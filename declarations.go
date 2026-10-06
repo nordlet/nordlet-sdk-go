@@ -44851,11 +44851,12 @@ func (s SubmissionsListDeclarationsRequestSortItemDir) Ptr() *SubmissionsListDec
 }
 
 var (
-	submissionsListDeclarationsResponseFieldRows     = big.NewInt(1 << 0)
-	submissionsListDeclarationsResponseFieldPage     = big.NewInt(1 << 1)
-	submissionsListDeclarationsResponseFieldPageSize = big.NewInt(1 << 2)
-	submissionsListDeclarationsResponseFieldTotal    = big.NewInt(1 << 3)
-	submissionsListDeclarationsResponseFieldTotals   = big.NewInt(1 << 4)
+	submissionsListDeclarationsResponseFieldRows             = big.NewInt(1 << 0)
+	submissionsListDeclarationsResponseFieldPage             = big.NewInt(1 << 1)
+	submissionsListDeclarationsResponseFieldPageSize         = big.NewInt(1 << 2)
+	submissionsListDeclarationsResponseFieldTotal            = big.NewInt(1 << 3)
+	submissionsListDeclarationsResponseFieldTotals           = big.NewInt(1 << 4)
+	submissionsListDeclarationsResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type SubmissionsListDeclarationsResponse struct {
@@ -44864,6 +44865,8 @@ type SubmissionsListDeclarationsResponse struct {
 	PageSize int64                                          `json:"pageSize" url:"pageSize"`
 	Total    int64                                          `json:"total" url:"total"`
 	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -44905,6 +44908,13 @@ func (s *SubmissionsListDeclarationsResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return s.Totals
+}
+
+func (s *SubmissionsListDeclarationsResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.TotalsByCurrency
 }
 
 func (s *SubmissionsListDeclarationsResponse) GetExtraProperties() map[string]interface{} {
@@ -44954,6 +44964,13 @@ func (s *SubmissionsListDeclarationsResponse) SetTotal(total int64) {
 func (s *SubmissionsListDeclarationsResponse) SetTotals(totals map[string]string) {
 	s.Totals = totals
 	s.require(submissionsListDeclarationsResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	s.TotalsByCurrency = totalsByCurrency
+	s.require(submissionsListDeclarationsResponseFieldTotalsByCurrency)
 }
 
 func (s *SubmissionsListDeclarationsResponse) UnmarshalJSON(data []byte) error {

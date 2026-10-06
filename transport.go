@@ -2997,11 +2997,12 @@ func (w WaybillsListTransportRequestSortItemDir) Ptr() *WaybillsListTransportReq
 }
 
 var (
-	waybillsListTransportResponseFieldRows     = big.NewInt(1 << 0)
-	waybillsListTransportResponseFieldPage     = big.NewInt(1 << 1)
-	waybillsListTransportResponseFieldPageSize = big.NewInt(1 << 2)
-	waybillsListTransportResponseFieldTotal    = big.NewInt(1 << 3)
-	waybillsListTransportResponseFieldTotals   = big.NewInt(1 << 4)
+	waybillsListTransportResponseFieldRows             = big.NewInt(1 << 0)
+	waybillsListTransportResponseFieldPage             = big.NewInt(1 << 1)
+	waybillsListTransportResponseFieldPageSize         = big.NewInt(1 << 2)
+	waybillsListTransportResponseFieldTotal            = big.NewInt(1 << 3)
+	waybillsListTransportResponseFieldTotals           = big.NewInt(1 << 4)
+	waybillsListTransportResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type WaybillsListTransportResponse struct {
@@ -3010,6 +3011,8 @@ type WaybillsListTransportResponse struct {
 	PageSize int64                                    `json:"pageSize" url:"pageSize"`
 	Total    int64                                    `json:"total" url:"total"`
 	Totals   map[string]string                        `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3051,6 +3054,13 @@ func (w *WaybillsListTransportResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return w.Totals
+}
+
+func (w *WaybillsListTransportResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if w == nil {
+		return nil
+	}
+	return w.TotalsByCurrency
 }
 
 func (w *WaybillsListTransportResponse) GetExtraProperties() map[string]interface{} {
@@ -3100,6 +3110,13 @@ func (w *WaybillsListTransportResponse) SetTotal(total int64) {
 func (w *WaybillsListTransportResponse) SetTotals(totals map[string]string) {
 	w.Totals = totals
 	w.require(waybillsListTransportResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsListTransportResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	w.TotalsByCurrency = totalsByCurrency
+	w.require(waybillsListTransportResponseFieldTotalsByCurrency)
 }
 
 func (w *WaybillsListTransportResponse) UnmarshalJSON(data []byte) error {

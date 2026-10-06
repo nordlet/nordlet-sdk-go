@@ -1187,6 +1187,14 @@ func TestSettersRunsCreatePayrollRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetPayDate", func(t *testing.T) {
+		obj := &RunsCreatePayrollRequest{}
+		var fernTestValuePayDate *time.Time
+		obj.SetPayDate(fernTestValuePayDate)
+		assert.Equal(t, fernTestValuePayDate, obj.PayDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestSettersMarkExplicitRunsCreatePayrollRequest(t *testing.T) {
@@ -1353,6 +1361,37 @@ func TestSettersMarkExplicitRunsCreatePayrollRequest(t *testing.T) {
 
 		// Act
 		obj.SetNotes(fernTestValueNotes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPayDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsCreatePayrollRequest{}
+		var fernTestValuePayDate *time.Time
+
+		// Act
+		obj.SetPayDate(fernTestValuePayDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -5296,6 +5335,14 @@ func TestSettersRunsApprovePayrollResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetPayDate", func(t *testing.T) {
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValuePayDate *time.Time
+		obj.SetPayDate(fernTestValuePayDate)
+		assert.Equal(t, fernTestValuePayDate, obj.PayDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetStatus", func(t *testing.T) {
 		obj := &RunsApprovePayrollResponse{}
 		var fernTestValueStatus RunsApprovePayrollResponseStatus
@@ -5493,6 +5540,39 @@ func TestGettersRunsApprovePayrollResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCountryCode() // Should return zero value
+	})
+
+	t.Run("GetPayDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsApprovePayrollResponse{}
+		var expected *time.Time
+		obj.PayDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPayDate(), "getter should return the property value")
+	})
+
+	t.Run("GetPayDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsApprovePayrollResponse{}
+		obj.PayDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPayDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPayDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsApprovePayrollResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPayDate() // Should return zero value
 	})
 
 	t.Run("GetStatus", func(t *testing.T) {
@@ -5948,6 +6028,37 @@ func TestSettersMarkExplicitRunsApprovePayrollResponse(t *testing.T) {
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPayDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsApprovePayrollResponse{}
+		var fernTestValuePayDate *time.Time
+
+		// Act
+		obj.SetPayDate(fernTestValuePayDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7577,6 +7688,14 @@ func TestSettersRunsCreatePayrollResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetPayDate", func(t *testing.T) {
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValuePayDate *time.Time
+		obj.SetPayDate(fernTestValuePayDate)
+		assert.Equal(t, fernTestValuePayDate, obj.PayDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetStatus", func(t *testing.T) {
 		obj := &RunsCreatePayrollResponse{}
 		var fernTestValueStatus RunsCreatePayrollResponseStatus
@@ -7782,6 +7901,39 @@ func TestGettersRunsCreatePayrollResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCountryCode() // Should return zero value
+	})
+
+	t.Run("GetPayDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsCreatePayrollResponse{}
+		var expected *time.Time
+		obj.PayDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPayDate(), "getter should return the property value")
+	})
+
+	t.Run("GetPayDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsCreatePayrollResponse{}
+		obj.PayDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPayDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPayDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsCreatePayrollResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPayDate() // Should return zero value
 	})
 
 	t.Run("GetStatus", func(t *testing.T) {
@@ -8270,6 +8422,37 @@ func TestSettersMarkExplicitRunsCreatePayrollResponse(t *testing.T) {
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPayDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsCreatePayrollResponse{}
+		var fernTestValuePayDate *time.Time
+
+		// Act
+		obj.SetPayDate(fernTestValuePayDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -11035,6 +11218,14 @@ func TestSettersRunsGetPayrollResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetPayDate", func(t *testing.T) {
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValuePayDate *time.Time
+		obj.SetPayDate(fernTestValuePayDate)
+		assert.Equal(t, fernTestValuePayDate, obj.PayDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetStatus", func(t *testing.T) {
 		obj := &RunsGetPayrollResponse{}
 		var fernTestValueStatus RunsGetPayrollResponseStatus
@@ -11240,6 +11431,39 @@ func TestGettersRunsGetPayrollResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCountryCode() // Should return zero value
+	})
+
+	t.Run("GetPayDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsGetPayrollResponse{}
+		var expected *time.Time
+		obj.PayDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPayDate(), "getter should return the property value")
+	})
+
+	t.Run("GetPayDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsGetPayrollResponse{}
+		obj.PayDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPayDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPayDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsGetPayrollResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPayDate() // Should return zero value
 	})
 
 	t.Run("GetStatus", func(t *testing.T) {
@@ -11728,6 +11952,37 @@ func TestSettersMarkExplicitRunsGetPayrollResponse(t *testing.T) {
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPayDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsGetPayrollResponse{}
+		var fernTestValuePayDate *time.Time
+
+		// Act
+		obj.SetPayDate(fernTestValuePayDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -15003,6 +15258,14 @@ func TestSettersRunsListPayrollResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTotalsByCurrency", func(t *testing.T) {
+		obj := &RunsListPayrollResponse{}
+		var fernTestValueTotalsByCurrency map[string]map[string]string
+		obj.SetTotalsByCurrency(fernTestValueTotalsByCurrency)
+		assert.Equal(t, fernTestValueTotalsByCurrency, obj.TotalsByCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersRunsListPayrollResponse(t *testing.T) {
@@ -15139,6 +15402,39 @@ func TestGettersRunsListPayrollResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetTotals() // Should return zero value
+	})
+
+	t.Run("GetTotalsByCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponse{}
+		var expected map[string]map[string]string
+		obj.TotalsByCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTotalsByCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetTotalsByCurrency_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponse{}
+		obj.TotalsByCurrency = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTotalsByCurrency(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTotalsByCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsListPayrollResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTotalsByCurrency() // Should return zero value
 	})
 
 }
@@ -15299,6 +15595,37 @@ func TestSettersMarkExplicitRunsListPayrollResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetTotalsByCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponse{}
+		var fernTestValueTotalsByCurrency map[string]map[string]string
+
+		// Act
+		obj.SetTotalsByCurrency(fernTestValueTotalsByCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
 func TestSettersRunsListPayrollResponseRowsItem(t *testing.T) {
@@ -15331,6 +15658,14 @@ func TestSettersRunsListPayrollResponseRowsItem(t *testing.T) {
 		var fernTestValueCountryCode string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPayDate", func(t *testing.T) {
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValuePayDate *time.Time
+		obj.SetPayDate(fernTestValuePayDate)
+		assert.Equal(t, fernTestValuePayDate, obj.PayDate)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -15531,6 +15866,39 @@ func TestGettersRunsListPayrollResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCountryCode() // Should return zero value
+	})
+
+	t.Run("GetPayDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponseRowsItem{}
+		var expected *time.Time
+		obj.PayDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPayDate(), "getter should return the property value")
+	})
+
+	t.Run("GetPayDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponseRowsItem{}
+		obj.PayDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetPayDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetPayDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *RunsListPayrollResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPayDate() // Should return zero value
 	})
 
 	t.Run("GetStatus", func(t *testing.T) {
@@ -15986,6 +16354,37 @@ func TestSettersMarkExplicitRunsListPayrollResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPayDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &RunsListPayrollResponseRowsItem{}
+		var fernTestValuePayDate *time.Time
+
+		// Act
+		obj.SetPayDate(fernTestValuePayDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

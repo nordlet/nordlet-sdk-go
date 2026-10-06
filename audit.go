@@ -532,11 +532,12 @@ func (l ListAuditRequestSortItemDir) Ptr() *ListAuditRequestSortItemDir {
 }
 
 var (
-	listAuditResponseFieldRows     = big.NewInt(1 << 0)
-	listAuditResponseFieldPage     = big.NewInt(1 << 1)
-	listAuditResponseFieldPageSize = big.NewInt(1 << 2)
-	listAuditResponseFieldTotal    = big.NewInt(1 << 3)
-	listAuditResponseFieldTotals   = big.NewInt(1 << 4)
+	listAuditResponseFieldRows             = big.NewInt(1 << 0)
+	listAuditResponseFieldPage             = big.NewInt(1 << 1)
+	listAuditResponseFieldPageSize         = big.NewInt(1 << 2)
+	listAuditResponseFieldTotal            = big.NewInt(1 << 3)
+	listAuditResponseFieldTotals           = big.NewInt(1 << 4)
+	listAuditResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type ListAuditResponse struct {
@@ -545,6 +546,8 @@ type ListAuditResponse struct {
 	PageSize int64                        `json:"pageSize" url:"pageSize"`
 	Total    int64                        `json:"total" url:"total"`
 	Totals   map[string]string            `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -586,6 +589,13 @@ func (l *ListAuditResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return l.Totals
+}
+
+func (l *ListAuditResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if l == nil {
+		return nil
+	}
+	return l.TotalsByCurrency
 }
 
 func (l *ListAuditResponse) GetExtraProperties() map[string]interface{} {
@@ -635,6 +645,13 @@ func (l *ListAuditResponse) SetTotal(total int64) {
 func (l *ListAuditResponse) SetTotals(totals map[string]string) {
 	l.Totals = totals
 	l.require(listAuditResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListAuditResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	l.TotalsByCurrency = totalsByCurrency
+	l.require(listAuditResponseFieldTotalsByCurrency)
 }
 
 func (l *ListAuditResponse) UnmarshalJSON(data []byte) error {

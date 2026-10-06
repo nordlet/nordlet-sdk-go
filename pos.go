@@ -1221,11 +1221,12 @@ func (d DevicesListPosRequestSortItemDir) Ptr() *DevicesListPosRequestSortItemDi
 }
 
 var (
-	devicesListPosResponseFieldRows     = big.NewInt(1 << 0)
-	devicesListPosResponseFieldPage     = big.NewInt(1 << 1)
-	devicesListPosResponseFieldPageSize = big.NewInt(1 << 2)
-	devicesListPosResponseFieldTotal    = big.NewInt(1 << 3)
-	devicesListPosResponseFieldTotals   = big.NewInt(1 << 4)
+	devicesListPosResponseFieldRows             = big.NewInt(1 << 0)
+	devicesListPosResponseFieldPage             = big.NewInt(1 << 1)
+	devicesListPosResponseFieldPageSize         = big.NewInt(1 << 2)
+	devicesListPosResponseFieldTotal            = big.NewInt(1 << 3)
+	devicesListPosResponseFieldTotals           = big.NewInt(1 << 4)
+	devicesListPosResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type DevicesListPosResponse struct {
@@ -1234,6 +1235,8 @@ type DevicesListPosResponse struct {
 	PageSize int64                             `json:"pageSize" url:"pageSize"`
 	Total    int64                             `json:"total" url:"total"`
 	Totals   map[string]string                 `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1275,6 +1278,13 @@ func (d *DevicesListPosResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return d.Totals
+}
+
+func (d *DevicesListPosResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if d == nil {
+		return nil
+	}
+	return d.TotalsByCurrency
 }
 
 func (d *DevicesListPosResponse) GetExtraProperties() map[string]interface{} {
@@ -1324,6 +1334,13 @@ func (d *DevicesListPosResponse) SetTotal(total int64) {
 func (d *DevicesListPosResponse) SetTotals(totals map[string]string) {
 	d.Totals = totals
 	d.require(devicesListPosResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DevicesListPosResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	d.TotalsByCurrency = totalsByCurrency
+	d.require(devicesListPosResponseFieldTotalsByCurrency)
 }
 
 func (d *DevicesListPosResponse) UnmarshalJSON(data []byte) error {
@@ -3303,11 +3320,12 @@ func (r ReportsListPosRequestSortItemDir) Ptr() *ReportsListPosRequestSortItemDi
 }
 
 var (
-	reportsListPosResponseFieldRows     = big.NewInt(1 << 0)
-	reportsListPosResponseFieldPage     = big.NewInt(1 << 1)
-	reportsListPosResponseFieldPageSize = big.NewInt(1 << 2)
-	reportsListPosResponseFieldTotal    = big.NewInt(1 << 3)
-	reportsListPosResponseFieldTotals   = big.NewInt(1 << 4)
+	reportsListPosResponseFieldRows             = big.NewInt(1 << 0)
+	reportsListPosResponseFieldPage             = big.NewInt(1 << 1)
+	reportsListPosResponseFieldPageSize         = big.NewInt(1 << 2)
+	reportsListPosResponseFieldTotal            = big.NewInt(1 << 3)
+	reportsListPosResponseFieldTotals           = big.NewInt(1 << 4)
+	reportsListPosResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type ReportsListPosResponse struct {
@@ -3316,6 +3334,8 @@ type ReportsListPosResponse struct {
 	PageSize int64                             `json:"pageSize" url:"pageSize"`
 	Total    int64                             `json:"total" url:"total"`
 	Totals   map[string]string                 `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3357,6 +3377,13 @@ func (r *ReportsListPosResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return r.Totals
+}
+
+func (r *ReportsListPosResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.TotalsByCurrency
 }
 
 func (r *ReportsListPosResponse) GetExtraProperties() map[string]interface{} {
@@ -3406,6 +3433,13 @@ func (r *ReportsListPosResponse) SetTotal(total int64) {
 func (r *ReportsListPosResponse) SetTotals(totals map[string]string) {
 	r.Totals = totals
 	r.require(reportsListPosResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReportsListPosResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	r.TotalsByCurrency = totalsByCurrency
+	r.require(reportsListPosResponseFieldTotalsByCurrency)
 }
 
 func (r *ReportsListPosResponse) UnmarshalJSON(data []byte) error {

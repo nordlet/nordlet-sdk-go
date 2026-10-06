@@ -1630,11 +1630,12 @@ func (b BanksListReferenceRequestSortItemDir) Ptr() *BanksListReferenceRequestSo
 }
 
 var (
-	banksListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	banksListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	banksListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	banksListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	banksListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	banksListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	banksListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	banksListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	banksListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	banksListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	banksListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type BanksListReferenceResponse struct {
@@ -1643,6 +1644,8 @@ type BanksListReferenceResponse struct {
 	PageSize int64                                 `json:"pageSize" url:"pageSize"`
 	Total    int64                                 `json:"total" url:"total"`
 	Totals   map[string]string                     `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1684,6 +1687,13 @@ func (b *BanksListReferenceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return b.Totals
+}
+
+func (b *BanksListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if b == nil {
+		return nil
+	}
+	return b.TotalsByCurrency
 }
 
 func (b *BanksListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -1733,6 +1743,13 @@ func (b *BanksListReferenceResponse) SetTotal(total int64) {
 func (b *BanksListReferenceResponse) SetTotals(totals map[string]string) {
 	b.Totals = totals
 	b.require(banksListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BanksListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	b.TotalsByCurrency = totalsByCurrency
+	b.require(banksListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (b *BanksListReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -2544,11 +2561,12 @@ func (c CnCodesListReferenceRequestSortItemDir) Ptr() *CnCodesListReferenceReque
 }
 
 var (
-	cnCodesListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	cnCodesListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	cnCodesListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	cnCodesListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	cnCodesListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	cnCodesListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	cnCodesListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	cnCodesListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	cnCodesListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	cnCodesListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	cnCodesListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type CnCodesListReferenceResponse struct {
@@ -2557,6 +2575,8 @@ type CnCodesListReferenceResponse struct {
 	PageSize int64                                   `json:"pageSize" url:"pageSize"`
 	Total    int64                                   `json:"total" url:"total"`
 	Totals   map[string]string                       `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2598,6 +2618,13 @@ func (c *CnCodesListReferenceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return c.Totals
+}
+
+func (c *CnCodesListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.TotalsByCurrency
 }
 
 func (c *CnCodesListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -2647,6 +2674,13 @@ func (c *CnCodesListReferenceResponse) SetTotal(total int64) {
 func (c *CnCodesListReferenceResponse) SetTotals(totals map[string]string) {
 	c.Totals = totals
 	c.require(cnCodesListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CnCodesListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	c.TotalsByCurrency = totalsByCurrency
+	c.require(cnCodesListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (c *CnCodesListReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -3974,11 +4008,12 @@ func (c CurrenciesListReferenceRequestSortItemDir) Ptr() *CurrenciesListReferenc
 }
 
 var (
-	currenciesListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	currenciesListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	currenciesListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	currenciesListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	currenciesListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	currenciesListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	currenciesListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	currenciesListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	currenciesListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	currenciesListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	currenciesListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type CurrenciesListReferenceResponse struct {
@@ -3987,6 +4022,8 @@ type CurrenciesListReferenceResponse struct {
 	PageSize int64                                      `json:"pageSize" url:"pageSize"`
 	Total    int64                                      `json:"total" url:"total"`
 	Totals   map[string]string                          `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4028,6 +4065,13 @@ func (c *CurrenciesListReferenceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return c.Totals
+}
+
+func (c *CurrenciesListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.TotalsByCurrency
 }
 
 func (c *CurrenciesListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -4077,6 +4121,13 @@ func (c *CurrenciesListReferenceResponse) SetTotal(total int64) {
 func (c *CurrenciesListReferenceResponse) SetTotals(totals map[string]string) {
 	c.Totals = totals
 	c.require(currenciesListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CurrenciesListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	c.TotalsByCurrency = totalsByCurrency
+	c.require(currenciesListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (c *CurrenciesListReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -5400,11 +5451,12 @@ func (e ExchangeRatesListReferenceRequestSortItemDir) Ptr() *ExchangeRatesListRe
 }
 
 var (
-	exchangeRatesListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	exchangeRatesListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	exchangeRatesListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	exchangeRatesListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	exchangeRatesListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	exchangeRatesListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	exchangeRatesListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	exchangeRatesListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	exchangeRatesListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	exchangeRatesListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	exchangeRatesListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type ExchangeRatesListReferenceResponse struct {
@@ -5413,6 +5465,8 @@ type ExchangeRatesListReferenceResponse struct {
 	PageSize int64                                         `json:"pageSize" url:"pageSize"`
 	Total    int64                                         `json:"total" url:"total"`
 	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5454,6 +5508,13 @@ func (e *ExchangeRatesListReferenceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return e.Totals
+}
+
+func (e *ExchangeRatesListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.TotalsByCurrency
 }
 
 func (e *ExchangeRatesListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -5503,6 +5564,13 @@ func (e *ExchangeRatesListReferenceResponse) SetTotal(total int64) {
 func (e *ExchangeRatesListReferenceResponse) SetTotals(totals map[string]string) {
 	e.Totals = totals
 	e.require(exchangeRatesListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExchangeRatesListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	e.TotalsByCurrency = totalsByCurrency
+	e.require(exchangeRatesListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (e *ExchangeRatesListReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -6194,11 +6262,12 @@ func (e ExchangeRatesOverridesListReferenceRequestSortItemDir) Ptr() *ExchangeRa
 }
 
 var (
-	exchangeRatesOverridesListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	exchangeRatesOverridesListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	exchangeRatesOverridesListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	exchangeRatesOverridesListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	exchangeRatesOverridesListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	exchangeRatesOverridesListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	exchangeRatesOverridesListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	exchangeRatesOverridesListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	exchangeRatesOverridesListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	exchangeRatesOverridesListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	exchangeRatesOverridesListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type ExchangeRatesOverridesListReferenceResponse struct {
@@ -6207,6 +6276,8 @@ type ExchangeRatesOverridesListReferenceResponse struct {
 	PageSize int64                                                  `json:"pageSize" url:"pageSize"`
 	Total    int64                                                  `json:"total" url:"total"`
 	Totals   map[string]string                                      `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6248,6 +6319,13 @@ func (e *ExchangeRatesOverridesListReferenceResponse) GetTotals() map[string]str
 		return nil
 	}
 	return e.Totals
+}
+
+func (e *ExchangeRatesOverridesListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.TotalsByCurrency
 }
 
 func (e *ExchangeRatesOverridesListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -6297,6 +6375,13 @@ func (e *ExchangeRatesOverridesListReferenceResponse) SetTotal(total int64) {
 func (e *ExchangeRatesOverridesListReferenceResponse) SetTotals(totals map[string]string) {
 	e.Totals = totals
 	e.require(exchangeRatesOverridesListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExchangeRatesOverridesListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	e.TotalsByCurrency = totalsByCurrency
+	e.require(exchangeRatesOverridesListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (e *ExchangeRatesOverridesListReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -8324,11 +8409,12 @@ func (s SeriesListReferenceRequestSortItemDir) Ptr() *SeriesListReferenceRequest
 }
 
 var (
-	seriesListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	seriesListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	seriesListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	seriesListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	seriesListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	seriesListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	seriesListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	seriesListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	seriesListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	seriesListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	seriesListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type SeriesListReferenceResponse struct {
@@ -8337,6 +8423,8 @@ type SeriesListReferenceResponse struct {
 	PageSize int64                                  `json:"pageSize" url:"pageSize"`
 	Total    int64                                  `json:"total" url:"total"`
 	Totals   map[string]string                      `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8378,6 +8466,13 @@ func (s *SeriesListReferenceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return s.Totals
+}
+
+func (s *SeriesListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.TotalsByCurrency
 }
 
 func (s *SeriesListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -8427,6 +8522,13 @@ func (s *SeriesListReferenceResponse) SetTotal(total int64) {
 func (s *SeriesListReferenceResponse) SetTotals(totals map[string]string) {
 	s.Totals = totals
 	s.require(seriesListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SeriesListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	s.TotalsByCurrency = totalsByCurrency
+	s.require(seriesListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (s *SeriesListReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -9082,11 +9184,12 @@ func (u UnitsListReferenceRequestSortItemDir) Ptr() *UnitsListReferenceRequestSo
 }
 
 var (
-	unitsListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	unitsListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	unitsListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	unitsListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	unitsListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	unitsListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	unitsListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	unitsListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	unitsListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	unitsListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	unitsListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type UnitsListReferenceResponse struct {
@@ -9095,6 +9198,8 @@ type UnitsListReferenceResponse struct {
 	PageSize int64                                 `json:"pageSize" url:"pageSize"`
 	Total    int64                                 `json:"total" url:"total"`
 	Totals   map[string]string                     `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9136,6 +9241,13 @@ func (u *UnitsListReferenceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return u.Totals
+}
+
+func (u *UnitsListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if u == nil {
+		return nil
+	}
+	return u.TotalsByCurrency
 }
 
 func (u *UnitsListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -9185,6 +9297,13 @@ func (u *UnitsListReferenceResponse) SetTotal(total int64) {
 func (u *UnitsListReferenceResponse) SetTotals(totals map[string]string) {
 	u.Totals = totals
 	u.require(unitsListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UnitsListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	u.TotalsByCurrency = totalsByCurrency
+	u.require(unitsListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (u *UnitsListReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -9784,11 +9903,12 @@ func (v VatClassifiersListReferenceRequestSortItemDir) Ptr() *VatClassifiersList
 }
 
 var (
-	vatClassifiersListReferenceResponseFieldRows     = big.NewInt(1 << 0)
-	vatClassifiersListReferenceResponseFieldPage     = big.NewInt(1 << 1)
-	vatClassifiersListReferenceResponseFieldPageSize = big.NewInt(1 << 2)
-	vatClassifiersListReferenceResponseFieldTotal    = big.NewInt(1 << 3)
-	vatClassifiersListReferenceResponseFieldTotals   = big.NewInt(1 << 4)
+	vatClassifiersListReferenceResponseFieldRows             = big.NewInt(1 << 0)
+	vatClassifiersListReferenceResponseFieldPage             = big.NewInt(1 << 1)
+	vatClassifiersListReferenceResponseFieldPageSize         = big.NewInt(1 << 2)
+	vatClassifiersListReferenceResponseFieldTotal            = big.NewInt(1 << 3)
+	vatClassifiersListReferenceResponseFieldTotals           = big.NewInt(1 << 4)
+	vatClassifiersListReferenceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type VatClassifiersListReferenceResponse struct {
@@ -9797,6 +9917,8 @@ type VatClassifiersListReferenceResponse struct {
 	PageSize int64                                          `json:"pageSize" url:"pageSize"`
 	Total    int64                                          `json:"total" url:"total"`
 	Totals   map[string]string                              `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9838,6 +9960,13 @@ func (v *VatClassifiersListReferenceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return v.Totals
+}
+
+func (v *VatClassifiersListReferenceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if v == nil {
+		return nil
+	}
+	return v.TotalsByCurrency
 }
 
 func (v *VatClassifiersListReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -9887,6 +10016,13 @@ func (v *VatClassifiersListReferenceResponse) SetTotal(total int64) {
 func (v *VatClassifiersListReferenceResponse) SetTotals(totals map[string]string) {
 	v.Totals = totals
 	v.require(vatClassifiersListReferenceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatClassifiersListReferenceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	v.TotalsByCurrency = totalsByCurrency
+	v.require(vatClassifiersListReferenceResponseFieldTotalsByCurrency)
 }
 
 func (v *VatClassifiersListReferenceResponse) UnmarshalJSON(data []byte) error {

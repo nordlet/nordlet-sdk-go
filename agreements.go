@@ -3397,11 +3397,12 @@ func (a AgreementsListAgreementsRequestSortItemDir) Ptr() *AgreementsListAgreeme
 }
 
 var (
-	agreementsListAgreementsResponseFieldRows     = big.NewInt(1 << 0)
-	agreementsListAgreementsResponseFieldPage     = big.NewInt(1 << 1)
-	agreementsListAgreementsResponseFieldPageSize = big.NewInt(1 << 2)
-	agreementsListAgreementsResponseFieldTotal    = big.NewInt(1 << 3)
-	agreementsListAgreementsResponseFieldTotals   = big.NewInt(1 << 4)
+	agreementsListAgreementsResponseFieldRows             = big.NewInt(1 << 0)
+	agreementsListAgreementsResponseFieldPage             = big.NewInt(1 << 1)
+	agreementsListAgreementsResponseFieldPageSize         = big.NewInt(1 << 2)
+	agreementsListAgreementsResponseFieldTotal            = big.NewInt(1 << 3)
+	agreementsListAgreementsResponseFieldTotals           = big.NewInt(1 << 4)
+	agreementsListAgreementsResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type AgreementsListAgreementsResponse struct {
@@ -3410,6 +3411,8 @@ type AgreementsListAgreementsResponse struct {
 	PageSize int64                                       `json:"pageSize" url:"pageSize"`
 	Total    int64                                       `json:"total" url:"total"`
 	Totals   map[string]string                           `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3451,6 +3454,13 @@ func (a *AgreementsListAgreementsResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return a.Totals
+}
+
+func (a *AgreementsListAgreementsResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if a == nil {
+		return nil
+	}
+	return a.TotalsByCurrency
 }
 
 func (a *AgreementsListAgreementsResponse) GetExtraProperties() map[string]interface{} {
@@ -3500,6 +3510,13 @@ func (a *AgreementsListAgreementsResponse) SetTotal(total int64) {
 func (a *AgreementsListAgreementsResponse) SetTotals(totals map[string]string) {
 	a.Totals = totals
 	a.require(agreementsListAgreementsResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsListAgreementsResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	a.TotalsByCurrency = totalsByCurrency
+	a.require(agreementsListAgreementsResponseFieldTotalsByCurrency)
 }
 
 func (a *AgreementsListAgreementsResponse) UnmarshalJSON(data []byte) error {
@@ -5521,11 +5538,12 @@ func (i InsurancePoliciesListAgreementsRequestSortItemDir) Ptr() *InsurancePolic
 }
 
 var (
-	insurancePoliciesListAgreementsResponseFieldRows     = big.NewInt(1 << 0)
-	insurancePoliciesListAgreementsResponseFieldPage     = big.NewInt(1 << 1)
-	insurancePoliciesListAgreementsResponseFieldPageSize = big.NewInt(1 << 2)
-	insurancePoliciesListAgreementsResponseFieldTotal    = big.NewInt(1 << 3)
-	insurancePoliciesListAgreementsResponseFieldTotals   = big.NewInt(1 << 4)
+	insurancePoliciesListAgreementsResponseFieldRows             = big.NewInt(1 << 0)
+	insurancePoliciesListAgreementsResponseFieldPage             = big.NewInt(1 << 1)
+	insurancePoliciesListAgreementsResponseFieldPageSize         = big.NewInt(1 << 2)
+	insurancePoliciesListAgreementsResponseFieldTotal            = big.NewInt(1 << 3)
+	insurancePoliciesListAgreementsResponseFieldTotals           = big.NewInt(1 << 4)
+	insurancePoliciesListAgreementsResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type InsurancePoliciesListAgreementsResponse struct {
@@ -5534,6 +5552,8 @@ type InsurancePoliciesListAgreementsResponse struct {
 	PageSize int64                                              `json:"pageSize" url:"pageSize"`
 	Total    int64                                              `json:"total" url:"total"`
 	Totals   map[string]string                                  `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5575,6 +5595,13 @@ func (i *InsurancePoliciesListAgreementsResponse) GetTotals() map[string]string 
 		return nil
 	}
 	return i.Totals
+}
+
+func (i *InsurancePoliciesListAgreementsResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if i == nil {
+		return nil
+	}
+	return i.TotalsByCurrency
 }
 
 func (i *InsurancePoliciesListAgreementsResponse) GetExtraProperties() map[string]interface{} {
@@ -5624,6 +5651,13 @@ func (i *InsurancePoliciesListAgreementsResponse) SetTotal(total int64) {
 func (i *InsurancePoliciesListAgreementsResponse) SetTotals(totals map[string]string) {
 	i.Totals = totals
 	i.require(insurancePoliciesListAgreementsResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InsurancePoliciesListAgreementsResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	i.TotalsByCurrency = totalsByCurrency
+	i.require(insurancePoliciesListAgreementsResponseFieldTotalsByCurrency)
 }
 
 func (i *InsurancePoliciesListAgreementsResponse) UnmarshalJSON(data []byte) error {
@@ -6467,11 +6501,12 @@ func (t TypesListAgreementsRequestSortItemDir) Ptr() *TypesListAgreementsRequest
 }
 
 var (
-	typesListAgreementsResponseFieldRows     = big.NewInt(1 << 0)
-	typesListAgreementsResponseFieldPage     = big.NewInt(1 << 1)
-	typesListAgreementsResponseFieldPageSize = big.NewInt(1 << 2)
-	typesListAgreementsResponseFieldTotal    = big.NewInt(1 << 3)
-	typesListAgreementsResponseFieldTotals   = big.NewInt(1 << 4)
+	typesListAgreementsResponseFieldRows             = big.NewInt(1 << 0)
+	typesListAgreementsResponseFieldPage             = big.NewInt(1 << 1)
+	typesListAgreementsResponseFieldPageSize         = big.NewInt(1 << 2)
+	typesListAgreementsResponseFieldTotal            = big.NewInt(1 << 3)
+	typesListAgreementsResponseFieldTotals           = big.NewInt(1 << 4)
+	typesListAgreementsResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type TypesListAgreementsResponse struct {
@@ -6480,6 +6515,8 @@ type TypesListAgreementsResponse struct {
 	PageSize int64                                  `json:"pageSize" url:"pageSize"`
 	Total    int64                                  `json:"total" url:"total"`
 	Totals   map[string]string                      `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6521,6 +6558,13 @@ func (t *TypesListAgreementsResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return t.Totals
+}
+
+func (t *TypesListAgreementsResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if t == nil {
+		return nil
+	}
+	return t.TotalsByCurrency
 }
 
 func (t *TypesListAgreementsResponse) GetExtraProperties() map[string]interface{} {
@@ -6570,6 +6614,13 @@ func (t *TypesListAgreementsResponse) SetTotal(total int64) {
 func (t *TypesListAgreementsResponse) SetTotals(totals map[string]string) {
 	t.Totals = totals
 	t.require(typesListAgreementsResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListAgreementsResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	t.TotalsByCurrency = totalsByCurrency
+	t.require(typesListAgreementsResponseFieldTotalsByCurrency)
 }
 
 func (t *TypesListAgreementsResponse) UnmarshalJSON(data []byte) error {

@@ -91,13 +91,14 @@ var (
 	createLeadsRequestFieldWebsite        = big.NewInt(1 << 4)
 	createLeadsRequestFieldCountryCode    = big.NewInt(1 << 5)
 	createLeadsRequestFieldSourceID       = big.NewInt(1 << 6)
-	createLeadsRequestFieldStatus         = big.NewInt(1 << 7)
-	createLeadsRequestFieldEstimatedValue = big.NewInt(1 << 8)
-	createLeadsRequestFieldCurrency       = big.NewInt(1 << 9)
-	createLeadsRequestFieldDescription    = big.NewInt(1 << 10)
-	createLeadsRequestFieldAssignedUserID = big.NewInt(1 << 11)
-	createLeadsRequestFieldDocuments      = big.NewInt(1 << 12)
-	createLeadsRequestFieldNotes          = big.NewInt(1 << 13)
+	createLeadsRequestFieldTypeID         = big.NewInt(1 << 7)
+	createLeadsRequestFieldStatus         = big.NewInt(1 << 8)
+	createLeadsRequestFieldEstimatedValue = big.NewInt(1 << 9)
+	createLeadsRequestFieldCurrency       = big.NewInt(1 << 10)
+	createLeadsRequestFieldDescription    = big.NewInt(1 << 11)
+	createLeadsRequestFieldAssignedUserID = big.NewInt(1 << 12)
+	createLeadsRequestFieldDocuments      = big.NewInt(1 << 13)
+	createLeadsRequestFieldNotes          = big.NewInt(1 << 14)
 )
 
 type CreateLeadsRequest struct {
@@ -108,6 +109,7 @@ type CreateLeadsRequest struct {
 	Website        *string                            `json:"website,omitempty" url:"-"`
 	CountryCode    *string                            `json:"countryCode,omitempty" url:"-"`
 	SourceID       *string                            `json:"sourceId,omitempty" url:"-"`
+	TypeID         *string                            `json:"typeId,omitempty" url:"-"`
 	Status         *CreateLeadsRequestStatus          `json:"status,omitempty" url:"-"`
 	EstimatedValue *string                            `json:"estimatedValue,omitempty" url:"-"`
 	Currency       *string                            `json:"currency,omitempty" url:"-"`
@@ -174,6 +176,13 @@ func (c *CreateLeadsRequest) SetCountryCode(countryCode *string) {
 func (c *CreateLeadsRequest) SetSourceID(sourceID *string) {
 	c.SourceID = sourceID
 	c.require(createLeadsRequestFieldSourceID)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateLeadsRequest) SetTypeID(typeID *string) {
+	c.TypeID = typeID
+	c.require(createLeadsRequestFieldTypeID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -937,15 +946,17 @@ var (
 	convertLeadsResponseLeadFieldCountryCode    = big.NewInt(1 << 6)
 	convertLeadsResponseLeadFieldSourceID       = big.NewInt(1 << 7)
 	convertLeadsResponseLeadFieldSourceName     = big.NewInt(1 << 8)
-	convertLeadsResponseLeadFieldStatus         = big.NewInt(1 << 9)
-	convertLeadsResponseLeadFieldEstimatedValue = big.NewInt(1 << 10)
-	convertLeadsResponseLeadFieldCurrency       = big.NewInt(1 << 11)
-	convertLeadsResponseLeadFieldDescription    = big.NewInt(1 << 12)
-	convertLeadsResponseLeadFieldAssignedUserID = big.NewInt(1 << 13)
-	convertLeadsResponseLeadFieldPartnerID      = big.NewInt(1 << 14)
-	convertLeadsResponseLeadFieldConvertedAt    = big.NewInt(1 << 15)
-	convertLeadsResponseLeadFieldCreatedAt      = big.NewInt(1 << 16)
-	convertLeadsResponseLeadFieldUpdatedAt      = big.NewInt(1 << 17)
+	convertLeadsResponseLeadFieldTypeID         = big.NewInt(1 << 9)
+	convertLeadsResponseLeadFieldTypeName       = big.NewInt(1 << 10)
+	convertLeadsResponseLeadFieldStatus         = big.NewInt(1 << 11)
+	convertLeadsResponseLeadFieldEstimatedValue = big.NewInt(1 << 12)
+	convertLeadsResponseLeadFieldCurrency       = big.NewInt(1 << 13)
+	convertLeadsResponseLeadFieldDescription    = big.NewInt(1 << 14)
+	convertLeadsResponseLeadFieldAssignedUserID = big.NewInt(1 << 15)
+	convertLeadsResponseLeadFieldPartnerID      = big.NewInt(1 << 16)
+	convertLeadsResponseLeadFieldConvertedAt    = big.NewInt(1 << 17)
+	convertLeadsResponseLeadFieldCreatedAt      = big.NewInt(1 << 18)
+	convertLeadsResponseLeadFieldUpdatedAt      = big.NewInt(1 << 19)
 )
 
 type ConvertLeadsResponseLead struct {
@@ -958,6 +969,8 @@ type ConvertLeadsResponseLead struct {
 	CountryCode    *string                        `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 	SourceID       *string                        `json:"sourceId,omitempty" url:"sourceId,omitempty"`
 	SourceName     *string                        `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	TypeID         *string                        `json:"typeId,omitempty" url:"typeId,omitempty"`
+	TypeName       *string                        `json:"typeName,omitempty" url:"typeName,omitempty"`
 	Status         ConvertLeadsResponseLeadStatus `json:"status" url:"status"`
 	EstimatedValue *string                        `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
 	Currency       string                         `json:"currency" url:"currency"`
@@ -1036,6 +1049,20 @@ func (c *ConvertLeadsResponseLead) GetSourceName() *string {
 		return nil
 	}
 	return c.SourceName
+}
+
+func (c *ConvertLeadsResponseLead) GetTypeID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.TypeID
+}
+
+func (c *ConvertLeadsResponseLead) GetTypeName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.TypeName
 }
 
 func (c *ConvertLeadsResponseLead) GetStatus() ConvertLeadsResponseLeadStatus {
@@ -1176,6 +1203,20 @@ func (c *ConvertLeadsResponseLead) SetSourceID(sourceID *string) {
 func (c *ConvertLeadsResponseLead) SetSourceName(sourceName *string) {
 	c.SourceName = sourceName
 	c.require(convertLeadsResponseLeadFieldSourceName)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ConvertLeadsResponseLead) SetTypeID(typeID *string) {
+	c.TypeID = typeID
+	c.require(convertLeadsResponseLeadFieldTypeID)
+}
+
+// SetTypeName sets the TypeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ConvertLeadsResponseLead) SetTypeName(typeName *string) {
+	c.TypeName = typeName
+	c.require(convertLeadsResponseLeadFieldTypeName)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -1468,15 +1509,17 @@ var (
 	createLeadsResponseFieldCountryCode    = big.NewInt(1 << 6)
 	createLeadsResponseFieldSourceID       = big.NewInt(1 << 7)
 	createLeadsResponseFieldSourceName     = big.NewInt(1 << 8)
-	createLeadsResponseFieldStatus         = big.NewInt(1 << 9)
-	createLeadsResponseFieldEstimatedValue = big.NewInt(1 << 10)
-	createLeadsResponseFieldCurrency       = big.NewInt(1 << 11)
-	createLeadsResponseFieldDescription    = big.NewInt(1 << 12)
-	createLeadsResponseFieldAssignedUserID = big.NewInt(1 << 13)
-	createLeadsResponseFieldPartnerID      = big.NewInt(1 << 14)
-	createLeadsResponseFieldConvertedAt    = big.NewInt(1 << 15)
-	createLeadsResponseFieldCreatedAt      = big.NewInt(1 << 16)
-	createLeadsResponseFieldUpdatedAt      = big.NewInt(1 << 17)
+	createLeadsResponseFieldTypeID         = big.NewInt(1 << 9)
+	createLeadsResponseFieldTypeName       = big.NewInt(1 << 10)
+	createLeadsResponseFieldStatus         = big.NewInt(1 << 11)
+	createLeadsResponseFieldEstimatedValue = big.NewInt(1 << 12)
+	createLeadsResponseFieldCurrency       = big.NewInt(1 << 13)
+	createLeadsResponseFieldDescription    = big.NewInt(1 << 14)
+	createLeadsResponseFieldAssignedUserID = big.NewInt(1 << 15)
+	createLeadsResponseFieldPartnerID      = big.NewInt(1 << 16)
+	createLeadsResponseFieldConvertedAt    = big.NewInt(1 << 17)
+	createLeadsResponseFieldCreatedAt      = big.NewInt(1 << 18)
+	createLeadsResponseFieldUpdatedAt      = big.NewInt(1 << 19)
 )
 
 type CreateLeadsResponse struct {
@@ -1489,6 +1532,8 @@ type CreateLeadsResponse struct {
 	CountryCode    *string                   `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 	SourceID       *string                   `json:"sourceId,omitempty" url:"sourceId,omitempty"`
 	SourceName     *string                   `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	TypeID         *string                   `json:"typeId,omitempty" url:"typeId,omitempty"`
+	TypeName       *string                   `json:"typeName,omitempty" url:"typeName,omitempty"`
 	Status         CreateLeadsResponseStatus `json:"status" url:"status"`
 	EstimatedValue *string                   `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
 	Currency       string                    `json:"currency" url:"currency"`
@@ -1567,6 +1612,20 @@ func (c *CreateLeadsResponse) GetSourceName() *string {
 		return nil
 	}
 	return c.SourceName
+}
+
+func (c *CreateLeadsResponse) GetTypeID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.TypeID
+}
+
+func (c *CreateLeadsResponse) GetTypeName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.TypeName
 }
 
 func (c *CreateLeadsResponse) GetStatus() CreateLeadsResponseStatus {
@@ -1707,6 +1766,20 @@ func (c *CreateLeadsResponse) SetSourceID(sourceID *string) {
 func (c *CreateLeadsResponse) SetSourceName(sourceName *string) {
 	c.SourceName = sourceName
 	c.require(createLeadsResponseFieldSourceName)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateLeadsResponse) SetTypeID(typeID *string) {
+	c.TypeID = typeID
+	c.require(createLeadsResponseFieldTypeID)
+}
+
+// SetTypeName sets the TypeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateLeadsResponse) SetTypeName(typeName *string) {
+	c.TypeName = typeName
+	c.require(createLeadsResponseFieldTypeName)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -2195,15 +2268,17 @@ var (
 	getLeadsResponseFieldCountryCode    = big.NewInt(1 << 6)
 	getLeadsResponseFieldSourceID       = big.NewInt(1 << 7)
 	getLeadsResponseFieldSourceName     = big.NewInt(1 << 8)
-	getLeadsResponseFieldStatus         = big.NewInt(1 << 9)
-	getLeadsResponseFieldEstimatedValue = big.NewInt(1 << 10)
-	getLeadsResponseFieldCurrency       = big.NewInt(1 << 11)
-	getLeadsResponseFieldDescription    = big.NewInt(1 << 12)
-	getLeadsResponseFieldAssignedUserID = big.NewInt(1 << 13)
-	getLeadsResponseFieldPartnerID      = big.NewInt(1 << 14)
-	getLeadsResponseFieldConvertedAt    = big.NewInt(1 << 15)
-	getLeadsResponseFieldCreatedAt      = big.NewInt(1 << 16)
-	getLeadsResponseFieldUpdatedAt      = big.NewInt(1 << 17)
+	getLeadsResponseFieldTypeID         = big.NewInt(1 << 9)
+	getLeadsResponseFieldTypeName       = big.NewInt(1 << 10)
+	getLeadsResponseFieldStatus         = big.NewInt(1 << 11)
+	getLeadsResponseFieldEstimatedValue = big.NewInt(1 << 12)
+	getLeadsResponseFieldCurrency       = big.NewInt(1 << 13)
+	getLeadsResponseFieldDescription    = big.NewInt(1 << 14)
+	getLeadsResponseFieldAssignedUserID = big.NewInt(1 << 15)
+	getLeadsResponseFieldPartnerID      = big.NewInt(1 << 16)
+	getLeadsResponseFieldConvertedAt    = big.NewInt(1 << 17)
+	getLeadsResponseFieldCreatedAt      = big.NewInt(1 << 18)
+	getLeadsResponseFieldUpdatedAt      = big.NewInt(1 << 19)
 )
 
 type GetLeadsResponse struct {
@@ -2216,6 +2291,8 @@ type GetLeadsResponse struct {
 	CountryCode    *string                `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 	SourceID       *string                `json:"sourceId,omitempty" url:"sourceId,omitempty"`
 	SourceName     *string                `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	TypeID         *string                `json:"typeId,omitempty" url:"typeId,omitempty"`
+	TypeName       *string                `json:"typeName,omitempty" url:"typeName,omitempty"`
 	Status         GetLeadsResponseStatus `json:"status" url:"status"`
 	EstimatedValue *string                `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
 	Currency       string                 `json:"currency" url:"currency"`
@@ -2294,6 +2371,20 @@ func (g *GetLeadsResponse) GetSourceName() *string {
 		return nil
 	}
 	return g.SourceName
+}
+
+func (g *GetLeadsResponse) GetTypeID() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TypeID
+}
+
+func (g *GetLeadsResponse) GetTypeName() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TypeName
 }
 
 func (g *GetLeadsResponse) GetStatus() GetLeadsResponseStatus {
@@ -2434,6 +2525,20 @@ func (g *GetLeadsResponse) SetSourceID(sourceID *string) {
 func (g *GetLeadsResponse) SetSourceName(sourceName *string) {
 	g.SourceName = sourceName
 	g.require(getLeadsResponseFieldSourceName)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetLeadsResponse) SetTypeID(typeID *string) {
+	g.TypeID = typeID
+	g.require(getLeadsResponseFieldTypeID)
+}
+
+// SetTypeName sets the TypeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetLeadsResponse) SetTypeName(typeName *string) {
+	g.TypeName = typeName
+	g.require(getLeadsResponseFieldTypeName)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -3027,11 +3132,12 @@ func (l ListLeadsRequestSortItemDir) Ptr() *ListLeadsRequestSortItemDir {
 }
 
 var (
-	listLeadsResponseFieldRows     = big.NewInt(1 << 0)
-	listLeadsResponseFieldPage     = big.NewInt(1 << 1)
-	listLeadsResponseFieldPageSize = big.NewInt(1 << 2)
-	listLeadsResponseFieldTotal    = big.NewInt(1 << 3)
-	listLeadsResponseFieldTotals   = big.NewInt(1 << 4)
+	listLeadsResponseFieldRows             = big.NewInt(1 << 0)
+	listLeadsResponseFieldPage             = big.NewInt(1 << 1)
+	listLeadsResponseFieldPageSize         = big.NewInt(1 << 2)
+	listLeadsResponseFieldTotal            = big.NewInt(1 << 3)
+	listLeadsResponseFieldTotals           = big.NewInt(1 << 4)
+	listLeadsResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type ListLeadsResponse struct {
@@ -3040,6 +3146,8 @@ type ListLeadsResponse struct {
 	PageSize int64                        `json:"pageSize" url:"pageSize"`
 	Total    int64                        `json:"total" url:"total"`
 	Totals   map[string]string            `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3081,6 +3189,13 @@ func (l *ListLeadsResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return l.Totals
+}
+
+func (l *ListLeadsResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if l == nil {
+		return nil
+	}
+	return l.TotalsByCurrency
 }
 
 func (l *ListLeadsResponse) GetExtraProperties() map[string]interface{} {
@@ -3130,6 +3245,13 @@ func (l *ListLeadsResponse) SetTotal(total int64) {
 func (l *ListLeadsResponse) SetTotals(totals map[string]string) {
 	l.Totals = totals
 	l.require(listLeadsResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListLeadsResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	l.TotalsByCurrency = totalsByCurrency
+	l.require(listLeadsResponseFieldTotalsByCurrency)
 }
 
 func (l *ListLeadsResponse) UnmarshalJSON(data []byte) error {
@@ -3184,15 +3306,17 @@ var (
 	listLeadsResponseRowsItemFieldCountryCode    = big.NewInt(1 << 6)
 	listLeadsResponseRowsItemFieldSourceID       = big.NewInt(1 << 7)
 	listLeadsResponseRowsItemFieldSourceName     = big.NewInt(1 << 8)
-	listLeadsResponseRowsItemFieldStatus         = big.NewInt(1 << 9)
-	listLeadsResponseRowsItemFieldEstimatedValue = big.NewInt(1 << 10)
-	listLeadsResponseRowsItemFieldCurrency       = big.NewInt(1 << 11)
-	listLeadsResponseRowsItemFieldDescription    = big.NewInt(1 << 12)
-	listLeadsResponseRowsItemFieldAssignedUserID = big.NewInt(1 << 13)
-	listLeadsResponseRowsItemFieldPartnerID      = big.NewInt(1 << 14)
-	listLeadsResponseRowsItemFieldConvertedAt    = big.NewInt(1 << 15)
-	listLeadsResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 16)
-	listLeadsResponseRowsItemFieldUpdatedAt      = big.NewInt(1 << 17)
+	listLeadsResponseRowsItemFieldTypeID         = big.NewInt(1 << 9)
+	listLeadsResponseRowsItemFieldTypeName       = big.NewInt(1 << 10)
+	listLeadsResponseRowsItemFieldStatus         = big.NewInt(1 << 11)
+	listLeadsResponseRowsItemFieldEstimatedValue = big.NewInt(1 << 12)
+	listLeadsResponseRowsItemFieldCurrency       = big.NewInt(1 << 13)
+	listLeadsResponseRowsItemFieldDescription    = big.NewInt(1 << 14)
+	listLeadsResponseRowsItemFieldAssignedUserID = big.NewInt(1 << 15)
+	listLeadsResponseRowsItemFieldPartnerID      = big.NewInt(1 << 16)
+	listLeadsResponseRowsItemFieldConvertedAt    = big.NewInt(1 << 17)
+	listLeadsResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 18)
+	listLeadsResponseRowsItemFieldUpdatedAt      = big.NewInt(1 << 19)
 )
 
 type ListLeadsResponseRowsItem struct {
@@ -3205,6 +3329,8 @@ type ListLeadsResponseRowsItem struct {
 	CountryCode    *string                         `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 	SourceID       *string                         `json:"sourceId,omitempty" url:"sourceId,omitempty"`
 	SourceName     *string                         `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	TypeID         *string                         `json:"typeId,omitempty" url:"typeId,omitempty"`
+	TypeName       *string                         `json:"typeName,omitempty" url:"typeName,omitempty"`
 	Status         ListLeadsResponseRowsItemStatus `json:"status" url:"status"`
 	EstimatedValue *string                         `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
 	Currency       string                          `json:"currency" url:"currency"`
@@ -3283,6 +3409,20 @@ func (l *ListLeadsResponseRowsItem) GetSourceName() *string {
 		return nil
 	}
 	return l.SourceName
+}
+
+func (l *ListLeadsResponseRowsItem) GetTypeID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.TypeID
+}
+
+func (l *ListLeadsResponseRowsItem) GetTypeName() *string {
+	if l == nil {
+		return nil
+	}
+	return l.TypeName
 }
 
 func (l *ListLeadsResponseRowsItem) GetStatus() ListLeadsResponseRowsItemStatus {
@@ -3423,6 +3563,20 @@ func (l *ListLeadsResponseRowsItem) SetSourceID(sourceID *string) {
 func (l *ListLeadsResponseRowsItem) SetSourceName(sourceName *string) {
 	l.SourceName = sourceName
 	l.require(listLeadsResponseRowsItemFieldSourceName)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListLeadsResponseRowsItem) SetTypeID(typeID *string) {
+	l.TypeID = typeID
+	l.require(listLeadsResponseRowsItemFieldTypeID)
+}
+
+// SetTypeName sets the TypeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListLeadsResponseRowsItem) SetTypeName(typeName *string) {
+	l.TypeName = typeName
+	l.require(listLeadsResponseRowsItemFieldTypeName)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -4830,6 +4984,778 @@ func (s *SourcesUpdateLeadsResponse) String() string {
 }
 
 var (
+	typesCreateLeadsResponseFieldID        = big.NewInt(1 << 0)
+	typesCreateLeadsResponseFieldName      = big.NewInt(1 << 1)
+	typesCreateLeadsResponseFieldIsActive  = big.NewInt(1 << 2)
+	typesCreateLeadsResponseFieldCreatedAt = big.NewInt(1 << 3)
+)
+
+type TypesCreateLeadsResponse struct {
+	ID        string    `json:"id" url:"id"`
+	Name      string    `json:"name" url:"name"`
+	IsActive  bool      `json:"isActive" url:"isActive"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TypesCreateLeadsResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TypesCreateLeadsResponse) GetName() string {
+	if t == nil {
+		return ""
+	}
+	return t.Name
+}
+
+func (t *TypesCreateLeadsResponse) GetIsActive() bool {
+	if t == nil {
+		return false
+	}
+	return t.IsActive
+}
+
+func (t *TypesCreateLeadsResponse) GetCreatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.CreatedAt
+}
+
+func (t *TypesCreateLeadsResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TypesCreateLeadsResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateLeadsResponse) SetID(id string) {
+	t.ID = id
+	t.require(typesCreateLeadsResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateLeadsResponse) SetName(name string) {
+	t.Name = name
+	t.require(typesCreateLeadsResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateLeadsResponse) SetIsActive(isActive bool) {
+	t.IsActive = isActive
+	t.require(typesCreateLeadsResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateLeadsResponse) SetCreatedAt(createdAt time.Time) {
+	t.CreatedAt = createdAt
+	t.require(typesCreateLeadsResponseFieldCreatedAt)
+}
+
+func (t *TypesCreateLeadsResponse) UnmarshalJSON(data []byte) error {
+	type embed TypesCreateLeadsResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TypesCreateLeadsResponse(unmarshaler.embed)
+	t.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TypesCreateLeadsResponse) MarshalJSON() ([]byte, error) {
+	type embed TypesCreateLeadsResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*t),
+		CreatedAt: internal.NewDateTime(t.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TypesCreateLeadsResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	typesDeleteLeadsResponseFieldID = big.NewInt(1 << 0)
+)
+
+type TypesDeleteLeadsResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TypesDeleteLeadsResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TypesDeleteLeadsResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TypesDeleteLeadsResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesDeleteLeadsResponse) SetID(id string) {
+	t.ID = id
+	t.require(typesDeleteLeadsResponseFieldID)
+}
+
+func (t *TypesDeleteLeadsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesDeleteLeadsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TypesDeleteLeadsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TypesDeleteLeadsResponse) MarshalJSON() ([]byte, error) {
+	type embed TypesDeleteLeadsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TypesDeleteLeadsResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	typesListLeadsResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type TypesListLeadsResponse struct {
+	Rows []*TypesListLeadsResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TypesListLeadsResponse) GetRows() []*TypesListLeadsResponseRowsItem {
+	if t == nil {
+		return nil
+	}
+	return t.Rows
+}
+
+func (t *TypesListLeadsResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TypesListLeadsResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListLeadsResponse) SetRows(rows []*TypesListLeadsResponseRowsItem) {
+	t.Rows = rows
+	t.require(typesListLeadsResponseFieldRows)
+}
+
+func (t *TypesListLeadsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesListLeadsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TypesListLeadsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TypesListLeadsResponse) MarshalJSON() ([]byte, error) {
+	type embed TypesListLeadsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TypesListLeadsResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	typesListLeadsResponseRowsItemFieldID        = big.NewInt(1 << 0)
+	typesListLeadsResponseRowsItemFieldName      = big.NewInt(1 << 1)
+	typesListLeadsResponseRowsItemFieldIsActive  = big.NewInt(1 << 2)
+	typesListLeadsResponseRowsItemFieldCreatedAt = big.NewInt(1 << 3)
+)
+
+type TypesListLeadsResponseRowsItem struct {
+	ID        string    `json:"id" url:"id"`
+	Name      string    `json:"name" url:"name"`
+	IsActive  bool      `json:"isActive" url:"isActive"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TypesListLeadsResponseRowsItem) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TypesListLeadsResponseRowsItem) GetName() string {
+	if t == nil {
+		return ""
+	}
+	return t.Name
+}
+
+func (t *TypesListLeadsResponseRowsItem) GetIsActive() bool {
+	if t == nil {
+		return false
+	}
+	return t.IsActive
+}
+
+func (t *TypesListLeadsResponseRowsItem) GetCreatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.CreatedAt
+}
+
+func (t *TypesListLeadsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TypesListLeadsResponseRowsItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListLeadsResponseRowsItem) SetID(id string) {
+	t.ID = id
+	t.require(typesListLeadsResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListLeadsResponseRowsItem) SetName(name string) {
+	t.Name = name
+	t.require(typesListLeadsResponseRowsItemFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListLeadsResponseRowsItem) SetIsActive(isActive bool) {
+	t.IsActive = isActive
+	t.require(typesListLeadsResponseRowsItemFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesListLeadsResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	t.CreatedAt = createdAt
+	t.require(typesListLeadsResponseRowsItemFieldCreatedAt)
+}
+
+func (t *TypesListLeadsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed TypesListLeadsResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TypesListLeadsResponseRowsItem(unmarshaler.embed)
+	t.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TypesListLeadsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed TypesListLeadsResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*t),
+		CreatedAt: internal.NewDateTime(t.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TypesListLeadsResponseRowsItem) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	typesOptionsLeadsResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type TypesOptionsLeadsResponse struct {
+	Rows []*TypesOptionsLeadsResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TypesOptionsLeadsResponse) GetRows() []*TypesOptionsLeadsResponseRowsItem {
+	if t == nil {
+		return nil
+	}
+	return t.Rows
+}
+
+func (t *TypesOptionsLeadsResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TypesOptionsLeadsResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesOptionsLeadsResponse) SetRows(rows []*TypesOptionsLeadsResponseRowsItem) {
+	t.Rows = rows
+	t.require(typesOptionsLeadsResponseFieldRows)
+}
+
+func (t *TypesOptionsLeadsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesOptionsLeadsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TypesOptionsLeadsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TypesOptionsLeadsResponse) MarshalJSON() ([]byte, error) {
+	type embed TypesOptionsLeadsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TypesOptionsLeadsResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	typesOptionsLeadsResponseRowsItemFieldID   = big.NewInt(1 << 0)
+	typesOptionsLeadsResponseRowsItemFieldName = big.NewInt(1 << 1)
+)
+
+type TypesOptionsLeadsResponseRowsItem struct {
+	ID   string `json:"id" url:"id"`
+	Name string `json:"name" url:"name"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TypesOptionsLeadsResponseRowsItem) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TypesOptionsLeadsResponseRowsItem) GetName() string {
+	if t == nil {
+		return ""
+	}
+	return t.Name
+}
+
+func (t *TypesOptionsLeadsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TypesOptionsLeadsResponseRowsItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesOptionsLeadsResponseRowsItem) SetID(id string) {
+	t.ID = id
+	t.require(typesOptionsLeadsResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesOptionsLeadsResponseRowsItem) SetName(name string) {
+	t.Name = name
+	t.require(typesOptionsLeadsResponseRowsItemFieldName)
+}
+
+func (t *TypesOptionsLeadsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesOptionsLeadsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TypesOptionsLeadsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TypesOptionsLeadsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed TypesOptionsLeadsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TypesOptionsLeadsResponseRowsItem) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	typesUpdateLeadsResponseFieldID        = big.NewInt(1 << 0)
+	typesUpdateLeadsResponseFieldName      = big.NewInt(1 << 1)
+	typesUpdateLeadsResponseFieldIsActive  = big.NewInt(1 << 2)
+	typesUpdateLeadsResponseFieldCreatedAt = big.NewInt(1 << 3)
+)
+
+type TypesUpdateLeadsResponse struct {
+	ID        string    `json:"id" url:"id"`
+	Name      string    `json:"name" url:"name"`
+	IsActive  bool      `json:"isActive" url:"isActive"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TypesUpdateLeadsResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TypesUpdateLeadsResponse) GetName() string {
+	if t == nil {
+		return ""
+	}
+	return t.Name
+}
+
+func (t *TypesUpdateLeadsResponse) GetIsActive() bool {
+	if t == nil {
+		return false
+	}
+	return t.IsActive
+}
+
+func (t *TypesUpdateLeadsResponse) GetCreatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.CreatedAt
+}
+
+func (t *TypesUpdateLeadsResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TypesUpdateLeadsResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesUpdateLeadsResponse) SetID(id string) {
+	t.ID = id
+	t.require(typesUpdateLeadsResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesUpdateLeadsResponse) SetName(name string) {
+	t.Name = name
+	t.require(typesUpdateLeadsResponseFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesUpdateLeadsResponse) SetIsActive(isActive bool) {
+	t.IsActive = isActive
+	t.require(typesUpdateLeadsResponseFieldIsActive)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesUpdateLeadsResponse) SetCreatedAt(createdAt time.Time) {
+	t.CreatedAt = createdAt
+	t.require(typesUpdateLeadsResponseFieldCreatedAt)
+}
+
+func (t *TypesUpdateLeadsResponse) UnmarshalJSON(data []byte) error {
+	type embed TypesUpdateLeadsResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TypesUpdateLeadsResponse(unmarshaler.embed)
+	t.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TypesUpdateLeadsResponse) MarshalJSON() ([]byte, error) {
+	type embed TypesUpdateLeadsResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*t),
+		CreatedAt: internal.NewDateTime(t.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TypesUpdateLeadsResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
 	updateLeadsRequestDocumentsItemFieldName = big.NewInt(1 << 0)
 	updateLeadsRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
 )
@@ -4967,15 +5893,17 @@ var (
 	updateLeadsResponseFieldCountryCode    = big.NewInt(1 << 6)
 	updateLeadsResponseFieldSourceID       = big.NewInt(1 << 7)
 	updateLeadsResponseFieldSourceName     = big.NewInt(1 << 8)
-	updateLeadsResponseFieldStatus         = big.NewInt(1 << 9)
-	updateLeadsResponseFieldEstimatedValue = big.NewInt(1 << 10)
-	updateLeadsResponseFieldCurrency       = big.NewInt(1 << 11)
-	updateLeadsResponseFieldDescription    = big.NewInt(1 << 12)
-	updateLeadsResponseFieldAssignedUserID = big.NewInt(1 << 13)
-	updateLeadsResponseFieldPartnerID      = big.NewInt(1 << 14)
-	updateLeadsResponseFieldConvertedAt    = big.NewInt(1 << 15)
-	updateLeadsResponseFieldCreatedAt      = big.NewInt(1 << 16)
-	updateLeadsResponseFieldUpdatedAt      = big.NewInt(1 << 17)
+	updateLeadsResponseFieldTypeID         = big.NewInt(1 << 9)
+	updateLeadsResponseFieldTypeName       = big.NewInt(1 << 10)
+	updateLeadsResponseFieldStatus         = big.NewInt(1 << 11)
+	updateLeadsResponseFieldEstimatedValue = big.NewInt(1 << 12)
+	updateLeadsResponseFieldCurrency       = big.NewInt(1 << 13)
+	updateLeadsResponseFieldDescription    = big.NewInt(1 << 14)
+	updateLeadsResponseFieldAssignedUserID = big.NewInt(1 << 15)
+	updateLeadsResponseFieldPartnerID      = big.NewInt(1 << 16)
+	updateLeadsResponseFieldConvertedAt    = big.NewInt(1 << 17)
+	updateLeadsResponseFieldCreatedAt      = big.NewInt(1 << 18)
+	updateLeadsResponseFieldUpdatedAt      = big.NewInt(1 << 19)
 )
 
 type UpdateLeadsResponse struct {
@@ -4988,6 +5916,8 @@ type UpdateLeadsResponse struct {
 	CountryCode    *string                   `json:"countryCode,omitempty" url:"countryCode,omitempty"`
 	SourceID       *string                   `json:"sourceId,omitempty" url:"sourceId,omitempty"`
 	SourceName     *string                   `json:"sourceName,omitempty" url:"sourceName,omitempty"`
+	TypeID         *string                   `json:"typeId,omitempty" url:"typeId,omitempty"`
+	TypeName       *string                   `json:"typeName,omitempty" url:"typeName,omitempty"`
 	Status         UpdateLeadsResponseStatus `json:"status" url:"status"`
 	EstimatedValue *string                   `json:"estimatedValue,omitempty" url:"estimatedValue,omitempty"`
 	Currency       string                    `json:"currency" url:"currency"`
@@ -5066,6 +5996,20 @@ func (u *UpdateLeadsResponse) GetSourceName() *string {
 		return nil
 	}
 	return u.SourceName
+}
+
+func (u *UpdateLeadsResponse) GetTypeID() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TypeID
+}
+
+func (u *UpdateLeadsResponse) GetTypeName() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TypeName
 }
 
 func (u *UpdateLeadsResponse) GetStatus() UpdateLeadsResponseStatus {
@@ -5206,6 +6150,20 @@ func (u *UpdateLeadsResponse) SetSourceID(sourceID *string) {
 func (u *UpdateLeadsResponse) SetSourceName(sourceName *string) {
 	u.SourceName = sourceName
 	u.require(updateLeadsResponseFieldSourceName)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateLeadsResponse) SetTypeID(typeID *string) {
+	u.TypeID = typeID
+	u.require(updateLeadsResponseFieldTypeID)
+}
+
+// SetTypeName sets the TypeName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateLeadsResponse) SetTypeName(typeName *string) {
+	u.TypeName = typeName
+	u.require(updateLeadsResponseFieldTypeName)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -5361,6 +6319,197 @@ func (u UpdateLeadsResponseStatus) Ptr() *UpdateLeadsResponseStatus {
 }
 
 var (
+	typesCreateLeadsRequestFieldName     = big.NewInt(1 << 0)
+	typesCreateLeadsRequestFieldIsActive = big.NewInt(1 << 1)
+)
+
+type TypesCreateLeadsRequest struct {
+	Name     string `json:"name" url:"-"`
+	IsActive *bool  `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TypesCreateLeadsRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateLeadsRequest) SetName(name string) {
+	t.Name = name
+	t.require(typesCreateLeadsRequestFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesCreateLeadsRequest) SetIsActive(isActive *bool) {
+	t.IsActive = isActive
+	t.require(typesCreateLeadsRequestFieldIsActive)
+}
+
+func (t *TypesCreateLeadsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesCreateLeadsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TypesCreateLeadsRequest(body)
+	return nil
+}
+
+func (t *TypesCreateLeadsRequest) MarshalJSON() ([]byte, error) {
+	type embed TypesCreateLeadsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	typesDeleteLeadsRequestFieldID = big.NewInt(1 << 0)
+)
+
+type TypesDeleteLeadsRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TypesDeleteLeadsRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesDeleteLeadsRequest) SetID(id string) {
+	t.ID = id
+	t.require(typesDeleteLeadsRequestFieldID)
+}
+
+func (t *TypesDeleteLeadsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesDeleteLeadsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TypesDeleteLeadsRequest(body)
+	return nil
+}
+
+func (t *TypesDeleteLeadsRequest) MarshalJSON() ([]byte, error) {
+	type embed TypesDeleteLeadsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type TypesListLeadsRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TypesListLeadsRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+type TypesOptionsLeadsRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TypesOptionsLeadsRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+var (
+	typesUpdateLeadsRequestFieldID       = big.NewInt(1 << 0)
+	typesUpdateLeadsRequestFieldName     = big.NewInt(1 << 1)
+	typesUpdateLeadsRequestFieldIsActive = big.NewInt(1 << 2)
+)
+
+type TypesUpdateLeadsRequest struct {
+	ID       string  `json:"id" url:"-"`
+	Name     *string `json:"name,omitempty" url:"-"`
+	IsActive *bool   `json:"isActive,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TypesUpdateLeadsRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesUpdateLeadsRequest) SetID(id string) {
+	t.ID = id
+	t.require(typesUpdateLeadsRequestFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesUpdateLeadsRequest) SetName(name *string) {
+	t.Name = name
+	t.require(typesUpdateLeadsRequestFieldName)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TypesUpdateLeadsRequest) SetIsActive(isActive *bool) {
+	t.IsActive = isActive
+	t.require(typesUpdateLeadsRequestFieldIsActive)
+}
+
+func (t *TypesUpdateLeadsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TypesUpdateLeadsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TypesUpdateLeadsRequest(body)
+	return nil
+}
+
+func (t *TypesUpdateLeadsRequest) MarshalJSON() ([]byte, error) {
+	type embed TypesUpdateLeadsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	updateLeadsRequestFieldID             = big.NewInt(1 << 0)
 	updateLeadsRequestFieldName           = big.NewInt(1 << 1)
 	updateLeadsRequestFieldContactName    = big.NewInt(1 << 2)
@@ -5369,12 +6518,13 @@ var (
 	updateLeadsRequestFieldWebsite        = big.NewInt(1 << 5)
 	updateLeadsRequestFieldCountryCode    = big.NewInt(1 << 6)
 	updateLeadsRequestFieldSourceID       = big.NewInt(1 << 7)
-	updateLeadsRequestFieldStatus         = big.NewInt(1 << 8)
-	updateLeadsRequestFieldEstimatedValue = big.NewInt(1 << 9)
-	updateLeadsRequestFieldCurrency       = big.NewInt(1 << 10)
-	updateLeadsRequestFieldDescription    = big.NewInt(1 << 11)
-	updateLeadsRequestFieldAssignedUserID = big.NewInt(1 << 12)
-	updateLeadsRequestFieldDocuments      = big.NewInt(1 << 13)
+	updateLeadsRequestFieldTypeID         = big.NewInt(1 << 8)
+	updateLeadsRequestFieldStatus         = big.NewInt(1 << 9)
+	updateLeadsRequestFieldEstimatedValue = big.NewInt(1 << 10)
+	updateLeadsRequestFieldCurrency       = big.NewInt(1 << 11)
+	updateLeadsRequestFieldDescription    = big.NewInt(1 << 12)
+	updateLeadsRequestFieldAssignedUserID = big.NewInt(1 << 13)
+	updateLeadsRequestFieldDocuments      = big.NewInt(1 << 14)
 )
 
 type UpdateLeadsRequest struct {
@@ -5386,6 +6536,7 @@ type UpdateLeadsRequest struct {
 	Website        *string                            `json:"website,omitempty" url:"-"`
 	CountryCode    *string                            `json:"countryCode,omitempty" url:"-"`
 	SourceID       *string                            `json:"sourceId,omitempty" url:"-"`
+	TypeID         *string                            `json:"typeId,omitempty" url:"-"`
 	Status         *UpdateLeadsRequestStatus          `json:"status,omitempty" url:"-"`
 	EstimatedValue *string                            `json:"estimatedValue,omitempty" url:"-"`
 	Currency       *string                            `json:"currency,omitempty" url:"-"`
@@ -5458,6 +6609,13 @@ func (u *UpdateLeadsRequest) SetCountryCode(countryCode *string) {
 func (u *UpdateLeadsRequest) SetSourceID(sourceID *string) {
 	u.SourceID = sourceID
 	u.require(updateLeadsRequestFieldSourceID)
+}
+
+// SetTypeID sets the TypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateLeadsRequest) SetTypeID(typeID *string) {
+	u.TypeID = typeID
+	u.require(updateLeadsRequestFieldTypeID)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;

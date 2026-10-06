@@ -2110,11 +2110,12 @@ func (l ListOperationTypesRequestSortItemDir) Ptr() *ListOperationTypesRequestSo
 }
 
 var (
-	listOperationTypesResponseFieldRows     = big.NewInt(1 << 0)
-	listOperationTypesResponseFieldPage     = big.NewInt(1 << 1)
-	listOperationTypesResponseFieldPageSize = big.NewInt(1 << 2)
-	listOperationTypesResponseFieldTotal    = big.NewInt(1 << 3)
-	listOperationTypesResponseFieldTotals   = big.NewInt(1 << 4)
+	listOperationTypesResponseFieldRows             = big.NewInt(1 << 0)
+	listOperationTypesResponseFieldPage             = big.NewInt(1 << 1)
+	listOperationTypesResponseFieldPageSize         = big.NewInt(1 << 2)
+	listOperationTypesResponseFieldTotal            = big.NewInt(1 << 3)
+	listOperationTypesResponseFieldTotals           = big.NewInt(1 << 4)
+	listOperationTypesResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type ListOperationTypesResponse struct {
@@ -2123,6 +2124,8 @@ type ListOperationTypesResponse struct {
 	PageSize int64                                 `json:"pageSize" url:"pageSize"`
 	Total    int64                                 `json:"total" url:"total"`
 	Totals   map[string]string                     `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2164,6 +2167,13 @@ func (l *ListOperationTypesResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return l.Totals
+}
+
+func (l *ListOperationTypesResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if l == nil {
+		return nil
+	}
+	return l.TotalsByCurrency
 }
 
 func (l *ListOperationTypesResponse) GetExtraProperties() map[string]interface{} {
@@ -2213,6 +2223,13 @@ func (l *ListOperationTypesResponse) SetTotal(total int64) {
 func (l *ListOperationTypesResponse) SetTotals(totals map[string]string) {
 	l.Totals = totals
 	l.require(listOperationTypesResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListOperationTypesResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	l.TotalsByCurrency = totalsByCurrency
+	l.require(listOperationTypesResponseFieldTotalsByCurrency)
 }
 
 func (l *ListOperationTypesResponse) UnmarshalJSON(data []byte) error {

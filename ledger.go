@@ -2741,11 +2741,12 @@ func (a AccountsListLedgerRequestSortItemDir) Ptr() *AccountsListLedgerRequestSo
 }
 
 var (
-	accountsListLedgerResponseFieldRows     = big.NewInt(1 << 0)
-	accountsListLedgerResponseFieldPage     = big.NewInt(1 << 1)
-	accountsListLedgerResponseFieldPageSize = big.NewInt(1 << 2)
-	accountsListLedgerResponseFieldTotal    = big.NewInt(1 << 3)
-	accountsListLedgerResponseFieldTotals   = big.NewInt(1 << 4)
+	accountsListLedgerResponseFieldRows             = big.NewInt(1 << 0)
+	accountsListLedgerResponseFieldPage             = big.NewInt(1 << 1)
+	accountsListLedgerResponseFieldPageSize         = big.NewInt(1 << 2)
+	accountsListLedgerResponseFieldTotal            = big.NewInt(1 << 3)
+	accountsListLedgerResponseFieldTotals           = big.NewInt(1 << 4)
+	accountsListLedgerResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type AccountsListLedgerResponse struct {
@@ -2754,6 +2755,8 @@ type AccountsListLedgerResponse struct {
 	PageSize int64                                 `json:"pageSize" url:"pageSize"`
 	Total    int64                                 `json:"total" url:"total"`
 	Totals   map[string]string                     `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2795,6 +2798,13 @@ func (a *AccountsListLedgerResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return a.Totals
+}
+
+func (a *AccountsListLedgerResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if a == nil {
+		return nil
+	}
+	return a.TotalsByCurrency
 }
 
 func (a *AccountsListLedgerResponse) GetExtraProperties() map[string]interface{} {
@@ -2844,6 +2854,13 @@ func (a *AccountsListLedgerResponse) SetTotal(total int64) {
 func (a *AccountsListLedgerResponse) SetTotals(totals map[string]string) {
 	a.Totals = totals
 	a.require(accountsListLedgerResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListLedgerResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	a.TotalsByCurrency = totalsByCurrency
+	a.require(accountsListLedgerResponseFieldTotalsByCurrency)
 }
 
 func (a *AccountsListLedgerResponse) UnmarshalJSON(data []byte) error {
@@ -4373,11 +4390,12 @@ func (c CostCenterGroupsListLedgerRequestSortItemDir) Ptr() *CostCenterGroupsLis
 }
 
 var (
-	costCenterGroupsListLedgerResponseFieldRows     = big.NewInt(1 << 0)
-	costCenterGroupsListLedgerResponseFieldPage     = big.NewInt(1 << 1)
-	costCenterGroupsListLedgerResponseFieldPageSize = big.NewInt(1 << 2)
-	costCenterGroupsListLedgerResponseFieldTotal    = big.NewInt(1 << 3)
-	costCenterGroupsListLedgerResponseFieldTotals   = big.NewInt(1 << 4)
+	costCenterGroupsListLedgerResponseFieldRows             = big.NewInt(1 << 0)
+	costCenterGroupsListLedgerResponseFieldPage             = big.NewInt(1 << 1)
+	costCenterGroupsListLedgerResponseFieldPageSize         = big.NewInt(1 << 2)
+	costCenterGroupsListLedgerResponseFieldTotal            = big.NewInt(1 << 3)
+	costCenterGroupsListLedgerResponseFieldTotals           = big.NewInt(1 << 4)
+	costCenterGroupsListLedgerResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type CostCenterGroupsListLedgerResponse struct {
@@ -4386,6 +4404,8 @@ type CostCenterGroupsListLedgerResponse struct {
 	PageSize int64                                         `json:"pageSize" url:"pageSize"`
 	Total    int64                                         `json:"total" url:"total"`
 	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4427,6 +4447,13 @@ func (c *CostCenterGroupsListLedgerResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return c.Totals
+}
+
+func (c *CostCenterGroupsListLedgerResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.TotalsByCurrency
 }
 
 func (c *CostCenterGroupsListLedgerResponse) GetExtraProperties() map[string]interface{} {
@@ -4476,6 +4503,13 @@ func (c *CostCenterGroupsListLedgerResponse) SetTotal(total int64) {
 func (c *CostCenterGroupsListLedgerResponse) SetTotals(totals map[string]string) {
 	c.Totals = totals
 	c.require(costCenterGroupsListLedgerResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CostCenterGroupsListLedgerResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	c.TotalsByCurrency = totalsByCurrency
+	c.require(costCenterGroupsListLedgerResponseFieldTotalsByCurrency)
 }
 
 func (c *CostCenterGroupsListLedgerResponse) UnmarshalJSON(data []byte) error {
@@ -5427,11 +5461,12 @@ func (c CostCentersListLedgerRequestSortItemDir) Ptr() *CostCentersListLedgerReq
 }
 
 var (
-	costCentersListLedgerResponseFieldRows     = big.NewInt(1 << 0)
-	costCentersListLedgerResponseFieldPage     = big.NewInt(1 << 1)
-	costCentersListLedgerResponseFieldPageSize = big.NewInt(1 << 2)
-	costCentersListLedgerResponseFieldTotal    = big.NewInt(1 << 3)
-	costCentersListLedgerResponseFieldTotals   = big.NewInt(1 << 4)
+	costCentersListLedgerResponseFieldRows             = big.NewInt(1 << 0)
+	costCentersListLedgerResponseFieldPage             = big.NewInt(1 << 1)
+	costCentersListLedgerResponseFieldPageSize         = big.NewInt(1 << 2)
+	costCentersListLedgerResponseFieldTotal            = big.NewInt(1 << 3)
+	costCentersListLedgerResponseFieldTotals           = big.NewInt(1 << 4)
+	costCentersListLedgerResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type CostCentersListLedgerResponse struct {
@@ -5440,6 +5475,8 @@ type CostCentersListLedgerResponse struct {
 	PageSize int64                                    `json:"pageSize" url:"pageSize"`
 	Total    int64                                    `json:"total" url:"total"`
 	Totals   map[string]string                        `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5481,6 +5518,13 @@ func (c *CostCentersListLedgerResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return c.Totals
+}
+
+func (c *CostCentersListLedgerResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.TotalsByCurrency
 }
 
 func (c *CostCentersListLedgerResponse) GetExtraProperties() map[string]interface{} {
@@ -5530,6 +5574,13 @@ func (c *CostCentersListLedgerResponse) SetTotal(total int64) {
 func (c *CostCentersListLedgerResponse) SetTotals(totals map[string]string) {
 	c.Totals = totals
 	c.require(costCentersListLedgerResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CostCentersListLedgerResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	c.TotalsByCurrency = totalsByCurrency
+	c.require(costCentersListLedgerResponseFieldTotalsByCurrency)
 }
 
 func (c *CostCentersListLedgerResponse) UnmarshalJSON(data []byte) error {
@@ -7281,11 +7332,12 @@ func (j JournalTransactionsListLedgerRequestSortItemDir) Ptr() *JournalTransacti
 }
 
 var (
-	journalTransactionsListLedgerResponseFieldRows     = big.NewInt(1 << 0)
-	journalTransactionsListLedgerResponseFieldPage     = big.NewInt(1 << 1)
-	journalTransactionsListLedgerResponseFieldPageSize = big.NewInt(1 << 2)
-	journalTransactionsListLedgerResponseFieldTotal    = big.NewInt(1 << 3)
-	journalTransactionsListLedgerResponseFieldTotals   = big.NewInt(1 << 4)
+	journalTransactionsListLedgerResponseFieldRows             = big.NewInt(1 << 0)
+	journalTransactionsListLedgerResponseFieldPage             = big.NewInt(1 << 1)
+	journalTransactionsListLedgerResponseFieldPageSize         = big.NewInt(1 << 2)
+	journalTransactionsListLedgerResponseFieldTotal            = big.NewInt(1 << 3)
+	journalTransactionsListLedgerResponseFieldTotals           = big.NewInt(1 << 4)
+	journalTransactionsListLedgerResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type JournalTransactionsListLedgerResponse struct {
@@ -7294,6 +7346,8 @@ type JournalTransactionsListLedgerResponse struct {
 	PageSize int64                                            `json:"pageSize" url:"pageSize"`
 	Total    int64                                            `json:"total" url:"total"`
 	Totals   map[string]string                                `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7335,6 +7389,13 @@ func (j *JournalTransactionsListLedgerResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return j.Totals
+}
+
+func (j *JournalTransactionsListLedgerResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if j == nil {
+		return nil
+	}
+	return j.TotalsByCurrency
 }
 
 func (j *JournalTransactionsListLedgerResponse) GetExtraProperties() map[string]interface{} {
@@ -7384,6 +7445,13 @@ func (j *JournalTransactionsListLedgerResponse) SetTotal(total int64) {
 func (j *JournalTransactionsListLedgerResponse) SetTotals(totals map[string]string) {
 	j.Totals = totals
 	j.require(journalTransactionsListLedgerResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsListLedgerResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	j.TotalsByCurrency = totalsByCurrency
+	j.require(journalTransactionsListLedgerResponseFieldTotalsByCurrency)
 }
 
 func (j *JournalTransactionsListLedgerResponse) UnmarshalJSON(data []byte) error {
@@ -7438,6 +7506,7 @@ var (
 	journalTransactionsListLedgerResponseRowsItemFieldStatus       = big.NewInt(1 << 6)
 	journalTransactionsListLedgerResponseRowsItemFieldCreatedAt    = big.NewInt(1 << 7)
 	journalTransactionsListLedgerResponseRowsItemFieldPostedAt     = big.NewInt(1 << 8)
+	journalTransactionsListLedgerResponseRowsItemFieldPartnerName  = big.NewInt(1 << 9)
 )
 
 type JournalTransactionsListLedgerResponseRowsItem struct {
@@ -7450,6 +7519,7 @@ type JournalTransactionsListLedgerResponseRowsItem struct {
 	Status       JournalTransactionsListLedgerResponseRowsItemStatus `json:"status" url:"status"`
 	CreatedAt    time.Time                                           `json:"createdAt" url:"createdAt"`
 	PostedAt     *time.Time                                          `json:"postedAt,omitempty" url:"postedAt,omitempty"`
+	PartnerName  *string                                             `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7519,6 +7589,13 @@ func (j *JournalTransactionsListLedgerResponseRowsItem) GetPostedAt() *time.Time
 		return nil
 	}
 	return j.PostedAt
+}
+
+func (j *JournalTransactionsListLedgerResponseRowsItem) GetPartnerName() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerName
 }
 
 func (j *JournalTransactionsListLedgerResponseRowsItem) GetExtraProperties() map[string]interface{} {
@@ -7596,6 +7673,13 @@ func (j *JournalTransactionsListLedgerResponseRowsItem) SetCreatedAt(createdAt t
 func (j *JournalTransactionsListLedgerResponseRowsItem) SetPostedAt(postedAt *time.Time) {
 	j.PostedAt = postedAt
 	j.require(journalTransactionsListLedgerResponseRowsItemFieldPostedAt)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsListLedgerResponseRowsItem) SetPartnerName(partnerName *string) {
+	j.PartnerName = partnerName
+	j.require(journalTransactionsListLedgerResponseRowsItemFieldPartnerName)
 }
 
 func (j *JournalTransactionsListLedgerResponseRowsItem) UnmarshalJSON(data []byte) error {
@@ -8857,11 +8941,12 @@ func (o OwnersListLedgerRequestSortItemDir) Ptr() *OwnersListLedgerRequestSortIt
 }
 
 var (
-	ownersListLedgerResponseFieldRows     = big.NewInt(1 << 0)
-	ownersListLedgerResponseFieldPage     = big.NewInt(1 << 1)
-	ownersListLedgerResponseFieldPageSize = big.NewInt(1 << 2)
-	ownersListLedgerResponseFieldTotal    = big.NewInt(1 << 3)
-	ownersListLedgerResponseFieldTotals   = big.NewInt(1 << 4)
+	ownersListLedgerResponseFieldRows             = big.NewInt(1 << 0)
+	ownersListLedgerResponseFieldPage             = big.NewInt(1 << 1)
+	ownersListLedgerResponseFieldPageSize         = big.NewInt(1 << 2)
+	ownersListLedgerResponseFieldTotal            = big.NewInt(1 << 3)
+	ownersListLedgerResponseFieldTotals           = big.NewInt(1 << 4)
+	ownersListLedgerResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type OwnersListLedgerResponse struct {
@@ -8870,6 +8955,8 @@ type OwnersListLedgerResponse struct {
 	PageSize int64                               `json:"pageSize" url:"pageSize"`
 	Total    int64                               `json:"total" url:"total"`
 	Totals   map[string]string                   `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8911,6 +8998,13 @@ func (o *OwnersListLedgerResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return o.Totals
+}
+
+func (o *OwnersListLedgerResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if o == nil {
+		return nil
+	}
+	return o.TotalsByCurrency
 }
 
 func (o *OwnersListLedgerResponse) GetExtraProperties() map[string]interface{} {
@@ -8960,6 +9054,13 @@ func (o *OwnersListLedgerResponse) SetTotal(total int64) {
 func (o *OwnersListLedgerResponse) SetTotals(totals map[string]string) {
 	o.Totals = totals
 	o.require(ownersListLedgerResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OwnersListLedgerResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	o.TotalsByCurrency = totalsByCurrency
+	o.require(ownersListLedgerResponseFieldTotalsByCurrency)
 }
 
 func (o *OwnersListLedgerResponse) UnmarshalJSON(data []byte) error {
@@ -10541,11 +10642,12 @@ func (p PeriodsListLedgerRequestSortItemDir) Ptr() *PeriodsListLedgerRequestSort
 }
 
 var (
-	periodsListLedgerResponseFieldRows     = big.NewInt(1 << 0)
-	periodsListLedgerResponseFieldPage     = big.NewInt(1 << 1)
-	periodsListLedgerResponseFieldPageSize = big.NewInt(1 << 2)
-	periodsListLedgerResponseFieldTotal    = big.NewInt(1 << 3)
-	periodsListLedgerResponseFieldTotals   = big.NewInt(1 << 4)
+	periodsListLedgerResponseFieldRows             = big.NewInt(1 << 0)
+	periodsListLedgerResponseFieldPage             = big.NewInt(1 << 1)
+	periodsListLedgerResponseFieldPageSize         = big.NewInt(1 << 2)
+	periodsListLedgerResponseFieldTotal            = big.NewInt(1 << 3)
+	periodsListLedgerResponseFieldTotals           = big.NewInt(1 << 4)
+	periodsListLedgerResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type PeriodsListLedgerResponse struct {
@@ -10554,6 +10656,8 @@ type PeriodsListLedgerResponse struct {
 	PageSize int64                                `json:"pageSize" url:"pageSize"`
 	Total    int64                                `json:"total" url:"total"`
 	Totals   map[string]string                    `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10595,6 +10699,13 @@ func (p *PeriodsListLedgerResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return p.Totals
+}
+
+func (p *PeriodsListLedgerResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.TotalsByCurrency
 }
 
 func (p *PeriodsListLedgerResponse) GetExtraProperties() map[string]interface{} {
@@ -10644,6 +10755,13 @@ func (p *PeriodsListLedgerResponse) SetTotal(total int64) {
 func (p *PeriodsListLedgerResponse) SetTotals(totals map[string]string) {
 	p.Totals = totals
 	p.require(periodsListLedgerResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodsListLedgerResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	p.TotalsByCurrency = totalsByCurrency
+	p.require(periodsListLedgerResponseFieldTotalsByCurrency)
 }
 
 func (p *PeriodsListLedgerResponse) UnmarshalJSON(data []byte) error {

@@ -258,6 +258,89 @@ func (a *AccountsUpdateBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	directDebitsCandidatesBankRequestFieldPage     = big.NewInt(1 << 0)
+	directDebitsCandidatesBankRequestFieldPageSize = big.NewInt(1 << 1)
+	directDebitsCandidatesBankRequestFieldSort     = big.NewInt(1 << 2)
+	directDebitsCandidatesBankRequestFieldFilter   = big.NewInt(1 << 3)
+	directDebitsCandidatesBankRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type DirectDebitsCandidatesBankRequest struct {
+	Page     *int64                                         `json:"page,omitempty" url:"-"`
+	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
+	Sort     []*DirectDebitsCandidatesBankRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*DirectDebitsCandidatesBankRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DirectDebitsCandidatesBankRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequest) SetPage(page *int64) {
+	d.Page = page
+	d.require(directDebitsCandidatesBankRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequest) SetPageSize(pageSize *int64) {
+	d.PageSize = pageSize
+	d.require(directDebitsCandidatesBankRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequest) SetSort(sort []*DirectDebitsCandidatesBankRequestSortItem) {
+	d.Sort = sort
+	d.require(directDebitsCandidatesBankRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequest) SetFilter(filter []*DirectDebitsCandidatesBankRequestFilterItem) {
+	d.Filter = filter
+	d.require(directDebitsCandidatesBankRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequest) SetTotals(totals []string) {
+	d.Totals = totals
+	d.require(directDebitsCandidatesBankRequestFieldTotals)
+}
+
+func (d *DirectDebitsCandidatesBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DirectDebitsCandidatesBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*d = DirectDebitsCandidatesBankRequest(body)
+	return nil
+}
+
+func (d *DirectDebitsCandidatesBankRequest) MarshalJSON() ([]byte, error) {
+	type embed DirectDebitsCandidatesBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	directDebitsExportBankRequestFieldBankAccountID  = big.NewInt(1 << 0)
 	directDebitsExportBankRequestFieldSaleInvoiceIDs = big.NewInt(1 << 1)
 	directDebitsExportBankRequestFieldCollectionDate = big.NewInt(1 << 2)
@@ -3741,11 +3824,12 @@ func (a AccountsListBankRequestSortItemDir) Ptr() *AccountsListBankRequestSortIt
 }
 
 var (
-	accountsListBankResponseFieldRows     = big.NewInt(1 << 0)
-	accountsListBankResponseFieldPage     = big.NewInt(1 << 1)
-	accountsListBankResponseFieldPageSize = big.NewInt(1 << 2)
-	accountsListBankResponseFieldTotal    = big.NewInt(1 << 3)
-	accountsListBankResponseFieldTotals   = big.NewInt(1 << 4)
+	accountsListBankResponseFieldRows             = big.NewInt(1 << 0)
+	accountsListBankResponseFieldPage             = big.NewInt(1 << 1)
+	accountsListBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	accountsListBankResponseFieldTotal            = big.NewInt(1 << 3)
+	accountsListBankResponseFieldTotals           = big.NewInt(1 << 4)
+	accountsListBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type AccountsListBankResponse struct {
@@ -3754,6 +3838,8 @@ type AccountsListBankResponse struct {
 	PageSize int64                               `json:"pageSize" url:"pageSize"`
 	Total    int64                               `json:"total" url:"total"`
 	Totals   map[string]string                   `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3795,6 +3881,13 @@ func (a *AccountsListBankResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return a.Totals
+}
+
+func (a *AccountsListBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if a == nil {
+		return nil
+	}
+	return a.TotalsByCurrency
 }
 
 func (a *AccountsListBankResponse) GetExtraProperties() map[string]interface{} {
@@ -3844,6 +3937,13 @@ func (a *AccountsListBankResponse) SetTotal(total int64) {
 func (a *AccountsListBankResponse) SetTotals(totals map[string]string) {
 	a.Totals = totals
 	a.require(accountsListBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	a.TotalsByCurrency = totalsByCurrency
+	a.require(accountsListBankResponseFieldTotalsByCurrency)
 }
 
 func (a *AccountsListBankResponse) UnmarshalJSON(data []byte) error {
@@ -4262,6 +4362,901 @@ func (a *AccountsUpdateBankResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	directDebitsCandidatesBankRequestFilterItemFieldField = big.NewInt(1 << 0)
+	directDebitsCandidatesBankRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	directDebitsCandidatesBankRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type DirectDebitsCandidatesBankRequestFilterItem struct {
+	Field string                                            `json:"field" url:"field"`
+	Op    DirectDebitsCandidatesBankRequestFilterItemOp     `json:"op" url:"op"`
+	Value *DirectDebitsCandidatesBankRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) GetField() string {
+	if d == nil {
+		return ""
+	}
+	return d.Field
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) GetOp() DirectDebitsCandidatesBankRequestFilterItemOp {
+	if d == nil {
+		return ""
+	}
+	return d.Op
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) GetValue() *DirectDebitsCandidatesBankRequestFilterItemValue {
+	if d == nil {
+		return nil
+	}
+	return d.Value
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequestFilterItem) SetField(field string) {
+	d.Field = field
+	d.require(directDebitsCandidatesBankRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequestFilterItem) SetOp(op DirectDebitsCandidatesBankRequestFilterItemOp) {
+	d.Op = op
+	d.require(directDebitsCandidatesBankRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequestFilterItem) SetValue(value *DirectDebitsCandidatesBankRequestFilterItemValue) {
+	d.Value = value
+	d.require(directDebitsCandidatesBankRequestFilterItemFieldValue)
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DirectDebitsCandidatesBankRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DirectDebitsCandidatesBankRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed DirectDebitsCandidatesBankRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DirectDebitsCandidatesBankRequestFilterItemOp string
+
+const (
+	DirectDebitsCandidatesBankRequestFilterItemOpEq       DirectDebitsCandidatesBankRequestFilterItemOp = "eq"
+	DirectDebitsCandidatesBankRequestFilterItemOpNe       DirectDebitsCandidatesBankRequestFilterItemOp = "ne"
+	DirectDebitsCandidatesBankRequestFilterItemOpContains DirectDebitsCandidatesBankRequestFilterItemOp = "contains"
+	DirectDebitsCandidatesBankRequestFilterItemOpGte      DirectDebitsCandidatesBankRequestFilterItemOp = "gte"
+	DirectDebitsCandidatesBankRequestFilterItemOpLte      DirectDebitsCandidatesBankRequestFilterItemOp = "lte"
+	DirectDebitsCandidatesBankRequestFilterItemOpIn       DirectDebitsCandidatesBankRequestFilterItemOp = "in"
+)
+
+func NewDirectDebitsCandidatesBankRequestFilterItemOpFromString(s string) (DirectDebitsCandidatesBankRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return DirectDebitsCandidatesBankRequestFilterItemOpEq, nil
+	case "ne":
+		return DirectDebitsCandidatesBankRequestFilterItemOpNe, nil
+	case "contains":
+		return DirectDebitsCandidatesBankRequestFilterItemOpContains, nil
+	case "gte":
+		return DirectDebitsCandidatesBankRequestFilterItemOpGte, nil
+	case "lte":
+		return DirectDebitsCandidatesBankRequestFilterItemOpLte, nil
+	case "in":
+		return DirectDebitsCandidatesBankRequestFilterItemOpIn, nil
+	}
+	var t DirectDebitsCandidatesBankRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DirectDebitsCandidatesBankRequestFilterItemOp) Ptr() *DirectDebitsCandidatesBankRequestFilterItemOp {
+	return &d
+}
+
+type DirectDebitsCandidatesBankRequestFilterItemValue struct {
+	String                                                        string
+	Double                                                        float64
+	Boolean                                                       bool
+	DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList []*DirectDebitsCandidatesBankRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValue) GetString() string {
+	if d == nil {
+		return ""
+	}
+	return d.String
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValue) GetDouble() float64 {
+	if d == nil {
+		return 0
+	}
+	return d.Double
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValue) GetBoolean() bool {
+	if d == nil {
+		return false
+	}
+	return d.Boolean
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValue) GetDirectDebitsCandidatesBankRequestFilterItemValueThreeItemList() []*DirectDebitsCandidatesBankRequestFilterItemValueThreeItem {
+	if d == nil {
+		return nil
+	}
+	return d.DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		d.typ = "String"
+		d.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		d.typ = "Double"
+		d.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		d.typ = "Boolean"
+		d.Boolean = valueBoolean
+		return nil
+	}
+	var valueDirectDebitsCandidatesBankRequestFilterItemValueThreeItemList []*DirectDebitsCandidatesBankRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueDirectDebitsCandidatesBankRequestFilterItemValueThreeItemList); err == nil {
+		d.typ = "DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList"
+		d.DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList = valueDirectDebitsCandidatesBankRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
+}
+
+func (d DirectDebitsCandidatesBankRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
+	}
+	if d.typ == "Boolean" || d.Boolean != false {
+		return json.Marshal(d.Boolean)
+	}
+	if d.typ == "DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList" || d.DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(d.DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DirectDebitsCandidatesBankRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitDirectDebitsCandidatesBankRequestFilterItemValueThreeItemList([]*DirectDebitsCandidatesBankRequestFilterItemValueThreeItem) error
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValue) Accept(visitor DirectDebitsCandidatesBankRequestFilterItemValueVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
+	}
+	if d.typ == "Boolean" || d.Boolean != false {
+		return visitor.VisitBoolean(d.Boolean)
+	}
+	if d.typ == "DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList" || d.DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitDirectDebitsCandidatesBankRequestFilterItemValueThreeItemList(d.DirectDebitsCandidatesBankRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DirectDebitsCandidatesBankRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValueThreeItem) GetString() string {
+	if d == nil {
+		return ""
+	}
+	return d.String
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if d == nil {
+		return 0
+	}
+	return d.Double
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		d.typ = "String"
+		d.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		d.typ = "Double"
+		d.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
+}
+
+func (d DirectDebitsCandidatesBankRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DirectDebitsCandidatesBankRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (d *DirectDebitsCandidatesBankRequestFilterItemValueThreeItem) Accept(visitor DirectDebitsCandidatesBankRequestFilterItemValueThreeItemVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+var (
+	directDebitsCandidatesBankRequestSortItemFieldField = big.NewInt(1 << 0)
+	directDebitsCandidatesBankRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type DirectDebitsCandidatesBankRequestSortItem struct {
+	Field string                                        `json:"field" url:"field"`
+	Dir   *DirectDebitsCandidatesBankRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DirectDebitsCandidatesBankRequestSortItem) GetField() string {
+	if d == nil {
+		return ""
+	}
+	return d.Field
+}
+
+func (d *DirectDebitsCandidatesBankRequestSortItem) GetDir() *DirectDebitsCandidatesBankRequestSortItemDir {
+	if d == nil {
+		return nil
+	}
+	return d.Dir
+}
+
+func (d *DirectDebitsCandidatesBankRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DirectDebitsCandidatesBankRequestSortItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequestSortItem) SetField(field string) {
+	d.Field = field
+	d.require(directDebitsCandidatesBankRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankRequestSortItem) SetDir(dir *DirectDebitsCandidatesBankRequestSortItemDir) {
+	d.Dir = dir
+	d.require(directDebitsCandidatesBankRequestSortItemFieldDir)
+}
+
+func (d *DirectDebitsCandidatesBankRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DirectDebitsCandidatesBankRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DirectDebitsCandidatesBankRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DirectDebitsCandidatesBankRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed DirectDebitsCandidatesBankRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DirectDebitsCandidatesBankRequestSortItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DirectDebitsCandidatesBankRequestSortItemDir string
+
+const (
+	DirectDebitsCandidatesBankRequestSortItemDirAsc  DirectDebitsCandidatesBankRequestSortItemDir = "asc"
+	DirectDebitsCandidatesBankRequestSortItemDirDesc DirectDebitsCandidatesBankRequestSortItemDir = "desc"
+)
+
+func NewDirectDebitsCandidatesBankRequestSortItemDirFromString(s string) (DirectDebitsCandidatesBankRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return DirectDebitsCandidatesBankRequestSortItemDirAsc, nil
+	case "desc":
+		return DirectDebitsCandidatesBankRequestSortItemDirDesc, nil
+	}
+	var t DirectDebitsCandidatesBankRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DirectDebitsCandidatesBankRequestSortItemDir) Ptr() *DirectDebitsCandidatesBankRequestSortItemDir {
+	return &d
+}
+
+var (
+	directDebitsCandidatesBankResponseFieldRows             = big.NewInt(1 << 0)
+	directDebitsCandidatesBankResponseFieldPage             = big.NewInt(1 << 1)
+	directDebitsCandidatesBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	directDebitsCandidatesBankResponseFieldTotal            = big.NewInt(1 << 3)
+	directDebitsCandidatesBankResponseFieldTotals           = big.NewInt(1 << 4)
+	directDebitsCandidatesBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type DirectDebitsCandidatesBankResponse struct {
+	Rows     []*DirectDebitsCandidatesBankResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                         `json:"page" url:"page"`
+	PageSize int64                                         `json:"pageSize" url:"pageSize"`
+	Total    int64                                         `json:"total" url:"total"`
+	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DirectDebitsCandidatesBankResponse) GetRows() []*DirectDebitsCandidatesBankResponseRowsItem {
+	if d == nil {
+		return nil
+	}
+	return d.Rows
+}
+
+func (d *DirectDebitsCandidatesBankResponse) GetPage() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.Page
+}
+
+func (d *DirectDebitsCandidatesBankResponse) GetPageSize() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.PageSize
+}
+
+func (d *DirectDebitsCandidatesBankResponse) GetTotal() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.Total
+}
+
+func (d *DirectDebitsCandidatesBankResponse) GetTotals() map[string]string {
+	if d == nil {
+		return nil
+	}
+	return d.Totals
+}
+
+func (d *DirectDebitsCandidatesBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if d == nil {
+		return nil
+	}
+	return d.TotalsByCurrency
+}
+
+func (d *DirectDebitsCandidatesBankResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DirectDebitsCandidatesBankResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponse) SetRows(rows []*DirectDebitsCandidatesBankResponseRowsItem) {
+	d.Rows = rows
+	d.require(directDebitsCandidatesBankResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponse) SetPage(page int64) {
+	d.Page = page
+	d.require(directDebitsCandidatesBankResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponse) SetPageSize(pageSize int64) {
+	d.PageSize = pageSize
+	d.require(directDebitsCandidatesBankResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponse) SetTotal(total int64) {
+	d.Total = total
+	d.require(directDebitsCandidatesBankResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponse) SetTotals(totals map[string]string) {
+	d.Totals = totals
+	d.require(directDebitsCandidatesBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	d.TotalsByCurrency = totalsByCurrency
+	d.require(directDebitsCandidatesBankResponseFieldTotalsByCurrency)
+}
+
+func (d *DirectDebitsCandidatesBankResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DirectDebitsCandidatesBankResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DirectDebitsCandidatesBankResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DirectDebitsCandidatesBankResponse) MarshalJSON() ([]byte, error) {
+	type embed DirectDebitsCandidatesBankResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DirectDebitsCandidatesBankResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	directDebitsCandidatesBankResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	directDebitsCandidatesBankResponseRowsItemFieldFullNumber           = big.NewInt(1 << 1)
+	directDebitsCandidatesBankResponseRowsItemFieldIssueDate            = big.NewInt(1 << 2)
+	directDebitsCandidatesBankResponseRowsItemFieldDueDate              = big.NewInt(1 << 3)
+	directDebitsCandidatesBankResponseRowsItemFieldPartnerID            = big.NewInt(1 << 4)
+	directDebitsCandidatesBankResponseRowsItemFieldPartnerName          = big.NewInt(1 << 5)
+	directDebitsCandidatesBankResponseRowsItemFieldCurrency             = big.NewInt(1 << 6)
+	directDebitsCandidatesBankResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 7)
+	directDebitsCandidatesBankResponseRowsItemFieldPaidAmount           = big.NewInt(1 << 8)
+	directDebitsCandidatesBankResponseRowsItemFieldRemaining            = big.NewInt(1 << 9)
+	directDebitsCandidatesBankResponseRowsItemFieldMandateID            = big.NewInt(1 << 10)
+	directDebitsCandidatesBankResponseRowsItemFieldMandateReference     = big.NewInt(1 << 11)
+	directDebitsCandidatesBankResponseRowsItemFieldMandateSignatureDate = big.NewInt(1 << 12)
+)
+
+type DirectDebitsCandidatesBankResponseRowsItem struct {
+	ID                   string     `json:"id" url:"id"`
+	FullNumber           *string    `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate            *time.Time `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate              *time.Time `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	PartnerID            string     `json:"partnerId" url:"partnerId"`
+	PartnerName          *string    `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	Currency             string     `json:"currency" url:"currency"`
+	GrossTotal           string     `json:"grossTotal" url:"grossTotal"`
+	PaidAmount           string     `json:"paidAmount" url:"paidAmount"`
+	Remaining            string     `json:"remaining" url:"remaining"`
+	MandateID            *string    `json:"mandateId,omitempty" url:"mandateId,omitempty"`
+	MandateReference     *string    `json:"mandateReference,omitempty" url:"mandateReference,omitempty"`
+	MandateSignatureDate *time.Time `json:"mandateSignatureDate,omitempty" url:"mandateSignatureDate,omitempty" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetID() string {
+	if d == nil {
+		return ""
+	}
+	return d.ID
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetFullNumber() *string {
+	if d == nil {
+		return nil
+	}
+	return d.FullNumber
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetIssueDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.IssueDate
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetDueDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DueDate
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetPartnerID() string {
+	if d == nil {
+		return ""
+	}
+	return d.PartnerID
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetPartnerName() *string {
+	if d == nil {
+		return nil
+	}
+	return d.PartnerName
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetCurrency() string {
+	if d == nil {
+		return ""
+	}
+	return d.Currency
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetGrossTotal() string {
+	if d == nil {
+		return ""
+	}
+	return d.GrossTotal
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetPaidAmount() string {
+	if d == nil {
+		return ""
+	}
+	return d.PaidAmount
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetRemaining() string {
+	if d == nil {
+		return ""
+	}
+	return d.Remaining
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetMandateID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.MandateID
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetMandateReference() *string {
+	if d == nil {
+		return nil
+	}
+	return d.MandateReference
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetMandateSignatureDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.MandateSignatureDate
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetID(id string) {
+	d.ID = id
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldID)
+}
+
+// SetFullNumber sets the FullNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetFullNumber(fullNumber *string) {
+	d.FullNumber = fullNumber
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldFullNumber)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetIssueDate(issueDate *time.Time) {
+	d.IssueDate = issueDate
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldIssueDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldDueDate)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetPartnerID(partnerID string) {
+	d.PartnerID = partnerID
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetPartnerName(partnerName *string) {
+	d.PartnerName = partnerName
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldPartnerName)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetCurrency(currency string) {
+	d.Currency = currency
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldCurrency)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetGrossTotal(grossTotal string) {
+	d.GrossTotal = grossTotal
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldGrossTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetPaidAmount(paidAmount string) {
+	d.PaidAmount = paidAmount
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldPaidAmount)
+}
+
+// SetRemaining sets the Remaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetRemaining(remaining string) {
+	d.Remaining = remaining
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldRemaining)
+}
+
+// SetMandateID sets the MandateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetMandateID(mandateID *string) {
+	d.MandateID = mandateID
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldMandateID)
+}
+
+// SetMandateReference sets the MandateReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetMandateReference(mandateReference *string) {
+	d.MandateReference = mandateReference
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldMandateReference)
+}
+
+// SetMandateSignatureDate sets the MandateSignatureDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsCandidatesBankResponseRowsItem) SetMandateSignatureDate(mandateSignatureDate *time.Time) {
+	d.MandateSignatureDate = mandateSignatureDate
+	d.require(directDebitsCandidatesBankResponseRowsItemFieldMandateSignatureDate)
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed DirectDebitsCandidatesBankResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		IssueDate            *internal.Date `json:"issueDate,omitempty"`
+		DueDate              *internal.Date `json:"dueDate,omitempty"`
+		MandateSignatureDate *internal.Date `json:"mandateSignatureDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DirectDebitsCandidatesBankResponseRowsItem(unmarshaler.embed)
+	d.IssueDate = unmarshaler.IssueDate.TimePtr()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	d.MandateSignatureDate = unmarshaler.MandateSignatureDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DirectDebitsCandidatesBankResponseRowsItem
+	var marshaler = struct {
+		embed
+		IssueDate            *internal.Date `json:"issueDate,omitempty"`
+		DueDate              *internal.Date `json:"dueDate,omitempty"`
+		MandateSignatureDate *internal.Date `json:"mandateSignatureDate,omitempty"`
+	}{
+		embed:                embed(*d),
+		IssueDate:            internal.NewOptionalDate(d.IssueDate),
+		DueDate:              internal.NewOptionalDate(d.DueDate),
+		MandateSignatureDate: internal.NewOptionalDate(d.MandateSignatureDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DirectDebitsCandidatesBankResponseRowsItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
 }
 
 var (
@@ -7215,11 +8210,12 @@ func (f FeedsConnectionsListBankRequestSortItemDir) Ptr() *FeedsConnectionsListB
 }
 
 var (
-	feedsConnectionsListBankResponseFieldRows     = big.NewInt(1 << 0)
-	feedsConnectionsListBankResponseFieldPage     = big.NewInt(1 << 1)
-	feedsConnectionsListBankResponseFieldPageSize = big.NewInt(1 << 2)
-	feedsConnectionsListBankResponseFieldTotal    = big.NewInt(1 << 3)
-	feedsConnectionsListBankResponseFieldTotals   = big.NewInt(1 << 4)
+	feedsConnectionsListBankResponseFieldRows             = big.NewInt(1 << 0)
+	feedsConnectionsListBankResponseFieldPage             = big.NewInt(1 << 1)
+	feedsConnectionsListBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	feedsConnectionsListBankResponseFieldTotal            = big.NewInt(1 << 3)
+	feedsConnectionsListBankResponseFieldTotals           = big.NewInt(1 << 4)
+	feedsConnectionsListBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type FeedsConnectionsListBankResponse struct {
@@ -7228,6 +8224,8 @@ type FeedsConnectionsListBankResponse struct {
 	PageSize int64                                       `json:"pageSize" url:"pageSize"`
 	Total    int64                                       `json:"total" url:"total"`
 	Totals   map[string]string                           `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7269,6 +8267,13 @@ func (f *FeedsConnectionsListBankResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return f.Totals
+}
+
+func (f *FeedsConnectionsListBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if f == nil {
+		return nil
+	}
+	return f.TotalsByCurrency
 }
 
 func (f *FeedsConnectionsListBankResponse) GetExtraProperties() map[string]interface{} {
@@ -7318,6 +8323,13 @@ func (f *FeedsConnectionsListBankResponse) SetTotal(total int64) {
 func (f *FeedsConnectionsListBankResponse) SetTotals(totals map[string]string) {
 	f.Totals = totals
 	f.require(feedsConnectionsListBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FeedsConnectionsListBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	f.TotalsByCurrency = totalsByCurrency
+	f.require(feedsConnectionsListBankResponseFieldTotalsByCurrency)
 }
 
 func (f *FeedsConnectionsListBankResponse) UnmarshalJSON(data []byte) error {
@@ -9899,11 +10911,12 @@ func (i ImportTemplatesListBankRequestSortItemDir) Ptr() *ImportTemplatesListBan
 }
 
 var (
-	importTemplatesListBankResponseFieldRows     = big.NewInt(1 << 0)
-	importTemplatesListBankResponseFieldPage     = big.NewInt(1 << 1)
-	importTemplatesListBankResponseFieldPageSize = big.NewInt(1 << 2)
-	importTemplatesListBankResponseFieldTotal    = big.NewInt(1 << 3)
-	importTemplatesListBankResponseFieldTotals   = big.NewInt(1 << 4)
+	importTemplatesListBankResponseFieldRows             = big.NewInt(1 << 0)
+	importTemplatesListBankResponseFieldPage             = big.NewInt(1 << 1)
+	importTemplatesListBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	importTemplatesListBankResponseFieldTotal            = big.NewInt(1 << 3)
+	importTemplatesListBankResponseFieldTotals           = big.NewInt(1 << 4)
+	importTemplatesListBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type ImportTemplatesListBankResponse struct {
@@ -9912,6 +10925,8 @@ type ImportTemplatesListBankResponse struct {
 	PageSize int64                                      `json:"pageSize" url:"pageSize"`
 	Total    int64                                      `json:"total" url:"total"`
 	Totals   map[string]string                          `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9953,6 +10968,13 @@ func (i *ImportTemplatesListBankResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return i.Totals
+}
+
+func (i *ImportTemplatesListBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if i == nil {
+		return nil
+	}
+	return i.TotalsByCurrency
 }
 
 func (i *ImportTemplatesListBankResponse) GetExtraProperties() map[string]interface{} {
@@ -10002,6 +11024,13 @@ func (i *ImportTemplatesListBankResponse) SetTotal(total int64) {
 func (i *ImportTemplatesListBankResponse) SetTotals(totals map[string]string) {
 	i.Totals = totals
 	i.require(importTemplatesListBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	i.TotalsByCurrency = totalsByCurrency
+	i.require(importTemplatesListBankResponseFieldTotalsByCurrency)
 }
 
 func (i *ImportTemplatesListBankResponse) UnmarshalJSON(data []byte) error {
@@ -12927,11 +13956,12 @@ func (m MandatesListBankRequestSortItemDir) Ptr() *MandatesListBankRequestSortIt
 }
 
 var (
-	mandatesListBankResponseFieldRows     = big.NewInt(1 << 0)
-	mandatesListBankResponseFieldPage     = big.NewInt(1 << 1)
-	mandatesListBankResponseFieldPageSize = big.NewInt(1 << 2)
-	mandatesListBankResponseFieldTotal    = big.NewInt(1 << 3)
-	mandatesListBankResponseFieldTotals   = big.NewInt(1 << 4)
+	mandatesListBankResponseFieldRows             = big.NewInt(1 << 0)
+	mandatesListBankResponseFieldPage             = big.NewInt(1 << 1)
+	mandatesListBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	mandatesListBankResponseFieldTotal            = big.NewInt(1 << 3)
+	mandatesListBankResponseFieldTotals           = big.NewInt(1 << 4)
+	mandatesListBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type MandatesListBankResponse struct {
@@ -12940,6 +13970,8 @@ type MandatesListBankResponse struct {
 	PageSize int64                               `json:"pageSize" url:"pageSize"`
 	Total    int64                               `json:"total" url:"total"`
 	Totals   map[string]string                   `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12981,6 +14013,13 @@ func (m *MandatesListBankResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return m.Totals
+}
+
+func (m *MandatesListBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if m == nil {
+		return nil
+	}
+	return m.TotalsByCurrency
 }
 
 func (m *MandatesListBankResponse) GetExtraProperties() map[string]interface{} {
@@ -13030,6 +14069,13 @@ func (m *MandatesListBankResponse) SetTotal(total int64) {
 func (m *MandatesListBankResponse) SetTotals(totals map[string]string) {
 	m.Totals = totals
 	m.require(mandatesListBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesListBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	m.TotalsByCurrency = totalsByCurrency
+	m.require(mandatesListBankResponseFieldTotalsByCurrency)
 }
 
 func (m *MandatesListBankResponse) UnmarshalJSON(data []byte) error {
@@ -17432,11 +18478,12 @@ func (s SettlementsListBankRequestSortItemDir) Ptr() *SettlementsListBankRequest
 }
 
 var (
-	settlementsListBankResponseFieldRows     = big.NewInt(1 << 0)
-	settlementsListBankResponseFieldPage     = big.NewInt(1 << 1)
-	settlementsListBankResponseFieldPageSize = big.NewInt(1 << 2)
-	settlementsListBankResponseFieldTotal    = big.NewInt(1 << 3)
-	settlementsListBankResponseFieldTotals   = big.NewInt(1 << 4)
+	settlementsListBankResponseFieldRows             = big.NewInt(1 << 0)
+	settlementsListBankResponseFieldPage             = big.NewInt(1 << 1)
+	settlementsListBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	settlementsListBankResponseFieldTotal            = big.NewInt(1 << 3)
+	settlementsListBankResponseFieldTotals           = big.NewInt(1 << 4)
+	settlementsListBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type SettlementsListBankResponse struct {
@@ -17445,6 +18492,8 @@ type SettlementsListBankResponse struct {
 	PageSize int64                                  `json:"pageSize" url:"pageSize"`
 	Total    int64                                  `json:"total" url:"total"`
 	Totals   map[string]string                      `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17486,6 +18535,13 @@ func (s *SettlementsListBankResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return s.Totals
+}
+
+func (s *SettlementsListBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.TotalsByCurrency
 }
 
 func (s *SettlementsListBankResponse) GetExtraProperties() map[string]interface{} {
@@ -17535,6 +18591,13 @@ func (s *SettlementsListBankResponse) SetTotal(total int64) {
 func (s *SettlementsListBankResponse) SetTotals(totals map[string]string) {
 	s.Totals = totals
 	s.require(settlementsListBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsListBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	s.TotalsByCurrency = totalsByCurrency
+	s.require(settlementsListBankResponseFieldTotalsByCurrency)
 }
 
 func (s *SettlementsListBankResponse) UnmarshalJSON(data []byte) error {
@@ -20534,11 +21597,12 @@ func (t TransactionsListBankRequestSortItemDir) Ptr() *TransactionsListBankReque
 }
 
 var (
-	transactionsListBankResponseFieldRows     = big.NewInt(1 << 0)
-	transactionsListBankResponseFieldPage     = big.NewInt(1 << 1)
-	transactionsListBankResponseFieldPageSize = big.NewInt(1 << 2)
-	transactionsListBankResponseFieldTotal    = big.NewInt(1 << 3)
-	transactionsListBankResponseFieldTotals   = big.NewInt(1 << 4)
+	transactionsListBankResponseFieldRows             = big.NewInt(1 << 0)
+	transactionsListBankResponseFieldPage             = big.NewInt(1 << 1)
+	transactionsListBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	transactionsListBankResponseFieldTotal            = big.NewInt(1 << 3)
+	transactionsListBankResponseFieldTotals           = big.NewInt(1 << 4)
+	transactionsListBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type TransactionsListBankResponse struct {
@@ -20547,6 +21611,8 @@ type TransactionsListBankResponse struct {
 	PageSize int64                                   `json:"pageSize" url:"pageSize"`
 	Total    int64                                   `json:"total" url:"total"`
 	Totals   map[string]string                       `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -20588,6 +21654,13 @@ func (t *TransactionsListBankResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return t.Totals
+}
+
+func (t *TransactionsListBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if t == nil {
+		return nil
+	}
+	return t.TotalsByCurrency
 }
 
 func (t *TransactionsListBankResponse) GetExtraProperties() map[string]interface{} {
@@ -20637,6 +21710,13 @@ func (t *TransactionsListBankResponse) SetTotal(total int64) {
 func (t *TransactionsListBankResponse) SetTotals(totals map[string]string) {
 	t.Totals = totals
 	t.require(transactionsListBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsListBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	t.TotalsByCurrency = totalsByCurrency
+	t.require(transactionsListBankResponseFieldTotalsByCurrency)
 }
 
 func (t *TransactionsListBankResponse) UnmarshalJSON(data []byte) error {

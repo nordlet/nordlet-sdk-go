@@ -4940,6 +4940,14 @@ client.Leads.Create(
 <dl>
 <dd>
 
+**typeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **status:** `*nordlet.CreateLeadsRequestStatus` 
     
 </dd>
@@ -5139,6 +5147,14 @@ client.Leads.Update(
 <dd>
 
 **sourceID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**typeID:** `*string` 
     
 </dd>
 </dl>
@@ -5729,6 +5745,231 @@ client.Leads.SourcesList(
 ```go
 request := &nordlet.SourcesOptionsLeadsRequest{}
 client.Leads.SourcesOptions(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Leads.TypesCreate(request) -> *nordlet.TypesCreateLeadsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TypesCreateLeadsRequest{
+        Name: "name",
+    }
+client.Leads.TypesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Leads.TypesUpdate(request) -> *nordlet.TypesUpdateLeadsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TypesUpdateLeadsRequest{
+        ID: "id",
+    }
+client.Leads.TypesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**isActive:** `*bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Leads.TypesDelete(request) -> *nordlet.TypesDeleteLeadsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TypesDeleteLeadsRequest{
+        ID: "id",
+    }
+client.Leads.TypesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Leads.TypesList(request) -> *nordlet.TypesListLeadsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TypesListLeadsRequest{}
+client.Leads.TypesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Leads.TypesOptions(request) -> *nordlet.TypesOptionsLeadsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TypesOptionsLeadsRequest{}
+client.Leads.TypesOptions(
         context.TODO(),
         request,
     )
@@ -17895,7 +18136,7 @@ client.Declarations.IeCt1Generate(
 <dl>
 <dd>
 
-Build the working paper for the Form B1 annual return of a financial year — company details, registered office, directors and secretary from Settings → Officers, the members from Settings → Shareholders, the issued share capital and the figures of the financial statements — in the order the CORE screens ask for them. The CRO publishes no file format for the B1, so it is keyed into CORE.
+Build the working paper for the Form B1 annual return of a financial year - company details, registered office, directors and secretary from Settings → Officers, the members from Settings → Shareholders, the issued share capital and the figures of the financial statements - in the order the CORE screens ask for them. The CRO publishes no file format for the B1, so it is keyed into CORE.
 </dd>
 </dl>
 </dd>
@@ -22246,7 +22487,7 @@ client.Migration.BooksValidate(
 <dl>
 <dd>
 
-Brings a company over from another system in one call: chart of accounts, partners, items, opening balances (or the full journal history), open customer and supplier invoices, fixed assets with their accumulated depreciation, and stock on hand. The whole package is written in one database transaction — if any row fails, nothing is stored.
+Brings a company over from another system in one call: chart of accounts, partners, items, opening balances (or the full journal history), open customer and supplier invoices, fixed assets with their accumulated depreciation, and stock on hand. The whole package is written in one database transaction - if any row fails, nothing is stored.
 </dd>
 </dl>
 </dd>
@@ -26570,6 +26811,14 @@ client.Payroll.RunsCreate(
 <dd>
 
 **notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -36544,6 +36793,83 @@ client.Bank.MandatesList(
 <dd>
 
 **filter:** `[]*nordlet.MandatesListBankRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.DirectDebitsCandidates(request) -> *nordlet.DirectDebitsCandidatesBankResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.DirectDebitsCandidatesBankRequest{}
+client.Bank.DirectDebitsCandidates(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.DirectDebitsCandidatesBankRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.DirectDebitsCandidatesBankRequestFilterItem` 
     
 </dd>
 </dl>

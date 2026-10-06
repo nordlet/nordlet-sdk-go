@@ -419,6 +419,22 @@ func (c *Client) MandatesList(
 	return response.Body, nil
 }
 
+func (c *Client) DirectDebitsCandidates(
+	ctx context.Context,
+	request *nordlet.DirectDebitsCandidatesBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.DirectDebitsCandidatesBankResponse, error) {
+	response, err := c.WithRawResponse.DirectDebitsCandidates(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) DirectDebitsExport(
 	ctx context.Context,
 	request *nordlet.DirectDebitsExportBankRequest,

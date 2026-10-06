@@ -45,7 +45,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"currencyCode\": \"currencyCode\",\n      \"date\": \"2026-07-01\",\n      \"rate\": \"rate\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"currencyCode\": \"currencyCode\",\n      \"date\": \"2026-07-01\",\n      \"rate\": \"rate\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -107,7 +107,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"currencyCode\": \"currencyCode\",\n      \"date\": \"2026-07-01\",\n      \"rate\": \"rate\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"currencyCode\": \"currencyCode\",\n      \"date\": \"2026-07-01\",\n      \"rate\": \"rate\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -293,7 +293,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"countryCode\": \"countryCode\",\n      \"name\": \"name\",\n      \"bic\": \"bic\",\n      \"bankCode\": \"bankCode\",\n      \"isActive\": true\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"countryCode\": \"countryCode\",\n      \"name\": \"name\",\n      \"bic\": \"bic\",\n      \"bankCode\": \"bankCode\",\n      \"isActive\": true\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -386,7 +386,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"minorUnits\": 1000000\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"minorUnits\": 1000000\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -417,7 +417,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"countryCode\": \"countryCode\",\n      \"name\": \"name\",\n      \"ratePercent\": \"ratePercent\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"countryCode\": \"countryCode\",\n      \"name\": \"name\",\n      \"ratePercent\": \"ratePercent\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -572,7 +572,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"nameLt\": \"nameLt\",\n      \"supplementaryUnit\": \"supplementaryUnit\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"nameLt\": \"nameLt\",\n      \"supplementaryUnit\": \"supplementaryUnit\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -696,7 +696,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"nameLt\": \"nameLt\",\n      \"nameEn\": \"nameEn\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"nameLt\": \"nameLt\",\n      \"nameEn\": \"nameEn\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -758,7 +758,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"documentType\": \"documentType\",\n      \"prefix\": \"prefix\",\n      \"year\": 1000000,\n      \"nextNumber\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"documentType\": \"documentType\",\n      \"prefix\": \"prefix\",\n      \"year\": 1000000,\n      \"nextNumber\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -882,7 +882,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"type\",\n      \"street\": \"street\",\n      \"city\": \"city\",\n      \"postalCode\": \"postalCode\",\n      \"countryCode\": \"countryCode\",\n      \"isDefault\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"type\",\n      \"street\": \"street\",\n      \"city\": \"city\",\n      \"postalCode\": \"postalCode\",\n      \"countryCode\": \"countryCode\",\n      \"isDefault\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1006,7 +1006,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"name\": \"name\",\n      \"role\": \"role\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"name\": \"name\",\n      \"role\": \"role\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1130,7 +1130,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"iban\": \"iban\",\n      \"bankName\": \"bankName\",\n      \"bic\": \"bic\",\n      \"currency\": \"currency\",\n      \"isDefault\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"iban\": \"iban\",\n      \"bankName\": \"bankName\",\n      \"bic\": \"bic\",\n      \"currency\": \"currency\",\n      \"isDefault\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1192,7 +1192,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"email\": \"email\",\n      \"locale\": \"en\",\n      \"currency\": \"currency\",\n      \"invoices\": [\n        {\n          \"id\": \"id\",\n          \"fullNumber\": \"fullNumber\",\n          \"issueDate\": \"2026-07-01\",\n          \"dueDate\": \"2026-07-01\",\n          \"remaining\": \"remaining\",\n          \"daysLate\": 1000000,\n          \"interest\": \"interest\"\n        }\n      ],\n      \"totalDue\": \"totalDue\",\n      \"interestDue\": \"interestDue\"\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"email\": \"email\",\n      \"locale\": \"en\",\n      \"invoices\": [\n        {\n          \"id\": \"id\",\n          \"fullNumber\": \"fullNumber\",\n          \"issueDate\": \"2026-07-01\",\n          \"dueDate\": \"2026-07-01\",\n          \"currency\": \"currency\",\n          \"remaining\": \"remaining\",\n          \"daysLate\": 1000000,\n          \"interest\": \"interest\"\n        }\n      ],\n      \"totals\": [\n        {\n          \"currency\": \"currency\",\n          \"totalDue\": \"totalDue\",\n          \"interestDue\": \"interestDue\"\n        }\n      ]\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1223,7 +1223,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"sentTo\": \"sentTo\",\n      \"invoiceCount\": 1000000,\n      \"totalDue\": \"totalDue\",\n      \"interestDue\": \"interestDue\",\n      \"currency\": \"currency\",\n      \"invoiceIds\": [\n        \"invoiceIds\"\n      ],\n      \"sentAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"sentTo\": \"sentTo\",\n      \"invoiceCount\": 1000000,\n      \"totalDue\": \"totalDue\",\n      \"interestDue\": \"interestDue\",\n      \"currency\": \"currency\",\n      \"invoiceIds\": [\n        \"invoiceIds\"\n      ],\n      \"sentAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1285,7 +1285,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"vatCode\": \"vatCode\",\n      \"reason\": \"invalid\",\n      \"status\": \"open\",\n      \"resolution\": \"confirmed_valid\",\n      \"resolutionNote\": \"resolutionNote\",\n      \"details\": {},\n      \"resolvedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"vatCode\": \"vatCode\",\n      \"reason\": \"invalid\",\n      \"status\": \"open\",\n      \"resolution\": \"confirmed_valid\",\n      \"resolutionNote\": \"resolutionNote\",\n      \"details\": {},\n      \"resolvedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1533,7 +1533,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"company\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"peppolId\": \"peppolId\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n      \"birthDate\": \"2026-07-01\",\n      \"isCustomer\": true,\n      \"isSupplier\": true,\n      \"paymentTermDays\": 1000000,\n      \"creditLimit\": \"creditLimit\",\n      \"priceListId\": \"priceListId\",\n      \"groupId\": \"groupId\",\n      \"statusId\": \"statusId\",\n      \"vatValid\": true,\n      \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n      \"address\": {},\n      \"correspondenceAddress\": {},\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"shortName\": \"shortName\",\n      \"website\": \"website\",\n      \"fax\": \"fax\",\n      \"eoriCode\": \"eoriCode\",\n      \"otherCode\": \"otherCode\",\n      \"foreignTaxNumber\": \"foreignTaxNumber\",\n      \"autoDebtReminder\": true,\n      \"lateInterestPercent\": \"lateInterestPercent\",\n      \"firstCallDate\": \"2026-07-01\",\n      \"lastCallDate\": \"2026-07-01\",\n      \"nextCallDate\": \"2026-07-01\",\n      \"rating\": 1000000,\n      \"isEmployee\": true,\n      \"isGroupMember\": true,\n      \"isActive\": true,\n      \"legalCountryClass\": \"lt\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"company\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"peppolId\": \"peppolId\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n      \"birthDate\": \"2026-07-01\",\n      \"isCustomer\": true,\n      \"isSupplier\": true,\n      \"paymentTermDays\": 1000000,\n      \"creditLimit\": \"creditLimit\",\n      \"priceListId\": \"priceListId\",\n      \"groupId\": \"groupId\",\n      \"statusId\": \"statusId\",\n      \"vatValid\": true,\n      \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n      \"address\": {},\n      \"correspondenceAddress\": {},\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"shortName\": \"shortName\",\n      \"website\": \"website\",\n      \"fax\": \"fax\",\n      \"eoriCode\": \"eoriCode\",\n      \"otherCode\": \"otherCode\",\n      \"foreignTaxNumber\": \"foreignTaxNumber\",\n      \"autoDebtReminder\": true,\n      \"lateInterestPercent\": \"lateInterestPercent\",\n      \"firstCallDate\": \"2026-07-01\",\n      \"lastCallDate\": \"2026-07-01\",\n      \"nextCallDate\": \"2026-07-01\",\n      \"rating\": 1000000,\n      \"isEmployee\": true,\n      \"isGroupMember\": true,\n      \"isActive\": true,\n      \"legalCountryClass\": \"lt\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1905,7 +1905,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"contactName\": \"contactName\",\n      \"contactEmail\": \"contactEmail\",\n      \"contactPhone\": \"contactPhone\",\n      \"subject\": \"subject\",\n      \"body\": \"body\",\n      \"channel\": \"channel\",\n      \"status\": \"new\",\n      \"assignedUserId\": \"assignedUserId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"closedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"contactName\": \"contactName\",\n      \"contactEmail\": \"contactEmail\",\n      \"contactPhone\": \"contactPhone\",\n      \"subject\": \"subject\",\n      \"body\": \"body\",\n      \"channel\": \"channel\",\n      \"status\": \"new\",\n      \"assignedUserId\": \"assignedUserId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"closedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1967,7 +1967,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"contactName\": \"contactName\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"website\": \"website\",\n  \"countryCode\": \"countryCode\",\n  \"sourceId\": \"sourceId\",\n  \"sourceName\": \"sourceName\",\n  \"status\": \"new\",\n  \"estimatedValue\": \"estimatedValue\",\n  \"currency\": \"currency\",\n  \"description\": \"description\",\n  \"assignedUserId\": \"assignedUserId\",\n  \"partnerId\": \"partnerId\",\n  \"convertedAt\": \"2026-07-01T09:30:00Z\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"contactName\": \"contactName\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"website\": \"website\",\n  \"countryCode\": \"countryCode\",\n  \"sourceId\": \"sourceId\",\n  \"sourceName\": \"sourceName\",\n  \"typeId\": \"typeId\",\n  \"typeName\": \"typeName\",\n  \"status\": \"new\",\n  \"estimatedValue\": \"estimatedValue\",\n  \"currency\": \"currency\",\n  \"description\": \"description\",\n  \"assignedUserId\": \"assignedUserId\",\n  \"partnerId\": \"partnerId\",\n  \"convertedAt\": \"2026-07-01T09:30:00Z\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1998,7 +1998,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"contactName\": \"contactName\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"website\": \"website\",\n  \"countryCode\": \"countryCode\",\n  \"sourceId\": \"sourceId\",\n  \"sourceName\": \"sourceName\",\n  \"status\": \"new\",\n  \"estimatedValue\": \"estimatedValue\",\n  \"currency\": \"currency\",\n  \"description\": \"description\",\n  \"assignedUserId\": \"assignedUserId\",\n  \"partnerId\": \"partnerId\",\n  \"convertedAt\": \"2026-07-01T09:30:00Z\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"contactName\": \"contactName\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"website\": \"website\",\n  \"countryCode\": \"countryCode\",\n  \"sourceId\": \"sourceId\",\n  \"sourceName\": \"sourceName\",\n  \"typeId\": \"typeId\",\n  \"typeName\": \"typeName\",\n  \"status\": \"new\",\n  \"estimatedValue\": \"estimatedValue\",\n  \"currency\": \"currency\",\n  \"description\": \"description\",\n  \"assignedUserId\": \"assignedUserId\",\n  \"partnerId\": \"partnerId\",\n  \"convertedAt\": \"2026-07-01T09:30:00Z\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2029,7 +2029,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"contactName\": \"contactName\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"website\": \"website\",\n  \"countryCode\": \"countryCode\",\n  \"sourceId\": \"sourceId\",\n  \"sourceName\": \"sourceName\",\n  \"status\": \"new\",\n  \"estimatedValue\": \"estimatedValue\",\n  \"currency\": \"currency\",\n  \"description\": \"description\",\n  \"assignedUserId\": \"assignedUserId\",\n  \"partnerId\": \"partnerId\",\n  \"convertedAt\": \"2026-07-01T09:30:00Z\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"contactName\": \"contactName\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"website\": \"website\",\n  \"countryCode\": \"countryCode\",\n  \"sourceId\": \"sourceId\",\n  \"sourceName\": \"sourceName\",\n  \"typeId\": \"typeId\",\n  \"typeName\": \"typeName\",\n  \"status\": \"new\",\n  \"estimatedValue\": \"estimatedValue\",\n  \"currency\": \"currency\",\n  \"description\": \"description\",\n  \"assignedUserId\": \"assignedUserId\",\n  \"partnerId\": \"partnerId\",\n  \"convertedAt\": \"2026-07-01T09:30:00Z\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2091,7 +2091,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"contactName\": \"contactName\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"website\": \"website\",\n      \"countryCode\": \"countryCode\",\n      \"sourceId\": \"sourceId\",\n      \"sourceName\": \"sourceName\",\n      \"status\": \"new\",\n      \"estimatedValue\": \"estimatedValue\",\n      \"currency\": \"currency\",\n      \"description\": \"description\",\n      \"assignedUserId\": \"assignedUserId\",\n      \"partnerId\": \"partnerId\",\n      \"convertedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"contactName\": \"contactName\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"website\": \"website\",\n      \"countryCode\": \"countryCode\",\n      \"sourceId\": \"sourceId\",\n      \"sourceName\": \"sourceName\",\n      \"typeId\": \"typeId\",\n      \"typeName\": \"typeName\",\n      \"status\": \"new\",\n      \"estimatedValue\": \"estimatedValue\",\n      \"currency\": \"currency\",\n      \"description\": \"description\",\n      \"assignedUserId\": \"assignedUserId\",\n      \"partnerId\": \"partnerId\",\n      \"convertedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2388,6 +2388,161 @@
       }
     },
     {
+      "id": "544ea2df-b069-4eb5-89e8-c502d4cb8c92",
+      "name": "Leads types create - default",
+      "request": {
+        "urlPathTemplate": "/v1/leads/types/create",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"isActive\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "544ea2df-b069-4eb5-89e8-c502d4cb8c92",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "652794f2-8a54-477d-bf44-f197f917e544",
+      "name": "Leads types update - default",
+      "request": {
+        "urlPathTemplate": "/v1/leads/types/update",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"isActive\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "652794f2-8a54-477d-bf44-f197f917e544",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "a381be87-3064-4619-8276-d3c75dd74147",
+      "name": "Leads types delete - default",
+      "request": {
+        "urlPathTemplate": "/v1/leads/types/delete",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "a381be87-3064-4619-8276-d3c75dd74147",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "489d9580-b80b-48e4-b301-04fb74962e75",
+      "name": "Leads types list - default",
+      "request": {
+        "urlPathTemplate": "/v1/leads/types/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "489d9580-b80b-48e4-b301-04fb74962e75",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "5b93257a-ee88-42fc-a682-44d5da8e36dc",
+      "name": "Leads types options - default",
+      "request": {
+        "urlPathTemplate": "/v1/leads/types/options",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "5b93257a-ee88-42fc-a682-44d5da8e36dc",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "0735be1b-d0f5-4913-8e7a-d9d1ef4d1f3e",
       "name": "Leads convert - default",
       "request": {
@@ -2401,7 +2556,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"lead\": {\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"contactName\": \"contactName\",\n    \"email\": \"email\",\n    \"phone\": \"phone\",\n    \"website\": \"website\",\n    \"countryCode\": \"countryCode\",\n    \"sourceId\": \"sourceId\",\n    \"sourceName\": \"sourceName\",\n    \"status\": \"new\",\n    \"estimatedValue\": \"estimatedValue\",\n    \"currency\": \"currency\",\n    \"description\": \"description\",\n    \"assignedUserId\": \"assignedUserId\",\n    \"partnerId\": \"partnerId\",\n    \"convertedAt\": \"2026-07-01T09:30:00Z\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"partnerId\": \"partnerId\"\n}",
+        "body": "{\n  \"lead\": {\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"contactName\": \"contactName\",\n    \"email\": \"email\",\n    \"phone\": \"phone\",\n    \"website\": \"website\",\n    \"countryCode\": \"countryCode\",\n    \"sourceId\": \"sourceId\",\n    \"sourceName\": \"sourceName\",\n    \"typeId\": \"typeId\",\n    \"typeName\": \"typeName\",\n    \"status\": \"new\",\n    \"estimatedValue\": \"estimatedValue\",\n    \"currency\": \"currency\",\n    \"description\": \"description\",\n    \"assignedUserId\": \"assignedUserId\",\n    \"partnerId\": \"partnerId\",\n    \"convertedAt\": \"2026-07-01T09:30:00Z\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"partnerId\": \"partnerId\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2556,7 +2711,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"product\",\n      \"tracking\": \"none\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"barcode\": \"barcode\",\n      \"unit\": \"unit\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"salePriceExclVat\": \"salePriceExclVat\",\n      \"purchasePriceExclVat\": \"purchasePriceExclVat\",\n      \"cnCode\": \"cnCode\",\n      \"originCountry\": \"originCountry\",\n      \"netMassKg\": \"netMassKg\",\n      \"supplementaryUnit\": \"supplementaryUnit\",\n      \"supplementaryQtyPerUnit\": \"supplementaryQtyPerUnit\",\n      \"description\": \"description\",\n      \"groupId\": \"groupId\",\n      \"attributes\": {},\n      \"documentRef\": \"documentRef\",\n      \"translations\": {},\n      \"components\": [\n        {\n          \"itemId\": \"itemId\",\n          \"itemName\": \"itemName\",\n          \"quantity\": \"quantity\"\n        }\n      ],\n      \"kindId\": \"kindId\",\n      \"saleAccountCode\": \"saleAccountCode\",\n      \"purchaseAccountCode\": \"purchaseAccountCode\",\n      \"expenseAccountCode\": \"expenseAccountCode\",\n      \"manufacturer\": \"manufacturer\",\n      \"grossMassKg\": \"grossMassKg\",\n      \"minQuantity\": \"minQuantity\",\n      \"costPrice\": \"costPrice\",\n      \"isFreePrice\": true,\n      \"externalId\": \"externalId\",\n      \"isReturnable\": true,\n      \"commentRequired\": true,\n      \"priceFrom\": \"priceFrom\",\n      \"priceTo\": \"priceTo\",\n      \"minPrice\": \"minPrice\",\n      \"discountPercent\": \"discountPercent\",\n      \"maxDiscountPercent\": \"maxDiscountPercent\",\n      \"loyaltyPoints\": 1000000,\n      \"department\": \"department\",\n      \"ageRestriction\": 1000000,\n      \"packageQuantity\": \"packageQuantity\",\n      \"taraCode\": \"taraCode\",\n      \"certificateNumber\": \"certificateNumber\",\n      \"certificateDate\": \"2026-07-01\",\n      \"validFrom\": \"validFrom\",\n      \"validTo\": \"validTo\",\n      \"posFlags\": {},\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"product\",\n      \"tracking\": \"none\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"barcode\": \"barcode\",\n      \"unit\": \"unit\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"salePriceExclVat\": \"salePriceExclVat\",\n      \"purchasePriceExclVat\": \"purchasePriceExclVat\",\n      \"cnCode\": \"cnCode\",\n      \"originCountry\": \"originCountry\",\n      \"netMassKg\": \"netMassKg\",\n      \"supplementaryUnit\": \"supplementaryUnit\",\n      \"supplementaryQtyPerUnit\": \"supplementaryQtyPerUnit\",\n      \"description\": \"description\",\n      \"groupId\": \"groupId\",\n      \"attributes\": {},\n      \"documentRef\": \"documentRef\",\n      \"translations\": {},\n      \"components\": [\n        {\n          \"itemId\": \"itemId\",\n          \"itemName\": \"itemName\",\n          \"quantity\": \"quantity\"\n        }\n      ],\n      \"kindId\": \"kindId\",\n      \"saleAccountCode\": \"saleAccountCode\",\n      \"purchaseAccountCode\": \"purchaseAccountCode\",\n      \"expenseAccountCode\": \"expenseAccountCode\",\n      \"manufacturer\": \"manufacturer\",\n      \"grossMassKg\": \"grossMassKg\",\n      \"minQuantity\": \"minQuantity\",\n      \"costPrice\": \"costPrice\",\n      \"isFreePrice\": true,\n      \"externalId\": \"externalId\",\n      \"isReturnable\": true,\n      \"commentRequired\": true,\n      \"priceFrom\": \"priceFrom\",\n      \"priceTo\": \"priceTo\",\n      \"minPrice\": \"minPrice\",\n      \"discountPercent\": \"discountPercent\",\n      \"maxDiscountPercent\": \"maxDiscountPercent\",\n      \"loyaltyPoints\": 1000000,\n      \"department\": \"department\",\n      \"ageRestriction\": 1000000,\n      \"packageQuantity\": \"packageQuantity\",\n      \"taraCode\": \"taraCode\",\n      \"certificateNumber\": \"certificateNumber\",\n      \"certificateDate\": \"2026-07-01\",\n      \"validFrom\": \"validFrom\",\n      \"validTo\": \"validTo\",\n      \"posFlags\": {},\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3827,7 +3982,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceLineId\": \"invoiceLineId\",\n      \"method\": \"point_in_time\",\n      \"status\": \"pending\",\n      \"scheduleDate\": \"2026-07-01\",\n      \"description\": \"description\",\n      \"amount\": \"amount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"recognizedAt\": \"2026-07-01T09:30:00Z\",\n      \"sortOrder\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceLineId\": \"invoiceLineId\",\n      \"method\": \"point_in_time\",\n      \"status\": \"pending\",\n      \"scheduleDate\": \"2026-07-01\",\n      \"description\": \"description\",\n      \"amount\": \"amount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"recognizedAt\": \"2026-07-01T09:30:00Z\",\n      \"sortOrder\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3889,7 +4044,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"invoice\",\n      \"status\": \"draft\",\n      \"paymentStatus\": \"unpaid\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"issueDate\": \"2026-07-01\",\n      \"dueDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"fxRate\": \"fxRate\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"paidAmount\": \"paidAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n      \"creditedInvoiceId\": \"creditedInvoiceId\",\n      \"creditedInvoiceReference\": \"creditedInvoiceReference\",\n      \"creditedInvoiceDate\": \"2026-07-01\",\n      \"agreementId\": \"agreementId\",\n      \"vatScheme\": \"domestic\",\n      \"intrastatTransportMode\": \"intrastatTransportMode\",\n      \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n      \"intrastatRegion\": \"intrastatRegion\",\n      \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n      \"vatCountryCode\": \"vatCountryCode\",\n      \"deemedSupplier\": true,\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"operationTypeId\": \"operationTypeId\",\n      \"documentSeriesId\": \"documentSeriesId\",\n      \"seriesLabel\": \"seriesLabel\",\n      \"discountPercent\": \"discountPercent\",\n      \"orderNumber\": \"orderNumber\",\n      \"issuedByName\": \"issuedByName\",\n      \"issuedByTitle\": \"issuedByTitle\",\n      \"receivedByName\": \"receivedByName\",\n      \"receivedByTitle\": \"receivedByTitle\",\n      \"lockedAt\": \"2026-07-01T09:30:00Z\",\n      \"lockedBy\": \"lockedBy\",\n      \"payToken\": \"payToken\",\n      \"einvoiceSystem\": \"einvoiceSystem\",\n      \"einvoiceTransport\": \"einvoiceTransport\",\n      \"einvoiceMessageId\": \"einvoiceMessageId\",\n      \"einvoiceNumber\": \"einvoiceNumber\",\n      \"einvoiceStatus\": \"einvoiceStatus\",\n      \"einvoiceDetail\": \"einvoiceDetail\",\n      \"einvoiceSentAt\": \"2026-07-01T09:30:00Z\",\n      \"einvoiceCheckedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"invoice\",\n      \"status\": \"draft\",\n      \"paymentStatus\": \"unpaid\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"issueDate\": \"2026-07-01\",\n      \"dueDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"fxRate\": \"fxRate\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"paidAmount\": \"paidAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"appliedToInvoiceId\": \"appliedToInvoiceId\",\n      \"creditedInvoiceId\": \"creditedInvoiceId\",\n      \"creditedInvoiceReference\": \"creditedInvoiceReference\",\n      \"creditedInvoiceDate\": \"2026-07-01\",\n      \"agreementId\": \"agreementId\",\n      \"vatScheme\": \"domestic\",\n      \"intrastatTransportMode\": \"intrastatTransportMode\",\n      \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n      \"intrastatRegion\": \"intrastatRegion\",\n      \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n      \"vatCountryCode\": \"vatCountryCode\",\n      \"deemedSupplier\": true,\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"operationTypeId\": \"operationTypeId\",\n      \"documentSeriesId\": \"documentSeriesId\",\n      \"seriesLabel\": \"seriesLabel\",\n      \"discountPercent\": \"discountPercent\",\n      \"orderNumber\": \"orderNumber\",\n      \"issuedByName\": \"issuedByName\",\n      \"issuedByTitle\": \"issuedByTitle\",\n      \"receivedByName\": \"receivedByName\",\n      \"receivedByTitle\": \"receivedByTitle\",\n      \"lockedAt\": \"2026-07-01T09:30:00Z\",\n      \"lockedBy\": \"lockedBy\",\n      \"payToken\": \"payToken\",\n      \"einvoiceSystem\": \"einvoiceSystem\",\n      \"einvoiceTransport\": \"einvoiceTransport\",\n      \"einvoiceMessageId\": \"einvoiceMessageId\",\n      \"einvoiceNumber\": \"einvoiceNumber\",\n      \"einvoiceStatus\": \"einvoiceStatus\",\n      \"einvoiceDetail\": \"einvoiceDetail\",\n      \"einvoiceSentAt\": \"2026-07-01T09:30:00Z\",\n      \"einvoiceCheckedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4075,7 +4230,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"goods\",\n      \"status\": \"draft\",\n      \"series\": \"series\",\n      \"fullNumber\": \"fullNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"saleInvoiceId\": \"saleInvoiceId\",\n      \"transferredByName\": \"transferredByName\",\n      \"transferredByTitle\": \"transferredByTitle\",\n      \"acceptedByName\": \"acceptedByName\",\n      \"acceptedByTitle\": \"acceptedByTitle\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"goods\",\n      \"status\": \"draft\",\n      \"series\": \"series\",\n      \"fullNumber\": \"fullNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"saleInvoiceId\": \"saleInvoiceId\",\n      \"transferredByName\": \"transferredByName\",\n      \"transferredByTitle\": \"transferredByTitle\",\n      \"acceptedByName\": \"acceptedByName\",\n      \"acceptedByTitle\": \"acceptedByTitle\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4261,7 +4416,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"runDate\": \"2026-07-01\",\n      \"trigger\": \"manual\",\n      \"scheduleCount\": 1000000,\n      \"totalAmount\": \"totalAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"runDate\": \"2026-07-01\",\n      \"trigger\": \"manual\",\n      \"scheduleCount\": 1000000,\n      \"totalAmount\": \"totalAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4323,7 +4478,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceFullNumber\": \"invoiceFullNumber\",\n      \"estimated\": \"estimated\",\n      \"consumed\": \"consumed\",\n      \"settlementRefunds\": \"settlementRefunds\",\n      \"remaining\": \"remaining\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceFullNumber\": \"invoiceFullNumber\",\n      \"estimated\": \"estimated\",\n      \"consumed\": \"consumed\",\n      \"settlementRefunds\": \"settlementRefunds\",\n      \"remaining\": \"remaining\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4509,7 +4664,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"invoiceType\": \"invoice\",\n      \"payerPartnerId\": \"payerPartnerId\",\n      \"debitAccountCode\": \"debitAccountCode\",\n      \"creditAccountCode\": \"creditAccountCode\",\n      \"vatAccountCode\": \"vatAccountCode\",\n      \"expenseAccountCode\": \"expenseAccountCode\",\n      \"advanceAccountCode\": \"advanceAccountCode\",\n      \"incomeAccountCode\": \"incomeAccountCode\",\n      \"isPurchase\": true,\n      \"isSale\": true,\n      \"isWriteOff\": true,\n      \"isInternalMovement\": true,\n      \"isPurchaseReturn\": true,\n      \"isSalesReturn\": true,\n      \"isConsignment\": true,\n      \"isProduction\": true,\n      \"isAssetIn\": true,\n      \"isAssetOut\": true,\n      \"isCashRegisterSale\": true,\n      \"includeInVatRegister\": true,\n      \"includeInSaft\": true,\n      \"isActive\": true,\n      \"sortOrder\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"invoiceType\": \"invoice\",\n      \"payerPartnerId\": \"payerPartnerId\",\n      \"debitAccountCode\": \"debitAccountCode\",\n      \"creditAccountCode\": \"creditAccountCode\",\n      \"vatAccountCode\": \"vatAccountCode\",\n      \"expenseAccountCode\": \"expenseAccountCode\",\n      \"advanceAccountCode\": \"advanceAccountCode\",\n      \"incomeAccountCode\": \"incomeAccountCode\",\n      \"isPurchase\": true,\n      \"isSale\": true,\n      \"isWriteOff\": true,\n      \"isInternalMovement\": true,\n      \"isPurchaseReturn\": true,\n      \"isSalesReturn\": true,\n      \"isConsignment\": true,\n      \"isProduction\": true,\n      \"isAssetIn\": true,\n      \"isAssetOut\": true,\n      \"isCashRegisterSale\": true,\n      \"includeInVatRegister\": true,\n      \"includeInSaft\": true,\n      \"isActive\": true,\n      \"sortOrder\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4664,7 +4819,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"documentType\": \"documentType\",\n      \"prefix\": \"prefix\",\n      \"name\": \"name\",\n      \"label\": \"label\",\n      \"operationTypeId\": \"operationTypeId\",\n      \"numberLength\": 1000000,\n      \"nextNumber\": 1000000,\n      \"allocatedFrom\": 1000000,\n      \"allocatedTo\": 1000000,\n      \"warehouseId\": \"warehouseId\",\n      \"printSeries\": true,\n      \"isDefault\": true,\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"documentType\": \"documentType\",\n      \"prefix\": \"prefix\",\n      \"name\": \"name\",\n      \"label\": \"label\",\n      \"operationTypeId\": \"operationTypeId\",\n      \"numberLength\": 1000000,\n      \"nextNumber\": 1000000,\n      \"allocatedFrom\": 1000000,\n      \"allocatedTo\": 1000000,\n      \"warehouseId\": \"warehouseId\",\n      \"printSeries\": true,\n      \"isDefault\": true,\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4850,7 +5005,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"invoice\",\n      \"status\": \"draft\",\n      \"paymentStatus\": \"unpaid\",\n      \"documentNumber\": \"documentNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"dueDate\": \"2026-07-01\",\n      \"registrationDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"paidAmount\": \"paidAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"creditedInvoiceId\": \"creditedInvoiceId\",\n      \"purchaseOrderId\": \"purchaseOrderId\",\n      \"operationTypeId\": \"operationTypeId\",\n      \"notes\": \"notes\",\n      \"intrastatTransportMode\": \"intrastatTransportMode\",\n      \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n      \"intrastatRegion\": \"intrastatRegion\",\n      \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n      \"einvoiceNumber\": \"einvoiceNumber\",\n      \"documentRef\": \"documentRef\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"type\": \"invoice\",\n      \"status\": \"draft\",\n      \"paymentStatus\": \"unpaid\",\n      \"documentNumber\": \"documentNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"dueDate\": \"2026-07-01\",\n      \"registrationDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"paidAmount\": \"paidAmount\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"creditedInvoiceId\": \"creditedInvoiceId\",\n      \"purchaseOrderId\": \"purchaseOrderId\",\n      \"operationTypeId\": \"operationTypeId\",\n      \"notes\": \"notes\",\n      \"intrastatTransportMode\": \"intrastatTransportMode\",\n      \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n      \"intrastatRegion\": \"intrastatRegion\",\n      \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n      \"einvoiceNumber\": \"einvoiceNumber\",\n      \"documentRef\": \"documentRef\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4974,7 +5129,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"status\": \"draft\",\n      \"orderNumber\": \"orderNumber\",\n      \"orderDate\": \"2026-07-01\",\n      \"expectedDate\": \"2026-07-01\",\n      \"warehouseId\": \"warehouseId\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"approvedBy\": \"approvedBy\",\n      \"approvedAt\": \"2026-07-01T09:30:00Z\",\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"status\": \"draft\",\n      \"orderNumber\": \"orderNumber\",\n      \"orderDate\": \"2026-07-01\",\n      \"expectedDate\": \"2026-07-01\",\n      \"warehouseId\": \"warehouseId\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"approvedBy\": \"approvedBy\",\n      \"approvedAt\": \"2026-07-01T09:30:00Z\",\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5253,7 +5408,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"orderId\": \"orderId\",\n      \"receiptNumber\": \"receiptNumber\",\n      \"receiptDate\": \"2026-07-01\",\n      \"warehouseId\": \"warehouseId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"orderId\": \"orderId\",\n      \"receiptNumber\": \"receiptNumber\",\n      \"receiptDate\": \"2026-07-01\",\n      \"warehouseId\": \"warehouseId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5532,7 +5687,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"fileId\": \"fileId\",\n      \"fileName\": \"fileName\",\n      \"mimeType\": \"mimeType\",\n      \"sizeBytes\": 1000000,\n      \"status\": \"pending\",\n      \"provider\": \"provider\",\n      \"model\": \"model\",\n      \"pagesProcessed\": 1000000,\n      \"extraction\": {\n        \"supplier\": {\n          \"name\": null,\n          \"code\": null,\n          \"vatCode\": null,\n          \"countryCode\": null,\n          \"iban\": null\n        },\n        \"documentNumber\": null,\n        \"documentDate\": \"2026-07-01\",\n        \"dueDate\": \"2026-07-01\",\n        \"currency\": null,\n        \"netTotal\": null,\n        \"vatTotal\": null,\n        \"grossTotal\": null,\n        \"notes\": null,\n        \"lines\": [\n          {\n            \"description\": \"description\",\n            \"quantity\": \"quantity\",\n            \"unit\": null,\n            \"unitPriceExclVat\": null,\n            \"vatRatePercent\": null,\n            \"lineNet\": null,\n            \"lineVat\": null,\n            \"lineGross\": null\n          }\n        ]\n      },\n      \"matchedPartnerId\": \"matchedPartnerId\",\n      \"purchaseInvoiceId\": \"purchaseInvoiceId\",\n      \"error\": \"error\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"fileId\": \"fileId\",\n      \"fileName\": \"fileName\",\n      \"mimeType\": \"mimeType\",\n      \"sizeBytes\": 1000000,\n      \"status\": \"pending\",\n      \"provider\": \"provider\",\n      \"model\": \"model\",\n      \"pagesProcessed\": 1000000,\n      \"extraction\": {\n        \"supplier\": {\n          \"name\": null,\n          \"code\": null,\n          \"vatCode\": null,\n          \"countryCode\": null,\n          \"iban\": null\n        },\n        \"documentNumber\": null,\n        \"documentDate\": \"2026-07-01\",\n        \"dueDate\": \"2026-07-01\",\n        \"currency\": null,\n        \"netTotal\": null,\n        \"vatTotal\": null,\n        \"grossTotal\": null,\n        \"notes\": null,\n        \"lines\": [\n          {\n            \"description\": \"description\",\n            \"quantity\": \"quantity\",\n            \"unit\": null,\n            \"unitPriceExclVat\": null,\n            \"vatRatePercent\": null,\n            \"lineNet\": null,\n            \"lineVat\": null,\n            \"lineGross\": null\n          }\n        ]\n      },\n      \"matchedPartnerId\": \"matchedPartnerId\",\n      \"purchaseInvoiceId\": \"purchaseInvoiceId\",\n      \"error\": \"error\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -8384,7 +8539,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"obligation\": \"obligation\",\n      \"periodYear\": 1000000,\n      \"periodMonth\": 1000000,\n      \"variant\": \"variant\",\n      \"status\": \"generated\",\n      \"fileName\": \"fileName\",\n      \"fileId\": \"fileId\",\n      \"externalRef\": \"externalRef\",\n      \"message\": \"message\",\n      \"ruleKey\": \"ruleKey\",\n      \"period\": \"period\",\n      \"documentKey\": \"documentKey\",\n      \"amendment\": 1000000,\n      \"origin\": \"origin\",\n      \"transportSystem\": \"transportSystem\",\n      \"environment\": \"test\",\n      \"submittedAt\": \"2026-07-01T09:30:00Z\",\n      \"acceptedAt\": \"2026-07-01T09:30:00Z\",\n      \"rejectedAt\": \"2026-07-01T09:30:00Z\",\n      \"checkedAt\": \"2026-07-01T09:30:00Z\",\n      \"nextCheckAt\": \"2026-07-01T09:30:00Z\",\n      \"attempts\": 1000000,\n      \"deliveryError\": \"deliveryError\",\n      \"sentSha256\": \"sentSha256\",\n      \"certificateFingerprint\": \"certificateFingerprint\",\n      \"submittedByActorType\": \"submittedByActorType\",\n      \"submittedByActorId\": \"submittedByActorId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"obligation\": \"obligation\",\n      \"periodYear\": 1000000,\n      \"periodMonth\": 1000000,\n      \"variant\": \"variant\",\n      \"status\": \"generated\",\n      \"fileName\": \"fileName\",\n      \"fileId\": \"fileId\",\n      \"externalRef\": \"externalRef\",\n      \"message\": \"message\",\n      \"ruleKey\": \"ruleKey\",\n      \"period\": \"period\",\n      \"documentKey\": \"documentKey\",\n      \"amendment\": 1000000,\n      \"origin\": \"origin\",\n      \"transportSystem\": \"transportSystem\",\n      \"environment\": \"test\",\n      \"submittedAt\": \"2026-07-01T09:30:00Z\",\n      \"acceptedAt\": \"2026-07-01T09:30:00Z\",\n      \"rejectedAt\": \"2026-07-01T09:30:00Z\",\n      \"checkedAt\": \"2026-07-01T09:30:00Z\",\n      \"nextCheckAt\": \"2026-07-01T09:30:00Z\",\n      \"attempts\": 1000000,\n      \"deliveryError\": \"deliveryError\",\n      \"sentSha256\": \"sentSha256\",\n      \"certificateFingerprint\": \"certificateFingerprint\",\n      \"submittedByActorType\": \"submittedByActorType\",\n      \"submittedByActorId\": \"submittedByActorId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -8415,7 +8570,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"translations\": {},\n      \"type\": \"asset\",\n      \"parentId\": \"parentId\",\n      \"isPostable\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"translations\": {},\n      \"type\": \"asset\",\n      \"parentId\": \"parentId\",\n      \"isPostable\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -8570,7 +8725,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"year\": 1000000,\n      \"month\": 1000000,\n      \"status\": \"open\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"year\": 1000000,\n      \"month\": 1000000,\n      \"status\": \"open\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -8663,7 +8818,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"date\": \"2026-07-01\",\n      \"description\": \"description\",\n      \"documentType\": \"documentType\",\n      \"documentId\": \"documentId\",\n      \"partnerId\": \"partnerId\",\n      \"status\": \"draft\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"postedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"date\": \"2026-07-01\",\n      \"description\": \"description\",\n      \"documentType\": \"documentType\",\n      \"documentId\": \"documentId\",\n      \"partnerId\": \"partnerId\",\n      \"status\": \"draft\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"postedAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -8756,7 +8911,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"groupId\": \"groupId\",\n      \"groupName\": \"groupName\",\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"groupId\": \"groupId\",\n      \"groupName\": \"groupName\",\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -8880,7 +9035,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9066,7 +9221,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"equityAccountCode\": \"equityAccountCode\",\n      \"sharesQuantity\": \"sharesQuantity\",\n      \"sharesAmount\": \"sharesAmount\",\n      \"sharesType\": \"sharesType\",\n      \"sharesAcquisitionDate\": \"2026-07-01\",\n      \"withholdingTaxPercent\": \"withholdingTaxPercent\",\n      \"partnerLiability\": \"general\",\n      \"specialBalanceRequired\": true,\n      \"supplementaryBalanceRequired\": true,\n      \"address\": {},\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"equityAccountCode\": \"equityAccountCode\",\n      \"sharesQuantity\": \"sharesQuantity\",\n      \"sharesAmount\": \"sharesAmount\",\n      \"sharesType\": \"sharesType\",\n      \"sharesAcquisitionDate\": \"2026-07-01\",\n      \"withholdingTaxPercent\": \"withholdingTaxPercent\",\n      \"partnerLiability\": \"general\",\n      \"specialBalanceRequired\": true,\n      \"supplementaryBalanceRequired\": true,\n      \"address\": {},\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9469,7 +9624,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"defaultUsefulLifeMonths\": 1000000,\n      \"assetAccountCode\": \"assetAccountCode\",\n      \"depreciationAccountCode\": \"depreciationAccountCode\",\n      \"expenseAccountCode\": \"expenseAccountCode\",\n      \"id\": \"id\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"defaultUsefulLifeMonths\": 1000000,\n      \"assetAccountCode\": \"assetAccountCode\",\n      \"depreciationAccountCode\": \"depreciationAccountCode\",\n      \"expenseAccountCode\": \"expenseAccountCode\",\n      \"id\": \"id\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9624,7 +9779,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"groupId\": \"groupId\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"acquisitionDate\": \"2026-07-01\",\n      \"depreciationStartDate\": \"2026-07-01\",\n      \"acquisitionCost\": \"acquisitionCost\",\n      \"salvageValue\": \"salvageValue\",\n      \"usefulLifeMonths\": 1000000,\n      \"totalCost\": \"totalCost\",\n      \"accumulatedDepreciation\": \"accumulatedDepreciation\",\n      \"netBookValue\": \"netBookValue\",\n      \"depreciatedMonths\": 1000000,\n      \"totalLifeMonths\": 1000000,\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"documents\": [\n        {\n          \"name\": \"name\",\n          \"ref\": \"ref\"\n        }\n      ],\n      \"inputVatAmount\": \"inputVatAmount\",\n      \"inputVatFirstUseDate\": \"2026-07-01\",\n      \"inputVatDeductiblePercent\": \"inputVatDeductiblePercent\",\n      \"inputVatRealEstate\": true,\n      \"inputVatUseChanges\": [\n        {\n          \"year\": 1000000,\n          \"percent\": \"121.00\",\n          \"reason\": \"use_change\"\n        }\n      ],\n      \"disposalDate\": \"2026-07-01\",\n      \"disposalReason\": \"sold\",\n      \"disposalProceeds\": \"disposalProceeds\",\n      \"disposalJournalTransactionId\": \"disposalJournalTransactionId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"groupId\": \"groupId\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"acquisitionDate\": \"2026-07-01\",\n      \"depreciationStartDate\": \"2026-07-01\",\n      \"acquisitionCost\": \"acquisitionCost\",\n      \"salvageValue\": \"salvageValue\",\n      \"usefulLifeMonths\": 1000000,\n      \"totalCost\": \"totalCost\",\n      \"accumulatedDepreciation\": \"accumulatedDepreciation\",\n      \"netBookValue\": \"netBookValue\",\n      \"depreciatedMonths\": 1000000,\n      \"totalLifeMonths\": 1000000,\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"documents\": [\n        {\n          \"name\": \"name\",\n          \"ref\": \"ref\"\n        }\n      ],\n      \"inputVatAmount\": \"inputVatAmount\",\n      \"inputVatFirstUseDate\": \"2026-07-01\",\n      \"inputVatDeductiblePercent\": \"inputVatDeductiblePercent\",\n      \"inputVatRealEstate\": true,\n      \"inputVatUseChanges\": [\n        {\n          \"year\": 1000000,\n          \"percent\": \"121.00\",\n          \"reason\": \"use_change\"\n        }\n      ],\n      \"disposalDate\": \"2026-07-01\",\n      \"disposalReason\": \"sold\",\n      \"disposalProceeds\": \"disposalProceeds\",\n      \"disposalJournalTransactionId\": \"disposalJournalTransactionId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9841,7 +9996,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"translations\": {}\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"translations\": {}\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9996,7 +10151,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"personalCode\": \"personalCode\",\n      \"birthDate\": \"2026-07-01\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"address\": {},\n      \"iban\": \"iban\",\n      \"socialInsuranceNo\": \"socialInsuranceNo\",\n      \"socialInsuranceStart\": \"socialInsuranceStart\",\n      \"hireDate\": \"2026-07-01\",\n      \"terminationDate\": \"2026-07-01\",\n      \"applyAllowance\": true,\n      \"allowanceOverride\": \"allowanceOverride\",\n      \"pensionAccumulation\": true,\n      \"payrollOptions\": {\n        \"key\": \"value\"\n      },\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"attributes\": [\n        {\n          \"name\": \"name\",\n          \"value\": \"value\"\n        }\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"personalCode\": \"personalCode\",\n      \"birthDate\": \"2026-07-01\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"address\": {},\n      \"iban\": \"iban\",\n      \"socialInsuranceNo\": \"socialInsuranceNo\",\n      \"socialInsuranceStart\": \"socialInsuranceStart\",\n      \"hireDate\": \"2026-07-01\",\n      \"terminationDate\": \"2026-07-01\",\n      \"applyAllowance\": true,\n      \"allowanceOverride\": \"allowanceOverride\",\n      \"pensionAccumulation\": true,\n      \"payrollOptions\": {\n        \"key\": \"value\"\n      },\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"attributes\": [\n        {\n          \"name\": \"name\",\n          \"value\": \"value\"\n        }\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -10151,7 +10306,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"positionId\": \"positionId\",\n      \"departmentId\": \"departmentId\",\n      \"scheduleId\": \"scheduleId\",\n      \"agreementId\": \"agreementId\",\n      \"contractNo\": \"contractNo\",\n      \"type\": \"permanent\",\n      \"startDate\": \"2026-07-01\",\n      \"endDate\": \"2026-07-01\",\n      \"endReason\": \"endReason\",\n      \"baseSalary\": \"baseSalary\",\n      \"salaryType\": \"monthly\",\n      \"workHours\": \"workHours\",\n      \"workHoursUnit\": \"day\",\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"positionId\": \"positionId\",\n      \"departmentId\": \"departmentId\",\n      \"scheduleId\": \"scheduleId\",\n      \"agreementId\": \"agreementId\",\n      \"contractNo\": \"contractNo\",\n      \"type\": \"permanent\",\n      \"startDate\": \"2026-07-01\",\n      \"endDate\": \"2026-07-01\",\n      \"endReason\": \"endReason\",\n      \"baseSalary\": \"baseSalary\",\n      \"salaryType\": \"monthly\",\n      \"workHours\": \"workHours\",\n      \"workHoursUnit\": \"day\",\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -10275,7 +10430,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"series\": \"series\",\n      \"number\": \"number\",\n      \"fromDate\": \"2026-07-01\",\n      \"toDate\": \"2026-07-01\",\n      \"reason\": \"reason\",\n      \"notes\": \"notes\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"series\": \"series\",\n      \"number\": \"number\",\n      \"fromDate\": \"2026-07-01\",\n      \"toDate\": \"2026-07-01\",\n      \"reason\": \"reason\",\n      \"notes\": \"notes\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -10399,7 +10554,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"type\": \"education\",\n      \"title\": \"title\",\n      \"institution\": \"institution\",\n      \"issuedAt\": \"2026-07-01T09:30:00Z\",\n      \"validUntil\": \"validUntil\",\n      \"fileId\": \"fileId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"type\": \"education\",\n      \"title\": \"title\",\n      \"institution\": \"institution\",\n      \"issuedAt\": \"2026-07-01T09:30:00Z\",\n      \"validUntil\": \"validUntil\",\n      \"fileId\": \"fileId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -10709,7 +10864,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"plateNumber\": \"plateNumber\",\n      \"make\": \"make\",\n      \"model\": \"model\",\n      \"year\": 1000000,\n      \"vin\": \"vin\",\n      \"fuelType\": \"fuelType\",\n      \"acquisitionDate\": \"2026-07-01\",\n      \"marketValue\": \"marketValue\",\n      \"fixedAssetId\": \"fixedAssetId\",\n      \"technicalInspectionDue\": \"technicalInspectionDue\",\n      \"insuranceDue\": \"insuranceDue\",\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"documents\": [\n        {\n          \"name\": \"name\",\n          \"ref\": \"ref\"\n        }\n      ],\n      \"currentAssignment\": {\n        \"id\": \"id\",\n        \"employeeId\": \"employeeId\",\n        \"employeeName\": \"employeeName\",\n        \"fromDate\": \"2026-07-01\",\n        \"privateUse\": true,\n        \"employerPaysFuel\": true\n      },\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"plateNumber\": \"plateNumber\",\n      \"make\": \"make\",\n      \"model\": \"model\",\n      \"year\": 1000000,\n      \"vin\": \"vin\",\n      \"fuelType\": \"fuelType\",\n      \"acquisitionDate\": \"2026-07-01\",\n      \"marketValue\": \"marketValue\",\n      \"fixedAssetId\": \"fixedAssetId\",\n      \"technicalInspectionDue\": \"technicalInspectionDue\",\n      \"insuranceDue\": \"insuranceDue\",\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"documents\": [\n        {\n          \"name\": \"name\",\n          \"ref\": \"ref\"\n        }\n      ],\n      \"currentAssignment\": {\n        \"id\": \"id\",\n        \"employeeId\": \"employeeId\",\n        \"employeeName\": \"employeeName\",\n        \"fromDate\": \"2026-07-01\",\n        \"privateUse\": true,\n        \"employerPaysFuel\": true\n      },\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -10802,7 +10957,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"vehicleId\": \"vehicleId\",\n      \"plateNumber\": \"plateNumber\",\n      \"employeeId\": \"employeeId\",\n      \"employeeName\": \"employeeName\",\n      \"fromDate\": \"2026-07-01\",\n      \"toDate\": \"2026-07-01\",\n      \"privateUse\": true,\n      \"employerPaysFuel\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"vehicleId\": \"vehicleId\",\n      \"plateNumber\": \"plateNumber\",\n      \"employeeId\": \"employeeId\",\n      \"employeeName\": \"employeeName\",\n      \"fromDate\": \"2026-07-01\",\n      \"toDate\": \"2026-07-01\",\n      \"privateUse\": true,\n      \"employerPaysFuel\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11019,7 +11174,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11050,7 +11205,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11081,7 +11236,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"year\": 1000000,\n      \"month\": 1000000,\n      \"countryCode\": \"countryCode\",\n      \"status\": \"draft\",\n      \"grossTotal\": \"grossTotal\",\n      \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n      \"incomeTaxTotal\": \"incomeTaxTotal\",\n      \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n      \"employerContributionsTotal\": \"employerContributionsTotal\",\n      \"componentTotals\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"netTotal\": \"netTotal\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"warnings\": [\n        \"warnings\"\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"approvedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"year\": 1000000,\n      \"month\": 1000000,\n      \"countryCode\": \"countryCode\",\n      \"payDate\": \"2026-07-01\",\n      \"status\": \"draft\",\n      \"grossTotal\": \"grossTotal\",\n      \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n      \"incomeTaxTotal\": \"incomeTaxTotal\",\n      \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n      \"employerContributionsTotal\": \"employerContributionsTotal\",\n      \"componentTotals\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"netTotal\": \"netTotal\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"warnings\": [\n        \"warnings\"\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"approvedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11143,7 +11298,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11267,7 +11422,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11422,7 +11577,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"typeId\": \"typeId\",\n      \"kind\": \"customer\",\n      \"partnerId\": \"partnerId\",\n      \"employeeId\": \"employeeId\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"number\": \"number\",\n      \"name\": \"name\",\n      \"startDate\": \"2026-07-01\",\n      \"endDate\": \"2026-07-01\",\n      \"autoRenew\": true,\n      \"value\": \"value\",\n      \"billingPeriod\": \"monthly\",\n      \"currency\": \"currency\",\n      \"status\": \"draft\",\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"typeId\": \"typeId\",\n      \"kind\": \"customer\",\n      \"partnerId\": \"partnerId\",\n      \"employeeId\": \"employeeId\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"number\": \"number\",\n      \"name\": \"name\",\n      \"startDate\": \"2026-07-01\",\n      \"endDate\": \"2026-07-01\",\n      \"autoRenew\": true,\n      \"value\": \"value\",\n      \"billingPeriod\": \"monthly\",\n      \"currency\": \"currency\",\n      \"status\": \"draft\",\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"partnerName\": \"partnerName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11546,7 +11701,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"insurerPartnerId\": \"insurerPartnerId\",\n      \"policyNumber\": \"policyNumber\",\n      \"insuredObject\": \"insuredObject\",\n      \"fromDate\": \"2026-07-01\",\n      \"toDate\": \"2026-07-01\",\n      \"premium\": \"premium\",\n      \"currency\": \"currency\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"insurerPartnerId\": \"insurerPartnerId\",\n      \"policyNumber\": \"policyNumber\",\n      \"insuredObject\": \"insuredObject\",\n      \"fromDate\": \"2026-07-01\",\n      \"toDate\": \"2026-07-01\",\n      \"premium\": \"premium\",\n      \"currency\": \"currency\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11701,7 +11856,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"isDefault\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"isDefault\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11887,7 +12042,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"warehouseId\": \"warehouseId\",\n      \"itemId\": \"itemId\",\n      \"lotId\": \"lotId\",\n      \"date\": \"2026-07-01\",\n      \"direction\": \"in\",\n      \"quantity\": \"quantity\",\n      \"unitCost\": \"unitCost\",\n      \"totalCost\": \"totalCost\",\n      \"remainingQty\": \"remainingQty\",\n      \"documentType\": \"documentType\",\n      \"documentId\": \"documentId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"warehouseId\": \"warehouseId\",\n      \"itemId\": \"itemId\",\n      \"lotId\": \"lotId\",\n      \"date\": \"2026-07-01\",\n      \"direction\": \"in\",\n      \"quantity\": \"quantity\",\n      \"unitCost\": \"unitCost\",\n      \"totalCost\": \"totalCost\",\n      \"remainingQty\": \"remainingQty\",\n      \"documentType\": \"documentType\",\n      \"documentId\": \"documentId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11918,7 +12073,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"lotNumber\": \"lotNumber\",\n      \"expiryDate\": \"2026-07-01\",\n      \"notes\": \"notes\",\n      \"onHand\": \"onHand\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"lotNumber\": \"lotNumber\",\n      \"expiryDate\": \"2026-07-01\",\n      \"notes\": \"notes\",\n      \"onHand\": \"onHand\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12073,7 +12228,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"method\": \"by_value\",\n      \"goodsReceiptId\": \"goodsReceiptId\",\n      \"sourceInvoiceId\": \"sourceInvoiceId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"method\": \"by_value\",\n      \"goodsReceiptId\": \"goodsReceiptId\",\n      \"sourceInvoiceId\": \"sourceInvoiceId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12197,7 +12352,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"warehouseId\": \"warehouseId\",\n      \"minQty\": \"minQty\",\n      \"reorderQty\": \"reorderQty\",\n      \"isActive\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"warehouseId\": \"warehouseId\",\n      \"minQty\": \"minQty\",\n      \"reorderQty\": \"reorderQty\",\n      \"isActive\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12321,7 +12476,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"costPerHour\": \"costPerHour\",\n      \"costAccountCode\": \"costAccountCode\",\n      \"maintenanceIntervalDays\": 1000000,\n      \"nextMaintenanceDate\": \"2026-07-01\",\n      \"isActive\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"costPerHour\": \"costPerHour\",\n      \"costAccountCode\": \"costAccountCode\",\n      \"maintenanceIntervalDays\": 1000000,\n      \"nextMaintenanceDate\": \"2026-07-01\",\n      \"isActive\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12414,7 +12569,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"isActive\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"isActive\": true,\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12538,7 +12693,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"workCenterId\": \"workCenterId\",\n      \"type\": \"preventive\",\n      \"status\": \"planned\",\n      \"plannedDate\": \"2026-07-01\",\n      \"completedDate\": \"2026-07-01\",\n      \"description\": \"description\",\n      \"downtimeHours\": \"downtimeHours\",\n      \"cost\": \"cost\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"workCenterId\": \"workCenterId\",\n      \"type\": \"preventive\",\n      \"status\": \"planned\",\n      \"plannedDate\": \"2026-07-01\",\n      \"completedDate\": \"2026-07-01\",\n      \"description\": \"description\",\n      \"downtimeHours\": \"downtimeHours\",\n      \"cost\": \"cost\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12631,7 +12786,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"finishedItemId\": \"finishedItemId\",\n      \"outputQuantity\": \"outputQuantity\",\n      \"routingId\": \"routingId\",\n      \"isActive\": true\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"finishedItemId\": \"finishedItemId\",\n      \"outputQuantity\": \"outputQuantity\",\n      \"routingId\": \"routingId\",\n      \"isActive\": true\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12786,7 +12941,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"orderId\": \"orderId\",\n      \"routingOperationId\": \"routingOperationId\",\n      \"name\": \"name\",\n      \"result\": \"pending\",\n      \"notes\": \"notes\",\n      \"checkedAt\": \"2026-07-01T09:30:00Z\",\n      \"checkedBy\": \"checkedBy\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"orderId\": \"orderId\",\n      \"routingOperationId\": \"routingOperationId\",\n      \"name\": \"name\",\n      \"result\": \"pending\",\n      \"notes\": \"notes\",\n      \"checkedAt\": \"2026-07-01T09:30:00Z\",\n      \"checkedBy\": \"checkedBy\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12879,7 +13034,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"assembly\",\n      \"bomId\": \"bomId\",\n      \"warehouseId\": \"warehouseId\",\n      \"routingId\": \"routingId\",\n      \"quantity\": \"quantity\",\n      \"date\": \"2026-07-01\",\n      \"status\": \"draft\",\n      \"scrappedQuantity\": \"scrappedQuantity\",\n      \"materialCost\": \"materialCost\",\n      \"laborCost\": \"laborCost\",\n      \"scrapCost\": \"scrapCost\",\n      \"totalCost\": \"totalCost\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"assembly\",\n      \"bomId\": \"bomId\",\n      \"warehouseId\": \"warehouseId\",\n      \"routingId\": \"routingId\",\n      \"quantity\": \"quantity\",\n      \"date\": \"2026-07-01\",\n      \"status\": \"draft\",\n      \"scrappedQuantity\": \"scrappedQuantity\",\n      \"materialCost\": \"materialCost\",\n      \"laborCost\": \"laborCost\",\n      \"scrapCost\": \"scrapCost\",\n      \"totalCost\": \"totalCost\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12972,7 +13127,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"channel\": \"channel\",\n      \"externalRef\": \"externalRef\",\n      \"partnerId\": \"partnerId\",\n      \"warehouseId\": \"warehouseId\",\n      \"currency\": \"currency\",\n      \"status\": \"new\",\n      \"invoiceId\": \"invoiceId\",\n      \"shipToCountryCode\": \"shipToCountryCode\",\n      \"marketplace\": \"marketplace\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"channel\": \"channel\",\n      \"externalRef\": \"externalRef\",\n      \"partnerId\": \"partnerId\",\n      \"warehouseId\": \"warehouseId\",\n      \"currency\": \"currency\",\n      \"status\": \"new\",\n      \"invoiceId\": \"invoiceId\",\n      \"shipToCountryCode\": \"shipToCountryCode\",\n      \"marketplace\": \"marketplace\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13220,7 +13375,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"receipt\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"date\": \"2026-07-01\",\n      \"partnerId\": \"partnerId\",\n      \"employeeId\": \"employeeId\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"purpose\": \"purpose\",\n      \"cashAccountCode\": \"cashAccountCode\",\n      \"counterAccountCode\": \"counterAccountCode\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"receipt\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"date\": \"2026-07-01\",\n      \"partnerId\": \"partnerId\",\n      \"employeeId\": \"employeeId\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"purpose\": \"purpose\",\n      \"cashAccountCode\": \"cashAccountCode\",\n      \"counterAccountCode\": \"counterAccountCode\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13406,7 +13561,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"partnerId\": \"partnerId\",\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"partnerId\": \"partnerId\",\n      \"status\": \"active\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13530,7 +13685,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"projectId\": \"projectId\",\n      \"employeeId\": \"employeeId\",\n      \"date\": \"2026-07-01\",\n      \"hours\": \"hours\",\n      \"description\": \"description\",\n      \"billable\": true,\n      \"hourlyRate\": \"hourlyRate\",\n      \"billedInvoiceId\": \"billedInvoiceId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"projectId\": \"projectId\",\n      \"employeeId\": \"employeeId\",\n      \"date\": \"2026-07-01\",\n      \"hours\": \"hours\",\n      \"description\": \"description\",\n      \"billable\": true,\n      \"hourlyRate\": \"hourlyRate\",\n      \"billedInvoiceId\": \"billedInvoiceId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13778,7 +13933,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"status\": \"draft\",\n      \"series\": \"series\",\n      \"fullNumber\": \"fullNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"dispatchAt\": \"2026-07-01T09:30:00Z\",\n      \"estimatedArrivalAt\": \"2026-07-01T09:30:00Z\",\n      \"consigneePartnerId\": \"consigneePartnerId\",\n      \"transporterPartnerId\": \"transporterPartnerId\",\n      \"vehiclePlate\": \"vehiclePlate\",\n      \"trailerPlate\": \"trailerPlate\",\n      \"driverName\": \"driverName\",\n      \"driverSurname\": \"driverSurname\",\n      \"loadWarehouseId\": \"loadWarehouseId\",\n      \"loadAddress\": \"loadAddress\",\n      \"unloadAddress\": \"unloadAddress\",\n      \"valueEur\": \"valueEur\",\n      \"saleInvoiceId\": \"saleInvoiceId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"consigneeName\": \"consigneeName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"status\": \"draft\",\n      \"series\": \"series\",\n      \"fullNumber\": \"fullNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"dispatchAt\": \"2026-07-01T09:30:00Z\",\n      \"estimatedArrivalAt\": \"2026-07-01T09:30:00Z\",\n      \"consigneePartnerId\": \"consigneePartnerId\",\n      \"transporterPartnerId\": \"transporterPartnerId\",\n      \"vehiclePlate\": \"vehiclePlate\",\n      \"trailerPlate\": \"trailerPlate\",\n      \"driverName\": \"driverName\",\n      \"driverSurname\": \"driverSurname\",\n      \"loadWarehouseId\": \"loadWarehouseId\",\n      \"loadAddress\": \"loadAddress\",\n      \"unloadAddress\": \"unloadAddress\",\n      \"valueEur\": \"valueEur\",\n      \"saleInvoiceId\": \"saleInvoiceId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\",\n      \"consigneeName\": \"consigneeName\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13871,7 +14026,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"serialNumber\": \"serialNumber\",\n      \"model\": \"model\",\n      \"registrationNumber\": \"registrationNumber\",\n      \"address\": \"address\",\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"serialNumber\": \"serialNumber\",\n      \"model\": \"model\",\n      \"registrationNumber\": \"registrationNumber\",\n      \"address\": \"address\",\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13964,7 +14119,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"reportNumber\": \"reportNumber\",\n      \"date\": \"2026-07-01\",\n      \"deviceId\": \"deviceId\",\n      \"warehouseId\": \"warehouseId\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"cashAmount\": \"cashAmount\",\n      \"cardAmount\": \"cardAmount\",\n      \"cogsTotal\": \"cogsTotal\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"reportNumber\": \"reportNumber\",\n      \"date\": \"2026-07-01\",\n      \"deviceId\": \"deviceId\",\n      \"warehouseId\": \"warehouseId\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"cashAmount\": \"cashAmount\",\n      \"cardAmount\": \"cardAmount\",\n      \"cogsTotal\": \"cogsTotal\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14212,7 +14367,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": 1000000,\n      \"actorType\": \"user\",\n      \"actorId\": \"actorId\",\n      \"action\": \"action\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"diff\": {\n        \"key\": \"value\"\n      },\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": 1000000,\n      \"actorType\": \"user\",\n      \"actorId\": \"actorId\",\n      \"action\": \"action\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"diff\": {\n        \"key\": \"value\"\n      },\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14274,7 +14429,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"url\": \"url\",\n      \"events\": [\n        \"events\"\n      ],\n      \"isActive\": true,\n      \"consecutiveFailures\": 1000000,\n      \"lastDeliveryStatus\": \"pending\",\n      \"lastDeliveryAt\": \"2026-07-01T09:30:00Z\",\n      \"pausedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"url\": \"url\",\n      \"events\": [\n        \"events\"\n      ],\n      \"isActive\": true,\n      \"consecutiveFailures\": 1000000,\n      \"lastDeliveryStatus\": \"pending\",\n      \"lastDeliveryAt\": \"2026-07-01T09:30:00Z\",\n      \"pausedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14367,7 +14522,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"subscriptionId\": \"subscriptionId\",\n      \"eventType\": \"eventType\",\n      \"status\": \"pending\",\n      \"attempts\": 1000000,\n      \"lastError\": \"lastError\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"deliveredAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"subscriptionId\": \"subscriptionId\",\n      \"eventType\": \"eventType\",\n      \"status\": \"pending\",\n      \"attempts\": 1000000,\n      \"lastError\": \"lastError\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"deliveredAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14460,7 +14615,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"iban\": \"iban\",\n      \"currency\": \"currency\",\n      \"accountCode\": \"accountCode\",\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"iban\": \"iban\",\n      \"currency\": \"currency\",\n      \"accountCode\": \"accountCode\",\n      \"isActive\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14584,7 +14739,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"counterpartyName\": \"counterpartyName\",\n      \"counterpartyIban\": \"counterpartyIban\",\n      \"description\": \"description\",\n      \"externalId\": \"externalId\",\n      \"status\": \"new\",\n      \"matchedDocumentType\": \"matchedDocumentType\",\n      \"matchedDocumentId\": \"matchedDocumentId\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"counterpartyName\": \"counterpartyName\",\n      \"counterpartyIban\": \"counterpartyIban\",\n      \"description\": \"description\",\n      \"externalId\": \"externalId\",\n      \"status\": \"new\",\n      \"matchedDocumentType\": \"matchedDocumentType\",\n      \"matchedDocumentId\": \"matchedDocumentId\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14863,7 +15018,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -15142,12 +15297,43 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"reference\": \"reference\",\n      \"scheme\": \"CORE\",\n      \"sequenceType\": \"recurrent\",\n      \"status\": \"active\",\n      \"debtorName\": \"debtorName\",\n      \"iban\": \"iban\",\n      \"bic\": \"bic\",\n      \"signatureDate\": \"2026-07-01\",\n      \"collectionsCount\": 1000000,\n      \"lastCollectionDate\": \"2026-07-01\",\n      \"expiresOn\": \"expiresOn\",\n      \"cancelledAt\": \"2026-07-01T09:30:00Z\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"reference\": \"reference\",\n      \"scheme\": \"CORE\",\n      \"sequenceType\": \"recurrent\",\n      \"status\": \"active\",\n      \"debtorName\": \"debtorName\",\n      \"iban\": \"iban\",\n      \"bic\": \"bic\",\n      \"signatureDate\": \"2026-07-01\",\n      \"collectionsCount\": 1000000,\n      \"lastCollectionDate\": \"2026-07-01\",\n      \"expiresOn\": \"expiresOn\",\n      \"cancelledAt\": \"2026-07-01T09:30:00Z\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "6dad28af-6895-4db3-a96e-b29a822d8191",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "9b5578e6-b2a4-4c59-9439-59371989adc7",
+      "name": "Bank direct debits candidates - default",
+      "request": {
+        "urlPathTemplate": "/v1/bank/direct-debits/candidates",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"fullNumber\": \"fullNumber\",\n      \"issueDate\": \"2026-07-01\",\n      \"dueDate\": \"2026-07-01\",\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"currency\": \"currency\",\n      \"grossTotal\": \"grossTotal\",\n      \"paidAmount\": \"paidAmount\",\n      \"remaining\": \"remaining\",\n      \"mandateId\": \"mandateId\",\n      \"mandateReference\": \"mandateReference\",\n      \"mandateSignatureDate\": \"2026-07-01\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "9b5578e6-b2a4-4c59-9439-59371989adc7",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -15266,7 +15452,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"provider\": \"provider\",\n      \"payoutId\": \"payoutId\",\n      \"payoutDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"grossTotal\": \"grossTotal\",\n      \"feeTotal\": \"feeTotal\",\n      \"netTotal\": \"netTotal\",\n      \"fxRate\": \"fxRate\",\n      \"status\": \"imported\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"bankTransactionId\": \"bankTransactionId\",\n      \"lineCount\": 1000000,\n      \"matchedCount\": 1000000,\n      \"unmatchedCount\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"provider\": \"provider\",\n      \"payoutId\": \"payoutId\",\n      \"payoutDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"grossTotal\": \"grossTotal\",\n      \"feeTotal\": \"feeTotal\",\n      \"netTotal\": \"netTotal\",\n      \"fxRate\": \"fxRate\",\n      \"status\": \"imported\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"bankTransactionId\": \"bankTransactionId\",\n      \"lineCount\": 1000000,\n      \"matchedCount\": 1000000,\n      \"unmatchedCount\": 1000000,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -15607,7 +15793,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"provider\": \"provider\",\n      \"aspspName\": \"aspspName\",\n      \"aspspCountry\": \"aspspCountry\",\n      \"psuType\": \"business\",\n      \"status\": \"pending\",\n      \"reference\": \"reference\",\n      \"consentExpiresAt\": \"2026-07-01T09:30:00Z\",\n      \"lastSyncedAt\": \"2026-07-01T09:30:00Z\",\n      \"error\": \"error\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"provider\": \"provider\",\n      \"aspspName\": \"aspspName\",\n      \"aspspCountry\": \"aspspCountry\",\n      \"psuType\": \"business\",\n      \"status\": \"pending\",\n      \"reference\": \"reference\",\n      \"consentExpiresAt\": \"2026-07-01T09:30:00Z\",\n      \"lastSyncedAt\": \"2026-07-01T09:30:00Z\",\n      \"error\": \"error\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -15824,7 +16010,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"fileName\": \"fileName\",\n      \"mimeType\": \"mimeType\",\n      \"sizeBytes\": 1000000,\n      \"sha256\": \"sha256\",\n      \"storageKey\": \"storageKey\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"fileName\": \"fileName\",\n      \"mimeType\": \"mimeType\",\n      \"sizeBytes\": 1000000,\n      \"sha256\": \"sha256\",\n      \"storageKey\": \"storageKey\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16041,7 +16227,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"receivable\": \"receivable\",\n      \"payable\": \"payable\",\n      \"net\": \"net\"\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"receivable\": \"receivable\",\n      \"payable\": \"payable\",\n      \"net\": \"net\"\n    }\n  ],\n  \"totals\": {\n    \"receivable\": \"receivable\",\n    \"payable\": \"payable\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16785,7 +16971,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"reportType\": \"reportType\",\n      \"params\": {\n        \"key\": \"value\"\n      },\n      \"formats\": [\n        \"formats\"\n      ],\n      \"status\": \"queued\",\n      \"error\": \"error\",\n      \"outputs\": [\n        {\n          \"format\": \"format\",\n          \"fileId\": \"fileId\",\n          \"fileName\": \"fileName\",\n          \"sizeBytes\": 1000000\n        }\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"startedAt\": \"2026-07-01T09:30:00Z\",\n      \"finishedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"reportType\": \"reportType\",\n      \"params\": {\n        \"key\": \"value\"\n      },\n      \"formats\": [\n        \"formats\"\n      ],\n      \"status\": \"queued\",\n      \"error\": \"error\",\n      \"outputs\": [\n        {\n          \"format\": \"format\",\n          \"fileId\": \"fileId\",\n          \"fileName\": \"fileName\",\n          \"sizeBytes\": 1000000\n        }\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"startedAt\": \"2026-07-01T09:30:00Z\",\n      \"finishedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -18638,6 +18824,6 @@
     }
   ],
   "meta": {
-    "total": 601
+    "total": 607
   }
 }

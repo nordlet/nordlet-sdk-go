@@ -3179,11 +3179,12 @@ func (o OrdersListEcommerceRequestSortItemDir) Ptr() *OrdersListEcommerceRequest
 }
 
 var (
-	ordersListEcommerceResponseFieldRows     = big.NewInt(1 << 0)
-	ordersListEcommerceResponseFieldPage     = big.NewInt(1 << 1)
-	ordersListEcommerceResponseFieldPageSize = big.NewInt(1 << 2)
-	ordersListEcommerceResponseFieldTotal    = big.NewInt(1 << 3)
-	ordersListEcommerceResponseFieldTotals   = big.NewInt(1 << 4)
+	ordersListEcommerceResponseFieldRows             = big.NewInt(1 << 0)
+	ordersListEcommerceResponseFieldPage             = big.NewInt(1 << 1)
+	ordersListEcommerceResponseFieldPageSize         = big.NewInt(1 << 2)
+	ordersListEcommerceResponseFieldTotal            = big.NewInt(1 << 3)
+	ordersListEcommerceResponseFieldTotals           = big.NewInt(1 << 4)
+	ordersListEcommerceResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type OrdersListEcommerceResponse struct {
@@ -3192,6 +3193,8 @@ type OrdersListEcommerceResponse struct {
 	PageSize int64                                  `json:"pageSize" url:"pageSize"`
 	Total    int64                                  `json:"total" url:"total"`
 	Totals   map[string]string                      `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3233,6 +3236,13 @@ func (o *OrdersListEcommerceResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return o.Totals
+}
+
+func (o *OrdersListEcommerceResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if o == nil {
+		return nil
+	}
+	return o.TotalsByCurrency
 }
 
 func (o *OrdersListEcommerceResponse) GetExtraProperties() map[string]interface{} {
@@ -3282,6 +3292,13 @@ func (o *OrdersListEcommerceResponse) SetTotal(total int64) {
 func (o *OrdersListEcommerceResponse) SetTotals(totals map[string]string) {
 	o.Totals = totals
 	o.require(ordersListEcommerceResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersListEcommerceResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	o.TotalsByCurrency = totalsByCurrency
+	o.require(ordersListEcommerceResponseFieldTotalsByCurrency)
 }
 
 func (o *OrdersListEcommerceResponse) UnmarshalJSON(data []byte) error {

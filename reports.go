@@ -9093,11 +9093,12 @@ func (j JobsListReportsRequestSortItemDir) Ptr() *JobsListReportsRequestSortItem
 }
 
 var (
-	jobsListReportsResponseFieldRows     = big.NewInt(1 << 0)
-	jobsListReportsResponseFieldPage     = big.NewInt(1 << 1)
-	jobsListReportsResponseFieldPageSize = big.NewInt(1 << 2)
-	jobsListReportsResponseFieldTotal    = big.NewInt(1 << 3)
-	jobsListReportsResponseFieldTotals   = big.NewInt(1 << 4)
+	jobsListReportsResponseFieldRows             = big.NewInt(1 << 0)
+	jobsListReportsResponseFieldPage             = big.NewInt(1 << 1)
+	jobsListReportsResponseFieldPageSize         = big.NewInt(1 << 2)
+	jobsListReportsResponseFieldTotal            = big.NewInt(1 << 3)
+	jobsListReportsResponseFieldTotals           = big.NewInt(1 << 4)
+	jobsListReportsResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type JobsListReportsResponse struct {
@@ -9106,6 +9107,8 @@ type JobsListReportsResponse struct {
 	PageSize int64                              `json:"pageSize" url:"pageSize"`
 	Total    int64                              `json:"total" url:"total"`
 	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9147,6 +9150,13 @@ func (j *JobsListReportsResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return j.Totals
+}
+
+func (j *JobsListReportsResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if j == nil {
+		return nil
+	}
+	return j.TotalsByCurrency
 }
 
 func (j *JobsListReportsResponse) GetExtraProperties() map[string]interface{} {
@@ -9196,6 +9206,13 @@ func (j *JobsListReportsResponse) SetTotal(total int64) {
 func (j *JobsListReportsResponse) SetTotals(totals map[string]string) {
 	j.Totals = totals
 	j.require(jobsListReportsResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JobsListReportsResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	j.TotalsByCurrency = totalsByCurrency
+	j.require(jobsListReportsResponseFieldTotalsByCurrency)
 }
 
 func (j *JobsListReportsResponse) UnmarshalJSON(data []byte) error {
@@ -10609,11 +10626,13 @@ func (o *OssReportsResponseTotals) String() string {
 }
 
 var (
-	partnerBalancesReportsResponseFieldRows = big.NewInt(1 << 0)
+	partnerBalancesReportsResponseFieldRows   = big.NewInt(1 << 0)
+	partnerBalancesReportsResponseFieldTotals = big.NewInt(1 << 1)
 )
 
 type PartnerBalancesReportsResponse struct {
-	Rows []*PartnerBalancesReportsResponseRowsItem `json:"rows" url:"rows"`
+	Rows   []*PartnerBalancesReportsResponseRowsItem `json:"rows" url:"rows"`
+	Totals *PartnerBalancesReportsResponseTotals     `json:"totals" url:"totals"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10627,6 +10646,13 @@ func (p *PartnerBalancesReportsResponse) GetRows() []*PartnerBalancesReportsResp
 		return nil
 	}
 	return p.Rows
+}
+
+func (p *PartnerBalancesReportsResponse) GetTotals() *PartnerBalancesReportsResponseTotals {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
 }
 
 func (p *PartnerBalancesReportsResponse) GetExtraProperties() map[string]interface{} {
@@ -10648,6 +10674,13 @@ func (p *PartnerBalancesReportsResponse) require(field *big.Int) {
 func (p *PartnerBalancesReportsResponse) SetRows(rows []*PartnerBalancesReportsResponseRowsItem) {
 	p.Rows = rows
 	p.require(partnerBalancesReportsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PartnerBalancesReportsResponse) SetTotals(totals *PartnerBalancesReportsResponseTotals) {
+	p.Totals = totals
+	p.require(partnerBalancesReportsResponseFieldTotals)
 }
 
 func (p *PartnerBalancesReportsResponse) UnmarshalJSON(data []byte) error {
@@ -10826,6 +10859,106 @@ func (p *PartnerBalancesReportsResponseRowsItem) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PartnerBalancesReportsResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	partnerBalancesReportsResponseTotalsFieldReceivable = big.NewInt(1 << 0)
+	partnerBalancesReportsResponseTotalsFieldPayable    = big.NewInt(1 << 1)
+)
+
+type PartnerBalancesReportsResponseTotals struct {
+	Receivable string `json:"receivable" url:"receivable"`
+	Payable    string `json:"payable" url:"payable"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PartnerBalancesReportsResponseTotals) GetReceivable() string {
+	if p == nil {
+		return ""
+	}
+	return p.Receivable
+}
+
+func (p *PartnerBalancesReportsResponseTotals) GetPayable() string {
+	if p == nil {
+		return ""
+	}
+	return p.Payable
+}
+
+func (p *PartnerBalancesReportsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PartnerBalancesReportsResponseTotals) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetReceivable sets the Receivable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PartnerBalancesReportsResponseTotals) SetReceivable(receivable string) {
+	p.Receivable = receivable
+	p.require(partnerBalancesReportsResponseTotalsFieldReceivable)
+}
+
+// SetPayable sets the Payable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PartnerBalancesReportsResponseTotals) SetPayable(payable string) {
+	p.Payable = payable
+	p.require(partnerBalancesReportsResponseTotalsFieldPayable)
+}
+
+func (p *PartnerBalancesReportsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler PartnerBalancesReportsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PartnerBalancesReportsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PartnerBalancesReportsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed PartnerBalancesReportsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PartnerBalancesReportsResponseTotals) String() string {
 	if p == nil {
 		return "<nil>"
 	}

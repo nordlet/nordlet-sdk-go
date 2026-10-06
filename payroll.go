@@ -508,6 +508,7 @@ var (
 	runsCreatePayrollRequestFieldGrossOverrides = big.NewInt(1 << 3)
 	runsCreatePayrollRequestFieldLines          = big.NewInt(1 << 4)
 	runsCreatePayrollRequestFieldNotes          = big.NewInt(1 << 5)
+	runsCreatePayrollRequestFieldPayDate        = big.NewInt(1 << 6)
 )
 
 type RunsCreatePayrollRequest struct {
@@ -517,6 +518,7 @@ type RunsCreatePayrollRequest struct {
 	GrossOverrides []*RunsCreatePayrollRequestGrossOverridesItem `json:"grossOverrides,omitempty" url:"-"`
 	Lines          []*RunsCreatePayrollRequestLinesItem          `json:"lines,omitempty" url:"-"`
 	Notes          *string                                       `json:"notes,omitempty" url:"-"`
+	PayDate        *time.Time                                    `json:"payDate,omitempty" url:"-" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -571,6 +573,13 @@ func (r *RunsCreatePayrollRequest) SetNotes(notes *string) {
 	r.require(runsCreatePayrollRequestFieldNotes)
 }
 
+// SetPayDate sets the PayDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollRequest) SetPayDate(payDate *time.Time) {
+	r.PayDate = payDate
+	r.require(runsCreatePayrollRequestFieldPayDate)
+}
+
 func (r *RunsCreatePayrollRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler RunsCreatePayrollRequest
 	var body unmarshaler
@@ -585,8 +594,10 @@ func (r *RunsCreatePayrollRequest) MarshalJSON() ([]byte, error) {
 	type embed RunsCreatePayrollRequest
 	var marshaler = struct {
 		embed
+		PayDate *internal.Date `json:"payDate,omitempty"`
 	}{
-		embed: embed(*r),
+		embed:   embed(*r),
+		PayDate: internal.NewOptionalDate(r.PayDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -2418,19 +2429,20 @@ var (
 	runsApprovePayrollResponseFieldYear                       = big.NewInt(1 << 1)
 	runsApprovePayrollResponseFieldMonth                      = big.NewInt(1 << 2)
 	runsApprovePayrollResponseFieldCountryCode                = big.NewInt(1 << 3)
-	runsApprovePayrollResponseFieldStatus                     = big.NewInt(1 << 4)
-	runsApprovePayrollResponseFieldGrossTotal                 = big.NewInt(1 << 5)
-	runsApprovePayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
-	runsApprovePayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 7)
-	runsApprovePayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
-	runsApprovePayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 9)
-	runsApprovePayrollResponseFieldComponentTotals            = big.NewInt(1 << 10)
-	runsApprovePayrollResponseFieldNetTotal                   = big.NewInt(1 << 11)
-	runsApprovePayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 12)
-	runsApprovePayrollResponseFieldNotes                      = big.NewInt(1 << 13)
-	runsApprovePayrollResponseFieldWarnings                   = big.NewInt(1 << 14)
-	runsApprovePayrollResponseFieldCreatedAt                  = big.NewInt(1 << 15)
-	runsApprovePayrollResponseFieldApprovedAt                 = big.NewInt(1 << 16)
+	runsApprovePayrollResponseFieldPayDate                    = big.NewInt(1 << 4)
+	runsApprovePayrollResponseFieldStatus                     = big.NewInt(1 << 5)
+	runsApprovePayrollResponseFieldGrossTotal                 = big.NewInt(1 << 6)
+	runsApprovePayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
+	runsApprovePayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 8)
+	runsApprovePayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
+	runsApprovePayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 10)
+	runsApprovePayrollResponseFieldComponentTotals            = big.NewInt(1 << 11)
+	runsApprovePayrollResponseFieldNetTotal                   = big.NewInt(1 << 12)
+	runsApprovePayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 13)
+	runsApprovePayrollResponseFieldNotes                      = big.NewInt(1 << 14)
+	runsApprovePayrollResponseFieldWarnings                   = big.NewInt(1 << 15)
+	runsApprovePayrollResponseFieldCreatedAt                  = big.NewInt(1 << 16)
+	runsApprovePayrollResponseFieldApprovedAt                 = big.NewInt(1 << 17)
 )
 
 type RunsApprovePayrollResponse struct {
@@ -2438,6 +2450,7 @@ type RunsApprovePayrollResponse struct {
 	Year                       int64                                            `json:"year" url:"year"`
 	Month                      int64                                            `json:"month" url:"month"`
 	CountryCode                string                                           `json:"countryCode" url:"countryCode"`
+	PayDate                    *time.Time                                       `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                     RunsApprovePayrollResponseStatus                 `json:"status" url:"status"`
 	GrossTotal                 string                                           `json:"grossTotal" url:"grossTotal"`
 	TaxAllowanceTotal          string                                           `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
@@ -2485,6 +2498,13 @@ func (r *RunsApprovePayrollResponse) GetCountryCode() string {
 		return ""
 	}
 	return r.CountryCode
+}
+
+func (r *RunsApprovePayrollResponse) GetPayDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.PayDate
 }
 
 func (r *RunsApprovePayrollResponse) GetStatus() RunsApprovePayrollResponseStatus {
@@ -2620,6 +2640,13 @@ func (r *RunsApprovePayrollResponse) SetCountryCode(countryCode string) {
 	r.require(runsApprovePayrollResponseFieldCountryCode)
 }
 
+// SetPayDate sets the PayDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetPayDate(payDate *time.Time) {
+	r.PayDate = payDate
+	r.require(runsApprovePayrollResponseFieldPayDate)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (r *RunsApprovePayrollResponse) SetStatus(status RunsApprovePayrollResponseStatus) {
@@ -2715,6 +2742,7 @@ func (r *RunsApprovePayrollResponse) UnmarshalJSON(data []byte) error {
 	type embed RunsApprovePayrollResponse
 	var unmarshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
@@ -2724,6 +2752,7 @@ func (r *RunsApprovePayrollResponse) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*r = RunsApprovePayrollResponse(unmarshaler.embed)
+	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
@@ -2739,10 +2768,12 @@ func (r *RunsApprovePayrollResponse) MarshalJSON() ([]byte, error) {
 	type embed RunsApprovePayrollResponse
 	var marshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
 		embed:      embed(*r),
+		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
 	}
@@ -3503,20 +3534,21 @@ var (
 	runsCreatePayrollResponseFieldYear                       = big.NewInt(1 << 1)
 	runsCreatePayrollResponseFieldMonth                      = big.NewInt(1 << 2)
 	runsCreatePayrollResponseFieldCountryCode                = big.NewInt(1 << 3)
-	runsCreatePayrollResponseFieldStatus                     = big.NewInt(1 << 4)
-	runsCreatePayrollResponseFieldGrossTotal                 = big.NewInt(1 << 5)
-	runsCreatePayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
-	runsCreatePayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 7)
-	runsCreatePayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
-	runsCreatePayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 9)
-	runsCreatePayrollResponseFieldComponentTotals            = big.NewInt(1 << 10)
-	runsCreatePayrollResponseFieldNetTotal                   = big.NewInt(1 << 11)
-	runsCreatePayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 12)
-	runsCreatePayrollResponseFieldNotes                      = big.NewInt(1 << 13)
-	runsCreatePayrollResponseFieldWarnings                   = big.NewInt(1 << 14)
-	runsCreatePayrollResponseFieldCreatedAt                  = big.NewInt(1 << 15)
-	runsCreatePayrollResponseFieldApprovedAt                 = big.NewInt(1 << 16)
-	runsCreatePayrollResponseFieldLines                      = big.NewInt(1 << 17)
+	runsCreatePayrollResponseFieldPayDate                    = big.NewInt(1 << 4)
+	runsCreatePayrollResponseFieldStatus                     = big.NewInt(1 << 5)
+	runsCreatePayrollResponseFieldGrossTotal                 = big.NewInt(1 << 6)
+	runsCreatePayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
+	runsCreatePayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 8)
+	runsCreatePayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
+	runsCreatePayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 10)
+	runsCreatePayrollResponseFieldComponentTotals            = big.NewInt(1 << 11)
+	runsCreatePayrollResponseFieldNetTotal                   = big.NewInt(1 << 12)
+	runsCreatePayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 13)
+	runsCreatePayrollResponseFieldNotes                      = big.NewInt(1 << 14)
+	runsCreatePayrollResponseFieldWarnings                   = big.NewInt(1 << 15)
+	runsCreatePayrollResponseFieldCreatedAt                  = big.NewInt(1 << 16)
+	runsCreatePayrollResponseFieldApprovedAt                 = big.NewInt(1 << 17)
+	runsCreatePayrollResponseFieldLines                      = big.NewInt(1 << 18)
 )
 
 type RunsCreatePayrollResponse struct {
@@ -3524,6 +3556,7 @@ type RunsCreatePayrollResponse struct {
 	Year                       int64                                           `json:"year" url:"year"`
 	Month                      int64                                           `json:"month" url:"month"`
 	CountryCode                string                                          `json:"countryCode" url:"countryCode"`
+	PayDate                    *time.Time                                      `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                     RunsCreatePayrollResponseStatus                 `json:"status" url:"status"`
 	GrossTotal                 string                                          `json:"grossTotal" url:"grossTotal"`
 	TaxAllowanceTotal          string                                          `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
@@ -3572,6 +3605,13 @@ func (r *RunsCreatePayrollResponse) GetCountryCode() string {
 		return ""
 	}
 	return r.CountryCode
+}
+
+func (r *RunsCreatePayrollResponse) GetPayDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.PayDate
 }
 
 func (r *RunsCreatePayrollResponse) GetStatus() RunsCreatePayrollResponseStatus {
@@ -3714,6 +3754,13 @@ func (r *RunsCreatePayrollResponse) SetCountryCode(countryCode string) {
 	r.require(runsCreatePayrollResponseFieldCountryCode)
 }
 
+// SetPayDate sets the PayDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetPayDate(payDate *time.Time) {
+	r.PayDate = payDate
+	r.require(runsCreatePayrollResponseFieldPayDate)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (r *RunsCreatePayrollResponse) SetStatus(status RunsCreatePayrollResponseStatus) {
@@ -3816,6 +3863,7 @@ func (r *RunsCreatePayrollResponse) UnmarshalJSON(data []byte) error {
 	type embed RunsCreatePayrollResponse
 	var unmarshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
@@ -3825,6 +3873,7 @@ func (r *RunsCreatePayrollResponse) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*r = RunsCreatePayrollResponse(unmarshaler.embed)
+	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
@@ -3840,10 +3889,12 @@ func (r *RunsCreatePayrollResponse) MarshalJSON() ([]byte, error) {
 	type embed RunsCreatePayrollResponse
 	var marshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
 		embed:      embed(*r),
+		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
 	}
@@ -4839,20 +4890,21 @@ var (
 	runsGetPayrollResponseFieldYear                       = big.NewInt(1 << 1)
 	runsGetPayrollResponseFieldMonth                      = big.NewInt(1 << 2)
 	runsGetPayrollResponseFieldCountryCode                = big.NewInt(1 << 3)
-	runsGetPayrollResponseFieldStatus                     = big.NewInt(1 << 4)
-	runsGetPayrollResponseFieldGrossTotal                 = big.NewInt(1 << 5)
-	runsGetPayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
-	runsGetPayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 7)
-	runsGetPayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
-	runsGetPayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 9)
-	runsGetPayrollResponseFieldComponentTotals            = big.NewInt(1 << 10)
-	runsGetPayrollResponseFieldNetTotal                   = big.NewInt(1 << 11)
-	runsGetPayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 12)
-	runsGetPayrollResponseFieldNotes                      = big.NewInt(1 << 13)
-	runsGetPayrollResponseFieldWarnings                   = big.NewInt(1 << 14)
-	runsGetPayrollResponseFieldCreatedAt                  = big.NewInt(1 << 15)
-	runsGetPayrollResponseFieldApprovedAt                 = big.NewInt(1 << 16)
-	runsGetPayrollResponseFieldLines                      = big.NewInt(1 << 17)
+	runsGetPayrollResponseFieldPayDate                    = big.NewInt(1 << 4)
+	runsGetPayrollResponseFieldStatus                     = big.NewInt(1 << 5)
+	runsGetPayrollResponseFieldGrossTotal                 = big.NewInt(1 << 6)
+	runsGetPayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
+	runsGetPayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 8)
+	runsGetPayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
+	runsGetPayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 10)
+	runsGetPayrollResponseFieldComponentTotals            = big.NewInt(1 << 11)
+	runsGetPayrollResponseFieldNetTotal                   = big.NewInt(1 << 12)
+	runsGetPayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 13)
+	runsGetPayrollResponseFieldNotes                      = big.NewInt(1 << 14)
+	runsGetPayrollResponseFieldWarnings                   = big.NewInt(1 << 15)
+	runsGetPayrollResponseFieldCreatedAt                  = big.NewInt(1 << 16)
+	runsGetPayrollResponseFieldApprovedAt                 = big.NewInt(1 << 17)
+	runsGetPayrollResponseFieldLines                      = big.NewInt(1 << 18)
 )
 
 type RunsGetPayrollResponse struct {
@@ -4860,6 +4912,7 @@ type RunsGetPayrollResponse struct {
 	Year                       int64                                        `json:"year" url:"year"`
 	Month                      int64                                        `json:"month" url:"month"`
 	CountryCode                string                                       `json:"countryCode" url:"countryCode"`
+	PayDate                    *time.Time                                   `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                     RunsGetPayrollResponseStatus                 `json:"status" url:"status"`
 	GrossTotal                 string                                       `json:"grossTotal" url:"grossTotal"`
 	TaxAllowanceTotal          string                                       `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
@@ -4908,6 +4961,13 @@ func (r *RunsGetPayrollResponse) GetCountryCode() string {
 		return ""
 	}
 	return r.CountryCode
+}
+
+func (r *RunsGetPayrollResponse) GetPayDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.PayDate
 }
 
 func (r *RunsGetPayrollResponse) GetStatus() RunsGetPayrollResponseStatus {
@@ -5050,6 +5110,13 @@ func (r *RunsGetPayrollResponse) SetCountryCode(countryCode string) {
 	r.require(runsGetPayrollResponseFieldCountryCode)
 }
 
+// SetPayDate sets the PayDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetPayDate(payDate *time.Time) {
+	r.PayDate = payDate
+	r.require(runsGetPayrollResponseFieldPayDate)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (r *RunsGetPayrollResponse) SetStatus(status RunsGetPayrollResponseStatus) {
@@ -5152,6 +5219,7 @@ func (r *RunsGetPayrollResponse) UnmarshalJSON(data []byte) error {
 	type embed RunsGetPayrollResponse
 	var unmarshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
@@ -5161,6 +5229,7 @@ func (r *RunsGetPayrollResponse) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*r = RunsGetPayrollResponse(unmarshaler.embed)
+	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
@@ -5176,10 +5245,12 @@ func (r *RunsGetPayrollResponse) MarshalJSON() ([]byte, error) {
 	type embed RunsGetPayrollResponse
 	var marshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
 		embed:      embed(*r),
+		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
 	}
@@ -6609,11 +6680,12 @@ func (r RunsListPayrollRequestSortItemDir) Ptr() *RunsListPayrollRequestSortItem
 }
 
 var (
-	runsListPayrollResponseFieldRows     = big.NewInt(1 << 0)
-	runsListPayrollResponseFieldPage     = big.NewInt(1 << 1)
-	runsListPayrollResponseFieldPageSize = big.NewInt(1 << 2)
-	runsListPayrollResponseFieldTotal    = big.NewInt(1 << 3)
-	runsListPayrollResponseFieldTotals   = big.NewInt(1 << 4)
+	runsListPayrollResponseFieldRows             = big.NewInt(1 << 0)
+	runsListPayrollResponseFieldPage             = big.NewInt(1 << 1)
+	runsListPayrollResponseFieldPageSize         = big.NewInt(1 << 2)
+	runsListPayrollResponseFieldTotal            = big.NewInt(1 << 3)
+	runsListPayrollResponseFieldTotals           = big.NewInt(1 << 4)
+	runsListPayrollResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type RunsListPayrollResponse struct {
@@ -6622,6 +6694,8 @@ type RunsListPayrollResponse struct {
 	PageSize int64                              `json:"pageSize" url:"pageSize"`
 	Total    int64                              `json:"total" url:"total"`
 	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6663,6 +6737,13 @@ func (r *RunsListPayrollResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return r.Totals
+}
+
+func (r *RunsListPayrollResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.TotalsByCurrency
 }
 
 func (r *RunsListPayrollResponse) GetExtraProperties() map[string]interface{} {
@@ -6714,6 +6795,13 @@ func (r *RunsListPayrollResponse) SetTotals(totals map[string]string) {
 	r.require(runsListPayrollResponseFieldTotals)
 }
 
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	r.TotalsByCurrency = totalsByCurrency
+	r.require(runsListPayrollResponseFieldTotalsByCurrency)
+}
+
 func (r *RunsListPayrollResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler RunsListPayrollResponse
 	var value unmarshaler
@@ -6761,19 +6849,20 @@ var (
 	runsListPayrollResponseRowsItemFieldYear                       = big.NewInt(1 << 1)
 	runsListPayrollResponseRowsItemFieldMonth                      = big.NewInt(1 << 2)
 	runsListPayrollResponseRowsItemFieldCountryCode                = big.NewInt(1 << 3)
-	runsListPayrollResponseRowsItemFieldStatus                     = big.NewInt(1 << 4)
-	runsListPayrollResponseRowsItemFieldGrossTotal                 = big.NewInt(1 << 5)
-	runsListPayrollResponseRowsItemFieldTaxAllowanceTotal          = big.NewInt(1 << 6)
-	runsListPayrollResponseRowsItemFieldIncomeTaxTotal             = big.NewInt(1 << 7)
-	runsListPayrollResponseRowsItemFieldEmployeeContributionsTotal = big.NewInt(1 << 8)
-	runsListPayrollResponseRowsItemFieldEmployerContributionsTotal = big.NewInt(1 << 9)
-	runsListPayrollResponseRowsItemFieldComponentTotals            = big.NewInt(1 << 10)
-	runsListPayrollResponseRowsItemFieldNetTotal                   = big.NewInt(1 << 11)
-	runsListPayrollResponseRowsItemFieldJournalTransactionID       = big.NewInt(1 << 12)
-	runsListPayrollResponseRowsItemFieldNotes                      = big.NewInt(1 << 13)
-	runsListPayrollResponseRowsItemFieldWarnings                   = big.NewInt(1 << 14)
-	runsListPayrollResponseRowsItemFieldCreatedAt                  = big.NewInt(1 << 15)
-	runsListPayrollResponseRowsItemFieldApprovedAt                 = big.NewInt(1 << 16)
+	runsListPayrollResponseRowsItemFieldPayDate                    = big.NewInt(1 << 4)
+	runsListPayrollResponseRowsItemFieldStatus                     = big.NewInt(1 << 5)
+	runsListPayrollResponseRowsItemFieldGrossTotal                 = big.NewInt(1 << 6)
+	runsListPayrollResponseRowsItemFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
+	runsListPayrollResponseRowsItemFieldIncomeTaxTotal             = big.NewInt(1 << 8)
+	runsListPayrollResponseRowsItemFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
+	runsListPayrollResponseRowsItemFieldEmployerContributionsTotal = big.NewInt(1 << 10)
+	runsListPayrollResponseRowsItemFieldComponentTotals            = big.NewInt(1 << 11)
+	runsListPayrollResponseRowsItemFieldNetTotal                   = big.NewInt(1 << 12)
+	runsListPayrollResponseRowsItemFieldJournalTransactionID       = big.NewInt(1 << 13)
+	runsListPayrollResponseRowsItemFieldNotes                      = big.NewInt(1 << 14)
+	runsListPayrollResponseRowsItemFieldWarnings                   = big.NewInt(1 << 15)
+	runsListPayrollResponseRowsItemFieldCreatedAt                  = big.NewInt(1 << 16)
+	runsListPayrollResponseRowsItemFieldApprovedAt                 = big.NewInt(1 << 17)
 )
 
 type RunsListPayrollResponseRowsItem struct {
@@ -6781,6 +6870,7 @@ type RunsListPayrollResponseRowsItem struct {
 	Year                       int64                                                 `json:"year" url:"year"`
 	Month                      int64                                                 `json:"month" url:"month"`
 	CountryCode                string                                                `json:"countryCode" url:"countryCode"`
+	PayDate                    *time.Time                                            `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                     RunsListPayrollResponseRowsItemStatus                 `json:"status" url:"status"`
 	GrossTotal                 string                                                `json:"grossTotal" url:"grossTotal"`
 	TaxAllowanceTotal          string                                                `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
@@ -6828,6 +6918,13 @@ func (r *RunsListPayrollResponseRowsItem) GetCountryCode() string {
 		return ""
 	}
 	return r.CountryCode
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetPayDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.PayDate
 }
 
 func (r *RunsListPayrollResponseRowsItem) GetStatus() RunsListPayrollResponseRowsItemStatus {
@@ -6963,6 +7060,13 @@ func (r *RunsListPayrollResponseRowsItem) SetCountryCode(countryCode string) {
 	r.require(runsListPayrollResponseRowsItemFieldCountryCode)
 }
 
+// SetPayDate sets the PayDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetPayDate(payDate *time.Time) {
+	r.PayDate = payDate
+	r.require(runsListPayrollResponseRowsItemFieldPayDate)
+}
+
 // SetStatus sets the Status field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (r *RunsListPayrollResponseRowsItem) SetStatus(status RunsListPayrollResponseRowsItemStatus) {
@@ -7058,6 +7162,7 @@ func (r *RunsListPayrollResponseRowsItem) UnmarshalJSON(data []byte) error {
 	type embed RunsListPayrollResponseRowsItem
 	var unmarshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
@@ -7067,6 +7172,7 @@ func (r *RunsListPayrollResponseRowsItem) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	*r = RunsListPayrollResponseRowsItem(unmarshaler.embed)
+	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
@@ -7082,10 +7188,12 @@ func (r *RunsListPayrollResponseRowsItem) MarshalJSON() ([]byte, error) {
 	type embed RunsListPayrollResponseRowsItem
 	var marshaler = struct {
 		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
 	}{
 		embed:      embed(*r),
+		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
 	}

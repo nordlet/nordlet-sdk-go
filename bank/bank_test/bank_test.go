@@ -717,6 +717,30 @@ func TestBankMandatesListWithWireMock(
 	VerifyRequestCount(t, "TestBankMandatesListWithWireMock", "POST", "/v1/bank/mandates/list", nil, 1)
 }
 
+func TestBankDirectDebitsCandidatesWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DirectDebitsCandidatesBankRequest{}
+	_, invocationErr := client.Bank.DirectDebitsCandidates(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankDirectDebitsCandidatesWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankDirectDebitsCandidatesWithWireMock", "POST", "/v1/bank/direct-debits/candidates", nil, 1)
+}
+
 func TestBankDirectDebitsExportWithWireMock(
 	t *testing.T,
 ) {

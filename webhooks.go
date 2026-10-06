@@ -844,11 +844,12 @@ func (d DeliveriesListWebhooksRequestSortItemDir) Ptr() *DeliveriesListWebhooksR
 }
 
 var (
-	deliveriesListWebhooksResponseFieldRows     = big.NewInt(1 << 0)
-	deliveriesListWebhooksResponseFieldPage     = big.NewInt(1 << 1)
-	deliveriesListWebhooksResponseFieldPageSize = big.NewInt(1 << 2)
-	deliveriesListWebhooksResponseFieldTotal    = big.NewInt(1 << 3)
-	deliveriesListWebhooksResponseFieldTotals   = big.NewInt(1 << 4)
+	deliveriesListWebhooksResponseFieldRows             = big.NewInt(1 << 0)
+	deliveriesListWebhooksResponseFieldPage             = big.NewInt(1 << 1)
+	deliveriesListWebhooksResponseFieldPageSize         = big.NewInt(1 << 2)
+	deliveriesListWebhooksResponseFieldTotal            = big.NewInt(1 << 3)
+	deliveriesListWebhooksResponseFieldTotals           = big.NewInt(1 << 4)
+	deliveriesListWebhooksResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type DeliveriesListWebhooksResponse struct {
@@ -857,6 +858,8 @@ type DeliveriesListWebhooksResponse struct {
 	PageSize int64                                     `json:"pageSize" url:"pageSize"`
 	Total    int64                                     `json:"total" url:"total"`
 	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -898,6 +901,13 @@ func (d *DeliveriesListWebhooksResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return d.Totals
+}
+
+func (d *DeliveriesListWebhooksResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if d == nil {
+		return nil
+	}
+	return d.TotalsByCurrency
 }
 
 func (d *DeliveriesListWebhooksResponse) GetExtraProperties() map[string]interface{} {
@@ -947,6 +957,13 @@ func (d *DeliveriesListWebhooksResponse) SetTotal(total int64) {
 func (d *DeliveriesListWebhooksResponse) SetTotals(totals map[string]string) {
 	d.Totals = totals
 	d.require(deliveriesListWebhooksResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeliveriesListWebhooksResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	d.TotalsByCurrency = totalsByCurrency
+	d.require(deliveriesListWebhooksResponseFieldTotalsByCurrency)
 }
 
 func (d *DeliveriesListWebhooksResponse) UnmarshalJSON(data []byte) error {
@@ -2253,11 +2270,12 @@ func (s SubscriptionsListWebhooksRequestSortItemDir) Ptr() *SubscriptionsListWeb
 }
 
 var (
-	subscriptionsListWebhooksResponseFieldRows     = big.NewInt(1 << 0)
-	subscriptionsListWebhooksResponseFieldPage     = big.NewInt(1 << 1)
-	subscriptionsListWebhooksResponseFieldPageSize = big.NewInt(1 << 2)
-	subscriptionsListWebhooksResponseFieldTotal    = big.NewInt(1 << 3)
-	subscriptionsListWebhooksResponseFieldTotals   = big.NewInt(1 << 4)
+	subscriptionsListWebhooksResponseFieldRows             = big.NewInt(1 << 0)
+	subscriptionsListWebhooksResponseFieldPage             = big.NewInt(1 << 1)
+	subscriptionsListWebhooksResponseFieldPageSize         = big.NewInt(1 << 2)
+	subscriptionsListWebhooksResponseFieldTotal            = big.NewInt(1 << 3)
+	subscriptionsListWebhooksResponseFieldTotals           = big.NewInt(1 << 4)
+	subscriptionsListWebhooksResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
 )
 
 type SubscriptionsListWebhooksResponse struct {
@@ -2266,6 +2284,8 @@ type SubscriptionsListWebhooksResponse struct {
 	PageSize int64                                        `json:"pageSize" url:"pageSize"`
 	Total    int64                                        `json:"total" url:"total"`
 	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2307,6 +2327,13 @@ func (s *SubscriptionsListWebhooksResponse) GetTotals() map[string]string {
 		return nil
 	}
 	return s.Totals
+}
+
+func (s *SubscriptionsListWebhooksResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.TotalsByCurrency
 }
 
 func (s *SubscriptionsListWebhooksResponse) GetExtraProperties() map[string]interface{} {
@@ -2356,6 +2383,13 @@ func (s *SubscriptionsListWebhooksResponse) SetTotal(total int64) {
 func (s *SubscriptionsListWebhooksResponse) SetTotals(totals map[string]string) {
 	s.Totals = totals
 	s.require(subscriptionsListWebhooksResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsListWebhooksResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	s.TotalsByCurrency = totalsByCurrency
+	s.require(subscriptionsListWebhooksResponseFieldTotalsByCurrency)
 }
 
 func (s *SubscriptionsListWebhooksResponse) UnmarshalJSON(data []byte) error {

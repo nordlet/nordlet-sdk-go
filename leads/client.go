@@ -258,6 +258,86 @@ func (c *Client) SourcesOptions(
 	return response.Body, nil
 }
 
+func (c *Client) TypesCreate(
+	ctx context.Context,
+	request *nordlet.TypesCreateLeadsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TypesCreateLeadsResponse, error) {
+	response, err := c.WithRawResponse.TypesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) TypesUpdate(
+	ctx context.Context,
+	request *nordlet.TypesUpdateLeadsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TypesUpdateLeadsResponse, error) {
+	response, err := c.WithRawResponse.TypesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) TypesDelete(
+	ctx context.Context,
+	request *nordlet.TypesDeleteLeadsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TypesDeleteLeadsResponse, error) {
+	response, err := c.WithRawResponse.TypesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) TypesList(
+	ctx context.Context,
+	request *nordlet.TypesListLeadsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TypesListLeadsResponse, error) {
+	response, err := c.WithRawResponse.TypesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) TypesOptions(
+	ctx context.Context,
+	request *nordlet.TypesOptionsLeadsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TypesOptionsLeadsResponse, error) {
+	response, err := c.WithRawResponse.TypesOptions(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Create a customer partner from the lead, move the lead files to the partner, copy the lead notes into the partner notes and mark the lead as converted.
 func (c *Client) Convert(
 	ctx context.Context,
