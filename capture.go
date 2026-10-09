@@ -629,6 +629,8 @@ var (
 	documentsConfirmCaptureRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
 	documentsConfirmCaptureRequestLinesItemFieldProjectID         = big.NewInt(1 << 9)
 	documentsConfirmCaptureRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
+	documentsConfirmCaptureRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
+	documentsConfirmCaptureRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 )
 
 type DocumentsConfirmCaptureRequestLinesItem struct {
@@ -643,6 +645,8 @@ type DocumentsConfirmCaptureRequestLinesItem struct {
 	CostCenterID      *string                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string                                          `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time                                       `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -726,6 +730,20 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return d.AccountCode
+}
+
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetDeferralStartDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralStartDate
+}
+
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetDeferralEndDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralEndDate
 }
 
 func (d *DocumentsConfirmCaptureRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -819,13 +837,35 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) SetAccountCode(accountCode *st
 	d.require(documentsConfirmCaptureRequestLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	d.DeferralStartDate = deferralStartDate
+	d.require(documentsConfirmCaptureRequestLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	d.DeferralEndDate = deferralEndDate
+	d.require(documentsConfirmCaptureRequestLinesItemFieldDeferralEndDate)
+}
+
 func (d *DocumentsConfirmCaptureRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler DocumentsConfirmCaptureRequestLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed DocumentsConfirmCaptureRequestLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*d = DocumentsConfirmCaptureRequestLinesItem(value)
+	*d = DocumentsConfirmCaptureRequestLinesItem(unmarshaler.embed)
+	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -839,8 +879,12 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) MarshalJSON() ([]byte, error) 
 	type embed DocumentsConfirmCaptureRequestLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*d),
+		embed:             embed(*d),
+		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -2640,29 +2684,33 @@ var (
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 10)
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 12)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 13)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 14)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 17)
 )
 
 type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
-	AccountCode       *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                string     `json:"id" url:"id"`
+	ItemID            *string    `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string     `json:"description" url:"description"`
+	Unit              string     `json:"unit" url:"unit"`
+	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LineNet           string     `json:"lineNet" url:"lineNet"`
+	LineVat           string     `json:"lineVat" url:"lineVat"`
+	LineGross         string     `json:"lineGross" url:"lineGross"`
+	SortOrder         int64      `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2753,6 +2801,20 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetAccountCode() *stri
 		return nil
 	}
 	return d.AccountCode
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetDeferralStartDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralStartDate
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetDeferralEndDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralEndDate
 }
 
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetLineNet() string {
@@ -2881,6 +2943,20 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetAccountCode(account
 	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	d.DeferralStartDate = deferralStartDate
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	d.DeferralEndDate = deferralEndDate
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralEndDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetLineNet(lineNet string) {
@@ -2910,12 +2986,20 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetSortOrder(sortOrder
 }
 
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler DocumentsConfirmCaptureResponseInvoiceLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed DocumentsConfirmCaptureResponseInvoiceLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*d = DocumentsConfirmCaptureResponseInvoiceLinesItem(value)
+	*d = DocumentsConfirmCaptureResponseInvoiceLinesItem(unmarshaler.embed)
+	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -2929,8 +3013,12 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) MarshalJSON() ([]byte,
 	type embed DocumentsConfirmCaptureResponseInvoiceLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*d),
+		embed:             embed(*d),
+		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)

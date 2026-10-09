@@ -524,6 +524,222 @@ func TestHrIncapacityCertificatesListWithWireMock(
 	VerifyRequestCount(t, "TestHrIncapacityCertificatesListWithWireMock", "POST", "/v1/hr/incapacity-certificates/list", nil, 1)
 }
 
+func TestHrPerDiemRatesCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PerDiemRatesCreateHrRequest{
+		CountryCode: "countryCode",
+		DailyAmount: "121.00",
+		ValidFrom: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Hr.PerDiemRatesCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrPerDiemRatesCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrPerDiemRatesCreateWithWireMock", "POST", "/v1/hr/per-diem-rates/create", nil, 1)
+}
+
+func TestHrPerDiemRatesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PerDiemRatesListHrRequest{}
+	_, invocationErr := client.Hr.PerDiemRatesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrPerDiemRatesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrPerDiemRatesListWithWireMock", "POST", "/v1/hr/per-diem-rates/list", nil, 1)
+}
+
+func TestHrPerDiemRatesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PerDiemRatesDeleteHrRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Hr.PerDiemRatesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrPerDiemRatesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrPerDiemRatesDeleteWithWireMock", "POST", "/v1/hr/per-diem-rates/delete", nil, 1)
+}
+
+func TestHrBusinessTripsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.BusinessTripsCreateHrRequest{
+		EmployeeID:             "employeeId",
+		DestinationCountryCode: "destinationCountryCode",
+		Purpose:                "purpose",
+		StartDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		EndDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Hr.BusinessTripsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrBusinessTripsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrBusinessTripsCreateWithWireMock", "POST", "/v1/hr/business-trips/create", nil, 1)
+}
+
+func TestHrBusinessTripsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.BusinessTripsGetHrRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Hr.BusinessTripsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrBusinessTripsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrBusinessTripsGetWithWireMock", "POST", "/v1/hr/business-trips/get", nil, 1)
+}
+
+func TestHrBusinessTripsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.BusinessTripsListHrRequest{}
+	_, invocationErr := client.Hr.BusinessTripsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrBusinessTripsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrBusinessTripsListWithWireMock", "POST", "/v1/hr/business-trips/list", nil, 1)
+}
+
+func TestHrBusinessTripsApproveWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.BusinessTripsApproveHrRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Hr.BusinessTripsApprove(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrBusinessTripsApproveWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrBusinessTripsApproveWithWireMock", "POST", "/v1/hr/business-trips/approve", nil, 1)
+}
+
+func TestHrBusinessTripsDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.BusinessTripsDeleteHrRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Hr.BusinessTripsDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestHrBusinessTripsDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestHrBusinessTripsDeleteWithWireMock", "POST", "/v1/hr/business-trips/delete", nil, 1)
+}
+
 func TestHrEmployeesRecordsCreateWithWireMock(
 	t *testing.T,
 ) {

@@ -956,6 +956,65 @@ func (g *GroupsListAssetsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type SettingsGetAssetsRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SettingsGetAssetsRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+var (
+	settingsUpdateAssetsRequestFieldAutoDepreciation = big.NewInt(1 << 0)
+)
+
+type SettingsUpdateAssetsRequest struct {
+	AutoDepreciation bool `json:"autoDepreciation" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SettingsUpdateAssetsRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetAutoDepreciation sets the AutoDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettingsUpdateAssetsRequest) SetAutoDepreciation(autoDepreciation bool) {
+	s.AutoDepreciation = autoDepreciation
+	s.require(settingsUpdateAssetsRequestFieldAutoDepreciation)
+}
+
+func (s *SettingsUpdateAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateAssetsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SettingsUpdateAssetsRequest(body)
+	return nil
+}
+
+func (s *SettingsUpdateAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateAssetsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
 var (
 	assetsCreateAssetsRequestDocumentsItemFieldName = big.NewInt(1 << 0)
 	assetsCreateAssetsRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
@@ -9036,4 +9095,172 @@ func (g *GroupsListAssetsResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	settingsGetAssetsResponseFieldAutoDepreciation = big.NewInt(1 << 0)
+)
+
+type SettingsGetAssetsResponse struct {
+	AutoDepreciation bool `json:"autoDepreciation" url:"autoDepreciation"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SettingsGetAssetsResponse) GetAutoDepreciation() bool {
+	if s == nil {
+		return false
+	}
+	return s.AutoDepreciation
+}
+
+func (s *SettingsGetAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SettingsGetAssetsResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetAutoDepreciation sets the AutoDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettingsGetAssetsResponse) SetAutoDepreciation(autoDepreciation bool) {
+	s.AutoDepreciation = autoDepreciation
+	s.require(settingsGetAssetsResponseFieldAutoDepreciation)
+}
+
+func (s *SettingsGetAssetsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsGetAssetsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SettingsGetAssetsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SettingsGetAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsGetAssetsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SettingsGetAssetsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	settingsUpdateAssetsResponseFieldAutoDepreciation = big.NewInt(1 << 0)
+)
+
+type SettingsUpdateAssetsResponse struct {
+	AutoDepreciation bool `json:"autoDepreciation" url:"autoDepreciation"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SettingsUpdateAssetsResponse) GetAutoDepreciation() bool {
+	if s == nil {
+		return false
+	}
+	return s.AutoDepreciation
+}
+
+func (s *SettingsUpdateAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SettingsUpdateAssetsResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetAutoDepreciation sets the AutoDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettingsUpdateAssetsResponse) SetAutoDepreciation(autoDepreciation bool) {
+	s.AutoDepreciation = autoDepreciation
+	s.require(settingsUpdateAssetsResponseFieldAutoDepreciation)
+}
+
+func (s *SettingsUpdateAssetsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateAssetsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SettingsUpdateAssetsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SettingsUpdateAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateAssetsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SettingsUpdateAssetsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }

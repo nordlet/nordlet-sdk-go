@@ -146,6 +146,22 @@ func (c *Client) TransactionsMatch(
 	return response.Body, nil
 }
 
+func (c *Client) TransactionsMatchMany(
+	ctx context.Context,
+	request *nordlet.TransactionsMatchManyBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TransactionsMatchManyBankResponse, error) {
+	response, err := c.WithRawResponse.TransactionsMatchMany(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Undo a match. A payment matched to an invoice, or a line posted by an import template, gets a reversing journal transaction dated date (default: today) and the invoice paid amount and payment status are restored; a line linked to a payment-provider settlement is only unlinked. The line returns to status new.
 func (c *Client) TransactionsUnmatch(
 	ctx context.Context,

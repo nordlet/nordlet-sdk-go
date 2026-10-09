@@ -308,6 +308,134 @@ func (c *Client) IncapacityCertificatesList(
 	return response.Body, nil
 }
 
+func (c *Client) PerDiemRatesCreate(
+	ctx context.Context,
+	request *nordlet.PerDiemRatesCreateHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PerDiemRatesCreateHrResponse, error) {
+	response, err := c.WithRawResponse.PerDiemRatesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PerDiemRatesList(
+	ctx context.Context,
+	request *nordlet.PerDiemRatesListHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PerDiemRatesListHrResponse, error) {
+	response, err := c.WithRawResponse.PerDiemRatesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) PerDiemRatesDelete(
+	ctx context.Context,
+	request *nordlet.PerDiemRatesDeleteHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PerDiemRatesDeleteHrResponse, error) {
+	response, err := c.WithRawResponse.PerDiemRatesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) BusinessTripsCreate(
+	ctx context.Context,
+	request *nordlet.BusinessTripsCreateHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.BusinessTripsCreateHrResponse, error) {
+	response, err := c.WithRawResponse.BusinessTripsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) BusinessTripsGet(
+	ctx context.Context,
+	request *nordlet.BusinessTripsGetHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.BusinessTripsGetHrResponse, error) {
+	response, err := c.WithRawResponse.BusinessTripsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) BusinessTripsList(
+	ctx context.Context,
+	request *nordlet.BusinessTripsListHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.BusinessTripsListHrResponse, error) {
+	response, err := c.WithRawResponse.BusinessTripsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) BusinessTripsApprove(
+	ctx context.Context,
+	request *nordlet.BusinessTripsApproveHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.BusinessTripsApproveHrResponse, error) {
+	response, err := c.WithRawResponse.BusinessTripsApprove(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) BusinessTripsDelete(
+	ctx context.Context,
+	request *nordlet.BusinessTripsDeleteHrRequest,
+	opts ...option.RequestOption,
+) (*nordlet.BusinessTripsDeleteHrResponse, error) {
+	response, err := c.WithRawResponse.BusinessTripsDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) EmployeesRecordsCreate(
 	ctx context.Context,
 	request *nordlet.EmployeesRecordsCreateHrRequest,

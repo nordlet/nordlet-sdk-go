@@ -93,9 +93,8 @@ func TestCashOrdersCreateWithWireMock(
 		Date: nordlet.MustParseDate(
 			"2026-07-01",
 		),
-		Amount:             "121.0000",
-		Purpose:            "purpose",
-		CounterAccountCode: "counterAccountCode",
+		Amount:  "121.0000",
+		Purpose: "purpose",
 	}
 	_, invocationErr := client.Cash.OrdersCreate(
 		context.TODO(),
@@ -181,6 +180,92 @@ func TestCashBalanceWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestCashBalanceWithWireMock", "POST", "/v1/cash/balance", nil, 1)
+}
+
+func TestCashExpenseReportsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ExpenseReportsCreateCashRequest{
+		EmployeeID: "employeeId",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Lines: []*nordlet.ExpenseReportsCreateCashRequestLinesItem{
+			&nordlet.ExpenseReportsCreateCashRequestLinesItem{
+				Description: "description",
+				AccountCode: "accountCode",
+				NetAmount:   "121.00",
+			},
+		},
+	}
+	_, invocationErr := client.Cash.ExpenseReportsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCashExpenseReportsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCashExpenseReportsCreateWithWireMock", "POST", "/v1/cash/expense-reports/create", nil, 1)
+}
+
+func TestCashExpenseReportsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ExpenseReportsGetCashRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Cash.ExpenseReportsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCashExpenseReportsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCashExpenseReportsGetWithWireMock", "POST", "/v1/cash/expense-reports/get", nil, 1)
+}
+
+func TestCashExpenseReportsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ExpenseReportsListCashRequest{}
+	_, invocationErr := client.Cash.ExpenseReportsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCashExpenseReportsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCashExpenseReportsListWithWireMock", "POST", "/v1/cash/expense-reports/list", nil, 1)
 }
 
 func TestCashAdvanceHoldersBalancesWithWireMock(

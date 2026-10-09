@@ -266,6 +266,39 @@ func TestBankTransactionsMatchWithWireMock(
 	VerifyRequestCount(t, "TestBankTransactionsMatchWithWireMock", "POST", "/v1/bank/transactions/match", nil, 1)
 }
 
+func TestBankTransactionsMatchManyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TransactionsMatchManyBankRequest{
+		TransactionID: "transactionId",
+		Allocations: []*nordlet.TransactionsMatchManyBankRequestAllocationsItem{
+			&nordlet.TransactionsMatchManyBankRequestAllocationsItem{
+				DocumentType: nordlet.TransactionsMatchManyBankRequestAllocationsItemDocumentTypeSaleInvoice,
+				DocumentID:   "documentId",
+				Amount:       "121.0000",
+			},
+		},
+	}
+	_, invocationErr := client.Bank.TransactionsMatchMany(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsMatchManyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankTransactionsMatchManyWithWireMock", "POST", "/v1/bank/transactions/match-many", nil, 1)
+}
+
 func TestBankTransactionsUnmatchWithWireMock(
 	t *testing.T,
 ) {

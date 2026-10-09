@@ -114,6 +114,38 @@ func (c *Client) InvoicesRegister(
 	return response.Body, nil
 }
 
+func (c *Client) DeferralsList(
+	ctx context.Context,
+	request *nordlet.DeferralsListPurchasesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.DeferralsListPurchasesResponse, error) {
+	response, err := c.WithRawResponse.DeferralsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) DeferralsPost(
+	ctx context.Context,
+	request *nordlet.DeferralsPostPurchasesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.DeferralsPostPurchasesResponse, error) {
+	response, err := c.WithRawResponse.DeferralsPost(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) InvoicesList(
 	ctx context.Context,
 	request *nordlet.InvoicesListPurchasesRequest,

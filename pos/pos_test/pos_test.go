@@ -239,3 +239,189 @@ func TestPosReportsListWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestPosReportsListWithWireMock", "POST", "/v1/pos/reports/list", nil, 1)
 }
+
+func TestPosShiftsOpenWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ShiftsOpenPosRequest{
+		DeviceID: "deviceId",
+	}
+	_, invocationErr := client.Pos.ShiftsOpen(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosShiftsOpenWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosShiftsOpenWithWireMock", "POST", "/v1/pos/shifts/open", nil, 1)
+}
+
+func TestPosShiftsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ShiftsGetPosRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Pos.ShiftsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosShiftsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosShiftsGetWithWireMock", "POST", "/v1/pos/shifts/get", nil, 1)
+}
+
+func TestPosShiftsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ShiftsListPosRequest{}
+	_, invocationErr := client.Pos.ShiftsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosShiftsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosShiftsListWithWireMock", "POST", "/v1/pos/shifts/list", nil, 1)
+}
+
+func TestPosReceiptsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ReceiptsCreatePosRequest{
+		ShiftID: "shiftId",
+		Lines: []*nordlet.ReceiptsCreatePosRequestLinesItem{
+			&nordlet.ReceiptsCreatePosRequestLinesItem{
+				Quantity:         "121.0000",
+				UnitPriceInclVat: "121.0000",
+				VatRatePercent:   "121.00",
+			},
+		},
+	}
+	_, invocationErr := client.Pos.ReceiptsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosReceiptsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosReceiptsCreateWithWireMock", "POST", "/v1/pos/receipts/create", nil, 1)
+}
+
+func TestPosReceiptsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ReceiptsListPosRequest{}
+	_, invocationErr := client.Pos.ReceiptsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosReceiptsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosReceiptsListWithWireMock", "POST", "/v1/pos/receipts/list", nil, 1)
+}
+
+func TestPosReceiptsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ReceiptsGetPosRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Pos.ReceiptsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosReceiptsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosReceiptsGetWithWireMock", "POST", "/v1/pos/receipts/get", nil, 1)
+}
+
+func TestPosShiftsCloseWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ShiftsClosePosRequest{
+		ID:          "id",
+		CountedCash: "121.00",
+	}
+	_, invocationErr := client.Pos.ShiftsClose(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosShiftsCloseWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosShiftsCloseWithWireMock", "POST", "/v1/pos/shifts/close", nil, 1)
+}

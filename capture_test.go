@@ -1356,6 +1356,22 @@ func TestSettersDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDeferralStartDate", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueDeferralStartDate *time.Time
+		obj.SetDeferralStartDate(fernTestValueDeferralStartDate)
+		assert.Equal(t, fernTestValueDeferralStartDate, obj.DeferralStartDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDeferralEndDate", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueDeferralEndDate *time.Time
+		obj.SetDeferralEndDate(fernTestValueDeferralEndDate)
+		assert.Equal(t, fernTestValueDeferralEndDate, obj.DeferralEndDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
@@ -1722,6 +1738,72 @@ func TestGettersDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
 		_ = obj.GetAccountCode() // Should return zero value
 	})
 
+	t.Run("GetDeferralStartDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var expected *time.Time
+		obj.DeferralStartDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeferralStartDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDeferralStartDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.DeferralStartDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeferralStartDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeferralStartDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeferralStartDate() // Should return zero value
+	})
+
+	t.Run("GetDeferralEndDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var expected *time.Time
+		obj.DeferralEndDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeferralEndDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDeferralEndDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		obj.DeferralEndDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeferralEndDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeferralEndDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeferralEndDate() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitDocumentsConfirmCaptureRequestLinesItem(t *testing.T) {
@@ -2043,6 +2125,68 @@ func TestSettersMarkExplicitDocumentsConfirmCaptureRequestLinesItem(t *testing.T
 
 		// Act
 		obj.SetAccountCode(fernTestValueAccountCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeferralStartDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueDeferralStartDate *time.Time
+
+		// Act
+		obj.SetDeferralStartDate(fernTestValueDeferralStartDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeferralEndDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureRequestLinesItem{}
+		var fernTestValueDeferralEndDate *time.Time
+
+		// Act
+		obj.SetDeferralEndDate(fernTestValueDeferralEndDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7211,6 +7355,22 @@ func TestSettersDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDeferralStartDate", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		var fernTestValueDeferralStartDate *time.Time
+		obj.SetDeferralStartDate(fernTestValueDeferralStartDate)
+		assert.Equal(t, fernTestValueDeferralStartDate, obj.DeferralStartDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDeferralEndDate", func(t *testing.T) {
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		var fernTestValueDeferralEndDate *time.Time
+		obj.SetDeferralEndDate(fernTestValueDeferralEndDate)
+		assert.Equal(t, fernTestValueDeferralEndDate, obj.DeferralEndDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetLineNet", func(t *testing.T) {
 		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
 		var fernTestValueLineNet string
@@ -7590,6 +7750,72 @@ func TestGettersDocumentsConfirmCaptureResponseInvoiceLinesItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAccountCode() // Should return zero value
+	})
+
+	t.Run("GetDeferralStartDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		var expected *time.Time
+		obj.DeferralStartDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeferralStartDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDeferralStartDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		obj.DeferralStartDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeferralStartDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeferralStartDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeferralStartDate() // Should return zero value
+	})
+
+	t.Run("GetDeferralEndDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		var expected *time.Time
+		obj.DeferralEndDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDeferralEndDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDeferralEndDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		obj.DeferralEndDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDeferralEndDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDeferralEndDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *DocumentsConfirmCaptureResponseInvoiceLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDeferralEndDate() // Should return zero value
 	})
 
 	t.Run("GetLineNet", func(t *testing.T) {
@@ -8036,6 +8262,68 @@ func TestSettersMarkExplicitDocumentsConfirmCaptureResponseInvoiceLinesItem(t *t
 
 		// Act
 		obj.SetAccountCode(fernTestValueAccountCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeferralStartDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		var fernTestValueDeferralStartDate *time.Time
+
+		// Act
+		obj.SetDeferralStartDate(fernTestValueDeferralStartDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDeferralEndDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &DocumentsConfirmCaptureResponseInvoiceLinesItem{}
+		var fernTestValueDeferralEndDate *time.Time
+
+		// Act
+		obj.SetDeferralEndDate(fernTestValueDeferralEndDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

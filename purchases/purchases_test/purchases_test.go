@@ -214,6 +214,54 @@ func TestPurchasesInvoicesRegisterWithWireMock(
 	VerifyRequestCount(t, "TestPurchasesInvoicesRegisterWithWireMock", "POST", "/v1/purchases/invoices/register", nil, 1)
 }
 
+func TestPurchasesDeferralsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DeferralsListPurchasesRequest{}
+	_, invocationErr := client.Purchases.DeferralsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesDeferralsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesDeferralsListWithWireMock", "POST", "/v1/purchases/deferrals/list", nil, 1)
+}
+
+func TestPurchasesDeferralsPostWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DeferralsPostPurchasesRequest{}
+	_, invocationErr := client.Purchases.DeferralsPost(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesDeferralsPostWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesDeferralsPostWithWireMock", "POST", "/v1/purchases/deferrals/post", nil, 1)
+}
+
 func TestPurchasesInvoicesListWithWireMock(
 	t *testing.T,
 ) {

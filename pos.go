@@ -276,6 +276,208 @@ func (d *DevicesUpdatePosRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	receiptsCreatePosRequestFieldShiftID    = big.NewInt(1 << 0)
+	receiptsCreatePosRequestFieldLines      = big.NewInt(1 << 1)
+	receiptsCreatePosRequestFieldCashAmount = big.NewInt(1 << 2)
+	receiptsCreatePosRequestFieldCardAmount = big.NewInt(1 << 3)
+)
+
+type ReceiptsCreatePosRequest struct {
+	ShiftID    string                               `json:"shiftId" url:"-"`
+	Lines      []*ReceiptsCreatePosRequestLinesItem `json:"lines" url:"-"`
+	CashAmount *string                              `json:"cashAmount,omitempty" url:"-"`
+	CardAmount *string                              `json:"cardAmount,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *ReceiptsCreatePosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequest) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(receiptsCreatePosRequestFieldShiftID)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequest) SetLines(lines []*ReceiptsCreatePosRequestLinesItem) {
+	r.Lines = lines
+	r.require(receiptsCreatePosRequestFieldLines)
+}
+
+// SetCashAmount sets the CashAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequest) SetCashAmount(cashAmount *string) {
+	r.CashAmount = cashAmount
+	r.require(receiptsCreatePosRequestFieldCashAmount)
+}
+
+// SetCardAmount sets the CardAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequest) SetCardAmount(cardAmount *string) {
+	r.CardAmount = cardAmount
+	r.require(receiptsCreatePosRequestFieldCardAmount)
+}
+
+func (r *ReceiptsCreatePosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsCreatePosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = ReceiptsCreatePosRequest(body)
+	return nil
+}
+
+func (r *ReceiptsCreatePosRequest) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsCreatePosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	receiptsGetPosRequestFieldID = big.NewInt(1 << 0)
+)
+
+type ReceiptsGetPosRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *ReceiptsGetPosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosRequest) SetID(id string) {
+	r.ID = id
+	r.require(receiptsGetPosRequestFieldID)
+}
+
+func (r *ReceiptsGetPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsGetPosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = ReceiptsGetPosRequest(body)
+	return nil
+}
+
+func (r *ReceiptsGetPosRequest) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsGetPosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	receiptsListPosRequestFieldPage     = big.NewInt(1 << 0)
+	receiptsListPosRequestFieldPageSize = big.NewInt(1 << 1)
+	receiptsListPosRequestFieldSort     = big.NewInt(1 << 2)
+	receiptsListPosRequestFieldFilter   = big.NewInt(1 << 3)
+	receiptsListPosRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type ReceiptsListPosRequest struct {
+	Page     *int64                              `json:"page,omitempty" url:"-"`
+	PageSize *int64                              `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ReceiptsListPosRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ReceiptsListPosRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *ReceiptsListPosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequest) SetPage(page *int64) {
+	r.Page = page
+	r.require(receiptsListPosRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequest) SetPageSize(pageSize *int64) {
+	r.PageSize = pageSize
+	r.require(receiptsListPosRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequest) SetSort(sort []*ReceiptsListPosRequestSortItem) {
+	r.Sort = sort
+	r.require(receiptsListPosRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequest) SetFilter(filter []*ReceiptsListPosRequestFilterItem) {
+	r.Filter = filter
+	r.require(receiptsListPosRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequest) SetTotals(totals []string) {
+	r.Totals = totals
+	r.require(receiptsListPosRequestFieldTotals)
+}
+
+func (r *ReceiptsListPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsListPosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = ReceiptsListPosRequest(body)
+	return nil
+}
+
+func (r *ReceiptsListPosRequest) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsListPosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	reportsCreatePosRequestFieldReportNumber         = big.NewInt(1 << 0)
 	reportsCreatePosRequestFieldDate                 = big.NewInt(1 << 1)
 	reportsCreatePosRequestFieldDeviceID             = big.NewInt(1 << 2)
@@ -575,6 +777,274 @@ func (r *ReportsListPosRequest) MarshalJSON() ([]byte, error) {
 		embed: embed(*r),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	shiftsClosePosRequestFieldID           = big.NewInt(1 << 0)
+	shiftsClosePosRequestFieldCountedCash  = big.NewInt(1 << 1)
+	shiftsClosePosRequestFieldDate         = big.NewInt(1 << 2)
+	shiftsClosePosRequestFieldReportNumber = big.NewInt(1 << 3)
+)
+
+type ShiftsClosePosRequest struct {
+	ID           string     `json:"id" url:"-"`
+	CountedCash  string     `json:"countedCash" url:"-"`
+	Date         *time.Time `json:"date,omitempty" url:"-" format:"date"`
+	ReportNumber *string    `json:"reportNumber,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *ShiftsClosePosRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosRequest) SetID(id string) {
+	s.ID = id
+	s.require(shiftsClosePosRequestFieldID)
+}
+
+// SetCountedCash sets the CountedCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosRequest) SetCountedCash(countedCash string) {
+	s.CountedCash = countedCash
+	s.require(shiftsClosePosRequestFieldCountedCash)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosRequest) SetDate(date *time.Time) {
+	s.Date = date
+	s.require(shiftsClosePosRequestFieldDate)
+}
+
+// SetReportNumber sets the ReportNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosRequest) SetReportNumber(reportNumber *string) {
+	s.ReportNumber = reportNumber
+	s.require(shiftsClosePosRequestFieldReportNumber)
+}
+
+func (s *ShiftsClosePosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ShiftsClosePosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = ShiftsClosePosRequest(body)
+	return nil
+}
+
+func (s *ShiftsClosePosRequest) MarshalJSON() ([]byte, error) {
+	type embed ShiftsClosePosRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date,omitempty"`
+	}{
+		embed: embed(*s),
+		Date:  internal.NewOptionalDate(s.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	shiftsGetPosRequestFieldID = big.NewInt(1 << 0)
+)
+
+type ShiftsGetPosRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *ShiftsGetPosRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosRequest) SetID(id string) {
+	s.ID = id
+	s.require(shiftsGetPosRequestFieldID)
+}
+
+func (s *ShiftsGetPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ShiftsGetPosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = ShiftsGetPosRequest(body)
+	return nil
+}
+
+func (s *ShiftsGetPosRequest) MarshalJSON() ([]byte, error) {
+	type embed ShiftsGetPosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	shiftsListPosRequestFieldPage     = big.NewInt(1 << 0)
+	shiftsListPosRequestFieldPageSize = big.NewInt(1 << 1)
+	shiftsListPosRequestFieldSort     = big.NewInt(1 << 2)
+	shiftsListPosRequestFieldFilter   = big.NewInt(1 << 3)
+	shiftsListPosRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type ShiftsListPosRequest struct {
+	Page     *int64                            `json:"page,omitempty" url:"-"`
+	PageSize *int64                            `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ShiftsListPosRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ShiftsListPosRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *ShiftsListPosRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequest) SetPage(page *int64) {
+	s.Page = page
+	s.require(shiftsListPosRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequest) SetPageSize(pageSize *int64) {
+	s.PageSize = pageSize
+	s.require(shiftsListPosRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequest) SetSort(sort []*ShiftsListPosRequestSortItem) {
+	s.Sort = sort
+	s.require(shiftsListPosRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequest) SetFilter(filter []*ShiftsListPosRequestFilterItem) {
+	s.Filter = filter
+	s.require(shiftsListPosRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequest) SetTotals(totals []string) {
+	s.Totals = totals
+	s.require(shiftsListPosRequestFieldTotals)
+}
+
+func (s *ShiftsListPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ShiftsListPosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = ShiftsListPosRequest(body)
+	return nil
+}
+
+func (s *ShiftsListPosRequest) MarshalJSON() ([]byte, error) {
+	type embed ShiftsListPosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	shiftsOpenPosRequestFieldDeviceID    = big.NewInt(1 << 0)
+	shiftsOpenPosRequestFieldWarehouseID = big.NewInt(1 << 1)
+	shiftsOpenPosRequestFieldOpeningCash = big.NewInt(1 << 2)
+)
+
+type ShiftsOpenPosRequest struct {
+	DeviceID    string  `json:"deviceId" url:"-"`
+	WarehouseID *string `json:"warehouseId,omitempty" url:"-"`
+	OpeningCash *string `json:"openingCash,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *ShiftsOpenPosRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetDeviceID sets the DeviceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosRequest) SetDeviceID(deviceID string) {
+	s.DeviceID = deviceID
+	s.require(shiftsOpenPosRequestFieldDeviceID)
+}
+
+// SetWarehouseID sets the WarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosRequest) SetWarehouseID(warehouseID *string) {
+	s.WarehouseID = warehouseID
+	s.require(shiftsOpenPosRequestFieldWarehouseID)
+}
+
+// SetOpeningCash sets the OpeningCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosRequest) SetOpeningCash(openingCash *string) {
+	s.OpeningCash = openingCash
+	s.require(shiftsOpenPosRequestFieldOpeningCash)
+}
+
+func (s *ShiftsOpenPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ShiftsOpenPosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = ShiftsOpenPosRequest(body)
+	return nil
+}
+
+func (s *ShiftsOpenPosRequest) MarshalJSON() ([]byte, error) {
+	type embed ShiftsOpenPosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
@@ -1791,6 +2261,1873 @@ func (d *DevicesUpdatePosResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	receiptsCreatePosRequestLinesItemFieldItemID           = big.NewInt(1 << 0)
+	receiptsCreatePosRequestLinesItemFieldDescription      = big.NewInt(1 << 1)
+	receiptsCreatePosRequestLinesItemFieldQuantity         = big.NewInt(1 << 2)
+	receiptsCreatePosRequestLinesItemFieldUnitPriceInclVat = big.NewInt(1 << 3)
+	receiptsCreatePosRequestLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+)
+
+type ReceiptsCreatePosRequestLinesItem struct {
+	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description      *string `json:"description,omitempty" url:"description,omitempty"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	UnitPriceInclVat string  `json:"unitPriceInclVat" url:"unitPriceInclVat"`
+	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) GetItemID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ItemID
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) GetDescription() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Description
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) GetQuantity() string {
+	if r == nil {
+		return ""
+	}
+	return r.Quantity
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) GetUnitPriceInclVat() string {
+	if r == nil {
+		return ""
+	}
+	return r.UnitPriceInclVat
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) GetVatRatePercent() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatRatePercent
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequestLinesItem) SetItemID(itemID *string) {
+	r.ItemID = itemID
+	r.require(receiptsCreatePosRequestLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequestLinesItem) SetDescription(description *string) {
+	r.Description = description
+	r.require(receiptsCreatePosRequestLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequestLinesItem) SetQuantity(quantity string) {
+	r.Quantity = quantity
+	r.require(receiptsCreatePosRequestLinesItemFieldQuantity)
+}
+
+// SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequestLinesItem) SetUnitPriceInclVat(unitPriceInclVat string) {
+	r.UnitPriceInclVat = unitPriceInclVat
+	r.require(receiptsCreatePosRequestLinesItemFieldUnitPriceInclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosRequestLinesItem) SetVatRatePercent(vatRatePercent string) {
+	r.VatRatePercent = vatRatePercent
+	r.require(receiptsCreatePosRequestLinesItemFieldVatRatePercent)
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsCreatePosRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptsCreatePosRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsCreatePosRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsCreatePosRequestLinesItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	receiptsCreatePosResponseFieldID         = big.NewInt(1 << 0)
+	receiptsCreatePosResponseFieldShiftID    = big.NewInt(1 << 1)
+	receiptsCreatePosResponseFieldNumber     = big.NewInt(1 << 2)
+	receiptsCreatePosResponseFieldNetTotal   = big.NewInt(1 << 3)
+	receiptsCreatePosResponseFieldVatTotal   = big.NewInt(1 << 4)
+	receiptsCreatePosResponseFieldGrossTotal = big.NewInt(1 << 5)
+	receiptsCreatePosResponseFieldCashAmount = big.NewInt(1 << 6)
+	receiptsCreatePosResponseFieldCardAmount = big.NewInt(1 << 7)
+	receiptsCreatePosResponseFieldCreatedAt  = big.NewInt(1 << 8)
+	receiptsCreatePosResponseFieldLines      = big.NewInt(1 << 9)
+)
+
+type ReceiptsCreatePosResponse struct {
+	ID         string                                `json:"id" url:"id"`
+	ShiftID    string                                `json:"shiftId" url:"shiftId"`
+	Number     int64                                 `json:"number" url:"number"`
+	NetTotal   string                                `json:"netTotal" url:"netTotal"`
+	VatTotal   string                                `json:"vatTotal" url:"vatTotal"`
+	GrossTotal string                                `json:"grossTotal" url:"grossTotal"`
+	CashAmount string                                `json:"cashAmount" url:"cashAmount"`
+	CardAmount string                                `json:"cardAmount" url:"cardAmount"`
+	CreatedAt  time.Time                             `json:"createdAt" url:"createdAt"`
+	Lines      []*ReceiptsCreatePosResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsCreatePosResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *ReceiptsCreatePosResponse) GetShiftID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ShiftID
+}
+
+func (r *ReceiptsCreatePosResponse) GetNumber() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Number
+}
+
+func (r *ReceiptsCreatePosResponse) GetNetTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetTotal
+}
+
+func (r *ReceiptsCreatePosResponse) GetVatTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatTotal
+}
+
+func (r *ReceiptsCreatePosResponse) GetGrossTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossTotal
+}
+
+func (r *ReceiptsCreatePosResponse) GetCashAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CashAmount
+}
+
+func (r *ReceiptsCreatePosResponse) GetCardAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CardAmount
+}
+
+func (r *ReceiptsCreatePosResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *ReceiptsCreatePosResponse) GetLines() []*ReceiptsCreatePosResponseLinesItem {
+	if r == nil {
+		return nil
+	}
+	return r.Lines
+}
+
+func (r *ReceiptsCreatePosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsCreatePosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetID(id string) {
+	r.ID = id
+	r.require(receiptsCreatePosResponseFieldID)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(receiptsCreatePosResponseFieldShiftID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetNumber(number int64) {
+	r.Number = number
+	r.require(receiptsCreatePosResponseFieldNumber)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(receiptsCreatePosResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(receiptsCreatePosResponseFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(receiptsCreatePosResponseFieldGrossTotal)
+}
+
+// SetCashAmount sets the CashAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(receiptsCreatePosResponseFieldCashAmount)
+}
+
+// SetCardAmount sets the CardAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetCardAmount(cardAmount string) {
+	r.CardAmount = cardAmount
+	r.require(receiptsCreatePosResponseFieldCardAmount)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(receiptsCreatePosResponseFieldCreatedAt)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponse) SetLines(lines []*ReceiptsCreatePosResponseLinesItem) {
+	r.Lines = lines
+	r.require(receiptsCreatePosResponseFieldLines)
+}
+
+func (r *ReceiptsCreatePosResponse) UnmarshalJSON(data []byte) error {
+	type embed ReceiptsCreatePosResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = ReceiptsCreatePosResponse(unmarshaler.embed)
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsCreatePosResponse) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsCreatePosResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*r),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsCreatePosResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	receiptsCreatePosResponseLinesItemFieldID               = big.NewInt(1 << 0)
+	receiptsCreatePosResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
+	receiptsCreatePosResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
+	receiptsCreatePosResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
+	receiptsCreatePosResponseLinesItemFieldUnitPriceInclVat = big.NewInt(1 << 4)
+	receiptsCreatePosResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	receiptsCreatePosResponseLinesItemFieldNetAmount        = big.NewInt(1 << 6)
+	receiptsCreatePosResponseLinesItemFieldVatAmount        = big.NewInt(1 << 7)
+	receiptsCreatePosResponseLinesItemFieldGrossAmount      = big.NewInt(1 << 8)
+)
+
+type ReceiptsCreatePosResponseLinesItem struct {
+	ID               string  `json:"id" url:"id"`
+	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	UnitPriceInclVat string  `json:"unitPriceInclVat" url:"unitPriceInclVat"`
+	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+	NetAmount        string  `json:"netAmount" url:"netAmount"`
+	VatAmount        string  `json:"vatAmount" url:"vatAmount"`
+	GrossAmount      string  `json:"grossAmount" url:"grossAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetItemID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ItemID
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetDescription() string {
+	if r == nil {
+		return ""
+	}
+	return r.Description
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetQuantity() string {
+	if r == nil {
+		return ""
+	}
+	return r.Quantity
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetUnitPriceInclVat() string {
+	if r == nil {
+		return ""
+	}
+	return r.UnitPriceInclVat
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetVatRatePercent() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatRatePercent
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetNetAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetAmount
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetVatAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatAmount
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetGrossAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossAmount
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetID(id string) {
+	r.ID = id
+	r.require(receiptsCreatePosResponseLinesItemFieldID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetItemID(itemID *string) {
+	r.ItemID = itemID
+	r.require(receiptsCreatePosResponseLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetDescription(description string) {
+	r.Description = description
+	r.require(receiptsCreatePosResponseLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetQuantity(quantity string) {
+	r.Quantity = quantity
+	r.require(receiptsCreatePosResponseLinesItemFieldQuantity)
+}
+
+// SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetUnitPriceInclVat(unitPriceInclVat string) {
+	r.UnitPriceInclVat = unitPriceInclVat
+	r.require(receiptsCreatePosResponseLinesItemFieldUnitPriceInclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	r.VatRatePercent = vatRatePercent
+	r.require(receiptsCreatePosResponseLinesItemFieldVatRatePercent)
+}
+
+// SetNetAmount sets the NetAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetNetAmount(netAmount string) {
+	r.NetAmount = netAmount
+	r.require(receiptsCreatePosResponseLinesItemFieldNetAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetVatAmount(vatAmount string) {
+	r.VatAmount = vatAmount
+	r.require(receiptsCreatePosResponseLinesItemFieldVatAmount)
+}
+
+// SetGrossAmount sets the GrossAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsCreatePosResponseLinesItem) SetGrossAmount(grossAmount string) {
+	r.GrossAmount = grossAmount
+	r.require(receiptsCreatePosResponseLinesItemFieldGrossAmount)
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsCreatePosResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptsCreatePosResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsCreatePosResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsCreatePosResponseLinesItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	receiptsGetPosResponseFieldID         = big.NewInt(1 << 0)
+	receiptsGetPosResponseFieldShiftID    = big.NewInt(1 << 1)
+	receiptsGetPosResponseFieldNumber     = big.NewInt(1 << 2)
+	receiptsGetPosResponseFieldNetTotal   = big.NewInt(1 << 3)
+	receiptsGetPosResponseFieldVatTotal   = big.NewInt(1 << 4)
+	receiptsGetPosResponseFieldGrossTotal = big.NewInt(1 << 5)
+	receiptsGetPosResponseFieldCashAmount = big.NewInt(1 << 6)
+	receiptsGetPosResponseFieldCardAmount = big.NewInt(1 << 7)
+	receiptsGetPosResponseFieldCreatedAt  = big.NewInt(1 << 8)
+	receiptsGetPosResponseFieldLines      = big.NewInt(1 << 9)
+)
+
+type ReceiptsGetPosResponse struct {
+	ID         string                             `json:"id" url:"id"`
+	ShiftID    string                             `json:"shiftId" url:"shiftId"`
+	Number     int64                              `json:"number" url:"number"`
+	NetTotal   string                             `json:"netTotal" url:"netTotal"`
+	VatTotal   string                             `json:"vatTotal" url:"vatTotal"`
+	GrossTotal string                             `json:"grossTotal" url:"grossTotal"`
+	CashAmount string                             `json:"cashAmount" url:"cashAmount"`
+	CardAmount string                             `json:"cardAmount" url:"cardAmount"`
+	CreatedAt  time.Time                          `json:"createdAt" url:"createdAt"`
+	Lines      []*ReceiptsGetPosResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsGetPosResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *ReceiptsGetPosResponse) GetShiftID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ShiftID
+}
+
+func (r *ReceiptsGetPosResponse) GetNumber() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Number
+}
+
+func (r *ReceiptsGetPosResponse) GetNetTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetTotal
+}
+
+func (r *ReceiptsGetPosResponse) GetVatTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatTotal
+}
+
+func (r *ReceiptsGetPosResponse) GetGrossTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossTotal
+}
+
+func (r *ReceiptsGetPosResponse) GetCashAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CashAmount
+}
+
+func (r *ReceiptsGetPosResponse) GetCardAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CardAmount
+}
+
+func (r *ReceiptsGetPosResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *ReceiptsGetPosResponse) GetLines() []*ReceiptsGetPosResponseLinesItem {
+	if r == nil {
+		return nil
+	}
+	return r.Lines
+}
+
+func (r *ReceiptsGetPosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsGetPosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetID(id string) {
+	r.ID = id
+	r.require(receiptsGetPosResponseFieldID)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(receiptsGetPosResponseFieldShiftID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetNumber(number int64) {
+	r.Number = number
+	r.require(receiptsGetPosResponseFieldNumber)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(receiptsGetPosResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(receiptsGetPosResponseFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(receiptsGetPosResponseFieldGrossTotal)
+}
+
+// SetCashAmount sets the CashAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(receiptsGetPosResponseFieldCashAmount)
+}
+
+// SetCardAmount sets the CardAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetCardAmount(cardAmount string) {
+	r.CardAmount = cardAmount
+	r.require(receiptsGetPosResponseFieldCardAmount)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(receiptsGetPosResponseFieldCreatedAt)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponse) SetLines(lines []*ReceiptsGetPosResponseLinesItem) {
+	r.Lines = lines
+	r.require(receiptsGetPosResponseFieldLines)
+}
+
+func (r *ReceiptsGetPosResponse) UnmarshalJSON(data []byte) error {
+	type embed ReceiptsGetPosResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = ReceiptsGetPosResponse(unmarshaler.embed)
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsGetPosResponse) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsGetPosResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*r),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsGetPosResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	receiptsGetPosResponseLinesItemFieldID               = big.NewInt(1 << 0)
+	receiptsGetPosResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
+	receiptsGetPosResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
+	receiptsGetPosResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
+	receiptsGetPosResponseLinesItemFieldUnitPriceInclVat = big.NewInt(1 << 4)
+	receiptsGetPosResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	receiptsGetPosResponseLinesItemFieldNetAmount        = big.NewInt(1 << 6)
+	receiptsGetPosResponseLinesItemFieldVatAmount        = big.NewInt(1 << 7)
+	receiptsGetPosResponseLinesItemFieldGrossAmount      = big.NewInt(1 << 8)
+)
+
+type ReceiptsGetPosResponseLinesItem struct {
+	ID               string  `json:"id" url:"id"`
+	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	UnitPriceInclVat string  `json:"unitPriceInclVat" url:"unitPriceInclVat"`
+	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+	NetAmount        string  `json:"netAmount" url:"netAmount"`
+	VatAmount        string  `json:"vatAmount" url:"vatAmount"`
+	GrossAmount      string  `json:"grossAmount" url:"grossAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetItemID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ItemID
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetDescription() string {
+	if r == nil {
+		return ""
+	}
+	return r.Description
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetQuantity() string {
+	if r == nil {
+		return ""
+	}
+	return r.Quantity
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetUnitPriceInclVat() string {
+	if r == nil {
+		return ""
+	}
+	return r.UnitPriceInclVat
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetVatRatePercent() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatRatePercent
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetNetAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetAmount
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetVatAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatAmount
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetGrossAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossAmount
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetID(id string) {
+	r.ID = id
+	r.require(receiptsGetPosResponseLinesItemFieldID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetItemID(itemID *string) {
+	r.ItemID = itemID
+	r.require(receiptsGetPosResponseLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetDescription(description string) {
+	r.Description = description
+	r.require(receiptsGetPosResponseLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetQuantity(quantity string) {
+	r.Quantity = quantity
+	r.require(receiptsGetPosResponseLinesItemFieldQuantity)
+}
+
+// SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetUnitPriceInclVat(unitPriceInclVat string) {
+	r.UnitPriceInclVat = unitPriceInclVat
+	r.require(receiptsGetPosResponseLinesItemFieldUnitPriceInclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	r.VatRatePercent = vatRatePercent
+	r.require(receiptsGetPosResponseLinesItemFieldVatRatePercent)
+}
+
+// SetNetAmount sets the NetAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetNetAmount(netAmount string) {
+	r.NetAmount = netAmount
+	r.require(receiptsGetPosResponseLinesItemFieldNetAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetVatAmount(vatAmount string) {
+	r.VatAmount = vatAmount
+	r.require(receiptsGetPosResponseLinesItemFieldVatAmount)
+}
+
+// SetGrossAmount sets the GrossAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsGetPosResponseLinesItem) SetGrossAmount(grossAmount string) {
+	r.GrossAmount = grossAmount
+	r.require(receiptsGetPosResponseLinesItemFieldGrossAmount)
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsGetPosResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptsGetPosResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsGetPosResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsGetPosResponseLinesItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	receiptsListPosRequestFilterItemFieldField = big.NewInt(1 << 0)
+	receiptsListPosRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	receiptsListPosRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type ReceiptsListPosRequestFilterItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Op    ReceiptsListPosRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ReceiptsListPosRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsListPosRequestFilterItem) GetField() string {
+	if r == nil {
+		return ""
+	}
+	return r.Field
+}
+
+func (r *ReceiptsListPosRequestFilterItem) GetOp() ReceiptsListPosRequestFilterItemOp {
+	if r == nil {
+		return ""
+	}
+	return r.Op
+}
+
+func (r *ReceiptsListPosRequestFilterItem) GetValue() *ReceiptsListPosRequestFilterItemValue {
+	if r == nil {
+		return nil
+	}
+	return r.Value
+}
+
+func (r *ReceiptsListPosRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsListPosRequestFilterItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequestFilterItem) SetField(field string) {
+	r.Field = field
+	r.require(receiptsListPosRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequestFilterItem) SetOp(op ReceiptsListPosRequestFilterItemOp) {
+	r.Op = op
+	r.require(receiptsListPosRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequestFilterItem) SetValue(value *ReceiptsListPosRequestFilterItemValue) {
+	r.Value = value
+	r.require(receiptsListPosRequestFilterItemFieldValue)
+}
+
+func (r *ReceiptsListPosRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsListPosRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptsListPosRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsListPosRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsListPosRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsListPosRequestFilterItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type ReceiptsListPosRequestFilterItemOp string
+
+const (
+	ReceiptsListPosRequestFilterItemOpEq       ReceiptsListPosRequestFilterItemOp = "eq"
+	ReceiptsListPosRequestFilterItemOpNe       ReceiptsListPosRequestFilterItemOp = "ne"
+	ReceiptsListPosRequestFilterItemOpContains ReceiptsListPosRequestFilterItemOp = "contains"
+	ReceiptsListPosRequestFilterItemOpGte      ReceiptsListPosRequestFilterItemOp = "gte"
+	ReceiptsListPosRequestFilterItemOpLte      ReceiptsListPosRequestFilterItemOp = "lte"
+	ReceiptsListPosRequestFilterItemOpIn       ReceiptsListPosRequestFilterItemOp = "in"
+)
+
+func NewReceiptsListPosRequestFilterItemOpFromString(s string) (ReceiptsListPosRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return ReceiptsListPosRequestFilterItemOpEq, nil
+	case "ne":
+		return ReceiptsListPosRequestFilterItemOpNe, nil
+	case "contains":
+		return ReceiptsListPosRequestFilterItemOpContains, nil
+	case "gte":
+		return ReceiptsListPosRequestFilterItemOpGte, nil
+	case "lte":
+		return ReceiptsListPosRequestFilterItemOpLte, nil
+	case "in":
+		return ReceiptsListPosRequestFilterItemOpIn, nil
+	}
+	var t ReceiptsListPosRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r ReceiptsListPosRequestFilterItemOp) Ptr() *ReceiptsListPosRequestFilterItemOp {
+	return &r
+}
+
+type ReceiptsListPosRequestFilterItemValue struct {
+	String                                             string
+	Double                                             float64
+	Boolean                                            bool
+	ReceiptsListPosRequestFilterItemValueThreeItemList []*ReceiptsListPosRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (r *ReceiptsListPosRequestFilterItemValue) GetString() string {
+	if r == nil {
+		return ""
+	}
+	return r.String
+}
+
+func (r *ReceiptsListPosRequestFilterItemValue) GetDouble() float64 {
+	if r == nil {
+		return 0
+	}
+	return r.Double
+}
+
+func (r *ReceiptsListPosRequestFilterItemValue) GetBoolean() bool {
+	if r == nil {
+		return false
+	}
+	return r.Boolean
+}
+
+func (r *ReceiptsListPosRequestFilterItemValue) GetReceiptsListPosRequestFilterItemValueThreeItemList() []*ReceiptsListPosRequestFilterItemValueThreeItem {
+	if r == nil {
+		return nil
+	}
+	return r.ReceiptsListPosRequestFilterItemValueThreeItemList
+}
+
+func (r *ReceiptsListPosRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		r.typ = "String"
+		r.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		r.typ = "Double"
+		r.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		r.typ = "Boolean"
+		r.Boolean = valueBoolean
+		return nil
+	}
+	var valueReceiptsListPosRequestFilterItemValueThreeItemList []*ReceiptsListPosRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueReceiptsListPosRequestFilterItemValueThreeItemList); err == nil {
+		r.typ = "ReceiptsListPosRequestFilterItemValueThreeItemList"
+		r.ReceiptsListPosRequestFilterItemValueThreeItemList = valueReceiptsListPosRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
+}
+
+func (r ReceiptsListPosRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
+	}
+	if r.typ == "Boolean" || r.Boolean != false {
+		return json.Marshal(r.Boolean)
+	}
+	if r.typ == "ReceiptsListPosRequestFilterItemValueThreeItemList" || r.ReceiptsListPosRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(r.ReceiptsListPosRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type ReceiptsListPosRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitReceiptsListPosRequestFilterItemValueThreeItemList([]*ReceiptsListPosRequestFilterItemValueThreeItem) error
+}
+
+func (r *ReceiptsListPosRequestFilterItemValue) Accept(visitor ReceiptsListPosRequestFilterItemValueVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
+	}
+	if r.typ == "Boolean" || r.Boolean != false {
+		return visitor.VisitBoolean(r.Boolean)
+	}
+	if r.typ == "ReceiptsListPosRequestFilterItemValueThreeItemList" || r.ReceiptsListPosRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitReceiptsListPosRequestFilterItemValueThreeItemList(r.ReceiptsListPosRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type ReceiptsListPosRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (r *ReceiptsListPosRequestFilterItemValueThreeItem) GetString() string {
+	if r == nil {
+		return ""
+	}
+	return r.String
+}
+
+func (r *ReceiptsListPosRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if r == nil {
+		return 0
+	}
+	return r.Double
+}
+
+func (r *ReceiptsListPosRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		r.typ = "String"
+		r.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		r.typ = "Double"
+		r.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
+}
+
+func (r ReceiptsListPosRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type ReceiptsListPosRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (r *ReceiptsListPosRequestFilterItemValueThreeItem) Accept(visitor ReceiptsListPosRequestFilterItemValueThreeItemVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+var (
+	receiptsListPosRequestSortItemFieldField = big.NewInt(1 << 0)
+	receiptsListPosRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type ReceiptsListPosRequestSortItem struct {
+	Field string                             `json:"field" url:"field"`
+	Dir   *ReceiptsListPosRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsListPosRequestSortItem) GetField() string {
+	if r == nil {
+		return ""
+	}
+	return r.Field
+}
+
+func (r *ReceiptsListPosRequestSortItem) GetDir() *ReceiptsListPosRequestSortItemDir {
+	if r == nil {
+		return nil
+	}
+	return r.Dir
+}
+
+func (r *ReceiptsListPosRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsListPosRequestSortItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequestSortItem) SetField(field string) {
+	r.Field = field
+	r.require(receiptsListPosRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosRequestSortItem) SetDir(dir *ReceiptsListPosRequestSortItemDir) {
+	r.Dir = dir
+	r.require(receiptsListPosRequestSortItemFieldDir)
+}
+
+func (r *ReceiptsListPosRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsListPosRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptsListPosRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsListPosRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsListPosRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsListPosRequestSortItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type ReceiptsListPosRequestSortItemDir string
+
+const (
+	ReceiptsListPosRequestSortItemDirAsc  ReceiptsListPosRequestSortItemDir = "asc"
+	ReceiptsListPosRequestSortItemDirDesc ReceiptsListPosRequestSortItemDir = "desc"
+)
+
+func NewReceiptsListPosRequestSortItemDirFromString(s string) (ReceiptsListPosRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return ReceiptsListPosRequestSortItemDirAsc, nil
+	case "desc":
+		return ReceiptsListPosRequestSortItemDirDesc, nil
+	}
+	var t ReceiptsListPosRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r ReceiptsListPosRequestSortItemDir) Ptr() *ReceiptsListPosRequestSortItemDir {
+	return &r
+}
+
+var (
+	receiptsListPosResponseFieldRows             = big.NewInt(1 << 0)
+	receiptsListPosResponseFieldPage             = big.NewInt(1 << 1)
+	receiptsListPosResponseFieldPageSize         = big.NewInt(1 << 2)
+	receiptsListPosResponseFieldTotal            = big.NewInt(1 << 3)
+	receiptsListPosResponseFieldTotals           = big.NewInt(1 << 4)
+	receiptsListPosResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type ReceiptsListPosResponse struct {
+	Rows     []*ReceiptsListPosResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                              `json:"page" url:"page"`
+	PageSize int64                              `json:"pageSize" url:"pageSize"`
+	Total    int64                              `json:"total" url:"total"`
+	Totals   map[string]string                  `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsListPosResponse) GetRows() []*ReceiptsListPosResponseRowsItem {
+	if r == nil {
+		return nil
+	}
+	return r.Rows
+}
+
+func (r *ReceiptsListPosResponse) GetPage() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Page
+}
+
+func (r *ReceiptsListPosResponse) GetPageSize() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.PageSize
+}
+
+func (r *ReceiptsListPosResponse) GetTotal() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Total
+}
+
+func (r *ReceiptsListPosResponse) GetTotals() map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.Totals
+}
+
+func (r *ReceiptsListPosResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.TotalsByCurrency
+}
+
+func (r *ReceiptsListPosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsListPosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponse) SetRows(rows []*ReceiptsListPosResponseRowsItem) {
+	r.Rows = rows
+	r.require(receiptsListPosResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponse) SetPage(page int64) {
+	r.Page = page
+	r.require(receiptsListPosResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponse) SetPageSize(pageSize int64) {
+	r.PageSize = pageSize
+	r.require(receiptsListPosResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponse) SetTotal(total int64) {
+	r.Total = total
+	r.require(receiptsListPosResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponse) SetTotals(totals map[string]string) {
+	r.Totals = totals
+	r.require(receiptsListPosResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	r.TotalsByCurrency = totalsByCurrency
+	r.require(receiptsListPosResponseFieldTotalsByCurrency)
+}
+
+func (r *ReceiptsListPosResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptsListPosResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptsListPosResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsListPosResponse) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsListPosResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsListPosResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	receiptsListPosResponseRowsItemFieldID         = big.NewInt(1 << 0)
+	receiptsListPosResponseRowsItemFieldShiftID    = big.NewInt(1 << 1)
+	receiptsListPosResponseRowsItemFieldNumber     = big.NewInt(1 << 2)
+	receiptsListPosResponseRowsItemFieldNetTotal   = big.NewInt(1 << 3)
+	receiptsListPosResponseRowsItemFieldVatTotal   = big.NewInt(1 << 4)
+	receiptsListPosResponseRowsItemFieldGrossTotal = big.NewInt(1 << 5)
+	receiptsListPosResponseRowsItemFieldCashAmount = big.NewInt(1 << 6)
+	receiptsListPosResponseRowsItemFieldCardAmount = big.NewInt(1 << 7)
+	receiptsListPosResponseRowsItemFieldCreatedAt  = big.NewInt(1 << 8)
+)
+
+type ReceiptsListPosResponseRowsItem struct {
+	ID         string    `json:"id" url:"id"`
+	ShiftID    string    `json:"shiftId" url:"shiftId"`
+	Number     int64     `json:"number" url:"number"`
+	NetTotal   string    `json:"netTotal" url:"netTotal"`
+	VatTotal   string    `json:"vatTotal" url:"vatTotal"`
+	GrossTotal string    `json:"grossTotal" url:"grossTotal"`
+	CashAmount string    `json:"cashAmount" url:"cashAmount"`
+	CardAmount string    `json:"cardAmount" url:"cardAmount"`
+	CreatedAt  time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetShiftID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ShiftID
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetNumber() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Number
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetNetTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetTotal
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetVatTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatTotal
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetGrossTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossTotal
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetCashAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CashAmount
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetCardAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CardAmount
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *ReceiptsListPosResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptsListPosResponseRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetID(id string) {
+	r.ID = id
+	r.require(receiptsListPosResponseRowsItemFieldID)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(receiptsListPosResponseRowsItemFieldShiftID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetNumber(number int64) {
+	r.Number = number
+	r.require(receiptsListPosResponseRowsItemFieldNumber)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(receiptsListPosResponseRowsItemFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(receiptsListPosResponseRowsItemFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(receiptsListPosResponseRowsItemFieldGrossTotal)
+}
+
+// SetCashAmount sets the CashAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(receiptsListPosResponseRowsItemFieldCashAmount)
+}
+
+// SetCardAmount sets the CardAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetCardAmount(cardAmount string) {
+	r.CardAmount = cardAmount
+	r.require(receiptsListPosResponseRowsItemFieldCardAmount)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptsListPosResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(receiptsListPosResponseRowsItemFieldCreatedAt)
+}
+
+func (r *ReceiptsListPosResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ReceiptsListPosResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = ReceiptsListPosResponseRowsItem(unmarshaler.embed)
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptsListPosResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ReceiptsListPosResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*r),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptsListPosResponseRowsItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
 }
 
 var (
@@ -3786,4 +6123,1687 @@ func (r *ReportsListPosResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	shiftsClosePosResponseFieldID             = big.NewInt(1 << 0)
+	shiftsClosePosResponseFieldDeviceID       = big.NewInt(1 << 1)
+	shiftsClosePosResponseFieldWarehouseID    = big.NewInt(1 << 2)
+	shiftsClosePosResponseFieldStatus         = big.NewInt(1 << 3)
+	shiftsClosePosResponseFieldOpeningCash    = big.NewInt(1 << 4)
+	shiftsClosePosResponseFieldCountedCash    = big.NewInt(1 << 5)
+	shiftsClosePosResponseFieldReceiptCount   = big.NewInt(1 << 6)
+	shiftsClosePosResponseFieldReportID       = big.NewInt(1 << 7)
+	shiftsClosePosResponseFieldOpenedAt       = big.NewInt(1 << 8)
+	shiftsClosePosResponseFieldClosedAt       = big.NewInt(1 << 9)
+	shiftsClosePosResponseFieldExpectedCash   = big.NewInt(1 << 10)
+	shiftsClosePosResponseFieldCashDifference = big.NewInt(1 << 11)
+)
+
+type ShiftsClosePosResponse struct {
+	ID             string                       `json:"id" url:"id"`
+	DeviceID       string                       `json:"deviceId" url:"deviceId"`
+	WarehouseID    *string                      `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Status         ShiftsClosePosResponseStatus `json:"status" url:"status"`
+	OpeningCash    string                       `json:"openingCash" url:"openingCash"`
+	CountedCash    *string                      `json:"countedCash,omitempty" url:"countedCash,omitempty"`
+	ReceiptCount   int64                        `json:"receiptCount" url:"receiptCount"`
+	ReportID       *string                      `json:"reportId,omitempty" url:"reportId,omitempty"`
+	OpenedAt       time.Time                    `json:"openedAt" url:"openedAt"`
+	ClosedAt       *time.Time                   `json:"closedAt,omitempty" url:"closedAt,omitempty"`
+	ExpectedCash   string                       `json:"expectedCash" url:"expectedCash"`
+	CashDifference string                       `json:"cashDifference" url:"cashDifference"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *ShiftsClosePosResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *ShiftsClosePosResponse) GetDeviceID() string {
+	if s == nil {
+		return ""
+	}
+	return s.DeviceID
+}
+
+func (s *ShiftsClosePosResponse) GetWarehouseID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.WarehouseID
+}
+
+func (s *ShiftsClosePosResponse) GetStatus() ShiftsClosePosResponseStatus {
+	if s == nil {
+		return ""
+	}
+	return s.Status
+}
+
+func (s *ShiftsClosePosResponse) GetOpeningCash() string {
+	if s == nil {
+		return ""
+	}
+	return s.OpeningCash
+}
+
+func (s *ShiftsClosePosResponse) GetCountedCash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CountedCash
+}
+
+func (s *ShiftsClosePosResponse) GetReceiptCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ReceiptCount
+}
+
+func (s *ShiftsClosePosResponse) GetReportID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReportID
+}
+
+func (s *ShiftsClosePosResponse) GetOpenedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.OpenedAt
+}
+
+func (s *ShiftsClosePosResponse) GetClosedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.ClosedAt
+}
+
+func (s *ShiftsClosePosResponse) GetExpectedCash() string {
+	if s == nil {
+		return ""
+	}
+	return s.ExpectedCash
+}
+
+func (s *ShiftsClosePosResponse) GetCashDifference() string {
+	if s == nil {
+		return ""
+	}
+	return s.CashDifference
+}
+
+func (s *ShiftsClosePosResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *ShiftsClosePosResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetID(id string) {
+	s.ID = id
+	s.require(shiftsClosePosResponseFieldID)
+}
+
+// SetDeviceID sets the DeviceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetDeviceID(deviceID string) {
+	s.DeviceID = deviceID
+	s.require(shiftsClosePosResponseFieldDeviceID)
+}
+
+// SetWarehouseID sets the WarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetWarehouseID(warehouseID *string) {
+	s.WarehouseID = warehouseID
+	s.require(shiftsClosePosResponseFieldWarehouseID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetStatus(status ShiftsClosePosResponseStatus) {
+	s.Status = status
+	s.require(shiftsClosePosResponseFieldStatus)
+}
+
+// SetOpeningCash sets the OpeningCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetOpeningCash(openingCash string) {
+	s.OpeningCash = openingCash
+	s.require(shiftsClosePosResponseFieldOpeningCash)
+}
+
+// SetCountedCash sets the CountedCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetCountedCash(countedCash *string) {
+	s.CountedCash = countedCash
+	s.require(shiftsClosePosResponseFieldCountedCash)
+}
+
+// SetReceiptCount sets the ReceiptCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetReceiptCount(receiptCount int64) {
+	s.ReceiptCount = receiptCount
+	s.require(shiftsClosePosResponseFieldReceiptCount)
+}
+
+// SetReportID sets the ReportID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetReportID(reportID *string) {
+	s.ReportID = reportID
+	s.require(shiftsClosePosResponseFieldReportID)
+}
+
+// SetOpenedAt sets the OpenedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetOpenedAt(openedAt time.Time) {
+	s.OpenedAt = openedAt
+	s.require(shiftsClosePosResponseFieldOpenedAt)
+}
+
+// SetClosedAt sets the ClosedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetClosedAt(closedAt *time.Time) {
+	s.ClosedAt = closedAt
+	s.require(shiftsClosePosResponseFieldClosedAt)
+}
+
+// SetExpectedCash sets the ExpectedCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetExpectedCash(expectedCash string) {
+	s.ExpectedCash = expectedCash
+	s.require(shiftsClosePosResponseFieldExpectedCash)
+}
+
+// SetCashDifference sets the CashDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsClosePosResponse) SetCashDifference(cashDifference string) {
+	s.CashDifference = cashDifference
+	s.require(shiftsClosePosResponseFieldCashDifference)
+}
+
+func (s *ShiftsClosePosResponse) UnmarshalJSON(data []byte) error {
+	type embed ShiftsClosePosResponse
+	var unmarshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = ShiftsClosePosResponse(unmarshaler.embed)
+	s.OpenedAt = unmarshaler.OpenedAt.Time()
+	s.ClosedAt = unmarshaler.ClosedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *ShiftsClosePosResponse) MarshalJSON() ([]byte, error) {
+	type embed ShiftsClosePosResponse
+	var marshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed:    embed(*s),
+		OpenedAt: internal.NewDateTime(s.OpenedAt),
+		ClosedAt: internal.NewOptionalDateTime(s.ClosedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *ShiftsClosePosResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type ShiftsClosePosResponseStatus string
+
+const (
+	ShiftsClosePosResponseStatusOpen   ShiftsClosePosResponseStatus = "open"
+	ShiftsClosePosResponseStatusClosed ShiftsClosePosResponseStatus = "closed"
+)
+
+func NewShiftsClosePosResponseStatusFromString(s string) (ShiftsClosePosResponseStatus, error) {
+	switch s {
+	case "open":
+		return ShiftsClosePosResponseStatusOpen, nil
+	case "closed":
+		return ShiftsClosePosResponseStatusClosed, nil
+	}
+	var t ShiftsClosePosResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s ShiftsClosePosResponseStatus) Ptr() *ShiftsClosePosResponseStatus {
+	return &s
+}
+
+var (
+	shiftsGetPosResponseFieldID           = big.NewInt(1 << 0)
+	shiftsGetPosResponseFieldDeviceID     = big.NewInt(1 << 1)
+	shiftsGetPosResponseFieldWarehouseID  = big.NewInt(1 << 2)
+	shiftsGetPosResponseFieldStatus       = big.NewInt(1 << 3)
+	shiftsGetPosResponseFieldOpeningCash  = big.NewInt(1 << 4)
+	shiftsGetPosResponseFieldCountedCash  = big.NewInt(1 << 5)
+	shiftsGetPosResponseFieldReceiptCount = big.NewInt(1 << 6)
+	shiftsGetPosResponseFieldReportID     = big.NewInt(1 << 7)
+	shiftsGetPosResponseFieldOpenedAt     = big.NewInt(1 << 8)
+	shiftsGetPosResponseFieldClosedAt     = big.NewInt(1 << 9)
+)
+
+type ShiftsGetPosResponse struct {
+	ID           string                     `json:"id" url:"id"`
+	DeviceID     string                     `json:"deviceId" url:"deviceId"`
+	WarehouseID  *string                    `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Status       ShiftsGetPosResponseStatus `json:"status" url:"status"`
+	OpeningCash  string                     `json:"openingCash" url:"openingCash"`
+	CountedCash  *string                    `json:"countedCash,omitempty" url:"countedCash,omitempty"`
+	ReceiptCount int64                      `json:"receiptCount" url:"receiptCount"`
+	ReportID     *string                    `json:"reportId,omitempty" url:"reportId,omitempty"`
+	OpenedAt     time.Time                  `json:"openedAt" url:"openedAt"`
+	ClosedAt     *time.Time                 `json:"closedAt,omitempty" url:"closedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *ShiftsGetPosResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *ShiftsGetPosResponse) GetDeviceID() string {
+	if s == nil {
+		return ""
+	}
+	return s.DeviceID
+}
+
+func (s *ShiftsGetPosResponse) GetWarehouseID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.WarehouseID
+}
+
+func (s *ShiftsGetPosResponse) GetStatus() ShiftsGetPosResponseStatus {
+	if s == nil {
+		return ""
+	}
+	return s.Status
+}
+
+func (s *ShiftsGetPosResponse) GetOpeningCash() string {
+	if s == nil {
+		return ""
+	}
+	return s.OpeningCash
+}
+
+func (s *ShiftsGetPosResponse) GetCountedCash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CountedCash
+}
+
+func (s *ShiftsGetPosResponse) GetReceiptCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ReceiptCount
+}
+
+func (s *ShiftsGetPosResponse) GetReportID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReportID
+}
+
+func (s *ShiftsGetPosResponse) GetOpenedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.OpenedAt
+}
+
+func (s *ShiftsGetPosResponse) GetClosedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.ClosedAt
+}
+
+func (s *ShiftsGetPosResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *ShiftsGetPosResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetID(id string) {
+	s.ID = id
+	s.require(shiftsGetPosResponseFieldID)
+}
+
+// SetDeviceID sets the DeviceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetDeviceID(deviceID string) {
+	s.DeviceID = deviceID
+	s.require(shiftsGetPosResponseFieldDeviceID)
+}
+
+// SetWarehouseID sets the WarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetWarehouseID(warehouseID *string) {
+	s.WarehouseID = warehouseID
+	s.require(shiftsGetPosResponseFieldWarehouseID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetStatus(status ShiftsGetPosResponseStatus) {
+	s.Status = status
+	s.require(shiftsGetPosResponseFieldStatus)
+}
+
+// SetOpeningCash sets the OpeningCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetOpeningCash(openingCash string) {
+	s.OpeningCash = openingCash
+	s.require(shiftsGetPosResponseFieldOpeningCash)
+}
+
+// SetCountedCash sets the CountedCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetCountedCash(countedCash *string) {
+	s.CountedCash = countedCash
+	s.require(shiftsGetPosResponseFieldCountedCash)
+}
+
+// SetReceiptCount sets the ReceiptCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetReceiptCount(receiptCount int64) {
+	s.ReceiptCount = receiptCount
+	s.require(shiftsGetPosResponseFieldReceiptCount)
+}
+
+// SetReportID sets the ReportID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetReportID(reportID *string) {
+	s.ReportID = reportID
+	s.require(shiftsGetPosResponseFieldReportID)
+}
+
+// SetOpenedAt sets the OpenedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetOpenedAt(openedAt time.Time) {
+	s.OpenedAt = openedAt
+	s.require(shiftsGetPosResponseFieldOpenedAt)
+}
+
+// SetClosedAt sets the ClosedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsGetPosResponse) SetClosedAt(closedAt *time.Time) {
+	s.ClosedAt = closedAt
+	s.require(shiftsGetPosResponseFieldClosedAt)
+}
+
+func (s *ShiftsGetPosResponse) UnmarshalJSON(data []byte) error {
+	type embed ShiftsGetPosResponse
+	var unmarshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = ShiftsGetPosResponse(unmarshaler.embed)
+	s.OpenedAt = unmarshaler.OpenedAt.Time()
+	s.ClosedAt = unmarshaler.ClosedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *ShiftsGetPosResponse) MarshalJSON() ([]byte, error) {
+	type embed ShiftsGetPosResponse
+	var marshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed:    embed(*s),
+		OpenedAt: internal.NewDateTime(s.OpenedAt),
+		ClosedAt: internal.NewOptionalDateTime(s.ClosedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *ShiftsGetPosResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type ShiftsGetPosResponseStatus string
+
+const (
+	ShiftsGetPosResponseStatusOpen   ShiftsGetPosResponseStatus = "open"
+	ShiftsGetPosResponseStatusClosed ShiftsGetPosResponseStatus = "closed"
+)
+
+func NewShiftsGetPosResponseStatusFromString(s string) (ShiftsGetPosResponseStatus, error) {
+	switch s {
+	case "open":
+		return ShiftsGetPosResponseStatusOpen, nil
+	case "closed":
+		return ShiftsGetPosResponseStatusClosed, nil
+	}
+	var t ShiftsGetPosResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s ShiftsGetPosResponseStatus) Ptr() *ShiftsGetPosResponseStatus {
+	return &s
+}
+
+var (
+	shiftsListPosRequestFilterItemFieldField = big.NewInt(1 << 0)
+	shiftsListPosRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	shiftsListPosRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type ShiftsListPosRequestFilterItem struct {
+	Field string                               `json:"field" url:"field"`
+	Op    ShiftsListPosRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ShiftsListPosRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *ShiftsListPosRequestFilterItem) GetField() string {
+	if s == nil {
+		return ""
+	}
+	return s.Field
+}
+
+func (s *ShiftsListPosRequestFilterItem) GetOp() ShiftsListPosRequestFilterItemOp {
+	if s == nil {
+		return ""
+	}
+	return s.Op
+}
+
+func (s *ShiftsListPosRequestFilterItem) GetValue() *ShiftsListPosRequestFilterItemValue {
+	if s == nil {
+		return nil
+	}
+	return s.Value
+}
+
+func (s *ShiftsListPosRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *ShiftsListPosRequestFilterItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequestFilterItem) SetField(field string) {
+	s.Field = field
+	s.require(shiftsListPosRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequestFilterItem) SetOp(op ShiftsListPosRequestFilterItemOp) {
+	s.Op = op
+	s.require(shiftsListPosRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequestFilterItem) SetValue(value *ShiftsListPosRequestFilterItemValue) {
+	s.Value = value
+	s.require(shiftsListPosRequestFilterItemFieldValue)
+}
+
+func (s *ShiftsListPosRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ShiftsListPosRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = ShiftsListPosRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *ShiftsListPosRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ShiftsListPosRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *ShiftsListPosRequestFilterItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type ShiftsListPosRequestFilterItemOp string
+
+const (
+	ShiftsListPosRequestFilterItemOpEq       ShiftsListPosRequestFilterItemOp = "eq"
+	ShiftsListPosRequestFilterItemOpNe       ShiftsListPosRequestFilterItemOp = "ne"
+	ShiftsListPosRequestFilterItemOpContains ShiftsListPosRequestFilterItemOp = "contains"
+	ShiftsListPosRequestFilterItemOpGte      ShiftsListPosRequestFilterItemOp = "gte"
+	ShiftsListPosRequestFilterItemOpLte      ShiftsListPosRequestFilterItemOp = "lte"
+	ShiftsListPosRequestFilterItemOpIn       ShiftsListPosRequestFilterItemOp = "in"
+)
+
+func NewShiftsListPosRequestFilterItemOpFromString(s string) (ShiftsListPosRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return ShiftsListPosRequestFilterItemOpEq, nil
+	case "ne":
+		return ShiftsListPosRequestFilterItemOpNe, nil
+	case "contains":
+		return ShiftsListPosRequestFilterItemOpContains, nil
+	case "gte":
+		return ShiftsListPosRequestFilterItemOpGte, nil
+	case "lte":
+		return ShiftsListPosRequestFilterItemOpLte, nil
+	case "in":
+		return ShiftsListPosRequestFilterItemOpIn, nil
+	}
+	var t ShiftsListPosRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s ShiftsListPosRequestFilterItemOp) Ptr() *ShiftsListPosRequestFilterItemOp {
+	return &s
+}
+
+type ShiftsListPosRequestFilterItemValue struct {
+	String                                           string
+	Double                                           float64
+	Boolean                                          bool
+	ShiftsListPosRequestFilterItemValueThreeItemList []*ShiftsListPosRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (s *ShiftsListPosRequestFilterItemValue) GetString() string {
+	if s == nil {
+		return ""
+	}
+	return s.String
+}
+
+func (s *ShiftsListPosRequestFilterItemValue) GetDouble() float64 {
+	if s == nil {
+		return 0
+	}
+	return s.Double
+}
+
+func (s *ShiftsListPosRequestFilterItemValue) GetBoolean() bool {
+	if s == nil {
+		return false
+	}
+	return s.Boolean
+}
+
+func (s *ShiftsListPosRequestFilterItemValue) GetShiftsListPosRequestFilterItemValueThreeItemList() []*ShiftsListPosRequestFilterItemValueThreeItem {
+	if s == nil {
+		return nil
+	}
+	return s.ShiftsListPosRequestFilterItemValueThreeItemList
+}
+
+func (s *ShiftsListPosRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		s.typ = "String"
+		s.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		s.typ = "Double"
+		s.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		s.typ = "Boolean"
+		s.Boolean = valueBoolean
+		return nil
+	}
+	var valueShiftsListPosRequestFilterItemValueThreeItemList []*ShiftsListPosRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueShiftsListPosRequestFilterItemValueThreeItemList); err == nil {
+		s.typ = "ShiftsListPosRequestFilterItemValueThreeItemList"
+		s.ShiftsListPosRequestFilterItemValueThreeItemList = valueShiftsListPosRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
+}
+
+func (s ShiftsListPosRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
+	}
+	if s.typ == "Boolean" || s.Boolean != false {
+		return json.Marshal(s.Boolean)
+	}
+	if s.typ == "ShiftsListPosRequestFilterItemValueThreeItemList" || s.ShiftsListPosRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(s.ShiftsListPosRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+type ShiftsListPosRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitShiftsListPosRequestFilterItemValueThreeItemList([]*ShiftsListPosRequestFilterItemValueThreeItem) error
+}
+
+func (s *ShiftsListPosRequestFilterItemValue) Accept(visitor ShiftsListPosRequestFilterItemValueVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
+	}
+	if s.typ == "Boolean" || s.Boolean != false {
+		return visitor.VisitBoolean(s.Boolean)
+	}
+	if s.typ == "ShiftsListPosRequestFilterItemValueThreeItemList" || s.ShiftsListPosRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitShiftsListPosRequestFilterItemValueThreeItemList(s.ShiftsListPosRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+type ShiftsListPosRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (s *ShiftsListPosRequestFilterItemValueThreeItem) GetString() string {
+	if s == nil {
+		return ""
+	}
+	return s.String
+}
+
+func (s *ShiftsListPosRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if s == nil {
+		return 0
+	}
+	return s.Double
+}
+
+func (s *ShiftsListPosRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		s.typ = "String"
+		s.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		s.typ = "Double"
+		s.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
+}
+
+func (s ShiftsListPosRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+type ShiftsListPosRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (s *ShiftsListPosRequestFilterItemValueThreeItem) Accept(visitor ShiftsListPosRequestFilterItemValueThreeItemVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+var (
+	shiftsListPosRequestSortItemFieldField = big.NewInt(1 << 0)
+	shiftsListPosRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type ShiftsListPosRequestSortItem struct {
+	Field string                           `json:"field" url:"field"`
+	Dir   *ShiftsListPosRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *ShiftsListPosRequestSortItem) GetField() string {
+	if s == nil {
+		return ""
+	}
+	return s.Field
+}
+
+func (s *ShiftsListPosRequestSortItem) GetDir() *ShiftsListPosRequestSortItemDir {
+	if s == nil {
+		return nil
+	}
+	return s.Dir
+}
+
+func (s *ShiftsListPosRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *ShiftsListPosRequestSortItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequestSortItem) SetField(field string) {
+	s.Field = field
+	s.require(shiftsListPosRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosRequestSortItem) SetDir(dir *ShiftsListPosRequestSortItemDir) {
+	s.Dir = dir
+	s.require(shiftsListPosRequestSortItemFieldDir)
+}
+
+func (s *ShiftsListPosRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ShiftsListPosRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = ShiftsListPosRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *ShiftsListPosRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ShiftsListPosRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *ShiftsListPosRequestSortItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type ShiftsListPosRequestSortItemDir string
+
+const (
+	ShiftsListPosRequestSortItemDirAsc  ShiftsListPosRequestSortItemDir = "asc"
+	ShiftsListPosRequestSortItemDirDesc ShiftsListPosRequestSortItemDir = "desc"
+)
+
+func NewShiftsListPosRequestSortItemDirFromString(s string) (ShiftsListPosRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return ShiftsListPosRequestSortItemDirAsc, nil
+	case "desc":
+		return ShiftsListPosRequestSortItemDirDesc, nil
+	}
+	var t ShiftsListPosRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s ShiftsListPosRequestSortItemDir) Ptr() *ShiftsListPosRequestSortItemDir {
+	return &s
+}
+
+var (
+	shiftsListPosResponseFieldRows             = big.NewInt(1 << 0)
+	shiftsListPosResponseFieldPage             = big.NewInt(1 << 1)
+	shiftsListPosResponseFieldPageSize         = big.NewInt(1 << 2)
+	shiftsListPosResponseFieldTotal            = big.NewInt(1 << 3)
+	shiftsListPosResponseFieldTotals           = big.NewInt(1 << 4)
+	shiftsListPosResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type ShiftsListPosResponse struct {
+	Rows     []*ShiftsListPosResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                            `json:"page" url:"page"`
+	PageSize int64                            `json:"pageSize" url:"pageSize"`
+	Total    int64                            `json:"total" url:"total"`
+	Totals   map[string]string                `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *ShiftsListPosResponse) GetRows() []*ShiftsListPosResponseRowsItem {
+	if s == nil {
+		return nil
+	}
+	return s.Rows
+}
+
+func (s *ShiftsListPosResponse) GetPage() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Page
+}
+
+func (s *ShiftsListPosResponse) GetPageSize() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.PageSize
+}
+
+func (s *ShiftsListPosResponse) GetTotal() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Total
+}
+
+func (s *ShiftsListPosResponse) GetTotals() map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.Totals
+}
+
+func (s *ShiftsListPosResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.TotalsByCurrency
+}
+
+func (s *ShiftsListPosResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *ShiftsListPosResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponse) SetRows(rows []*ShiftsListPosResponseRowsItem) {
+	s.Rows = rows
+	s.require(shiftsListPosResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponse) SetPage(page int64) {
+	s.Page = page
+	s.require(shiftsListPosResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponse) SetPageSize(pageSize int64) {
+	s.PageSize = pageSize
+	s.require(shiftsListPosResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponse) SetTotal(total int64) {
+	s.Total = total
+	s.require(shiftsListPosResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponse) SetTotals(totals map[string]string) {
+	s.Totals = totals
+	s.require(shiftsListPosResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	s.TotalsByCurrency = totalsByCurrency
+	s.require(shiftsListPosResponseFieldTotalsByCurrency)
+}
+
+func (s *ShiftsListPosResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ShiftsListPosResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = ShiftsListPosResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *ShiftsListPosResponse) MarshalJSON() ([]byte, error) {
+	type embed ShiftsListPosResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *ShiftsListPosResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	shiftsListPosResponseRowsItemFieldID           = big.NewInt(1 << 0)
+	shiftsListPosResponseRowsItemFieldDeviceID     = big.NewInt(1 << 1)
+	shiftsListPosResponseRowsItemFieldWarehouseID  = big.NewInt(1 << 2)
+	shiftsListPosResponseRowsItemFieldStatus       = big.NewInt(1 << 3)
+	shiftsListPosResponseRowsItemFieldOpeningCash  = big.NewInt(1 << 4)
+	shiftsListPosResponseRowsItemFieldCountedCash  = big.NewInt(1 << 5)
+	shiftsListPosResponseRowsItemFieldReceiptCount = big.NewInt(1 << 6)
+	shiftsListPosResponseRowsItemFieldReportID     = big.NewInt(1 << 7)
+	shiftsListPosResponseRowsItemFieldOpenedAt     = big.NewInt(1 << 8)
+	shiftsListPosResponseRowsItemFieldClosedAt     = big.NewInt(1 << 9)
+)
+
+type ShiftsListPosResponseRowsItem struct {
+	ID           string                              `json:"id" url:"id"`
+	DeviceID     string                              `json:"deviceId" url:"deviceId"`
+	WarehouseID  *string                             `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Status       ShiftsListPosResponseRowsItemStatus `json:"status" url:"status"`
+	OpeningCash  string                              `json:"openingCash" url:"openingCash"`
+	CountedCash  *string                             `json:"countedCash,omitempty" url:"countedCash,omitempty"`
+	ReceiptCount int64                               `json:"receiptCount" url:"receiptCount"`
+	ReportID     *string                             `json:"reportId,omitempty" url:"reportId,omitempty"`
+	OpenedAt     time.Time                           `json:"openedAt" url:"openedAt"`
+	ClosedAt     *time.Time                          `json:"closedAt,omitempty" url:"closedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetDeviceID() string {
+	if s == nil {
+		return ""
+	}
+	return s.DeviceID
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetWarehouseID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.WarehouseID
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetStatus() ShiftsListPosResponseRowsItemStatus {
+	if s == nil {
+		return ""
+	}
+	return s.Status
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetOpeningCash() string {
+	if s == nil {
+		return ""
+	}
+	return s.OpeningCash
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetCountedCash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CountedCash
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetReceiptCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ReceiptCount
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetReportID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReportID
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetOpenedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.OpenedAt
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetClosedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.ClosedAt
+}
+
+func (s *ShiftsListPosResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *ShiftsListPosResponseRowsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetID(id string) {
+	s.ID = id
+	s.require(shiftsListPosResponseRowsItemFieldID)
+}
+
+// SetDeviceID sets the DeviceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetDeviceID(deviceID string) {
+	s.DeviceID = deviceID
+	s.require(shiftsListPosResponseRowsItemFieldDeviceID)
+}
+
+// SetWarehouseID sets the WarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetWarehouseID(warehouseID *string) {
+	s.WarehouseID = warehouseID
+	s.require(shiftsListPosResponseRowsItemFieldWarehouseID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetStatus(status ShiftsListPosResponseRowsItemStatus) {
+	s.Status = status
+	s.require(shiftsListPosResponseRowsItemFieldStatus)
+}
+
+// SetOpeningCash sets the OpeningCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetOpeningCash(openingCash string) {
+	s.OpeningCash = openingCash
+	s.require(shiftsListPosResponseRowsItemFieldOpeningCash)
+}
+
+// SetCountedCash sets the CountedCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetCountedCash(countedCash *string) {
+	s.CountedCash = countedCash
+	s.require(shiftsListPosResponseRowsItemFieldCountedCash)
+}
+
+// SetReceiptCount sets the ReceiptCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetReceiptCount(receiptCount int64) {
+	s.ReceiptCount = receiptCount
+	s.require(shiftsListPosResponseRowsItemFieldReceiptCount)
+}
+
+// SetReportID sets the ReportID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetReportID(reportID *string) {
+	s.ReportID = reportID
+	s.require(shiftsListPosResponseRowsItemFieldReportID)
+}
+
+// SetOpenedAt sets the OpenedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetOpenedAt(openedAt time.Time) {
+	s.OpenedAt = openedAt
+	s.require(shiftsListPosResponseRowsItemFieldOpenedAt)
+}
+
+// SetClosedAt sets the ClosedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsListPosResponseRowsItem) SetClosedAt(closedAt *time.Time) {
+	s.ClosedAt = closedAt
+	s.require(shiftsListPosResponseRowsItemFieldClosedAt)
+}
+
+func (s *ShiftsListPosResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ShiftsListPosResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = ShiftsListPosResponseRowsItem(unmarshaler.embed)
+	s.OpenedAt = unmarshaler.OpenedAt.Time()
+	s.ClosedAt = unmarshaler.ClosedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *ShiftsListPosResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ShiftsListPosResponseRowsItem
+	var marshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed:    embed(*s),
+		OpenedAt: internal.NewDateTime(s.OpenedAt),
+		ClosedAt: internal.NewOptionalDateTime(s.ClosedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *ShiftsListPosResponseRowsItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type ShiftsListPosResponseRowsItemStatus string
+
+const (
+	ShiftsListPosResponseRowsItemStatusOpen   ShiftsListPosResponseRowsItemStatus = "open"
+	ShiftsListPosResponseRowsItemStatusClosed ShiftsListPosResponseRowsItemStatus = "closed"
+)
+
+func NewShiftsListPosResponseRowsItemStatusFromString(s string) (ShiftsListPosResponseRowsItemStatus, error) {
+	switch s {
+	case "open":
+		return ShiftsListPosResponseRowsItemStatusOpen, nil
+	case "closed":
+		return ShiftsListPosResponseRowsItemStatusClosed, nil
+	}
+	var t ShiftsListPosResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s ShiftsListPosResponseRowsItemStatus) Ptr() *ShiftsListPosResponseRowsItemStatus {
+	return &s
+}
+
+var (
+	shiftsOpenPosResponseFieldID           = big.NewInt(1 << 0)
+	shiftsOpenPosResponseFieldDeviceID     = big.NewInt(1 << 1)
+	shiftsOpenPosResponseFieldWarehouseID  = big.NewInt(1 << 2)
+	shiftsOpenPosResponseFieldStatus       = big.NewInt(1 << 3)
+	shiftsOpenPosResponseFieldOpeningCash  = big.NewInt(1 << 4)
+	shiftsOpenPosResponseFieldCountedCash  = big.NewInt(1 << 5)
+	shiftsOpenPosResponseFieldReceiptCount = big.NewInt(1 << 6)
+	shiftsOpenPosResponseFieldReportID     = big.NewInt(1 << 7)
+	shiftsOpenPosResponseFieldOpenedAt     = big.NewInt(1 << 8)
+	shiftsOpenPosResponseFieldClosedAt     = big.NewInt(1 << 9)
+)
+
+type ShiftsOpenPosResponse struct {
+	ID           string                      `json:"id" url:"id"`
+	DeviceID     string                      `json:"deviceId" url:"deviceId"`
+	WarehouseID  *string                     `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
+	Status       ShiftsOpenPosResponseStatus `json:"status" url:"status"`
+	OpeningCash  string                      `json:"openingCash" url:"openingCash"`
+	CountedCash  *string                     `json:"countedCash,omitempty" url:"countedCash,omitempty"`
+	ReceiptCount int64                       `json:"receiptCount" url:"receiptCount"`
+	ReportID     *string                     `json:"reportId,omitempty" url:"reportId,omitempty"`
+	OpenedAt     time.Time                   `json:"openedAt" url:"openedAt"`
+	ClosedAt     *time.Time                  `json:"closedAt,omitempty" url:"closedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *ShiftsOpenPosResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *ShiftsOpenPosResponse) GetDeviceID() string {
+	if s == nil {
+		return ""
+	}
+	return s.DeviceID
+}
+
+func (s *ShiftsOpenPosResponse) GetWarehouseID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.WarehouseID
+}
+
+func (s *ShiftsOpenPosResponse) GetStatus() ShiftsOpenPosResponseStatus {
+	if s == nil {
+		return ""
+	}
+	return s.Status
+}
+
+func (s *ShiftsOpenPosResponse) GetOpeningCash() string {
+	if s == nil {
+		return ""
+	}
+	return s.OpeningCash
+}
+
+func (s *ShiftsOpenPosResponse) GetCountedCash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CountedCash
+}
+
+func (s *ShiftsOpenPosResponse) GetReceiptCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ReceiptCount
+}
+
+func (s *ShiftsOpenPosResponse) GetReportID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReportID
+}
+
+func (s *ShiftsOpenPosResponse) GetOpenedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.OpenedAt
+}
+
+func (s *ShiftsOpenPosResponse) GetClosedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.ClosedAt
+}
+
+func (s *ShiftsOpenPosResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *ShiftsOpenPosResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetID(id string) {
+	s.ID = id
+	s.require(shiftsOpenPosResponseFieldID)
+}
+
+// SetDeviceID sets the DeviceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetDeviceID(deviceID string) {
+	s.DeviceID = deviceID
+	s.require(shiftsOpenPosResponseFieldDeviceID)
+}
+
+// SetWarehouseID sets the WarehouseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetWarehouseID(warehouseID *string) {
+	s.WarehouseID = warehouseID
+	s.require(shiftsOpenPosResponseFieldWarehouseID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetStatus(status ShiftsOpenPosResponseStatus) {
+	s.Status = status
+	s.require(shiftsOpenPosResponseFieldStatus)
+}
+
+// SetOpeningCash sets the OpeningCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetOpeningCash(openingCash string) {
+	s.OpeningCash = openingCash
+	s.require(shiftsOpenPosResponseFieldOpeningCash)
+}
+
+// SetCountedCash sets the CountedCash field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetCountedCash(countedCash *string) {
+	s.CountedCash = countedCash
+	s.require(shiftsOpenPosResponseFieldCountedCash)
+}
+
+// SetReceiptCount sets the ReceiptCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetReceiptCount(receiptCount int64) {
+	s.ReceiptCount = receiptCount
+	s.require(shiftsOpenPosResponseFieldReceiptCount)
+}
+
+// SetReportID sets the ReportID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetReportID(reportID *string) {
+	s.ReportID = reportID
+	s.require(shiftsOpenPosResponseFieldReportID)
+}
+
+// SetOpenedAt sets the OpenedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetOpenedAt(openedAt time.Time) {
+	s.OpenedAt = openedAt
+	s.require(shiftsOpenPosResponseFieldOpenedAt)
+}
+
+// SetClosedAt sets the ClosedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *ShiftsOpenPosResponse) SetClosedAt(closedAt *time.Time) {
+	s.ClosedAt = closedAt
+	s.require(shiftsOpenPosResponseFieldClosedAt)
+}
+
+func (s *ShiftsOpenPosResponse) UnmarshalJSON(data []byte) error {
+	type embed ShiftsOpenPosResponse
+	var unmarshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = ShiftsOpenPosResponse(unmarshaler.embed)
+	s.OpenedAt = unmarshaler.OpenedAt.Time()
+	s.ClosedAt = unmarshaler.ClosedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *ShiftsOpenPosResponse) MarshalJSON() ([]byte, error) {
+	type embed ShiftsOpenPosResponse
+	var marshaler = struct {
+		embed
+		OpenedAt *internal.DateTime `json:"openedAt"`
+		ClosedAt *internal.DateTime `json:"closedAt,omitempty"`
+	}{
+		embed:    embed(*s),
+		OpenedAt: internal.NewDateTime(s.OpenedAt),
+		ClosedAt: internal.NewOptionalDateTime(s.ClosedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *ShiftsOpenPosResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type ShiftsOpenPosResponseStatus string
+
+const (
+	ShiftsOpenPosResponseStatusOpen   ShiftsOpenPosResponseStatus = "open"
+	ShiftsOpenPosResponseStatusClosed ShiftsOpenPosResponseStatus = "closed"
+)
+
+func NewShiftsOpenPosResponseStatusFromString(s string) (ShiftsOpenPosResponseStatus, error) {
+	switch s {
+	case "open":
+		return ShiftsOpenPosResponseStatusOpen, nil
+	case "closed":
+		return ShiftsOpenPosResponseStatusClosed, nil
+	}
+	var t ShiftsOpenPosResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s ShiftsOpenPosResponseStatus) Ptr() *ShiftsOpenPosResponseStatus {
+	return &s
 }

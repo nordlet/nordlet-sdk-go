@@ -2315,8 +2315,9 @@ var (
 	aPIKeysListAccountResponseRowsItemFieldLastUsedAt      = big.NewInt(1 << 3)
 	aPIKeysListAccountResponseRowsItemFieldExpiresAt       = big.NewInt(1 << 4)
 	aPIKeysListAccountResponseRowsItemFieldReplacedByKeyID = big.NewInt(1 << 5)
-	aPIKeysListAccountResponseRowsItemFieldRevokedAt       = big.NewInt(1 << 6)
-	aPIKeysListAccountResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 7)
+	aPIKeysListAccountResponseRowsItemFieldCreatedByUserID = big.NewInt(1 << 6)
+	aPIKeysListAccountResponseRowsItemFieldRevokedAt       = big.NewInt(1 << 7)
+	aPIKeysListAccountResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 8)
 )
 
 type APIKeysListAccountResponseRowsItem struct {
@@ -2326,6 +2327,7 @@ type APIKeysListAccountResponseRowsItem struct {
 	LastUsedAt      *time.Time `json:"lastUsedAt,omitempty" url:"lastUsedAt,omitempty"`
 	ExpiresAt       *time.Time `json:"expiresAt,omitempty" url:"expiresAt,omitempty"`
 	ReplacedByKeyID *string    `json:"replacedByKeyId,omitempty" url:"replacedByKeyId,omitempty"`
+	CreatedByUserID *string    `json:"createdByUserId,omitempty" url:"createdByUserId,omitempty"`
 	RevokedAt       *time.Time `json:"revokedAt,omitempty" url:"revokedAt,omitempty"`
 	CreatedAt       time.Time  `json:"createdAt" url:"createdAt"`
 
@@ -2376,6 +2378,13 @@ func (a *APIKeysListAccountResponseRowsItem) GetReplacedByKeyID() *string {
 		return nil
 	}
 	return a.ReplacedByKeyID
+}
+
+func (a *APIKeysListAccountResponseRowsItem) GetCreatedByUserID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CreatedByUserID
 }
 
 func (a *APIKeysListAccountResponseRowsItem) GetRevokedAt() *time.Time {
@@ -2446,6 +2455,13 @@ func (a *APIKeysListAccountResponseRowsItem) SetExpiresAt(expiresAt *time.Time) 
 func (a *APIKeysListAccountResponseRowsItem) SetReplacedByKeyID(replacedByKeyID *string) {
 	a.ReplacedByKeyID = replacedByKeyID
 	a.require(aPIKeysListAccountResponseRowsItemFieldReplacedByKeyID)
+}
+
+// SetCreatedByUserID sets the CreatedByUserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeysListAccountResponseRowsItem) SetCreatedByUserID(createdByUserID *string) {
+	a.CreatedByUserID = createdByUserID
+	a.require(aPIKeysListAccountResponseRowsItemFieldCreatedByUserID)
 }
 
 // SetRevokedAt sets the RevokedAt field and marks it as non-optional;

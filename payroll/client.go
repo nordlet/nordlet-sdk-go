@@ -195,6 +195,22 @@ func (c *Client) RunsApprove(
 	return response.Body, nil
 }
 
+func (c *Client) RunsReverse(
+	ctx context.Context,
+	request *nordlet.RunsReversePayrollRequest,
+	opts ...option.RequestOption,
+) (*nordlet.RunsReversePayrollResponse, error) {
+	response, err := c.WithRawResponse.RunsReverse(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) RunsCancel(
 	ctx context.Context,
 	request *nordlet.RunsCancelPayrollRequest,

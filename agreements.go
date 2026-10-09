@@ -864,6 +864,65 @@ func (i *InsurancePoliciesListAgreementsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type SettingsGetAgreementsRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SettingsGetAgreementsRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+var (
+	settingsUpdateAgreementsRequestFieldAutoBilling = big.NewInt(1 << 0)
+)
+
+type SettingsUpdateAgreementsRequest struct {
+	AutoBilling bool `json:"autoBilling" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SettingsUpdateAgreementsRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetAutoBilling sets the AutoBilling field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettingsUpdateAgreementsRequest) SetAutoBilling(autoBilling bool) {
+	s.AutoBilling = autoBilling
+	s.require(settingsUpdateAgreementsRequestFieldAutoBilling)
+}
+
+func (s *SettingsUpdateAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateAgreementsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SettingsUpdateAgreementsRequest(body)
+	return nil
+}
+
+func (s *SettingsUpdateAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateAgreementsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
 var (
 	agreementsBillingRunAgreementsResponseFieldGenerated = big.NewInt(1 << 0)
 	agreementsBillingRunAgreementsResponseFieldExpired   = big.NewInt(1 << 1)
@@ -5944,6 +6003,174 @@ func (i *InsurancePoliciesListAgreementsResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	settingsGetAgreementsResponseFieldAutoBilling = big.NewInt(1 << 0)
+)
+
+type SettingsGetAgreementsResponse struct {
+	AutoBilling bool `json:"autoBilling" url:"autoBilling"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SettingsGetAgreementsResponse) GetAutoBilling() bool {
+	if s == nil {
+		return false
+	}
+	return s.AutoBilling
+}
+
+func (s *SettingsGetAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SettingsGetAgreementsResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetAutoBilling sets the AutoBilling field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettingsGetAgreementsResponse) SetAutoBilling(autoBilling bool) {
+	s.AutoBilling = autoBilling
+	s.require(settingsGetAgreementsResponseFieldAutoBilling)
+}
+
+func (s *SettingsGetAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsGetAgreementsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SettingsGetAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SettingsGetAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsGetAgreementsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SettingsGetAgreementsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	settingsUpdateAgreementsResponseFieldAutoBilling = big.NewInt(1 << 0)
+)
+
+type SettingsUpdateAgreementsResponse struct {
+	AutoBilling bool `json:"autoBilling" url:"autoBilling"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SettingsUpdateAgreementsResponse) GetAutoBilling() bool {
+	if s == nil {
+		return false
+	}
+	return s.AutoBilling
+}
+
+func (s *SettingsUpdateAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SettingsUpdateAgreementsResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetAutoBilling sets the AutoBilling field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettingsUpdateAgreementsResponse) SetAutoBilling(autoBilling bool) {
+	s.AutoBilling = autoBilling
+	s.require(settingsUpdateAgreementsResponseFieldAutoBilling)
+}
+
+func (s *SettingsUpdateAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SettingsUpdateAgreementsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SettingsUpdateAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SettingsUpdateAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed SettingsUpdateAgreementsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SettingsUpdateAgreementsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }
 
 var (

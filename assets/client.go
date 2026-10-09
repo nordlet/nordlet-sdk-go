@@ -34,6 +34,38 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+func (c *Client) SettingsGet(
+	ctx context.Context,
+	request *nordlet.SettingsGetAssetsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SettingsGetAssetsResponse, error) {
+	response, err := c.WithRawResponse.SettingsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) SettingsUpdate(
+	ctx context.Context,
+	request *nordlet.SettingsUpdateAssetsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SettingsUpdateAssetsResponse, error) {
+	response, err := c.WithRawResponse.SettingsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) GroupsCreate(
 	ctx context.Context,
 	request *nordlet.GroupsCreateAssetsRequest,

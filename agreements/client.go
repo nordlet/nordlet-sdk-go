@@ -34,6 +34,38 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+func (c *Client) SettingsGet(
+	ctx context.Context,
+	request *nordlet.SettingsGetAgreementsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SettingsGetAgreementsResponse, error) {
+	response, err := c.WithRawResponse.SettingsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) SettingsUpdate(
+	ctx context.Context,
+	request *nordlet.SettingsUpdateAgreementsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SettingsUpdateAgreementsResponse, error) {
+	response, err := c.WithRawResponse.SettingsUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) TypesCreate(
 	ctx context.Context,
 	request *nordlet.TypesCreateAgreementsRequest,

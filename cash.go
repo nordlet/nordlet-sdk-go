@@ -81,16 +81,222 @@ func (b *BalanceCashRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	expenseReportsCreateCashRequestFieldEmployeeID = big.NewInt(1 << 0)
+	expenseReportsCreateCashRequestFieldDate       = big.NewInt(1 << 1)
+	expenseReportsCreateCashRequestFieldNotes      = big.NewInt(1 << 2)
+	expenseReportsCreateCashRequestFieldLines      = big.NewInt(1 << 3)
+)
+
+type ExpenseReportsCreateCashRequest struct {
+	EmployeeID string                                      `json:"employeeId" url:"-"`
+	Date       time.Time                                   `json:"date" url:"-" format:"date"`
+	Notes      *string                                     `json:"notes,omitempty" url:"-"`
+	Lines      []*ExpenseReportsCreateCashRequestLinesItem `json:"lines" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *ExpenseReportsCreateCashRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequest) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(expenseReportsCreateCashRequestFieldEmployeeID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequest) SetDate(date time.Time) {
+	e.Date = date
+	e.require(expenseReportsCreateCashRequestFieldDate)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequest) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(expenseReportsCreateCashRequestFieldNotes)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequest) SetLines(lines []*ExpenseReportsCreateCashRequestLinesItem) {
+	e.Lines = lines
+	e.require(expenseReportsCreateCashRequestFieldLines)
+}
+
+func (e *ExpenseReportsCreateCashRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsCreateCashRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = ExpenseReportsCreateCashRequest(body)
+	return nil
+}
+
+func (e *ExpenseReportsCreateCashRequest) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsCreateCashRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*e),
+		Date:  internal.NewDate(e.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	expenseReportsGetCashRequestFieldID = big.NewInt(1 << 0)
+)
+
+type ExpenseReportsGetCashRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *ExpenseReportsGetCashRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashRequest) SetID(id string) {
+	e.ID = id
+	e.require(expenseReportsGetCashRequestFieldID)
+}
+
+func (e *ExpenseReportsGetCashRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsGetCashRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = ExpenseReportsGetCashRequest(body)
+	return nil
+}
+
+func (e *ExpenseReportsGetCashRequest) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsGetCashRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	expenseReportsListCashRequestFieldPage     = big.NewInt(1 << 0)
+	expenseReportsListCashRequestFieldPageSize = big.NewInt(1 << 1)
+	expenseReportsListCashRequestFieldSort     = big.NewInt(1 << 2)
+	expenseReportsListCashRequestFieldFilter   = big.NewInt(1 << 3)
+	expenseReportsListCashRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type ExpenseReportsListCashRequest struct {
+	Page     *int64                                     `json:"page,omitempty" url:"-"`
+	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
+	Sort     []*ExpenseReportsListCashRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*ExpenseReportsListCashRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *ExpenseReportsListCashRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequest) SetPage(page *int64) {
+	e.Page = page
+	e.require(expenseReportsListCashRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequest) SetPageSize(pageSize *int64) {
+	e.PageSize = pageSize
+	e.require(expenseReportsListCashRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequest) SetSort(sort []*ExpenseReportsListCashRequestSortItem) {
+	e.Sort = sort
+	e.require(expenseReportsListCashRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequest) SetFilter(filter []*ExpenseReportsListCashRequestFilterItem) {
+	e.Filter = filter
+	e.require(expenseReportsListCashRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequest) SetTotals(totals []string) {
+	e.Totals = totals
+	e.require(expenseReportsListCashRequestFieldTotals)
+}
+
+func (e *ExpenseReportsListCashRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsListCashRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = ExpenseReportsListCashRequest(body)
+	return nil
+}
+
+func (e *ExpenseReportsListCashRequest) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsListCashRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	ordersCreateCashRequestFieldType               = big.NewInt(1 << 0)
 	ordersCreateCashRequestFieldDate               = big.NewInt(1 << 1)
 	ordersCreateCashRequestFieldAmount             = big.NewInt(1 << 2)
 	ordersCreateCashRequestFieldPurpose            = big.NewInt(1 << 3)
 	ordersCreateCashRequestFieldCounterAccountCode = big.NewInt(1 << 4)
 	ordersCreateCashRequestFieldCashAccountCode    = big.NewInt(1 << 5)
-	ordersCreateCashRequestFieldSeries             = big.NewInt(1 << 6)
-	ordersCreateCashRequestFieldPartnerID          = big.NewInt(1 << 7)
-	ordersCreateCashRequestFieldEmployeeID         = big.NewInt(1 << 8)
-	ordersCreateCashRequestFieldNotes              = big.NewInt(1 << 9)
+	ordersCreateCashRequestFieldSaleInvoiceID      = big.NewInt(1 << 6)
+	ordersCreateCashRequestFieldPurchaseInvoiceID  = big.NewInt(1 << 7)
+	ordersCreateCashRequestFieldSeries             = big.NewInt(1 << 8)
+	ordersCreateCashRequestFieldPartnerID          = big.NewInt(1 << 9)
+	ordersCreateCashRequestFieldEmployeeID         = big.NewInt(1 << 10)
+	ordersCreateCashRequestFieldNotes              = big.NewInt(1 << 11)
 )
 
 type OrdersCreateCashRequest struct {
@@ -98,8 +304,10 @@ type OrdersCreateCashRequest struct {
 	Date               time.Time                   `json:"date" url:"-" format:"date"`
 	Amount             string                      `json:"amount" url:"-"`
 	Purpose            string                      `json:"purpose" url:"-"`
-	CounterAccountCode string                      `json:"counterAccountCode" url:"-"`
+	CounterAccountCode *string                     `json:"counterAccountCode,omitempty" url:"-"`
 	CashAccountCode    *string                     `json:"cashAccountCode,omitempty" url:"-"`
+	SaleInvoiceID      *string                     `json:"saleInvoiceId,omitempty" url:"-"`
+	PurchaseInvoiceID  *string                     `json:"purchaseInvoiceId,omitempty" url:"-"`
 	Series             *string                     `json:"series,omitempty" url:"-"`
 	PartnerID          *string                     `json:"partnerId,omitempty" url:"-"`
 	EmployeeID         *string                     `json:"employeeId,omitempty" url:"-"`
@@ -146,7 +354,7 @@ func (o *OrdersCreateCashRequest) SetPurpose(purpose string) {
 
 // SetCounterAccountCode sets the CounterAccountCode field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (o *OrdersCreateCashRequest) SetCounterAccountCode(counterAccountCode string) {
+func (o *OrdersCreateCashRequest) SetCounterAccountCode(counterAccountCode *string) {
 	o.CounterAccountCode = counterAccountCode
 	o.require(ordersCreateCashRequestFieldCounterAccountCode)
 }
@@ -156,6 +364,20 @@ func (o *OrdersCreateCashRequest) SetCounterAccountCode(counterAccountCode strin
 func (o *OrdersCreateCashRequest) SetCashAccountCode(cashAccountCode *string) {
 	o.CashAccountCode = cashAccountCode
 	o.require(ordersCreateCashRequestFieldCashAccountCode)
+}
+
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreateCashRequest) SetSaleInvoiceID(saleInvoiceID *string) {
+	o.SaleInvoiceID = saleInvoiceID
+	o.require(ordersCreateCashRequestFieldSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreateCashRequest) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	o.PurchaseInvoiceID = purchaseInvoiceID
+	o.require(ordersCreateCashRequestFieldPurchaseInvoiceID)
 }
 
 // SetSeries sets the Series field and marks it as non-optional;
@@ -428,7 +650,8 @@ var (
 	advanceHoldersBalancesCashResponseRowsItemFieldLastName   = big.NewInt(1 << 2)
 	advanceHoldersBalancesCashResponseRowsItemFieldIssued     = big.NewInt(1 << 3)
 	advanceHoldersBalancesCashResponseRowsItemFieldReturned   = big.NewInt(1 << 4)
-	advanceHoldersBalancesCashResponseRowsItemFieldBalance    = big.NewInt(1 << 5)
+	advanceHoldersBalancesCashResponseRowsItemFieldSettled    = big.NewInt(1 << 5)
+	advanceHoldersBalancesCashResponseRowsItemFieldBalance    = big.NewInt(1 << 6)
 )
 
 type AdvanceHoldersBalancesCashResponseRowsItem struct {
@@ -437,6 +660,7 @@ type AdvanceHoldersBalancesCashResponseRowsItem struct {
 	LastName   string `json:"lastName" url:"lastName"`
 	Issued     string `json:"issued" url:"issued"`
 	Returned   string `json:"returned" url:"returned"`
+	Settled    string `json:"settled" url:"settled"`
 	Balance    string `json:"balance" url:"balance"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -479,6 +703,13 @@ func (a *AdvanceHoldersBalancesCashResponseRowsItem) GetReturned() string {
 		return ""
 	}
 	return a.Returned
+}
+
+func (a *AdvanceHoldersBalancesCashResponseRowsItem) GetSettled() string {
+	if a == nil {
+		return ""
+	}
+	return a.Settled
 }
 
 func (a *AdvanceHoldersBalancesCashResponseRowsItem) GetBalance() string {
@@ -535,6 +766,13 @@ func (a *AdvanceHoldersBalancesCashResponseRowsItem) SetIssued(issued string) {
 func (a *AdvanceHoldersBalancesCashResponseRowsItem) SetReturned(returned string) {
 	a.Returned = returned
 	a.require(advanceHoldersBalancesCashResponseRowsItemFieldReturned)
+}
+
+// SetSettled sets the Settled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AdvanceHoldersBalancesCashResponseRowsItem) SetSettled(settled string) {
+	a.Settled = settled
+	a.require(advanceHoldersBalancesCashResponseRowsItemFieldSettled)
 }
 
 // SetBalance sets the Balance field and marks it as non-optional;
@@ -686,6 +924,1837 @@ func (b *BalanceCashResponse) String() string {
 	return fmt.Sprintf("%#v", b)
 }
 
+var (
+	expenseReportsCreateCashRequestLinesItemFieldDescription    = big.NewInt(1 << 0)
+	expenseReportsCreateCashRequestLinesItemFieldDocumentNumber = big.NewInt(1 << 1)
+	expenseReportsCreateCashRequestLinesItemFieldAccountCode    = big.NewInt(1 << 2)
+	expenseReportsCreateCashRequestLinesItemFieldNetAmount      = big.NewInt(1 << 3)
+	expenseReportsCreateCashRequestLinesItemFieldVatAmount      = big.NewInt(1 << 4)
+)
+
+type ExpenseReportsCreateCashRequestLinesItem struct {
+	Description    string  `json:"description" url:"description"`
+	DocumentNumber *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	AccountCode    string  `json:"accountCode" url:"accountCode"`
+	NetAmount      string  `json:"netAmount" url:"netAmount"`
+	VatAmount      *string `json:"vatAmount,omitempty" url:"vatAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetDescription() string {
+	if e == nil {
+		return ""
+	}
+	return e.Description
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetDocumentNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.DocumentNumber
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetAccountCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.AccountCode
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetNetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.NetAmount
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetVatAmount() *string {
+	if e == nil {
+		return nil
+	}
+	return e.VatAmount
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequestLinesItem) SetDescription(description string) {
+	e.Description = description
+	e.require(expenseReportsCreateCashRequestLinesItemFieldDescription)
+}
+
+// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequestLinesItem) SetDocumentNumber(documentNumber *string) {
+	e.DocumentNumber = documentNumber
+	e.require(expenseReportsCreateCashRequestLinesItemFieldDocumentNumber)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequestLinesItem) SetAccountCode(accountCode string) {
+	e.AccountCode = accountCode
+	e.require(expenseReportsCreateCashRequestLinesItemFieldAccountCode)
+}
+
+// SetNetAmount sets the NetAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequestLinesItem) SetNetAmount(netAmount string) {
+	e.NetAmount = netAmount
+	e.require(expenseReportsCreateCashRequestLinesItemFieldNetAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequestLinesItem) SetVatAmount(vatAmount *string) {
+	e.VatAmount = vatAmount
+	e.require(expenseReportsCreateCashRequestLinesItemFieldVatAmount)
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsCreateCashRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = ExpenseReportsCreateCashRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsCreateCashRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	expenseReportsCreateCashResponseFieldID                   = big.NewInt(1 << 0)
+	expenseReportsCreateCashResponseFieldNumber               = big.NewInt(1 << 1)
+	expenseReportsCreateCashResponseFieldEmployeeID           = big.NewInt(1 << 2)
+	expenseReportsCreateCashResponseFieldDate                 = big.NewInt(1 << 3)
+	expenseReportsCreateCashResponseFieldNetTotal             = big.NewInt(1 << 4)
+	expenseReportsCreateCashResponseFieldVatTotal             = big.NewInt(1 << 5)
+	expenseReportsCreateCashResponseFieldTotal                = big.NewInt(1 << 6)
+	expenseReportsCreateCashResponseFieldJournalTransactionID = big.NewInt(1 << 7)
+	expenseReportsCreateCashResponseFieldNotes                = big.NewInt(1 << 8)
+	expenseReportsCreateCashResponseFieldCreatedAt            = big.NewInt(1 << 9)
+	expenseReportsCreateCashResponseFieldLines                = big.NewInt(1 << 10)
+)
+
+type ExpenseReportsCreateCashResponse struct {
+	ID                   string                                       `json:"id" url:"id"`
+	Number               string                                       `json:"number" url:"number"`
+	EmployeeID           string                                       `json:"employeeId" url:"employeeId"`
+	Date                 time.Time                                    `json:"date" url:"date" format:"date"`
+	NetTotal             string                                       `json:"netTotal" url:"netTotal"`
+	VatTotal             string                                       `json:"vatTotal" url:"vatTotal"`
+	Total                string                                       `json:"total" url:"total"`
+	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                    `json:"createdAt" url:"createdAt"`
+	Lines                []*ExpenseReportsCreateCashResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetNumber() string {
+	if e == nil {
+		return ""
+	}
+	return e.Number
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetEmployeeID() string {
+	if e == nil {
+		return ""
+	}
+	return e.EmployeeID
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.Date
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetNetTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.NetTotal
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetVatTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatTotal
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.Total
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetJournalTransactionID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.JournalTransactionID
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetLines() []*ExpenseReportsCreateCashResponseLinesItem {
+	if e == nil {
+		return nil
+	}
+	return e.Lines
+}
+
+func (e *ExpenseReportsCreateCashResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsCreateCashResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetID(id string) {
+	e.ID = id
+	e.require(expenseReportsCreateCashResponseFieldID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetNumber(number string) {
+	e.Number = number
+	e.require(expenseReportsCreateCashResponseFieldNumber)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(expenseReportsCreateCashResponseFieldEmployeeID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetDate(date time.Time) {
+	e.Date = date
+	e.require(expenseReportsCreateCashResponseFieldDate)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetNetTotal(netTotal string) {
+	e.NetTotal = netTotal
+	e.require(expenseReportsCreateCashResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetVatTotal(vatTotal string) {
+	e.VatTotal = vatTotal
+	e.require(expenseReportsCreateCashResponseFieldVatTotal)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetTotal(total string) {
+	e.Total = total
+	e.require(expenseReportsCreateCashResponseFieldTotal)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetJournalTransactionID(journalTransactionID *string) {
+	e.JournalTransactionID = journalTransactionID
+	e.require(expenseReportsCreateCashResponseFieldJournalTransactionID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(expenseReportsCreateCashResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(expenseReportsCreateCashResponseFieldCreatedAt)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponse) SetLines(lines []*ExpenseReportsCreateCashResponseLinesItem) {
+	e.Lines = lines
+	e.require(expenseReportsCreateCashResponseFieldLines)
+}
+
+func (e *ExpenseReportsCreateCashResponse) UnmarshalJSON(data []byte) error {
+	type embed ExpenseReportsCreateCashResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExpenseReportsCreateCashResponse(unmarshaler.embed)
+	e.Date = unmarshaler.Date.Time()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsCreateCashResponse) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsCreateCashResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		Date:      internal.NewDate(e.Date),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsCreateCashResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	expenseReportsCreateCashResponseLinesItemFieldID             = big.NewInt(1 << 0)
+	expenseReportsCreateCashResponseLinesItemFieldDescription    = big.NewInt(1 << 1)
+	expenseReportsCreateCashResponseLinesItemFieldDocumentNumber = big.NewInt(1 << 2)
+	expenseReportsCreateCashResponseLinesItemFieldAccountCode    = big.NewInt(1 << 3)
+	expenseReportsCreateCashResponseLinesItemFieldNetAmount      = big.NewInt(1 << 4)
+	expenseReportsCreateCashResponseLinesItemFieldVatAmount      = big.NewInt(1 << 5)
+)
+
+type ExpenseReportsCreateCashResponseLinesItem struct {
+	ID             string  `json:"id" url:"id"`
+	Description    string  `json:"description" url:"description"`
+	DocumentNumber *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	AccountCode    string  `json:"accountCode" url:"accountCode"`
+	NetAmount      string  `json:"netAmount" url:"netAmount"`
+	VatAmount      string  `json:"vatAmount" url:"vatAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetDescription() string {
+	if e == nil {
+		return ""
+	}
+	return e.Description
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetDocumentNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.DocumentNumber
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetAccountCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.AccountCode
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetNetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.NetAmount
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetVatAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatAmount
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetID(id string) {
+	e.ID = id
+	e.require(expenseReportsCreateCashResponseLinesItemFieldID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetDescription(description string) {
+	e.Description = description
+	e.require(expenseReportsCreateCashResponseLinesItemFieldDescription)
+}
+
+// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetDocumentNumber(documentNumber *string) {
+	e.DocumentNumber = documentNumber
+	e.require(expenseReportsCreateCashResponseLinesItemFieldDocumentNumber)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetAccountCode(accountCode string) {
+	e.AccountCode = accountCode
+	e.require(expenseReportsCreateCashResponseLinesItemFieldAccountCode)
+}
+
+// SetNetAmount sets the NetAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetNetAmount(netAmount string) {
+	e.NetAmount = netAmount
+	e.require(expenseReportsCreateCashResponseLinesItemFieldNetAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetVatAmount(vatAmount string) {
+	e.VatAmount = vatAmount
+	e.require(expenseReportsCreateCashResponseLinesItemFieldVatAmount)
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsCreateCashResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = ExpenseReportsCreateCashResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsCreateCashResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	expenseReportsGetCashResponseFieldID                   = big.NewInt(1 << 0)
+	expenseReportsGetCashResponseFieldNumber               = big.NewInt(1 << 1)
+	expenseReportsGetCashResponseFieldEmployeeID           = big.NewInt(1 << 2)
+	expenseReportsGetCashResponseFieldDate                 = big.NewInt(1 << 3)
+	expenseReportsGetCashResponseFieldNetTotal             = big.NewInt(1 << 4)
+	expenseReportsGetCashResponseFieldVatTotal             = big.NewInt(1 << 5)
+	expenseReportsGetCashResponseFieldTotal                = big.NewInt(1 << 6)
+	expenseReportsGetCashResponseFieldJournalTransactionID = big.NewInt(1 << 7)
+	expenseReportsGetCashResponseFieldNotes                = big.NewInt(1 << 8)
+	expenseReportsGetCashResponseFieldCreatedAt            = big.NewInt(1 << 9)
+	expenseReportsGetCashResponseFieldLines                = big.NewInt(1 << 10)
+)
+
+type ExpenseReportsGetCashResponse struct {
+	ID                   string                                    `json:"id" url:"id"`
+	Number               string                                    `json:"number" url:"number"`
+	EmployeeID           string                                    `json:"employeeId" url:"employeeId"`
+	Date                 time.Time                                 `json:"date" url:"date" format:"date"`
+	NetTotal             string                                    `json:"netTotal" url:"netTotal"`
+	VatTotal             string                                    `json:"vatTotal" url:"vatTotal"`
+	Total                string                                    `json:"total" url:"total"`
+	JournalTransactionID *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                 `json:"createdAt" url:"createdAt"`
+	Lines                []*ExpenseReportsGetCashResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsGetCashResponse) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *ExpenseReportsGetCashResponse) GetNumber() string {
+	if e == nil {
+		return ""
+	}
+	return e.Number
+}
+
+func (e *ExpenseReportsGetCashResponse) GetEmployeeID() string {
+	if e == nil {
+		return ""
+	}
+	return e.EmployeeID
+}
+
+func (e *ExpenseReportsGetCashResponse) GetDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.Date
+}
+
+func (e *ExpenseReportsGetCashResponse) GetNetTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.NetTotal
+}
+
+func (e *ExpenseReportsGetCashResponse) GetVatTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatTotal
+}
+
+func (e *ExpenseReportsGetCashResponse) GetTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.Total
+}
+
+func (e *ExpenseReportsGetCashResponse) GetJournalTransactionID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.JournalTransactionID
+}
+
+func (e *ExpenseReportsGetCashResponse) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *ExpenseReportsGetCashResponse) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *ExpenseReportsGetCashResponse) GetLines() []*ExpenseReportsGetCashResponseLinesItem {
+	if e == nil {
+		return nil
+	}
+	return e.Lines
+}
+
+func (e *ExpenseReportsGetCashResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsGetCashResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetID(id string) {
+	e.ID = id
+	e.require(expenseReportsGetCashResponseFieldID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetNumber(number string) {
+	e.Number = number
+	e.require(expenseReportsGetCashResponseFieldNumber)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(expenseReportsGetCashResponseFieldEmployeeID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetDate(date time.Time) {
+	e.Date = date
+	e.require(expenseReportsGetCashResponseFieldDate)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetNetTotal(netTotal string) {
+	e.NetTotal = netTotal
+	e.require(expenseReportsGetCashResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetVatTotal(vatTotal string) {
+	e.VatTotal = vatTotal
+	e.require(expenseReportsGetCashResponseFieldVatTotal)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetTotal(total string) {
+	e.Total = total
+	e.require(expenseReportsGetCashResponseFieldTotal)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetJournalTransactionID(journalTransactionID *string) {
+	e.JournalTransactionID = journalTransactionID
+	e.require(expenseReportsGetCashResponseFieldJournalTransactionID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(expenseReportsGetCashResponseFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(expenseReportsGetCashResponseFieldCreatedAt)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponse) SetLines(lines []*ExpenseReportsGetCashResponseLinesItem) {
+	e.Lines = lines
+	e.require(expenseReportsGetCashResponseFieldLines)
+}
+
+func (e *ExpenseReportsGetCashResponse) UnmarshalJSON(data []byte) error {
+	type embed ExpenseReportsGetCashResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExpenseReportsGetCashResponse(unmarshaler.embed)
+	e.Date = unmarshaler.Date.Time()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsGetCashResponse) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsGetCashResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		Date:      internal.NewDate(e.Date),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsGetCashResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	expenseReportsGetCashResponseLinesItemFieldID             = big.NewInt(1 << 0)
+	expenseReportsGetCashResponseLinesItemFieldDescription    = big.NewInt(1 << 1)
+	expenseReportsGetCashResponseLinesItemFieldDocumentNumber = big.NewInt(1 << 2)
+	expenseReportsGetCashResponseLinesItemFieldAccountCode    = big.NewInt(1 << 3)
+	expenseReportsGetCashResponseLinesItemFieldNetAmount      = big.NewInt(1 << 4)
+	expenseReportsGetCashResponseLinesItemFieldVatAmount      = big.NewInt(1 << 5)
+)
+
+type ExpenseReportsGetCashResponseLinesItem struct {
+	ID             string  `json:"id" url:"id"`
+	Description    string  `json:"description" url:"description"`
+	DocumentNumber *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	AccountCode    string  `json:"accountCode" url:"accountCode"`
+	NetAmount      string  `json:"netAmount" url:"netAmount"`
+	VatAmount      string  `json:"vatAmount" url:"vatAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetDescription() string {
+	if e == nil {
+		return ""
+	}
+	return e.Description
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetDocumentNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.DocumentNumber
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetAccountCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.AccountCode
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetNetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.NetAmount
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetVatAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatAmount
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetID(id string) {
+	e.ID = id
+	e.require(expenseReportsGetCashResponseLinesItemFieldID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetDescription(description string) {
+	e.Description = description
+	e.require(expenseReportsGetCashResponseLinesItemFieldDescription)
+}
+
+// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetDocumentNumber(documentNumber *string) {
+	e.DocumentNumber = documentNumber
+	e.require(expenseReportsGetCashResponseLinesItemFieldDocumentNumber)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetAccountCode(accountCode string) {
+	e.AccountCode = accountCode
+	e.require(expenseReportsGetCashResponseLinesItemFieldAccountCode)
+}
+
+// SetNetAmount sets the NetAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetNetAmount(netAmount string) {
+	e.NetAmount = netAmount
+	e.require(expenseReportsGetCashResponseLinesItemFieldNetAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetVatAmount(vatAmount string) {
+	e.VatAmount = vatAmount
+	e.require(expenseReportsGetCashResponseLinesItemFieldVatAmount)
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsGetCashResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = ExpenseReportsGetCashResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsGetCashResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	expenseReportsListCashRequestFilterItemFieldField = big.NewInt(1 << 0)
+	expenseReportsListCashRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	expenseReportsListCashRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type ExpenseReportsListCashRequestFilterItem struct {
+	Field string                                        `json:"field" url:"field"`
+	Op    ExpenseReportsListCashRequestFilterItemOp     `json:"op" url:"op"`
+	Value *ExpenseReportsListCashRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) GetField() string {
+	if e == nil {
+		return ""
+	}
+	return e.Field
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) GetOp() ExpenseReportsListCashRequestFilterItemOp {
+	if e == nil {
+		return ""
+	}
+	return e.Op
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) GetValue() *ExpenseReportsListCashRequestFilterItemValue {
+	if e == nil {
+		return nil
+	}
+	return e.Value
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequestFilterItem) SetField(field string) {
+	e.Field = field
+	e.require(expenseReportsListCashRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequestFilterItem) SetOp(op ExpenseReportsListCashRequestFilterItemOp) {
+	e.Op = op
+	e.require(expenseReportsListCashRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequestFilterItem) SetValue(value *ExpenseReportsListCashRequestFilterItemValue) {
+	e.Value = value
+	e.require(expenseReportsListCashRequestFilterItemFieldValue)
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsListCashRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = ExpenseReportsListCashRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsListCashRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsListCashRequestFilterItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type ExpenseReportsListCashRequestFilterItemOp string
+
+const (
+	ExpenseReportsListCashRequestFilterItemOpEq       ExpenseReportsListCashRequestFilterItemOp = "eq"
+	ExpenseReportsListCashRequestFilterItemOpNe       ExpenseReportsListCashRequestFilterItemOp = "ne"
+	ExpenseReportsListCashRequestFilterItemOpContains ExpenseReportsListCashRequestFilterItemOp = "contains"
+	ExpenseReportsListCashRequestFilterItemOpGte      ExpenseReportsListCashRequestFilterItemOp = "gte"
+	ExpenseReportsListCashRequestFilterItemOpLte      ExpenseReportsListCashRequestFilterItemOp = "lte"
+	ExpenseReportsListCashRequestFilterItemOpIn       ExpenseReportsListCashRequestFilterItemOp = "in"
+)
+
+func NewExpenseReportsListCashRequestFilterItemOpFromString(s string) (ExpenseReportsListCashRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return ExpenseReportsListCashRequestFilterItemOpEq, nil
+	case "ne":
+		return ExpenseReportsListCashRequestFilterItemOpNe, nil
+	case "contains":
+		return ExpenseReportsListCashRequestFilterItemOpContains, nil
+	case "gte":
+		return ExpenseReportsListCashRequestFilterItemOpGte, nil
+	case "lte":
+		return ExpenseReportsListCashRequestFilterItemOpLte, nil
+	case "in":
+		return ExpenseReportsListCashRequestFilterItemOpIn, nil
+	}
+	var t ExpenseReportsListCashRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e ExpenseReportsListCashRequestFilterItemOp) Ptr() *ExpenseReportsListCashRequestFilterItemOp {
+	return &e
+}
+
+type ExpenseReportsListCashRequestFilterItemValue struct {
+	String                                                    string
+	Double                                                    float64
+	Boolean                                                   bool
+	ExpenseReportsListCashRequestFilterItemValueThreeItemList []*ExpenseReportsListCashRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValue) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValue) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValue) GetBoolean() bool {
+	if e == nil {
+		return false
+	}
+	return e.Boolean
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValue) GetExpenseReportsListCashRequestFilterItemValueThreeItemList() []*ExpenseReportsListCashRequestFilterItemValueThreeItem {
+	if e == nil {
+		return nil
+	}
+	return e.ExpenseReportsListCashRequestFilterItemValueThreeItemList
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		e.typ = "Boolean"
+		e.Boolean = valueBoolean
+		return nil
+	}
+	var valueExpenseReportsListCashRequestFilterItemValueThreeItemList []*ExpenseReportsListCashRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueExpenseReportsListCashRequestFilterItemValueThreeItemList); err == nil {
+		e.typ = "ExpenseReportsListCashRequestFilterItemValueThreeItemList"
+		e.ExpenseReportsListCashRequestFilterItemValueThreeItemList = valueExpenseReportsListCashRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e ExpenseReportsListCashRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return json.Marshal(e.Boolean)
+	}
+	if e.typ == "ExpenseReportsListCashRequestFilterItemValueThreeItemList" || e.ExpenseReportsListCashRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(e.ExpenseReportsListCashRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type ExpenseReportsListCashRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitExpenseReportsListCashRequestFilterItemValueThreeItemList([]*ExpenseReportsListCashRequestFilterItemValueThreeItem) error
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValue) Accept(visitor ExpenseReportsListCashRequestFilterItemValueVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	if e.typ == "Boolean" || e.Boolean != false {
+		return visitor.VisitBoolean(e.Boolean)
+	}
+	if e.typ == "ExpenseReportsListCashRequestFilterItemValueThreeItemList" || e.ExpenseReportsListCashRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitExpenseReportsListCashRequestFilterItemValueThreeItemList(e.ExpenseReportsListCashRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type ExpenseReportsListCashRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValueThreeItem) GetString() string {
+	if e == nil {
+		return ""
+	}
+	return e.String
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if e == nil {
+		return 0
+	}
+	return e.Double
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		e.typ = "String"
+		e.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		e.typ = "Double"
+		e.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, e)
+}
+
+func (e ExpenseReportsListCashRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if e.typ == "String" || e.String != "" {
+		return json.Marshal(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return json.Marshal(e.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+type ExpenseReportsListCashRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (e *ExpenseReportsListCashRequestFilterItemValueThreeItem) Accept(visitor ExpenseReportsListCashRequestFilterItemValueThreeItemVisitor) error {
+	if e.typ == "String" || e.String != "" {
+		return visitor.VisitString(e.String)
+	}
+	if e.typ == "Double" || e.Double != 0 {
+		return visitor.VisitDouble(e.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", e)
+}
+
+var (
+	expenseReportsListCashRequestSortItemFieldField = big.NewInt(1 << 0)
+	expenseReportsListCashRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type ExpenseReportsListCashRequestSortItem struct {
+	Field string                                    `json:"field" url:"field"`
+	Dir   *ExpenseReportsListCashRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsListCashRequestSortItem) GetField() string {
+	if e == nil {
+		return ""
+	}
+	return e.Field
+}
+
+func (e *ExpenseReportsListCashRequestSortItem) GetDir() *ExpenseReportsListCashRequestSortItemDir {
+	if e == nil {
+		return nil
+	}
+	return e.Dir
+}
+
+func (e *ExpenseReportsListCashRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsListCashRequestSortItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequestSortItem) SetField(field string) {
+	e.Field = field
+	e.require(expenseReportsListCashRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashRequestSortItem) SetDir(dir *ExpenseReportsListCashRequestSortItemDir) {
+	e.Dir = dir
+	e.require(expenseReportsListCashRequestSortItemFieldDir)
+}
+
+func (e *ExpenseReportsListCashRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsListCashRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = ExpenseReportsListCashRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsListCashRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsListCashRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsListCashRequestSortItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type ExpenseReportsListCashRequestSortItemDir string
+
+const (
+	ExpenseReportsListCashRequestSortItemDirAsc  ExpenseReportsListCashRequestSortItemDir = "asc"
+	ExpenseReportsListCashRequestSortItemDirDesc ExpenseReportsListCashRequestSortItemDir = "desc"
+)
+
+func NewExpenseReportsListCashRequestSortItemDirFromString(s string) (ExpenseReportsListCashRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return ExpenseReportsListCashRequestSortItemDirAsc, nil
+	case "desc":
+		return ExpenseReportsListCashRequestSortItemDirDesc, nil
+	}
+	var t ExpenseReportsListCashRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e ExpenseReportsListCashRequestSortItemDir) Ptr() *ExpenseReportsListCashRequestSortItemDir {
+	return &e
+}
+
+var (
+	expenseReportsListCashResponseFieldRows             = big.NewInt(1 << 0)
+	expenseReportsListCashResponseFieldPage             = big.NewInt(1 << 1)
+	expenseReportsListCashResponseFieldPageSize         = big.NewInt(1 << 2)
+	expenseReportsListCashResponseFieldTotal            = big.NewInt(1 << 3)
+	expenseReportsListCashResponseFieldTotals           = big.NewInt(1 << 4)
+	expenseReportsListCashResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type ExpenseReportsListCashResponse struct {
+	Rows     []*ExpenseReportsListCashResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                     `json:"page" url:"page"`
+	PageSize int64                                     `json:"pageSize" url:"pageSize"`
+	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsListCashResponse) GetRows() []*ExpenseReportsListCashResponseRowsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Rows
+}
+
+func (e *ExpenseReportsListCashResponse) GetPage() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Page
+}
+
+func (e *ExpenseReportsListCashResponse) GetPageSize() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PageSize
+}
+
+func (e *ExpenseReportsListCashResponse) GetTotal() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Total
+}
+
+func (e *ExpenseReportsListCashResponse) GetTotals() map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.Totals
+}
+
+func (e *ExpenseReportsListCashResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if e == nil {
+		return nil
+	}
+	return e.TotalsByCurrency
+}
+
+func (e *ExpenseReportsListCashResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsListCashResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponse) SetRows(rows []*ExpenseReportsListCashResponseRowsItem) {
+	e.Rows = rows
+	e.require(expenseReportsListCashResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponse) SetPage(page int64) {
+	e.Page = page
+	e.require(expenseReportsListCashResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponse) SetPageSize(pageSize int64) {
+	e.PageSize = pageSize
+	e.require(expenseReportsListCashResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponse) SetTotal(total int64) {
+	e.Total = total
+	e.require(expenseReportsListCashResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponse) SetTotals(totals map[string]string) {
+	e.Totals = totals
+	e.require(expenseReportsListCashResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	e.TotalsByCurrency = totalsByCurrency
+	e.require(expenseReportsListCashResponseFieldTotalsByCurrency)
+}
+
+func (e *ExpenseReportsListCashResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ExpenseReportsListCashResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = ExpenseReportsListCashResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsListCashResponse) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsListCashResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsListCashResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	expenseReportsListCashResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	expenseReportsListCashResponseRowsItemFieldNumber               = big.NewInt(1 << 1)
+	expenseReportsListCashResponseRowsItemFieldEmployeeID           = big.NewInt(1 << 2)
+	expenseReportsListCashResponseRowsItemFieldDate                 = big.NewInt(1 << 3)
+	expenseReportsListCashResponseRowsItemFieldNetTotal             = big.NewInt(1 << 4)
+	expenseReportsListCashResponseRowsItemFieldVatTotal             = big.NewInt(1 << 5)
+	expenseReportsListCashResponseRowsItemFieldTotal                = big.NewInt(1 << 6)
+	expenseReportsListCashResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 7)
+	expenseReportsListCashResponseRowsItemFieldNotes                = big.NewInt(1 << 8)
+	expenseReportsListCashResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 9)
+)
+
+type ExpenseReportsListCashResponseRowsItem struct {
+	ID                   string    `json:"id" url:"id"`
+	Number               string    `json:"number" url:"number"`
+	EmployeeID           string    `json:"employeeId" url:"employeeId"`
+	Date                 time.Time `json:"date" url:"date" format:"date"`
+	NetTotal             string    `json:"netTotal" url:"netTotal"`
+	VatTotal             string    `json:"vatTotal" url:"vatTotal"`
+	Total                string    `json:"total" url:"total"`
+	JournalTransactionID *string   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                *string   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetNumber() string {
+	if e == nil {
+		return ""
+	}
+	return e.Number
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetEmployeeID() string {
+	if e == nil {
+		return ""
+	}
+	return e.EmployeeID
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.Date
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetNetTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.NetTotal
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetVatTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatTotal
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.Total
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetJournalTransactionID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.JournalTransactionID
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetNotes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Notes
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetID(id string) {
+	e.ID = id
+	e.require(expenseReportsListCashResponseRowsItemFieldID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetNumber(number string) {
+	e.Number = number
+	e.require(expenseReportsListCashResponseRowsItemFieldNumber)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetEmployeeID(employeeID string) {
+	e.EmployeeID = employeeID
+	e.require(expenseReportsListCashResponseRowsItemFieldEmployeeID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetDate(date time.Time) {
+	e.Date = date
+	e.require(expenseReportsListCashResponseRowsItemFieldDate)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetNetTotal(netTotal string) {
+	e.NetTotal = netTotal
+	e.require(expenseReportsListCashResponseRowsItemFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetVatTotal(vatTotal string) {
+	e.VatTotal = vatTotal
+	e.require(expenseReportsListCashResponseRowsItemFieldVatTotal)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetTotal(total string) {
+	e.Total = total
+	e.require(expenseReportsListCashResponseRowsItemFieldTotal)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
+	e.JournalTransactionID = journalTransactionID
+	e.require(expenseReportsListCashResponseRowsItemFieldJournalTransactionID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetNotes(notes *string) {
+	e.Notes = notes
+	e.require(expenseReportsListCashResponseRowsItemFieldNotes)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsListCashResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(expenseReportsListCashResponseRowsItemFieldCreatedAt)
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ExpenseReportsListCashResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExpenseReportsListCashResponseRowsItem(unmarshaler.embed)
+	e.Date = unmarshaler.Date.Time()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ExpenseReportsListCashResponseRowsItem
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		Date:      internal.NewDate(e.Date),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExpenseReportsListCashResponseRowsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
 type OrdersCreateCashRequestType string
 
 const (
@@ -723,8 +2792,10 @@ var (
 	ordersCreateCashResponseFieldCashAccountCode      = big.NewInt(1 << 11)
 	ordersCreateCashResponseFieldCounterAccountCode   = big.NewInt(1 << 12)
 	ordersCreateCashResponseFieldJournalTransactionID = big.NewInt(1 << 13)
-	ordersCreateCashResponseFieldNotes                = big.NewInt(1 << 14)
-	ordersCreateCashResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	ordersCreateCashResponseFieldSaleInvoiceID        = big.NewInt(1 << 14)
+	ordersCreateCashResponseFieldPurchaseInvoiceID    = big.NewInt(1 << 15)
+	ordersCreateCashResponseFieldNotes                = big.NewInt(1 << 16)
+	ordersCreateCashResponseFieldCreatedAt            = big.NewInt(1 << 17)
 )
 
 type OrdersCreateCashResponse struct {
@@ -742,6 +2813,8 @@ type OrdersCreateCashResponse struct {
 	CashAccountCode      string                       `json:"cashAccountCode" url:"cashAccountCode"`
 	CounterAccountCode   string                       `json:"counterAccountCode" url:"counterAccountCode"`
 	JournalTransactionID *string                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	SaleInvoiceID        *string                      `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	PurchaseInvoiceID    *string                      `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Notes                *string                      `json:"notes,omitempty" url:"notes,omitempty"`
 	CreatedAt            time.Time                    `json:"createdAt" url:"createdAt"`
 
@@ -848,6 +2921,20 @@ func (o *OrdersCreateCashResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return o.JournalTransactionID
+}
+
+func (o *OrdersCreateCashResponse) GetSaleInvoiceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SaleInvoiceID
+}
+
+func (o *OrdersCreateCashResponse) GetPurchaseInvoiceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PurchaseInvoiceID
 }
 
 func (o *OrdersCreateCashResponse) GetNotes() *string {
@@ -976,6 +3063,20 @@ func (o *OrdersCreateCashResponse) SetJournalTransactionID(journalTransactionID 
 	o.require(ordersCreateCashResponseFieldJournalTransactionID)
 }
 
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreateCashResponse) SetSaleInvoiceID(saleInvoiceID *string) {
+	o.SaleInvoiceID = saleInvoiceID
+	o.require(ordersCreateCashResponseFieldSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreateCashResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	o.PurchaseInvoiceID = purchaseInvoiceID
+	o.require(ordersCreateCashResponseFieldPurchaseInvoiceID)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (o *OrdersCreateCashResponse) SetNotes(notes *string) {
@@ -1081,8 +3182,10 @@ var (
 	ordersGetCashResponseFieldCashAccountCode      = big.NewInt(1 << 11)
 	ordersGetCashResponseFieldCounterAccountCode   = big.NewInt(1 << 12)
 	ordersGetCashResponseFieldJournalTransactionID = big.NewInt(1 << 13)
-	ordersGetCashResponseFieldNotes                = big.NewInt(1 << 14)
-	ordersGetCashResponseFieldCreatedAt            = big.NewInt(1 << 15)
+	ordersGetCashResponseFieldSaleInvoiceID        = big.NewInt(1 << 14)
+	ordersGetCashResponseFieldPurchaseInvoiceID    = big.NewInt(1 << 15)
+	ordersGetCashResponseFieldNotes                = big.NewInt(1 << 16)
+	ordersGetCashResponseFieldCreatedAt            = big.NewInt(1 << 17)
 )
 
 type OrdersGetCashResponse struct {
@@ -1100,6 +3203,8 @@ type OrdersGetCashResponse struct {
 	CashAccountCode      string                    `json:"cashAccountCode" url:"cashAccountCode"`
 	CounterAccountCode   string                    `json:"counterAccountCode" url:"counterAccountCode"`
 	JournalTransactionID *string                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	SaleInvoiceID        *string                   `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	PurchaseInvoiceID    *string                   `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Notes                *string                   `json:"notes,omitempty" url:"notes,omitempty"`
 	CreatedAt            time.Time                 `json:"createdAt" url:"createdAt"`
 
@@ -1206,6 +3311,20 @@ func (o *OrdersGetCashResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return o.JournalTransactionID
+}
+
+func (o *OrdersGetCashResponse) GetSaleInvoiceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SaleInvoiceID
+}
+
+func (o *OrdersGetCashResponse) GetPurchaseInvoiceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PurchaseInvoiceID
 }
 
 func (o *OrdersGetCashResponse) GetNotes() *string {
@@ -1332,6 +3451,20 @@ func (o *OrdersGetCashResponse) SetCounterAccountCode(counterAccountCode string)
 func (o *OrdersGetCashResponse) SetJournalTransactionID(journalTransactionID *string) {
 	o.JournalTransactionID = journalTransactionID
 	o.require(ordersGetCashResponseFieldJournalTransactionID)
+}
+
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersGetCashResponse) SetSaleInvoiceID(saleInvoiceID *string) {
+	o.SaleInvoiceID = saleInvoiceID
+	o.require(ordersGetCashResponseFieldSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersGetCashResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	o.PurchaseInvoiceID = purchaseInvoiceID
+	o.require(ordersGetCashResponseFieldPurchaseInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -2042,8 +4175,10 @@ var (
 	ordersListCashResponseRowsItemFieldCashAccountCode      = big.NewInt(1 << 11)
 	ordersListCashResponseRowsItemFieldCounterAccountCode   = big.NewInt(1 << 12)
 	ordersListCashResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 13)
-	ordersListCashResponseRowsItemFieldNotes                = big.NewInt(1 << 14)
-	ordersListCashResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 15)
+	ordersListCashResponseRowsItemFieldSaleInvoiceID        = big.NewInt(1 << 14)
+	ordersListCashResponseRowsItemFieldPurchaseInvoiceID    = big.NewInt(1 << 15)
+	ordersListCashResponseRowsItemFieldNotes                = big.NewInt(1 << 16)
+	ordersListCashResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 17)
 )
 
 type OrdersListCashResponseRowsItem struct {
@@ -2061,6 +4196,8 @@ type OrdersListCashResponseRowsItem struct {
 	CashAccountCode      string                             `json:"cashAccountCode" url:"cashAccountCode"`
 	CounterAccountCode   string                             `json:"counterAccountCode" url:"counterAccountCode"`
 	JournalTransactionID *string                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	SaleInvoiceID        *string                            `json:"saleInvoiceId,omitempty" url:"saleInvoiceId,omitempty"`
+	PurchaseInvoiceID    *string                            `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Notes                *string                            `json:"notes,omitempty" url:"notes,omitempty"`
 	CreatedAt            time.Time                          `json:"createdAt" url:"createdAt"`
 
@@ -2167,6 +4304,20 @@ func (o *OrdersListCashResponseRowsItem) GetJournalTransactionID() *string {
 		return nil
 	}
 	return o.JournalTransactionID
+}
+
+func (o *OrdersListCashResponseRowsItem) GetSaleInvoiceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SaleInvoiceID
+}
+
+func (o *OrdersListCashResponseRowsItem) GetPurchaseInvoiceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PurchaseInvoiceID
 }
 
 func (o *OrdersListCashResponseRowsItem) GetNotes() *string {
@@ -2293,6 +4444,20 @@ func (o *OrdersListCashResponseRowsItem) SetCounterAccountCode(counterAccountCod
 func (o *OrdersListCashResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
 	o.JournalTransactionID = journalTransactionID
 	o.require(ordersListCashResponseRowsItemFieldJournalTransactionID)
+}
+
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersListCashResponseRowsItem) SetSaleInvoiceID(saleInvoiceID *string) {
+	o.SaleInvoiceID = saleInvoiceID
+	o.require(ordersListCashResponseRowsItemFieldSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersListCashResponseRowsItem) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	o.PurchaseInvoiceID = purchaseInvoiceID
+	o.require(ordersListCashResponseRowsItemFieldPurchaseInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;

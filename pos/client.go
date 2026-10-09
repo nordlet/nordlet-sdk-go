@@ -129,3 +129,115 @@ func (c *Client) ReportsList(
 	}
 	return response.Body, nil
 }
+
+func (c *Client) ShiftsOpen(
+	ctx context.Context,
+	request *nordlet.ShiftsOpenPosRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ShiftsOpenPosResponse, error) {
+	response, err := c.WithRawResponse.ShiftsOpen(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ShiftsGet(
+	ctx context.Context,
+	request *nordlet.ShiftsGetPosRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ShiftsGetPosResponse, error) {
+	response, err := c.WithRawResponse.ShiftsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ShiftsList(
+	ctx context.Context,
+	request *nordlet.ShiftsListPosRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ShiftsListPosResponse, error) {
+	response, err := c.WithRawResponse.ShiftsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ReceiptsCreate(
+	ctx context.Context,
+	request *nordlet.ReceiptsCreatePosRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ReceiptsCreatePosResponse, error) {
+	response, err := c.WithRawResponse.ReceiptsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ReceiptsList(
+	ctx context.Context,
+	request *nordlet.ReceiptsListPosRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ReceiptsListPosResponse, error) {
+	response, err := c.WithRawResponse.ReceiptsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ReceiptsGet(
+	ctx context.Context,
+	request *nordlet.ReceiptsGetPosRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ReceiptsGetPosResponse, error) {
+	response, err := c.WithRawResponse.ReceiptsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ShiftsClose(
+	ctx context.Context,
+	request *nordlet.ShiftsClosePosRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ShiftsClosePosResponse, error) {
+	response, err := c.WithRawResponse.ShiftsClose(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

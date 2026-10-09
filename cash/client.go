@@ -98,6 +98,54 @@ func (c *Client) Balance(
 	return response.Body, nil
 }
 
+func (c *Client) ExpenseReportsCreate(
+	ctx context.Context,
+	request *nordlet.ExpenseReportsCreateCashRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ExpenseReportsCreateCashResponse, error) {
+	response, err := c.WithRawResponse.ExpenseReportsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ExpenseReportsGet(
+	ctx context.Context,
+	request *nordlet.ExpenseReportsGetCashRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ExpenseReportsGetCashResponse, error) {
+	response, err := c.WithRawResponse.ExpenseReportsGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) ExpenseReportsList(
+	ctx context.Context,
+	request *nordlet.ExpenseReportsListCashRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ExpenseReportsListCashResponse, error) {
+	response, err := c.WithRawResponse.ExpenseReportsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) AdvanceHoldersBalances(
 	ctx context.Context,
 	request *nordlet.AdvanceHoldersBalancesCashRequest,

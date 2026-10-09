@@ -11612,6 +11612,7 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesVatReceivable       PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.vatReceivable"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesGoodsForResale      PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.goodsForResale"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesDefaultExpense      PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.defaultExpense"
+	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesPrepaidExpenses     PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.prepaidExpenses"
 	PostingRulesUpdateLedgerRequestRulesItemKeyInventoryCogs                PostingRulesUpdateLedgerRequestRulesItemKey = "inventory.cogs"
 	PostingRulesUpdateLedgerRequestRulesItemKeyInventoryStock               PostingRulesUpdateLedgerRequestRulesItemKey = "inventory.stock"
 	PostingRulesUpdateLedgerRequestRulesItemKeyProductionLaborApplied       PostingRulesUpdateLedgerRequestRulesItemKey = "production.laborApplied"
@@ -11628,6 +11629,7 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalGain           PostingRulesUpdateLedgerRequestRulesItemKey = "assets.disposalGain"
 	PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalLoss           PostingRulesUpdateLedgerRequestRulesItemKey = "assets.disposalLoss"
 	PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalProceeds       PostingRulesUpdateLedgerRequestRulesItemKey = "assets.disposalProceeds"
+	PostingRulesUpdateLedgerRequestRulesItemKeyCashAdvances                 PostingRulesUpdateLedgerRequestRulesItemKey = "cash.advances"
 	PostingRulesUpdateLedgerRequestRulesItemKeyClosingRetainedEarnings      PostingRulesUpdateLedgerRequestRulesItemKey = "closing.retainedEarnings"
 )
 
@@ -11651,6 +11653,8 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesGoodsForResale, nil
 	case "purchases.defaultExpense":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesDefaultExpense, nil
+	case "purchases.prepaidExpenses":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesPrepaidExpenses, nil
 	case "inventory.cogs":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyInventoryCogs, nil
 	case "inventory.stock":
@@ -11683,6 +11687,8 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalLoss, nil
 	case "assets.disposalProceeds":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalProceeds, nil
+	case "cash.advances":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyCashAdvances, nil
 	case "closing.retainedEarnings":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyClosingRetainedEarnings, nil
 	}

@@ -337,6 +337,33 @@ func TestPayrollRunsApproveWithWireMock(
 	VerifyRequestCount(t, "TestPayrollRunsApproveWithWireMock", "POST", "/v1/payroll/runs/approve", nil, 1)
 }
 
+func TestPayrollRunsReverseWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RunsReversePayrollRequest{
+		ID:     "id",
+		Reason: "reason",
+	}
+	_, invocationErr := client.Payroll.RunsReverse(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPayrollRunsReverseWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPayrollRunsReverseWithWireMock", "POST", "/v1/payroll/runs/reverse", nil, 1)
+}
+
 func TestPayrollRunsCancelWithWireMock(
 	t *testing.T,
 ) {

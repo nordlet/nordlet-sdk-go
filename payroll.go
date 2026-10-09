@@ -733,6 +733,61 @@ func (r *RunsListPayrollRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	runsReversePayrollRequestFieldID     = big.NewInt(1 << 0)
+	runsReversePayrollRequestFieldReason = big.NewInt(1 << 1)
+)
+
+type RunsReversePayrollRequest struct {
+	ID     string `json:"id" url:"-"`
+	Reason string `json:"reason" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RunsReversePayrollRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollRequest) SetID(id string) {
+	r.ID = id
+	r.require(runsReversePayrollRequestFieldID)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollRequest) SetReason(reason string) {
+	r.Reason = reason
+	r.require(runsReversePayrollRequestFieldReason)
+}
+
+func (r *RunsReversePayrollRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RunsReversePayrollRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RunsReversePayrollRequest(body)
+	return nil
+}
+
+func (r *RunsReversePayrollRequest) MarshalJSON() ([]byte, error) {
+	type embed RunsReversePayrollRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	schedulesCreatePayrollRequestFieldCode         = big.NewInt(1 << 0)
 	schedulesCreatePayrollRequestFieldName         = big.NewInt(1 << 1)
 	schedulesCreatePayrollRequestFieldHoursPerWeek = big.NewInt(1 << 2)
@@ -2425,45 +2480,51 @@ func (p *PaymentsExportPayrollResponse) String() string {
 }
 
 var (
-	runsApprovePayrollResponseFieldID                         = big.NewInt(1 << 0)
-	runsApprovePayrollResponseFieldYear                       = big.NewInt(1 << 1)
-	runsApprovePayrollResponseFieldMonth                      = big.NewInt(1 << 2)
-	runsApprovePayrollResponseFieldCountryCode                = big.NewInt(1 << 3)
-	runsApprovePayrollResponseFieldPayDate                    = big.NewInt(1 << 4)
-	runsApprovePayrollResponseFieldStatus                     = big.NewInt(1 << 5)
-	runsApprovePayrollResponseFieldGrossTotal                 = big.NewInt(1 << 6)
-	runsApprovePayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
-	runsApprovePayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 8)
-	runsApprovePayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
-	runsApprovePayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 10)
-	runsApprovePayrollResponseFieldComponentTotals            = big.NewInt(1 << 11)
-	runsApprovePayrollResponseFieldNetTotal                   = big.NewInt(1 << 12)
-	runsApprovePayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 13)
-	runsApprovePayrollResponseFieldNotes                      = big.NewInt(1 << 14)
-	runsApprovePayrollResponseFieldWarnings                   = big.NewInt(1 << 15)
-	runsApprovePayrollResponseFieldCreatedAt                  = big.NewInt(1 << 16)
-	runsApprovePayrollResponseFieldApprovedAt                 = big.NewInt(1 << 17)
+	runsApprovePayrollResponseFieldID                           = big.NewInt(1 << 0)
+	runsApprovePayrollResponseFieldYear                         = big.NewInt(1 << 1)
+	runsApprovePayrollResponseFieldMonth                        = big.NewInt(1 << 2)
+	runsApprovePayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
+	runsApprovePayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
+	runsApprovePayrollResponseFieldStatus                       = big.NewInt(1 << 5)
+	runsApprovePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
+	runsApprovePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
+	runsApprovePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
+	runsApprovePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
+	runsApprovePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
+	runsApprovePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
+	runsApprovePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	runsApprovePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
+	runsApprovePayrollResponseFieldNotes                        = big.NewInt(1 << 14)
+	runsApprovePayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
+	runsApprovePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
+	runsApprovePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
+	runsApprovePayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
+	runsApprovePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
+	runsApprovePayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
 )
 
 type RunsApprovePayrollResponse struct {
-	ID                         string                                           `json:"id" url:"id"`
-	Year                       int64                                            `json:"year" url:"year"`
-	Month                      int64                                            `json:"month" url:"month"`
-	CountryCode                string                                           `json:"countryCode" url:"countryCode"`
-	PayDate                    *time.Time                                       `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
-	Status                     RunsApprovePayrollResponseStatus                 `json:"status" url:"status"`
-	GrossTotal                 string                                           `json:"grossTotal" url:"grossTotal"`
-	TaxAllowanceTotal          string                                           `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
-	IncomeTaxTotal             string                                           `json:"incomeTaxTotal" url:"incomeTaxTotal"`
-	EmployeeContributionsTotal string                                           `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
-	EmployerContributionsTotal string                                           `json:"employerContributionsTotal" url:"employerContributionsTotal"`
-	ComponentTotals            []*RunsApprovePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
-	NetTotal                   string                                           `json:"netTotal" url:"netTotal"`
-	JournalTransactionID       *string                                          `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                      *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
-	Warnings                   []string                                         `json:"warnings" url:"warnings"`
-	CreatedAt                  time.Time                                        `json:"createdAt" url:"createdAt"`
-	ApprovedAt                 *time.Time                                       `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ID                           string                                           `json:"id" url:"id"`
+	Year                         int64                                            `json:"year" url:"year"`
+	Month                        int64                                            `json:"month" url:"month"`
+	CountryCode                  string                                           `json:"countryCode" url:"countryCode"`
+	PayDate                      *time.Time                                       `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
+	Status                       RunsApprovePayrollResponseStatus                 `json:"status" url:"status"`
+	GrossTotal                   string                                           `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal            string                                           `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal               string                                           `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal   string                                           `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal   string                                           `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals              []*RunsApprovePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                     string                                           `json:"netTotal" url:"netTotal"`
+	JournalTransactionID         *string                                          `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                        *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	Warnings                     []string                                         `json:"warnings" url:"warnings"`
+	CreatedAt                    time.Time                                        `json:"createdAt" url:"createdAt"`
+	ApprovedAt                   *time.Time                                       `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ReversedAt                   *time.Time                                       `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                          `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                          `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2596,6 +2657,27 @@ func (r *RunsApprovePayrollResponse) GetApprovedAt() *time.Time {
 		return nil
 	}
 	return r.ApprovedAt
+}
+
+func (r *RunsApprovePayrollResponse) GetReversedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.ReversedAt
+}
+
+func (r *RunsApprovePayrollResponse) GetReversalJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalJournalTransactionID
+}
+
+func (r *RunsApprovePayrollResponse) GetReversalReason() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalReason
 }
 
 func (r *RunsApprovePayrollResponse) GetExtraProperties() map[string]interface{} {
@@ -2738,6 +2820,27 @@ func (r *RunsApprovePayrollResponse) SetApprovedAt(approvedAt *time.Time) {
 	r.require(runsApprovePayrollResponseFieldApprovedAt)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetReversedAt(reversedAt *time.Time) {
+	r.ReversedAt = reversedAt
+	r.require(runsApprovePayrollResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	r.ReversalJournalTransactionID = reversalJournalTransactionID
+	r.require(runsApprovePayrollResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetReversalReason(reversalReason *string) {
+	r.ReversalReason = reversalReason
+	r.require(runsApprovePayrollResponseFieldReversalReason)
+}
+
 func (r *RunsApprovePayrollResponse) UnmarshalJSON(data []byte) error {
 	type embed RunsApprovePayrollResponse
 	var unmarshaler = struct {
@@ -2745,6 +2848,7 @@ func (r *RunsApprovePayrollResponse) UnmarshalJSON(data []byte) error {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed: embed(*r),
 	}
@@ -2755,6 +2859,7 @@ func (r *RunsApprovePayrollResponse) UnmarshalJSON(data []byte) error {
 	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
+	r.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
@@ -2771,11 +2876,13 @@ func (r *RunsApprovePayrollResponse) MarshalJSON() ([]byte, error) {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed:      embed(*r),
 		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
+		ReversedAt: internal.NewOptionalDateTime(r.ReversedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -2980,6 +3087,7 @@ type RunsApprovePayrollResponseStatus string
 const (
 	RunsApprovePayrollResponseStatusDraft    RunsApprovePayrollResponseStatus = "draft"
 	RunsApprovePayrollResponseStatusApproved RunsApprovePayrollResponseStatus = "approved"
+	RunsApprovePayrollResponseStatusReversed RunsApprovePayrollResponseStatus = "reversed"
 )
 
 func NewRunsApprovePayrollResponseStatusFromString(s string) (RunsApprovePayrollResponseStatus, error) {
@@ -2988,6 +3096,8 @@ func NewRunsApprovePayrollResponseStatusFromString(s string) (RunsApprovePayroll
 		return RunsApprovePayrollResponseStatusDraft, nil
 	case "approved":
 		return RunsApprovePayrollResponseStatusApproved, nil
+	case "reversed":
+		return RunsApprovePayrollResponseStatusReversed, nil
 	}
 	var t RunsApprovePayrollResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -3530,47 +3640,53 @@ func (r *RunsCreatePayrollRequestLinesItemDeductionsItem) String() string {
 }
 
 var (
-	runsCreatePayrollResponseFieldID                         = big.NewInt(1 << 0)
-	runsCreatePayrollResponseFieldYear                       = big.NewInt(1 << 1)
-	runsCreatePayrollResponseFieldMonth                      = big.NewInt(1 << 2)
-	runsCreatePayrollResponseFieldCountryCode                = big.NewInt(1 << 3)
-	runsCreatePayrollResponseFieldPayDate                    = big.NewInt(1 << 4)
-	runsCreatePayrollResponseFieldStatus                     = big.NewInt(1 << 5)
-	runsCreatePayrollResponseFieldGrossTotal                 = big.NewInt(1 << 6)
-	runsCreatePayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
-	runsCreatePayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 8)
-	runsCreatePayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
-	runsCreatePayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 10)
-	runsCreatePayrollResponseFieldComponentTotals            = big.NewInt(1 << 11)
-	runsCreatePayrollResponseFieldNetTotal                   = big.NewInt(1 << 12)
-	runsCreatePayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 13)
-	runsCreatePayrollResponseFieldNotes                      = big.NewInt(1 << 14)
-	runsCreatePayrollResponseFieldWarnings                   = big.NewInt(1 << 15)
-	runsCreatePayrollResponseFieldCreatedAt                  = big.NewInt(1 << 16)
-	runsCreatePayrollResponseFieldApprovedAt                 = big.NewInt(1 << 17)
-	runsCreatePayrollResponseFieldLines                      = big.NewInt(1 << 18)
+	runsCreatePayrollResponseFieldID                           = big.NewInt(1 << 0)
+	runsCreatePayrollResponseFieldYear                         = big.NewInt(1 << 1)
+	runsCreatePayrollResponseFieldMonth                        = big.NewInt(1 << 2)
+	runsCreatePayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
+	runsCreatePayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
+	runsCreatePayrollResponseFieldStatus                       = big.NewInt(1 << 5)
+	runsCreatePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
+	runsCreatePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
+	runsCreatePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
+	runsCreatePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
+	runsCreatePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
+	runsCreatePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
+	runsCreatePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	runsCreatePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
+	runsCreatePayrollResponseFieldNotes                        = big.NewInt(1 << 14)
+	runsCreatePayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
+	runsCreatePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
+	runsCreatePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
+	runsCreatePayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
+	runsCreatePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
+	runsCreatePayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
+	runsCreatePayrollResponseFieldLines                        = big.NewInt(1 << 21)
 )
 
 type RunsCreatePayrollResponse struct {
-	ID                         string                                          `json:"id" url:"id"`
-	Year                       int64                                           `json:"year" url:"year"`
-	Month                      int64                                           `json:"month" url:"month"`
-	CountryCode                string                                          `json:"countryCode" url:"countryCode"`
-	PayDate                    *time.Time                                      `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
-	Status                     RunsCreatePayrollResponseStatus                 `json:"status" url:"status"`
-	GrossTotal                 string                                          `json:"grossTotal" url:"grossTotal"`
-	TaxAllowanceTotal          string                                          `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
-	IncomeTaxTotal             string                                          `json:"incomeTaxTotal" url:"incomeTaxTotal"`
-	EmployeeContributionsTotal string                                          `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
-	EmployerContributionsTotal string                                          `json:"employerContributionsTotal" url:"employerContributionsTotal"`
-	ComponentTotals            []*RunsCreatePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
-	NetTotal                   string                                          `json:"netTotal" url:"netTotal"`
-	JournalTransactionID       *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                      *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
-	Warnings                   []string                                        `json:"warnings" url:"warnings"`
-	CreatedAt                  time.Time                                       `json:"createdAt" url:"createdAt"`
-	ApprovedAt                 *time.Time                                      `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
-	Lines                      []*RunsCreatePayrollResponseLinesItem           `json:"lines" url:"lines"`
+	ID                           string                                          `json:"id" url:"id"`
+	Year                         int64                                           `json:"year" url:"year"`
+	Month                        int64                                           `json:"month" url:"month"`
+	CountryCode                  string                                          `json:"countryCode" url:"countryCode"`
+	PayDate                      *time.Time                                      `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
+	Status                       RunsCreatePayrollResponseStatus                 `json:"status" url:"status"`
+	GrossTotal                   string                                          `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal            string                                          `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal               string                                          `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal   string                                          `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal   string                                          `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals              []*RunsCreatePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                     string                                          `json:"netTotal" url:"netTotal"`
+	JournalTransactionID         *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	Warnings                     []string                                        `json:"warnings" url:"warnings"`
+	CreatedAt                    time.Time                                       `json:"createdAt" url:"createdAt"`
+	ApprovedAt                   *time.Time                                      `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ReversedAt                   *time.Time                                      `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                         `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                         `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	Lines                        []*RunsCreatePayrollResponseLinesItem           `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3703,6 +3819,27 @@ func (r *RunsCreatePayrollResponse) GetApprovedAt() *time.Time {
 		return nil
 	}
 	return r.ApprovedAt
+}
+
+func (r *RunsCreatePayrollResponse) GetReversedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.ReversedAt
+}
+
+func (r *RunsCreatePayrollResponse) GetReversalJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalJournalTransactionID
+}
+
+func (r *RunsCreatePayrollResponse) GetReversalReason() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalReason
 }
 
 func (r *RunsCreatePayrollResponse) GetLines() []*RunsCreatePayrollResponseLinesItem {
@@ -3852,6 +3989,27 @@ func (r *RunsCreatePayrollResponse) SetApprovedAt(approvedAt *time.Time) {
 	r.require(runsCreatePayrollResponseFieldApprovedAt)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetReversedAt(reversedAt *time.Time) {
+	r.ReversedAt = reversedAt
+	r.require(runsCreatePayrollResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	r.ReversalJournalTransactionID = reversalJournalTransactionID
+	r.require(runsCreatePayrollResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetReversalReason(reversalReason *string) {
+	r.ReversalReason = reversalReason
+	r.require(runsCreatePayrollResponseFieldReversalReason)
+}
+
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (r *RunsCreatePayrollResponse) SetLines(lines []*RunsCreatePayrollResponseLinesItem) {
@@ -3866,6 +4024,7 @@ func (r *RunsCreatePayrollResponse) UnmarshalJSON(data []byte) error {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed: embed(*r),
 	}
@@ -3876,6 +4035,7 @@ func (r *RunsCreatePayrollResponse) UnmarshalJSON(data []byte) error {
 	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
+	r.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
@@ -3892,11 +4052,13 @@ func (r *RunsCreatePayrollResponse) MarshalJSON() ([]byte, error) {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed:      embed(*r),
 		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
+		ReversedAt: internal.NewOptionalDateTime(r.ReversedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -4868,6 +5030,7 @@ type RunsCreatePayrollResponseStatus string
 const (
 	RunsCreatePayrollResponseStatusDraft    RunsCreatePayrollResponseStatus = "draft"
 	RunsCreatePayrollResponseStatusApproved RunsCreatePayrollResponseStatus = "approved"
+	RunsCreatePayrollResponseStatusReversed RunsCreatePayrollResponseStatus = "reversed"
 )
 
 func NewRunsCreatePayrollResponseStatusFromString(s string) (RunsCreatePayrollResponseStatus, error) {
@@ -4876,6 +5039,8 @@ func NewRunsCreatePayrollResponseStatusFromString(s string) (RunsCreatePayrollRe
 		return RunsCreatePayrollResponseStatusDraft, nil
 	case "approved":
 		return RunsCreatePayrollResponseStatusApproved, nil
+	case "reversed":
+		return RunsCreatePayrollResponseStatusReversed, nil
 	}
 	var t RunsCreatePayrollResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -4886,47 +5051,53 @@ func (r RunsCreatePayrollResponseStatus) Ptr() *RunsCreatePayrollResponseStatus 
 }
 
 var (
-	runsGetPayrollResponseFieldID                         = big.NewInt(1 << 0)
-	runsGetPayrollResponseFieldYear                       = big.NewInt(1 << 1)
-	runsGetPayrollResponseFieldMonth                      = big.NewInt(1 << 2)
-	runsGetPayrollResponseFieldCountryCode                = big.NewInt(1 << 3)
-	runsGetPayrollResponseFieldPayDate                    = big.NewInt(1 << 4)
-	runsGetPayrollResponseFieldStatus                     = big.NewInt(1 << 5)
-	runsGetPayrollResponseFieldGrossTotal                 = big.NewInt(1 << 6)
-	runsGetPayrollResponseFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
-	runsGetPayrollResponseFieldIncomeTaxTotal             = big.NewInt(1 << 8)
-	runsGetPayrollResponseFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
-	runsGetPayrollResponseFieldEmployerContributionsTotal = big.NewInt(1 << 10)
-	runsGetPayrollResponseFieldComponentTotals            = big.NewInt(1 << 11)
-	runsGetPayrollResponseFieldNetTotal                   = big.NewInt(1 << 12)
-	runsGetPayrollResponseFieldJournalTransactionID       = big.NewInt(1 << 13)
-	runsGetPayrollResponseFieldNotes                      = big.NewInt(1 << 14)
-	runsGetPayrollResponseFieldWarnings                   = big.NewInt(1 << 15)
-	runsGetPayrollResponseFieldCreatedAt                  = big.NewInt(1 << 16)
-	runsGetPayrollResponseFieldApprovedAt                 = big.NewInt(1 << 17)
-	runsGetPayrollResponseFieldLines                      = big.NewInt(1 << 18)
+	runsGetPayrollResponseFieldID                           = big.NewInt(1 << 0)
+	runsGetPayrollResponseFieldYear                         = big.NewInt(1 << 1)
+	runsGetPayrollResponseFieldMonth                        = big.NewInt(1 << 2)
+	runsGetPayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
+	runsGetPayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
+	runsGetPayrollResponseFieldStatus                       = big.NewInt(1 << 5)
+	runsGetPayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
+	runsGetPayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
+	runsGetPayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
+	runsGetPayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
+	runsGetPayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
+	runsGetPayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
+	runsGetPayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	runsGetPayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
+	runsGetPayrollResponseFieldNotes                        = big.NewInt(1 << 14)
+	runsGetPayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
+	runsGetPayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
+	runsGetPayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
+	runsGetPayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
+	runsGetPayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
+	runsGetPayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
+	runsGetPayrollResponseFieldLines                        = big.NewInt(1 << 21)
 )
 
 type RunsGetPayrollResponse struct {
-	ID                         string                                       `json:"id" url:"id"`
-	Year                       int64                                        `json:"year" url:"year"`
-	Month                      int64                                        `json:"month" url:"month"`
-	CountryCode                string                                       `json:"countryCode" url:"countryCode"`
-	PayDate                    *time.Time                                   `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
-	Status                     RunsGetPayrollResponseStatus                 `json:"status" url:"status"`
-	GrossTotal                 string                                       `json:"grossTotal" url:"grossTotal"`
-	TaxAllowanceTotal          string                                       `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
-	IncomeTaxTotal             string                                       `json:"incomeTaxTotal" url:"incomeTaxTotal"`
-	EmployeeContributionsTotal string                                       `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
-	EmployerContributionsTotal string                                       `json:"employerContributionsTotal" url:"employerContributionsTotal"`
-	ComponentTotals            []*RunsGetPayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
-	NetTotal                   string                                       `json:"netTotal" url:"netTotal"`
-	JournalTransactionID       *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                      *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	Warnings                   []string                                     `json:"warnings" url:"warnings"`
-	CreatedAt                  time.Time                                    `json:"createdAt" url:"createdAt"`
-	ApprovedAt                 *time.Time                                   `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
-	Lines                      []*RunsGetPayrollResponseLinesItem           `json:"lines" url:"lines"`
+	ID                           string                                       `json:"id" url:"id"`
+	Year                         int64                                        `json:"year" url:"year"`
+	Month                        int64                                        `json:"month" url:"month"`
+	CountryCode                  string                                       `json:"countryCode" url:"countryCode"`
+	PayDate                      *time.Time                                   `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
+	Status                       RunsGetPayrollResponseStatus                 `json:"status" url:"status"`
+	GrossTotal                   string                                       `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal            string                                       `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal               string                                       `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal   string                                       `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal   string                                       `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals              []*RunsGetPayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                     string                                       `json:"netTotal" url:"netTotal"`
+	JournalTransactionID         *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                        *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	Warnings                     []string                                     `json:"warnings" url:"warnings"`
+	CreatedAt                    time.Time                                    `json:"createdAt" url:"createdAt"`
+	ApprovedAt                   *time.Time                                   `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ReversedAt                   *time.Time                                   `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                      `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                      `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	Lines                        []*RunsGetPayrollResponseLinesItem           `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5059,6 +5230,27 @@ func (r *RunsGetPayrollResponse) GetApprovedAt() *time.Time {
 		return nil
 	}
 	return r.ApprovedAt
+}
+
+func (r *RunsGetPayrollResponse) GetReversedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.ReversedAt
+}
+
+func (r *RunsGetPayrollResponse) GetReversalJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalJournalTransactionID
+}
+
+func (r *RunsGetPayrollResponse) GetReversalReason() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalReason
 }
 
 func (r *RunsGetPayrollResponse) GetLines() []*RunsGetPayrollResponseLinesItem {
@@ -5208,6 +5400,27 @@ func (r *RunsGetPayrollResponse) SetApprovedAt(approvedAt *time.Time) {
 	r.require(runsGetPayrollResponseFieldApprovedAt)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetReversedAt(reversedAt *time.Time) {
+	r.ReversedAt = reversedAt
+	r.require(runsGetPayrollResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	r.ReversalJournalTransactionID = reversalJournalTransactionID
+	r.require(runsGetPayrollResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetReversalReason(reversalReason *string) {
+	r.ReversalReason = reversalReason
+	r.require(runsGetPayrollResponseFieldReversalReason)
+}
+
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (r *RunsGetPayrollResponse) SetLines(lines []*RunsGetPayrollResponseLinesItem) {
@@ -5222,6 +5435,7 @@ func (r *RunsGetPayrollResponse) UnmarshalJSON(data []byte) error {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed: embed(*r),
 	}
@@ -5232,6 +5446,7 @@ func (r *RunsGetPayrollResponse) UnmarshalJSON(data []byte) error {
 	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
+	r.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
@@ -5248,11 +5463,13 @@ func (r *RunsGetPayrollResponse) MarshalJSON() ([]byte, error) {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed:      embed(*r),
 		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
+		ReversedAt: internal.NewOptionalDateTime(r.ReversedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -6224,6 +6441,7 @@ type RunsGetPayrollResponseStatus string
 const (
 	RunsGetPayrollResponseStatusDraft    RunsGetPayrollResponseStatus = "draft"
 	RunsGetPayrollResponseStatusApproved RunsGetPayrollResponseStatus = "approved"
+	RunsGetPayrollResponseStatusReversed RunsGetPayrollResponseStatus = "reversed"
 )
 
 func NewRunsGetPayrollResponseStatusFromString(s string) (RunsGetPayrollResponseStatus, error) {
@@ -6232,6 +6450,8 @@ func NewRunsGetPayrollResponseStatusFromString(s string) (RunsGetPayrollResponse
 		return RunsGetPayrollResponseStatusDraft, nil
 	case "approved":
 		return RunsGetPayrollResponseStatusApproved, nil
+	case "reversed":
+		return RunsGetPayrollResponseStatusReversed, nil
 	}
 	var t RunsGetPayrollResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -6845,45 +7065,51 @@ func (r *RunsListPayrollResponse) String() string {
 }
 
 var (
-	runsListPayrollResponseRowsItemFieldID                         = big.NewInt(1 << 0)
-	runsListPayrollResponseRowsItemFieldYear                       = big.NewInt(1 << 1)
-	runsListPayrollResponseRowsItemFieldMonth                      = big.NewInt(1 << 2)
-	runsListPayrollResponseRowsItemFieldCountryCode                = big.NewInt(1 << 3)
-	runsListPayrollResponseRowsItemFieldPayDate                    = big.NewInt(1 << 4)
-	runsListPayrollResponseRowsItemFieldStatus                     = big.NewInt(1 << 5)
-	runsListPayrollResponseRowsItemFieldGrossTotal                 = big.NewInt(1 << 6)
-	runsListPayrollResponseRowsItemFieldTaxAllowanceTotal          = big.NewInt(1 << 7)
-	runsListPayrollResponseRowsItemFieldIncomeTaxTotal             = big.NewInt(1 << 8)
-	runsListPayrollResponseRowsItemFieldEmployeeContributionsTotal = big.NewInt(1 << 9)
-	runsListPayrollResponseRowsItemFieldEmployerContributionsTotal = big.NewInt(1 << 10)
-	runsListPayrollResponseRowsItemFieldComponentTotals            = big.NewInt(1 << 11)
-	runsListPayrollResponseRowsItemFieldNetTotal                   = big.NewInt(1 << 12)
-	runsListPayrollResponseRowsItemFieldJournalTransactionID       = big.NewInt(1 << 13)
-	runsListPayrollResponseRowsItemFieldNotes                      = big.NewInt(1 << 14)
-	runsListPayrollResponseRowsItemFieldWarnings                   = big.NewInt(1 << 15)
-	runsListPayrollResponseRowsItemFieldCreatedAt                  = big.NewInt(1 << 16)
-	runsListPayrollResponseRowsItemFieldApprovedAt                 = big.NewInt(1 << 17)
+	runsListPayrollResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	runsListPayrollResponseRowsItemFieldYear                         = big.NewInt(1 << 1)
+	runsListPayrollResponseRowsItemFieldMonth                        = big.NewInt(1 << 2)
+	runsListPayrollResponseRowsItemFieldCountryCode                  = big.NewInt(1 << 3)
+	runsListPayrollResponseRowsItemFieldPayDate                      = big.NewInt(1 << 4)
+	runsListPayrollResponseRowsItemFieldStatus                       = big.NewInt(1 << 5)
+	runsListPayrollResponseRowsItemFieldGrossTotal                   = big.NewInt(1 << 6)
+	runsListPayrollResponseRowsItemFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
+	runsListPayrollResponseRowsItemFieldIncomeTaxTotal               = big.NewInt(1 << 8)
+	runsListPayrollResponseRowsItemFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
+	runsListPayrollResponseRowsItemFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
+	runsListPayrollResponseRowsItemFieldComponentTotals              = big.NewInt(1 << 11)
+	runsListPayrollResponseRowsItemFieldNetTotal                     = big.NewInt(1 << 12)
+	runsListPayrollResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 13)
+	runsListPayrollResponseRowsItemFieldNotes                        = big.NewInt(1 << 14)
+	runsListPayrollResponseRowsItemFieldWarnings                     = big.NewInt(1 << 15)
+	runsListPayrollResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 16)
+	runsListPayrollResponseRowsItemFieldApprovedAt                   = big.NewInt(1 << 17)
+	runsListPayrollResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 18)
+	runsListPayrollResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 19)
+	runsListPayrollResponseRowsItemFieldReversalReason               = big.NewInt(1 << 20)
 )
 
 type RunsListPayrollResponseRowsItem struct {
-	ID                         string                                                `json:"id" url:"id"`
-	Year                       int64                                                 `json:"year" url:"year"`
-	Month                      int64                                                 `json:"month" url:"month"`
-	CountryCode                string                                                `json:"countryCode" url:"countryCode"`
-	PayDate                    *time.Time                                            `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
-	Status                     RunsListPayrollResponseRowsItemStatus                 `json:"status" url:"status"`
-	GrossTotal                 string                                                `json:"grossTotal" url:"grossTotal"`
-	TaxAllowanceTotal          string                                                `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
-	IncomeTaxTotal             string                                                `json:"incomeTaxTotal" url:"incomeTaxTotal"`
-	EmployeeContributionsTotal string                                                `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
-	EmployerContributionsTotal string                                                `json:"employerContributionsTotal" url:"employerContributionsTotal"`
-	ComponentTotals            []*RunsListPayrollResponseRowsItemComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
-	NetTotal                   string                                                `json:"netTotal" url:"netTotal"`
-	JournalTransactionID       *string                                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	Notes                      *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
-	Warnings                   []string                                              `json:"warnings" url:"warnings"`
-	CreatedAt                  time.Time                                             `json:"createdAt" url:"createdAt"`
-	ApprovedAt                 *time.Time                                            `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ID                           string                                                `json:"id" url:"id"`
+	Year                         int64                                                 `json:"year" url:"year"`
+	Month                        int64                                                 `json:"month" url:"month"`
+	CountryCode                  string                                                `json:"countryCode" url:"countryCode"`
+	PayDate                      *time.Time                                            `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
+	Status                       RunsListPayrollResponseRowsItemStatus                 `json:"status" url:"status"`
+	GrossTotal                   string                                                `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal            string                                                `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal               string                                                `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal   string                                                `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal   string                                                `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals              []*RunsListPayrollResponseRowsItemComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                     string                                                `json:"netTotal" url:"netTotal"`
+	JournalTransactionID         *string                                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                        *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+	Warnings                     []string                                              `json:"warnings" url:"warnings"`
+	CreatedAt                    time.Time                                             `json:"createdAt" url:"createdAt"`
+	ApprovedAt                   *time.Time                                            `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ReversedAt                   *time.Time                                            `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                               `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                               `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7016,6 +7242,27 @@ func (r *RunsListPayrollResponseRowsItem) GetApprovedAt() *time.Time {
 		return nil
 	}
 	return r.ApprovedAt
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetReversedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.ReversedAt
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetReversalJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalJournalTransactionID
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetReversalReason() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalReason
 }
 
 func (r *RunsListPayrollResponseRowsItem) GetExtraProperties() map[string]interface{} {
@@ -7158,6 +7405,27 @@ func (r *RunsListPayrollResponseRowsItem) SetApprovedAt(approvedAt *time.Time) {
 	r.require(runsListPayrollResponseRowsItemFieldApprovedAt)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetReversedAt(reversedAt *time.Time) {
+	r.ReversedAt = reversedAt
+	r.require(runsListPayrollResponseRowsItemFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	r.ReversalJournalTransactionID = reversalJournalTransactionID
+	r.require(runsListPayrollResponseRowsItemFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetReversalReason(reversalReason *string) {
+	r.ReversalReason = reversalReason
+	r.require(runsListPayrollResponseRowsItemFieldReversalReason)
+}
+
 func (r *RunsListPayrollResponseRowsItem) UnmarshalJSON(data []byte) error {
 	type embed RunsListPayrollResponseRowsItem
 	var unmarshaler = struct {
@@ -7165,6 +7433,7 @@ func (r *RunsListPayrollResponseRowsItem) UnmarshalJSON(data []byte) error {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed: embed(*r),
 	}
@@ -7175,6 +7444,7 @@ func (r *RunsListPayrollResponseRowsItem) UnmarshalJSON(data []byte) error {
 	r.PayDate = unmarshaler.PayDate.TimePtr()
 	r.CreatedAt = unmarshaler.CreatedAt.Time()
 	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
+	r.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *r)
 	if err != nil {
 		return err
@@ -7191,11 +7461,13 @@ func (r *RunsListPayrollResponseRowsItem) MarshalJSON() ([]byte, error) {
 		PayDate    *internal.Date     `json:"payDate,omitempty"`
 		CreatedAt  *internal.DateTime `json:"createdAt"`
 		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
 	}{
 		embed:      embed(*r),
 		PayDate:    internal.NewOptionalDate(r.PayDate),
 		CreatedAt:  internal.NewDateTime(r.CreatedAt),
 		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
+		ReversedAt: internal.NewOptionalDateTime(r.ReversedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -7400,6 +7672,7 @@ type RunsListPayrollResponseRowsItemStatus string
 const (
 	RunsListPayrollResponseRowsItemStatusDraft    RunsListPayrollResponseRowsItemStatus = "draft"
 	RunsListPayrollResponseRowsItemStatusApproved RunsListPayrollResponseRowsItemStatus = "approved"
+	RunsListPayrollResponseRowsItemStatusReversed RunsListPayrollResponseRowsItemStatus = "reversed"
 )
 
 func NewRunsListPayrollResponseRowsItemStatusFromString(s string) (RunsListPayrollResponseRowsItemStatus, error) {
@@ -7408,12 +7681,642 @@ func NewRunsListPayrollResponseRowsItemStatusFromString(s string) (RunsListPayro
 		return RunsListPayrollResponseRowsItemStatusDraft, nil
 	case "approved":
 		return RunsListPayrollResponseRowsItemStatusApproved, nil
+	case "reversed":
+		return RunsListPayrollResponseRowsItemStatusReversed, nil
 	}
 	var t RunsListPayrollResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
 func (r RunsListPayrollResponseRowsItemStatus) Ptr() *RunsListPayrollResponseRowsItemStatus {
+	return &r
+}
+
+var (
+	runsReversePayrollResponseFieldID                           = big.NewInt(1 << 0)
+	runsReversePayrollResponseFieldYear                         = big.NewInt(1 << 1)
+	runsReversePayrollResponseFieldMonth                        = big.NewInt(1 << 2)
+	runsReversePayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
+	runsReversePayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
+	runsReversePayrollResponseFieldStatus                       = big.NewInt(1 << 5)
+	runsReversePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
+	runsReversePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
+	runsReversePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
+	runsReversePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
+	runsReversePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
+	runsReversePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
+	runsReversePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	runsReversePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
+	runsReversePayrollResponseFieldNotes                        = big.NewInt(1 << 14)
+	runsReversePayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
+	runsReversePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
+	runsReversePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
+	runsReversePayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
+	runsReversePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
+	runsReversePayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
+)
+
+type RunsReversePayrollResponse struct {
+	ID                           string                                           `json:"id" url:"id"`
+	Year                         int64                                            `json:"year" url:"year"`
+	Month                        int64                                            `json:"month" url:"month"`
+	CountryCode                  string                                           `json:"countryCode" url:"countryCode"`
+	PayDate                      *time.Time                                       `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
+	Status                       RunsReversePayrollResponseStatus                 `json:"status" url:"status"`
+	GrossTotal                   string                                           `json:"grossTotal" url:"grossTotal"`
+	TaxAllowanceTotal            string                                           `json:"taxAllowanceTotal" url:"taxAllowanceTotal"`
+	IncomeTaxTotal               string                                           `json:"incomeTaxTotal" url:"incomeTaxTotal"`
+	EmployeeContributionsTotal   string                                           `json:"employeeContributionsTotal" url:"employeeContributionsTotal"`
+	EmployerContributionsTotal   string                                           `json:"employerContributionsTotal" url:"employerContributionsTotal"`
+	ComponentTotals              []*RunsReversePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
+	NetTotal                     string                                           `json:"netTotal" url:"netTotal"`
+	JournalTransactionID         *string                                          `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Notes                        *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
+	Warnings                     []string                                         `json:"warnings" url:"warnings"`
+	CreatedAt                    time.Time                                        `json:"createdAt" url:"createdAt"`
+	ApprovedAt                   *time.Time                                       `json:"approvedAt,omitempty" url:"approvedAt,omitempty"`
+	ReversedAt                   *time.Time                                       `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                          `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                          `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RunsReversePayrollResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RunsReversePayrollResponse) GetYear() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Year
+}
+
+func (r *RunsReversePayrollResponse) GetMonth() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Month
+}
+
+func (r *RunsReversePayrollResponse) GetCountryCode() string {
+	if r == nil {
+		return ""
+	}
+	return r.CountryCode
+}
+
+func (r *RunsReversePayrollResponse) GetPayDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.PayDate
+}
+
+func (r *RunsReversePayrollResponse) GetStatus() RunsReversePayrollResponseStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *RunsReversePayrollResponse) GetGrossTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossTotal
+}
+
+func (r *RunsReversePayrollResponse) GetTaxAllowanceTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.TaxAllowanceTotal
+}
+
+func (r *RunsReversePayrollResponse) GetIncomeTaxTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.IncomeTaxTotal
+}
+
+func (r *RunsReversePayrollResponse) GetEmployeeContributionsTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.EmployeeContributionsTotal
+}
+
+func (r *RunsReversePayrollResponse) GetEmployerContributionsTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.EmployerContributionsTotal
+}
+
+func (r *RunsReversePayrollResponse) GetComponentTotals() []*RunsReversePayrollResponseComponentTotalsItem {
+	if r == nil {
+		return nil
+	}
+	return r.ComponentTotals
+}
+
+func (r *RunsReversePayrollResponse) GetNetTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetTotal
+}
+
+func (r *RunsReversePayrollResponse) GetJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.JournalTransactionID
+}
+
+func (r *RunsReversePayrollResponse) GetNotes() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Notes
+}
+
+func (r *RunsReversePayrollResponse) GetWarnings() []string {
+	if r == nil {
+		return nil
+	}
+	return r.Warnings
+}
+
+func (r *RunsReversePayrollResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RunsReversePayrollResponse) GetApprovedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.ApprovedAt
+}
+
+func (r *RunsReversePayrollResponse) GetReversedAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.ReversedAt
+}
+
+func (r *RunsReversePayrollResponse) GetReversalJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalJournalTransactionID
+}
+
+func (r *RunsReversePayrollResponse) GetReversalReason() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ReversalReason
+}
+
+func (r *RunsReversePayrollResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RunsReversePayrollResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetID(id string) {
+	r.ID = id
+	r.require(runsReversePayrollResponseFieldID)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetYear(year int64) {
+	r.Year = year
+	r.require(runsReversePayrollResponseFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetMonth(month int64) {
+	r.Month = month
+	r.require(runsReversePayrollResponseFieldMonth)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetCountryCode(countryCode string) {
+	r.CountryCode = countryCode
+	r.require(runsReversePayrollResponseFieldCountryCode)
+}
+
+// SetPayDate sets the PayDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetPayDate(payDate *time.Time) {
+	r.PayDate = payDate
+	r.require(runsReversePayrollResponseFieldPayDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetStatus(status RunsReversePayrollResponseStatus) {
+	r.Status = status
+	r.require(runsReversePayrollResponseFieldStatus)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(runsReversePayrollResponseFieldGrossTotal)
+}
+
+// SetTaxAllowanceTotal sets the TaxAllowanceTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetTaxAllowanceTotal(taxAllowanceTotal string) {
+	r.TaxAllowanceTotal = taxAllowanceTotal
+	r.require(runsReversePayrollResponseFieldTaxAllowanceTotal)
+}
+
+// SetIncomeTaxTotal sets the IncomeTaxTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetIncomeTaxTotal(incomeTaxTotal string) {
+	r.IncomeTaxTotal = incomeTaxTotal
+	r.require(runsReversePayrollResponseFieldIncomeTaxTotal)
+}
+
+// SetEmployeeContributionsTotal sets the EmployeeContributionsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetEmployeeContributionsTotal(employeeContributionsTotal string) {
+	r.EmployeeContributionsTotal = employeeContributionsTotal
+	r.require(runsReversePayrollResponseFieldEmployeeContributionsTotal)
+}
+
+// SetEmployerContributionsTotal sets the EmployerContributionsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetEmployerContributionsTotal(employerContributionsTotal string) {
+	r.EmployerContributionsTotal = employerContributionsTotal
+	r.require(runsReversePayrollResponseFieldEmployerContributionsTotal)
+}
+
+// SetComponentTotals sets the ComponentTotals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetComponentTotals(componentTotals []*RunsReversePayrollResponseComponentTotalsItem) {
+	r.ComponentTotals = componentTotals
+	r.require(runsReversePayrollResponseFieldComponentTotals)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(runsReversePayrollResponseFieldNetTotal)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(runsReversePayrollResponseFieldJournalTransactionID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetNotes(notes *string) {
+	r.Notes = notes
+	r.require(runsReversePayrollResponseFieldNotes)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetWarnings(warnings []string) {
+	r.Warnings = warnings
+	r.require(runsReversePayrollResponseFieldWarnings)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(runsReversePayrollResponseFieldCreatedAt)
+}
+
+// SetApprovedAt sets the ApprovedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetApprovedAt(approvedAt *time.Time) {
+	r.ApprovedAt = approvedAt
+	r.require(runsReversePayrollResponseFieldApprovedAt)
+}
+
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetReversedAt(reversedAt *time.Time) {
+	r.ReversedAt = reversedAt
+	r.require(runsReversePayrollResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	r.ReversalJournalTransactionID = reversalJournalTransactionID
+	r.require(runsReversePayrollResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetReversalReason(reversalReason *string) {
+	r.ReversalReason = reversalReason
+	r.require(runsReversePayrollResponseFieldReversalReason)
+}
+
+func (r *RunsReversePayrollResponse) UnmarshalJSON(data []byte) error {
+	type embed RunsReversePayrollResponse
+	var unmarshaler = struct {
+		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
+		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RunsReversePayrollResponse(unmarshaler.embed)
+	r.PayDate = unmarshaler.PayDate.TimePtr()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.ApprovedAt = unmarshaler.ApprovedAt.TimePtr()
+	r.ReversedAt = unmarshaler.ReversedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RunsReversePayrollResponse) MarshalJSON() ([]byte, error) {
+	type embed RunsReversePayrollResponse
+	var marshaler = struct {
+		embed
+		PayDate    *internal.Date     `json:"payDate,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
+		ApprovedAt *internal.DateTime `json:"approvedAt,omitempty"`
+		ReversedAt *internal.DateTime `json:"reversedAt,omitempty"`
+	}{
+		embed:      embed(*r),
+		PayDate:    internal.NewOptionalDate(r.PayDate),
+		CreatedAt:  internal.NewDateTime(r.CreatedAt),
+		ApprovedAt: internal.NewOptionalDateTime(r.ApprovedAt),
+		ReversedAt: internal.NewOptionalDateTime(r.ReversedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RunsReversePayrollResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	runsReversePayrollResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
+	runsReversePayrollResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
+	runsReversePayrollResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
+	runsReversePayrollResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
+	runsReversePayrollResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+)
+
+type RunsReversePayrollResponseComponentTotalsItem struct {
+	Code   string                                            `json:"code" url:"code"`
+	Kind   RunsReversePayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount string                                            `json:"amount" url:"amount"`
+	Rate   *string                                           `json:"rate,omitempty" url:"rate,omitempty"`
+	Base   *string                                           `json:"base,omitempty" url:"base,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) GetCode() string {
+	if r == nil {
+		return ""
+	}
+	return r.Code
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) GetKind() RunsReversePayrollResponseComponentTotalsItemKind {
+	if r == nil {
+		return ""
+	}
+	return r.Kind
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) GetAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.Amount
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) GetRate() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Rate
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) GetBase() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Base
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponseComponentTotalsItem) SetCode(code string) {
+	r.Code = code
+	r.require(runsReversePayrollResponseComponentTotalsItemFieldCode)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponseComponentTotalsItem) SetKind(kind RunsReversePayrollResponseComponentTotalsItemKind) {
+	r.Kind = kind
+	r.require(runsReversePayrollResponseComponentTotalsItemFieldKind)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponseComponentTotalsItem) SetAmount(amount string) {
+	r.Amount = amount
+	r.require(runsReversePayrollResponseComponentTotalsItemFieldAmount)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponseComponentTotalsItem) SetRate(rate *string) {
+	r.Rate = rate
+	r.require(runsReversePayrollResponseComponentTotalsItemFieldRate)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponseComponentTotalsItem) SetBase(base *string) {
+	r.Base = base
+	r.require(runsReversePayrollResponseComponentTotalsItemFieldBase)
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RunsReversePayrollResponseComponentTotalsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RunsReversePayrollResponseComponentTotalsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) MarshalJSON() ([]byte, error) {
+	type embed RunsReversePayrollResponseComponentTotalsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RunsReversePayrollResponseComponentTotalsItemKind string
+
+const (
+	RunsReversePayrollResponseComponentTotalsItemKindAllowance            RunsReversePayrollResponseComponentTotalsItemKind = "allowance"
+	RunsReversePayrollResponseComponentTotalsItemKindEmployeeTax          RunsReversePayrollResponseComponentTotalsItemKind = "employee_tax"
+	RunsReversePayrollResponseComponentTotalsItemKindEmployeeContribution RunsReversePayrollResponseComponentTotalsItemKind = "employee_contribution"
+	RunsReversePayrollResponseComponentTotalsItemKindEmployerContribution RunsReversePayrollResponseComponentTotalsItemKind = "employer_contribution"
+	RunsReversePayrollResponseComponentTotalsItemKindEmployerPayment      RunsReversePayrollResponseComponentTotalsItemKind = "employer_payment"
+)
+
+func NewRunsReversePayrollResponseComponentTotalsItemKindFromString(s string) (RunsReversePayrollResponseComponentTotalsItemKind, error) {
+	switch s {
+	case "allowance":
+		return RunsReversePayrollResponseComponentTotalsItemKindAllowance, nil
+	case "employee_tax":
+		return RunsReversePayrollResponseComponentTotalsItemKindEmployeeTax, nil
+	case "employee_contribution":
+		return RunsReversePayrollResponseComponentTotalsItemKindEmployeeContribution, nil
+	case "employer_contribution":
+		return RunsReversePayrollResponseComponentTotalsItemKindEmployerContribution, nil
+	case "employer_payment":
+		return RunsReversePayrollResponseComponentTotalsItemKindEmployerPayment, nil
+	}
+	var t RunsReversePayrollResponseComponentTotalsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsReversePayrollResponseComponentTotalsItemKind) Ptr() *RunsReversePayrollResponseComponentTotalsItemKind {
+	return &r
+}
+
+type RunsReversePayrollResponseStatus string
+
+const (
+	RunsReversePayrollResponseStatusDraft    RunsReversePayrollResponseStatus = "draft"
+	RunsReversePayrollResponseStatusApproved RunsReversePayrollResponseStatus = "approved"
+	RunsReversePayrollResponseStatusReversed RunsReversePayrollResponseStatus = "reversed"
+)
+
+func NewRunsReversePayrollResponseStatusFromString(s string) (RunsReversePayrollResponseStatus, error) {
+	switch s {
+	case "draft":
+		return RunsReversePayrollResponseStatusDraft, nil
+	case "approved":
+		return RunsReversePayrollResponseStatusApproved, nil
+	case "reversed":
+		return RunsReversePayrollResponseStatusReversed, nil
+	}
+	var t RunsReversePayrollResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsReversePayrollResponseStatus) Ptr() *RunsReversePayrollResponseStatus {
 	return &r
 }
 

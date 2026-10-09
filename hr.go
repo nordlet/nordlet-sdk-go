@@ -11,6 +11,313 @@ import (
 )
 
 var (
+	businessTripsApproveHrRequestFieldID = big.NewInt(1 << 0)
+)
+
+type BusinessTripsApproveHrRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (b *BusinessTripsApproveHrRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrRequest) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsApproveHrRequestFieldID)
+}
+
+func (b *BusinessTripsApproveHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsApproveHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*b = BusinessTripsApproveHrRequest(body)
+	return nil
+}
+
+func (b *BusinessTripsApproveHrRequest) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsApproveHrRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	businessTripsCreateHrRequestFieldEmployeeID             = big.NewInt(1 << 0)
+	businessTripsCreateHrRequestFieldDestinationCountryCode = big.NewInt(1 << 1)
+	businessTripsCreateHrRequestFieldPurpose                = big.NewInt(1 << 2)
+	businessTripsCreateHrRequestFieldStartDate              = big.NewInt(1 << 3)
+	businessTripsCreateHrRequestFieldEndDate                = big.NewInt(1 << 4)
+)
+
+type BusinessTripsCreateHrRequest struct {
+	EmployeeID             string    `json:"employeeId" url:"-"`
+	DestinationCountryCode string    `json:"destinationCountryCode" url:"-"`
+	Purpose                string    `json:"purpose" url:"-"`
+	StartDate              time.Time `json:"startDate" url:"-" format:"date"`
+	EndDate                time.Time `json:"endDate" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (b *BusinessTripsCreateHrRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrRequest) SetEmployeeID(employeeID string) {
+	b.EmployeeID = employeeID
+	b.require(businessTripsCreateHrRequestFieldEmployeeID)
+}
+
+// SetDestinationCountryCode sets the DestinationCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrRequest) SetDestinationCountryCode(destinationCountryCode string) {
+	b.DestinationCountryCode = destinationCountryCode
+	b.require(businessTripsCreateHrRequestFieldDestinationCountryCode)
+}
+
+// SetPurpose sets the Purpose field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrRequest) SetPurpose(purpose string) {
+	b.Purpose = purpose
+	b.require(businessTripsCreateHrRequestFieldPurpose)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrRequest) SetStartDate(startDate time.Time) {
+	b.StartDate = startDate
+	b.require(businessTripsCreateHrRequestFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrRequest) SetEndDate(endDate time.Time) {
+	b.EndDate = endDate
+	b.require(businessTripsCreateHrRequestFieldEndDate)
+}
+
+func (b *BusinessTripsCreateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsCreateHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*b = BusinessTripsCreateHrRequest(body)
+	return nil
+}
+
+func (b *BusinessTripsCreateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsCreateHrRequest
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date `json:"startDate"`
+		EndDate   *internal.Date `json:"endDate"`
+	}{
+		embed:     embed(*b),
+		StartDate: internal.NewDate(b.StartDate),
+		EndDate:   internal.NewDate(b.EndDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	businessTripsDeleteHrRequestFieldID = big.NewInt(1 << 0)
+)
+
+type BusinessTripsDeleteHrRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (b *BusinessTripsDeleteHrRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsDeleteHrRequest) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsDeleteHrRequestFieldID)
+}
+
+func (b *BusinessTripsDeleteHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsDeleteHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*b = BusinessTripsDeleteHrRequest(body)
+	return nil
+}
+
+func (b *BusinessTripsDeleteHrRequest) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsDeleteHrRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	businessTripsGetHrRequestFieldID = big.NewInt(1 << 0)
+)
+
+type BusinessTripsGetHrRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (b *BusinessTripsGetHrRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrRequest) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsGetHrRequestFieldID)
+}
+
+func (b *BusinessTripsGetHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsGetHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*b = BusinessTripsGetHrRequest(body)
+	return nil
+}
+
+func (b *BusinessTripsGetHrRequest) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsGetHrRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	businessTripsListHrRequestFieldPage     = big.NewInt(1 << 0)
+	businessTripsListHrRequestFieldPageSize = big.NewInt(1 << 1)
+	businessTripsListHrRequestFieldSort     = big.NewInt(1 << 2)
+	businessTripsListHrRequestFieldFilter   = big.NewInt(1 << 3)
+	businessTripsListHrRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type BusinessTripsListHrRequest struct {
+	Page     *int64                                  `json:"page,omitempty" url:"-"`
+	PageSize *int64                                  `json:"pageSize,omitempty" url:"-"`
+	Sort     []*BusinessTripsListHrRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*BusinessTripsListHrRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (b *BusinessTripsListHrRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequest) SetPage(page *int64) {
+	b.Page = page
+	b.require(businessTripsListHrRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequest) SetPageSize(pageSize *int64) {
+	b.PageSize = pageSize
+	b.require(businessTripsListHrRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequest) SetSort(sort []*BusinessTripsListHrRequestSortItem) {
+	b.Sort = sort
+	b.require(businessTripsListHrRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequest) SetFilter(filter []*BusinessTripsListHrRequestFilterItem) {
+	b.Filter = filter
+	b.require(businessTripsListHrRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequest) SetTotals(totals []string) {
+	b.Totals = totals
+	b.require(businessTripsListHrRequestFieldTotals)
+}
+
+func (b *BusinessTripsListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsListHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*b = BusinessTripsListHrRequest(body)
+	return nil
+}
+
+func (b *BusinessTripsListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsListHrRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	contractsCreateHrRequestFieldEmployeeID   = big.NewInt(1 << 0)
 	contractsCreateHrRequestFieldPositionID   = big.NewInt(1 << 1)
 	contractsCreateHrRequestFieldDepartmentID = big.NewInt(1 << 2)
@@ -1707,6 +2014,201 @@ func (l *LeaveBalancesSetHrRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	perDiemRatesCreateHrRequestFieldCountryCode = big.NewInt(1 << 0)
+	perDiemRatesCreateHrRequestFieldDailyAmount = big.NewInt(1 << 1)
+	perDiemRatesCreateHrRequestFieldValidFrom   = big.NewInt(1 << 2)
+)
+
+type PerDiemRatesCreateHrRequest struct {
+	CountryCode string    `json:"countryCode" url:"-"`
+	DailyAmount string    `json:"dailyAmount" url:"-"`
+	ValidFrom   time.Time `json:"validFrom" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PerDiemRatesCreateHrRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrRequest) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(perDiemRatesCreateHrRequestFieldCountryCode)
+}
+
+// SetDailyAmount sets the DailyAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrRequest) SetDailyAmount(dailyAmount string) {
+	p.DailyAmount = dailyAmount
+	p.require(perDiemRatesCreateHrRequestFieldDailyAmount)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrRequest) SetValidFrom(validFrom time.Time) {
+	p.ValidFrom = validFrom
+	p.require(perDiemRatesCreateHrRequestFieldValidFrom)
+}
+
+func (p *PerDiemRatesCreateHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PerDiemRatesCreateHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PerDiemRatesCreateHrRequest(body)
+	return nil
+}
+
+func (p *PerDiemRatesCreateHrRequest) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesCreateHrRequest
+	var marshaler = struct {
+		embed
+		ValidFrom *internal.Date `json:"validFrom"`
+	}{
+		embed:     embed(*p),
+		ValidFrom: internal.NewDate(p.ValidFrom),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	perDiemRatesDeleteHrRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PerDiemRatesDeleteHrRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PerDiemRatesDeleteHrRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesDeleteHrRequest) SetID(id string) {
+	p.ID = id
+	p.require(perDiemRatesDeleteHrRequestFieldID)
+}
+
+func (p *PerDiemRatesDeleteHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PerDiemRatesDeleteHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PerDiemRatesDeleteHrRequest(body)
+	return nil
+}
+
+func (p *PerDiemRatesDeleteHrRequest) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesDeleteHrRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	perDiemRatesListHrRequestFieldPage     = big.NewInt(1 << 0)
+	perDiemRatesListHrRequestFieldPageSize = big.NewInt(1 << 1)
+	perDiemRatesListHrRequestFieldSort     = big.NewInt(1 << 2)
+	perDiemRatesListHrRequestFieldFilter   = big.NewInt(1 << 3)
+	perDiemRatesListHrRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type PerDiemRatesListHrRequest struct {
+	Page     *int64                                 `json:"page,omitempty" url:"-"`
+	PageSize *int64                                 `json:"pageSize,omitempty" url:"-"`
+	Sort     []*PerDiemRatesListHrRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*PerDiemRatesListHrRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PerDiemRatesListHrRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequest) SetPage(page *int64) {
+	p.Page = page
+	p.require(perDiemRatesListHrRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequest) SetPageSize(pageSize *int64) {
+	p.PageSize = pageSize
+	p.require(perDiemRatesListHrRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequest) SetSort(sort []*PerDiemRatesListHrRequestSortItem) {
+	p.Sort = sort
+	p.require(perDiemRatesListHrRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequest) SetFilter(filter []*PerDiemRatesListHrRequestFilterItem) {
+	p.Filter = filter
+	p.require(perDiemRatesListHrRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequest) SetTotals(totals []string) {
+	p.Totals = totals
+	p.require(perDiemRatesListHrRequestFieldTotals)
+}
+
+func (p *PerDiemRatesListHrRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PerDiemRatesListHrRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PerDiemRatesListHrRequest(body)
+	return nil
+}
+
+func (p *PerDiemRatesListHrRequest) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesListHrRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	positionsCreateHrRequestFieldCode         = big.NewInt(1 << 0)
 	positionsCreateHrRequestFieldName         = big.NewInt(1 << 1)
 	positionsCreateHrRequestFieldTranslations = big.NewInt(1 << 2)
@@ -2226,6 +2728,1965 @@ func (t *TimesheetsUpsertHrRequest) MarshalJSON() ([]byte, error) {
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	businessTripsApproveHrResponseFieldID                     = big.NewInt(1 << 0)
+	businessTripsApproveHrResponseFieldEmployeeID             = big.NewInt(1 << 1)
+	businessTripsApproveHrResponseFieldDestinationCountryCode = big.NewInt(1 << 2)
+	businessTripsApproveHrResponseFieldPurpose                = big.NewInt(1 << 3)
+	businessTripsApproveHrResponseFieldStartDate              = big.NewInt(1 << 4)
+	businessTripsApproveHrResponseFieldEndDate                = big.NewInt(1 << 5)
+	businessTripsApproveHrResponseFieldDays                   = big.NewInt(1 << 6)
+	businessTripsApproveHrResponseFieldDailyRate              = big.NewInt(1 << 7)
+	businessTripsApproveHrResponseFieldPerDiemAmount          = big.NewInt(1 << 8)
+	businessTripsApproveHrResponseFieldStatus                 = big.NewInt(1 << 9)
+	businessTripsApproveHrResponseFieldPayrollRunID           = big.NewInt(1 << 10)
+	businessTripsApproveHrResponseFieldCreatedAt              = big.NewInt(1 << 11)
+	businessTripsApproveHrResponseFieldUpdatedAt              = big.NewInt(1 << 12)
+)
+
+type BusinessTripsApproveHrResponse struct {
+	ID                     string                               `json:"id" url:"id"`
+	EmployeeID             string                               `json:"employeeId" url:"employeeId"`
+	DestinationCountryCode string                               `json:"destinationCountryCode" url:"destinationCountryCode"`
+	Purpose                string                               `json:"purpose" url:"purpose"`
+	StartDate              time.Time                            `json:"startDate" url:"startDate" format:"date"`
+	EndDate                time.Time                            `json:"endDate" url:"endDate" format:"date"`
+	Days                   int64                                `json:"days" url:"days"`
+	DailyRate              string                               `json:"dailyRate" url:"dailyRate"`
+	PerDiemAmount          string                               `json:"perDiemAmount" url:"perDiemAmount"`
+	Status                 BusinessTripsApproveHrResponseStatus `json:"status" url:"status"`
+	PayrollRunID           *string                              `json:"payrollRunId,omitempty" url:"payrollRunId,omitempty"`
+	CreatedAt              time.Time                            `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                            `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsApproveHrResponse) GetID() string {
+	if b == nil {
+		return ""
+	}
+	return b.ID
+}
+
+func (b *BusinessTripsApproveHrResponse) GetEmployeeID() string {
+	if b == nil {
+		return ""
+	}
+	return b.EmployeeID
+}
+
+func (b *BusinessTripsApproveHrResponse) GetDestinationCountryCode() string {
+	if b == nil {
+		return ""
+	}
+	return b.DestinationCountryCode
+}
+
+func (b *BusinessTripsApproveHrResponse) GetPurpose() string {
+	if b == nil {
+		return ""
+	}
+	return b.Purpose
+}
+
+func (b *BusinessTripsApproveHrResponse) GetStartDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.StartDate
+}
+
+func (b *BusinessTripsApproveHrResponse) GetEndDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.EndDate
+}
+
+func (b *BusinessTripsApproveHrResponse) GetDays() int64 {
+	if b == nil {
+		return 0
+	}
+	return b.Days
+}
+
+func (b *BusinessTripsApproveHrResponse) GetDailyRate() string {
+	if b == nil {
+		return ""
+	}
+	return b.DailyRate
+}
+
+func (b *BusinessTripsApproveHrResponse) GetPerDiemAmount() string {
+	if b == nil {
+		return ""
+	}
+	return b.PerDiemAmount
+}
+
+func (b *BusinessTripsApproveHrResponse) GetStatus() BusinessTripsApproveHrResponseStatus {
+	if b == nil {
+		return ""
+	}
+	return b.Status
+}
+
+func (b *BusinessTripsApproveHrResponse) GetPayrollRunID() *string {
+	if b == nil {
+		return nil
+	}
+	return b.PayrollRunID
+}
+
+func (b *BusinessTripsApproveHrResponse) GetCreatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.CreatedAt
+}
+
+func (b *BusinessTripsApproveHrResponse) GetUpdatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.UpdatedAt
+}
+
+func (b *BusinessTripsApproveHrResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsApproveHrResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsApproveHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetEmployeeID(employeeID string) {
+	b.EmployeeID = employeeID
+	b.require(businessTripsApproveHrResponseFieldEmployeeID)
+}
+
+// SetDestinationCountryCode sets the DestinationCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetDestinationCountryCode(destinationCountryCode string) {
+	b.DestinationCountryCode = destinationCountryCode
+	b.require(businessTripsApproveHrResponseFieldDestinationCountryCode)
+}
+
+// SetPurpose sets the Purpose field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetPurpose(purpose string) {
+	b.Purpose = purpose
+	b.require(businessTripsApproveHrResponseFieldPurpose)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetStartDate(startDate time.Time) {
+	b.StartDate = startDate
+	b.require(businessTripsApproveHrResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetEndDate(endDate time.Time) {
+	b.EndDate = endDate
+	b.require(businessTripsApproveHrResponseFieldEndDate)
+}
+
+// SetDays sets the Days field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetDays(days int64) {
+	b.Days = days
+	b.require(businessTripsApproveHrResponseFieldDays)
+}
+
+// SetDailyRate sets the DailyRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetDailyRate(dailyRate string) {
+	b.DailyRate = dailyRate
+	b.require(businessTripsApproveHrResponseFieldDailyRate)
+}
+
+// SetPerDiemAmount sets the PerDiemAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetPerDiemAmount(perDiemAmount string) {
+	b.PerDiemAmount = perDiemAmount
+	b.require(businessTripsApproveHrResponseFieldPerDiemAmount)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetStatus(status BusinessTripsApproveHrResponseStatus) {
+	b.Status = status
+	b.require(businessTripsApproveHrResponseFieldStatus)
+}
+
+// SetPayrollRunID sets the PayrollRunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetPayrollRunID(payrollRunID *string) {
+	b.PayrollRunID = payrollRunID
+	b.require(businessTripsApproveHrResponseFieldPayrollRunID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetCreatedAt(createdAt time.Time) {
+	b.CreatedAt = createdAt
+	b.require(businessTripsApproveHrResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsApproveHrResponse) SetUpdatedAt(updatedAt time.Time) {
+	b.UpdatedAt = updatedAt
+	b.require(businessTripsApproveHrResponseFieldUpdatedAt)
+}
+
+func (b *BusinessTripsApproveHrResponse) UnmarshalJSON(data []byte) error {
+	type embed BusinessTripsApproveHrResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*b = BusinessTripsApproveHrResponse(unmarshaler.embed)
+	b.StartDate = unmarshaler.StartDate.Time()
+	b.EndDate = unmarshaler.EndDate.Time()
+	b.CreatedAt = unmarshaler.CreatedAt.Time()
+	b.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsApproveHrResponse) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsApproveHrResponse
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*b),
+		StartDate: internal.NewDate(b.StartDate),
+		EndDate:   internal.NewDate(b.EndDate),
+		CreatedAt: internal.NewDateTime(b.CreatedAt),
+		UpdatedAt: internal.NewDateTime(b.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsApproveHrResponse) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+type BusinessTripsApproveHrResponseStatus string
+
+const (
+	BusinessTripsApproveHrResponseStatusDraft    BusinessTripsApproveHrResponseStatus = "draft"
+	BusinessTripsApproveHrResponseStatusApproved BusinessTripsApproveHrResponseStatus = "approved"
+)
+
+func NewBusinessTripsApproveHrResponseStatusFromString(s string) (BusinessTripsApproveHrResponseStatus, error) {
+	switch s {
+	case "draft":
+		return BusinessTripsApproveHrResponseStatusDraft, nil
+	case "approved":
+		return BusinessTripsApproveHrResponseStatusApproved, nil
+	}
+	var t BusinessTripsApproveHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BusinessTripsApproveHrResponseStatus) Ptr() *BusinessTripsApproveHrResponseStatus {
+	return &b
+}
+
+var (
+	businessTripsCreateHrResponseFieldID                     = big.NewInt(1 << 0)
+	businessTripsCreateHrResponseFieldEmployeeID             = big.NewInt(1 << 1)
+	businessTripsCreateHrResponseFieldDestinationCountryCode = big.NewInt(1 << 2)
+	businessTripsCreateHrResponseFieldPurpose                = big.NewInt(1 << 3)
+	businessTripsCreateHrResponseFieldStartDate              = big.NewInt(1 << 4)
+	businessTripsCreateHrResponseFieldEndDate                = big.NewInt(1 << 5)
+	businessTripsCreateHrResponseFieldDays                   = big.NewInt(1 << 6)
+	businessTripsCreateHrResponseFieldDailyRate              = big.NewInt(1 << 7)
+	businessTripsCreateHrResponseFieldPerDiemAmount          = big.NewInt(1 << 8)
+	businessTripsCreateHrResponseFieldStatus                 = big.NewInt(1 << 9)
+	businessTripsCreateHrResponseFieldPayrollRunID           = big.NewInt(1 << 10)
+	businessTripsCreateHrResponseFieldCreatedAt              = big.NewInt(1 << 11)
+	businessTripsCreateHrResponseFieldUpdatedAt              = big.NewInt(1 << 12)
+)
+
+type BusinessTripsCreateHrResponse struct {
+	ID                     string                              `json:"id" url:"id"`
+	EmployeeID             string                              `json:"employeeId" url:"employeeId"`
+	DestinationCountryCode string                              `json:"destinationCountryCode" url:"destinationCountryCode"`
+	Purpose                string                              `json:"purpose" url:"purpose"`
+	StartDate              time.Time                           `json:"startDate" url:"startDate" format:"date"`
+	EndDate                time.Time                           `json:"endDate" url:"endDate" format:"date"`
+	Days                   int64                               `json:"days" url:"days"`
+	DailyRate              string                              `json:"dailyRate" url:"dailyRate"`
+	PerDiemAmount          string                              `json:"perDiemAmount" url:"perDiemAmount"`
+	Status                 BusinessTripsCreateHrResponseStatus `json:"status" url:"status"`
+	PayrollRunID           *string                             `json:"payrollRunId,omitempty" url:"payrollRunId,omitempty"`
+	CreatedAt              time.Time                           `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                           `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsCreateHrResponse) GetID() string {
+	if b == nil {
+		return ""
+	}
+	return b.ID
+}
+
+func (b *BusinessTripsCreateHrResponse) GetEmployeeID() string {
+	if b == nil {
+		return ""
+	}
+	return b.EmployeeID
+}
+
+func (b *BusinessTripsCreateHrResponse) GetDestinationCountryCode() string {
+	if b == nil {
+		return ""
+	}
+	return b.DestinationCountryCode
+}
+
+func (b *BusinessTripsCreateHrResponse) GetPurpose() string {
+	if b == nil {
+		return ""
+	}
+	return b.Purpose
+}
+
+func (b *BusinessTripsCreateHrResponse) GetStartDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.StartDate
+}
+
+func (b *BusinessTripsCreateHrResponse) GetEndDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.EndDate
+}
+
+func (b *BusinessTripsCreateHrResponse) GetDays() int64 {
+	if b == nil {
+		return 0
+	}
+	return b.Days
+}
+
+func (b *BusinessTripsCreateHrResponse) GetDailyRate() string {
+	if b == nil {
+		return ""
+	}
+	return b.DailyRate
+}
+
+func (b *BusinessTripsCreateHrResponse) GetPerDiemAmount() string {
+	if b == nil {
+		return ""
+	}
+	return b.PerDiemAmount
+}
+
+func (b *BusinessTripsCreateHrResponse) GetStatus() BusinessTripsCreateHrResponseStatus {
+	if b == nil {
+		return ""
+	}
+	return b.Status
+}
+
+func (b *BusinessTripsCreateHrResponse) GetPayrollRunID() *string {
+	if b == nil {
+		return nil
+	}
+	return b.PayrollRunID
+}
+
+func (b *BusinessTripsCreateHrResponse) GetCreatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.CreatedAt
+}
+
+func (b *BusinessTripsCreateHrResponse) GetUpdatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.UpdatedAt
+}
+
+func (b *BusinessTripsCreateHrResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsCreateHrResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsCreateHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetEmployeeID(employeeID string) {
+	b.EmployeeID = employeeID
+	b.require(businessTripsCreateHrResponseFieldEmployeeID)
+}
+
+// SetDestinationCountryCode sets the DestinationCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetDestinationCountryCode(destinationCountryCode string) {
+	b.DestinationCountryCode = destinationCountryCode
+	b.require(businessTripsCreateHrResponseFieldDestinationCountryCode)
+}
+
+// SetPurpose sets the Purpose field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetPurpose(purpose string) {
+	b.Purpose = purpose
+	b.require(businessTripsCreateHrResponseFieldPurpose)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetStartDate(startDate time.Time) {
+	b.StartDate = startDate
+	b.require(businessTripsCreateHrResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetEndDate(endDate time.Time) {
+	b.EndDate = endDate
+	b.require(businessTripsCreateHrResponseFieldEndDate)
+}
+
+// SetDays sets the Days field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetDays(days int64) {
+	b.Days = days
+	b.require(businessTripsCreateHrResponseFieldDays)
+}
+
+// SetDailyRate sets the DailyRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetDailyRate(dailyRate string) {
+	b.DailyRate = dailyRate
+	b.require(businessTripsCreateHrResponseFieldDailyRate)
+}
+
+// SetPerDiemAmount sets the PerDiemAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetPerDiemAmount(perDiemAmount string) {
+	b.PerDiemAmount = perDiemAmount
+	b.require(businessTripsCreateHrResponseFieldPerDiemAmount)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetStatus(status BusinessTripsCreateHrResponseStatus) {
+	b.Status = status
+	b.require(businessTripsCreateHrResponseFieldStatus)
+}
+
+// SetPayrollRunID sets the PayrollRunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetPayrollRunID(payrollRunID *string) {
+	b.PayrollRunID = payrollRunID
+	b.require(businessTripsCreateHrResponseFieldPayrollRunID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetCreatedAt(createdAt time.Time) {
+	b.CreatedAt = createdAt
+	b.require(businessTripsCreateHrResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsCreateHrResponse) SetUpdatedAt(updatedAt time.Time) {
+	b.UpdatedAt = updatedAt
+	b.require(businessTripsCreateHrResponseFieldUpdatedAt)
+}
+
+func (b *BusinessTripsCreateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed BusinessTripsCreateHrResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*b = BusinessTripsCreateHrResponse(unmarshaler.embed)
+	b.StartDate = unmarshaler.StartDate.Time()
+	b.EndDate = unmarshaler.EndDate.Time()
+	b.CreatedAt = unmarshaler.CreatedAt.Time()
+	b.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsCreateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsCreateHrResponse
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*b),
+		StartDate: internal.NewDate(b.StartDate),
+		EndDate:   internal.NewDate(b.EndDate),
+		CreatedAt: internal.NewDateTime(b.CreatedAt),
+		UpdatedAt: internal.NewDateTime(b.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsCreateHrResponse) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+type BusinessTripsCreateHrResponseStatus string
+
+const (
+	BusinessTripsCreateHrResponseStatusDraft    BusinessTripsCreateHrResponseStatus = "draft"
+	BusinessTripsCreateHrResponseStatusApproved BusinessTripsCreateHrResponseStatus = "approved"
+)
+
+func NewBusinessTripsCreateHrResponseStatusFromString(s string) (BusinessTripsCreateHrResponseStatus, error) {
+	switch s {
+	case "draft":
+		return BusinessTripsCreateHrResponseStatusDraft, nil
+	case "approved":
+		return BusinessTripsCreateHrResponseStatusApproved, nil
+	}
+	var t BusinessTripsCreateHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BusinessTripsCreateHrResponseStatus) Ptr() *BusinessTripsCreateHrResponseStatus {
+	return &b
+}
+
+var (
+	businessTripsDeleteHrResponseFieldID = big.NewInt(1 << 0)
+)
+
+type BusinessTripsDeleteHrResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsDeleteHrResponse) GetID() string {
+	if b == nil {
+		return ""
+	}
+	return b.ID
+}
+
+func (b *BusinessTripsDeleteHrResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsDeleteHrResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsDeleteHrResponse) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsDeleteHrResponseFieldID)
+}
+
+func (b *BusinessTripsDeleteHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsDeleteHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*b = BusinessTripsDeleteHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsDeleteHrResponse) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsDeleteHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsDeleteHrResponse) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+var (
+	businessTripsGetHrResponseFieldID                     = big.NewInt(1 << 0)
+	businessTripsGetHrResponseFieldEmployeeID             = big.NewInt(1 << 1)
+	businessTripsGetHrResponseFieldDestinationCountryCode = big.NewInt(1 << 2)
+	businessTripsGetHrResponseFieldPurpose                = big.NewInt(1 << 3)
+	businessTripsGetHrResponseFieldStartDate              = big.NewInt(1 << 4)
+	businessTripsGetHrResponseFieldEndDate                = big.NewInt(1 << 5)
+	businessTripsGetHrResponseFieldDays                   = big.NewInt(1 << 6)
+	businessTripsGetHrResponseFieldDailyRate              = big.NewInt(1 << 7)
+	businessTripsGetHrResponseFieldPerDiemAmount          = big.NewInt(1 << 8)
+	businessTripsGetHrResponseFieldStatus                 = big.NewInt(1 << 9)
+	businessTripsGetHrResponseFieldPayrollRunID           = big.NewInt(1 << 10)
+	businessTripsGetHrResponseFieldCreatedAt              = big.NewInt(1 << 11)
+	businessTripsGetHrResponseFieldUpdatedAt              = big.NewInt(1 << 12)
+)
+
+type BusinessTripsGetHrResponse struct {
+	ID                     string                           `json:"id" url:"id"`
+	EmployeeID             string                           `json:"employeeId" url:"employeeId"`
+	DestinationCountryCode string                           `json:"destinationCountryCode" url:"destinationCountryCode"`
+	Purpose                string                           `json:"purpose" url:"purpose"`
+	StartDate              time.Time                        `json:"startDate" url:"startDate" format:"date"`
+	EndDate                time.Time                        `json:"endDate" url:"endDate" format:"date"`
+	Days                   int64                            `json:"days" url:"days"`
+	DailyRate              string                           `json:"dailyRate" url:"dailyRate"`
+	PerDiemAmount          string                           `json:"perDiemAmount" url:"perDiemAmount"`
+	Status                 BusinessTripsGetHrResponseStatus `json:"status" url:"status"`
+	PayrollRunID           *string                          `json:"payrollRunId,omitempty" url:"payrollRunId,omitempty"`
+	CreatedAt              time.Time                        `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                        `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsGetHrResponse) GetID() string {
+	if b == nil {
+		return ""
+	}
+	return b.ID
+}
+
+func (b *BusinessTripsGetHrResponse) GetEmployeeID() string {
+	if b == nil {
+		return ""
+	}
+	return b.EmployeeID
+}
+
+func (b *BusinessTripsGetHrResponse) GetDestinationCountryCode() string {
+	if b == nil {
+		return ""
+	}
+	return b.DestinationCountryCode
+}
+
+func (b *BusinessTripsGetHrResponse) GetPurpose() string {
+	if b == nil {
+		return ""
+	}
+	return b.Purpose
+}
+
+func (b *BusinessTripsGetHrResponse) GetStartDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.StartDate
+}
+
+func (b *BusinessTripsGetHrResponse) GetEndDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.EndDate
+}
+
+func (b *BusinessTripsGetHrResponse) GetDays() int64 {
+	if b == nil {
+		return 0
+	}
+	return b.Days
+}
+
+func (b *BusinessTripsGetHrResponse) GetDailyRate() string {
+	if b == nil {
+		return ""
+	}
+	return b.DailyRate
+}
+
+func (b *BusinessTripsGetHrResponse) GetPerDiemAmount() string {
+	if b == nil {
+		return ""
+	}
+	return b.PerDiemAmount
+}
+
+func (b *BusinessTripsGetHrResponse) GetStatus() BusinessTripsGetHrResponseStatus {
+	if b == nil {
+		return ""
+	}
+	return b.Status
+}
+
+func (b *BusinessTripsGetHrResponse) GetPayrollRunID() *string {
+	if b == nil {
+		return nil
+	}
+	return b.PayrollRunID
+}
+
+func (b *BusinessTripsGetHrResponse) GetCreatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.CreatedAt
+}
+
+func (b *BusinessTripsGetHrResponse) GetUpdatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.UpdatedAt
+}
+
+func (b *BusinessTripsGetHrResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsGetHrResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsGetHrResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetEmployeeID(employeeID string) {
+	b.EmployeeID = employeeID
+	b.require(businessTripsGetHrResponseFieldEmployeeID)
+}
+
+// SetDestinationCountryCode sets the DestinationCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetDestinationCountryCode(destinationCountryCode string) {
+	b.DestinationCountryCode = destinationCountryCode
+	b.require(businessTripsGetHrResponseFieldDestinationCountryCode)
+}
+
+// SetPurpose sets the Purpose field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetPurpose(purpose string) {
+	b.Purpose = purpose
+	b.require(businessTripsGetHrResponseFieldPurpose)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetStartDate(startDate time.Time) {
+	b.StartDate = startDate
+	b.require(businessTripsGetHrResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetEndDate(endDate time.Time) {
+	b.EndDate = endDate
+	b.require(businessTripsGetHrResponseFieldEndDate)
+}
+
+// SetDays sets the Days field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetDays(days int64) {
+	b.Days = days
+	b.require(businessTripsGetHrResponseFieldDays)
+}
+
+// SetDailyRate sets the DailyRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetDailyRate(dailyRate string) {
+	b.DailyRate = dailyRate
+	b.require(businessTripsGetHrResponseFieldDailyRate)
+}
+
+// SetPerDiemAmount sets the PerDiemAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetPerDiemAmount(perDiemAmount string) {
+	b.PerDiemAmount = perDiemAmount
+	b.require(businessTripsGetHrResponseFieldPerDiemAmount)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetStatus(status BusinessTripsGetHrResponseStatus) {
+	b.Status = status
+	b.require(businessTripsGetHrResponseFieldStatus)
+}
+
+// SetPayrollRunID sets the PayrollRunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetPayrollRunID(payrollRunID *string) {
+	b.PayrollRunID = payrollRunID
+	b.require(businessTripsGetHrResponseFieldPayrollRunID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetCreatedAt(createdAt time.Time) {
+	b.CreatedAt = createdAt
+	b.require(businessTripsGetHrResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsGetHrResponse) SetUpdatedAt(updatedAt time.Time) {
+	b.UpdatedAt = updatedAt
+	b.require(businessTripsGetHrResponseFieldUpdatedAt)
+}
+
+func (b *BusinessTripsGetHrResponse) UnmarshalJSON(data []byte) error {
+	type embed BusinessTripsGetHrResponse
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*b = BusinessTripsGetHrResponse(unmarshaler.embed)
+	b.StartDate = unmarshaler.StartDate.Time()
+	b.EndDate = unmarshaler.EndDate.Time()
+	b.CreatedAt = unmarshaler.CreatedAt.Time()
+	b.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsGetHrResponse) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsGetHrResponse
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*b),
+		StartDate: internal.NewDate(b.StartDate),
+		EndDate:   internal.NewDate(b.EndDate),
+		CreatedAt: internal.NewDateTime(b.CreatedAt),
+		UpdatedAt: internal.NewDateTime(b.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsGetHrResponse) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+type BusinessTripsGetHrResponseStatus string
+
+const (
+	BusinessTripsGetHrResponseStatusDraft    BusinessTripsGetHrResponseStatus = "draft"
+	BusinessTripsGetHrResponseStatusApproved BusinessTripsGetHrResponseStatus = "approved"
+)
+
+func NewBusinessTripsGetHrResponseStatusFromString(s string) (BusinessTripsGetHrResponseStatus, error) {
+	switch s {
+	case "draft":
+		return BusinessTripsGetHrResponseStatusDraft, nil
+	case "approved":
+		return BusinessTripsGetHrResponseStatusApproved, nil
+	}
+	var t BusinessTripsGetHrResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BusinessTripsGetHrResponseStatus) Ptr() *BusinessTripsGetHrResponseStatus {
+	return &b
+}
+
+var (
+	businessTripsListHrRequestFilterItemFieldField = big.NewInt(1 << 0)
+	businessTripsListHrRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	businessTripsListHrRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type BusinessTripsListHrRequestFilterItem struct {
+	Field string                                     `json:"field" url:"field"`
+	Op    BusinessTripsListHrRequestFilterItemOp     `json:"op" url:"op"`
+	Value *BusinessTripsListHrRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) GetField() string {
+	if b == nil {
+		return ""
+	}
+	return b.Field
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) GetOp() BusinessTripsListHrRequestFilterItemOp {
+	if b == nil {
+		return ""
+	}
+	return b.Op
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) GetValue() *BusinessTripsListHrRequestFilterItemValue {
+	if b == nil {
+		return nil
+	}
+	return b.Value
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequestFilterItem) SetField(field string) {
+	b.Field = field
+	b.require(businessTripsListHrRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequestFilterItem) SetOp(op BusinessTripsListHrRequestFilterItemOp) {
+	b.Op = op
+	b.require(businessTripsListHrRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequestFilterItem) SetValue(value *BusinessTripsListHrRequestFilterItemValue) {
+	b.Value = value
+	b.require(businessTripsListHrRequestFilterItemFieldValue)
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsListHrRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*b = BusinessTripsListHrRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsListHrRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsListHrRequestFilterItem) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+type BusinessTripsListHrRequestFilterItemOp string
+
+const (
+	BusinessTripsListHrRequestFilterItemOpEq       BusinessTripsListHrRequestFilterItemOp = "eq"
+	BusinessTripsListHrRequestFilterItemOpNe       BusinessTripsListHrRequestFilterItemOp = "ne"
+	BusinessTripsListHrRequestFilterItemOpContains BusinessTripsListHrRequestFilterItemOp = "contains"
+	BusinessTripsListHrRequestFilterItemOpGte      BusinessTripsListHrRequestFilterItemOp = "gte"
+	BusinessTripsListHrRequestFilterItemOpLte      BusinessTripsListHrRequestFilterItemOp = "lte"
+	BusinessTripsListHrRequestFilterItemOpIn       BusinessTripsListHrRequestFilterItemOp = "in"
+)
+
+func NewBusinessTripsListHrRequestFilterItemOpFromString(s string) (BusinessTripsListHrRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return BusinessTripsListHrRequestFilterItemOpEq, nil
+	case "ne":
+		return BusinessTripsListHrRequestFilterItemOpNe, nil
+	case "contains":
+		return BusinessTripsListHrRequestFilterItemOpContains, nil
+	case "gte":
+		return BusinessTripsListHrRequestFilterItemOpGte, nil
+	case "lte":
+		return BusinessTripsListHrRequestFilterItemOpLte, nil
+	case "in":
+		return BusinessTripsListHrRequestFilterItemOpIn, nil
+	}
+	var t BusinessTripsListHrRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BusinessTripsListHrRequestFilterItemOp) Ptr() *BusinessTripsListHrRequestFilterItemOp {
+	return &b
+}
+
+type BusinessTripsListHrRequestFilterItemValue struct {
+	String                                                 string
+	Double                                                 float64
+	Boolean                                                bool
+	BusinessTripsListHrRequestFilterItemValueThreeItemList []*BusinessTripsListHrRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValue) GetString() string {
+	if b == nil {
+		return ""
+	}
+	return b.String
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValue) GetDouble() float64 {
+	if b == nil {
+		return 0
+	}
+	return b.Double
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValue) GetBoolean() bool {
+	if b == nil {
+		return false
+	}
+	return b.Boolean
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValue) GetBusinessTripsListHrRequestFilterItemValueThreeItemList() []*BusinessTripsListHrRequestFilterItemValueThreeItem {
+	if b == nil {
+		return nil
+	}
+	return b.BusinessTripsListHrRequestFilterItemValueThreeItemList
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		b.typ = "String"
+		b.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		b.typ = "Double"
+		b.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		b.typ = "Boolean"
+		b.Boolean = valueBoolean
+		return nil
+	}
+	var valueBusinessTripsListHrRequestFilterItemValueThreeItemList []*BusinessTripsListHrRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueBusinessTripsListHrRequestFilterItemValueThreeItemList); err == nil {
+		b.typ = "BusinessTripsListHrRequestFilterItemValueThreeItemList"
+		b.BusinessTripsListHrRequestFilterItemValueThreeItemList = valueBusinessTripsListHrRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, b)
+}
+
+func (b BusinessTripsListHrRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if b.typ == "String" || b.String != "" {
+		return json.Marshal(b.String)
+	}
+	if b.typ == "Double" || b.Double != 0 {
+		return json.Marshal(b.Double)
+	}
+	if b.typ == "Boolean" || b.Boolean != false {
+		return json.Marshal(b.Boolean)
+	}
+	if b.typ == "BusinessTripsListHrRequestFilterItemValueThreeItemList" || b.BusinessTripsListHrRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(b.BusinessTripsListHrRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", b)
+}
+
+type BusinessTripsListHrRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitBusinessTripsListHrRequestFilterItemValueThreeItemList([]*BusinessTripsListHrRequestFilterItemValueThreeItem) error
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValue) Accept(visitor BusinessTripsListHrRequestFilterItemValueVisitor) error {
+	if b.typ == "String" || b.String != "" {
+		return visitor.VisitString(b.String)
+	}
+	if b.typ == "Double" || b.Double != 0 {
+		return visitor.VisitDouble(b.Double)
+	}
+	if b.typ == "Boolean" || b.Boolean != false {
+		return visitor.VisitBoolean(b.Boolean)
+	}
+	if b.typ == "BusinessTripsListHrRequestFilterItemValueThreeItemList" || b.BusinessTripsListHrRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitBusinessTripsListHrRequestFilterItemValueThreeItemList(b.BusinessTripsListHrRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", b)
+}
+
+type BusinessTripsListHrRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValueThreeItem) GetString() string {
+	if b == nil {
+		return ""
+	}
+	return b.String
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if b == nil {
+		return 0
+	}
+	return b.Double
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		b.typ = "String"
+		b.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		b.typ = "Double"
+		b.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, b)
+}
+
+func (b BusinessTripsListHrRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if b.typ == "String" || b.String != "" {
+		return json.Marshal(b.String)
+	}
+	if b.typ == "Double" || b.Double != 0 {
+		return json.Marshal(b.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", b)
+}
+
+type BusinessTripsListHrRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (b *BusinessTripsListHrRequestFilterItemValueThreeItem) Accept(visitor BusinessTripsListHrRequestFilterItemValueThreeItemVisitor) error {
+	if b.typ == "String" || b.String != "" {
+		return visitor.VisitString(b.String)
+	}
+	if b.typ == "Double" || b.Double != 0 {
+		return visitor.VisitDouble(b.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", b)
+}
+
+var (
+	businessTripsListHrRequestSortItemFieldField = big.NewInt(1 << 0)
+	businessTripsListHrRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type BusinessTripsListHrRequestSortItem struct {
+	Field string                                 `json:"field" url:"field"`
+	Dir   *BusinessTripsListHrRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsListHrRequestSortItem) GetField() string {
+	if b == nil {
+		return ""
+	}
+	return b.Field
+}
+
+func (b *BusinessTripsListHrRequestSortItem) GetDir() *BusinessTripsListHrRequestSortItemDir {
+	if b == nil {
+		return nil
+	}
+	return b.Dir
+}
+
+func (b *BusinessTripsListHrRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsListHrRequestSortItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequestSortItem) SetField(field string) {
+	b.Field = field
+	b.require(businessTripsListHrRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrRequestSortItem) SetDir(dir *BusinessTripsListHrRequestSortItemDir) {
+	b.Dir = dir
+	b.require(businessTripsListHrRequestSortItemFieldDir)
+}
+
+func (b *BusinessTripsListHrRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsListHrRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*b = BusinessTripsListHrRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsListHrRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsListHrRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsListHrRequestSortItem) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+type BusinessTripsListHrRequestSortItemDir string
+
+const (
+	BusinessTripsListHrRequestSortItemDirAsc  BusinessTripsListHrRequestSortItemDir = "asc"
+	BusinessTripsListHrRequestSortItemDirDesc BusinessTripsListHrRequestSortItemDir = "desc"
+)
+
+func NewBusinessTripsListHrRequestSortItemDirFromString(s string) (BusinessTripsListHrRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return BusinessTripsListHrRequestSortItemDirAsc, nil
+	case "desc":
+		return BusinessTripsListHrRequestSortItemDirDesc, nil
+	}
+	var t BusinessTripsListHrRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BusinessTripsListHrRequestSortItemDir) Ptr() *BusinessTripsListHrRequestSortItemDir {
+	return &b
+}
+
+var (
+	businessTripsListHrResponseFieldRows             = big.NewInt(1 << 0)
+	businessTripsListHrResponseFieldPage             = big.NewInt(1 << 1)
+	businessTripsListHrResponseFieldPageSize         = big.NewInt(1 << 2)
+	businessTripsListHrResponseFieldTotal            = big.NewInt(1 << 3)
+	businessTripsListHrResponseFieldTotals           = big.NewInt(1 << 4)
+	businessTripsListHrResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type BusinessTripsListHrResponse struct {
+	Rows     []*BusinessTripsListHrResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                  `json:"page" url:"page"`
+	PageSize int64                                  `json:"pageSize" url:"pageSize"`
+	Total    int64                                  `json:"total" url:"total"`
+	Totals   map[string]string                      `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsListHrResponse) GetRows() []*BusinessTripsListHrResponseRowsItem {
+	if b == nil {
+		return nil
+	}
+	return b.Rows
+}
+
+func (b *BusinessTripsListHrResponse) GetPage() int64 {
+	if b == nil {
+		return 0
+	}
+	return b.Page
+}
+
+func (b *BusinessTripsListHrResponse) GetPageSize() int64 {
+	if b == nil {
+		return 0
+	}
+	return b.PageSize
+}
+
+func (b *BusinessTripsListHrResponse) GetTotal() int64 {
+	if b == nil {
+		return 0
+	}
+	return b.Total
+}
+
+func (b *BusinessTripsListHrResponse) GetTotals() map[string]string {
+	if b == nil {
+		return nil
+	}
+	return b.Totals
+}
+
+func (b *BusinessTripsListHrResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if b == nil {
+		return nil
+	}
+	return b.TotalsByCurrency
+}
+
+func (b *BusinessTripsListHrResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsListHrResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponse) SetRows(rows []*BusinessTripsListHrResponseRowsItem) {
+	b.Rows = rows
+	b.require(businessTripsListHrResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponse) SetPage(page int64) {
+	b.Page = page
+	b.require(businessTripsListHrResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponse) SetPageSize(pageSize int64) {
+	b.PageSize = pageSize
+	b.require(businessTripsListHrResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponse) SetTotal(total int64) {
+	b.Total = total
+	b.require(businessTripsListHrResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponse) SetTotals(totals map[string]string) {
+	b.Totals = totals
+	b.require(businessTripsListHrResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	b.TotalsByCurrency = totalsByCurrency
+	b.require(businessTripsListHrResponseFieldTotalsByCurrency)
+}
+
+func (b *BusinessTripsListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler BusinessTripsListHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*b = BusinessTripsListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsListHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsListHrResponse) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+var (
+	businessTripsListHrResponseRowsItemFieldID                     = big.NewInt(1 << 0)
+	businessTripsListHrResponseRowsItemFieldEmployeeID             = big.NewInt(1 << 1)
+	businessTripsListHrResponseRowsItemFieldDestinationCountryCode = big.NewInt(1 << 2)
+	businessTripsListHrResponseRowsItemFieldPurpose                = big.NewInt(1 << 3)
+	businessTripsListHrResponseRowsItemFieldStartDate              = big.NewInt(1 << 4)
+	businessTripsListHrResponseRowsItemFieldEndDate                = big.NewInt(1 << 5)
+	businessTripsListHrResponseRowsItemFieldDays                   = big.NewInt(1 << 6)
+	businessTripsListHrResponseRowsItemFieldDailyRate              = big.NewInt(1 << 7)
+	businessTripsListHrResponseRowsItemFieldPerDiemAmount          = big.NewInt(1 << 8)
+	businessTripsListHrResponseRowsItemFieldStatus                 = big.NewInt(1 << 9)
+	businessTripsListHrResponseRowsItemFieldPayrollRunID           = big.NewInt(1 << 10)
+	businessTripsListHrResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 11)
+	businessTripsListHrResponseRowsItemFieldUpdatedAt              = big.NewInt(1 << 12)
+)
+
+type BusinessTripsListHrResponseRowsItem struct {
+	ID                     string                                    `json:"id" url:"id"`
+	EmployeeID             string                                    `json:"employeeId" url:"employeeId"`
+	DestinationCountryCode string                                    `json:"destinationCountryCode" url:"destinationCountryCode"`
+	Purpose                string                                    `json:"purpose" url:"purpose"`
+	StartDate              time.Time                                 `json:"startDate" url:"startDate" format:"date"`
+	EndDate                time.Time                                 `json:"endDate" url:"endDate" format:"date"`
+	Days                   int64                                     `json:"days" url:"days"`
+	DailyRate              string                                    `json:"dailyRate" url:"dailyRate"`
+	PerDiemAmount          string                                    `json:"perDiemAmount" url:"perDiemAmount"`
+	Status                 BusinessTripsListHrResponseRowsItemStatus `json:"status" url:"status"`
+	PayrollRunID           *string                                   `json:"payrollRunId,omitempty" url:"payrollRunId,omitempty"`
+	CreatedAt              time.Time                                 `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                 `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetID() string {
+	if b == nil {
+		return ""
+	}
+	return b.ID
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetEmployeeID() string {
+	if b == nil {
+		return ""
+	}
+	return b.EmployeeID
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetDestinationCountryCode() string {
+	if b == nil {
+		return ""
+	}
+	return b.DestinationCountryCode
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetPurpose() string {
+	if b == nil {
+		return ""
+	}
+	return b.Purpose
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetStartDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.StartDate
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetEndDate() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.EndDate
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetDays() int64 {
+	if b == nil {
+		return 0
+	}
+	return b.Days
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetDailyRate() string {
+	if b == nil {
+		return ""
+	}
+	return b.DailyRate
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetPerDiemAmount() string {
+	if b == nil {
+		return ""
+	}
+	return b.PerDiemAmount
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetStatus() BusinessTripsListHrResponseRowsItemStatus {
+	if b == nil {
+		return ""
+	}
+	return b.Status
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetPayrollRunID() *string {
+	if b == nil {
+		return nil
+	}
+	return b.PayrollRunID
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetCreatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.CreatedAt
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetUpdatedAt() time.Time {
+	if b == nil {
+		return time.Time{}
+	}
+	return b.UpdatedAt
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetID(id string) {
+	b.ID = id
+	b.require(businessTripsListHrResponseRowsItemFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetEmployeeID(employeeID string) {
+	b.EmployeeID = employeeID
+	b.require(businessTripsListHrResponseRowsItemFieldEmployeeID)
+}
+
+// SetDestinationCountryCode sets the DestinationCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetDestinationCountryCode(destinationCountryCode string) {
+	b.DestinationCountryCode = destinationCountryCode
+	b.require(businessTripsListHrResponseRowsItemFieldDestinationCountryCode)
+}
+
+// SetPurpose sets the Purpose field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetPurpose(purpose string) {
+	b.Purpose = purpose
+	b.require(businessTripsListHrResponseRowsItemFieldPurpose)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetStartDate(startDate time.Time) {
+	b.StartDate = startDate
+	b.require(businessTripsListHrResponseRowsItemFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetEndDate(endDate time.Time) {
+	b.EndDate = endDate
+	b.require(businessTripsListHrResponseRowsItemFieldEndDate)
+}
+
+// SetDays sets the Days field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetDays(days int64) {
+	b.Days = days
+	b.require(businessTripsListHrResponseRowsItemFieldDays)
+}
+
+// SetDailyRate sets the DailyRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetDailyRate(dailyRate string) {
+	b.DailyRate = dailyRate
+	b.require(businessTripsListHrResponseRowsItemFieldDailyRate)
+}
+
+// SetPerDiemAmount sets the PerDiemAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetPerDiemAmount(perDiemAmount string) {
+	b.PerDiemAmount = perDiemAmount
+	b.require(businessTripsListHrResponseRowsItemFieldPerDiemAmount)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetStatus(status BusinessTripsListHrResponseRowsItemStatus) {
+	b.Status = status
+	b.require(businessTripsListHrResponseRowsItemFieldStatus)
+}
+
+// SetPayrollRunID sets the PayrollRunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetPayrollRunID(payrollRunID *string) {
+	b.PayrollRunID = payrollRunID
+	b.require(businessTripsListHrResponseRowsItemFieldPayrollRunID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	b.CreatedAt = createdAt
+	b.require(businessTripsListHrResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BusinessTripsListHrResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	b.UpdatedAt = updatedAt
+	b.require(businessTripsListHrResponseRowsItemFieldUpdatedAt)
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed BusinessTripsListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*b),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*b = BusinessTripsListHrResponseRowsItem(unmarshaler.embed)
+	b.StartDate = unmarshaler.StartDate.Time()
+	b.EndDate = unmarshaler.EndDate.Time()
+	b.CreatedAt = unmarshaler.CreatedAt.Time()
+	b.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed BusinessTripsListHrResponseRowsItem
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date     `json:"startDate"`
+		EndDate   *internal.Date     `json:"endDate"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*b),
+		StartDate: internal.NewDate(b.StartDate),
+		EndDate:   internal.NewDate(b.EndDate),
+		CreatedAt: internal.NewDateTime(b.CreatedAt),
+		UpdatedAt: internal.NewDateTime(b.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BusinessTripsListHrResponseRowsItem) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+type BusinessTripsListHrResponseRowsItemStatus string
+
+const (
+	BusinessTripsListHrResponseRowsItemStatusDraft    BusinessTripsListHrResponseRowsItemStatus = "draft"
+	BusinessTripsListHrResponseRowsItemStatusApproved BusinessTripsListHrResponseRowsItemStatus = "approved"
+)
+
+func NewBusinessTripsListHrResponseRowsItemStatusFromString(s string) (BusinessTripsListHrResponseRowsItemStatus, error) {
+	switch s {
+	case "draft":
+		return BusinessTripsListHrResponseRowsItemStatusDraft, nil
+	case "approved":
+		return BusinessTripsListHrResponseRowsItemStatusApproved, nil
+	}
+	var t BusinessTripsListHrResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BusinessTripsListHrResponseRowsItemStatus) Ptr() *BusinessTripsListHrResponseRowsItemStatus {
+	return &b
 }
 
 type ContractsCreateHrRequestSalaryType string
@@ -12375,6 +14836,1005 @@ func (l *LeaveBalancesSetHrResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", l)
+}
+
+var (
+	perDiemRatesCreateHrResponseFieldID          = big.NewInt(1 << 0)
+	perDiemRatesCreateHrResponseFieldCountryCode = big.NewInt(1 << 1)
+	perDiemRatesCreateHrResponseFieldDailyAmount = big.NewInt(1 << 2)
+	perDiemRatesCreateHrResponseFieldValidFrom   = big.NewInt(1 << 3)
+	perDiemRatesCreateHrResponseFieldCreatedAt   = big.NewInt(1 << 4)
+)
+
+type PerDiemRatesCreateHrResponse struct {
+	ID          string    `json:"id" url:"id"`
+	CountryCode string    `json:"countryCode" url:"countryCode"`
+	DailyAmount string    `json:"dailyAmount" url:"dailyAmount"`
+	ValidFrom   string    `json:"validFrom" url:"validFrom"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PerDiemRatesCreateHrResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PerDiemRatesCreateHrResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PerDiemRatesCreateHrResponse) GetDailyAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.DailyAmount
+}
+
+func (p *PerDiemRatesCreateHrResponse) GetValidFrom() string {
+	if p == nil {
+		return ""
+	}
+	return p.ValidFrom
+}
+
+func (p *PerDiemRatesCreateHrResponse) GetCreatedAt() time.Time {
+	if p == nil {
+		return time.Time{}
+	}
+	return p.CreatedAt
+}
+
+func (p *PerDiemRatesCreateHrResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PerDiemRatesCreateHrResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrResponse) SetID(id string) {
+	p.ID = id
+	p.require(perDiemRatesCreateHrResponseFieldID)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(perDiemRatesCreateHrResponseFieldCountryCode)
+}
+
+// SetDailyAmount sets the DailyAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrResponse) SetDailyAmount(dailyAmount string) {
+	p.DailyAmount = dailyAmount
+	p.require(perDiemRatesCreateHrResponseFieldDailyAmount)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrResponse) SetValidFrom(validFrom string) {
+	p.ValidFrom = validFrom
+	p.require(perDiemRatesCreateHrResponseFieldValidFrom)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesCreateHrResponse) SetCreatedAt(createdAt time.Time) {
+	p.CreatedAt = createdAt
+	p.require(perDiemRatesCreateHrResponseFieldCreatedAt)
+}
+
+func (p *PerDiemRatesCreateHrResponse) UnmarshalJSON(data []byte) error {
+	type embed PerDiemRatesCreateHrResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*p),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*p = PerDiemRatesCreateHrResponse(unmarshaler.embed)
+	p.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PerDiemRatesCreateHrResponse) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesCreateHrResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*p),
+		CreatedAt: internal.NewDateTime(p.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PerDiemRatesCreateHrResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	perDiemRatesDeleteHrResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PerDiemRatesDeleteHrResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PerDiemRatesDeleteHrResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PerDiemRatesDeleteHrResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PerDiemRatesDeleteHrResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesDeleteHrResponse) SetID(id string) {
+	p.ID = id
+	p.require(perDiemRatesDeleteHrResponseFieldID)
+}
+
+func (p *PerDiemRatesDeleteHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PerDiemRatesDeleteHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PerDiemRatesDeleteHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PerDiemRatesDeleteHrResponse) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesDeleteHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PerDiemRatesDeleteHrResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	perDiemRatesListHrRequestFilterItemFieldField = big.NewInt(1 << 0)
+	perDiemRatesListHrRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	perDiemRatesListHrRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type PerDiemRatesListHrRequestFilterItem struct {
+	Field string                                    `json:"field" url:"field"`
+	Op    PerDiemRatesListHrRequestFilterItemOp     `json:"op" url:"op"`
+	Value *PerDiemRatesListHrRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) GetOp() PerDiemRatesListHrRequestFilterItemOp {
+	if p == nil {
+		return ""
+	}
+	return p.Op
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) GetValue() *PerDiemRatesListHrRequestFilterItemValue {
+	if p == nil {
+		return nil
+	}
+	return p.Value
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequestFilterItem) SetField(field string) {
+	p.Field = field
+	p.require(perDiemRatesListHrRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequestFilterItem) SetOp(op PerDiemRatesListHrRequestFilterItemOp) {
+	p.Op = op
+	p.require(perDiemRatesListHrRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequestFilterItem) SetValue(value *PerDiemRatesListHrRequestFilterItemValue) {
+	p.Value = value
+	p.require(perDiemRatesListHrRequestFilterItemFieldValue)
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PerDiemRatesListHrRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PerDiemRatesListHrRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesListHrRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PerDiemRatesListHrRequestFilterItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PerDiemRatesListHrRequestFilterItemOp string
+
+const (
+	PerDiemRatesListHrRequestFilterItemOpEq       PerDiemRatesListHrRequestFilterItemOp = "eq"
+	PerDiemRatesListHrRequestFilterItemOpNe       PerDiemRatesListHrRequestFilterItemOp = "ne"
+	PerDiemRatesListHrRequestFilterItemOpContains PerDiemRatesListHrRequestFilterItemOp = "contains"
+	PerDiemRatesListHrRequestFilterItemOpGte      PerDiemRatesListHrRequestFilterItemOp = "gte"
+	PerDiemRatesListHrRequestFilterItemOpLte      PerDiemRatesListHrRequestFilterItemOp = "lte"
+	PerDiemRatesListHrRequestFilterItemOpIn       PerDiemRatesListHrRequestFilterItemOp = "in"
+)
+
+func NewPerDiemRatesListHrRequestFilterItemOpFromString(s string) (PerDiemRatesListHrRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return PerDiemRatesListHrRequestFilterItemOpEq, nil
+	case "ne":
+		return PerDiemRatesListHrRequestFilterItemOpNe, nil
+	case "contains":
+		return PerDiemRatesListHrRequestFilterItemOpContains, nil
+	case "gte":
+		return PerDiemRatesListHrRequestFilterItemOpGte, nil
+	case "lte":
+		return PerDiemRatesListHrRequestFilterItemOpLte, nil
+	case "in":
+		return PerDiemRatesListHrRequestFilterItemOpIn, nil
+	}
+	var t PerDiemRatesListHrRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PerDiemRatesListHrRequestFilterItemOp) Ptr() *PerDiemRatesListHrRequestFilterItemOp {
+	return &p
+}
+
+type PerDiemRatesListHrRequestFilterItemValue struct {
+	String                                                string
+	Double                                                float64
+	Boolean                                               bool
+	PerDiemRatesListHrRequestFilterItemValueThreeItemList []*PerDiemRatesListHrRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValue) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValue) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValue) GetBoolean() bool {
+	if p == nil {
+		return false
+	}
+	return p.Boolean
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValue) GetPerDiemRatesListHrRequestFilterItemValueThreeItemList() []*PerDiemRatesListHrRequestFilterItemValueThreeItem {
+	if p == nil {
+		return nil
+	}
+	return p.PerDiemRatesListHrRequestFilterItemValueThreeItemList
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		p.typ = "Boolean"
+		p.Boolean = valueBoolean
+		return nil
+	}
+	var valuePerDiemRatesListHrRequestFilterItemValueThreeItemList []*PerDiemRatesListHrRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valuePerDiemRatesListHrRequestFilterItemValueThreeItemList); err == nil {
+		p.typ = "PerDiemRatesListHrRequestFilterItemValueThreeItemList"
+		p.PerDiemRatesListHrRequestFilterItemValueThreeItemList = valuePerDiemRatesListHrRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PerDiemRatesListHrRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return json.Marshal(p.Boolean)
+	}
+	if p.typ == "PerDiemRatesListHrRequestFilterItemValueThreeItemList" || p.PerDiemRatesListHrRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(p.PerDiemRatesListHrRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PerDiemRatesListHrRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitPerDiemRatesListHrRequestFilterItemValueThreeItemList([]*PerDiemRatesListHrRequestFilterItemValueThreeItem) error
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValue) Accept(visitor PerDiemRatesListHrRequestFilterItemValueVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	if p.typ == "Boolean" || p.Boolean != false {
+		return visitor.VisitBoolean(p.Boolean)
+	}
+	if p.typ == "PerDiemRatesListHrRequestFilterItemValueThreeItemList" || p.PerDiemRatesListHrRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitPerDiemRatesListHrRequestFilterItemValueThreeItemList(p.PerDiemRatesListHrRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PerDiemRatesListHrRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValueThreeItem) GetString() string {
+	if p == nil {
+		return ""
+	}
+	return p.String
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if p == nil {
+		return 0
+	}
+	return p.Double
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		p.typ = "String"
+		p.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		p.typ = "Double"
+		p.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, p)
+}
+
+func (p PerDiemRatesListHrRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if p.typ == "String" || p.String != "" {
+		return json.Marshal(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return json.Marshal(p.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+type PerDiemRatesListHrRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (p *PerDiemRatesListHrRequestFilterItemValueThreeItem) Accept(visitor PerDiemRatesListHrRequestFilterItemValueThreeItemVisitor) error {
+	if p.typ == "String" || p.String != "" {
+		return visitor.VisitString(p.String)
+	}
+	if p.typ == "Double" || p.Double != 0 {
+		return visitor.VisitDouble(p.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", p)
+}
+
+var (
+	perDiemRatesListHrRequestSortItemFieldField = big.NewInt(1 << 0)
+	perDiemRatesListHrRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type PerDiemRatesListHrRequestSortItem struct {
+	Field string                                `json:"field" url:"field"`
+	Dir   *PerDiemRatesListHrRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PerDiemRatesListHrRequestSortItem) GetField() string {
+	if p == nil {
+		return ""
+	}
+	return p.Field
+}
+
+func (p *PerDiemRatesListHrRequestSortItem) GetDir() *PerDiemRatesListHrRequestSortItemDir {
+	if p == nil {
+		return nil
+	}
+	return p.Dir
+}
+
+func (p *PerDiemRatesListHrRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PerDiemRatesListHrRequestSortItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequestSortItem) SetField(field string) {
+	p.Field = field
+	p.require(perDiemRatesListHrRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrRequestSortItem) SetDir(dir *PerDiemRatesListHrRequestSortItemDir) {
+	p.Dir = dir
+	p.require(perDiemRatesListHrRequestSortItemFieldDir)
+}
+
+func (p *PerDiemRatesListHrRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PerDiemRatesListHrRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PerDiemRatesListHrRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PerDiemRatesListHrRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesListHrRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PerDiemRatesListHrRequestSortItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PerDiemRatesListHrRequestSortItemDir string
+
+const (
+	PerDiemRatesListHrRequestSortItemDirAsc  PerDiemRatesListHrRequestSortItemDir = "asc"
+	PerDiemRatesListHrRequestSortItemDirDesc PerDiemRatesListHrRequestSortItemDir = "desc"
+)
+
+func NewPerDiemRatesListHrRequestSortItemDirFromString(s string) (PerDiemRatesListHrRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return PerDiemRatesListHrRequestSortItemDirAsc, nil
+	case "desc":
+		return PerDiemRatesListHrRequestSortItemDirDesc, nil
+	}
+	var t PerDiemRatesListHrRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PerDiemRatesListHrRequestSortItemDir) Ptr() *PerDiemRatesListHrRequestSortItemDir {
+	return &p
+}
+
+var (
+	perDiemRatesListHrResponseFieldRows             = big.NewInt(1 << 0)
+	perDiemRatesListHrResponseFieldPage             = big.NewInt(1 << 1)
+	perDiemRatesListHrResponseFieldPageSize         = big.NewInt(1 << 2)
+	perDiemRatesListHrResponseFieldTotal            = big.NewInt(1 << 3)
+	perDiemRatesListHrResponseFieldTotals           = big.NewInt(1 << 4)
+	perDiemRatesListHrResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type PerDiemRatesListHrResponse struct {
+	Rows     []*PerDiemRatesListHrResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                 `json:"page" url:"page"`
+	PageSize int64                                 `json:"pageSize" url:"pageSize"`
+	Total    int64                                 `json:"total" url:"total"`
+	Totals   map[string]string                     `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PerDiemRatesListHrResponse) GetRows() []*PerDiemRatesListHrResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PerDiemRatesListHrResponse) GetPage() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Page
+}
+
+func (p *PerDiemRatesListHrResponse) GetPageSize() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.PageSize
+}
+
+func (p *PerDiemRatesListHrResponse) GetTotal() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Total
+}
+
+func (p *PerDiemRatesListHrResponse) GetTotals() map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.Totals
+}
+
+func (p *PerDiemRatesListHrResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if p == nil {
+		return nil
+	}
+	return p.TotalsByCurrency
+}
+
+func (p *PerDiemRatesListHrResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PerDiemRatesListHrResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponse) SetRows(rows []*PerDiemRatesListHrResponseRowsItem) {
+	p.Rows = rows
+	p.require(perDiemRatesListHrResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponse) SetPage(page int64) {
+	p.Page = page
+	p.require(perDiemRatesListHrResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponse) SetPageSize(pageSize int64) {
+	p.PageSize = pageSize
+	p.require(perDiemRatesListHrResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponse) SetTotal(total int64) {
+	p.Total = total
+	p.require(perDiemRatesListHrResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponse) SetTotals(totals map[string]string) {
+	p.Totals = totals
+	p.require(perDiemRatesListHrResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	p.TotalsByCurrency = totalsByCurrency
+	p.require(perDiemRatesListHrResponseFieldTotalsByCurrency)
+}
+
+func (p *PerDiemRatesListHrResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PerDiemRatesListHrResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PerDiemRatesListHrResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PerDiemRatesListHrResponse) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesListHrResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PerDiemRatesListHrResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	perDiemRatesListHrResponseRowsItemFieldID          = big.NewInt(1 << 0)
+	perDiemRatesListHrResponseRowsItemFieldCountryCode = big.NewInt(1 << 1)
+	perDiemRatesListHrResponseRowsItemFieldDailyAmount = big.NewInt(1 << 2)
+	perDiemRatesListHrResponseRowsItemFieldValidFrom   = big.NewInt(1 << 3)
+	perDiemRatesListHrResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 4)
+)
+
+type PerDiemRatesListHrResponseRowsItem struct {
+	ID          string    `json:"id" url:"id"`
+	CountryCode string    `json:"countryCode" url:"countryCode"`
+	DailyAmount string    `json:"dailyAmount" url:"dailyAmount"`
+	ValidFrom   string    `json:"validFrom" url:"validFrom"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) GetDailyAmount() string {
+	if p == nil {
+		return ""
+	}
+	return p.DailyAmount
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) GetValidFrom() string {
+	if p == nil {
+		return ""
+	}
+	return p.ValidFrom
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) GetCreatedAt() time.Time {
+	if p == nil {
+		return time.Time{}
+	}
+	return p.CreatedAt
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(perDiemRatesListHrResponseRowsItemFieldID)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponseRowsItem) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(perDiemRatesListHrResponseRowsItemFieldCountryCode)
+}
+
+// SetDailyAmount sets the DailyAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponseRowsItem) SetDailyAmount(dailyAmount string) {
+	p.DailyAmount = dailyAmount
+	p.require(perDiemRatesListHrResponseRowsItemFieldDailyAmount)
+}
+
+// SetValidFrom sets the ValidFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponseRowsItem) SetValidFrom(validFrom string) {
+	p.ValidFrom = validFrom
+	p.require(perDiemRatesListHrResponseRowsItemFieldValidFrom)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PerDiemRatesListHrResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	p.CreatedAt = createdAt
+	p.require(perDiemRatesListHrResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed PerDiemRatesListHrResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*p),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*p = PerDiemRatesListHrResponseRowsItem(unmarshaler.embed)
+	p.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PerDiemRatesListHrResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*p),
+		CreatedAt: internal.NewDateTime(p.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PerDiemRatesListHrResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }
 
 var (

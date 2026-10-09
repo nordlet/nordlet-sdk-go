@@ -1489,6 +1489,37 @@
       }
     },
     {
+      "id": "01a499f1-9ada-4960-81ac-ad21ef990777",
+      "name": "Merge a duplicate partner into another: every document and record of the duplicate moves to the kept partner - default",
+      "request": {
+        "urlPathTemplate": "/v1/partners/merge",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"targetId\": \"targetId\",\n  \"sourceId\": \"sourceId\",\n  \"moved\": [\n    {\n      \"table\": \"table\",\n      \"column\": \"column\",\n      \"rows\": 1000000\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "01a499f1-9ada-4960-81ac-ad21ef990777",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "718be1ab-f9aa-42b9-8fff-0e0858b9a0dd",
       "name": "Blank a partner's personal data and hide the record - default",
       "request": {
@@ -4850,7 +4881,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"deferralStartDate\": \"2026-07-01\",\n      \"deferralEndDate\": \"2026-07-01\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4881,7 +4912,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"deferralStartDate\": \"2026-07-01\",\n      \"deferralEndDate\": \"2026-07-01\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4912,7 +4943,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"deferralStartDate\": \"2026-07-01\",\n      \"deferralEndDate\": \"2026-07-01\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4974,12 +5005,74 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"partnerId\": \"partnerId\",\n  \"type\": \"invoice\",\n  \"status\": \"draft\",\n  \"paymentStatus\": \"unpaid\",\n  \"documentNumber\": \"documentNumber\",\n  \"documentDate\": \"2026-07-01\",\n  \"dueDate\": \"2026-07-01\",\n  \"registrationDate\": \"2026-07-01\",\n  \"currency\": \"currency\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"creditedInvoiceId\": \"creditedInvoiceId\",\n  \"purchaseOrderId\": \"purchaseOrderId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"notes\": \"notes\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"einvoiceNumber\": \"einvoiceNumber\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"unit\": \"unit\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"costCenterId\": \"costCenterId\",\n      \"projectId\": \"projectId\",\n      \"accountCode\": \"accountCode\",\n      \"deferralStartDate\": \"2026-07-01\",\n      \"deferralEndDate\": \"2026-07-01\",\n      \"lineNet\": \"lineNet\",\n      \"lineVat\": \"lineVat\",\n      \"lineGross\": \"lineGross\",\n      \"sortOrder\": 1000000\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "0843a6b6-e87f-4580-9c20-bd593949d180",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "d7279445-3932-429d-93c1-640a59d76ee3",
+      "name": "Monthly release schedule of purchase lines booked as prepaid expenses - default",
+      "request": {
+        "urlPathTemplate": "/v1/purchases/deferrals/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"invoiceId\": \"invoiceId\",\n      \"invoiceLineId\": \"invoiceLineId\",\n      \"scheduleDate\": \"2026-07-01\",\n      \"description\": \"description\",\n      \"amount\": \"amount\",\n      \"expenseAccountCode\": \"expenseAccountCode\",\n      \"prepaidAccountCode\": \"prepaidAccountCode\",\n      \"status\": \"pending\",\n      \"journalTransactionId\": \"journalTransactionId\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "d7279445-3932-429d-93c1-640a59d76ee3",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "e1f6157b-80eb-40bb-9655-91366883ff90",
+      "name": "Release to expense every prepaid-expense month that is due by asOfDate - default",
+      "request": {
+        "urlPathTemplate": "/v1/purchases/deferrals/post",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"posted\": 1000000,\n  \"total\": \"total\",\n  \"journalTransactionIds\": [\n    \"journalTransactionIds\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e1f6157b-80eb-40bb-9655-91366883ff90",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -5749,7 +5842,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"capture\": {\n    \"id\": \"id\",\n    \"fileId\": \"fileId\",\n    \"fileName\": \"fileName\",\n    \"mimeType\": \"mimeType\",\n    \"sizeBytes\": 1000000,\n    \"status\": \"pending\",\n    \"provider\": \"provider\",\n    \"model\": \"model\",\n    \"pagesProcessed\": 1000000,\n    \"extraction\": {\n      \"supplier\": {\n        \"name\": null,\n        \"code\": null,\n        \"vatCode\": null,\n        \"countryCode\": null,\n        \"iban\": null\n      },\n      \"documentNumber\": \"documentNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"dueDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"notes\": \"notes\",\n      \"lines\": [\n        {\n          \"description\": \"description\",\n          \"quantity\": \"quantity\",\n          \"unit\": null,\n          \"unitPriceExclVat\": null,\n          \"vatRatePercent\": null,\n          \"lineNet\": null,\n          \"lineVat\": null,\n          \"lineGross\": null\n        }\n      ]\n    },\n    \"matchedPartnerId\": \"matchedPartnerId\",\n    \"purchaseInvoiceId\": \"purchaseInvoiceId\",\n    \"error\": \"error\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"invoice\": {\n    \"id\": \"id\",\n    \"partnerId\": \"partnerId\",\n    \"type\": \"invoice\",\n    \"status\": \"draft\",\n    \"paymentStatus\": \"unpaid\",\n    \"documentNumber\": \"documentNumber\",\n    \"documentDate\": \"2026-07-01\",\n    \"dueDate\": \"2026-07-01\",\n    \"registrationDate\": \"2026-07-01\",\n    \"currency\": \"currency\",\n    \"netTotal\": \"netTotal\",\n    \"vatTotal\": \"vatTotal\",\n    \"grossTotal\": \"grossTotal\",\n    \"paidAmount\": \"paidAmount\",\n    \"journalTransactionId\": \"journalTransactionId\",\n    \"creditedInvoiceId\": \"creditedInvoiceId\",\n    \"purchaseOrderId\": \"purchaseOrderId\",\n    \"operationTypeId\": \"operationTypeId\",\n    \"notes\": \"notes\",\n    \"intrastatTransportMode\": \"intrastatTransportMode\",\n    \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n    \"intrastatRegion\": \"intrastatRegion\",\n    \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n    \"einvoiceNumber\": \"einvoiceNumber\",\n    \"documentRef\": \"documentRef\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\",\n    \"lines\": [\n      {\n        \"id\": \"id\",\n        \"itemId\": null,\n        \"description\": \"description\",\n        \"unit\": \"unit\",\n        \"quantity\": \"quantity\",\n        \"unitPriceExclVat\": null,\n        \"unitPriceInclVat\": null,\n        \"vatRatePercent\": \"vatRatePercent\",\n        \"vatClassifierCode\": null,\n        \"costCenterId\": null,\n        \"projectId\": null,\n        \"accountCode\": null,\n        \"lineNet\": \"lineNet\",\n        \"lineVat\": \"lineVat\",\n        \"lineGross\": \"lineGross\",\n        \"sortOrder\": 1000000\n      }\n    ]\n  }\n}",
+        "body": "{\n  \"capture\": {\n    \"id\": \"id\",\n    \"fileId\": \"fileId\",\n    \"fileName\": \"fileName\",\n    \"mimeType\": \"mimeType\",\n    \"sizeBytes\": 1000000,\n    \"status\": \"pending\",\n    \"provider\": \"provider\",\n    \"model\": \"model\",\n    \"pagesProcessed\": 1000000,\n    \"extraction\": {\n      \"supplier\": {\n        \"name\": null,\n        \"code\": null,\n        \"vatCode\": null,\n        \"countryCode\": null,\n        \"iban\": null\n      },\n      \"documentNumber\": \"documentNumber\",\n      \"documentDate\": \"2026-07-01\",\n      \"dueDate\": \"2026-07-01\",\n      \"currency\": \"currency\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"notes\": \"notes\",\n      \"lines\": [\n        {\n          \"description\": \"description\",\n          \"quantity\": \"quantity\",\n          \"unit\": null,\n          \"unitPriceExclVat\": null,\n          \"vatRatePercent\": null,\n          \"lineNet\": null,\n          \"lineVat\": null,\n          \"lineGross\": null\n        }\n      ]\n    },\n    \"matchedPartnerId\": \"matchedPartnerId\",\n    \"purchaseInvoiceId\": \"purchaseInvoiceId\",\n    \"error\": \"error\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"invoice\": {\n    \"id\": \"id\",\n    \"partnerId\": \"partnerId\",\n    \"type\": \"invoice\",\n    \"status\": \"draft\",\n    \"paymentStatus\": \"unpaid\",\n    \"documentNumber\": \"documentNumber\",\n    \"documentDate\": \"2026-07-01\",\n    \"dueDate\": \"2026-07-01\",\n    \"registrationDate\": \"2026-07-01\",\n    \"currency\": \"currency\",\n    \"netTotal\": \"netTotal\",\n    \"vatTotal\": \"vatTotal\",\n    \"grossTotal\": \"grossTotal\",\n    \"paidAmount\": \"paidAmount\",\n    \"journalTransactionId\": \"journalTransactionId\",\n    \"creditedInvoiceId\": \"creditedInvoiceId\",\n    \"purchaseOrderId\": \"purchaseOrderId\",\n    \"operationTypeId\": \"operationTypeId\",\n    \"notes\": \"notes\",\n    \"intrastatTransportMode\": \"intrastatTransportMode\",\n    \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n    \"intrastatRegion\": \"intrastatRegion\",\n    \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n    \"einvoiceNumber\": \"einvoiceNumber\",\n    \"documentRef\": \"documentRef\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\",\n    \"lines\": [\n      {\n        \"id\": \"id\",\n        \"itemId\": null,\n        \"description\": \"description\",\n        \"unit\": \"unit\",\n        \"quantity\": \"quantity\",\n        \"unitPriceExclVat\": null,\n        \"unitPriceInclVat\": null,\n        \"vatRatePercent\": \"vatRatePercent\",\n        \"vatClassifierCode\": null,\n        \"costCenterId\": null,\n        \"projectId\": null,\n        \"accountCode\": null,\n        \"deferralStartDate\": \"2026-07-01\",\n        \"deferralEndDate\": \"2026-07-01\",\n        \"lineNet\": \"lineNet\",\n        \"lineVat\": \"lineVat\",\n        \"lineGross\": \"lineGross\",\n        \"sortOrder\": 1000000\n      }\n    ]\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9580,6 +9673,68 @@
       }
     },
     {
+      "id": "2e09de06-f750-4024-8c61-c42e07334645",
+      "name": "Assets settings get - default",
+      "request": {
+        "urlPathTemplate": "/v1/assets/settings/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"autoDepreciation\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "2e09de06-f750-4024-8c61-c42e07334645",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "36641097-365c-4630-81c0-dd257aa1194d",
+      "name": "Assets settings update - default",
+      "request": {
+        "urlPathTemplate": "/v1/assets/settings/update",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"autoDepreciation\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "36641097-365c-4630-81c0-dd257aa1194d",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "72fce768-fae1-4491-a743-663d41eca700",
       "name": "Assets groups create - default",
       "request": {
@@ -10448,6 +10603,254 @@
       }
     },
     {
+      "id": "1c990f2e-ecc8-44d5-96d0-46a3267cea31",
+      "name": "Hr per diem rates create - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/per-diem-rates/create",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"countryCode\": \"countryCode\",\n  \"dailyAmount\": \"dailyAmount\",\n  \"validFrom\": \"validFrom\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1c990f2e-ecc8-44d5-96d0-46a3267cea31",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "dea639b8-8729-4522-b775-c9a71b8cf795",
+      "name": "Hr per diem rates list - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/per-diem-rates/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"countryCode\": \"countryCode\",\n      \"dailyAmount\": \"dailyAmount\",\n      \"validFrom\": \"validFrom\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "dea639b8-8729-4522-b775-c9a71b8cf795",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "018fc18c-19be-4b2f-9edf-e3074f1d284a",
+      "name": "Hr per diem rates delete - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/per-diem-rates/delete",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "018fc18c-19be-4b2f-9edf-e3074f1d284a",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "b87ad826-8a11-4432-aabc-3c0f90eac8dd",
+      "name": "Record a business trip; the per diem is the trip days times the company rate for the destination - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/business-trips/create",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"employeeId\": \"employeeId\",\n  \"destinationCountryCode\": \"destinationCountryCode\",\n  \"purpose\": \"purpose\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"days\": 1000000,\n  \"dailyRate\": \"dailyRate\",\n  \"perDiemAmount\": \"perDiemAmount\",\n  \"status\": \"draft\",\n  \"payrollRunId\": \"payrollRunId\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "b87ad826-8a11-4432-aabc-3c0f90eac8dd",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "cde24200-3179-429e-a1bf-54784e4441b9",
+      "name": "Hr business trips get - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/business-trips/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"employeeId\": \"employeeId\",\n  \"destinationCountryCode\": \"destinationCountryCode\",\n  \"purpose\": \"purpose\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"days\": 1000000,\n  \"dailyRate\": \"dailyRate\",\n  \"perDiemAmount\": \"perDiemAmount\",\n  \"status\": \"draft\",\n  \"payrollRunId\": \"payrollRunId\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "cde24200-3179-429e-a1bf-54784e4441b9",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "81800512-7418-4b5e-a1a0-ee9f07e389f1",
+      "name": "Hr business trips list - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/business-trips/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"destinationCountryCode\": \"destinationCountryCode\",\n      \"purpose\": \"purpose\",\n      \"startDate\": \"2026-07-01\",\n      \"endDate\": \"2026-07-01\",\n      \"days\": 1000000,\n      \"dailyRate\": \"dailyRate\",\n      \"perDiemAmount\": \"perDiemAmount\",\n      \"status\": \"draft\",\n      \"payrollRunId\": \"payrollRunId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "81800512-7418-4b5e-a1a0-ee9f07e389f1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ebcee71a-ddd5-42b0-b50c-d65530e47410",
+      "name": "Approve a trip so the automatic payroll run for the month it ends pays the per diem - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/business-trips/approve",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"employeeId\": \"employeeId\",\n  \"destinationCountryCode\": \"destinationCountryCode\",\n  \"purpose\": \"purpose\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"days\": 1000000,\n  \"dailyRate\": \"dailyRate\",\n  \"perDiemAmount\": \"perDiemAmount\",\n  \"status\": \"draft\",\n  \"payrollRunId\": \"payrollRunId\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ebcee71a-ddd5-42b0-b50c-d65530e47410",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "81d65cba-c583-4ef0-ac37-6c155f88c51b",
+      "name": "Hr business trips delete - default",
+      "request": {
+        "urlPathTemplate": "/v1/hr/business-trips/delete",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "81d65cba-c583-4ef0-ac37-6c155f88c51b",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "e54d9907-911e-4a42-a259-33484a403b77",
       "name": "Hr employees records create - default",
       "request": {
@@ -11174,7 +11577,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11205,7 +11608,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11236,7 +11639,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"year\": 1000000,\n      \"month\": 1000000,\n      \"countryCode\": \"countryCode\",\n      \"payDate\": \"2026-07-01\",\n      \"status\": \"draft\",\n      \"grossTotal\": \"grossTotal\",\n      \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n      \"incomeTaxTotal\": \"incomeTaxTotal\",\n      \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n      \"employerContributionsTotal\": \"employerContributionsTotal\",\n      \"componentTotals\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"netTotal\": \"netTotal\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"warnings\": [\n        \"warnings\"\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"approvedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"year\": 1000000,\n      \"month\": 1000000,\n      \"countryCode\": \"countryCode\",\n      \"payDate\": \"2026-07-01\",\n      \"status\": \"draft\",\n      \"grossTotal\": \"grossTotal\",\n      \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n      \"incomeTaxTotal\": \"incomeTaxTotal\",\n      \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n      \"employerContributionsTotal\": \"employerContributionsTotal\",\n      \"componentTotals\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"netTotal\": \"netTotal\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"warnings\": [\n        \"warnings\"\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"approvedAt\": \"2026-07-01T09:30:00Z\",\n      \"reversedAt\": \"2026-07-01T09:30:00Z\",\n      \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n      \"reversalReason\": \"reversalReason\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -11298,12 +11701,43 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "1ed361ac-2a96-4de2-ba6e-7f7a25906215",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "965bd11e-ad9a-4278-9b03-41830d55cd54",
+      "name": "Reverse an approved payroll run with a mirror journal entry so a corrected run can be made - default",
+      "request": {
+        "urlPathTemplate": "/v1/payroll/runs/reverse",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "965bd11e-ad9a-4278-9b03-41830d55cd54",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -11366,6 +11800,68 @@
         }
       },
       "uuid": "f6fd311e-89ac-4b20-bcbd-ba7c7b6f0231",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "38b99449-10d0-4e14-a2ff-426ba14b4d14",
+      "name": "Agreements settings get - default",
+      "request": {
+        "urlPathTemplate": "/v1/agreements/settings/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"autoBilling\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "38b99449-10d0-4e14-a2ff-426ba14b4d14",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "9d402e8d-c639-44f8-8bec-c1bb6861ef31",
+      "name": "Agreements settings update - default",
+      "request": {
+        "urlPathTemplate": "/v1/agreements/settings/update",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"autoBilling\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "9d402e8d-c639-44f8-8bec-c1bb6861ef31",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -13313,7 +13809,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"type\": \"receipt\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"date\": \"2026-07-01\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"purpose\": \"purpose\",\n  \"cashAccountCode\": \"cashAccountCode\",\n  \"counterAccountCode\": \"counterAccountCode\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"type\": \"receipt\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"date\": \"2026-07-01\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"purpose\": \"purpose\",\n  \"cashAccountCode\": \"cashAccountCode\",\n  \"counterAccountCode\": \"counterAccountCode\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"saleInvoiceId\": \"saleInvoiceId\",\n  \"purchaseInvoiceId\": \"purchaseInvoiceId\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13344,7 +13840,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"type\": \"receipt\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"date\": \"2026-07-01\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"purpose\": \"purpose\",\n  \"cashAccountCode\": \"cashAccountCode\",\n  \"counterAccountCode\": \"counterAccountCode\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"type\": \"receipt\",\n  \"series\": \"series\",\n  \"number\": 1000000,\n  \"fullNumber\": \"fullNumber\",\n  \"date\": \"2026-07-01\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"purpose\": \"purpose\",\n  \"cashAccountCode\": \"cashAccountCode\",\n  \"counterAccountCode\": \"counterAccountCode\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"saleInvoiceId\": \"saleInvoiceId\",\n  \"purchaseInvoiceId\": \"purchaseInvoiceId\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13375,7 +13871,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"receipt\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"date\": \"2026-07-01\",\n      \"partnerId\": \"partnerId\",\n      \"employeeId\": \"employeeId\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"purpose\": \"purpose\",\n      \"cashAccountCode\": \"cashAccountCode\",\n      \"counterAccountCode\": \"counterAccountCode\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"receipt\",\n      \"series\": \"series\",\n      \"number\": 1000000,\n      \"fullNumber\": \"fullNumber\",\n      \"date\": \"2026-07-01\",\n      \"partnerId\": \"partnerId\",\n      \"employeeId\": \"employeeId\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"purpose\": \"purpose\",\n      \"cashAccountCode\": \"cashAccountCode\",\n      \"counterAccountCode\": \"counterAccountCode\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"saleInvoiceId\": \"saleInvoiceId\",\n      \"purchaseInvoiceId\": \"purchaseInvoiceId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13424,6 +13920,99 @@
       }
     },
     {
+      "id": "e2512baa-41a4-48a8-b5a2-c3897a087029",
+      "name": "Settle an employee cash advance with the receipts the employee paid from it - default",
+      "request": {
+        "urlPathTemplate": "/v1/cash/expense-reports/create",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"number\": \"number\",\n  \"employeeId\": \"employeeId\",\n  \"date\": \"2026-07-01\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"total\": \"total\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"description\": \"description\",\n      \"documentNumber\": \"documentNumber\",\n      \"accountCode\": \"accountCode\",\n      \"netAmount\": \"netAmount\",\n      \"vatAmount\": \"vatAmount\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e2512baa-41a4-48a8-b5a2-c3897a087029",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3c6f3049-f021-49aa-b83b-6117898aeb3e",
+      "name": "Cash expense reports get - default",
+      "request": {
+        "urlPathTemplate": "/v1/cash/expense-reports/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"number\": \"number\",\n  \"employeeId\": \"employeeId\",\n  \"date\": \"2026-07-01\",\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"total\": \"total\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"description\": \"description\",\n      \"documentNumber\": \"documentNumber\",\n      \"accountCode\": \"accountCode\",\n      \"netAmount\": \"netAmount\",\n      \"vatAmount\": \"vatAmount\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3c6f3049-f021-49aa-b83b-6117898aeb3e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "eac1e62e-9b4e-476c-8c59-e9687670efd4",
+      "name": "Cash expense reports list - default",
+      "request": {
+        "urlPathTemplate": "/v1/cash/expense-reports/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"number\": \"number\",\n      \"employeeId\": \"employeeId\",\n      \"date\": \"2026-07-01\",\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"total\": \"total\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"notes\": \"notes\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "eac1e62e-9b4e-476c-8c59-e9687670efd4",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "2ef31780-d244-4b25-8483-ebbd2ec25e55",
       "name": "Cash advance holders balances - default",
       "request": {
@@ -13437,7 +14026,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"employeeId\": \"employeeId\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"issued\": \"issued\",\n      \"returned\": \"returned\",\n      \"balance\": \"balance\"\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"employeeId\": \"employeeId\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"issued\": \"issued\",\n      \"returned\": \"returned\",\n      \"settled\": \"settled\",\n      \"balance\": \"balance\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14137,6 +14726,223 @@
       }
     },
     {
+      "id": "84dd2c7e-a53c-46ba-8747-e6e02de0e8b2",
+      "name": "Open a cash register shift on a POS device; a device has at most one open shift - default",
+      "request": {
+        "urlPathTemplate": "/v1/pos/shifts/open",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"deviceId\": \"deviceId\",\n  \"warehouseId\": \"warehouseId\",\n  \"status\": \"open\",\n  \"openingCash\": \"openingCash\",\n  \"countedCash\": \"countedCash\",\n  \"receiptCount\": 1000000,\n  \"reportId\": \"reportId\",\n  \"openedAt\": \"2026-07-01T09:30:00Z\",\n  \"closedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "84dd2c7e-a53c-46ba-8747-e6e02de0e8b2",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "5c0779b0-7a86-435f-945a-e2bb644daffc",
+      "name": "Pos shifts get - default",
+      "request": {
+        "urlPathTemplate": "/v1/pos/shifts/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"deviceId\": \"deviceId\",\n  \"warehouseId\": \"warehouseId\",\n  \"status\": \"open\",\n  \"openingCash\": \"openingCash\",\n  \"countedCash\": \"countedCash\",\n  \"receiptCount\": 1000000,\n  \"reportId\": \"reportId\",\n  \"openedAt\": \"2026-07-01T09:30:00Z\",\n  \"closedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "5c0779b0-7a86-435f-945a-e2bb644daffc",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "039be0ad-da18-443b-bda6-1f4a241af6a1",
+      "name": "Pos shifts list - default",
+      "request": {
+        "urlPathTemplate": "/v1/pos/shifts/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"deviceId\": \"deviceId\",\n      \"warehouseId\": \"warehouseId\",\n      \"status\": \"open\",\n      \"openingCash\": \"openingCash\",\n      \"countedCash\": \"countedCash\",\n      \"receiptCount\": 1000000,\n      \"reportId\": \"reportId\",\n      \"openedAt\": \"2026-07-01T09:30:00Z\",\n      \"closedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "039be0ad-da18-443b-bda6-1f4a241af6a1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "5bda38b1-0251-4c83-b7df-b531274f2a8a",
+      "name": "Record a sale receipt in an open shift; the shift close turns its receipts into the Z-report - default",
+      "request": {
+        "urlPathTemplate": "/v1/pos/receipts/create",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"shiftId\": \"shiftId\",\n  \"number\": 1000000,\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"cashAmount\": \"cashAmount\",\n  \"cardAmount\": \"cardAmount\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"netAmount\": \"netAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"grossAmount\": \"grossAmount\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "5bda38b1-0251-4c83-b7df-b531274f2a8a",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "0382eb3e-292e-4d68-a151-2bbc8b1677e8",
+      "name": "Pos receipts list - default",
+      "request": {
+        "urlPathTemplate": "/v1/pos/receipts/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"shiftId\": \"shiftId\",\n      \"number\": 1000000,\n      \"netTotal\": \"netTotal\",\n      \"vatTotal\": \"vatTotal\",\n      \"grossTotal\": \"grossTotal\",\n      \"cashAmount\": \"cashAmount\",\n      \"cardAmount\": \"cardAmount\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "0382eb3e-292e-4d68-a151-2bbc8b1677e8",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3ee04d47-06cd-4b50-b894-26a9a871c829",
+      "name": "Pos receipts get - default",
+      "request": {
+        "urlPathTemplate": "/v1/pos/receipts/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"shiftId\": \"shiftId\",\n  \"number\": 1000000,\n  \"netTotal\": \"netTotal\",\n  \"vatTotal\": \"vatTotal\",\n  \"grossTotal\": \"grossTotal\",\n  \"cashAmount\": \"cashAmount\",\n  \"cardAmount\": \"cardAmount\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceInclVat\": \"unitPriceInclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"netAmount\": \"netAmount\",\n      \"vatAmount\": \"vatAmount\",\n      \"grossAmount\": \"grossAmount\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3ee04d47-06cd-4b50-b894-26a9a871c829",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "c3e1ae76-a7d9-4a4e-9ee2-eef65e080514",
+      "name": "Close a shift: its receipts become one Z-report posted to the ledger, and the counted cash is compared - default",
+      "request": {
+        "urlPathTemplate": "/v1/pos/shifts/close",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"deviceId\": \"deviceId\",\n  \"warehouseId\": \"warehouseId\",\n  \"status\": \"open\",\n  \"openingCash\": \"openingCash\",\n  \"countedCash\": \"countedCash\",\n  \"receiptCount\": 1000000,\n  \"reportId\": \"reportId\",\n  \"openedAt\": \"2026-07-01T09:30:00Z\",\n  \"closedAt\": \"2026-07-01T09:30:00Z\",\n  \"expectedCash\": \"expectedCash\",\n  \"cashDifference\": \"cashDifference\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "c3e1ae76-a7d9-4a4e-9ee2-eef65e080514",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "113d1f99-9a4f-45d1-9526-00b2e8b7b4e3",
       "name": "Calendar list - default",
       "request": {
@@ -14776,6 +15582,37 @@
         }
       },
       "uuid": "0e683728-f212-4ddd-9644-59f59e08c89e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "c9e3ee5b-b410-48c0-a0ee-f4e05abb4de9",
+      "name": "Match one bank payment to several invoices in its currency, splitting the amount between them - default",
+      "request": {
+        "urlPathTemplate": "/v1/bank/transactions/match-many",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "c9e3ee5b-b410-48c0-a0ee-f4e05abb4de9",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -16754,7 +17591,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"fromDate\": \"2026-07-01\",\n  \"toDate\": \"2026-07-01\",\n  \"rows\": [\n    {\n      \"employeeId\": \"employeeId\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"opening\": \"opening\",\n      \"issued\": \"issued\",\n      \"returned\": \"returned\",\n      \"closing\": \"closing\"\n    }\n  ]\n}",
+        "body": "{\n  \"fromDate\": \"2026-07-01\",\n  \"toDate\": \"2026-07-01\",\n  \"rows\": [\n    {\n      \"employeeId\": \"employeeId\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"opening\": \"opening\",\n      \"issued\": \"issued\",\n      \"returned\": \"returned\",\n      \"settled\": \"settled\",\n      \"closing\": \"closing\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -18340,7 +19177,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"scopes\": [\n        \"scopes\"\n      ],\n      \"lastUsedAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"replacedByKeyId\": \"replacedByKeyId\",\n      \"revokedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"scopes\": [\n        \"scopes\"\n      ],\n      \"lastUsedAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"replacedByKeyId\": \"replacedByKeyId\",\n      \"createdByUserId\": \"createdByUserId\",\n      \"revokedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -18824,6 +19661,6 @@
     }
   ],
   "meta": {
-    "total": 607
+    "total": 634
   }
 }

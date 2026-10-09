@@ -1762,7 +1762,8 @@ var (
 	advanceReconciliationReportsResponseRowsItemFieldOpening    = big.NewInt(1 << 3)
 	advanceReconciliationReportsResponseRowsItemFieldIssued     = big.NewInt(1 << 4)
 	advanceReconciliationReportsResponseRowsItemFieldReturned   = big.NewInt(1 << 5)
-	advanceReconciliationReportsResponseRowsItemFieldClosing    = big.NewInt(1 << 6)
+	advanceReconciliationReportsResponseRowsItemFieldSettled    = big.NewInt(1 << 6)
+	advanceReconciliationReportsResponseRowsItemFieldClosing    = big.NewInt(1 << 7)
 )
 
 type AdvanceReconciliationReportsResponseRowsItem struct {
@@ -1772,6 +1773,7 @@ type AdvanceReconciliationReportsResponseRowsItem struct {
 	Opening    string `json:"opening" url:"opening"`
 	Issued     string `json:"issued" url:"issued"`
 	Returned   string `json:"returned" url:"returned"`
+	Settled    string `json:"settled" url:"settled"`
 	Closing    string `json:"closing" url:"closing"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1821,6 +1823,13 @@ func (a *AdvanceReconciliationReportsResponseRowsItem) GetReturned() string {
 		return ""
 	}
 	return a.Returned
+}
+
+func (a *AdvanceReconciliationReportsResponseRowsItem) GetSettled() string {
+	if a == nil {
+		return ""
+	}
+	return a.Settled
 }
 
 func (a *AdvanceReconciliationReportsResponseRowsItem) GetClosing() string {
@@ -1884,6 +1893,13 @@ func (a *AdvanceReconciliationReportsResponseRowsItem) SetIssued(issued string) 
 func (a *AdvanceReconciliationReportsResponseRowsItem) SetReturned(returned string) {
 	a.Returned = returned
 	a.require(advanceReconciliationReportsResponseRowsItemFieldReturned)
+}
+
+// SetSettled sets the Settled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AdvanceReconciliationReportsResponseRowsItem) SetSettled(settled string) {
+	a.Settled = settled
+	a.require(advanceReconciliationReportsResponseRowsItemFieldSettled)
 }
 
 // SetClosing sets the Closing field and marks it as non-optional;

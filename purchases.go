@@ -11,6 +11,137 @@ import (
 )
 
 var (
+	deferralsListPurchasesRequestFieldPage     = big.NewInt(1 << 0)
+	deferralsListPurchasesRequestFieldPageSize = big.NewInt(1 << 1)
+	deferralsListPurchasesRequestFieldSort     = big.NewInt(1 << 2)
+	deferralsListPurchasesRequestFieldFilter   = big.NewInt(1 << 3)
+	deferralsListPurchasesRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type DeferralsListPurchasesRequest struct {
+	Page     *int64                                     `json:"page,omitempty" url:"-"`
+	PageSize *int64                                     `json:"pageSize,omitempty" url:"-"`
+	Sort     []*DeferralsListPurchasesRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*DeferralsListPurchasesRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DeferralsListPurchasesRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequest) SetPage(page *int64) {
+	d.Page = page
+	d.require(deferralsListPurchasesRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequest) SetPageSize(pageSize *int64) {
+	d.PageSize = pageSize
+	d.require(deferralsListPurchasesRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequest) SetSort(sort []*DeferralsListPurchasesRequestSortItem) {
+	d.Sort = sort
+	d.require(deferralsListPurchasesRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequest) SetFilter(filter []*DeferralsListPurchasesRequestFilterItem) {
+	d.Filter = filter
+	d.require(deferralsListPurchasesRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequest) SetTotals(totals []string) {
+	d.Totals = totals
+	d.require(deferralsListPurchasesRequestFieldTotals)
+}
+
+func (d *DeferralsListPurchasesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeferralsListPurchasesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*d = DeferralsListPurchasesRequest(body)
+	return nil
+}
+
+func (d *DeferralsListPurchasesRequest) MarshalJSON() ([]byte, error) {
+	type embed DeferralsListPurchasesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	deferralsPostPurchasesRequestFieldAsOfDate = big.NewInt(1 << 0)
+)
+
+type DeferralsPostPurchasesRequest struct {
+	AsOfDate *time.Time `json:"asOfDate,omitempty" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DeferralsPostPurchasesRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetAsOfDate sets the AsOfDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsPostPurchasesRequest) SetAsOfDate(asOfDate *time.Time) {
+	d.AsOfDate = asOfDate
+	d.require(deferralsPostPurchasesRequestFieldAsOfDate)
+}
+
+func (d *DeferralsPostPurchasesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeferralsPostPurchasesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*d = DeferralsPostPurchasesRequest(body)
+	return nil
+}
+
+func (d *DeferralsPostPurchasesRequest) MarshalJSON() ([]byte, error) {
+	type embed DeferralsPostPurchasesRequest
+	var marshaler = struct {
+		embed
+		AsOfDate *internal.Date `json:"asOfDate,omitempty"`
+	}{
+		embed:    embed(*d),
+		AsOfDate: internal.NewOptionalDate(d.AsOfDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	invoicesCreatePurchasesRequestFieldPartnerID                    = big.NewInt(1 << 0)
 	invoicesCreatePurchasesRequestFieldType                         = big.NewInt(1 << 1)
 	invoicesCreatePurchasesRequestFieldDocumentNumber               = big.NewInt(1 << 2)
@@ -1575,6 +1706,986 @@ func (r *ReceiptsListPurchasesRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	deferralsListPurchasesRequestFilterItemFieldField = big.NewInt(1 << 0)
+	deferralsListPurchasesRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	deferralsListPurchasesRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type DeferralsListPurchasesRequestFilterItem struct {
+	Field string                                        `json:"field" url:"field"`
+	Op    DeferralsListPurchasesRequestFilterItemOp     `json:"op" url:"op"`
+	Value *DeferralsListPurchasesRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) GetField() string {
+	if d == nil {
+		return ""
+	}
+	return d.Field
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) GetOp() DeferralsListPurchasesRequestFilterItemOp {
+	if d == nil {
+		return ""
+	}
+	return d.Op
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) GetValue() *DeferralsListPurchasesRequestFilterItemValue {
+	if d == nil {
+		return nil
+	}
+	return d.Value
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequestFilterItem) SetField(field string) {
+	d.Field = field
+	d.require(deferralsListPurchasesRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequestFilterItem) SetOp(op DeferralsListPurchasesRequestFilterItemOp) {
+	d.Op = op
+	d.require(deferralsListPurchasesRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequestFilterItem) SetValue(value *DeferralsListPurchasesRequestFilterItemValue) {
+	d.Value = value
+	d.require(deferralsListPurchasesRequestFilterItemFieldValue)
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeferralsListPurchasesRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DeferralsListPurchasesRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed DeferralsListPurchasesRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DeferralsListPurchasesRequestFilterItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DeferralsListPurchasesRequestFilterItemOp string
+
+const (
+	DeferralsListPurchasesRequestFilterItemOpEq       DeferralsListPurchasesRequestFilterItemOp = "eq"
+	DeferralsListPurchasesRequestFilterItemOpNe       DeferralsListPurchasesRequestFilterItemOp = "ne"
+	DeferralsListPurchasesRequestFilterItemOpContains DeferralsListPurchasesRequestFilterItemOp = "contains"
+	DeferralsListPurchasesRequestFilterItemOpGte      DeferralsListPurchasesRequestFilterItemOp = "gte"
+	DeferralsListPurchasesRequestFilterItemOpLte      DeferralsListPurchasesRequestFilterItemOp = "lte"
+	DeferralsListPurchasesRequestFilterItemOpIn       DeferralsListPurchasesRequestFilterItemOp = "in"
+)
+
+func NewDeferralsListPurchasesRequestFilterItemOpFromString(s string) (DeferralsListPurchasesRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return DeferralsListPurchasesRequestFilterItemOpEq, nil
+	case "ne":
+		return DeferralsListPurchasesRequestFilterItemOpNe, nil
+	case "contains":
+		return DeferralsListPurchasesRequestFilterItemOpContains, nil
+	case "gte":
+		return DeferralsListPurchasesRequestFilterItemOpGte, nil
+	case "lte":
+		return DeferralsListPurchasesRequestFilterItemOpLte, nil
+	case "in":
+		return DeferralsListPurchasesRequestFilterItemOpIn, nil
+	}
+	var t DeferralsListPurchasesRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DeferralsListPurchasesRequestFilterItemOp) Ptr() *DeferralsListPurchasesRequestFilterItemOp {
+	return &d
+}
+
+type DeferralsListPurchasesRequestFilterItemValue struct {
+	String                                                    string
+	Double                                                    float64
+	Boolean                                                   bool
+	DeferralsListPurchasesRequestFilterItemValueThreeItemList []*DeferralsListPurchasesRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValue) GetString() string {
+	if d == nil {
+		return ""
+	}
+	return d.String
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValue) GetDouble() float64 {
+	if d == nil {
+		return 0
+	}
+	return d.Double
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValue) GetBoolean() bool {
+	if d == nil {
+		return false
+	}
+	return d.Boolean
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValue) GetDeferralsListPurchasesRequestFilterItemValueThreeItemList() []*DeferralsListPurchasesRequestFilterItemValueThreeItem {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralsListPurchasesRequestFilterItemValueThreeItemList
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		d.typ = "String"
+		d.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		d.typ = "Double"
+		d.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		d.typ = "Boolean"
+		d.Boolean = valueBoolean
+		return nil
+	}
+	var valueDeferralsListPurchasesRequestFilterItemValueThreeItemList []*DeferralsListPurchasesRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueDeferralsListPurchasesRequestFilterItemValueThreeItemList); err == nil {
+		d.typ = "DeferralsListPurchasesRequestFilterItemValueThreeItemList"
+		d.DeferralsListPurchasesRequestFilterItemValueThreeItemList = valueDeferralsListPurchasesRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
+}
+
+func (d DeferralsListPurchasesRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
+	}
+	if d.typ == "Boolean" || d.Boolean != false {
+		return json.Marshal(d.Boolean)
+	}
+	if d.typ == "DeferralsListPurchasesRequestFilterItemValueThreeItemList" || d.DeferralsListPurchasesRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(d.DeferralsListPurchasesRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DeferralsListPurchasesRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitDeferralsListPurchasesRequestFilterItemValueThreeItemList([]*DeferralsListPurchasesRequestFilterItemValueThreeItem) error
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValue) Accept(visitor DeferralsListPurchasesRequestFilterItemValueVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
+	}
+	if d.typ == "Boolean" || d.Boolean != false {
+		return visitor.VisitBoolean(d.Boolean)
+	}
+	if d.typ == "DeferralsListPurchasesRequestFilterItemValueThreeItemList" || d.DeferralsListPurchasesRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitDeferralsListPurchasesRequestFilterItemValueThreeItemList(d.DeferralsListPurchasesRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DeferralsListPurchasesRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValueThreeItem) GetString() string {
+	if d == nil {
+		return ""
+	}
+	return d.String
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if d == nil {
+		return 0
+	}
+	return d.Double
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		d.typ = "String"
+		d.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		d.typ = "Double"
+		d.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
+}
+
+func (d DeferralsListPurchasesRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DeferralsListPurchasesRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (d *DeferralsListPurchasesRequestFilterItemValueThreeItem) Accept(visitor DeferralsListPurchasesRequestFilterItemValueThreeItemVisitor) error {
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
+	}
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+var (
+	deferralsListPurchasesRequestSortItemFieldField = big.NewInt(1 << 0)
+	deferralsListPurchasesRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type DeferralsListPurchasesRequestSortItem struct {
+	Field string                                    `json:"field" url:"field"`
+	Dir   *DeferralsListPurchasesRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DeferralsListPurchasesRequestSortItem) GetField() string {
+	if d == nil {
+		return ""
+	}
+	return d.Field
+}
+
+func (d *DeferralsListPurchasesRequestSortItem) GetDir() *DeferralsListPurchasesRequestSortItemDir {
+	if d == nil {
+		return nil
+	}
+	return d.Dir
+}
+
+func (d *DeferralsListPurchasesRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DeferralsListPurchasesRequestSortItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequestSortItem) SetField(field string) {
+	d.Field = field
+	d.require(deferralsListPurchasesRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesRequestSortItem) SetDir(dir *DeferralsListPurchasesRequestSortItemDir) {
+	d.Dir = dir
+	d.require(deferralsListPurchasesRequestSortItemFieldDir)
+}
+
+func (d *DeferralsListPurchasesRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeferralsListPurchasesRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DeferralsListPurchasesRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DeferralsListPurchasesRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed DeferralsListPurchasesRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DeferralsListPurchasesRequestSortItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DeferralsListPurchasesRequestSortItemDir string
+
+const (
+	DeferralsListPurchasesRequestSortItemDirAsc  DeferralsListPurchasesRequestSortItemDir = "asc"
+	DeferralsListPurchasesRequestSortItemDirDesc DeferralsListPurchasesRequestSortItemDir = "desc"
+)
+
+func NewDeferralsListPurchasesRequestSortItemDirFromString(s string) (DeferralsListPurchasesRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return DeferralsListPurchasesRequestSortItemDirAsc, nil
+	case "desc":
+		return DeferralsListPurchasesRequestSortItemDirDesc, nil
+	}
+	var t DeferralsListPurchasesRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DeferralsListPurchasesRequestSortItemDir) Ptr() *DeferralsListPurchasesRequestSortItemDir {
+	return &d
+}
+
+var (
+	deferralsListPurchasesResponseFieldRows             = big.NewInt(1 << 0)
+	deferralsListPurchasesResponseFieldPage             = big.NewInt(1 << 1)
+	deferralsListPurchasesResponseFieldPageSize         = big.NewInt(1 << 2)
+	deferralsListPurchasesResponseFieldTotal            = big.NewInt(1 << 3)
+	deferralsListPurchasesResponseFieldTotals           = big.NewInt(1 << 4)
+	deferralsListPurchasesResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type DeferralsListPurchasesResponse struct {
+	Rows     []*DeferralsListPurchasesResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                     `json:"page" url:"page"`
+	PageSize int64                                     `json:"pageSize" url:"pageSize"`
+	Total    int64                                     `json:"total" url:"total"`
+	Totals   map[string]string                         `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DeferralsListPurchasesResponse) GetRows() []*DeferralsListPurchasesResponseRowsItem {
+	if d == nil {
+		return nil
+	}
+	return d.Rows
+}
+
+func (d *DeferralsListPurchasesResponse) GetPage() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.Page
+}
+
+func (d *DeferralsListPurchasesResponse) GetPageSize() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.PageSize
+}
+
+func (d *DeferralsListPurchasesResponse) GetTotal() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.Total
+}
+
+func (d *DeferralsListPurchasesResponse) GetTotals() map[string]string {
+	if d == nil {
+		return nil
+	}
+	return d.Totals
+}
+
+func (d *DeferralsListPurchasesResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if d == nil {
+		return nil
+	}
+	return d.TotalsByCurrency
+}
+
+func (d *DeferralsListPurchasesResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DeferralsListPurchasesResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponse) SetRows(rows []*DeferralsListPurchasesResponseRowsItem) {
+	d.Rows = rows
+	d.require(deferralsListPurchasesResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponse) SetPage(page int64) {
+	d.Page = page
+	d.require(deferralsListPurchasesResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponse) SetPageSize(pageSize int64) {
+	d.PageSize = pageSize
+	d.require(deferralsListPurchasesResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponse) SetTotal(total int64) {
+	d.Total = total
+	d.require(deferralsListPurchasesResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponse) SetTotals(totals map[string]string) {
+	d.Totals = totals
+	d.require(deferralsListPurchasesResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	d.TotalsByCurrency = totalsByCurrency
+	d.require(deferralsListPurchasesResponseFieldTotalsByCurrency)
+}
+
+func (d *DeferralsListPurchasesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeferralsListPurchasesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DeferralsListPurchasesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DeferralsListPurchasesResponse) MarshalJSON() ([]byte, error) {
+	type embed DeferralsListPurchasesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DeferralsListPurchasesResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	deferralsListPurchasesResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	deferralsListPurchasesResponseRowsItemFieldInvoiceID            = big.NewInt(1 << 1)
+	deferralsListPurchasesResponseRowsItemFieldInvoiceLineID        = big.NewInt(1 << 2)
+	deferralsListPurchasesResponseRowsItemFieldScheduleDate         = big.NewInt(1 << 3)
+	deferralsListPurchasesResponseRowsItemFieldDescription          = big.NewInt(1 << 4)
+	deferralsListPurchasesResponseRowsItemFieldAmount               = big.NewInt(1 << 5)
+	deferralsListPurchasesResponseRowsItemFieldExpenseAccountCode   = big.NewInt(1 << 6)
+	deferralsListPurchasesResponseRowsItemFieldPrepaidAccountCode   = big.NewInt(1 << 7)
+	deferralsListPurchasesResponseRowsItemFieldStatus               = big.NewInt(1 << 8)
+	deferralsListPurchasesResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 9)
+)
+
+type DeferralsListPurchasesResponseRowsItem struct {
+	ID                   string                                       `json:"id" url:"id"`
+	InvoiceID            string                                       `json:"invoiceId" url:"invoiceId"`
+	InvoiceLineID        string                                       `json:"invoiceLineId" url:"invoiceLineId"`
+	ScheduleDate         time.Time                                    `json:"scheduleDate" url:"scheduleDate" format:"date"`
+	Description          *string                                      `json:"description,omitempty" url:"description,omitempty"`
+	Amount               string                                       `json:"amount" url:"amount"`
+	ExpenseAccountCode   string                                       `json:"expenseAccountCode" url:"expenseAccountCode"`
+	PrepaidAccountCode   string                                       `json:"prepaidAccountCode" url:"prepaidAccountCode"`
+	Status               DeferralsListPurchasesResponseRowsItemStatus `json:"status" url:"status"`
+	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetID() string {
+	if d == nil {
+		return ""
+	}
+	return d.ID
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetInvoiceID() string {
+	if d == nil {
+		return ""
+	}
+	return d.InvoiceID
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetInvoiceLineID() string {
+	if d == nil {
+		return ""
+	}
+	return d.InvoiceLineID
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetScheduleDate() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.ScheduleDate
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetDescription() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Description
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetAmount() string {
+	if d == nil {
+		return ""
+	}
+	return d.Amount
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetExpenseAccountCode() string {
+	if d == nil {
+		return ""
+	}
+	return d.ExpenseAccountCode
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetPrepaidAccountCode() string {
+	if d == nil {
+		return ""
+	}
+	return d.PrepaidAccountCode
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetStatus() DeferralsListPurchasesResponseRowsItemStatus {
+	if d == nil {
+		return ""
+	}
+	return d.Status
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetJournalTransactionID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.JournalTransactionID
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetID(id string) {
+	d.ID = id
+	d.require(deferralsListPurchasesResponseRowsItemFieldID)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetInvoiceID(invoiceID string) {
+	d.InvoiceID = invoiceID
+	d.require(deferralsListPurchasesResponseRowsItemFieldInvoiceID)
+}
+
+// SetInvoiceLineID sets the InvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetInvoiceLineID(invoiceLineID string) {
+	d.InvoiceLineID = invoiceLineID
+	d.require(deferralsListPurchasesResponseRowsItemFieldInvoiceLineID)
+}
+
+// SetScheduleDate sets the ScheduleDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetScheduleDate(scheduleDate time.Time) {
+	d.ScheduleDate = scheduleDate
+	d.require(deferralsListPurchasesResponseRowsItemFieldScheduleDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetDescription(description *string) {
+	d.Description = description
+	d.require(deferralsListPurchasesResponseRowsItemFieldDescription)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetAmount(amount string) {
+	d.Amount = amount
+	d.require(deferralsListPurchasesResponseRowsItemFieldAmount)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetExpenseAccountCode(expenseAccountCode string) {
+	d.ExpenseAccountCode = expenseAccountCode
+	d.require(deferralsListPurchasesResponseRowsItemFieldExpenseAccountCode)
+}
+
+// SetPrepaidAccountCode sets the PrepaidAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetPrepaidAccountCode(prepaidAccountCode string) {
+	d.PrepaidAccountCode = prepaidAccountCode
+	d.require(deferralsListPurchasesResponseRowsItemFieldPrepaidAccountCode)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetStatus(status DeferralsListPurchasesResponseRowsItemStatus) {
+	d.Status = status
+	d.require(deferralsListPurchasesResponseRowsItemFieldStatus)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsListPurchasesResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
+	d.JournalTransactionID = journalTransactionID
+	d.require(deferralsListPurchasesResponseRowsItemFieldJournalTransactionID)
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed DeferralsListPurchasesResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		ScheduleDate *internal.Date `json:"scheduleDate"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DeferralsListPurchasesResponseRowsItem(unmarshaler.embed)
+	d.ScheduleDate = unmarshaler.ScheduleDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DeferralsListPurchasesResponseRowsItem
+	var marshaler = struct {
+		embed
+		ScheduleDate *internal.Date `json:"scheduleDate"`
+	}{
+		embed:        embed(*d),
+		ScheduleDate: internal.NewDate(d.ScheduleDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DeferralsListPurchasesResponseRowsItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DeferralsListPurchasesResponseRowsItemStatus string
+
+const (
+	DeferralsListPurchasesResponseRowsItemStatusPending   DeferralsListPurchasesResponseRowsItemStatus = "pending"
+	DeferralsListPurchasesResponseRowsItemStatusPosted    DeferralsListPurchasesResponseRowsItemStatus = "posted"
+	DeferralsListPurchasesResponseRowsItemStatusCancelled DeferralsListPurchasesResponseRowsItemStatus = "cancelled"
+)
+
+func NewDeferralsListPurchasesResponseRowsItemStatusFromString(s string) (DeferralsListPurchasesResponseRowsItemStatus, error) {
+	switch s {
+	case "pending":
+		return DeferralsListPurchasesResponseRowsItemStatusPending, nil
+	case "posted":
+		return DeferralsListPurchasesResponseRowsItemStatusPosted, nil
+	case "cancelled":
+		return DeferralsListPurchasesResponseRowsItemStatusCancelled, nil
+	}
+	var t DeferralsListPurchasesResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DeferralsListPurchasesResponseRowsItemStatus) Ptr() *DeferralsListPurchasesResponseRowsItemStatus {
+	return &d
+}
+
+var (
+	deferralsPostPurchasesResponseFieldPosted                = big.NewInt(1 << 0)
+	deferralsPostPurchasesResponseFieldTotal                 = big.NewInt(1 << 1)
+	deferralsPostPurchasesResponseFieldJournalTransactionIDs = big.NewInt(1 << 2)
+)
+
+type DeferralsPostPurchasesResponse struct {
+	Posted                int64    `json:"posted" url:"posted"`
+	Total                 string   `json:"total" url:"total"`
+	JournalTransactionIDs []string `json:"journalTransactionIds" url:"journalTransactionIds"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DeferralsPostPurchasesResponse) GetPosted() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.Posted
+}
+
+func (d *DeferralsPostPurchasesResponse) GetTotal() string {
+	if d == nil {
+		return ""
+	}
+	return d.Total
+}
+
+func (d *DeferralsPostPurchasesResponse) GetJournalTransactionIDs() []string {
+	if d == nil {
+		return nil
+	}
+	return d.JournalTransactionIDs
+}
+
+func (d *DeferralsPostPurchasesResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DeferralsPostPurchasesResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetPosted sets the Posted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsPostPurchasesResponse) SetPosted(posted int64) {
+	d.Posted = posted
+	d.require(deferralsPostPurchasesResponseFieldPosted)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsPostPurchasesResponse) SetTotal(total string) {
+	d.Total = total
+	d.require(deferralsPostPurchasesResponseFieldTotal)
+}
+
+// SetJournalTransactionIDs sets the JournalTransactionIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeferralsPostPurchasesResponse) SetJournalTransactionIDs(journalTransactionIDs []string) {
+	d.JournalTransactionIDs = journalTransactionIDs
+	d.require(deferralsPostPurchasesResponseFieldJournalTransactionIDs)
+}
+
+func (d *DeferralsPostPurchasesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeferralsPostPurchasesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DeferralsPostPurchasesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DeferralsPostPurchasesResponse) MarshalJSON() ([]byte, error) {
+	type embed DeferralsPostPurchasesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DeferralsPostPurchasesResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
 	invoicesCreatePurchasesRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
 	invoicesCreatePurchasesRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
 	invoicesCreatePurchasesRequestLinesItemFieldUnit              = big.NewInt(1 << 2)
@@ -1586,6 +2697,8 @@ var (
 	invoicesCreatePurchasesRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
 	invoicesCreatePurchasesRequestLinesItemFieldProjectID         = big.NewInt(1 << 9)
 	invoicesCreatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
+	invoicesCreatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
+	invoicesCreatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 )
 
 type InvoicesCreatePurchasesRequestLinesItem struct {
@@ -1600,6 +2713,8 @@ type InvoicesCreatePurchasesRequestLinesItem struct {
 	CostCenterID      *string                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string                                          `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time                                       `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1683,6 +2798,20 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return i.AccountCode
+}
+
+func (i *InvoicesCreatePurchasesRequestLinesItem) GetDeferralStartDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralStartDate
+}
+
+func (i *InvoicesCreatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralEndDate
 }
 
 func (i *InvoicesCreatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1776,13 +2905,35 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) SetAccountCode(accountCode *st
 	i.require(invoicesCreatePurchasesRequestLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequestLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	i.DeferralStartDate = deferralStartDate
+	i.require(invoicesCreatePurchasesRequestLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	i.DeferralEndDate = deferralEndDate
+	i.require(invoicesCreatePurchasesRequestLinesItemFieldDeferralEndDate)
+}
+
 func (i *InvoicesCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler InvoicesCreatePurchasesRequestLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed InvoicesCreatePurchasesRequestLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*i = InvoicesCreatePurchasesRequestLinesItem(value)
+	*i = InvoicesCreatePurchasesRequestLinesItem(unmarshaler.embed)
+	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -1796,8 +2947,12 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) 
 	type embed InvoicesCreatePurchasesRequestLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*i),
+		embed:             embed(*i),
+		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -2455,29 +3610,33 @@ var (
 	invoicesCreatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
 	invoicesCreatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
 	invoicesCreatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 12)
-	invoicesCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 13)
-	invoicesCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 14)
-	invoicesCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 15)
+	invoicesCreatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
+	invoicesCreatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
+	invoicesCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
+	invoicesCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
+	invoicesCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
+	invoicesCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
 )
 
 type InvoicesCreatePurchasesResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
-	AccountCode       *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                string     `json:"id" url:"id"`
+	ItemID            *string    `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string     `json:"description" url:"description"`
+	Unit              string     `json:"unit" url:"unit"`
+	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LineNet           string     `json:"lineNet" url:"lineNet"`
+	LineVat           string     `json:"lineVat" url:"lineVat"`
+	LineGross         string     `json:"lineGross" url:"lineGross"`
+	SortOrder         int64      `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2568,6 +3727,20 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return i.AccountCode
+}
+
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetDeferralStartDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralStartDate
+}
+
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetDeferralEndDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralEndDate
 }
 
 func (i *InvoicesCreatePurchasesResponseLinesItem) GetLineNet() string {
@@ -2696,6 +3869,20 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) SetAccountCode(accountCode *s
 	i.require(invoicesCreatePurchasesResponseLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	i.DeferralStartDate = deferralStartDate
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	i.DeferralEndDate = deferralEndDate
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldDeferralEndDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreatePurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -2725,12 +3912,20 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) SetSortOrder(sortOrder int64)
 }
 
 func (i *InvoicesCreatePurchasesResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler InvoicesCreatePurchasesResponseLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed InvoicesCreatePurchasesResponseLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*i = InvoicesCreatePurchasesResponseLinesItem(value)
+	*i = InvoicesCreatePurchasesResponseLinesItem(unmarshaler.embed)
+	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -2744,8 +3939,12 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) MarshalJSON() ([]byte, error)
 	type embed InvoicesCreatePurchasesResponseLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*i),
+		embed:             embed(*i),
+		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -3472,29 +4671,33 @@ var (
 	invoicesGetPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
 	invoicesGetPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
 	invoicesGetPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 12)
-	invoicesGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 13)
-	invoicesGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 14)
-	invoicesGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 15)
+	invoicesGetPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
+	invoicesGetPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
+	invoicesGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
+	invoicesGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
+	invoicesGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
+	invoicesGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
 )
 
 type InvoicesGetPurchasesResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
-	AccountCode       *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                string     `json:"id" url:"id"`
+	ItemID            *string    `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string     `json:"description" url:"description"`
+	Unit              string     `json:"unit" url:"unit"`
+	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LineNet           string     `json:"lineNet" url:"lineNet"`
+	LineVat           string     `json:"lineVat" url:"lineVat"`
+	LineGross         string     `json:"lineGross" url:"lineGross"`
+	SortOrder         int64      `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3585,6 +4788,20 @@ func (i *InvoicesGetPurchasesResponseLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return i.AccountCode
+}
+
+func (i *InvoicesGetPurchasesResponseLinesItem) GetDeferralStartDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralStartDate
+}
+
+func (i *InvoicesGetPurchasesResponseLinesItem) GetDeferralEndDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralEndDate
 }
 
 func (i *InvoicesGetPurchasesResponseLinesItem) GetLineNet() string {
@@ -3713,6 +4930,20 @@ func (i *InvoicesGetPurchasesResponseLinesItem) SetAccountCode(accountCode *stri
 	i.require(invoicesGetPurchasesResponseLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	i.DeferralStartDate = deferralStartDate
+	i.require(invoicesGetPurchasesResponseLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	i.DeferralEndDate = deferralEndDate
+	i.require(invoicesGetPurchasesResponseLinesItemFieldDeferralEndDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetPurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -3742,12 +4973,20 @@ func (i *InvoicesGetPurchasesResponseLinesItem) SetSortOrder(sortOrder int64) {
 }
 
 func (i *InvoicesGetPurchasesResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler InvoicesGetPurchasesResponseLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed InvoicesGetPurchasesResponseLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*i = InvoicesGetPurchasesResponseLinesItem(value)
+	*i = InvoicesGetPurchasesResponseLinesItem(unmarshaler.embed)
+	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -3761,8 +5000,12 @@ func (i *InvoicesGetPurchasesResponseLinesItem) MarshalJSON() ([]byte, error) {
 	type embed InvoicesGetPurchasesResponseLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*i),
+		embed:             embed(*i),
+		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -6017,29 +7260,33 @@ var (
 	invoicesRegisterPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
 	invoicesRegisterPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
 	invoicesRegisterPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 12)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 13)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 14)
-	invoicesRegisterPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 15)
+	invoicesRegisterPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
+	invoicesRegisterPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
+	invoicesRegisterPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
 )
 
 type InvoicesRegisterPurchasesResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
-	AccountCode       *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                string     `json:"id" url:"id"`
+	ItemID            *string    `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string     `json:"description" url:"description"`
+	Unit              string     `json:"unit" url:"unit"`
+	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LineNet           string     `json:"lineNet" url:"lineNet"`
+	LineVat           string     `json:"lineVat" url:"lineVat"`
+	LineGross         string     `json:"lineGross" url:"lineGross"`
+	SortOrder         int64      `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6130,6 +7377,20 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return i.AccountCode
+}
+
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetDeferralStartDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralStartDate
+}
+
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetDeferralEndDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralEndDate
 }
 
 func (i *InvoicesRegisterPurchasesResponseLinesItem) GetLineNet() string {
@@ -6258,6 +7519,20 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) SetAccountCode(accountCode 
 	i.require(invoicesRegisterPurchasesResponseLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	i.DeferralStartDate = deferralStartDate
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	i.DeferralEndDate = deferralEndDate
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldDeferralEndDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesRegisterPurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -6287,12 +7562,20 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) SetSortOrder(sortOrder int6
 }
 
 func (i *InvoicesRegisterPurchasesResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler InvoicesRegisterPurchasesResponseLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed InvoicesRegisterPurchasesResponseLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*i = InvoicesRegisterPurchasesResponseLinesItem(value)
+	*i = InvoicesRegisterPurchasesResponseLinesItem(unmarshaler.embed)
+	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -6306,8 +7589,12 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) MarshalJSON() ([]byte, erro
 	type embed InvoicesRegisterPurchasesResponseLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*i),
+		embed:             embed(*i),
+		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -6409,6 +7696,8 @@ var (
 	invoicesUpdatePurchasesRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
 	invoicesUpdatePurchasesRequestLinesItemFieldProjectID         = big.NewInt(1 << 9)
 	invoicesUpdatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
+	invoicesUpdatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
+	invoicesUpdatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 )
 
 type InvoicesUpdatePurchasesRequestLinesItem struct {
@@ -6423,6 +7712,8 @@ type InvoicesUpdatePurchasesRequestLinesItem struct {
 	CostCenterID      *string                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string                                          `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time                                       `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6506,6 +7797,20 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return i.AccountCode
+}
+
+func (i *InvoicesUpdatePurchasesRequestLinesItem) GetDeferralStartDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralStartDate
+}
+
+func (i *InvoicesUpdatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralEndDate
 }
 
 func (i *InvoicesUpdatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -6599,13 +7904,35 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) SetAccountCode(accountCode *st
 	i.require(invoicesUpdatePurchasesRequestLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequestLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	i.DeferralStartDate = deferralStartDate
+	i.require(invoicesUpdatePurchasesRequestLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	i.DeferralEndDate = deferralEndDate
+	i.require(invoicesUpdatePurchasesRequestLinesItemFieldDeferralEndDate)
+}
+
 func (i *InvoicesUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler InvoicesUpdatePurchasesRequestLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed InvoicesUpdatePurchasesRequestLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*i = InvoicesUpdatePurchasesRequestLinesItem(value)
+	*i = InvoicesUpdatePurchasesRequestLinesItem(unmarshaler.embed)
+	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -6619,8 +7946,12 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) 
 	type embed InvoicesUpdatePurchasesRequestLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*i),
+		embed:             embed(*i),
+		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -7256,29 +8587,33 @@ var (
 	invoicesUpdatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
 	invoicesUpdatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
 	invoicesUpdatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 12)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 13)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 14)
-	invoicesUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 15)
+	invoicesUpdatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
+	invoicesUpdatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
+	invoicesUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
 )
 
 type InvoicesUpdatePurchasesResponseLinesItem struct {
-	ID                string  `json:"id" url:"id"`
-	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description       string  `json:"description" url:"description"`
-	Unit              string  `json:"unit" url:"unit"`
-	Quantity          string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat  *string `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
-	AccountCode       *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
-	LineNet           string  `json:"lineNet" url:"lineNet"`
-	LineVat           string  `json:"lineVat" url:"lineVat"`
-	LineGross         string  `json:"lineGross" url:"lineGross"`
-	SortOrder         int64   `json:"sortOrder" url:"sortOrder"`
+	ID                string     `json:"id" url:"id"`
+	ItemID            *string    `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string     `json:"description" url:"description"`
+	Unit              string     `json:"unit" url:"unit"`
+	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LineNet           string     `json:"lineNet" url:"lineNet"`
+	LineVat           string     `json:"lineVat" url:"lineVat"`
+	LineGross         string     `json:"lineGross" url:"lineGross"`
+	SortOrder         int64      `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7369,6 +8704,20 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return i.AccountCode
+}
+
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetDeferralStartDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralStartDate
+}
+
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetDeferralEndDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DeferralEndDate
 }
 
 func (i *InvoicesUpdatePurchasesResponseLinesItem) GetLineNet() string {
@@ -7497,6 +8846,20 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) SetAccountCode(accountCode *s
 	i.require(invoicesUpdatePurchasesResponseLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	i.DeferralStartDate = deferralStartDate
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	i.DeferralEndDate = deferralEndDate
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldDeferralEndDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdatePurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -7526,12 +8889,20 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) SetSortOrder(sortOrder int64)
 }
 
 func (i *InvoicesUpdatePurchasesResponseLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler InvoicesUpdatePurchasesResponseLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed InvoicesUpdatePurchasesResponseLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*i = InvoicesUpdatePurchasesResponseLinesItem(value)
+	*i = InvoicesUpdatePurchasesResponseLinesItem(unmarshaler.embed)
+	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -7545,8 +8916,12 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) MarshalJSON() ([]byte, error)
 	type embed InvoicesUpdatePurchasesResponseLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*i),
+		embed:             embed(*i),
+		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -9967,6 +11342,8 @@ var (
 	ordersCreatePurchasesRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
 	ordersCreatePurchasesRequestLinesItemFieldProjectID         = big.NewInt(1 << 9)
 	ordersCreatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
+	ordersCreatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
+	ordersCreatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 )
 
 type OrdersCreatePurchasesRequestLinesItem struct {
@@ -9981,6 +11358,8 @@ type OrdersCreatePurchasesRequestLinesItem struct {
 	CostCenterID      *string                                        `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string                                        `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string                                        `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time                                     `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time                                     `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10064,6 +11443,20 @@ func (o *OrdersCreatePurchasesRequestLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return o.AccountCode
+}
+
+func (o *OrdersCreatePurchasesRequestLinesItem) GetDeferralStartDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.DeferralStartDate
+}
+
+func (o *OrdersCreatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.DeferralEndDate
 }
 
 func (o *OrdersCreatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -10157,13 +11550,35 @@ func (o *OrdersCreatePurchasesRequestLinesItem) SetAccountCode(accountCode *stri
 	o.require(ordersCreatePurchasesRequestLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesRequestLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	o.DeferralStartDate = deferralStartDate
+	o.require(ordersCreatePurchasesRequestLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	o.DeferralEndDate = deferralEndDate
+	o.require(ordersCreatePurchasesRequestLinesItemFieldDeferralEndDate)
+}
+
 func (o *OrdersCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler OrdersCreatePurchasesRequestLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed OrdersCreatePurchasesRequestLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*o = OrdersCreatePurchasesRequestLinesItem(value)
+	*o = OrdersCreatePurchasesRequestLinesItem(unmarshaler.embed)
+	o.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	o.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
@@ -10177,8 +11592,12 @@ func (o *OrdersCreatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) {
 	type embed OrdersCreatePurchasesRequestLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*o),
+		embed:             embed(*o),
+		DeferralStartDate: internal.NewOptionalDate(o.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(o.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -14469,6 +15888,8 @@ var (
 	ordersUpdatePurchasesRequestLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
 	ordersUpdatePurchasesRequestLinesItemFieldProjectID         = big.NewInt(1 << 9)
 	ordersUpdatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
+	ordersUpdatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
+	ordersUpdatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 )
 
 type OrdersUpdatePurchasesRequestLinesItem struct {
@@ -14483,6 +15904,8 @@ type OrdersUpdatePurchasesRequestLinesItem struct {
 	CostCenterID      *string                                        `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string                                        `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string                                        `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time                                     `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time                                     `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14566,6 +15989,20 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) GetAccountCode() *string {
 		return nil
 	}
 	return o.AccountCode
+}
+
+func (o *OrdersUpdatePurchasesRequestLinesItem) GetDeferralStartDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.DeferralStartDate
+}
+
+func (o *OrdersUpdatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.DeferralEndDate
 }
 
 func (o *OrdersUpdatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -14659,13 +16096,35 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) SetAccountCode(accountCode *stri
 	o.require(ordersUpdatePurchasesRequestLinesItemFieldAccountCode)
 }
 
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesRequestLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	o.DeferralStartDate = deferralStartDate
+	o.require(ordersUpdatePurchasesRequestLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	o.DeferralEndDate = deferralEndDate
+	o.require(ordersUpdatePurchasesRequestLinesItemFieldDeferralEndDate)
+}
+
 func (o *OrdersUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
-	type unmarshaler OrdersUpdatePurchasesRequestLinesItem
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed OrdersUpdatePurchasesRequestLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*o),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*o = OrdersUpdatePurchasesRequestLinesItem(value)
+	*o = OrdersUpdatePurchasesRequestLinesItem(unmarshaler.embed)
+	o.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	o.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
@@ -14679,8 +16138,12 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) {
 	type embed OrdersUpdatePurchasesRequestLinesItem
 	var marshaler = struct {
 		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
 	}{
-		embed: embed(*o),
+		embed:             embed(*o),
+		DeferralStartDate: internal.NewOptionalDate(o.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(o.DeferralEndDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)

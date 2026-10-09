@@ -1165,17 +1165,19 @@ func (i *InvoicesGetSalesRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	invoicesIssueSalesRequestFieldID          = big.NewInt(1 << 0)
-	invoicesIssueSalesRequestFieldSeries      = big.NewInt(1 << 1)
-	invoicesIssueSalesRequestFieldIssueDate   = big.NewInt(1 << 2)
-	invoicesIssueSalesRequestFieldWarehouseID = big.NewInt(1 << 3)
+	invoicesIssueSalesRequestFieldID            = big.NewInt(1 << 0)
+	invoicesIssueSalesRequestFieldSeries        = big.NewInt(1 << 1)
+	invoicesIssueSalesRequestFieldIssueDate     = big.NewInt(1 << 2)
+	invoicesIssueSalesRequestFieldWarehouseID   = big.NewInt(1 << 3)
+	invoicesIssueSalesRequestFieldReturnToStock = big.NewInt(1 << 4)
 )
 
 type InvoicesIssueSalesRequest struct {
-	ID          string     `json:"id" url:"-"`
-	Series      *string    `json:"series,omitempty" url:"-"`
-	IssueDate   *time.Time `json:"issueDate,omitempty" url:"-" format:"date"`
-	WarehouseID *string    `json:"warehouseId,omitempty" url:"-"`
+	ID            string     `json:"id" url:"-"`
+	Series        *string    `json:"series,omitempty" url:"-"`
+	IssueDate     *time.Time `json:"issueDate,omitempty" url:"-" format:"date"`
+	WarehouseID   *string    `json:"warehouseId,omitempty" url:"-"`
+	ReturnToStock *bool      `json:"returnToStock,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1214,6 +1216,13 @@ func (i *InvoicesIssueSalesRequest) SetIssueDate(issueDate *time.Time) {
 func (i *InvoicesIssueSalesRequest) SetWarehouseID(warehouseID *string) {
 	i.WarehouseID = warehouseID
 	i.require(invoicesIssueSalesRequestFieldWarehouseID)
+}
+
+// SetReturnToStock sets the ReturnToStock field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesRequest) SetReturnToStock(returnToStock *bool) {
+	i.ReturnToStock = returnToStock
+	i.require(invoicesIssueSalesRequestFieldReturnToStock)
 }
 
 func (i *InvoicesIssueSalesRequest) UnmarshalJSON(data []byte) error {

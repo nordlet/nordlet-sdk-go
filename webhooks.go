@@ -1358,6 +1358,7 @@ const (
 	SubscriptionsCreateWebhooksRequestEventsItemLeadCreated                 SubscriptionsCreateWebhooksRequestEventsItem = "lead.created"
 	SubscriptionsCreateWebhooksRequestEventsItemPartnerInquiryCreated       SubscriptionsCreateWebhooksRequestEventsItem = "partner_inquiry.created"
 	SubscriptionsCreateWebhooksRequestEventsItemPayrollRunApproved          SubscriptionsCreateWebhooksRequestEventsItem = "payroll_run.approved"
+	SubscriptionsCreateWebhooksRequestEventsItemPayrollRunReversed          SubscriptionsCreateWebhooksRequestEventsItem = "payroll_run.reversed"
 	SubscriptionsCreateWebhooksRequestEventsItemPosReportCreated            SubscriptionsCreateWebhooksRequestEventsItem = "pos_report.created"
 	SubscriptionsCreateWebhooksRequestEventsItemPriceListUpdated            SubscriptionsCreateWebhooksRequestEventsItem = "price_list.updated"
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoicePaid         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.paid"
@@ -1415,6 +1416,8 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemPartnerInquiryCreated, nil
 	case "payroll_run.approved":
 		return SubscriptionsCreateWebhooksRequestEventsItemPayrollRunApproved, nil
+	case "payroll_run.reversed":
+		return SubscriptionsCreateWebhooksRequestEventsItemPayrollRunReversed, nil
 	case "pos_report.created":
 		return SubscriptionsCreateWebhooksRequestEventsItemPosReportCreated, nil
 	case "price_list.updated":
@@ -2704,6 +2707,7 @@ const (
 	SubscriptionsUpdateWebhooksRequestEventsItemLeadCreated                 SubscriptionsUpdateWebhooksRequestEventsItem = "lead.created"
 	SubscriptionsUpdateWebhooksRequestEventsItemPartnerInquiryCreated       SubscriptionsUpdateWebhooksRequestEventsItem = "partner_inquiry.created"
 	SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunApproved          SubscriptionsUpdateWebhooksRequestEventsItem = "payroll_run.approved"
+	SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunReversed          SubscriptionsUpdateWebhooksRequestEventsItem = "payroll_run.reversed"
 	SubscriptionsUpdateWebhooksRequestEventsItemPosReportCreated            SubscriptionsUpdateWebhooksRequestEventsItem = "pos_report.created"
 	SubscriptionsUpdateWebhooksRequestEventsItemPriceListUpdated            SubscriptionsUpdateWebhooksRequestEventsItem = "price_list.updated"
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoicePaid         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.paid"
@@ -2761,6 +2765,8 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemPartnerInquiryCreated, nil
 	case "payroll_run.approved":
 		return SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunApproved, nil
+	case "payroll_run.reversed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunReversed, nil
 	case "pos_report.created":
 		return SubscriptionsUpdateWebhooksRequestEventsItemPosReportCreated, nil
 	case "price_list.updated":

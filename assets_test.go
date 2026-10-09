@@ -2338,6 +2338,51 @@ func TestSettersMarkExplicitGroupsListAssetsRequest(t *testing.T) {
 
 }
 
+func TestSettersSettingsUpdateAssetsRequest(t *testing.T) {
+	t.Run("SetAutoDepreciation", func(t *testing.T) {
+		obj := &SettingsUpdateAssetsRequest{}
+		var fernTestValueAutoDepreciation bool
+		obj.SetAutoDepreciation(fernTestValueAutoDepreciation)
+		assert.Equal(t, fernTestValueAutoDepreciation, obj.AutoDepreciation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitSettingsUpdateAssetsRequest(t *testing.T) {
+	t.Run("SetAutoDepreciation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsUpdateAssetsRequest{}
+		var fernTestValueAutoDepreciation bool
+
+		// Act
+		obj.SetAutoDepreciation(fernTestValueAutoDepreciation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("SetName", func(t *testing.T) {
 		obj := &AssetsCreateAssetsRequestDocumentsItem{}
@@ -21233,6 +21278,148 @@ func TestSettersMarkExplicitGroupsListAssetsResponseRowsItem(t *testing.T) {
 
 }
 
+func TestSettersSettingsGetAssetsResponse(t *testing.T) {
+	t.Run("SetAutoDepreciation", func(t *testing.T) {
+		obj := &SettingsGetAssetsResponse{}
+		var fernTestValueAutoDepreciation bool
+		obj.SetAutoDepreciation(fernTestValueAutoDepreciation)
+		assert.Equal(t, fernTestValueAutoDepreciation, obj.AutoDepreciation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSettingsGetAssetsResponse(t *testing.T) {
+	t.Run("GetAutoDepreciation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsGetAssetsResponse{}
+		var expected bool
+		obj.AutoDepreciation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAutoDepreciation(), "getter should return the property value")
+	})
+
+	t.Run("GetAutoDepreciation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SettingsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAutoDepreciation() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSettingsGetAssetsResponse(t *testing.T) {
+	t.Run("SetAutoDepreciation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsGetAssetsResponse{}
+		var fernTestValueAutoDepreciation bool
+
+		// Act
+		obj.SetAutoDepreciation(fernTestValueAutoDepreciation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSettingsUpdateAssetsResponse(t *testing.T) {
+	t.Run("SetAutoDepreciation", func(t *testing.T) {
+		obj := &SettingsUpdateAssetsResponse{}
+		var fernTestValueAutoDepreciation bool
+		obj.SetAutoDepreciation(fernTestValueAutoDepreciation)
+		assert.Equal(t, fernTestValueAutoDepreciation, obj.AutoDepreciation)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSettingsUpdateAssetsResponse(t *testing.T) {
+	t.Run("GetAutoDepreciation", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsUpdateAssetsResponse{}
+		var expected bool
+		obj.AutoDepreciation = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAutoDepreciation(), "getter should return the property value")
+	})
+
+	t.Run("GetAutoDepreciation_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SettingsUpdateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAutoDepreciation() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSettingsUpdateAssetsResponse(t *testing.T) {
+	t.Run("SetAutoDepreciation_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsUpdateAssetsResponse{}
+		var fernTestValueAutoDepreciation bool
+
+		// Act
+		obj.SetAutoDepreciation(fernTestValueAutoDepreciation)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestJSONMarshalingAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -22388,6 +22575,72 @@ func TestJSONMarshalingGroupsListAssetsResponseRowsItem(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingSettingsGetAssetsResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsGetAssetsResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SettingsGetAssetsResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SettingsGetAssetsResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SettingsGetAssetsResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSettingsUpdateAssetsResponse(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SettingsUpdateAssetsResponse{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SettingsUpdateAssetsResponse
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SettingsUpdateAssetsResponse
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SettingsUpdateAssetsResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestStringAssetsCreateAssetsRequestDocumentsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -22943,6 +23196,38 @@ func TestStringGroupsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *GroupsListAssetsResponseRowsItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSettingsGetAssetsResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SettingsGetAssetsResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SettingsGetAssetsResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSettingsUpdateAssetsResponse(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SettingsUpdateAssetsResponse{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SettingsUpdateAssetsResponse
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -24748,6 +25033,52 @@ func TestExtraPropertiesGroupsListAssetsResponseRowsItem(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *GroupsListAssetsResponseRowsItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSettingsGetAssetsResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SettingsGetAssetsResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SettingsGetAssetsResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSettingsUpdateAssetsResponse(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SettingsUpdateAssetsResponse{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SettingsUpdateAssetsResponse
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

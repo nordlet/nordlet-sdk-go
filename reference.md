@@ -3909,6 +3909,62 @@ client.Partners.Delete(
 </dl>
 </details>
 
+<details><summary><code>client.Partners.Merge(request) -> *nordlet.MergePartnersResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.MergePartnersRequest{
+        SourceID: "sourceId",
+        TargetID: "targetId",
+    }
+client.Partners.Merge(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sourceID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**targetID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Partners.Anonymize(request) -> *nordlet.AnonymizePartnersResponse</code></summary>
 <dl>
 <dd>
@@ -9439,6 +9495,14 @@ client.Sales.InvoicesIssue(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**returnToStock:** `*bool` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -12556,6 +12620,128 @@ client.Purchases.InvoicesRegister(
 <dd>
 
 **warehouseID:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.DeferralsList(request) -> *nordlet.DeferralsListPurchasesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.DeferralsListPurchasesRequest{}
+client.Purchases.DeferralsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.DeferralsListPurchasesRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.DeferralsListPurchasesRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Purchases.DeferralsPost(request) -> *nordlet.DeferralsPostPurchasesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.DeferralsPostPurchasesRequest{}
+client.Purchases.DeferralsPost(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**asOfDate:** `*time.Time` 
     
 </dd>
 </dl>
@@ -22627,6 +22813,83 @@ client.Migration.BooksImport(
 </details>
 
 ## assets
+<details><summary><code>client.Assets.SettingsGet(request) -> *nordlet.SettingsGetAssetsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SettingsGetAssetsRequest{}
+client.Assets.SettingsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Assets.SettingsUpdate(request) -> *nordlet.SettingsUpdateAssetsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SettingsUpdateAssetsRequest{
+        AutoDepreciation: true,
+    }
+client.Assets.SettingsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**autoDepreciation:** `bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Assets.GroupsCreate(request) -> *nordlet.GroupsCreateAssetsResponse</code></summary>
 <dl>
 <dd>
@@ -25045,6 +25308,502 @@ client.Hr.IncapacityCertificatesList(
 </dl>
 </details>
 
+<details><summary><code>client.Hr.PerDiemRatesCreate(request) -> *nordlet.PerDiemRatesCreateHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PerDiemRatesCreateHrRequest{
+        CountryCode: "countryCode",
+        DailyAmount: "121.00",
+        ValidFrom: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+    }
+client.Hr.PerDiemRatesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**countryCode:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dailyAmount:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**validFrom:** `time.Time` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.PerDiemRatesList(request) -> *nordlet.PerDiemRatesListHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PerDiemRatesListHrRequest{}
+client.Hr.PerDiemRatesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.PerDiemRatesListHrRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.PerDiemRatesListHrRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.PerDiemRatesDelete(request) -> *nordlet.PerDiemRatesDeleteHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PerDiemRatesDeleteHrRequest{
+        ID: "id",
+    }
+client.Hr.PerDiemRatesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.BusinessTripsCreate(request) -> *nordlet.BusinessTripsCreateHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.BusinessTripsCreateHrRequest{
+        EmployeeID: "employeeId",
+        DestinationCountryCode: "destinationCountryCode",
+        Purpose: "purpose",
+        StartDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        EndDate: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+    }
+client.Hr.BusinessTripsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**employeeID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**destinationCountryCode:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purpose:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**startDate:** `time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**endDate:** `time.Time` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.BusinessTripsGet(request) -> *nordlet.BusinessTripsGetHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.BusinessTripsGetHrRequest{
+        ID: "id",
+    }
+client.Hr.BusinessTripsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.BusinessTripsList(request) -> *nordlet.BusinessTripsListHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.BusinessTripsListHrRequest{}
+client.Hr.BusinessTripsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.BusinessTripsListHrRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.BusinessTripsListHrRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.BusinessTripsApprove(request) -> *nordlet.BusinessTripsApproveHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.BusinessTripsApproveHrRequest{
+        ID: "id",
+    }
+client.Hr.BusinessTripsApprove(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Hr.BusinessTripsDelete(request) -> *nordlet.BusinessTripsDeleteHrResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.BusinessTripsDeleteHrRequest{
+        ID: "id",
+    }
+client.Hr.BusinessTripsDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Hr.EmployeesRecordsCreate(request) -> *nordlet.EmployeesRecordsCreateHrResponse</code></summary>
 <dl>
 <dd>
@@ -27150,6 +27909,62 @@ client.Payroll.RunsApprove(
 </dl>
 </details>
 
+<details><summary><code>client.Payroll.RunsReverse(request) -> *nordlet.RunsReversePayrollResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.RunsReversePayrollRequest{
+        ID: "id",
+        Reason: "reason",
+    }
+client.Payroll.RunsReverse(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Payroll.RunsCancel(request) -> *nordlet.RunsCancelPayrollResponse</code></summary>
 <dl>
 <dd>
@@ -27270,6 +28085,83 @@ client.Payroll.PaymentsExport(
 </details>
 
 ## agreements
+<details><summary><code>client.Agreements.SettingsGet(request) -> *nordlet.SettingsGetAgreementsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SettingsGetAgreementsRequest{}
+client.Agreements.SettingsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Agreements.SettingsUpdate(request) -> *nordlet.SettingsUpdateAgreementsResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SettingsUpdateAgreementsRequest{
+        AutoBilling: true,
+    }
+client.Agreements.SettingsUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**autoBilling:** `bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Agreements.TypesCreate(request) -> *nordlet.TypesCreateAgreementsResponse</code></summary>
 <dl>
 <dd>
@@ -31799,7 +32691,6 @@ request := &nordlet.OrdersCreateCashRequest{
         ),
         Amount: "121.0000",
         Purpose: "purpose",
-        CounterAccountCode: "counterAccountCode",
     }
 client.Cash.OrdersCreate(
         context.TODO(),
@@ -31852,7 +32743,7 @@ client.Cash.OrdersCreate(
 <dl>
 <dd>
 
-**counterAccountCode:** `string` 
+**counterAccountCode:** `*string` 
     
 </dd>
 </dl>
@@ -31861,6 +32752,22 @@ client.Cash.OrdersCreate(
 <dd>
 
 **cashAccountCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**saleInvoiceID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purchaseInvoiceID:** `*string` 
     
 </dd>
 </dl>
@@ -32070,6 +32977,211 @@ client.Cash.Balance(
 <dd>
 
 **asOf:** `*time.Time` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Cash.ExpenseReportsCreate(request) -> *nordlet.ExpenseReportsCreateCashResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ExpenseReportsCreateCashRequest{
+        EmployeeID: "employeeId",
+        Date: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        Lines: []*nordlet.ExpenseReportsCreateCashRequestLinesItem{
+            &nordlet.ExpenseReportsCreateCashRequestLinesItem{
+                Description: "description",
+                AccountCode: "accountCode",
+                NetAmount: "121.00",
+            },
+        },
+    }
+client.Cash.ExpenseReportsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**employeeID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.ExpenseReportsCreateCashRequestLinesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Cash.ExpenseReportsGet(request) -> *nordlet.ExpenseReportsGetCashResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ExpenseReportsGetCashRequest{
+        ID: "id",
+    }
+client.Cash.ExpenseReportsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Cash.ExpenseReportsList(request) -> *nordlet.ExpenseReportsListCashResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ExpenseReportsListCashRequest{}
+client.Cash.ExpenseReportsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.ExpenseReportsListCashRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.ExpenseReportsListCashRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -34021,6 +35133,467 @@ client.Pos.ReportsList(
 </dl>
 </details>
 
+<details><summary><code>client.Pos.ShiftsOpen(request) -> *nordlet.ShiftsOpenPosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ShiftsOpenPosRequest{
+        DeviceID: "deviceId",
+    }
+client.Pos.ShiftsOpen(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**deviceID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**warehouseID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**openingCash:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Pos.ShiftsGet(request) -> *nordlet.ShiftsGetPosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ShiftsGetPosRequest{
+        ID: "id",
+    }
+client.Pos.ShiftsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Pos.ShiftsList(request) -> *nordlet.ShiftsListPosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ShiftsListPosRequest{}
+client.Pos.ShiftsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.ShiftsListPosRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.ShiftsListPosRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Pos.ReceiptsCreate(request) -> *nordlet.ReceiptsCreatePosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ReceiptsCreatePosRequest{
+        ShiftID: "shiftId",
+        Lines: []*nordlet.ReceiptsCreatePosRequestLinesItem{
+            &nordlet.ReceiptsCreatePosRequestLinesItem{
+                Quantity: "121.0000",
+                UnitPriceInclVat: "121.0000",
+                VatRatePercent: "121.00",
+            },
+        },
+    }
+client.Pos.ReceiptsCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**shiftID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.ReceiptsCreatePosRequestLinesItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cashAmount:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cardAmount:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Pos.ReceiptsList(request) -> *nordlet.ReceiptsListPosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ReceiptsListPosRequest{}
+client.Pos.ReceiptsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.ReceiptsListPosRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.ReceiptsListPosRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Pos.ReceiptsGet(request) -> *nordlet.ReceiptsGetPosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ReceiptsGetPosRequest{
+        ID: "id",
+    }
+client.Pos.ReceiptsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Pos.ShiftsClose(request) -> *nordlet.ShiftsClosePosResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ShiftsClosePosRequest{
+        ID: "id",
+        CountedCash: "121.00",
+    }
+client.Pos.ShiftsClose(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**countedCash:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**date:** `*time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reportNumber:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## calendar
 <details><summary><code>client.Calendar.List(request) -> *nordlet.ListCalendarResponse</code></summary>
 <dl>
@@ -35442,6 +37015,68 @@ client.Bank.TransactionsMatch(
 <dd>
 
 **invoiceAmount:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.TransactionsMatchMany(request) -> *nordlet.TransactionsMatchManyBankResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TransactionsMatchManyBankRequest{
+        TransactionID: "transactionId",
+        Allocations: []*nordlet.TransactionsMatchManyBankRequestAllocationsItem{
+            &nordlet.TransactionsMatchManyBankRequestAllocationsItem{
+                DocumentType: nordlet.TransactionsMatchManyBankRequestAllocationsItemDocumentTypeSaleInvoice,
+                DocumentID: "documentId",
+                Amount: "121.0000",
+            },
+        },
+    }
+client.Bank.TransactionsMatchMany(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**transactionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**allocations:** `[]*nordlet.TransactionsMatchManyBankRequestAllocationsItem` 
     
 </dd>
 </dl>

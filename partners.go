@@ -2652,6 +2652,61 @@ func (l *ListPartnersRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	mergePartnersRequestFieldSourceID = big.NewInt(1 << 0)
+	mergePartnersRequestFieldTargetID = big.NewInt(1 << 1)
+)
+
+type MergePartnersRequest struct {
+	SourceID string `json:"sourceId" url:"-"`
+	TargetID string `json:"targetId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (m *MergePartnersRequest) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersRequest) SetSourceID(sourceID string) {
+	m.SourceID = sourceID
+	m.require(mergePartnersRequestFieldSourceID)
+}
+
+// SetTargetID sets the TargetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersRequest) SetTargetID(targetID string) {
+	m.TargetID = targetID
+	m.require(mergePartnersRequestFieldTargetID)
+}
+
+func (m *MergePartnersRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler MergePartnersRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*m = MergePartnersRequest(body)
+	return nil
+}
+
+func (m *MergePartnersRequest) MarshalJSON() ([]byte, error) {
+	type embed MergePartnersRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	statusesCreatePartnersRequestFieldCode      = big.NewInt(1 << 0)
 	statusesCreatePartnersRequestFieldName      = big.NewInt(1 << 1)
 	statusesCreatePartnersRequestFieldSortOrder = big.NewInt(1 << 2)
@@ -17539,6 +17594,238 @@ func NewListPartnersResponseRowsItemTypeFromString(s string) (ListPartnersRespon
 
 func (l ListPartnersResponseRowsItemType) Ptr() *ListPartnersResponseRowsItemType {
 	return &l
+}
+
+var (
+	mergePartnersResponseFieldTargetID = big.NewInt(1 << 0)
+	mergePartnersResponseFieldSourceID = big.NewInt(1 << 1)
+	mergePartnersResponseFieldMoved    = big.NewInt(1 << 2)
+)
+
+type MergePartnersResponse struct {
+	TargetID string                            `json:"targetId" url:"targetId"`
+	SourceID string                            `json:"sourceId" url:"sourceId"`
+	Moved    []*MergePartnersResponseMovedItem `json:"moved" url:"moved"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (m *MergePartnersResponse) GetTargetID() string {
+	if m == nil {
+		return ""
+	}
+	return m.TargetID
+}
+
+func (m *MergePartnersResponse) GetSourceID() string {
+	if m == nil {
+		return ""
+	}
+	return m.SourceID
+}
+
+func (m *MergePartnersResponse) GetMoved() []*MergePartnersResponseMovedItem {
+	if m == nil {
+		return nil
+	}
+	return m.Moved
+}
+
+func (m *MergePartnersResponse) GetExtraProperties() map[string]interface{} {
+	if m == nil {
+		return nil
+	}
+	return m.extraProperties
+}
+
+func (m *MergePartnersResponse) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetTargetID sets the TargetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersResponse) SetTargetID(targetID string) {
+	m.TargetID = targetID
+	m.require(mergePartnersResponseFieldTargetID)
+}
+
+// SetSourceID sets the SourceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersResponse) SetSourceID(sourceID string) {
+	m.SourceID = sourceID
+	m.require(mergePartnersResponseFieldSourceID)
+}
+
+// SetMoved sets the Moved field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersResponse) SetMoved(moved []*MergePartnersResponseMovedItem) {
+	m.Moved = moved
+	m.require(mergePartnersResponseFieldMoved)
+}
+
+func (m *MergePartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler MergePartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*m = MergePartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
+	if err != nil {
+		return err
+	}
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (m *MergePartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed MergePartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (m *MergePartnersResponse) String() string {
+	if m == nil {
+		return "<nil>"
+	}
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(m); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", m)
+}
+
+var (
+	mergePartnersResponseMovedItemFieldTable  = big.NewInt(1 << 0)
+	mergePartnersResponseMovedItemFieldColumn = big.NewInt(1 << 1)
+	mergePartnersResponseMovedItemFieldRows   = big.NewInt(1 << 2)
+)
+
+type MergePartnersResponseMovedItem struct {
+	Table  string `json:"table" url:"table"`
+	Column string `json:"column" url:"column"`
+	Rows   int64  `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (m *MergePartnersResponseMovedItem) GetTable() string {
+	if m == nil {
+		return ""
+	}
+	return m.Table
+}
+
+func (m *MergePartnersResponseMovedItem) GetColumn() string {
+	if m == nil {
+		return ""
+	}
+	return m.Column
+}
+
+func (m *MergePartnersResponseMovedItem) GetRows() int64 {
+	if m == nil {
+		return 0
+	}
+	return m.Rows
+}
+
+func (m *MergePartnersResponseMovedItem) GetExtraProperties() map[string]interface{} {
+	if m == nil {
+		return nil
+	}
+	return m.extraProperties
+}
+
+func (m *MergePartnersResponseMovedItem) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetTable sets the Table field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersResponseMovedItem) SetTable(table string) {
+	m.Table = table
+	m.require(mergePartnersResponseMovedItemFieldTable)
+}
+
+// SetColumn sets the Column field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersResponseMovedItem) SetColumn(column string) {
+	m.Column = column
+	m.require(mergePartnersResponseMovedItemFieldColumn)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MergePartnersResponseMovedItem) SetRows(rows int64) {
+	m.Rows = rows
+	m.require(mergePartnersResponseMovedItemFieldRows)
+}
+
+func (m *MergePartnersResponseMovedItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler MergePartnersResponseMovedItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*m = MergePartnersResponseMovedItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
+	if err != nil {
+		return err
+	}
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (m *MergePartnersResponseMovedItem) MarshalJSON() ([]byte, error) {
+	type embed MergePartnersResponseMovedItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (m *MergePartnersResponseMovedItem) String() string {
+	if m == nil {
+		return "<nil>"
+	}
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(m); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", m)
 }
 
 var (

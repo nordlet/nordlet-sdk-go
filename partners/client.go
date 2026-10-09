@@ -402,6 +402,22 @@ func (c *Client) Delete(
 	return response.Body, nil
 }
 
+func (c *Client) Merge(
+	ctx context.Context,
+	request *nordlet.MergePartnersRequest,
+	opts ...option.RequestOption,
+) (*nordlet.MergePartnersResponse, error) {
+	response, err := c.WithRawResponse.Merge(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Removes birth date, self-employment certificate number, email, phone, address, notes, contacts, addresses and bank accounts, then hides the partner. The name, code and VAT number stay because issued invoices must keep identifying the counterparty for the statutory retention period.
 func (c *Client) Anonymize(
 	ctx context.Context,
