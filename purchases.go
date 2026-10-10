@@ -569,12 +569,14 @@ var (
 	invoicesRegisterPurchasesRequestFieldID               = big.NewInt(1 << 0)
 	invoicesRegisterPurchasesRequestFieldRegistrationDate = big.NewInt(1 << 1)
 	invoicesRegisterPurchasesRequestFieldWarehouseID      = big.NewInt(1 << 2)
+	invoicesRegisterPurchasesRequestFieldReturnFromStock  = big.NewInt(1 << 3)
 )
 
 type InvoicesRegisterPurchasesRequest struct {
 	ID               string     `json:"id" url:"-"`
 	RegistrationDate *time.Time `json:"registrationDate,omitempty" url:"-" format:"date"`
 	WarehouseID      *string    `json:"warehouseId,omitempty" url:"-"`
+	ReturnFromStock  *bool      `json:"returnFromStock,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -606,6 +608,13 @@ func (i *InvoicesRegisterPurchasesRequest) SetRegistrationDate(registrationDate 
 func (i *InvoicesRegisterPurchasesRequest) SetWarehouseID(warehouseID *string) {
 	i.WarehouseID = warehouseID
 	i.require(invoicesRegisterPurchasesRequestFieldWarehouseID)
+}
+
+// SetReturnFromStock sets the ReturnFromStock field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesRequest) SetReturnFromStock(returnFromStock *bool) {
+	i.ReturnFromStock = returnFromStock
+	i.require(invoicesRegisterPurchasesRequestFieldReturnFromStock)
 }
 
 func (i *InvoicesRegisterPurchasesRequest) UnmarshalJSON(data []byte) error {

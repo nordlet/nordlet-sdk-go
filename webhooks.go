@@ -1345,47 +1345,51 @@ func (d *DeliveriesRedeliverWebhooksResponse) String() string {
 type SubscriptionsCreateWebhooksRequestEventsItem string
 
 const (
-	SubscriptionsCreateWebhooksRequestEventsItemAgreementInvoiceGenerated   SubscriptionsCreateWebhooksRequestEventsItem = "agreement.invoice_generated"
-	SubscriptionsCreateWebhooksRequestEventsItemBankFeedSynced              SubscriptionsCreateWebhooksRequestEventsItem = "bank_feed.synced"
-	SubscriptionsCreateWebhooksRequestEventsItemFilingFailed                SubscriptionsCreateWebhooksRequestEventsItem = "filing.failed"
-	SubscriptionsCreateWebhooksRequestEventsItemFilingRejected              SubscriptionsCreateWebhooksRequestEventsItem = "filing.rejected"
-	SubscriptionsCreateWebhooksRequestEventsItemGoodsReceiptPosted          SubscriptionsCreateWebhooksRequestEventsItem = "goods_receipt.posted"
-	SubscriptionsCreateWebhooksRequestEventsItemIntercompanyInvoiceMirrored SubscriptionsCreateWebhooksRequestEventsItem = "intercompany.invoice_mirrored"
-	SubscriptionsCreateWebhooksRequestEventsItemItemCreated                 SubscriptionsCreateWebhooksRequestEventsItem = "item.created"
-	SubscriptionsCreateWebhooksRequestEventsItemItemDeleted                 SubscriptionsCreateWebhooksRequestEventsItem = "item.deleted"
-	SubscriptionsCreateWebhooksRequestEventsItemItemUpdated                 SubscriptionsCreateWebhooksRequestEventsItem = "item.updated"
-	SubscriptionsCreateWebhooksRequestEventsItemLeadConverted               SubscriptionsCreateWebhooksRequestEventsItem = "lead.converted"
-	SubscriptionsCreateWebhooksRequestEventsItemLeadCreated                 SubscriptionsCreateWebhooksRequestEventsItem = "lead.created"
-	SubscriptionsCreateWebhooksRequestEventsItemPartnerInquiryCreated       SubscriptionsCreateWebhooksRequestEventsItem = "partner_inquiry.created"
-	SubscriptionsCreateWebhooksRequestEventsItemPayrollRunApproved          SubscriptionsCreateWebhooksRequestEventsItem = "payroll_run.approved"
-	SubscriptionsCreateWebhooksRequestEventsItemPayrollRunReversed          SubscriptionsCreateWebhooksRequestEventsItem = "payroll_run.reversed"
-	SubscriptionsCreateWebhooksRequestEventsItemPosReportCreated            SubscriptionsCreateWebhooksRequestEventsItem = "pos_report.created"
-	SubscriptionsCreateWebhooksRequestEventsItemPriceListUpdated            SubscriptionsCreateWebhooksRequestEventsItem = "price_list.updated"
-	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoicePaid         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.paid"
-	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceRegistered   SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.registered"
-	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved       SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.approved"
-	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderReceived       SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.received"
-	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityActual       SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.actual"
-	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityTruedUp      SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.trued_up"
-	SubscriptionsCreateWebhooksRequestEventsItemReportCompleted             SubscriptionsCreateWebhooksRequestEventsItem = "report.completed"
-	SubscriptionsCreateWebhooksRequestEventsItemReportFailed                SubscriptionsCreateWebhooksRequestEventsItem = "report.failed"
-	SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionModified  SubscriptionsCreateWebhooksRequestEventsItem = "revenue_recognition.modified"
-	SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionPosted    SubscriptionsCreateWebhooksRequestEventsItem = "revenue_recognition.posted"
-	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent     SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.einvoice_sent"
-	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceIssued           SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.issued"
-	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePaid             SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.paid"
-	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent       SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
-	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent             SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.sent"
-	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderCreated           SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.created"
-	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderFulfilled         SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.fulfilled"
-	SubscriptionsCreateWebhooksRequestEventsItemSettlementImported          SubscriptionsCreateWebhooksRequestEventsItem = "settlement.imported"
-	SubscriptionsCreateWebhooksRequestEventsItemSettlementPosted            SubscriptionsCreateWebhooksRequestEventsItem = "settlement.posted"
-	SubscriptionsCreateWebhooksRequestEventsItemSettlementUpdated           SubscriptionsCreateWebhooksRequestEventsItem = "settlement.updated"
-	SubscriptionsCreateWebhooksRequestEventsItemStockChanged                SubscriptionsCreateWebhooksRequestEventsItem = "stock.changed"
-	SubscriptionsCreateWebhooksRequestEventsItemStockReorderNeeded          SubscriptionsCreateWebhooksRequestEventsItem = "stock.reorder_needed"
-	SubscriptionsCreateWebhooksRequestEventsItemVatReviewOpened             SubscriptionsCreateWebhooksRequestEventsItem = "vat_review.opened"
-	SubscriptionsCreateWebhooksRequestEventsItemVatReviewResolved           SubscriptionsCreateWebhooksRequestEventsItem = "vat_review.resolved"
-	SubscriptionsCreateWebhooksRequestEventsItemAll                         SubscriptionsCreateWebhooksRequestEventsItem = "*"
+	SubscriptionsCreateWebhooksRequestEventsItemAgreementInvoiceGenerated     SubscriptionsCreateWebhooksRequestEventsItem = "agreement.invoice_generated"
+	SubscriptionsCreateWebhooksRequestEventsItemBankFeedSynced                SubscriptionsCreateWebhooksRequestEventsItem = "bank_feed.synced"
+	SubscriptionsCreateWebhooksRequestEventsItemDocumentCapturePeppolReceived SubscriptionsCreateWebhooksRequestEventsItem = "document_capture.peppol_received"
+	SubscriptionsCreateWebhooksRequestEventsItemFilingFailed                  SubscriptionsCreateWebhooksRequestEventsItem = "filing.failed"
+	SubscriptionsCreateWebhooksRequestEventsItemFilingRejected                SubscriptionsCreateWebhooksRequestEventsItem = "filing.rejected"
+	SubscriptionsCreateWebhooksRequestEventsItemGoodsReceiptPosted            SubscriptionsCreateWebhooksRequestEventsItem = "goods_receipt.posted"
+	SubscriptionsCreateWebhooksRequestEventsItemIntercompanyInvoiceMirrored   SubscriptionsCreateWebhooksRequestEventsItem = "intercompany.invoice_mirrored"
+	SubscriptionsCreateWebhooksRequestEventsItemItemCreated                   SubscriptionsCreateWebhooksRequestEventsItem = "item.created"
+	SubscriptionsCreateWebhooksRequestEventsItemItemDeleted                   SubscriptionsCreateWebhooksRequestEventsItem = "item.deleted"
+	SubscriptionsCreateWebhooksRequestEventsItemItemUpdated                   SubscriptionsCreateWebhooksRequestEventsItem = "item.updated"
+	SubscriptionsCreateWebhooksRequestEventsItemLeadConverted                 SubscriptionsCreateWebhooksRequestEventsItem = "lead.converted"
+	SubscriptionsCreateWebhooksRequestEventsItemLeadCreated                   SubscriptionsCreateWebhooksRequestEventsItem = "lead.created"
+	SubscriptionsCreateWebhooksRequestEventsItemPartnerInquiryCreated         SubscriptionsCreateWebhooksRequestEventsItem = "partner_inquiry.created"
+	SubscriptionsCreateWebhooksRequestEventsItemPayrollRunApproved            SubscriptionsCreateWebhooksRequestEventsItem = "payroll_run.approved"
+	SubscriptionsCreateWebhooksRequestEventsItemPayrollRunReversed            SubscriptionsCreateWebhooksRequestEventsItem = "payroll_run.reversed"
+	SubscriptionsCreateWebhooksRequestEventsItemPosReportCreated              SubscriptionsCreateWebhooksRequestEventsItem = "pos_report.created"
+	SubscriptionsCreateWebhooksRequestEventsItemPriceListUpdated              SubscriptionsCreateWebhooksRequestEventsItem = "price_list.updated"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoicePaid           SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.paid"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceRegistered     SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.registered"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.approved"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderReceived         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.received"
+	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityActual         SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.actual"
+	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityTruedUp        SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.trued_up"
+	SubscriptionsCreateWebhooksRequestEventsItemReportCompleted               SubscriptionsCreateWebhooksRequestEventsItem = "report.completed"
+	SubscriptionsCreateWebhooksRequestEventsItemReportFailed                  SubscriptionsCreateWebhooksRequestEventsItem = "report.failed"
+	SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionModified    SubscriptionsCreateWebhooksRequestEventsItem = "revenue_recognition.modified"
+	SubscriptionsCreateWebhooksRequestEventsItemRevenueRecognitionPosted      SubscriptionsCreateWebhooksRequestEventsItem = "revenue_recognition.posted"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent       SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.einvoice_sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceIssued             SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.issued"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePaid               SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.paid"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolDelivered    SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_delivered"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolFailed       SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_failed"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolRejected     SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_rejected"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent         SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent               SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderCreated             SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.created"
+	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderFulfilled           SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.fulfilled"
+	SubscriptionsCreateWebhooksRequestEventsItemSettlementImported            SubscriptionsCreateWebhooksRequestEventsItem = "settlement.imported"
+	SubscriptionsCreateWebhooksRequestEventsItemSettlementPosted              SubscriptionsCreateWebhooksRequestEventsItem = "settlement.posted"
+	SubscriptionsCreateWebhooksRequestEventsItemSettlementUpdated             SubscriptionsCreateWebhooksRequestEventsItem = "settlement.updated"
+	SubscriptionsCreateWebhooksRequestEventsItemStockChanged                  SubscriptionsCreateWebhooksRequestEventsItem = "stock.changed"
+	SubscriptionsCreateWebhooksRequestEventsItemStockReorderNeeded            SubscriptionsCreateWebhooksRequestEventsItem = "stock.reorder_needed"
+	SubscriptionsCreateWebhooksRequestEventsItemVatReviewOpened               SubscriptionsCreateWebhooksRequestEventsItem = "vat_review.opened"
+	SubscriptionsCreateWebhooksRequestEventsItemVatReviewResolved             SubscriptionsCreateWebhooksRequestEventsItem = "vat_review.resolved"
+	SubscriptionsCreateWebhooksRequestEventsItemAll                           SubscriptionsCreateWebhooksRequestEventsItem = "*"
 )
 
 func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (SubscriptionsCreateWebhooksRequestEventsItem, error) {
@@ -1394,6 +1398,8 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemAgreementInvoiceGenerated, nil
 	case "bank_feed.synced":
 		return SubscriptionsCreateWebhooksRequestEventsItemBankFeedSynced, nil
+	case "document_capture.peppol_received":
+		return SubscriptionsCreateWebhooksRequestEventsItemDocumentCapturePeppolReceived, nil
 	case "filing.failed":
 		return SubscriptionsCreateWebhooksRequestEventsItemFilingFailed, nil
 	case "filing.rejected":
@@ -1448,6 +1454,12 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceIssued, nil
 	case "sale_invoice.paid":
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePaid, nil
+	case "sale_invoice.peppol_delivered":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolDelivered, nil
+	case "sale_invoice.peppol_failed":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolFailed, nil
+	case "sale_invoice.peppol_rejected":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolRejected, nil
 	case "sale_invoice.peppol_sent":
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
 	case "sale_invoice.sent":
@@ -2694,47 +2706,51 @@ func (s SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus) Ptr() *Subs
 type SubscriptionsUpdateWebhooksRequestEventsItem string
 
 const (
-	SubscriptionsUpdateWebhooksRequestEventsItemAgreementInvoiceGenerated   SubscriptionsUpdateWebhooksRequestEventsItem = "agreement.invoice_generated"
-	SubscriptionsUpdateWebhooksRequestEventsItemBankFeedSynced              SubscriptionsUpdateWebhooksRequestEventsItem = "bank_feed.synced"
-	SubscriptionsUpdateWebhooksRequestEventsItemFilingFailed                SubscriptionsUpdateWebhooksRequestEventsItem = "filing.failed"
-	SubscriptionsUpdateWebhooksRequestEventsItemFilingRejected              SubscriptionsUpdateWebhooksRequestEventsItem = "filing.rejected"
-	SubscriptionsUpdateWebhooksRequestEventsItemGoodsReceiptPosted          SubscriptionsUpdateWebhooksRequestEventsItem = "goods_receipt.posted"
-	SubscriptionsUpdateWebhooksRequestEventsItemIntercompanyInvoiceMirrored SubscriptionsUpdateWebhooksRequestEventsItem = "intercompany.invoice_mirrored"
-	SubscriptionsUpdateWebhooksRequestEventsItemItemCreated                 SubscriptionsUpdateWebhooksRequestEventsItem = "item.created"
-	SubscriptionsUpdateWebhooksRequestEventsItemItemDeleted                 SubscriptionsUpdateWebhooksRequestEventsItem = "item.deleted"
-	SubscriptionsUpdateWebhooksRequestEventsItemItemUpdated                 SubscriptionsUpdateWebhooksRequestEventsItem = "item.updated"
-	SubscriptionsUpdateWebhooksRequestEventsItemLeadConverted               SubscriptionsUpdateWebhooksRequestEventsItem = "lead.converted"
-	SubscriptionsUpdateWebhooksRequestEventsItemLeadCreated                 SubscriptionsUpdateWebhooksRequestEventsItem = "lead.created"
-	SubscriptionsUpdateWebhooksRequestEventsItemPartnerInquiryCreated       SubscriptionsUpdateWebhooksRequestEventsItem = "partner_inquiry.created"
-	SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunApproved          SubscriptionsUpdateWebhooksRequestEventsItem = "payroll_run.approved"
-	SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunReversed          SubscriptionsUpdateWebhooksRequestEventsItem = "payroll_run.reversed"
-	SubscriptionsUpdateWebhooksRequestEventsItemPosReportCreated            SubscriptionsUpdateWebhooksRequestEventsItem = "pos_report.created"
-	SubscriptionsUpdateWebhooksRequestEventsItemPriceListUpdated            SubscriptionsUpdateWebhooksRequestEventsItem = "price_list.updated"
-	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoicePaid         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.paid"
-	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceRegistered   SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.registered"
-	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved       SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.approved"
-	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderReceived       SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.received"
-	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityActual       SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.actual"
-	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityTruedUp      SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.trued_up"
-	SubscriptionsUpdateWebhooksRequestEventsItemReportCompleted             SubscriptionsUpdateWebhooksRequestEventsItem = "report.completed"
-	SubscriptionsUpdateWebhooksRequestEventsItemReportFailed                SubscriptionsUpdateWebhooksRequestEventsItem = "report.failed"
-	SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionModified  SubscriptionsUpdateWebhooksRequestEventsItem = "revenue_recognition.modified"
-	SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionPosted    SubscriptionsUpdateWebhooksRequestEventsItem = "revenue_recognition.posted"
-	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent     SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.einvoice_sent"
-	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceIssued           SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.issued"
-	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePaid             SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.paid"
-	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent       SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
-	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent             SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.sent"
-	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderCreated           SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.created"
-	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderFulfilled         SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.fulfilled"
-	SubscriptionsUpdateWebhooksRequestEventsItemSettlementImported          SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.imported"
-	SubscriptionsUpdateWebhooksRequestEventsItemSettlementPosted            SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.posted"
-	SubscriptionsUpdateWebhooksRequestEventsItemSettlementUpdated           SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.updated"
-	SubscriptionsUpdateWebhooksRequestEventsItemStockChanged                SubscriptionsUpdateWebhooksRequestEventsItem = "stock.changed"
-	SubscriptionsUpdateWebhooksRequestEventsItemStockReorderNeeded          SubscriptionsUpdateWebhooksRequestEventsItem = "stock.reorder_needed"
-	SubscriptionsUpdateWebhooksRequestEventsItemVatReviewOpened             SubscriptionsUpdateWebhooksRequestEventsItem = "vat_review.opened"
-	SubscriptionsUpdateWebhooksRequestEventsItemVatReviewResolved           SubscriptionsUpdateWebhooksRequestEventsItem = "vat_review.resolved"
-	SubscriptionsUpdateWebhooksRequestEventsItemAll                         SubscriptionsUpdateWebhooksRequestEventsItem = "*"
+	SubscriptionsUpdateWebhooksRequestEventsItemAgreementInvoiceGenerated     SubscriptionsUpdateWebhooksRequestEventsItem = "agreement.invoice_generated"
+	SubscriptionsUpdateWebhooksRequestEventsItemBankFeedSynced                SubscriptionsUpdateWebhooksRequestEventsItem = "bank_feed.synced"
+	SubscriptionsUpdateWebhooksRequestEventsItemDocumentCapturePeppolReceived SubscriptionsUpdateWebhooksRequestEventsItem = "document_capture.peppol_received"
+	SubscriptionsUpdateWebhooksRequestEventsItemFilingFailed                  SubscriptionsUpdateWebhooksRequestEventsItem = "filing.failed"
+	SubscriptionsUpdateWebhooksRequestEventsItemFilingRejected                SubscriptionsUpdateWebhooksRequestEventsItem = "filing.rejected"
+	SubscriptionsUpdateWebhooksRequestEventsItemGoodsReceiptPosted            SubscriptionsUpdateWebhooksRequestEventsItem = "goods_receipt.posted"
+	SubscriptionsUpdateWebhooksRequestEventsItemIntercompanyInvoiceMirrored   SubscriptionsUpdateWebhooksRequestEventsItem = "intercompany.invoice_mirrored"
+	SubscriptionsUpdateWebhooksRequestEventsItemItemCreated                   SubscriptionsUpdateWebhooksRequestEventsItem = "item.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemItemDeleted                   SubscriptionsUpdateWebhooksRequestEventsItem = "item.deleted"
+	SubscriptionsUpdateWebhooksRequestEventsItemItemUpdated                   SubscriptionsUpdateWebhooksRequestEventsItem = "item.updated"
+	SubscriptionsUpdateWebhooksRequestEventsItemLeadConverted                 SubscriptionsUpdateWebhooksRequestEventsItem = "lead.converted"
+	SubscriptionsUpdateWebhooksRequestEventsItemLeadCreated                   SubscriptionsUpdateWebhooksRequestEventsItem = "lead.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemPartnerInquiryCreated         SubscriptionsUpdateWebhooksRequestEventsItem = "partner_inquiry.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunApproved            SubscriptionsUpdateWebhooksRequestEventsItem = "payroll_run.approved"
+	SubscriptionsUpdateWebhooksRequestEventsItemPayrollRunReversed            SubscriptionsUpdateWebhooksRequestEventsItem = "payroll_run.reversed"
+	SubscriptionsUpdateWebhooksRequestEventsItemPosReportCreated              SubscriptionsUpdateWebhooksRequestEventsItem = "pos_report.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemPriceListUpdated              SubscriptionsUpdateWebhooksRequestEventsItem = "price_list.updated"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoicePaid           SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.paid"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceRegistered     SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.registered"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.approved"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderReceived         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.received"
+	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityActual         SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.actual"
+	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityTruedUp        SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.trued_up"
+	SubscriptionsUpdateWebhooksRequestEventsItemReportCompleted               SubscriptionsUpdateWebhooksRequestEventsItem = "report.completed"
+	SubscriptionsUpdateWebhooksRequestEventsItemReportFailed                  SubscriptionsUpdateWebhooksRequestEventsItem = "report.failed"
+	SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionModified    SubscriptionsUpdateWebhooksRequestEventsItem = "revenue_recognition.modified"
+	SubscriptionsUpdateWebhooksRequestEventsItemRevenueRecognitionPosted      SubscriptionsUpdateWebhooksRequestEventsItem = "revenue_recognition.posted"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceEinvoiceSent       SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.einvoice_sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceIssued             SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.issued"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePaid               SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.paid"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolDelivered    SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_delivered"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolFailed       SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_failed"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolRejected     SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_rejected"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent         SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent               SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderCreated             SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.created"
+	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderFulfilled           SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.fulfilled"
+	SubscriptionsUpdateWebhooksRequestEventsItemSettlementImported            SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.imported"
+	SubscriptionsUpdateWebhooksRequestEventsItemSettlementPosted              SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.posted"
+	SubscriptionsUpdateWebhooksRequestEventsItemSettlementUpdated             SubscriptionsUpdateWebhooksRequestEventsItem = "settlement.updated"
+	SubscriptionsUpdateWebhooksRequestEventsItemStockChanged                  SubscriptionsUpdateWebhooksRequestEventsItem = "stock.changed"
+	SubscriptionsUpdateWebhooksRequestEventsItemStockReorderNeeded            SubscriptionsUpdateWebhooksRequestEventsItem = "stock.reorder_needed"
+	SubscriptionsUpdateWebhooksRequestEventsItemVatReviewOpened               SubscriptionsUpdateWebhooksRequestEventsItem = "vat_review.opened"
+	SubscriptionsUpdateWebhooksRequestEventsItemVatReviewResolved             SubscriptionsUpdateWebhooksRequestEventsItem = "vat_review.resolved"
+	SubscriptionsUpdateWebhooksRequestEventsItemAll                           SubscriptionsUpdateWebhooksRequestEventsItem = "*"
 )
 
 func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (SubscriptionsUpdateWebhooksRequestEventsItem, error) {
@@ -2743,6 +2759,8 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemAgreementInvoiceGenerated, nil
 	case "bank_feed.synced":
 		return SubscriptionsUpdateWebhooksRequestEventsItemBankFeedSynced, nil
+	case "document_capture.peppol_received":
+		return SubscriptionsUpdateWebhooksRequestEventsItemDocumentCapturePeppolReceived, nil
 	case "filing.failed":
 		return SubscriptionsUpdateWebhooksRequestEventsItemFilingFailed, nil
 	case "filing.rejected":
@@ -2797,6 +2815,12 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceIssued, nil
 	case "sale_invoice.paid":
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePaid, nil
+	case "sale_invoice.peppol_delivered":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolDelivered, nil
+	case "sale_invoice.peppol_failed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolFailed, nil
+	case "sale_invoice.peppol_rejected":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolRejected, nil
 	case "sale_invoice.peppol_sent":
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
 	case "sale_invoice.sent":

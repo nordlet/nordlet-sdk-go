@@ -11,27 +11,33 @@ import (
 )
 
 var (
-	documentsConfirmCaptureRequestFieldID             = big.NewInt(1 << 0)
-	documentsConfirmCaptureRequestFieldPartnerID      = big.NewInt(1 << 1)
-	documentsConfirmCaptureRequestFieldNewSupplier    = big.NewInt(1 << 2)
-	documentsConfirmCaptureRequestFieldDocumentNumber = big.NewInt(1 << 3)
-	documentsConfirmCaptureRequestFieldDocumentDate   = big.NewInt(1 << 4)
-	documentsConfirmCaptureRequestFieldDueDate        = big.NewInt(1 << 5)
-	documentsConfirmCaptureRequestFieldCurrency       = big.NewInt(1 << 6)
-	documentsConfirmCaptureRequestFieldNotes          = big.NewInt(1 << 7)
-	documentsConfirmCaptureRequestFieldLines          = big.NewInt(1 << 8)
+	documentsConfirmCaptureRequestFieldID                     = big.NewInt(1 << 0)
+	documentsConfirmCaptureRequestFieldPartnerID              = big.NewInt(1 << 1)
+	documentsConfirmCaptureRequestFieldNewSupplier            = big.NewInt(1 << 2)
+	documentsConfirmCaptureRequestFieldType                   = big.NewInt(1 << 3)
+	documentsConfirmCaptureRequestFieldDocumentNumber         = big.NewInt(1 << 4)
+	documentsConfirmCaptureRequestFieldDocumentDate           = big.NewInt(1 << 5)
+	documentsConfirmCaptureRequestFieldDueDate                = big.NewInt(1 << 6)
+	documentsConfirmCaptureRequestFieldCurrency               = big.NewInt(1 << 7)
+	documentsConfirmCaptureRequestFieldNotes                  = big.NewInt(1 << 8)
+	documentsConfirmCaptureRequestFieldLines                  = big.NewInt(1 << 9)
+	documentsConfirmCaptureRequestFieldOppositeLines          = big.NewInt(1 << 10)
+	documentsConfirmCaptureRequestFieldOppositeDocumentNumber = big.NewInt(1 << 11)
 )
 
 type DocumentsConfirmCaptureRequest struct {
-	ID             string                                     `json:"id" url:"-"`
-	PartnerID      *string                                    `json:"partnerId,omitempty" url:"-"`
-	NewSupplier    *DocumentsConfirmCaptureRequestNewSupplier `json:"newSupplier,omitempty" url:"-"`
-	DocumentNumber string                                     `json:"documentNumber" url:"-"`
-	DocumentDate   time.Time                                  `json:"documentDate" url:"-" format:"date"`
-	DueDate        *time.Time                                 `json:"dueDate,omitempty" url:"-" format:"date"`
-	Currency       *string                                    `json:"currency,omitempty" url:"-"`
-	Notes          *string                                    `json:"notes,omitempty" url:"-"`
-	Lines          []*DocumentsConfirmCaptureRequestLinesItem `json:"lines" url:"-"`
+	ID                     string                                             `json:"id" url:"-"`
+	PartnerID              *string                                            `json:"partnerId,omitempty" url:"-"`
+	NewSupplier            *DocumentsConfirmCaptureRequestNewSupplier         `json:"newSupplier,omitempty" url:"-"`
+	Type                   *DocumentsConfirmCaptureRequestType                `json:"type,omitempty" url:"-"`
+	DocumentNumber         string                                             `json:"documentNumber" url:"-"`
+	DocumentDate           time.Time                                          `json:"documentDate" url:"-" format:"date"`
+	DueDate                *time.Time                                         `json:"dueDate,omitempty" url:"-" format:"date"`
+	Currency               *string                                            `json:"currency,omitempty" url:"-"`
+	Notes                  *string                                            `json:"notes,omitempty" url:"-"`
+	Lines                  []*DocumentsConfirmCaptureRequestLinesItem         `json:"lines" url:"-"`
+	OppositeLines          []*DocumentsConfirmCaptureRequestOppositeLinesItem `json:"oppositeLines,omitempty" url:"-"`
+	OppositeDocumentNumber *string                                            `json:"oppositeDocumentNumber,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -63,6 +69,13 @@ func (d *DocumentsConfirmCaptureRequest) SetPartnerID(partnerID *string) {
 func (d *DocumentsConfirmCaptureRequest) SetNewSupplier(newSupplier *DocumentsConfirmCaptureRequestNewSupplier) {
 	d.NewSupplier = newSupplier
 	d.require(documentsConfirmCaptureRequestFieldNewSupplier)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetType(type_ *DocumentsConfirmCaptureRequestType) {
+	d.Type = type_
+	d.require(documentsConfirmCaptureRequestFieldType)
 }
 
 // SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
@@ -105,6 +118,20 @@ func (d *DocumentsConfirmCaptureRequest) SetNotes(notes *string) {
 func (d *DocumentsConfirmCaptureRequest) SetLines(lines []*DocumentsConfirmCaptureRequestLinesItem) {
 	d.Lines = lines
 	d.require(documentsConfirmCaptureRequestFieldLines)
+}
+
+// SetOppositeLines sets the OppositeLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetOppositeLines(oppositeLines []*DocumentsConfirmCaptureRequestOppositeLinesItem) {
+	d.OppositeLines = oppositeLines
+	d.require(documentsConfirmCaptureRequestFieldOppositeLines)
+}
+
+// SetOppositeDocumentNumber sets the OppositeDocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequest) SetOppositeDocumentNumber(oppositeDocumentNumber *string) {
+	d.OppositeDocumentNumber = oppositeDocumentNumber
+	d.require(documentsConfirmCaptureRequestFieldOppositeDocumentNumber)
 }
 
 func (d *DocumentsConfirmCaptureRequest) UnmarshalJSON(data []byte) error {
@@ -1100,13 +1127,387 @@ func (d *DocumentsConfirmCaptureRequestNewSupplier) String() string {
 }
 
 var (
-	documentsConfirmCaptureResponseFieldCapture = big.NewInt(1 << 0)
-	documentsConfirmCaptureResponseFieldInvoice = big.NewInt(1 << 1)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldItemID            = big.NewInt(1 << 0)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldDescription       = big.NewInt(1 << 1)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldUnit              = big.NewInt(1 << 2)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldQuantity          = big.NewInt(1 << 3)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 5)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldVatRatePercent    = big.NewInt(1 << 6)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldVatClassifierCode = big.NewInt(1 << 7)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldCostCenterID      = big.NewInt(1 << 8)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldProjectID         = big.NewInt(1 << 9)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldAccountCode       = big.NewInt(1 << 10)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
+)
+
+type DocumentsConfirmCaptureRequestOppositeLinesItem struct {
+	ItemID            *string                                                  `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string                                                  `json:"description,omitempty" url:"description,omitempty"`
+	Unit              *string                                                  `json:"unit,omitempty" url:"unit,omitempty"`
+	Quantity          *DocumentsConfirmCaptureRequestOppositeLinesItemQuantity `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string                                                  `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string                                                  `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    *string                                                  `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string                                                  `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string                                                  `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string                                                  `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string                                                  `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time                                               `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time                                               `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetItemID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.ItemID
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetDescription() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Description
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetUnit() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetQuantity() *DocumentsConfirmCaptureRequestOppositeLinesItemQuantity {
+	if d == nil {
+		return nil
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetUnitPriceInclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceInclVat
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetVatRatePercent() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetVatClassifierCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatClassifierCode
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetCostCenterID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.CostCenterID
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetProjectID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.ProjectID
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetAccountCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.AccountCode
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetDeferralStartDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralStartDate
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetDeferralEndDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralEndDate
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetItemID(itemID *string) {
+	d.ItemID = itemID
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetDescription(description *string) {
+	d.Description = description
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldDescription)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldUnit)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetQuantity(quantity *DocumentsConfirmCaptureRequestOppositeLinesItemQuantity) {
+	d.Quantity = quantity
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldUnitPriceExclVat)
+}
+
+// SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetUnitPriceInclVat(unitPriceInclVat *string) {
+	d.UnitPriceInclVat = unitPriceInclVat
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldUnitPriceInclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	d.VatClassifierCode = vatClassifierCode
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldVatClassifierCode)
+}
+
+// SetCostCenterID sets the CostCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetCostCenterID(costCenterID *string) {
+	d.CostCenterID = costCenterID
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetProjectID(projectID *string) {
+	d.ProjectID = projectID
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldProjectID)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetAccountCode(accountCode *string) {
+	d.AccountCode = accountCode
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldAccountCode)
+}
+
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	d.DeferralStartDate = deferralStartDate
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	d.DeferralEndDate = deferralEndDate
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralEndDate)
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) UnmarshalJSON(data []byte) error {
+	type embed DocumentsConfirmCaptureRequestOppositeLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DocumentsConfirmCaptureRequestOppositeLinesItem(unmarshaler.embed)
+	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureRequestOppositeLinesItem
+	var marshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed:             embed(*d),
+		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsConfirmCaptureRequestOppositeLinesItemQuantity struct {
+	Double float64
+	String string
+
+	typ string
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItemQuantity) GetDouble() float64 {
+	if d == nil {
+		return 0
+	}
+	return d.Double
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItemQuantity) GetString() string {
+	if d == nil {
+		return ""
+	}
+	return d.String
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItemQuantity) UnmarshalJSON(data []byte) error {
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		d.typ = "Double"
+		d.Double = valueDouble
+		return nil
+	}
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		d.typ = "String"
+		d.String = valueString
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, d)
+}
+
+func (d DocumentsConfirmCaptureRequestOppositeLinesItemQuantity) MarshalJSON() ([]byte, error) {
+	if d.typ == "Double" || d.Double != 0 {
+		return json.Marshal(d.Double)
+	}
+	if d.typ == "String" || d.String != "" {
+		return json.Marshal(d.String)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DocumentsConfirmCaptureRequestOppositeLinesItemQuantityVisitor interface {
+	VisitDouble(float64) error
+	VisitString(string) error
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItemQuantity) Accept(visitor DocumentsConfirmCaptureRequestOppositeLinesItemQuantityVisitor) error {
+	if d.typ == "Double" || d.Double != 0 {
+		return visitor.VisitDouble(d.Double)
+	}
+	if d.typ == "String" || d.String != "" {
+		return visitor.VisitString(d.String)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", d)
+}
+
+type DocumentsConfirmCaptureRequestType string
+
+const (
+	DocumentsConfirmCaptureRequestTypeInvoice    DocumentsConfirmCaptureRequestType = "invoice"
+	DocumentsConfirmCaptureRequestTypeCreditNote DocumentsConfirmCaptureRequestType = "credit_note"
+)
+
+func NewDocumentsConfirmCaptureRequestTypeFromString(s string) (DocumentsConfirmCaptureRequestType, error) {
+	switch s {
+	case "invoice":
+		return DocumentsConfirmCaptureRequestTypeInvoice, nil
+	case "credit_note":
+		return DocumentsConfirmCaptureRequestTypeCreditNote, nil
+	}
+	var t DocumentsConfirmCaptureRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsConfirmCaptureRequestType) Ptr() *DocumentsConfirmCaptureRequestType {
+	return &d
+}
+
+var (
+	documentsConfirmCaptureResponseFieldCapture         = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseFieldInvoice         = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseFieldOppositeInvoice = big.NewInt(1 << 2)
 )
 
 type DocumentsConfirmCaptureResponse struct {
-	Capture *DocumentsConfirmCaptureResponseCapture `json:"capture" url:"capture"`
-	Invoice *DocumentsConfirmCaptureResponseInvoice `json:"invoice" url:"invoice"`
+	Capture         *DocumentsConfirmCaptureResponseCapture         `json:"capture" url:"capture"`
+	Invoice         *DocumentsConfirmCaptureResponseInvoice         `json:"invoice" url:"invoice"`
+	OppositeInvoice *DocumentsConfirmCaptureResponseOppositeInvoice `json:"oppositeInvoice,omitempty" url:"oppositeInvoice,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1127,6 +1528,13 @@ func (d *DocumentsConfirmCaptureResponse) GetInvoice() *DocumentsConfirmCaptureR
 		return nil
 	}
 	return d.Invoice
+}
+
+func (d *DocumentsConfirmCaptureResponse) GetOppositeInvoice() *DocumentsConfirmCaptureResponseOppositeInvoice {
+	if d == nil {
+		return nil
+	}
+	return d.OppositeInvoice
 }
 
 func (d *DocumentsConfirmCaptureResponse) GetExtraProperties() map[string]interface{} {
@@ -1155,6 +1563,13 @@ func (d *DocumentsConfirmCaptureResponse) SetCapture(capture *DocumentsConfirmCa
 func (d *DocumentsConfirmCaptureResponse) SetInvoice(invoice *DocumentsConfirmCaptureResponseInvoice) {
 	d.Invoice = invoice
 	d.require(documentsConfirmCaptureResponseFieldInvoice)
+}
+
+// SetOppositeInvoice sets the OppositeInvoice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponse) SetOppositeInvoice(oppositeInvoice *DocumentsConfirmCaptureResponseOppositeInvoice) {
+	d.OppositeInvoice = oppositeInvoice
+	d.require(documentsConfirmCaptureResponseFieldOppositeInvoice)
 }
 
 func (d *DocumentsConfirmCaptureResponse) UnmarshalJSON(data []byte) error {
@@ -1213,8 +1628,9 @@ var (
 	documentsConfirmCaptureResponseCaptureFieldMatchedPartnerID  = big.NewInt(1 << 10)
 	documentsConfirmCaptureResponseCaptureFieldPurchaseInvoiceID = big.NewInt(1 << 11)
 	documentsConfirmCaptureResponseCaptureFieldError             = big.NewInt(1 << 12)
-	documentsConfirmCaptureResponseCaptureFieldCreatedAt         = big.NewInt(1 << 13)
-	documentsConfirmCaptureResponseCaptureFieldUpdatedAt         = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseCaptureFieldSenderID          = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseCaptureFieldCreatedAt         = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseCaptureFieldUpdatedAt         = big.NewInt(1 << 15)
 )
 
 type DocumentsConfirmCaptureResponseCapture struct {
@@ -1231,6 +1647,7 @@ type DocumentsConfirmCaptureResponseCapture struct {
 	MatchedPartnerID  *string                                           `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
 	PurchaseInvoiceID *string                                           `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Error             *string                                           `json:"error,omitempty" url:"error,omitempty"`
+	SenderID          *string                                           `json:"senderId,omitempty" url:"senderId,omitempty"`
 	CreatedAt         time.Time                                         `json:"createdAt" url:"createdAt"`
 	UpdatedAt         time.Time                                         `json:"updatedAt" url:"updatedAt"`
 
@@ -1330,6 +1747,13 @@ func (d *DocumentsConfirmCaptureResponseCapture) GetError() *string {
 		return nil
 	}
 	return d.Error
+}
+
+func (d *DocumentsConfirmCaptureResponseCapture) GetSenderID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.SenderID
 }
 
 func (d *DocumentsConfirmCaptureResponseCapture) GetCreatedAt() time.Time {
@@ -1451,6 +1875,13 @@ func (d *DocumentsConfirmCaptureResponseCapture) SetError(error_ *string) {
 	d.require(documentsConfirmCaptureResponseCaptureFieldError)
 }
 
+// SetSenderID sets the SenderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCapture) SetSenderID(senderID *string) {
+	d.SenderID = senderID
+	d.require(documentsConfirmCaptureResponseCaptureFieldSenderID)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseCapture) SetCreatedAt(createdAt time.Time) {
@@ -1520,35 +1951,46 @@ func (d *DocumentsConfirmCaptureResponseCapture) String() string {
 }
 
 var (
-	documentsConfirmCaptureResponseCaptureExtractionFieldSupplier       = big.NewInt(1 << 0)
-	documentsConfirmCaptureResponseCaptureExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	documentsConfirmCaptureResponseCaptureExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	documentsConfirmCaptureResponseCaptureExtractionFieldDueDate        = big.NewInt(1 << 3)
-	documentsConfirmCaptureResponseCaptureExtractionFieldCurrency       = big.NewInt(1 << 4)
-	documentsConfirmCaptureResponseCaptureExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	documentsConfirmCaptureResponseCaptureExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	documentsConfirmCaptureResponseCaptureExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	documentsConfirmCaptureResponseCaptureExtractionFieldNotes          = big.NewInt(1 << 8)
-	documentsConfirmCaptureResponseCaptureExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseCaptureExtractionFieldDocumentType   = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseCaptureExtractionFieldSupplier       = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseCaptureExtractionFieldDocumentNumber = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseCaptureExtractionFieldDocumentDate   = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseCaptureExtractionFieldDueDate        = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseCaptureExtractionFieldCurrency       = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseCaptureExtractionFieldNetTotal       = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseCaptureExtractionFieldVatTotal       = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseCaptureExtractionFieldGrossTotal     = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseCaptureExtractionFieldNotes          = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseCaptureExtractionFieldLines          = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseCaptureExtractionFieldOppositeLines  = big.NewInt(1 << 11)
 )
 
 type DocumentsConfirmCaptureResponseCaptureExtraction struct {
-	Supplier       *DocumentsConfirmCaptureResponseCaptureExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                                      `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *time.Time                                                   `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
-	DueDate        *time.Time                                                   `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency       *string                                                      `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                                      `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                                      `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                                      `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem `json:"lines" url:"lines"`
+	DocumentType   *DocumentsConfirmCaptureResponseCaptureExtractionDocumentType        `json:"documentType,omitempty" url:"documentType,omitempty"`
+	Supplier       *DocumentsConfirmCaptureResponseCaptureExtractionSupplier            `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                                              `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                                           `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                                           `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                                              `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                                              `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                                              `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                                              `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                                              `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsConfirmCaptureResponseCaptureExtractionLinesItem         `json:"lines" url:"lines"`
+	OppositeLines  []*DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem `json:"oppositeLines,omitempty" url:"oppositeLines,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetDocumentType() *DocumentsConfirmCaptureResponseCaptureExtractionDocumentType {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentType
 }
 
 func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetSupplier() *DocumentsConfirmCaptureResponseCaptureExtractionSupplier {
@@ -1621,6 +2063,13 @@ func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetLines() []*Documen
 	return d.Lines
 }
 
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetOppositeLines() []*DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem {
+	if d == nil {
+		return nil
+	}
+	return d.OppositeLines
+}
+
 func (d *DocumentsConfirmCaptureResponseCaptureExtraction) GetExtraProperties() map[string]interface{} {
 	if d == nil {
 		return nil
@@ -1633,6 +2082,13 @@ func (d *DocumentsConfirmCaptureResponseCaptureExtraction) require(field *big.In
 		d.explicitFields = big.NewInt(0)
 	}
 	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetDocumentType(documentType *DocumentsConfirmCaptureResponseCaptureExtractionDocumentType) {
+	d.DocumentType = documentType
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldDocumentType)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
@@ -1705,6 +2161,13 @@ func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetLines(lines []*Doc
 	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldLines)
 }
 
+// SetOppositeLines sets the OppositeLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtraction) SetOppositeLines(oppositeLines []*DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) {
+	d.OppositeLines = oppositeLines
+	d.require(documentsConfirmCaptureResponseCaptureExtractionFieldOppositeLines)
+}
+
 func (d *DocumentsConfirmCaptureResponseCaptureExtraction) UnmarshalJSON(data []byte) error {
 	type embed DocumentsConfirmCaptureResponseCaptureExtraction
 	var unmarshaler = struct {
@@ -1757,6 +2220,28 @@ func (d *DocumentsConfirmCaptureResponseCaptureExtraction) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsConfirmCaptureResponseCaptureExtractionDocumentType string
+
+const (
+	DocumentsConfirmCaptureResponseCaptureExtractionDocumentTypeInvoice    DocumentsConfirmCaptureResponseCaptureExtractionDocumentType = "invoice"
+	DocumentsConfirmCaptureResponseCaptureExtractionDocumentTypeCreditNote DocumentsConfirmCaptureResponseCaptureExtractionDocumentType = "credit_note"
+)
+
+func NewDocumentsConfirmCaptureResponseCaptureExtractionDocumentTypeFromString(s string) (DocumentsConfirmCaptureResponseCaptureExtractionDocumentType, error) {
+	switch s {
+	case "invoice":
+		return DocumentsConfirmCaptureResponseCaptureExtractionDocumentTypeInvoice, nil
+	case "credit_note":
+		return DocumentsConfirmCaptureResponseCaptureExtractionDocumentTypeCreditNote, nil
+	}
+	var t DocumentsConfirmCaptureResponseCaptureExtractionDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsConfirmCaptureResponseCaptureExtractionDocumentType) Ptr() *DocumentsConfirmCaptureResponseCaptureExtractionDocumentType {
+	return &d
 }
 
 var (
@@ -1941,6 +2426,202 @@ func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) MarshalJSON(
 }
 
 func (d *DocumentsConfirmCaptureResponseCaptureExtractionLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldLineGross        = big.NewInt(1 << 7)
+)
+
+type DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem struct {
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
+	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
+	LineVat          *string `json:"lineVat,omitempty" url:"lineVat,omitempty"`
+	LineGross        *string `json:"lineGross,omitempty" url:"lineGross,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetDescription() string {
+	if d == nil {
+		return ""
+	}
+	return d.Description
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetUnit() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetVatRatePercent() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetLineNet() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineNet
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetLineVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineVat
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetLineGross() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineGross
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldQuantity)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldUnit)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldVatRatePercent)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsConfirmCaptureResponseCaptureExtractionOppositeLinesItemFieldLineGross)
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsConfirmCaptureResponseCaptureExtractionOppositeLinesItem) String() string {
 	if d == nil {
 		return "<nil>"
 	}
@@ -3109,6 +3790,983 @@ func (d DocumentsConfirmCaptureResponseInvoiceType) Ptr() *DocumentsConfirmCaptu
 }
 
 var (
+	documentsConfirmCaptureResponseOppositeInvoiceFieldID                           = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldPartnerID                    = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldType                         = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldStatus                       = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldPaymentStatus                = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentNumber               = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentDate                 = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldDueDate                      = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldRegistrationDate             = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldCurrency                     = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldNetTotal                     = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldVatTotal                     = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldGrossTotal                   = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldPaidAmount                   = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldJournalTransactionID         = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldCreditedInvoiceID            = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldPurchaseOrderID              = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldOperationTypeID              = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldNotes                        = big.NewInt(1 << 18)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatRegion              = big.NewInt(1 << 21)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldEinvoiceNumber               = big.NewInt(1 << 23)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentRef                  = big.NewInt(1 << 24)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldCreatedAt                    = big.NewInt(1 << 25)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldUpdatedAt                    = big.NewInt(1 << 26)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldLines                        = big.NewInt(1 << 27)
+)
+
+type DocumentsConfirmCaptureResponseOppositeInvoice struct {
+	ID                           string                                                      `json:"id" url:"id"`
+	PartnerID                    string                                                      `json:"partnerId" url:"partnerId"`
+	Type                         DocumentsConfirmCaptureResponseOppositeInvoiceType          `json:"type" url:"type"`
+	Status                       DocumentsConfirmCaptureResponseOppositeInvoiceStatus        `json:"status" url:"status"`
+	PaymentStatus                DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	DocumentNumber               string                                                      `json:"documentNumber" url:"documentNumber"`
+	DocumentDate                 time.Time                                                   `json:"documentDate" url:"documentDate" format:"date"`
+	DueDate                      *time.Time                                                  `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	RegistrationDate             *time.Time                                                  `json:"registrationDate,omitempty" url:"registrationDate,omitempty" format:"date"`
+	Currency                     string                                                      `json:"currency" url:"currency"`
+	NetTotal                     string                                                      `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                                      `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                                      `json:"grossTotal" url:"grossTotal"`
+	PaidAmount                   string                                                      `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreditedInvoiceID            *string                                                     `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	PurchaseOrderID              *string                                                     `json:"purchaseOrderId,omitempty" url:"purchaseOrderId,omitempty"`
+	OperationTypeID              *string                                                     `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	Notes                        *string                                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	IntrastatTransportMode       *string                                                     `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                                     `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                                     `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                                     `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	EinvoiceNumber               *string                                                     `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	DocumentRef                  *string                                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	CreatedAt                    time.Time                                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                                   `json:"updatedAt" url:"updatedAt"`
+	Lines                        []*DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem  `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetID() string {
+	if d == nil {
+		return ""
+	}
+	return d.ID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetPartnerID() string {
+	if d == nil {
+		return ""
+	}
+	return d.PartnerID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetType() DocumentsConfirmCaptureResponseOppositeInvoiceType {
+	if d == nil {
+		return ""
+	}
+	return d.Type
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetStatus() DocumentsConfirmCaptureResponseOppositeInvoiceStatus {
+	if d == nil {
+		return ""
+	}
+	return d.Status
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetPaymentStatus() DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus {
+	if d == nil {
+		return ""
+	}
+	return d.PaymentStatus
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetDocumentNumber() string {
+	if d == nil {
+		return ""
+	}
+	return d.DocumentNumber
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetDocumentDate() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.DocumentDate
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetDueDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DueDate
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetRegistrationDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.RegistrationDate
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetCurrency() string {
+	if d == nil {
+		return ""
+	}
+	return d.Currency
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetNetTotal() string {
+	if d == nil {
+		return ""
+	}
+	return d.NetTotal
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetVatTotal() string {
+	if d == nil {
+		return ""
+	}
+	return d.VatTotal
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetGrossTotal() string {
+	if d == nil {
+		return ""
+	}
+	return d.GrossTotal
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetPaidAmount() string {
+	if d == nil {
+		return ""
+	}
+	return d.PaidAmount
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetJournalTransactionID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.JournalTransactionID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetCreditedInvoiceID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.CreditedInvoiceID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetPurchaseOrderID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.PurchaseOrderID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetOperationTypeID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.OperationTypeID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetNotes() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Notes
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetIntrastatTransportMode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.IntrastatTransportMode
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetIntrastatDeliveryTerms() *string {
+	if d == nil {
+		return nil
+	}
+	return d.IntrastatDeliveryTerms
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetIntrastatRegion() *string {
+	if d == nil {
+		return nil
+	}
+	return d.IntrastatRegion
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetIntrastatNatureOfTransaction() *string {
+	if d == nil {
+		return nil
+	}
+	return d.IntrastatNatureOfTransaction
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetEinvoiceNumber() *string {
+	if d == nil {
+		return nil
+	}
+	return d.EinvoiceNumber
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetDocumentRef() *string {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentRef
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetCreatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.CreatedAt
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetUpdatedAt() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.UpdatedAt
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetLines() []*DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem {
+	if d == nil {
+		return nil
+	}
+	return d.Lines
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetID(id string) {
+	d.ID = id
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetPartnerID(partnerID string) {
+	d.PartnerID = partnerID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldPartnerID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetType(type_ DocumentsConfirmCaptureResponseOppositeInvoiceType) {
+	d.Type = type_
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetStatus(status DocumentsConfirmCaptureResponseOppositeInvoiceStatus) {
+	d.Status = status
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldStatus)
+}
+
+// SetPaymentStatus sets the PaymentStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetPaymentStatus(paymentStatus DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus) {
+	d.PaymentStatus = paymentStatus
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldPaymentStatus)
+}
+
+// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetDocumentNumber(documentNumber string) {
+	d.DocumentNumber = documentNumber
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentNumber)
+}
+
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetDocumentDate(documentDate time.Time) {
+	d.DocumentDate = documentDate
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetDueDate(dueDate *time.Time) {
+	d.DueDate = dueDate
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldDueDate)
+}
+
+// SetRegistrationDate sets the RegistrationDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetRegistrationDate(registrationDate *time.Time) {
+	d.RegistrationDate = registrationDate
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldRegistrationDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetCurrency(currency string) {
+	d.Currency = currency
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldCurrency)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetNetTotal(netTotal string) {
+	d.NetTotal = netTotal
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetVatTotal(vatTotal string) {
+	d.VatTotal = vatTotal
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetGrossTotal(grossTotal string) {
+	d.GrossTotal = grossTotal
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldGrossTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetPaidAmount(paidAmount string) {
+	d.PaidAmount = paidAmount
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldPaidAmount)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetJournalTransactionID(journalTransactionID *string) {
+	d.JournalTransactionID = journalTransactionID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldJournalTransactionID)
+}
+
+// SetCreditedInvoiceID sets the CreditedInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetCreditedInvoiceID(creditedInvoiceID *string) {
+	d.CreditedInvoiceID = creditedInvoiceID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldCreditedInvoiceID)
+}
+
+// SetPurchaseOrderID sets the PurchaseOrderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetPurchaseOrderID(purchaseOrderID *string) {
+	d.PurchaseOrderID = purchaseOrderID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldPurchaseOrderID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetOperationTypeID(operationTypeID *string) {
+	d.OperationTypeID = operationTypeID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldOperationTypeID)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetNotes(notes *string) {
+	d.Notes = notes
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldNotes)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	d.IntrastatTransportMode = intrastatTransportMode
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	d.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetIntrastatRegion(intrastatRegion *string) {
+	d.IntrastatRegion = intrastatRegion
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	d.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatNatureOfTransaction)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetEinvoiceNumber(einvoiceNumber *string) {
+	d.EinvoiceNumber = einvoiceNumber
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldEinvoiceNumber)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetDocumentRef(documentRef *string) {
+	d.DocumentRef = documentRef
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentRef)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetCreatedAt(createdAt time.Time) {
+	d.CreatedAt = createdAt
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetUpdatedAt(updatedAt time.Time) {
+	d.UpdatedAt = updatedAt
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldUpdatedAt)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetLines(lines []*DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) {
+	d.Lines = lines
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldLines)
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) UnmarshalJSON(data []byte) error {
+	type embed DocumentsConfirmCaptureResponseOppositeInvoice
+	var unmarshaler = struct {
+		embed
+		DocumentDate     *internal.Date     `json:"documentDate"`
+		DueDate          *internal.Date     `json:"dueDate,omitempty"`
+		RegistrationDate *internal.Date     `json:"registrationDate,omitempty"`
+		CreatedAt        *internal.DateTime `json:"createdAt"`
+		UpdatedAt        *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DocumentsConfirmCaptureResponseOppositeInvoice(unmarshaler.embed)
+	d.DocumentDate = unmarshaler.DocumentDate.Time()
+	d.DueDate = unmarshaler.DueDate.TimePtr()
+	d.RegistrationDate = unmarshaler.RegistrationDate.TimePtr()
+	d.CreatedAt = unmarshaler.CreatedAt.Time()
+	d.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseOppositeInvoice
+	var marshaler = struct {
+		embed
+		DocumentDate     *internal.Date     `json:"documentDate"`
+		DueDate          *internal.Date     `json:"dueDate,omitempty"`
+		RegistrationDate *internal.Date     `json:"registrationDate,omitempty"`
+		CreatedAt        *internal.DateTime `json:"createdAt"`
+		UpdatedAt        *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:            embed(*d),
+		DocumentDate:     internal.NewDate(d.DocumentDate),
+		DueDate:          internal.NewOptionalDate(d.DueDate),
+		RegistrationDate: internal.NewOptionalDate(d.RegistrationDate),
+		CreatedAt:        internal.NewDateTime(d.CreatedAt),
+		UpdatedAt:        internal.NewDateTime(d.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldID                = big.NewInt(1 << 0)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldItemID            = big.NewInt(1 << 1)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDescription       = big.NewInt(1 << 2)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnit              = big.NewInt(1 << 3)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldQuantity          = big.NewInt(1 << 4)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+)
+
+type DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem struct {
+	ID                string     `json:"id" url:"id"`
+	ItemID            *string    `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string     `json:"description" url:"description"`
+	Unit              string     `json:"unit" url:"unit"`
+	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
+	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
+	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LineNet           string     `json:"lineNet" url:"lineNet"`
+	LineVat           string     `json:"lineVat" url:"lineVat"`
+	LineGross         string     `json:"lineGross" url:"lineGross"`
+	SortOrder         int64      `json:"sortOrder" url:"sortOrder"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetID() string {
+	if d == nil {
+		return ""
+	}
+	return d.ID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetItemID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.ItemID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetDescription() string {
+	if d == nil {
+		return ""
+	}
+	return d.Description
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetUnit() string {
+	if d == nil {
+		return ""
+	}
+	return d.Unit
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetUnitPriceInclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceInclVat
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetVatRatePercent() string {
+	if d == nil {
+		return ""
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetVatClassifierCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatClassifierCode
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetCostCenterID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.CostCenterID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetProjectID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.ProjectID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetAccountCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.AccountCode
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetDeferralStartDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralStartDate
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetDeferralEndDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.DeferralEndDate
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetLineNet() string {
+	if d == nil {
+		return ""
+	}
+	return d.LineNet
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetLineVat() string {
+	if d == nil {
+		return ""
+	}
+	return d.LineVat
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetLineGross() string {
+	if d == nil {
+		return ""
+	}
+	return d.LineGross
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetSortOrder() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.SortOrder
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetID(id string) {
+	d.ID = id
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetItemID(itemID *string) {
+	d.ItemID = itemID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDescription)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetUnit(unit string) {
+	d.Unit = unit
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnit)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceExclVat)
+}
+
+// SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetUnitPriceInclVat(unitPriceInclVat *string) {
+	d.UnitPriceInclVat = unitPriceInclVat
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceInclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetVatRatePercent(vatRatePercent string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	d.VatClassifierCode = vatClassifierCode
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatClassifierCode)
+}
+
+// SetCostCenterID sets the CostCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetCostCenterID(costCenterID *string) {
+	d.CostCenterID = costCenterID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetProjectID(projectID *string) {
+	d.ProjectID = projectID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldProjectID)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetAccountCode(accountCode *string) {
+	d.AccountCode = accountCode
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldAccountCode)
+}
+
+// SetDeferralStartDate sets the DeferralStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetDeferralStartDate(deferralStartDate *time.Time) {
+	d.DeferralStartDate = deferralStartDate
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralStartDate)
+}
+
+// SetDeferralEndDate sets the DeferralEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetDeferralEndDate(deferralEndDate *time.Time) {
+	d.DeferralEndDate = deferralEndDate
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralEndDate)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetLineNet(lineNet string) {
+	d.LineNet = lineNet
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetLineVat(lineVat string) {
+	d.LineVat = lineVat
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetLineGross(lineGross string) {
+	d.LineGross = lineGross
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineGross)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetSortOrder(sortOrder int64) {
+	d.SortOrder = sortOrder
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldSortOrder)
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) UnmarshalJSON(data []byte) error {
+	type embed DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem
+	var unmarshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem(unmarshaler.embed)
+	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
+	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem
+	var marshaler = struct {
+		embed
+		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
+		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+	}{
+		embed:             embed(*d),
+		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
+		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus string
+
+const (
+	DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatusUnpaid  DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus = "unpaid"
+	DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatusPartial DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus = "partial"
+	DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatusPaid    DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus = "paid"
+)
+
+func NewDocumentsConfirmCaptureResponseOppositeInvoicePaymentStatusFromString(s string) (DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus, error) {
+	switch s {
+	case "unpaid":
+		return DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatusUnpaid, nil
+	case "partial":
+		return DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatusPartial, nil
+	case "paid":
+		return DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatusPaid, nil
+	}
+	var t DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus) Ptr() *DocumentsConfirmCaptureResponseOppositeInvoicePaymentStatus {
+	return &d
+}
+
+type DocumentsConfirmCaptureResponseOppositeInvoiceStatus string
+
+const (
+	DocumentsConfirmCaptureResponseOppositeInvoiceStatusDraft      DocumentsConfirmCaptureResponseOppositeInvoiceStatus = "draft"
+	DocumentsConfirmCaptureResponseOppositeInvoiceStatusRegistered DocumentsConfirmCaptureResponseOppositeInvoiceStatus = "registered"
+)
+
+func NewDocumentsConfirmCaptureResponseOppositeInvoiceStatusFromString(s string) (DocumentsConfirmCaptureResponseOppositeInvoiceStatus, error) {
+	switch s {
+	case "draft":
+		return DocumentsConfirmCaptureResponseOppositeInvoiceStatusDraft, nil
+	case "registered":
+		return DocumentsConfirmCaptureResponseOppositeInvoiceStatusRegistered, nil
+	}
+	var t DocumentsConfirmCaptureResponseOppositeInvoiceStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsConfirmCaptureResponseOppositeInvoiceStatus) Ptr() *DocumentsConfirmCaptureResponseOppositeInvoiceStatus {
+	return &d
+}
+
+type DocumentsConfirmCaptureResponseOppositeInvoiceType string
+
+const (
+	DocumentsConfirmCaptureResponseOppositeInvoiceTypeInvoice    DocumentsConfirmCaptureResponseOppositeInvoiceType = "invoice"
+	DocumentsConfirmCaptureResponseOppositeInvoiceTypeCreditNote DocumentsConfirmCaptureResponseOppositeInvoiceType = "credit_note"
+)
+
+func NewDocumentsConfirmCaptureResponseOppositeInvoiceTypeFromString(s string) (DocumentsConfirmCaptureResponseOppositeInvoiceType, error) {
+	switch s {
+	case "invoice":
+		return DocumentsConfirmCaptureResponseOppositeInvoiceTypeInvoice, nil
+	case "credit_note":
+		return DocumentsConfirmCaptureResponseOppositeInvoiceTypeCreditNote, nil
+	}
+	var t DocumentsConfirmCaptureResponseOppositeInvoiceType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsConfirmCaptureResponseOppositeInvoiceType) Ptr() *DocumentsConfirmCaptureResponseOppositeInvoiceType {
+	return &d
+}
+
+var (
 	documentsDeleteCaptureResponseFieldDeleted = big.NewInt(1 << 0)
 )
 
@@ -3206,9 +4864,10 @@ var (
 	documentsExtractCaptureResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
 	documentsExtractCaptureResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
 	documentsExtractCaptureResponseFieldError             = big.NewInt(1 << 12)
-	documentsExtractCaptureResponseFieldCreatedAt         = big.NewInt(1 << 13)
-	documentsExtractCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 14)
-	documentsExtractCaptureResponseFieldRawText           = big.NewInt(1 << 15)
+	documentsExtractCaptureResponseFieldSenderID          = big.NewInt(1 << 13)
+	documentsExtractCaptureResponseFieldCreatedAt         = big.NewInt(1 << 14)
+	documentsExtractCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 15)
+	documentsExtractCaptureResponseFieldRawText           = big.NewInt(1 << 16)
 )
 
 type DocumentsExtractCaptureResponse struct {
@@ -3225,6 +4884,7 @@ type DocumentsExtractCaptureResponse struct {
 	MatchedPartnerID  *string                                    `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
 	PurchaseInvoiceID *string                                    `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Error             *string                                    `json:"error,omitempty" url:"error,omitempty"`
+	SenderID          *string                                    `json:"senderId,omitempty" url:"senderId,omitempty"`
 	CreatedAt         time.Time                                  `json:"createdAt" url:"createdAt"`
 	UpdatedAt         time.Time                                  `json:"updatedAt" url:"updatedAt"`
 	RawText           *string                                    `json:"rawText,omitempty" url:"rawText,omitempty"`
@@ -3325,6 +4985,13 @@ func (d *DocumentsExtractCaptureResponse) GetError() *string {
 		return nil
 	}
 	return d.Error
+}
+
+func (d *DocumentsExtractCaptureResponse) GetSenderID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.SenderID
 }
 
 func (d *DocumentsExtractCaptureResponse) GetCreatedAt() time.Time {
@@ -3453,6 +5120,13 @@ func (d *DocumentsExtractCaptureResponse) SetError(error_ *string) {
 	d.require(documentsExtractCaptureResponseFieldError)
 }
 
+// SetSenderID sets the SenderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponse) SetSenderID(senderID *string) {
+	d.SenderID = senderID
+	d.require(documentsExtractCaptureResponseFieldSenderID)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsExtractCaptureResponse) SetCreatedAt(createdAt time.Time) {
@@ -3529,35 +5203,46 @@ func (d *DocumentsExtractCaptureResponse) String() string {
 }
 
 var (
-	documentsExtractCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
-	documentsExtractCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	documentsExtractCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	documentsExtractCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
-	documentsExtractCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
-	documentsExtractCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	documentsExtractCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	documentsExtractCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	documentsExtractCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 8)
-	documentsExtractCaptureResponseExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsExtractCaptureResponseExtractionFieldDocumentType   = big.NewInt(1 << 0)
+	documentsExtractCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 1)
+	documentsExtractCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 2)
+	documentsExtractCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 3)
+	documentsExtractCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 4)
+	documentsExtractCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 5)
+	documentsExtractCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 6)
+	documentsExtractCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 7)
+	documentsExtractCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 8)
+	documentsExtractCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 9)
+	documentsExtractCaptureResponseExtractionFieldLines          = big.NewInt(1 << 10)
+	documentsExtractCaptureResponseExtractionFieldOppositeLines  = big.NewInt(1 << 11)
 )
 
 type DocumentsExtractCaptureResponseExtraction struct {
-	Supplier       *DocumentsExtractCaptureResponseExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                               `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *time.Time                                            `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
-	DueDate        *time.Time                                            `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency       *string                                               `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                               `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                               `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                               `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*DocumentsExtractCaptureResponseExtractionLinesItem `json:"lines" url:"lines"`
+	DocumentType   *DocumentsExtractCaptureResponseExtractionDocumentType        `json:"documentType,omitempty" url:"documentType,omitempty"`
+	Supplier       *DocumentsExtractCaptureResponseExtractionSupplier            `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                                       `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                                    `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                                    `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                                       `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                                       `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                                       `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                                       `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                                       `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsExtractCaptureResponseExtractionLinesItem         `json:"lines" url:"lines"`
+	OppositeLines  []*DocumentsExtractCaptureResponseExtractionOppositeLinesItem `json:"oppositeLines,omitempty" url:"oppositeLines,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsExtractCaptureResponseExtraction) GetDocumentType() *DocumentsExtractCaptureResponseExtractionDocumentType {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentType
 }
 
 func (d *DocumentsExtractCaptureResponseExtraction) GetSupplier() *DocumentsExtractCaptureResponseExtractionSupplier {
@@ -3630,6 +5315,13 @@ func (d *DocumentsExtractCaptureResponseExtraction) GetLines() []*DocumentsExtra
 	return d.Lines
 }
 
+func (d *DocumentsExtractCaptureResponseExtraction) GetOppositeLines() []*DocumentsExtractCaptureResponseExtractionOppositeLinesItem {
+	if d == nil {
+		return nil
+	}
+	return d.OppositeLines
+}
+
 func (d *DocumentsExtractCaptureResponseExtraction) GetExtraProperties() map[string]interface{} {
 	if d == nil {
 		return nil
@@ -3642,6 +5334,13 @@ func (d *DocumentsExtractCaptureResponseExtraction) require(field *big.Int) {
 		d.explicitFields = big.NewInt(0)
 	}
 	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtraction) SetDocumentType(documentType *DocumentsExtractCaptureResponseExtractionDocumentType) {
+	d.DocumentType = documentType
+	d.require(documentsExtractCaptureResponseExtractionFieldDocumentType)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
@@ -3714,6 +5413,13 @@ func (d *DocumentsExtractCaptureResponseExtraction) SetLines(lines []*DocumentsE
 	d.require(documentsExtractCaptureResponseExtractionFieldLines)
 }
 
+// SetOppositeLines sets the OppositeLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtraction) SetOppositeLines(oppositeLines []*DocumentsExtractCaptureResponseExtractionOppositeLinesItem) {
+	d.OppositeLines = oppositeLines
+	d.require(documentsExtractCaptureResponseExtractionFieldOppositeLines)
+}
+
 func (d *DocumentsExtractCaptureResponseExtraction) UnmarshalJSON(data []byte) error {
 	type embed DocumentsExtractCaptureResponseExtraction
 	var unmarshaler = struct {
@@ -3766,6 +5472,28 @@ func (d *DocumentsExtractCaptureResponseExtraction) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsExtractCaptureResponseExtractionDocumentType string
+
+const (
+	DocumentsExtractCaptureResponseExtractionDocumentTypeInvoice    DocumentsExtractCaptureResponseExtractionDocumentType = "invoice"
+	DocumentsExtractCaptureResponseExtractionDocumentTypeCreditNote DocumentsExtractCaptureResponseExtractionDocumentType = "credit_note"
+)
+
+func NewDocumentsExtractCaptureResponseExtractionDocumentTypeFromString(s string) (DocumentsExtractCaptureResponseExtractionDocumentType, error) {
+	switch s {
+	case "invoice":
+		return DocumentsExtractCaptureResponseExtractionDocumentTypeInvoice, nil
+	case "credit_note":
+		return DocumentsExtractCaptureResponseExtractionDocumentTypeCreditNote, nil
+	}
+	var t DocumentsExtractCaptureResponseExtractionDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsExtractCaptureResponseExtractionDocumentType) Ptr() *DocumentsExtractCaptureResponseExtractionDocumentType {
+	return &d
 }
 
 var (
@@ -3950,6 +5678,202 @@ func (d *DocumentsExtractCaptureResponseExtractionLinesItem) MarshalJSON() ([]by
 }
 
 func (d *DocumentsExtractCaptureResponseExtractionLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsExtractCaptureResponseExtractionOppositeLinesItemFieldLineGross        = big.NewInt(1 << 7)
+)
+
+type DocumentsExtractCaptureResponseExtractionOppositeLinesItem struct {
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
+	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
+	LineVat          *string `json:"lineVat,omitempty" url:"lineVat,omitempty"`
+	LineGross        *string `json:"lineGross,omitempty" url:"lineGross,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetDescription() string {
+	if d == nil {
+		return ""
+	}
+	return d.Description
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetUnit() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetVatRatePercent() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetLineNet() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineNet
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetLineVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineVat
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetLineGross() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineGross
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldQuantity)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldUnit)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldVatRatePercent)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsExtractCaptureResponseExtractionOppositeLinesItemFieldLineGross)
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsExtractCaptureResponseExtractionOppositeLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DocumentsExtractCaptureResponseExtractionOppositeLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsExtractCaptureResponseExtractionOppositeLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsExtractCaptureResponseExtractionOppositeLinesItem) String() string {
 	if d == nil {
 		return "<nil>"
 	}
@@ -4154,9 +6078,10 @@ var (
 	documentsGetCaptureResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
 	documentsGetCaptureResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
 	documentsGetCaptureResponseFieldError             = big.NewInt(1 << 12)
-	documentsGetCaptureResponseFieldCreatedAt         = big.NewInt(1 << 13)
-	documentsGetCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 14)
-	documentsGetCaptureResponseFieldRawText           = big.NewInt(1 << 15)
+	documentsGetCaptureResponseFieldSenderID          = big.NewInt(1 << 13)
+	documentsGetCaptureResponseFieldCreatedAt         = big.NewInt(1 << 14)
+	documentsGetCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 15)
+	documentsGetCaptureResponseFieldRawText           = big.NewInt(1 << 16)
 )
 
 type DocumentsGetCaptureResponse struct {
@@ -4173,6 +6098,7 @@ type DocumentsGetCaptureResponse struct {
 	MatchedPartnerID  *string                                `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
 	PurchaseInvoiceID *string                                `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Error             *string                                `json:"error,omitempty" url:"error,omitempty"`
+	SenderID          *string                                `json:"senderId,omitempty" url:"senderId,omitempty"`
 	CreatedAt         time.Time                              `json:"createdAt" url:"createdAt"`
 	UpdatedAt         time.Time                              `json:"updatedAt" url:"updatedAt"`
 	RawText           *string                                `json:"rawText,omitempty" url:"rawText,omitempty"`
@@ -4273,6 +6199,13 @@ func (d *DocumentsGetCaptureResponse) GetError() *string {
 		return nil
 	}
 	return d.Error
+}
+
+func (d *DocumentsGetCaptureResponse) GetSenderID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.SenderID
 }
 
 func (d *DocumentsGetCaptureResponse) GetCreatedAt() time.Time {
@@ -4401,6 +6334,13 @@ func (d *DocumentsGetCaptureResponse) SetError(error_ *string) {
 	d.require(documentsGetCaptureResponseFieldError)
 }
 
+// SetSenderID sets the SenderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponse) SetSenderID(senderID *string) {
+	d.SenderID = senderID
+	d.require(documentsGetCaptureResponseFieldSenderID)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsGetCaptureResponse) SetCreatedAt(createdAt time.Time) {
@@ -4477,35 +6417,46 @@ func (d *DocumentsGetCaptureResponse) String() string {
 }
 
 var (
-	documentsGetCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
-	documentsGetCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	documentsGetCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	documentsGetCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
-	documentsGetCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
-	documentsGetCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	documentsGetCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	documentsGetCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	documentsGetCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 8)
-	documentsGetCaptureResponseExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsGetCaptureResponseExtractionFieldDocumentType   = big.NewInt(1 << 0)
+	documentsGetCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 1)
+	documentsGetCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 2)
+	documentsGetCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 3)
+	documentsGetCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 4)
+	documentsGetCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 5)
+	documentsGetCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 6)
+	documentsGetCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 7)
+	documentsGetCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 8)
+	documentsGetCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 9)
+	documentsGetCaptureResponseExtractionFieldLines          = big.NewInt(1 << 10)
+	documentsGetCaptureResponseExtractionFieldOppositeLines  = big.NewInt(1 << 11)
 )
 
 type DocumentsGetCaptureResponseExtraction struct {
-	Supplier       *DocumentsGetCaptureResponseExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                           `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *time.Time                                        `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
-	DueDate        *time.Time                                        `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency       *string                                           `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                           `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                           `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                           `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*DocumentsGetCaptureResponseExtractionLinesItem `json:"lines" url:"lines"`
+	DocumentType   *DocumentsGetCaptureResponseExtractionDocumentType        `json:"documentType,omitempty" url:"documentType,omitempty"`
+	Supplier       *DocumentsGetCaptureResponseExtractionSupplier            `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                                   `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                                `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                                `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                                   `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                                   `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                                   `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                                   `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsGetCaptureResponseExtractionLinesItem         `json:"lines" url:"lines"`
+	OppositeLines  []*DocumentsGetCaptureResponseExtractionOppositeLinesItem `json:"oppositeLines,omitempty" url:"oppositeLines,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsGetCaptureResponseExtraction) GetDocumentType() *DocumentsGetCaptureResponseExtractionDocumentType {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentType
 }
 
 func (d *DocumentsGetCaptureResponseExtraction) GetSupplier() *DocumentsGetCaptureResponseExtractionSupplier {
@@ -4578,6 +6529,13 @@ func (d *DocumentsGetCaptureResponseExtraction) GetLines() []*DocumentsGetCaptur
 	return d.Lines
 }
 
+func (d *DocumentsGetCaptureResponseExtraction) GetOppositeLines() []*DocumentsGetCaptureResponseExtractionOppositeLinesItem {
+	if d == nil {
+		return nil
+	}
+	return d.OppositeLines
+}
+
 func (d *DocumentsGetCaptureResponseExtraction) GetExtraProperties() map[string]interface{} {
 	if d == nil {
 		return nil
@@ -4590,6 +6548,13 @@ func (d *DocumentsGetCaptureResponseExtraction) require(field *big.Int) {
 		d.explicitFields = big.NewInt(0)
 	}
 	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtraction) SetDocumentType(documentType *DocumentsGetCaptureResponseExtractionDocumentType) {
+	d.DocumentType = documentType
+	d.require(documentsGetCaptureResponseExtractionFieldDocumentType)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
@@ -4662,6 +6627,13 @@ func (d *DocumentsGetCaptureResponseExtraction) SetLines(lines []*DocumentsGetCa
 	d.require(documentsGetCaptureResponseExtractionFieldLines)
 }
 
+// SetOppositeLines sets the OppositeLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtraction) SetOppositeLines(oppositeLines []*DocumentsGetCaptureResponseExtractionOppositeLinesItem) {
+	d.OppositeLines = oppositeLines
+	d.require(documentsGetCaptureResponseExtractionFieldOppositeLines)
+}
+
 func (d *DocumentsGetCaptureResponseExtraction) UnmarshalJSON(data []byte) error {
 	type embed DocumentsGetCaptureResponseExtraction
 	var unmarshaler = struct {
@@ -4714,6 +6686,28 @@ func (d *DocumentsGetCaptureResponseExtraction) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsGetCaptureResponseExtractionDocumentType string
+
+const (
+	DocumentsGetCaptureResponseExtractionDocumentTypeInvoice    DocumentsGetCaptureResponseExtractionDocumentType = "invoice"
+	DocumentsGetCaptureResponseExtractionDocumentTypeCreditNote DocumentsGetCaptureResponseExtractionDocumentType = "credit_note"
+)
+
+func NewDocumentsGetCaptureResponseExtractionDocumentTypeFromString(s string) (DocumentsGetCaptureResponseExtractionDocumentType, error) {
+	switch s {
+	case "invoice":
+		return DocumentsGetCaptureResponseExtractionDocumentTypeInvoice, nil
+	case "credit_note":
+		return DocumentsGetCaptureResponseExtractionDocumentTypeCreditNote, nil
+	}
+	var t DocumentsGetCaptureResponseExtractionDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsGetCaptureResponseExtractionDocumentType) Ptr() *DocumentsGetCaptureResponseExtractionDocumentType {
+	return &d
 }
 
 var (
@@ -4898,6 +6892,202 @@ func (d *DocumentsGetCaptureResponseExtractionLinesItem) MarshalJSON() ([]byte, 
 }
 
 func (d *DocumentsGetCaptureResponseExtractionLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsGetCaptureResponseExtractionOppositeLinesItemFieldLineGross        = big.NewInt(1 << 7)
+)
+
+type DocumentsGetCaptureResponseExtractionOppositeLinesItem struct {
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
+	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
+	LineVat          *string `json:"lineVat,omitempty" url:"lineVat,omitempty"`
+	LineGross        *string `json:"lineGross,omitempty" url:"lineGross,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetDescription() string {
+	if d == nil {
+		return ""
+	}
+	return d.Description
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetUnit() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetVatRatePercent() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetLineNet() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineNet
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetLineVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineVat
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetLineGross() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineGross
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldQuantity)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldUnit)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldVatRatePercent)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsGetCaptureResponseExtractionOppositeLinesItemFieldLineGross)
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsGetCaptureResponseExtractionOppositeLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DocumentsGetCaptureResponseExtractionOppositeLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsGetCaptureResponseExtractionOppositeLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsGetCaptureResponseExtractionOppositeLinesItem) String() string {
 	if d == nil {
 		return "<nil>"
 	}
@@ -5705,8 +7895,9 @@ var (
 	documentsListCaptureResponseRowsItemFieldMatchedPartnerID  = big.NewInt(1 << 10)
 	documentsListCaptureResponseRowsItemFieldPurchaseInvoiceID = big.NewInt(1 << 11)
 	documentsListCaptureResponseRowsItemFieldError             = big.NewInt(1 << 12)
-	documentsListCaptureResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 13)
-	documentsListCaptureResponseRowsItemFieldUpdatedAt         = big.NewInt(1 << 14)
+	documentsListCaptureResponseRowsItemFieldSenderID          = big.NewInt(1 << 13)
+	documentsListCaptureResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 14)
+	documentsListCaptureResponseRowsItemFieldUpdatedAt         = big.NewInt(1 << 15)
 )
 
 type DocumentsListCaptureResponseRowsItem struct {
@@ -5723,6 +7914,7 @@ type DocumentsListCaptureResponseRowsItem struct {
 	MatchedPartnerID  *string                                         `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
 	PurchaseInvoiceID *string                                         `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Error             *string                                         `json:"error,omitempty" url:"error,omitempty"`
+	SenderID          *string                                         `json:"senderId,omitempty" url:"senderId,omitempty"`
 	CreatedAt         time.Time                                       `json:"createdAt" url:"createdAt"`
 	UpdatedAt         time.Time                                       `json:"updatedAt" url:"updatedAt"`
 
@@ -5822,6 +8014,13 @@ func (d *DocumentsListCaptureResponseRowsItem) GetError() *string {
 		return nil
 	}
 	return d.Error
+}
+
+func (d *DocumentsListCaptureResponseRowsItem) GetSenderID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.SenderID
 }
 
 func (d *DocumentsListCaptureResponseRowsItem) GetCreatedAt() time.Time {
@@ -5943,6 +8142,13 @@ func (d *DocumentsListCaptureResponseRowsItem) SetError(error_ *string) {
 	d.require(documentsListCaptureResponseRowsItemFieldError)
 }
 
+// SetSenderID sets the SenderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItem) SetSenderID(senderID *string) {
+	d.SenderID = senderID
+	d.require(documentsListCaptureResponseRowsItemFieldSenderID)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsListCaptureResponseRowsItem) SetCreatedAt(createdAt time.Time) {
@@ -6012,35 +8218,46 @@ func (d *DocumentsListCaptureResponseRowsItem) String() string {
 }
 
 var (
-	documentsListCaptureResponseRowsItemExtractionFieldSupplier       = big.NewInt(1 << 0)
-	documentsListCaptureResponseRowsItemExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	documentsListCaptureResponseRowsItemExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	documentsListCaptureResponseRowsItemExtractionFieldDueDate        = big.NewInt(1 << 3)
-	documentsListCaptureResponseRowsItemExtractionFieldCurrency       = big.NewInt(1 << 4)
-	documentsListCaptureResponseRowsItemExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	documentsListCaptureResponseRowsItemExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	documentsListCaptureResponseRowsItemExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	documentsListCaptureResponseRowsItemExtractionFieldNotes          = big.NewInt(1 << 8)
-	documentsListCaptureResponseRowsItemExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsListCaptureResponseRowsItemExtractionFieldDocumentType   = big.NewInt(1 << 0)
+	documentsListCaptureResponseRowsItemExtractionFieldSupplier       = big.NewInt(1 << 1)
+	documentsListCaptureResponseRowsItemExtractionFieldDocumentNumber = big.NewInt(1 << 2)
+	documentsListCaptureResponseRowsItemExtractionFieldDocumentDate   = big.NewInt(1 << 3)
+	documentsListCaptureResponseRowsItemExtractionFieldDueDate        = big.NewInt(1 << 4)
+	documentsListCaptureResponseRowsItemExtractionFieldCurrency       = big.NewInt(1 << 5)
+	documentsListCaptureResponseRowsItemExtractionFieldNetTotal       = big.NewInt(1 << 6)
+	documentsListCaptureResponseRowsItemExtractionFieldVatTotal       = big.NewInt(1 << 7)
+	documentsListCaptureResponseRowsItemExtractionFieldGrossTotal     = big.NewInt(1 << 8)
+	documentsListCaptureResponseRowsItemExtractionFieldNotes          = big.NewInt(1 << 9)
+	documentsListCaptureResponseRowsItemExtractionFieldLines          = big.NewInt(1 << 10)
+	documentsListCaptureResponseRowsItemExtractionFieldOppositeLines  = big.NewInt(1 << 11)
 )
 
 type DocumentsListCaptureResponseRowsItemExtraction struct {
-	Supplier       *DocumentsListCaptureResponseRowsItemExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                                    `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *time.Time                                                 `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
-	DueDate        *time.Time                                                 `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency       *string                                                    `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                                    `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                                    `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                                    `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                                    `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*DocumentsListCaptureResponseRowsItemExtractionLinesItem `json:"lines" url:"lines"`
+	DocumentType   *DocumentsListCaptureResponseRowsItemExtractionDocumentType        `json:"documentType,omitempty" url:"documentType,omitempty"`
+	Supplier       *DocumentsListCaptureResponseRowsItemExtractionSupplier            `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                                            `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                                         `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                                         `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                                            `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                                            `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                                            `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                                            `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                                            `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsListCaptureResponseRowsItemExtractionLinesItem         `json:"lines" url:"lines"`
+	OppositeLines  []*DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem `json:"oppositeLines,omitempty" url:"oppositeLines,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetDocumentType() *DocumentsListCaptureResponseRowsItemExtractionDocumentType {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentType
 }
 
 func (d *DocumentsListCaptureResponseRowsItemExtraction) GetSupplier() *DocumentsListCaptureResponseRowsItemExtractionSupplier {
@@ -6113,6 +8330,13 @@ func (d *DocumentsListCaptureResponseRowsItemExtraction) GetLines() []*Documents
 	return d.Lines
 }
 
+func (d *DocumentsListCaptureResponseRowsItemExtraction) GetOppositeLines() []*DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem {
+	if d == nil {
+		return nil
+	}
+	return d.OppositeLines
+}
+
 func (d *DocumentsListCaptureResponseRowsItemExtraction) GetExtraProperties() map[string]interface{} {
 	if d == nil {
 		return nil
@@ -6125,6 +8349,13 @@ func (d *DocumentsListCaptureResponseRowsItemExtraction) require(field *big.Int)
 		d.explicitFields = big.NewInt(0)
 	}
 	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetDocumentType(documentType *DocumentsListCaptureResponseRowsItemExtractionDocumentType) {
+	d.DocumentType = documentType
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldDocumentType)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
@@ -6197,6 +8428,13 @@ func (d *DocumentsListCaptureResponseRowsItemExtraction) SetLines(lines []*Docum
 	d.require(documentsListCaptureResponseRowsItemExtractionFieldLines)
 }
 
+// SetOppositeLines sets the OppositeLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtraction) SetOppositeLines(oppositeLines []*DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) {
+	d.OppositeLines = oppositeLines
+	d.require(documentsListCaptureResponseRowsItemExtractionFieldOppositeLines)
+}
+
 func (d *DocumentsListCaptureResponseRowsItemExtraction) UnmarshalJSON(data []byte) error {
 	type embed DocumentsListCaptureResponseRowsItemExtraction
 	var unmarshaler = struct {
@@ -6249,6 +8487,28 @@ func (d *DocumentsListCaptureResponseRowsItemExtraction) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsListCaptureResponseRowsItemExtractionDocumentType string
+
+const (
+	DocumentsListCaptureResponseRowsItemExtractionDocumentTypeInvoice    DocumentsListCaptureResponseRowsItemExtractionDocumentType = "invoice"
+	DocumentsListCaptureResponseRowsItemExtractionDocumentTypeCreditNote DocumentsListCaptureResponseRowsItemExtractionDocumentType = "credit_note"
+)
+
+func NewDocumentsListCaptureResponseRowsItemExtractionDocumentTypeFromString(s string) (DocumentsListCaptureResponseRowsItemExtractionDocumentType, error) {
+	switch s {
+	case "invoice":
+		return DocumentsListCaptureResponseRowsItemExtractionDocumentTypeInvoice, nil
+	case "credit_note":
+		return DocumentsListCaptureResponseRowsItemExtractionDocumentTypeCreditNote, nil
+	}
+	var t DocumentsListCaptureResponseRowsItemExtractionDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsListCaptureResponseRowsItemExtractionDocumentType) Ptr() *DocumentsListCaptureResponseRowsItemExtractionDocumentType {
+	return &d
 }
 
 var (
@@ -6433,6 +8693,202 @@ func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) MarshalJSON() 
 }
 
 func (d *DocumentsListCaptureResponseRowsItemExtractionLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldLineGross        = big.NewInt(1 << 7)
+)
+
+type DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem struct {
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
+	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
+	LineVat          *string `json:"lineVat,omitempty" url:"lineVat,omitempty"`
+	LineGross        *string `json:"lineGross,omitempty" url:"lineGross,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetDescription() string {
+	if d == nil {
+		return ""
+	}
+	return d.Description
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetUnit() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetVatRatePercent() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetLineNet() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineNet
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetLineVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineVat
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetLineGross() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineGross
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldQuantity)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldUnit)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldVatRatePercent)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsListCaptureResponseRowsItemExtractionOppositeLinesItemFieldLineGross)
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsListCaptureResponseRowsItemExtractionOppositeLinesItem) String() string {
 	if d == nil {
 		return "<nil>"
 	}
@@ -6637,9 +9093,10 @@ var (
 	documentsUploadCaptureResponseFieldMatchedPartnerID  = big.NewInt(1 << 10)
 	documentsUploadCaptureResponseFieldPurchaseInvoiceID = big.NewInt(1 << 11)
 	documentsUploadCaptureResponseFieldError             = big.NewInt(1 << 12)
-	documentsUploadCaptureResponseFieldCreatedAt         = big.NewInt(1 << 13)
-	documentsUploadCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 14)
-	documentsUploadCaptureResponseFieldRawText           = big.NewInt(1 << 15)
+	documentsUploadCaptureResponseFieldSenderID          = big.NewInt(1 << 13)
+	documentsUploadCaptureResponseFieldCreatedAt         = big.NewInt(1 << 14)
+	documentsUploadCaptureResponseFieldUpdatedAt         = big.NewInt(1 << 15)
+	documentsUploadCaptureResponseFieldRawText           = big.NewInt(1 << 16)
 )
 
 type DocumentsUploadCaptureResponse struct {
@@ -6656,6 +9113,7 @@ type DocumentsUploadCaptureResponse struct {
 	MatchedPartnerID  *string                                   `json:"matchedPartnerId,omitempty" url:"matchedPartnerId,omitempty"`
 	PurchaseInvoiceID *string                                   `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
 	Error             *string                                   `json:"error,omitempty" url:"error,omitempty"`
+	SenderID          *string                                   `json:"senderId,omitempty" url:"senderId,omitempty"`
 	CreatedAt         time.Time                                 `json:"createdAt" url:"createdAt"`
 	UpdatedAt         time.Time                                 `json:"updatedAt" url:"updatedAt"`
 	RawText           *string                                   `json:"rawText,omitempty" url:"rawText,omitempty"`
@@ -6756,6 +9214,13 @@ func (d *DocumentsUploadCaptureResponse) GetError() *string {
 		return nil
 	}
 	return d.Error
+}
+
+func (d *DocumentsUploadCaptureResponse) GetSenderID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.SenderID
 }
 
 func (d *DocumentsUploadCaptureResponse) GetCreatedAt() time.Time {
@@ -6884,6 +9349,13 @@ func (d *DocumentsUploadCaptureResponse) SetError(error_ *string) {
 	d.require(documentsUploadCaptureResponseFieldError)
 }
 
+// SetSenderID sets the SenderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponse) SetSenderID(senderID *string) {
+	d.SenderID = senderID
+	d.require(documentsUploadCaptureResponseFieldSenderID)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsUploadCaptureResponse) SetCreatedAt(createdAt time.Time) {
@@ -6960,35 +9432,46 @@ func (d *DocumentsUploadCaptureResponse) String() string {
 }
 
 var (
-	documentsUploadCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 0)
-	documentsUploadCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 1)
-	documentsUploadCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 2)
-	documentsUploadCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 3)
-	documentsUploadCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 4)
-	documentsUploadCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 5)
-	documentsUploadCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 6)
-	documentsUploadCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 7)
-	documentsUploadCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 8)
-	documentsUploadCaptureResponseExtractionFieldLines          = big.NewInt(1 << 9)
+	documentsUploadCaptureResponseExtractionFieldDocumentType   = big.NewInt(1 << 0)
+	documentsUploadCaptureResponseExtractionFieldSupplier       = big.NewInt(1 << 1)
+	documentsUploadCaptureResponseExtractionFieldDocumentNumber = big.NewInt(1 << 2)
+	documentsUploadCaptureResponseExtractionFieldDocumentDate   = big.NewInt(1 << 3)
+	documentsUploadCaptureResponseExtractionFieldDueDate        = big.NewInt(1 << 4)
+	documentsUploadCaptureResponseExtractionFieldCurrency       = big.NewInt(1 << 5)
+	documentsUploadCaptureResponseExtractionFieldNetTotal       = big.NewInt(1 << 6)
+	documentsUploadCaptureResponseExtractionFieldVatTotal       = big.NewInt(1 << 7)
+	documentsUploadCaptureResponseExtractionFieldGrossTotal     = big.NewInt(1 << 8)
+	documentsUploadCaptureResponseExtractionFieldNotes          = big.NewInt(1 << 9)
+	documentsUploadCaptureResponseExtractionFieldLines          = big.NewInt(1 << 10)
+	documentsUploadCaptureResponseExtractionFieldOppositeLines  = big.NewInt(1 << 11)
 )
 
 type DocumentsUploadCaptureResponseExtraction struct {
-	Supplier       *DocumentsUploadCaptureResponseExtractionSupplier    `json:"supplier" url:"supplier"`
-	DocumentNumber *string                                              `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	DocumentDate   *time.Time                                           `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
-	DueDate        *time.Time                                           `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency       *string                                              `json:"currency,omitempty" url:"currency,omitempty"`
-	NetTotal       *string                                              `json:"netTotal,omitempty" url:"netTotal,omitempty"`
-	VatTotal       *string                                              `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
-	GrossTotal     *string                                              `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
-	Notes          *string                                              `json:"notes,omitempty" url:"notes,omitempty"`
-	Lines          []*DocumentsUploadCaptureResponseExtractionLinesItem `json:"lines" url:"lines"`
+	DocumentType   *DocumentsUploadCaptureResponseExtractionDocumentType        `json:"documentType,omitempty" url:"documentType,omitempty"`
+	Supplier       *DocumentsUploadCaptureResponseExtractionSupplier            `json:"supplier" url:"supplier"`
+	DocumentNumber *string                                                      `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	DocumentDate   *time.Time                                                   `json:"documentDate,omitempty" url:"documentDate,omitempty" format:"date"`
+	DueDate        *time.Time                                                   `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency       *string                                                      `json:"currency,omitempty" url:"currency,omitempty"`
+	NetTotal       *string                                                      `json:"netTotal,omitempty" url:"netTotal,omitempty"`
+	VatTotal       *string                                                      `json:"vatTotal,omitempty" url:"vatTotal,omitempty"`
+	GrossTotal     *string                                                      `json:"grossTotal,omitempty" url:"grossTotal,omitempty"`
+	Notes          *string                                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	Lines          []*DocumentsUploadCaptureResponseExtractionLinesItem         `json:"lines" url:"lines"`
+	OppositeLines  []*DocumentsUploadCaptureResponseExtractionOppositeLinesItem `json:"oppositeLines,omitempty" url:"oppositeLines,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsUploadCaptureResponseExtraction) GetDocumentType() *DocumentsUploadCaptureResponseExtractionDocumentType {
+	if d == nil {
+		return nil
+	}
+	return d.DocumentType
 }
 
 func (d *DocumentsUploadCaptureResponseExtraction) GetSupplier() *DocumentsUploadCaptureResponseExtractionSupplier {
@@ -7061,6 +9544,13 @@ func (d *DocumentsUploadCaptureResponseExtraction) GetLines() []*DocumentsUpload
 	return d.Lines
 }
 
+func (d *DocumentsUploadCaptureResponseExtraction) GetOppositeLines() []*DocumentsUploadCaptureResponseExtractionOppositeLinesItem {
+	if d == nil {
+		return nil
+	}
+	return d.OppositeLines
+}
+
 func (d *DocumentsUploadCaptureResponseExtraction) GetExtraProperties() map[string]interface{} {
 	if d == nil {
 		return nil
@@ -7073,6 +9563,13 @@ func (d *DocumentsUploadCaptureResponseExtraction) require(field *big.Int) {
 		d.explicitFields = big.NewInt(0)
 	}
 	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetDocumentType(documentType *DocumentsUploadCaptureResponseExtractionDocumentType) {
+	d.DocumentType = documentType
+	d.require(documentsUploadCaptureResponseExtractionFieldDocumentType)
 }
 
 // SetSupplier sets the Supplier field and marks it as non-optional;
@@ -7145,6 +9642,13 @@ func (d *DocumentsUploadCaptureResponseExtraction) SetLines(lines []*DocumentsUp
 	d.require(documentsUploadCaptureResponseExtractionFieldLines)
 }
 
+// SetOppositeLines sets the OppositeLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtraction) SetOppositeLines(oppositeLines []*DocumentsUploadCaptureResponseExtractionOppositeLinesItem) {
+	d.OppositeLines = oppositeLines
+	d.require(documentsUploadCaptureResponseExtractionFieldOppositeLines)
+}
+
 func (d *DocumentsUploadCaptureResponseExtraction) UnmarshalJSON(data []byte) error {
 	type embed DocumentsUploadCaptureResponseExtraction
 	var unmarshaler = struct {
@@ -7197,6 +9701,28 @@ func (d *DocumentsUploadCaptureResponseExtraction) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DocumentsUploadCaptureResponseExtractionDocumentType string
+
+const (
+	DocumentsUploadCaptureResponseExtractionDocumentTypeInvoice    DocumentsUploadCaptureResponseExtractionDocumentType = "invoice"
+	DocumentsUploadCaptureResponseExtractionDocumentTypeCreditNote DocumentsUploadCaptureResponseExtractionDocumentType = "credit_note"
+)
+
+func NewDocumentsUploadCaptureResponseExtractionDocumentTypeFromString(s string) (DocumentsUploadCaptureResponseExtractionDocumentType, error) {
+	switch s {
+	case "invoice":
+		return DocumentsUploadCaptureResponseExtractionDocumentTypeInvoice, nil
+	case "credit_note":
+		return DocumentsUploadCaptureResponseExtractionDocumentTypeCreditNote, nil
+	}
+	var t DocumentsUploadCaptureResponseExtractionDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DocumentsUploadCaptureResponseExtractionDocumentType) Ptr() *DocumentsUploadCaptureResponseExtractionDocumentType {
+	return &d
 }
 
 var (
@@ -7381,6 +9907,202 @@ func (d *DocumentsUploadCaptureResponseExtractionLinesItem) MarshalJSON() ([]byt
 }
 
 func (d *DocumentsUploadCaptureResponseExtractionLinesItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldDescription      = big.NewInt(1 << 0)
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldQuantity         = big.NewInt(1 << 1)
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldUnit             = big.NewInt(1 << 2)
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldLineNet          = big.NewInt(1 << 5)
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldLineVat          = big.NewInt(1 << 6)
+	documentsUploadCaptureResponseExtractionOppositeLinesItemFieldLineGross        = big.NewInt(1 << 7)
+)
+
+type DocumentsUploadCaptureResponseExtractionOppositeLinesItem struct {
+	Description      string  `json:"description" url:"description"`
+	Quantity         string  `json:"quantity" url:"quantity"`
+	Unit             *string `json:"unit,omitempty" url:"unit,omitempty"`
+	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
+	LineVat          *string `json:"lineVat,omitempty" url:"lineVat,omitempty"`
+	LineGross        *string `json:"lineGross,omitempty" url:"lineGross,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetDescription() string {
+	if d == nil {
+		return ""
+	}
+	return d.Description
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.Quantity
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetUnit() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetUnitPriceExclVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UnitPriceExclVat
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetVatRatePercent() *string {
+	if d == nil {
+		return nil
+	}
+	return d.VatRatePercent
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetLineNet() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineNet
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetLineVat() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineVat
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetLineGross() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LineGross
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetDescription(description string) {
+	d.Description = description
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetQuantity(quantity string) {
+	d.Quantity = quantity
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldQuantity)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetUnit(unit *string) {
+	d.Unit = unit
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldUnit)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	d.UnitPriceExclVat = unitPriceExclVat
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	d.VatRatePercent = vatRatePercent
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldVatRatePercent)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetLineNet(lineNet *string) {
+	d.LineNet = lineNet
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetLineVat(lineVat *string) {
+	d.LineVat = lineVat
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) SetLineGross(lineGross *string) {
+	d.LineGross = lineGross
+	d.require(documentsUploadCaptureResponseExtractionOppositeLinesItemFieldLineGross)
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DocumentsUploadCaptureResponseExtractionOppositeLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DocumentsUploadCaptureResponseExtractionOppositeLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) MarshalJSON() ([]byte, error) {
+	type embed DocumentsUploadCaptureResponseExtractionOppositeLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DocumentsUploadCaptureResponseExtractionOppositeLinesItem) String() string {
 	if d == nil {
 		return "<nil>"
 	}

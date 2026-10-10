@@ -18154,6 +18154,54 @@ func TestSettersVatResolveReferenceRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetServiceKind", func(t *testing.T) {
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueServiceKind *VatResolveReferenceRequestServiceKind
+		obj.SetServiceKind(fernTestValueServiceKind)
+		assert.Equal(t, fernTestValueServiceKind, obj.ServiceKind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetServiceCountryCode", func(t *testing.T) {
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueServiceCountryCode *string
+		obj.SetServiceCountryCode(fernTestValueServiceCountryCode)
+		assert.Equal(t, fernTestValueServiceCountryCode, obj.ServiceCountryCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUnderlyingSupplierGaveVatNumber", func(t *testing.T) {
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueUnderlyingSupplierGaveVatNumber *bool
+		obj.SetUnderlyingSupplierGaveVatNumber(fernTestValueUnderlyingSupplierGaveVatNumber)
+		assert.Equal(t, fernTestValueUnderlyingSupplierGaveVatNumber, obj.UnderlyingSupplierGaveVatNumber)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetUnderlyingSupplierChargesVat", func(t *testing.T) {
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueUnderlyingSupplierChargesVat *bool
+		obj.SetUnderlyingSupplierChargesVat(fernTestValueUnderlyingSupplierChargesVat)
+		assert.Equal(t, fernTestValueUnderlyingSupplierChargesVat, obj.UnderlyingSupplierChargesVat)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetGoodsKind", func(t *testing.T) {
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueGoodsKind *VatResolveReferenceRequestGoodsKind
+		obj.SetGoodsKind(fernTestValueGoodsKind)
+		assert.Equal(t, fernTestValueGoodsKind, obj.GoodsKind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetGoodsLocationCountryCode", func(t *testing.T) {
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueGoodsLocationCountryCode *string
+		obj.SetGoodsLocationCountryCode(fernTestValueGoodsLocationCountryCode)
+		assert.Equal(t, fernTestValueGoodsLocationCountryCode, obj.GoodsLocationCountryCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestSettersMarkExplicitVatResolveReferenceRequest(t *testing.T) {
@@ -18444,6 +18492,192 @@ func TestSettersMarkExplicitVatResolveReferenceRequest(t *testing.T) {
 
 		// Act
 		obj.SetImportedConsignmentValueEur(fernTestValueImportedConsignmentValueEur)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetServiceKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueServiceKind *VatResolveReferenceRequestServiceKind
+
+		// Act
+		obj.SetServiceKind(fernTestValueServiceKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetServiceCountryCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueServiceCountryCode *string
+
+		// Act
+		obj.SetServiceCountryCode(fernTestValueServiceCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUnderlyingSupplierGaveVatNumber_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueUnderlyingSupplierGaveVatNumber *bool
+
+		// Act
+		obj.SetUnderlyingSupplierGaveVatNumber(fernTestValueUnderlyingSupplierGaveVatNumber)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetUnderlyingSupplierChargesVat_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueUnderlyingSupplierChargesVat *bool
+
+		// Act
+		obj.SetUnderlyingSupplierChargesVat(fernTestValueUnderlyingSupplierChargesVat)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetGoodsKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueGoodsKind *VatResolveReferenceRequestGoodsKind
+
+		// Act
+		obj.SetGoodsKind(fernTestValueGoodsKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetGoodsLocationCountryCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatResolveReferenceRequest{}
+		var fernTestValueGoodsLocationCountryCode *string
+
+		// Act
+		obj.SetGoodsLocationCountryCode(fernTestValueGoodsLocationCountryCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -22375,6 +22609,64 @@ func TestEnumVatClassifiersListReferenceRequestSortItemDir(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewVatClassifiersListReferenceRequestSortItemDirFromString("asc")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumVatResolveReferenceRequestGoodsKind(t *testing.T) {
+	t.Run("NewFromString_installed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatResolveReferenceRequestGoodsKindFromString("installed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatResolveReferenceRequestGoodsKind("installed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_energy_network", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatResolveReferenceRequestGoodsKindFromString("energy_network")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatResolveReferenceRequestGoodsKind("energy_network"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewVatResolveReferenceRequestGoodsKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewVatResolveReferenceRequestGoodsKindFromString("installed")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumVatResolveReferenceRequestServiceKind(t *testing.T) {
+	t.Run("NewFromString_short_term_accommodation", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatResolveReferenceRequestServiceKindFromString("short_term_accommodation")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatResolveReferenceRequestServiceKind("short_term_accommodation"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_passenger_road_transport", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatResolveReferenceRequestServiceKindFromString("passenger_road_transport")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatResolveReferenceRequestServiceKind("passenger_road_transport"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewVatResolveReferenceRequestServiceKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewVatResolveReferenceRequestServiceKindFromString("short_term_accommodation")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

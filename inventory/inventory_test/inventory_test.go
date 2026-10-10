@@ -178,6 +178,32 @@ func TestInventoryWarehousesListWithWireMock(
 	VerifyRequestCount(t, "TestInventoryWarehousesListWithWireMock", "POST", "/v1/inventory/warehouses/list", nil, 1)
 }
 
+func TestInventoryWarehousesUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.WarehousesUpdateInventoryRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Inventory.WarehousesUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestInventoryWarehousesUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestInventoryWarehousesUpdateWithWireMock", "POST", "/v1/inventory/warehouses/update", nil, 1)
+}
+
 func TestInventoryStockReceiveWithWireMock(
 	t *testing.T,
 ) {

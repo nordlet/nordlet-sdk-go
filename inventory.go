@@ -1381,27 +1381,29 @@ func (l LandedCostsCreateInventoryRequestMethod) Ptr() *LandedCostsCreateInvento
 }
 
 var (
-	landedCostsCreateInventoryResponseFieldID              = big.NewInt(1 << 0)
-	landedCostsCreateInventoryResponseFieldDate            = big.NewInt(1 << 1)
-	landedCostsCreateInventoryResponseFieldAmount          = big.NewInt(1 << 2)
-	landedCostsCreateInventoryResponseFieldMethod          = big.NewInt(1 << 3)
-	landedCostsCreateInventoryResponseFieldGoodsReceiptID  = big.NewInt(1 << 4)
-	landedCostsCreateInventoryResponseFieldSourceInvoiceID = big.NewInt(1 << 5)
-	landedCostsCreateInventoryResponseFieldNotes           = big.NewInt(1 << 6)
-	landedCostsCreateInventoryResponseFieldCreatedAt       = big.NewInt(1 << 7)
-	landedCostsCreateInventoryResponseFieldLines           = big.NewInt(1 << 8)
+	landedCostsCreateInventoryResponseFieldID                   = big.NewInt(1 << 0)
+	landedCostsCreateInventoryResponseFieldDate                 = big.NewInt(1 << 1)
+	landedCostsCreateInventoryResponseFieldAmount               = big.NewInt(1 << 2)
+	landedCostsCreateInventoryResponseFieldMethod               = big.NewInt(1 << 3)
+	landedCostsCreateInventoryResponseFieldGoodsReceiptID       = big.NewInt(1 << 4)
+	landedCostsCreateInventoryResponseFieldSourceInvoiceID      = big.NewInt(1 << 5)
+	landedCostsCreateInventoryResponseFieldNotes                = big.NewInt(1 << 6)
+	landedCostsCreateInventoryResponseFieldCreatedAt            = big.NewInt(1 << 7)
+	landedCostsCreateInventoryResponseFieldJournalTransactionID = big.NewInt(1 << 8)
+	landedCostsCreateInventoryResponseFieldLines                = big.NewInt(1 << 9)
 )
 
 type LandedCostsCreateInventoryResponse struct {
-	ID              string                                         `json:"id" url:"id"`
-	Date            time.Time                                      `json:"date" url:"date" format:"date"`
-	Amount          string                                         `json:"amount" url:"amount"`
-	Method          LandedCostsCreateInventoryResponseMethod       `json:"method" url:"method"`
-	GoodsReceiptID  *string                                        `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
-	SourceInvoiceID *string                                        `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
-	Notes           *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt       time.Time                                      `json:"createdAt" url:"createdAt"`
-	Lines           []*LandedCostsCreateInventoryResponseLinesItem `json:"lines" url:"lines"`
+	ID                   string                                         `json:"id" url:"id"`
+	Date                 time.Time                                      `json:"date" url:"date" format:"date"`
+	Amount               string                                         `json:"amount" url:"amount"`
+	Method               LandedCostsCreateInventoryResponseMethod       `json:"method" url:"method"`
+	GoodsReceiptID       *string                                        `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
+	SourceInvoiceID      *string                                        `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
+	Notes                *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                      `json:"createdAt" url:"createdAt"`
+	JournalTransactionID *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Lines                []*LandedCostsCreateInventoryResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1464,6 +1466,13 @@ func (l *LandedCostsCreateInventoryResponse) GetCreatedAt() time.Time {
 		return time.Time{}
 	}
 	return l.CreatedAt
+}
+
+func (l *LandedCostsCreateInventoryResponse) GetJournalTransactionID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.JournalTransactionID
 }
 
 func (l *LandedCostsCreateInventoryResponse) GetLines() []*LandedCostsCreateInventoryResponseLinesItem {
@@ -1541,6 +1550,13 @@ func (l *LandedCostsCreateInventoryResponse) SetNotes(notes *string) {
 func (l *LandedCostsCreateInventoryResponse) SetCreatedAt(createdAt time.Time) {
 	l.CreatedAt = createdAt
 	l.require(landedCostsCreateInventoryResponseFieldCreatedAt)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LandedCostsCreateInventoryResponse) SetJournalTransactionID(journalTransactionID *string) {
+	l.JournalTransactionID = journalTransactionID
+	l.require(landedCostsCreateInventoryResponseFieldJournalTransactionID)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -1743,27 +1759,29 @@ func (l LandedCostsCreateInventoryResponseMethod) Ptr() *LandedCostsCreateInvent
 }
 
 var (
-	landedCostsGetInventoryResponseFieldID              = big.NewInt(1 << 0)
-	landedCostsGetInventoryResponseFieldDate            = big.NewInt(1 << 1)
-	landedCostsGetInventoryResponseFieldAmount          = big.NewInt(1 << 2)
-	landedCostsGetInventoryResponseFieldMethod          = big.NewInt(1 << 3)
-	landedCostsGetInventoryResponseFieldGoodsReceiptID  = big.NewInt(1 << 4)
-	landedCostsGetInventoryResponseFieldSourceInvoiceID = big.NewInt(1 << 5)
-	landedCostsGetInventoryResponseFieldNotes           = big.NewInt(1 << 6)
-	landedCostsGetInventoryResponseFieldCreatedAt       = big.NewInt(1 << 7)
-	landedCostsGetInventoryResponseFieldLines           = big.NewInt(1 << 8)
+	landedCostsGetInventoryResponseFieldID                   = big.NewInt(1 << 0)
+	landedCostsGetInventoryResponseFieldDate                 = big.NewInt(1 << 1)
+	landedCostsGetInventoryResponseFieldAmount               = big.NewInt(1 << 2)
+	landedCostsGetInventoryResponseFieldMethod               = big.NewInt(1 << 3)
+	landedCostsGetInventoryResponseFieldGoodsReceiptID       = big.NewInt(1 << 4)
+	landedCostsGetInventoryResponseFieldSourceInvoiceID      = big.NewInt(1 << 5)
+	landedCostsGetInventoryResponseFieldNotes                = big.NewInt(1 << 6)
+	landedCostsGetInventoryResponseFieldCreatedAt            = big.NewInt(1 << 7)
+	landedCostsGetInventoryResponseFieldJournalTransactionID = big.NewInt(1 << 8)
+	landedCostsGetInventoryResponseFieldLines                = big.NewInt(1 << 9)
 )
 
 type LandedCostsGetInventoryResponse struct {
-	ID              string                                      `json:"id" url:"id"`
-	Date            time.Time                                   `json:"date" url:"date" format:"date"`
-	Amount          string                                      `json:"amount" url:"amount"`
-	Method          LandedCostsGetInventoryResponseMethod       `json:"method" url:"method"`
-	GoodsReceiptID  *string                                     `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
-	SourceInvoiceID *string                                     `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
-	Notes           *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt       time.Time                                   `json:"createdAt" url:"createdAt"`
-	Lines           []*LandedCostsGetInventoryResponseLinesItem `json:"lines" url:"lines"`
+	ID                   string                                      `json:"id" url:"id"`
+	Date                 time.Time                                   `json:"date" url:"date" format:"date"`
+	Amount               string                                      `json:"amount" url:"amount"`
+	Method               LandedCostsGetInventoryResponseMethod       `json:"method" url:"method"`
+	GoodsReceiptID       *string                                     `json:"goodsReceiptId,omitempty" url:"goodsReceiptId,omitempty"`
+	SourceInvoiceID      *string                                     `json:"sourceInvoiceId,omitempty" url:"sourceInvoiceId,omitempty"`
+	Notes                *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                   `json:"createdAt" url:"createdAt"`
+	JournalTransactionID *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Lines                []*LandedCostsGetInventoryResponseLinesItem `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1826,6 +1844,13 @@ func (l *LandedCostsGetInventoryResponse) GetCreatedAt() time.Time {
 		return time.Time{}
 	}
 	return l.CreatedAt
+}
+
+func (l *LandedCostsGetInventoryResponse) GetJournalTransactionID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.JournalTransactionID
 }
 
 func (l *LandedCostsGetInventoryResponse) GetLines() []*LandedCostsGetInventoryResponseLinesItem {
@@ -1903,6 +1928,13 @@ func (l *LandedCostsGetInventoryResponse) SetNotes(notes *string) {
 func (l *LandedCostsGetInventoryResponse) SetCreatedAt(createdAt time.Time) {
 	l.CreatedAt = createdAt
 	l.require(landedCostsGetInventoryResponseFieldCreatedAt)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LandedCostsGetInventoryResponse) SetJournalTransactionID(journalTransactionID *string) {
+	l.JournalTransactionID = journalTransactionID
+	l.require(landedCostsGetInventoryResponseFieldJournalTransactionID)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -8229,19 +8261,21 @@ func (s *StockWriteOffInventoryResponse) String() string {
 }
 
 var (
-	warehousesCreateInventoryResponseFieldID        = big.NewInt(1 << 0)
-	warehousesCreateInventoryResponseFieldCode      = big.NewInt(1 << 1)
-	warehousesCreateInventoryResponseFieldName      = big.NewInt(1 << 2)
-	warehousesCreateInventoryResponseFieldIsDefault = big.NewInt(1 << 3)
-	warehousesCreateInventoryResponseFieldCreatedAt = big.NewInt(1 << 4)
+	warehousesCreateInventoryResponseFieldID          = big.NewInt(1 << 0)
+	warehousesCreateInventoryResponseFieldCode        = big.NewInt(1 << 1)
+	warehousesCreateInventoryResponseFieldName        = big.NewInt(1 << 2)
+	warehousesCreateInventoryResponseFieldIsDefault   = big.NewInt(1 << 3)
+	warehousesCreateInventoryResponseFieldCountryCode = big.NewInt(1 << 4)
+	warehousesCreateInventoryResponseFieldCreatedAt   = big.NewInt(1 << 5)
 )
 
 type WarehousesCreateInventoryResponse struct {
-	ID        string    `json:"id" url:"id"`
-	Code      string    `json:"code" url:"code"`
-	Name      string    `json:"name" url:"name"`
-	IsDefault bool      `json:"isDefault" url:"isDefault"`
-	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	ID          string    `json:"id" url:"id"`
+	Code        string    `json:"code" url:"code"`
+	Name        string    `json:"name" url:"name"`
+	IsDefault   bool      `json:"isDefault" url:"isDefault"`
+	CountryCode *string   `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8276,6 +8310,13 @@ func (w *WarehousesCreateInventoryResponse) GetIsDefault() bool {
 		return false
 	}
 	return w.IsDefault
+}
+
+func (w *WarehousesCreateInventoryResponse) GetCountryCode() *string {
+	if w == nil {
+		return nil
+	}
+	return w.CountryCode
 }
 
 func (w *WarehousesCreateInventoryResponse) GetCreatedAt() time.Time {
@@ -8325,6 +8366,13 @@ func (w *WarehousesCreateInventoryResponse) SetName(name string) {
 func (w *WarehousesCreateInventoryResponse) SetIsDefault(isDefault bool) {
 	w.IsDefault = isDefault
 	w.require(warehousesCreateInventoryResponseFieldIsDefault)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesCreateInventoryResponse) SetCountryCode(countryCode *string) {
+	w.CountryCode = countryCode
+	w.require(warehousesCreateInventoryResponseFieldCountryCode)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -8988,19 +9036,21 @@ func (w *WarehousesListInventoryResponse) String() string {
 }
 
 var (
-	warehousesListInventoryResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	warehousesListInventoryResponseRowsItemFieldCode      = big.NewInt(1 << 1)
-	warehousesListInventoryResponseRowsItemFieldName      = big.NewInt(1 << 2)
-	warehousesListInventoryResponseRowsItemFieldIsDefault = big.NewInt(1 << 3)
-	warehousesListInventoryResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
+	warehousesListInventoryResponseRowsItemFieldID          = big.NewInt(1 << 0)
+	warehousesListInventoryResponseRowsItemFieldCode        = big.NewInt(1 << 1)
+	warehousesListInventoryResponseRowsItemFieldName        = big.NewInt(1 << 2)
+	warehousesListInventoryResponseRowsItemFieldIsDefault   = big.NewInt(1 << 3)
+	warehousesListInventoryResponseRowsItemFieldCountryCode = big.NewInt(1 << 4)
+	warehousesListInventoryResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 5)
 )
 
 type WarehousesListInventoryResponseRowsItem struct {
-	ID        string    `json:"id" url:"id"`
-	Code      string    `json:"code" url:"code"`
-	Name      string    `json:"name" url:"name"`
-	IsDefault bool      `json:"isDefault" url:"isDefault"`
-	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	ID          string    `json:"id" url:"id"`
+	Code        string    `json:"code" url:"code"`
+	Name        string    `json:"name" url:"name"`
+	IsDefault   bool      `json:"isDefault" url:"isDefault"`
+	CountryCode *string   `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9035,6 +9085,13 @@ func (w *WarehousesListInventoryResponseRowsItem) GetIsDefault() bool {
 		return false
 	}
 	return w.IsDefault
+}
+
+func (w *WarehousesListInventoryResponseRowsItem) GetCountryCode() *string {
+	if w == nil {
+		return nil
+	}
+	return w.CountryCode
 }
 
 func (w *WarehousesListInventoryResponseRowsItem) GetCreatedAt() time.Time {
@@ -9084,6 +9141,13 @@ func (w *WarehousesListInventoryResponseRowsItem) SetName(name string) {
 func (w *WarehousesListInventoryResponseRowsItem) SetIsDefault(isDefault bool) {
 	w.IsDefault = isDefault
 	w.require(warehousesListInventoryResponseRowsItemFieldIsDefault)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesListInventoryResponseRowsItem) SetCountryCode(countryCode *string) {
+	w.CountryCode = countryCode
+	w.require(warehousesListInventoryResponseRowsItemFieldCountryCode)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -9144,15 +9208,189 @@ func (w *WarehousesListInventoryResponseRowsItem) String() string {
 }
 
 var (
-	warehousesCreateInventoryRequestFieldCode      = big.NewInt(1 << 0)
-	warehousesCreateInventoryRequestFieldName      = big.NewInt(1 << 1)
-	warehousesCreateInventoryRequestFieldIsDefault = big.NewInt(1 << 2)
+	warehousesUpdateInventoryResponseFieldID          = big.NewInt(1 << 0)
+	warehousesUpdateInventoryResponseFieldCode        = big.NewInt(1 << 1)
+	warehousesUpdateInventoryResponseFieldName        = big.NewInt(1 << 2)
+	warehousesUpdateInventoryResponseFieldIsDefault   = big.NewInt(1 << 3)
+	warehousesUpdateInventoryResponseFieldCountryCode = big.NewInt(1 << 4)
+	warehousesUpdateInventoryResponseFieldCreatedAt   = big.NewInt(1 << 5)
+)
+
+type WarehousesUpdateInventoryResponse struct {
+	ID          string    `json:"id" url:"id"`
+	Code        string    `json:"code" url:"code"`
+	Name        string    `json:"name" url:"name"`
+	IsDefault   bool      `json:"isDefault" url:"isDefault"`
+	CountryCode *string   `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WarehousesUpdateInventoryResponse) GetID() string {
+	if w == nil {
+		return ""
+	}
+	return w.ID
+}
+
+func (w *WarehousesUpdateInventoryResponse) GetCode() string {
+	if w == nil {
+		return ""
+	}
+	return w.Code
+}
+
+func (w *WarehousesUpdateInventoryResponse) GetName() string {
+	if w == nil {
+		return ""
+	}
+	return w.Name
+}
+
+func (w *WarehousesUpdateInventoryResponse) GetIsDefault() bool {
+	if w == nil {
+		return false
+	}
+	return w.IsDefault
+}
+
+func (w *WarehousesUpdateInventoryResponse) GetCountryCode() *string {
+	if w == nil {
+		return nil
+	}
+	return w.CountryCode
+}
+
+func (w *WarehousesUpdateInventoryResponse) GetCreatedAt() time.Time {
+	if w == nil {
+		return time.Time{}
+	}
+	return w.CreatedAt
+}
+
+func (w *WarehousesUpdateInventoryResponse) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WarehousesUpdateInventoryResponse) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryResponse) SetID(id string) {
+	w.ID = id
+	w.require(warehousesUpdateInventoryResponseFieldID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryResponse) SetCode(code string) {
+	w.Code = code
+	w.require(warehousesUpdateInventoryResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryResponse) SetName(name string) {
+	w.Name = name
+	w.require(warehousesUpdateInventoryResponseFieldName)
+}
+
+// SetIsDefault sets the IsDefault field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryResponse) SetIsDefault(isDefault bool) {
+	w.IsDefault = isDefault
+	w.require(warehousesUpdateInventoryResponseFieldIsDefault)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryResponse) SetCountryCode(countryCode *string) {
+	w.CountryCode = countryCode
+	w.require(warehousesUpdateInventoryResponseFieldCountryCode)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryResponse) SetCreatedAt(createdAt time.Time) {
+	w.CreatedAt = createdAt
+	w.require(warehousesUpdateInventoryResponseFieldCreatedAt)
+}
+
+func (w *WarehousesUpdateInventoryResponse) UnmarshalJSON(data []byte) error {
+	type embed WarehousesUpdateInventoryResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*w),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*w = WarehousesUpdateInventoryResponse(unmarshaler.embed)
+	w.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WarehousesUpdateInventoryResponse) MarshalJSON() ([]byte, error) {
+	type embed WarehousesUpdateInventoryResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*w),
+		CreatedAt: internal.NewDateTime(w.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WarehousesUpdateInventoryResponse) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	warehousesCreateInventoryRequestFieldCode        = big.NewInt(1 << 0)
+	warehousesCreateInventoryRequestFieldName        = big.NewInt(1 << 1)
+	warehousesCreateInventoryRequestFieldIsDefault   = big.NewInt(1 << 2)
+	warehousesCreateInventoryRequestFieldCountryCode = big.NewInt(1 << 3)
 )
 
 type WarehousesCreateInventoryRequest struct {
-	Code      string `json:"code" url:"-"`
-	Name      string `json:"name" url:"-"`
-	IsDefault *bool  `json:"isDefault,omitempty" url:"-"`
+	Code        string  `json:"code" url:"-"`
+	Name        string  `json:"name" url:"-"`
+	IsDefault   *bool   `json:"isDefault,omitempty" url:"-"`
+	CountryCode *string `json:"countryCode,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9184,6 +9422,13 @@ func (w *WarehousesCreateInventoryRequest) SetName(name string) {
 func (w *WarehousesCreateInventoryRequest) SetIsDefault(isDefault *bool) {
 	w.IsDefault = isDefault
 	w.require(warehousesCreateInventoryRequestFieldIsDefault)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesCreateInventoryRequest) SetCountryCode(countryCode *string) {
+	w.CountryCode = countryCode
+	w.require(warehousesCreateInventoryRequestFieldCountryCode)
 }
 
 func (w *WarehousesCreateInventoryRequest) UnmarshalJSON(data []byte) error {
@@ -9281,6 +9526,70 @@ func (w *WarehousesListInventoryRequest) UnmarshalJSON(data []byte) error {
 
 func (w *WarehousesListInventoryRequest) MarshalJSON() ([]byte, error) {
 	type embed WarehousesListInventoryRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	warehousesUpdateInventoryRequestFieldID          = big.NewInt(1 << 0)
+	warehousesUpdateInventoryRequestFieldName        = big.NewInt(1 << 1)
+	warehousesUpdateInventoryRequestFieldCountryCode = big.NewInt(1 << 2)
+)
+
+type WarehousesUpdateInventoryRequest struct {
+	ID          string  `json:"id" url:"-"`
+	Name        *string `json:"name,omitempty" url:"-"`
+	CountryCode *string `json:"countryCode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WarehousesUpdateInventoryRequest) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryRequest) SetID(id string) {
+	w.ID = id
+	w.require(warehousesUpdateInventoryRequestFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryRequest) SetName(name *string) {
+	w.Name = name
+	w.require(warehousesUpdateInventoryRequestFieldName)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WarehousesUpdateInventoryRequest) SetCountryCode(countryCode *string) {
+	w.CountryCode = countryCode
+	w.require(warehousesUpdateInventoryRequestFieldCountryCode)
+}
+
+func (w *WarehousesUpdateInventoryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler WarehousesUpdateInventoryRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WarehousesUpdateInventoryRequest(body)
+	return nil
+}
+
+func (w *WarehousesUpdateInventoryRequest) MarshalJSON() ([]byte, error) {
+	type embed WarehousesUpdateInventoryRequest
 	var marshaler = struct {
 		embed
 	}{

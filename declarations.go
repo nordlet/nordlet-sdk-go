@@ -1563,6 +1563,157 @@ func (e *EsVerifactuDeclaracionResponsableDeclarationsRequest) require(field *bi
 }
 
 var (
+	euDac7PreviewDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type EuDac7PreviewDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EuDac7PreviewDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsRequest) SetYear(year int64) {
+	e.Year = year
+	e.require(euDac7PreviewDeclarationsRequestFieldYear)
+}
+
+func (e *EuDac7PreviewDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuDac7PreviewDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EuDac7PreviewDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EuDac7PreviewDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EuDac7PreviewDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	euDac7XMLDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type EuDac7XMLDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EuDac7XMLDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7XMLDeclarationsRequest) SetYear(year int64) {
+	e.Year = year
+	e.require(euDac7XMLDeclarationsRequestFieldYear)
+}
+
+func (e *EuDac7XMLDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuDac7XMLDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EuDac7XMLDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EuDac7XMLDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EuDac7XMLDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	euDigitalReportingListDeclarationsRequestFieldFromDate = big.NewInt(1 << 0)
+	euDigitalReportingListDeclarationsRequestFieldToDate   = big.NewInt(1 << 1)
+)
+
+type EuDigitalReportingListDeclarationsRequest struct {
+	FromDate time.Time `json:"fromDate" url:"-" format:"date"`
+	ToDate   time.Time `json:"toDate" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EuDigitalReportingListDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsRequest) SetFromDate(fromDate time.Time) {
+	e.FromDate = fromDate
+	e.require(euDigitalReportingListDeclarationsRequestFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsRequest) SetToDate(toDate time.Time) {
+	e.ToDate = toDate
+	e.require(euDigitalReportingListDeclarationsRequestFieldToDate)
+}
+
+func (e *EuDigitalReportingListDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuDigitalReportingListDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EuDigitalReportingListDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EuDigitalReportingListDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EuDigitalReportingListDeclarationsRequest
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*e),
+		FromDate: internal.NewDate(e.FromDate),
+		ToDate:   internal.NewDate(e.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	euDistanceSalesThresholdGetDeclarationsRequestFieldDate = big.NewInt(1 << 0)
 )
 
@@ -1711,6 +1862,61 @@ func (e *EuOssComputeDeclarationsRequest) UnmarshalJSON(data []byte) error {
 
 func (e *EuOssComputeDeclarationsRequest) MarshalJSON() ([]byte, error) {
 	type embed EuOssComputeDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	euOwnGoodsTransfersComputeDeclarationsRequestFieldYear  = big.NewInt(1 << 0)
+	euOwnGoodsTransfersComputeDeclarationsRequestFieldMonth = big.NewInt(1 << 1)
+)
+
+type EuOwnGoodsTransfersComputeDeclarationsRequest struct {
+	Year  int64 `json:"year" url:"-"`
+	Month int64 `json:"month" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsRequest) SetYear(year int64) {
+	e.Year = year
+	e.require(euOwnGoodsTransfersComputeDeclarationsRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsRequest) SetMonth(month int64) {
+	e.Month = month
+	e.require(euOwnGoodsTransfersComputeDeclarationsRequestFieldMonth)
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuOwnGoodsTransfersComputeDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EuOwnGoodsTransfersComputeDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EuOwnGoodsTransfersComputeDeclarationsRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -20429,6 +20635,1370 @@ func (e *EsVerifactuDeclaracionResponsableDeclarationsResponse) String() string 
 }
 
 var (
+	euDac7PreviewDeclarationsResponseFieldYear             = big.NewInt(1 << 0)
+	euDac7PreviewDeclarationsResponseFieldCountry          = big.NewInt(1 << 1)
+	euDac7PreviewDeclarationsResponseFieldSystem           = big.NewInt(1 << 2)
+	euDac7PreviewDeclarationsResponseFieldSendsDirectly    = big.NewInt(1 << 3)
+	euDac7PreviewDeclarationsResponseFieldMessageTypeIndic = big.NewInt(1 << 4)
+	euDac7PreviewDeclarationsResponseFieldCurrency         = big.NewInt(1 << 5)
+	euDac7PreviewDeclarationsResponseFieldSellers          = big.NewInt(1 << 6)
+	euDac7PreviewDeclarationsResponseFieldWarnings         = big.NewInt(1 << 7)
+	euDac7PreviewDeclarationsResponseFieldSource           = big.NewInt(1 << 8)
+)
+
+type EuDac7PreviewDeclarationsResponse struct {
+	Year             int64                                           `json:"year" url:"year"`
+	Country          string                                          `json:"country" url:"country"`
+	System           string                                          `json:"system" url:"system"`
+	SendsDirectly    bool                                            `json:"sendsDirectly" url:"sendsDirectly"`
+	MessageTypeIndic string                                          `json:"messageTypeIndic" url:"messageTypeIndic"`
+	Currency         string                                          `json:"currency" url:"currency"`
+	Sellers          []*EuDac7PreviewDeclarationsResponseSellersItem `json:"sellers" url:"sellers"`
+	Warnings         []string                                        `json:"warnings" url:"warnings"`
+	Source           string                                          `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetCountry() string {
+	if e == nil {
+		return ""
+	}
+	return e.Country
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetSystem() string {
+	if e == nil {
+		return ""
+	}
+	return e.System
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetSendsDirectly() bool {
+	if e == nil {
+		return false
+	}
+	return e.SendsDirectly
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetMessageTypeIndic() string {
+	if e == nil {
+		return ""
+	}
+	return e.MessageTypeIndic
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetCurrency() string {
+	if e == nil {
+		return ""
+	}
+	return e.Currency
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetSellers() []*EuDac7PreviewDeclarationsResponseSellersItem {
+	if e == nil {
+		return nil
+	}
+	return e.Sellers
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetWarnings() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Warnings
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetSource() string {
+	if e == nil {
+		return ""
+	}
+	return e.Source
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetYear(year int64) {
+	e.Year = year
+	e.require(euDac7PreviewDeclarationsResponseFieldYear)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetCountry(country string) {
+	e.Country = country
+	e.require(euDac7PreviewDeclarationsResponseFieldCountry)
+}
+
+// SetSystem sets the System field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetSystem(system string) {
+	e.System = system
+	e.require(euDac7PreviewDeclarationsResponseFieldSystem)
+}
+
+// SetSendsDirectly sets the SendsDirectly field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetSendsDirectly(sendsDirectly bool) {
+	e.SendsDirectly = sendsDirectly
+	e.require(euDac7PreviewDeclarationsResponseFieldSendsDirectly)
+}
+
+// SetMessageTypeIndic sets the MessageTypeIndic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetMessageTypeIndic(messageTypeIndic string) {
+	e.MessageTypeIndic = messageTypeIndic
+	e.require(euDac7PreviewDeclarationsResponseFieldMessageTypeIndic)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetCurrency(currency string) {
+	e.Currency = currency
+	e.require(euDac7PreviewDeclarationsResponseFieldCurrency)
+}
+
+// SetSellers sets the Sellers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetSellers(sellers []*EuDac7PreviewDeclarationsResponseSellersItem) {
+	e.Sellers = sellers
+	e.require(euDac7PreviewDeclarationsResponseFieldSellers)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetWarnings(warnings []string) {
+	e.Warnings = warnings
+	e.require(euDac7PreviewDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponse) SetSource(source string) {
+	e.Source = source
+	e.require(euDac7PreviewDeclarationsResponseFieldSource)
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuDac7PreviewDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuDac7PreviewDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EuDac7PreviewDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuDac7PreviewDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euDac7PreviewDeclarationsResponseSellersItemFieldSellerID      = big.NewInt(1 << 0)
+	euDac7PreviewDeclarationsResponseSellersItemFieldName          = big.NewInt(1 << 1)
+	euDac7PreviewDeclarationsResponseSellersItemFieldReportable    = big.NewInt(1 << 2)
+	euDac7PreviewDeclarationsResponseSellersItemFieldReason        = big.NewInt(1 << 3)
+	euDac7PreviewDeclarationsResponseSellersItemFieldConsideration = big.NewInt(1 << 4)
+	euDac7PreviewDeclarationsResponseSellersItemFieldActivities    = big.NewInt(1 << 5)
+	euDac7PreviewDeclarationsResponseSellersItemFieldWarnings      = big.NewInt(1 << 6)
+)
+
+type EuDac7PreviewDeclarationsResponseSellersItem struct {
+	SellerID      string   `json:"sellerId" url:"sellerId"`
+	Name          string   `json:"name" url:"name"`
+	Reportable    bool     `json:"reportable" url:"reportable"`
+	Reason        *string  `json:"reason,omitempty" url:"reason,omitempty"`
+	Consideration string   `json:"consideration" url:"consideration"`
+	Activities    int64    `json:"activities" url:"activities"`
+	Warnings      []string `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetSellerID() string {
+	if e == nil {
+		return ""
+	}
+	return e.SellerID
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetReportable() bool {
+	if e == nil {
+		return false
+	}
+	return e.Reportable
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetReason() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Reason
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetConsideration() string {
+	if e == nil {
+		return ""
+	}
+	return e.Consideration
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetActivities() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Activities
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetWarnings() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Warnings
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetSellerID sets the SellerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) SetSellerID(sellerID string) {
+	e.SellerID = sellerID
+	e.require(euDac7PreviewDeclarationsResponseSellersItemFieldSellerID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) SetName(name string) {
+	e.Name = name
+	e.require(euDac7PreviewDeclarationsResponseSellersItemFieldName)
+}
+
+// SetReportable sets the Reportable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) SetReportable(reportable bool) {
+	e.Reportable = reportable
+	e.require(euDac7PreviewDeclarationsResponseSellersItemFieldReportable)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) SetReason(reason *string) {
+	e.Reason = reason
+	e.require(euDac7PreviewDeclarationsResponseSellersItemFieldReason)
+}
+
+// SetConsideration sets the Consideration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) SetConsideration(consideration string) {
+	e.Consideration = consideration
+	e.require(euDac7PreviewDeclarationsResponseSellersItemFieldConsideration)
+}
+
+// SetActivities sets the Activities field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) SetActivities(activities int64) {
+	e.Activities = activities
+	e.require(euDac7PreviewDeclarationsResponseSellersItemFieldActivities)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) SetWarnings(warnings []string) {
+	e.Warnings = warnings
+	e.require(euDac7PreviewDeclarationsResponseSellersItemFieldWarnings)
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuDac7PreviewDeclarationsResponseSellersItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuDac7PreviewDeclarationsResponseSellersItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) MarshalJSON() ([]byte, error) {
+	type embed EuDac7PreviewDeclarationsResponseSellersItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuDac7PreviewDeclarationsResponseSellersItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euDac7XMLDeclarationsResponseFieldFileName    = big.NewInt(1 << 0)
+	euDac7XMLDeclarationsResponseFieldContentType = big.NewInt(1 << 1)
+	euDac7XMLDeclarationsResponseFieldData        = big.NewInt(1 << 2)
+	euDac7XMLDeclarationsResponseFieldWarnings    = big.NewInt(1 << 3)
+)
+
+type EuDac7XMLDeclarationsResponse struct {
+	FileName    string   `json:"fileName" url:"fileName"`
+	ContentType string   `json:"contentType" url:"contentType"`
+	Data        string   `json:"data" url:"data"`
+	Warnings    []string `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuDac7XMLDeclarationsResponse) GetFileName() string {
+	if e == nil {
+		return ""
+	}
+	return e.FileName
+}
+
+func (e *EuDac7XMLDeclarationsResponse) GetContentType() string {
+	if e == nil {
+		return ""
+	}
+	return e.ContentType
+}
+
+func (e *EuDac7XMLDeclarationsResponse) GetData() string {
+	if e == nil {
+		return ""
+	}
+	return e.Data
+}
+
+func (e *EuDac7XMLDeclarationsResponse) GetWarnings() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Warnings
+}
+
+func (e *EuDac7XMLDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuDac7XMLDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7XMLDeclarationsResponse) SetFileName(fileName string) {
+	e.FileName = fileName
+	e.require(euDac7XMLDeclarationsResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7XMLDeclarationsResponse) SetContentType(contentType string) {
+	e.ContentType = contentType
+	e.require(euDac7XMLDeclarationsResponseFieldContentType)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7XMLDeclarationsResponse) SetData(data string) {
+	e.Data = data
+	e.require(euDac7XMLDeclarationsResponseFieldData)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDac7XMLDeclarationsResponse) SetWarnings(warnings []string) {
+	e.Warnings = warnings
+	e.require(euDac7XMLDeclarationsResponseFieldWarnings)
+}
+
+func (e *EuDac7XMLDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuDac7XMLDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuDac7XMLDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuDac7XMLDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EuDac7XMLDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuDac7XMLDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euDigitalReportingListDeclarationsResponseFieldFromDate     = big.NewInt(1 << 0)
+	euDigitalReportingListDeclarationsResponseFieldToDate       = big.NewInt(1 << 1)
+	euDigitalReportingListDeclarationsResponseFieldAppliesFrom  = big.NewInt(1 << 2)
+	euDigitalReportingListDeclarationsResponseFieldReportTo     = big.NewInt(1 << 3)
+	euDigitalReportingListDeclarationsResponseFieldTransactions = big.NewInt(1 << 4)
+	euDigitalReportingListDeclarationsResponseFieldWarnings     = big.NewInt(1 << 5)
+	euDigitalReportingListDeclarationsResponseFieldSource       = big.NewInt(1 << 6)
+)
+
+type EuDigitalReportingListDeclarationsResponse struct {
+	FromDate     time.Time                                                     `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate       time.Time                                                     `json:"toDate" url:"toDate" format:"date"`
+	AppliesFrom  string                                                        `json:"appliesFrom" url:"appliesFrom"`
+	ReportTo     string                                                        `json:"reportTo" url:"reportTo"`
+	Transactions []*EuDigitalReportingListDeclarationsResponseTransactionsItem `json:"transactions" url:"transactions"`
+	Warnings     []string                                                      `json:"warnings" url:"warnings"`
+	Source       string                                                        `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetFromDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.FromDate
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetToDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.ToDate
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetAppliesFrom() string {
+	if e == nil {
+		return ""
+	}
+	return e.AppliesFrom
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetReportTo() string {
+	if e == nil {
+		return ""
+	}
+	return e.ReportTo
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetTransactions() []*EuDigitalReportingListDeclarationsResponseTransactionsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Transactions
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetWarnings() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Warnings
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetSource() string {
+	if e == nil {
+		return ""
+	}
+	return e.Source
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponse) SetFromDate(fromDate time.Time) {
+	e.FromDate = fromDate
+	e.require(euDigitalReportingListDeclarationsResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponse) SetToDate(toDate time.Time) {
+	e.ToDate = toDate
+	e.require(euDigitalReportingListDeclarationsResponseFieldToDate)
+}
+
+// SetAppliesFrom sets the AppliesFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponse) SetAppliesFrom(appliesFrom string) {
+	e.AppliesFrom = appliesFrom
+	e.require(euDigitalReportingListDeclarationsResponseFieldAppliesFrom)
+}
+
+// SetReportTo sets the ReportTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponse) SetReportTo(reportTo string) {
+	e.ReportTo = reportTo
+	e.require(euDigitalReportingListDeclarationsResponseFieldReportTo)
+}
+
+// SetTransactions sets the Transactions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponse) SetTransactions(transactions []*EuDigitalReportingListDeclarationsResponseTransactionsItem) {
+	e.Transactions = transactions
+	e.require(euDigitalReportingListDeclarationsResponseFieldTransactions)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponse) SetWarnings(warnings []string) {
+	e.Warnings = warnings
+	e.require(euDigitalReportingListDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponse) SetSource(source string) {
+	e.Source = source
+	e.require(euDigitalReportingListDeclarationsResponseFieldSource)
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed EuDigitalReportingListDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EuDigitalReportingListDeclarationsResponse(unmarshaler.embed)
+	e.FromDate = unmarshaler.FromDate.Time()
+	e.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EuDigitalReportingListDeclarationsResponse
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*e),
+		FromDate: internal.NewDate(e.FromDate),
+		ToDate:   internal.NewDate(e.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuDigitalReportingListDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldDirection              = big.NewInt(1 << 0)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldArticle                = big.NewInt(1 << 1)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldDocumentID             = big.NewInt(1 << 2)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldDocumentType           = big.NewInt(1 << 3)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldNumber                 = big.NewInt(1 << 4)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldIssueDate              = big.NewInt(1 << 5)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldPartnerName            = big.NewInt(1 << 6)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldSupplierVatNumber      = big.NewInt(1 << 7)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldCustomerVatNumber      = big.NewInt(1 << 8)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldCurrency               = big.NewInt(1 << 9)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldLines                  = big.NewInt(1 << 10)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldTaxableAmount          = big.NewInt(1 << 11)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldVatAmount              = big.NewInt(1 << 12)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldExemptionReference     = big.NewInt(1 << 13)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldReverseCharge          = big.NewInt(1 << 14)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldCorrectedInvoiceNumber = big.NewInt(1 << 15)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldSupplierAccounts       = big.NewInt(1 << 16)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldReportTo               = big.NewInt(1 << 17)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldDeadline               = big.NewInt(1 << 18)
+	euDigitalReportingListDeclarationsResponseTransactionsItemFieldMissing                = big.NewInt(1 << 19)
+)
+
+type EuDigitalReportingListDeclarationsResponseTransactionsItem struct {
+	Direction              EuDigitalReportingListDeclarationsResponseTransactionsItemDirection    `json:"direction" url:"direction"`
+	Article                EuDigitalReportingListDeclarationsResponseTransactionsItemArticle      `json:"article" url:"article"`
+	DocumentID             string                                                                 `json:"documentId" url:"documentId"`
+	DocumentType           EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType `json:"documentType" url:"documentType"`
+	Number                 *string                                                                `json:"number,omitempty" url:"number,omitempty"`
+	IssueDate              time.Time                                                              `json:"issueDate" url:"issueDate" format:"date"`
+	PartnerName            string                                                                 `json:"partnerName" url:"partnerName"`
+	SupplierVatNumber      *string                                                                `json:"supplierVatNumber,omitempty" url:"supplierVatNumber,omitempty"`
+	CustomerVatNumber      *string                                                                `json:"customerVatNumber,omitempty" url:"customerVatNumber,omitempty"`
+	Currency               string                                                                 `json:"currency" url:"currency"`
+	Lines                  []*EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem `json:"lines" url:"lines"`
+	TaxableAmount          string                                                                 `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount              *string                                                                `json:"vatAmount,omitempty" url:"vatAmount,omitempty"`
+	ExemptionReference     *string                                                                `json:"exemptionReference,omitempty" url:"exemptionReference,omitempty"`
+	ReverseCharge          bool                                                                   `json:"reverseCharge" url:"reverseCharge"`
+	CorrectedInvoiceNumber *string                                                                `json:"correctedInvoiceNumber,omitempty" url:"correctedInvoiceNumber,omitempty"`
+	SupplierAccounts       []string                                                               `json:"supplierAccounts" url:"supplierAccounts"`
+	ReportTo               string                                                                 `json:"reportTo" url:"reportTo"`
+	Deadline               string                                                                 `json:"deadline" url:"deadline"`
+	Missing                []string                                                               `json:"missing" url:"missing"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetDirection() EuDigitalReportingListDeclarationsResponseTransactionsItemDirection {
+	if e == nil {
+		return ""
+	}
+	return e.Direction
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetArticle() EuDigitalReportingListDeclarationsResponseTransactionsItemArticle {
+	if e == nil {
+		return ""
+	}
+	return e.Article
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetDocumentID() string {
+	if e == nil {
+		return ""
+	}
+	return e.DocumentID
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetDocumentType() EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType {
+	if e == nil {
+		return ""
+	}
+	return e.DocumentType
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Number
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetIssueDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.IssueDate
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetPartnerName() string {
+	if e == nil {
+		return ""
+	}
+	return e.PartnerName
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetSupplierVatNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.SupplierVatNumber
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetCustomerVatNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CustomerVatNumber
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetCurrency() string {
+	if e == nil {
+		return ""
+	}
+	return e.Currency
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetLines() []*EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem {
+	if e == nil {
+		return nil
+	}
+	return e.Lines
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetTaxableAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.TaxableAmount
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetVatAmount() *string {
+	if e == nil {
+		return nil
+	}
+	return e.VatAmount
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetExemptionReference() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ExemptionReference
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetReverseCharge() bool {
+	if e == nil {
+		return false
+	}
+	return e.ReverseCharge
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetCorrectedInvoiceNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CorrectedInvoiceNumber
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetSupplierAccounts() []string {
+	if e == nil {
+		return nil
+	}
+	return e.SupplierAccounts
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetReportTo() string {
+	if e == nil {
+		return ""
+	}
+	return e.ReportTo
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetDeadline() string {
+	if e == nil {
+		return ""
+	}
+	return e.Deadline
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetMissing() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Missing
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetDirection sets the Direction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetDirection(direction EuDigitalReportingListDeclarationsResponseTransactionsItemDirection) {
+	e.Direction = direction
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldDirection)
+}
+
+// SetArticle sets the Article field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetArticle(article EuDigitalReportingListDeclarationsResponseTransactionsItemArticle) {
+	e.Article = article
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldArticle)
+}
+
+// SetDocumentID sets the DocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetDocumentID(documentID string) {
+	e.DocumentID = documentID
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldDocumentID)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetDocumentType(documentType EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType) {
+	e.DocumentType = documentType
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldDocumentType)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetNumber(number *string) {
+	e.Number = number
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldNumber)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetIssueDate(issueDate time.Time) {
+	e.IssueDate = issueDate
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldIssueDate)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetPartnerName(partnerName string) {
+	e.PartnerName = partnerName
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldPartnerName)
+}
+
+// SetSupplierVatNumber sets the SupplierVatNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetSupplierVatNumber(supplierVatNumber *string) {
+	e.SupplierVatNumber = supplierVatNumber
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldSupplierVatNumber)
+}
+
+// SetCustomerVatNumber sets the CustomerVatNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetCustomerVatNumber(customerVatNumber *string) {
+	e.CustomerVatNumber = customerVatNumber
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldCustomerVatNumber)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetCurrency(currency string) {
+	e.Currency = currency
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldCurrency)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetLines(lines []*EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) {
+	e.Lines = lines
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldLines)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetTaxableAmount(taxableAmount string) {
+	e.TaxableAmount = taxableAmount
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetVatAmount(vatAmount *string) {
+	e.VatAmount = vatAmount
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldVatAmount)
+}
+
+// SetExemptionReference sets the ExemptionReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetExemptionReference(exemptionReference *string) {
+	e.ExemptionReference = exemptionReference
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldExemptionReference)
+}
+
+// SetReverseCharge sets the ReverseCharge field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetReverseCharge(reverseCharge bool) {
+	e.ReverseCharge = reverseCharge
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldReverseCharge)
+}
+
+// SetCorrectedInvoiceNumber sets the CorrectedInvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetCorrectedInvoiceNumber(correctedInvoiceNumber *string) {
+	e.CorrectedInvoiceNumber = correctedInvoiceNumber
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldCorrectedInvoiceNumber)
+}
+
+// SetSupplierAccounts sets the SupplierAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetSupplierAccounts(supplierAccounts []string) {
+	e.SupplierAccounts = supplierAccounts
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldSupplierAccounts)
+}
+
+// SetReportTo sets the ReportTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetReportTo(reportTo string) {
+	e.ReportTo = reportTo
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldReportTo)
+}
+
+// SetDeadline sets the Deadline field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetDeadline(deadline string) {
+	e.Deadline = deadline
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldDeadline)
+}
+
+// SetMissing sets the Missing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) SetMissing(missing []string) {
+	e.Missing = missing
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemFieldMissing)
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) UnmarshalJSON(data []byte) error {
+	type embed EuDigitalReportingListDeclarationsResponseTransactionsItem
+	var unmarshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EuDigitalReportingListDeclarationsResponseTransactionsItem(unmarshaler.embed)
+	e.IssueDate = unmarshaler.IssueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) MarshalJSON() ([]byte, error) {
+	type embed EuDigitalReportingListDeclarationsResponseTransactionsItem
+	var marshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed:     embed(*e),
+		IssueDate: internal.NewDate(e.IssueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EuDigitalReportingListDeclarationsResponseTransactionsItemArticle string
+
+const (
+	EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1A EuDigitalReportingListDeclarationsResponseTransactionsItemArticle = "262(1)(a)"
+	EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1B EuDigitalReportingListDeclarationsResponseTransactionsItemArticle = "262(1)(b)"
+	EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1C EuDigitalReportingListDeclarationsResponseTransactionsItemArticle = "262(1)(c)"
+	EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1D EuDigitalReportingListDeclarationsResponseTransactionsItemArticle = "262(1)(d)"
+)
+
+func NewEuDigitalReportingListDeclarationsResponseTransactionsItemArticleFromString(s string) (EuDigitalReportingListDeclarationsResponseTransactionsItemArticle, error) {
+	switch s {
+	case "262(1)(a)":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1A, nil
+	case "262(1)(b)":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1B, nil
+	case "262(1)(c)":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1C, nil
+	case "262(1)(d)":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemArticleTwoHundredSixtyTwo1D, nil
+	}
+	var t EuDigitalReportingListDeclarationsResponseTransactionsItemArticle
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EuDigitalReportingListDeclarationsResponseTransactionsItemArticle) Ptr() *EuDigitalReportingListDeclarationsResponseTransactionsItemArticle {
+	return &e
+}
+
+type EuDigitalReportingListDeclarationsResponseTransactionsItemDirection string
+
+const (
+	EuDigitalReportingListDeclarationsResponseTransactionsItemDirectionSupply      EuDigitalReportingListDeclarationsResponseTransactionsItemDirection = "supply"
+	EuDigitalReportingListDeclarationsResponseTransactionsItemDirectionAcquisition EuDigitalReportingListDeclarationsResponseTransactionsItemDirection = "acquisition"
+)
+
+func NewEuDigitalReportingListDeclarationsResponseTransactionsItemDirectionFromString(s string) (EuDigitalReportingListDeclarationsResponseTransactionsItemDirection, error) {
+	switch s {
+	case "supply":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemDirectionSupply, nil
+	case "acquisition":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemDirectionAcquisition, nil
+	}
+	var t EuDigitalReportingListDeclarationsResponseTransactionsItemDirection
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EuDigitalReportingListDeclarationsResponseTransactionsItemDirection) Ptr() *EuDigitalReportingListDeclarationsResponseTransactionsItemDirection {
+	return &e
+}
+
+type EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType string
+
+const (
+	EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentTypeInvoice    EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType = "invoice"
+	EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentTypeCreditNote EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType = "credit_note"
+)
+
+func NewEuDigitalReportingListDeclarationsResponseTransactionsItemDocumentTypeFromString(s string) (EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType, error) {
+	switch s {
+	case "invoice":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentTypeInvoice, nil
+	case "credit_note":
+		return EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentTypeCreditNote, nil
+	}
+	var t EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType) Ptr() *EuDigitalReportingListDeclarationsResponseTransactionsItemDocumentType {
+	return &e
+}
+
+var (
+	euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldDescription    = big.NewInt(1 << 0)
+	euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldQuantity       = big.NewInt(1 << 1)
+	euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldUnit           = big.NewInt(1 << 2)
+	euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldUnitPrice      = big.NewInt(1 << 3)
+	euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldTaxableAmount  = big.NewInt(1 << 4)
+	euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldVatRatePercent = big.NewInt(1 << 5)
+	euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldVatAmount      = big.NewInt(1 << 6)
+)
+
+type EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem struct {
+	Description    string  `json:"description" url:"description"`
+	Quantity       string  `json:"quantity" url:"quantity"`
+	Unit           string  `json:"unit" url:"unit"`
+	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	TaxableAmount  string  `json:"taxableAmount" url:"taxableAmount"`
+	VatRatePercent string  `json:"vatRatePercent" url:"vatRatePercent"`
+	VatAmount      string  `json:"vatAmount" url:"vatAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetDescription() string {
+	if e == nil {
+		return ""
+	}
+	return e.Description
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetQuantity() string {
+	if e == nil {
+		return ""
+	}
+	return e.Quantity
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetUnit() string {
+	if e == nil {
+		return ""
+	}
+	return e.Unit
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetUnitPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.UnitPrice
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetTaxableAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.TaxableAmount
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetVatRatePercent() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatRatePercent
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetVatAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatAmount
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) SetDescription(description string) {
+	e.Description = description
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) SetQuantity(quantity string) {
+	e.Quantity = quantity
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldQuantity)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) SetUnit(unit string) {
+	e.Unit = unit
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldUnit)
+}
+
+// SetUnitPrice sets the UnitPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) SetUnitPrice(unitPrice *string) {
+	e.UnitPrice = unitPrice
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldUnitPrice)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) SetTaxableAmount(taxableAmount string) {
+	e.TaxableAmount = taxableAmount
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldTaxableAmount)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) SetVatRatePercent(vatRatePercent string) {
+	e.VatRatePercent = vatRatePercent
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldVatRatePercent)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) SetVatAmount(vatAmount string) {
+	e.VatAmount = vatAmount
+	e.require(euDigitalReportingListDeclarationsResponseTransactionsItemLinesItemFieldVatAmount)
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) MarshalJSON() ([]byte, error) {
+	type embed EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuDigitalReportingListDeclarationsResponseTransactionsItemLinesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
 	euDistanceSalesThresholdGetDeclarationsResponseFieldThresholdEur    = big.NewInt(1 << 0)
 	euDistanceSalesThresholdGetDeclarationsResponseFieldHomeCountryCode = big.NewInt(1 << 1)
 	euDistanceSalesThresholdGetDeclarationsResponseFieldCurrentYear     = big.NewInt(1 << 2)
@@ -22438,6 +24008,618 @@ func (e *EuOssComputeDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EuOssComputeDeclarationsResponseTotals) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldPeriodYear                  = big.NewInt(1 << 0)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldPeriodMonth                 = big.NewInt(1 << 1)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldFromDate                    = big.NewInt(1 << 2)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldToDate                      = big.NewInt(1 << 3)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldDueDate                     = big.NewInt(1 << 4)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldMemberStateOfIdentification = big.NewInt(1 << 5)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldCurrency                    = big.NewInt(1 << 6)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldRows                        = big.NewInt(1 << 7)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldTotal                       = big.NewInt(1 << 8)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldTransfers                   = big.NewInt(1 << 9)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldWarnings                    = big.NewInt(1 << 10)
+	euOwnGoodsTransfersComputeDeclarationsResponseFieldSource                      = big.NewInt(1 << 11)
+)
+
+type EuOwnGoodsTransfersComputeDeclarationsResponse struct {
+	PeriodYear                  int64                                                          `json:"periodYear" url:"periodYear"`
+	PeriodMonth                 int64                                                          `json:"periodMonth" url:"periodMonth"`
+	FromDate                    time.Time                                                      `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate                      time.Time                                                      `json:"toDate" url:"toDate" format:"date"`
+	DueDate                     time.Time                                                      `json:"dueDate" url:"dueDate" format:"date"`
+	MemberStateOfIdentification string                                                         `json:"memberStateOfIdentification" url:"memberStateOfIdentification"`
+	Currency                    string                                                         `json:"currency" url:"currency"`
+	Rows                        []*EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem      `json:"rows" url:"rows"`
+	Total                       string                                                         `json:"total" url:"total"`
+	Transfers                   []*EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem `json:"transfers" url:"transfers"`
+	Warnings                    []string                                                       `json:"warnings" url:"warnings"`
+	Source                      string                                                         `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetPeriodYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PeriodYear
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetPeriodMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PeriodMonth
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetFromDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.FromDate
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetToDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.ToDate
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetDueDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.DueDate
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetMemberStateOfIdentification() string {
+	if e == nil {
+		return ""
+	}
+	return e.MemberStateOfIdentification
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetCurrency() string {
+	if e == nil {
+		return ""
+	}
+	return e.Currency
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetRows() []*EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Rows
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetTotal() string {
+	if e == nil {
+		return ""
+	}
+	return e.Total
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetTransfers() []*EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem {
+	if e == nil {
+		return nil
+	}
+	return e.Transfers
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetWarnings() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Warnings
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetSource() string {
+	if e == nil {
+		return ""
+	}
+	return e.Source
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetPeriodYear(periodYear int64) {
+	e.PeriodYear = periodYear
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldPeriodYear)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetPeriodMonth(periodMonth int64) {
+	e.PeriodMonth = periodMonth
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldPeriodMonth)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetFromDate(fromDate time.Time) {
+	e.FromDate = fromDate
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetToDate(toDate time.Time) {
+	e.ToDate = toDate
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldToDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetDueDate(dueDate time.Time) {
+	e.DueDate = dueDate
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldDueDate)
+}
+
+// SetMemberStateOfIdentification sets the MemberStateOfIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetMemberStateOfIdentification(memberStateOfIdentification string) {
+	e.MemberStateOfIdentification = memberStateOfIdentification
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldMemberStateOfIdentification)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetCurrency(currency string) {
+	e.Currency = currency
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldCurrency)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetRows(rows []*EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) {
+	e.Rows = rows
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldRows)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetTotal(total string) {
+	e.Total = total
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldTotal)
+}
+
+// SetTransfers sets the Transfers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetTransfers(transfers []*EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) {
+	e.Transfers = transfers
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldTransfers)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetWarnings(warnings []string) {
+	e.Warnings = warnings
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) SetSource(source string) {
+	e.Source = source
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseFieldSource)
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed EuOwnGoodsTransfersComputeDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+		DueDate  *internal.Date `json:"dueDate"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EuOwnGoodsTransfersComputeDeclarationsResponse(unmarshaler.embed)
+	e.FromDate = unmarshaler.FromDate.Time()
+	e.ToDate = unmarshaler.ToDate.Time()
+	e.DueDate = unmarshaler.DueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EuOwnGoodsTransfersComputeDeclarationsResponse
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+		DueDate  *internal.Date `json:"dueDate"`
+	}{
+		embed:    embed(*e),
+		FromDate: internal.NewDate(e.FromDate),
+		ToDate:   internal.NewDate(e.ToDate),
+		DueDate:  internal.NewDate(e.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldDestinationCountryCode = big.NewInt(1 << 0)
+	euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldDispatchCountryCode    = big.NewInt(1 << 1)
+	euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldTaxableAmount          = big.NewInt(1 << 2)
+	euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldTransfers              = big.NewInt(1 << 3)
+)
+
+type EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem struct {
+	DestinationCountryCode string `json:"destinationCountryCode" url:"destinationCountryCode"`
+	DispatchCountryCode    string `json:"dispatchCountryCode" url:"dispatchCountryCode"`
+	TaxableAmount          string `json:"taxableAmount" url:"taxableAmount"`
+	Transfers              int64  `json:"transfers" url:"transfers"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) GetDestinationCountryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.DestinationCountryCode
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) GetDispatchCountryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.DispatchCountryCode
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) GetTaxableAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.TaxableAmount
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) GetTransfers() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Transfers
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetDestinationCountryCode sets the DestinationCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) SetDestinationCountryCode(destinationCountryCode string) {
+	e.DestinationCountryCode = destinationCountryCode
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldDestinationCountryCode)
+}
+
+// SetDispatchCountryCode sets the DispatchCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) SetDispatchCountryCode(dispatchCountryCode string) {
+	e.DispatchCountryCode = dispatchCountryCode
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldDispatchCountryCode)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) SetTaxableAmount(taxableAmount string) {
+	e.TaxableAmount = taxableAmount
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldTaxableAmount)
+}
+
+// SetTransfers sets the Transfers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) SetTransfers(transfers int64) {
+	e.Transfers = transfers
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseRowsItemFieldTransfers)
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseRowsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldMovementID      = big.NewInt(1 << 0)
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldDate            = big.NewInt(1 << 1)
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldItemID          = big.NewInt(1 << 2)
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldItemName        = big.NewInt(1 << 3)
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldQuantity        = big.NewInt(1 << 4)
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldCost            = big.NewInt(1 << 5)
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldFromCountryCode = big.NewInt(1 << 6)
+	euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldToCountryCode   = big.NewInt(1 << 7)
+)
+
+type EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem struct {
+	MovementID      string    `json:"movementId" url:"movementId"`
+	Date            time.Time `json:"date" url:"date" format:"date"`
+	ItemID          string    `json:"itemId" url:"itemId"`
+	ItemName        string    `json:"itemName" url:"itemName"`
+	Quantity        string    `json:"quantity" url:"quantity"`
+	Cost            string    `json:"cost" url:"cost"`
+	FromCountryCode string    `json:"fromCountryCode" url:"fromCountryCode"`
+	ToCountryCode   string    `json:"toCountryCode" url:"toCountryCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetMovementID() string {
+	if e == nil {
+		return ""
+	}
+	return e.MovementID
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.Date
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetItemID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ItemID
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetItemName() string {
+	if e == nil {
+		return ""
+	}
+	return e.ItemName
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetQuantity() string {
+	if e == nil {
+		return ""
+	}
+	return e.Quantity
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetCost() string {
+	if e == nil {
+		return ""
+	}
+	return e.Cost
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetFromCountryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.FromCountryCode
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetToCountryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.ToCountryCode
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetMovementID sets the MovementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetMovementID(movementID string) {
+	e.MovementID = movementID
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldMovementID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetDate(date time.Time) {
+	e.Date = date
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldDate)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetItemID(itemID string) {
+	e.ItemID = itemID
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldItemID)
+}
+
+// SetItemName sets the ItemName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetItemName(itemName string) {
+	e.ItemName = itemName
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldItemName)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetQuantity(quantity string) {
+	e.Quantity = quantity
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldQuantity)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetCost(cost string) {
+	e.Cost = cost
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldCost)
+}
+
+// SetFromCountryCode sets the FromCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetFromCountryCode(fromCountryCode string) {
+	e.FromCountryCode = fromCountryCode
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldFromCountryCode)
+}
+
+// SetToCountryCode sets the ToCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) SetToCountryCode(toCountryCode string) {
+	e.ToCountryCode = toCountryCode
+	e.require(euOwnGoodsTransfersComputeDeclarationsResponseTransfersItemFieldToCountryCode)
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) UnmarshalJSON(data []byte) error {
+	type embed EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem(unmarshaler.embed)
+	e.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) MarshalJSON() ([]byte, error) {
+	type embed EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*e),
+		Date:  internal.NewDate(e.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOwnGoodsTransfersComputeDeclarationsResponseTransfersItem) String() string {
 	if e == nil {
 		return "<nil>"
 	}

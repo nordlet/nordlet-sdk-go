@@ -575,12 +575,15 @@ var (
 	invoicesApplyAdvanceSalesRequestFieldAdvanceID = big.NewInt(1 << 0)
 	invoicesApplyAdvanceSalesRequestFieldInvoiceID = big.NewInt(1 << 1)
 	invoicesApplyAdvanceSalesRequestFieldDate      = big.NewInt(1 << 2)
+	invoicesApplyAdvanceSalesRequestFieldAmount    = big.NewInt(1 << 3)
 )
 
 type InvoicesApplyAdvanceSalesRequest struct {
 	AdvanceID string     `json:"advanceId" url:"-"`
 	InvoiceID string     `json:"invoiceId" url:"-"`
 	Date      *time.Time `json:"date,omitempty" url:"-" format:"date"`
+	// Gross amount of the advance to apply; defaults to the unapplied advance or the unpaid balance of the invoice, whichever is smaller
+	Amount *string `json:"amount,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -612,6 +615,13 @@ func (i *InvoicesApplyAdvanceSalesRequest) SetInvoiceID(invoiceID string) {
 func (i *InvoicesApplyAdvanceSalesRequest) SetDate(date *time.Time) {
 	i.Date = date
 	i.require(invoicesApplyAdvanceSalesRequestFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesRequest) SetAmount(amount *string) {
+	i.Amount = amount
+	i.require(invoicesApplyAdvanceSalesRequestFieldAmount)
 }
 
 func (i *InvoicesApplyAdvanceSalesRequest) UnmarshalJSON(data []byte) error {
@@ -1574,6 +1584,52 @@ func (i *InvoicesPeppolSendSalesRequest) UnmarshalJSON(data []byte) error {
 
 func (i *InvoicesPeppolSendSalesRequest) MarshalJSON() ([]byte, error) {
 	type embed InvoicesPeppolSendSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoicesPeppolStatusSalesRequestFieldID = big.NewInt(1 << 0)
+)
+
+type InvoicesPeppolStatusSalesRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoicesPeppolStatusSalesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPeppolStatusSalesRequest) SetID(id string) {
+	i.ID = id
+	i.require(invoicesPeppolStatusSalesRequestFieldID)
+}
+
+func (i *InvoicesPeppolStatusSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesPeppolStatusSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoicesPeppolStatusSalesRequest(body)
+	return nil
+}
+
+func (i *InvoicesPeppolStatusSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoicesPeppolStatusSalesRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -6835,10 +6891,16 @@ var (
 	invoicesApplyAdvanceSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesApplyAdvanceSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(1 << 53)
-	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(1 << 54)
+	invoicesApplyAdvanceSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesApplyAdvanceSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesApplyAdvanceSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesApplyAdvanceSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
+	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(1 << 59)
+	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
 )
 
 type InvoicesApplyAdvanceSalesResponse struct {
@@ -6893,10 +6955,17 @@ type InvoicesApplyAdvanceSalesResponse struct {
 	EinvoiceDetail               *string                                        `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                                     `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                                     `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                        `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                        `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                        `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                     `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                     `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*InvoicesApplyAdvanceSalesResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence                  *InvoicesApplyAdvanceSalesResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                                       `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesApplyAdvanceSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesApplyAdvanceSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7262,6 +7331,41 @@ func (i *InvoicesApplyAdvanceSalesResponse) GetEinvoiceCheckedAt() *time.Time {
 	return i.EinvoiceCheckedAt
 }
 
+func (i *InvoicesApplyAdvanceSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
 func (i *InvoicesApplyAdvanceSalesResponse) GetCreatedAt() time.Time {
 	if i == nil {
 		return time.Time{}
@@ -7274,6 +7378,13 @@ func (i *InvoicesApplyAdvanceSalesResponse) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return i.UpdatedAt
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
 }
 
 func (i *InvoicesApplyAdvanceSalesResponse) GetLines() []*InvoicesApplyAdvanceSalesResponseLinesItem {
@@ -7661,6 +7772,41 @@ func (i *InvoicesApplyAdvanceSalesResponse) SetEinvoiceCheckedAt(einvoiceChecked
 	i.require(invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesApplyAdvanceSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesApplyAdvanceSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesApplyAdvanceSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesApplyAdvanceSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesApplyAdvanceSalesResponse) SetCreatedAt(createdAt time.Time) {
@@ -7673,6 +7819,13 @@ func (i *InvoicesApplyAdvanceSalesResponse) SetCreatedAt(createdAt time.Time) {
 func (i *InvoicesApplyAdvanceSalesResponse) SetUpdatedAt(updatedAt time.Time) {
 	i.UpdatedAt = updatedAt
 	i.require(invoicesApplyAdvanceSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -7699,6 +7852,8 @@ func (i *InvoicesApplyAdvanceSalesResponse) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -7714,6 +7869,8 @@ func (i *InvoicesApplyAdvanceSalesResponse) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -7735,6 +7892,8 @@ func (i *InvoicesApplyAdvanceSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -7745,6 +7904,8 @@ func (i *InvoicesApplyAdvanceSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}
@@ -10266,10 +10427,16 @@ var (
 	invoicesCreateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesCreateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesCreateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesCreateSalesResponseFieldLines                        = big.NewInt(1 << 53)
-	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 54)
+	invoicesCreateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesCreateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesCreateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesCreateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesCreateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
+	invoicesCreateSalesResponseFieldLines                        = big.NewInt(1 << 59)
+	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
 )
 
 type InvoicesCreateSalesResponse struct {
@@ -10324,10 +10491,17 @@ type InvoicesCreateSalesResponse struct {
 	EinvoiceDetail               *string                                  `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                               `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                               `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                  `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                  `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                  `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                               `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                               `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*InvoicesCreateSalesResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence                  *InvoicesCreateSalesResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                                 `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesCreateSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesCreateSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10693,6 +10867,41 @@ func (i *InvoicesCreateSalesResponse) GetEinvoiceCheckedAt() *time.Time {
 	return i.EinvoiceCheckedAt
 }
 
+func (i *InvoicesCreateSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesCreateSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesCreateSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesCreateSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesCreateSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
 func (i *InvoicesCreateSalesResponse) GetCreatedAt() time.Time {
 	if i == nil {
 		return time.Time{}
@@ -10705,6 +10914,13 @@ func (i *InvoicesCreateSalesResponse) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return i.UpdatedAt
+}
+
+func (i *InvoicesCreateSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
 }
 
 func (i *InvoicesCreateSalesResponse) GetLines() []*InvoicesCreateSalesResponseLinesItem {
@@ -11092,6 +11308,41 @@ func (i *InvoicesCreateSalesResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *ti
 	i.require(invoicesCreateSalesResponseFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesCreateSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesCreateSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesCreateSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesCreateSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesCreateSalesResponseFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreateSalesResponse) SetCreatedAt(createdAt time.Time) {
@@ -11104,6 +11355,13 @@ func (i *InvoicesCreateSalesResponse) SetCreatedAt(createdAt time.Time) {
 func (i *InvoicesCreateSalesResponse) SetUpdatedAt(updatedAt time.Time) {
 	i.UpdatedAt = updatedAt
 	i.require(invoicesCreateSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesCreateSalesResponseFieldAdvanceAppliedAmount)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -11130,6 +11388,8 @@ func (i *InvoicesCreateSalesResponse) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -11145,6 +11405,8 @@ func (i *InvoicesCreateSalesResponse) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -11166,6 +11428,8 @@ func (i *InvoicesCreateSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -11176,6 +11440,8 @@ func (i *InvoicesCreateSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}
@@ -13710,10 +13976,16 @@ var (
 	invoicesGetSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesGetSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesGetSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesGetSalesResponseFieldLines                        = big.NewInt(1 << 53)
-	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(1 << 54)
+	invoicesGetSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesGetSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesGetSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesGetSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesGetSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesGetSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
+	invoicesGetSalesResponseFieldLines                        = big.NewInt(1 << 59)
+	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
 )
 
 type InvoicesGetSalesResponse struct {
@@ -13768,10 +14040,17 @@ type InvoicesGetSalesResponse struct {
 	EinvoiceDetail               *string                               `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                            `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                            `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                               `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                               `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                               `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                            `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                            `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                             `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                             `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*InvoicesGetSalesResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence                  *InvoicesGetSalesResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                              `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesGetSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesGetSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14137,6 +14416,41 @@ func (i *InvoicesGetSalesResponse) GetEinvoiceCheckedAt() *time.Time {
 	return i.EinvoiceCheckedAt
 }
 
+func (i *InvoicesGetSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesGetSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesGetSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesGetSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesGetSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
 func (i *InvoicesGetSalesResponse) GetCreatedAt() time.Time {
 	if i == nil {
 		return time.Time{}
@@ -14149,6 +14463,13 @@ func (i *InvoicesGetSalesResponse) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return i.UpdatedAt
+}
+
+func (i *InvoicesGetSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
 }
 
 func (i *InvoicesGetSalesResponse) GetLines() []*InvoicesGetSalesResponseLinesItem {
@@ -14536,6 +14857,41 @@ func (i *InvoicesGetSalesResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *time.
 	i.require(invoicesGetSalesResponseFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesGetSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesGetSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesGetSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesGetSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesGetSalesResponseFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetSalesResponse) SetCreatedAt(createdAt time.Time) {
@@ -14548,6 +14904,13 @@ func (i *InvoicesGetSalesResponse) SetCreatedAt(createdAt time.Time) {
 func (i *InvoicesGetSalesResponse) SetUpdatedAt(updatedAt time.Time) {
 	i.UpdatedAt = updatedAt
 	i.require(invoicesGetSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesGetSalesResponseFieldAdvanceAppliedAmount)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -14574,6 +14937,8 @@ func (i *InvoicesGetSalesResponse) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -14589,6 +14954,8 @@ func (i *InvoicesGetSalesResponse) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -14610,6 +14977,8 @@ func (i *InvoicesGetSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -14620,6 +14989,8 @@ func (i *InvoicesGetSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}
@@ -16420,10 +16791,16 @@ var (
 	invoicesIssueSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesIssueSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesIssueSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesIssueSalesResponseFieldLines                        = big.NewInt(1 << 53)
-	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(1 << 54)
+	invoicesIssueSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesIssueSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesIssueSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesIssueSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesIssueSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
+	invoicesIssueSalesResponseFieldLines                        = big.NewInt(1 << 59)
+	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
 )
 
 type InvoicesIssueSalesResponse struct {
@@ -16478,10 +16855,17 @@ type InvoicesIssueSalesResponse struct {
 	EinvoiceDetail               *string                                 `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                              `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                              `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                 `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                 `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                 `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                              `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                              `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                               `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                               `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*InvoicesIssueSalesResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence                  *InvoicesIssueSalesResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                                `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesIssueSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesIssueSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16847,6 +17231,41 @@ func (i *InvoicesIssueSalesResponse) GetEinvoiceCheckedAt() *time.Time {
 	return i.EinvoiceCheckedAt
 }
 
+func (i *InvoicesIssueSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesIssueSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesIssueSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesIssueSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesIssueSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
 func (i *InvoicesIssueSalesResponse) GetCreatedAt() time.Time {
 	if i == nil {
 		return time.Time{}
@@ -16859,6 +17278,13 @@ func (i *InvoicesIssueSalesResponse) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return i.UpdatedAt
+}
+
+func (i *InvoicesIssueSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
 }
 
 func (i *InvoicesIssueSalesResponse) GetLines() []*InvoicesIssueSalesResponseLinesItem {
@@ -17246,6 +17672,41 @@ func (i *InvoicesIssueSalesResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *tim
 	i.require(invoicesIssueSalesResponseFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesIssueSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesIssueSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesIssueSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesIssueSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesIssueSalesResponseFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesIssueSalesResponse) SetCreatedAt(createdAt time.Time) {
@@ -17258,6 +17719,13 @@ func (i *InvoicesIssueSalesResponse) SetCreatedAt(createdAt time.Time) {
 func (i *InvoicesIssueSalesResponse) SetUpdatedAt(updatedAt time.Time) {
 	i.UpdatedAt = updatedAt
 	i.require(invoicesIssueSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesIssueSalesResponseFieldAdvanceAppliedAmount)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -17284,6 +17752,8 @@ func (i *InvoicesIssueSalesResponse) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -17299,6 +17769,8 @@ func (i *InvoicesIssueSalesResponse) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -17320,6 +17792,8 @@ func (i *InvoicesIssueSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -17330,6 +17804,8 @@ func (i *InvoicesIssueSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}
@@ -19733,9 +20209,14 @@ var (
 	invoicesListSalesResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesListSalesResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(1 << 53)
+	invoicesListSalesResponseRowsItemFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesListSalesResponseRowsItemFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesListSalesResponseRowsItemFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesListSalesResponseRowsItemFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesListSalesResponseRowsItemFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(1 << 58)
 )
 
 type InvoicesListSalesResponseRowsItem struct {
@@ -19790,6 +20271,11 @@ type InvoicesListSalesResponseRowsItem struct {
 	EinvoiceDetail               *string                                        `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                                     `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                                     `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                        `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                        `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                        `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                     `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                     `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
 	PartnerName                  *string                                        `json:"partnerName,omitempty" url:"partnerName,omitempty"`
@@ -20156,6 +20642,41 @@ func (i *InvoicesListSalesResponseRowsItem) GetEinvoiceCheckedAt() *time.Time {
 		return nil
 	}
 	return i.EinvoiceCheckedAt
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
 }
 
 func (i *InvoicesListSalesResponseRowsItem) GetCreatedAt() time.Time {
@@ -20550,6 +21071,41 @@ func (i *InvoicesListSalesResponseRowsItem) SetEinvoiceCheckedAt(einvoiceChecked
 	i.require(invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesListSalesResponseRowsItemFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesListSalesResponseRowsItemFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesListSalesResponseRowsItemFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesListSalesResponseRowsItemFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesListSalesResponseRowsItemFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesListSalesResponseRowsItem) SetCreatedAt(createdAt time.Time) {
@@ -20581,6 +21137,8 @@ func (i *InvoicesListSalesResponseRowsItem) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -20596,6 +21154,8 @@ func (i *InvoicesListSalesResponseRowsItem) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -20617,6 +21177,8 @@ func (i *InvoicesListSalesResponseRowsItem) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -20627,6 +21189,8 @@ func (i *InvoicesListSalesResponseRowsItem) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}
@@ -20819,10 +21383,16 @@ var (
 	invoicesLockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesLockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesLockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesLockSalesResponseFieldLines                        = big.NewInt(1 << 53)
-	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 54)
+	invoicesLockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesLockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesLockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesLockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesLockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesLockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
+	invoicesLockSalesResponseFieldLines                        = big.NewInt(1 << 59)
+	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
 )
 
 type InvoicesLockSalesResponse struct {
@@ -20877,10 +21447,17 @@ type InvoicesLockSalesResponse struct {
 	EinvoiceDetail               *string                                `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                             `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                             `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                             `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                             `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                              `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                              `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*InvoicesLockSalesResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence                  *InvoicesLockSalesResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                               `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesLockSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesLockSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -21246,6 +21823,41 @@ func (i *InvoicesLockSalesResponse) GetEinvoiceCheckedAt() *time.Time {
 	return i.EinvoiceCheckedAt
 }
 
+func (i *InvoicesLockSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesLockSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesLockSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesLockSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesLockSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
 func (i *InvoicesLockSalesResponse) GetCreatedAt() time.Time {
 	if i == nil {
 		return time.Time{}
@@ -21258,6 +21870,13 @@ func (i *InvoicesLockSalesResponse) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return i.UpdatedAt
+}
+
+func (i *InvoicesLockSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
 }
 
 func (i *InvoicesLockSalesResponse) GetLines() []*InvoicesLockSalesResponseLinesItem {
@@ -21645,6 +22264,41 @@ func (i *InvoicesLockSalesResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *time
 	i.require(invoicesLockSalesResponseFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesLockSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesLockSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesLockSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesLockSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesLockSalesResponseFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesLockSalesResponse) SetCreatedAt(createdAt time.Time) {
@@ -21657,6 +22311,13 @@ func (i *InvoicesLockSalesResponse) SetCreatedAt(createdAt time.Time) {
 func (i *InvoicesLockSalesResponse) SetUpdatedAt(updatedAt time.Time) {
 	i.UpdatedAt = updatedAt
 	i.require(invoicesLockSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesLockSalesResponseFieldAdvanceAppliedAmount)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -21683,6 +22344,8 @@ func (i *InvoicesLockSalesResponse) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -21698,6 +22361,8 @@ func (i *InvoicesLockSalesResponse) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -21719,6 +22384,8 @@ func (i *InvoicesLockSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -21729,6 +22396,8 @@ func (i *InvoicesLockSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}
@@ -23909,14 +24578,18 @@ var (
 	invoicesPeppolSendSalesResponseFieldSent       = big.NewInt(1 << 0)
 	invoicesPeppolSendSalesResponseFieldMessageID  = big.NewInt(1 << 1)
 	invoicesPeppolSendSalesResponseFieldReceiverID = big.NewInt(1 << 2)
-	invoicesPeppolSendSalesResponseFieldFileID     = big.NewInt(1 << 3)
+	invoicesPeppolSendSalesResponseFieldStatus     = big.NewInt(1 << 3)
+	invoicesPeppolSendSalesResponseFieldDetail     = big.NewInt(1 << 4)
+	invoicesPeppolSendSalesResponseFieldFileID     = big.NewInt(1 << 5)
 )
 
 type InvoicesPeppolSendSalesResponse struct {
-	Sent       bool    `json:"sent" url:"sent"`
-	MessageID  string  `json:"messageId" url:"messageId"`
-	ReceiverID string  `json:"receiverId" url:"receiverId"`
-	FileID     *string `json:"fileId,omitempty" url:"fileId,omitempty"`
+	Sent       bool                                  `json:"sent" url:"sent"`
+	MessageID  string                                `json:"messageId" url:"messageId"`
+	ReceiverID string                                `json:"receiverId" url:"receiverId"`
+	Status     InvoicesPeppolSendSalesResponseStatus `json:"status" url:"status"`
+	Detail     *string                               `json:"detail,omitempty" url:"detail,omitempty"`
+	FileID     *string                               `json:"fileId,omitempty" url:"fileId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -23944,6 +24617,20 @@ func (i *InvoicesPeppolSendSalesResponse) GetReceiverID() string {
 		return ""
 	}
 	return i.ReceiverID
+}
+
+func (i *InvoicesPeppolSendSalesResponse) GetStatus() InvoicesPeppolSendSalesResponseStatus {
+	if i == nil {
+		return ""
+	}
+	return i.Status
+}
+
+func (i *InvoicesPeppolSendSalesResponse) GetDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Detail
 }
 
 func (i *InvoicesPeppolSendSalesResponse) GetFileID() *string {
@@ -23986,6 +24673,20 @@ func (i *InvoicesPeppolSendSalesResponse) SetMessageID(messageID string) {
 func (i *InvoicesPeppolSendSalesResponse) SetReceiverID(receiverID string) {
 	i.ReceiverID = receiverID
 	i.require(invoicesPeppolSendSalesResponseFieldReceiverID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPeppolSendSalesResponse) SetStatus(status InvoicesPeppolSendSalesResponseStatus) {
+	i.Status = status
+	i.require(invoicesPeppolSendSalesResponseFieldStatus)
+}
+
+// SetDetail sets the Detail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPeppolSendSalesResponse) SetDetail(detail *string) {
+	i.Detail = detail
+	i.require(invoicesPeppolSendSalesResponseFieldDetail)
 }
 
 // SetFileID sets the FileID field and marks it as non-optional;
@@ -24035,6 +24736,202 @@ func (i *InvoicesPeppolSendSalesResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", i)
+}
+
+type InvoicesPeppolSendSalesResponseStatus string
+
+const (
+	InvoicesPeppolSendSalesResponseStatusPending   InvoicesPeppolSendSalesResponseStatus = "pending"
+	InvoicesPeppolSendSalesResponseStatusDelivered InvoicesPeppolSendSalesResponseStatus = "delivered"
+	InvoicesPeppolSendSalesResponseStatusRejected  InvoicesPeppolSendSalesResponseStatus = "rejected"
+	InvoicesPeppolSendSalesResponseStatusFailed    InvoicesPeppolSendSalesResponseStatus = "failed"
+)
+
+func NewInvoicesPeppolSendSalesResponseStatusFromString(s string) (InvoicesPeppolSendSalesResponseStatus, error) {
+	switch s {
+	case "pending":
+		return InvoicesPeppolSendSalesResponseStatusPending, nil
+	case "delivered":
+		return InvoicesPeppolSendSalesResponseStatusDelivered, nil
+	case "rejected":
+		return InvoicesPeppolSendSalesResponseStatusRejected, nil
+	case "failed":
+		return InvoicesPeppolSendSalesResponseStatusFailed, nil
+	}
+	var t InvoicesPeppolSendSalesResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesPeppolSendSalesResponseStatus) Ptr() *InvoicesPeppolSendSalesResponseStatus {
+	return &i
+}
+
+var (
+	invoicesPeppolStatusSalesResponseFieldMessageID = big.NewInt(1 << 0)
+	invoicesPeppolStatusSalesResponseFieldStatus    = big.NewInt(1 << 1)
+	invoicesPeppolStatusSalesResponseFieldDetail    = big.NewInt(1 << 2)
+	invoicesPeppolStatusSalesResponseFieldCheckedAt = big.NewInt(1 << 3)
+)
+
+type InvoicesPeppolStatusSalesResponse struct {
+	MessageID string                                  `json:"messageId" url:"messageId"`
+	Status    InvoicesPeppolStatusSalesResponseStatus `json:"status" url:"status"`
+	Detail    *string                                 `json:"detail,omitempty" url:"detail,omitempty"`
+	CheckedAt time.Time                               `json:"checkedAt" url:"checkedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) GetMessageID() string {
+	if i == nil {
+		return ""
+	}
+	return i.MessageID
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) GetStatus() InvoicesPeppolStatusSalesResponseStatus {
+	if i == nil {
+		return ""
+	}
+	return i.Status
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) GetDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Detail
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) GetCheckedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CheckedAt
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetMessageID sets the MessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPeppolStatusSalesResponse) SetMessageID(messageID string) {
+	i.MessageID = messageID
+	i.require(invoicesPeppolStatusSalesResponseFieldMessageID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPeppolStatusSalesResponse) SetStatus(status InvoicesPeppolStatusSalesResponseStatus) {
+	i.Status = status
+	i.require(invoicesPeppolStatusSalesResponseFieldStatus)
+}
+
+// SetDetail sets the Detail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPeppolStatusSalesResponse) SetDetail(detail *string) {
+	i.Detail = detail
+	i.require(invoicesPeppolStatusSalesResponseFieldDetail)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPeppolStatusSalesResponse) SetCheckedAt(checkedAt time.Time) {
+	i.CheckedAt = checkedAt
+	i.require(invoicesPeppolStatusSalesResponseFieldCheckedAt)
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed InvoicesPeppolStatusSalesResponse
+	var unmarshaler = struct {
+		embed
+		CheckedAt *internal.DateTime `json:"checkedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesPeppolStatusSalesResponse(unmarshaler.embed)
+	i.CheckedAt = unmarshaler.CheckedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoicesPeppolStatusSalesResponse
+	var marshaler = struct {
+		embed
+		CheckedAt *internal.DateTime `json:"checkedAt"`
+	}{
+		embed:     embed(*i),
+		CheckedAt: internal.NewDateTime(i.CheckedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesPeppolStatusSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoicesPeppolStatusSalesResponseStatus string
+
+const (
+	InvoicesPeppolStatusSalesResponseStatusPending   InvoicesPeppolStatusSalesResponseStatus = "pending"
+	InvoicesPeppolStatusSalesResponseStatusDelivered InvoicesPeppolStatusSalesResponseStatus = "delivered"
+	InvoicesPeppolStatusSalesResponseStatusRejected  InvoicesPeppolStatusSalesResponseStatus = "rejected"
+	InvoicesPeppolStatusSalesResponseStatusFailed    InvoicesPeppolStatusSalesResponseStatus = "failed"
+)
+
+func NewInvoicesPeppolStatusSalesResponseStatusFromString(s string) (InvoicesPeppolStatusSalesResponseStatus, error) {
+	switch s {
+	case "pending":
+		return InvoicesPeppolStatusSalesResponseStatusPending, nil
+	case "delivered":
+		return InvoicesPeppolStatusSalesResponseStatusDelivered, nil
+	case "rejected":
+		return InvoicesPeppolStatusSalesResponseStatusRejected, nil
+	case "failed":
+		return InvoicesPeppolStatusSalesResponseStatusFailed, nil
+	}
+	var t InvoicesPeppolStatusSalesResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesPeppolStatusSalesResponseStatus) Ptr() *InvoicesPeppolStatusSalesResponseStatus {
+	return &i
 }
 
 var (
@@ -24362,10 +25259,16 @@ var (
 	invoicesUnlockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesUnlockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesUnlockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(1 << 53)
-	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 54)
+	invoicesUnlockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesUnlockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesUnlockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesUnlockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesUnlockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesUnlockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
+	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(1 << 59)
+	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
 )
 
 type InvoicesUnlockSalesResponse struct {
@@ -24420,10 +25323,17 @@ type InvoicesUnlockSalesResponse struct {
 	EinvoiceDetail               *string                                  `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                               `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                               `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                  `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                  `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                  `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                               `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                               `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*InvoicesUnlockSalesResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence                  *InvoicesUnlockSalesResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                                 `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesUnlockSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesUnlockSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -24789,6 +25699,41 @@ func (i *InvoicesUnlockSalesResponse) GetEinvoiceCheckedAt() *time.Time {
 	return i.EinvoiceCheckedAt
 }
 
+func (i *InvoicesUnlockSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesUnlockSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesUnlockSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesUnlockSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesUnlockSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
 func (i *InvoicesUnlockSalesResponse) GetCreatedAt() time.Time {
 	if i == nil {
 		return time.Time{}
@@ -24801,6 +25746,13 @@ func (i *InvoicesUnlockSalesResponse) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return i.UpdatedAt
+}
+
+func (i *InvoicesUnlockSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
 }
 
 func (i *InvoicesUnlockSalesResponse) GetLines() []*InvoicesUnlockSalesResponseLinesItem {
@@ -25188,6 +26140,41 @@ func (i *InvoicesUnlockSalesResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *ti
 	i.require(invoicesUnlockSalesResponseFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesUnlockSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesUnlockSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesUnlockSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesUnlockSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesUnlockSalesResponseFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUnlockSalesResponse) SetCreatedAt(createdAt time.Time) {
@@ -25200,6 +26187,13 @@ func (i *InvoicesUnlockSalesResponse) SetCreatedAt(createdAt time.Time) {
 func (i *InvoicesUnlockSalesResponse) SetUpdatedAt(updatedAt time.Time) {
 	i.UpdatedAt = updatedAt
 	i.require(invoicesUnlockSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesUnlockSalesResponseFieldAdvanceAppliedAmount)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -25226,6 +26220,8 @@ func (i *InvoicesUnlockSalesResponse) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -25241,6 +26237,8 @@ func (i *InvoicesUnlockSalesResponse) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -25262,6 +26260,8 @@ func (i *InvoicesUnlockSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -25272,6 +26272,8 @@ func (i *InvoicesUnlockSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}
@@ -27765,10 +28767,16 @@ var (
 	invoicesUpdateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
 	invoicesUpdateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
 	invoicesUpdateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 51)
-	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 52)
-	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(1 << 53)
-	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 54)
+	invoicesUpdateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
+	invoicesUpdateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
+	invoicesUpdateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
+	invoicesUpdateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
+	invoicesUpdateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
+	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
+	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
+	invoicesUpdateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
+	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(1 << 59)
+	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
 )
 
 type InvoicesUpdateSalesResponse struct {
@@ -27823,10 +28831,17 @@ type InvoicesUpdateSalesResponse struct {
 	EinvoiceDetail               *string                                  `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
 	EinvoiceSentAt               *time.Time                               `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
 	EinvoiceCheckedAt            *time.Time                               `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                  `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                  `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                  `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                               `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                               `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
 	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
-	Lines                        []*InvoicesUpdateSalesResponseLinesItem  `json:"lines" url:"lines"`
-	VatEvidence                  *InvoicesUpdateSalesResponseVatEvidence  `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                                 `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesUpdateSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesUpdateSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -28192,6 +29207,41 @@ func (i *InvoicesUpdateSalesResponse) GetEinvoiceCheckedAt() *time.Time {
 	return i.EinvoiceCheckedAt
 }
 
+func (i *InvoicesUpdateSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesUpdateSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesUpdateSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesUpdateSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesUpdateSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
 func (i *InvoicesUpdateSalesResponse) GetCreatedAt() time.Time {
 	if i == nil {
 		return time.Time{}
@@ -28204,6 +29254,13 @@ func (i *InvoicesUpdateSalesResponse) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return i.UpdatedAt
+}
+
+func (i *InvoicesUpdateSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
 }
 
 func (i *InvoicesUpdateSalesResponse) GetLines() []*InvoicesUpdateSalesResponseLinesItem {
@@ -28591,6 +29648,41 @@ func (i *InvoicesUpdateSalesResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *ti
 	i.require(invoicesUpdateSalesResponseFieldEinvoiceCheckedAt)
 }
 
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesUpdateSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesUpdateSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesUpdateSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesUpdateSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesUpdateSalesResponseFieldPeppolCheckedAt)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdateSalesResponse) SetCreatedAt(createdAt time.Time) {
@@ -28603,6 +29695,13 @@ func (i *InvoicesUpdateSalesResponse) SetCreatedAt(createdAt time.Time) {
 func (i *InvoicesUpdateSalesResponse) SetUpdatedAt(updatedAt time.Time) {
 	i.UpdatedAt = updatedAt
 	i.require(invoicesUpdateSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesUpdateSalesResponseFieldAdvanceAppliedAmount)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -28629,6 +29728,8 @@ func (i *InvoicesUpdateSalesResponse) UnmarshalJSON(data []byte) error {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -28644,6 +29745,8 @@ func (i *InvoicesUpdateSalesResponse) UnmarshalJSON(data []byte) error {
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
 	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
 	i.CreatedAt = unmarshaler.CreatedAt.Time()
 	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
@@ -28665,6 +29768,8 @@ func (i *InvoicesUpdateSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
 		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
 		CreatedAt           *internal.DateTime `json:"createdAt"`
 		UpdatedAt           *internal.DateTime `json:"updatedAt"`
 	}{
@@ -28675,6 +29780,8 @@ func (i *InvoicesUpdateSalesResponse) MarshalJSON() ([]byte, error) {
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
 		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
 		CreatedAt:           internal.NewDateTime(i.CreatedAt),
 		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
 	}

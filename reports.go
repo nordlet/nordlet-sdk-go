@@ -10071,16 +10071,18 @@ func (o *OnlineSalesReportsResponse) String() string {
 
 var (
 	onlineSalesReportsResponseRowsItemFieldChannel   = big.NewInt(1 << 0)
-	onlineSalesReportsResponseRowsItemFieldOrders    = big.NewInt(1 << 1)
-	onlineSalesReportsResponseRowsItemFieldFulfilled = big.NewInt(1 << 2)
-	onlineSalesReportsResponseRowsItemFieldCancelled = big.NewInt(1 << 3)
-	onlineSalesReportsResponseRowsItemFieldOpen      = big.NewInt(1 << 4)
-	onlineSalesReportsResponseRowsItemFieldNet       = big.NewInt(1 << 5)
-	onlineSalesReportsResponseRowsItemFieldGross     = big.NewInt(1 << 6)
+	onlineSalesReportsResponseRowsItemFieldCurrency  = big.NewInt(1 << 1)
+	onlineSalesReportsResponseRowsItemFieldOrders    = big.NewInt(1 << 2)
+	onlineSalesReportsResponseRowsItemFieldFulfilled = big.NewInt(1 << 3)
+	onlineSalesReportsResponseRowsItemFieldCancelled = big.NewInt(1 << 4)
+	onlineSalesReportsResponseRowsItemFieldOpen      = big.NewInt(1 << 5)
+	onlineSalesReportsResponseRowsItemFieldNet       = big.NewInt(1 << 6)
+	onlineSalesReportsResponseRowsItemFieldGross     = big.NewInt(1 << 7)
 )
 
 type OnlineSalesReportsResponseRowsItem struct {
 	Channel   string `json:"channel" url:"channel"`
+	Currency  string `json:"currency" url:"currency"`
 	Orders    int64  `json:"orders" url:"orders"`
 	Fulfilled int64  `json:"fulfilled" url:"fulfilled"`
 	Cancelled int64  `json:"cancelled" url:"cancelled"`
@@ -10100,6 +10102,13 @@ func (o *OnlineSalesReportsResponseRowsItem) GetChannel() string {
 		return ""
 	}
 	return o.Channel
+}
+
+func (o *OnlineSalesReportsResponseRowsItem) GetCurrency() string {
+	if o == nil {
+		return ""
+	}
+	return o.Currency
 }
 
 func (o *OnlineSalesReportsResponseRowsItem) GetOrders() int64 {
@@ -10163,6 +10172,13 @@ func (o *OnlineSalesReportsResponseRowsItem) require(field *big.Int) {
 func (o *OnlineSalesReportsResponseRowsItem) SetChannel(channel string) {
 	o.Channel = channel
 	o.require(onlineSalesReportsResponseRowsItemFieldChannel)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OnlineSalesReportsResponseRowsItem) SetCurrency(currency string) {
+	o.Currency = currency
+	o.require(onlineSalesReportsResponseRowsItemFieldCurrency)
 }
 
 // SetOrders sets the Orders field and marks it as non-optional;

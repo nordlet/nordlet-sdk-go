@@ -12,18 +12,20 @@ import (
 
 var (
 	accountsCreateBankRequestFieldName        = big.NewInt(1 << 0)
-	accountsCreateBankRequestFieldIban        = big.NewInt(1 << 1)
-	accountsCreateBankRequestFieldCurrency    = big.NewInt(1 << 2)
-	accountsCreateBankRequestFieldAccountCode = big.NewInt(1 << 3)
-	accountsCreateBankRequestFieldDocumentRef = big.NewInt(1 << 4)
+	accountsCreateBankRequestFieldType        = big.NewInt(1 << 1)
+	accountsCreateBankRequestFieldIban        = big.NewInt(1 << 2)
+	accountsCreateBankRequestFieldCurrency    = big.NewInt(1 << 3)
+	accountsCreateBankRequestFieldAccountCode = big.NewInt(1 << 4)
+	accountsCreateBankRequestFieldDocumentRef = big.NewInt(1 << 5)
 )
 
 type AccountsCreateBankRequest struct {
-	Name        string  `json:"name" url:"-"`
-	Iban        *string `json:"iban,omitempty" url:"-"`
-	Currency    *string `json:"currency,omitempty" url:"-"`
-	AccountCode *string `json:"accountCode,omitempty" url:"-"`
-	DocumentRef *string `json:"documentRef,omitempty" url:"-"`
+	Name        string                         `json:"name" url:"-"`
+	Type        *AccountsCreateBankRequestType `json:"type,omitempty" url:"-"`
+	Iban        *string                        `json:"iban,omitempty" url:"-"`
+	Currency    *string                        `json:"currency,omitempty" url:"-"`
+	AccountCode *string                        `json:"accountCode,omitempty" url:"-"`
+	DocumentRef *string                        `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -41,6 +43,13 @@ func (a *AccountsCreateBankRequest) require(field *big.Int) {
 func (a *AccountsCreateBankRequest) SetName(name string) {
 	a.Name = name
 	a.require(accountsCreateBankRequestFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequest) SetType(type_ *AccountsCreateBankRequestType) {
+	a.Type = type_
+	a.require(accountsCreateBankRequestFieldType)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
@@ -178,17 +187,19 @@ func (a *AccountsListBankRequest) MarshalJSON() ([]byte, error) {
 var (
 	accountsUpdateBankRequestFieldID          = big.NewInt(1 << 0)
 	accountsUpdateBankRequestFieldName        = big.NewInt(1 << 1)
-	accountsUpdateBankRequestFieldIban        = big.NewInt(1 << 2)
-	accountsUpdateBankRequestFieldAccountCode = big.NewInt(1 << 3)
-	accountsUpdateBankRequestFieldIsActive    = big.NewInt(1 << 4)
+	accountsUpdateBankRequestFieldType        = big.NewInt(1 << 2)
+	accountsUpdateBankRequestFieldIban        = big.NewInt(1 << 3)
+	accountsUpdateBankRequestFieldAccountCode = big.NewInt(1 << 4)
+	accountsUpdateBankRequestFieldIsActive    = big.NewInt(1 << 5)
 )
 
 type AccountsUpdateBankRequest struct {
-	ID          string  `json:"id" url:"-"`
-	Name        *string `json:"name,omitempty" url:"-"`
-	Iban        *string `json:"iban,omitempty" url:"-"`
-	AccountCode *string `json:"accountCode,omitempty" url:"-"`
-	IsActive    *bool   `json:"isActive,omitempty" url:"-"`
+	ID          string                         `json:"id" url:"-"`
+	Name        *string                        `json:"name,omitempty" url:"-"`
+	Type        *AccountsUpdateBankRequestType `json:"type,omitempty" url:"-"`
+	Iban        *string                        `json:"iban,omitempty" url:"-"`
+	AccountCode *string                        `json:"accountCode,omitempty" url:"-"`
+	IsActive    *bool                          `json:"isActive,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -213,6 +224,13 @@ func (a *AccountsUpdateBankRequest) SetID(id string) {
 func (a *AccountsUpdateBankRequest) SetName(name *string) {
 	a.Name = name
 	a.require(accountsUpdateBankRequestFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequest) SetType(type_ *AccountsUpdateBankRequestType) {
+	a.Type = type_
+	a.require(accountsUpdateBankRequestFieldType)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
@@ -3252,24 +3270,48 @@ func (t *TransactionsUnmatchBankRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type AccountsCreateBankRequestType string
+
+const (
+	AccountsCreateBankRequestTypeBank   AccountsCreateBankRequestType = "bank"
+	AccountsCreateBankRequestTypeStripe AccountsCreateBankRequestType = "stripe"
+)
+
+func NewAccountsCreateBankRequestTypeFromString(s string) (AccountsCreateBankRequestType, error) {
+	switch s {
+	case "bank":
+		return AccountsCreateBankRequestTypeBank, nil
+	case "stripe":
+		return AccountsCreateBankRequestTypeStripe, nil
+	}
+	var t AccountsCreateBankRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountsCreateBankRequestType) Ptr() *AccountsCreateBankRequestType {
+	return &a
+}
+
 var (
 	accountsCreateBankResponseFieldID          = big.NewInt(1 << 0)
 	accountsCreateBankResponseFieldName        = big.NewInt(1 << 1)
-	accountsCreateBankResponseFieldIban        = big.NewInt(1 << 2)
-	accountsCreateBankResponseFieldCurrency    = big.NewInt(1 << 3)
-	accountsCreateBankResponseFieldAccountCode = big.NewInt(1 << 4)
-	accountsCreateBankResponseFieldIsActive    = big.NewInt(1 << 5)
-	accountsCreateBankResponseFieldCreatedAt   = big.NewInt(1 << 6)
+	accountsCreateBankResponseFieldType        = big.NewInt(1 << 2)
+	accountsCreateBankResponseFieldIban        = big.NewInt(1 << 3)
+	accountsCreateBankResponseFieldCurrency    = big.NewInt(1 << 4)
+	accountsCreateBankResponseFieldAccountCode = big.NewInt(1 << 5)
+	accountsCreateBankResponseFieldIsActive    = big.NewInt(1 << 6)
+	accountsCreateBankResponseFieldCreatedAt   = big.NewInt(1 << 7)
 )
 
 type AccountsCreateBankResponse struct {
-	ID          string    `json:"id" url:"id"`
-	Name        string    `json:"name" url:"name"`
-	Iban        *string   `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency    string    `json:"currency" url:"currency"`
-	AccountCode string    `json:"accountCode" url:"accountCode"`
-	IsActive    bool      `json:"isActive" url:"isActive"`
-	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+	ID          string                         `json:"id" url:"id"`
+	Name        string                         `json:"name" url:"name"`
+	Type        AccountsCreateBankResponseType `json:"type" url:"type"`
+	Iban        *string                        `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency    string                         `json:"currency" url:"currency"`
+	AccountCode string                         `json:"accountCode" url:"accountCode"`
+	IsActive    bool                           `json:"isActive" url:"isActive"`
+	CreatedAt   time.Time                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3290,6 +3332,13 @@ func (a *AccountsCreateBankResponse) GetName() string {
 		return ""
 	}
 	return a.Name
+}
+
+func (a *AccountsCreateBankResponse) GetType() AccountsCreateBankResponseType {
+	if a == nil {
+		return ""
+	}
+	return a.Type
 }
 
 func (a *AccountsCreateBankResponse) GetIban() *string {
@@ -3353,6 +3402,13 @@ func (a *AccountsCreateBankResponse) SetID(id string) {
 func (a *AccountsCreateBankResponse) SetName(name string) {
 	a.Name = name
 	a.require(accountsCreateBankResponseFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponse) SetType(type_ AccountsCreateBankResponseType) {
+	a.Type = type_
+	a.require(accountsCreateBankResponseFieldType)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
@@ -3438,6 +3494,28 @@ func (a *AccountsCreateBankResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", a)
+}
+
+type AccountsCreateBankResponseType string
+
+const (
+	AccountsCreateBankResponseTypeBank   AccountsCreateBankResponseType = "bank"
+	AccountsCreateBankResponseTypeStripe AccountsCreateBankResponseType = "stripe"
+)
+
+func NewAccountsCreateBankResponseTypeFromString(s string) (AccountsCreateBankResponseType, error) {
+	switch s {
+	case "bank":
+		return AccountsCreateBankResponseTypeBank, nil
+	case "stripe":
+		return AccountsCreateBankResponseTypeStripe, nil
+	}
+	var t AccountsCreateBankResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountsCreateBankResponseType) Ptr() *AccountsCreateBankResponseType {
+	return &a
 }
 
 var (
@@ -4046,21 +4124,23 @@ func (a *AccountsListBankResponse) String() string {
 var (
 	accountsListBankResponseRowsItemFieldID          = big.NewInt(1 << 0)
 	accountsListBankResponseRowsItemFieldName        = big.NewInt(1 << 1)
-	accountsListBankResponseRowsItemFieldIban        = big.NewInt(1 << 2)
-	accountsListBankResponseRowsItemFieldCurrency    = big.NewInt(1 << 3)
-	accountsListBankResponseRowsItemFieldAccountCode = big.NewInt(1 << 4)
-	accountsListBankResponseRowsItemFieldIsActive    = big.NewInt(1 << 5)
-	accountsListBankResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 6)
+	accountsListBankResponseRowsItemFieldType        = big.NewInt(1 << 2)
+	accountsListBankResponseRowsItemFieldIban        = big.NewInt(1 << 3)
+	accountsListBankResponseRowsItemFieldCurrency    = big.NewInt(1 << 4)
+	accountsListBankResponseRowsItemFieldAccountCode = big.NewInt(1 << 5)
+	accountsListBankResponseRowsItemFieldIsActive    = big.NewInt(1 << 6)
+	accountsListBankResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 7)
 )
 
 type AccountsListBankResponseRowsItem struct {
-	ID          string    `json:"id" url:"id"`
-	Name        string    `json:"name" url:"name"`
-	Iban        *string   `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency    string    `json:"currency" url:"currency"`
-	AccountCode string    `json:"accountCode" url:"accountCode"`
-	IsActive    bool      `json:"isActive" url:"isActive"`
-	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+	ID          string                               `json:"id" url:"id"`
+	Name        string                               `json:"name" url:"name"`
+	Type        AccountsListBankResponseRowsItemType `json:"type" url:"type"`
+	Iban        *string                              `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency    string                               `json:"currency" url:"currency"`
+	AccountCode string                               `json:"accountCode" url:"accountCode"`
+	IsActive    bool                                 `json:"isActive" url:"isActive"`
+	CreatedAt   time.Time                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4081,6 +4161,13 @@ func (a *AccountsListBankResponseRowsItem) GetName() string {
 		return ""
 	}
 	return a.Name
+}
+
+func (a *AccountsListBankResponseRowsItem) GetType() AccountsListBankResponseRowsItemType {
+	if a == nil {
+		return ""
+	}
+	return a.Type
 }
 
 func (a *AccountsListBankResponseRowsItem) GetIban() *string {
@@ -4144,6 +4231,13 @@ func (a *AccountsListBankResponseRowsItem) SetID(id string) {
 func (a *AccountsListBankResponseRowsItem) SetName(name string) {
 	a.Name = name
 	a.require(accountsListBankResponseRowsItemFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItem) SetType(type_ AccountsListBankResponseRowsItemType) {
+	a.Type = type_
+	a.require(accountsListBankResponseRowsItemFieldType)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
@@ -4231,24 +4325,70 @@ func (a *AccountsListBankResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+type AccountsListBankResponseRowsItemType string
+
+const (
+	AccountsListBankResponseRowsItemTypeBank   AccountsListBankResponseRowsItemType = "bank"
+	AccountsListBankResponseRowsItemTypeStripe AccountsListBankResponseRowsItemType = "stripe"
+)
+
+func NewAccountsListBankResponseRowsItemTypeFromString(s string) (AccountsListBankResponseRowsItemType, error) {
+	switch s {
+	case "bank":
+		return AccountsListBankResponseRowsItemTypeBank, nil
+	case "stripe":
+		return AccountsListBankResponseRowsItemTypeStripe, nil
+	}
+	var t AccountsListBankResponseRowsItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountsListBankResponseRowsItemType) Ptr() *AccountsListBankResponseRowsItemType {
+	return &a
+}
+
+type AccountsUpdateBankRequestType string
+
+const (
+	AccountsUpdateBankRequestTypeBank   AccountsUpdateBankRequestType = "bank"
+	AccountsUpdateBankRequestTypeStripe AccountsUpdateBankRequestType = "stripe"
+)
+
+func NewAccountsUpdateBankRequestTypeFromString(s string) (AccountsUpdateBankRequestType, error) {
+	switch s {
+	case "bank":
+		return AccountsUpdateBankRequestTypeBank, nil
+	case "stripe":
+		return AccountsUpdateBankRequestTypeStripe, nil
+	}
+	var t AccountsUpdateBankRequestType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountsUpdateBankRequestType) Ptr() *AccountsUpdateBankRequestType {
+	return &a
+}
+
 var (
 	accountsUpdateBankResponseFieldID          = big.NewInt(1 << 0)
 	accountsUpdateBankResponseFieldName        = big.NewInt(1 << 1)
-	accountsUpdateBankResponseFieldIban        = big.NewInt(1 << 2)
-	accountsUpdateBankResponseFieldCurrency    = big.NewInt(1 << 3)
-	accountsUpdateBankResponseFieldAccountCode = big.NewInt(1 << 4)
-	accountsUpdateBankResponseFieldIsActive    = big.NewInt(1 << 5)
-	accountsUpdateBankResponseFieldCreatedAt   = big.NewInt(1 << 6)
+	accountsUpdateBankResponseFieldType        = big.NewInt(1 << 2)
+	accountsUpdateBankResponseFieldIban        = big.NewInt(1 << 3)
+	accountsUpdateBankResponseFieldCurrency    = big.NewInt(1 << 4)
+	accountsUpdateBankResponseFieldAccountCode = big.NewInt(1 << 5)
+	accountsUpdateBankResponseFieldIsActive    = big.NewInt(1 << 6)
+	accountsUpdateBankResponseFieldCreatedAt   = big.NewInt(1 << 7)
 )
 
 type AccountsUpdateBankResponse struct {
-	ID          string    `json:"id" url:"id"`
-	Name        string    `json:"name" url:"name"`
-	Iban        *string   `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency    string    `json:"currency" url:"currency"`
-	AccountCode string    `json:"accountCode" url:"accountCode"`
-	IsActive    bool      `json:"isActive" url:"isActive"`
-	CreatedAt   time.Time `json:"createdAt" url:"createdAt"`
+	ID          string                         `json:"id" url:"id"`
+	Name        string                         `json:"name" url:"name"`
+	Type        AccountsUpdateBankResponseType `json:"type" url:"type"`
+	Iban        *string                        `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency    string                         `json:"currency" url:"currency"`
+	AccountCode string                         `json:"accountCode" url:"accountCode"`
+	IsActive    bool                           `json:"isActive" url:"isActive"`
+	CreatedAt   time.Time                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4269,6 +4409,13 @@ func (a *AccountsUpdateBankResponse) GetName() string {
 		return ""
 	}
 	return a.Name
+}
+
+func (a *AccountsUpdateBankResponse) GetType() AccountsUpdateBankResponseType {
+	if a == nil {
+		return ""
+	}
+	return a.Type
 }
 
 func (a *AccountsUpdateBankResponse) GetIban() *string {
@@ -4332,6 +4479,13 @@ func (a *AccountsUpdateBankResponse) SetID(id string) {
 func (a *AccountsUpdateBankResponse) SetName(name string) {
 	a.Name = name
 	a.require(accountsUpdateBankResponseFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponse) SetType(type_ AccountsUpdateBankResponseType) {
+	a.Type = type_
+	a.require(accountsUpdateBankResponseFieldType)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
@@ -4417,6 +4571,28 @@ func (a *AccountsUpdateBankResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", a)
+}
+
+type AccountsUpdateBankResponseType string
+
+const (
+	AccountsUpdateBankResponseTypeBank   AccountsUpdateBankResponseType = "bank"
+	AccountsUpdateBankResponseTypeStripe AccountsUpdateBankResponseType = "stripe"
+)
+
+func NewAccountsUpdateBankResponseTypeFromString(s string) (AccountsUpdateBankResponseType, error) {
+	switch s {
+	case "bank":
+		return AccountsUpdateBankResponseTypeBank, nil
+	case "stripe":
+		return AccountsUpdateBankResponseTypeStripe, nil
+	}
+	var t AccountsUpdateBankResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountsUpdateBankResponseType) Ptr() *AccountsUpdateBankResponseType {
+	return &a
 }
 
 var (
@@ -15978,39 +16154,47 @@ func (p *PaymentsExportBankResponse) String() string {
 }
 
 var (
-	settlementsCommissionBankResponseFieldID                = big.NewInt(1 << 0)
-	settlementsCommissionBankResponseFieldExternalID        = big.NewInt(1 << 1)
-	settlementsCommissionBankResponseFieldCategory          = big.NewInt(1 << 2)
-	settlementsCommissionBankResponseFieldDate              = big.NewInt(1 << 3)
-	settlementsCommissionBankResponseFieldGross             = big.NewInt(1 << 4)
-	settlementsCommissionBankResponseFieldFee               = big.NewInt(1 << 5)
-	settlementsCommissionBankResponseFieldNet               = big.NewInt(1 << 6)
-	settlementsCommissionBankResponseFieldDescription       = big.NewInt(1 << 7)
-	settlementsCommissionBankResponseFieldSourceID          = big.NewInt(1 << 8)
-	settlementsCommissionBankResponseFieldChargeID          = big.NewInt(1 << 9)
-	settlementsCommissionBankResponseFieldCommissionPercent = big.NewInt(1 << 10)
-	settlementsCommissionBankResponseFieldCommissionAmount  = big.NewInt(1 << 11)
-	settlementsCommissionBankResponseFieldReference         = big.NewInt(1 << 12)
-	settlementsCommissionBankResponseFieldMatchedInvoiceID  = big.NewInt(1 << 13)
-	settlementsCommissionBankResponseFieldMatchStatus       = big.NewInt(1 << 14)
+	settlementsCommissionBankResponseFieldID                    = big.NewInt(1 << 0)
+	settlementsCommissionBankResponseFieldExternalID            = big.NewInt(1 << 1)
+	settlementsCommissionBankResponseFieldCategory              = big.NewInt(1 << 2)
+	settlementsCommissionBankResponseFieldDate                  = big.NewInt(1 << 3)
+	settlementsCommissionBankResponseFieldGross                 = big.NewInt(1 << 4)
+	settlementsCommissionBankResponseFieldFee                   = big.NewInt(1 << 5)
+	settlementsCommissionBankResponseFieldNet                   = big.NewInt(1 << 6)
+	settlementsCommissionBankResponseFieldDescription           = big.NewInt(1 << 7)
+	settlementsCommissionBankResponseFieldSourceID              = big.NewInt(1 << 8)
+	settlementsCommissionBankResponseFieldChargeID              = big.NewInt(1 << 9)
+	settlementsCommissionBankResponseFieldCommissionPercent     = big.NewInt(1 << 10)
+	settlementsCommissionBankResponseFieldCommissionAmount      = big.NewInt(1 << 11)
+	settlementsCommissionBankResponseFieldReference             = big.NewInt(1 << 12)
+	settlementsCommissionBankResponseFieldMatchedInvoiceID      = big.NewInt(1 << 13)
+	settlementsCommissionBankResponseFieldMatchStatus           = big.NewInt(1 << 14)
+	settlementsCommissionBankResponseFieldClearingBankAccountID = big.NewInt(1 << 15)
+	settlementsCommissionBankResponseFieldClearingBooked        = big.NewInt(1 << 16)
+	settlementsCommissionBankResponseFieldClearingDifference    = big.NewInt(1 << 17)
+	settlementsCommissionBankResponseFieldClearingUnposted      = big.NewInt(1 << 18)
 )
 
 type SettlementsCommissionBankResponse struct {
-	ID                string                                       `json:"id" url:"id"`
-	ExternalID        string                                       `json:"externalId" url:"externalId"`
-	Category          string                                       `json:"category" url:"category"`
-	Date              time.Time                                    `json:"date" url:"date" format:"date"`
-	Gross             string                                       `json:"gross" url:"gross"`
-	Fee               string                                       `json:"fee" url:"fee"`
-	Net               string                                       `json:"net" url:"net"`
-	Description       *string                                      `json:"description,omitempty" url:"description,omitempty"`
-	SourceID          *string                                      `json:"sourceId,omitempty" url:"sourceId,omitempty"`
-	ChargeID          *string                                      `json:"chargeId,omitempty" url:"chargeId,omitempty"`
-	CommissionPercent *string                                      `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
-	CommissionAmount  *string                                      `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
-	Reference         *string                                      `json:"reference,omitempty" url:"reference,omitempty"`
-	MatchedInvoiceID  *string                                      `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
-	MatchStatus       SettlementsCommissionBankResponseMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ID                    string                                       `json:"id" url:"id"`
+	ExternalID            string                                       `json:"externalId" url:"externalId"`
+	Category              string                                       `json:"category" url:"category"`
+	Date                  time.Time                                    `json:"date" url:"date" format:"date"`
+	Gross                 string                                       `json:"gross" url:"gross"`
+	Fee                   string                                       `json:"fee" url:"fee"`
+	Net                   string                                       `json:"net" url:"net"`
+	Description           *string                                      `json:"description,omitempty" url:"description,omitempty"`
+	SourceID              *string                                      `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	ChargeID              *string                                      `json:"chargeId,omitempty" url:"chargeId,omitempty"`
+	CommissionPercent     *string                                      `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
+	CommissionAmount      *string                                      `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
+	Reference             *string                                      `json:"reference,omitempty" url:"reference,omitempty"`
+	MatchedInvoiceID      *string                                      `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
+	MatchStatus           SettlementsCommissionBankResponseMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ClearingBankAccountID *string                                      `json:"clearingBankAccountId,omitempty" url:"clearingBankAccountId,omitempty"`
+	ClearingBooked        *string                                      `json:"clearingBooked,omitempty" url:"clearingBooked,omitempty"`
+	ClearingDifference    *string                                      `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingUnposted      bool                                         `json:"clearingUnposted" url:"clearingUnposted"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16122,6 +16306,34 @@ func (s *SettlementsCommissionBankResponse) GetMatchStatus() SettlementsCommissi
 		return ""
 	}
 	return s.MatchStatus
+}
+
+func (s *SettlementsCommissionBankResponse) GetClearingBankAccountID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingBankAccountID
+}
+
+func (s *SettlementsCommissionBankResponse) GetClearingBooked() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingBooked
+}
+
+func (s *SettlementsCommissionBankResponse) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsCommissionBankResponse) GetClearingUnposted() bool {
+	if s == nil {
+		return false
+	}
+	return s.ClearingUnposted
 }
 
 func (s *SettlementsCommissionBankResponse) GetExtraProperties() map[string]interface{} {
@@ -16243,6 +16455,34 @@ func (s *SettlementsCommissionBankResponse) SetMatchStatus(matchStatus Settlemen
 	s.require(settlementsCommissionBankResponseFieldMatchStatus)
 }
 
+// SetClearingBankAccountID sets the ClearingBankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsCommissionBankResponse) SetClearingBankAccountID(clearingBankAccountID *string) {
+	s.ClearingBankAccountID = clearingBankAccountID
+	s.require(settlementsCommissionBankResponseFieldClearingBankAccountID)
+}
+
+// SetClearingBooked sets the ClearingBooked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsCommissionBankResponse) SetClearingBooked(clearingBooked *string) {
+	s.ClearingBooked = clearingBooked
+	s.require(settlementsCommissionBankResponseFieldClearingBooked)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsCommissionBankResponse) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsCommissionBankResponseFieldClearingDifference)
+}
+
+// SetClearingUnposted sets the ClearingUnposted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsCommissionBankResponse) SetClearingUnposted(clearingUnposted bool) {
+	s.ClearingUnposted = clearingUnposted
+	s.require(settlementsCommissionBankResponseFieldClearingUnposted)
+}
+
 func (s *SettlementsCommissionBankResponse) UnmarshalJSON(data []byte) error {
 	type embed SettlementsCommissionBankResponse
 	var unmarshaler = struct {
@@ -16335,9 +16575,12 @@ var (
 	settlementsGetBankResponseFieldLineCount            = big.NewInt(1 << 13)
 	settlementsGetBankResponseFieldMatchedCount         = big.NewInt(1 << 14)
 	settlementsGetBankResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
-	settlementsGetBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
-	settlementsGetBankResponseFieldUpdatedAt            = big.NewInt(1 << 17)
-	settlementsGetBankResponseFieldLines                = big.NewInt(1 << 18)
+	settlementsGetBankResponseFieldClearedNet           = big.NewInt(1 << 16)
+	settlementsGetBankResponseFieldClearingDifference   = big.NewInt(1 << 17)
+	settlementsGetBankResponseFieldClearingOpenCount    = big.NewInt(1 << 18)
+	settlementsGetBankResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	settlementsGetBankResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	settlementsGetBankResponseFieldLines                = big.NewInt(1 << 21)
 )
 
 type SettlementsGetBankResponse struct {
@@ -16357,6 +16600,9 @@ type SettlementsGetBankResponse struct {
 	LineCount            int64                                  `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                                  `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                                  `json:"unmatchedCount" url:"unmatchedCount"`
+	ClearedNet           *string                                `json:"clearedNet,omitempty" url:"clearedNet,omitempty"`
+	ClearingDifference   *string                                `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingOpenCount    int64                                  `json:"clearingOpenCount" url:"clearingOpenCount"`
 	CreatedAt            time.Time                              `json:"createdAt" url:"createdAt"`
 	UpdatedAt            time.Time                              `json:"updatedAt" url:"updatedAt"`
 	Lines                []*SettlementsGetBankResponseLinesItem `json:"lines" url:"lines"`
@@ -16478,6 +16724,27 @@ func (s *SettlementsGetBankResponse) GetUnmatchedCount() int64 {
 		return 0
 	}
 	return s.UnmatchedCount
+}
+
+func (s *SettlementsGetBankResponse) GetClearedNet() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearedNet
+}
+
+func (s *SettlementsGetBankResponse) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsGetBankResponse) GetClearingOpenCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ClearingOpenCount
 }
 
 func (s *SettlementsGetBankResponse) GetCreatedAt() time.Time {
@@ -16627,6 +16894,27 @@ func (s *SettlementsGetBankResponse) SetUnmatchedCount(unmatchedCount int64) {
 	s.require(settlementsGetBankResponseFieldUnmatchedCount)
 }
 
+// SetClearedNet sets the ClearedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsGetBankResponse) SetClearedNet(clearedNet *string) {
+	s.ClearedNet = clearedNet
+	s.require(settlementsGetBankResponseFieldClearedNet)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsGetBankResponse) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsGetBankResponseFieldClearingDifference)
+}
+
+// SetClearingOpenCount sets the ClearingOpenCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsGetBankResponse) SetClearingOpenCount(clearingOpenCount int64) {
+	s.ClearingOpenCount = clearingOpenCount
+	s.require(settlementsGetBankResponseFieldClearingOpenCount)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SettlementsGetBankResponse) SetCreatedAt(createdAt time.Time) {
@@ -16707,39 +16995,47 @@ func (s *SettlementsGetBankResponse) String() string {
 }
 
 var (
-	settlementsGetBankResponseLinesItemFieldID                = big.NewInt(1 << 0)
-	settlementsGetBankResponseLinesItemFieldExternalID        = big.NewInt(1 << 1)
-	settlementsGetBankResponseLinesItemFieldCategory          = big.NewInt(1 << 2)
-	settlementsGetBankResponseLinesItemFieldDate              = big.NewInt(1 << 3)
-	settlementsGetBankResponseLinesItemFieldGross             = big.NewInt(1 << 4)
-	settlementsGetBankResponseLinesItemFieldFee               = big.NewInt(1 << 5)
-	settlementsGetBankResponseLinesItemFieldNet               = big.NewInt(1 << 6)
-	settlementsGetBankResponseLinesItemFieldDescription       = big.NewInt(1 << 7)
-	settlementsGetBankResponseLinesItemFieldSourceID          = big.NewInt(1 << 8)
-	settlementsGetBankResponseLinesItemFieldChargeID          = big.NewInt(1 << 9)
-	settlementsGetBankResponseLinesItemFieldCommissionPercent = big.NewInt(1 << 10)
-	settlementsGetBankResponseLinesItemFieldCommissionAmount  = big.NewInt(1 << 11)
-	settlementsGetBankResponseLinesItemFieldReference         = big.NewInt(1 << 12)
-	settlementsGetBankResponseLinesItemFieldMatchedInvoiceID  = big.NewInt(1 << 13)
-	settlementsGetBankResponseLinesItemFieldMatchStatus       = big.NewInt(1 << 14)
+	settlementsGetBankResponseLinesItemFieldID                    = big.NewInt(1 << 0)
+	settlementsGetBankResponseLinesItemFieldExternalID            = big.NewInt(1 << 1)
+	settlementsGetBankResponseLinesItemFieldCategory              = big.NewInt(1 << 2)
+	settlementsGetBankResponseLinesItemFieldDate                  = big.NewInt(1 << 3)
+	settlementsGetBankResponseLinesItemFieldGross                 = big.NewInt(1 << 4)
+	settlementsGetBankResponseLinesItemFieldFee                   = big.NewInt(1 << 5)
+	settlementsGetBankResponseLinesItemFieldNet                   = big.NewInt(1 << 6)
+	settlementsGetBankResponseLinesItemFieldDescription           = big.NewInt(1 << 7)
+	settlementsGetBankResponseLinesItemFieldSourceID              = big.NewInt(1 << 8)
+	settlementsGetBankResponseLinesItemFieldChargeID              = big.NewInt(1 << 9)
+	settlementsGetBankResponseLinesItemFieldCommissionPercent     = big.NewInt(1 << 10)
+	settlementsGetBankResponseLinesItemFieldCommissionAmount      = big.NewInt(1 << 11)
+	settlementsGetBankResponseLinesItemFieldReference             = big.NewInt(1 << 12)
+	settlementsGetBankResponseLinesItemFieldMatchedInvoiceID      = big.NewInt(1 << 13)
+	settlementsGetBankResponseLinesItemFieldMatchStatus           = big.NewInt(1 << 14)
+	settlementsGetBankResponseLinesItemFieldClearingBankAccountID = big.NewInt(1 << 15)
+	settlementsGetBankResponseLinesItemFieldClearingBooked        = big.NewInt(1 << 16)
+	settlementsGetBankResponseLinesItemFieldClearingDifference    = big.NewInt(1 << 17)
+	settlementsGetBankResponseLinesItemFieldClearingUnposted      = big.NewInt(1 << 18)
 )
 
 type SettlementsGetBankResponseLinesItem struct {
-	ID                string                                         `json:"id" url:"id"`
-	ExternalID        string                                         `json:"externalId" url:"externalId"`
-	Category          string                                         `json:"category" url:"category"`
-	Date              time.Time                                      `json:"date" url:"date" format:"date"`
-	Gross             string                                         `json:"gross" url:"gross"`
-	Fee               string                                         `json:"fee" url:"fee"`
-	Net               string                                         `json:"net" url:"net"`
-	Description       *string                                        `json:"description,omitempty" url:"description,omitempty"`
-	SourceID          *string                                        `json:"sourceId,omitempty" url:"sourceId,omitempty"`
-	ChargeID          *string                                        `json:"chargeId,omitempty" url:"chargeId,omitempty"`
-	CommissionPercent *string                                        `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
-	CommissionAmount  *string                                        `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
-	Reference         *string                                        `json:"reference,omitempty" url:"reference,omitempty"`
-	MatchedInvoiceID  *string                                        `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
-	MatchStatus       SettlementsGetBankResponseLinesItemMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ID                    string                                         `json:"id" url:"id"`
+	ExternalID            string                                         `json:"externalId" url:"externalId"`
+	Category              string                                         `json:"category" url:"category"`
+	Date                  time.Time                                      `json:"date" url:"date" format:"date"`
+	Gross                 string                                         `json:"gross" url:"gross"`
+	Fee                   string                                         `json:"fee" url:"fee"`
+	Net                   string                                         `json:"net" url:"net"`
+	Description           *string                                        `json:"description,omitempty" url:"description,omitempty"`
+	SourceID              *string                                        `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	ChargeID              *string                                        `json:"chargeId,omitempty" url:"chargeId,omitempty"`
+	CommissionPercent     *string                                        `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
+	CommissionAmount      *string                                        `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
+	Reference             *string                                        `json:"reference,omitempty" url:"reference,omitempty"`
+	MatchedInvoiceID      *string                                        `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
+	MatchStatus           SettlementsGetBankResponseLinesItemMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ClearingBankAccountID *string                                        `json:"clearingBankAccountId,omitempty" url:"clearingBankAccountId,omitempty"`
+	ClearingBooked        *string                                        `json:"clearingBooked,omitempty" url:"clearingBooked,omitempty"`
+	ClearingDifference    *string                                        `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingUnposted      bool                                           `json:"clearingUnposted" url:"clearingUnposted"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16851,6 +17147,34 @@ func (s *SettlementsGetBankResponseLinesItem) GetMatchStatus() SettlementsGetBan
 		return ""
 	}
 	return s.MatchStatus
+}
+
+func (s *SettlementsGetBankResponseLinesItem) GetClearingBankAccountID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingBankAccountID
+}
+
+func (s *SettlementsGetBankResponseLinesItem) GetClearingBooked() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingBooked
+}
+
+func (s *SettlementsGetBankResponseLinesItem) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsGetBankResponseLinesItem) GetClearingUnposted() bool {
+	if s == nil {
+		return false
+	}
+	return s.ClearingUnposted
 }
 
 func (s *SettlementsGetBankResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -16970,6 +17294,34 @@ func (s *SettlementsGetBankResponseLinesItem) SetMatchedInvoiceID(matchedInvoice
 func (s *SettlementsGetBankResponseLinesItem) SetMatchStatus(matchStatus SettlementsGetBankResponseLinesItemMatchStatus) {
 	s.MatchStatus = matchStatus
 	s.require(settlementsGetBankResponseLinesItemFieldMatchStatus)
+}
+
+// SetClearingBankAccountID sets the ClearingBankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsGetBankResponseLinesItem) SetClearingBankAccountID(clearingBankAccountID *string) {
+	s.ClearingBankAccountID = clearingBankAccountID
+	s.require(settlementsGetBankResponseLinesItemFieldClearingBankAccountID)
+}
+
+// SetClearingBooked sets the ClearingBooked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsGetBankResponseLinesItem) SetClearingBooked(clearingBooked *string) {
+	s.ClearingBooked = clearingBooked
+	s.require(settlementsGetBankResponseLinesItemFieldClearingBooked)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsGetBankResponseLinesItem) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsGetBankResponseLinesItemFieldClearingDifference)
+}
+
+// SetClearingUnposted sets the ClearingUnposted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsGetBankResponseLinesItem) SetClearingUnposted(clearingUnposted bool) {
+	s.ClearingUnposted = clearingUnposted
+	s.require(settlementsGetBankResponseLinesItemFieldClearingUnposted)
 }
 
 func (s *SettlementsGetBankResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -17301,8 +17653,11 @@ var (
 	settlementsImportBankResponseBatchesItemFieldLineCount            = big.NewInt(1 << 13)
 	settlementsImportBankResponseBatchesItemFieldMatchedCount         = big.NewInt(1 << 14)
 	settlementsImportBankResponseBatchesItemFieldUnmatchedCount       = big.NewInt(1 << 15)
-	settlementsImportBankResponseBatchesItemFieldCreatedAt            = big.NewInt(1 << 16)
-	settlementsImportBankResponseBatchesItemFieldUpdatedAt            = big.NewInt(1 << 17)
+	settlementsImportBankResponseBatchesItemFieldClearedNet           = big.NewInt(1 << 16)
+	settlementsImportBankResponseBatchesItemFieldClearingDifference   = big.NewInt(1 << 17)
+	settlementsImportBankResponseBatchesItemFieldClearingOpenCount    = big.NewInt(1 << 18)
+	settlementsImportBankResponseBatchesItemFieldCreatedAt            = big.NewInt(1 << 19)
+	settlementsImportBankResponseBatchesItemFieldUpdatedAt            = big.NewInt(1 << 20)
 )
 
 type SettlementsImportBankResponseBatchesItem struct {
@@ -17322,6 +17677,9 @@ type SettlementsImportBankResponseBatchesItem struct {
 	LineCount            int64                                          `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                                          `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                                          `json:"unmatchedCount" url:"unmatchedCount"`
+	ClearedNet           *string                                        `json:"clearedNet,omitempty" url:"clearedNet,omitempty"`
+	ClearingDifference   *string                                        `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingOpenCount    int64                                          `json:"clearingOpenCount" url:"clearingOpenCount"`
 	CreatedAt            time.Time                                      `json:"createdAt" url:"createdAt"`
 	UpdatedAt            time.Time                                      `json:"updatedAt" url:"updatedAt"`
 
@@ -17442,6 +17800,27 @@ func (s *SettlementsImportBankResponseBatchesItem) GetUnmatchedCount() int64 {
 		return 0
 	}
 	return s.UnmatchedCount
+}
+
+func (s *SettlementsImportBankResponseBatchesItem) GetClearedNet() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearedNet
+}
+
+func (s *SettlementsImportBankResponseBatchesItem) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsImportBankResponseBatchesItem) GetClearingOpenCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ClearingOpenCount
 }
 
 func (s *SettlementsImportBankResponseBatchesItem) GetCreatedAt() time.Time {
@@ -17584,6 +17963,27 @@ func (s *SettlementsImportBankResponseBatchesItem) SetUnmatchedCount(unmatchedCo
 	s.require(settlementsImportBankResponseBatchesItemFieldUnmatchedCount)
 }
 
+// SetClearedNet sets the ClearedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsImportBankResponseBatchesItem) SetClearedNet(clearedNet *string) {
+	s.ClearedNet = clearedNet
+	s.require(settlementsImportBankResponseBatchesItemFieldClearedNet)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsImportBankResponseBatchesItem) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsImportBankResponseBatchesItemFieldClearingDifference)
+}
+
+// SetClearingOpenCount sets the ClearingOpenCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsImportBankResponseBatchesItem) SetClearingOpenCount(clearingOpenCount int64) {
+	s.ClearingOpenCount = clearingOpenCount
+	s.require(settlementsImportBankResponseBatchesItemFieldClearingOpenCount)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SettlementsImportBankResponseBatchesItem) SetCreatedAt(createdAt time.Time) {
@@ -17717,8 +18117,11 @@ var (
 	settlementsLinkBankResponseFieldLineCount            = big.NewInt(1 << 13)
 	settlementsLinkBankResponseFieldMatchedCount         = big.NewInt(1 << 14)
 	settlementsLinkBankResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
-	settlementsLinkBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
-	settlementsLinkBankResponseFieldUpdatedAt            = big.NewInt(1 << 17)
+	settlementsLinkBankResponseFieldClearedNet           = big.NewInt(1 << 16)
+	settlementsLinkBankResponseFieldClearingDifference   = big.NewInt(1 << 17)
+	settlementsLinkBankResponseFieldClearingOpenCount    = big.NewInt(1 << 18)
+	settlementsLinkBankResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	settlementsLinkBankResponseFieldUpdatedAt            = big.NewInt(1 << 20)
 )
 
 type SettlementsLinkBankResponse struct {
@@ -17738,6 +18141,9 @@ type SettlementsLinkBankResponse struct {
 	LineCount            int64                             `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                             `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                             `json:"unmatchedCount" url:"unmatchedCount"`
+	ClearedNet           *string                           `json:"clearedNet,omitempty" url:"clearedNet,omitempty"`
+	ClearingDifference   *string                           `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingOpenCount    int64                             `json:"clearingOpenCount" url:"clearingOpenCount"`
 	CreatedAt            time.Time                         `json:"createdAt" url:"createdAt"`
 	UpdatedAt            time.Time                         `json:"updatedAt" url:"updatedAt"`
 
@@ -17858,6 +18264,27 @@ func (s *SettlementsLinkBankResponse) GetUnmatchedCount() int64 {
 		return 0
 	}
 	return s.UnmatchedCount
+}
+
+func (s *SettlementsLinkBankResponse) GetClearedNet() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearedNet
+}
+
+func (s *SettlementsLinkBankResponse) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsLinkBankResponse) GetClearingOpenCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ClearingOpenCount
 }
 
 func (s *SettlementsLinkBankResponse) GetCreatedAt() time.Time {
@@ -17998,6 +18425,27 @@ func (s *SettlementsLinkBankResponse) SetMatchedCount(matchedCount int64) {
 func (s *SettlementsLinkBankResponse) SetUnmatchedCount(unmatchedCount int64) {
 	s.UnmatchedCount = unmatchedCount
 	s.require(settlementsLinkBankResponseFieldUnmatchedCount)
+}
+
+// SetClearedNet sets the ClearedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsLinkBankResponse) SetClearedNet(clearedNet *string) {
+	s.ClearedNet = clearedNet
+	s.require(settlementsLinkBankResponseFieldClearedNet)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsLinkBankResponse) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsLinkBankResponseFieldClearingDifference)
+}
+
+// SetClearingOpenCount sets the ClearingOpenCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsLinkBankResponse) SetClearingOpenCount(clearingOpenCount int64) {
+	s.ClearingOpenCount = clearingOpenCount
+	s.require(settlementsLinkBankResponseFieldClearingOpenCount)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -18714,8 +19162,11 @@ var (
 	settlementsListBankResponseRowsItemFieldLineCount            = big.NewInt(1 << 13)
 	settlementsListBankResponseRowsItemFieldMatchedCount         = big.NewInt(1 << 14)
 	settlementsListBankResponseRowsItemFieldUnmatchedCount       = big.NewInt(1 << 15)
-	settlementsListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 16)
-	settlementsListBankResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 17)
+	settlementsListBankResponseRowsItemFieldClearedNet           = big.NewInt(1 << 16)
+	settlementsListBankResponseRowsItemFieldClearingDifference   = big.NewInt(1 << 17)
+	settlementsListBankResponseRowsItemFieldClearingOpenCount    = big.NewInt(1 << 18)
+	settlementsListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 19)
+	settlementsListBankResponseRowsItemFieldUpdatedAt            = big.NewInt(1 << 20)
 )
 
 type SettlementsListBankResponseRowsItem struct {
@@ -18735,6 +19186,9 @@ type SettlementsListBankResponseRowsItem struct {
 	LineCount            int64                                     `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                                     `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                                     `json:"unmatchedCount" url:"unmatchedCount"`
+	ClearedNet           *string                                   `json:"clearedNet,omitempty" url:"clearedNet,omitempty"`
+	ClearingDifference   *string                                   `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingOpenCount    int64                                     `json:"clearingOpenCount" url:"clearingOpenCount"`
 	CreatedAt            time.Time                                 `json:"createdAt" url:"createdAt"`
 	UpdatedAt            time.Time                                 `json:"updatedAt" url:"updatedAt"`
 
@@ -18855,6 +19309,27 @@ func (s *SettlementsListBankResponseRowsItem) GetUnmatchedCount() int64 {
 		return 0
 	}
 	return s.UnmatchedCount
+}
+
+func (s *SettlementsListBankResponseRowsItem) GetClearedNet() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearedNet
+}
+
+func (s *SettlementsListBankResponseRowsItem) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsListBankResponseRowsItem) GetClearingOpenCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ClearingOpenCount
 }
 
 func (s *SettlementsListBankResponseRowsItem) GetCreatedAt() time.Time {
@@ -18997,6 +19472,27 @@ func (s *SettlementsListBankResponseRowsItem) SetUnmatchedCount(unmatchedCount i
 	s.require(settlementsListBankResponseRowsItemFieldUnmatchedCount)
 }
 
+// SetClearedNet sets the ClearedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsListBankResponseRowsItem) SetClearedNet(clearedNet *string) {
+	s.ClearedNet = clearedNet
+	s.require(settlementsListBankResponseRowsItemFieldClearedNet)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsListBankResponseRowsItem) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsListBankResponseRowsItemFieldClearingDifference)
+}
+
+// SetClearingOpenCount sets the ClearingOpenCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsListBankResponseRowsItem) SetClearingOpenCount(clearingOpenCount int64) {
+	s.ClearingOpenCount = clearingOpenCount
+	s.require(settlementsListBankResponseRowsItemFieldClearingOpenCount)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SettlementsListBankResponseRowsItem) SetCreatedAt(createdAt time.Time) {
@@ -19092,39 +19588,47 @@ func (s SettlementsListBankResponseRowsItemStatus) Ptr() *SettlementsListBankRes
 }
 
 var (
-	settlementsMatchBankResponseFieldID                = big.NewInt(1 << 0)
-	settlementsMatchBankResponseFieldExternalID        = big.NewInt(1 << 1)
-	settlementsMatchBankResponseFieldCategory          = big.NewInt(1 << 2)
-	settlementsMatchBankResponseFieldDate              = big.NewInt(1 << 3)
-	settlementsMatchBankResponseFieldGross             = big.NewInt(1 << 4)
-	settlementsMatchBankResponseFieldFee               = big.NewInt(1 << 5)
-	settlementsMatchBankResponseFieldNet               = big.NewInt(1 << 6)
-	settlementsMatchBankResponseFieldDescription       = big.NewInt(1 << 7)
-	settlementsMatchBankResponseFieldSourceID          = big.NewInt(1 << 8)
-	settlementsMatchBankResponseFieldChargeID          = big.NewInt(1 << 9)
-	settlementsMatchBankResponseFieldCommissionPercent = big.NewInt(1 << 10)
-	settlementsMatchBankResponseFieldCommissionAmount  = big.NewInt(1 << 11)
-	settlementsMatchBankResponseFieldReference         = big.NewInt(1 << 12)
-	settlementsMatchBankResponseFieldMatchedInvoiceID  = big.NewInt(1 << 13)
-	settlementsMatchBankResponseFieldMatchStatus       = big.NewInt(1 << 14)
+	settlementsMatchBankResponseFieldID                    = big.NewInt(1 << 0)
+	settlementsMatchBankResponseFieldExternalID            = big.NewInt(1 << 1)
+	settlementsMatchBankResponseFieldCategory              = big.NewInt(1 << 2)
+	settlementsMatchBankResponseFieldDate                  = big.NewInt(1 << 3)
+	settlementsMatchBankResponseFieldGross                 = big.NewInt(1 << 4)
+	settlementsMatchBankResponseFieldFee                   = big.NewInt(1 << 5)
+	settlementsMatchBankResponseFieldNet                   = big.NewInt(1 << 6)
+	settlementsMatchBankResponseFieldDescription           = big.NewInt(1 << 7)
+	settlementsMatchBankResponseFieldSourceID              = big.NewInt(1 << 8)
+	settlementsMatchBankResponseFieldChargeID              = big.NewInt(1 << 9)
+	settlementsMatchBankResponseFieldCommissionPercent     = big.NewInt(1 << 10)
+	settlementsMatchBankResponseFieldCommissionAmount      = big.NewInt(1 << 11)
+	settlementsMatchBankResponseFieldReference             = big.NewInt(1 << 12)
+	settlementsMatchBankResponseFieldMatchedInvoiceID      = big.NewInt(1 << 13)
+	settlementsMatchBankResponseFieldMatchStatus           = big.NewInt(1 << 14)
+	settlementsMatchBankResponseFieldClearingBankAccountID = big.NewInt(1 << 15)
+	settlementsMatchBankResponseFieldClearingBooked        = big.NewInt(1 << 16)
+	settlementsMatchBankResponseFieldClearingDifference    = big.NewInt(1 << 17)
+	settlementsMatchBankResponseFieldClearingUnposted      = big.NewInt(1 << 18)
 )
 
 type SettlementsMatchBankResponse struct {
-	ID                string                                  `json:"id" url:"id"`
-	ExternalID        string                                  `json:"externalId" url:"externalId"`
-	Category          string                                  `json:"category" url:"category"`
-	Date              time.Time                               `json:"date" url:"date" format:"date"`
-	Gross             string                                  `json:"gross" url:"gross"`
-	Fee               string                                  `json:"fee" url:"fee"`
-	Net               string                                  `json:"net" url:"net"`
-	Description       *string                                 `json:"description,omitempty" url:"description,omitempty"`
-	SourceID          *string                                 `json:"sourceId,omitempty" url:"sourceId,omitempty"`
-	ChargeID          *string                                 `json:"chargeId,omitempty" url:"chargeId,omitempty"`
-	CommissionPercent *string                                 `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
-	CommissionAmount  *string                                 `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
-	Reference         *string                                 `json:"reference,omitempty" url:"reference,omitempty"`
-	MatchedInvoiceID  *string                                 `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
-	MatchStatus       SettlementsMatchBankResponseMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ID                    string                                  `json:"id" url:"id"`
+	ExternalID            string                                  `json:"externalId" url:"externalId"`
+	Category              string                                  `json:"category" url:"category"`
+	Date                  time.Time                               `json:"date" url:"date" format:"date"`
+	Gross                 string                                  `json:"gross" url:"gross"`
+	Fee                   string                                  `json:"fee" url:"fee"`
+	Net                   string                                  `json:"net" url:"net"`
+	Description           *string                                 `json:"description,omitempty" url:"description,omitempty"`
+	SourceID              *string                                 `json:"sourceId,omitempty" url:"sourceId,omitempty"`
+	ChargeID              *string                                 `json:"chargeId,omitempty" url:"chargeId,omitempty"`
+	CommissionPercent     *string                                 `json:"commissionPercent,omitempty" url:"commissionPercent,omitempty"`
+	CommissionAmount      *string                                 `json:"commissionAmount,omitempty" url:"commissionAmount,omitempty"`
+	Reference             *string                                 `json:"reference,omitempty" url:"reference,omitempty"`
+	MatchedInvoiceID      *string                                 `json:"matchedInvoiceId,omitempty" url:"matchedInvoiceId,omitempty"`
+	MatchStatus           SettlementsMatchBankResponseMatchStatus `json:"matchStatus" url:"matchStatus"`
+	ClearingBankAccountID *string                                 `json:"clearingBankAccountId,omitempty" url:"clearingBankAccountId,omitempty"`
+	ClearingBooked        *string                                 `json:"clearingBooked,omitempty" url:"clearingBooked,omitempty"`
+	ClearingDifference    *string                                 `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingUnposted      bool                                    `json:"clearingUnposted" url:"clearingUnposted"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -19236,6 +19740,34 @@ func (s *SettlementsMatchBankResponse) GetMatchStatus() SettlementsMatchBankResp
 		return ""
 	}
 	return s.MatchStatus
+}
+
+func (s *SettlementsMatchBankResponse) GetClearingBankAccountID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingBankAccountID
+}
+
+func (s *SettlementsMatchBankResponse) GetClearingBooked() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingBooked
+}
+
+func (s *SettlementsMatchBankResponse) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsMatchBankResponse) GetClearingUnposted() bool {
+	if s == nil {
+		return false
+	}
+	return s.ClearingUnposted
 }
 
 func (s *SettlementsMatchBankResponse) GetExtraProperties() map[string]interface{} {
@@ -19357,6 +19889,34 @@ func (s *SettlementsMatchBankResponse) SetMatchStatus(matchStatus SettlementsMat
 	s.require(settlementsMatchBankResponseFieldMatchStatus)
 }
 
+// SetClearingBankAccountID sets the ClearingBankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsMatchBankResponse) SetClearingBankAccountID(clearingBankAccountID *string) {
+	s.ClearingBankAccountID = clearingBankAccountID
+	s.require(settlementsMatchBankResponseFieldClearingBankAccountID)
+}
+
+// SetClearingBooked sets the ClearingBooked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsMatchBankResponse) SetClearingBooked(clearingBooked *string) {
+	s.ClearingBooked = clearingBooked
+	s.require(settlementsMatchBankResponseFieldClearingBooked)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsMatchBankResponse) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsMatchBankResponseFieldClearingDifference)
+}
+
+// SetClearingUnposted sets the ClearingUnposted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsMatchBankResponse) SetClearingUnposted(clearingUnposted bool) {
+	s.ClearingUnposted = clearingUnposted
+	s.require(settlementsMatchBankResponseFieldClearingUnposted)
+}
+
 func (s *SettlementsMatchBankResponse) UnmarshalJSON(data []byte) error {
 	type embed SettlementsMatchBankResponse
 	var unmarshaler = struct {
@@ -19449,10 +20009,13 @@ var (
 	settlementsPostBankResponseFieldLineCount            = big.NewInt(1 << 13)
 	settlementsPostBankResponseFieldMatchedCount         = big.NewInt(1 << 14)
 	settlementsPostBankResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
-	settlementsPostBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
-	settlementsPostBankResponseFieldUpdatedAt            = big.NewInt(1 << 17)
-	settlementsPostBankResponseFieldWarnings             = big.NewInt(1 << 18)
-	settlementsPostBankResponseFieldSummary              = big.NewInt(1 << 19)
+	settlementsPostBankResponseFieldClearedNet           = big.NewInt(1 << 16)
+	settlementsPostBankResponseFieldClearingDifference   = big.NewInt(1 << 17)
+	settlementsPostBankResponseFieldClearingOpenCount    = big.NewInt(1 << 18)
+	settlementsPostBankResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	settlementsPostBankResponseFieldUpdatedAt            = big.NewInt(1 << 20)
+	settlementsPostBankResponseFieldWarnings             = big.NewInt(1 << 21)
+	settlementsPostBankResponseFieldSummary              = big.NewInt(1 << 22)
 )
 
 type SettlementsPostBankResponse struct {
@@ -19472,6 +20035,9 @@ type SettlementsPostBankResponse struct {
 	LineCount            int64                               `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                               `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                               `json:"unmatchedCount" url:"unmatchedCount"`
+	ClearedNet           *string                             `json:"clearedNet,omitempty" url:"clearedNet,omitempty"`
+	ClearingDifference   *string                             `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingOpenCount    int64                               `json:"clearingOpenCount" url:"clearingOpenCount"`
 	CreatedAt            time.Time                           `json:"createdAt" url:"createdAt"`
 	UpdatedAt            time.Time                           `json:"updatedAt" url:"updatedAt"`
 	Warnings             []string                            `json:"warnings" url:"warnings"`
@@ -19594,6 +20160,27 @@ func (s *SettlementsPostBankResponse) GetUnmatchedCount() int64 {
 		return 0
 	}
 	return s.UnmatchedCount
+}
+
+func (s *SettlementsPostBankResponse) GetClearedNet() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearedNet
+}
+
+func (s *SettlementsPostBankResponse) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsPostBankResponse) GetClearingOpenCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ClearingOpenCount
 }
 
 func (s *SettlementsPostBankResponse) GetCreatedAt() time.Time {
@@ -19750,6 +20337,27 @@ func (s *SettlementsPostBankResponse) SetUnmatchedCount(unmatchedCount int64) {
 	s.require(settlementsPostBankResponseFieldUnmatchedCount)
 }
 
+// SetClearedNet sets the ClearedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsPostBankResponse) SetClearedNet(clearedNet *string) {
+	s.ClearedNet = clearedNet
+	s.require(settlementsPostBankResponseFieldClearedNet)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsPostBankResponse) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsPostBankResponseFieldClearingDifference)
+}
+
+// SetClearingOpenCount sets the ClearingOpenCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsPostBankResponse) SetClearingOpenCount(clearingOpenCount int64) {
+	s.ClearingOpenCount = clearingOpenCount
+	s.require(settlementsPostBankResponseFieldClearingOpenCount)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SettlementsPostBankResponse) SetCreatedAt(createdAt time.Time) {
@@ -19864,8 +20472,9 @@ var (
 	settlementsPostBankResponseSummaryFieldSellerAmount       = big.NewInt(1 << 2)
 	settlementsPostBankResponseSummaryFieldFeeAmount          = big.NewInt(1 << 3)
 	settlementsPostBankResponseSummaryFieldSuspenseAmount     = big.NewInt(1 << 4)
-	settlementsPostBankResponseSummaryFieldFxRate             = big.NewInt(1 << 5)
-	settlementsPostBankResponseSummaryFieldExchangeDifference = big.NewInt(1 << 6)
+	settlementsPostBankResponseSummaryFieldClearedAmount      = big.NewInt(1 << 5)
+	settlementsPostBankResponseSummaryFieldFxRate             = big.NewInt(1 << 6)
+	settlementsPostBankResponseSummaryFieldExchangeDifference = big.NewInt(1 << 7)
 )
 
 type SettlementsPostBankResponseSummary struct {
@@ -19874,6 +20483,7 @@ type SettlementsPostBankResponseSummary struct {
 	SellerAmount       string `json:"sellerAmount" url:"sellerAmount"`
 	FeeAmount          string `json:"feeAmount" url:"feeAmount"`
 	SuspenseAmount     string `json:"suspenseAmount" url:"suspenseAmount"`
+	ClearedAmount      string `json:"clearedAmount" url:"clearedAmount"`
 	FxRate             string `json:"fxRate" url:"fxRate"`
 	ExchangeDifference string `json:"exchangeDifference" url:"exchangeDifference"`
 
@@ -19917,6 +20527,13 @@ func (s *SettlementsPostBankResponseSummary) GetSuspenseAmount() string {
 		return ""
 	}
 	return s.SuspenseAmount
+}
+
+func (s *SettlementsPostBankResponseSummary) GetClearedAmount() string {
+	if s == nil {
+		return ""
+	}
+	return s.ClearedAmount
 }
 
 func (s *SettlementsPostBankResponseSummary) GetFxRate() string {
@@ -19980,6 +20597,13 @@ func (s *SettlementsPostBankResponseSummary) SetFeeAmount(feeAmount string) {
 func (s *SettlementsPostBankResponseSummary) SetSuspenseAmount(suspenseAmount string) {
 	s.SuspenseAmount = suspenseAmount
 	s.require(settlementsPostBankResponseSummaryFieldSuspenseAmount)
+}
+
+// SetClearedAmount sets the ClearedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsPostBankResponseSummary) SetClearedAmount(clearedAmount string) {
+	s.ClearedAmount = clearedAmount
+	s.require(settlementsPostBankResponseSummaryFieldClearedAmount)
 }
 
 // SetFxRate sets the FxRate field and marks it as non-optional;
@@ -20055,8 +20679,11 @@ var (
 	settlementsUnlinkBankResponseFieldLineCount            = big.NewInt(1 << 13)
 	settlementsUnlinkBankResponseFieldMatchedCount         = big.NewInt(1 << 14)
 	settlementsUnlinkBankResponseFieldUnmatchedCount       = big.NewInt(1 << 15)
-	settlementsUnlinkBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
-	settlementsUnlinkBankResponseFieldUpdatedAt            = big.NewInt(1 << 17)
+	settlementsUnlinkBankResponseFieldClearedNet           = big.NewInt(1 << 16)
+	settlementsUnlinkBankResponseFieldClearingDifference   = big.NewInt(1 << 17)
+	settlementsUnlinkBankResponseFieldClearingOpenCount    = big.NewInt(1 << 18)
+	settlementsUnlinkBankResponseFieldCreatedAt            = big.NewInt(1 << 19)
+	settlementsUnlinkBankResponseFieldUpdatedAt            = big.NewInt(1 << 20)
 )
 
 type SettlementsUnlinkBankResponse struct {
@@ -20076,6 +20703,9 @@ type SettlementsUnlinkBankResponse struct {
 	LineCount            int64                               `json:"lineCount" url:"lineCount"`
 	MatchedCount         int64                               `json:"matchedCount" url:"matchedCount"`
 	UnmatchedCount       int64                               `json:"unmatchedCount" url:"unmatchedCount"`
+	ClearedNet           *string                             `json:"clearedNet,omitempty" url:"clearedNet,omitempty"`
+	ClearingDifference   *string                             `json:"clearingDifference,omitempty" url:"clearingDifference,omitempty"`
+	ClearingOpenCount    int64                               `json:"clearingOpenCount" url:"clearingOpenCount"`
 	CreatedAt            time.Time                           `json:"createdAt" url:"createdAt"`
 	UpdatedAt            time.Time                           `json:"updatedAt" url:"updatedAt"`
 
@@ -20196,6 +20826,27 @@ func (s *SettlementsUnlinkBankResponse) GetUnmatchedCount() int64 {
 		return 0
 	}
 	return s.UnmatchedCount
+}
+
+func (s *SettlementsUnlinkBankResponse) GetClearedNet() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearedNet
+}
+
+func (s *SettlementsUnlinkBankResponse) GetClearingDifference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ClearingDifference
+}
+
+func (s *SettlementsUnlinkBankResponse) GetClearingOpenCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ClearingOpenCount
 }
 
 func (s *SettlementsUnlinkBankResponse) GetCreatedAt() time.Time {
@@ -20336,6 +20987,27 @@ func (s *SettlementsUnlinkBankResponse) SetMatchedCount(matchedCount int64) {
 func (s *SettlementsUnlinkBankResponse) SetUnmatchedCount(unmatchedCount int64) {
 	s.UnmatchedCount = unmatchedCount
 	s.require(settlementsUnlinkBankResponseFieldUnmatchedCount)
+}
+
+// SetClearedNet sets the ClearedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsUnlinkBankResponse) SetClearedNet(clearedNet *string) {
+	s.ClearedNet = clearedNet
+	s.require(settlementsUnlinkBankResponseFieldClearedNet)
+}
+
+// SetClearingDifference sets the ClearingDifference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsUnlinkBankResponse) SetClearingDifference(clearingDifference *string) {
+	s.ClearingDifference = clearingDifference
+	s.require(settlementsUnlinkBankResponseFieldClearingDifference)
+}
+
+// SetClearingOpenCount sets the ClearingOpenCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SettlementsUnlinkBankResponse) SetClearingOpenCount(clearingOpenCount int64) {
+	s.ClearingOpenCount = clearingOpenCount
+	s.require(settlementsUnlinkBankResponseFieldClearingOpenCount)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -22147,6 +22819,7 @@ type TransactionsMatchBankRequestDocumentType string
 const (
 	TransactionsMatchBankRequestDocumentTypeSaleInvoice     TransactionsMatchBankRequestDocumentType = "sale_invoice"
 	TransactionsMatchBankRequestDocumentTypePurchaseInvoice TransactionsMatchBankRequestDocumentType = "purchase_invoice"
+	TransactionsMatchBankRequestDocumentTypePayrollRun      TransactionsMatchBankRequestDocumentType = "payroll_run"
 )
 
 func NewTransactionsMatchBankRequestDocumentTypeFromString(s string) (TransactionsMatchBankRequestDocumentType, error) {
@@ -22155,6 +22828,8 @@ func NewTransactionsMatchBankRequestDocumentTypeFromString(s string) (Transactio
 		return TransactionsMatchBankRequestDocumentTypeSaleInvoice, nil
 	case "purchase_invoice":
 		return TransactionsMatchBankRequestDocumentTypePurchaseInvoice, nil
+	case "payroll_run":
+		return TransactionsMatchBankRequestDocumentTypePayrollRun, nil
 	}
 	var t TransactionsMatchBankRequestDocumentType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -22611,6 +23286,7 @@ type TransactionsMatchManyBankRequestAllocationsItemDocumentType string
 const (
 	TransactionsMatchManyBankRequestAllocationsItemDocumentTypeSaleInvoice     TransactionsMatchManyBankRequestAllocationsItemDocumentType = "sale_invoice"
 	TransactionsMatchManyBankRequestAllocationsItemDocumentTypePurchaseInvoice TransactionsMatchManyBankRequestAllocationsItemDocumentType = "purchase_invoice"
+	TransactionsMatchManyBankRequestAllocationsItemDocumentTypePayrollRun      TransactionsMatchManyBankRequestAllocationsItemDocumentType = "payroll_run"
 )
 
 func NewTransactionsMatchManyBankRequestAllocationsItemDocumentTypeFromString(s string) (TransactionsMatchManyBankRequestAllocationsItemDocumentType, error) {
@@ -22619,6 +23295,8 @@ func NewTransactionsMatchManyBankRequestAllocationsItemDocumentTypeFromString(s 
 		return TransactionsMatchManyBankRequestAllocationsItemDocumentTypeSaleInvoice, nil
 	case "purchase_invoice":
 		return TransactionsMatchManyBankRequestAllocationsItemDocumentTypePurchaseInvoice, nil
+	case "payroll_run":
+		return TransactionsMatchManyBankRequestAllocationsItemDocumentTypePayrollRun, nil
 	}
 	var t TransactionsMatchManyBankRequestAllocationsItemDocumentType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -22959,6 +23637,7 @@ type TransactionsRecordBankRequestDocumentType string
 const (
 	TransactionsRecordBankRequestDocumentTypeSaleInvoice     TransactionsRecordBankRequestDocumentType = "sale_invoice"
 	TransactionsRecordBankRequestDocumentTypePurchaseInvoice TransactionsRecordBankRequestDocumentType = "purchase_invoice"
+	TransactionsRecordBankRequestDocumentTypePayrollRun      TransactionsRecordBankRequestDocumentType = "payroll_run"
 )
 
 func NewTransactionsRecordBankRequestDocumentTypeFromString(s string) (TransactionsRecordBankRequestDocumentType, error) {
@@ -22967,6 +23646,8 @@ func NewTransactionsRecordBankRequestDocumentTypeFromString(s string) (Transacti
 		return TransactionsRecordBankRequestDocumentTypeSaleInvoice, nil
 	case "purchase_invoice":
 		return TransactionsRecordBankRequestDocumentTypePurchaseInvoice, nil
+	case "payroll_run":
+		return TransactionsRecordBankRequestDocumentTypePayrollRun, nil
 	}
 	var t TransactionsRecordBankRequestDocumentType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -23603,6 +24284,7 @@ type TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentType string
 const (
 	TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypeSaleInvoice     TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentType = "sale_invoice"
 	TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypePurchaseInvoice TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentType = "purchase_invoice"
+	TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypePayrollRun      TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentType = "payroll_run"
 )
 
 func NewTransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypeFromString(s string) (TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentType, error) {
@@ -23611,6 +24293,8 @@ func NewTransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypeFromStr
 		return TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypeSaleInvoice, nil
 	case "purchase_invoice":
 		return TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypePurchaseInvoice, nil
+	case "payroll_run":
+		return TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentTypePayrollRun, nil
 	}
 	var t TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

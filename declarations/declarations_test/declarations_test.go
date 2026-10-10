@@ -522,6 +522,116 @@ func TestDeclarationsEuIossComputeWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsEuIossComputeWithWireMock", "POST", "/v1/declarations/eu/ioss/compute", nil, 1)
 }
 
+func TestDeclarationsEuOwnGoodsTransfersComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EuOwnGoodsTransfersComputeDeclarationsRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.EuOwnGoodsTransfersCompute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEuOwnGoodsTransfersComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEuOwnGoodsTransfersComputeWithWireMock", "POST", "/v1/declarations/eu/own-goods-transfers/compute", nil, 1)
+}
+
+func TestDeclarationsEuDigitalReportingListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EuDigitalReportingListDeclarationsRequest{
+		FromDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		ToDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Declarations.EuDigitalReportingList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEuDigitalReportingListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEuDigitalReportingListWithWireMock", "POST", "/v1/declarations/eu/digital-reporting/list", nil, 1)
+}
+
+func TestDeclarationsEuDac7PreviewWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EuDac7PreviewDeclarationsRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.EuDac7Preview(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEuDac7PreviewWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEuDac7PreviewWithWireMock", "POST", "/v1/declarations/eu/dac7/preview", nil, 1)
+}
+
+func TestDeclarationsEuDac7XMLWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EuDac7XMLDeclarationsRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.EuDac7XML(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEuDac7XMLWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEuDac7XMLWithWireMock", "POST", "/v1/declarations/eu/dac7/xml", nil, 1)
+}
+
 func TestDeclarationsEuDistanceSalesThresholdGetWithWireMock(
 	t *testing.T,
 ) {

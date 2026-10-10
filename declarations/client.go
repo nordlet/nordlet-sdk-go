@@ -290,6 +290,71 @@ func (c *Client) EuIossCompute(
 	return response.Body, nil
 }
 
+func (c *Client) EuOwnGoodsTransfersCompute(
+	ctx context.Context,
+	request *nordlet.EuOwnGoodsTransfersComputeDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.EuOwnGoodsTransfersComputeDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuOwnGoodsTransfersCompute(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) EuDigitalReportingList(
+	ctx context.Context,
+	request *nordlet.EuDigitalReportingListDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.EuDigitalReportingListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuDigitalReportingList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Which platform sellers are reportable for the year (Council Directive (EU) 2021/514, Annex V) and why the others are excluded, the data still missing, and how the company files the report in its Member State.
+func (c *Client) EuDac7Preview(
+	ctx context.Context,
+	request *nordlet.EuDac7PreviewDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.EuDac7PreviewDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuDac7Preview(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) EuDac7XML(
+	ctx context.Context,
+	request *nordlet.EuDac7XMLDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.EuDac7XMLDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.EuDac7XML(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) EuDistanceSalesThresholdGet(
 	ctx context.Context,
 	request *nordlet.EuDistanceSalesThresholdGetDeclarationsRequest,
@@ -1170,7 +1235,7 @@ func (c *Client) PlJpkMagGenerate(
 	return response.Body, nil
 }
 
-// Generate PIT-11(29) for every person on the payroll of one year: the pay, the deductible costs, the advance withheld and the social and health contributions taken off it. One document per person, because that is how the form is filed.
+// Generate PIT-11(29) for every person on the payroll of one year: the pay, the deductible costs, the advance withheld and the social and health contributions taken off it. One document per person, because that is how the form is filed, addressed to the tax office of the place of residence of that person (employee field plKodUrzedu); a person without that code is refused with 422.
 func (c *Client) PlPit11Generate(
 	ctx context.Context,
 	request *nordlet.PlPit11GenerateDeclarationsRequest,

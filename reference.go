@@ -10415,6 +10415,50 @@ func (v *VatClassifiersUpsertReferenceResponse) String() string {
 	return fmt.Sprintf("%#v", v)
 }
 
+type VatResolveReferenceRequestGoodsKind string
+
+const (
+	VatResolveReferenceRequestGoodsKindInstalled     VatResolveReferenceRequestGoodsKind = "installed"
+	VatResolveReferenceRequestGoodsKindEnergyNetwork VatResolveReferenceRequestGoodsKind = "energy_network"
+)
+
+func NewVatResolveReferenceRequestGoodsKindFromString(s string) (VatResolveReferenceRequestGoodsKind, error) {
+	switch s {
+	case "installed":
+		return VatResolveReferenceRequestGoodsKindInstalled, nil
+	case "energy_network":
+		return VatResolveReferenceRequestGoodsKindEnergyNetwork, nil
+	}
+	var t VatResolveReferenceRequestGoodsKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VatResolveReferenceRequestGoodsKind) Ptr() *VatResolveReferenceRequestGoodsKind {
+	return &v
+}
+
+type VatResolveReferenceRequestServiceKind string
+
+const (
+	VatResolveReferenceRequestServiceKindShortTermAccommodation VatResolveReferenceRequestServiceKind = "short_term_accommodation"
+	VatResolveReferenceRequestServiceKindPassengerRoadTransport VatResolveReferenceRequestServiceKind = "passenger_road_transport"
+)
+
+func NewVatResolveReferenceRequestServiceKindFromString(s string) (VatResolveReferenceRequestServiceKind, error) {
+	switch s {
+	case "short_term_accommodation":
+		return VatResolveReferenceRequestServiceKindShortTermAccommodation, nil
+	case "passenger_road_transport":
+		return VatResolveReferenceRequestServiceKindPassengerRoadTransport, nil
+	}
+	var t VatResolveReferenceRequestServiceKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VatResolveReferenceRequestServiceKind) Ptr() *VatResolveReferenceRequestServiceKind {
+	return &v
+}
+
 type VatResolveReferenceRequestSupplyType string
 
 const (
@@ -11020,29 +11064,41 @@ func (v *VatClassifiersUpsertReferenceRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	vatResolveReferenceRequestFieldPartnerID                   = big.NewInt(1 << 0)
-	vatResolveReferenceRequestFieldCustomerCountryCode         = big.NewInt(1 << 1)
-	vatResolveReferenceRequestFieldCustomerIsBusiness          = big.NewInt(1 << 2)
-	vatResolveReferenceRequestFieldSupplyType                  = big.NewInt(1 << 3)
-	vatResolveReferenceRequestFieldDate                        = big.NewInt(1 << 4)
-	vatResolveReferenceRequestFieldBelowDistanceSalesThreshold = big.NewInt(1 << 5)
-	vatResolveReferenceRequestFieldFacilitatedByMarketplace    = big.NewInt(1 << 6)
-	vatResolveReferenceRequestFieldActingAsMarketplace         = big.NewInt(1 << 7)
-	vatResolveReferenceRequestFieldSellerEstablishedInEu       = big.NewInt(1 << 8)
-	vatResolveReferenceRequestFieldImportedConsignmentValueEur = big.NewInt(1 << 9)
+	vatResolveReferenceRequestFieldPartnerID                       = big.NewInt(1 << 0)
+	vatResolveReferenceRequestFieldCustomerCountryCode             = big.NewInt(1 << 1)
+	vatResolveReferenceRequestFieldCustomerIsBusiness              = big.NewInt(1 << 2)
+	vatResolveReferenceRequestFieldSupplyType                      = big.NewInt(1 << 3)
+	vatResolveReferenceRequestFieldDate                            = big.NewInt(1 << 4)
+	vatResolveReferenceRequestFieldBelowDistanceSalesThreshold     = big.NewInt(1 << 5)
+	vatResolveReferenceRequestFieldFacilitatedByMarketplace        = big.NewInt(1 << 6)
+	vatResolveReferenceRequestFieldActingAsMarketplace             = big.NewInt(1 << 7)
+	vatResolveReferenceRequestFieldSellerEstablishedInEu           = big.NewInt(1 << 8)
+	vatResolveReferenceRequestFieldImportedConsignmentValueEur     = big.NewInt(1 << 9)
+	vatResolveReferenceRequestFieldServiceKind                     = big.NewInt(1 << 10)
+	vatResolveReferenceRequestFieldServiceCountryCode              = big.NewInt(1 << 11)
+	vatResolveReferenceRequestFieldUnderlyingSupplierGaveVatNumber = big.NewInt(1 << 12)
+	vatResolveReferenceRequestFieldUnderlyingSupplierChargesVat    = big.NewInt(1 << 13)
+	vatResolveReferenceRequestFieldGoodsKind                       = big.NewInt(1 << 14)
+	vatResolveReferenceRequestFieldGoodsLocationCountryCode        = big.NewInt(1 << 15)
 )
 
 type VatResolveReferenceRequest struct {
-	PartnerID                   *string                               `json:"partnerId,omitempty" url:"-"`
-	CustomerCountryCode         *string                               `json:"customerCountryCode,omitempty" url:"-"`
-	CustomerIsBusiness          *bool                                 `json:"customerIsBusiness,omitempty" url:"-"`
-	SupplyType                  *VatResolveReferenceRequestSupplyType `json:"supplyType,omitempty" url:"-"`
-	Date                        *time.Time                            `json:"date,omitempty" url:"-" format:"date"`
-	BelowDistanceSalesThreshold *bool                                 `json:"belowDistanceSalesThreshold,omitempty" url:"-"`
-	FacilitatedByMarketplace    *bool                                 `json:"facilitatedByMarketplace,omitempty" url:"-"`
-	ActingAsMarketplace         *bool                                 `json:"actingAsMarketplace,omitempty" url:"-"`
-	SellerEstablishedInEu       *bool                                 `json:"sellerEstablishedInEu,omitempty" url:"-"`
-	ImportedConsignmentValueEur *string                               `json:"importedConsignmentValueEur,omitempty" url:"-"`
+	PartnerID                       *string                                `json:"partnerId,omitempty" url:"-"`
+	CustomerCountryCode             *string                                `json:"customerCountryCode,omitempty" url:"-"`
+	CustomerIsBusiness              *bool                                  `json:"customerIsBusiness,omitempty" url:"-"`
+	SupplyType                      *VatResolveReferenceRequestSupplyType  `json:"supplyType,omitempty" url:"-"`
+	Date                            *time.Time                             `json:"date,omitempty" url:"-" format:"date"`
+	BelowDistanceSalesThreshold     *bool                                  `json:"belowDistanceSalesThreshold,omitempty" url:"-"`
+	FacilitatedByMarketplace        *bool                                  `json:"facilitatedByMarketplace,omitempty" url:"-"`
+	ActingAsMarketplace             *bool                                  `json:"actingAsMarketplace,omitempty" url:"-"`
+	SellerEstablishedInEu           *bool                                  `json:"sellerEstablishedInEu,omitempty" url:"-"`
+	ImportedConsignmentValueEur     *string                                `json:"importedConsignmentValueEur,omitempty" url:"-"`
+	ServiceKind                     *VatResolveReferenceRequestServiceKind `json:"serviceKind,omitempty" url:"-"`
+	ServiceCountryCode              *string                                `json:"serviceCountryCode,omitempty" url:"-"`
+	UnderlyingSupplierGaveVatNumber *bool                                  `json:"underlyingSupplierGaveVatNumber,omitempty" url:"-"`
+	UnderlyingSupplierChargesVat    *bool                                  `json:"underlyingSupplierChargesVat,omitempty" url:"-"`
+	GoodsKind                       *VatResolveReferenceRequestGoodsKind   `json:"goodsKind,omitempty" url:"-"`
+	GoodsLocationCountryCode        *string                                `json:"goodsLocationCountryCode,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11123,6 +11179,48 @@ func (v *VatResolveReferenceRequest) SetSellerEstablishedInEu(sellerEstablishedI
 func (v *VatResolveReferenceRequest) SetImportedConsignmentValueEur(importedConsignmentValueEur *string) {
 	v.ImportedConsignmentValueEur = importedConsignmentValueEur
 	v.require(vatResolveReferenceRequestFieldImportedConsignmentValueEur)
+}
+
+// SetServiceKind sets the ServiceKind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceRequest) SetServiceKind(serviceKind *VatResolveReferenceRequestServiceKind) {
+	v.ServiceKind = serviceKind
+	v.require(vatResolveReferenceRequestFieldServiceKind)
+}
+
+// SetServiceCountryCode sets the ServiceCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceRequest) SetServiceCountryCode(serviceCountryCode *string) {
+	v.ServiceCountryCode = serviceCountryCode
+	v.require(vatResolveReferenceRequestFieldServiceCountryCode)
+}
+
+// SetUnderlyingSupplierGaveVatNumber sets the UnderlyingSupplierGaveVatNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceRequest) SetUnderlyingSupplierGaveVatNumber(underlyingSupplierGaveVatNumber *bool) {
+	v.UnderlyingSupplierGaveVatNumber = underlyingSupplierGaveVatNumber
+	v.require(vatResolveReferenceRequestFieldUnderlyingSupplierGaveVatNumber)
+}
+
+// SetUnderlyingSupplierChargesVat sets the UnderlyingSupplierChargesVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceRequest) SetUnderlyingSupplierChargesVat(underlyingSupplierChargesVat *bool) {
+	v.UnderlyingSupplierChargesVat = underlyingSupplierChargesVat
+	v.require(vatResolveReferenceRequestFieldUnderlyingSupplierChargesVat)
+}
+
+// SetGoodsKind sets the GoodsKind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceRequest) SetGoodsKind(goodsKind *VatResolveReferenceRequestGoodsKind) {
+	v.GoodsKind = goodsKind
+	v.require(vatResolveReferenceRequestFieldGoodsKind)
+}
+
+// SetGoodsLocationCountryCode sets the GoodsLocationCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceRequest) SetGoodsLocationCountryCode(goodsLocationCountryCode *string) {
+	v.GoodsLocationCountryCode = goodsLocationCountryCode
+	v.require(vatResolveReferenceRequestFieldGoodsLocationCountryCode)
 }
 
 func (v *VatResolveReferenceRequest) UnmarshalJSON(data []byte) error {

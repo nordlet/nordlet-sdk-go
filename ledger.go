@@ -763,12 +763,14 @@ func (c *CostCentersUpdateLedgerRequest) MarshalJSON() ([]byte, error) {
 var (
 	journalTransactionsCreateLedgerRequestFieldDate        = big.NewInt(1 << 0)
 	journalTransactionsCreateLedgerRequestFieldDescription = big.NewInt(1 << 1)
-	journalTransactionsCreateLedgerRequestFieldEntries     = big.NewInt(1 << 2)
+	journalTransactionsCreateLedgerRequestFieldCurrency    = big.NewInt(1 << 2)
+	journalTransactionsCreateLedgerRequestFieldEntries     = big.NewInt(1 << 3)
 )
 
 type JournalTransactionsCreateLedgerRequest struct {
 	Date        time.Time                                            `json:"date" url:"-" format:"date"`
 	Description *string                                              `json:"description,omitempty" url:"-"`
+	Currency    *string                                              `json:"currency,omitempty" url:"-"`
 	Entries     []*JournalTransactionsCreateLedgerRequestEntriesItem `json:"entries" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -794,6 +796,13 @@ func (j *JournalTransactionsCreateLedgerRequest) SetDate(date time.Time) {
 func (j *JournalTransactionsCreateLedgerRequest) SetDescription(description *string) {
 	j.Description = description
 	j.require(journalTransactionsCreateLedgerRequestFieldDescription)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsCreateLedgerRequest) SetCurrency(currency *string) {
+	j.Currency = currency
+	j.require(journalTransactionsCreateLedgerRequestFieldCurrency)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;

@@ -2493,14 +2493,15 @@ var (
 	runsApprovePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
 	runsApprovePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
 	runsApprovePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsApprovePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
-	runsApprovePayrollResponseFieldNotes                        = big.NewInt(1 << 14)
-	runsApprovePayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
-	runsApprovePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
-	runsApprovePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
-	runsApprovePayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
-	runsApprovePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
-	runsApprovePayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
+	runsApprovePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	runsApprovePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	runsApprovePayrollResponseFieldNotes                        = big.NewInt(1 << 15)
+	runsApprovePayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
+	runsApprovePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
+	runsApprovePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
+	runsApprovePayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	runsApprovePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	runsApprovePayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
 )
 
 type RunsApprovePayrollResponse struct {
@@ -2517,6 +2518,7 @@ type RunsApprovePayrollResponse struct {
 	EmployerContributionsTotal   string                                           `json:"employerContributionsTotal" url:"employerContributionsTotal"`
 	ComponentTotals              []*RunsApprovePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
 	NetTotal                     string                                           `json:"netTotal" url:"netTotal"`
+	PaidAmount                   string                                           `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                          `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	Notes                        *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
 	Warnings                     []string                                         `json:"warnings" url:"warnings"`
@@ -2622,6 +2624,13 @@ func (r *RunsApprovePayrollResponse) GetNetTotal() string {
 		return ""
 	}
 	return r.NetTotal
+}
+
+func (r *RunsApprovePayrollResponse) GetPaidAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.PaidAmount
 }
 
 func (r *RunsApprovePayrollResponse) GetJournalTransactionID() *string {
@@ -2783,6 +2792,13 @@ func (r *RunsApprovePayrollResponse) SetComponentTotals(componentTotals []*RunsA
 func (r *RunsApprovePayrollResponse) SetNetTotal(netTotal string) {
 	r.NetTotal = netTotal
 	r.require(runsApprovePayrollResponseFieldNetTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetPaidAmount(paidAmount string) {
+	r.PaidAmount = paidAmount
+	r.require(runsApprovePayrollResponseFieldPaidAmount)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
@@ -3653,15 +3669,16 @@ var (
 	runsCreatePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
 	runsCreatePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
 	runsCreatePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsCreatePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
-	runsCreatePayrollResponseFieldNotes                        = big.NewInt(1 << 14)
-	runsCreatePayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
-	runsCreatePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
-	runsCreatePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
-	runsCreatePayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
-	runsCreatePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
-	runsCreatePayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
-	runsCreatePayrollResponseFieldLines                        = big.NewInt(1 << 21)
+	runsCreatePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	runsCreatePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	runsCreatePayrollResponseFieldNotes                        = big.NewInt(1 << 15)
+	runsCreatePayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
+	runsCreatePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
+	runsCreatePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
+	runsCreatePayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	runsCreatePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	runsCreatePayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
+	runsCreatePayrollResponseFieldLines                        = big.NewInt(1 << 22)
 )
 
 type RunsCreatePayrollResponse struct {
@@ -3678,6 +3695,7 @@ type RunsCreatePayrollResponse struct {
 	EmployerContributionsTotal   string                                          `json:"employerContributionsTotal" url:"employerContributionsTotal"`
 	ComponentTotals              []*RunsCreatePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
 	NetTotal                     string                                          `json:"netTotal" url:"netTotal"`
+	PaidAmount                   string                                          `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                         `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	Notes                        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
 	Warnings                     []string                                        `json:"warnings" url:"warnings"`
@@ -3784,6 +3802,13 @@ func (r *RunsCreatePayrollResponse) GetNetTotal() string {
 		return ""
 	}
 	return r.NetTotal
+}
+
+func (r *RunsCreatePayrollResponse) GetPaidAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.PaidAmount
 }
 
 func (r *RunsCreatePayrollResponse) GetJournalTransactionID() *string {
@@ -3952,6 +3977,13 @@ func (r *RunsCreatePayrollResponse) SetComponentTotals(componentTotals []*RunsCr
 func (r *RunsCreatePayrollResponse) SetNetTotal(netTotal string) {
 	r.NetTotal = netTotal
 	r.require(runsCreatePayrollResponseFieldNetTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetPaidAmount(paidAmount string) {
+	r.PaidAmount = paidAmount
+	r.require(runsCreatePayrollResponseFieldPaidAmount)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
@@ -5064,15 +5096,16 @@ var (
 	runsGetPayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
 	runsGetPayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
 	runsGetPayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsGetPayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
-	runsGetPayrollResponseFieldNotes                        = big.NewInt(1 << 14)
-	runsGetPayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
-	runsGetPayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
-	runsGetPayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
-	runsGetPayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
-	runsGetPayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
-	runsGetPayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
-	runsGetPayrollResponseFieldLines                        = big.NewInt(1 << 21)
+	runsGetPayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	runsGetPayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	runsGetPayrollResponseFieldNotes                        = big.NewInt(1 << 15)
+	runsGetPayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
+	runsGetPayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
+	runsGetPayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
+	runsGetPayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	runsGetPayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	runsGetPayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
+	runsGetPayrollResponseFieldLines                        = big.NewInt(1 << 22)
 )
 
 type RunsGetPayrollResponse struct {
@@ -5089,6 +5122,7 @@ type RunsGetPayrollResponse struct {
 	EmployerContributionsTotal   string                                       `json:"employerContributionsTotal" url:"employerContributionsTotal"`
 	ComponentTotals              []*RunsGetPayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
 	NetTotal                     string                                       `json:"netTotal" url:"netTotal"`
+	PaidAmount                   string                                       `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	Notes                        *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
 	Warnings                     []string                                     `json:"warnings" url:"warnings"`
@@ -5195,6 +5229,13 @@ func (r *RunsGetPayrollResponse) GetNetTotal() string {
 		return ""
 	}
 	return r.NetTotal
+}
+
+func (r *RunsGetPayrollResponse) GetPaidAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.PaidAmount
 }
 
 func (r *RunsGetPayrollResponse) GetJournalTransactionID() *string {
@@ -5363,6 +5404,13 @@ func (r *RunsGetPayrollResponse) SetComponentTotals(componentTotals []*RunsGetPa
 func (r *RunsGetPayrollResponse) SetNetTotal(netTotal string) {
 	r.NetTotal = netTotal
 	r.require(runsGetPayrollResponseFieldNetTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetPaidAmount(paidAmount string) {
+	r.PaidAmount = paidAmount
+	r.require(runsGetPayrollResponseFieldPaidAmount)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
@@ -7078,14 +7126,15 @@ var (
 	runsListPayrollResponseRowsItemFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
 	runsListPayrollResponseRowsItemFieldComponentTotals              = big.NewInt(1 << 11)
 	runsListPayrollResponseRowsItemFieldNetTotal                     = big.NewInt(1 << 12)
-	runsListPayrollResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 13)
-	runsListPayrollResponseRowsItemFieldNotes                        = big.NewInt(1 << 14)
-	runsListPayrollResponseRowsItemFieldWarnings                     = big.NewInt(1 << 15)
-	runsListPayrollResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 16)
-	runsListPayrollResponseRowsItemFieldApprovedAt                   = big.NewInt(1 << 17)
-	runsListPayrollResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 18)
-	runsListPayrollResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 19)
-	runsListPayrollResponseRowsItemFieldReversalReason               = big.NewInt(1 << 20)
+	runsListPayrollResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 13)
+	runsListPayrollResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 14)
+	runsListPayrollResponseRowsItemFieldNotes                        = big.NewInt(1 << 15)
+	runsListPayrollResponseRowsItemFieldWarnings                     = big.NewInt(1 << 16)
+	runsListPayrollResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 17)
+	runsListPayrollResponseRowsItemFieldApprovedAt                   = big.NewInt(1 << 18)
+	runsListPayrollResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 19)
+	runsListPayrollResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	runsListPayrollResponseRowsItemFieldReversalReason               = big.NewInt(1 << 21)
 )
 
 type RunsListPayrollResponseRowsItem struct {
@@ -7102,6 +7151,7 @@ type RunsListPayrollResponseRowsItem struct {
 	EmployerContributionsTotal   string                                                `json:"employerContributionsTotal" url:"employerContributionsTotal"`
 	ComponentTotals              []*RunsListPayrollResponseRowsItemComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
 	NetTotal                     string                                                `json:"netTotal" url:"netTotal"`
+	PaidAmount                   string                                                `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	Notes                        *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
 	Warnings                     []string                                              `json:"warnings" url:"warnings"`
@@ -7207,6 +7257,13 @@ func (r *RunsListPayrollResponseRowsItem) GetNetTotal() string {
 		return ""
 	}
 	return r.NetTotal
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetPaidAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.PaidAmount
 }
 
 func (r *RunsListPayrollResponseRowsItem) GetJournalTransactionID() *string {
@@ -7368,6 +7425,13 @@ func (r *RunsListPayrollResponseRowsItem) SetComponentTotals(componentTotals []*
 func (r *RunsListPayrollResponseRowsItem) SetNetTotal(netTotal string) {
 	r.NetTotal = netTotal
 	r.require(runsListPayrollResponseRowsItemFieldNetTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetPaidAmount(paidAmount string) {
+	r.PaidAmount = paidAmount
+	r.require(runsListPayrollResponseRowsItemFieldPaidAmount)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
@@ -7706,14 +7770,15 @@ var (
 	runsReversePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
 	runsReversePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
 	runsReversePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsReversePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 13)
-	runsReversePayrollResponseFieldNotes                        = big.NewInt(1 << 14)
-	runsReversePayrollResponseFieldWarnings                     = big.NewInt(1 << 15)
-	runsReversePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 16)
-	runsReversePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 17)
-	runsReversePayrollResponseFieldReversedAt                   = big.NewInt(1 << 18)
-	runsReversePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 19)
-	runsReversePayrollResponseFieldReversalReason               = big.NewInt(1 << 20)
+	runsReversePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
+	runsReversePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
+	runsReversePayrollResponseFieldNotes                        = big.NewInt(1 << 15)
+	runsReversePayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
+	runsReversePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
+	runsReversePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
+	runsReversePayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	runsReversePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	runsReversePayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
 )
 
 type RunsReversePayrollResponse struct {
@@ -7730,6 +7795,7 @@ type RunsReversePayrollResponse struct {
 	EmployerContributionsTotal   string                                           `json:"employerContributionsTotal" url:"employerContributionsTotal"`
 	ComponentTotals              []*RunsReversePayrollResponseComponentTotalsItem `json:"componentTotals" url:"componentTotals"`
 	NetTotal                     string                                           `json:"netTotal" url:"netTotal"`
+	PaidAmount                   string                                           `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                          `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
 	Notes                        *string                                          `json:"notes,omitempty" url:"notes,omitempty"`
 	Warnings                     []string                                         `json:"warnings" url:"warnings"`
@@ -7835,6 +7901,13 @@ func (r *RunsReversePayrollResponse) GetNetTotal() string {
 		return ""
 	}
 	return r.NetTotal
+}
+
+func (r *RunsReversePayrollResponse) GetPaidAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.PaidAmount
 }
 
 func (r *RunsReversePayrollResponse) GetJournalTransactionID() *string {
@@ -7996,6 +8069,13 @@ func (r *RunsReversePayrollResponse) SetComponentTotals(componentTotals []*RunsR
 func (r *RunsReversePayrollResponse) SetNetTotal(netTotal string) {
 	r.NetTotal = netTotal
 	r.require(runsReversePayrollResponseFieldNetTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetPaidAmount(paidAmount string) {
+	r.PaidAmount = paidAmount
+	r.require(runsReversePayrollResponseFieldPaidAmount)
 }
 
 // SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
