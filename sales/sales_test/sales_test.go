@@ -799,6 +799,134 @@ func TestSalesActsPdfWithWireMock(
 	VerifyRequestCount(t, "TestSalesActsPdfWithWireMock", "POST", "/v1/sales/acts/pdf", nil, 1)
 }
 
+func TestSalesInvoiceTemplatesCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoiceTemplatesCreateSalesRequest{
+		Name: "name",
+	}
+	_, invocationErr := client.Sales.InvoiceTemplatesCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoiceTemplatesCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoiceTemplatesCreateWithWireMock", "POST", "/v1/sales/invoice-templates/create", nil, 1)
+}
+
+func TestSalesInvoiceTemplatesUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoiceTemplatesUpdateSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.InvoiceTemplatesUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoiceTemplatesUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoiceTemplatesUpdateWithWireMock", "POST", "/v1/sales/invoice-templates/update", nil, 1)
+}
+
+func TestSalesInvoiceTemplatesGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoiceTemplatesGetSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.InvoiceTemplatesGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoiceTemplatesGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoiceTemplatesGetWithWireMock", "POST", "/v1/sales/invoice-templates/get", nil, 1)
+}
+
+func TestSalesInvoiceTemplatesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoiceTemplatesDeleteSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.InvoiceTemplatesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoiceTemplatesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoiceTemplatesDeleteWithWireMock", "POST", "/v1/sales/invoice-templates/delete", nil, 1)
+}
+
+func TestSalesInvoiceTemplatesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoiceTemplatesListSalesRequest{}
+	_, invocationErr := client.Sales.InvoiceTemplatesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoiceTemplatesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoiceTemplatesListWithWireMock", "POST", "/v1/sales/invoice-templates/list", nil, 1)
+}
+
 func TestSalesRecognitionComputeWithWireMock(
 	t *testing.T,
 ) {

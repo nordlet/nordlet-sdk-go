@@ -2504,22 +2504,6 @@ func TestSettersCreatePartnersRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &CreatePartnersRequest{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &CreatePartnersRequest{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &CreatePartnersRequest{}
 		var fernTestValueAutoDebtReminder *bool
@@ -3324,68 +3308,6 @@ func TestSettersMarkExplicitCreatePartnersRequest(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersRequest{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersRequest{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4289,22 +4211,6 @@ func TestSettersFindOrCreatePartnersRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &FindOrCreatePartnersRequest{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &FindOrCreatePartnersRequest{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &FindOrCreatePartnersRequest{}
 		var fernTestValueAutoDebtReminder *bool
@@ -5109,68 +5015,6 @@ func TestSettersMarkExplicitFindOrCreatePartnersRequest(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersRequest{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersRequest{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -16554,22 +16398,6 @@ func TestSettersCreatePartnersResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &CreatePartnersResponse{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &CreatePartnersResponse{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &CreatePartnersResponse{}
 		var fernTestValueAutoDebtReminder bool
@@ -17508,72 +17336,6 @@ func TestGettersCreatePartnersResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetEoriCode() // Should return zero value
-	})
-
-	t.Run("GetOtherCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersResponse{}
-		var expected *string
-		obj.OtherCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOtherCode(), "getter should return the property value")
-	})
-
-	t.Run("GetOtherCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersResponse{}
-		obj.OtherCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetOtherCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetOtherCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreatePartnersResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOtherCode() // Should return zero value
-	})
-
-	t.Run("GetForeignTaxNumber", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersResponse{}
-		var expected *string
-		obj.ForeignTaxNumber = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetForeignTaxNumber(), "getter should return the property value")
-	})
-
-	t.Run("GetForeignTaxNumber_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersResponse{}
-		obj.ForeignTaxNumber = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetForeignTaxNumber(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetForeignTaxNumber_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *CreatePartnersResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetForeignTaxNumber() // Should return zero value
 	})
 
 	t.Run("GetAutoDebtReminder", func(t *testing.T) {
@@ -18729,68 +18491,6 @@ func TestSettersMarkExplicitCreatePartnersResponse(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersResponse{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &CreatePartnersResponse{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -25238,22 +24938,6 @@ func TestSettersFindOrCreatePartnersResponsePartner(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &FindOrCreatePartnersResponsePartner{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &FindOrCreatePartnersResponsePartner{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &FindOrCreatePartnersResponsePartner{}
 		var fernTestValueAutoDebtReminder bool
@@ -26192,72 +25876,6 @@ func TestGettersFindOrCreatePartnersResponsePartner(t *testing.T) {
 			}
 		}()
 		_ = obj.GetEoriCode() // Should return zero value
-	})
-
-	t.Run("GetOtherCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersResponsePartner{}
-		var expected *string
-		obj.OtherCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOtherCode(), "getter should return the property value")
-	})
-
-	t.Run("GetOtherCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersResponsePartner{}
-		obj.OtherCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetOtherCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetOtherCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *FindOrCreatePartnersResponsePartner
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOtherCode() // Should return zero value
-	})
-
-	t.Run("GetForeignTaxNumber", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersResponsePartner{}
-		var expected *string
-		obj.ForeignTaxNumber = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetForeignTaxNumber(), "getter should return the property value")
-	})
-
-	t.Run("GetForeignTaxNumber_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersResponsePartner{}
-		obj.ForeignTaxNumber = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetForeignTaxNumber(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetForeignTaxNumber_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *FindOrCreatePartnersResponsePartner
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetForeignTaxNumber() // Should return zero value
 	})
 
 	t.Run("GetAutoDebtReminder", func(t *testing.T) {
@@ -27413,68 +27031,6 @@ func TestSettersMarkExplicitFindOrCreatePartnersResponsePartner(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersResponsePartner{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FindOrCreatePartnersResponsePartner{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -28971,22 +28527,6 @@ func TestSettersGetPartnersResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &GetPartnersResponse{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &GetPartnersResponse{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &GetPartnersResponse{}
 		var fernTestValueAutoDebtReminder bool
@@ -29925,72 +29465,6 @@ func TestGettersGetPartnersResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetEoriCode() // Should return zero value
-	})
-
-	t.Run("GetOtherCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetPartnersResponse{}
-		var expected *string
-		obj.OtherCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOtherCode(), "getter should return the property value")
-	})
-
-	t.Run("GetOtherCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetPartnersResponse{}
-		obj.OtherCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetOtherCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetOtherCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *GetPartnersResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOtherCode() // Should return zero value
-	})
-
-	t.Run("GetForeignTaxNumber", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetPartnersResponse{}
-		var expected *string
-		obj.ForeignTaxNumber = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetForeignTaxNumber(), "getter should return the property value")
-	})
-
-	t.Run("GetForeignTaxNumber_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetPartnersResponse{}
-		obj.ForeignTaxNumber = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetForeignTaxNumber(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetForeignTaxNumber_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *GetPartnersResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetForeignTaxNumber() // Should return zero value
 	})
 
 	t.Run("GetAutoDebtReminder", func(t *testing.T) {
@@ -31146,68 +30620,6 @@ func TestSettersMarkExplicitGetPartnersResponse(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetPartnersResponse{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &GetPartnersResponse{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -39569,22 +38981,6 @@ func TestSettersListPartnersResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &ListPartnersResponseRowsItem{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &ListPartnersResponseRowsItem{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &ListPartnersResponseRowsItem{}
 		var fernTestValueAutoDebtReminder bool
@@ -40523,72 +39919,6 @@ func TestGettersListPartnersResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetEoriCode() // Should return zero value
-	})
-
-	t.Run("GetOtherCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &ListPartnersResponseRowsItem{}
-		var expected *string
-		obj.OtherCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOtherCode(), "getter should return the property value")
-	})
-
-	t.Run("GetOtherCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &ListPartnersResponseRowsItem{}
-		obj.OtherCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetOtherCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetOtherCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *ListPartnersResponseRowsItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOtherCode() // Should return zero value
-	})
-
-	t.Run("GetForeignTaxNumber", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &ListPartnersResponseRowsItem{}
-		var expected *string
-		obj.ForeignTaxNumber = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetForeignTaxNumber(), "getter should return the property value")
-	})
-
-	t.Run("GetForeignTaxNumber_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &ListPartnersResponseRowsItem{}
-		obj.ForeignTaxNumber = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetForeignTaxNumber(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetForeignTaxNumber_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *ListPartnersResponseRowsItem
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetForeignTaxNumber() // Should return zero value
 	})
 
 	t.Run("GetAutoDebtReminder", func(t *testing.T) {
@@ -41744,68 +41074,6 @@ func TestSettersMarkExplicitListPartnersResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &ListPartnersResponseRowsItem{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &ListPartnersResponseRowsItem{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -45693,22 +44961,6 @@ func TestSettersUpdatePartnersResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &UpdatePartnersResponse{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &UpdatePartnersResponse{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &UpdatePartnersResponse{}
 		var fernTestValueAutoDebtReminder bool
@@ -46647,72 +45899,6 @@ func TestGettersUpdatePartnersResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetEoriCode() // Should return zero value
-	})
-
-	t.Run("GetOtherCode", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersResponse{}
-		var expected *string
-		obj.OtherCode = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOtherCode(), "getter should return the property value")
-	})
-
-	t.Run("GetOtherCode_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersResponse{}
-		obj.OtherCode = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetOtherCode(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetOtherCode_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UpdatePartnersResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOtherCode() // Should return zero value
-	})
-
-	t.Run("GetForeignTaxNumber", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersResponse{}
-		var expected *string
-		obj.ForeignTaxNumber = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetForeignTaxNumber(), "getter should return the property value")
-	})
-
-	t.Run("GetForeignTaxNumber_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersResponse{}
-		obj.ForeignTaxNumber = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetForeignTaxNumber(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetForeignTaxNumber_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *UpdatePartnersResponse
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetForeignTaxNumber() // Should return zero value
 	})
 
 	t.Run("GetAutoDebtReminder", func(t *testing.T) {
@@ -47868,68 +47054,6 @@ func TestSettersMarkExplicitUpdatePartnersResponse(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersResponse{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersResponse{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -52996,22 +52120,6 @@ func TestSettersUpdatePartnersRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOtherCode", func(t *testing.T) {
-		obj := &UpdatePartnersRequest{}
-		var fernTestValueOtherCode *string
-		obj.SetOtherCode(fernTestValueOtherCode)
-		assert.Equal(t, fernTestValueOtherCode, obj.OtherCode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetForeignTaxNumber", func(t *testing.T) {
-		obj := &UpdatePartnersRequest{}
-		var fernTestValueForeignTaxNumber *string
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
-		assert.Equal(t, fernTestValueForeignTaxNumber, obj.ForeignTaxNumber)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetAutoDebtReminder", func(t *testing.T) {
 		obj := &UpdatePartnersRequest{}
 		var fernTestValueAutoDebtReminder *bool
@@ -53847,68 +52955,6 @@ func TestSettersMarkExplicitUpdatePartnersRequest(t *testing.T) {
 
 		// Act
 		obj.SetEoriCode(fernTestValueEoriCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOtherCode_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersRequest{}
-		var fernTestValueOtherCode *string
-
-		// Act
-		obj.SetOtherCode(fernTestValueOtherCode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetForeignTaxNumber_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &UpdatePartnersRequest{}
-		var fernTestValueForeignTaxNumber *string
-
-		// Act
-		obj.SetForeignTaxNumber(fernTestValueForeignTaxNumber)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

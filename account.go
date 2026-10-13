@@ -9233,23 +9233,31 @@ func (m *MeAccountResponse) String() string {
 }
 
 var (
-	meAccountResponseBillingFieldStatus       = big.NewInt(1 << 0)
-	meAccountResponseBillingFieldPlan         = big.NewInt(1 << 1)
-	meAccountResponseBillingFieldBalanceCents = big.NewInt(1 << 2)
-	meAccountResponseBillingFieldTrialEndsAt  = big.NewInt(1 << 3)
-	meAccountResponseBillingFieldPayerUserID  = big.NewInt(1 << 4)
-	meAccountResponseBillingFieldPayerEmail   = big.NewInt(1 << 5)
-	meAccountResponseBillingFieldIsPayer      = big.NewInt(1 << 6)
+	meAccountResponseBillingFieldStatus                  = big.NewInt(1 << 0)
+	meAccountResponseBillingFieldPlan                    = big.NewInt(1 << 1)
+	meAccountResponseBillingFieldBalanceCents            = big.NewInt(1 << 2)
+	meAccountResponseBillingFieldOverdraftAllowanceCents = big.NewInt(1 << 3)
+	meAccountResponseBillingFieldTrialEndsAt             = big.NewInt(1 << 4)
+	meAccountResponseBillingFieldPayerUserID             = big.NewInt(1 << 5)
+	meAccountResponseBillingFieldPayerEmail              = big.NewInt(1 << 6)
+	meAccountResponseBillingFieldIsPayer                 = big.NewInt(1 << 7)
+	meAccountResponseBillingFieldPlanChosen              = big.NewInt(1 << 8)
+	meAccountResponseBillingFieldFlatRate                = big.NewInt(1 << 9)
+	meAccountResponseBillingFieldAccountType             = big.NewInt(1 << 10)
 )
 
 type MeAccountResponseBilling struct {
-	Status       MeAccountResponseBillingStatus `json:"status" url:"status"`
-	Plan         string                         `json:"plan" url:"plan"`
-	BalanceCents int64                          `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt  *time.Time                     `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	PayerUserID  string                         `json:"payerUserId" url:"payerUserId"`
-	PayerEmail   string                         `json:"payerEmail" url:"payerEmail"`
-	IsPayer      bool                           `json:"isPayer" url:"isPayer"`
+	Status                  MeAccountResponseBillingStatus      `json:"status" url:"status"`
+	Plan                    string                              `json:"plan" url:"plan"`
+	BalanceCents            int64                               `json:"balanceCents" url:"balanceCents"`
+	OverdraftAllowanceCents int64                               `json:"overdraftAllowanceCents" url:"overdraftAllowanceCents"`
+	TrialEndsAt             *time.Time                          `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	PayerUserID             string                              `json:"payerUserId" url:"payerUserId"`
+	PayerEmail              string                              `json:"payerEmail" url:"payerEmail"`
+	IsPayer                 bool                                `json:"isPayer" url:"isPayer"`
+	PlanChosen              bool                                `json:"planChosen" url:"planChosen"`
+	FlatRate                bool                                `json:"flatRate" url:"flatRate"`
+	AccountType             MeAccountResponseBillingAccountType `json:"accountType" url:"accountType"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9279,6 +9287,13 @@ func (m *MeAccountResponseBilling) GetBalanceCents() int64 {
 	return m.BalanceCents
 }
 
+func (m *MeAccountResponseBilling) GetOverdraftAllowanceCents() int64 {
+	if m == nil {
+		return 0
+	}
+	return m.OverdraftAllowanceCents
+}
+
 func (m *MeAccountResponseBilling) GetTrialEndsAt() *time.Time {
 	if m == nil {
 		return nil
@@ -9305,6 +9320,27 @@ func (m *MeAccountResponseBilling) GetIsPayer() bool {
 		return false
 	}
 	return m.IsPayer
+}
+
+func (m *MeAccountResponseBilling) GetPlanChosen() bool {
+	if m == nil {
+		return false
+	}
+	return m.PlanChosen
+}
+
+func (m *MeAccountResponseBilling) GetFlatRate() bool {
+	if m == nil {
+		return false
+	}
+	return m.FlatRate
+}
+
+func (m *MeAccountResponseBilling) GetAccountType() MeAccountResponseBillingAccountType {
+	if m == nil {
+		return ""
+	}
+	return m.AccountType
 }
 
 func (m *MeAccountResponseBilling) GetExtraProperties() map[string]interface{} {
@@ -9342,6 +9378,13 @@ func (m *MeAccountResponseBilling) SetBalanceCents(balanceCents int64) {
 	m.require(meAccountResponseBillingFieldBalanceCents)
 }
 
+// SetOverdraftAllowanceCents sets the OverdraftAllowanceCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseBilling) SetOverdraftAllowanceCents(overdraftAllowanceCents int64) {
+	m.OverdraftAllowanceCents = overdraftAllowanceCents
+	m.require(meAccountResponseBillingFieldOverdraftAllowanceCents)
+}
+
 // SetTrialEndsAt sets the TrialEndsAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (m *MeAccountResponseBilling) SetTrialEndsAt(trialEndsAt *time.Time) {
@@ -9368,6 +9411,27 @@ func (m *MeAccountResponseBilling) SetPayerEmail(payerEmail string) {
 func (m *MeAccountResponseBilling) SetIsPayer(isPayer bool) {
 	m.IsPayer = isPayer
 	m.require(meAccountResponseBillingFieldIsPayer)
+}
+
+// SetPlanChosen sets the PlanChosen field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseBilling) SetPlanChosen(planChosen bool) {
+	m.PlanChosen = planChosen
+	m.require(meAccountResponseBillingFieldPlanChosen)
+}
+
+// SetFlatRate sets the FlatRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseBilling) SetFlatRate(flatRate bool) {
+	m.FlatRate = flatRate
+	m.require(meAccountResponseBillingFieldFlatRate)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseBilling) SetAccountType(accountType MeAccountResponseBillingAccountType) {
+	m.AccountType = accountType
+	m.require(meAccountResponseBillingFieldAccountType)
 }
 
 func (m *MeAccountResponseBilling) UnmarshalJSON(data []byte) error {
@@ -9418,6 +9482,28 @@ func (m *MeAccountResponseBilling) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", m)
+}
+
+type MeAccountResponseBillingAccountType string
+
+const (
+	MeAccountResponseBillingAccountTypeFlatRate   MeAccountResponseBillingAccountType = "flat_rate"
+	MeAccountResponseBillingAccountTypePerRequest MeAccountResponseBillingAccountType = "per_request"
+)
+
+func NewMeAccountResponseBillingAccountTypeFromString(s string) (MeAccountResponseBillingAccountType, error) {
+	switch s {
+	case "flat_rate":
+		return MeAccountResponseBillingAccountTypeFlatRate, nil
+	case "per_request":
+		return MeAccountResponseBillingAccountTypePerRequest, nil
+	}
+	var t MeAccountResponseBillingAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MeAccountResponseBillingAccountType) Ptr() *MeAccountResponseBillingAccountType {
+	return &m
 }
 
 type MeAccountResponseBillingStatus string

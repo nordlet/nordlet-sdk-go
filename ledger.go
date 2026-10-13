@@ -11639,6 +11639,14 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalLoss           PostingRulesUpdateLedgerRequestRulesItemKey = "assets.disposalLoss"
 	PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalProceeds       PostingRulesUpdateLedgerRequestRulesItemKey = "assets.disposalProceeds"
 	PostingRulesUpdateLedgerRequestRulesItemKeyCashAdvances                 PostingRulesUpdateLedgerRequestRulesItemKey = "cash.advances"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesInvestments        PostingRulesUpdateLedgerRequestRulesItemKey = "securities.investments"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesGain               PostingRulesUpdateLedgerRequestRulesItemKey = "securities.gain"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesLoss               PostingRulesUpdateLedgerRequestRulesItemKey = "securities.loss"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesDividendIncome     PostingRulesUpdateLedgerRequestRulesItemKey = "securities.dividendIncome"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesWithholdingTax     PostingRulesUpdateLedgerRequestRulesItemKey = "securities.withholdingTax"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesInterestIncome     PostingRulesUpdateLedgerRequestRulesItemKey = "securities.interestIncome"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesInterestExpense    PostingRulesUpdateLedgerRequestRulesItemKey = "securities.interestExpense"
+	PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesFees               PostingRulesUpdateLedgerRequestRulesItemKey = "securities.fees"
 	PostingRulesUpdateLedgerRequestRulesItemKeyClosingRetainedEarnings      PostingRulesUpdateLedgerRequestRulesItemKey = "closing.retainedEarnings"
 )
 
@@ -11698,6 +11706,22 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeyAssetsDisposalProceeds, nil
 	case "cash.advances":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyCashAdvances, nil
+	case "securities.investments":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesInvestments, nil
+	case "securities.gain":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesGain, nil
+	case "securities.loss":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesLoss, nil
+	case "securities.dividendIncome":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesDividendIncome, nil
+	case "securities.withholdingTax":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesWithholdingTax, nil
+	case "securities.interestIncome":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesInterestIncome, nil
+	case "securities.interestExpense":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesInterestExpense, nil
+	case "securities.fees":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySecuritiesFees, nil
 	case "closing.retainedEarnings":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyClosingRetainedEarnings, nil
 	}

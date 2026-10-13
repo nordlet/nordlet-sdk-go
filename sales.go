@@ -572,6 +572,696 @@ func (a *ActsUpdateSalesRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	invoiceTemplatesCreateSalesRequestFieldName                         = big.NewInt(1 << 0)
+	invoiceTemplatesCreateSalesRequestFieldDocumentType                 = big.NewInt(1 << 1)
+	invoiceTemplatesCreateSalesRequestFieldPartnerID                    = big.NewInt(1 << 2)
+	invoiceTemplatesCreateSalesRequestFieldCurrency                     = big.NewInt(1 << 3)
+	invoiceTemplatesCreateSalesRequestFieldPaymentTermDays              = big.NewInt(1 << 4)
+	invoiceTemplatesCreateSalesRequestFieldVatScheme                    = big.NewInt(1 << 5)
+	invoiceTemplatesCreateSalesRequestFieldVatCountryCode               = big.NewInt(1 << 6)
+	invoiceTemplatesCreateSalesRequestFieldAgreementID                  = big.NewInt(1 << 7)
+	invoiceTemplatesCreateSalesRequestFieldOperationTypeID              = big.NewInt(1 << 8)
+	invoiceTemplatesCreateSalesRequestFieldDocumentSeriesID             = big.NewInt(1 << 9)
+	invoiceTemplatesCreateSalesRequestFieldDiscountPercent              = big.NewInt(1 << 10)
+	invoiceTemplatesCreateSalesRequestFieldIssuedByName                 = big.NewInt(1 << 11)
+	invoiceTemplatesCreateSalesRequestFieldIssuedByTitle                = big.NewInt(1 << 12)
+	invoiceTemplatesCreateSalesRequestFieldReceivedByName               = big.NewInt(1 << 13)
+	invoiceTemplatesCreateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 14)
+	invoiceTemplatesCreateSalesRequestFieldNotes                        = big.NewInt(1 << 15)
+	invoiceTemplatesCreateSalesRequestFieldSupplyType                   = big.NewInt(1 << 16)
+	invoiceTemplatesCreateSalesRequestFieldSeriesLabel                  = big.NewInt(1 << 17)
+	invoiceTemplatesCreateSalesRequestFieldOrderNumber                  = big.NewInt(1 << 18)
+	invoiceTemplatesCreateSalesRequestFieldIntrastatTransportMode       = big.NewInt(1 << 19)
+	invoiceTemplatesCreateSalesRequestFieldIntrastatDeliveryTerms       = big.NewInt(1 << 20)
+	invoiceTemplatesCreateSalesRequestFieldIntrastatRegion              = big.NewInt(1 << 21)
+	invoiceTemplatesCreateSalesRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 22)
+	invoiceTemplatesCreateSalesRequestFieldLines                        = big.NewInt(1 << 23)
+)
+
+type InvoiceTemplatesCreateSalesRequest struct {
+	Name                         string                                          `json:"name" url:"-"`
+	DocumentType                 *InvoiceTemplatesCreateSalesRequestDocumentType `json:"documentType,omitempty" url:"-"`
+	PartnerID                    *string                                         `json:"partnerId,omitempty" url:"-"`
+	Currency                     *string                                         `json:"currency,omitempty" url:"-"`
+	PaymentTermDays              *int64                                          `json:"paymentTermDays,omitempty" url:"-"`
+	VatScheme                    *InvoiceTemplatesCreateSalesRequestVatScheme    `json:"vatScheme,omitempty" url:"-"`
+	VatCountryCode               *string                                         `json:"vatCountryCode,omitempty" url:"-"`
+	AgreementID                  *string                                         `json:"agreementId,omitempty" url:"-"`
+	OperationTypeID              *string                                         `json:"operationTypeId,omitempty" url:"-"`
+	DocumentSeriesID             *string                                         `json:"documentSeriesId,omitempty" url:"-"`
+	DiscountPercent              *string                                         `json:"discountPercent,omitempty" url:"-"`
+	IssuedByName                 *string                                         `json:"issuedByName,omitempty" url:"-"`
+	IssuedByTitle                *string                                         `json:"issuedByTitle,omitempty" url:"-"`
+	ReceivedByName               *string                                         `json:"receivedByName,omitempty" url:"-"`
+	ReceivedByTitle              *string                                         `json:"receivedByTitle,omitempty" url:"-"`
+	Notes                        *string                                         `json:"notes,omitempty" url:"-"`
+	SupplyType                   *InvoiceTemplatesCreateSalesRequestSupplyType   `json:"supplyType,omitempty" url:"-"`
+	SeriesLabel                  *string                                         `json:"seriesLabel,omitempty" url:"-"`
+	OrderNumber                  *string                                         `json:"orderNumber,omitempty" url:"-"`
+	IntrastatTransportMode       *string                                         `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                                         `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                                         `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                                         `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	Lines                        []*InvoiceTemplatesCreateSalesRequestLinesItem  `json:"lines,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoiceTemplatesCreateSalesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetName(name string) {
+	i.Name = name
+	i.require(invoiceTemplatesCreateSalesRequestFieldName)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetDocumentType(documentType *InvoiceTemplatesCreateSalesRequestDocumentType) {
+	i.DocumentType = documentType
+	i.require(invoiceTemplatesCreateSalesRequestFieldDocumentType)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetPartnerID(partnerID *string) {
+	i.PartnerID = partnerID
+	i.require(invoiceTemplatesCreateSalesRequestFieldPartnerID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetCurrency(currency *string) {
+	i.Currency = currency
+	i.require(invoiceTemplatesCreateSalesRequestFieldCurrency)
+}
+
+// SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetPaymentTermDays(paymentTermDays *int64) {
+	i.PaymentTermDays = paymentTermDays
+	i.require(invoiceTemplatesCreateSalesRequestFieldPaymentTermDays)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetVatScheme(vatScheme *InvoiceTemplatesCreateSalesRequestVatScheme) {
+	i.VatScheme = vatScheme
+	i.require(invoiceTemplatesCreateSalesRequestFieldVatScheme)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoiceTemplatesCreateSalesRequestFieldVatCountryCode)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoiceTemplatesCreateSalesRequestFieldAgreementID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetOperationTypeID(operationTypeID *string) {
+	i.OperationTypeID = operationTypeID
+	i.require(invoiceTemplatesCreateSalesRequestFieldOperationTypeID)
+}
+
+// SetDocumentSeriesID sets the DocumentSeriesID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetDocumentSeriesID(documentSeriesID *string) {
+	i.DocumentSeriesID = documentSeriesID
+	i.require(invoiceTemplatesCreateSalesRequestFieldDocumentSeriesID)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetDiscountPercent(discountPercent *string) {
+	i.DiscountPercent = discountPercent
+	i.require(invoiceTemplatesCreateSalesRequestFieldDiscountPercent)
+}
+
+// SetIssuedByName sets the IssuedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetIssuedByName(issuedByName *string) {
+	i.IssuedByName = issuedByName
+	i.require(invoiceTemplatesCreateSalesRequestFieldIssuedByName)
+}
+
+// SetIssuedByTitle sets the IssuedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetIssuedByTitle(issuedByTitle *string) {
+	i.IssuedByTitle = issuedByTitle
+	i.require(invoiceTemplatesCreateSalesRequestFieldIssuedByTitle)
+}
+
+// SetReceivedByName sets the ReceivedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetReceivedByName(receivedByName *string) {
+	i.ReceivedByName = receivedByName
+	i.require(invoiceTemplatesCreateSalesRequestFieldReceivedByName)
+}
+
+// SetReceivedByTitle sets the ReceivedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetReceivedByTitle(receivedByTitle *string) {
+	i.ReceivedByTitle = receivedByTitle
+	i.require(invoiceTemplatesCreateSalesRequestFieldReceivedByTitle)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoiceTemplatesCreateSalesRequestFieldNotes)
+}
+
+// SetSupplyType sets the SupplyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetSupplyType(supplyType *InvoiceTemplatesCreateSalesRequestSupplyType) {
+	i.SupplyType = supplyType
+	i.require(invoiceTemplatesCreateSalesRequestFieldSupplyType)
+}
+
+// SetSeriesLabel sets the SeriesLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetSeriesLabel(seriesLabel *string) {
+	i.SeriesLabel = seriesLabel
+	i.require(invoiceTemplatesCreateSalesRequestFieldSeriesLabel)
+}
+
+// SetOrderNumber sets the OrderNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetOrderNumber(orderNumber *string) {
+	i.OrderNumber = orderNumber
+	i.require(invoiceTemplatesCreateSalesRequestFieldOrderNumber)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	i.IntrastatTransportMode = intrastatTransportMode
+	i.require(invoiceTemplatesCreateSalesRequestFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	i.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	i.require(invoiceTemplatesCreateSalesRequestFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetIntrastatRegion(intrastatRegion *string) {
+	i.IntrastatRegion = intrastatRegion
+	i.require(invoiceTemplatesCreateSalesRequestFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	i.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	i.require(invoiceTemplatesCreateSalesRequestFieldIntrastatNatureOfTransaction)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequest) SetLines(lines []*InvoiceTemplatesCreateSalesRequestLinesItem) {
+	i.Lines = lines
+	i.require(invoiceTemplatesCreateSalesRequestFieldLines)
+}
+
+func (i *InvoiceTemplatesCreateSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesCreateSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesCreateSalesRequest(body)
+	return nil
+}
+
+func (i *InvoiceTemplatesCreateSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesCreateSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoiceTemplatesDeleteSalesRequestFieldID = big.NewInt(1 << 0)
+)
+
+type InvoiceTemplatesDeleteSalesRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoiceTemplatesDeleteSalesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesDeleteSalesRequest) SetID(id string) {
+	i.ID = id
+	i.require(invoiceTemplatesDeleteSalesRequestFieldID)
+}
+
+func (i *InvoiceTemplatesDeleteSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesDeleteSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesDeleteSalesRequest(body)
+	return nil
+}
+
+func (i *InvoiceTemplatesDeleteSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesDeleteSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoiceTemplatesGetSalesRequestFieldID = big.NewInt(1 << 0)
+)
+
+type InvoiceTemplatesGetSalesRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoiceTemplatesGetSalesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesRequest) SetID(id string) {
+	i.ID = id
+	i.require(invoiceTemplatesGetSalesRequestFieldID)
+}
+
+func (i *InvoiceTemplatesGetSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesGetSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesGetSalesRequest(body)
+	return nil
+}
+
+func (i *InvoiceTemplatesGetSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesGetSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoiceTemplatesListSalesRequestFieldPage     = big.NewInt(1 << 0)
+	invoiceTemplatesListSalesRequestFieldPageSize = big.NewInt(1 << 1)
+	invoiceTemplatesListSalesRequestFieldSort     = big.NewInt(1 << 2)
+	invoiceTemplatesListSalesRequestFieldFilter   = big.NewInt(1 << 3)
+	invoiceTemplatesListSalesRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type InvoiceTemplatesListSalesRequest struct {
+	Page     *int64                                        `json:"page,omitempty" url:"-"`
+	PageSize *int64                                        `json:"pageSize,omitempty" url:"-"`
+	Sort     []*InvoiceTemplatesListSalesRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*InvoiceTemplatesListSalesRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoiceTemplatesListSalesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequest) SetPage(page *int64) {
+	i.Page = page
+	i.require(invoiceTemplatesListSalesRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequest) SetPageSize(pageSize *int64) {
+	i.PageSize = pageSize
+	i.require(invoiceTemplatesListSalesRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequest) SetSort(sort []*InvoiceTemplatesListSalesRequestSortItem) {
+	i.Sort = sort
+	i.require(invoiceTemplatesListSalesRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequest) SetFilter(filter []*InvoiceTemplatesListSalesRequestFilterItem) {
+	i.Filter = filter
+	i.require(invoiceTemplatesListSalesRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequest) SetTotals(totals []string) {
+	i.Totals = totals
+	i.require(invoiceTemplatesListSalesRequestFieldTotals)
+}
+
+func (i *InvoiceTemplatesListSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesListSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesListSalesRequest(body)
+	return nil
+}
+
+func (i *InvoiceTemplatesListSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesListSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoiceTemplatesUpdateSalesRequestFieldID                           = big.NewInt(1 << 0)
+	invoiceTemplatesUpdateSalesRequestFieldName                         = big.NewInt(1 << 1)
+	invoiceTemplatesUpdateSalesRequestFieldDocumentType                 = big.NewInt(1 << 2)
+	invoiceTemplatesUpdateSalesRequestFieldPartnerID                    = big.NewInt(1 << 3)
+	invoiceTemplatesUpdateSalesRequestFieldCurrency                     = big.NewInt(1 << 4)
+	invoiceTemplatesUpdateSalesRequestFieldPaymentTermDays              = big.NewInt(1 << 5)
+	invoiceTemplatesUpdateSalesRequestFieldVatScheme                    = big.NewInt(1 << 6)
+	invoiceTemplatesUpdateSalesRequestFieldVatCountryCode               = big.NewInt(1 << 7)
+	invoiceTemplatesUpdateSalesRequestFieldAgreementID                  = big.NewInt(1 << 8)
+	invoiceTemplatesUpdateSalesRequestFieldOperationTypeID              = big.NewInt(1 << 9)
+	invoiceTemplatesUpdateSalesRequestFieldDocumentSeriesID             = big.NewInt(1 << 10)
+	invoiceTemplatesUpdateSalesRequestFieldDiscountPercent              = big.NewInt(1 << 11)
+	invoiceTemplatesUpdateSalesRequestFieldIssuedByName                 = big.NewInt(1 << 12)
+	invoiceTemplatesUpdateSalesRequestFieldIssuedByTitle                = big.NewInt(1 << 13)
+	invoiceTemplatesUpdateSalesRequestFieldReceivedByName               = big.NewInt(1 << 14)
+	invoiceTemplatesUpdateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 15)
+	invoiceTemplatesUpdateSalesRequestFieldNotes                        = big.NewInt(1 << 16)
+	invoiceTemplatesUpdateSalesRequestFieldSupplyType                   = big.NewInt(1 << 17)
+	invoiceTemplatesUpdateSalesRequestFieldSeriesLabel                  = big.NewInt(1 << 18)
+	invoiceTemplatesUpdateSalesRequestFieldOrderNumber                  = big.NewInt(1 << 19)
+	invoiceTemplatesUpdateSalesRequestFieldIntrastatTransportMode       = big.NewInt(1 << 20)
+	invoiceTemplatesUpdateSalesRequestFieldIntrastatDeliveryTerms       = big.NewInt(1 << 21)
+	invoiceTemplatesUpdateSalesRequestFieldIntrastatRegion              = big.NewInt(1 << 22)
+	invoiceTemplatesUpdateSalesRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 23)
+	invoiceTemplatesUpdateSalesRequestFieldLines                        = big.NewInt(1 << 24)
+)
+
+type InvoiceTemplatesUpdateSalesRequest struct {
+	ID                           string                                          `json:"id" url:"-"`
+	Name                         *string                                         `json:"name,omitempty" url:"-"`
+	DocumentType                 *InvoiceTemplatesUpdateSalesRequestDocumentType `json:"documentType,omitempty" url:"-"`
+	PartnerID                    *string                                         `json:"partnerId,omitempty" url:"-"`
+	Currency                     *string                                         `json:"currency,omitempty" url:"-"`
+	PaymentTermDays              *int64                                          `json:"paymentTermDays,omitempty" url:"-"`
+	VatScheme                    *InvoiceTemplatesUpdateSalesRequestVatScheme    `json:"vatScheme,omitempty" url:"-"`
+	VatCountryCode               *string                                         `json:"vatCountryCode,omitempty" url:"-"`
+	AgreementID                  *string                                         `json:"agreementId,omitempty" url:"-"`
+	OperationTypeID              *string                                         `json:"operationTypeId,omitempty" url:"-"`
+	DocumentSeriesID             *string                                         `json:"documentSeriesId,omitempty" url:"-"`
+	DiscountPercent              *string                                         `json:"discountPercent,omitempty" url:"-"`
+	IssuedByName                 *string                                         `json:"issuedByName,omitempty" url:"-"`
+	IssuedByTitle                *string                                         `json:"issuedByTitle,omitempty" url:"-"`
+	ReceivedByName               *string                                         `json:"receivedByName,omitempty" url:"-"`
+	ReceivedByTitle              *string                                         `json:"receivedByTitle,omitempty" url:"-"`
+	Notes                        *string                                         `json:"notes,omitempty" url:"-"`
+	SupplyType                   *InvoiceTemplatesUpdateSalesRequestSupplyType   `json:"supplyType,omitempty" url:"-"`
+	SeriesLabel                  *string                                         `json:"seriesLabel,omitempty" url:"-"`
+	OrderNumber                  *string                                         `json:"orderNumber,omitempty" url:"-"`
+	IntrastatTransportMode       *string                                         `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                                         `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                                         `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                                         `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	Lines                        []*InvoiceTemplatesUpdateSalesRequestLinesItem  `json:"lines,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetID(id string) {
+	i.ID = id
+	i.require(invoiceTemplatesUpdateSalesRequestFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetName(name *string) {
+	i.Name = name
+	i.require(invoiceTemplatesUpdateSalesRequestFieldName)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetDocumentType(documentType *InvoiceTemplatesUpdateSalesRequestDocumentType) {
+	i.DocumentType = documentType
+	i.require(invoiceTemplatesUpdateSalesRequestFieldDocumentType)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetPartnerID(partnerID *string) {
+	i.PartnerID = partnerID
+	i.require(invoiceTemplatesUpdateSalesRequestFieldPartnerID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetCurrency(currency *string) {
+	i.Currency = currency
+	i.require(invoiceTemplatesUpdateSalesRequestFieldCurrency)
+}
+
+// SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetPaymentTermDays(paymentTermDays *int64) {
+	i.PaymentTermDays = paymentTermDays
+	i.require(invoiceTemplatesUpdateSalesRequestFieldPaymentTermDays)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetVatScheme(vatScheme *InvoiceTemplatesUpdateSalesRequestVatScheme) {
+	i.VatScheme = vatScheme
+	i.require(invoiceTemplatesUpdateSalesRequestFieldVatScheme)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoiceTemplatesUpdateSalesRequestFieldVatCountryCode)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoiceTemplatesUpdateSalesRequestFieldAgreementID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetOperationTypeID(operationTypeID *string) {
+	i.OperationTypeID = operationTypeID
+	i.require(invoiceTemplatesUpdateSalesRequestFieldOperationTypeID)
+}
+
+// SetDocumentSeriesID sets the DocumentSeriesID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetDocumentSeriesID(documentSeriesID *string) {
+	i.DocumentSeriesID = documentSeriesID
+	i.require(invoiceTemplatesUpdateSalesRequestFieldDocumentSeriesID)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetDiscountPercent(discountPercent *string) {
+	i.DiscountPercent = discountPercent
+	i.require(invoiceTemplatesUpdateSalesRequestFieldDiscountPercent)
+}
+
+// SetIssuedByName sets the IssuedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetIssuedByName(issuedByName *string) {
+	i.IssuedByName = issuedByName
+	i.require(invoiceTemplatesUpdateSalesRequestFieldIssuedByName)
+}
+
+// SetIssuedByTitle sets the IssuedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetIssuedByTitle(issuedByTitle *string) {
+	i.IssuedByTitle = issuedByTitle
+	i.require(invoiceTemplatesUpdateSalesRequestFieldIssuedByTitle)
+}
+
+// SetReceivedByName sets the ReceivedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetReceivedByName(receivedByName *string) {
+	i.ReceivedByName = receivedByName
+	i.require(invoiceTemplatesUpdateSalesRequestFieldReceivedByName)
+}
+
+// SetReceivedByTitle sets the ReceivedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetReceivedByTitle(receivedByTitle *string) {
+	i.ReceivedByTitle = receivedByTitle
+	i.require(invoiceTemplatesUpdateSalesRequestFieldReceivedByTitle)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoiceTemplatesUpdateSalesRequestFieldNotes)
+}
+
+// SetSupplyType sets the SupplyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetSupplyType(supplyType *InvoiceTemplatesUpdateSalesRequestSupplyType) {
+	i.SupplyType = supplyType
+	i.require(invoiceTemplatesUpdateSalesRequestFieldSupplyType)
+}
+
+// SetSeriesLabel sets the SeriesLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetSeriesLabel(seriesLabel *string) {
+	i.SeriesLabel = seriesLabel
+	i.require(invoiceTemplatesUpdateSalesRequestFieldSeriesLabel)
+}
+
+// SetOrderNumber sets the OrderNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetOrderNumber(orderNumber *string) {
+	i.OrderNumber = orderNumber
+	i.require(invoiceTemplatesUpdateSalesRequestFieldOrderNumber)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	i.IntrastatTransportMode = intrastatTransportMode
+	i.require(invoiceTemplatesUpdateSalesRequestFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	i.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	i.require(invoiceTemplatesUpdateSalesRequestFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetIntrastatRegion(intrastatRegion *string) {
+	i.IntrastatRegion = intrastatRegion
+	i.require(invoiceTemplatesUpdateSalesRequestFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	i.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	i.require(invoiceTemplatesUpdateSalesRequestFieldIntrastatNatureOfTransaction)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequest) SetLines(lines []*InvoiceTemplatesUpdateSalesRequestLinesItem) {
+	i.Lines = lines
+	i.require(invoiceTemplatesUpdateSalesRequestFieldLines)
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesUpdateSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesUpdateSalesRequest(body)
+	return nil
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesUpdateSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	invoicesApplyAdvanceSalesRequestFieldAdvanceID = big.NewInt(1 << 0)
 	invoicesApplyAdvanceSalesRequestFieldInvoiceID = big.NewInt(1 << 1)
 	invoicesApplyAdvanceSalesRequestFieldDate      = big.NewInt(1 << 2)
@@ -6837,6 +7527,4285 @@ func NewActsUpdateSalesResponseTypeFromString(s string) (ActsUpdateSalesResponse
 
 func (a ActsUpdateSalesResponseType) Ptr() *ActsUpdateSalesResponseType {
 	return &a
+}
+
+type InvoiceTemplatesCreateSalesRequestDocumentType string
+
+const (
+	InvoiceTemplatesCreateSalesRequestDocumentTypeInvoice    InvoiceTemplatesCreateSalesRequestDocumentType = "invoice"
+	InvoiceTemplatesCreateSalesRequestDocumentTypeCreditNote InvoiceTemplatesCreateSalesRequestDocumentType = "credit_note"
+)
+
+func NewInvoiceTemplatesCreateSalesRequestDocumentTypeFromString(s string) (InvoiceTemplatesCreateSalesRequestDocumentType, error) {
+	switch s {
+	case "invoice":
+		return InvoiceTemplatesCreateSalesRequestDocumentTypeInvoice, nil
+	case "credit_note":
+		return InvoiceTemplatesCreateSalesRequestDocumentTypeCreditNote, nil
+	}
+	var t InvoiceTemplatesCreateSalesRequestDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesCreateSalesRequestDocumentType) Ptr() *InvoiceTemplatesCreateSalesRequestDocumentType {
+	return &i
+}
+
+var (
+	invoiceTemplatesCreateSalesRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldQuantity          = big.NewInt(1 << 2)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldProjectID         = big.NewInt(1 << 6)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldUnit              = big.NewInt(1 << 7)
+)
+
+type InvoiceTemplatesCreateSalesRequestLinesItem struct {
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string `json:"description,omitempty" url:"description,omitempty"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetDescription() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Description
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetQuantity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Quantity
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetUnitPriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceExclVat
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetVatExemptionBasis() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatExemptionBasis
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetProjectID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ProjectID
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetUnit() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Unit
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetDescription(description *string) {
+	i.Description = description
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetQuantity(quantity *string) {
+	i.Quantity = quantity
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	i.UnitPriceExclVat = unitPriceExclVat
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldVatRatePercent)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	i.VatExemptionBasis = vatExemptionBasis
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldVatExemptionBasis)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetProjectID(projectID *string) {
+	i.ProjectID = projectID
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldProjectID)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetUnit(unit *string) {
+	i.Unit = unit
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldUnit)
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesCreateSalesRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesCreateSalesRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesCreateSalesRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesCreateSalesRequestSupplyType string
+
+const (
+	InvoiceTemplatesCreateSalesRequestSupplyTypeGoods    InvoiceTemplatesCreateSalesRequestSupplyType = "goods"
+	InvoiceTemplatesCreateSalesRequestSupplyTypeServices InvoiceTemplatesCreateSalesRequestSupplyType = "services"
+	InvoiceTemplatesCreateSalesRequestSupplyTypeDigital  InvoiceTemplatesCreateSalesRequestSupplyType = "digital"
+)
+
+func NewInvoiceTemplatesCreateSalesRequestSupplyTypeFromString(s string) (InvoiceTemplatesCreateSalesRequestSupplyType, error) {
+	switch s {
+	case "goods":
+		return InvoiceTemplatesCreateSalesRequestSupplyTypeGoods, nil
+	case "services":
+		return InvoiceTemplatesCreateSalesRequestSupplyTypeServices, nil
+	case "digital":
+		return InvoiceTemplatesCreateSalesRequestSupplyTypeDigital, nil
+	}
+	var t InvoiceTemplatesCreateSalesRequestSupplyType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesCreateSalesRequestSupplyType) Ptr() *InvoiceTemplatesCreateSalesRequestSupplyType {
+	return &i
+}
+
+type InvoiceTemplatesCreateSalesRequestVatScheme string
+
+const (
+	InvoiceTemplatesCreateSalesRequestVatSchemeDomestic          InvoiceTemplatesCreateSalesRequestVatScheme = "domestic"
+	InvoiceTemplatesCreateSalesRequestVatSchemeIntraEuB2B        InvoiceTemplatesCreateSalesRequestVatScheme = "intra_eu_b2b"
+	InvoiceTemplatesCreateSalesRequestVatSchemeReverseCharge     InvoiceTemplatesCreateSalesRequestVatScheme = "reverse_charge"
+	InvoiceTemplatesCreateSalesRequestVatSchemeOssUnion          InvoiceTemplatesCreateSalesRequestVatScheme = "oss_union"
+	InvoiceTemplatesCreateSalesRequestVatSchemeIoss              InvoiceTemplatesCreateSalesRequestVatScheme = "ioss"
+	InvoiceTemplatesCreateSalesRequestVatSchemeMarketplaceDeemed InvoiceTemplatesCreateSalesRequestVatScheme = "marketplace_deemed"
+	InvoiceTemplatesCreateSalesRequestVatSchemeExport            InvoiceTemplatesCreateSalesRequestVatScheme = "export"
+	InvoiceTemplatesCreateSalesRequestVatSchemeOutOfScope        InvoiceTemplatesCreateSalesRequestVatScheme = "out_of_scope"
+	InvoiceTemplatesCreateSalesRequestVatSchemeSmeExempt         InvoiceTemplatesCreateSalesRequestVatScheme = "sme_exempt"
+)
+
+func NewInvoiceTemplatesCreateSalesRequestVatSchemeFromString(s string) (InvoiceTemplatesCreateSalesRequestVatScheme, error) {
+	switch s {
+	case "domestic":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeDomestic, nil
+	case "intra_eu_b2b":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeIntraEuB2B, nil
+	case "reverse_charge":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeReverseCharge, nil
+	case "oss_union":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeOssUnion, nil
+	case "ioss":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeIoss, nil
+	case "marketplace_deemed":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeMarketplaceDeemed, nil
+	case "export":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeExport, nil
+	case "out_of_scope":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeSmeExempt, nil
+	}
+	var t InvoiceTemplatesCreateSalesRequestVatScheme
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesCreateSalesRequestVatScheme) Ptr() *InvoiceTemplatesCreateSalesRequestVatScheme {
+	return &i
+}
+
+var (
+	invoiceTemplatesCreateSalesResponseFieldID                           = big.NewInt(1 << 0)
+	invoiceTemplatesCreateSalesResponseFieldName                         = big.NewInt(1 << 1)
+	invoiceTemplatesCreateSalesResponseFieldDocumentType                 = big.NewInt(1 << 2)
+	invoiceTemplatesCreateSalesResponseFieldPartnerID                    = big.NewInt(1 << 3)
+	invoiceTemplatesCreateSalesResponseFieldCurrency                     = big.NewInt(1 << 4)
+	invoiceTemplatesCreateSalesResponseFieldPaymentTermDays              = big.NewInt(1 << 5)
+	invoiceTemplatesCreateSalesResponseFieldVatScheme                    = big.NewInt(1 << 6)
+	invoiceTemplatesCreateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 7)
+	invoiceTemplatesCreateSalesResponseFieldAgreementID                  = big.NewInt(1 << 8)
+	invoiceTemplatesCreateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 9)
+	invoiceTemplatesCreateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 10)
+	invoiceTemplatesCreateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 11)
+	invoiceTemplatesCreateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 12)
+	invoiceTemplatesCreateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 13)
+	invoiceTemplatesCreateSalesResponseFieldReceivedByName               = big.NewInt(1 << 14)
+	invoiceTemplatesCreateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 15)
+	invoiceTemplatesCreateSalesResponseFieldNotes                        = big.NewInt(1 << 16)
+	invoiceTemplatesCreateSalesResponseFieldSupplyType                   = big.NewInt(1 << 17)
+	invoiceTemplatesCreateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 18)
+	invoiceTemplatesCreateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 19)
+	invoiceTemplatesCreateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 20)
+	invoiceTemplatesCreateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 21)
+	invoiceTemplatesCreateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 22)
+	invoiceTemplatesCreateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 23)
+	invoiceTemplatesCreateSalesResponseFieldLines                        = big.NewInt(1 << 24)
+	invoiceTemplatesCreateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 25)
+	invoiceTemplatesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 26)
+)
+
+type InvoiceTemplatesCreateSalesResponse struct {
+	ID                           string                                          `json:"id" url:"id"`
+	Name                         string                                          `json:"name" url:"name"`
+	DocumentType                 InvoiceTemplatesCreateSalesResponseDocumentType `json:"documentType" url:"documentType"`
+	PartnerID                    *string                                         `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Currency                     *string                                         `json:"currency,omitempty" url:"currency,omitempty"`
+	PaymentTermDays              *int64                                          `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	VatScheme                    *string                                         `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	VatCountryCode               *string                                         `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	AgreementID                  *string                                         `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	OperationTypeID              *string                                         `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                         `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	DiscountPercent              *string                                         `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	IssuedByName                 *string                                         `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                         `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                         `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                         `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Notes                        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	SupplyType                   *InvoiceTemplatesCreateSalesResponseSupplyType  `json:"supplyType,omitempty" url:"supplyType,omitempty"`
+	SeriesLabel                  *string                                         `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	OrderNumber                  *string                                         `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IntrastatTransportMode       *string                                         `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                         `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                         `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                         `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	Lines                        []*InvoiceTemplatesCreateSalesResponseLinesItem `json:"lines" url:"lines"`
+	CreatedAt                    time.Time                                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                       `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetDocumentType() InvoiceTemplatesCreateSalesResponseDocumentType {
+	if i == nil {
+		return ""
+	}
+	return i.DocumentType
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetPartnerID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PartnerID
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetCurrency() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Currency
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetPaymentTermDays() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentTermDays
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetVatScheme() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatScheme
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetVatCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCountryCode
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OperationTypeID
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetDocumentSeriesID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DocumentSeriesID
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetDiscountPercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DiscountPercent
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetIssuedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByName
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetIssuedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByTitle
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetReceivedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByName
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetReceivedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByTitle
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetNotes() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetSupplyType() *InvoiceTemplatesCreateSalesResponseSupplyType {
+	if i == nil {
+		return nil
+	}
+	return i.SupplyType
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetSeriesLabel() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SeriesLabel
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetOrderNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OrderNumber
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetIntrastatTransportMode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatTransportMode
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetIntrastatDeliveryTerms() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatDeliveryTerms
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetIntrastatRegion() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatRegion
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetIntrastatNatureOfTransaction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatNatureOfTransaction
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetLines() []*InvoiceTemplatesCreateSalesResponseLinesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Lines
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetID(id string) {
+	i.ID = id
+	i.require(invoiceTemplatesCreateSalesResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetName(name string) {
+	i.Name = name
+	i.require(invoiceTemplatesCreateSalesResponseFieldName)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetDocumentType(documentType InvoiceTemplatesCreateSalesResponseDocumentType) {
+	i.DocumentType = documentType
+	i.require(invoiceTemplatesCreateSalesResponseFieldDocumentType)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetPartnerID(partnerID *string) {
+	i.PartnerID = partnerID
+	i.require(invoiceTemplatesCreateSalesResponseFieldPartnerID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetCurrency(currency *string) {
+	i.Currency = currency
+	i.require(invoiceTemplatesCreateSalesResponseFieldCurrency)
+}
+
+// SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetPaymentTermDays(paymentTermDays *int64) {
+	i.PaymentTermDays = paymentTermDays
+	i.require(invoiceTemplatesCreateSalesResponseFieldPaymentTermDays)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetVatScheme(vatScheme *string) {
+	i.VatScheme = vatScheme
+	i.require(invoiceTemplatesCreateSalesResponseFieldVatScheme)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoiceTemplatesCreateSalesResponseFieldVatCountryCode)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoiceTemplatesCreateSalesResponseFieldAgreementID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetOperationTypeID(operationTypeID *string) {
+	i.OperationTypeID = operationTypeID
+	i.require(invoiceTemplatesCreateSalesResponseFieldOperationTypeID)
+}
+
+// SetDocumentSeriesID sets the DocumentSeriesID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetDocumentSeriesID(documentSeriesID *string) {
+	i.DocumentSeriesID = documentSeriesID
+	i.require(invoiceTemplatesCreateSalesResponseFieldDocumentSeriesID)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetDiscountPercent(discountPercent *string) {
+	i.DiscountPercent = discountPercent
+	i.require(invoiceTemplatesCreateSalesResponseFieldDiscountPercent)
+}
+
+// SetIssuedByName sets the IssuedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetIssuedByName(issuedByName *string) {
+	i.IssuedByName = issuedByName
+	i.require(invoiceTemplatesCreateSalesResponseFieldIssuedByName)
+}
+
+// SetIssuedByTitle sets the IssuedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetIssuedByTitle(issuedByTitle *string) {
+	i.IssuedByTitle = issuedByTitle
+	i.require(invoiceTemplatesCreateSalesResponseFieldIssuedByTitle)
+}
+
+// SetReceivedByName sets the ReceivedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetReceivedByName(receivedByName *string) {
+	i.ReceivedByName = receivedByName
+	i.require(invoiceTemplatesCreateSalesResponseFieldReceivedByName)
+}
+
+// SetReceivedByTitle sets the ReceivedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
+	i.ReceivedByTitle = receivedByTitle
+	i.require(invoiceTemplatesCreateSalesResponseFieldReceivedByTitle)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoiceTemplatesCreateSalesResponseFieldNotes)
+}
+
+// SetSupplyType sets the SupplyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetSupplyType(supplyType *InvoiceTemplatesCreateSalesResponseSupplyType) {
+	i.SupplyType = supplyType
+	i.require(invoiceTemplatesCreateSalesResponseFieldSupplyType)
+}
+
+// SetSeriesLabel sets the SeriesLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetSeriesLabel(seriesLabel *string) {
+	i.SeriesLabel = seriesLabel
+	i.require(invoiceTemplatesCreateSalesResponseFieldSeriesLabel)
+}
+
+// SetOrderNumber sets the OrderNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetOrderNumber(orderNumber *string) {
+	i.OrderNumber = orderNumber
+	i.require(invoiceTemplatesCreateSalesResponseFieldOrderNumber)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	i.IntrastatTransportMode = intrastatTransportMode
+	i.require(invoiceTemplatesCreateSalesResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	i.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	i.require(invoiceTemplatesCreateSalesResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetIntrastatRegion(intrastatRegion *string) {
+	i.IntrastatRegion = intrastatRegion
+	i.require(invoiceTemplatesCreateSalesResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	i.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	i.require(invoiceTemplatesCreateSalesResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetLines(lines []*InvoiceTemplatesCreateSalesResponseLinesItem) {
+	i.Lines = lines
+	i.require(invoiceTemplatesCreateSalesResponseFieldLines)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(invoiceTemplatesCreateSalesResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponse) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(invoiceTemplatesCreateSalesResponseFieldUpdatedAt)
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed InvoiceTemplatesCreateSalesResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesCreateSalesResponse(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesCreateSalesResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesCreateSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesCreateSalesResponseDocumentType string
+
+const (
+	InvoiceTemplatesCreateSalesResponseDocumentTypeInvoice    InvoiceTemplatesCreateSalesResponseDocumentType = "invoice"
+	InvoiceTemplatesCreateSalesResponseDocumentTypeCreditNote InvoiceTemplatesCreateSalesResponseDocumentType = "credit_note"
+)
+
+func NewInvoiceTemplatesCreateSalesResponseDocumentTypeFromString(s string) (InvoiceTemplatesCreateSalesResponseDocumentType, error) {
+	switch s {
+	case "invoice":
+		return InvoiceTemplatesCreateSalesResponseDocumentTypeInvoice, nil
+	case "credit_note":
+		return InvoiceTemplatesCreateSalesResponseDocumentTypeCreditNote, nil
+	}
+	var t InvoiceTemplatesCreateSalesResponseDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesCreateSalesResponseDocumentType) Ptr() *InvoiceTemplatesCreateSalesResponseDocumentType {
+	return &i
+}
+
+var (
+	invoiceTemplatesCreateSalesResponseLinesItemFieldItemID            = big.NewInt(1 << 0)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldDescription       = big.NewInt(1 << 1)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldQuantity          = big.NewInt(1 << 2)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 6)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 7)
+)
+
+type InvoiceTemplatesCreateSalesResponseLinesItem struct {
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string `json:"description,omitempty" url:"description,omitempty"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetDescription() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Description
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetQuantity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Quantity
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetUnitPriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceExclVat
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetVatExemptionBasis() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatExemptionBasis
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetProjectID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ProjectID
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetUnit() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Unit
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetDescription(description *string) {
+	i.Description = description
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetQuantity(quantity *string) {
+	i.Quantity = quantity
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	i.UnitPriceExclVat = unitPriceExclVat
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	i.VatExemptionBasis = vatExemptionBasis
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetProjectID(projectID *string) {
+	i.ProjectID = projectID
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldProjectID)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetUnit(unit *string) {
+	i.Unit = unit
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldUnit)
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesCreateSalesResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesCreateSalesResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesCreateSalesResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesCreateSalesResponseSupplyType string
+
+const (
+	InvoiceTemplatesCreateSalesResponseSupplyTypeGoods    InvoiceTemplatesCreateSalesResponseSupplyType = "goods"
+	InvoiceTemplatesCreateSalesResponseSupplyTypeServices InvoiceTemplatesCreateSalesResponseSupplyType = "services"
+	InvoiceTemplatesCreateSalesResponseSupplyTypeDigital  InvoiceTemplatesCreateSalesResponseSupplyType = "digital"
+)
+
+func NewInvoiceTemplatesCreateSalesResponseSupplyTypeFromString(s string) (InvoiceTemplatesCreateSalesResponseSupplyType, error) {
+	switch s {
+	case "goods":
+		return InvoiceTemplatesCreateSalesResponseSupplyTypeGoods, nil
+	case "services":
+		return InvoiceTemplatesCreateSalesResponseSupplyTypeServices, nil
+	case "digital":
+		return InvoiceTemplatesCreateSalesResponseSupplyTypeDigital, nil
+	}
+	var t InvoiceTemplatesCreateSalesResponseSupplyType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesCreateSalesResponseSupplyType) Ptr() *InvoiceTemplatesCreateSalesResponseSupplyType {
+	return &i
+}
+
+var (
+	invoiceTemplatesDeleteSalesResponseFieldDeleted = big.NewInt(1 << 0)
+)
+
+type InvoiceTemplatesDeleteSalesResponse struct {
+	Deleted bool `json:"deleted" url:"deleted"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesDeleteSalesResponse) GetDeleted() bool {
+	if i == nil {
+		return false
+	}
+	return i.Deleted
+}
+
+func (i *InvoiceTemplatesDeleteSalesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesDeleteSalesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetDeleted sets the Deleted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesDeleteSalesResponse) SetDeleted(deleted bool) {
+	i.Deleted = deleted
+	i.require(invoiceTemplatesDeleteSalesResponseFieldDeleted)
+}
+
+func (i *InvoiceTemplatesDeleteSalesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesDeleteSalesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesDeleteSalesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesDeleteSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesDeleteSalesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesDeleteSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoiceTemplatesGetSalesResponseFieldID                           = big.NewInt(1 << 0)
+	invoiceTemplatesGetSalesResponseFieldName                         = big.NewInt(1 << 1)
+	invoiceTemplatesGetSalesResponseFieldDocumentType                 = big.NewInt(1 << 2)
+	invoiceTemplatesGetSalesResponseFieldPartnerID                    = big.NewInt(1 << 3)
+	invoiceTemplatesGetSalesResponseFieldCurrency                     = big.NewInt(1 << 4)
+	invoiceTemplatesGetSalesResponseFieldPaymentTermDays              = big.NewInt(1 << 5)
+	invoiceTemplatesGetSalesResponseFieldVatScheme                    = big.NewInt(1 << 6)
+	invoiceTemplatesGetSalesResponseFieldVatCountryCode               = big.NewInt(1 << 7)
+	invoiceTemplatesGetSalesResponseFieldAgreementID                  = big.NewInt(1 << 8)
+	invoiceTemplatesGetSalesResponseFieldOperationTypeID              = big.NewInt(1 << 9)
+	invoiceTemplatesGetSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 10)
+	invoiceTemplatesGetSalesResponseFieldDiscountPercent              = big.NewInt(1 << 11)
+	invoiceTemplatesGetSalesResponseFieldIssuedByName                 = big.NewInt(1 << 12)
+	invoiceTemplatesGetSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 13)
+	invoiceTemplatesGetSalesResponseFieldReceivedByName               = big.NewInt(1 << 14)
+	invoiceTemplatesGetSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 15)
+	invoiceTemplatesGetSalesResponseFieldNotes                        = big.NewInt(1 << 16)
+	invoiceTemplatesGetSalesResponseFieldSupplyType                   = big.NewInt(1 << 17)
+	invoiceTemplatesGetSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 18)
+	invoiceTemplatesGetSalesResponseFieldOrderNumber                  = big.NewInt(1 << 19)
+	invoiceTemplatesGetSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 20)
+	invoiceTemplatesGetSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 21)
+	invoiceTemplatesGetSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 22)
+	invoiceTemplatesGetSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 23)
+	invoiceTemplatesGetSalesResponseFieldLines                        = big.NewInt(1 << 24)
+	invoiceTemplatesGetSalesResponseFieldCreatedAt                    = big.NewInt(1 << 25)
+	invoiceTemplatesGetSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 26)
+)
+
+type InvoiceTemplatesGetSalesResponse struct {
+	ID                           string                                       `json:"id" url:"id"`
+	Name                         string                                       `json:"name" url:"name"`
+	DocumentType                 InvoiceTemplatesGetSalesResponseDocumentType `json:"documentType" url:"documentType"`
+	PartnerID                    *string                                      `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Currency                     *string                                      `json:"currency,omitempty" url:"currency,omitempty"`
+	PaymentTermDays              *int64                                       `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	VatScheme                    *string                                      `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	VatCountryCode               *string                                      `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	AgreementID                  *string                                      `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	OperationTypeID              *string                                      `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                      `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	DiscountPercent              *string                                      `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	IssuedByName                 *string                                      `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                      `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                      `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                      `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Notes                        *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	SupplyType                   *InvoiceTemplatesGetSalesResponseSupplyType  `json:"supplyType,omitempty" url:"supplyType,omitempty"`
+	SeriesLabel                  *string                                      `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	OrderNumber                  *string                                      `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IntrastatTransportMode       *string                                      `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                      `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                      `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                      `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	Lines                        []*InvoiceTemplatesGetSalesResponseLinesItem `json:"lines" url:"lines"`
+	CreatedAt                    time.Time                                    `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                    `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetDocumentType() InvoiceTemplatesGetSalesResponseDocumentType {
+	if i == nil {
+		return ""
+	}
+	return i.DocumentType
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetPartnerID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PartnerID
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetCurrency() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Currency
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetPaymentTermDays() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentTermDays
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetVatScheme() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatScheme
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetVatCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCountryCode
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OperationTypeID
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetDocumentSeriesID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DocumentSeriesID
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetDiscountPercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DiscountPercent
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetIssuedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByName
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetIssuedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByTitle
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetReceivedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByName
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetReceivedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByTitle
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetNotes() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetSupplyType() *InvoiceTemplatesGetSalesResponseSupplyType {
+	if i == nil {
+		return nil
+	}
+	return i.SupplyType
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetSeriesLabel() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SeriesLabel
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetOrderNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OrderNumber
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetIntrastatTransportMode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatTransportMode
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetIntrastatDeliveryTerms() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatDeliveryTerms
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetIntrastatRegion() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatRegion
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetIntrastatNatureOfTransaction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatNatureOfTransaction
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetLines() []*InvoiceTemplatesGetSalesResponseLinesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Lines
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetID(id string) {
+	i.ID = id
+	i.require(invoiceTemplatesGetSalesResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetName(name string) {
+	i.Name = name
+	i.require(invoiceTemplatesGetSalesResponseFieldName)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetDocumentType(documentType InvoiceTemplatesGetSalesResponseDocumentType) {
+	i.DocumentType = documentType
+	i.require(invoiceTemplatesGetSalesResponseFieldDocumentType)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetPartnerID(partnerID *string) {
+	i.PartnerID = partnerID
+	i.require(invoiceTemplatesGetSalesResponseFieldPartnerID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetCurrency(currency *string) {
+	i.Currency = currency
+	i.require(invoiceTemplatesGetSalesResponseFieldCurrency)
+}
+
+// SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetPaymentTermDays(paymentTermDays *int64) {
+	i.PaymentTermDays = paymentTermDays
+	i.require(invoiceTemplatesGetSalesResponseFieldPaymentTermDays)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetVatScheme(vatScheme *string) {
+	i.VatScheme = vatScheme
+	i.require(invoiceTemplatesGetSalesResponseFieldVatScheme)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoiceTemplatesGetSalesResponseFieldVatCountryCode)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoiceTemplatesGetSalesResponseFieldAgreementID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetOperationTypeID(operationTypeID *string) {
+	i.OperationTypeID = operationTypeID
+	i.require(invoiceTemplatesGetSalesResponseFieldOperationTypeID)
+}
+
+// SetDocumentSeriesID sets the DocumentSeriesID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetDocumentSeriesID(documentSeriesID *string) {
+	i.DocumentSeriesID = documentSeriesID
+	i.require(invoiceTemplatesGetSalesResponseFieldDocumentSeriesID)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetDiscountPercent(discountPercent *string) {
+	i.DiscountPercent = discountPercent
+	i.require(invoiceTemplatesGetSalesResponseFieldDiscountPercent)
+}
+
+// SetIssuedByName sets the IssuedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetIssuedByName(issuedByName *string) {
+	i.IssuedByName = issuedByName
+	i.require(invoiceTemplatesGetSalesResponseFieldIssuedByName)
+}
+
+// SetIssuedByTitle sets the IssuedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetIssuedByTitle(issuedByTitle *string) {
+	i.IssuedByTitle = issuedByTitle
+	i.require(invoiceTemplatesGetSalesResponseFieldIssuedByTitle)
+}
+
+// SetReceivedByName sets the ReceivedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetReceivedByName(receivedByName *string) {
+	i.ReceivedByName = receivedByName
+	i.require(invoiceTemplatesGetSalesResponseFieldReceivedByName)
+}
+
+// SetReceivedByTitle sets the ReceivedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
+	i.ReceivedByTitle = receivedByTitle
+	i.require(invoiceTemplatesGetSalesResponseFieldReceivedByTitle)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoiceTemplatesGetSalesResponseFieldNotes)
+}
+
+// SetSupplyType sets the SupplyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetSupplyType(supplyType *InvoiceTemplatesGetSalesResponseSupplyType) {
+	i.SupplyType = supplyType
+	i.require(invoiceTemplatesGetSalesResponseFieldSupplyType)
+}
+
+// SetSeriesLabel sets the SeriesLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetSeriesLabel(seriesLabel *string) {
+	i.SeriesLabel = seriesLabel
+	i.require(invoiceTemplatesGetSalesResponseFieldSeriesLabel)
+}
+
+// SetOrderNumber sets the OrderNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetOrderNumber(orderNumber *string) {
+	i.OrderNumber = orderNumber
+	i.require(invoiceTemplatesGetSalesResponseFieldOrderNumber)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	i.IntrastatTransportMode = intrastatTransportMode
+	i.require(invoiceTemplatesGetSalesResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	i.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	i.require(invoiceTemplatesGetSalesResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetIntrastatRegion(intrastatRegion *string) {
+	i.IntrastatRegion = intrastatRegion
+	i.require(invoiceTemplatesGetSalesResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	i.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	i.require(invoiceTemplatesGetSalesResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetLines(lines []*InvoiceTemplatesGetSalesResponseLinesItem) {
+	i.Lines = lines
+	i.require(invoiceTemplatesGetSalesResponseFieldLines)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(invoiceTemplatesGetSalesResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponse) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(invoiceTemplatesGetSalesResponseFieldUpdatedAt)
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed InvoiceTemplatesGetSalesResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesGetSalesResponse(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesGetSalesResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesGetSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesGetSalesResponseDocumentType string
+
+const (
+	InvoiceTemplatesGetSalesResponseDocumentTypeInvoice    InvoiceTemplatesGetSalesResponseDocumentType = "invoice"
+	InvoiceTemplatesGetSalesResponseDocumentTypeCreditNote InvoiceTemplatesGetSalesResponseDocumentType = "credit_note"
+)
+
+func NewInvoiceTemplatesGetSalesResponseDocumentTypeFromString(s string) (InvoiceTemplatesGetSalesResponseDocumentType, error) {
+	switch s {
+	case "invoice":
+		return InvoiceTemplatesGetSalesResponseDocumentTypeInvoice, nil
+	case "credit_note":
+		return InvoiceTemplatesGetSalesResponseDocumentTypeCreditNote, nil
+	}
+	var t InvoiceTemplatesGetSalesResponseDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesGetSalesResponseDocumentType) Ptr() *InvoiceTemplatesGetSalesResponseDocumentType {
+	return &i
+}
+
+var (
+	invoiceTemplatesGetSalesResponseLinesItemFieldItemID            = big.NewInt(1 << 0)
+	invoiceTemplatesGetSalesResponseLinesItemFieldDescription       = big.NewInt(1 << 1)
+	invoiceTemplatesGetSalesResponseLinesItemFieldQuantity          = big.NewInt(1 << 2)
+	invoiceTemplatesGetSalesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
+	invoiceTemplatesGetSalesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	invoiceTemplatesGetSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
+	invoiceTemplatesGetSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 6)
+	invoiceTemplatesGetSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 7)
+)
+
+type InvoiceTemplatesGetSalesResponseLinesItem struct {
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string `json:"description,omitempty" url:"description,omitempty"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetDescription() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Description
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetQuantity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Quantity
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetUnitPriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceExclVat
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetVatExemptionBasis() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatExemptionBasis
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetProjectID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ProjectID
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetUnit() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Unit
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetDescription(description *string) {
+	i.Description = description
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetQuantity(quantity *string) {
+	i.Quantity = quantity
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	i.UnitPriceExclVat = unitPriceExclVat
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	i.VatExemptionBasis = vatExemptionBasis
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetProjectID(projectID *string) {
+	i.ProjectID = projectID
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldProjectID)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetUnit(unit *string) {
+	i.Unit = unit
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldUnit)
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesGetSalesResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesGetSalesResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesGetSalesResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesGetSalesResponseSupplyType string
+
+const (
+	InvoiceTemplatesGetSalesResponseSupplyTypeGoods    InvoiceTemplatesGetSalesResponseSupplyType = "goods"
+	InvoiceTemplatesGetSalesResponseSupplyTypeServices InvoiceTemplatesGetSalesResponseSupplyType = "services"
+	InvoiceTemplatesGetSalesResponseSupplyTypeDigital  InvoiceTemplatesGetSalesResponseSupplyType = "digital"
+)
+
+func NewInvoiceTemplatesGetSalesResponseSupplyTypeFromString(s string) (InvoiceTemplatesGetSalesResponseSupplyType, error) {
+	switch s {
+	case "goods":
+		return InvoiceTemplatesGetSalesResponseSupplyTypeGoods, nil
+	case "services":
+		return InvoiceTemplatesGetSalesResponseSupplyTypeServices, nil
+	case "digital":
+		return InvoiceTemplatesGetSalesResponseSupplyTypeDigital, nil
+	}
+	var t InvoiceTemplatesGetSalesResponseSupplyType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesGetSalesResponseSupplyType) Ptr() *InvoiceTemplatesGetSalesResponseSupplyType {
+	return &i
+}
+
+var (
+	invoiceTemplatesListSalesRequestFilterItemFieldField = big.NewInt(1 << 0)
+	invoiceTemplatesListSalesRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	invoiceTemplatesListSalesRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type InvoiceTemplatesListSalesRequestFilterItem struct {
+	Field string                                           `json:"field" url:"field"`
+	Op    InvoiceTemplatesListSalesRequestFilterItemOp     `json:"op" url:"op"`
+	Value *InvoiceTemplatesListSalesRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) GetField() string {
+	if i == nil {
+		return ""
+	}
+	return i.Field
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) GetOp() InvoiceTemplatesListSalesRequestFilterItemOp {
+	if i == nil {
+		return ""
+	}
+	return i.Op
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) GetValue() *InvoiceTemplatesListSalesRequestFilterItemValue {
+	if i == nil {
+		return nil
+	}
+	return i.Value
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequestFilterItem) SetField(field string) {
+	i.Field = field
+	i.require(invoiceTemplatesListSalesRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequestFilterItem) SetOp(op InvoiceTemplatesListSalesRequestFilterItemOp) {
+	i.Op = op
+	i.require(invoiceTemplatesListSalesRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequestFilterItem) SetValue(value *InvoiceTemplatesListSalesRequestFilterItemValue) {
+	i.Value = value
+	i.require(invoiceTemplatesListSalesRequestFilterItemFieldValue)
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesListSalesRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesListSalesRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesListSalesRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesListSalesRequestFilterItemOp string
+
+const (
+	InvoiceTemplatesListSalesRequestFilterItemOpEq       InvoiceTemplatesListSalesRequestFilterItemOp = "eq"
+	InvoiceTemplatesListSalesRequestFilterItemOpNe       InvoiceTemplatesListSalesRequestFilterItemOp = "ne"
+	InvoiceTemplatesListSalesRequestFilterItemOpContains InvoiceTemplatesListSalesRequestFilterItemOp = "contains"
+	InvoiceTemplatesListSalesRequestFilterItemOpGte      InvoiceTemplatesListSalesRequestFilterItemOp = "gte"
+	InvoiceTemplatesListSalesRequestFilterItemOpLte      InvoiceTemplatesListSalesRequestFilterItemOp = "lte"
+	InvoiceTemplatesListSalesRequestFilterItemOpIn       InvoiceTemplatesListSalesRequestFilterItemOp = "in"
+)
+
+func NewInvoiceTemplatesListSalesRequestFilterItemOpFromString(s string) (InvoiceTemplatesListSalesRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return InvoiceTemplatesListSalesRequestFilterItemOpEq, nil
+	case "ne":
+		return InvoiceTemplatesListSalesRequestFilterItemOpNe, nil
+	case "contains":
+		return InvoiceTemplatesListSalesRequestFilterItemOpContains, nil
+	case "gte":
+		return InvoiceTemplatesListSalesRequestFilterItemOpGte, nil
+	case "lte":
+		return InvoiceTemplatesListSalesRequestFilterItemOpLte, nil
+	case "in":
+		return InvoiceTemplatesListSalesRequestFilterItemOpIn, nil
+	}
+	var t InvoiceTemplatesListSalesRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesListSalesRequestFilterItemOp) Ptr() *InvoiceTemplatesListSalesRequestFilterItemOp {
+	return &i
+}
+
+type InvoiceTemplatesListSalesRequestFilterItemValue struct {
+	String                                                       string
+	Double                                                       float64
+	Boolean                                                      bool
+	InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList []*InvoiceTemplatesListSalesRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValue) GetString() string {
+	if i == nil {
+		return ""
+	}
+	return i.String
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValue) GetDouble() float64 {
+	if i == nil {
+		return 0
+	}
+	return i.Double
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValue) GetBoolean() bool {
+	if i == nil {
+		return false
+	}
+	return i.Boolean
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValue) GetInvoiceTemplatesListSalesRequestFilterItemValueThreeItemList() []*InvoiceTemplatesListSalesRequestFilterItemValueThreeItem {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		i.typ = "String"
+		i.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		i.typ = "Double"
+		i.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		i.typ = "Boolean"
+		i.Boolean = valueBoolean
+		return nil
+	}
+	var valueInvoiceTemplatesListSalesRequestFilterItemValueThreeItemList []*InvoiceTemplatesListSalesRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueInvoiceTemplatesListSalesRequestFilterItemValueThreeItemList); err == nil {
+		i.typ = "InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList"
+		i.InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList = valueInvoiceTemplatesListSalesRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, i)
+}
+
+func (i InvoiceTemplatesListSalesRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if i.typ == "String" || i.String != "" {
+		return json.Marshal(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return json.Marshal(i.Double)
+	}
+	if i.typ == "Boolean" || i.Boolean != false {
+		return json.Marshal(i.Boolean)
+	}
+	if i.typ == "InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList" || i.InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(i.InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+type InvoiceTemplatesListSalesRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitInvoiceTemplatesListSalesRequestFilterItemValueThreeItemList([]*InvoiceTemplatesListSalesRequestFilterItemValueThreeItem) error
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValue) Accept(visitor InvoiceTemplatesListSalesRequestFilterItemValueVisitor) error {
+	if i.typ == "String" || i.String != "" {
+		return visitor.VisitString(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return visitor.VisitDouble(i.Double)
+	}
+	if i.typ == "Boolean" || i.Boolean != false {
+		return visitor.VisitBoolean(i.Boolean)
+	}
+	if i.typ == "InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList" || i.InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitInvoiceTemplatesListSalesRequestFilterItemValueThreeItemList(i.InvoiceTemplatesListSalesRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+type InvoiceTemplatesListSalesRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValueThreeItem) GetString() string {
+	if i == nil {
+		return ""
+	}
+	return i.String
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if i == nil {
+		return 0
+	}
+	return i.Double
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		i.typ = "String"
+		i.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		i.typ = "Double"
+		i.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, i)
+}
+
+func (i InvoiceTemplatesListSalesRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if i.typ == "String" || i.String != "" {
+		return json.Marshal(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return json.Marshal(i.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+type InvoiceTemplatesListSalesRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (i *InvoiceTemplatesListSalesRequestFilterItemValueThreeItem) Accept(visitor InvoiceTemplatesListSalesRequestFilterItemValueThreeItemVisitor) error {
+	if i.typ == "String" || i.String != "" {
+		return visitor.VisitString(i.String)
+	}
+	if i.typ == "Double" || i.Double != 0 {
+		return visitor.VisitDouble(i.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", i)
+}
+
+var (
+	invoiceTemplatesListSalesRequestSortItemFieldField = big.NewInt(1 << 0)
+	invoiceTemplatesListSalesRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type InvoiceTemplatesListSalesRequestSortItem struct {
+	Field string                                       `json:"field" url:"field"`
+	Dir   *InvoiceTemplatesListSalesRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesListSalesRequestSortItem) GetField() string {
+	if i == nil {
+		return ""
+	}
+	return i.Field
+}
+
+func (i *InvoiceTemplatesListSalesRequestSortItem) GetDir() *InvoiceTemplatesListSalesRequestSortItemDir {
+	if i == nil {
+		return nil
+	}
+	return i.Dir
+}
+
+func (i *InvoiceTemplatesListSalesRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesListSalesRequestSortItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequestSortItem) SetField(field string) {
+	i.Field = field
+	i.require(invoiceTemplatesListSalesRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesRequestSortItem) SetDir(dir *InvoiceTemplatesListSalesRequestSortItemDir) {
+	i.Dir = dir
+	i.require(invoiceTemplatesListSalesRequestSortItemFieldDir)
+}
+
+func (i *InvoiceTemplatesListSalesRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesListSalesRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesListSalesRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesListSalesRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesListSalesRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesListSalesRequestSortItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesListSalesRequestSortItemDir string
+
+const (
+	InvoiceTemplatesListSalesRequestSortItemDirAsc  InvoiceTemplatesListSalesRequestSortItemDir = "asc"
+	InvoiceTemplatesListSalesRequestSortItemDirDesc InvoiceTemplatesListSalesRequestSortItemDir = "desc"
+)
+
+func NewInvoiceTemplatesListSalesRequestSortItemDirFromString(s string) (InvoiceTemplatesListSalesRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return InvoiceTemplatesListSalesRequestSortItemDirAsc, nil
+	case "desc":
+		return InvoiceTemplatesListSalesRequestSortItemDirDesc, nil
+	}
+	var t InvoiceTemplatesListSalesRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesListSalesRequestSortItemDir) Ptr() *InvoiceTemplatesListSalesRequestSortItemDir {
+	return &i
+}
+
+var (
+	invoiceTemplatesListSalesResponseFieldRows             = big.NewInt(1 << 0)
+	invoiceTemplatesListSalesResponseFieldPage             = big.NewInt(1 << 1)
+	invoiceTemplatesListSalesResponseFieldPageSize         = big.NewInt(1 << 2)
+	invoiceTemplatesListSalesResponseFieldTotal            = big.NewInt(1 << 3)
+	invoiceTemplatesListSalesResponseFieldTotals           = big.NewInt(1 << 4)
+	invoiceTemplatesListSalesResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type InvoiceTemplatesListSalesResponse struct {
+	Rows     []*InvoiceTemplatesListSalesResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                        `json:"page" url:"page"`
+	PageSize int64                                        `json:"pageSize" url:"pageSize"`
+	Total    int64                                        `json:"total" url:"total"`
+	Totals   map[string]string                            `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesListSalesResponse) GetRows() []*InvoiceTemplatesListSalesResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *InvoiceTemplatesListSalesResponse) GetPage() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Page
+}
+
+func (i *InvoiceTemplatesListSalesResponse) GetPageSize() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.PageSize
+}
+
+func (i *InvoiceTemplatesListSalesResponse) GetTotal() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Total
+}
+
+func (i *InvoiceTemplatesListSalesResponse) GetTotals() map[string]string {
+	if i == nil {
+		return nil
+	}
+	return i.Totals
+}
+
+func (i *InvoiceTemplatesListSalesResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if i == nil {
+		return nil
+	}
+	return i.TotalsByCurrency
+}
+
+func (i *InvoiceTemplatesListSalesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesListSalesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponse) SetRows(rows []*InvoiceTemplatesListSalesResponseRowsItem) {
+	i.Rows = rows
+	i.require(invoiceTemplatesListSalesResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponse) SetPage(page int64) {
+	i.Page = page
+	i.require(invoiceTemplatesListSalesResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponse) SetPageSize(pageSize int64) {
+	i.PageSize = pageSize
+	i.require(invoiceTemplatesListSalesResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponse) SetTotal(total int64) {
+	i.Total = total
+	i.require(invoiceTemplatesListSalesResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponse) SetTotals(totals map[string]string) {
+	i.Totals = totals
+	i.require(invoiceTemplatesListSalesResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	i.TotalsByCurrency = totalsByCurrency
+	i.require(invoiceTemplatesListSalesResponseFieldTotalsByCurrency)
+}
+
+func (i *InvoiceTemplatesListSalesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesListSalesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesListSalesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesListSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesListSalesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesListSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoiceTemplatesListSalesResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	invoiceTemplatesListSalesResponseRowsItemFieldName                         = big.NewInt(1 << 1)
+	invoiceTemplatesListSalesResponseRowsItemFieldDocumentType                 = big.NewInt(1 << 2)
+	invoiceTemplatesListSalesResponseRowsItemFieldPartnerID                    = big.NewInt(1 << 3)
+	invoiceTemplatesListSalesResponseRowsItemFieldCurrency                     = big.NewInt(1 << 4)
+	invoiceTemplatesListSalesResponseRowsItemFieldPaymentTermDays              = big.NewInt(1 << 5)
+	invoiceTemplatesListSalesResponseRowsItemFieldVatScheme                    = big.NewInt(1 << 6)
+	invoiceTemplatesListSalesResponseRowsItemFieldVatCountryCode               = big.NewInt(1 << 7)
+	invoiceTemplatesListSalesResponseRowsItemFieldAgreementID                  = big.NewInt(1 << 8)
+	invoiceTemplatesListSalesResponseRowsItemFieldOperationTypeID              = big.NewInt(1 << 9)
+	invoiceTemplatesListSalesResponseRowsItemFieldDocumentSeriesID             = big.NewInt(1 << 10)
+	invoiceTemplatesListSalesResponseRowsItemFieldDiscountPercent              = big.NewInt(1 << 11)
+	invoiceTemplatesListSalesResponseRowsItemFieldIssuedByName                 = big.NewInt(1 << 12)
+	invoiceTemplatesListSalesResponseRowsItemFieldIssuedByTitle                = big.NewInt(1 << 13)
+	invoiceTemplatesListSalesResponseRowsItemFieldReceivedByName               = big.NewInt(1 << 14)
+	invoiceTemplatesListSalesResponseRowsItemFieldReceivedByTitle              = big.NewInt(1 << 15)
+	invoiceTemplatesListSalesResponseRowsItemFieldNotes                        = big.NewInt(1 << 16)
+	invoiceTemplatesListSalesResponseRowsItemFieldSupplyType                   = big.NewInt(1 << 17)
+	invoiceTemplatesListSalesResponseRowsItemFieldSeriesLabel                  = big.NewInt(1 << 18)
+	invoiceTemplatesListSalesResponseRowsItemFieldOrderNumber                  = big.NewInt(1 << 19)
+	invoiceTemplatesListSalesResponseRowsItemFieldIntrastatTransportMode       = big.NewInt(1 << 20)
+	invoiceTemplatesListSalesResponseRowsItemFieldIntrastatDeliveryTerms       = big.NewInt(1 << 21)
+	invoiceTemplatesListSalesResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 22)
+	invoiceTemplatesListSalesResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 23)
+	invoiceTemplatesListSalesResponseRowsItemFieldLines                        = big.NewInt(1 << 24)
+	invoiceTemplatesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 25)
+	invoiceTemplatesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 26)
+)
+
+type InvoiceTemplatesListSalesResponseRowsItem struct {
+	ID                           string                                                `json:"id" url:"id"`
+	Name                         string                                                `json:"name" url:"name"`
+	DocumentType                 InvoiceTemplatesListSalesResponseRowsItemDocumentType `json:"documentType" url:"documentType"`
+	PartnerID                    *string                                               `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Currency                     *string                                               `json:"currency,omitempty" url:"currency,omitempty"`
+	PaymentTermDays              *int64                                                `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	VatScheme                    *string                                               `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	VatCountryCode               *string                                               `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	AgreementID                  *string                                               `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	OperationTypeID              *string                                               `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                               `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	DiscountPercent              *string                                               `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	IssuedByName                 *string                                               `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                               `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                               `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                               `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Notes                        *string                                               `json:"notes,omitempty" url:"notes,omitempty"`
+	SupplyType                   *InvoiceTemplatesListSalesResponseRowsItemSupplyType  `json:"supplyType,omitempty" url:"supplyType,omitempty"`
+	SeriesLabel                  *string                                               `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	OrderNumber                  *string                                               `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IntrastatTransportMode       *string                                               `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                               `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                               `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                               `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	Lines                        []*InvoiceTemplatesListSalesResponseRowsItemLinesItem `json:"lines" url:"lines"`
+	CreatedAt                    time.Time                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                             `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetDocumentType() InvoiceTemplatesListSalesResponseRowsItemDocumentType {
+	if i == nil {
+		return ""
+	}
+	return i.DocumentType
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetPartnerID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PartnerID
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetCurrency() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Currency
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetPaymentTermDays() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentTermDays
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetVatScheme() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatScheme
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetVatCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCountryCode
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OperationTypeID
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetDocumentSeriesID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DocumentSeriesID
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetDiscountPercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DiscountPercent
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetIssuedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByName
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetIssuedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByTitle
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetReceivedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByName
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetReceivedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByTitle
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetNotes() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetSupplyType() *InvoiceTemplatesListSalesResponseRowsItemSupplyType {
+	if i == nil {
+		return nil
+	}
+	return i.SupplyType
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetSeriesLabel() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SeriesLabel
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetOrderNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OrderNumber
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetIntrastatTransportMode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatTransportMode
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetIntrastatDeliveryTerms() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatDeliveryTerms
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetIntrastatRegion() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatRegion
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetIntrastatNatureOfTransaction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatNatureOfTransaction
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetLines() []*InvoiceTemplatesListSalesResponseRowsItemLinesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Lines
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetID(id string) {
+	i.ID = id
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetName(name string) {
+	i.Name = name
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldName)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetDocumentType(documentType InvoiceTemplatesListSalesResponseRowsItemDocumentType) {
+	i.DocumentType = documentType
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldDocumentType)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetPartnerID(partnerID *string) {
+	i.PartnerID = partnerID
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldPartnerID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetCurrency(currency *string) {
+	i.Currency = currency
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldCurrency)
+}
+
+// SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetPaymentTermDays(paymentTermDays *int64) {
+	i.PaymentTermDays = paymentTermDays
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldPaymentTermDays)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetVatScheme(vatScheme *string) {
+	i.VatScheme = vatScheme
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldVatScheme)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldVatCountryCode)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldAgreementID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetOperationTypeID(operationTypeID *string) {
+	i.OperationTypeID = operationTypeID
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldOperationTypeID)
+}
+
+// SetDocumentSeriesID sets the DocumentSeriesID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetDocumentSeriesID(documentSeriesID *string) {
+	i.DocumentSeriesID = documentSeriesID
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldDocumentSeriesID)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetDiscountPercent(discountPercent *string) {
+	i.DiscountPercent = discountPercent
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldDiscountPercent)
+}
+
+// SetIssuedByName sets the IssuedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetIssuedByName(issuedByName *string) {
+	i.IssuedByName = issuedByName
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldIssuedByName)
+}
+
+// SetIssuedByTitle sets the IssuedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetIssuedByTitle(issuedByTitle *string) {
+	i.IssuedByTitle = issuedByTitle
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldIssuedByTitle)
+}
+
+// SetReceivedByName sets the ReceivedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetReceivedByName(receivedByName *string) {
+	i.ReceivedByName = receivedByName
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldReceivedByName)
+}
+
+// SetReceivedByTitle sets the ReceivedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetReceivedByTitle(receivedByTitle *string) {
+	i.ReceivedByTitle = receivedByTitle
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldReceivedByTitle)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldNotes)
+}
+
+// SetSupplyType sets the SupplyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetSupplyType(supplyType *InvoiceTemplatesListSalesResponseRowsItemSupplyType) {
+	i.SupplyType = supplyType
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldSupplyType)
+}
+
+// SetSeriesLabel sets the SeriesLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetSeriesLabel(seriesLabel *string) {
+	i.SeriesLabel = seriesLabel
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldSeriesLabel)
+}
+
+// SetOrderNumber sets the OrderNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetOrderNumber(orderNumber *string) {
+	i.OrderNumber = orderNumber
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldOrderNumber)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	i.IntrastatTransportMode = intrastatTransportMode
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	i.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetIntrastatRegion(intrastatRegion *string) {
+	i.IntrastatRegion = intrastatRegion
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	i.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldIntrastatNatureOfTransaction)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetLines(lines []*InvoiceTemplatesListSalesResponseRowsItemLinesItem) {
+	i.Lines = lines
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldLines)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(invoiceTemplatesListSalesResponseRowsItemFieldUpdatedAt)
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed InvoiceTemplatesListSalesResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesListSalesResponseRowsItem(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesListSalesResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesListSalesResponseRowsItemDocumentType string
+
+const (
+	InvoiceTemplatesListSalesResponseRowsItemDocumentTypeInvoice    InvoiceTemplatesListSalesResponseRowsItemDocumentType = "invoice"
+	InvoiceTemplatesListSalesResponseRowsItemDocumentTypeCreditNote InvoiceTemplatesListSalesResponseRowsItemDocumentType = "credit_note"
+)
+
+func NewInvoiceTemplatesListSalesResponseRowsItemDocumentTypeFromString(s string) (InvoiceTemplatesListSalesResponseRowsItemDocumentType, error) {
+	switch s {
+	case "invoice":
+		return InvoiceTemplatesListSalesResponseRowsItemDocumentTypeInvoice, nil
+	case "credit_note":
+		return InvoiceTemplatesListSalesResponseRowsItemDocumentTypeCreditNote, nil
+	}
+	var t InvoiceTemplatesListSalesResponseRowsItemDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesListSalesResponseRowsItemDocumentType) Ptr() *InvoiceTemplatesListSalesResponseRowsItemDocumentType {
+	return &i
+}
+
+var (
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldItemID            = big.NewInt(1 << 0)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldDescription       = big.NewInt(1 << 1)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldQuantity          = big.NewInt(1 << 2)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldProjectID         = big.NewInt(1 << 6)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldUnit              = big.NewInt(1 << 7)
+)
+
+type InvoiceTemplatesListSalesResponseRowsItemLinesItem struct {
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string `json:"description,omitempty" url:"description,omitempty"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetDescription() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Description
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetQuantity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Quantity
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetUnitPriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceExclVat
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetVatExemptionBasis() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatExemptionBasis
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetProjectID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ProjectID
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetUnit() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Unit
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetDescription(description *string) {
+	i.Description = description
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetQuantity(quantity *string) {
+	i.Quantity = quantity
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	i.UnitPriceExclVat = unitPriceExclVat
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatRatePercent)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	i.VatExemptionBasis = vatExemptionBasis
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatExemptionBasis)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetProjectID(projectID *string) {
+	i.ProjectID = projectID
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldProjectID)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetUnit(unit *string) {
+	i.Unit = unit
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldUnit)
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesListSalesResponseRowsItemLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesListSalesResponseRowsItemLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesListSalesResponseRowsItemLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesListSalesResponseRowsItemSupplyType string
+
+const (
+	InvoiceTemplatesListSalesResponseRowsItemSupplyTypeGoods    InvoiceTemplatesListSalesResponseRowsItemSupplyType = "goods"
+	InvoiceTemplatesListSalesResponseRowsItemSupplyTypeServices InvoiceTemplatesListSalesResponseRowsItemSupplyType = "services"
+	InvoiceTemplatesListSalesResponseRowsItemSupplyTypeDigital  InvoiceTemplatesListSalesResponseRowsItemSupplyType = "digital"
+)
+
+func NewInvoiceTemplatesListSalesResponseRowsItemSupplyTypeFromString(s string) (InvoiceTemplatesListSalesResponseRowsItemSupplyType, error) {
+	switch s {
+	case "goods":
+		return InvoiceTemplatesListSalesResponseRowsItemSupplyTypeGoods, nil
+	case "services":
+		return InvoiceTemplatesListSalesResponseRowsItemSupplyTypeServices, nil
+	case "digital":
+		return InvoiceTemplatesListSalesResponseRowsItemSupplyTypeDigital, nil
+	}
+	var t InvoiceTemplatesListSalesResponseRowsItemSupplyType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesListSalesResponseRowsItemSupplyType) Ptr() *InvoiceTemplatesListSalesResponseRowsItemSupplyType {
+	return &i
+}
+
+type InvoiceTemplatesUpdateSalesRequestDocumentType string
+
+const (
+	InvoiceTemplatesUpdateSalesRequestDocumentTypeInvoice    InvoiceTemplatesUpdateSalesRequestDocumentType = "invoice"
+	InvoiceTemplatesUpdateSalesRequestDocumentTypeCreditNote InvoiceTemplatesUpdateSalesRequestDocumentType = "credit_note"
+)
+
+func NewInvoiceTemplatesUpdateSalesRequestDocumentTypeFromString(s string) (InvoiceTemplatesUpdateSalesRequestDocumentType, error) {
+	switch s {
+	case "invoice":
+		return InvoiceTemplatesUpdateSalesRequestDocumentTypeInvoice, nil
+	case "credit_note":
+		return InvoiceTemplatesUpdateSalesRequestDocumentTypeCreditNote, nil
+	}
+	var t InvoiceTemplatesUpdateSalesRequestDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesUpdateSalesRequestDocumentType) Ptr() *InvoiceTemplatesUpdateSalesRequestDocumentType {
+	return &i
+}
+
+var (
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldQuantity          = big.NewInt(1 << 2)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldProjectID         = big.NewInt(1 << 6)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldUnit              = big.NewInt(1 << 7)
+)
+
+type InvoiceTemplatesUpdateSalesRequestLinesItem struct {
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string `json:"description,omitempty" url:"description,omitempty"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetDescription() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Description
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetQuantity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Quantity
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetUnitPriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceExclVat
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetVatExemptionBasis() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatExemptionBasis
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetProjectID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ProjectID
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetUnit() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Unit
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetDescription(description *string) {
+	i.Description = description
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetQuantity(quantity *string) {
+	i.Quantity = quantity
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	i.UnitPriceExclVat = unitPriceExclVat
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldVatRatePercent)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	i.VatExemptionBasis = vatExemptionBasis
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldVatExemptionBasis)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetProjectID(projectID *string) {
+	i.ProjectID = projectID
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldProjectID)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetUnit(unit *string) {
+	i.Unit = unit
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldUnit)
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesUpdateSalesRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesUpdateSalesRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesUpdateSalesRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesUpdateSalesRequestSupplyType string
+
+const (
+	InvoiceTemplatesUpdateSalesRequestSupplyTypeGoods    InvoiceTemplatesUpdateSalesRequestSupplyType = "goods"
+	InvoiceTemplatesUpdateSalesRequestSupplyTypeServices InvoiceTemplatesUpdateSalesRequestSupplyType = "services"
+	InvoiceTemplatesUpdateSalesRequestSupplyTypeDigital  InvoiceTemplatesUpdateSalesRequestSupplyType = "digital"
+)
+
+func NewInvoiceTemplatesUpdateSalesRequestSupplyTypeFromString(s string) (InvoiceTemplatesUpdateSalesRequestSupplyType, error) {
+	switch s {
+	case "goods":
+		return InvoiceTemplatesUpdateSalesRequestSupplyTypeGoods, nil
+	case "services":
+		return InvoiceTemplatesUpdateSalesRequestSupplyTypeServices, nil
+	case "digital":
+		return InvoiceTemplatesUpdateSalesRequestSupplyTypeDigital, nil
+	}
+	var t InvoiceTemplatesUpdateSalesRequestSupplyType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesUpdateSalesRequestSupplyType) Ptr() *InvoiceTemplatesUpdateSalesRequestSupplyType {
+	return &i
+}
+
+type InvoiceTemplatesUpdateSalesRequestVatScheme string
+
+const (
+	InvoiceTemplatesUpdateSalesRequestVatSchemeDomestic          InvoiceTemplatesUpdateSalesRequestVatScheme = "domestic"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeIntraEuB2B        InvoiceTemplatesUpdateSalesRequestVatScheme = "intra_eu_b2b"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeReverseCharge     InvoiceTemplatesUpdateSalesRequestVatScheme = "reverse_charge"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeOssUnion          InvoiceTemplatesUpdateSalesRequestVatScheme = "oss_union"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeIoss              InvoiceTemplatesUpdateSalesRequestVatScheme = "ioss"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeMarketplaceDeemed InvoiceTemplatesUpdateSalesRequestVatScheme = "marketplace_deemed"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeExport            InvoiceTemplatesUpdateSalesRequestVatScheme = "export"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeOutOfScope        InvoiceTemplatesUpdateSalesRequestVatScheme = "out_of_scope"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeSmeExempt         InvoiceTemplatesUpdateSalesRequestVatScheme = "sme_exempt"
+)
+
+func NewInvoiceTemplatesUpdateSalesRequestVatSchemeFromString(s string) (InvoiceTemplatesUpdateSalesRequestVatScheme, error) {
+	switch s {
+	case "domestic":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeDomestic, nil
+	case "intra_eu_b2b":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeIntraEuB2B, nil
+	case "reverse_charge":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeReverseCharge, nil
+	case "oss_union":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeOssUnion, nil
+	case "ioss":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeIoss, nil
+	case "marketplace_deemed":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeMarketplaceDeemed, nil
+	case "export":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeExport, nil
+	case "out_of_scope":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeSmeExempt, nil
+	}
+	var t InvoiceTemplatesUpdateSalesRequestVatScheme
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesUpdateSalesRequestVatScheme) Ptr() *InvoiceTemplatesUpdateSalesRequestVatScheme {
+	return &i
+}
+
+var (
+	invoiceTemplatesUpdateSalesResponseFieldID                           = big.NewInt(1 << 0)
+	invoiceTemplatesUpdateSalesResponseFieldName                         = big.NewInt(1 << 1)
+	invoiceTemplatesUpdateSalesResponseFieldDocumentType                 = big.NewInt(1 << 2)
+	invoiceTemplatesUpdateSalesResponseFieldPartnerID                    = big.NewInt(1 << 3)
+	invoiceTemplatesUpdateSalesResponseFieldCurrency                     = big.NewInt(1 << 4)
+	invoiceTemplatesUpdateSalesResponseFieldPaymentTermDays              = big.NewInt(1 << 5)
+	invoiceTemplatesUpdateSalesResponseFieldVatScheme                    = big.NewInt(1 << 6)
+	invoiceTemplatesUpdateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 7)
+	invoiceTemplatesUpdateSalesResponseFieldAgreementID                  = big.NewInt(1 << 8)
+	invoiceTemplatesUpdateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 9)
+	invoiceTemplatesUpdateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 10)
+	invoiceTemplatesUpdateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 11)
+	invoiceTemplatesUpdateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 12)
+	invoiceTemplatesUpdateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 13)
+	invoiceTemplatesUpdateSalesResponseFieldReceivedByName               = big.NewInt(1 << 14)
+	invoiceTemplatesUpdateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 15)
+	invoiceTemplatesUpdateSalesResponseFieldNotes                        = big.NewInt(1 << 16)
+	invoiceTemplatesUpdateSalesResponseFieldSupplyType                   = big.NewInt(1 << 17)
+	invoiceTemplatesUpdateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 18)
+	invoiceTemplatesUpdateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 19)
+	invoiceTemplatesUpdateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 20)
+	invoiceTemplatesUpdateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 21)
+	invoiceTemplatesUpdateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 22)
+	invoiceTemplatesUpdateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 23)
+	invoiceTemplatesUpdateSalesResponseFieldLines                        = big.NewInt(1 << 24)
+	invoiceTemplatesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 25)
+	invoiceTemplatesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 26)
+)
+
+type InvoiceTemplatesUpdateSalesResponse struct {
+	ID                           string                                          `json:"id" url:"id"`
+	Name                         string                                          `json:"name" url:"name"`
+	DocumentType                 InvoiceTemplatesUpdateSalesResponseDocumentType `json:"documentType" url:"documentType"`
+	PartnerID                    *string                                         `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Currency                     *string                                         `json:"currency,omitempty" url:"currency,omitempty"`
+	PaymentTermDays              *int64                                          `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	VatScheme                    *string                                         `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	VatCountryCode               *string                                         `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	AgreementID                  *string                                         `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	OperationTypeID              *string                                         `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                         `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	DiscountPercent              *string                                         `json:"discountPercent,omitempty" url:"discountPercent,omitempty"`
+	IssuedByName                 *string                                         `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                         `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                         `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                         `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Notes                        *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	SupplyType                   *InvoiceTemplatesUpdateSalesResponseSupplyType  `json:"supplyType,omitempty" url:"supplyType,omitempty"`
+	SeriesLabel                  *string                                         `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	OrderNumber                  *string                                         `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IntrastatTransportMode       *string                                         `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                         `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                         `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                         `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	Lines                        []*InvoiceTemplatesUpdateSalesResponseLinesItem `json:"lines" url:"lines"`
+	CreatedAt                    time.Time                                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                       `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetDocumentType() InvoiceTemplatesUpdateSalesResponseDocumentType {
+	if i == nil {
+		return ""
+	}
+	return i.DocumentType
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetPartnerID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PartnerID
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetCurrency() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Currency
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetPaymentTermDays() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentTermDays
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetVatScheme() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatScheme
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetVatCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCountryCode
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OperationTypeID
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetDocumentSeriesID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DocumentSeriesID
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetDiscountPercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DiscountPercent
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetIssuedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByName
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetIssuedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByTitle
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetReceivedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByName
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetReceivedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByTitle
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetNotes() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetSupplyType() *InvoiceTemplatesUpdateSalesResponseSupplyType {
+	if i == nil {
+		return nil
+	}
+	return i.SupplyType
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetSeriesLabel() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SeriesLabel
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetOrderNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OrderNumber
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetIntrastatTransportMode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatTransportMode
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetIntrastatDeliveryTerms() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatDeliveryTerms
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetIntrastatRegion() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatRegion
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetIntrastatNatureOfTransaction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatNatureOfTransaction
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetLines() []*InvoiceTemplatesUpdateSalesResponseLinesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Lines
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetID(id string) {
+	i.ID = id
+	i.require(invoiceTemplatesUpdateSalesResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetName(name string) {
+	i.Name = name
+	i.require(invoiceTemplatesUpdateSalesResponseFieldName)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetDocumentType(documentType InvoiceTemplatesUpdateSalesResponseDocumentType) {
+	i.DocumentType = documentType
+	i.require(invoiceTemplatesUpdateSalesResponseFieldDocumentType)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetPartnerID(partnerID *string) {
+	i.PartnerID = partnerID
+	i.require(invoiceTemplatesUpdateSalesResponseFieldPartnerID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetCurrency(currency *string) {
+	i.Currency = currency
+	i.require(invoiceTemplatesUpdateSalesResponseFieldCurrency)
+}
+
+// SetPaymentTermDays sets the PaymentTermDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetPaymentTermDays(paymentTermDays *int64) {
+	i.PaymentTermDays = paymentTermDays
+	i.require(invoiceTemplatesUpdateSalesResponseFieldPaymentTermDays)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetVatScheme(vatScheme *string) {
+	i.VatScheme = vatScheme
+	i.require(invoiceTemplatesUpdateSalesResponseFieldVatScheme)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoiceTemplatesUpdateSalesResponseFieldVatCountryCode)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoiceTemplatesUpdateSalesResponseFieldAgreementID)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetOperationTypeID(operationTypeID *string) {
+	i.OperationTypeID = operationTypeID
+	i.require(invoiceTemplatesUpdateSalesResponseFieldOperationTypeID)
+}
+
+// SetDocumentSeriesID sets the DocumentSeriesID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetDocumentSeriesID(documentSeriesID *string) {
+	i.DocumentSeriesID = documentSeriesID
+	i.require(invoiceTemplatesUpdateSalesResponseFieldDocumentSeriesID)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetDiscountPercent(discountPercent *string) {
+	i.DiscountPercent = discountPercent
+	i.require(invoiceTemplatesUpdateSalesResponseFieldDiscountPercent)
+}
+
+// SetIssuedByName sets the IssuedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetIssuedByName(issuedByName *string) {
+	i.IssuedByName = issuedByName
+	i.require(invoiceTemplatesUpdateSalesResponseFieldIssuedByName)
+}
+
+// SetIssuedByTitle sets the IssuedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetIssuedByTitle(issuedByTitle *string) {
+	i.IssuedByTitle = issuedByTitle
+	i.require(invoiceTemplatesUpdateSalesResponseFieldIssuedByTitle)
+}
+
+// SetReceivedByName sets the ReceivedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetReceivedByName(receivedByName *string) {
+	i.ReceivedByName = receivedByName
+	i.require(invoiceTemplatesUpdateSalesResponseFieldReceivedByName)
+}
+
+// SetReceivedByTitle sets the ReceivedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
+	i.ReceivedByTitle = receivedByTitle
+	i.require(invoiceTemplatesUpdateSalesResponseFieldReceivedByTitle)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoiceTemplatesUpdateSalesResponseFieldNotes)
+}
+
+// SetSupplyType sets the SupplyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetSupplyType(supplyType *InvoiceTemplatesUpdateSalesResponseSupplyType) {
+	i.SupplyType = supplyType
+	i.require(invoiceTemplatesUpdateSalesResponseFieldSupplyType)
+}
+
+// SetSeriesLabel sets the SeriesLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetSeriesLabel(seriesLabel *string) {
+	i.SeriesLabel = seriesLabel
+	i.require(invoiceTemplatesUpdateSalesResponseFieldSeriesLabel)
+}
+
+// SetOrderNumber sets the OrderNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetOrderNumber(orderNumber *string) {
+	i.OrderNumber = orderNumber
+	i.require(invoiceTemplatesUpdateSalesResponseFieldOrderNumber)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	i.IntrastatTransportMode = intrastatTransportMode
+	i.require(invoiceTemplatesUpdateSalesResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	i.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	i.require(invoiceTemplatesUpdateSalesResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetIntrastatRegion(intrastatRegion *string) {
+	i.IntrastatRegion = intrastatRegion
+	i.require(invoiceTemplatesUpdateSalesResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	i.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	i.require(invoiceTemplatesUpdateSalesResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetLines(lines []*InvoiceTemplatesUpdateSalesResponseLinesItem) {
+	i.Lines = lines
+	i.require(invoiceTemplatesUpdateSalesResponseFieldLines)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(invoiceTemplatesUpdateSalesResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponse) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(invoiceTemplatesUpdateSalesResponseFieldUpdatedAt)
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed InvoiceTemplatesUpdateSalesResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesUpdateSalesResponse(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesUpdateSalesResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesUpdateSalesResponseDocumentType string
+
+const (
+	InvoiceTemplatesUpdateSalesResponseDocumentTypeInvoice    InvoiceTemplatesUpdateSalesResponseDocumentType = "invoice"
+	InvoiceTemplatesUpdateSalesResponseDocumentTypeCreditNote InvoiceTemplatesUpdateSalesResponseDocumentType = "credit_note"
+)
+
+func NewInvoiceTemplatesUpdateSalesResponseDocumentTypeFromString(s string) (InvoiceTemplatesUpdateSalesResponseDocumentType, error) {
+	switch s {
+	case "invoice":
+		return InvoiceTemplatesUpdateSalesResponseDocumentTypeInvoice, nil
+	case "credit_note":
+		return InvoiceTemplatesUpdateSalesResponseDocumentTypeCreditNote, nil
+	}
+	var t InvoiceTemplatesUpdateSalesResponseDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesUpdateSalesResponseDocumentType) Ptr() *InvoiceTemplatesUpdateSalesResponseDocumentType {
+	return &i
+}
+
+var (
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldItemID            = big.NewInt(1 << 0)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldDescription       = big.NewInt(1 << 1)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldQuantity          = big.NewInt(1 << 2)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 6)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 7)
+)
+
+type InvoiceTemplatesUpdateSalesResponseLinesItem struct {
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string `json:"description,omitempty" url:"description,omitempty"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetDescription() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Description
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetQuantity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Quantity
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetUnitPriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceExclVat
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetVatExemptionBasis() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatExemptionBasis
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetProjectID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ProjectID
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetUnit() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Unit
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetDescription(description *string) {
+	i.Description = description
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldDescription)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetQuantity(quantity *string) {
+	i.Quantity = quantity
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	i.UnitPriceExclVat = unitPriceExclVat
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldUnitPriceExclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	i.VatExemptionBasis = vatExemptionBasis
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetProjectID(projectID *string) {
+	i.ProjectID = projectID
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldProjectID)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetUnit(unit *string) {
+	i.Unit = unit
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldUnit)
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoiceTemplatesUpdateSalesResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoiceTemplatesUpdateSalesResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoiceTemplatesUpdateSalesResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoiceTemplatesUpdateSalesResponseSupplyType string
+
+const (
+	InvoiceTemplatesUpdateSalesResponseSupplyTypeGoods    InvoiceTemplatesUpdateSalesResponseSupplyType = "goods"
+	InvoiceTemplatesUpdateSalesResponseSupplyTypeServices InvoiceTemplatesUpdateSalesResponseSupplyType = "services"
+	InvoiceTemplatesUpdateSalesResponseSupplyTypeDigital  InvoiceTemplatesUpdateSalesResponseSupplyType = "digital"
+)
+
+func NewInvoiceTemplatesUpdateSalesResponseSupplyTypeFromString(s string) (InvoiceTemplatesUpdateSalesResponseSupplyType, error) {
+	switch s {
+	case "goods":
+		return InvoiceTemplatesUpdateSalesResponseSupplyTypeGoods, nil
+	case "services":
+		return InvoiceTemplatesUpdateSalesResponseSupplyTypeServices, nil
+	case "digital":
+		return InvoiceTemplatesUpdateSalesResponseSupplyTypeDigital, nil
+	}
+	var t InvoiceTemplatesUpdateSalesResponseSupplyType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoiceTemplatesUpdateSalesResponseSupplyType) Ptr() *InvoiceTemplatesUpdateSalesResponseSupplyType {
+	return &i
 }
 
 var (

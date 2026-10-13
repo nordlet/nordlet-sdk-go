@@ -127,6 +127,85 @@ func TestBillingAccountSetPlanWithWireMock(
 	VerifyRequestCount(t, "TestBillingAccountSetPlanWithWireMock", "POST", "/v1/billing/account/set-plan", nil, 1)
 }
 
+func TestBillingAccountSetAccountTypeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.AccountSetAccountTypeBillingRequest{
+		AccountType: nordlet.AccountSetAccountTypeBillingRequestAccountTypeFlatRate,
+	}
+	_, invocationErr := client.Billing.AccountSetAccountType(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingAccountSetAccountTypeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingAccountSetAccountTypeWithWireMock", "POST", "/v1/billing/account/set-account-type", nil, 1)
+}
+
+func TestBillingAccountSetAutoTopUpWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.AccountSetAutoTopUpBillingRequest{
+		Enabled:     true,
+		AmountCents: int64(1000000),
+	}
+	_, invocationErr := client.Billing.AccountSetAutoTopUp(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingAccountSetAutoTopUpWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingAccountSetAutoTopUpWithWireMock", "POST", "/v1/billing/account/set-auto-top-up", nil, 1)
+}
+
+func TestBillingAccountSetOverdraftCapWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.AccountSetOverdraftCapBillingRequest{
+		CapCents: int64(1000000),
+	}
+	_, invocationErr := client.Billing.AccountSetOverdraftCap(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingAccountSetOverdraftCapWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingAccountSetOverdraftCapWithWireMock", "POST", "/v1/billing/account/set-overdraft-cap", nil, 1)
+}
+
 func TestBillingTopupCreateWithWireMock(
 	t *testing.T,
 ) {
@@ -151,6 +230,82 @@ func TestBillingTopupCreateWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestBillingTopupCreateWithWireMock", "POST", "/v1/billing/topup/create", nil, 1)
+}
+
+func TestBillingTopupConfirmWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TopupConfirmBillingRequest{
+		SessionID: "sessionId",
+	}
+	_, invocationErr := client.Billing.TopupConfirm(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingTopupConfirmWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingTopupConfirmWithWireMock", "POST", "/v1/billing/topup/confirm", nil, 1)
+}
+
+func TestBillingFlatRateCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.FlatRateCreateBillingRequest{}
+	_, invocationErr := client.Billing.FlatRateCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingFlatRateCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingFlatRateCreateWithWireMock", "POST", "/v1/billing/flat-rate/create", nil, 1)
+}
+
+func TestBillingFlatRateConfirmWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.FlatRateConfirmBillingRequest{
+		SessionID: "sessionId",
+	}
+	_, invocationErr := client.Billing.FlatRateConfirm(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingFlatRateConfirmWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingFlatRateConfirmWithWireMock", "POST", "/v1/billing/flat-rate/confirm", nil, 1)
 }
 
 func TestBillingPortalCreateWithWireMock(

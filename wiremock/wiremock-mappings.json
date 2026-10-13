@@ -1347,7 +1347,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"type\": \"company\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"peppolId\": \"peppolId\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n  \"birthDate\": \"2026-07-01\",\n  \"isCustomer\": true,\n  \"isSupplier\": true,\n  \"paymentTermDays\": 1000000,\n  \"creditLimit\": \"creditLimit\",\n  \"priceListId\": \"priceListId\",\n  \"groupId\": \"groupId\",\n  \"statusId\": \"statusId\",\n  \"vatValid\": true,\n  \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"correspondenceAddress\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"shortName\": \"shortName\",\n  \"website\": \"website\",\n  \"fax\": \"fax\",\n  \"eoriCode\": \"eoriCode\",\n  \"otherCode\": \"otherCode\",\n  \"foreignTaxNumber\": \"foreignTaxNumber\",\n  \"autoDebtReminder\": true,\n  \"lateInterestPercent\": \"lateInterestPercent\",\n  \"firstCallDate\": \"2026-07-01\",\n  \"lastCallDate\": \"2026-07-01\",\n  \"nextCallDate\": \"2026-07-01\",\n  \"rating\": 1000000,\n  \"isEmployee\": true,\n  \"isGroupMember\": true,\n  \"isActive\": true,\n  \"legalCountryClass\": \"lt\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"type\": \"company\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"peppolId\": \"peppolId\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n  \"birthDate\": \"2026-07-01\",\n  \"isCustomer\": true,\n  \"isSupplier\": true,\n  \"paymentTermDays\": 1000000,\n  \"creditLimit\": \"creditLimit\",\n  \"priceListId\": \"priceListId\",\n  \"groupId\": \"groupId\",\n  \"statusId\": \"statusId\",\n  \"vatValid\": true,\n  \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"correspondenceAddress\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"shortName\": \"shortName\",\n  \"website\": \"website\",\n  \"fax\": \"fax\",\n  \"eoriCode\": \"eoriCode\",\n  \"autoDebtReminder\": true,\n  \"lateInterestPercent\": \"lateInterestPercent\",\n  \"firstCallDate\": \"2026-07-01\",\n  \"lastCallDate\": \"2026-07-01\",\n  \"nextCallDate\": \"2026-07-01\",\n  \"rating\": 1000000,\n  \"isEmployee\": true,\n  \"isGroupMember\": true,\n  \"isActive\": true,\n  \"legalCountryClass\": \"lt\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1378,7 +1378,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"created\": true,\n  \"partner\": {\n    \"id\": \"id\",\n    \"type\": \"company\",\n    \"name\": \"name\",\n    \"code\": \"code\",\n    \"vatCode\": \"vatCode\",\n    \"peppolId\": \"peppolId\",\n    \"email\": \"email\",\n    \"phone\": \"phone\",\n    \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n    \"birthDate\": \"2026-07-01\",\n    \"isCustomer\": true,\n    \"isSupplier\": true,\n    \"paymentTermDays\": 1000000,\n    \"creditLimit\": \"creditLimit\",\n    \"priceListId\": \"priceListId\",\n    \"groupId\": \"groupId\",\n    \"statusId\": \"statusId\",\n    \"vatValid\": true,\n    \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n    \"address\": {\n      \"street\": \"street\",\n      \"city\": \"city\",\n      \"municipality\": \"municipality\",\n      \"county\": \"county\",\n      \"postalCode\": \"postalCode\",\n      \"countryCode\": \"countryCode\"\n    },\n    \"correspondenceAddress\": {\n      \"street\": \"street\",\n      \"city\": \"city\",\n      \"municipality\": \"municipality\",\n      \"county\": \"county\",\n      \"postalCode\": \"postalCode\",\n      \"countryCode\": \"countryCode\"\n    },\n    \"notes\": \"notes\",\n    \"documentRef\": \"documentRef\",\n    \"shortName\": \"shortName\",\n    \"website\": \"website\",\n    \"fax\": \"fax\",\n    \"eoriCode\": \"eoriCode\",\n    \"otherCode\": \"otherCode\",\n    \"foreignTaxNumber\": \"foreignTaxNumber\",\n    \"autoDebtReminder\": true,\n    \"lateInterestPercent\": \"lateInterestPercent\",\n    \"firstCallDate\": \"2026-07-01\",\n    \"lastCallDate\": \"2026-07-01\",\n    \"nextCallDate\": \"2026-07-01\",\n    \"rating\": 1000000,\n    \"isEmployee\": true,\n    \"isGroupMember\": true,\n    \"isActive\": true,\n    \"legalCountryClass\": \"lt\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\"\n  }\n}",
+        "body": "{\n  \"created\": true,\n  \"partner\": {\n    \"id\": \"id\",\n    \"type\": \"company\",\n    \"name\": \"name\",\n    \"code\": \"code\",\n    \"vatCode\": \"vatCode\",\n    \"peppolId\": \"peppolId\",\n    \"email\": \"email\",\n    \"phone\": \"phone\",\n    \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n    \"birthDate\": \"2026-07-01\",\n    \"isCustomer\": true,\n    \"isSupplier\": true,\n    \"paymentTermDays\": 1000000,\n    \"creditLimit\": \"creditLimit\",\n    \"priceListId\": \"priceListId\",\n    \"groupId\": \"groupId\",\n    \"statusId\": \"statusId\",\n    \"vatValid\": true,\n    \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n    \"address\": {\n      \"street\": \"street\",\n      \"city\": \"city\",\n      \"municipality\": \"municipality\",\n      \"county\": \"county\",\n      \"postalCode\": \"postalCode\",\n      \"countryCode\": \"countryCode\"\n    },\n    \"correspondenceAddress\": {\n      \"street\": \"street\",\n      \"city\": \"city\",\n      \"municipality\": \"municipality\",\n      \"county\": \"county\",\n      \"postalCode\": \"postalCode\",\n      \"countryCode\": \"countryCode\"\n    },\n    \"notes\": \"notes\",\n    \"documentRef\": \"documentRef\",\n    \"shortName\": \"shortName\",\n    \"website\": \"website\",\n    \"fax\": \"fax\",\n    \"eoriCode\": \"eoriCode\",\n    \"autoDebtReminder\": true,\n    \"lateInterestPercent\": \"lateInterestPercent\",\n    \"firstCallDate\": \"2026-07-01\",\n    \"lastCallDate\": \"2026-07-01\",\n    \"nextCallDate\": \"2026-07-01\",\n    \"rating\": 1000000,\n    \"isEmployee\": true,\n    \"isGroupMember\": true,\n    \"isActive\": true,\n    \"legalCountryClass\": \"lt\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\",\n    \"updatedAt\": \"2026-07-01T09:30:00Z\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1409,7 +1409,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"type\": \"company\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"peppolId\": \"peppolId\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n  \"birthDate\": \"2026-07-01\",\n  \"isCustomer\": true,\n  \"isSupplier\": true,\n  \"paymentTermDays\": 1000000,\n  \"creditLimit\": \"creditLimit\",\n  \"priceListId\": \"priceListId\",\n  \"groupId\": \"groupId\",\n  \"statusId\": \"statusId\",\n  \"vatValid\": true,\n  \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"correspondenceAddress\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"shortName\": \"shortName\",\n  \"website\": \"website\",\n  \"fax\": \"fax\",\n  \"eoriCode\": \"eoriCode\",\n  \"otherCode\": \"otherCode\",\n  \"foreignTaxNumber\": \"foreignTaxNumber\",\n  \"autoDebtReminder\": true,\n  \"lateInterestPercent\": \"lateInterestPercent\",\n  \"firstCallDate\": \"2026-07-01\",\n  \"lastCallDate\": \"2026-07-01\",\n  \"nextCallDate\": \"2026-07-01\",\n  \"rating\": 1000000,\n  \"isEmployee\": true,\n  \"isGroupMember\": true,\n  \"isActive\": true,\n  \"legalCountryClass\": \"lt\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"type\": \"company\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"peppolId\": \"peppolId\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n  \"birthDate\": \"2026-07-01\",\n  \"isCustomer\": true,\n  \"isSupplier\": true,\n  \"paymentTermDays\": 1000000,\n  \"creditLimit\": \"creditLimit\",\n  \"priceListId\": \"priceListId\",\n  \"groupId\": \"groupId\",\n  \"statusId\": \"statusId\",\n  \"vatValid\": true,\n  \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"correspondenceAddress\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"shortName\": \"shortName\",\n  \"website\": \"website\",\n  \"fax\": \"fax\",\n  \"eoriCode\": \"eoriCode\",\n  \"autoDebtReminder\": true,\n  \"lateInterestPercent\": \"lateInterestPercent\",\n  \"firstCallDate\": \"2026-07-01\",\n  \"lastCallDate\": \"2026-07-01\",\n  \"nextCallDate\": \"2026-07-01\",\n  \"rating\": 1000000,\n  \"isEmployee\": true,\n  \"isGroupMember\": true,\n  \"isActive\": true,\n  \"legalCountryClass\": \"lt\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1440,7 +1440,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"type\": \"company\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"peppolId\": \"peppolId\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n  \"birthDate\": \"2026-07-01\",\n  \"isCustomer\": true,\n  \"isSupplier\": true,\n  \"paymentTermDays\": 1000000,\n  \"creditLimit\": \"creditLimit\",\n  \"priceListId\": \"priceListId\",\n  \"groupId\": \"groupId\",\n  \"statusId\": \"statusId\",\n  \"vatValid\": true,\n  \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"correspondenceAddress\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"shortName\": \"shortName\",\n  \"website\": \"website\",\n  \"fax\": \"fax\",\n  \"eoriCode\": \"eoriCode\",\n  \"otherCode\": \"otherCode\",\n  \"foreignTaxNumber\": \"foreignTaxNumber\",\n  \"autoDebtReminder\": true,\n  \"lateInterestPercent\": \"lateInterestPercent\",\n  \"firstCallDate\": \"2026-07-01\",\n  \"lastCallDate\": \"2026-07-01\",\n  \"nextCallDate\": \"2026-07-01\",\n  \"rating\": 1000000,\n  \"isEmployee\": true,\n  \"isGroupMember\": true,\n  \"isActive\": true,\n  \"legalCountryClass\": \"lt\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"type\": \"company\",\n  \"name\": \"name\",\n  \"code\": \"code\",\n  \"vatCode\": \"vatCode\",\n  \"peppolId\": \"peppolId\",\n  \"email\": \"email\",\n  \"phone\": \"phone\",\n  \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n  \"birthDate\": \"2026-07-01\",\n  \"isCustomer\": true,\n  \"isSupplier\": true,\n  \"paymentTermDays\": 1000000,\n  \"creditLimit\": \"creditLimit\",\n  \"priceListId\": \"priceListId\",\n  \"groupId\": \"groupId\",\n  \"statusId\": \"statusId\",\n  \"vatValid\": true,\n  \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n  \"address\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"correspondenceAddress\": {\n    \"street\": \"street\",\n    \"city\": \"city\",\n    \"municipality\": \"municipality\",\n    \"county\": \"county\",\n    \"postalCode\": \"postalCode\",\n    \"countryCode\": \"countryCode\"\n  },\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"shortName\": \"shortName\",\n  \"website\": \"website\",\n  \"fax\": \"fax\",\n  \"eoriCode\": \"eoriCode\",\n  \"autoDebtReminder\": true,\n  \"lateInterestPercent\": \"lateInterestPercent\",\n  \"firstCallDate\": \"2026-07-01\",\n  \"lastCallDate\": \"2026-07-01\",\n  \"nextCallDate\": \"2026-07-01\",\n  \"rating\": 1000000,\n  \"isEmployee\": true,\n  \"isGroupMember\": true,\n  \"isActive\": true,\n  \"legalCountryClass\": \"lt\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1564,7 +1564,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"company\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"peppolId\": \"peppolId\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n      \"birthDate\": \"2026-07-01\",\n      \"isCustomer\": true,\n      \"isSupplier\": true,\n      \"paymentTermDays\": 1000000,\n      \"creditLimit\": \"creditLimit\",\n      \"priceListId\": \"priceListId\",\n      \"groupId\": \"groupId\",\n      \"statusId\": \"statusId\",\n      \"vatValid\": true,\n      \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n      \"address\": {},\n      \"correspondenceAddress\": {},\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"shortName\": \"shortName\",\n      \"website\": \"website\",\n      \"fax\": \"fax\",\n      \"eoriCode\": \"eoriCode\",\n      \"otherCode\": \"otherCode\",\n      \"foreignTaxNumber\": \"foreignTaxNumber\",\n      \"autoDebtReminder\": true,\n      \"lateInterestPercent\": \"lateInterestPercent\",\n      \"firstCallDate\": \"2026-07-01\",\n      \"lastCallDate\": \"2026-07-01\",\n      \"nextCallDate\": \"2026-07-01\",\n      \"rating\": 1000000,\n      \"isEmployee\": true,\n      \"isGroupMember\": true,\n      \"isActive\": true,\n      \"legalCountryClass\": \"lt\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"company\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"peppolId\": \"peppolId\",\n      \"email\": \"email\",\n      \"phone\": \"phone\",\n      \"selfEmploymentCertNo\": \"selfEmploymentCertNo\",\n      \"birthDate\": \"2026-07-01\",\n      \"isCustomer\": true,\n      \"isSupplier\": true,\n      \"paymentTermDays\": 1000000,\n      \"creditLimit\": \"creditLimit\",\n      \"priceListId\": \"priceListId\",\n      \"groupId\": \"groupId\",\n      \"statusId\": \"statusId\",\n      \"vatValid\": true,\n      \"vatValidatedAt\": \"2026-07-01T09:30:00Z\",\n      \"address\": {},\n      \"correspondenceAddress\": {},\n      \"notes\": \"notes\",\n      \"documentRef\": \"documentRef\",\n      \"shortName\": \"shortName\",\n      \"website\": \"website\",\n      \"fax\": \"fax\",\n      \"eoriCode\": \"eoriCode\",\n      \"autoDebtReminder\": true,\n      \"lateInterestPercent\": \"lateInterestPercent\",\n      \"firstCallDate\": \"2026-07-01\",\n      \"lastCallDate\": \"2026-07-01\",\n      \"nextCallDate\": \"2026-07-01\",\n      \"rating\": 1000000,\n      \"isEmployee\": true,\n      \"isGroupMember\": true,\n      \"isActive\": true,\n      \"legalCountryClass\": \"lt\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4329,6 +4329,161 @@
         }
       },
       "uuid": "f85b46a9-235f-4dc7-b3a6-62bf54744258",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "1888ed32-96ad-4c56-a36a-04072d84fade",
+      "name": "Create an invoice or credit note template - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/invoice-templates/create",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1888ed32-96ad-4c56-a36a-04072d84fade",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "0a42e2e4-8ffe-437f-9340-a4aeff03b30b",
+      "name": "Update an invoice or credit note template - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/invoice-templates/update",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "0a42e2e4-8ffe-437f-9340-a4aeff03b30b",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "b7a2ec74-29cb-4aaa-8a6a-7dd1332a8889",
+      "name": "Get an invoice or credit note template - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/invoice-templates/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "b7a2ec74-29cb-4aaa-8a6a-7dd1332a8889",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "96755f80-5c68-4109-ae9e-4d3642988308",
+      "name": "Delete an invoice or credit note template - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/invoice-templates/delete",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"deleted\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "96755f80-5c68-4109-ae9e-4d3642988308",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "099e2d43-7492-48fb-b440-bbd537757b75",
+      "name": "List invoice and credit note templates - default",
+      "request": {
+        "urlPathTemplate": "/v1/sales/invoice-templates/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"documentType\": \"invoice\",\n      \"partnerId\": \"partnerId\",\n      \"currency\": \"currency\",\n      \"paymentTermDays\": 1000000,\n      \"vatScheme\": \"vatScheme\",\n      \"vatCountryCode\": \"vatCountryCode\",\n      \"agreementId\": \"agreementId\",\n      \"operationTypeId\": \"operationTypeId\",\n      \"documentSeriesId\": \"documentSeriesId\",\n      \"discountPercent\": \"discountPercent\",\n      \"issuedByName\": \"issuedByName\",\n      \"issuedByTitle\": \"issuedByTitle\",\n      \"receivedByName\": \"receivedByName\",\n      \"receivedByTitle\": \"receivedByTitle\",\n      \"notes\": \"notes\",\n      \"supplyType\": \"goods\",\n      \"seriesLabel\": \"seriesLabel\",\n      \"orderNumber\": \"orderNumber\",\n      \"intrastatTransportMode\": \"intrastatTransportMode\",\n      \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n      \"intrastatRegion\": \"intrastatRegion\",\n      \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n      \"lines\": [\n        {}\n      ],\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "099e2d43-7492-48fb-b440-bbd537757b75",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -16904,6 +17059,99 @@
       }
     },
     {
+      "id": "1c2873e4-de0f-429a-88a5-0f519265f0b6",
+      "name": "Bank securities import - default",
+      "request": {
+        "urlPathTemplate": "/v1/bank/securities/import",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"broker\": \"broker\",\n  \"brokerAccount\": \"brokerAccount\",\n  \"period\": \"period\",\n  \"fileName\": \"fileName\",\n  \"operationCount\": 1000000,\n  \"duplicateCount\": 1000000,\n  \"postedCount\": 1000000,\n  \"notPostedCount\": 1000000,\n  \"realizedTotal\": \"realizedTotal\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1c2873e4-de0f-429a-88a5-0f519265f0b6",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "dd178303-5dd5-4ea6-9473-9f1f1f0e13d9",
+      "name": "Bank securities list - default",
+      "request": {
+        "urlPathTemplate": "/v1/bank/securities/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"broker\": \"broker\",\n      \"brokerAccount\": \"brokerAccount\",\n      \"period\": \"period\",\n      \"fileName\": \"fileName\",\n      \"operationCount\": 1000000,\n      \"duplicateCount\": 1000000,\n      \"postedCount\": 1000000,\n      \"notPostedCount\": 1000000,\n      \"realizedTotal\": \"realizedTotal\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "dd178303-5dd5-4ea6-9473-9f1f1f0e13d9",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "234de207-4f97-4e45-b514-97efac621295",
+      "name": "Bank securities get - default",
+      "request": {
+        "urlPathTemplate": "/v1/bank/securities/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"broker\": \"broker\",\n  \"brokerAccount\": \"brokerAccount\",\n  \"period\": \"period\",\n  \"fileName\": \"fileName\",\n  \"operationCount\": 1000000,\n  \"duplicateCount\": 1000000,\n  \"postedCount\": 1000000,\n  \"notPostedCount\": 1000000,\n  \"realizedTotal\": \"realizedTotal\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"operations\": [\n    {\n      \"id\": \"id\",\n      \"kind\": \"kind\",\n      \"date\": \"2026-07-01\",\n      \"time\": \"time\",\n      \"assetCategory\": \"assetCategory\",\n      \"symbol\": \"symbol\",\n      \"description\": \"description\",\n      \"currency\": \"currency\",\n      \"quantity\": \"quantity\",\n      \"price\": \"price\",\n      \"amount\": \"amount\",\n      \"fee\": \"fee\",\n      \"brokerRealized\": \"brokerRealized\",\n      \"code\": \"code\",\n      \"fxRate\": \"fxRate\",\n      \"cashBase\": \"cashBase\",\n      \"costBase\": \"costBase\",\n      \"realizedBase\": \"realizedBase\",\n      \"status\": \"posted\",\n      \"note\": \"note\",\n      \"journalTransactionId\": \"journalTransactionId\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "234de207-4f97-4e45-b514-97efac621295",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "a6e6335d-dc06-458e-825f-986621836555",
       "name": "List the PSD2 banks (ASPSPs) available to connect - default",
       "request": {
@@ -18720,7 +18968,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedRequests\": 1000000,\n      \"requestOverageEur\": \"requestOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -18751,12 +18999,105 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedRequests\": 1000000,\n      \"requestOverageEur\": \"requestOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "ac33f386-d809-4661-b817-4fae23943526",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "377d8b92-e160-4a1c-b473-6eedb2269af6",
+      "name": "Billing account set account type - default",
+      "request": {
+        "urlPathTemplate": "/v1/billing/account/set-account-type",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "377d8b92-e160-4a1c-b473-6eedb2269af6",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3cee32bc-1063-41fa-aff7-480028eacc2b",
+      "name": "Billing account set auto top up - default",
+      "request": {
+        "urlPathTemplate": "/v1/billing/account/set-auto-top-up",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3cee32bc-1063-41fa-aff7-480028eacc2b",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "49709ce6-2ec3-4ac0-917d-82f5e60440ec",
+      "name": "Billing account set overdraft cap - default",
+      "request": {
+        "urlPathTemplate": "/v1/billing/account/set-overdraft-cap",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "49709ce6-2ec3-4ac0-917d-82f5e60440ec",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -18788,6 +19129,99 @@
         }
       },
       "uuid": "a19a1ea3-a2c8-40d6-ba5c-424399ebbec1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "88bcb4ea-dc0d-4ae6-a5e6-bea37f875427",
+      "name": "Billing topup confirm - default",
+      "request": {
+        "urlPathTemplate": "/v1/billing/topup/confirm",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "88bcb4ea-dc0d-4ae6-a5e6-bea37f875427",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "4405d941-8965-4f19-89e1-d2dbf6e6b8c7",
+      "name": "Billing flat rate create - default",
+      "request": {
+        "urlPathTemplate": "/v1/billing/flat-rate/create",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"url\": \"url\",\n  \"sessionId\": \"sessionId\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "4405d941-8965-4f19-89e1-d2dbf6e6b8c7",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "013524a4-4a67-4e8a-af96-ae33bc35e45b",
+      "name": "Billing flat rate confirm - default",
+      "request": {
+        "urlPathTemplate": "/v1/billing/flat-rate/confirm",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "013524a4-4a67-4e8a-af96-ae33bc35e45b",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -18999,7 +19433,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"isSuperAdmin\": true\n  },\n  \"locale\": \"locale\",\n  \"activeCompanyId\": \"activeCompanyId\",\n  \"timeZone\": \"timeZone\",\n  \"role\": \"role\",\n  \"billing\": {\n    \"status\": \"trial\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"payerUserId\": \"payerUserId\",\n    \"payerEmail\": \"payerEmail\",\n    \"isPayer\": true\n  },\n  \"referralPoints\": 1000000,\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"companies\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"role\": \"role\",\n      \"isSandbox\": true,\n      \"status\": \"active\",\n      \"deletedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"isSuperAdmin\": true\n  },\n  \"locale\": \"locale\",\n  \"activeCompanyId\": \"activeCompanyId\",\n  \"timeZone\": \"timeZone\",\n  \"role\": \"role\",\n  \"billing\": {\n    \"status\": \"trial\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"overdraftAllowanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"payerUserId\": \"payerUserId\",\n    \"payerEmail\": \"payerEmail\",\n    \"isPayer\": true,\n    \"planChosen\": true,\n    \"flatRate\": true,\n    \"accountType\": \"flat_rate\"\n  },\n  \"referralPoints\": 1000000,\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"companies\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"role\": \"role\",\n      \"isSandbox\": true,\n      \"status\": \"active\",\n      \"deletedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20072,6 +20506,6 @@
     }
   ],
   "meta": {
-    "total": 647
+    "total": 661
   }
 }

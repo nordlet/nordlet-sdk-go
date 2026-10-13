@@ -1032,18 +1032,16 @@ var (
 	createPartnersRequestFieldWebsite               = big.NewInt(1 << 21)
 	createPartnersRequestFieldFax                   = big.NewInt(1 << 22)
 	createPartnersRequestFieldEoriCode              = big.NewInt(1 << 23)
-	createPartnersRequestFieldOtherCode             = big.NewInt(1 << 24)
-	createPartnersRequestFieldForeignTaxNumber      = big.NewInt(1 << 25)
-	createPartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
-	createPartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
-	createPartnersRequestFieldFirstCallDate         = big.NewInt(1 << 28)
-	createPartnersRequestFieldLastCallDate          = big.NewInt(1 << 29)
-	createPartnersRequestFieldNextCallDate          = big.NewInt(1 << 30)
-	createPartnersRequestFieldRating                = big.NewInt(1 << 31)
-	createPartnersRequestFieldIsEmployee            = big.NewInt(1 << 32)
-	createPartnersRequestFieldIsGroupMember         = big.NewInt(1 << 33)
-	createPartnersRequestFieldIsActive              = big.NewInt(1 << 34)
-	createPartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
+	createPartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 24)
+	createPartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 25)
+	createPartnersRequestFieldFirstCallDate         = big.NewInt(1 << 26)
+	createPartnersRequestFieldLastCallDate          = big.NewInt(1 << 27)
+	createPartnersRequestFieldNextCallDate          = big.NewInt(1 << 28)
+	createPartnersRequestFieldRating                = big.NewInt(1 << 29)
+	createPartnersRequestFieldIsEmployee            = big.NewInt(1 << 30)
+	createPartnersRequestFieldIsGroupMember         = big.NewInt(1 << 31)
+	createPartnersRequestFieldIsActive              = big.NewInt(1 << 32)
+	createPartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 33)
 )
 
 type CreatePartnersRequest struct {
@@ -1071,8 +1069,6 @@ type CreatePartnersRequest struct {
 	Website               *string                                     `json:"website,omitempty" url:"-"`
 	Fax                   *string                                     `json:"fax,omitempty" url:"-"`
 	EoriCode              *string                                     `json:"eoriCode,omitempty" url:"-"`
-	OtherCode             *string                                     `json:"otherCode,omitempty" url:"-"`
-	ForeignTaxNumber      *string                                     `json:"foreignTaxNumber,omitempty" url:"-"`
 	AutoDebtReminder      *bool                                       `json:"autoDebtReminder,omitempty" url:"-"`
 	LateInterestPercent   *string                                     `json:"lateInterestPercent,omitempty" url:"-"`
 	FirstCallDate         *time.Time                                  `json:"firstCallDate,omitempty" url:"-" format:"date"`
@@ -1261,20 +1257,6 @@ func (c *CreatePartnersRequest) SetFax(fax *string) {
 func (c *CreatePartnersRequest) SetEoriCode(eoriCode *string) {
 	c.EoriCode = eoriCode
 	c.require(createPartnersRequestFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreatePartnersRequest) SetOtherCode(otherCode *string) {
-	c.OtherCode = otherCode
-	c.require(createPartnersRequestFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreatePartnersRequest) SetForeignTaxNumber(foreignTaxNumber *string) {
-	c.ForeignTaxNumber = foreignTaxNumber
-	c.require(createPartnersRequestFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
@@ -1644,18 +1626,16 @@ var (
 	findOrCreatePartnersRequestFieldWebsite               = big.NewInt(1 << 21)
 	findOrCreatePartnersRequestFieldFax                   = big.NewInt(1 << 22)
 	findOrCreatePartnersRequestFieldEoriCode              = big.NewInt(1 << 23)
-	findOrCreatePartnersRequestFieldOtherCode             = big.NewInt(1 << 24)
-	findOrCreatePartnersRequestFieldForeignTaxNumber      = big.NewInt(1 << 25)
-	findOrCreatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
-	findOrCreatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
-	findOrCreatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 28)
-	findOrCreatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 29)
-	findOrCreatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 30)
-	findOrCreatePartnersRequestFieldRating                = big.NewInt(1 << 31)
-	findOrCreatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 32)
-	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 33)
-	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 34)
-	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
+	findOrCreatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 24)
+	findOrCreatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 25)
+	findOrCreatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 26)
+	findOrCreatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 27)
+	findOrCreatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 28)
+	findOrCreatePartnersRequestFieldRating                = big.NewInt(1 << 29)
+	findOrCreatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 30)
+	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 31)
+	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 32)
+	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 33)
 )
 
 type FindOrCreatePartnersRequest struct {
@@ -1683,8 +1663,6 @@ type FindOrCreatePartnersRequest struct {
 	Website               *string                                           `json:"website,omitempty" url:"-"`
 	Fax                   *string                                           `json:"fax,omitempty" url:"-"`
 	EoriCode              *string                                           `json:"eoriCode,omitempty" url:"-"`
-	OtherCode             *string                                           `json:"otherCode,omitempty" url:"-"`
-	ForeignTaxNumber      *string                                           `json:"foreignTaxNumber,omitempty" url:"-"`
 	AutoDebtReminder      *bool                                             `json:"autoDebtReminder,omitempty" url:"-"`
 	LateInterestPercent   *string                                           `json:"lateInterestPercent,omitempty" url:"-"`
 	FirstCallDate         *time.Time                                        `json:"firstCallDate,omitempty" url:"-" format:"date"`
@@ -1873,20 +1851,6 @@ func (f *FindOrCreatePartnersRequest) SetFax(fax *string) {
 func (f *FindOrCreatePartnersRequest) SetEoriCode(eoriCode *string) {
 	f.EoriCode = eoriCode
 	f.require(findOrCreatePartnersRequestFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FindOrCreatePartnersRequest) SetOtherCode(otherCode *string) {
-	f.OtherCode = otherCode
-	f.require(findOrCreatePartnersRequestFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FindOrCreatePartnersRequest) SetForeignTaxNumber(foreignTaxNumber *string) {
-	f.ForeignTaxNumber = foreignTaxNumber
-	f.require(findOrCreatePartnersRequestFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
@@ -7406,20 +7370,18 @@ var (
 	createPartnersResponseFieldWebsite               = big.NewInt(1 << 24)
 	createPartnersResponseFieldFax                   = big.NewInt(1 << 25)
 	createPartnersResponseFieldEoriCode              = big.NewInt(1 << 26)
-	createPartnersResponseFieldOtherCode             = big.NewInt(1 << 27)
-	createPartnersResponseFieldForeignTaxNumber      = big.NewInt(1 << 28)
-	createPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	createPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
-	createPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
-	createPartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
-	createPartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
-	createPartnersResponseFieldRating                = big.NewInt(1 << 34)
-	createPartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
-	createPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
-	createPartnersResponseFieldIsActive              = big.NewInt(1 << 37)
-	createPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
-	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
-	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
+	createPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	createPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 28)
+	createPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 29)
+	createPartnersResponseFieldLastCallDate          = big.NewInt(1 << 30)
+	createPartnersResponseFieldNextCallDate          = big.NewInt(1 << 31)
+	createPartnersResponseFieldRating                = big.NewInt(1 << 32)
+	createPartnersResponseFieldIsEmployee            = big.NewInt(1 << 33)
+	createPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 34)
+	createPartnersResponseFieldIsActive              = big.NewInt(1 << 35)
+	createPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 36)
+	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 37)
+	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 38)
 )
 
 type CreatePartnersResponse struct {
@@ -7450,8 +7412,6 @@ type CreatePartnersResponse struct {
 	Website               *string                                      `json:"website,omitempty" url:"website,omitempty"`
 	Fax                   *string                                      `json:"fax,omitempty" url:"fax,omitempty"`
 	EoriCode              *string                                      `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
-	OtherCode             *string                                      `json:"otherCode,omitempty" url:"otherCode,omitempty"`
-	ForeignTaxNumber      *string                                      `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
 	AutoDebtReminder      bool                                         `json:"autoDebtReminder" url:"autoDebtReminder"`
 	LateInterestPercent   *string                                      `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
 	FirstCallDate         *time.Time                                   `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty" format:"date"`
@@ -7659,20 +7619,6 @@ func (c *CreatePartnersResponse) GetEoriCode() *string {
 		return nil
 	}
 	return c.EoriCode
-}
-
-func (c *CreatePartnersResponse) GetOtherCode() *string {
-	if c == nil {
-		return nil
-	}
-	return c.OtherCode
-}
-
-func (c *CreatePartnersResponse) GetForeignTaxNumber() *string {
-	if c == nil {
-		return nil
-	}
-	return c.ForeignTaxNumber
 }
 
 func (c *CreatePartnersResponse) GetAutoDebtReminder() bool {
@@ -7960,20 +7906,6 @@ func (c *CreatePartnersResponse) SetFax(fax *string) {
 func (c *CreatePartnersResponse) SetEoriCode(eoriCode *string) {
 	c.EoriCode = eoriCode
 	c.require(createPartnersResponseFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreatePartnersResponse) SetOtherCode(otherCode *string) {
-	c.OtherCode = otherCode
-	c.require(createPartnersResponseFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CreatePartnersResponse) SetForeignTaxNumber(foreignTaxNumber *string) {
-	c.ForeignTaxNumber = foreignTaxNumber
-	c.require(createPartnersResponseFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
@@ -11016,20 +10948,18 @@ var (
 	findOrCreatePartnersResponsePartnerFieldWebsite               = big.NewInt(1 << 24)
 	findOrCreatePartnersResponsePartnerFieldFax                   = big.NewInt(1 << 25)
 	findOrCreatePartnersResponsePartnerFieldEoriCode              = big.NewInt(1 << 26)
-	findOrCreatePartnersResponsePartnerFieldOtherCode             = big.NewInt(1 << 27)
-	findOrCreatePartnersResponsePartnerFieldForeignTaxNumber      = big.NewInt(1 << 28)
-	findOrCreatePartnersResponsePartnerFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	findOrCreatePartnersResponsePartnerFieldLateInterestPercent   = big.NewInt(1 << 30)
-	findOrCreatePartnersResponsePartnerFieldFirstCallDate         = big.NewInt(1 << 31)
-	findOrCreatePartnersResponsePartnerFieldLastCallDate          = big.NewInt(1 << 32)
-	findOrCreatePartnersResponsePartnerFieldNextCallDate          = big.NewInt(1 << 33)
-	findOrCreatePartnersResponsePartnerFieldRating                = big.NewInt(1 << 34)
-	findOrCreatePartnersResponsePartnerFieldIsEmployee            = big.NewInt(1 << 35)
-	findOrCreatePartnersResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 36)
-	findOrCreatePartnersResponsePartnerFieldIsActive              = big.NewInt(1 << 37)
-	findOrCreatePartnersResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 38)
-	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 39)
-	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 40)
+	findOrCreatePartnersResponsePartnerFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	findOrCreatePartnersResponsePartnerFieldLateInterestPercent   = big.NewInt(1 << 28)
+	findOrCreatePartnersResponsePartnerFieldFirstCallDate         = big.NewInt(1 << 29)
+	findOrCreatePartnersResponsePartnerFieldLastCallDate          = big.NewInt(1 << 30)
+	findOrCreatePartnersResponsePartnerFieldNextCallDate          = big.NewInt(1 << 31)
+	findOrCreatePartnersResponsePartnerFieldRating                = big.NewInt(1 << 32)
+	findOrCreatePartnersResponsePartnerFieldIsEmployee            = big.NewInt(1 << 33)
+	findOrCreatePartnersResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 34)
+	findOrCreatePartnersResponsePartnerFieldIsActive              = big.NewInt(1 << 35)
+	findOrCreatePartnersResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 36)
+	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 37)
+	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 38)
 )
 
 type FindOrCreatePartnersResponsePartner struct {
@@ -11060,8 +10990,6 @@ type FindOrCreatePartnersResponsePartner struct {
 	Website               *string                                                   `json:"website,omitempty" url:"website,omitempty"`
 	Fax                   *string                                                   `json:"fax,omitempty" url:"fax,omitempty"`
 	EoriCode              *string                                                   `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
-	OtherCode             *string                                                   `json:"otherCode,omitempty" url:"otherCode,omitempty"`
-	ForeignTaxNumber      *string                                                   `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
 	AutoDebtReminder      bool                                                      `json:"autoDebtReminder" url:"autoDebtReminder"`
 	LateInterestPercent   *string                                                   `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
 	FirstCallDate         *time.Time                                                `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty" format:"date"`
@@ -11269,20 +11197,6 @@ func (f *FindOrCreatePartnersResponsePartner) GetEoriCode() *string {
 		return nil
 	}
 	return f.EoriCode
-}
-
-func (f *FindOrCreatePartnersResponsePartner) GetOtherCode() *string {
-	if f == nil {
-		return nil
-	}
-	return f.OtherCode
-}
-
-func (f *FindOrCreatePartnersResponsePartner) GetForeignTaxNumber() *string {
-	if f == nil {
-		return nil
-	}
-	return f.ForeignTaxNumber
 }
 
 func (f *FindOrCreatePartnersResponsePartner) GetAutoDebtReminder() bool {
@@ -11570,20 +11484,6 @@ func (f *FindOrCreatePartnersResponsePartner) SetFax(fax *string) {
 func (f *FindOrCreatePartnersResponsePartner) SetEoriCode(eoriCode *string) {
 	f.EoriCode = eoriCode
 	f.require(findOrCreatePartnersResponsePartnerFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FindOrCreatePartnersResponsePartner) SetOtherCode(otherCode *string) {
-	f.OtherCode = otherCode
-	f.require(findOrCreatePartnersResponsePartnerFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FindOrCreatePartnersResponsePartner) SetForeignTaxNumber(foreignTaxNumber *string) {
-	f.ForeignTaxNumber = foreignTaxNumber
-	f.require(findOrCreatePartnersResponsePartnerFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
@@ -12147,20 +12047,18 @@ var (
 	getPartnersResponseFieldWebsite               = big.NewInt(1 << 24)
 	getPartnersResponseFieldFax                   = big.NewInt(1 << 25)
 	getPartnersResponseFieldEoriCode              = big.NewInt(1 << 26)
-	getPartnersResponseFieldOtherCode             = big.NewInt(1 << 27)
-	getPartnersResponseFieldForeignTaxNumber      = big.NewInt(1 << 28)
-	getPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	getPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
-	getPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
-	getPartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
-	getPartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
-	getPartnersResponseFieldRating                = big.NewInt(1 << 34)
-	getPartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
-	getPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
-	getPartnersResponseFieldIsActive              = big.NewInt(1 << 37)
-	getPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
-	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
-	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
+	getPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	getPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 28)
+	getPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 29)
+	getPartnersResponseFieldLastCallDate          = big.NewInt(1 << 30)
+	getPartnersResponseFieldNextCallDate          = big.NewInt(1 << 31)
+	getPartnersResponseFieldRating                = big.NewInt(1 << 32)
+	getPartnersResponseFieldIsEmployee            = big.NewInt(1 << 33)
+	getPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 34)
+	getPartnersResponseFieldIsActive              = big.NewInt(1 << 35)
+	getPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 36)
+	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 37)
+	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 38)
 )
 
 type GetPartnersResponse struct {
@@ -12191,8 +12089,6 @@ type GetPartnersResponse struct {
 	Website               *string                                   `json:"website,omitempty" url:"website,omitempty"`
 	Fax                   *string                                   `json:"fax,omitempty" url:"fax,omitempty"`
 	EoriCode              *string                                   `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
-	OtherCode             *string                                   `json:"otherCode,omitempty" url:"otherCode,omitempty"`
-	ForeignTaxNumber      *string                                   `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
 	AutoDebtReminder      bool                                      `json:"autoDebtReminder" url:"autoDebtReminder"`
 	LateInterestPercent   *string                                   `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
 	FirstCallDate         *time.Time                                `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty" format:"date"`
@@ -12400,20 +12296,6 @@ func (g *GetPartnersResponse) GetEoriCode() *string {
 		return nil
 	}
 	return g.EoriCode
-}
-
-func (g *GetPartnersResponse) GetOtherCode() *string {
-	if g == nil {
-		return nil
-	}
-	return g.OtherCode
-}
-
-func (g *GetPartnersResponse) GetForeignTaxNumber() *string {
-	if g == nil {
-		return nil
-	}
-	return g.ForeignTaxNumber
 }
 
 func (g *GetPartnersResponse) GetAutoDebtReminder() bool {
@@ -12701,20 +12583,6 @@ func (g *GetPartnersResponse) SetFax(fax *string) {
 func (g *GetPartnersResponse) SetEoriCode(eoriCode *string) {
 	g.EoriCode = eoriCode
 	g.require(getPartnersResponseFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetPartnersResponse) SetOtherCode(otherCode *string) {
-	g.OtherCode = otherCode
-	g.require(getPartnersResponseFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (g *GetPartnersResponse) SetForeignTaxNumber(foreignTaxNumber *string) {
-	g.ForeignTaxNumber = foreignTaxNumber
-	g.require(getPartnersResponseFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
@@ -16493,20 +16361,18 @@ var (
 	listPartnersResponseRowsItemFieldWebsite               = big.NewInt(1 << 24)
 	listPartnersResponseRowsItemFieldFax                   = big.NewInt(1 << 25)
 	listPartnersResponseRowsItemFieldEoriCode              = big.NewInt(1 << 26)
-	listPartnersResponseRowsItemFieldOtherCode             = big.NewInt(1 << 27)
-	listPartnersResponseRowsItemFieldForeignTaxNumber      = big.NewInt(1 << 28)
-	listPartnersResponseRowsItemFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	listPartnersResponseRowsItemFieldLateInterestPercent   = big.NewInt(1 << 30)
-	listPartnersResponseRowsItemFieldFirstCallDate         = big.NewInt(1 << 31)
-	listPartnersResponseRowsItemFieldLastCallDate          = big.NewInt(1 << 32)
-	listPartnersResponseRowsItemFieldNextCallDate          = big.NewInt(1 << 33)
-	listPartnersResponseRowsItemFieldRating                = big.NewInt(1 << 34)
-	listPartnersResponseRowsItemFieldIsEmployee            = big.NewInt(1 << 35)
-	listPartnersResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 36)
-	listPartnersResponseRowsItemFieldIsActive              = big.NewInt(1 << 37)
-	listPartnersResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 38)
-	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 39)
-	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 40)
+	listPartnersResponseRowsItemFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	listPartnersResponseRowsItemFieldLateInterestPercent   = big.NewInt(1 << 28)
+	listPartnersResponseRowsItemFieldFirstCallDate         = big.NewInt(1 << 29)
+	listPartnersResponseRowsItemFieldLastCallDate          = big.NewInt(1 << 30)
+	listPartnersResponseRowsItemFieldNextCallDate          = big.NewInt(1 << 31)
+	listPartnersResponseRowsItemFieldRating                = big.NewInt(1 << 32)
+	listPartnersResponseRowsItemFieldIsEmployee            = big.NewInt(1 << 33)
+	listPartnersResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 34)
+	listPartnersResponseRowsItemFieldIsActive              = big.NewInt(1 << 35)
+	listPartnersResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 36)
+	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 37)
+	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 38)
 )
 
 type ListPartnersResponseRowsItem struct {
@@ -16537,8 +16403,6 @@ type ListPartnersResponseRowsItem struct {
 	Website               *string                                            `json:"website,omitempty" url:"website,omitempty"`
 	Fax                   *string                                            `json:"fax,omitempty" url:"fax,omitempty"`
 	EoriCode              *string                                            `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
-	OtherCode             *string                                            `json:"otherCode,omitempty" url:"otherCode,omitempty"`
-	ForeignTaxNumber      *string                                            `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
 	AutoDebtReminder      bool                                               `json:"autoDebtReminder" url:"autoDebtReminder"`
 	LateInterestPercent   *string                                            `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
 	FirstCallDate         *time.Time                                         `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty" format:"date"`
@@ -16746,20 +16610,6 @@ func (l *ListPartnersResponseRowsItem) GetEoriCode() *string {
 		return nil
 	}
 	return l.EoriCode
-}
-
-func (l *ListPartnersResponseRowsItem) GetOtherCode() *string {
-	if l == nil {
-		return nil
-	}
-	return l.OtherCode
-}
-
-func (l *ListPartnersResponseRowsItem) GetForeignTaxNumber() *string {
-	if l == nil {
-		return nil
-	}
-	return l.ForeignTaxNumber
 }
 
 func (l *ListPartnersResponseRowsItem) GetAutoDebtReminder() bool {
@@ -17047,20 +16897,6 @@ func (l *ListPartnersResponseRowsItem) SetFax(fax *string) {
 func (l *ListPartnersResponseRowsItem) SetEoriCode(eoriCode *string) {
 	l.EoriCode = eoriCode
 	l.require(listPartnersResponseRowsItemFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListPartnersResponseRowsItem) SetOtherCode(otherCode *string) {
-	l.OtherCode = otherCode
-	l.require(listPartnersResponseRowsItemFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (l *ListPartnersResponseRowsItem) SetForeignTaxNumber(foreignTaxNumber *string) {
-	l.ForeignTaxNumber = foreignTaxNumber
-	l.require(listPartnersResponseRowsItemFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
@@ -18867,20 +18703,18 @@ var (
 	updatePartnersResponseFieldWebsite               = big.NewInt(1 << 24)
 	updatePartnersResponseFieldFax                   = big.NewInt(1 << 25)
 	updatePartnersResponseFieldEoriCode              = big.NewInt(1 << 26)
-	updatePartnersResponseFieldOtherCode             = big.NewInt(1 << 27)
-	updatePartnersResponseFieldForeignTaxNumber      = big.NewInt(1 << 28)
-	updatePartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	updatePartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
-	updatePartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
-	updatePartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
-	updatePartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
-	updatePartnersResponseFieldRating                = big.NewInt(1 << 34)
-	updatePartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
-	updatePartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
-	updatePartnersResponseFieldIsActive              = big.NewInt(1 << 37)
-	updatePartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
-	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
-	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
+	updatePartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	updatePartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 28)
+	updatePartnersResponseFieldFirstCallDate         = big.NewInt(1 << 29)
+	updatePartnersResponseFieldLastCallDate          = big.NewInt(1 << 30)
+	updatePartnersResponseFieldNextCallDate          = big.NewInt(1 << 31)
+	updatePartnersResponseFieldRating                = big.NewInt(1 << 32)
+	updatePartnersResponseFieldIsEmployee            = big.NewInt(1 << 33)
+	updatePartnersResponseFieldIsGroupMember         = big.NewInt(1 << 34)
+	updatePartnersResponseFieldIsActive              = big.NewInt(1 << 35)
+	updatePartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 36)
+	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 37)
+	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 38)
 )
 
 type UpdatePartnersResponse struct {
@@ -18911,8 +18745,6 @@ type UpdatePartnersResponse struct {
 	Website               *string                                      `json:"website,omitempty" url:"website,omitempty"`
 	Fax                   *string                                      `json:"fax,omitempty" url:"fax,omitempty"`
 	EoriCode              *string                                      `json:"eoriCode,omitempty" url:"eoriCode,omitempty"`
-	OtherCode             *string                                      `json:"otherCode,omitempty" url:"otherCode,omitempty"`
-	ForeignTaxNumber      *string                                      `json:"foreignTaxNumber,omitempty" url:"foreignTaxNumber,omitempty"`
 	AutoDebtReminder      bool                                         `json:"autoDebtReminder" url:"autoDebtReminder"`
 	LateInterestPercent   *string                                      `json:"lateInterestPercent,omitempty" url:"lateInterestPercent,omitempty"`
 	FirstCallDate         *time.Time                                   `json:"firstCallDate,omitempty" url:"firstCallDate,omitempty" format:"date"`
@@ -19120,20 +18952,6 @@ func (u *UpdatePartnersResponse) GetEoriCode() *string {
 		return nil
 	}
 	return u.EoriCode
-}
-
-func (u *UpdatePartnersResponse) GetOtherCode() *string {
-	if u == nil {
-		return nil
-	}
-	return u.OtherCode
-}
-
-func (u *UpdatePartnersResponse) GetForeignTaxNumber() *string {
-	if u == nil {
-		return nil
-	}
-	return u.ForeignTaxNumber
 }
 
 func (u *UpdatePartnersResponse) GetAutoDebtReminder() bool {
@@ -19421,20 +19239,6 @@ func (u *UpdatePartnersResponse) SetFax(fax *string) {
 func (u *UpdatePartnersResponse) SetEoriCode(eoriCode *string) {
 	u.EoriCode = eoriCode
 	u.require(updatePartnersResponseFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UpdatePartnersResponse) SetOtherCode(otherCode *string) {
-	u.OtherCode = otherCode
-	u.require(updatePartnersResponseFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UpdatePartnersResponse) SetForeignTaxNumber(foreignTaxNumber *string) {
-	u.ForeignTaxNumber = foreignTaxNumber
-	u.require(updatePartnersResponseFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;
@@ -21784,18 +21588,16 @@ var (
 	updatePartnersRequestFieldWebsite               = big.NewInt(1 << 22)
 	updatePartnersRequestFieldFax                   = big.NewInt(1 << 23)
 	updatePartnersRequestFieldEoriCode              = big.NewInt(1 << 24)
-	updatePartnersRequestFieldOtherCode             = big.NewInt(1 << 25)
-	updatePartnersRequestFieldForeignTaxNumber      = big.NewInt(1 << 26)
-	updatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 27)
-	updatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 28)
-	updatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 29)
-	updatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 30)
-	updatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 31)
-	updatePartnersRequestFieldRating                = big.NewInt(1 << 32)
-	updatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 33)
-	updatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 34)
-	updatePartnersRequestFieldIsActive              = big.NewInt(1 << 35)
-	updatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
+	updatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 25)
+	updatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 26)
+	updatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 27)
+	updatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 28)
+	updatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 29)
+	updatePartnersRequestFieldRating                = big.NewInt(1 << 30)
+	updatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 31)
+	updatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 32)
+	updatePartnersRequestFieldIsActive              = big.NewInt(1 << 33)
+	updatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 34)
 )
 
 type UpdatePartnersRequest struct {
@@ -21824,8 +21626,6 @@ type UpdatePartnersRequest struct {
 	Website               *string                                     `json:"website,omitempty" url:"-"`
 	Fax                   *string                                     `json:"fax,omitempty" url:"-"`
 	EoriCode              *string                                     `json:"eoriCode,omitempty" url:"-"`
-	OtherCode             *string                                     `json:"otherCode,omitempty" url:"-"`
-	ForeignTaxNumber      *string                                     `json:"foreignTaxNumber,omitempty" url:"-"`
 	AutoDebtReminder      *bool                                       `json:"autoDebtReminder,omitempty" url:"-"`
 	LateInterestPercent   *string                                     `json:"lateInterestPercent,omitempty" url:"-"`
 	FirstCallDate         *time.Time                                  `json:"firstCallDate,omitempty" url:"-" format:"date"`
@@ -22021,20 +21821,6 @@ func (u *UpdatePartnersRequest) SetFax(fax *string) {
 func (u *UpdatePartnersRequest) SetEoriCode(eoriCode *string) {
 	u.EoriCode = eoriCode
 	u.require(updatePartnersRequestFieldEoriCode)
-}
-
-// SetOtherCode sets the OtherCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UpdatePartnersRequest) SetOtherCode(otherCode *string) {
-	u.OtherCode = otherCode
-	u.require(updatePartnersRequestFieldOtherCode)
-}
-
-// SetForeignTaxNumber sets the ForeignTaxNumber field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (u *UpdatePartnersRequest) SetForeignTaxNumber(foreignTaxNumber *string) {
-	u.ForeignTaxNumber = foreignTaxNumber
-	u.require(updatePartnersRequestFieldForeignTaxNumber)
 }
 
 // SetAutoDebtReminder sets the AutoDebtReminder field and marks it as non-optional;

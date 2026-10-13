@@ -66,12 +66,108 @@ func (c *Client) AccountSetPlan(
 	return response.Body, nil
 }
 
+func (c *Client) AccountSetAccountType(
+	ctx context.Context,
+	request *nordlet.AccountSetAccountTypeBillingRequest,
+	opts ...option.RequestOption,
+) (*nordlet.AccountSetAccountTypeBillingResponse, error) {
+	response, err := c.WithRawResponse.AccountSetAccountType(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) AccountSetAutoTopUp(
+	ctx context.Context,
+	request *nordlet.AccountSetAutoTopUpBillingRequest,
+	opts ...option.RequestOption,
+) (*nordlet.AccountSetAutoTopUpBillingResponse, error) {
+	response, err := c.WithRawResponse.AccountSetAutoTopUp(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) AccountSetOverdraftCap(
+	ctx context.Context,
+	request *nordlet.AccountSetOverdraftCapBillingRequest,
+	opts ...option.RequestOption,
+) (*nordlet.AccountSetOverdraftCapBillingResponse, error) {
+	response, err := c.WithRawResponse.AccountSetOverdraftCap(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) TopupCreate(
 	ctx context.Context,
 	request *nordlet.TopupCreateBillingRequest,
 	opts ...option.RequestOption,
 ) (*nordlet.TopupCreateBillingResponse, error) {
 	response, err := c.WithRawResponse.TopupCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) TopupConfirm(
+	ctx context.Context,
+	request *nordlet.TopupConfirmBillingRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TopupConfirmBillingResponse, error) {
+	response, err := c.WithRawResponse.TopupConfirm(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) FlatRateCreate(
+	ctx context.Context,
+	request *nordlet.FlatRateCreateBillingRequest,
+	opts ...option.RequestOption,
+) (*nordlet.FlatRateCreateBillingResponse, error) {
+	response, err := c.WithRawResponse.FlatRateCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) FlatRateConfirm(
+	ctx context.Context,
+	request *nordlet.FlatRateConfirmBillingRequest,
+	opts ...option.RequestOption,
+) (*nordlet.FlatRateConfirmBillingResponse, error) {
+	response, err := c.WithRawResponse.FlatRateConfirm(
 		ctx,
 		request,
 		opts...,

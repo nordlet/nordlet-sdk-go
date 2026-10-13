@@ -614,6 +614,54 @@ func (c *Client) SettlementsPost(
 	return response.Body, nil
 }
 
+func (c *Client) SecuritiesImport(
+	ctx context.Context,
+	request *nordlet.SecuritiesImportBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SecuritiesImportBankResponse, error) {
+	response, err := c.WithRawResponse.SecuritiesImport(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) SecuritiesList(
+	ctx context.Context,
+	request *nordlet.SecuritiesListBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SecuritiesListBankResponse, error) {
+	response, err := c.WithRawResponse.SecuritiesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) SecuritiesGet(
+	ctx context.Context,
+	request *nordlet.SecuritiesGetBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SecuritiesGetBankResponse, error) {
+	response, err := c.WithRawResponse.SecuritiesGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) FeedsBanksList(
 	ctx context.Context,
 	request *nordlet.FeedsBanksListBankRequest,

@@ -114,7 +114,7 @@ func (c *Client) InvoicesPeppolXML(
 	return response.Body, nil
 }
 
-// Send an issued invoice or credit note to the customer over Peppol through the company's own access point (Settings → Compliance → EU; Nordlet supports Recommand, Storecove and e-invoice.be). Without one the call is refused with 422 and the document can only be downloaded with `sales/invoices/peppol-xml`. `status` is `pending` until the receiving access point confirms, then `delivered`; `failed` and `rejected` come with `detail`, and the invoice can then be sent again. Later changes arrive through the access point's webhook and are announced as `sale_invoice.peppol_delivered`, `sale_invoice.peppol_rejected` and `sale_invoice.peppol_failed`.
+// Send an issued invoice or credit note to the customer over Peppol through the company's own access point (Account → Compliance → EU; Nordlet supports Recommand, Storecove and e-invoice.be). Without one the call is refused with 422 and the document can only be downloaded with `sales/invoices/peppol-xml`. `status` is `pending` until the receiving access point confirms, then `delivered`; `failed` and `rejected` come with `detail`, and the invoice can then be sent again. Later changes arrive through the access point's webhook and are announced as `sale_invoice.peppol_delivered`, `sale_invoice.peppol_rejected` and `sale_invoice.peppol_failed`.
 func (c *Client) InvoicesPeppolSend(
 	ctx context.Context,
 	request *nordlet.InvoicesPeppolSendSalesRequest,
@@ -477,6 +477,86 @@ func (c *Client) ActsPdf(
 	opts ...option.RequestOption,
 ) (*nordlet.ActsPdfSalesResponse, error) {
 	response, err := c.WithRawResponse.ActsPdf(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) InvoiceTemplatesCreate(
+	ctx context.Context,
+	request *nordlet.InvoiceTemplatesCreateSalesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoiceTemplatesCreateSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoiceTemplatesCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) InvoiceTemplatesUpdate(
+	ctx context.Context,
+	request *nordlet.InvoiceTemplatesUpdateSalesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoiceTemplatesUpdateSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoiceTemplatesUpdate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) InvoiceTemplatesGet(
+	ctx context.Context,
+	request *nordlet.InvoiceTemplatesGetSalesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoiceTemplatesGetSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoiceTemplatesGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) InvoiceTemplatesDelete(
+	ctx context.Context,
+	request *nordlet.InvoiceTemplatesDeleteSalesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoiceTemplatesDeleteSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoiceTemplatesDelete(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+func (c *Client) InvoiceTemplatesList(
+	ctx context.Context,
+	request *nordlet.InvoiceTemplatesListSalesRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoiceTemplatesListSalesResponse, error) {
+	response, err := c.WithRawResponse.InvoiceTemplatesList(
 		ctx,
 		request,
 		opts...,

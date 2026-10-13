@@ -2238,6 +2238,199 @@ func (p *PaymentsExportBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	securitiesGetBankRequestFieldID = big.NewInt(1 << 0)
+)
+
+type SecuritiesGetBankRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SecuritiesGetBankRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankRequest) SetID(id string) {
+	s.ID = id
+	s.require(securitiesGetBankRequestFieldID)
+}
+
+func (s *SecuritiesGetBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SecuritiesGetBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SecuritiesGetBankRequest(body)
+	return nil
+}
+
+func (s *SecuritiesGetBankRequest) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesGetBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	securitiesImportBankRequestFieldBankAccountID = big.NewInt(1 << 0)
+	securitiesImportBankRequestFieldContent       = big.NewInt(1 << 1)
+	securitiesImportBankRequestFieldFileName      = big.NewInt(1 << 2)
+)
+
+type SecuritiesImportBankRequest struct {
+	BankAccountID string  `json:"bankAccountId" url:"-"`
+	Content       string  `json:"content" url:"-"`
+	FileName      *string `json:"fileName,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SecuritiesImportBankRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankRequest) SetBankAccountID(bankAccountID string) {
+	s.BankAccountID = bankAccountID
+	s.require(securitiesImportBankRequestFieldBankAccountID)
+}
+
+// SetContent sets the Content field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankRequest) SetContent(content string) {
+	s.Content = content
+	s.require(securitiesImportBankRequestFieldContent)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankRequest) SetFileName(fileName *string) {
+	s.FileName = fileName
+	s.require(securitiesImportBankRequestFieldFileName)
+}
+
+func (s *SecuritiesImportBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SecuritiesImportBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SecuritiesImportBankRequest(body)
+	return nil
+}
+
+func (s *SecuritiesImportBankRequest) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesImportBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	securitiesListBankRequestFieldPage     = big.NewInt(1 << 0)
+	securitiesListBankRequestFieldPageSize = big.NewInt(1 << 1)
+	securitiesListBankRequestFieldSort     = big.NewInt(1 << 2)
+	securitiesListBankRequestFieldFilter   = big.NewInt(1 << 3)
+	securitiesListBankRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type SecuritiesListBankRequest struct {
+	Page     *int64                                 `json:"page,omitempty" url:"-"`
+	PageSize *int64                                 `json:"pageSize,omitempty" url:"-"`
+	Sort     []*SecuritiesListBankRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*SecuritiesListBankRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SecuritiesListBankRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequest) SetPage(page *int64) {
+	s.Page = page
+	s.require(securitiesListBankRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequest) SetPageSize(pageSize *int64) {
+	s.PageSize = pageSize
+	s.require(securitiesListBankRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequest) SetSort(sort []*SecuritiesListBankRequestSortItem) {
+	s.Sort = sort
+	s.require(securitiesListBankRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequest) SetFilter(filter []*SecuritiesListBankRequestFilterItem) {
+	s.Filter = filter
+	s.require(securitiesListBankRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequest) SetTotals(totals []string) {
+	s.Totals = totals
+	s.require(securitiesListBankRequestFieldTotals)
+}
+
+func (s *SecuritiesListBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SecuritiesListBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SecuritiesListBankRequest(body)
+	return nil
+}
+
+func (s *SecuritiesListBankRequest) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesListBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	settlementsCommissionBankRequestFieldLineID            = big.NewInt(1 << 0)
 	settlementsCommissionBankRequestFieldCommissionPercent = big.NewInt(1 << 1)
 	settlementsCommissionBankRequestFieldCommissionAmount  = big.NewInt(1 << 2)
@@ -3275,6 +3468,7 @@ type AccountsCreateBankRequestType string
 const (
 	AccountsCreateBankRequestTypeBank   AccountsCreateBankRequestType = "bank"
 	AccountsCreateBankRequestTypeStripe AccountsCreateBankRequestType = "stripe"
+	AccountsCreateBankRequestTypeBroker AccountsCreateBankRequestType = "broker"
 )
 
 func NewAccountsCreateBankRequestTypeFromString(s string) (AccountsCreateBankRequestType, error) {
@@ -3283,6 +3477,8 @@ func NewAccountsCreateBankRequestTypeFromString(s string) (AccountsCreateBankReq
 		return AccountsCreateBankRequestTypeBank, nil
 	case "stripe":
 		return AccountsCreateBankRequestTypeStripe, nil
+	case "broker":
+		return AccountsCreateBankRequestTypeBroker, nil
 	}
 	var t AccountsCreateBankRequestType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -3501,6 +3697,7 @@ type AccountsCreateBankResponseType string
 const (
 	AccountsCreateBankResponseTypeBank   AccountsCreateBankResponseType = "bank"
 	AccountsCreateBankResponseTypeStripe AccountsCreateBankResponseType = "stripe"
+	AccountsCreateBankResponseTypeBroker AccountsCreateBankResponseType = "broker"
 )
 
 func NewAccountsCreateBankResponseTypeFromString(s string) (AccountsCreateBankResponseType, error) {
@@ -3509,6 +3706,8 @@ func NewAccountsCreateBankResponseTypeFromString(s string) (AccountsCreateBankRe
 		return AccountsCreateBankResponseTypeBank, nil
 	case "stripe":
 		return AccountsCreateBankResponseTypeStripe, nil
+	case "broker":
+		return AccountsCreateBankResponseTypeBroker, nil
 	}
 	var t AccountsCreateBankResponseType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -4330,6 +4529,7 @@ type AccountsListBankResponseRowsItemType string
 const (
 	AccountsListBankResponseRowsItemTypeBank   AccountsListBankResponseRowsItemType = "bank"
 	AccountsListBankResponseRowsItemTypeStripe AccountsListBankResponseRowsItemType = "stripe"
+	AccountsListBankResponseRowsItemTypeBroker AccountsListBankResponseRowsItemType = "broker"
 )
 
 func NewAccountsListBankResponseRowsItemTypeFromString(s string) (AccountsListBankResponseRowsItemType, error) {
@@ -4338,6 +4538,8 @@ func NewAccountsListBankResponseRowsItemTypeFromString(s string) (AccountsListBa
 		return AccountsListBankResponseRowsItemTypeBank, nil
 	case "stripe":
 		return AccountsListBankResponseRowsItemTypeStripe, nil
+	case "broker":
+		return AccountsListBankResponseRowsItemTypeBroker, nil
 	}
 	var t AccountsListBankResponseRowsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -4352,6 +4554,7 @@ type AccountsUpdateBankRequestType string
 const (
 	AccountsUpdateBankRequestTypeBank   AccountsUpdateBankRequestType = "bank"
 	AccountsUpdateBankRequestTypeStripe AccountsUpdateBankRequestType = "stripe"
+	AccountsUpdateBankRequestTypeBroker AccountsUpdateBankRequestType = "broker"
 )
 
 func NewAccountsUpdateBankRequestTypeFromString(s string) (AccountsUpdateBankRequestType, error) {
@@ -4360,6 +4563,8 @@ func NewAccountsUpdateBankRequestTypeFromString(s string) (AccountsUpdateBankReq
 		return AccountsUpdateBankRequestTypeBank, nil
 	case "stripe":
 		return AccountsUpdateBankRequestTypeStripe, nil
+	case "broker":
+		return AccountsUpdateBankRequestTypeBroker, nil
 	}
 	var t AccountsUpdateBankRequestType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -4578,6 +4783,7 @@ type AccountsUpdateBankResponseType string
 const (
 	AccountsUpdateBankResponseTypeBank   AccountsUpdateBankResponseType = "bank"
 	AccountsUpdateBankResponseTypeStripe AccountsUpdateBankResponseType = "stripe"
+	AccountsUpdateBankResponseTypeBroker AccountsUpdateBankResponseType = "broker"
 )
 
 func NewAccountsUpdateBankResponseTypeFromString(s string) (AccountsUpdateBankResponseType, error) {
@@ -4586,6 +4792,8 @@ func NewAccountsUpdateBankResponseTypeFromString(s string) (AccountsUpdateBankRe
 		return AccountsUpdateBankResponseTypeBank, nil
 	case "stripe":
 		return AccountsUpdateBankResponseTypeStripe, nil
+	case "broker":
+		return AccountsUpdateBankResponseTypeBroker, nil
 	}
 	var t AccountsUpdateBankResponseType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -16151,6 +16359,1863 @@ func (p *PaymentsExportBankResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	securitiesGetBankResponseFieldID             = big.NewInt(1 << 0)
+	securitiesGetBankResponseFieldBankAccountID  = big.NewInt(1 << 1)
+	securitiesGetBankResponseFieldBroker         = big.NewInt(1 << 2)
+	securitiesGetBankResponseFieldBrokerAccount  = big.NewInt(1 << 3)
+	securitiesGetBankResponseFieldPeriod         = big.NewInt(1 << 4)
+	securitiesGetBankResponseFieldFileName       = big.NewInt(1 << 5)
+	securitiesGetBankResponseFieldOperationCount = big.NewInt(1 << 6)
+	securitiesGetBankResponseFieldDuplicateCount = big.NewInt(1 << 7)
+	securitiesGetBankResponseFieldPostedCount    = big.NewInt(1 << 8)
+	securitiesGetBankResponseFieldNotPostedCount = big.NewInt(1 << 9)
+	securitiesGetBankResponseFieldRealizedTotal  = big.NewInt(1 << 10)
+	securitiesGetBankResponseFieldCreatedAt      = big.NewInt(1 << 11)
+	securitiesGetBankResponseFieldOperations     = big.NewInt(1 << 12)
+)
+
+type SecuritiesGetBankResponse struct {
+	ID             string                                     `json:"id" url:"id"`
+	BankAccountID  string                                     `json:"bankAccountId" url:"bankAccountId"`
+	Broker         string                                     `json:"broker" url:"broker"`
+	BrokerAccount  string                                     `json:"brokerAccount" url:"brokerAccount"`
+	Period         string                                     `json:"period" url:"period"`
+	FileName       *string                                    `json:"fileName,omitempty" url:"fileName,omitempty"`
+	OperationCount int64                                      `json:"operationCount" url:"operationCount"`
+	DuplicateCount int64                                      `json:"duplicateCount" url:"duplicateCount"`
+	PostedCount    int64                                      `json:"postedCount" url:"postedCount"`
+	NotPostedCount int64                                      `json:"notPostedCount" url:"notPostedCount"`
+	RealizedTotal  string                                     `json:"realizedTotal" url:"realizedTotal"`
+	CreatedAt      time.Time                                  `json:"createdAt" url:"createdAt"`
+	Operations     []*SecuritiesGetBankResponseOperationsItem `json:"operations" url:"operations"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SecuritiesGetBankResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SecuritiesGetBankResponse) GetBankAccountID() string {
+	if s == nil {
+		return ""
+	}
+	return s.BankAccountID
+}
+
+func (s *SecuritiesGetBankResponse) GetBroker() string {
+	if s == nil {
+		return ""
+	}
+	return s.Broker
+}
+
+func (s *SecuritiesGetBankResponse) GetBrokerAccount() string {
+	if s == nil {
+		return ""
+	}
+	return s.BrokerAccount
+}
+
+func (s *SecuritiesGetBankResponse) GetPeriod() string {
+	if s == nil {
+		return ""
+	}
+	return s.Period
+}
+
+func (s *SecuritiesGetBankResponse) GetFileName() *string {
+	if s == nil {
+		return nil
+	}
+	return s.FileName
+}
+
+func (s *SecuritiesGetBankResponse) GetOperationCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.OperationCount
+}
+
+func (s *SecuritiesGetBankResponse) GetDuplicateCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.DuplicateCount
+}
+
+func (s *SecuritiesGetBankResponse) GetPostedCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.PostedCount
+}
+
+func (s *SecuritiesGetBankResponse) GetNotPostedCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.NotPostedCount
+}
+
+func (s *SecuritiesGetBankResponse) GetRealizedTotal() string {
+	if s == nil {
+		return ""
+	}
+	return s.RealizedTotal
+}
+
+func (s *SecuritiesGetBankResponse) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SecuritiesGetBankResponse) GetOperations() []*SecuritiesGetBankResponseOperationsItem {
+	if s == nil {
+		return nil
+	}
+	return s.Operations
+}
+
+func (s *SecuritiesGetBankResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SecuritiesGetBankResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetID(id string) {
+	s.ID = id
+	s.require(securitiesGetBankResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetBankAccountID(bankAccountID string) {
+	s.BankAccountID = bankAccountID
+	s.require(securitiesGetBankResponseFieldBankAccountID)
+}
+
+// SetBroker sets the Broker field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetBroker(broker string) {
+	s.Broker = broker
+	s.require(securitiesGetBankResponseFieldBroker)
+}
+
+// SetBrokerAccount sets the BrokerAccount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetBrokerAccount(brokerAccount string) {
+	s.BrokerAccount = brokerAccount
+	s.require(securitiesGetBankResponseFieldBrokerAccount)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetPeriod(period string) {
+	s.Period = period
+	s.require(securitiesGetBankResponseFieldPeriod)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetFileName(fileName *string) {
+	s.FileName = fileName
+	s.require(securitiesGetBankResponseFieldFileName)
+}
+
+// SetOperationCount sets the OperationCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetOperationCount(operationCount int64) {
+	s.OperationCount = operationCount
+	s.require(securitiesGetBankResponseFieldOperationCount)
+}
+
+// SetDuplicateCount sets the DuplicateCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetDuplicateCount(duplicateCount int64) {
+	s.DuplicateCount = duplicateCount
+	s.require(securitiesGetBankResponseFieldDuplicateCount)
+}
+
+// SetPostedCount sets the PostedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetPostedCount(postedCount int64) {
+	s.PostedCount = postedCount
+	s.require(securitiesGetBankResponseFieldPostedCount)
+}
+
+// SetNotPostedCount sets the NotPostedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetNotPostedCount(notPostedCount int64) {
+	s.NotPostedCount = notPostedCount
+	s.require(securitiesGetBankResponseFieldNotPostedCount)
+}
+
+// SetRealizedTotal sets the RealizedTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetRealizedTotal(realizedTotal string) {
+	s.RealizedTotal = realizedTotal
+	s.require(securitiesGetBankResponseFieldRealizedTotal)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(securitiesGetBankResponseFieldCreatedAt)
+}
+
+// SetOperations sets the Operations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponse) SetOperations(operations []*SecuritiesGetBankResponseOperationsItem) {
+	s.Operations = operations
+	s.require(securitiesGetBankResponseFieldOperations)
+}
+
+func (s *SecuritiesGetBankResponse) UnmarshalJSON(data []byte) error {
+	type embed SecuritiesGetBankResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SecuritiesGetBankResponse(unmarshaler.embed)
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SecuritiesGetBankResponse) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesGetBankResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*s),
+		CreatedAt: internal.NewDateTime(s.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SecuritiesGetBankResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	securitiesGetBankResponseOperationsItemFieldID                   = big.NewInt(1 << 0)
+	securitiesGetBankResponseOperationsItemFieldKind                 = big.NewInt(1 << 1)
+	securitiesGetBankResponseOperationsItemFieldDate                 = big.NewInt(1 << 2)
+	securitiesGetBankResponseOperationsItemFieldTime                 = big.NewInt(1 << 3)
+	securitiesGetBankResponseOperationsItemFieldAssetCategory        = big.NewInt(1 << 4)
+	securitiesGetBankResponseOperationsItemFieldSymbol               = big.NewInt(1 << 5)
+	securitiesGetBankResponseOperationsItemFieldDescription          = big.NewInt(1 << 6)
+	securitiesGetBankResponseOperationsItemFieldCurrency             = big.NewInt(1 << 7)
+	securitiesGetBankResponseOperationsItemFieldQuantity             = big.NewInt(1 << 8)
+	securitiesGetBankResponseOperationsItemFieldPrice                = big.NewInt(1 << 9)
+	securitiesGetBankResponseOperationsItemFieldAmount               = big.NewInt(1 << 10)
+	securitiesGetBankResponseOperationsItemFieldFee                  = big.NewInt(1 << 11)
+	securitiesGetBankResponseOperationsItemFieldBrokerRealized       = big.NewInt(1 << 12)
+	securitiesGetBankResponseOperationsItemFieldCode                 = big.NewInt(1 << 13)
+	securitiesGetBankResponseOperationsItemFieldFxRate               = big.NewInt(1 << 14)
+	securitiesGetBankResponseOperationsItemFieldCashBase             = big.NewInt(1 << 15)
+	securitiesGetBankResponseOperationsItemFieldCostBase             = big.NewInt(1 << 16)
+	securitiesGetBankResponseOperationsItemFieldRealizedBase         = big.NewInt(1 << 17)
+	securitiesGetBankResponseOperationsItemFieldStatus               = big.NewInt(1 << 18)
+	securitiesGetBankResponseOperationsItemFieldNote                 = big.NewInt(1 << 19)
+	securitiesGetBankResponseOperationsItemFieldJournalTransactionID = big.NewInt(1 << 20)
+)
+
+type SecuritiesGetBankResponseOperationsItem struct {
+	ID                   string                                        `json:"id" url:"id"`
+	Kind                 string                                        `json:"kind" url:"kind"`
+	Date                 time.Time                                     `json:"date" url:"date" format:"date"`
+	Time                 *string                                       `json:"time,omitempty" url:"time,omitempty"`
+	AssetCategory        *string                                       `json:"assetCategory,omitempty" url:"assetCategory,omitempty"`
+	Symbol               *string                                       `json:"symbol,omitempty" url:"symbol,omitempty"`
+	Description          *string                                       `json:"description,omitempty" url:"description,omitempty"`
+	Currency             string                                        `json:"currency" url:"currency"`
+	Quantity             *string                                       `json:"quantity,omitempty" url:"quantity,omitempty"`
+	Price                *string                                       `json:"price,omitempty" url:"price,omitempty"`
+	Amount               *string                                       `json:"amount,omitempty" url:"amount,omitempty"`
+	Fee                  *string                                       `json:"fee,omitempty" url:"fee,omitempty"`
+	BrokerRealized       *string                                       `json:"brokerRealized,omitempty" url:"brokerRealized,omitempty"`
+	Code                 *string                                       `json:"code,omitempty" url:"code,omitempty"`
+	FxRate               *string                                       `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	CashBase             *string                                       `json:"cashBase,omitempty" url:"cashBase,omitempty"`
+	CostBase             *string                                       `json:"costBase,omitempty" url:"costBase,omitempty"`
+	RealizedBase         *string                                       `json:"realizedBase,omitempty" url:"realizedBase,omitempty"`
+	Status               SecuritiesGetBankResponseOperationsItemStatus `json:"status" url:"status"`
+	Note                 *string                                       `json:"note,omitempty" url:"note,omitempty"`
+	JournalTransactionID *string                                       `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetKind() string {
+	if s == nil {
+		return ""
+	}
+	return s.Kind
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetDate() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.Date
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetTime() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Time
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetAssetCategory() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AssetCategory
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetSymbol() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Symbol
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetDescription() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Description
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetCurrency() string {
+	if s == nil {
+		return ""
+	}
+	return s.Currency
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetQuantity() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Quantity
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetPrice() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Price
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetAmount() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Amount
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetFee() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Fee
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetBrokerRealized() *string {
+	if s == nil {
+		return nil
+	}
+	return s.BrokerRealized
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Code
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetFxRate() *string {
+	if s == nil {
+		return nil
+	}
+	return s.FxRate
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetCashBase() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CashBase
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetCostBase() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CostBase
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetRealizedBase() *string {
+	if s == nil {
+		return nil
+	}
+	return s.RealizedBase
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetStatus() SecuritiesGetBankResponseOperationsItemStatus {
+	if s == nil {
+		return ""
+	}
+	return s.Status
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetNote() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Note
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetJournalTransactionID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.JournalTransactionID
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetID(id string) {
+	s.ID = id
+	s.require(securitiesGetBankResponseOperationsItemFieldID)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetKind(kind string) {
+	s.Kind = kind
+	s.require(securitiesGetBankResponseOperationsItemFieldKind)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetDate(date time.Time) {
+	s.Date = date
+	s.require(securitiesGetBankResponseOperationsItemFieldDate)
+}
+
+// SetTime sets the Time field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetTime(time *string) {
+	s.Time = time
+	s.require(securitiesGetBankResponseOperationsItemFieldTime)
+}
+
+// SetAssetCategory sets the AssetCategory field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetAssetCategory(assetCategory *string) {
+	s.AssetCategory = assetCategory
+	s.require(securitiesGetBankResponseOperationsItemFieldAssetCategory)
+}
+
+// SetSymbol sets the Symbol field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetSymbol(symbol *string) {
+	s.Symbol = symbol
+	s.require(securitiesGetBankResponseOperationsItemFieldSymbol)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetDescription(description *string) {
+	s.Description = description
+	s.require(securitiesGetBankResponseOperationsItemFieldDescription)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetCurrency(currency string) {
+	s.Currency = currency
+	s.require(securitiesGetBankResponseOperationsItemFieldCurrency)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetQuantity(quantity *string) {
+	s.Quantity = quantity
+	s.require(securitiesGetBankResponseOperationsItemFieldQuantity)
+}
+
+// SetPrice sets the Price field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetPrice(price *string) {
+	s.Price = price
+	s.require(securitiesGetBankResponseOperationsItemFieldPrice)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetAmount(amount *string) {
+	s.Amount = amount
+	s.require(securitiesGetBankResponseOperationsItemFieldAmount)
+}
+
+// SetFee sets the Fee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetFee(fee *string) {
+	s.Fee = fee
+	s.require(securitiesGetBankResponseOperationsItemFieldFee)
+}
+
+// SetBrokerRealized sets the BrokerRealized field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetBrokerRealized(brokerRealized *string) {
+	s.BrokerRealized = brokerRealized
+	s.require(securitiesGetBankResponseOperationsItemFieldBrokerRealized)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetCode(code *string) {
+	s.Code = code
+	s.require(securitiesGetBankResponseOperationsItemFieldCode)
+}
+
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetFxRate(fxRate *string) {
+	s.FxRate = fxRate
+	s.require(securitiesGetBankResponseOperationsItemFieldFxRate)
+}
+
+// SetCashBase sets the CashBase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetCashBase(cashBase *string) {
+	s.CashBase = cashBase
+	s.require(securitiesGetBankResponseOperationsItemFieldCashBase)
+}
+
+// SetCostBase sets the CostBase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetCostBase(costBase *string) {
+	s.CostBase = costBase
+	s.require(securitiesGetBankResponseOperationsItemFieldCostBase)
+}
+
+// SetRealizedBase sets the RealizedBase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetRealizedBase(realizedBase *string) {
+	s.RealizedBase = realizedBase
+	s.require(securitiesGetBankResponseOperationsItemFieldRealizedBase)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetStatus(status SecuritiesGetBankResponseOperationsItemStatus) {
+	s.Status = status
+	s.require(securitiesGetBankResponseOperationsItemFieldStatus)
+}
+
+// SetNote sets the Note field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetNote(note *string) {
+	s.Note = note
+	s.require(securitiesGetBankResponseOperationsItemFieldNote)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesGetBankResponseOperationsItem) SetJournalTransactionID(journalTransactionID *string) {
+	s.JournalTransactionID = journalTransactionID
+	s.require(securitiesGetBankResponseOperationsItemFieldJournalTransactionID)
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) UnmarshalJSON(data []byte) error {
+	type embed SecuritiesGetBankResponseOperationsItem
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SecuritiesGetBankResponseOperationsItem(unmarshaler.embed)
+	s.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesGetBankResponseOperationsItem
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*s),
+		Date:  internal.NewDate(s.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SecuritiesGetBankResponseOperationsItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SecuritiesGetBankResponseOperationsItemStatus string
+
+const (
+	SecuritiesGetBankResponseOperationsItemStatusPosted    SecuritiesGetBankResponseOperationsItemStatus = "posted"
+	SecuritiesGetBankResponseOperationsItemStatusNotPosted SecuritiesGetBankResponseOperationsItemStatus = "not_posted"
+)
+
+func NewSecuritiesGetBankResponseOperationsItemStatusFromString(s string) (SecuritiesGetBankResponseOperationsItemStatus, error) {
+	switch s {
+	case "posted":
+		return SecuritiesGetBankResponseOperationsItemStatusPosted, nil
+	case "not_posted":
+		return SecuritiesGetBankResponseOperationsItemStatusNotPosted, nil
+	}
+	var t SecuritiesGetBankResponseOperationsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SecuritiesGetBankResponseOperationsItemStatus) Ptr() *SecuritiesGetBankResponseOperationsItemStatus {
+	return &s
+}
+
+var (
+	securitiesImportBankResponseFieldID             = big.NewInt(1 << 0)
+	securitiesImportBankResponseFieldBankAccountID  = big.NewInt(1 << 1)
+	securitiesImportBankResponseFieldBroker         = big.NewInt(1 << 2)
+	securitiesImportBankResponseFieldBrokerAccount  = big.NewInt(1 << 3)
+	securitiesImportBankResponseFieldPeriod         = big.NewInt(1 << 4)
+	securitiesImportBankResponseFieldFileName       = big.NewInt(1 << 5)
+	securitiesImportBankResponseFieldOperationCount = big.NewInt(1 << 6)
+	securitiesImportBankResponseFieldDuplicateCount = big.NewInt(1 << 7)
+	securitiesImportBankResponseFieldPostedCount    = big.NewInt(1 << 8)
+	securitiesImportBankResponseFieldNotPostedCount = big.NewInt(1 << 9)
+	securitiesImportBankResponseFieldRealizedTotal  = big.NewInt(1 << 10)
+	securitiesImportBankResponseFieldCreatedAt      = big.NewInt(1 << 11)
+)
+
+type SecuritiesImportBankResponse struct {
+	ID             string    `json:"id" url:"id"`
+	BankAccountID  string    `json:"bankAccountId" url:"bankAccountId"`
+	Broker         string    `json:"broker" url:"broker"`
+	BrokerAccount  string    `json:"brokerAccount" url:"brokerAccount"`
+	Period         string    `json:"period" url:"period"`
+	FileName       *string   `json:"fileName,omitempty" url:"fileName,omitempty"`
+	OperationCount int64     `json:"operationCount" url:"operationCount"`
+	DuplicateCount int64     `json:"duplicateCount" url:"duplicateCount"`
+	PostedCount    int64     `json:"postedCount" url:"postedCount"`
+	NotPostedCount int64     `json:"notPostedCount" url:"notPostedCount"`
+	RealizedTotal  string    `json:"realizedTotal" url:"realizedTotal"`
+	CreatedAt      time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SecuritiesImportBankResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SecuritiesImportBankResponse) GetBankAccountID() string {
+	if s == nil {
+		return ""
+	}
+	return s.BankAccountID
+}
+
+func (s *SecuritiesImportBankResponse) GetBroker() string {
+	if s == nil {
+		return ""
+	}
+	return s.Broker
+}
+
+func (s *SecuritiesImportBankResponse) GetBrokerAccount() string {
+	if s == nil {
+		return ""
+	}
+	return s.BrokerAccount
+}
+
+func (s *SecuritiesImportBankResponse) GetPeriod() string {
+	if s == nil {
+		return ""
+	}
+	return s.Period
+}
+
+func (s *SecuritiesImportBankResponse) GetFileName() *string {
+	if s == nil {
+		return nil
+	}
+	return s.FileName
+}
+
+func (s *SecuritiesImportBankResponse) GetOperationCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.OperationCount
+}
+
+func (s *SecuritiesImportBankResponse) GetDuplicateCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.DuplicateCount
+}
+
+func (s *SecuritiesImportBankResponse) GetPostedCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.PostedCount
+}
+
+func (s *SecuritiesImportBankResponse) GetNotPostedCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.NotPostedCount
+}
+
+func (s *SecuritiesImportBankResponse) GetRealizedTotal() string {
+	if s == nil {
+		return ""
+	}
+	return s.RealizedTotal
+}
+
+func (s *SecuritiesImportBankResponse) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SecuritiesImportBankResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SecuritiesImportBankResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetID(id string) {
+	s.ID = id
+	s.require(securitiesImportBankResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetBankAccountID(bankAccountID string) {
+	s.BankAccountID = bankAccountID
+	s.require(securitiesImportBankResponseFieldBankAccountID)
+}
+
+// SetBroker sets the Broker field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetBroker(broker string) {
+	s.Broker = broker
+	s.require(securitiesImportBankResponseFieldBroker)
+}
+
+// SetBrokerAccount sets the BrokerAccount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetBrokerAccount(brokerAccount string) {
+	s.BrokerAccount = brokerAccount
+	s.require(securitiesImportBankResponseFieldBrokerAccount)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetPeriod(period string) {
+	s.Period = period
+	s.require(securitiesImportBankResponseFieldPeriod)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetFileName(fileName *string) {
+	s.FileName = fileName
+	s.require(securitiesImportBankResponseFieldFileName)
+}
+
+// SetOperationCount sets the OperationCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetOperationCount(operationCount int64) {
+	s.OperationCount = operationCount
+	s.require(securitiesImportBankResponseFieldOperationCount)
+}
+
+// SetDuplicateCount sets the DuplicateCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetDuplicateCount(duplicateCount int64) {
+	s.DuplicateCount = duplicateCount
+	s.require(securitiesImportBankResponseFieldDuplicateCount)
+}
+
+// SetPostedCount sets the PostedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetPostedCount(postedCount int64) {
+	s.PostedCount = postedCount
+	s.require(securitiesImportBankResponseFieldPostedCount)
+}
+
+// SetNotPostedCount sets the NotPostedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetNotPostedCount(notPostedCount int64) {
+	s.NotPostedCount = notPostedCount
+	s.require(securitiesImportBankResponseFieldNotPostedCount)
+}
+
+// SetRealizedTotal sets the RealizedTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetRealizedTotal(realizedTotal string) {
+	s.RealizedTotal = realizedTotal
+	s.require(securitiesImportBankResponseFieldRealizedTotal)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesImportBankResponse) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(securitiesImportBankResponseFieldCreatedAt)
+}
+
+func (s *SecuritiesImportBankResponse) UnmarshalJSON(data []byte) error {
+	type embed SecuritiesImportBankResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SecuritiesImportBankResponse(unmarshaler.embed)
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SecuritiesImportBankResponse) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesImportBankResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*s),
+		CreatedAt: internal.NewDateTime(s.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SecuritiesImportBankResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	securitiesListBankRequestFilterItemFieldField = big.NewInt(1 << 0)
+	securitiesListBankRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	securitiesListBankRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type SecuritiesListBankRequestFilterItem struct {
+	Field string                                    `json:"field" url:"field"`
+	Op    SecuritiesListBankRequestFilterItemOp     `json:"op" url:"op"`
+	Value *SecuritiesListBankRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SecuritiesListBankRequestFilterItem) GetField() string {
+	if s == nil {
+		return ""
+	}
+	return s.Field
+}
+
+func (s *SecuritiesListBankRequestFilterItem) GetOp() SecuritiesListBankRequestFilterItemOp {
+	if s == nil {
+		return ""
+	}
+	return s.Op
+}
+
+func (s *SecuritiesListBankRequestFilterItem) GetValue() *SecuritiesListBankRequestFilterItemValue {
+	if s == nil {
+		return nil
+	}
+	return s.Value
+}
+
+func (s *SecuritiesListBankRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SecuritiesListBankRequestFilterItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequestFilterItem) SetField(field string) {
+	s.Field = field
+	s.require(securitiesListBankRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequestFilterItem) SetOp(op SecuritiesListBankRequestFilterItemOp) {
+	s.Op = op
+	s.require(securitiesListBankRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequestFilterItem) SetValue(value *SecuritiesListBankRequestFilterItemValue) {
+	s.Value = value
+	s.require(securitiesListBankRequestFilterItemFieldValue)
+}
+
+func (s *SecuritiesListBankRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SecuritiesListBankRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SecuritiesListBankRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SecuritiesListBankRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesListBankRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SecuritiesListBankRequestFilterItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SecuritiesListBankRequestFilterItemOp string
+
+const (
+	SecuritiesListBankRequestFilterItemOpEq       SecuritiesListBankRequestFilterItemOp = "eq"
+	SecuritiesListBankRequestFilterItemOpNe       SecuritiesListBankRequestFilterItemOp = "ne"
+	SecuritiesListBankRequestFilterItemOpContains SecuritiesListBankRequestFilterItemOp = "contains"
+	SecuritiesListBankRequestFilterItemOpGte      SecuritiesListBankRequestFilterItemOp = "gte"
+	SecuritiesListBankRequestFilterItemOpLte      SecuritiesListBankRequestFilterItemOp = "lte"
+	SecuritiesListBankRequestFilterItemOpIn       SecuritiesListBankRequestFilterItemOp = "in"
+)
+
+func NewSecuritiesListBankRequestFilterItemOpFromString(s string) (SecuritiesListBankRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return SecuritiesListBankRequestFilterItemOpEq, nil
+	case "ne":
+		return SecuritiesListBankRequestFilterItemOpNe, nil
+	case "contains":
+		return SecuritiesListBankRequestFilterItemOpContains, nil
+	case "gte":
+		return SecuritiesListBankRequestFilterItemOpGte, nil
+	case "lte":
+		return SecuritiesListBankRequestFilterItemOpLte, nil
+	case "in":
+		return SecuritiesListBankRequestFilterItemOpIn, nil
+	}
+	var t SecuritiesListBankRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SecuritiesListBankRequestFilterItemOp) Ptr() *SecuritiesListBankRequestFilterItemOp {
+	return &s
+}
+
+type SecuritiesListBankRequestFilterItemValue struct {
+	String                                                string
+	Double                                                float64
+	Boolean                                               bool
+	SecuritiesListBankRequestFilterItemValueThreeItemList []*SecuritiesListBankRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (s *SecuritiesListBankRequestFilterItemValue) GetString() string {
+	if s == nil {
+		return ""
+	}
+	return s.String
+}
+
+func (s *SecuritiesListBankRequestFilterItemValue) GetDouble() float64 {
+	if s == nil {
+		return 0
+	}
+	return s.Double
+}
+
+func (s *SecuritiesListBankRequestFilterItemValue) GetBoolean() bool {
+	if s == nil {
+		return false
+	}
+	return s.Boolean
+}
+
+func (s *SecuritiesListBankRequestFilterItemValue) GetSecuritiesListBankRequestFilterItemValueThreeItemList() []*SecuritiesListBankRequestFilterItemValueThreeItem {
+	if s == nil {
+		return nil
+	}
+	return s.SecuritiesListBankRequestFilterItemValueThreeItemList
+}
+
+func (s *SecuritiesListBankRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		s.typ = "String"
+		s.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		s.typ = "Double"
+		s.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		s.typ = "Boolean"
+		s.Boolean = valueBoolean
+		return nil
+	}
+	var valueSecuritiesListBankRequestFilterItemValueThreeItemList []*SecuritiesListBankRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueSecuritiesListBankRequestFilterItemValueThreeItemList); err == nil {
+		s.typ = "SecuritiesListBankRequestFilterItemValueThreeItemList"
+		s.SecuritiesListBankRequestFilterItemValueThreeItemList = valueSecuritiesListBankRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
+}
+
+func (s SecuritiesListBankRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
+	}
+	if s.typ == "Boolean" || s.Boolean != false {
+		return json.Marshal(s.Boolean)
+	}
+	if s.typ == "SecuritiesListBankRequestFilterItemValueThreeItemList" || s.SecuritiesListBankRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(s.SecuritiesListBankRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+type SecuritiesListBankRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitSecuritiesListBankRequestFilterItemValueThreeItemList([]*SecuritiesListBankRequestFilterItemValueThreeItem) error
+}
+
+func (s *SecuritiesListBankRequestFilterItemValue) Accept(visitor SecuritiesListBankRequestFilterItemValueVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
+	}
+	if s.typ == "Boolean" || s.Boolean != false {
+		return visitor.VisitBoolean(s.Boolean)
+	}
+	if s.typ == "SecuritiesListBankRequestFilterItemValueThreeItemList" || s.SecuritiesListBankRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitSecuritiesListBankRequestFilterItemValueThreeItemList(s.SecuritiesListBankRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+type SecuritiesListBankRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (s *SecuritiesListBankRequestFilterItemValueThreeItem) GetString() string {
+	if s == nil {
+		return ""
+	}
+	return s.String
+}
+
+func (s *SecuritiesListBankRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if s == nil {
+		return 0
+	}
+	return s.Double
+}
+
+func (s *SecuritiesListBankRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		s.typ = "String"
+		s.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		s.typ = "Double"
+		s.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, s)
+}
+
+func (s SecuritiesListBankRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if s.typ == "String" || s.String != "" {
+		return json.Marshal(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return json.Marshal(s.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+type SecuritiesListBankRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (s *SecuritiesListBankRequestFilterItemValueThreeItem) Accept(visitor SecuritiesListBankRequestFilterItemValueThreeItemVisitor) error {
+	if s.typ == "String" || s.String != "" {
+		return visitor.VisitString(s.String)
+	}
+	if s.typ == "Double" || s.Double != 0 {
+		return visitor.VisitDouble(s.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", s)
+}
+
+var (
+	securitiesListBankRequestSortItemFieldField = big.NewInt(1 << 0)
+	securitiesListBankRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type SecuritiesListBankRequestSortItem struct {
+	Field string                                `json:"field" url:"field"`
+	Dir   *SecuritiesListBankRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SecuritiesListBankRequestSortItem) GetField() string {
+	if s == nil {
+		return ""
+	}
+	return s.Field
+}
+
+func (s *SecuritiesListBankRequestSortItem) GetDir() *SecuritiesListBankRequestSortItemDir {
+	if s == nil {
+		return nil
+	}
+	return s.Dir
+}
+
+func (s *SecuritiesListBankRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SecuritiesListBankRequestSortItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequestSortItem) SetField(field string) {
+	s.Field = field
+	s.require(securitiesListBankRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankRequestSortItem) SetDir(dir *SecuritiesListBankRequestSortItemDir) {
+	s.Dir = dir
+	s.require(securitiesListBankRequestSortItemFieldDir)
+}
+
+func (s *SecuritiesListBankRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SecuritiesListBankRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SecuritiesListBankRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SecuritiesListBankRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesListBankRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SecuritiesListBankRequestSortItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SecuritiesListBankRequestSortItemDir string
+
+const (
+	SecuritiesListBankRequestSortItemDirAsc  SecuritiesListBankRequestSortItemDir = "asc"
+	SecuritiesListBankRequestSortItemDirDesc SecuritiesListBankRequestSortItemDir = "desc"
+)
+
+func NewSecuritiesListBankRequestSortItemDirFromString(s string) (SecuritiesListBankRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return SecuritiesListBankRequestSortItemDirAsc, nil
+	case "desc":
+		return SecuritiesListBankRequestSortItemDirDesc, nil
+	}
+	var t SecuritiesListBankRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SecuritiesListBankRequestSortItemDir) Ptr() *SecuritiesListBankRequestSortItemDir {
+	return &s
+}
+
+var (
+	securitiesListBankResponseFieldRows             = big.NewInt(1 << 0)
+	securitiesListBankResponseFieldPage             = big.NewInt(1 << 1)
+	securitiesListBankResponseFieldPageSize         = big.NewInt(1 << 2)
+	securitiesListBankResponseFieldTotal            = big.NewInt(1 << 3)
+	securitiesListBankResponseFieldTotals           = big.NewInt(1 << 4)
+	securitiesListBankResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type SecuritiesListBankResponse struct {
+	Rows     []*SecuritiesListBankResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                 `json:"page" url:"page"`
+	PageSize int64                                 `json:"pageSize" url:"pageSize"`
+	Total    int64                                 `json:"total" url:"total"`
+	Totals   map[string]string                     `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SecuritiesListBankResponse) GetRows() []*SecuritiesListBankResponseRowsItem {
+	if s == nil {
+		return nil
+	}
+	return s.Rows
+}
+
+func (s *SecuritiesListBankResponse) GetPage() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Page
+}
+
+func (s *SecuritiesListBankResponse) GetPageSize() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.PageSize
+}
+
+func (s *SecuritiesListBankResponse) GetTotal() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Total
+}
+
+func (s *SecuritiesListBankResponse) GetTotals() map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.Totals
+}
+
+func (s *SecuritiesListBankResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if s == nil {
+		return nil
+	}
+	return s.TotalsByCurrency
+}
+
+func (s *SecuritiesListBankResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SecuritiesListBankResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponse) SetRows(rows []*SecuritiesListBankResponseRowsItem) {
+	s.Rows = rows
+	s.require(securitiesListBankResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponse) SetPage(page int64) {
+	s.Page = page
+	s.require(securitiesListBankResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponse) SetPageSize(pageSize int64) {
+	s.PageSize = pageSize
+	s.require(securitiesListBankResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponse) SetTotal(total int64) {
+	s.Total = total
+	s.require(securitiesListBankResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponse) SetTotals(totals map[string]string) {
+	s.Totals = totals
+	s.require(securitiesListBankResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	s.TotalsByCurrency = totalsByCurrency
+	s.require(securitiesListBankResponseFieldTotalsByCurrency)
+}
+
+func (s *SecuritiesListBankResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SecuritiesListBankResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SecuritiesListBankResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SecuritiesListBankResponse) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesListBankResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SecuritiesListBankResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	securitiesListBankResponseRowsItemFieldID             = big.NewInt(1 << 0)
+	securitiesListBankResponseRowsItemFieldBankAccountID  = big.NewInt(1 << 1)
+	securitiesListBankResponseRowsItemFieldBroker         = big.NewInt(1 << 2)
+	securitiesListBankResponseRowsItemFieldBrokerAccount  = big.NewInt(1 << 3)
+	securitiesListBankResponseRowsItemFieldPeriod         = big.NewInt(1 << 4)
+	securitiesListBankResponseRowsItemFieldFileName       = big.NewInt(1 << 5)
+	securitiesListBankResponseRowsItemFieldOperationCount = big.NewInt(1 << 6)
+	securitiesListBankResponseRowsItemFieldDuplicateCount = big.NewInt(1 << 7)
+	securitiesListBankResponseRowsItemFieldPostedCount    = big.NewInt(1 << 8)
+	securitiesListBankResponseRowsItemFieldNotPostedCount = big.NewInt(1 << 9)
+	securitiesListBankResponseRowsItemFieldRealizedTotal  = big.NewInt(1 << 10)
+	securitiesListBankResponseRowsItemFieldCreatedAt      = big.NewInt(1 << 11)
+)
+
+type SecuritiesListBankResponseRowsItem struct {
+	ID             string    `json:"id" url:"id"`
+	BankAccountID  string    `json:"bankAccountId" url:"bankAccountId"`
+	Broker         string    `json:"broker" url:"broker"`
+	BrokerAccount  string    `json:"brokerAccount" url:"brokerAccount"`
+	Period         string    `json:"period" url:"period"`
+	FileName       *string   `json:"fileName,omitempty" url:"fileName,omitempty"`
+	OperationCount int64     `json:"operationCount" url:"operationCount"`
+	DuplicateCount int64     `json:"duplicateCount" url:"duplicateCount"`
+	PostedCount    int64     `json:"postedCount" url:"postedCount"`
+	NotPostedCount int64     `json:"notPostedCount" url:"notPostedCount"`
+	RealizedTotal  string    `json:"realizedTotal" url:"realizedTotal"`
+	CreatedAt      time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetBankAccountID() string {
+	if s == nil {
+		return ""
+	}
+	return s.BankAccountID
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetBroker() string {
+	if s == nil {
+		return ""
+	}
+	return s.Broker
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetBrokerAccount() string {
+	if s == nil {
+		return ""
+	}
+	return s.BrokerAccount
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetPeriod() string {
+	if s == nil {
+		return ""
+	}
+	return s.Period
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetFileName() *string {
+	if s == nil {
+		return nil
+	}
+	return s.FileName
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetOperationCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.OperationCount
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetDuplicateCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.DuplicateCount
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetPostedCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.PostedCount
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetNotPostedCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.NotPostedCount
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetRealizedTotal() string {
+	if s == nil {
+		return ""
+	}
+	return s.RealizedTotal
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SecuritiesListBankResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SecuritiesListBankResponseRowsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetID(id string) {
+	s.ID = id
+	s.require(securitiesListBankResponseRowsItemFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetBankAccountID(bankAccountID string) {
+	s.BankAccountID = bankAccountID
+	s.require(securitiesListBankResponseRowsItemFieldBankAccountID)
+}
+
+// SetBroker sets the Broker field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetBroker(broker string) {
+	s.Broker = broker
+	s.require(securitiesListBankResponseRowsItemFieldBroker)
+}
+
+// SetBrokerAccount sets the BrokerAccount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetBrokerAccount(brokerAccount string) {
+	s.BrokerAccount = brokerAccount
+	s.require(securitiesListBankResponseRowsItemFieldBrokerAccount)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetPeriod(period string) {
+	s.Period = period
+	s.require(securitiesListBankResponseRowsItemFieldPeriod)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetFileName(fileName *string) {
+	s.FileName = fileName
+	s.require(securitiesListBankResponseRowsItemFieldFileName)
+}
+
+// SetOperationCount sets the OperationCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetOperationCount(operationCount int64) {
+	s.OperationCount = operationCount
+	s.require(securitiesListBankResponseRowsItemFieldOperationCount)
+}
+
+// SetDuplicateCount sets the DuplicateCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetDuplicateCount(duplicateCount int64) {
+	s.DuplicateCount = duplicateCount
+	s.require(securitiesListBankResponseRowsItemFieldDuplicateCount)
+}
+
+// SetPostedCount sets the PostedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetPostedCount(postedCount int64) {
+	s.PostedCount = postedCount
+	s.require(securitiesListBankResponseRowsItemFieldPostedCount)
+}
+
+// SetNotPostedCount sets the NotPostedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetNotPostedCount(notPostedCount int64) {
+	s.NotPostedCount = notPostedCount
+	s.require(securitiesListBankResponseRowsItemFieldNotPostedCount)
+}
+
+// SetRealizedTotal sets the RealizedTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetRealizedTotal(realizedTotal string) {
+	s.RealizedTotal = realizedTotal
+	s.require(securitiesListBankResponseRowsItemFieldRealizedTotal)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SecuritiesListBankResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(securitiesListBankResponseRowsItemFieldCreatedAt)
+}
+
+func (s *SecuritiesListBankResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed SecuritiesListBankResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SecuritiesListBankResponseRowsItem(unmarshaler.embed)
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SecuritiesListBankResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed SecuritiesListBankResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*s),
+		CreatedAt: internal.NewDateTime(s.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SecuritiesListBankResponseRowsItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }
 
 var (

@@ -3101,22 +3101,6 @@ client.Partners.Create(
 <dl>
 <dd>
 
-**otherCode:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**foreignTaxNumber:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **autoDebtReminder:** `*bool` 
     
 </dd>
@@ -3421,22 +3405,6 @@ client.Partners.FindOrCreate(
 <dd>
 
 **eoriCode:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**otherCode:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**foreignTaxNumber:** `*string` 
     
 </dd>
 </dl>
@@ -3803,22 +3771,6 @@ client.Partners.Update(
 <dd>
 
 **eoriCode:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**otherCode:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**foreignTaxNumber:** `*string` 
     
 </dd>
 </dl>
@@ -8984,7 +8936,7 @@ client.Sales.InvoicesPeppolXML(
 <dl>
 <dd>
 
-Send an issued invoice or credit note to the customer over Peppol through the company's own access point (Settings → Compliance → EU; Nordlet supports Recommand, Storecove and e-invoice.be). Without one the call is refused with 422 and the document can only be downloaded with `sales/invoices/peppol-xml`. `status` is `pending` until the receiving access point confirms, then `delivered`; `failed` and `rejected` come with `detail`, and the invoice can then be sent again. Later changes arrive through the access point's webhook and are announced as `sale_invoice.peppol_delivered`, `sale_invoice.peppol_rejected` and `sale_invoice.peppol_failed`.
+Send an issued invoice or credit note to the customer over Peppol through the company's own access point (Account → Compliance → EU; Nordlet supports Recommand, Storecove and e-invoice.be). Without one the call is refused with 422 and the document can only be downloaded with `sales/invoices/peppol-xml`. `status` is `pending` until the receiving access point confirms, then `delivered`; `failed` and `rejected` come with `detail`, and the invoice can then be sent again. Later changes arrive through the access point's webhook and are announced as `sale_invoice.peppol_delivered`, `sale_invoice.peppol_rejected` and `sale_invoice.peppol_failed`.
 </dd>
 </dl>
 </dd>
@@ -10600,6 +10552,647 @@ client.Sales.ActsPdf(
 <dd>
 
 **locale:** `*nordlet.ActsPdfSalesRequestLocale` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoiceTemplatesCreate(request) -> *nordlet.InvoiceTemplatesCreateSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoiceTemplatesCreateSalesRequest{
+        Name: "name",
+    }
+client.Sales.InvoiceTemplatesCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**name:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentType:** `*nordlet.InvoiceTemplatesCreateSalesRequestDocumentType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**paymentTermDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatScheme:** `*nordlet.InvoiceTemplatesCreateSalesRequestVatScheme` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatCountryCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agreementID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**operationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentSeriesID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**discountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**supplyType:** `*nordlet.InvoiceTemplatesCreateSalesRequestSupplyType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**seriesLabel:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**orderNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatTransportMode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatDeliveryTerms:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatRegion:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatNatureOfTransaction:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.InvoiceTemplatesCreateSalesRequestLinesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoiceTemplatesUpdate(request) -> *nordlet.InvoiceTemplatesUpdateSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoiceTemplatesUpdateSalesRequest{
+        ID: "id",
+    }
+client.Sales.InvoiceTemplatesUpdate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentType:** `*nordlet.InvoiceTemplatesUpdateSalesRequestDocumentType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**partnerID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**currency:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**paymentTermDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatScheme:** `*nordlet.InvoiceTemplatesUpdateSalesRequestVatScheme` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**vatCountryCode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agreementID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**operationTypeID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**documentSeriesID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**discountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**issuedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receivedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**notes:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**supplyType:** `*nordlet.InvoiceTemplatesUpdateSalesRequestSupplyType` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**seriesLabel:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**orderNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatTransportMode:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatDeliveryTerms:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatRegion:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**intrastatNatureOfTransaction:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**lines:** `[]*nordlet.InvoiceTemplatesUpdateSalesRequestLinesItem` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoiceTemplatesGet(request) -> *nordlet.InvoiceTemplatesGetSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoiceTemplatesGetSalesRequest{
+        ID: "id",
+    }
+client.Sales.InvoiceTemplatesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoiceTemplatesDelete(request) -> *nordlet.InvoiceTemplatesDeleteSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoiceTemplatesDeleteSalesRequest{
+        ID: "id",
+    }
+client.Sales.InvoiceTemplatesDelete(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoiceTemplatesList(request) -> *nordlet.InvoiceTemplatesListSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoiceTemplatesListSalesRequest{}
+client.Sales.InvoiceTemplatesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.InvoiceTemplatesListSalesRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.InvoiceTemplatesListSalesRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
     
 </dd>
 </dl>
@@ -18847,7 +19440,7 @@ client.Declarations.IeCt1Generate(
 <dl>
 <dd>
 
-Build the working paper for the Form B1 annual return of a financial year - company details, registered office, directors and secretary from Settings → Officers, the members from Settings → Shareholders, the issued share capital and the figures of the financial statements - in the order the CORE screens ask for them. The CRO publishes no file format for the B1, so it is keyed into CORE.
+Build the working paper for the Form B1 annual return of a financial year - company details, registered office, directors and secretary from Account → Officers, the members from Account → Shareholders, the issued share capital and the figures of the financial statements - in the order the CORE screens ask for them. The CRO publishes no file format for the B1, so it is keyed into CORE.
 </dd>
 </dl>
 </dd>
@@ -22560,7 +23153,7 @@ client.Ledger.JournalTransactionsCreate(
 <dl>
 <dd>
 
-The rows or codes of each return or registry deposit of the company country that are filled from account balances. Accounts fall into a row by the layout defaults for the standard chart of accounts unless mapped under Settings → Statement rows.
+The rows or codes of each return or registry deposit of the company country that are filled from account balances. Accounts fall into a row by the layout defaults for the standard chart of accounts unless mapped under Account → Statement rows.
 </dd>
 </dl>
 </dd>
@@ -40362,6 +40955,194 @@ client.Bank.SettlementsPost(
 </dl>
 </details>
 
+<details><summary><code>client.Bank.SecuritiesImport(request) -> *nordlet.SecuritiesImportBankResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SecuritiesImportBankRequest{
+        BankAccountID: "bankAccountId",
+        Content: "content",
+    }
+client.Bank.SecuritiesImport(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**bankAccountID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**content:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**fileName:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.SecuritiesList(request) -> *nordlet.SecuritiesListBankResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SecuritiesListBankRequest{}
+client.Bank.SecuritiesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sort:** `[]*nordlet.SecuritiesListBankRequestSortItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**filter:** `[]*nordlet.SecuritiesListBankRequestFilterItem` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**totals:** `[]string` — Numeric fields to sum over every row matching the filter (not only the current page)
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.SecuritiesGet(request) -> *nordlet.SecuritiesGetBankResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SecuritiesGetBankRequest{
+        ID: "id",
+    }
+client.Bank.SecuritiesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Bank.FeedsBanksList(request) -> *nordlet.FeedsBanksListBankResponse</code></summary>
 <dl>
 <dd>
@@ -44056,6 +44837,156 @@ client.Billing.AccountSetPlan(
 </dl>
 </details>
 
+<details><summary><code>client.Billing.AccountSetAccountType(request) -> *nordlet.AccountSetAccountTypeBillingResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.AccountSetAccountTypeBillingRequest{
+        AccountType: nordlet.AccountSetAccountTypeBillingRequestAccountTypeFlatRate,
+    }
+client.Billing.AccountSetAccountType(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**accountType:** `*nordlet.AccountSetAccountTypeBillingRequestAccountType` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.AccountSetAutoTopUp(request) -> *nordlet.AccountSetAutoTopUpBillingResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.AccountSetAutoTopUpBillingRequest{
+        Enabled: true,
+        AmountCents: int64(1000000),
+    }
+client.Billing.AccountSetAutoTopUp(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**enabled:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amountCents:** `int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.AccountSetOverdraftCap(request) -> *nordlet.AccountSetOverdraftCapBillingResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.AccountSetOverdraftCapBillingRequest{
+        CapCents: int64(1000000),
+    }
+client.Billing.AccountSetOverdraftCap(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**capCents:** `int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Billing.TopupCreate(request) -> *nordlet.TopupCreateBillingResponse</code></summary>
 <dl>
 <dd>
@@ -44100,6 +45031,161 @@ client.Billing.TopupCreate(
 <dd>
 
 **locale:** `*nordlet.TopupCreateBillingRequestLocale` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**returnTo:** `*nordlet.TopupCreateBillingRequestReturnTo` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.TopupConfirm(request) -> *nordlet.TopupConfirmBillingResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.TopupConfirmBillingRequest{
+        SessionID: "sessionId",
+    }
+client.Billing.TopupConfirm(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.FlatRateCreate(request) -> *nordlet.FlatRateCreateBillingResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.FlatRateCreateBillingRequest{}
+client.Billing.FlatRateCreate(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**locale:** `*nordlet.FlatRateCreateBillingRequestLocale` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**plan:** `*nordlet.FlatRateCreateBillingRequestPlan` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.FlatRateConfirm(request) -> *nordlet.FlatRateConfirmBillingResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.FlatRateConfirmBillingRequest{
+        SessionID: "sessionId",
+    }
+client.Billing.FlatRateConfirm(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
     
 </dd>
 </dl>
