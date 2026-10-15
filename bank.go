@@ -1354,6 +1354,19 @@ func (i *ImportTemplatesListBankRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type ImportTemplatesListBuiltinBankRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ImportTemplatesListBuiltinBankRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
 var (
 	importTemplatesUpdateBankRequestFieldName                         = big.NewInt(1 << 0)
 	importTemplatesUpdateBankRequestFieldType                         = big.NewInt(1 << 1)
@@ -9774,6 +9787,7 @@ const (
 	ImportTemplatesCreateBankRequestTypeStripe         ImportTemplatesCreateBankRequestType = "stripe"
 	ImportTemplatesCreateBankRequestTypeIso20022       ImportTemplatesCreateBankRequestType = "iso20022"
 	ImportTemplatesCreateBankRequestTypeBankConnection ImportTemplatesCreateBankRequestType = "bank_connection"
+	ImportTemplatesCreateBankRequestTypeRevolut        ImportTemplatesCreateBankRequestType = "revolut"
 )
 
 func NewImportTemplatesCreateBankRequestTypeFromString(s string) (ImportTemplatesCreateBankRequestType, error) {
@@ -9784,6 +9798,8 @@ func NewImportTemplatesCreateBankRequestTypeFromString(s string) (ImportTemplate
 		return ImportTemplatesCreateBankRequestTypeIso20022, nil
 	case "bank_connection":
 		return ImportTemplatesCreateBankRequestTypeBankConnection, nil
+	case "revolut":
+		return ImportTemplatesCreateBankRequestTypeRevolut, nil
 	}
 	var t ImportTemplatesCreateBankRequestType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -9810,8 +9826,9 @@ var (
 	importTemplatesCreateBankResponseFieldLenderMetaField              = big.NewInt(1 << 13)
 	importTemplatesCreateBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
 	importTemplatesCreateBankResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesCreateBankResponseFieldCreatedAt                    = big.NewInt(1 << 16)
-	importTemplatesCreateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 17)
+	importTemplatesCreateBankResponseFieldBuiltin                      = big.NewInt(1 << 16)
+	importTemplatesCreateBankResponseFieldCreatedAt                    = big.NewInt(1 << 17)
+	importTemplatesCreateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 18)
 )
 
 type ImportTemplatesCreateBankResponse struct {
@@ -9831,8 +9848,10 @@ type ImportTemplatesCreateBankResponse struct {
 	LenderMetaField              *string                                        `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
 	PartialRefundLabel           *string                                        `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
 	FullRefundLabel              *string                                        `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
-	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
+	// Provided by Nordlet for every company; it cannot be changed or deleted
+	Builtin   bool      `json:"builtin" url:"builtin"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9951,6 +9970,13 @@ func (i *ImportTemplatesCreateBankResponse) GetFullRefundLabel() *string {
 		return nil
 	}
 	return i.FullRefundLabel
+}
+
+func (i *ImportTemplatesCreateBankResponse) GetBuiltin() bool {
+	if i == nil {
+		return false
+	}
+	return i.Builtin
 }
 
 func (i *ImportTemplatesCreateBankResponse) GetCreatedAt() time.Time {
@@ -10091,6 +10117,13 @@ func (i *ImportTemplatesCreateBankResponse) SetPartialRefundLabel(partialRefundL
 func (i *ImportTemplatesCreateBankResponse) SetFullRefundLabel(fullRefundLabel *string) {
 	i.FullRefundLabel = fullRefundLabel
 	i.require(importTemplatesCreateBankResponseFieldFullRefundLabel)
+}
+
+// SetBuiltin sets the Builtin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesCreateBankResponse) SetBuiltin(builtin bool) {
+	i.Builtin = builtin
+	i.require(importTemplatesCreateBankResponseFieldBuiltin)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -10283,6 +10316,7 @@ const (
 	ImportTemplatesCreateBankResponseTypeStripe         ImportTemplatesCreateBankResponseType = "stripe"
 	ImportTemplatesCreateBankResponseTypeIso20022       ImportTemplatesCreateBankResponseType = "iso20022"
 	ImportTemplatesCreateBankResponseTypeBankConnection ImportTemplatesCreateBankResponseType = "bank_connection"
+	ImportTemplatesCreateBankResponseTypeRevolut        ImportTemplatesCreateBankResponseType = "revolut"
 )
 
 func NewImportTemplatesCreateBankResponseTypeFromString(s string) (ImportTemplatesCreateBankResponseType, error) {
@@ -10293,6 +10327,8 @@ func NewImportTemplatesCreateBankResponseTypeFromString(s string) (ImportTemplat
 		return ImportTemplatesCreateBankResponseTypeIso20022, nil
 	case "bank_connection":
 		return ImportTemplatesCreateBankResponseTypeBankConnection, nil
+	case "revolut":
+		return ImportTemplatesCreateBankResponseTypeRevolut, nil
 	}
 	var t ImportTemplatesCreateBankResponseType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -10419,8 +10455,9 @@ var (
 	importTemplatesGetBankResponseFieldLenderMetaField              = big.NewInt(1 << 13)
 	importTemplatesGetBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
 	importTemplatesGetBankResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesGetBankResponseFieldCreatedAt                    = big.NewInt(1 << 16)
-	importTemplatesGetBankResponseFieldUpdatedAt                    = big.NewInt(1 << 17)
+	importTemplatesGetBankResponseFieldBuiltin                      = big.NewInt(1 << 16)
+	importTemplatesGetBankResponseFieldCreatedAt                    = big.NewInt(1 << 17)
+	importTemplatesGetBankResponseFieldUpdatedAt                    = big.NewInt(1 << 18)
 )
 
 type ImportTemplatesGetBankResponse struct {
@@ -10440,8 +10477,10 @@ type ImportTemplatesGetBankResponse struct {
 	LenderMetaField              *string                                     `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
 	PartialRefundLabel           *string                                     `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
 	FullRefundLabel              *string                                     `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
-	CreatedAt                    time.Time                                   `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                   `json:"updatedAt" url:"updatedAt"`
+	// Provided by Nordlet for every company; it cannot be changed or deleted
+	Builtin   bool      `json:"builtin" url:"builtin"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10560,6 +10599,13 @@ func (i *ImportTemplatesGetBankResponse) GetFullRefundLabel() *string {
 		return nil
 	}
 	return i.FullRefundLabel
+}
+
+func (i *ImportTemplatesGetBankResponse) GetBuiltin() bool {
+	if i == nil {
+		return false
+	}
+	return i.Builtin
 }
 
 func (i *ImportTemplatesGetBankResponse) GetCreatedAt() time.Time {
@@ -10700,6 +10746,13 @@ func (i *ImportTemplatesGetBankResponse) SetPartialRefundLabel(partialRefundLabe
 func (i *ImportTemplatesGetBankResponse) SetFullRefundLabel(fullRefundLabel *string) {
 	i.FullRefundLabel = fullRefundLabel
 	i.require(importTemplatesGetBankResponseFieldFullRefundLabel)
+}
+
+// SetBuiltin sets the Builtin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesGetBankResponse) SetBuiltin(builtin bool) {
+	i.Builtin = builtin
+	i.require(importTemplatesGetBankResponseFieldBuiltin)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -10892,6 +10945,7 @@ const (
 	ImportTemplatesGetBankResponseTypeStripe         ImportTemplatesGetBankResponseType = "stripe"
 	ImportTemplatesGetBankResponseTypeIso20022       ImportTemplatesGetBankResponseType = "iso20022"
 	ImportTemplatesGetBankResponseTypeBankConnection ImportTemplatesGetBankResponseType = "bank_connection"
+	ImportTemplatesGetBankResponseTypeRevolut        ImportTemplatesGetBankResponseType = "revolut"
 )
 
 func NewImportTemplatesGetBankResponseTypeFromString(s string) (ImportTemplatesGetBankResponseType, error) {
@@ -10902,6 +10956,8 @@ func NewImportTemplatesGetBankResponseTypeFromString(s string) (ImportTemplatesG
 		return ImportTemplatesGetBankResponseTypeIso20022, nil
 	case "bank_connection":
 		return ImportTemplatesGetBankResponseTypeBankConnection, nil
+	case "revolut":
+		return ImportTemplatesGetBankResponseTypeRevolut, nil
 	}
 	var t ImportTemplatesGetBankResponseType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -11531,8 +11587,9 @@ var (
 	importTemplatesListBankResponseRowsItemFieldLenderMetaField              = big.NewInt(1 << 13)
 	importTemplatesListBankResponseRowsItemFieldPartialRefundLabel           = big.NewInt(1 << 14)
 	importTemplatesListBankResponseRowsItemFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesListBankResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 16)
-	importTemplatesListBankResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 17)
+	importTemplatesListBankResponseRowsItemFieldBuiltin                      = big.NewInt(1 << 16)
+	importTemplatesListBankResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 17)
+	importTemplatesListBankResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 18)
 )
 
 type ImportTemplatesListBankResponseRowsItem struct {
@@ -11552,8 +11609,10 @@ type ImportTemplatesListBankResponseRowsItem struct {
 	LenderMetaField              *string                                              `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
 	PartialRefundLabel           *string                                              `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
 	FullRefundLabel              *string                                              `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
-	CreatedAt                    time.Time                                            `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                            `json:"updatedAt" url:"updatedAt"`
+	// Provided by Nordlet for every company; it cannot be changed or deleted
+	Builtin   bool      `json:"builtin" url:"builtin"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11672,6 +11731,13 @@ func (i *ImportTemplatesListBankResponseRowsItem) GetFullRefundLabel() *string {
 		return nil
 	}
 	return i.FullRefundLabel
+}
+
+func (i *ImportTemplatesListBankResponseRowsItem) GetBuiltin() bool {
+	if i == nil {
+		return false
+	}
+	return i.Builtin
 }
 
 func (i *ImportTemplatesListBankResponseRowsItem) GetCreatedAt() time.Time {
@@ -11812,6 +11878,13 @@ func (i *ImportTemplatesListBankResponseRowsItem) SetPartialRefundLabel(partialR
 func (i *ImportTemplatesListBankResponseRowsItem) SetFullRefundLabel(fullRefundLabel *string) {
 	i.FullRefundLabel = fullRefundLabel
 	i.require(importTemplatesListBankResponseRowsItemFieldFullRefundLabel)
+}
+
+// SetBuiltin sets the Builtin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBankResponseRowsItem) SetBuiltin(builtin bool) {
+	i.Builtin = builtin
+	i.require(importTemplatesListBankResponseRowsItemFieldBuiltin)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -12004,6 +12077,7 @@ const (
 	ImportTemplatesListBankResponseRowsItemTypeStripe         ImportTemplatesListBankResponseRowsItemType = "stripe"
 	ImportTemplatesListBankResponseRowsItemTypeIso20022       ImportTemplatesListBankResponseRowsItemType = "iso20022"
 	ImportTemplatesListBankResponseRowsItemTypeBankConnection ImportTemplatesListBankResponseRowsItemType = "bank_connection"
+	ImportTemplatesListBankResponseRowsItemTypeRevolut        ImportTemplatesListBankResponseRowsItemType = "revolut"
 )
 
 func NewImportTemplatesListBankResponseRowsItemTypeFromString(s string) (ImportTemplatesListBankResponseRowsItemType, error) {
@@ -12014,12 +12088,627 @@ func NewImportTemplatesListBankResponseRowsItemTypeFromString(s string) (ImportT
 		return ImportTemplatesListBankResponseRowsItemTypeIso20022, nil
 	case "bank_connection":
 		return ImportTemplatesListBankResponseRowsItemTypeBankConnection, nil
+	case "revolut":
+		return ImportTemplatesListBankResponseRowsItemTypeRevolut, nil
 	}
 	var t ImportTemplatesListBankResponseRowsItemType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
 func (i ImportTemplatesListBankResponseRowsItemType) Ptr() *ImportTemplatesListBankResponseRowsItemType {
+	return &i
+}
+
+var (
+	importTemplatesListBuiltinBankResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type ImportTemplatesListBuiltinBankResponse struct {
+	Rows []*ImportTemplatesListBuiltinBankResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ImportTemplatesListBuiltinBankResponse) GetRows() []*ImportTemplatesListBuiltinBankResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *ImportTemplatesListBuiltinBankResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ImportTemplatesListBuiltinBankResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponse) SetRows(rows []*ImportTemplatesListBuiltinBankResponseRowsItem) {
+	i.Rows = rows
+	i.require(importTemplatesListBuiltinBankResponseFieldRows)
+}
+
+func (i *ImportTemplatesListBuiltinBankResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ImportTemplatesListBuiltinBankResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ImportTemplatesListBuiltinBankResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ImportTemplatesListBuiltinBankResponse) MarshalJSON() ([]byte, error) {
+	type embed ImportTemplatesListBuiltinBankResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ImportTemplatesListBuiltinBankResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	importTemplatesListBuiltinBankResponseRowsItemFieldID                           = big.NewInt(1 << 0)
+	importTemplatesListBuiltinBankResponseRowsItemFieldName                         = big.NewInt(1 << 1)
+	importTemplatesListBuiltinBankResponseRowsItemFieldType                         = big.NewInt(1 << 2)
+	importTemplatesListBuiltinBankResponseRowsItemFieldFields                       = big.NewInt(1 << 3)
+	importTemplatesListBuiltinBankResponseRowsItemFieldMetaFields                   = big.NewInt(1 << 4)
+	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceMetaField             = big.NewInt(1 << 5)
+	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
+	importTemplatesListBuiltinBankResponseRowsItemFieldCompanyMetaField             = big.NewInt(1 << 7)
+	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceItemID                = big.NewInt(1 << 8)
+	importTemplatesListBuiltinBankResponseRowsItemFieldAdvanceInvoices              = big.NewInt(1 << 9)
+	importTemplatesListBuiltinBankResponseRowsItemFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
+	importTemplatesListBuiltinBankResponseRowsItemFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
+	importTemplatesListBuiltinBankResponseRowsItemFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
+	importTemplatesListBuiltinBankResponseRowsItemFieldLenderMetaField              = big.NewInt(1 << 13)
+	importTemplatesListBuiltinBankResponseRowsItemFieldPartialRefundLabel           = big.NewInt(1 << 14)
+	importTemplatesListBuiltinBankResponseRowsItemFieldFullRefundLabel              = big.NewInt(1 << 15)
+	importTemplatesListBuiltinBankResponseRowsItemFieldBuiltin                      = big.NewInt(1 << 16)
+	importTemplatesListBuiltinBankResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 17)
+	importTemplatesListBuiltinBankResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 18)
+)
+
+type ImportTemplatesListBuiltinBankResponseRowsItem struct {
+	ID                           string                                                      `json:"id" url:"id"`
+	Name                         string                                                      `json:"name" url:"name"`
+	Type                         ImportTemplatesListBuiltinBankResponseRowsItemType          `json:"type" url:"type"`
+	Fields                       []*ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem `json:"fields" url:"fields"`
+	MetaFields                   []string                                                    `json:"metaFields" url:"metaFields"`
+	InvoiceMetaField             *string                                                     `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
+	InvoiceVatRatePercent        *string                                                     `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	CompanyMetaField             *string                                                     `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
+	InvoiceItemID                *string                                                     `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
+	AdvanceInvoices              bool                                                        `json:"advanceInvoices" url:"advanceInvoices"`
+	AuthorizationOperationTypeID *string                                                     `json:"authorizationOperationTypeId,omitempty" url:"authorizationOperationTypeId,omitempty"`
+	PayoutOperationTypeID        *string                                                     `json:"payoutOperationTypeId,omitempty" url:"payoutOperationTypeId,omitempty"`
+	CommissionOperationTypeID    *string                                                     `json:"commissionOperationTypeId,omitempty" url:"commissionOperationTypeId,omitempty"`
+	LenderMetaField              *string                                                     `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
+	PartialRefundLabel           *string                                                     `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
+	FullRefundLabel              *string                                                     `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
+	// Provided by Nordlet for every company; it cannot be changed or deleted
+	Builtin   bool      `json:"builtin" url:"builtin"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetType() ImportTemplatesListBuiltinBankResponseRowsItemType {
+	if i == nil {
+		return ""
+	}
+	return i.Type
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetFields() []*ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Fields
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetMetaFields() []string {
+	if i == nil {
+		return nil
+	}
+	return i.MetaFields
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetInvoiceMetaField() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceMetaField
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetInvoiceVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceVatRatePercent
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetCompanyMetaField() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CompanyMetaField
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetInvoiceItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceItemID
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetAdvanceInvoices() bool {
+	if i == nil {
+		return false
+	}
+	return i.AdvanceInvoices
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetAuthorizationOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AuthorizationOperationTypeID
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetPayoutOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PayoutOperationTypeID
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetCommissionOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CommissionOperationTypeID
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetLenderMetaField() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LenderMetaField
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetPartialRefundLabel() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PartialRefundLabel
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetFullRefundLabel() *string {
+	if i == nil {
+		return nil
+	}
+	return i.FullRefundLabel
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetBuiltin() bool {
+	if i == nil {
+		return false
+	}
+	return i.Builtin
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetID(id string) {
+	i.ID = id
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetName(name string) {
+	i.Name = name
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetType(type_ ImportTemplatesListBuiltinBankResponseRowsItemType) {
+	i.Type = type_
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldType)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetFields(fields []*ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) {
+	i.Fields = fields
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldFields)
+}
+
+// SetMetaFields sets the MetaFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetMetaFields(metaFields []string) {
+	i.MetaFields = metaFields
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldMetaFields)
+}
+
+// SetInvoiceMetaField sets the InvoiceMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetInvoiceMetaField(invoiceMetaField *string) {
+	i.InvoiceMetaField = invoiceMetaField
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceMetaField)
+}
+
+// SetInvoiceVatRatePercent sets the InvoiceVatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
+	i.InvoiceVatRatePercent = invoiceVatRatePercent
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceVatRatePercent)
+}
+
+// SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetCompanyMetaField(companyMetaField *string) {
+	i.CompanyMetaField = companyMetaField
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldCompanyMetaField)
+}
+
+// SetInvoiceItemID sets the InvoiceItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetInvoiceItemID(invoiceItemID *string) {
+	i.InvoiceItemID = invoiceItemID
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceItemID)
+}
+
+// SetAdvanceInvoices sets the AdvanceInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetAdvanceInvoices(advanceInvoices bool) {
+	i.AdvanceInvoices = advanceInvoices
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldAdvanceInvoices)
+}
+
+// SetAuthorizationOperationTypeID sets the AuthorizationOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetAuthorizationOperationTypeID(authorizationOperationTypeID *string) {
+	i.AuthorizationOperationTypeID = authorizationOperationTypeID
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldAuthorizationOperationTypeID)
+}
+
+// SetPayoutOperationTypeID sets the PayoutOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetPayoutOperationTypeID(payoutOperationTypeID *string) {
+	i.PayoutOperationTypeID = payoutOperationTypeID
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldPayoutOperationTypeID)
+}
+
+// SetCommissionOperationTypeID sets the CommissionOperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetCommissionOperationTypeID(commissionOperationTypeID *string) {
+	i.CommissionOperationTypeID = commissionOperationTypeID
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldCommissionOperationTypeID)
+}
+
+// SetLenderMetaField sets the LenderMetaField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetLenderMetaField(lenderMetaField *string) {
+	i.LenderMetaField = lenderMetaField
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldLenderMetaField)
+}
+
+// SetPartialRefundLabel sets the PartialRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetPartialRefundLabel(partialRefundLabel *string) {
+	i.PartialRefundLabel = partialRefundLabel
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldPartialRefundLabel)
+}
+
+// SetFullRefundLabel sets the FullRefundLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetFullRefundLabel(fullRefundLabel *string) {
+	i.FullRefundLabel = fullRefundLabel
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldFullRefundLabel)
+}
+
+// SetBuiltin sets the Builtin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetBuiltin(builtin bool) {
+	i.Builtin = builtin
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldBuiltin)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldUpdatedAt)
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ImportTemplatesListBuiltinBankResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ImportTemplatesListBuiltinBankResponseRowsItem(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ImportTemplatesListBuiltinBankResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	importTemplatesListBuiltinBankResponseRowsItemFieldsItemFieldName          = big.NewInt(1 << 0)
+	importTemplatesListBuiltinBankResponseRowsItemFieldsItemFieldAccountCode   = big.NewInt(1 << 1)
+	importTemplatesListBuiltinBankResponseRowsItemFieldsItemFieldCreatePartner = big.NewInt(1 << 2)
+)
+
+type ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem struct {
+	Name          string  `json:"name" url:"name"`
+	AccountCode   *string `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	CreatePartner bool    `json:"createPartner" url:"createPartner"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) GetAccountCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AccountCode
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) GetCreatePartner() bool {
+	if i == nil {
+		return false
+	}
+	return i.CreatePartner
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) SetName(name string) {
+	i.Name = name
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldsItemFieldName)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) SetAccountCode(accountCode *string) {
+	i.AccountCode = accountCode
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldsItemFieldAccountCode)
+}
+
+// SetCreatePartner sets the CreatePartner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) SetCreatePartner(createPartner bool) {
+	i.CreatePartner = createPartner
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldsItemFieldCreatePartner)
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItemFieldsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type ImportTemplatesListBuiltinBankResponseRowsItemType string
+
+const (
+	ImportTemplatesListBuiltinBankResponseRowsItemTypeStripe         ImportTemplatesListBuiltinBankResponseRowsItemType = "stripe"
+	ImportTemplatesListBuiltinBankResponseRowsItemTypeIso20022       ImportTemplatesListBuiltinBankResponseRowsItemType = "iso20022"
+	ImportTemplatesListBuiltinBankResponseRowsItemTypeBankConnection ImportTemplatesListBuiltinBankResponseRowsItemType = "bank_connection"
+	ImportTemplatesListBuiltinBankResponseRowsItemTypeRevolut        ImportTemplatesListBuiltinBankResponseRowsItemType = "revolut"
+)
+
+func NewImportTemplatesListBuiltinBankResponseRowsItemTypeFromString(s string) (ImportTemplatesListBuiltinBankResponseRowsItemType, error) {
+	switch s {
+	case "stripe":
+		return ImportTemplatesListBuiltinBankResponseRowsItemTypeStripe, nil
+	case "iso20022":
+		return ImportTemplatesListBuiltinBankResponseRowsItemTypeIso20022, nil
+	case "bank_connection":
+		return ImportTemplatesListBuiltinBankResponseRowsItemTypeBankConnection, nil
+	case "revolut":
+		return ImportTemplatesListBuiltinBankResponseRowsItemTypeRevolut, nil
+	}
+	var t ImportTemplatesListBuiltinBankResponseRowsItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i ImportTemplatesListBuiltinBankResponseRowsItemType) Ptr() *ImportTemplatesListBuiltinBankResponseRowsItemType {
 	return &i
 }
 
@@ -12145,6 +12834,7 @@ const (
 	ImportTemplatesUpdateBankRequestTypeStripe         ImportTemplatesUpdateBankRequestType = "stripe"
 	ImportTemplatesUpdateBankRequestTypeIso20022       ImportTemplatesUpdateBankRequestType = "iso20022"
 	ImportTemplatesUpdateBankRequestTypeBankConnection ImportTemplatesUpdateBankRequestType = "bank_connection"
+	ImportTemplatesUpdateBankRequestTypeRevolut        ImportTemplatesUpdateBankRequestType = "revolut"
 )
 
 func NewImportTemplatesUpdateBankRequestTypeFromString(s string) (ImportTemplatesUpdateBankRequestType, error) {
@@ -12155,6 +12845,8 @@ func NewImportTemplatesUpdateBankRequestTypeFromString(s string) (ImportTemplate
 		return ImportTemplatesUpdateBankRequestTypeIso20022, nil
 	case "bank_connection":
 		return ImportTemplatesUpdateBankRequestTypeBankConnection, nil
+	case "revolut":
+		return ImportTemplatesUpdateBankRequestTypeRevolut, nil
 	}
 	var t ImportTemplatesUpdateBankRequestType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -12181,8 +12873,9 @@ var (
 	importTemplatesUpdateBankResponseFieldLenderMetaField              = big.NewInt(1 << 13)
 	importTemplatesUpdateBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
 	importTemplatesUpdateBankResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesUpdateBankResponseFieldCreatedAt                    = big.NewInt(1 << 16)
-	importTemplatesUpdateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 17)
+	importTemplatesUpdateBankResponseFieldBuiltin                      = big.NewInt(1 << 16)
+	importTemplatesUpdateBankResponseFieldCreatedAt                    = big.NewInt(1 << 17)
+	importTemplatesUpdateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 18)
 )
 
 type ImportTemplatesUpdateBankResponse struct {
@@ -12202,8 +12895,10 @@ type ImportTemplatesUpdateBankResponse struct {
 	LenderMetaField              *string                                        `json:"lenderMetaField,omitempty" url:"lenderMetaField,omitempty"`
 	PartialRefundLabel           *string                                        `json:"partialRefundLabel,omitempty" url:"partialRefundLabel,omitempty"`
 	FullRefundLabel              *string                                        `json:"fullRefundLabel,omitempty" url:"fullRefundLabel,omitempty"`
-	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
+	// Provided by Nordlet for every company; it cannot be changed or deleted
+	Builtin   bool      `json:"builtin" url:"builtin"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12322,6 +13017,13 @@ func (i *ImportTemplatesUpdateBankResponse) GetFullRefundLabel() *string {
 		return nil
 	}
 	return i.FullRefundLabel
+}
+
+func (i *ImportTemplatesUpdateBankResponse) GetBuiltin() bool {
+	if i == nil {
+		return false
+	}
+	return i.Builtin
 }
 
 func (i *ImportTemplatesUpdateBankResponse) GetCreatedAt() time.Time {
@@ -12462,6 +13164,13 @@ func (i *ImportTemplatesUpdateBankResponse) SetPartialRefundLabel(partialRefundL
 func (i *ImportTemplatesUpdateBankResponse) SetFullRefundLabel(fullRefundLabel *string) {
 	i.FullRefundLabel = fullRefundLabel
 	i.require(importTemplatesUpdateBankResponseFieldFullRefundLabel)
+}
+
+// SetBuiltin sets the Builtin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesUpdateBankResponse) SetBuiltin(builtin bool) {
+	i.Builtin = builtin
+	i.require(importTemplatesUpdateBankResponseFieldBuiltin)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -12654,6 +13363,7 @@ const (
 	ImportTemplatesUpdateBankResponseTypeStripe         ImportTemplatesUpdateBankResponseType = "stripe"
 	ImportTemplatesUpdateBankResponseTypeIso20022       ImportTemplatesUpdateBankResponseType = "iso20022"
 	ImportTemplatesUpdateBankResponseTypeBankConnection ImportTemplatesUpdateBankResponseType = "bank_connection"
+	ImportTemplatesUpdateBankResponseTypeRevolut        ImportTemplatesUpdateBankResponseType = "revolut"
 )
 
 func NewImportTemplatesUpdateBankResponseTypeFromString(s string) (ImportTemplatesUpdateBankResponseType, error) {
@@ -12664,6 +13374,8 @@ func NewImportTemplatesUpdateBankResponseTypeFromString(s string) (ImportTemplat
 		return ImportTemplatesUpdateBankResponseTypeIso20022, nil
 	case "bank_connection":
 		return ImportTemplatesUpdateBankResponseTypeBankConnection, nil
+	case "revolut":
+		return ImportTemplatesUpdateBankResponseTypeRevolut, nil
 	}
 	var t ImportTemplatesUpdateBankResponseType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -23172,9 +23884,10 @@ func (s SettlementsUnlinkBankResponseStatus) Ptr() *SettlementsUnlinkBankRespons
 type StatementsImportBankRequestFormat string
 
 const (
-	StatementsImportBankRequestFormatCamt053   StatementsImportBankRequestFormat = "camt053"
-	StatementsImportBankRequestFormatMt940     StatementsImportBankRequestFormat = "mt940"
-	StatementsImportBankRequestFormatStripeCsv StatementsImportBankRequestFormat = "stripe-csv"
+	StatementsImportBankRequestFormatCamt053    StatementsImportBankRequestFormat = "camt053"
+	StatementsImportBankRequestFormatMt940      StatementsImportBankRequestFormat = "mt940"
+	StatementsImportBankRequestFormatStripeCsv  StatementsImportBankRequestFormat = "stripe-csv"
+	StatementsImportBankRequestFormatRevolutCsv StatementsImportBankRequestFormat = "revolut-csv"
 )
 
 func NewStatementsImportBankRequestFormatFromString(s string) (StatementsImportBankRequestFormat, error) {
@@ -23185,6 +23898,8 @@ func NewStatementsImportBankRequestFormatFromString(s string) (StatementsImportB
 		return StatementsImportBankRequestFormatMt940, nil
 	case "stripe-csv":
 		return StatementsImportBankRequestFormatStripeCsv, nil
+	case "revolut-csv":
+		return StatementsImportBankRequestFormatRevolutCsv, nil
 	}
 	var t StatementsImportBankRequestFormat
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

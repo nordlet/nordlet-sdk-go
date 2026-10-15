@@ -9043,7 +9043,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"translations\": {},\n      \"type\": \"asset\",\n      \"parentId\": \"parentId\",\n      \"isPostable\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"displayName\": \"displayName\",\n      \"type\": \"asset\",\n      \"parentId\": \"parentId\",\n      \"isPostable\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9074,7 +9074,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"code\": \"code\",\n  \"name\": \"name\",\n  \"translations\": {\n    \"key\": {\n      \"name\": \"name\"\n    }\n  },\n  \"type\": \"asset\",\n  \"parentId\": \"parentId\",\n  \"isPostable\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"code\": \"code\",\n  \"name\": \"name\",\n  \"displayName\": \"displayName\",\n  \"type\": \"asset\",\n  \"parentId\": \"parentId\",\n  \"isPostable\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9105,7 +9105,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"code\": \"code\",\n  \"name\": \"name\",\n  \"translations\": {\n    \"key\": {\n      \"name\": \"name\"\n    }\n  },\n  \"type\": \"asset\",\n  \"parentId\": \"parentId\",\n  \"isPostable\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"code\": \"code\",\n  \"name\": \"name\",\n  \"displayName\": \"displayName\",\n  \"type\": \"asset\",\n  \"parentId\": \"parentId\",\n  \"isPostable\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16297,7 +16297,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16328,7 +16328,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16390,12 +16390,43 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "df8f0145-126c-47cd-8030-7d6ddf065582",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ef24d9b3-4897-44d0-8817-cb6d325d5218",
+      "name": "Import templates Nordlet provides for every company - default",
+      "request": {
+        "urlPathTemplate": "/v1/bank/import-templates/list-builtin",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"builtin\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ef24d9b3-4897-44d0-8817-cb6d325d5218",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -16421,7 +16452,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"builtin\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20506,6 +20537,6 @@
     }
   ],
   "meta": {
-    "total": 661
+    "total": 662
   }
 }

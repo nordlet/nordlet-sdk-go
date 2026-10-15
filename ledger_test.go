@@ -27,14 +27,6 @@ func TestSettersAccountsCreateLedgerRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTranslations", func(t *testing.T) {
-		obj := &AccountsCreateLedgerRequest{}
-		var fernTestValueTranslations map[string]*AccountsCreateLedgerRequestTranslationsValue
-		obj.SetTranslations(fernTestValueTranslations)
-		assert.Equal(t, fernTestValueTranslations, obj.Translations)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetType", func(t *testing.T) {
 		obj := &AccountsCreateLedgerRequest{}
 		var fernTestValueType AccountsCreateLedgerRequestType
@@ -101,37 +93,6 @@ func TestSettersMarkExplicitAccountsCreateLedgerRequest(t *testing.T) {
 
 		// Act
 		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTranslations_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerRequest{}
-		var fernTestValueTranslations map[string]*AccountsCreateLedgerRequestTranslationsValue
-
-		// Act
-		obj.SetTranslations(fernTestValueTranslations)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -468,14 +429,6 @@ func TestSettersAccountsUpdateLedgerRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTranslations", func(t *testing.T) {
-		obj := &AccountsUpdateLedgerRequest{}
-		var fernTestValueTranslations map[string]*AccountsUpdateLedgerRequestTranslationsValue
-		obj.SetTranslations(fernTestValueTranslations)
-		assert.Equal(t, fernTestValueTranslations, obj.Translations)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetParentID", func(t *testing.T) {
 		obj := &AccountsUpdateLedgerRequest{}
 		var fernTestValueParentID *string
@@ -534,37 +487,6 @@ func TestSettersMarkExplicitAccountsUpdateLedgerRequest(t *testing.T) {
 
 		// Act
 		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetTranslations_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerRequest{}
-		var fernTestValueTranslations map[string]*AccountsUpdateLedgerRequestTranslationsValue
-
-		// Act
-		obj.SetTranslations(fernTestValueTranslations)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3963,77 +3885,6 @@ func TestSettersMarkExplicitAccountsApplyTemplateLedgerResponse(t *testing.T) {
 
 }
 
-func TestSettersAccountsCreateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("SetName", func(t *testing.T) {
-		obj := &AccountsCreateLedgerRequestTranslationsValue{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersAccountsCreateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerRequestTranslationsValue{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsCreateLedgerRequestTranslationsValue
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitAccountsCreateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerRequestTranslationsValue{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
 func TestSettersAccountsCreateLedgerResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
 		obj := &AccountsCreateLedgerResponse{}
@@ -4059,11 +3910,11 @@ func TestSettersAccountsCreateLedgerResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTranslations", func(t *testing.T) {
+	t.Run("SetDisplayName", func(t *testing.T) {
 		obj := &AccountsCreateLedgerResponse{}
-		var fernTestValueTranslations map[string]*AccountsCreateLedgerResponseTranslationsValue
-		obj.SetTranslations(fernTestValueTranslations)
-		assert.Equal(t, fernTestValueTranslations, obj.Translations)
+		var fernTestValueDisplayName string
+		obj.SetDisplayName(fernTestValueDisplayName)
+		assert.Equal(t, fernTestValueDisplayName, obj.DisplayName)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -4171,28 +4022,18 @@ func TestGettersAccountsCreateLedgerResponse(t *testing.T) {
 		_ = obj.GetName() // Should return zero value
 	})
 
-	t.Run("GetTranslations", func(t *testing.T) {
+	t.Run("GetDisplayName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &AccountsCreateLedgerResponse{}
-		var expected map[string]*AccountsCreateLedgerResponseTranslationsValue
-		obj.Translations = expected
+		var expected string
+		obj.DisplayName = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetTranslations(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetDisplayName(), "getter should return the property value")
 	})
 
-	t.Run("GetTranslations_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerResponse{}
-		obj.Translations = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTranslations(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTranslations_NilReceiver", func(t *testing.T) {
+	t.Run("GetDisplayName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *AccountsCreateLedgerResponse
 		// Should not panic - getters should handle nil receiver gracefully
@@ -4201,7 +4042,7 @@ func TestGettersAccountsCreateLedgerResponse(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetTranslations() // Should return zero value
+		_ = obj.GetDisplayName() // Should return zero value
 	})
 
 	t.Run("GetType", func(t *testing.T) {
@@ -4402,14 +4243,14 @@ func TestSettersMarkExplicitAccountsCreateLedgerResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTranslations_MarksExplicit", func(t *testing.T) {
+	t.Run("SetDisplayName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &AccountsCreateLedgerResponse{}
-		var fernTestValueTranslations map[string]*AccountsCreateLedgerResponseTranslationsValue
+		var fernTestValueDisplayName string
 
 		// Act
-		obj.SetTranslations(fernTestValueTranslations)
+		obj.SetDisplayName(fernTestValueDisplayName)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4534,77 +4375,6 @@ func TestSettersMarkExplicitAccountsCreateLedgerResponse(t *testing.T) {
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersAccountsCreateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("SetName", func(t *testing.T) {
-		obj := &AccountsCreateLedgerResponseTranslationsValue{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersAccountsCreateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerResponseTranslationsValue{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsCreateLedgerResponseTranslationsValue
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitAccountsCreateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerResponseTranslationsValue{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -5568,11 +5338,11 @@ func TestSettersAccountsListLedgerResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTranslations", func(t *testing.T) {
+	t.Run("SetDisplayName", func(t *testing.T) {
 		obj := &AccountsListLedgerResponseRowsItem{}
-		var fernTestValueTranslations map[string]*AccountsListLedgerResponseRowsItemTranslationsValue
-		obj.SetTranslations(fernTestValueTranslations)
-		assert.Equal(t, fernTestValueTranslations, obj.Translations)
+		var fernTestValueDisplayName string
+		obj.SetDisplayName(fernTestValueDisplayName)
+		assert.Equal(t, fernTestValueDisplayName, obj.DisplayName)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -5680,28 +5450,18 @@ func TestGettersAccountsListLedgerResponseRowsItem(t *testing.T) {
 		_ = obj.GetName() // Should return zero value
 	})
 
-	t.Run("GetTranslations", func(t *testing.T) {
+	t.Run("GetDisplayName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &AccountsListLedgerResponseRowsItem{}
-		var expected map[string]*AccountsListLedgerResponseRowsItemTranslationsValue
-		obj.Translations = expected
+		var expected string
+		obj.DisplayName = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetTranslations(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetDisplayName(), "getter should return the property value")
 	})
 
-	t.Run("GetTranslations_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsListLedgerResponseRowsItem{}
-		obj.Translations = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTranslations(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTranslations_NilReceiver", func(t *testing.T) {
+	t.Run("GetDisplayName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *AccountsListLedgerResponseRowsItem
 		// Should not panic - getters should handle nil receiver gracefully
@@ -5710,7 +5470,7 @@ func TestGettersAccountsListLedgerResponseRowsItem(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetTranslations() // Should return zero value
+		_ = obj.GetDisplayName() // Should return zero value
 	})
 
 	t.Run("GetType", func(t *testing.T) {
@@ -5911,14 +5671,14 @@ func TestSettersMarkExplicitAccountsListLedgerResponseRowsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTranslations_MarksExplicit", func(t *testing.T) {
+	t.Run("SetDisplayName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &AccountsListLedgerResponseRowsItem{}
-		var fernTestValueTranslations map[string]*AccountsListLedgerResponseRowsItemTranslationsValue
+		var fernTestValueDisplayName string
 
 		// Act
-		obj.SetTranslations(fernTestValueTranslations)
+		obj.SetDisplayName(fernTestValueDisplayName)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -6043,77 +5803,6 @@ func TestSettersMarkExplicitAccountsListLedgerResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersAccountsListLedgerResponseRowsItemTranslationsValue(t *testing.T) {
-	t.Run("SetName", func(t *testing.T) {
-		obj := &AccountsListLedgerResponseRowsItemTranslationsValue{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersAccountsListLedgerResponseRowsItemTranslationsValue(t *testing.T) {
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsListLedgerResponseRowsItemTranslationsValue{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsListLedgerResponseRowsItemTranslationsValue
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitAccountsListLedgerResponseRowsItemTranslationsValue(t *testing.T) {
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsListLedgerResponseRowsItemTranslationsValue{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -6272,77 +5961,6 @@ func TestSettersMarkExplicitAccountsSwitchChartLedgerResponse(t *testing.T) {
 
 }
 
-func TestSettersAccountsUpdateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("SetName", func(t *testing.T) {
-		obj := &AccountsUpdateLedgerRequestTranslationsValue{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersAccountsUpdateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerRequestTranslationsValue{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsUpdateLedgerRequestTranslationsValue
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitAccountsUpdateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerRequestTranslationsValue{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
 func TestSettersAccountsUpdateLedgerResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
 		obj := &AccountsUpdateLedgerResponse{}
@@ -6368,11 +5986,11 @@ func TestSettersAccountsUpdateLedgerResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetTranslations", func(t *testing.T) {
+	t.Run("SetDisplayName", func(t *testing.T) {
 		obj := &AccountsUpdateLedgerResponse{}
-		var fernTestValueTranslations map[string]*AccountsUpdateLedgerResponseTranslationsValue
-		obj.SetTranslations(fernTestValueTranslations)
-		assert.Equal(t, fernTestValueTranslations, obj.Translations)
+		var fernTestValueDisplayName string
+		obj.SetDisplayName(fernTestValueDisplayName)
+		assert.Equal(t, fernTestValueDisplayName, obj.DisplayName)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -6480,28 +6098,18 @@ func TestGettersAccountsUpdateLedgerResponse(t *testing.T) {
 		_ = obj.GetName() // Should return zero value
 	})
 
-	t.Run("GetTranslations", func(t *testing.T) {
+	t.Run("GetDisplayName", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &AccountsUpdateLedgerResponse{}
-		var expected map[string]*AccountsUpdateLedgerResponseTranslationsValue
-		obj.Translations = expected
+		var expected string
+		obj.DisplayName = expected
 
 		// Act & Assert
-		assert.Equal(t, expected, obj.GetTranslations(), "getter should return the property value")
+		assert.Equal(t, expected, obj.GetDisplayName(), "getter should return the property value")
 	})
 
-	t.Run("GetTranslations_NilValue", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerResponse{}
-		obj.Translations = nil
-
-		// Act & Assert
-		assert.Nil(t, obj.GetTranslations(), "getter should return nil when property is nil")
-	})
-
-	t.Run("GetTranslations_NilReceiver", func(t *testing.T) {
+	t.Run("GetDisplayName_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *AccountsUpdateLedgerResponse
 		// Should not panic - getters should handle nil receiver gracefully
@@ -6510,7 +6118,7 @@ func TestGettersAccountsUpdateLedgerResponse(t *testing.T) {
 				t.Errorf("Getter panicked on nil receiver: %v", r)
 			}
 		}()
-		_ = obj.GetTranslations() // Should return zero value
+		_ = obj.GetDisplayName() // Should return zero value
 	})
 
 	t.Run("GetType", func(t *testing.T) {
@@ -6711,14 +6319,14 @@ func TestSettersMarkExplicitAccountsUpdateLedgerResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetTranslations_MarksExplicit", func(t *testing.T) {
+	t.Run("SetDisplayName_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &AccountsUpdateLedgerResponse{}
-		var fernTestValueTranslations map[string]*AccountsUpdateLedgerResponseTranslationsValue
+		var fernTestValueDisplayName string
 
 		// Act
-		obj.SetTranslations(fernTestValueTranslations)
+		obj.SetDisplayName(fernTestValueDisplayName)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -6843,77 +6451,6 @@ func TestSettersMarkExplicitAccountsUpdateLedgerResponse(t *testing.T) {
 
 		// Act
 		obj.SetCreatedAt(fernTestValueCreatedAt)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-}
-
-func TestSettersAccountsUpdateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("SetName", func(t *testing.T) {
-		obj := &AccountsUpdateLedgerResponseTranslationsValue{}
-		var fernTestValueName string
-		obj.SetName(fernTestValueName)
-		assert.Equal(t, fernTestValueName, obj.Name)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-}
-
-func TestGettersAccountsUpdateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("GetName", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerResponseTranslationsValue{}
-		var expected string
-		obj.Name = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetName(), "getter should return the property value")
-	})
-
-	t.Run("GetName_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsUpdateLedgerResponseTranslationsValue
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetName() // Should return zero value
-	})
-
-}
-
-func TestSettersMarkExplicitAccountsUpdateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("SetName_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerResponseTranslationsValue{}
-		var fernTestValueName string
-
-		// Act
-		obj.SetName(fernTestValueName)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -25467,39 +25004,6 @@ func TestJSONMarshalingAccountsApplyTemplateLedgerResponse(t *testing.T) {
 	})
 }
 
-func TestJSONMarshalingAccountsCreateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerRequestTranslationsValue{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled AccountsCreateLedgerRequestTranslationsValue
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsCreateLedgerRequestTranslationsValue
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsCreateLedgerRequestTranslationsValue
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
 func TestJSONMarshalingAccountsCreateLedgerResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -25528,39 +25032,6 @@ func TestJSONMarshalingAccountsCreateLedgerResponse(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj AccountsCreateLedgerResponse
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
-func TestJSONMarshalingAccountsCreateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsCreateLedgerResponseTranslationsValue{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled AccountsCreateLedgerResponseTranslationsValue
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsCreateLedgerResponseTranslationsValue
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsCreateLedgerResponseTranslationsValue
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -25698,39 +25169,6 @@ func TestJSONMarshalingAccountsListLedgerResponseRowsItem(t *testing.T) {
 	})
 }
 
-func TestJSONMarshalingAccountsListLedgerResponseRowsItemTranslationsValue(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsListLedgerResponseRowsItemTranslationsValue{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled AccountsListLedgerResponseRowsItemTranslationsValue
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsListLedgerResponseRowsItemTranslationsValue
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsListLedgerResponseRowsItemTranslationsValue
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
 func TestJSONMarshalingAccountsSwitchChartLedgerResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -25764,39 +25202,6 @@ func TestJSONMarshalingAccountsSwitchChartLedgerResponse(t *testing.T) {
 	})
 }
 
-func TestJSONMarshalingAccountsUpdateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerRequestTranslationsValue{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled AccountsUpdateLedgerRequestTranslationsValue
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsUpdateLedgerRequestTranslationsValue
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsUpdateLedgerRequestTranslationsValue
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
 func TestJSONMarshalingAccountsUpdateLedgerResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -25825,39 +25230,6 @@ func TestJSONMarshalingAccountsUpdateLedgerResponse(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj AccountsUpdateLedgerResponse
-		err := json.Unmarshal([]byte(`{}`), &obj)
-		assert.NoError(t, err, "unmarshaling empty object should succeed")
-	})
-}
-
-func TestJSONMarshalingAccountsUpdateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("MarshalUnmarshal", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountsUpdateLedgerResponseTranslationsValue{}
-
-		// Act - Marshal to JSON
-		data, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed")
-		assert.NotNil(t, data, "marshaled data should not be nil")
-		assert.NotEmpty(t, data, "marshaled data should not be empty")
-
-		// Unmarshal back and verify round-trip
-		var unmarshaled AccountsUpdateLedgerResponseTranslationsValue
-		err = json.Unmarshal(data, &unmarshaled)
-		assert.NoError(t, err, "round-trip unmarshal should succeed")
-	})
-
-	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsUpdateLedgerResponseTranslationsValue
-		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
-		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
-	})
-
-	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
-		t.Parallel()
-		var obj AccountsUpdateLedgerResponseTranslationsValue
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -27628,22 +27000,6 @@ func TestStringAccountsApplyTemplateLedgerResponse(t *testing.T) {
 	})
 }
 
-func TestStringAccountsCreateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsCreateLedgerRequestTranslationsValue{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsCreateLedgerRequestTranslationsValue
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
 func TestStringAccountsCreateLedgerResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -27655,22 +27011,6 @@ func TestStringAccountsCreateLedgerResponse(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *AccountsCreateLedgerResponse
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
-func TestStringAccountsCreateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsCreateLedgerResponseTranslationsValue{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsCreateLedgerResponseTranslationsValue
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -27740,22 +27080,6 @@ func TestStringAccountsListLedgerResponseRowsItem(t *testing.T) {
 	})
 }
 
-func TestStringAccountsListLedgerResponseRowsItemTranslationsValue(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsListLedgerResponseRowsItemTranslationsValue{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsListLedgerResponseRowsItemTranslationsValue
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
 func TestStringAccountsSwitchChartLedgerResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -27772,22 +27096,6 @@ func TestStringAccountsSwitchChartLedgerResponse(t *testing.T) {
 	})
 }
 
-func TestStringAccountsUpdateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsUpdateLedgerRequestTranslationsValue{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsUpdateLedgerRequestTranslationsValue
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
 func TestStringAccountsUpdateLedgerResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -27799,22 +27107,6 @@ func TestStringAccountsUpdateLedgerResponse(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *AccountsUpdateLedgerResponse
-		result := obj.String()
-		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
-	})
-}
-
-func TestStringAccountsUpdateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("StringMethod", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsUpdateLedgerResponseTranslationsValue{}
-		result := obj.String()
-		assert.NotEmpty(t, result, "String() should return a non-empty representation")
-	})
-
-	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsUpdateLedgerResponseTranslationsValue
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -29902,6 +29194,27 @@ func TestEnumPostingRulesUpdateLedgerRequestRulesItemKey(t *testing.T) {
 		assert.Equal(t, PostingRulesUpdateLedgerRequestRulesItemKey("bank.fxLoss"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_bank_fees", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString("bank.fees")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostingRulesUpdateLedgerRequestRulesItemKey("bank.fees"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank_cardPayments", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString("bank.cardPayments")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostingRulesUpdateLedgerRequestRulesItemKey("bank.cardPayments"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bank_topUps", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString("bank.topUps")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostingRulesUpdateLedgerRequestRulesItemKey("bank.topUps"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_settlements_fees", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString("settlements.fees")
@@ -30195,29 +29508,6 @@ func TestExtraPropertiesAccountsApplyTemplateLedgerResponse(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesAccountsCreateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsCreateLedgerRequestTranslationsValue{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsCreateLedgerRequestTranslationsValue
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
 func TestExtraPropertiesAccountsCreateLedgerResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -30236,29 +29526,6 @@ func TestExtraPropertiesAccountsCreateLedgerResponse(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *AccountsCreateLedgerResponse
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
-func TestExtraPropertiesAccountsCreateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsCreateLedgerResponseTranslationsValue{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsCreateLedgerResponseTranslationsValue
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -30356,29 +29623,6 @@ func TestExtraPropertiesAccountsListLedgerResponseRowsItem(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesAccountsListLedgerResponseRowsItemTranslationsValue(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsListLedgerResponseRowsItemTranslationsValue{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsListLedgerResponseRowsItemTranslationsValue
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
 func TestExtraPropertiesAccountsSwitchChartLedgerResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -30402,29 +29646,6 @@ func TestExtraPropertiesAccountsSwitchChartLedgerResponse(t *testing.T) {
 	})
 }
 
-func TestExtraPropertiesAccountsUpdateLedgerRequestTranslationsValue(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsUpdateLedgerRequestTranslationsValue{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsUpdateLedgerRequestTranslationsValue
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
 func TestExtraPropertiesAccountsUpdateLedgerResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -30443,29 +29664,6 @@ func TestExtraPropertiesAccountsUpdateLedgerResponse(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *AccountsUpdateLedgerResponse
-		extraProps := obj.GetExtraProperties()
-		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
-	})
-}
-
-func TestExtraPropertiesAccountsUpdateLedgerResponseTranslationsValue(t *testing.T) {
-	t.Run("GetExtraProperties", func(t *testing.T) {
-		t.Parallel()
-		obj := &AccountsUpdateLedgerResponseTranslationsValue{}
-		// Should not panic when calling GetExtraProperties()
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("GetExtraProperties() panicked: %v", r)
-			}
-		}()
-		extraProps := obj.GetExtraProperties()
-		// Result can be nil or an empty/non-empty map
-		_ = extraProps
-	})
-
-	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountsUpdateLedgerResponseTranslationsValue
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

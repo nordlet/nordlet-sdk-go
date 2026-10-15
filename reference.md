@@ -21623,14 +21623,6 @@ client.Ledger.AccountsCreate(
 <dl>
 <dd>
 
-**translations:** `map[string]*nordlet.AccountsCreateLedgerRequestTranslationsValue` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **type_:** `*nordlet.AccountsCreateLedgerRequestType` 
     
 </dd>
@@ -21703,14 +21695,6 @@ client.Ledger.AccountsUpdate(
 <dd>
 
 **name:** `*string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**translations:** `map[string]*nordlet.AccountsUpdateLedgerRequestTranslationsValue` 
     
 </dd>
 </dl>
@@ -39523,6 +39507,36 @@ client.Bank.ImportTemplatesGet(
 
 **id:** `string` 
     
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Bank.ImportTemplatesListBuiltin(request) -> *nordlet.ImportTemplatesListBuiltinBankResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ImportTemplatesListBuiltinBankRequest{}
+client.Bank.ImportTemplatesListBuiltin(
+        context.TODO(),
+        request,
+    )
+}
+```
 </dd>
 </dl>
 </dd>

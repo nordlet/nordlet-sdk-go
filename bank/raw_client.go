@@ -692,6 +692,50 @@ func (r *RawClient) ImportTemplatesGet(
 	}, nil
 }
 
+func (r *RawClient) ImportTemplatesListBuiltin(
+	ctx context.Context,
+	request *nordlet.ImportTemplatesListBuiltinBankRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.ImportTemplatesListBuiltinBankResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/bank/import-templates/list-builtin"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.ImportTemplatesListBuiltinBankResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.ImportTemplatesListBuiltinBankResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) ImportTemplatesList(
 	ctx context.Context,
 	request *nordlet.ImportTemplatesListBankRequest,

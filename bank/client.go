@@ -275,6 +275,22 @@ func (c *Client) ImportTemplatesGet(
 	return response.Body, nil
 }
 
+func (c *Client) ImportTemplatesListBuiltin(
+	ctx context.Context,
+	request *nordlet.ImportTemplatesListBuiltinBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.ImportTemplatesListBuiltinBankResponse, error) {
+	response, err := c.WithRawResponse.ImportTemplatesListBuiltin(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) ImportTemplatesList(
 	ctx context.Context,
 	request *nordlet.ImportTemplatesListBankRequest,
