@@ -1138,6 +1138,30 @@ func TestBankSecuritiesGetWithWireMock(
 	VerifyRequestCount(t, "TestBankSecuritiesGetWithWireMock", "POST", "/v1/bank/securities/get", nil, 1)
 }
 
+func TestBankSecuritiesOperationsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SecuritiesOperationsListBankRequest{}
+	_, invocationErr := client.Bank.SecuritiesOperationsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankSecuritiesOperationsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankSecuritiesOperationsListWithWireMock", "POST", "/v1/bank/securities/operations/list", nil, 1)
+}
+
 func TestBankFeedsBanksListWithWireMock(
 	t *testing.T,
 ) {

@@ -678,6 +678,22 @@ func (c *Client) SecuritiesGet(
 	return response.Body, nil
 }
 
+func (c *Client) SecuritiesOperationsList(
+	ctx context.Context,
+	request *nordlet.SecuritiesOperationsListBankRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SecuritiesOperationsListBankResponse, error) {
+	response, err := c.WithRawResponse.SecuritiesOperationsList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) FeedsBanksList(
 	ctx context.Context,
 	request *nordlet.FeedsBanksListBankRequest,

@@ -8733,7 +8733,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"system\": \"system\",\n  \"country\": \"country\",\n  \"title\": \"title\",\n  \"fields\": [\n    {\n      \"key\": \"key\",\n      \"kind\": \"text\",\n      \"multiline\": true,\n      \"options\": [\n        \"options\"\n      ]\n    }\n  ],\n  \"endpoints\": [\n    {\n      \"name\": \"name\",\n      \"test\": \"test\",\n      \"production\": \"production\"\n    }\n  ],\n  \"values\": {\n    \"key\": \"value\"\n  },\n  \"acceptsCertificate\": true\n}",
+        "body": "{\n  \"system\": \"system\",\n  \"country\": \"country\",\n  \"title\": \"title\",\n  \"fields\": [\n    {\n      \"key\": \"key\",\n      \"kind\": \"text\",\n      \"multiline\": true,\n      \"options\": [\n        \"options\"\n      ],\n      \"companyField\": \"code\"\n    }\n  ],\n  \"endpoints\": [\n    {\n      \"name\": \"name\",\n      \"test\": \"test\",\n      \"production\": \"production\"\n    }\n  ],\n  \"values\": {\n    \"key\": \"value\"\n  },\n  \"acceptsCertificate\": true\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -17165,12 +17165,43 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"broker\": \"broker\",\n  \"brokerAccount\": \"brokerAccount\",\n  \"period\": \"period\",\n  \"fileName\": \"fileName\",\n  \"operationCount\": 1000000,\n  \"duplicateCount\": 1000000,\n  \"postedCount\": 1000000,\n  \"notPostedCount\": 1000000,\n  \"realizedTotal\": \"realizedTotal\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"operations\": [\n    {\n      \"id\": \"id\",\n      \"kind\": \"kind\",\n      \"date\": \"2026-07-01\",\n      \"time\": \"time\",\n      \"assetCategory\": \"assetCategory\",\n      \"symbol\": \"symbol\",\n      \"description\": \"description\",\n      \"currency\": \"currency\",\n      \"quantity\": \"quantity\",\n      \"price\": \"price\",\n      \"amount\": \"amount\",\n      \"fee\": \"fee\",\n      \"brokerRealized\": \"brokerRealized\",\n      \"code\": \"code\",\n      \"fxRate\": \"fxRate\",\n      \"cashBase\": \"cashBase\",\n      \"costBase\": \"costBase\",\n      \"realizedBase\": \"realizedBase\",\n      \"status\": \"posted\",\n      \"note\": \"note\",\n      \"journalTransactionId\": \"journalTransactionId\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"broker\": \"broker\",\n  \"brokerAccount\": \"brokerAccount\",\n  \"period\": \"period\",\n  \"fileName\": \"fileName\",\n  \"operationCount\": 1000000,\n  \"duplicateCount\": 1000000,\n  \"postedCount\": 1000000,\n  \"notPostedCount\": 1000000,\n  \"realizedTotal\": \"realizedTotal\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"operations\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"kind\": \"kind\",\n      \"date\": \"2026-07-01\",\n      \"time\": \"time\",\n      \"assetCategory\": \"assetCategory\",\n      \"symbol\": \"symbol\",\n      \"description\": \"description\",\n      \"currency\": \"currency\",\n      \"quantity\": \"quantity\",\n      \"price\": \"price\",\n      \"amount\": \"amount\",\n      \"fee\": \"fee\",\n      \"brokerRealized\": \"brokerRealized\",\n      \"code\": \"code\",\n      \"fxRate\": \"fxRate\",\n      \"cashBase\": \"cashBase\",\n      \"costBase\": \"costBase\",\n      \"realizedBase\": \"realizedBase\",\n      \"status\": \"posted\",\n      \"note\": \"note\",\n      \"journalTransactionId\": \"journalTransactionId\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "234de207-4f97-4e45-b514-97efac621295",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "b82e4a96-9563-40f2-a989-620aa772ca61",
+      "name": "Bank securities operations list - default",
+      "request": {
+        "urlPathTemplate": "/v1/bank/securities/operations/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"kind\": \"kind\",\n      \"date\": \"2026-07-01\",\n      \"time\": \"time\",\n      \"assetCategory\": \"assetCategory\",\n      \"symbol\": \"symbol\",\n      \"description\": \"description\",\n      \"currency\": \"currency\",\n      \"quantity\": \"quantity\",\n      \"price\": \"price\",\n      \"amount\": \"amount\",\n      \"fee\": \"fee\",\n      \"brokerRealized\": \"brokerRealized\",\n      \"code\": \"code\",\n      \"fxRate\": \"fxRate\",\n      \"cashBase\": \"cashBase\",\n      \"costBase\": \"costBase\",\n      \"realizedBase\": \"realizedBase\",\n      \"status\": \"posted\",\n      \"note\": \"note\",\n      \"journalTransactionId\": \"journalTransactionId\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "b82e4a96-9563-40f2-a989-620aa772ca61",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -20537,6 +20568,6 @@
     }
   ],
   "meta": {
-    "total": 662
+    "total": 663
   }
 }

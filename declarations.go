@@ -1022,7 +1022,13 @@ func (c *CertificatesUploadDeclarationsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+var (
+	configsListDeclarationsRequestFieldCountry = big.NewInt(1 << 0)
+)
+
 type ConfigsListDeclarationsRequest struct {
+	// List the systems of this country instead of the company country
+	Country *string `json:"country,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1033,6 +1039,34 @@ func (c *ConfigsListDeclarationsRequest) require(field *big.Int) {
 		c.explicitFields = big.NewInt(0)
 	}
 	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ConfigsListDeclarationsRequest) SetCountry(country *string) {
+	c.Country = country
+	c.require(configsListDeclarationsRequestFieldCountry)
+}
+
+func (c *ConfigsListDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ConfigsListDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*c = ConfigsListDeclarationsRequest(body)
+	return nil
+}
+
+func (c *ConfigsListDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed ConfigsListDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }
 
 var (
@@ -11441,17 +11475,19 @@ func (c *ConfigsListDeclarationsResponseRowsItemEndpointsItem) String() string {
 }
 
 var (
-	configsListDeclarationsResponseRowsItemFieldsItemFieldKey       = big.NewInt(1 << 0)
-	configsListDeclarationsResponseRowsItemFieldsItemFieldKind      = big.NewInt(1 << 1)
-	configsListDeclarationsResponseRowsItemFieldsItemFieldMultiline = big.NewInt(1 << 2)
-	configsListDeclarationsResponseRowsItemFieldsItemFieldOptions   = big.NewInt(1 << 3)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldKey          = big.NewInt(1 << 0)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldKind         = big.NewInt(1 << 1)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldMultiline    = big.NewInt(1 << 2)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldOptions      = big.NewInt(1 << 3)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldCompanyField = big.NewInt(1 << 4)
 )
 
 type ConfigsListDeclarationsResponseRowsItemFieldsItem struct {
-	Key       string                                                `json:"key" url:"key"`
-	Kind      ConfigsListDeclarationsResponseRowsItemFieldsItemKind `json:"kind" url:"kind"`
-	Multiline *bool                                                 `json:"multiline,omitempty" url:"multiline,omitempty"`
-	Options   []string                                              `json:"options,omitempty" url:"options,omitempty"`
+	Key          string                                                         `json:"key" url:"key"`
+	Kind         ConfigsListDeclarationsResponseRowsItemFieldsItemKind          `json:"kind" url:"kind"`
+	Multiline    *bool                                                          `json:"multiline,omitempty" url:"multiline,omitempty"`
+	Options      []string                                                       `json:"options,omitempty" url:"options,omitempty"`
+	CompanyField *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField `json:"companyField,omitempty" url:"companyField,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11486,6 +11522,13 @@ func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) GetOptions() []strin
 		return nil
 	}
 	return c.Options
+}
+
+func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) GetCompanyField() *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField {
+	if c == nil {
+		return nil
+	}
+	return c.CompanyField
 }
 
 func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) GetExtraProperties() map[string]interface{} {
@@ -11530,6 +11573,13 @@ func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) SetOptions(options [
 	c.require(configsListDeclarationsResponseRowsItemFieldsItemFieldOptions)
 }
 
+// SetCompanyField sets the CompanyField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) SetCompanyField(companyField *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField) {
+	c.CompanyField = companyField
+	c.require(configsListDeclarationsResponseRowsItemFieldsItemFieldCompanyField)
+}
+
 func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler ConfigsListDeclarationsResponseRowsItemFieldsItem
 	var value unmarshaler
@@ -11570,6 +11620,28 @@ func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField string
+
+const (
+	ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldCode    ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField = "code"
+	ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldVatCode ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField = "vatCode"
+)
+
+func NewConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldFromString(s string) (ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField, error) {
+	switch s {
+	case "code":
+		return ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldCode, nil
+	case "vatCode":
+		return ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldVatCode, nil
+	}
+	var t ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField) Ptr() *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField {
+	return &c
 }
 
 type ConfigsListDeclarationsResponseRowsItemFieldsItemKind string
@@ -11900,17 +11972,19 @@ func (c *ConfigsUpdateDeclarationsResponseEndpointsItem) String() string {
 }
 
 var (
-	configsUpdateDeclarationsResponseFieldsItemFieldKey       = big.NewInt(1 << 0)
-	configsUpdateDeclarationsResponseFieldsItemFieldKind      = big.NewInt(1 << 1)
-	configsUpdateDeclarationsResponseFieldsItemFieldMultiline = big.NewInt(1 << 2)
-	configsUpdateDeclarationsResponseFieldsItemFieldOptions   = big.NewInt(1 << 3)
+	configsUpdateDeclarationsResponseFieldsItemFieldKey          = big.NewInt(1 << 0)
+	configsUpdateDeclarationsResponseFieldsItemFieldKind         = big.NewInt(1 << 1)
+	configsUpdateDeclarationsResponseFieldsItemFieldMultiline    = big.NewInt(1 << 2)
+	configsUpdateDeclarationsResponseFieldsItemFieldOptions      = big.NewInt(1 << 3)
+	configsUpdateDeclarationsResponseFieldsItemFieldCompanyField = big.NewInt(1 << 4)
 )
 
 type ConfigsUpdateDeclarationsResponseFieldsItem struct {
-	Key       string                                          `json:"key" url:"key"`
-	Kind      ConfigsUpdateDeclarationsResponseFieldsItemKind `json:"kind" url:"kind"`
-	Multiline *bool                                           `json:"multiline,omitempty" url:"multiline,omitempty"`
-	Options   []string                                        `json:"options,omitempty" url:"options,omitempty"`
+	Key          string                                                   `json:"key" url:"key"`
+	Kind         ConfigsUpdateDeclarationsResponseFieldsItemKind          `json:"kind" url:"kind"`
+	Multiline    *bool                                                    `json:"multiline,omitempty" url:"multiline,omitempty"`
+	Options      []string                                                 `json:"options,omitempty" url:"options,omitempty"`
+	CompanyField *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField `json:"companyField,omitempty" url:"companyField,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11945,6 +12019,13 @@ func (c *ConfigsUpdateDeclarationsResponseFieldsItem) GetOptions() []string {
 		return nil
 	}
 	return c.Options
+}
+
+func (c *ConfigsUpdateDeclarationsResponseFieldsItem) GetCompanyField() *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField {
+	if c == nil {
+		return nil
+	}
+	return c.CompanyField
 }
 
 func (c *ConfigsUpdateDeclarationsResponseFieldsItem) GetExtraProperties() map[string]interface{} {
@@ -11989,6 +12070,13 @@ func (c *ConfigsUpdateDeclarationsResponseFieldsItem) SetOptions(options []strin
 	c.require(configsUpdateDeclarationsResponseFieldsItemFieldOptions)
 }
 
+// SetCompanyField sets the CompanyField field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ConfigsUpdateDeclarationsResponseFieldsItem) SetCompanyField(companyField *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField) {
+	c.CompanyField = companyField
+	c.require(configsUpdateDeclarationsResponseFieldsItemFieldCompanyField)
+}
+
 func (c *ConfigsUpdateDeclarationsResponseFieldsItem) UnmarshalJSON(data []byte) error {
 	type unmarshaler ConfigsUpdateDeclarationsResponseFieldsItem
 	var value unmarshaler
@@ -12029,6 +12117,28 @@ func (c *ConfigsUpdateDeclarationsResponseFieldsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type ConfigsUpdateDeclarationsResponseFieldsItemCompanyField string
+
+const (
+	ConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldCode    ConfigsUpdateDeclarationsResponseFieldsItemCompanyField = "code"
+	ConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldVatCode ConfigsUpdateDeclarationsResponseFieldsItemCompanyField = "vatCode"
+)
+
+func NewConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldFromString(s string) (ConfigsUpdateDeclarationsResponseFieldsItemCompanyField, error) {
+	switch s {
+	case "code":
+		return ConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldCode, nil
+	case "vatCode":
+		return ConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldVatCode, nil
+	}
+	var t ConfigsUpdateDeclarationsResponseFieldsItemCompanyField
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ConfigsUpdateDeclarationsResponseFieldsItemCompanyField) Ptr() *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField {
+	return &c
 }
 
 type ConfigsUpdateDeclarationsResponseFieldsItemKind string

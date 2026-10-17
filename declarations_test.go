@@ -2194,6 +2194,51 @@ func TestSettersMarkExplicitCertificatesUploadDeclarationsRequest(t *testing.T) 
 
 }
 
+func TestSettersConfigsListDeclarationsRequest(t *testing.T) {
+	t.Run("SetCountry", func(t *testing.T) {
+		obj := &ConfigsListDeclarationsRequest{}
+		var fernTestValueCountry *string
+		obj.SetCountry(fernTestValueCountry)
+		assert.Equal(t, fernTestValueCountry, obj.Country)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitConfigsListDeclarationsRequest(t *testing.T) {
+	t.Run("SetCountry_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ConfigsListDeclarationsRequest{}
+		var fernTestValueCountry *string
+
+		// Act
+		obj.SetCountry(fernTestValueCountry)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersConfigsUpdateDeclarationsRequest(t *testing.T) {
 	t.Run("SetSystem", func(t *testing.T) {
 		obj := &ConfigsUpdateDeclarationsRequest{}
@@ -22424,6 +22469,14 @@ func TestSettersConfigsListDeclarationsResponseRowsItemFieldsItem(t *testing.T) 
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCompanyField", func(t *testing.T) {
+		obj := &ConfigsListDeclarationsResponseRowsItemFieldsItem{}
+		var fernTestValueCompanyField *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField
+		obj.SetCompanyField(fernTestValueCompanyField)
+		assert.Equal(t, fernTestValueCompanyField, obj.CompanyField)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersConfigsListDeclarationsResponseRowsItemFieldsItem(t *testing.T) {
@@ -22539,6 +22592,39 @@ func TestGettersConfigsListDeclarationsResponseRowsItemFieldsItem(t *testing.T) 
 		_ = obj.GetOptions() // Should return zero value
 	})
 
+	t.Run("GetCompanyField", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ConfigsListDeclarationsResponseRowsItemFieldsItem{}
+		var expected *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField
+		obj.CompanyField = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCompanyField(), "getter should return the property value")
+	})
+
+	t.Run("GetCompanyField_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ConfigsListDeclarationsResponseRowsItemFieldsItem{}
+		obj.CompanyField = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCompanyField(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCompanyField_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ConfigsListDeclarationsResponseRowsItemFieldsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCompanyField() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitConfigsListDeclarationsResponseRowsItemFieldsItem(t *testing.T) {
@@ -22643,6 +22729,37 @@ func TestSettersMarkExplicitConfigsListDeclarationsResponseRowsItemFieldsItem(t 
 
 		// Act
 		obj.SetOptions(fernTestValueOptions)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCompanyField_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ConfigsListDeclarationsResponseRowsItemFieldsItem{}
+		var fernTestValueCompanyField *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField
+
+		// Act
+		obj.SetCompanyField(fernTestValueCompanyField)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -23389,6 +23506,14 @@ func TestSettersConfigsUpdateDeclarationsResponseFieldsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCompanyField", func(t *testing.T) {
+		obj := &ConfigsUpdateDeclarationsResponseFieldsItem{}
+		var fernTestValueCompanyField *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField
+		obj.SetCompanyField(fernTestValueCompanyField)
+		assert.Equal(t, fernTestValueCompanyField, obj.CompanyField)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersConfigsUpdateDeclarationsResponseFieldsItem(t *testing.T) {
@@ -23504,6 +23629,39 @@ func TestGettersConfigsUpdateDeclarationsResponseFieldsItem(t *testing.T) {
 		_ = obj.GetOptions() // Should return zero value
 	})
 
+	t.Run("GetCompanyField", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ConfigsUpdateDeclarationsResponseFieldsItem{}
+		var expected *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField
+		obj.CompanyField = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCompanyField(), "getter should return the property value")
+	})
+
+	t.Run("GetCompanyField_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ConfigsUpdateDeclarationsResponseFieldsItem{}
+		obj.CompanyField = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCompanyField(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCompanyField_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ConfigsUpdateDeclarationsResponseFieldsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCompanyField() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitConfigsUpdateDeclarationsResponseFieldsItem(t *testing.T) {
@@ -23608,6 +23766,37 @@ func TestSettersMarkExplicitConfigsUpdateDeclarationsResponseFieldsItem(t *testi
 
 		// Act
 		obj.SetOptions(fernTestValueOptions)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCompanyField_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ConfigsUpdateDeclarationsResponseFieldsItem{}
+		var fernTestValueCompanyField *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField
+
+		// Act
+		obj.SetCompanyField(fernTestValueCompanyField)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -128011,6 +128200,35 @@ func TestEnumCertificatesUploadDeclarationsResponseRowsItemHealth(t *testing.T) 
 	})
 }
 
+func TestEnumConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField(t *testing.T) {
+	t.Run("NewFromString_code", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldFromString("code")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField("code"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_vatCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldFromString("vatCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField("vatCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewConfigsListDeclarationsResponseRowsItemFieldsItemCompanyFieldFromString("code")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumConfigsListDeclarationsResponseRowsItemFieldsItemKind(t *testing.T) {
 	t.Run("NewFromString_text", func(t *testing.T) {
 		t.Parallel()
@@ -128054,6 +128272,35 @@ func TestEnumConfigsListDeclarationsResponseRowsItemFieldsItemKind(t *testing.T)
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewConfigsListDeclarationsResponseRowsItemFieldsItemKindFromString("text")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumConfigsUpdateDeclarationsResponseFieldsItemCompanyField(t *testing.T) {
+	t.Run("NewFromString_code", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldFromString("code")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ConfigsUpdateDeclarationsResponseFieldsItemCompanyField("code"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_vatCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldFromString("vatCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ConfigsUpdateDeclarationsResponseFieldsItemCompanyField("vatCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewConfigsUpdateDeclarationsResponseFieldsItemCompanyFieldFromString("code")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
