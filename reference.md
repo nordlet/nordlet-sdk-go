@@ -21779,7 +21779,7 @@ client.Ledger.AccountsApplyTemplate(
 <dl>
 <dd>
 
-Replaces the seeded chart with the chart template of the company country (the Romanian general chart for a company registered in Romania, the Lithuanian standard chart otherwise) and switches the posting defaults with it. Answers 409 when the company already uses that chart, has journal entries, holds accounts created by hand, or has settings that name an account the new chart does not have.
+Replaces the seeded chart with the chart template of the company country (the Romanian general chart for a company registered in Romania, the Estonian e-arveldaja chart for a company registered in Estonia, the Lithuanian standard chart otherwise) and switches the posting defaults with it. Answers 409 when the company already uses that chart, has journal entries, holds accounts created by hand, or has settings that name an account the new chart does not have.
 </dd>
 </dl>
 </dd>
@@ -29095,6 +29095,36 @@ client.Payroll.SchedulesList(
 </dl>
 </details>
 
+<details><summary><code>client.Payroll.PaymentTypesList(request) -> *nordlet.PaymentTypesListPayrollResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PaymentTypesListPayrollRequest{}
+client.Payroll.PaymentTypesList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Payroll.Calc(request) -> *nordlet.CalcPayrollResponse</code></summary>
 <dl>
 <dd>
@@ -29190,6 +29220,14 @@ client.Payroll.Calc(
 <dd>
 
 **options:** `map[string]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**payments:** `[]*nordlet.CalcPayrollRequestPaymentsItem` 
     
 </dd>
 </dl>

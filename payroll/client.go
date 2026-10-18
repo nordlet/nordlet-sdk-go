@@ -98,6 +98,22 @@ func (c *Client) SchedulesList(
 	return response.Body, nil
 }
 
+func (c *Client) PaymentTypesList(
+	ctx context.Context,
+	request *nordlet.PaymentTypesListPayrollRequest,
+	opts ...option.RequestOption,
+) (*nordlet.PaymentTypesListPayrollResponse, error) {
+	response, err := c.WithRawResponse.PaymentTypesList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 func (c *Client) Calc(
 	ctx context.Context,
 	request *nordlet.CalcPayrollRequest,

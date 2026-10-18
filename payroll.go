@@ -19,17 +19,19 @@ var (
 	calcPayrollRequestFieldFixedTerm           = big.NewInt(1 << 5)
 	calcPayrollRequestFieldBenefitInKind       = big.NewInt(1 << 6)
 	calcPayrollRequestFieldOptions             = big.NewInt(1 << 7)
+	calcPayrollRequestFieldPayments            = big.NewInt(1 << 8)
 )
 
 type CalcPayrollRequest struct {
-	TaxableBase         string            `json:"taxableBase" url:"-"`
-	Date                time.Time         `json:"date" url:"-" format:"date"`
-	ApplyAllowance      *bool             `json:"applyAllowance,omitempty" url:"-"`
-	AllowanceOverride   *string           `json:"allowanceOverride,omitempty" url:"-"`
-	PensionAccumulation *bool             `json:"pensionAccumulation,omitempty" url:"-"`
-	FixedTerm           *bool             `json:"fixedTerm,omitempty" url:"-"`
-	BenefitInKind       *string           `json:"benefitInKind,omitempty" url:"-"`
-	Options             map[string]string `json:"options,omitempty" url:"-"`
+	TaxableBase         string                            `json:"taxableBase" url:"-"`
+	Date                time.Time                         `json:"date" url:"-" format:"date"`
+	ApplyAllowance      *bool                             `json:"applyAllowance,omitempty" url:"-"`
+	AllowanceOverride   *string                           `json:"allowanceOverride,omitempty" url:"-"`
+	PensionAccumulation *bool                             `json:"pensionAccumulation,omitempty" url:"-"`
+	FixedTerm           *bool                             `json:"fixedTerm,omitempty" url:"-"`
+	BenefitInKind       *string                           `json:"benefitInKind,omitempty" url:"-"`
+	Options             map[string]string                 `json:"options,omitempty" url:"-"`
+	Payments            []*CalcPayrollRequestPaymentsItem `json:"payments,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -96,6 +98,13 @@ func (c *CalcPayrollRequest) SetBenefitInKind(benefitInKind *string) {
 func (c *CalcPayrollRequest) SetOptions(options map[string]string) {
 	c.Options = options
 	c.require(calcPayrollRequestFieldOptions)
+}
+
+// SetPayments sets the Payments field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CalcPayrollRequest) SetPayments(payments []*CalcPayrollRequestPaymentsItem) {
+	c.Payments = payments
+	c.require(calcPayrollRequestFieldPayments)
 }
 
 func (c *CalcPayrollRequest) UnmarshalJSON(data []byte) error {
@@ -269,6 +278,19 @@ func (l *LinesAttendancePayrollRequest) MarshalJSON() ([]byte, error) {
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
 	return json.Marshal(explicitMarshaler)
+}
+
+type PaymentTypesListPayrollRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PaymentTypesListPayrollRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
 }
 
 var (
@@ -865,6 +887,122 @@ func (s *SchedulesListPayrollRequest) require(field *big.Int) {
 }
 
 var (
+	calcPayrollRequestPaymentsItemFieldPaymentType = big.NewInt(1 << 0)
+	calcPayrollRequestPaymentsItemFieldAmount      = big.NewInt(1 << 1)
+	calcPayrollRequestPaymentsItemFieldHours       = big.NewInt(1 << 2)
+)
+
+type CalcPayrollRequestPaymentsItem struct {
+	PaymentType string  `json:"paymentType" url:"paymentType"`
+	Amount      string  `json:"amount" url:"amount"`
+	Hours       *string `json:"hours,omitempty" url:"hours,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CalcPayrollRequestPaymentsItem) GetPaymentType() string {
+	if c == nil {
+		return ""
+	}
+	return c.PaymentType
+}
+
+func (c *CalcPayrollRequestPaymentsItem) GetAmount() string {
+	if c == nil {
+		return ""
+	}
+	return c.Amount
+}
+
+func (c *CalcPayrollRequestPaymentsItem) GetHours() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Hours
+}
+
+func (c *CalcPayrollRequestPaymentsItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CalcPayrollRequestPaymentsItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CalcPayrollRequestPaymentsItem) SetPaymentType(paymentType string) {
+	c.PaymentType = paymentType
+	c.require(calcPayrollRequestPaymentsItemFieldPaymentType)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CalcPayrollRequestPaymentsItem) SetAmount(amount string) {
+	c.Amount = amount
+	c.require(calcPayrollRequestPaymentsItemFieldAmount)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CalcPayrollRequestPaymentsItem) SetHours(hours *string) {
+	c.Hours = hours
+	c.require(calcPayrollRequestPaymentsItemFieldHours)
+}
+
+func (c *CalcPayrollRequestPaymentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler CalcPayrollRequestPaymentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CalcPayrollRequestPaymentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CalcPayrollRequestPaymentsItem) MarshalJSON() ([]byte, error) {
+	type embed CalcPayrollRequestPaymentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CalcPayrollRequestPaymentsItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
 	calcPayrollResponseFieldCountryCode           = big.NewInt(1 << 0)
 	calcPayrollResponseFieldTaxAllowance          = big.NewInt(1 << 1)
 	calcPayrollResponseFieldIncomeTax             = big.NewInt(1 << 2)
@@ -1045,19 +1183,21 @@ func (c *CalcPayrollResponse) String() string {
 }
 
 var (
-	calcPayrollResponseComponentsItemFieldCode   = big.NewInt(1 << 0)
-	calcPayrollResponseComponentsItemFieldKind   = big.NewInt(1 << 1)
-	calcPayrollResponseComponentsItemFieldAmount = big.NewInt(1 << 2)
-	calcPayrollResponseComponentsItemFieldRate   = big.NewInt(1 << 3)
-	calcPayrollResponseComponentsItemFieldBase   = big.NewInt(1 << 4)
+	calcPayrollResponseComponentsItemFieldCode        = big.NewInt(1 << 0)
+	calcPayrollResponseComponentsItemFieldKind        = big.NewInt(1 << 1)
+	calcPayrollResponseComponentsItemFieldAmount      = big.NewInt(1 << 2)
+	calcPayrollResponseComponentsItemFieldRate        = big.NewInt(1 << 3)
+	calcPayrollResponseComponentsItemFieldBase        = big.NewInt(1 << 4)
+	calcPayrollResponseComponentsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type CalcPayrollResponseComponentsItem struct {
-	Code   string                                `json:"code" url:"code"`
-	Kind   CalcPayrollResponseComponentsItemKind `json:"kind" url:"kind"`
-	Amount string                                `json:"amount" url:"amount"`
-	Rate   *string                               `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                               `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                `json:"code" url:"code"`
+	Kind        CalcPayrollResponseComponentsItemKind `json:"kind" url:"kind"`
+	Amount      string                                `json:"amount" url:"amount"`
+	Rate        *string                               `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                               `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                               `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1099,6 +1239,13 @@ func (c *CalcPayrollResponseComponentsItem) GetBase() *string {
 		return nil
 	}
 	return c.Base
+}
+
+func (c *CalcPayrollResponseComponentsItem) GetPaymentType() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PaymentType
 }
 
 func (c *CalcPayrollResponseComponentsItem) GetExtraProperties() map[string]interface{} {
@@ -1148,6 +1295,13 @@ func (c *CalcPayrollResponseComponentsItem) SetRate(rate *string) {
 func (c *CalcPayrollResponseComponentsItem) SetBase(base *string) {
 	c.Base = base
 	c.require(calcPayrollResponseComponentsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CalcPayrollResponseComponentsItem) SetPaymentType(paymentType *string) {
+	c.PaymentType = paymentType
+	c.require(calcPayrollResponseComponentsItemFieldPaymentType)
 }
 
 func (c *CalcPayrollResponseComponentsItem) UnmarshalJSON(data []byte) error {
@@ -1912,15 +2066,19 @@ func (l *LinesAttendancePayrollResponse) String() string {
 }
 
 var (
-	linesAttendancePayrollResponseAdditionsItemFieldName    = big.NewInt(1 << 0)
-	linesAttendancePayrollResponseAdditionsItemFieldAmount  = big.NewInt(1 << 1)
-	linesAttendancePayrollResponseAdditionsItemFieldTaxable = big.NewInt(1 << 2)
+	linesAttendancePayrollResponseAdditionsItemFieldName        = big.NewInt(1 << 0)
+	linesAttendancePayrollResponseAdditionsItemFieldAmount      = big.NewInt(1 << 1)
+	linesAttendancePayrollResponseAdditionsItemFieldTaxable     = big.NewInt(1 << 2)
+	linesAttendancePayrollResponseAdditionsItemFieldPaymentType = big.NewInt(1 << 3)
+	linesAttendancePayrollResponseAdditionsItemFieldHours       = big.NewInt(1 << 4)
 )
 
 type LinesAttendancePayrollResponseAdditionsItem struct {
-	Name    string `json:"name" url:"name"`
-	Amount  string `json:"amount" url:"amount"`
-	Taxable bool   `json:"taxable" url:"taxable"`
+	Name        string  `json:"name" url:"name"`
+	Amount      string  `json:"amount" url:"amount"`
+	Taxable     bool    `json:"taxable" url:"taxable"`
+	PaymentType *string `json:"paymentType,omitempty" url:"paymentType,omitempty"`
+	Hours       *string `json:"hours,omitempty" url:"hours,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1948,6 +2106,20 @@ func (l *LinesAttendancePayrollResponseAdditionsItem) GetTaxable() bool {
 		return false
 	}
 	return l.Taxable
+}
+
+func (l *LinesAttendancePayrollResponseAdditionsItem) GetPaymentType() *string {
+	if l == nil {
+		return nil
+	}
+	return l.PaymentType
+}
+
+func (l *LinesAttendancePayrollResponseAdditionsItem) GetHours() *string {
+	if l == nil {
+		return nil
+	}
+	return l.Hours
 }
 
 func (l *LinesAttendancePayrollResponseAdditionsItem) GetExtraProperties() map[string]interface{} {
@@ -1983,6 +2155,20 @@ func (l *LinesAttendancePayrollResponseAdditionsItem) SetAmount(amount string) {
 func (l *LinesAttendancePayrollResponseAdditionsItem) SetTaxable(taxable bool) {
 	l.Taxable = taxable
 	l.require(linesAttendancePayrollResponseAdditionsItemFieldTaxable)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LinesAttendancePayrollResponseAdditionsItem) SetPaymentType(paymentType *string) {
+	l.PaymentType = paymentType
+	l.require(linesAttendancePayrollResponseAdditionsItemFieldPaymentType)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LinesAttendancePayrollResponseAdditionsItem) SetHours(hours *string) {
+	l.Hours = hours
+	l.require(linesAttendancePayrollResponseAdditionsItemFieldHours)
 }
 
 func (l *LinesAttendancePayrollResponseAdditionsItem) UnmarshalJSON(data []byte) error {
@@ -2028,19 +2214,21 @@ func (l *LinesAttendancePayrollResponseAdditionsItem) String() string {
 }
 
 var (
-	linesAttendancePayrollResponseComponentsItemFieldCode   = big.NewInt(1 << 0)
-	linesAttendancePayrollResponseComponentsItemFieldKind   = big.NewInt(1 << 1)
-	linesAttendancePayrollResponseComponentsItemFieldAmount = big.NewInt(1 << 2)
-	linesAttendancePayrollResponseComponentsItemFieldRate   = big.NewInt(1 << 3)
-	linesAttendancePayrollResponseComponentsItemFieldBase   = big.NewInt(1 << 4)
+	linesAttendancePayrollResponseComponentsItemFieldCode        = big.NewInt(1 << 0)
+	linesAttendancePayrollResponseComponentsItemFieldKind        = big.NewInt(1 << 1)
+	linesAttendancePayrollResponseComponentsItemFieldAmount      = big.NewInt(1 << 2)
+	linesAttendancePayrollResponseComponentsItemFieldRate        = big.NewInt(1 << 3)
+	linesAttendancePayrollResponseComponentsItemFieldBase        = big.NewInt(1 << 4)
+	linesAttendancePayrollResponseComponentsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type LinesAttendancePayrollResponseComponentsItem struct {
-	Code   string                                           `json:"code" url:"code"`
-	Kind   LinesAttendancePayrollResponseComponentsItemKind `json:"kind" url:"kind"`
-	Amount string                                           `json:"amount" url:"amount"`
-	Rate   *string                                          `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                          `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                           `json:"code" url:"code"`
+	Kind        LinesAttendancePayrollResponseComponentsItemKind `json:"kind" url:"kind"`
+	Amount      string                                           `json:"amount" url:"amount"`
+	Rate        *string                                          `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                          `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                          `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2082,6 +2270,13 @@ func (l *LinesAttendancePayrollResponseComponentsItem) GetBase() *string {
 		return nil
 	}
 	return l.Base
+}
+
+func (l *LinesAttendancePayrollResponseComponentsItem) GetPaymentType() *string {
+	if l == nil {
+		return nil
+	}
+	return l.PaymentType
 }
 
 func (l *LinesAttendancePayrollResponseComponentsItem) GetExtraProperties() map[string]interface{} {
@@ -2131,6 +2326,13 @@ func (l *LinesAttendancePayrollResponseComponentsItem) SetRate(rate *string) {
 func (l *LinesAttendancePayrollResponseComponentsItem) SetBase(base *string) {
 	l.Base = base
 	l.require(linesAttendancePayrollResponseComponentsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LinesAttendancePayrollResponseComponentsItem) SetPaymentType(paymentType *string) {
+	l.PaymentType = paymentType
+	l.require(linesAttendancePayrollResponseComponentsItemFieldPaymentType)
 }
 
 func (l *LinesAttendancePayrollResponseComponentsItem) UnmarshalJSON(data []byte) error {
@@ -2304,6 +2506,238 @@ func (l *LinesAttendancePayrollResponseDeductionsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", l)
+}
+
+var (
+	paymentTypesListPayrollResponseFieldCountryCode        = big.NewInt(1 << 0)
+	paymentTypesListPayrollResponseFieldDefaultPaymentType = big.NewInt(1 << 1)
+	paymentTypesListPayrollResponseFieldRows               = big.NewInt(1 << 2)
+)
+
+type PaymentTypesListPayrollResponse struct {
+	CountryCode        string                                     `json:"countryCode" url:"countryCode"`
+	DefaultPaymentType *string                                    `json:"defaultPaymentType,omitempty" url:"defaultPaymentType,omitempty"`
+	Rows               []*PaymentTypesListPayrollResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PaymentTypesListPayrollResponse) GetCountryCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.CountryCode
+}
+
+func (p *PaymentTypesListPayrollResponse) GetDefaultPaymentType() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DefaultPaymentType
+}
+
+func (p *PaymentTypesListPayrollResponse) GetRows() []*PaymentTypesListPayrollResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PaymentTypesListPayrollResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PaymentTypesListPayrollResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentTypesListPayrollResponse) SetCountryCode(countryCode string) {
+	p.CountryCode = countryCode
+	p.require(paymentTypesListPayrollResponseFieldCountryCode)
+}
+
+// SetDefaultPaymentType sets the DefaultPaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentTypesListPayrollResponse) SetDefaultPaymentType(defaultPaymentType *string) {
+	p.DefaultPaymentType = defaultPaymentType
+	p.require(paymentTypesListPayrollResponseFieldDefaultPaymentType)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentTypesListPayrollResponse) SetRows(rows []*PaymentTypesListPayrollResponseRowsItem) {
+	p.Rows = rows
+	p.require(paymentTypesListPayrollResponseFieldRows)
+}
+
+func (p *PaymentTypesListPayrollResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PaymentTypesListPayrollResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PaymentTypesListPayrollResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PaymentTypesListPayrollResponse) MarshalJSON() ([]byte, error) {
+	type embed PaymentTypesListPayrollResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PaymentTypesListPayrollResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	paymentTypesListPayrollResponseRowsItemFieldCode    = big.NewInt(1 << 0)
+	paymentTypesListPayrollResponseRowsItemFieldName    = big.NewInt(1 << 1)
+	paymentTypesListPayrollResponseRowsItemFieldApplies = big.NewInt(1 << 2)
+)
+
+type PaymentTypesListPayrollResponseRowsItem struct {
+	Code    string   `json:"code" url:"code"`
+	Name    string   `json:"name" url:"name"`
+	Applies []string `json:"applies" url:"applies"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) GetCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) GetName() string {
+	if p == nil {
+		return ""
+	}
+	return p.Name
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) GetApplies() []string {
+	if p == nil {
+		return nil
+	}
+	return p.Applies
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentTypesListPayrollResponseRowsItem) SetCode(code string) {
+	p.Code = code
+	p.require(paymentTypesListPayrollResponseRowsItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentTypesListPayrollResponseRowsItem) SetName(name string) {
+	p.Name = name
+	p.require(paymentTypesListPayrollResponseRowsItemFieldName)
+}
+
+// SetApplies sets the Applies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentTypesListPayrollResponseRowsItem) SetApplies(applies []string) {
+	p.Applies = applies
+	p.require(paymentTypesListPayrollResponseRowsItemFieldApplies)
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PaymentTypesListPayrollResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PaymentTypesListPayrollResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PaymentTypesListPayrollResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PaymentTypesListPayrollResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
 }
 
 type PaymentsExportPayrollRequestLocale string
@@ -2920,19 +3354,21 @@ func (r *RunsApprovePayrollResponse) String() string {
 }
 
 var (
-	runsApprovePayrollResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
-	runsApprovePayrollResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
-	runsApprovePayrollResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
-	runsApprovePayrollResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
-	runsApprovePayrollResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+	runsApprovePayrollResponseComponentTotalsItemFieldCode        = big.NewInt(1 << 0)
+	runsApprovePayrollResponseComponentTotalsItemFieldKind        = big.NewInt(1 << 1)
+	runsApprovePayrollResponseComponentTotalsItemFieldAmount      = big.NewInt(1 << 2)
+	runsApprovePayrollResponseComponentTotalsItemFieldRate        = big.NewInt(1 << 3)
+	runsApprovePayrollResponseComponentTotalsItemFieldBase        = big.NewInt(1 << 4)
+	runsApprovePayrollResponseComponentTotalsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type RunsApprovePayrollResponseComponentTotalsItem struct {
-	Code   string                                            `json:"code" url:"code"`
-	Kind   RunsApprovePayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
-	Amount string                                            `json:"amount" url:"amount"`
-	Rate   *string                                           `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                           `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                            `json:"code" url:"code"`
+	Kind        RunsApprovePayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount      string                                            `json:"amount" url:"amount"`
+	Rate        *string                                           `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                           `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                           `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2974,6 +3410,13 @@ func (r *RunsApprovePayrollResponseComponentTotalsItem) GetBase() *string {
 		return nil
 	}
 	return r.Base
+}
+
+func (r *RunsApprovePayrollResponseComponentTotalsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
 }
 
 func (r *RunsApprovePayrollResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
@@ -3023,6 +3466,13 @@ func (r *RunsApprovePayrollResponseComponentTotalsItem) SetRate(rate *string) {
 func (r *RunsApprovePayrollResponseComponentTotalsItem) SetBase(base *string) {
 	r.Base = base
 	r.require(runsApprovePayrollResponseComponentTotalsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponseComponentTotalsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsApprovePayrollResponseComponentTotalsItemFieldPaymentType)
 }
 
 func (r *RunsApprovePayrollResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {
@@ -3440,15 +3890,19 @@ func (r *RunsCreatePayrollRequestLinesItem) String() string {
 }
 
 var (
-	runsCreatePayrollRequestLinesItemAdditionsItemFieldName    = big.NewInt(1 << 0)
-	runsCreatePayrollRequestLinesItemAdditionsItemFieldAmount  = big.NewInt(1 << 1)
-	runsCreatePayrollRequestLinesItemAdditionsItemFieldTaxable = big.NewInt(1 << 2)
+	runsCreatePayrollRequestLinesItemAdditionsItemFieldName        = big.NewInt(1 << 0)
+	runsCreatePayrollRequestLinesItemAdditionsItemFieldAmount      = big.NewInt(1 << 1)
+	runsCreatePayrollRequestLinesItemAdditionsItemFieldTaxable     = big.NewInt(1 << 2)
+	runsCreatePayrollRequestLinesItemAdditionsItemFieldPaymentType = big.NewInt(1 << 3)
+	runsCreatePayrollRequestLinesItemAdditionsItemFieldHours       = big.NewInt(1 << 4)
 )
 
 type RunsCreatePayrollRequestLinesItemAdditionsItem struct {
-	Name    string `json:"name" url:"name"`
-	Amount  string `json:"amount" url:"amount"`
-	Taxable *bool  `json:"taxable,omitempty" url:"taxable,omitempty"`
+	Name        string  `json:"name" url:"name"`
+	Amount      string  `json:"amount" url:"amount"`
+	Taxable     *bool   `json:"taxable,omitempty" url:"taxable,omitempty"`
+	PaymentType *string `json:"paymentType,omitempty" url:"paymentType,omitempty"`
+	Hours       *string `json:"hours,omitempty" url:"hours,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3476,6 +3930,20 @@ func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) GetTaxable() *bool {
 		return nil
 	}
 	return r.Taxable
+}
+
+func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
+}
+
+func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) GetHours() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Hours
 }
 
 func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) GetExtraProperties() map[string]interface{} {
@@ -3511,6 +3979,20 @@ func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) SetAmount(amount string
 func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) SetTaxable(taxable *bool) {
 	r.Taxable = taxable
 	r.require(runsCreatePayrollRequestLinesItemAdditionsItemFieldTaxable)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsCreatePayrollRequestLinesItemAdditionsItemFieldPaymentType)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) SetHours(hours *string) {
+	r.Hours = hours
+	r.require(runsCreatePayrollRequestLinesItemAdditionsItemFieldHours)
 }
 
 func (r *RunsCreatePayrollRequestLinesItemAdditionsItem) UnmarshalJSON(data []byte) error {
@@ -4112,19 +4594,21 @@ func (r *RunsCreatePayrollResponse) String() string {
 }
 
 var (
-	runsCreatePayrollResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
-	runsCreatePayrollResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
-	runsCreatePayrollResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
-	runsCreatePayrollResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
-	runsCreatePayrollResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+	runsCreatePayrollResponseComponentTotalsItemFieldCode        = big.NewInt(1 << 0)
+	runsCreatePayrollResponseComponentTotalsItemFieldKind        = big.NewInt(1 << 1)
+	runsCreatePayrollResponseComponentTotalsItemFieldAmount      = big.NewInt(1 << 2)
+	runsCreatePayrollResponseComponentTotalsItemFieldRate        = big.NewInt(1 << 3)
+	runsCreatePayrollResponseComponentTotalsItemFieldBase        = big.NewInt(1 << 4)
+	runsCreatePayrollResponseComponentTotalsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type RunsCreatePayrollResponseComponentTotalsItem struct {
-	Code   string                                           `json:"code" url:"code"`
-	Kind   RunsCreatePayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
-	Amount string                                           `json:"amount" url:"amount"`
-	Rate   *string                                          `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                          `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                           `json:"code" url:"code"`
+	Kind        RunsCreatePayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount      string                                           `json:"amount" url:"amount"`
+	Rate        *string                                          `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                          `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                          `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4166,6 +4650,13 @@ func (r *RunsCreatePayrollResponseComponentTotalsItem) GetBase() *string {
 		return nil
 	}
 	return r.Base
+}
+
+func (r *RunsCreatePayrollResponseComponentTotalsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
 }
 
 func (r *RunsCreatePayrollResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
@@ -4215,6 +4706,13 @@ func (r *RunsCreatePayrollResponseComponentTotalsItem) SetRate(rate *string) {
 func (r *RunsCreatePayrollResponseComponentTotalsItem) SetBase(base *string) {
 	r.Base = base
 	r.require(runsCreatePayrollResponseComponentTotalsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponseComponentTotalsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsCreatePayrollResponseComponentTotalsItemFieldPaymentType)
 }
 
 func (r *RunsCreatePayrollResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {
@@ -4663,15 +5161,19 @@ func (r *RunsCreatePayrollResponseLinesItem) String() string {
 }
 
 var (
-	runsCreatePayrollResponseLinesItemAdditionsItemFieldName    = big.NewInt(1 << 0)
-	runsCreatePayrollResponseLinesItemAdditionsItemFieldAmount  = big.NewInt(1 << 1)
-	runsCreatePayrollResponseLinesItemAdditionsItemFieldTaxable = big.NewInt(1 << 2)
+	runsCreatePayrollResponseLinesItemAdditionsItemFieldName        = big.NewInt(1 << 0)
+	runsCreatePayrollResponseLinesItemAdditionsItemFieldAmount      = big.NewInt(1 << 1)
+	runsCreatePayrollResponseLinesItemAdditionsItemFieldTaxable     = big.NewInt(1 << 2)
+	runsCreatePayrollResponseLinesItemAdditionsItemFieldPaymentType = big.NewInt(1 << 3)
+	runsCreatePayrollResponseLinesItemAdditionsItemFieldHours       = big.NewInt(1 << 4)
 )
 
 type RunsCreatePayrollResponseLinesItemAdditionsItem struct {
-	Name    string `json:"name" url:"name"`
-	Amount  string `json:"amount" url:"amount"`
-	Taxable bool   `json:"taxable" url:"taxable"`
+	Name        string  `json:"name" url:"name"`
+	Amount      string  `json:"amount" url:"amount"`
+	Taxable     bool    `json:"taxable" url:"taxable"`
+	PaymentType *string `json:"paymentType,omitempty" url:"paymentType,omitempty"`
+	Hours       *string `json:"hours,omitempty" url:"hours,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4699,6 +5201,20 @@ func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) GetTaxable() bool {
 		return false
 	}
 	return r.Taxable
+}
+
+func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
+}
+
+func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) GetHours() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Hours
 }
 
 func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) GetExtraProperties() map[string]interface{} {
@@ -4734,6 +5250,20 @@ func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) SetAmount(amount strin
 func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) SetTaxable(taxable bool) {
 	r.Taxable = taxable
 	r.require(runsCreatePayrollResponseLinesItemAdditionsItemFieldTaxable)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsCreatePayrollResponseLinesItemAdditionsItemFieldPaymentType)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) SetHours(hours *string) {
+	r.Hours = hours
+	r.require(runsCreatePayrollResponseLinesItemAdditionsItemFieldHours)
 }
 
 func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) UnmarshalJSON(data []byte) error {
@@ -4779,19 +5309,21 @@ func (r *RunsCreatePayrollResponseLinesItemAdditionsItem) String() string {
 }
 
 var (
-	runsCreatePayrollResponseLinesItemComponentsItemFieldCode   = big.NewInt(1 << 0)
-	runsCreatePayrollResponseLinesItemComponentsItemFieldKind   = big.NewInt(1 << 1)
-	runsCreatePayrollResponseLinesItemComponentsItemFieldAmount = big.NewInt(1 << 2)
-	runsCreatePayrollResponseLinesItemComponentsItemFieldRate   = big.NewInt(1 << 3)
-	runsCreatePayrollResponseLinesItemComponentsItemFieldBase   = big.NewInt(1 << 4)
+	runsCreatePayrollResponseLinesItemComponentsItemFieldCode        = big.NewInt(1 << 0)
+	runsCreatePayrollResponseLinesItemComponentsItemFieldKind        = big.NewInt(1 << 1)
+	runsCreatePayrollResponseLinesItemComponentsItemFieldAmount      = big.NewInt(1 << 2)
+	runsCreatePayrollResponseLinesItemComponentsItemFieldRate        = big.NewInt(1 << 3)
+	runsCreatePayrollResponseLinesItemComponentsItemFieldBase        = big.NewInt(1 << 4)
+	runsCreatePayrollResponseLinesItemComponentsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type RunsCreatePayrollResponseLinesItemComponentsItem struct {
-	Code   string                                               `json:"code" url:"code"`
-	Kind   RunsCreatePayrollResponseLinesItemComponentsItemKind `json:"kind" url:"kind"`
-	Amount string                                               `json:"amount" url:"amount"`
-	Rate   *string                                              `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                              `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                               `json:"code" url:"code"`
+	Kind        RunsCreatePayrollResponseLinesItemComponentsItemKind `json:"kind" url:"kind"`
+	Amount      string                                               `json:"amount" url:"amount"`
+	Rate        *string                                              `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                              `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                              `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4833,6 +5365,13 @@ func (r *RunsCreatePayrollResponseLinesItemComponentsItem) GetBase() *string {
 		return nil
 	}
 	return r.Base
+}
+
+func (r *RunsCreatePayrollResponseLinesItemComponentsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
 }
 
 func (r *RunsCreatePayrollResponseLinesItemComponentsItem) GetExtraProperties() map[string]interface{} {
@@ -4882,6 +5421,13 @@ func (r *RunsCreatePayrollResponseLinesItemComponentsItem) SetRate(rate *string)
 func (r *RunsCreatePayrollResponseLinesItemComponentsItem) SetBase(base *string) {
 	r.Base = base
 	r.require(runsCreatePayrollResponseLinesItemComponentsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponseLinesItemComponentsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsCreatePayrollResponseLinesItemComponentsItemFieldPaymentType)
 }
 
 func (r *RunsCreatePayrollResponseLinesItemComponentsItem) UnmarshalJSON(data []byte) error {
@@ -5539,19 +6085,21 @@ func (r *RunsGetPayrollResponse) String() string {
 }
 
 var (
-	runsGetPayrollResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
-	runsGetPayrollResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
-	runsGetPayrollResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
-	runsGetPayrollResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
-	runsGetPayrollResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+	runsGetPayrollResponseComponentTotalsItemFieldCode        = big.NewInt(1 << 0)
+	runsGetPayrollResponseComponentTotalsItemFieldKind        = big.NewInt(1 << 1)
+	runsGetPayrollResponseComponentTotalsItemFieldAmount      = big.NewInt(1 << 2)
+	runsGetPayrollResponseComponentTotalsItemFieldRate        = big.NewInt(1 << 3)
+	runsGetPayrollResponseComponentTotalsItemFieldBase        = big.NewInt(1 << 4)
+	runsGetPayrollResponseComponentTotalsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type RunsGetPayrollResponseComponentTotalsItem struct {
-	Code   string                                        `json:"code" url:"code"`
-	Kind   RunsGetPayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
-	Amount string                                        `json:"amount" url:"amount"`
-	Rate   *string                                       `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                       `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                        `json:"code" url:"code"`
+	Kind        RunsGetPayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount      string                                        `json:"amount" url:"amount"`
+	Rate        *string                                       `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                       `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                       `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5593,6 +6141,13 @@ func (r *RunsGetPayrollResponseComponentTotalsItem) GetBase() *string {
 		return nil
 	}
 	return r.Base
+}
+
+func (r *RunsGetPayrollResponseComponentTotalsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
 }
 
 func (r *RunsGetPayrollResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
@@ -5642,6 +6197,13 @@ func (r *RunsGetPayrollResponseComponentTotalsItem) SetRate(rate *string) {
 func (r *RunsGetPayrollResponseComponentTotalsItem) SetBase(base *string) {
 	r.Base = base
 	r.require(runsGetPayrollResponseComponentTotalsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponseComponentTotalsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsGetPayrollResponseComponentTotalsItemFieldPaymentType)
 }
 
 func (r *RunsGetPayrollResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {
@@ -6090,15 +6652,19 @@ func (r *RunsGetPayrollResponseLinesItem) String() string {
 }
 
 var (
-	runsGetPayrollResponseLinesItemAdditionsItemFieldName    = big.NewInt(1 << 0)
-	runsGetPayrollResponseLinesItemAdditionsItemFieldAmount  = big.NewInt(1 << 1)
-	runsGetPayrollResponseLinesItemAdditionsItemFieldTaxable = big.NewInt(1 << 2)
+	runsGetPayrollResponseLinesItemAdditionsItemFieldName        = big.NewInt(1 << 0)
+	runsGetPayrollResponseLinesItemAdditionsItemFieldAmount      = big.NewInt(1 << 1)
+	runsGetPayrollResponseLinesItemAdditionsItemFieldTaxable     = big.NewInt(1 << 2)
+	runsGetPayrollResponseLinesItemAdditionsItemFieldPaymentType = big.NewInt(1 << 3)
+	runsGetPayrollResponseLinesItemAdditionsItemFieldHours       = big.NewInt(1 << 4)
 )
 
 type RunsGetPayrollResponseLinesItemAdditionsItem struct {
-	Name    string `json:"name" url:"name"`
-	Amount  string `json:"amount" url:"amount"`
-	Taxable bool   `json:"taxable" url:"taxable"`
+	Name        string  `json:"name" url:"name"`
+	Amount      string  `json:"amount" url:"amount"`
+	Taxable     bool    `json:"taxable" url:"taxable"`
+	PaymentType *string `json:"paymentType,omitempty" url:"paymentType,omitempty"`
+	Hours       *string `json:"hours,omitempty" url:"hours,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6126,6 +6692,20 @@ func (r *RunsGetPayrollResponseLinesItemAdditionsItem) GetTaxable() bool {
 		return false
 	}
 	return r.Taxable
+}
+
+func (r *RunsGetPayrollResponseLinesItemAdditionsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
+}
+
+func (r *RunsGetPayrollResponseLinesItemAdditionsItem) GetHours() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Hours
 }
 
 func (r *RunsGetPayrollResponseLinesItemAdditionsItem) GetExtraProperties() map[string]interface{} {
@@ -6161,6 +6741,20 @@ func (r *RunsGetPayrollResponseLinesItemAdditionsItem) SetAmount(amount string) 
 func (r *RunsGetPayrollResponseLinesItemAdditionsItem) SetTaxable(taxable bool) {
 	r.Taxable = taxable
 	r.require(runsGetPayrollResponseLinesItemAdditionsItemFieldTaxable)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponseLinesItemAdditionsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsGetPayrollResponseLinesItemAdditionsItemFieldPaymentType)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponseLinesItemAdditionsItem) SetHours(hours *string) {
+	r.Hours = hours
+	r.require(runsGetPayrollResponseLinesItemAdditionsItemFieldHours)
 }
 
 func (r *RunsGetPayrollResponseLinesItemAdditionsItem) UnmarshalJSON(data []byte) error {
@@ -6206,19 +6800,21 @@ func (r *RunsGetPayrollResponseLinesItemAdditionsItem) String() string {
 }
 
 var (
-	runsGetPayrollResponseLinesItemComponentsItemFieldCode   = big.NewInt(1 << 0)
-	runsGetPayrollResponseLinesItemComponentsItemFieldKind   = big.NewInt(1 << 1)
-	runsGetPayrollResponseLinesItemComponentsItemFieldAmount = big.NewInt(1 << 2)
-	runsGetPayrollResponseLinesItemComponentsItemFieldRate   = big.NewInt(1 << 3)
-	runsGetPayrollResponseLinesItemComponentsItemFieldBase   = big.NewInt(1 << 4)
+	runsGetPayrollResponseLinesItemComponentsItemFieldCode        = big.NewInt(1 << 0)
+	runsGetPayrollResponseLinesItemComponentsItemFieldKind        = big.NewInt(1 << 1)
+	runsGetPayrollResponseLinesItemComponentsItemFieldAmount      = big.NewInt(1 << 2)
+	runsGetPayrollResponseLinesItemComponentsItemFieldRate        = big.NewInt(1 << 3)
+	runsGetPayrollResponseLinesItemComponentsItemFieldBase        = big.NewInt(1 << 4)
+	runsGetPayrollResponseLinesItemComponentsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type RunsGetPayrollResponseLinesItemComponentsItem struct {
-	Code   string                                            `json:"code" url:"code"`
-	Kind   RunsGetPayrollResponseLinesItemComponentsItemKind `json:"kind" url:"kind"`
-	Amount string                                            `json:"amount" url:"amount"`
-	Rate   *string                                           `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                           `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                            `json:"code" url:"code"`
+	Kind        RunsGetPayrollResponseLinesItemComponentsItemKind `json:"kind" url:"kind"`
+	Amount      string                                            `json:"amount" url:"amount"`
+	Rate        *string                                           `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                           `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                           `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6260,6 +6856,13 @@ func (r *RunsGetPayrollResponseLinesItemComponentsItem) GetBase() *string {
 		return nil
 	}
 	return r.Base
+}
+
+func (r *RunsGetPayrollResponseLinesItemComponentsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
 }
 
 func (r *RunsGetPayrollResponseLinesItemComponentsItem) GetExtraProperties() map[string]interface{} {
@@ -6309,6 +6912,13 @@ func (r *RunsGetPayrollResponseLinesItemComponentsItem) SetRate(rate *string) {
 func (r *RunsGetPayrollResponseLinesItemComponentsItem) SetBase(base *string) {
 	r.Base = base
 	r.require(runsGetPayrollResponseLinesItemComponentsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponseLinesItemComponentsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsGetPayrollResponseLinesItemComponentsItemFieldPaymentType)
 }
 
 func (r *RunsGetPayrollResponseLinesItemComponentsItem) UnmarshalJSON(data []byte) error {
@@ -7553,19 +8163,21 @@ func (r *RunsListPayrollResponseRowsItem) String() string {
 }
 
 var (
-	runsListPayrollResponseRowsItemComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
-	runsListPayrollResponseRowsItemComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
-	runsListPayrollResponseRowsItemComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
-	runsListPayrollResponseRowsItemComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
-	runsListPayrollResponseRowsItemComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+	runsListPayrollResponseRowsItemComponentTotalsItemFieldCode        = big.NewInt(1 << 0)
+	runsListPayrollResponseRowsItemComponentTotalsItemFieldKind        = big.NewInt(1 << 1)
+	runsListPayrollResponseRowsItemComponentTotalsItemFieldAmount      = big.NewInt(1 << 2)
+	runsListPayrollResponseRowsItemComponentTotalsItemFieldRate        = big.NewInt(1 << 3)
+	runsListPayrollResponseRowsItemComponentTotalsItemFieldBase        = big.NewInt(1 << 4)
+	runsListPayrollResponseRowsItemComponentTotalsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type RunsListPayrollResponseRowsItemComponentTotalsItem struct {
-	Code   string                                                 `json:"code" url:"code"`
-	Kind   RunsListPayrollResponseRowsItemComponentTotalsItemKind `json:"kind" url:"kind"`
-	Amount string                                                 `json:"amount" url:"amount"`
-	Rate   *string                                                `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                                `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                                 `json:"code" url:"code"`
+	Kind        RunsListPayrollResponseRowsItemComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount      string                                                 `json:"amount" url:"amount"`
+	Rate        *string                                                `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                                `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                                `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7607,6 +8219,13 @@ func (r *RunsListPayrollResponseRowsItemComponentTotalsItem) GetBase() *string {
 		return nil
 	}
 	return r.Base
+}
+
+func (r *RunsListPayrollResponseRowsItemComponentTotalsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
 }
 
 func (r *RunsListPayrollResponseRowsItemComponentTotalsItem) GetExtraProperties() map[string]interface{} {
@@ -7656,6 +8275,13 @@ func (r *RunsListPayrollResponseRowsItemComponentTotalsItem) SetRate(rate *strin
 func (r *RunsListPayrollResponseRowsItemComponentTotalsItem) SetBase(base *string) {
 	r.Base = base
 	r.require(runsListPayrollResponseRowsItemComponentTotalsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItemComponentTotalsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsListPayrollResponseRowsItemComponentTotalsItemFieldPaymentType)
 }
 
 func (r *RunsListPayrollResponseRowsItemComponentTotalsItem) UnmarshalJSON(data []byte) error {
@@ -8197,19 +8823,21 @@ func (r *RunsReversePayrollResponse) String() string {
 }
 
 var (
-	runsReversePayrollResponseComponentTotalsItemFieldCode   = big.NewInt(1 << 0)
-	runsReversePayrollResponseComponentTotalsItemFieldKind   = big.NewInt(1 << 1)
-	runsReversePayrollResponseComponentTotalsItemFieldAmount = big.NewInt(1 << 2)
-	runsReversePayrollResponseComponentTotalsItemFieldRate   = big.NewInt(1 << 3)
-	runsReversePayrollResponseComponentTotalsItemFieldBase   = big.NewInt(1 << 4)
+	runsReversePayrollResponseComponentTotalsItemFieldCode        = big.NewInt(1 << 0)
+	runsReversePayrollResponseComponentTotalsItemFieldKind        = big.NewInt(1 << 1)
+	runsReversePayrollResponseComponentTotalsItemFieldAmount      = big.NewInt(1 << 2)
+	runsReversePayrollResponseComponentTotalsItemFieldRate        = big.NewInt(1 << 3)
+	runsReversePayrollResponseComponentTotalsItemFieldBase        = big.NewInt(1 << 4)
+	runsReversePayrollResponseComponentTotalsItemFieldPaymentType = big.NewInt(1 << 5)
 )
 
 type RunsReversePayrollResponseComponentTotalsItem struct {
-	Code   string                                            `json:"code" url:"code"`
-	Kind   RunsReversePayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
-	Amount string                                            `json:"amount" url:"amount"`
-	Rate   *string                                           `json:"rate,omitempty" url:"rate,omitempty"`
-	Base   *string                                           `json:"base,omitempty" url:"base,omitempty"`
+	Code        string                                            `json:"code" url:"code"`
+	Kind        RunsReversePayrollResponseComponentTotalsItemKind `json:"kind" url:"kind"`
+	Amount      string                                            `json:"amount" url:"amount"`
+	Rate        *string                                           `json:"rate,omitempty" url:"rate,omitempty"`
+	Base        *string                                           `json:"base,omitempty" url:"base,omitempty"`
+	PaymentType *string                                           `json:"paymentType,omitempty" url:"paymentType,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8251,6 +8879,13 @@ func (r *RunsReversePayrollResponseComponentTotalsItem) GetBase() *string {
 		return nil
 	}
 	return r.Base
+}
+
+func (r *RunsReversePayrollResponseComponentTotalsItem) GetPaymentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PaymentType
 }
 
 func (r *RunsReversePayrollResponseComponentTotalsItem) GetExtraProperties() map[string]interface{} {
@@ -8300,6 +8935,13 @@ func (r *RunsReversePayrollResponseComponentTotalsItem) SetRate(rate *string) {
 func (r *RunsReversePayrollResponseComponentTotalsItem) SetBase(base *string) {
 	r.Base = base
 	r.require(runsReversePayrollResponseComponentTotalsItemFieldBase)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponseComponentTotalsItem) SetPaymentType(paymentType *string) {
+	r.PaymentType = paymentType
+	r.require(runsReversePayrollResponseComponentTotalsItemFieldPaymentType)
 }
 
 func (r *RunsReversePayrollResponseComponentTotalsItem) UnmarshalJSON(data []byte) error {

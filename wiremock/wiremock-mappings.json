@@ -6501,7 +6501,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"year\": 1000000,\n  \"payoutTiming\": \"same-month\",\n  \"payoutFrom\": {\n    \"year\": 1000000,\n    \"month\": 1000000\n  },\n  \"payoutTo\": {\n    \"year\": 1000000,\n    \"month\": 1000000\n  },\n  \"registrationNumber\": \"registrationNumber\",\n  \"companyName\": \"companyName\",\n  \"rows\": [\n    {\n      \"employeeId\": \"employeeId\",\n      \"personalCode\": \"personalCode\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"paymentCode\": \"paymentCode\",\n      \"paidAmount\": \"paidAmount\",\n      \"gpmWithheld\": \"gpmWithheld\"\n    }\n  ],\n  \"totals\": {\n    \"paidAmount\": \"paidAmount\",\n    \"gpmWithheld\": \"gpmWithheld\",\n    \"persons\": 1000000\n  },\n  \"runsFound\": 1000000,\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"notes\": [\n    \"notes\"\n  ],\n  \"source\": \"source\"\n}",
+        "body": "{\n  \"year\": 1000000,\n  \"payoutTiming\": \"same-month\",\n  \"payoutFrom\": {\n    \"year\": 1000000,\n    \"month\": 1000000\n  },\n  \"payoutTo\": {\n    \"year\": 1000000,\n    \"month\": 1000000\n  },\n  \"registrationNumber\": \"registrationNumber\",\n  \"companyName\": \"companyName\",\n  \"rows\": [\n    {\n      \"employeeId\": \"employeeId\",\n      \"personalCode\": \"personalCode\",\n      \"firstName\": \"firstName\",\n      \"lastName\": \"lastName\",\n      \"paymentCode\": \"paymentCode\",\n      \"paidAmount\": \"paidAmount\",\n      \"gpmWithheld\": \"gpmWithheld\",\n      \"gpmRatePercent\": \"gpmRatePercent\"\n    }\n  ],\n  \"totals\": {\n    \"paidAmount\": \"paidAmount\",\n    \"gpmWithheld\": \"gpmWithheld\",\n    \"persons\": 1000000\n  },\n  \"runsFound\": 1000000,\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"notes\": [\n    \"notes\"\n  ],\n  \"source\": \"source\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12068,6 +12068,37 @@
       }
     },
     {
+      "id": "6b293867-5066-4ff7-856e-e7ae684feab6",
+      "name": "List the payment types of the company country and the rules each one follows - default",
+      "request": {
+        "urlPathTemplate": "/v1/payroll/payment-types/list",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"countryCode\": \"countryCode\",\n  \"defaultPaymentType\": \"defaultPaymentType\",\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"name\": \"name\",\n      \"applies\": [\n        \"applies\"\n      ]\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "6b293867-5066-4ff7-856e-e7ae684feab6",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "3dae5102-b6f6-4bb4-a4d3-e28736ba62c6",
       "name": "Calculate one employee payment under the rules of the company country - default",
       "request": {
@@ -12081,7 +12112,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"countryCode\": \"countryCode\",\n  \"taxAllowance\": \"taxAllowance\",\n  \"incomeTax\": \"incomeTax\",\n  \"employeeContributions\": \"employeeContributions\",\n  \"employerContributions\": \"employerContributions\",\n  \"components\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"net\": \"net\"\n}",
+        "body": "{\n  \"countryCode\": \"countryCode\",\n  \"taxAllowance\": \"taxAllowance\",\n  \"incomeTax\": \"incomeTax\",\n  \"employeeContributions\": \"employeeContributions\",\n  \"employerContributions\": \"employerContributions\",\n  \"components\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\",\n      \"paymentType\": \"paymentType\"\n    }\n  ],\n  \"net\": \"net\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12112,7 +12143,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\",\n      \"paymentType\": \"paymentType\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12143,7 +12174,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\",\n      \"paymentType\": \"paymentType\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"employeeId\": \"employeeId\",\n      \"contractId\": \"contractId\",\n      \"employeeName\": \"employeeName\",\n      \"gross\": \"gross\",\n      \"natura\": \"natura\",\n      \"additions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\",\n          \"taxable\": true\n        }\n      ],\n      \"deductions\": [\n        {\n          \"name\": \"name\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"taxableBase\": \"taxableBase\",\n      \"taxAllowance\": \"taxAllowance\",\n      \"incomeTax\": \"incomeTax\",\n      \"employeeContributions\": \"employeeContributions\",\n      \"employerContributions\": \"employerContributions\",\n      \"components\": [\n        {\n          \"code\": \"code\",\n          \"kind\": \"allowance\",\n          \"amount\": \"amount\"\n        }\n      ],\n      \"net\": \"net\",\n      \"daysWorked\": \"daysWorked\",\n      \"hoursWorked\": \"hoursWorked\",\n      \"registeredDays\": \"registeredDays\",\n      \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12205,7 +12236,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"employeeId\": \"employeeId\",\n  \"contractId\": \"contractId\",\n  \"employeeName\": \"employeeName\",\n  \"gross\": \"gross\",\n  \"natura\": \"natura\",\n  \"additions\": [\n    {\n      \"name\": \"name\",\n      \"amount\": \"amount\",\n      \"taxable\": true\n    }\n  ],\n  \"deductions\": [\n    {\n      \"name\": \"name\",\n      \"amount\": \"amount\"\n    }\n  ],\n  \"taxableBase\": \"taxableBase\",\n  \"taxAllowance\": \"taxAllowance\",\n  \"incomeTax\": \"incomeTax\",\n  \"employeeContributions\": \"employeeContributions\",\n  \"employerContributions\": \"employerContributions\",\n  \"components\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"net\": \"net\",\n  \"daysWorked\": \"daysWorked\",\n  \"hoursWorked\": \"hoursWorked\",\n  \"registeredDays\": \"registeredDays\",\n  \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"employeeId\": \"employeeId\",\n  \"contractId\": \"contractId\",\n  \"employeeName\": \"employeeName\",\n  \"gross\": \"gross\",\n  \"natura\": \"natura\",\n  \"additions\": [\n    {\n      \"name\": \"name\",\n      \"amount\": \"amount\",\n      \"taxable\": true,\n      \"paymentType\": \"paymentType\",\n      \"hours\": \"hours\"\n    }\n  ],\n  \"deductions\": [\n    {\n      \"name\": \"name\",\n      \"amount\": \"amount\"\n    }\n  ],\n  \"taxableBase\": \"taxableBase\",\n  \"taxAllowance\": \"taxAllowance\",\n  \"incomeTax\": \"incomeTax\",\n  \"employeeContributions\": \"employeeContributions\",\n  \"employerContributions\": \"employerContributions\",\n  \"components\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\",\n      \"paymentType\": \"paymentType\"\n    }\n  ],\n  \"net\": \"net\",\n  \"daysWorked\": \"daysWorked\",\n  \"hoursWorked\": \"hoursWorked\",\n  \"registeredDays\": \"registeredDays\",\n  \"averageHourlyEarnings\": \"averageHourlyEarnings\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12236,7 +12267,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\",\n      \"paymentType\": \"paymentType\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -12267,7 +12298,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"year\": 1000000,\n  \"month\": 1000000,\n  \"countryCode\": \"countryCode\",\n  \"payDate\": \"2026-07-01\",\n  \"status\": \"draft\",\n  \"grossTotal\": \"grossTotal\",\n  \"taxAllowanceTotal\": \"taxAllowanceTotal\",\n  \"incomeTaxTotal\": \"incomeTaxTotal\",\n  \"employeeContributionsTotal\": \"employeeContributionsTotal\",\n  \"employerContributionsTotal\": \"employerContributionsTotal\",\n  \"componentTotals\": [\n    {\n      \"code\": \"code\",\n      \"kind\": \"allowance\",\n      \"amount\": \"amount\",\n      \"rate\": \"rate\",\n      \"base\": \"base\",\n      \"paymentType\": \"paymentType\"\n    }\n  ],\n  \"netTotal\": \"netTotal\",\n  \"paidAmount\": \"paidAmount\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"notes\": \"notes\",\n  \"warnings\": [\n    \"warnings\"\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"approvedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversedAt\": \"2026-07-01T09:30:00Z\",\n  \"reversalJournalTransactionId\": \"reversalJournalTransactionId\",\n  \"reversalReason\": \"reversalReason\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20568,6 +20599,6 @@
     }
   ],
   "meta": {
-    "total": 663
+    "total": 664
   }
 }

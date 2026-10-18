@@ -32468,23 +32468,25 @@ func (l *LtGpm312ComputeDeclarationsResponsePayoutTo) String() string {
 }
 
 var (
-	ltGpm312ComputeDeclarationsResponseRowsItemFieldEmployeeID   = big.NewInt(1 << 0)
-	ltGpm312ComputeDeclarationsResponseRowsItemFieldPersonalCode = big.NewInt(1 << 1)
-	ltGpm312ComputeDeclarationsResponseRowsItemFieldFirstName    = big.NewInt(1 << 2)
-	ltGpm312ComputeDeclarationsResponseRowsItemFieldLastName     = big.NewInt(1 << 3)
-	ltGpm312ComputeDeclarationsResponseRowsItemFieldPaymentCode  = big.NewInt(1 << 4)
-	ltGpm312ComputeDeclarationsResponseRowsItemFieldPaidAmount   = big.NewInt(1 << 5)
-	ltGpm312ComputeDeclarationsResponseRowsItemFieldGpmWithheld  = big.NewInt(1 << 6)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldEmployeeID     = big.NewInt(1 << 0)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldPersonalCode   = big.NewInt(1 << 1)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldFirstName      = big.NewInt(1 << 2)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldLastName       = big.NewInt(1 << 3)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldPaymentCode    = big.NewInt(1 << 4)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldPaidAmount     = big.NewInt(1 << 5)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldGpmWithheld    = big.NewInt(1 << 6)
+	ltGpm312ComputeDeclarationsResponseRowsItemFieldGpmRatePercent = big.NewInt(1 << 7)
 )
 
 type LtGpm312ComputeDeclarationsResponseRowsItem struct {
-	EmployeeID   string  `json:"employeeId" url:"employeeId"`
-	PersonalCode *string `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	FirstName    string  `json:"firstName" url:"firstName"`
-	LastName     string  `json:"lastName" url:"lastName"`
-	PaymentCode  string  `json:"paymentCode" url:"paymentCode"`
-	PaidAmount   string  `json:"paidAmount" url:"paidAmount"`
-	GpmWithheld  string  `json:"gpmWithheld" url:"gpmWithheld"`
+	EmployeeID     string  `json:"employeeId" url:"employeeId"`
+	PersonalCode   *string `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	FirstName      string  `json:"firstName" url:"firstName"`
+	LastName       string  `json:"lastName" url:"lastName"`
+	PaymentCode    string  `json:"paymentCode" url:"paymentCode"`
+	PaidAmount     string  `json:"paidAmount" url:"paidAmount"`
+	GpmWithheld    string  `json:"gpmWithheld" url:"gpmWithheld"`
+	GpmRatePercent string  `json:"gpmRatePercent" url:"gpmRatePercent"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -32540,6 +32542,13 @@ func (l *LtGpm312ComputeDeclarationsResponseRowsItem) GetGpmWithheld() string {
 		return ""
 	}
 	return l.GpmWithheld
+}
+
+func (l *LtGpm312ComputeDeclarationsResponseRowsItem) GetGpmRatePercent() string {
+	if l == nil {
+		return ""
+	}
+	return l.GpmRatePercent
 }
 
 func (l *LtGpm312ComputeDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
@@ -32603,6 +32612,13 @@ func (l *LtGpm312ComputeDeclarationsResponseRowsItem) SetPaidAmount(paidAmount s
 func (l *LtGpm312ComputeDeclarationsResponseRowsItem) SetGpmWithheld(gpmWithheld string) {
 	l.GpmWithheld = gpmWithheld
 	l.require(ltGpm312ComputeDeclarationsResponseRowsItemFieldGpmWithheld)
+}
+
+// SetGpmRatePercent sets the GpmRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtGpm312ComputeDeclarationsResponseRowsItem) SetGpmRatePercent(gpmRatePercent string) {
+	l.GpmRatePercent = gpmRatePercent
+	l.require(ltGpm312ComputeDeclarationsResponseRowsItemFieldGpmRatePercent)
 }
 
 func (l *LtGpm312ComputeDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {

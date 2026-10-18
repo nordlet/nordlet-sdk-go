@@ -179,6 +179,30 @@ func TestPayrollSchedulesListWithWireMock(
 	VerifyRequestCount(t, "TestPayrollSchedulesListWithWireMock", "POST", "/v1/payroll/schedules/list", nil, 1)
 }
 
+func TestPayrollPaymentTypesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PaymentTypesListPayrollRequest{}
+	_, invocationErr := client.Payroll.PaymentTypesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPayrollPaymentTypesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPayrollPaymentTypesListWithWireMock", "POST", "/v1/payroll/payment-types/list", nil, 1)
+}
+
 func TestPayrollCalcWithWireMock(
 	t *testing.T,
 ) {
