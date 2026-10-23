@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Return the company's fixed asset setting `autoDepreciation`.
 func (c *Client) SettingsGet(
 	ctx context.Context,
 	request *nordlet.SettingsGetAssetsRequest,
@@ -50,6 +51,7 @@ func (c *Client) SettingsGet(
 	return response.Body, nil
 }
 
+// Turn automatic depreciation on or off. When it is on, the scheduler posts the previous month's depreciation for the company once a day, as `assets/depreciation/post` does.
 func (c *Client) SettingsUpdate(
 	ctx context.Context,
 	request *nordlet.SettingsUpdateAssetsRequest,
@@ -66,6 +68,7 @@ func (c *Client) SettingsUpdate(
 	return response.Body, nil
 }
 
+// Create an asset group: the asset, accumulated depreciation and depreciation expense accounts its assets are posted to, and an optional default useful life in months. `expenseAccountCode` defaults to the chart's depreciation expense account; each account must exist and be postable (422). A duplicate code is refused with 409.
 func (c *Client) GroupsCreate(
 	ctx context.Context,
 	request *nordlet.GroupsCreateAssetsRequest,
@@ -82,6 +85,7 @@ func (c *Client) GroupsCreate(
 	return response.Body, nil
 }
 
+// List the asset groups; filterable and sortable by `code` and `name`.
 func (c *Client) GroupsList(
 	ctx context.Context,
 	request *nordlet.GroupsListAssetsRequest,
@@ -98,6 +102,7 @@ func (c *Client) GroupsList(
 	return response.Body, nil
 }
 
+// Register a fixed asset in a group with its acquisition date and cost, salvage value, useful life in months (defaults to the group's default; 422 when neither is set) and depreciation start date (defaults to the acquisition date). The salvage value must be below the acquisition cost (422); a duplicate code is refused with 409. Depreciation is posted with `assets/depreciation/post`.
 func (c *Client) AssetsCreate(
 	ctx context.Context,
 	request *nordlet.AssetsCreateAssetsRequest,
@@ -114,6 +119,7 @@ func (c *Client) AssetsCreate(
 	return response.Body, nil
 }
 
+// Change an asset that has no posted depreciation yet: group, code, name, dates, cost, salvage value, useful life, notes or documents. Refused with 409 once depreciation is posted or the asset is disposed, and with 422 when the salvage value would reach the acquisition cost; a duplicate code is 409.
 func (c *Client) AssetsUpdate(
 	ctx context.Context,
 	request *nordlet.AssetsUpdateAssetsRequest,
@@ -147,6 +153,7 @@ func (c *Client) AssetsInputVat(
 	return response.Body, nil
 }
 
+// Return one fixed asset with its totals (cost including modernisations, accumulated depreciation, net book value, total life in months), its input VAT facts and its disposal.
 func (c *Client) AssetsGet(
 	ctx context.Context,
 	request *nordlet.AssetsGetAssetsRequest,
@@ -163,6 +170,7 @@ func (c *Client) AssetsGet(
 	return response.Body, nil
 }
 
+// List the fixed assets; filterable by `code`, `name`, `groupId`, `status`, `acquisitionDate`, `acquisitionCost` and `accumulatedDepreciation`, sortable by `code`, `name`, `acquisitionDate` and `acquisitionCost`.
 func (c *Client) AssetsList(
 	ctx context.Context,
 	request *nordlet.AssetsListAssetsRequest,
@@ -179,6 +187,7 @@ func (c *Client) AssetsList(
 	return response.Body, nil
 }
 
+// Record a modernisation of a fixed asset: `amount` is added to its cost and `addedLifeMonths` to its useful life from the month of `date` on, and the remaining depreciable value is spread over the months left. Refused with 422 when the asset is disposed or when no depreciation month would be left (give `addedLifeMonths` of at least 1); a fully depreciated asset becomes active again.
 func (c *Client) AssetsModernize(
 	ctx context.Context,
 	request *nordlet.AssetsModernizeAssetsRequest,
@@ -212,6 +221,7 @@ func (c *Client) AssetsDispose(
 	return response.Body, nil
 }
 
+// Preview what `assets/depreciation/post` would post for a month: per active asset the amount and the months it covers, earlier unposted months included, and whether the month is already posted. Nothing is written.
 func (c *Client) DepreciationPreview(
 	ctx context.Context,
 	request *nordlet.DepreciationPreviewAssetsRequest,
@@ -228,6 +238,7 @@ func (c *Client) DepreciationPreview(
 	return response.Body, nil
 }
 
+// Post the depreciation of a month: one journal entry dated the last day of the month that debits each group's expense account and credits its accumulated depreciation account, for every active asset whose depreciation has started, covering that month and any earlier month not yet posted. Each month's amount is the remaining depreciable value (cost plus modernisations less salvage value less accumulated depreciation) divided by the months left; an asset whose life or value is used up becomes `fully_depreciated`. Answers 409 when the period is locked, and `journalTransactionId` null when nothing is due.
 func (c *Client) DepreciationPost(
 	ctx context.Context,
 	request *nordlet.DepreciationPostAssetsRequest,

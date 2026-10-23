@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Creates a job position with an optional code and name translations, for use in `hr/contracts/create`.
 func (c *Client) PositionsCreate(
 	ctx context.Context,
 	request *nordlet.PositionsCreateHrRequest,
@@ -50,6 +51,7 @@ func (c *Client) PositionsCreate(
 	return response.Body, nil
 }
 
+// Changes the code, name or translations of a position; a null `translations` removes them.
 func (c *Client) PositionsUpdate(
 	ctx context.Context,
 	request *nordlet.PositionsUpdateHrRequest,
@@ -66,6 +68,7 @@ func (c *Client) PositionsUpdate(
 	return response.Body, nil
 }
 
+// Lists the company's positions; filterable and sortable by `name` and `code`.
 func (c *Client) PositionsList(
 	ctx context.Context,
 	request *nordlet.PositionsListHrRequest,
@@ -82,6 +85,7 @@ func (c *Client) PositionsList(
 	return response.Body, nil
 }
 
+// Creates an employee record. `payrollOptions` holds the country-specific settings the payroll engine reads for the person (see `hr/employees/fields`); `applyAllowance` defaults to true and `pensionAccumulation` to false.
 func (c *Client) EmployeesCreate(
 	ctx context.Context,
 	request *nordlet.EmployeesCreateHrRequest,
@@ -98,6 +102,7 @@ func (c *Client) EmployeesCreate(
 	return response.Body, nil
 }
 
+// Changes the given fields of an employee; a null clears the fields that allow it (code, personal code, birth date, contact details, address, IBAN, social insurance number and start, hire date, notes). `status` and `terminationDate` are set here too.
 func (c *Client) EmployeesUpdate(
 	ctx context.Context,
 	request *nordlet.EmployeesUpdateHrRequest,
@@ -114,6 +119,7 @@ func (c *Client) EmployeesUpdate(
 	return response.Body, nil
 }
 
+// Reads one employee.
 func (c *Client) EmployeesGet(
 	ctx context.Context,
 	request *nordlet.EmployeesGetHrRequest,
@@ -147,6 +153,7 @@ func (c *Client) EmployeesFields(
 	return response.Body, nil
 }
 
+// Lists the employees that are not deleted; filterable by `firstName`, `lastName`, `code`, `status` and `email`, sortable by `lastName`, `code` and `createdAt`.
 func (c *Client) EmployeesList(
 	ctx context.Context,
 	request *nordlet.EmployeesListHrRequest,
@@ -163,6 +170,7 @@ func (c *Client) EmployeesList(
 	return response.Body, nil
 }
 
+// Marks the employee deleted; the record stays and no longer appears in lists or payroll runs. `hr/employees/anonymize` also blanks the personal data.
 func (c *Client) EmployeesDelete(
 	ctx context.Context,
 	request *nordlet.EmployeesDeleteHrRequest,
@@ -196,6 +204,7 @@ func (c *Client) EmployeesAnonymize(
 	return response.Body, nil
 }
 
+// Creates an employment contract for an employee. A `permanent` contract takes no `endDate` and a `fixed_term` one requires it; the number comes from `contractNo` or, with `agreementId`, from the employee's agreement; `workHours` defaults by `salaryType`. Answers 422 when the end date is before the start, and 409 when the employee already has a contract overlapping the period (end it with `hr/contracts/end` first) or the contract number already exists.
 func (c *Client) ContractsCreate(
 	ctx context.Context,
 	request *nordlet.ContractsCreateHrRequest,
@@ -212,6 +221,7 @@ func (c *Client) ContractsCreate(
 	return response.Body, nil
 }
 
+// Ends a contract on `endDate` with an optional reason. Answers 422 when the end date is before the contract start.
 func (c *Client) ContractsEnd(
 	ctx context.Context,
 	request *nordlet.ContractsEndHrRequest,
@@ -228,6 +238,7 @@ func (c *Client) ContractsEnd(
 	return response.Body, nil
 }
 
+// Lists employment contracts; filterable by `employeeId`, `agreementId`, `status` and `contractNo`, sortable by `startDate` and `contractNo`.
 func (c *Client) ContractsList(
 	ctx context.Context,
 	request *nordlet.ContractsListHrRequest,
@@ -244,6 +255,7 @@ func (c *Client) ContractsList(
 	return response.Body, nil
 }
 
+// Creates or replaces the leave entitlement of an employee for a year; `usedDays` is kept unless given (0 on a new row) and `remainingDays` is the entitled days less the used ones.
 func (c *Client) LeaveBalancesSet(
 	ctx context.Context,
 	request *nordlet.LeaveBalancesSetHrRequest,
@@ -260,6 +272,7 @@ func (c *Client) LeaveBalancesSet(
 	return response.Body, nil
 }
 
+// Lists leave balances, narrowed to an employee and/or a year when given, oldest year first.
 func (c *Client) LeaveBalancesList(
 	ctx context.Context,
 	request *nordlet.LeaveBalancesListHrRequest,
@@ -276,6 +289,7 @@ func (c *Client) LeaveBalancesList(
 	return response.Body, nil
 }
 
+// Records a sick-leave certificate of an employee. Answers 422 when `toDate` is before `fromDate`. `payroll/runs/create` warns when a certificate covers working days of a month that has no timesheet.
 func (c *Client) IncapacityCertificatesCreate(
 	ctx context.Context,
 	request *nordlet.IncapacityCertificatesCreateHrRequest,
@@ -292,6 +306,7 @@ func (c *Client) IncapacityCertificatesCreate(
 	return response.Body, nil
 }
 
+// Lists incapacity certificates; filterable by `employeeId` and `number`, sortable by `fromDate` and `number`.
 func (c *Client) IncapacityCertificatesList(
 	ctx context.Context,
 	request *nordlet.IncapacityCertificatesListHrRequest,
@@ -308,6 +323,7 @@ func (c *Client) IncapacityCertificatesList(
 	return response.Body, nil
 }
 
+// Adds the company's daily per diem rate for a destination country from `validFrom`; `hr/business-trips/create` takes the latest rate valid on the trip's start date. Answers 409 when a rate for that country already starts on that date.
 func (c *Client) PerDiemRatesCreate(
 	ctx context.Context,
 	request *nordlet.PerDiemRatesCreateHrRequest,
@@ -324,6 +340,7 @@ func (c *Client) PerDiemRatesCreate(
 	return response.Body, nil
 }
 
+// Lists per diem rates; filterable by `countryCode`, sortable by `countryCode` and `validFrom`.
 func (c *Client) PerDiemRatesList(
 	ctx context.Context,
 	request *nordlet.PerDiemRatesListHrRequest,
@@ -340,6 +357,7 @@ func (c *Client) PerDiemRatesList(
 	return response.Body, nil
 }
 
+// Deletes a per diem rate.
 func (c *Client) PerDiemRatesDelete(
 	ctx context.Context,
 	request *nordlet.PerDiemRatesDeleteHrRequest,
@@ -356,6 +374,7 @@ func (c *Client) PerDiemRatesDelete(
 	return response.Body, nil
 }
 
+// Stores the trip as a draft with `days` counted as calendar days, both ends included, and `perDiemAmount` as the days times the company's rate for the destination valid on the start date (`hr/per-diem-rates/create`). Answers 422 when the trip ends before it starts or no rate covers the destination on that date, and 409 when the employee already has a trip overlapping the dates.
 func (c *Client) BusinessTripsCreate(
 	ctx context.Context,
 	request *nordlet.BusinessTripsCreateHrRequest,
@@ -372,6 +391,7 @@ func (c *Client) BusinessTripsCreate(
 	return response.Body, nil
 }
 
+// Reads one business trip.
 func (c *Client) BusinessTripsGet(
 	ctx context.Context,
 	request *nordlet.BusinessTripsGetHrRequest,
@@ -388,6 +408,7 @@ func (c *Client) BusinessTripsGet(
 	return response.Body, nil
 }
 
+// Lists business trips; filterable by `employeeId`, `status` and `payrollRunId`, sortable by `startDate`.
 func (c *Client) BusinessTripsList(
 	ctx context.Context,
 	request *nordlet.BusinessTripsListHrRequest,
@@ -404,6 +425,7 @@ func (c *Client) BusinessTripsList(
 	return response.Body, nil
 }
 
+// Sets the trip's status to `approved`. `payroll/runs/create` without explicit lines adds the per diem of every approved trip ending in the run month as an untaxed addition and sets the trip's `payrollRunId`; reversing or cancelling the run releases the trip again. Answers 409 when the trip is not a draft.
 func (c *Client) BusinessTripsApprove(
 	ctx context.Context,
 	request *nordlet.BusinessTripsApproveHrRequest,
@@ -420,6 +442,7 @@ func (c *Client) BusinessTripsApprove(
 	return response.Body, nil
 }
 
+// Deletes a draft trip; answers 409 when the trip is not a draft.
 func (c *Client) BusinessTripsDelete(
 	ctx context.Context,
 	request *nordlet.BusinessTripsDeleteHrRequest,
@@ -436,6 +459,7 @@ func (c *Client) BusinessTripsDelete(
 	return response.Body, nil
 }
 
+// Adds an education, qualification, certificate or training record to an employee, optionally linked to one of the company's uploaded files (`fileId`).
 func (c *Client) EmployeesRecordsCreate(
 	ctx context.Context,
 	request *nordlet.EmployeesRecordsCreateHrRequest,
@@ -452,6 +476,7 @@ func (c *Client) EmployeesRecordsCreate(
 	return response.Body, nil
 }
 
+// Changes the given fields of an employee record; `issuedAt`, `validUntil` and `fileId` can be cleared with null.
 func (c *Client) EmployeesRecordsUpdate(
 	ctx context.Context,
 	request *nordlet.EmployeesRecordsUpdateHrRequest,
@@ -468,6 +493,7 @@ func (c *Client) EmployeesRecordsUpdate(
 	return response.Body, nil
 }
 
+// Deletes an employee record.
 func (c *Client) EmployeesRecordsDelete(
 	ctx context.Context,
 	request *nordlet.EmployeesRecordsDeleteHrRequest,
@@ -484,6 +510,7 @@ func (c *Client) EmployeesRecordsDelete(
 	return response.Body, nil
 }
 
+// Lists employee records; filterable by `employeeId`, `type` and `title`, sortable by `createdAt` and `issuedAt`.
 func (c *Client) EmployeesRecordsList(
 	ctx context.Context,
 	request *nordlet.EmployeesRecordsListHrRequest,
@@ -500,6 +527,7 @@ func (c *Client) EmployeesRecordsList(
 	return response.Body, nil
 }
 
+// Lists the files uploaded against an employee, newest first.
 func (c *Client) EmployeesAttachmentsList(
 	ctx context.Context,
 	request *nordlet.EmployeesAttachmentsListHrRequest,
@@ -516,6 +544,7 @@ func (c *Client) EmployeesAttachmentsList(
 	return response.Body, nil
 }
 
+// Builds the timesheet of the month for every employee with a contract in it, or for one employee with `employeeId`, replacing any existing timesheet: the Monday to Friday days within the contract get the contract's daily hours (its weekly hours over five), and for a Lithuanian company the public holidays are `holiday` days with 0 hours. Answers 422 when no contract covers the month.
 func (c *Client) TimesheetsGenerate(
 	ctx context.Context,
 	request *nordlet.TimesheetsGenerateHrRequest,
@@ -532,6 +561,7 @@ func (c *Client) TimesheetsGenerate(
 	return response.Body, nil
 }
 
+// Creates or replaces the timesheet of an employee for a month from the given days; `workedDays` and `workedHours` count the `work` and `business_trip` days with hours. Answers 422 for a day outside the month, a day given twice or more than 24 hours in a day. `payroll/runs/create` reads the timesheet for the paid days, the days worked and the business-trip days of the month.
 func (c *Client) TimesheetsUpsert(
 	ctx context.Context,
 	request *nordlet.TimesheetsUpsertHrRequest,
@@ -548,6 +578,7 @@ func (c *Client) TimesheetsUpsert(
 	return response.Body, nil
 }
 
+// Reads the timesheet of an employee for a month.
 func (c *Client) TimesheetsGet(
 	ctx context.Context,
 	request *nordlet.TimesheetsGetHrRequest,
@@ -564,6 +595,7 @@ func (c *Client) TimesheetsGet(
 	return response.Body, nil
 }
 
+// Lists the timesheets of a month, ordered by employee name.
 func (c *Client) TimesheetsList(
 	ctx context.Context,
 	request *nordlet.TimesheetsListHrRequest,
@@ -580,6 +612,7 @@ func (c *Client) TimesheetsList(
 	return response.Body, nil
 }
 
+// Deletes a timesheet.
 func (c *Client) TimesheetsDelete(
 	ctx context.Context,
 	request *nordlet.TimesheetsDeleteHrRequest,

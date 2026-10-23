@@ -1366,6 +1366,7 @@ const (
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceRegistered     SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.registered"
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.approved"
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderReceived         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.received"
+	SubscriptionsCreateWebhooksRequestEventsItemRecurringInvoiceGenerated     SubscriptionsCreateWebhooksRequestEventsItem = "recurring_invoice.generated"
 	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityActual         SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.actual"
 	SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityTruedUp        SubscriptionsCreateWebhooksRequestEventsItem = "refund_liability.trued_up"
 	SubscriptionsCreateWebhooksRequestEventsItemReportCompleted               SubscriptionsCreateWebhooksRequestEventsItem = "report.completed"
@@ -1436,6 +1437,8 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved, nil
 	case "purchase_order.received":
 		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderReceived, nil
+	case "recurring_invoice.generated":
+		return SubscriptionsCreateWebhooksRequestEventsItemRecurringInvoiceGenerated, nil
 	case "refund_liability.actual":
 		return SubscriptionsCreateWebhooksRequestEventsItemRefundLiabilityActual, nil
 	case "refund_liability.trued_up":
@@ -2727,6 +2730,7 @@ const (
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceRegistered     SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.registered"
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.approved"
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderReceived         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.received"
+	SubscriptionsUpdateWebhooksRequestEventsItemRecurringInvoiceGenerated     SubscriptionsUpdateWebhooksRequestEventsItem = "recurring_invoice.generated"
 	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityActual         SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.actual"
 	SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityTruedUp        SubscriptionsUpdateWebhooksRequestEventsItem = "refund_liability.trued_up"
 	SubscriptionsUpdateWebhooksRequestEventsItemReportCompleted               SubscriptionsUpdateWebhooksRequestEventsItem = "report.completed"
@@ -2797,6 +2801,8 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved, nil
 	case "purchase_order.received":
 		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderReceived, nil
+	case "recurring_invoice.generated":
+		return SubscriptionsUpdateWebhooksRequestEventsItemRecurringInvoiceGenerated, nil
 	case "refund_liability.actual":
 		return SubscriptionsUpdateWebhooksRequestEventsItemRefundLiabilityActual, nil
 	case "refund_liability.trued_up":

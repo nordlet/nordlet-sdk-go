@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Create a draft purchase invoice or credit note (`type`) from a supplier document; it is posted with `purchases/invoices/register`. Lines without a unit price take the item's supplier or purchase price, `currency` defaults to the company's invoice currency, `documentRef` links an uploaded file, and the gross total leaves out self-assessed VAT. `creditedInvoiceId` (credit notes only) must be an invoice of the same partner, `purchaseOrderId` an order of the same partner that is not draft, submitted or cancelled, and `operationTypeId` an active purchase operation type, each 422 otherwise; the same `documentNumber` for the same partner is refused with 409.
 func (c *Client) InvoicesCreate(
 	ctx context.Context,
 	request *nordlet.InvoicesCreatePurchasesRequest,
@@ -50,6 +51,7 @@ func (c *Client) InvoicesCreate(
 	return response.Body, nil
 }
 
+// Return one purchase invoice or credit note with its lines.
 func (c *Client) InvoicesGet(
 	ctx context.Context,
 	request *nordlet.InvoicesGetPurchasesRequest,
@@ -66,6 +68,7 @@ func (c *Client) InvoicesGet(
 	return response.Body, nil
 }
 
+// Change a draft purchase invoice (409 once registered); only the fields sent are changed, and `lines` replace all existing lines with the totals recomputed. `purchaseOrderId` and `operationTypeId` are checked as on `purchases/invoices/create` (422). A `documentNumber` already used for the partner is refused with 409.
 func (c *Client) InvoicesUpdate(
 	ctx context.Context,
 	request *nordlet.InvoicesUpdatePurchasesRequest,
@@ -82,6 +85,7 @@ func (c *Client) InvoicesUpdate(
 	return response.Body, nil
 }
 
+// Mark a draft purchase invoice as deleted (409 once registered). A document capture linked to it goes back to `extracted` (or `pending` when it has no extraction) and can be confirmed again.
 func (c *Client) InvoicesDelete(
 	ctx context.Context,
 	request *nordlet.InvoicesDeletePurchasesRequest,
@@ -98,6 +102,7 @@ func (c *Client) InvoicesDelete(
 	return response.Body, nil
 }
 
+// Register a draft purchase invoice or credit note: posts the journal entry dated `registrationDate` (default the document date) and sets the status to `registered`. The entry debits each line's expense account (the line's `accountCode`, else the item's purchase or expense account, else the operation type's expense account, else the `purchases.goodsForResale` or `purchases.defaultExpense` rule account), debits VAT receivable (a company that is not a VAT payer books the VAT into the expense instead), credits payables (the operation type's credit account when set) and credits output VAT for self-assessed VAT; a credit note posts the reverse. Lines with `deferralStartDate` and `deferralEndDate` are debited to the `purchases.prepaidExpenses` account instead and get a monthly release schedule for `purchases/deferrals/post`. With `warehouseId` the product lines of an invoice are received into stock at their base-currency cost (422 on an order-linked invoice, whose goods arrive through `purchases/receipts/create`, and for a line that is also deferred); `returnFromStock` on a credit note that credits an invoice takes the goods back out of stock at their FIFO cost and books the difference to the credited amount on the `inventory.cogs` account (422 on an invoice, without `creditedInvoiceId`, or when no goods of the credited invoice are in stock). A credit note that credits a registered invoice in the same currency is applied to it as a payment up to the open amount. Refused with 409 when already registered or the accounting period is locked, and with 422 when the credit notes would exceed the credited invoice, a posting account is missing or no exchange rate exists for the date. Emits `purchase_invoice.registered`, `purchase_invoice.paid` when the credited invoice becomes fully paid, and `stock.changed` when stock moves.
 func (c *Client) InvoicesRegister(
 	ctx context.Context,
 	request *nordlet.InvoicesRegisterPurchasesRequest,
@@ -114,6 +119,7 @@ func (c *Client) InvoicesRegister(
 	return response.Body, nil
 }
 
+// List the monthly release rows that `purchases/invoices/register` creates for lines booked as prepaid expenses, each with its amount, expense and prepaid account and `status` (`pending`, `posted`, `cancelled`). Filterable by `invoiceId`, `status` and `scheduleDate`; sortable by `scheduleDate`.
 func (c *Client) DeferralsList(
 	ctx context.Context,
 	request *nordlet.DeferralsListPurchasesRequest,
@@ -130,6 +136,7 @@ func (c *Client) DeferralsList(
 	return response.Body, nil
 }
 
+// Post every `pending` prepaid-expense release row dated on or before `asOfDate` (default today in the company's time zone): one journal entry per schedule date debiting the expense account and crediting the prepaid account, and the rows become `posted`. A locked accounting period is refused with 409. The scheduled job `expense-deferrals` runs the same release for every active company.
 func (c *Client) DeferralsPost(
 	ctx context.Context,
 	request *nordlet.DeferralsPostPurchasesRequest,
@@ -146,6 +153,7 @@ func (c *Client) DeferralsPost(
 	return response.Body, nil
 }
 
+// List purchase invoices and credit notes without lines, with the supplier's `partnerName`. Filterable by `partnerId`, `type`, `status`, `paymentStatus`, `documentNumber`, `documentDate`, `currency`, `operationTypeId`, `purchaseOrderId`, `grossTotal`, `netTotal`, `vatTotal` and `dueDate`; sortable by `createdAt`, `documentDate`, `documentNumber`, `grossTotal` and `dueDate`.
 func (c *Client) InvoicesList(
 	ctx context.Context,
 	request *nordlet.InvoicesListPurchasesRequest,
@@ -162,6 +170,7 @@ func (c *Client) InvoicesList(
 	return response.Body, nil
 }
 
+// Create a draft purchase order for a supplier. Lines without a unit price take the item's supplier or purchase price; `orderNumber` comes from the `purchase_order` series with prefix PO when not given; `currency` defaults to the company's invoice currency; `documentRef` links an uploaded file to the order. A number already in use is refused with 409. The order continues with `purchases/orders/submit`, `purchases/orders/approve` and `purchases/receipts/create`.
 func (c *Client) OrdersCreate(
 	ctx context.Context,
 	request *nordlet.OrdersCreatePurchasesRequest,
@@ -178,6 +187,7 @@ func (c *Client) OrdersCreate(
 	return response.Body, nil
 }
 
+// Change a draft purchase order (409 once it is submitted); only the fields sent are changed. `lines` replace all existing lines and the totals are recomputed.
 func (c *Client) OrdersUpdate(
 	ctx context.Context,
 	request *nordlet.OrdersUpdatePurchasesRequest,
@@ -194,6 +204,7 @@ func (c *Client) OrdersUpdate(
 	return response.Body, nil
 }
 
+// Return one purchase order with its lines; each line carries `receivedQty` and `remainingQty`.
 func (c *Client) OrdersGet(
 	ctx context.Context,
 	request *nordlet.OrdersGetPurchasesRequest,
@@ -210,6 +221,7 @@ func (c *Client) OrdersGet(
 	return response.Body, nil
 }
 
+// List purchase orders without lines, with the supplier's `partnerName`. Filterable by `partnerId`, `status`, `orderNumber`, `orderDate`, `currency` and `grossTotal`; sortable by `createdAt`, `orderDate`, `orderNumber` and `grossTotal`.
 func (c *Client) OrdersList(
 	ctx context.Context,
 	request *nordlet.OrdersListPurchasesRequest,
@@ -226,6 +238,7 @@ func (c *Client) OrdersList(
 	return response.Body, nil
 }
 
+// Move a `draft` purchase order to `submitted` for approval (409 from any other status). `reason` is kept in the audit log.
 func (c *Client) OrdersSubmit(
 	ctx context.Context,
 	request *nordlet.OrdersSubmitPurchasesRequest,
@@ -242,6 +255,7 @@ func (c *Client) OrdersSubmit(
 	return response.Body, nil
 }
 
+// Approve a `submitted` purchase order (409 from any other status), recording who approved it and when; needs the `purchases:approve` scope. Goods are then received with `purchases/receipts/create`. Emits `purchase_order.approved`.
 func (c *Client) OrdersApprove(
 	ctx context.Context,
 	request *nordlet.OrdersApprovePurchasesRequest,
@@ -258,6 +272,7 @@ func (c *Client) OrdersApprove(
 	return response.Body, nil
 }
 
+// Send a `submitted` purchase order back to `draft` (409 from any other status); needs the `purchases:approve` scope. `reason` is kept in the audit log.
 func (c *Client) OrdersReject(
 	ctx context.Context,
 	request *nordlet.OrdersRejectPurchasesRequest,
@@ -274,6 +289,7 @@ func (c *Client) OrdersReject(
 	return response.Body, nil
 }
 
+// Cancel a `draft`, `submitted` or `approved` purchase order (409 from any other status, or when the order already has a goods receipt).
 func (c *Client) OrdersCancel(
 	ctx context.Context,
 	request *nordlet.OrdersCancelPurchasesRequest,
@@ -290,6 +306,7 @@ func (c *Client) OrdersCancel(
 	return response.Body, nil
 }
 
+// Close an `approved`, `partially_received` or `received` purchase order (409 from any other status); a closed order accepts no further goods receipts.
 func (c *Client) OrdersClose(
 	ctx context.Context,
 	request *nordlet.OrdersClosePurchasesRequest,
@@ -306,6 +323,7 @@ func (c *Client) OrdersClose(
 	return response.Body, nil
 }
 
+// Mark a `draft` purchase order as deleted (409 once it is submitted).
 func (c *Client) OrdersDelete(
 	ctx context.Context,
 	request *nordlet.OrdersDeletePurchasesRequest,
@@ -322,6 +340,7 @@ func (c *Client) OrdersDelete(
 	return response.Body, nil
 }
 
+// Record a goods receipt against an `approved` or `partially_received` purchase order (409 otherwise), numbered from the `goods_receipt` series with prefix GR. Lines whose item is a product go into stock in `warehouseId`, else the order's warehouse (422 when neither is set), at their share of the order line's net amount converted at the receipt date's rate; `lotNumber` and `expiryDate` receive them into a lot, and an item that needs lot or serial tracking is refused with 422 without one. A quantity above the line's remaining quantity is refused with 409; the order becomes `received` when every line is fully received, else `partially_received`. Emits `goods_receipt.posted`, `stock.changed` and, when fully received, `purchase_order.received`.
 func (c *Client) ReceiptsCreate(
 	ctx context.Context,
 	request *nordlet.ReceiptsCreatePurchasesRequest,
@@ -338,6 +357,7 @@ func (c *Client) ReceiptsCreate(
 	return response.Body, nil
 }
 
+// Return one goods receipt with its lines and their stock movement ids.
 func (c *Client) ReceiptsGet(
 	ctx context.Context,
 	request *nordlet.ReceiptsGetPurchasesRequest,
@@ -354,6 +374,7 @@ func (c *Client) ReceiptsGet(
 	return response.Body, nil
 }
 
+// List goods receipts without lines. Filterable by `orderId`, `warehouseId`, `receiptDate` and `receiptNumber`; sortable by `createdAt` and `receiptDate`.
 func (c *Client) ReceiptsList(
 	ctx context.Context,
 	request *nordlet.ReceiptsListPurchasesRequest,
@@ -370,6 +391,7 @@ func (c *Client) ReceiptsList(
 	return response.Body, nil
 }
 
+// Compare a purchase invoice with its linked purchase order and the goods received so far, grouped by item (by description for lines without one). Each row is `matched`, `not_received` (invoiced but nothing received), `over_invoiced` (invoiced more than received), `price_mismatch` (unit price differs by more than `priceTolerancePercent`), `not_on_order` or `not_invoiced`; `status` is `mismatched` when any row other than `not_invoiced` is not matched. Refused with 422 when the invoice has no `purchaseOrderId` or its currency differs from the order's. Nothing is changed.
 func (c *Client) InvoicesMatch(
 	ctx context.Context,
 	request *nordlet.InvoicesMatchPurchasesRequest,

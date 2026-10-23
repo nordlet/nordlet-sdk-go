@@ -927,6 +927,187 @@ func TestSalesInvoiceTemplatesListWithWireMock(
 	VerifyRequestCount(t, "TestSalesInvoiceTemplatesListWithWireMock", "POST", "/v1/sales/invoice-templates/list", nil, 1)
 }
 
+func TestSalesRecurringInvoicesCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RecurringInvoicesCreateSalesRequest{
+		TemplateID: "templateId",
+		StartDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Sales.RecurringInvoicesCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesRecurringInvoicesCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesRecurringInvoicesCreateWithWireMock", "POST", "/v1/sales/recurring-invoices/create", nil, 1)
+}
+
+func TestSalesRecurringInvoicesUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RecurringInvoicesUpdateSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.RecurringInvoicesUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesRecurringInvoicesUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesRecurringInvoicesUpdateWithWireMock", "POST", "/v1/sales/recurring-invoices/update", nil, 1)
+}
+
+func TestSalesRecurringInvoicesGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RecurringInvoicesGetSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.RecurringInvoicesGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesRecurringInvoicesGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesRecurringInvoicesGetWithWireMock", "POST", "/v1/sales/recurring-invoices/get", nil, 1)
+}
+
+func TestSalesRecurringInvoicesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RecurringInvoicesDeleteSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.RecurringInvoicesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesRecurringInvoicesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesRecurringInvoicesDeleteWithWireMock", "POST", "/v1/sales/recurring-invoices/delete", nil, 1)
+}
+
+func TestSalesRecurringInvoicesGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RecurringInvoicesGenerateSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.RecurringInvoicesGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesRecurringInvoicesGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesRecurringInvoicesGenerateWithWireMock", "POST", "/v1/sales/recurring-invoices/generate", nil, 1)
+}
+
+func TestSalesRecurringInvoicesRunWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RecurringInvoicesRunSalesRequest{}
+	_, invocationErr := client.Sales.RecurringInvoicesRun(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesRecurringInvoicesRunWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesRecurringInvoicesRunWithWireMock", "POST", "/v1/sales/recurring-invoices/run", nil, 1)
+}
+
+func TestSalesRecurringInvoicesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RecurringInvoicesListSalesRequest{}
+	_, invocationErr := client.Sales.RecurringInvoicesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesRecurringInvoicesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesRecurringInvoicesListWithWireMock", "POST", "/v1/sales/recurring-invoices/list", nil, 1)
+}
+
 func TestSalesRecognitionComputeWithWireMock(
 	t *testing.T,
 ) {

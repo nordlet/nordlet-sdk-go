@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Create a sign-in link for the e-mail address and send it; the link is valid for 15 minutes and is consumed with `account/login-link/consume`. When an unused link was requested for the same address within the last minute, the call answers `sent` without sending another. `locale` sets the language of the e-mail and of the link; `acceptTerms`, `acceptDpa` and `referralCode` are stored with the link and used when the address has no account yet.
 func (c *Client) LoginLinkRequest(
 	ctx context.Context,
 	request *nordlet.LoginLinkRequestAccountRequest,
@@ -50,6 +51,7 @@ func (c *Client) LoginLinkRequest(
 	return response.Body, nil
 }
 
+// Exchange a sign-in link token for a session; an unknown, used or expired token is refused with 401. When no account has the address, one is created (`isNewUser`), which is refused with 422 unless the link was requested with `acceptTerms` and `acceptDpa`; a `referralCode` on the link records who referred the new user. A link from `account/email/change-request` changes the signed-in user's address instead, refused with 409 when another account has it.
 func (c *Client) LoginLinkConsume(
 	ctx context.Context,
 	request *nordlet.LoginLinkConsumeAccountRequest,
@@ -66,6 +68,7 @@ func (c *Client) LoginLinkConsume(
 	return response.Body, nil
 }
 
+// Delete the session the call was made with.
 func (c *Client) Logout(
 	ctx context.Context,
 	request *nordlet.LogoutAccountRequest,
@@ -82,6 +85,7 @@ func (c *Client) Logout(
 	return response.Body, nil
 }
 
+// Return the signed-in user, their active company and role in it, the companies they belong to and their consent state. `billing` is the billing account that pays for the active company (its payer, or the user when there is none or no company), with `isPayer` saying whether that is the user; `referralPoints` is the user's current points balance.
 func (c *Client) Me(
 	ctx context.Context,
 	request *nordlet.MeAccountRequest,
@@ -98,6 +102,7 @@ func (c *Client) Me(
 	return response.Body, nil
 }
 
+// List the members of the active company with their role.
 func (c *Client) MembersList(
 	ctx context.Context,
 	request *nordlet.MembersListAccountRequest,
@@ -114,6 +119,7 @@ func (c *Client) MembersList(
 	return response.Body, nil
 }
 
+// Change the role of a member of the active company; owners and admins may call it. Refused with 422 for the caller's own role and with 403 for the owner's, which only `account/members/transfer-ownership` changes.
 func (c *Client) MembersSetRole(
 	ctx context.Context,
 	request *nordlet.MembersSetRoleAccountRequest,
@@ -130,6 +136,7 @@ func (c *Client) MembersSetRole(
 	return response.Body, nil
 }
 
+// Make another member the owner of the active company; the caller must be its owner and becomes an admin. Refused with 422 when `userId` is the caller. With `movePayer` the company's billing also moves to the new owner, which only the member currently paying for it may do (403).
 func (c *Client) MembersTransferOwnership(
 	ctx context.Context,
 	request *nordlet.MembersTransferOwnershipAccountRequest,
@@ -146,6 +153,7 @@ func (c *Client) MembersTransferOwnership(
 	return response.Body, nil
 }
 
+// Remove a member from the active company; owners and admins may call it. Their sessions lose this company as the active one and the API keys they created for it are revoked. Refused with 422 for the caller themself and with 403 for the owner.
 func (c *Client) MembersRemove(
 	ctx context.Context,
 	request *nordlet.MembersRemoveAccountRequest,
@@ -162,6 +170,7 @@ func (c *Client) MembersRemove(
 	return response.Body, nil
 }
 
+// Create an invitation to the active company for an e-mail address with the given role and send it by e-mail in `locale`; owners and admins may call it. The invitation is valid for 7 days and replaces an earlier pending one for the same address. Refused with 409 when the address already belongs to a member.
 func (c *Client) InvitesCreate(
 	ctx context.Context,
 	request *nordlet.InvitesCreateAccountRequest,
@@ -178,6 +187,7 @@ func (c *Client) InvitesCreate(
 	return response.Body, nil
 }
 
+// List the pending invitations of the active company; `expired` marks those past their expiry.
 func (c *Client) InvitesList(
 	ctx context.Context,
 	request *nordlet.InvitesListAccountRequest,
@@ -194,6 +204,7 @@ func (c *Client) InvitesList(
 	return response.Body, nil
 }
 
+// Delete a pending invitation of the active company.
 func (c *Client) InvitesRevoke(
 	ctx context.Context,
 	request *nordlet.InvitesRevokeAccountRequest,
@@ -210,6 +221,7 @@ func (c *Client) InvitesRevoke(
 	return response.Body, nil
 }
 
+// Read a pending invitation by its token: the invited address, role and company name, whether it has expired and whether an account with that address already exists (`userExists`), in which case `account/invites/accept` must be called signed in as that account.
 func (c *Client) InvitesGet(
 	ctx context.Context,
 	request *nordlet.InvitesGetAccountRequest,
@@ -226,6 +238,7 @@ func (c *Client) InvitesGet(
 	return response.Body, nil
 }
 
+// Accept an invitation and return a session with the invited company active. When the address has no account, one is created with `name` and `locale`, which is refused with 422 unless `acceptTerms` and `acceptDpa` are true; when it has one, the call must be made signed in as that account (401 otherwise). An expired invitation is refused with 422.
 func (c *Client) InvitesAccept(
 	ctx context.Context,
 	request *nordlet.InvitesAcceptAccountRequest,
@@ -242,6 +255,7 @@ func (c *Client) InvitesAccept(
 	return response.Body, nil
 }
 
+// Set the user's language: with an active company it is stored on their membership of that company (`scope` = `membership`), otherwise on the user (`scope` = `user`).
 func (c *Client) LocaleSet(
 	ctx context.Context,
 	request *nordlet.LocaleSetAccountRequest,
@@ -258,6 +272,7 @@ func (c *Client) LocaleSet(
 	return response.Body, nil
 }
 
+// Create a company with the caller as its owner and payer, seed its chart of accounts from the template of `countryCode`, and make it the active company of the session. `timeZone` defaults to the country's, `isVatPayer` to true and `defaultInvoiceCurrency` to the base currency. Refused with 422 when `baseCurrency` is not a supported currency.
 func (c *Client) CompaniesCreate(
 	ctx context.Context,
 	request *nordlet.CompaniesCreateAccountRequest,
@@ -274,6 +289,7 @@ func (c *Client) CompaniesCreate(
 	return response.Body, nil
 }
 
+// Make one of the caller's companies the active company of the session. Refused with 403 when the caller is not a member and with 422 when the company is archived or deleted.
 func (c *Client) CompaniesSelect(
 	ctx context.Context,
 	request *nordlet.CompaniesSelectAccountRequest,
@@ -290,6 +306,7 @@ func (c *Client) CompaniesSelect(
 	return response.Body, nil
 }
 
+// Return the profile of the active company.
 func (c *Client) CompaniesProfile(
 	ctx context.Context,
 	request *nordlet.CompaniesProfileAccountRequest,
@@ -306,6 +323,7 @@ func (c *Client) CompaniesProfile(
 	return response.Body, nil
 }
 
+// Change the profile of the active company; owners and admins may call it. Only the fields sent are changed, and the nullable ones can be sent as null to clear them. `logo` stores a base64-encoded image as a file of the company and sets `logoFileId`. The country, base currency and sandbox flag are fixed at creation.
 func (c *Client) CompaniesUpdate(
 	ctx context.Context,
 	request *nordlet.CompaniesUpdateAccountRequest,
@@ -322,6 +340,7 @@ func (c *Client) CompaniesUpdate(
 	return response.Body, nil
 }
 
+// Set the company named by `companyId` to `archived`; the caller must be its owner. Every session that had it active loses it. Refused with 409 unless the company is active; `account/companies/activate` reverses it.
 func (c *Client) CompaniesArchive(
 	ctx context.Context,
 	request *nordlet.CompaniesArchiveAccountRequest,
@@ -338,6 +357,7 @@ func (c *Client) CompaniesArchive(
 	return response.Body, nil
 }
 
+// Set the company named by `companyId` to `deleted`; the caller must be its owner, and every session that had it active loses it. A sandbox company is purged at once; any other is purged by the scheduled purge after `purgeAfter` (10 days) and can be restored until then with `account/companies/activate`. Refused with 409 when it is already deleted.
 func (c *Client) CompaniesDelete(
 	ctx context.Context,
 	request *nordlet.CompaniesDeleteAccountRequest,
@@ -354,6 +374,7 @@ func (c *Client) CompaniesDelete(
 	return response.Body, nil
 }
 
+// Set an archived or deleted company named by `companyId` back to `active`; the caller must be its owner. Refused with 409 when it is already active.
 func (c *Client) CompaniesActivate(
 	ctx context.Context,
 	request *nordlet.CompaniesActivateAccountRequest,
@@ -370,6 +391,7 @@ func (c *Client) CompaniesActivate(
 	return response.Body, nil
 }
 
+// Create an API key for the active company and return the key itself once; owners, admins and developers may call it. `scopes` defaults to the caller's own scopes and may not exceed them (403); without `expiresInDays` the key does not expire.
 func (c *Client) APIKeysCreate(
 	ctx context.Context,
 	request *nordlet.APIKeysCreateAccountRequest,
@@ -386,6 +408,7 @@ func (c *Client) APIKeysCreate(
 	return response.Body, nil
 }
 
+// List the API keys of the active company, including expired and revoked ones.
 func (c *Client) APIKeysList(
 	ctx context.Context,
 	request *nordlet.APIKeysListAccountRequest,
@@ -402,6 +425,7 @@ func (c *Client) APIKeysList(
 	return response.Body, nil
 }
 
+// Create a new key with the name and scopes of the key `id` and return it once; the old key keeps working for `overlapHours` and then expires, and its `replacedByKeyId` points to the new one. `expiresInDays` applies to the new key. Refused with 409 when the old key is revoked.
 func (c *Client) APIKeysRotate(
 	ctx context.Context,
 	request *nordlet.APIKeysRotateAccountRequest,
@@ -418,6 +442,7 @@ func (c *Client) APIKeysRotate(
 	return response.Body, nil
 }
 
+// Revoke an API key of the active company at once.
 func (c *Client) APIKeysRevoke(
 	ctx context.Context,
 	request *nordlet.APIKeysRevokeAccountRequest,
@@ -434,6 +459,7 @@ func (c *Client) APIKeysRevoke(
 	return response.Body, nil
 }
 
+// Record the signed-in user's acceptance of the current Terms of Service and Data Processing Agreement versions and return the consent state.
 func (c *Client) ConsentAccept(
 	ctx context.Context,
 	request *nordlet.ConsentAcceptAccountRequest,
@@ -450,6 +476,7 @@ func (c *Client) ConsentAccept(
 	return response.Body, nil
 }
 
+// Set the signed-in user's name; null or a blank string clears it.
 func (c *Client) ProfileUpdate(
 	ctx context.Context,
 	request *nordlet.ProfileUpdateAccountRequest,
@@ -466,6 +493,7 @@ func (c *Client) ProfileUpdate(
 	return response.Body, nil
 }
 
+// Send a confirmation link to `newEmail`; the address changes when that link is consumed with `account/login-link/consume`. When an unused link was sent to the address within the last minute, the call answers `sent` without sending another. Refused with 422 when it is already the user's address and with 409 when another account has it.
 func (c *Client) EmailChangeRequest(
 	ctx context.Context,
 	request *nordlet.EmailChangeRequestAccountRequest,
@@ -482,6 +510,7 @@ func (c *Client) EmailChangeRequest(
 	return response.Body, nil
 }
 
+// List the signed-in user's sessions that have not expired; `current` marks the one the call was made with.
 func (c *Client) SessionsList(
 	ctx context.Context,
 	request *nordlet.SessionsListAccountRequest,
@@ -498,6 +527,7 @@ func (c *Client) SessionsList(
 	return response.Body, nil
 }
 
+// Delete one of the signed-in user's sessions.
 func (c *Client) SessionsRevoke(
 	ctx context.Context,
 	request *nordlet.SessionsRevokeAccountRequest,
@@ -514,6 +544,7 @@ func (c *Client) SessionsRevoke(
 	return response.Body, nil
 }
 
+// Delete every session of the signed-in user except the one the call was made with, and return how many were deleted.
 func (c *Client) SessionsRevokeOthers(
 	ctx context.Context,
 	request *nordlet.SessionsRevokeOthersAccountRequest,
@@ -530,6 +561,7 @@ func (c *Client) SessionsRevokeOthers(
 	return response.Body, nil
 }
 
+// Return the user's profile, consent state, memberships, unexpired sessions, billing account, credit transactions and the audit entries they made in their companies (the most recent 5000 of each of the last two).
 func (c *Client) Export(
 	ctx context.Context,
 	request *nordlet.ExportAccountRequest,
@@ -563,6 +595,7 @@ func (c *Client) Delete(
 	return response.Body, nil
 }
 
+// Return the user's referral code (allocated on first call) and sign-up link, their points balance, the number of accounts they referred and the last 50 points entries. `rates.perEur` is the points the referrer earns per euro a referred user tops up, `rates.pointCents` the credit one point converts to with `account/referral/convert`.
 func (c *Client) ReferralGet(
 	ctx context.Context,
 	request *nordlet.ReferralGetAccountRequest,
@@ -579,6 +612,7 @@ func (c *Client) ReferralGet(
 	return response.Body, nil
 }
 
+// Convert `points` of the user's referral points into credit on their billing account at `rates.pointCents` per point, booked as an `adjustment` credit transaction; a billing account past its trial is set to active when the new balance allows. Refused with 422 when the user has fewer points than requested.
 func (c *Client) ReferralConvert(
 	ctx context.Context,
 	request *nordlet.ReferralConvertAccountRequest,
@@ -595,6 +629,7 @@ func (c *Client) ReferralConvert(
 	return response.Body, nil
 }
 
+// Return the signed-in user's saved column list and page size for the table `tableKey`; both are null when nothing is saved.
 func (c *Client) TableSettingsGet(
 	ctx context.Context,
 	request *nordlet.TableSettingsGetAccountRequest,
@@ -611,6 +646,7 @@ func (c *Client) TableSettingsGet(
 	return response.Body, nil
 }
 
+// Save the signed-in user's column list and page size for the table `tableKey`; only the fields sent are changed, and null clears one.
 func (c *Client) TableSettingsSet(
 	ctx context.Context,
 	request *nordlet.TableSettingsSetAccountRequest,
@@ -627,6 +663,7 @@ func (c *Client) TableSettingsSet(
 	return response.Body, nil
 }
 
+// List the signed-in user's saved table settings.
 func (c *Client) TableSettingsList(
 	ctx context.Context,
 	request *nordlet.TableSettingsListAccountRequest,

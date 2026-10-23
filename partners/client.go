@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Adds an address of type billing, shipping, registered or other to the partner in `partnerId`.
 func (c *Client) AddressesCreate(
 	ctx context.Context,
 	request *nordlet.AddressesCreatePartnersRequest,
@@ -50,6 +51,7 @@ func (c *Client) AddressesCreate(
 	return response.Body, nil
 }
 
+// Changes the given fields of a partner address.
 func (c *Client) AddressesUpdate(
 	ctx context.Context,
 	request *nordlet.AddressesUpdatePartnersRequest,
@@ -66,6 +68,7 @@ func (c *Client) AddressesUpdate(
 	return response.Body, nil
 }
 
+// Deletes a partner address.
 func (c *Client) AddressesDelete(
 	ctx context.Context,
 	request *nordlet.AddressesDeletePartnersRequest,
@@ -82,6 +85,7 @@ func (c *Client) AddressesDelete(
 	return response.Body, nil
 }
 
+// Lists partner addresses; filterable by `partnerId`, `type` and `city`, sortable by `createdAt`.
 func (c *Client) AddressesList(
 	ctx context.Context,
 	request *nordlet.AddressesListPartnersRequest,
@@ -98,6 +102,7 @@ func (c *Client) AddressesList(
 	return response.Body, nil
 }
 
+// Adds a contact person to the partner in `partnerId`.
 func (c *Client) ContactsCreate(
 	ctx context.Context,
 	request *nordlet.ContactsCreatePartnersRequest,
@@ -114,6 +119,7 @@ func (c *Client) ContactsCreate(
 	return response.Body, nil
 }
 
+// Changes the given fields of a partner contact.
 func (c *Client) ContactsUpdate(
 	ctx context.Context,
 	request *nordlet.ContactsUpdatePartnersRequest,
@@ -130,6 +136,7 @@ func (c *Client) ContactsUpdate(
 	return response.Body, nil
 }
 
+// Deletes a partner contact.
 func (c *Client) ContactsDelete(
 	ctx context.Context,
 	request *nordlet.ContactsDeletePartnersRequest,
@@ -146,6 +153,7 @@ func (c *Client) ContactsDelete(
 	return response.Body, nil
 }
 
+// Lists partner contacts; filterable by `partnerId`, `name` and `email`, sortable by `createdAt`.
 func (c *Client) ContactsList(
 	ctx context.Context,
 	request *nordlet.ContactsListPartnersRequest,
@@ -162,6 +170,7 @@ func (c *Client) ContactsList(
 	return response.Body, nil
 }
 
+// Adds a bank account to the partner in `partnerId`. The IBAN is stored without spaces in upper case; an IBAN the partner already has is refused with 409. With `isDefault` true the partner's other accounts lose their default mark.
 func (c *Client) BankAccountsCreate(
 	ctx context.Context,
 	request *nordlet.BankAccountsCreatePartnersRequest,
@@ -178,6 +187,7 @@ func (c *Client) BankAccountsCreate(
 	return response.Body, nil
 }
 
+// Changes the given fields of a partner bank account. A new IBAN is stored without spaces in upper case and is refused with 409 when the partner already has it; when the account is the default after the change, the partner's other accounts lose their default mark.
 func (c *Client) BankAccountsUpdate(
 	ctx context.Context,
 	request *nordlet.BankAccountsUpdatePartnersRequest,
@@ -194,6 +204,7 @@ func (c *Client) BankAccountsUpdate(
 	return response.Body, nil
 }
 
+// Deletes a partner bank account.
 func (c *Client) BankAccountsDelete(
 	ctx context.Context,
 	request *nordlet.BankAccountsDeletePartnersRequest,
@@ -210,6 +221,7 @@ func (c *Client) BankAccountsDelete(
 	return response.Body, nil
 }
 
+// Lists partner bank accounts; filterable by `partnerId` and `iban`, sortable by `createdAt`.
 func (c *Client) BankAccountsList(
 	ctx context.Context,
 	request *nordlet.BankAccountsListPartnersRequest,
@@ -226,6 +238,7 @@ func (c *Client) BankAccountsList(
 	return response.Body, nil
 }
 
+// Lists the files attached to a partner, newest first. `partners/create` attaches one with `documentRef`, and `leads/convert` moves the lead's files here.
 func (c *Client) FilesList(
 	ctx context.Context,
 	request *nordlet.FilesListPartnersRequest,
@@ -242,6 +255,7 @@ func (c *Client) FilesList(
 	return response.Body, nil
 }
 
+// Runs the selection of the daily debt-reminder job for this company as of the company's current date and returns what it would send, without sending or recording anything. A partner is included when it has `autoDebtReminder`, is active, has an e-mail address, got no reminder in the last 7 days and has issued invoices or advance invoices past their due date with an unpaid remainder; the interest per invoice is the remainder times the partner's `lateInterestPercent` times the days late over 365, and the totals are per currency. Sent reminders are listed by `partners/debt-reminders/list`.
 func (c *Client) DebtRemindersPreview(
 	ctx context.Context,
 	request *nordlet.DebtRemindersPreviewPartnersRequest,
@@ -258,6 +272,7 @@ func (c *Client) DebtRemindersPreview(
 	return response.Body, nil
 }
 
+// Lists the debt reminders the daily job has sent, one row per partner and currency with the ids of the invoices it covered; filterable by `partnerId`, sortable by `sentAt`.
 func (c *Client) DebtRemindersList(
 	ctx context.Context,
 	request *nordlet.DebtRemindersListPartnersRequest,
@@ -274,6 +289,7 @@ func (c *Client) DebtRemindersList(
 	return response.Body, nil
 }
 
+// Checks a VAT number against VIES, either a free `vatCode` or the VAT code of the partner in `partnerId` (exactly one of the two); a code without an EU country prefix and 2 to 12 alphanumeric characters is refused with 422, as is a partner without a VAT code, and a VIES outage answers 503. With a partner the outcome is written to it (`vatValid`, `vatValidatedAt`): an invalid number or a VIES name that shares no word with the partner's name opens or refreshes the partner's VAT review (`vat_review.opened`), a VIES failure opens one with reason `service_error`, and a valid matching number resolves the open review as `revalidated` (`vat_review.resolved`). Reviews are listed and closed with `partners/vat-reviews/list` and `partners/vat-reviews/resolve`.
 func (c *Client) ValidateVat(
 	ctx context.Context,
 	request *nordlet.ValidateVatPartnersRequest,
@@ -290,6 +306,7 @@ func (c *Client) ValidateVat(
 	return response.Body, nil
 }
 
+// Lists the VAT reviews opened by VIES checks of partners' VAT codes, with reason `invalid`, `name_mismatch` or `service_error`; filterable by `partnerId`, `status` and `reason`, sortable by `createdAt`.
 func (c *Client) VatReviewsList(
 	ctx context.Context,
 	request *nordlet.VatReviewsListPartnersRequest,
@@ -306,6 +323,7 @@ func (c *Client) VatReviewsList(
 	return response.Body, nil
 }
 
+// Closes an open VAT review as `confirmed_valid`, `confirmed_invalid` or `dismissed`, with an optional note. The first two also set the partner's `vatValid` and stamp `vatValidatedAt` when the partner still carries the reviewed VAT code; `dismissed` leaves the partner unchanged. A review that is already resolved answers 409; emits `vat_review.resolved`.
 func (c *Client) VatReviewsResolve(
 	ctx context.Context,
 	request *nordlet.VatReviewsResolvePartnersRequest,
@@ -322,6 +340,7 @@ func (c *Client) VatReviewsResolve(
 	return response.Body, nil
 }
 
+// Creates a partner. `groupId`, `statusId` and `priceListId` must belong to the company; without `legalCountryClass` the class is derived from the address country (`lt`, `eu` or `non_eu`); `documentRef` attaches an uploaded file that is not yet linked to a record; a `code` already used by a live partner of the company is refused with 409. A `vatCode` is checked against VIES at once and the result stored on the partner: an invalid number, a VIES name that shares no word with the partner's name, or a VIES failure opens a VAT review (`vat_review.opened`), while a code that is not an EU VAT number is stored unchecked (see `partners/validate-vat`).
 func (c *Client) Create(
 	ctx context.Context,
 	request *nordlet.CreatePartnersRequest,
@@ -338,6 +357,7 @@ func (c *Client) Create(
 	return response.Body, nil
 }
 
+// Returns the live partner matched by `code`, then `vatCode`, then `email` (at least one is required), or creates one from the body with the same validation and VIES check as `partners/create`; `created` says which happened. A creation that loses a race on the partner code returns the partner the other call created.
 func (c *Client) FindOrCreate(
 	ctx context.Context,
 	request *nordlet.FindOrCreatePartnersRequest,
@@ -354,6 +374,7 @@ func (c *Client) FindOrCreate(
 	return response.Body, nil
 }
 
+// Returns one partner; a deleted partner answers 404.
 func (c *Client) Get(
 	ctx context.Context,
 	request *nordlet.GetPartnersRequest,
@@ -370,6 +391,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
+// Changes the given fields of a partner; the clearable fields accept null. A new address country re-derives `legalCountryClass` unless the class is given, and a `code` already used by another live partner of the company is refused with 409. A changed `vatCode` resets the VIES result and is checked at once as in `partners/create`; a removed code, or one that is not an EU VAT number, resolves the partner's open VAT review as `superseded` (`vat_review.resolved`).
 func (c *Client) Update(
 	ctx context.Context,
 	request *nordlet.UpdatePartnersRequest,
@@ -386,6 +408,7 @@ func (c *Client) Update(
 	return response.Body, nil
 }
 
+// Marks a partner as deleted; it no longer appears in lists or lookups.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *nordlet.DeletePartnersRequest,
@@ -402,6 +425,7 @@ func (c *Client) Delete(
 	return response.Body, nil
 }
 
+// Moves every row that references the duplicate `sourceId` through a foreign key to partners (looked up in the database catalogue, within the company) to `targetId`, then marks the source partner as deleted; `moved` lists the tables, columns and row counts. Merging a partner into itself is 422, and when both partners hold the same unique entry (for example the same IBAN or item supplier row) the merge is refused with 409 until it is removed from one of them. When the kept partner has an open VAT review, the duplicate's open review is resolved as `superseded` (`vat_review.resolved`).
 func (c *Client) Merge(
 	ctx context.Context,
 	request *nordlet.MergePartnersRequest,
@@ -435,6 +459,7 @@ func (c *Client) Anonymize(
 	return response.Body, nil
 }
 
+// Lists live partners; filterable by `name`, `code`, `vatCode`, `email`, `type`, `isCustomer`, `isSupplier`, `isActive`, `legalCountryClass`, `isEmployee`, `groupId`, `statusId` and `nextCallDate`, sortable by `name`, `code`, `createdAt`, `nextCallDate` and `rating`.
 func (c *Client) List(
 	ctx context.Context,
 	request *nordlet.ListPartnersRequest,
@@ -451,6 +476,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
+// Creates a partner group; a `code` already used by a group of the company is refused with 409.
 func (c *Client) GroupsCreate(
 	ctx context.Context,
 	request *nordlet.GroupsCreatePartnersRequest,
@@ -467,6 +493,7 @@ func (c *Client) GroupsCreate(
 	return response.Body, nil
 }
 
+// Changes the code or name of a partner group; a code already used by another group of the company is refused with 409.
 func (c *Client) GroupsUpdate(
 	ctx context.Context,
 	request *nordlet.GroupsUpdatePartnersRequest,
@@ -483,6 +510,7 @@ func (c *Client) GroupsUpdate(
 	return response.Body, nil
 }
 
+// Deletes a partner group; a group still assigned to a live partner is refused with 409.
 func (c *Client) GroupsDelete(
 	ctx context.Context,
 	request *nordlet.GroupsDeletePartnersRequest,
@@ -499,6 +527,7 @@ func (c *Client) GroupsDelete(
 	return response.Body, nil
 }
 
+// Lists the company's partner groups ordered by code.
 func (c *Client) GroupsList(
 	ctx context.Context,
 	request *nordlet.GroupsListPartnersRequest,
@@ -515,6 +544,7 @@ func (c *Client) GroupsList(
 	return response.Body, nil
 }
 
+// Creates a partner status with a `sortOrder`; a `code` already used by a status of the company is refused with 409.
 func (c *Client) StatusesCreate(
 	ctx context.Context,
 	request *nordlet.StatusesCreatePartnersRequest,
@@ -531,6 +561,7 @@ func (c *Client) StatusesCreate(
 	return response.Body, nil
 }
 
+// Changes the code, name or sort order of a partner status; a code already used by another status of the company is refused with 409.
 func (c *Client) StatusesUpdate(
 	ctx context.Context,
 	request *nordlet.StatusesUpdatePartnersRequest,
@@ -547,6 +578,7 @@ func (c *Client) StatusesUpdate(
 	return response.Body, nil
 }
 
+// Deletes a partner status; a status still assigned to a live partner is refused with 409.
 func (c *Client) StatusesDelete(
 	ctx context.Context,
 	request *nordlet.StatusesDeletePartnersRequest,
@@ -563,6 +595,7 @@ func (c *Client) StatusesDelete(
 	return response.Body, nil
 }
 
+// Lists the company's partner statuses ordered by sort order, then code.
 func (c *Client) StatusesList(
 	ctx context.Context,
 	request *nordlet.StatusesListPartnersRequest,
@@ -579,6 +612,7 @@ func (c *Client) StatusesList(
 	return response.Body, nil
 }
 
+// Records an inquiry in status `new`, from a partner (`partnerId`) or from a contact given by `contactName` or `contactEmail`; without any of the three it is refused with 422. `assignedUserId` must be a member of the company. Emits `partner_inquiry.created`.
 func (c *Client) InquiriesCreate(
 	ctx context.Context,
 	request *nordlet.InquiriesCreatePartnersRequest,
@@ -595,6 +629,7 @@ func (c *Client) InquiriesCreate(
 	return response.Body, nil
 }
 
+// Changes the given fields of an inquiry; `partnerId` and `assignedUserId` accept null. Setting `status` to `closed` stamps `closedAt`, and moving a closed inquiry to another status clears it.
 func (c *Client) InquiriesUpdate(
 	ctx context.Context,
 	request *nordlet.InquiriesUpdatePartnersRequest,
@@ -611,6 +646,7 @@ func (c *Client) InquiriesUpdate(
 	return response.Body, nil
 }
 
+// Returns one inquiry with the name of its partner.
 func (c *Client) InquiriesGet(
 	ctx context.Context,
 	request *nordlet.InquiriesGetPartnersRequest,
@@ -627,6 +663,7 @@ func (c *Client) InquiriesGet(
 	return response.Body, nil
 }
 
+// Lists inquiries with their partner names; filterable by `status`, `channel`, `partnerId`, `assignedUserId` and `subject`, sortable by `createdAt` and `updatedAt`.
 func (c *Client) InquiriesList(
 	ctx context.Context,
 	request *nordlet.InquiriesListPartnersRequest,
@@ -643,6 +680,7 @@ func (c *Client) InquiriesList(
 	return response.Body, nil
 }
 
+// Compares a partner's open receivables plus an optional `additionalAmount` with its `creditLimit`. The open receivables are the unpaid remainder of the partner's issued invoices, advance invoices and credit notes (credit notes negative), converted to the company's base currency at each invoice's `fxRate`. Without a credit limit `available` is null and `exceeded` is false.
 func (c *Client) CreditCheck(
 	ctx context.Context,
 	request *nordlet.CreditCheckPartnersRequest,

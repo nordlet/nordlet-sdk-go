@@ -51,6 +51,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
+// Add an officer to the company's register (`officers/list`); `signsAccounts` defaults to true. Refused with 422 when `resignedOn` is before `appointedOn`.
 func (c *Client) Create(
 	ctx context.Context,
 	request *nordlet.CreateOfficersRequest,
@@ -67,6 +68,7 @@ func (c *Client) Create(
 	return response.Body, nil
 }
 
+// Replace the recorded data of an officer; every field is written as sent, so a field left out is cleared and `signsAccounts` falls back to true. Refused with 422 when `resignedOn` is before `appointedOn`.
 func (c *Client) Update(
 	ctx context.Context,
 	request *nordlet.UpdateOfficersRequest,
@@ -83,6 +85,7 @@ func (c *Client) Update(
 	return response.Body, nil
 }
 
+// Remove an officer from the company's register.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *nordlet.DeleteOfficersRequest,

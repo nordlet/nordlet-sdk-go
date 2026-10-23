@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Create a consolidation group owned by the calling company; `presentationCurrency` defaults to the company's base currency. Members are added with `consolidation/members/add`.
 func (c *Client) GroupsCreate(
 	ctx context.Context,
 	request *nordlet.GroupsCreateConsolidationRequest,
@@ -50,6 +51,7 @@ func (c *Client) GroupsCreate(
 	return response.Body, nil
 }
 
+// List the calling company's consolidation groups with their member counts.
 func (c *Client) GroupsList(
 	ctx context.Context,
 	request *nordlet.GroupsListConsolidationRequest,
@@ -66,6 +68,7 @@ func (c *Client) GroupsList(
 	return response.Body, nil
 }
 
+// Return one consolidation group with its members, each with its ownership percentage and consolidation method.
 func (c *Client) GroupsGet(
 	ctx context.Context,
 	request *nordlet.GroupsGetConsolidationRequest,
@@ -82,6 +85,7 @@ func (c *Client) GroupsGet(
 	return response.Body, nil
 }
 
+// Rename a consolidation group or change its presentation currency.
 func (c *Client) GroupsUpdate(
 	ctx context.Context,
 	request *nordlet.GroupsUpdateConsolidationRequest,
@@ -98,6 +102,7 @@ func (c *Client) GroupsUpdate(
 	return response.Body, nil
 }
 
+// Delete a consolidation group.
 func (c *Client) GroupsDelete(
 	ctx context.Context,
 	request *nordlet.GroupsDeleteConsolidationRequest,
@@ -114,6 +119,7 @@ func (c *Client) GroupsDelete(
 	return response.Body, nil
 }
 
+// Add a company to a consolidation group with its ownership percentage and method (`full`, `proportional` or `equity`), or change those of an existing member. Another company can be added only by a signed-in user who is owner, admin or accountant of it; an API key is refused with 403.
 func (c *Client) MembersAdd(
 	ctx context.Context,
 	request *nordlet.MembersAddConsolidationRequest,
@@ -130,6 +136,7 @@ func (c *Client) MembersAdd(
 	return response.Body, nil
 }
 
+// Remove a company from a consolidation group.
 func (c *Client) MembersRemove(
 	ctx context.Context,
 	request *nordlet.MembersRemoveConsolidationRequest,
@@ -180,6 +187,7 @@ func (c *Client) IntercompanyLinksSet(
 	return response.Body, nil
 }
 
+// List the intercompany links of a group: which partner record of which member company stands for which other member company.
 func (c *Client) IntercompanyLinksList(
 	ctx context.Context,
 	request *nordlet.IntercompanyLinksListConsolidationRequest,
@@ -196,6 +204,7 @@ func (c *Client) IntercompanyLinksList(
 	return response.Body, nil
 }
 
+// Remove an intercompany link from a group.
 func (c *Client) IntercompanyLinksRemove(
 	ctx context.Context,
 	request *nordlet.IntercompanyLinksRemoveConsolidationRequest,
@@ -229,6 +238,7 @@ func (c *Client) IntercompanyReport(
 	return response.Body, nil
 }
 
+// Consolidated financial statements of a group for a period in its presentation currency, with the consolidated trial balance and cash flow, each member's contribution and the intercompany candidates. Each member's balances are translated at the group owner's exchange rates of `toDate` and taken in full, in proportion to the ownership (`proportional`) or as an equity-method investment (`equity`); a fully consolidated member held below 100 % yields the non-controlling interest, and `eliminations` are amounts added to account codes before the statements are assembled (`balanced` tells whether they net to zero). Refused with 422 when the group has no members.
 func (c *Client) Report(
 	ctx context.Context,
 	request *nordlet.ReportConsolidationRequest,

@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Create a work center with its `costPerHour`. `costAccountCode` must be a postable account of the chart (422 otherwise); when a production order completes, the labor cost of the operations run on this center is credited to it instead of the `production.laborApplied` posting rule account. A duplicate `code` is refused with 409.
 func (c *Client) WorkCentersCreate(
 	ctx context.Context,
 	request *nordlet.WorkCentersCreateProductionRequest,
@@ -50,6 +51,7 @@ func (c *Client) WorkCentersCreate(
 	return response.Body, nil
 }
 
+// Change a work center; only the fields sent are changed. `costAccountCode` must be a postable account of the chart (422 otherwise); a `code` already used by another work center is refused with 409.
 func (c *Client) WorkCentersUpdate(
 	ctx context.Context,
 	request *nordlet.WorkCentersUpdateProductionRequest,
@@ -66,6 +68,7 @@ func (c *Client) WorkCentersUpdate(
 	return response.Body, nil
 }
 
+// List work centers. `nextMaintenanceDate` is the latest completed maintenance date (the creation date when there is none) plus `maintenanceIntervalDays`, null without an interval. Filterable by `code`, `name` and `isActive`; sortable by `code`, `name` and `createdAt`.
 func (c *Client) WorkCentersList(
 	ctx context.Context,
 	request *nordlet.WorkCentersListProductionRequest,
@@ -82,6 +85,7 @@ func (c *Client) WorkCentersList(
 	return response.Body, nil
 }
 
+// Create a routing with its operations: `sequence`, work center, `setupMinutes`, `runMinutesPerUnit` and an optional `qualityCheckName` that becomes a pending quality check on every production order using the routing. Operation sequences must be unique (422); a duplicate `code` is refused with 409.
 func (c *Client) RoutingsCreate(
 	ctx context.Context,
 	request *nordlet.RoutingsCreateProductionRequest,
@@ -98,6 +102,7 @@ func (c *Client) RoutingsCreate(
 	return response.Body, nil
 }
 
+// Return one routing with its operations in sequence order.
 func (c *Client) RoutingsGet(
 	ctx context.Context,
 	request *nordlet.RoutingsGetProductionRequest,
@@ -114,6 +119,7 @@ func (c *Client) RoutingsGet(
 	return response.Body, nil
 }
 
+// List routings without their operations. Filterable by `code`, `name` and `isActive`; sortable by `code`, `name` and `createdAt`.
 func (c *Client) RoutingsList(
 	ctx context.Context,
 	request *nordlet.RoutingsListProductionRequest,
@@ -130,6 +136,7 @@ func (c *Client) RoutingsList(
 	return response.Body, nil
 }
 
+// Record a `preventive` or `corrective` maintenance planned for a work center on `plannedDate`; it starts as `planned`.
 func (c *Client) MaintenanceCreate(
 	ctx context.Context,
 	request *nordlet.MaintenanceCreateProductionRequest,
@@ -146,6 +153,7 @@ func (c *Client) MaintenanceCreate(
 	return response.Body, nil
 }
 
+// Mark a `planned` maintenance as completed on `completedDate`, with optional `downtimeHours` and `cost` (409 when it is already completed or cancelled). The work center's `nextMaintenanceDate` is then counted from the latest completed maintenance date.
 func (c *Client) MaintenanceComplete(
 	ctx context.Context,
 	request *nordlet.MaintenanceCompleteProductionRequest,
@@ -162,6 +170,7 @@ func (c *Client) MaintenanceComplete(
 	return response.Body, nil
 }
 
+// Cancel a `planned` maintenance (409 when it is already completed or cancelled).
 func (c *Client) MaintenanceCancel(
 	ctx context.Context,
 	request *nordlet.MaintenanceCancelProductionRequest,
@@ -178,6 +187,7 @@ func (c *Client) MaintenanceCancel(
 	return response.Body, nil
 }
 
+// List maintenance records. Filterable by `workCenterId`, `status` and `type`; sortable by `plannedDate` and `createdAt`.
 func (c *Client) MaintenanceList(
 	ctx context.Context,
 	request *nordlet.MaintenanceListProductionRequest,
@@ -194,6 +204,7 @@ func (c *Client) MaintenanceList(
 	return response.Body, nil
 }
 
+// Create a bill of materials for a finished item. `outputQuantity` is the finished quantity made per unit of order quantity; each line's `quantity` is the component consumed per unit of order quantity, increased by its `scrapPercent` at completion; `routingId` is the default routing of assembly orders. A BOM that consumes its own finished item is refused with 422, a duplicate `code` with 409.
 func (c *Client) BomsCreate(
 	ctx context.Context,
 	request *nordlet.BomsCreateProductionRequest,
@@ -210,6 +221,7 @@ func (c *Client) BomsCreate(
 	return response.Body, nil
 }
 
+// Return one bill of materials with its component lines.
 func (c *Client) BomsGet(
 	ctx context.Context,
 	request *nordlet.BomsGetProductionRequest,
@@ -226,6 +238,7 @@ func (c *Client) BomsGet(
 	return response.Body, nil
 }
 
+// List bills of materials without their lines. Filterable by `code`, `name`, `finishedItemId` and `isActive`; sortable by `code` and `name`.
 func (c *Client) BomsList(
 	ctx context.Context,
 	request *nordlet.BomsListProductionRequest,
@@ -242,6 +255,7 @@ func (c *Client) BomsList(
 	return response.Body, nil
 }
 
+// Create a draft production order for `quantity` units of a BOM in a warehouse; stock moves only at `production/orders/complete`. An `assembly` order takes its routing from `routingId`, else from the BOM, and copies the routing's operations onto the order (`plannedMinutes` = setup minutes + run minutes per unit × finished quantity, priced at the work center's current `costPerHour`) with a pending quality check for every operation that names one. A `routingId` on a `disassembly` order, an inactive routing or a routing without operations is refused with 422.
 func (c *Client) OrdersCreate(
 	ctx context.Context,
 	request *nordlet.OrdersCreateProductionRequest,
@@ -258,6 +272,7 @@ func (c *Client) OrdersCreate(
 	return response.Body, nil
 }
 
+// Record the `actualMinutes` spent on one operation of a draft production order; at completion the actual minutes, else the planned ones, price the operation's labor cost. Refused with 409 once the order is completed.
 func (c *Client) OrdersRecordOperation(
 	ctx context.Context,
 	request *nordlet.OrdersRecordOperationProductionRequest,
@@ -274,6 +289,7 @@ func (c *Client) OrdersRecordOperation(
 	return response.Body, nil
 }
 
+// Add a pending quality check to a draft production order (409 once the order is completed). The order cannot complete while a check is pending.
 func (c *Client) QualityChecksAdd(
 	ctx context.Context,
 	request *nordlet.QualityChecksAddProductionRequest,
@@ -290,6 +306,7 @@ func (c *Client) QualityChecksAdd(
 	return response.Body, nil
 }
 
+// Record the result of a quality check as `passed` or `failed`, with the time and the actor (409 once the order is completed). Only a `pending` check blocks `production/orders/complete`; a `failed` one does not.
 func (c *Client) QualityChecksRecord(
 	ctx context.Context,
 	request *nordlet.QualityChecksRecordProductionRequest,
@@ -306,6 +323,7 @@ func (c *Client) QualityChecksRecord(
 	return response.Body, nil
 }
 
+// List quality checks. Filterable by `orderId`, `result` and `name`; sortable by `createdAt` and `name`.
 func (c *Client) QualityChecksList(
 	ctx context.Context,
 	request *nordlet.QualityChecksListProductionRequest,
@@ -322,6 +340,7 @@ func (c *Client) QualityChecksList(
 	return response.Body, nil
 }
 
+// Complete a draft production order on the order's date. An `assembly` consumes the components FIFO from the warehouse (line quantity × order quantity, increased by `scrapPercent`), prices each operation at its actual or planned minutes × `costPerHour`, receives the finished item at material cost + labor cost less the share of `scrappedQuantity`, and, when there is labor, scrap or a component stock account other than the finished one, posts a journal entry debiting the finished stock account (and the `production.scrap` rule account for the scrapped share) and crediting the component stock accounts and the work centers' cost accounts (or the `production.laborApplied` rule account); a `disassembly` consumes the finished item and receives the components at its cost shared by quantity. `componentsAccountCode` and `finishedAccountCode` default to the chart's production accounts. Refused with 409 when the order is already completed, a quality check is still pending or the accounting period is locked, and with 422 when the BOM has no lines, `scrappedQuantity` is given on a disassembly or exceeds the finished quantity, the assembly cost is zero, stock is insufficient, a received item needs lot or serial tracking, or a posting account is missing. Emits `stock.changed`.
 func (c *Client) OrdersComplete(
 	ctx context.Context,
 	request *nordlet.OrdersCompleteProductionRequest,
@@ -338,6 +357,7 @@ func (c *Client) OrdersComplete(
 	return response.Body, nil
 }
 
+// Return one production order with its operations and quality checks.
 func (c *Client) OrdersGet(
 	ctx context.Context,
 	request *nordlet.OrdersGetProductionRequest,
@@ -354,6 +374,7 @@ func (c *Client) OrdersGet(
 	return response.Body, nil
 }
 
+// List production orders without operations and quality checks. Filterable by `bomId`, `warehouseId`, `status` and `type`; sortable by `date` and `createdAt`.
 func (c *Client) OrdersList(
 	ctx context.Context,
 	request *nordlet.OrdersListProductionRequest,

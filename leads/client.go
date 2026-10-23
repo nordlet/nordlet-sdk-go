@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Creates a lead in status `new`, `contacted`, `qualified` or `lost`. `assignedUserId` must be a member of the company and `sourceId` and `typeId` must exist in it; `countryCode` and `currency` are stored in upper case; `documents` attach uploaded files not yet linked to a record, and `notes` become the lead's first notes with the caller as author. Emits `lead.created`.
 func (c *Client) Create(
 	ctx context.Context,
 	request *nordlet.CreateLeadsRequest,
@@ -50,6 +51,7 @@ func (c *Client) Create(
 	return response.Body, nil
 }
 
+// Returns one lead with its source and type names.
 func (c *Client) Get(
 	ctx context.Context,
 	request *nordlet.GetLeadsRequest,
@@ -66,6 +68,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
+// Changes the given fields of a lead; the clearable fields accept null, `documents` attach more uploaded files, and `countryCode` and `currency` are stored in upper case. A lead that is already converted cannot change `status` (409).
 func (c *Client) Update(
 	ctx context.Context,
 	request *nordlet.UpdateLeadsRequest,
@@ -82,6 +85,7 @@ func (c *Client) Update(
 	return response.Body, nil
 }
 
+// Deletes a lead with its notes and detaches its files, which stay in the company's files without a record.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *nordlet.DeleteLeadsRequest,
@@ -98,6 +102,7 @@ func (c *Client) Delete(
 	return response.Body, nil
 }
 
+// Lists leads with their source and type names; filterable by `name`, `contactName`, `email`, `phone`, `status`, `sourceId`, `typeId`, `countryCode`, `assignedUserId`, `partnerId`, `estimatedValue` and `createdAt`, sortable by `name`, `status`, `estimatedValue`, `createdAt` and `updatedAt`.
 func (c *Client) List(
 	ctx context.Context,
 	request *nordlet.ListLeadsRequest,
@@ -114,6 +119,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
+// Adds a note to a lead with the caller as author and refreshes the lead's `updatedAt`.
 func (c *Client) NotesCreate(
 	ctx context.Context,
 	request *nordlet.NotesCreateLeadsRequest,
@@ -130,6 +136,7 @@ func (c *Client) NotesCreate(
 	return response.Body, nil
 }
 
+// Deletes a lead note.
 func (c *Client) NotesDelete(
 	ctx context.Context,
 	request *nordlet.NotesDeleteLeadsRequest,
@@ -146,6 +153,7 @@ func (c *Client) NotesDelete(
 	return response.Body, nil
 }
 
+// Lists the notes of a lead, newest first.
 func (c *Client) NotesList(
 	ctx context.Context,
 	request *nordlet.NotesListLeadsRequest,
@@ -162,6 +170,7 @@ func (c *Client) NotesList(
 	return response.Body, nil
 }
 
+// Lists the files attached to a lead, newest first.
 func (c *Client) FilesList(
 	ctx context.Context,
 	request *nordlet.FilesListLeadsRequest,
@@ -178,6 +187,7 @@ func (c *Client) FilesList(
 	return response.Body, nil
 }
 
+// Creates a lead source; a `name` already used by a source of the company is refused with 409.
 func (c *Client) SourcesCreate(
 	ctx context.Context,
 	request *nordlet.SourcesCreateLeadsRequest,
@@ -194,6 +204,7 @@ func (c *Client) SourcesCreate(
 	return response.Body, nil
 }
 
+// Changes the name or `isActive` flag of a lead source; a name already used by another source of the company is refused with 409.
 func (c *Client) SourcesUpdate(
 	ctx context.Context,
 	request *nordlet.SourcesUpdateLeadsRequest,
@@ -210,6 +221,7 @@ func (c *Client) SourcesUpdate(
 	return response.Body, nil
 }
 
+// Deletes a lead source; one still referenced by a lead is refused with 409 and should be deactivated with `leads/sources/update` instead.
 func (c *Client) SourcesDelete(
 	ctx context.Context,
 	request *nordlet.SourcesDeleteLeadsRequest,
@@ -226,6 +238,7 @@ func (c *Client) SourcesDelete(
 	return response.Body, nil
 }
 
+// Lists all lead sources of the company, active and inactive, ordered by name.
 func (c *Client) SourcesList(
 	ctx context.Context,
 	request *nordlet.SourcesListLeadsRequest,
@@ -242,6 +255,7 @@ func (c *Client) SourcesList(
 	return response.Body, nil
 }
 
+// Lists the id and name of the active lead sources, ordered by name.
 func (c *Client) SourcesOptions(
 	ctx context.Context,
 	request *nordlet.SourcesOptionsLeadsRequest,
@@ -258,6 +272,7 @@ func (c *Client) SourcesOptions(
 	return response.Body, nil
 }
 
+// Creates a lead type; a `name` already used by a type of the company is refused with 409.
 func (c *Client) TypesCreate(
 	ctx context.Context,
 	request *nordlet.TypesCreateLeadsRequest,
@@ -274,6 +289,7 @@ func (c *Client) TypesCreate(
 	return response.Body, nil
 }
 
+// Changes the name or `isActive` flag of a lead type; a name already used by another type of the company is refused with 409.
 func (c *Client) TypesUpdate(
 	ctx context.Context,
 	request *nordlet.TypesUpdateLeadsRequest,
@@ -290,6 +306,7 @@ func (c *Client) TypesUpdate(
 	return response.Body, nil
 }
 
+// Deletes a lead type; one still referenced by a lead is refused with 409 and should be deactivated with `leads/types/update` instead.
 func (c *Client) TypesDelete(
 	ctx context.Context,
 	request *nordlet.TypesDeleteLeadsRequest,
@@ -306,6 +323,7 @@ func (c *Client) TypesDelete(
 	return response.Body, nil
 }
 
+// Lists all lead types of the company, active and inactive, ordered by name.
 func (c *Client) TypesList(
 	ctx context.Context,
 	request *nordlet.TypesListLeadsRequest,
@@ -322,6 +340,7 @@ func (c *Client) TypesList(
 	return response.Body, nil
 }
 
+// Lists the id and name of the active lead types, ordered by name.
 func (c *Client) TypesOptions(
 	ctx context.Context,
 	request *nordlet.TypesOptionsLeadsRequest,

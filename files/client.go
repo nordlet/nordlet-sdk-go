@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Store a base64-encoded file of up to 10 MB (413 above that) under an `entity` and optional `entityId`, and return its record with the SHA-256 of the content and its `storageKey`, which other calls take as `documentRef`.
 func (c *Client) Upload(
 	ctx context.Context,
 	request *nordlet.UploadFilesRequest,
@@ -50,6 +51,7 @@ func (c *Client) Upload(
 	return response.Body, nil
 }
 
+// Return a file record with its content, base64-encoded.
 func (c *Client) Get(
 	ctx context.Context,
 	request *nordlet.GetFilesRequest,
@@ -66,6 +68,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
+// List the company's files. Filterable by `entity`, `entityId` and `fileName`; sortable by `createdAt`, `fileName` and `sizeBytes`.
 func (c *Client) List(
 	ctx context.Context,
 	request *nordlet.ListFilesRequest,
@@ -82,6 +85,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
+// Delete a file record and its stored content.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *nordlet.DeleteFilesRequest,

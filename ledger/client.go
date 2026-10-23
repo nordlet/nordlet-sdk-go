@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Lists the company's chart of accounts. Filterable by `code`, `name`, `type` and `isPostable`; sortable by `code` and `name`.
 func (c *Client) AccountsList(
 	ctx context.Context,
 	request *nordlet.AccountsListLedgerRequest,
@@ -50,6 +51,7 @@ func (c *Client) AccountsList(
 	return response.Body, nil
 }
 
+// Adds an account to the company's chart of accounts. `parentId` must name an account of the same company. Answers 409 when an account with the same `code` already exists.
 func (c *Client) AccountsCreate(
 	ctx context.Context,
 	request *nordlet.AccountsCreateLedgerRequest,
@@ -66,6 +68,7 @@ func (c *Client) AccountsCreate(
 	return response.Body, nil
 }
 
+// Changes the name, parent or postability of an account; the code and type cannot be changed. An account cannot be its own parent.
 func (c *Client) AccountsUpdate(
 	ctx context.Context,
 	request *nordlet.AccountsUpdateLedgerRequest,
@@ -82,6 +85,7 @@ func (c *Client) AccountsUpdate(
 	return response.Body, nil
 }
 
+// Adds the accounts of the company's chart template that the chart does not have yet (an account whose code already exists is not replaced) and sets the parent links the template defines. Returns the number of accounts in the chart afterwards.
 func (c *Client) AccountsApplyTemplate(
 	ctx context.Context,
 	request *nordlet.AccountsApplyTemplateLedgerRequest,
@@ -115,6 +119,7 @@ func (c *Client) AccountsSwitchChart(
 	return response.Body, nil
 }
 
+// Lists the company's accounting periods with their `open` or `locked` status. Filterable by `year`, `month` and `status`; sortable by `year` and `month`.
 func (c *Client) PeriodsList(
 	ctx context.Context,
 	request *nordlet.PeriodsListLedgerRequest,
@@ -131,6 +136,7 @@ func (c *Client) PeriodsList(
 	return response.Body, nil
 }
 
+// Locks the month so that postings dated in it are refused with 409 (`ledger/journal/transactions/create`, `cash/orders/create` and `cash/expense-reports/create` among them). Before locking a month that is not locked yet, posts the pending ratable revenue recognition tranches scheduled up to the month end and emits `revenue_recognition.posted` when there were any; when the month is the company's fiscal year end and no year-end close is posted for that year, posts the year-end close that moves the income and expense balances of the fiscal year to the retained earnings account (posting rule `closing.retainedEarnings`).
 func (c *Client) PeriodsLock(
 	ctx context.Context,
 	request *nordlet.PeriodsLockLedgerRequest,
@@ -147,6 +153,7 @@ func (c *Client) PeriodsLock(
 	return response.Body, nil
 }
 
+// Opens the month for posting again. When the month is the company's fiscal year end and a year-end close is posted for it, posts a reversal of that close dated the same day.
 func (c *Client) PeriodsUnlock(
 	ctx context.Context,
 	request *nordlet.PeriodsUnlockLedgerRequest,
@@ -163,6 +170,7 @@ func (c *Client) PeriodsUnlock(
 	return response.Body, nil
 }
 
+// Lists journal transactions with the partner name. Filterable by `date`, `status`, `documentType`, `partnerId` and `documentId`; sortable by `date` and `createdAt`.
 func (c *Client) JournalTransactionsList(
 	ctx context.Context,
 	request *nordlet.JournalTransactionsListLedgerRequest,
@@ -179,6 +187,7 @@ func (c *Client) JournalTransactionsList(
 	return response.Body, nil
 }
 
+// Creates a cost center, optionally inside a cost center group. Answers 409 when the `code` is already used.
 func (c *Client) CostCentersCreate(
 	ctx context.Context,
 	request *nordlet.CostCentersCreateLedgerRequest,
@@ -195,6 +204,7 @@ func (c *Client) CostCentersCreate(
 	return response.Body, nil
 }
 
+// Changes the name, group or active flag of a cost center. An inactive cost center is refused on new manual journal entries (`ledger/journal/transactions/create` answers 422).
 func (c *Client) CostCentersUpdate(
 	ctx context.Context,
 	request *nordlet.CostCentersUpdateLedgerRequest,
@@ -211,6 +221,7 @@ func (c *Client) CostCentersUpdate(
 	return response.Body, nil
 }
 
+// Lists cost centers with their group name. Filterable by `code`, `name`, `isActive` and `groupId`; sortable by `code`, `name` and `createdAt`.
 func (c *Client) CostCentersList(
 	ctx context.Context,
 	request *nordlet.CostCentersListLedgerRequest,
@@ -227,6 +238,7 @@ func (c *Client) CostCentersList(
 	return response.Body, nil
 }
 
+// Creates a cost center group. Answers 409 when the `code` is already used.
 func (c *Client) CostCenterGroupsCreate(
 	ctx context.Context,
 	request *nordlet.CostCenterGroupsCreateLedgerRequest,
@@ -243,6 +255,7 @@ func (c *Client) CostCenterGroupsCreate(
 	return response.Body, nil
 }
 
+// Changes the code or name of a cost center group. Answers 409 when the new code is already used.
 func (c *Client) CostCenterGroupsUpdate(
 	ctx context.Context,
 	request *nordlet.CostCenterGroupsUpdateLedgerRequest,
@@ -259,6 +272,7 @@ func (c *Client) CostCenterGroupsUpdate(
 	return response.Body, nil
 }
 
+// Deletes a cost center group. Answers 409 while cost centers are still assigned to it.
 func (c *Client) CostCenterGroupsDelete(
 	ctx context.Context,
 	request *nordlet.CostCenterGroupsDeleteLedgerRequest,
@@ -275,6 +289,7 @@ func (c *Client) CostCenterGroupsDelete(
 	return response.Body, nil
 }
 
+// Lists cost center groups. Filterable and sortable by `code` and `name`.
 func (c *Client) CostCenterGroupsList(
 	ctx context.Context,
 	request *nordlet.CostCenterGroupsListLedgerRequest,
@@ -291,6 +306,7 @@ func (c *Client) CostCenterGroupsList(
 	return response.Body, nil
 }
 
+// Lists every posting rule with its default account code on the company's chart template, the account code in effect and whether the company has overridden it.
 func (c *Client) PostingRulesList(
 	ctx context.Context,
 	request *nordlet.PostingRulesListLedgerRequest,
@@ -307,6 +323,7 @@ func (c *Client) PostingRulesList(
 	return response.Body, nil
 }
 
+// Overrides the account code of one or more posting rules; an `accountCode` of null removes the override and the chart default applies again. Every code given must be a postable account of the company's chart, else 422.
 func (c *Client) PostingRulesUpdate(
 	ctx context.Context,
 	request *nordlet.PostingRulesUpdateLedgerRequest,
@@ -323,6 +340,7 @@ func (c *Client) PostingRulesUpdate(
 	return response.Body, nil
 }
 
+// Adds an owner of the company. `equityAccountCode` defaults to the share capital account of the company's chart; a code that is not in the chart of accounts answers 422.
 func (c *Client) OwnersCreate(
 	ctx context.Context,
 	request *nordlet.OwnersCreateLedgerRequest,
@@ -339,6 +357,7 @@ func (c *Client) OwnersCreate(
 	return response.Body, nil
 }
 
+// Changes the fields of an owner. An `equityAccountCode` that is not in the chart of accounts answers 422.
 func (c *Client) OwnersUpdate(
 	ctx context.Context,
 	request *nordlet.OwnersUpdateLedgerRequest,
@@ -355,6 +374,7 @@ func (c *Client) OwnersUpdate(
 	return response.Body, nil
 }
 
+// Deletes an owner.
 func (c *Client) OwnersDelete(
 	ctx context.Context,
 	request *nordlet.OwnersDeleteLedgerRequest,
@@ -371,6 +391,7 @@ func (c *Client) OwnersDelete(
 	return response.Body, nil
 }
 
+// Lists the company's owners. Filterable by `name` and `code`; sortable by `name` and `createdAt`.
 func (c *Client) OwnersList(
 	ctx context.Context,
 	request *nordlet.OwnersListLedgerRequest,
@@ -387,6 +408,7 @@ func (c *Client) OwnersList(
 	return response.Body, nil
 }
 
+// Returns a journal transaction with its entries, ordered by account code.
 func (c *Client) JournalTransactionsGet(
 	ctx context.Context,
 	request *nordlet.JournalTransactionsGetLedgerRequest,
@@ -403,6 +425,7 @@ func (c *Client) JournalTransactionsGet(
 	return response.Body, nil
 }
 
+// Posts a manual journal transaction (`documentType` `manual`, status `posted`) in the company's base currency. Every `accountCode` must be a postable account of the chart, cost centers must exist and be active, projects must exist, and the debits must equal the credits. Answers 422 for an amount with more than two decimals, for a `currency` other than the base currency and for an inactive cost center, and 409 when the accounting period of `date` is locked.
 func (c *Client) JournalTransactionsCreate(
 	ctx context.Context,
 	request *nordlet.JournalTransactionsCreateLedgerRequest,
@@ -436,6 +459,7 @@ func (c *Client) StatementRowsSchemes(
 	return response.Body, nil
 }
 
+// Every postable account of the company with the row of `scheme` it falls into, by a mapping (`ledger/statement-rows/set`) or by the layout default, and the amount it carries there: the balance up to `toDate` on a balance-sheet row, the movement from `fromDate` to `toDate` on an income-statement row. `toDate` defaults to today and `fromDate` to 1 January of that year. `rows` holds the row totals and `unmapped` the accounts with a balance but no row.
 func (c *Client) StatementRowsList(
 	ctx context.Context,
 	request *nordlet.StatementRowsListLedgerRequest,

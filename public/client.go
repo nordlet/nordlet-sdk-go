@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Store a request for an integration: the integration asked for and the sender's name, company, e-mail and details. When `website` is filled in, the call answers `received` without storing anything.
 func (c *Client) IntegrationRequests(
 	ctx context.Context,
 	request *nordlet.IntegrationRequestsPublicRequest,
@@ -50,6 +51,7 @@ func (c *Client) IntegrationRequests(
 	return response.Body, nil
 }
 
+// Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice or the company has no template, and 409 when the invoice is already paid.
 func (c *Client) Pay(
 	ctx context.Context,
 	request *nordlet.PayPublicRequest,

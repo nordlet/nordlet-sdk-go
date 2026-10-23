@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Create a catalog item: a product, a service or a set of other items. `unit` must be `vnt`, a global measurement unit or one of the company's own units (`catalog/units/options`), the sale, purchase and expense account codes must be postable accounts of the chart, and `priceFrom`/`priceTo` and `validFrom`/`validTo` must be in order; otherwise 422. A `set` needs at least one component and none of them may be a set; `components` on any other type is refused with 422. 409 when an active item already carries the `code`. `documentRef` is the storage key of a file uploaded with `files/upload`, which is attached to the item. Emits `item.created`.
 func (c *Client) ItemsCreate(
 	ctx context.Context,
 	request *nordlet.ItemsCreateCatalogRequest,
@@ -50,6 +51,7 @@ func (c *Client) ItemsCreate(
 	return response.Body, nil
 }
 
+// Return one item; a set comes with its components.
 func (c *Client) ItemsGet(
 	ctx context.Context,
 	request *nordlet.ItemsGetCatalogRequest,
@@ -66,6 +68,7 @@ func (c *Client) ItemsGet(
 	return response.Body, nil
 }
 
+// Change the fields of an item; the fields that are nullable in the request can be set to null to clear them. The checks of `catalog/items/create` apply. `components` replaces the whole component list and is accepted only when the item is or becomes a set (422); turning an item into a set needs components and is refused with 409 while the item is itself a component of another set. Turning a set into another type removes its components. 409 when an active item already carries the new `code`. Emits `item.updated`.
 func (c *Client) ItemsUpdate(
 	ctx context.Context,
 	request *nordlet.ItemsUpdateCatalogRequest,
@@ -82,6 +85,7 @@ func (c *Client) ItemsUpdate(
 	return response.Body, nil
 }
 
+// Soft-delete an item. Refused with 409 while the item is a component of an active set. Emits `item.deleted`.
 func (c *Client) ItemsDelete(
 	ctx context.Context,
 	request *nordlet.ItemsDeleteCatalogRequest,
@@ -98,6 +102,7 @@ func (c *Client) ItemsDelete(
 	return response.Body, nil
 }
 
+// List the active items. Filterable: name, code, barcode, type, vatClassifierCode, groupId, kindId, externalId, manufacturer, department. Sortable: name, code, createdAt, updatedAt, salePriceExclVat; default name ascending. Rows carry no components; `catalog/items/get` returns them.
 func (c *Client) ItemsList(
 	ctx context.Context,
 	request *nordlet.ItemsListCatalogRequest,
@@ -114,6 +119,7 @@ func (c *Client) ItemsList(
 	return response.Body, nil
 }
 
+// List the files attached to an item, newest first.
 func (c *Client) ItemsFilesList(
 	ctx context.Context,
 	request *nordlet.ItemsFilesListCatalogRequest,
@@ -130,6 +136,7 @@ func (c *Client) ItemsFilesList(
 	return response.Body, nil
 }
 
+// Create an item kind: a code, a name, the SAF-T item type, whether quantities are accounted for, and a sort order. 409 when the code already exists.
 func (c *Client) ItemsKindsCreate(
 	ctx context.Context,
 	request *nordlet.ItemsKindsCreateCatalogRequest,
@@ -146,6 +153,7 @@ func (c *Client) ItemsKindsCreate(
 	return response.Body, nil
 }
 
+// Change an item kind. 409 when the new code already exists.
 func (c *Client) ItemsKindsUpdate(
 	ctx context.Context,
 	request *nordlet.ItemsKindsUpdateCatalogRequest,
@@ -162,6 +170,7 @@ func (c *Client) ItemsKindsUpdate(
 	return response.Body, nil
 }
 
+// Delete an item kind. Refused with 409 while an active item uses it; soft-deleted items that still carry it are detached.
 func (c *Client) ItemsKindsDelete(
 	ctx context.Context,
 	request *nordlet.ItemsKindsDeleteCatalogRequest,
@@ -178,6 +187,7 @@ func (c *Client) ItemsKindsDelete(
 	return response.Body, nil
 }
 
+// List the company's item kinds in sort order, then by code.
 func (c *Client) ItemsKindsList(
 	ctx context.Context,
 	request *nordlet.ItemsKindsListCatalogRequest,
@@ -194,6 +204,7 @@ func (c *Client) ItemsKindsList(
 	return response.Body, nil
 }
 
+// Create a unit of measure of the company's own, in addition to the global measurement units (`reference/units/list`). 409 when the code already exists.
 func (c *Client) UnitsCreate(
 	ctx context.Context,
 	request *nordlet.UnitsCreateCatalogRequest,
@@ -210,6 +221,7 @@ func (c *Client) UnitsCreate(
 	return response.Body, nil
 }
 
+// Change the code, name or active flag of a company unit. 409 when the new code already exists.
 func (c *Client) UnitsUpdate(
 	ctx context.Context,
 	request *nordlet.UnitsUpdateCatalogRequest,
@@ -226,6 +238,7 @@ func (c *Client) UnitsUpdate(
 	return response.Body, nil
 }
 
+// Delete a company unit of measure.
 func (c *Client) UnitsDelete(
 	ctx context.Context,
 	request *nordlet.UnitsDeleteCatalogRequest,
@@ -242,6 +255,7 @@ func (c *Client) UnitsDelete(
 	return response.Body, nil
 }
 
+// List the company's own units of measure, ordered by code.
 func (c *Client) UnitsList(
 	ctx context.Context,
 	request *nordlet.UnitsListCatalogRequest,
@@ -258,6 +272,7 @@ func (c *Client) UnitsList(
 	return response.Body, nil
 }
 
+// Return the unit codes an item can use: the company's active own units first, then the global measurement units, named in the requested `locale` (Lithuanian for `lt`, English otherwise). A company unit hides a global unit with the same code.
 func (c *Client) UnitsOptions(
 	ctx context.Context,
 	request *nordlet.UnitsOptionsCatalogRequest,
@@ -274,6 +289,7 @@ func (c *Client) UnitsOptions(
 	return response.Body, nil
 }
 
+// Create an item group, optionally under `parentId`. 409 when the code already exists.
 func (c *Client) ItemGroupsCreate(
 	ctx context.Context,
 	request *nordlet.ItemGroupsCreateCatalogRequest,
@@ -290,6 +306,7 @@ func (c *Client) ItemGroupsCreate(
 	return response.Body, nil
 }
 
+// Change the code, name or parent of an item group; `parentId` null moves it to the top level. 422 when the new parent is the group itself or one of its descendants. 409 when the new code already exists.
 func (c *Client) ItemGroupsUpdate(
 	ctx context.Context,
 	request *nordlet.ItemGroupsUpdateCatalogRequest,
@@ -306,6 +323,7 @@ func (c *Client) ItemGroupsUpdate(
 	return response.Body, nil
 }
 
+// Delete an item group. Refused with 409 while it has child groups or active items assigned.
 func (c *Client) ItemGroupsDelete(
 	ctx context.Context,
 	request *nordlet.ItemGroupsDeleteCatalogRequest,
@@ -322,6 +340,7 @@ func (c *Client) ItemGroupsDelete(
 	return response.Body, nil
 }
 
+// List the company's item groups, ordered by code.
 func (c *Client) ItemGroupsList(
 	ctx context.Context,
 	request *nordlet.ItemGroupsListCatalogRequest,
@@ -338,6 +357,7 @@ func (c *Client) ItemGroupsList(
 	return response.Body, nil
 }
 
+// Create or replace the supplier record of an item for a partner (one per item and partner): supplier code, purchase price excluding VAT, currency (EUR when omitted) and notes. Fields omitted from the request are cleared on an existing record.
 func (c *Client) ItemsSuppliersUpsert(
 	ctx context.Context,
 	request *nordlet.ItemsSuppliersUpsertCatalogRequest,
@@ -354,6 +374,7 @@ func (c *Client) ItemsSuppliersUpsert(
 	return response.Body, nil
 }
 
+// List the supplier records, optionally for one `itemId` and/or `partnerId`, ordered by partner name.
 func (c *Client) ItemsSuppliersList(
 	ctx context.Context,
 	request *nordlet.ItemsSuppliersListCatalogRequest,
@@ -370,6 +391,7 @@ func (c *Client) ItemsSuppliersList(
 	return response.Body, nil
 }
 
+// Delete the supplier record of an item.
 func (c *Client) ItemsSuppliersDelete(
 	ctx context.Context,
 	request *nordlet.ItemsSuppliersDeleteCatalogRequest,
@@ -386,6 +408,7 @@ func (c *Client) ItemsSuppliersDelete(
 	return response.Body, nil
 }
 
+// Create a price list (currency EUR and active when omitted). 409 when the code already exists.
 func (c *Client) PriceListsCreate(
 	ctx context.Context,
 	request *nordlet.PriceListsCreateCatalogRequest,
@@ -402,6 +425,7 @@ func (c *Client) PriceListsCreate(
 	return response.Body, nil
 }
 
+// Change a price list. 409 when the new code already exists.
 func (c *Client) PriceListsUpdate(
 	ctx context.Context,
 	request *nordlet.PriceListsUpdateCatalogRequest,
@@ -418,6 +442,7 @@ func (c *Client) PriceListsUpdate(
 	return response.Body, nil
 }
 
+// List the company's price lists, ordered by code.
 func (c *Client) PriceListsList(
 	ctx context.Context,
 	request *nordlet.PriceListsListCatalogRequest,
@@ -434,6 +459,7 @@ func (c *Client) PriceListsList(
 	return response.Body, nil
 }
 
+// Set the unit price excluding VAT of up to 500 items on a price list; a price already on the list is replaced and the other items on the list are kept. 422 when an item appears twice in the request. Emits `price_list.updated` with the item ids.
 func (c *Client) PriceListsItemsSet(
 	ctx context.Context,
 	request *nordlet.PriceListsItemsSetCatalogRequest,
@@ -450,6 +476,7 @@ func (c *Client) PriceListsItemsSet(
 	return response.Body, nil
 }
 
+// List the prices of a price list with the item name and code, ordered by item name.
 func (c *Client) PriceListsItemsList(
 	ctx context.Context,
 	request *nordlet.PriceListsItemsListCatalogRequest,
@@ -466,6 +493,7 @@ func (c *Client) PriceListsItemsList(
 	return response.Body, nil
 }
 
+// Remove one item from a price list.
 func (c *Client) PriceListsItemsDelete(
 	ctx context.Context,
 	request *nordlet.PriceListsItemsDeleteCatalogRequest,

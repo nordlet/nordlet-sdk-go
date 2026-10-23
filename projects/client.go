@@ -34,6 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
+// Create a project; `partnerId` is the customer that `projects/time-entries/bill` invoices by default. A duplicate `code` is refused with 409.
 func (c *Client) Create(
 	ctx context.Context,
 	request *nordlet.CreateProjectsRequest,
@@ -50,6 +51,7 @@ func (c *Client) Create(
 	return response.Body, nil
 }
 
+// Change a project's name, customer, `status` (`active`, `completed`, `archived`) or notes; only the fields sent are changed. An archived project accepts no new time entries.
 func (c *Client) Update(
 	ctx context.Context,
 	request *nordlet.UpdateProjectsRequest,
@@ -66,6 +68,7 @@ func (c *Client) Update(
 	return response.Body, nil
 }
 
+// Return one project.
 func (c *Client) Get(
 	ctx context.Context,
 	request *nordlet.GetProjectsRequest,
@@ -82,6 +85,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
+// List projects. Filterable by `code`, `name`, `status` and `partnerId`; sortable by `code`, `name` and `createdAt`.
 func (c *Client) List(
 	ctx context.Context,
 	request *nordlet.ListProjectsRequest,
@@ -98,6 +102,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
+// Record hours worked on a project on a date, optionally for an employee and with the `hourlyRate` used when billing. `hours` must be positive (422); an archived project is refused with 409.
 func (c *Client) TimeEntriesCreate(
 	ctx context.Context,
 	request *nordlet.TimeEntriesCreateProjectsRequest,
@@ -114,6 +119,7 @@ func (c *Client) TimeEntriesCreate(
 	return response.Body, nil
 }
 
+// Change a time entry; only the fields sent are changed. `hours` must be positive (422); an entry already billed to an invoice cannot be changed (409).
 func (c *Client) TimeEntriesUpdate(
 	ctx context.Context,
 	request *nordlet.TimeEntriesUpdateProjectsRequest,
@@ -130,6 +136,7 @@ func (c *Client) TimeEntriesUpdate(
 	return response.Body, nil
 }
 
+// Delete a time entry (409 once it is billed).
 func (c *Client) TimeEntriesDelete(
 	ctx context.Context,
 	request *nordlet.TimeEntriesDeleteProjectsRequest,
@@ -146,6 +153,7 @@ func (c *Client) TimeEntriesDelete(
 	return response.Body, nil
 }
 
+// List time entries. Filterable by `projectId`, `employeeId`, `billable`, `billedInvoiceId` and `date`; sortable by `date`, `createdAt` and `hours`.
 func (c *Client) TimeEntriesList(
 	ctx context.Context,
 	request *nordlet.TimeEntriesListProjectsRequest,
@@ -162,6 +170,7 @@ func (c *Client) TimeEntriesList(
 	return response.Body, nil
 }
 
+// Create a draft sale invoice from the project's unbilled billable time entries, optionally limited to `dateFrom` and `dateTo`, and mark them billed; needs the `sales:write` scope, and the invoice is issued with `sales/invoices/issue`. The customer is `partnerId`, else the project's partner (422 without either); each entry is priced at its own `hourlyRate`, else the call's `hourlyRate` (422 when an entry has neither); `groupBy` `rate` makes one line per rate with the summed hours, `entry` one line per entry; `itemId`, `vatRatePercent` and `vatClassifierCode` go onto every line. No matching entries is 422.
 func (c *Client) TimeEntriesBill(
 	ctx context.Context,
 	request *nordlet.TimeEntriesBillProjectsRequest,
@@ -178,6 +187,7 @@ func (c *Client) TimeEntriesBill(
 	return response.Body, nil
 }
 
+// Profitability per project: `revenue` and `costs` from posted journal entries tagged with the project (income accounts credit less debit, expense accounts debit less credit), `profit` as their difference, and the hours from time entries (total, billable, billed, unbilled, and the unbilled amount at the entries' hourly rates). `projectId` limits the report to one project; `dateFrom` and `dateTo` limit the journal dates and the entry dates. Nothing is changed.
 func (c *Client) Report(
 	ctx context.Context,
 	request *nordlet.ReportProjectsRequest,

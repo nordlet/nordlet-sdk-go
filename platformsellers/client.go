@@ -51,6 +51,7 @@ func (c *Client) List(
 	return response.Body, nil
 }
 
+// Read one platform seller with its activities, ordered by year.
 func (c *Client) Get(
 	ctx context.Context,
 	request *nordlet.GetPlatformSellersRequest,
@@ -67,6 +68,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
+// Record a seller on the company's platform for the DAC7 report: an `individual` (first and last name required) or an `entity` (`entityName` required), with its `activities` per year and quarter. An `immovable_property` activity needs `propertyAddress`; property address, type and rented days on any other kind of activity are refused. These checks answer 422; a `partnerId` that does not exist answers 404. The report is built from the sellers with `declarations/eu/dac7/preview` and `declarations/eu/dac7/xml`.
 func (c *Client) Create(
 	ctx context.Context,
 	request *nordlet.CreatePlatformSellersRequest,
@@ -83,6 +85,7 @@ func (c *Client) Create(
 	return response.Body, nil
 }
 
+// Replace a platform seller's details and all of its activities with the ones given, under the same checks as `platform-sellers/create`.
 func (c *Client) Update(
 	ctx context.Context,
 	request *nordlet.UpdatePlatformSellersRequest,
@@ -99,6 +102,7 @@ func (c *Client) Update(
 	return response.Body, nil
 }
 
+// Mark a platform seller as deleted. It leaves the lists and the DAC7 report.
 func (c *Client) Delete(
 	ctx context.Context,
 	request *nordlet.DeletePlatformSellersRequest,

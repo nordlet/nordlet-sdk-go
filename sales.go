@@ -1356,16 +1356,17 @@ var (
 	invoicesCreateSalesRequestFieldDeemedSupplier               = big.NewInt(1 << 15)
 	invoicesCreateSalesRequestFieldNotes                        = big.NewInt(1 << 16)
 	invoicesCreateSalesRequestFieldDocumentRef                  = big.NewInt(1 << 17)
-	invoicesCreateSalesRequestFieldOperationTypeID              = big.NewInt(1 << 18)
-	invoicesCreateSalesRequestFieldDocumentSeriesID             = big.NewInt(1 << 19)
-	invoicesCreateSalesRequestFieldSeriesLabel                  = big.NewInt(1 << 20)
-	invoicesCreateSalesRequestFieldOrderNumber                  = big.NewInt(1 << 21)
-	invoicesCreateSalesRequestFieldIssuedByName                 = big.NewInt(1 << 22)
-	invoicesCreateSalesRequestFieldIssuedByTitle                = big.NewInt(1 << 23)
-	invoicesCreateSalesRequestFieldReceivedByName               = big.NewInt(1 << 24)
-	invoicesCreateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 25)
-	invoicesCreateSalesRequestFieldDiscountPercent              = big.NewInt(1 << 26)
-	invoicesCreateSalesRequestFieldLines                        = big.NewInt(1 << 27)
+	invoicesCreateSalesRequestFieldLocale                       = big.NewInt(1 << 18)
+	invoicesCreateSalesRequestFieldOperationTypeID              = big.NewInt(1 << 19)
+	invoicesCreateSalesRequestFieldDocumentSeriesID             = big.NewInt(1 << 20)
+	invoicesCreateSalesRequestFieldSeriesLabel                  = big.NewInt(1 << 21)
+	invoicesCreateSalesRequestFieldOrderNumber                  = big.NewInt(1 << 22)
+	invoicesCreateSalesRequestFieldIssuedByName                 = big.NewInt(1 << 23)
+	invoicesCreateSalesRequestFieldIssuedByTitle                = big.NewInt(1 << 24)
+	invoicesCreateSalesRequestFieldReceivedByName               = big.NewInt(1 << 25)
+	invoicesCreateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 26)
+	invoicesCreateSalesRequestFieldDiscountPercent              = big.NewInt(1 << 27)
+	invoicesCreateSalesRequestFieldLines                        = big.NewInt(1 << 28)
 )
 
 type InvoicesCreateSalesRequest struct {
@@ -1378,27 +1379,29 @@ type InvoicesCreateSalesRequest struct {
 	// Number of an original invoice issued outside Nordlet; give it with creditedInvoiceDate
 	CreditedInvoiceReference *string `json:"creditedInvoiceReference,omitempty" url:"-"`
 	// Issue date of the original invoice issued outside Nordlet
-	CreditedInvoiceDate          *time.Time                             `json:"creditedInvoiceDate,omitempty" url:"-" format:"date"`
-	AgreementID                  *string                                `json:"agreementId,omitempty" url:"-"`
-	VatScheme                    *InvoicesCreateSalesRequestVatScheme   `json:"vatScheme,omitempty" url:"-"`
-	IntrastatTransportMode       *string                                `json:"intrastatTransportMode,omitempty" url:"-"`
-	IntrastatDeliveryTerms       *string                                `json:"intrastatDeliveryTerms,omitempty" url:"-"`
-	IntrastatRegion              *string                                `json:"intrastatRegion,omitempty" url:"-"`
-	IntrastatNatureOfTransaction *string                                `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
-	VatCountryCode               *string                                `json:"vatCountryCode,omitempty" url:"-"`
-	DeemedSupplier               *bool                                  `json:"deemedSupplier,omitempty" url:"-"`
-	Notes                        *string                                `json:"notes,omitempty" url:"-"`
-	DocumentRef                  *string                                `json:"documentRef,omitempty" url:"-"`
-	OperationTypeID              *string                                `json:"operationTypeId,omitempty" url:"-"`
-	DocumentSeriesID             *string                                `json:"documentSeriesId,omitempty" url:"-"`
-	SeriesLabel                  *string                                `json:"seriesLabel,omitempty" url:"-"`
-	OrderNumber                  *string                                `json:"orderNumber,omitempty" url:"-"`
-	IssuedByName                 *string                                `json:"issuedByName,omitempty" url:"-"`
-	IssuedByTitle                *string                                `json:"issuedByTitle,omitempty" url:"-"`
-	ReceivedByName               *string                                `json:"receivedByName,omitempty" url:"-"`
-	ReceivedByTitle              *string                                `json:"receivedByTitle,omitempty" url:"-"`
-	DiscountPercent              *string                                `json:"discountPercent,omitempty" url:"-"`
-	Lines                        []*InvoicesCreateSalesRequestLinesItem `json:"lines" url:"-"`
+	CreditedInvoiceDate          *time.Time                           `json:"creditedInvoiceDate,omitempty" url:"-" format:"date"`
+	AgreementID                  *string                              `json:"agreementId,omitempty" url:"-"`
+	VatScheme                    *InvoicesCreateSalesRequestVatScheme `json:"vatScheme,omitempty" url:"-"`
+	IntrastatTransportMode       *string                              `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                              `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                              `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                              `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	VatCountryCode               *string                              `json:"vatCountryCode,omitempty" url:"-"`
+	DeemedSupplier               *bool                                `json:"deemedSupplier,omitempty" url:"-"`
+	Notes                        *string                              `json:"notes,omitempty" url:"-"`
+	DocumentRef                  *string                              `json:"documentRef,omitempty" url:"-"`
+	// Language of the PDF and of the e-mail the invoice is sent with; unset means the language asked for when the PDF is made
+	Locale           *InvoicesCreateSalesRequestLocale      `json:"locale,omitempty" url:"-"`
+	OperationTypeID  *string                                `json:"operationTypeId,omitempty" url:"-"`
+	DocumentSeriesID *string                                `json:"documentSeriesId,omitempty" url:"-"`
+	SeriesLabel      *string                                `json:"seriesLabel,omitempty" url:"-"`
+	OrderNumber      *string                                `json:"orderNumber,omitempty" url:"-"`
+	IssuedByName     *string                                `json:"issuedByName,omitempty" url:"-"`
+	IssuedByTitle    *string                                `json:"issuedByTitle,omitempty" url:"-"`
+	ReceivedByName   *string                                `json:"receivedByName,omitempty" url:"-"`
+	ReceivedByTitle  *string                                `json:"receivedByTitle,omitempty" url:"-"`
+	DiscountPercent  *string                                `json:"discountPercent,omitempty" url:"-"`
+	Lines            []*InvoicesCreateSalesRequestLinesItem `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1535,6 +1538,13 @@ func (i *InvoicesCreateSalesRequest) SetNotes(notes *string) {
 func (i *InvoicesCreateSalesRequest) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesCreateSalesRequestFieldDocumentRef)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequest) SetLocale(locale *InvoicesCreateSalesRequestLocale) {
+	i.Locale = locale
+	i.require(invoicesCreateSalesRequestFieldLocale)
 }
 
 // SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
@@ -2500,16 +2510,17 @@ var (
 	invoicesUpdateSalesRequestFieldVatCountryCode               = big.NewInt(1 << 11)
 	invoicesUpdateSalesRequestFieldDeemedSupplier               = big.NewInt(1 << 12)
 	invoicesUpdateSalesRequestFieldNotes                        = big.NewInt(1 << 13)
-	invoicesUpdateSalesRequestFieldOperationTypeID              = big.NewInt(1 << 14)
-	invoicesUpdateSalesRequestFieldDocumentSeriesID             = big.NewInt(1 << 15)
-	invoicesUpdateSalesRequestFieldSeriesLabel                  = big.NewInt(1 << 16)
-	invoicesUpdateSalesRequestFieldDiscountPercent              = big.NewInt(1 << 17)
-	invoicesUpdateSalesRequestFieldOrderNumber                  = big.NewInt(1 << 18)
-	invoicesUpdateSalesRequestFieldIssuedByName                 = big.NewInt(1 << 19)
-	invoicesUpdateSalesRequestFieldIssuedByTitle                = big.NewInt(1 << 20)
-	invoicesUpdateSalesRequestFieldReceivedByName               = big.NewInt(1 << 21)
-	invoicesUpdateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 22)
-	invoicesUpdateSalesRequestFieldLines                        = big.NewInt(1 << 23)
+	invoicesUpdateSalesRequestFieldLocale                       = big.NewInt(1 << 14)
+	invoicesUpdateSalesRequestFieldOperationTypeID              = big.NewInt(1 << 15)
+	invoicesUpdateSalesRequestFieldDocumentSeriesID             = big.NewInt(1 << 16)
+	invoicesUpdateSalesRequestFieldSeriesLabel                  = big.NewInt(1 << 17)
+	invoicesUpdateSalesRequestFieldDiscountPercent              = big.NewInt(1 << 18)
+	invoicesUpdateSalesRequestFieldOrderNumber                  = big.NewInt(1 << 19)
+	invoicesUpdateSalesRequestFieldIssuedByName                 = big.NewInt(1 << 20)
+	invoicesUpdateSalesRequestFieldIssuedByTitle                = big.NewInt(1 << 21)
+	invoicesUpdateSalesRequestFieldReceivedByName               = big.NewInt(1 << 22)
+	invoicesUpdateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 23)
+	invoicesUpdateSalesRequestFieldLines                        = big.NewInt(1 << 24)
 )
 
 type InvoicesUpdateSalesRequest struct {
@@ -2527,6 +2538,7 @@ type InvoicesUpdateSalesRequest struct {
 	VatCountryCode               *string                                `json:"vatCountryCode,omitempty" url:"-"`
 	DeemedSupplier               *bool                                  `json:"deemedSupplier,omitempty" url:"-"`
 	Notes                        *string                                `json:"notes,omitempty" url:"-"`
+	Locale                       *InvoicesUpdateSalesRequestLocale      `json:"locale,omitempty" url:"-"`
 	OperationTypeID              *string                                `json:"operationTypeId,omitempty" url:"-"`
 	DocumentSeriesID             *string                                `json:"documentSeriesId,omitempty" url:"-"`
 	SeriesLabel                  *string                                `json:"seriesLabel,omitempty" url:"-"`
@@ -2645,6 +2657,13 @@ func (i *InvoicesUpdateSalesRequest) SetDeemedSupplier(deemedSupplier *bool) {
 func (i *InvoicesUpdateSalesRequest) SetNotes(notes *string) {
 	i.Notes = notes
 	i.require(invoicesUpdateSalesRequestFieldNotes)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequest) SetLocale(locale *InvoicesUpdateSalesRequestLocale) {
+	i.Locale = locale
+	i.require(invoicesUpdateSalesRequestFieldLocale)
 }
 
 // SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
@@ -3217,6 +3236,566 @@ func (r *RecognitionSummarySalesRequest) MarshalJSON() ([]byte, error) {
 		embed
 	}{
 		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	recurringInvoicesCreateSalesRequestFieldTemplateID = big.NewInt(1 << 0)
+	recurringInvoicesCreateSalesRequestFieldPartnerID  = big.NewInt(1 << 1)
+	recurringInvoicesCreateSalesRequestFieldFrequency  = big.NewInt(1 << 2)
+	recurringInvoicesCreateSalesRequestFieldInterval   = big.NewInt(1 << 3)
+	recurringInvoicesCreateSalesRequestFieldStartDate  = big.NewInt(1 << 4)
+	recurringInvoicesCreateSalesRequestFieldEndDate    = big.NewInt(1 << 5)
+	recurringInvoicesCreateSalesRequestFieldLocale     = big.NewInt(1 << 6)
+	recurringInvoicesCreateSalesRequestFieldAutoIssue  = big.NewInt(1 << 7)
+	recurringInvoicesCreateSalesRequestFieldAutoSend   = big.NewInt(1 << 8)
+	recurringInvoicesCreateSalesRequestFieldSendTo     = big.NewInt(1 << 9)
+)
+
+type RecurringInvoicesCreateSalesRequest struct {
+	TemplateID string                                        `json:"templateId" url:"-"`
+	PartnerID  *string                                       `json:"partnerId,omitempty" url:"-"`
+	Frequency  *RecurringInvoicesCreateSalesRequestFrequency `json:"frequency,omitempty" url:"-"`
+	Interval   *int64                                        `json:"interval,omitempty" url:"-"`
+	StartDate  time.Time                                     `json:"startDate" url:"-" format:"date"`
+	EndDate    *time.Time                                    `json:"endDate,omitempty" url:"-" format:"date"`
+	Locale     *RecurringInvoicesCreateSalesRequestLocale    `json:"locale,omitempty" url:"-"`
+	AutoIssue  *bool                                         `json:"autoIssue,omitempty" url:"-"`
+	AutoSend   *bool                                         `json:"autoSend,omitempty" url:"-"`
+	SendTo     *string                                       `json:"sendTo,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RecurringInvoicesCreateSalesRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetTemplateID(templateID string) {
+	r.TemplateID = templateID
+	r.require(recurringInvoicesCreateSalesRequestFieldTemplateID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetPartnerID(partnerID *string) {
+	r.PartnerID = partnerID
+	r.require(recurringInvoicesCreateSalesRequestFieldPartnerID)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetFrequency(frequency *RecurringInvoicesCreateSalesRequestFrequency) {
+	r.Frequency = frequency
+	r.require(recurringInvoicesCreateSalesRequestFieldFrequency)
+}
+
+// SetInterval sets the Interval field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetInterval(interval *int64) {
+	r.Interval = interval
+	r.require(recurringInvoicesCreateSalesRequestFieldInterval)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetStartDate(startDate time.Time) {
+	r.StartDate = startDate
+	r.require(recurringInvoicesCreateSalesRequestFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetEndDate(endDate *time.Time) {
+	r.EndDate = endDate
+	r.require(recurringInvoicesCreateSalesRequestFieldEndDate)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetLocale(locale *RecurringInvoicesCreateSalesRequestLocale) {
+	r.Locale = locale
+	r.require(recurringInvoicesCreateSalesRequestFieldLocale)
+}
+
+// SetAutoIssue sets the AutoIssue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetAutoIssue(autoIssue *bool) {
+	r.AutoIssue = autoIssue
+	r.require(recurringInvoicesCreateSalesRequestFieldAutoIssue)
+}
+
+// SetAutoSend sets the AutoSend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetAutoSend(autoSend *bool) {
+	r.AutoSend = autoSend
+	r.require(recurringInvoicesCreateSalesRequestFieldAutoSend)
+}
+
+// SetSendTo sets the SendTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesRequest) SetSendTo(sendTo *string) {
+	r.SendTo = sendTo
+	r.require(recurringInvoicesCreateSalesRequestFieldSendTo)
+}
+
+func (r *RecurringInvoicesCreateSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesCreateSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesCreateSalesRequest(body)
+	return nil
+}
+
+func (r *RecurringInvoicesCreateSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesCreateSalesRequest
+	var marshaler = struct {
+		embed
+		StartDate *internal.Date `json:"startDate"`
+		EndDate   *internal.Date `json:"endDate,omitempty"`
+	}{
+		embed:     embed(*r),
+		StartDate: internal.NewDate(r.StartDate),
+		EndDate:   internal.NewOptionalDate(r.EndDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	recurringInvoicesDeleteSalesRequestFieldID = big.NewInt(1 << 0)
+)
+
+type RecurringInvoicesDeleteSalesRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RecurringInvoicesDeleteSalesRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesDeleteSalesRequest) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesDeleteSalesRequestFieldID)
+}
+
+func (r *RecurringInvoicesDeleteSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesDeleteSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesDeleteSalesRequest(body)
+	return nil
+}
+
+func (r *RecurringInvoicesDeleteSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesDeleteSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	recurringInvoicesGenerateSalesRequestFieldID = big.NewInt(1 << 0)
+)
+
+type RecurringInvoicesGenerateSalesRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RecurringInvoicesGenerateSalesRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesRequest) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesGenerateSalesRequestFieldID)
+}
+
+func (r *RecurringInvoicesGenerateSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesGenerateSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesGenerateSalesRequest(body)
+	return nil
+}
+
+func (r *RecurringInvoicesGenerateSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesGenerateSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	recurringInvoicesGetSalesRequestFieldID = big.NewInt(1 << 0)
+)
+
+type RecurringInvoicesGetSalesRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RecurringInvoicesGetSalesRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesRequest) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesGetSalesRequestFieldID)
+}
+
+func (r *RecurringInvoicesGetSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesGetSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesGetSalesRequest(body)
+	return nil
+}
+
+func (r *RecurringInvoicesGetSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesGetSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	recurringInvoicesListSalesRequestFieldPage     = big.NewInt(1 << 0)
+	recurringInvoicesListSalesRequestFieldPageSize = big.NewInt(1 << 1)
+	recurringInvoicesListSalesRequestFieldSort     = big.NewInt(1 << 2)
+	recurringInvoicesListSalesRequestFieldFilter   = big.NewInt(1 << 3)
+	recurringInvoicesListSalesRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type RecurringInvoicesListSalesRequest struct {
+	Page     *int64                                         `json:"page,omitempty" url:"-"`
+	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
+	Sort     []*RecurringInvoicesListSalesRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*RecurringInvoicesListSalesRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RecurringInvoicesListSalesRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequest) SetPage(page *int64) {
+	r.Page = page
+	r.require(recurringInvoicesListSalesRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequest) SetPageSize(pageSize *int64) {
+	r.PageSize = pageSize
+	r.require(recurringInvoicesListSalesRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequest) SetSort(sort []*RecurringInvoicesListSalesRequestSortItem) {
+	r.Sort = sort
+	r.require(recurringInvoicesListSalesRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequest) SetFilter(filter []*RecurringInvoicesListSalesRequestFilterItem) {
+	r.Filter = filter
+	r.require(recurringInvoicesListSalesRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequest) SetTotals(totals []string) {
+	r.Totals = totals
+	r.require(recurringInvoicesListSalesRequestFieldTotals)
+}
+
+func (r *RecurringInvoicesListSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesListSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesListSalesRequest(body)
+	return nil
+}
+
+func (r *RecurringInvoicesListSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesListSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	recurringInvoicesRunSalesRequestFieldAsOfDate = big.NewInt(1 << 0)
+)
+
+type RecurringInvoicesRunSalesRequest struct {
+	AsOfDate *time.Time `json:"asOfDate,omitempty" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RecurringInvoicesRunSalesRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetAsOfDate sets the AsOfDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesRequest) SetAsOfDate(asOfDate *time.Time) {
+	r.AsOfDate = asOfDate
+	r.require(recurringInvoicesRunSalesRequestFieldAsOfDate)
+}
+
+func (r *RecurringInvoicesRunSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesRunSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesRunSalesRequest(body)
+	return nil
+}
+
+func (r *RecurringInvoicesRunSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesRunSalesRequest
+	var marshaler = struct {
+		embed
+		AsOfDate *internal.Date `json:"asOfDate,omitempty"`
+	}{
+		embed:    embed(*r),
+		AsOfDate: internal.NewOptionalDate(r.AsOfDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	recurringInvoicesUpdateSalesRequestFieldID          = big.NewInt(1 << 0)
+	recurringInvoicesUpdateSalesRequestFieldTemplateID  = big.NewInt(1 << 1)
+	recurringInvoicesUpdateSalesRequestFieldPartnerID   = big.NewInt(1 << 2)
+	recurringInvoicesUpdateSalesRequestFieldFrequency   = big.NewInt(1 << 3)
+	recurringInvoicesUpdateSalesRequestFieldInterval    = big.NewInt(1 << 4)
+	recurringInvoicesUpdateSalesRequestFieldStartDate   = big.NewInt(1 << 5)
+	recurringInvoicesUpdateSalesRequestFieldEndDate     = big.NewInt(1 << 6)
+	recurringInvoicesUpdateSalesRequestFieldNextRunDate = big.NewInt(1 << 7)
+	recurringInvoicesUpdateSalesRequestFieldStatus      = big.NewInt(1 << 8)
+	recurringInvoicesUpdateSalesRequestFieldLocale      = big.NewInt(1 << 9)
+	recurringInvoicesUpdateSalesRequestFieldAutoIssue   = big.NewInt(1 << 10)
+	recurringInvoicesUpdateSalesRequestFieldAutoSend    = big.NewInt(1 << 11)
+	recurringInvoicesUpdateSalesRequestFieldSendTo      = big.NewInt(1 << 12)
+)
+
+type RecurringInvoicesUpdateSalesRequest struct {
+	ID          string                                        `json:"id" url:"-"`
+	TemplateID  *string                                       `json:"templateId,omitempty" url:"-"`
+	PartnerID   *string                                       `json:"partnerId,omitempty" url:"-"`
+	Frequency   *RecurringInvoicesUpdateSalesRequestFrequency `json:"frequency,omitempty" url:"-"`
+	Interval    *int64                                        `json:"interval,omitempty" url:"-"`
+	StartDate   *time.Time                                    `json:"startDate,omitempty" url:"-" format:"date"`
+	EndDate     *time.Time                                    `json:"endDate,omitempty" url:"-" format:"date"`
+	NextRunDate *time.Time                                    `json:"nextRunDate,omitempty" url:"-" format:"date"`
+	Status      *RecurringInvoicesUpdateSalesRequestStatus    `json:"status,omitempty" url:"-"`
+	Locale      *RecurringInvoicesUpdateSalesRequestLocale    `json:"locale,omitempty" url:"-"`
+	AutoIssue   *bool                                         `json:"autoIssue,omitempty" url:"-"`
+	AutoSend    *bool                                         `json:"autoSend,omitempty" url:"-"`
+	SendTo      *string                                       `json:"sendTo,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RecurringInvoicesUpdateSalesRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesUpdateSalesRequestFieldID)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetTemplateID(templateID *string) {
+	r.TemplateID = templateID
+	r.require(recurringInvoicesUpdateSalesRequestFieldTemplateID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetPartnerID(partnerID *string) {
+	r.PartnerID = partnerID
+	r.require(recurringInvoicesUpdateSalesRequestFieldPartnerID)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetFrequency(frequency *RecurringInvoicesUpdateSalesRequestFrequency) {
+	r.Frequency = frequency
+	r.require(recurringInvoicesUpdateSalesRequestFieldFrequency)
+}
+
+// SetInterval sets the Interval field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetInterval(interval *int64) {
+	r.Interval = interval
+	r.require(recurringInvoicesUpdateSalesRequestFieldInterval)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetStartDate(startDate *time.Time) {
+	r.StartDate = startDate
+	r.require(recurringInvoicesUpdateSalesRequestFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetEndDate(endDate *time.Time) {
+	r.EndDate = endDate
+	r.require(recurringInvoicesUpdateSalesRequestFieldEndDate)
+}
+
+// SetNextRunDate sets the NextRunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetNextRunDate(nextRunDate *time.Time) {
+	r.NextRunDate = nextRunDate
+	r.require(recurringInvoicesUpdateSalesRequestFieldNextRunDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetStatus(status *RecurringInvoicesUpdateSalesRequestStatus) {
+	r.Status = status
+	r.require(recurringInvoicesUpdateSalesRequestFieldStatus)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetLocale(locale *RecurringInvoicesUpdateSalesRequestLocale) {
+	r.Locale = locale
+	r.require(recurringInvoicesUpdateSalesRequestFieldLocale)
+}
+
+// SetAutoIssue sets the AutoIssue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetAutoIssue(autoIssue *bool) {
+	r.AutoIssue = autoIssue
+	r.require(recurringInvoicesUpdateSalesRequestFieldAutoIssue)
+}
+
+// SetAutoSend sets the AutoSend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetAutoSend(autoSend *bool) {
+	r.AutoSend = autoSend
+	r.require(recurringInvoicesUpdateSalesRequestFieldAutoSend)
+}
+
+// SetSendTo sets the SendTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesRequest) SetSendTo(sendTo *string) {
+	r.SendTo = sendTo
+	r.require(recurringInvoicesUpdateSalesRequestFieldSendTo)
+}
+
+func (r *RecurringInvoicesUpdateSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesUpdateSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesUpdateSalesRequest(body)
+	return nil
+}
+
+func (r *RecurringInvoicesUpdateSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesUpdateSalesRequest
+	var marshaler = struct {
+		embed
+		StartDate   *internal.Date `json:"startDate,omitempty"`
+		EndDate     *internal.Date `json:"endDate,omitempty"`
+		NextRunDate *internal.Date `json:"nextRunDate,omitempty"`
+	}{
+		embed:       embed(*r),
+		StartDate:   internal.NewOptionalDate(r.StartDate),
+		EndDate:     internal.NewOptionalDate(r.EndDate),
+		NextRunDate: internal.NewOptionalDate(r.NextRunDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -11849,27 +12428,29 @@ var (
 	invoicesApplyAdvanceSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesApplyAdvanceSalesResponseFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesApplyAdvanceSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesApplyAdvanceSalesResponseFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesApplyAdvanceSalesResponseFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesApplyAdvanceSalesResponseFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesApplyAdvanceSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesApplyAdvanceSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesApplyAdvanceSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesApplyAdvanceSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
-	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(1 << 59)
-	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
+	invoicesApplyAdvanceSalesResponseFieldLocale                       = big.NewInt(1 << 40)
+	invoicesApplyAdvanceSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesApplyAdvanceSalesResponseFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesApplyAdvanceSalesResponseFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesApplyAdvanceSalesResponseFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesApplyAdvanceSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesApplyAdvanceSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesApplyAdvanceSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesApplyAdvanceSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 60)
+	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(1 << 61)
+	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(1 << 62)
 )
 
 type InvoicesApplyAdvanceSalesResponse struct {
@@ -11913,6 +12494,8 @@ type InvoicesApplyAdvanceSalesResponse struct {
 	IssuedByTitle                *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                        `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                        `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                                     `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -12221,6 +12804,20 @@ func (i *InvoicesApplyAdvanceSalesResponse) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesApplyAdvanceSalesResponse) GetLockedAt() *time.Time {
@@ -12662,6 +13259,20 @@ func (i *InvoicesApplyAdvanceSalesResponse) SetReceivedByName(receivedByName *st
 func (i *InvoicesApplyAdvanceSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
 	i.ReceivedByTitle = receivedByTitle
 	i.require(invoicesApplyAdvanceSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesApplyAdvanceSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesApplyAdvanceSalesResponseFieldRecurringInvoiceID)
 }
 
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
@@ -15273,6 +15884,32 @@ func (i *InvoicesCreateSalesRequestLinesItemRecognitionMilestonesItem) String() 
 	return fmt.Sprintf("%#v", i)
 }
 
+// Language of the PDF and of the e-mail the invoice is sent with; unset means the language asked for when the PDF is made
+type InvoicesCreateSalesRequestLocale string
+
+const (
+	InvoicesCreateSalesRequestLocaleEn InvoicesCreateSalesRequestLocale = "en"
+	InvoicesCreateSalesRequestLocaleLt InvoicesCreateSalesRequestLocale = "lt"
+	InvoicesCreateSalesRequestLocaleDe InvoicesCreateSalesRequestLocale = "de"
+)
+
+func NewInvoicesCreateSalesRequestLocaleFromString(s string) (InvoicesCreateSalesRequestLocale, error) {
+	switch s {
+	case "en":
+		return InvoicesCreateSalesRequestLocaleEn, nil
+	case "lt":
+		return InvoicesCreateSalesRequestLocaleLt, nil
+	case "de":
+		return InvoicesCreateSalesRequestLocaleDe, nil
+	}
+	var t InvoicesCreateSalesRequestLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesCreateSalesRequestLocale) Ptr() *InvoicesCreateSalesRequestLocale {
+	return &i
+}
+
 type InvoicesCreateSalesRequestType string
 
 const (
@@ -15385,27 +16022,29 @@ var (
 	invoicesCreateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesCreateSalesResponseFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesCreateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesCreateSalesResponseFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesCreateSalesResponseFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesCreateSalesResponseFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesCreateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesCreateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesCreateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesCreateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesCreateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesCreateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesCreateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesCreateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesCreateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesCreateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesCreateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesCreateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesCreateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
-	invoicesCreateSalesResponseFieldLines                        = big.NewInt(1 << 59)
-	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
+	invoicesCreateSalesResponseFieldLocale                       = big.NewInt(1 << 40)
+	invoicesCreateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesCreateSalesResponseFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesCreateSalesResponseFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesCreateSalesResponseFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesCreateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesCreateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesCreateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesCreateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesCreateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesCreateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesCreateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesCreateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesCreateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesCreateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesCreateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesCreateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesCreateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 60)
+	invoicesCreateSalesResponseFieldLines                        = big.NewInt(1 << 61)
+	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 62)
 )
 
 type InvoicesCreateSalesResponse struct {
@@ -15449,6 +16088,8 @@ type InvoicesCreateSalesResponse struct {
 	IssuedByTitle                *string                                  `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                                  `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                                  `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                  `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                  `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                               `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                                  `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                                  `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -15757,6 +16398,20 @@ func (i *InvoicesCreateSalesResponse) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesCreateSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesCreateSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesCreateSalesResponse) GetLockedAt() *time.Time {
@@ -16198,6 +16853,20 @@ func (i *InvoicesCreateSalesResponse) SetReceivedByName(receivedByName *string) 
 func (i *InvoicesCreateSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
 	i.ReceivedByTitle = receivedByTitle
 	i.require(invoicesCreateSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesCreateSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesCreateSalesResponseFieldRecurringInvoiceID)
 }
 
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
@@ -18934,27 +19603,29 @@ var (
 	invoicesGetSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesGetSalesResponseFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesGetSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesGetSalesResponseFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesGetSalesResponseFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesGetSalesResponseFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesGetSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesGetSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesGetSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesGetSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesGetSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesGetSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesGetSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesGetSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesGetSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesGetSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesGetSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesGetSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesGetSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesGetSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
-	invoicesGetSalesResponseFieldLines                        = big.NewInt(1 << 59)
-	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
+	invoicesGetSalesResponseFieldLocale                       = big.NewInt(1 << 40)
+	invoicesGetSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesGetSalesResponseFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesGetSalesResponseFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesGetSalesResponseFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesGetSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesGetSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesGetSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesGetSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesGetSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesGetSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesGetSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesGetSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesGetSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesGetSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesGetSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesGetSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesGetSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesGetSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 60)
+	invoicesGetSalesResponseFieldLines                        = big.NewInt(1 << 61)
+	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(1 << 62)
 )
 
 type InvoicesGetSalesResponse struct {
@@ -18998,6 +19669,8 @@ type InvoicesGetSalesResponse struct {
 	IssuedByTitle                *string                               `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                               `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                               `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                               `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                               `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                            `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                               `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                               `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -19306,6 +19979,20 @@ func (i *InvoicesGetSalesResponse) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesGetSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesGetSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesGetSalesResponse) GetLockedAt() *time.Time {
@@ -19747,6 +20434,20 @@ func (i *InvoicesGetSalesResponse) SetReceivedByName(receivedByName *string) {
 func (i *InvoicesGetSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
 	i.ReceivedByTitle = receivedByTitle
 	i.require(invoicesGetSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesGetSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesGetSalesResponseFieldRecurringInvoiceID)
 }
 
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
@@ -21749,27 +22450,29 @@ var (
 	invoicesIssueSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesIssueSalesResponseFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesIssueSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesIssueSalesResponseFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesIssueSalesResponseFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesIssueSalesResponseFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesIssueSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesIssueSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesIssueSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesIssueSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesIssueSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesIssueSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesIssueSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesIssueSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesIssueSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesIssueSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesIssueSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesIssueSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesIssueSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
-	invoicesIssueSalesResponseFieldLines                        = big.NewInt(1 << 59)
-	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
+	invoicesIssueSalesResponseFieldLocale                       = big.NewInt(1 << 40)
+	invoicesIssueSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesIssueSalesResponseFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesIssueSalesResponseFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesIssueSalesResponseFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesIssueSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesIssueSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesIssueSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesIssueSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesIssueSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesIssueSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesIssueSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesIssueSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesIssueSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesIssueSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesIssueSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesIssueSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesIssueSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 60)
+	invoicesIssueSalesResponseFieldLines                        = big.NewInt(1 << 61)
+	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(1 << 62)
 )
 
 type InvoicesIssueSalesResponse struct {
@@ -21813,6 +22516,8 @@ type InvoicesIssueSalesResponse struct {
 	IssuedByTitle                *string                                 `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                                 `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                                 `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                 `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                 `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                              `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                                 `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                                 `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -22121,6 +22826,20 @@ func (i *InvoicesIssueSalesResponse) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesIssueSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesIssueSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesIssueSalesResponse) GetLockedAt() *time.Time {
@@ -22562,6 +23281,20 @@ func (i *InvoicesIssueSalesResponse) SetReceivedByName(receivedByName *string) {
 func (i *InvoicesIssueSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
 	i.ReceivedByTitle = receivedByTitle
 	i.require(invoicesIssueSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesIssueSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesIssueSalesResponseFieldRecurringInvoiceID)
 }
 
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
@@ -25167,25 +25900,27 @@ var (
 	invoicesListSalesResponseRowsItemFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesListSalesResponseRowsItemFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesListSalesResponseRowsItemFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesListSalesResponseRowsItemFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesListSalesResponseRowsItemFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesListSalesResponseRowsItemFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesListSalesResponseRowsItemFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesListSalesResponseRowsItemFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesListSalesResponseRowsItemFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesListSalesResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesListSalesResponseRowsItemFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesListSalesResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesListSalesResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesListSalesResponseRowsItemFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesListSalesResponseRowsItemFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesListSalesResponseRowsItemFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesListSalesResponseRowsItemFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesListSalesResponseRowsItemFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(1 << 58)
+	invoicesListSalesResponseRowsItemFieldLocale                       = big.NewInt(1 << 40)
+	invoicesListSalesResponseRowsItemFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesListSalesResponseRowsItemFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesListSalesResponseRowsItemFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesListSalesResponseRowsItemFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesListSalesResponseRowsItemFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesListSalesResponseRowsItemFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesListSalesResponseRowsItemFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesListSalesResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesListSalesResponseRowsItemFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesListSalesResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesListSalesResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesListSalesResponseRowsItemFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesListSalesResponseRowsItemFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesListSalesResponseRowsItemFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesListSalesResponseRowsItemFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesListSalesResponseRowsItemFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(1 << 60)
 )
 
 type InvoicesListSalesResponseRowsItem struct {
@@ -25229,6 +25964,8 @@ type InvoicesListSalesResponseRowsItem struct {
 	IssuedByTitle                *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                        `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                        `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                                     `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -25534,6 +26271,20 @@ func (i *InvoicesListSalesResponseRowsItem) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesListSalesResponseRowsItem) GetLockedAt() *time.Time {
@@ -25963,6 +26714,20 @@ func (i *InvoicesListSalesResponseRowsItem) SetReceivedByTitle(receivedByTitle *
 	i.require(invoicesListSalesResponseRowsItemFieldReceivedByTitle)
 }
 
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesListSalesResponseRowsItemFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesListSalesResponseRowsItemFieldRecurringInvoiceID)
+}
+
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesListSalesResponseRowsItem) SetLockedAt(lockedAt *time.Time) {
@@ -26341,27 +27106,29 @@ var (
 	invoicesLockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesLockSalesResponseFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesLockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesLockSalesResponseFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesLockSalesResponseFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesLockSalesResponseFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesLockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesLockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesLockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesLockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesLockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesLockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesLockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesLockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesLockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesLockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesLockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesLockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesLockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesLockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
-	invoicesLockSalesResponseFieldLines                        = big.NewInt(1 << 59)
-	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
+	invoicesLockSalesResponseFieldLocale                       = big.NewInt(1 << 40)
+	invoicesLockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesLockSalesResponseFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesLockSalesResponseFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesLockSalesResponseFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesLockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesLockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesLockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesLockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesLockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesLockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesLockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesLockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesLockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesLockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesLockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesLockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesLockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesLockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 60)
+	invoicesLockSalesResponseFieldLines                        = big.NewInt(1 << 61)
+	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 62)
 )
 
 type InvoicesLockSalesResponse struct {
@@ -26405,6 +27172,8 @@ type InvoicesLockSalesResponse struct {
 	IssuedByTitle                *string                                `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                                `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                                `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                             `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                                `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                                `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -26713,6 +27482,20 @@ func (i *InvoicesLockSalesResponse) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesLockSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesLockSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesLockSalesResponse) GetLockedAt() *time.Time {
@@ -27154,6 +27937,20 @@ func (i *InvoicesLockSalesResponse) SetReceivedByName(receivedByName *string) {
 func (i *InvoicesLockSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
 	i.ReceivedByTitle = receivedByTitle
 	i.require(invoicesLockSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesLockSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesLockSalesResponseFieldRecurringInvoiceID)
 }
 
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
@@ -30217,27 +31014,29 @@ var (
 	invoicesUnlockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesUnlockSalesResponseFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesUnlockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesUnlockSalesResponseFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesUnlockSalesResponseFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesUnlockSalesResponseFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesUnlockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesUnlockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesUnlockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesUnlockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesUnlockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesUnlockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesUnlockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesUnlockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesUnlockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesUnlockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesUnlockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesUnlockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesUnlockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesUnlockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
-	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(1 << 59)
-	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
+	invoicesUnlockSalesResponseFieldLocale                       = big.NewInt(1 << 40)
+	invoicesUnlockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesUnlockSalesResponseFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesUnlockSalesResponseFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesUnlockSalesResponseFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesUnlockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesUnlockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesUnlockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesUnlockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesUnlockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesUnlockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesUnlockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesUnlockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesUnlockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesUnlockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesUnlockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesUnlockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesUnlockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesUnlockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 60)
+	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(1 << 61)
+	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(1 << 62)
 )
 
 type InvoicesUnlockSalesResponse struct {
@@ -30281,6 +31080,8 @@ type InvoicesUnlockSalesResponse struct {
 	IssuedByTitle                *string                                  `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                                  `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                                  `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                  `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                  `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                               `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                                  `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                                  `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -30589,6 +31390,20 @@ func (i *InvoicesUnlockSalesResponse) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesUnlockSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesUnlockSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesUnlockSalesResponse) GetLockedAt() *time.Time {
@@ -31030,6 +31845,20 @@ func (i *InvoicesUnlockSalesResponse) SetReceivedByName(receivedByName *string) 
 func (i *InvoicesUnlockSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
 	i.ReceivedByTitle = receivedByTitle
 	i.require(invoicesUnlockSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesUnlockSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesUnlockSalesResponseFieldRecurringInvoiceID)
 }
 
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
@@ -33641,6 +34470,31 @@ func (i *InvoicesUpdateSalesRequestLinesItemRecognitionMilestonesItem) String() 
 	return fmt.Sprintf("%#v", i)
 }
 
+type InvoicesUpdateSalesRequestLocale string
+
+const (
+	InvoicesUpdateSalesRequestLocaleEn InvoicesUpdateSalesRequestLocale = "en"
+	InvoicesUpdateSalesRequestLocaleLt InvoicesUpdateSalesRequestLocale = "lt"
+	InvoicesUpdateSalesRequestLocaleDe InvoicesUpdateSalesRequestLocale = "de"
+)
+
+func NewInvoicesUpdateSalesRequestLocaleFromString(s string) (InvoicesUpdateSalesRequestLocale, error) {
+	switch s {
+	case "en":
+		return InvoicesUpdateSalesRequestLocaleEn, nil
+	case "lt":
+		return InvoicesUpdateSalesRequestLocaleLt, nil
+	case "de":
+		return InvoicesUpdateSalesRequestLocaleDe, nil
+	}
+	var t InvoicesUpdateSalesRequestLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesUpdateSalesRequestLocale) Ptr() *InvoicesUpdateSalesRequestLocale {
+	return &i
+}
+
 type InvoicesUpdateSalesRequestVatScheme string
 
 const (
@@ -33725,27 +34579,29 @@ var (
 	invoicesUpdateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 37)
 	invoicesUpdateSalesResponseFieldReceivedByName               = big.NewInt(1 << 38)
 	invoicesUpdateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 39)
-	invoicesUpdateSalesResponseFieldLockedAt                     = big.NewInt(1 << 40)
-	invoicesUpdateSalesResponseFieldLockedBy                     = big.NewInt(1 << 41)
-	invoicesUpdateSalesResponseFieldPayToken                     = big.NewInt(1 << 42)
-	invoicesUpdateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 43)
-	invoicesUpdateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 44)
-	invoicesUpdateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 45)
-	invoicesUpdateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 46)
-	invoicesUpdateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 47)
-	invoicesUpdateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 48)
-	invoicesUpdateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 49)
-	invoicesUpdateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 50)
-	invoicesUpdateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 51)
-	invoicesUpdateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 52)
-	invoicesUpdateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 53)
-	invoicesUpdateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 54)
-	invoicesUpdateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 55)
-	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 56)
-	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 57)
-	invoicesUpdateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 58)
-	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(1 << 59)
-	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 60)
+	invoicesUpdateSalesResponseFieldLocale                       = big.NewInt(1 << 40)
+	invoicesUpdateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 41)
+	invoicesUpdateSalesResponseFieldLockedAt                     = big.NewInt(1 << 42)
+	invoicesUpdateSalesResponseFieldLockedBy                     = big.NewInt(1 << 43)
+	invoicesUpdateSalesResponseFieldPayToken                     = big.NewInt(1 << 44)
+	invoicesUpdateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 45)
+	invoicesUpdateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 46)
+	invoicesUpdateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 47)
+	invoicesUpdateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 48)
+	invoicesUpdateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 49)
+	invoicesUpdateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 50)
+	invoicesUpdateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 51)
+	invoicesUpdateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 52)
+	invoicesUpdateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 53)
+	invoicesUpdateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 54)
+	invoicesUpdateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 55)
+	invoicesUpdateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 56)
+	invoicesUpdateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 57)
+	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 58)
+	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(1 << 59)
+	invoicesUpdateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(1 << 60)
+	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(1 << 61)
+	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(1 << 62)
 )
 
 type InvoicesUpdateSalesResponse struct {
@@ -33789,6 +34645,8 @@ type InvoicesUpdateSalesResponse struct {
 	IssuedByTitle                *string                                  `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
 	ReceivedByName               *string                                  `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
 	ReceivedByTitle              *string                                  `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                  `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                  `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
 	LockedAt                     *time.Time                               `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
 	LockedBy                     *string                                  `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
 	PayToken                     *string                                  `json:"payToken,omitempty" url:"payToken,omitempty"`
@@ -34097,6 +34955,20 @@ func (i *InvoicesUpdateSalesResponse) GetReceivedByTitle() *string {
 		return nil
 	}
 	return i.ReceivedByTitle
+}
+
+func (i *InvoicesUpdateSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesUpdateSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
 }
 
 func (i *InvoicesUpdateSalesResponse) GetLockedAt() *time.Time {
@@ -34538,6 +35410,20 @@ func (i *InvoicesUpdateSalesResponse) SetReceivedByName(receivedByName *string) 
 func (i *InvoicesUpdateSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
 	i.ReceivedByTitle = receivedByTitle
 	i.require(invoicesUpdateSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesUpdateSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesUpdateSalesResponseFieldRecurringInvoiceID)
 }
 
 // SetLockedAt sets the LockedAt field and marks it as non-optional;
@@ -39796,6 +40682,3774 @@ func (r *RecognitionSummarySalesResponseTotals) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesCreateSalesRequestFrequency string
+
+const (
+	RecurringInvoicesCreateSalesRequestFrequencyWeekly    RecurringInvoicesCreateSalesRequestFrequency = "weekly"
+	RecurringInvoicesCreateSalesRequestFrequencyMonthly   RecurringInvoicesCreateSalesRequestFrequency = "monthly"
+	RecurringInvoicesCreateSalesRequestFrequencyQuarterly RecurringInvoicesCreateSalesRequestFrequency = "quarterly"
+	RecurringInvoicesCreateSalesRequestFrequencyAnnual    RecurringInvoicesCreateSalesRequestFrequency = "annual"
+)
+
+func NewRecurringInvoicesCreateSalesRequestFrequencyFromString(s string) (RecurringInvoicesCreateSalesRequestFrequency, error) {
+	switch s {
+	case "weekly":
+		return RecurringInvoicesCreateSalesRequestFrequencyWeekly, nil
+	case "monthly":
+		return RecurringInvoicesCreateSalesRequestFrequencyMonthly, nil
+	case "quarterly":
+		return RecurringInvoicesCreateSalesRequestFrequencyQuarterly, nil
+	case "annual":
+		return RecurringInvoicesCreateSalesRequestFrequencyAnnual, nil
+	}
+	var t RecurringInvoicesCreateSalesRequestFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesCreateSalesRequestFrequency) Ptr() *RecurringInvoicesCreateSalesRequestFrequency {
+	return &r
+}
+
+type RecurringInvoicesCreateSalesRequestLocale string
+
+const (
+	RecurringInvoicesCreateSalesRequestLocaleEn RecurringInvoicesCreateSalesRequestLocale = "en"
+	RecurringInvoicesCreateSalesRequestLocaleLt RecurringInvoicesCreateSalesRequestLocale = "lt"
+	RecurringInvoicesCreateSalesRequestLocaleDe RecurringInvoicesCreateSalesRequestLocale = "de"
+)
+
+func NewRecurringInvoicesCreateSalesRequestLocaleFromString(s string) (RecurringInvoicesCreateSalesRequestLocale, error) {
+	switch s {
+	case "en":
+		return RecurringInvoicesCreateSalesRequestLocaleEn, nil
+	case "lt":
+		return RecurringInvoicesCreateSalesRequestLocaleLt, nil
+	case "de":
+		return RecurringInvoicesCreateSalesRequestLocaleDe, nil
+	}
+	var t RecurringInvoicesCreateSalesRequestLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesCreateSalesRequestLocale) Ptr() *RecurringInvoicesCreateSalesRequestLocale {
+	return &r
+}
+
+var (
+	recurringInvoicesCreateSalesResponseFieldID            = big.NewInt(1 << 0)
+	recurringInvoicesCreateSalesResponseFieldTemplateID    = big.NewInt(1 << 1)
+	recurringInvoicesCreateSalesResponseFieldTemplateName  = big.NewInt(1 << 2)
+	recurringInvoicesCreateSalesResponseFieldPartnerID     = big.NewInt(1 << 3)
+	recurringInvoicesCreateSalesResponseFieldPartnerName   = big.NewInt(1 << 4)
+	recurringInvoicesCreateSalesResponseFieldFrequency     = big.NewInt(1 << 5)
+	recurringInvoicesCreateSalesResponseFieldInterval      = big.NewInt(1 << 6)
+	recurringInvoicesCreateSalesResponseFieldStartDate     = big.NewInt(1 << 7)
+	recurringInvoicesCreateSalesResponseFieldEndDate       = big.NewInt(1 << 8)
+	recurringInvoicesCreateSalesResponseFieldNextRunDate   = big.NewInt(1 << 9)
+	recurringInvoicesCreateSalesResponseFieldStatus        = big.NewInt(1 << 10)
+	recurringInvoicesCreateSalesResponseFieldLocale        = big.NewInt(1 << 11)
+	recurringInvoicesCreateSalesResponseFieldAutoIssue     = big.NewInt(1 << 12)
+	recurringInvoicesCreateSalesResponseFieldAutoSend      = big.NewInt(1 << 13)
+	recurringInvoicesCreateSalesResponseFieldSendTo        = big.NewInt(1 << 14)
+	recurringInvoicesCreateSalesResponseFieldOccurrences   = big.NewInt(1 << 15)
+	recurringInvoicesCreateSalesResponseFieldLastRunAt     = big.NewInt(1 << 16)
+	recurringInvoicesCreateSalesResponseFieldLastInvoiceID = big.NewInt(1 << 17)
+	recurringInvoicesCreateSalesResponseFieldLastError     = big.NewInt(1 << 18)
+	recurringInvoicesCreateSalesResponseFieldCreatedAt     = big.NewInt(1 << 19)
+	recurringInvoicesCreateSalesResponseFieldUpdatedAt     = big.NewInt(1 << 20)
+)
+
+type RecurringInvoicesCreateSalesResponse struct {
+	ID            string                                        `json:"id" url:"id"`
+	TemplateID    string                                        `json:"templateId" url:"templateId"`
+	TemplateName  *string                                       `json:"templateName,omitempty" url:"templateName,omitempty"`
+	PartnerID     string                                        `json:"partnerId" url:"partnerId"`
+	PartnerName   *string                                       `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	Frequency     RecurringInvoicesCreateSalesResponseFrequency `json:"frequency" url:"frequency"`
+	Interval      int64                                         `json:"interval" url:"interval"`
+	StartDate     time.Time                                     `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                    `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	NextRunDate   time.Time                                     `json:"nextRunDate" url:"nextRunDate" format:"date"`
+	Status        RecurringInvoicesCreateSalesResponseStatus    `json:"status" url:"status"`
+	Locale        *string                                       `json:"locale,omitempty" url:"locale,omitempty"`
+	AutoIssue     bool                                          `json:"autoIssue" url:"autoIssue"`
+	AutoSend      bool                                          `json:"autoSend" url:"autoSend"`
+	SendTo        *string                                       `json:"sendTo,omitempty" url:"sendTo,omitempty"`
+	Occurrences   int64                                         `json:"occurrences" url:"occurrences"`
+	LastRunAt     *time.Time                                    `json:"lastRunAt,omitempty" url:"lastRunAt,omitempty"`
+	LastInvoiceID *string                                       `json:"lastInvoiceId,omitempty" url:"lastInvoiceId,omitempty"`
+	LastError     *string                                       `json:"lastError,omitempty" url:"lastError,omitempty"`
+	CreatedAt     time.Time                                     `json:"createdAt" url:"createdAt"`
+	UpdatedAt     time.Time                                     `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetTemplateID() string {
+	if r == nil {
+		return ""
+	}
+	return r.TemplateID
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetTemplateName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.TemplateName
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetPartnerID() string {
+	if r == nil {
+		return ""
+	}
+	return r.PartnerID
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetPartnerName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PartnerName
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetFrequency() RecurringInvoicesCreateSalesResponseFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetInterval() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Interval
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetStartDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.StartDate
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetEndDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.EndDate
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetNextRunDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.NextRunDate
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetStatus() RecurringInvoicesCreateSalesResponseStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetLocale() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Locale
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetAutoIssue() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoIssue
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetAutoSend() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoSend
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetSendTo() *string {
+	if r == nil {
+		return nil
+	}
+	return r.SendTo
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetOccurrences() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Occurrences
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetLastRunAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.LastRunAt
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetLastInvoiceID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastInvoiceID
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetLastError() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastError
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.UpdatedAt
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesCreateSalesResponseFieldID)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetTemplateID(templateID string) {
+	r.TemplateID = templateID
+	r.require(recurringInvoicesCreateSalesResponseFieldTemplateID)
+}
+
+// SetTemplateName sets the TemplateName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetTemplateName(templateName *string) {
+	r.TemplateName = templateName
+	r.require(recurringInvoicesCreateSalesResponseFieldTemplateName)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetPartnerID(partnerID string) {
+	r.PartnerID = partnerID
+	r.require(recurringInvoicesCreateSalesResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetPartnerName(partnerName *string) {
+	r.PartnerName = partnerName
+	r.require(recurringInvoicesCreateSalesResponseFieldPartnerName)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetFrequency(frequency RecurringInvoicesCreateSalesResponseFrequency) {
+	r.Frequency = frequency
+	r.require(recurringInvoicesCreateSalesResponseFieldFrequency)
+}
+
+// SetInterval sets the Interval field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetInterval(interval int64) {
+	r.Interval = interval
+	r.require(recurringInvoicesCreateSalesResponseFieldInterval)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetStartDate(startDate time.Time) {
+	r.StartDate = startDate
+	r.require(recurringInvoicesCreateSalesResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetEndDate(endDate *time.Time) {
+	r.EndDate = endDate
+	r.require(recurringInvoicesCreateSalesResponseFieldEndDate)
+}
+
+// SetNextRunDate sets the NextRunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetNextRunDate(nextRunDate time.Time) {
+	r.NextRunDate = nextRunDate
+	r.require(recurringInvoicesCreateSalesResponseFieldNextRunDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetStatus(status RecurringInvoicesCreateSalesResponseStatus) {
+	r.Status = status
+	r.require(recurringInvoicesCreateSalesResponseFieldStatus)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetLocale(locale *string) {
+	r.Locale = locale
+	r.require(recurringInvoicesCreateSalesResponseFieldLocale)
+}
+
+// SetAutoIssue sets the AutoIssue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetAutoIssue(autoIssue bool) {
+	r.AutoIssue = autoIssue
+	r.require(recurringInvoicesCreateSalesResponseFieldAutoIssue)
+}
+
+// SetAutoSend sets the AutoSend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetAutoSend(autoSend bool) {
+	r.AutoSend = autoSend
+	r.require(recurringInvoicesCreateSalesResponseFieldAutoSend)
+}
+
+// SetSendTo sets the SendTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetSendTo(sendTo *string) {
+	r.SendTo = sendTo
+	r.require(recurringInvoicesCreateSalesResponseFieldSendTo)
+}
+
+// SetOccurrences sets the Occurrences field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetOccurrences(occurrences int64) {
+	r.Occurrences = occurrences
+	r.require(recurringInvoicesCreateSalesResponseFieldOccurrences)
+}
+
+// SetLastRunAt sets the LastRunAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetLastRunAt(lastRunAt *time.Time) {
+	r.LastRunAt = lastRunAt
+	r.require(recurringInvoicesCreateSalesResponseFieldLastRunAt)
+}
+
+// SetLastInvoiceID sets the LastInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetLastInvoiceID(lastInvoiceID *string) {
+	r.LastInvoiceID = lastInvoiceID
+	r.require(recurringInvoicesCreateSalesResponseFieldLastInvoiceID)
+}
+
+// SetLastError sets the LastError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetLastError(lastError *string) {
+	r.LastError = lastError
+	r.require(recurringInvoicesCreateSalesResponseFieldLastError)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(recurringInvoicesCreateSalesResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesCreateSalesResponse) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(recurringInvoicesCreateSalesResponseFieldUpdatedAt)
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed RecurringInvoicesCreateSalesResponse
+	var unmarshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesCreateSalesResponse(unmarshaler.embed)
+	r.StartDate = unmarshaler.StartDate.Time()
+	r.EndDate = unmarshaler.EndDate.TimePtr()
+	r.NextRunDate = unmarshaler.NextRunDate.Time()
+	r.LastRunAt = unmarshaler.LastRunAt.TimePtr()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesCreateSalesResponse
+	var marshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:       embed(*r),
+		StartDate:   internal.NewDate(r.StartDate),
+		EndDate:     internal.NewOptionalDate(r.EndDate),
+		NextRunDate: internal.NewDate(r.NextRunDate),
+		LastRunAt:   internal.NewOptionalDateTime(r.LastRunAt),
+		CreatedAt:   internal.NewDateTime(r.CreatedAt),
+		UpdatedAt:   internal.NewDateTime(r.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesCreateSalesResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesCreateSalesResponseFrequency string
+
+const (
+	RecurringInvoicesCreateSalesResponseFrequencyWeekly    RecurringInvoicesCreateSalesResponseFrequency = "weekly"
+	RecurringInvoicesCreateSalesResponseFrequencyMonthly   RecurringInvoicesCreateSalesResponseFrequency = "monthly"
+	RecurringInvoicesCreateSalesResponseFrequencyQuarterly RecurringInvoicesCreateSalesResponseFrequency = "quarterly"
+	RecurringInvoicesCreateSalesResponseFrequencyAnnual    RecurringInvoicesCreateSalesResponseFrequency = "annual"
+)
+
+func NewRecurringInvoicesCreateSalesResponseFrequencyFromString(s string) (RecurringInvoicesCreateSalesResponseFrequency, error) {
+	switch s {
+	case "weekly":
+		return RecurringInvoicesCreateSalesResponseFrequencyWeekly, nil
+	case "monthly":
+		return RecurringInvoicesCreateSalesResponseFrequencyMonthly, nil
+	case "quarterly":
+		return RecurringInvoicesCreateSalesResponseFrequencyQuarterly, nil
+	case "annual":
+		return RecurringInvoicesCreateSalesResponseFrequencyAnnual, nil
+	}
+	var t RecurringInvoicesCreateSalesResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesCreateSalesResponseFrequency) Ptr() *RecurringInvoicesCreateSalesResponseFrequency {
+	return &r
+}
+
+type RecurringInvoicesCreateSalesResponseStatus string
+
+const (
+	RecurringInvoicesCreateSalesResponseStatusActive   RecurringInvoicesCreateSalesResponseStatus = "active"
+	RecurringInvoicesCreateSalesResponseStatusPaused   RecurringInvoicesCreateSalesResponseStatus = "paused"
+	RecurringInvoicesCreateSalesResponseStatusFinished RecurringInvoicesCreateSalesResponseStatus = "finished"
+)
+
+func NewRecurringInvoicesCreateSalesResponseStatusFromString(s string) (RecurringInvoicesCreateSalesResponseStatus, error) {
+	switch s {
+	case "active":
+		return RecurringInvoicesCreateSalesResponseStatusActive, nil
+	case "paused":
+		return RecurringInvoicesCreateSalesResponseStatusPaused, nil
+	case "finished":
+		return RecurringInvoicesCreateSalesResponseStatusFinished, nil
+	}
+	var t RecurringInvoicesCreateSalesResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesCreateSalesResponseStatus) Ptr() *RecurringInvoicesCreateSalesResponseStatus {
+	return &r
+}
+
+var (
+	recurringInvoicesDeleteSalesResponseFieldDeleted = big.NewInt(1 << 0)
+)
+
+type RecurringInvoicesDeleteSalesResponse struct {
+	Deleted bool `json:"deleted" url:"deleted"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesDeleteSalesResponse) GetDeleted() bool {
+	if r == nil {
+		return false
+	}
+	return r.Deleted
+}
+
+func (r *RecurringInvoicesDeleteSalesResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesDeleteSalesResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetDeleted sets the Deleted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesDeleteSalesResponse) SetDeleted(deleted bool) {
+	r.Deleted = deleted
+	r.require(recurringInvoicesDeleteSalesResponseFieldDeleted)
+}
+
+func (r *RecurringInvoicesDeleteSalesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesDeleteSalesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesDeleteSalesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesDeleteSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesDeleteSalesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesDeleteSalesResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	recurringInvoicesGenerateSalesResponseFieldInvoiceID        = big.NewInt(1 << 0)
+	recurringInvoicesGenerateSalesResponseFieldIssueDate        = big.NewInt(1 << 1)
+	recurringInvoicesGenerateSalesResponseFieldIssued           = big.NewInt(1 << 2)
+	recurringInvoicesGenerateSalesResponseFieldSent             = big.NewInt(1 << 3)
+	recurringInvoicesGenerateSalesResponseFieldError            = big.NewInt(1 << 4)
+	recurringInvoicesGenerateSalesResponseFieldRecurringInvoice = big.NewInt(1 << 5)
+)
+
+type RecurringInvoicesGenerateSalesResponse struct {
+	InvoiceID        string                                                  `json:"invoiceId" url:"invoiceId"`
+	IssueDate        time.Time                                               `json:"issueDate" url:"issueDate" format:"date"`
+	Issued           bool                                                    `json:"issued" url:"issued"`
+	Sent             bool                                                    `json:"sent" url:"sent"`
+	Error            *string                                                 `json:"error,omitempty" url:"error,omitempty"`
+	RecurringInvoice *RecurringInvoicesGenerateSalesResponseRecurringInvoice `json:"recurringInvoice" url:"recurringInvoice"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) GetInvoiceID() string {
+	if r == nil {
+		return ""
+	}
+	return r.InvoiceID
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) GetIssueDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.IssueDate
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) GetIssued() bool {
+	if r == nil {
+		return false
+	}
+	return r.Issued
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) GetSent() bool {
+	if r == nil {
+		return false
+	}
+	return r.Sent
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) GetError() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Error
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) GetRecurringInvoice() *RecurringInvoicesGenerateSalesResponseRecurringInvoice {
+	if r == nil {
+		return nil
+	}
+	return r.RecurringInvoice
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponse) SetInvoiceID(invoiceID string) {
+	r.InvoiceID = invoiceID
+	r.require(recurringInvoicesGenerateSalesResponseFieldInvoiceID)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponse) SetIssueDate(issueDate time.Time) {
+	r.IssueDate = issueDate
+	r.require(recurringInvoicesGenerateSalesResponseFieldIssueDate)
+}
+
+// SetIssued sets the Issued field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponse) SetIssued(issued bool) {
+	r.Issued = issued
+	r.require(recurringInvoicesGenerateSalesResponseFieldIssued)
+}
+
+// SetSent sets the Sent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponse) SetSent(sent bool) {
+	r.Sent = sent
+	r.require(recurringInvoicesGenerateSalesResponseFieldSent)
+}
+
+// SetError sets the Error field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponse) SetError(error_ *string) {
+	r.Error = error_
+	r.require(recurringInvoicesGenerateSalesResponseFieldError)
+}
+
+// SetRecurringInvoice sets the RecurringInvoice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponse) SetRecurringInvoice(recurringInvoice *RecurringInvoicesGenerateSalesResponseRecurringInvoice) {
+	r.RecurringInvoice = recurringInvoice
+	r.require(recurringInvoicesGenerateSalesResponseFieldRecurringInvoice)
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed RecurringInvoicesGenerateSalesResponse
+	var unmarshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesGenerateSalesResponse(unmarshaler.embed)
+	r.IssueDate = unmarshaler.IssueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesGenerateSalesResponse
+	var marshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed:     embed(*r),
+		IssueDate: internal.NewDate(r.IssueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesGenerateSalesResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldID            = big.NewInt(1 << 0)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldTemplateID    = big.NewInt(1 << 1)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldTemplateName  = big.NewInt(1 << 2)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldPartnerID     = big.NewInt(1 << 3)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldPartnerName   = big.NewInt(1 << 4)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldFrequency     = big.NewInt(1 << 5)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldInterval      = big.NewInt(1 << 6)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldStartDate     = big.NewInt(1 << 7)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldEndDate       = big.NewInt(1 << 8)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldNextRunDate   = big.NewInt(1 << 9)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldStatus        = big.NewInt(1 << 10)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLocale        = big.NewInt(1 << 11)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldAutoIssue     = big.NewInt(1 << 12)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldAutoSend      = big.NewInt(1 << 13)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldSendTo        = big.NewInt(1 << 14)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldOccurrences   = big.NewInt(1 << 15)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLastRunAt     = big.NewInt(1 << 16)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLastInvoiceID = big.NewInt(1 << 17)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLastError     = big.NewInt(1 << 18)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldCreatedAt     = big.NewInt(1 << 19)
+	recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldUpdatedAt     = big.NewInt(1 << 20)
+)
+
+type RecurringInvoicesGenerateSalesResponseRecurringInvoice struct {
+	ID            string                                                          `json:"id" url:"id"`
+	TemplateID    string                                                          `json:"templateId" url:"templateId"`
+	TemplateName  *string                                                         `json:"templateName,omitempty" url:"templateName,omitempty"`
+	PartnerID     string                                                          `json:"partnerId" url:"partnerId"`
+	PartnerName   *string                                                         `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	Frequency     RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency `json:"frequency" url:"frequency"`
+	Interval      int64                                                           `json:"interval" url:"interval"`
+	StartDate     time.Time                                                       `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                                      `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	NextRunDate   time.Time                                                       `json:"nextRunDate" url:"nextRunDate" format:"date"`
+	Status        RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus    `json:"status" url:"status"`
+	Locale        *string                                                         `json:"locale,omitempty" url:"locale,omitempty"`
+	AutoIssue     bool                                                            `json:"autoIssue" url:"autoIssue"`
+	AutoSend      bool                                                            `json:"autoSend" url:"autoSend"`
+	SendTo        *string                                                         `json:"sendTo,omitempty" url:"sendTo,omitempty"`
+	Occurrences   int64                                                           `json:"occurrences" url:"occurrences"`
+	LastRunAt     *time.Time                                                      `json:"lastRunAt,omitempty" url:"lastRunAt,omitempty"`
+	LastInvoiceID *string                                                         `json:"lastInvoiceId,omitempty" url:"lastInvoiceId,omitempty"`
+	LastError     *string                                                         `json:"lastError,omitempty" url:"lastError,omitempty"`
+	CreatedAt     time.Time                                                       `json:"createdAt" url:"createdAt"`
+	UpdatedAt     time.Time                                                       `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetTemplateID() string {
+	if r == nil {
+		return ""
+	}
+	return r.TemplateID
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetTemplateName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.TemplateName
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetPartnerID() string {
+	if r == nil {
+		return ""
+	}
+	return r.PartnerID
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetPartnerName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PartnerName
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetFrequency() RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetInterval() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Interval
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetStartDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.StartDate
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetEndDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.EndDate
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetNextRunDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.NextRunDate
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetStatus() RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetLocale() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Locale
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetAutoIssue() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoIssue
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetAutoSend() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoSend
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetSendTo() *string {
+	if r == nil {
+		return nil
+	}
+	return r.SendTo
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetOccurrences() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Occurrences
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetLastRunAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.LastRunAt
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetLastInvoiceID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastInvoiceID
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetLastError() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastError
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.UpdatedAt
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldID)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetTemplateID(templateID string) {
+	r.TemplateID = templateID
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldTemplateID)
+}
+
+// SetTemplateName sets the TemplateName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetTemplateName(templateName *string) {
+	r.TemplateName = templateName
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldTemplateName)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetPartnerID(partnerID string) {
+	r.PartnerID = partnerID
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetPartnerName(partnerName *string) {
+	r.PartnerName = partnerName
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldPartnerName)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetFrequency(frequency RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency) {
+	r.Frequency = frequency
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldFrequency)
+}
+
+// SetInterval sets the Interval field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetInterval(interval int64) {
+	r.Interval = interval
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldInterval)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetStartDate(startDate time.Time) {
+	r.StartDate = startDate
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetEndDate(endDate *time.Time) {
+	r.EndDate = endDate
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldEndDate)
+}
+
+// SetNextRunDate sets the NextRunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetNextRunDate(nextRunDate time.Time) {
+	r.NextRunDate = nextRunDate
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldNextRunDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetStatus(status RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus) {
+	r.Status = status
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldStatus)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetLocale(locale *string) {
+	r.Locale = locale
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLocale)
+}
+
+// SetAutoIssue sets the AutoIssue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetAutoIssue(autoIssue bool) {
+	r.AutoIssue = autoIssue
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldAutoIssue)
+}
+
+// SetAutoSend sets the AutoSend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetAutoSend(autoSend bool) {
+	r.AutoSend = autoSend
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldAutoSend)
+}
+
+// SetSendTo sets the SendTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetSendTo(sendTo *string) {
+	r.SendTo = sendTo
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldSendTo)
+}
+
+// SetOccurrences sets the Occurrences field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetOccurrences(occurrences int64) {
+	r.Occurrences = occurrences
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldOccurrences)
+}
+
+// SetLastRunAt sets the LastRunAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetLastRunAt(lastRunAt *time.Time) {
+	r.LastRunAt = lastRunAt
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLastRunAt)
+}
+
+// SetLastInvoiceID sets the LastInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetLastInvoiceID(lastInvoiceID *string) {
+	r.LastInvoiceID = lastInvoiceID
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLastInvoiceID)
+}
+
+// SetLastError sets the LastError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetLastError(lastError *string) {
+	r.LastError = lastError
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldLastError)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(recurringInvoicesGenerateSalesResponseRecurringInvoiceFieldUpdatedAt)
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) UnmarshalJSON(data []byte) error {
+	type embed RecurringInvoicesGenerateSalesResponseRecurringInvoice
+	var unmarshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesGenerateSalesResponseRecurringInvoice(unmarshaler.embed)
+	r.StartDate = unmarshaler.StartDate.Time()
+	r.EndDate = unmarshaler.EndDate.TimePtr()
+	r.NextRunDate = unmarshaler.NextRunDate.Time()
+	r.LastRunAt = unmarshaler.LastRunAt.TimePtr()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesGenerateSalesResponseRecurringInvoice
+	var marshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:       embed(*r),
+		StartDate:   internal.NewDate(r.StartDate),
+		EndDate:     internal.NewOptionalDate(r.EndDate),
+		NextRunDate: internal.NewDate(r.NextRunDate),
+		LastRunAt:   internal.NewOptionalDateTime(r.LastRunAt),
+		CreatedAt:   internal.NewDateTime(r.CreatedAt),
+		UpdatedAt:   internal.NewDateTime(r.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesGenerateSalesResponseRecurringInvoice) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency string
+
+const (
+	RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyWeekly    RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency = "weekly"
+	RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyMonthly   RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency = "monthly"
+	RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyQuarterly RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency = "quarterly"
+	RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyAnnual    RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency = "annual"
+)
+
+func NewRecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyFromString(s string) (RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency, error) {
+	switch s {
+	case "weekly":
+		return RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyWeekly, nil
+	case "monthly":
+		return RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyMonthly, nil
+	case "quarterly":
+		return RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyQuarterly, nil
+	case "annual":
+		return RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequencyAnnual, nil
+	}
+	var t RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency) Ptr() *RecurringInvoicesGenerateSalesResponseRecurringInvoiceFrequency {
+	return &r
+}
+
+type RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus string
+
+const (
+	RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatusActive   RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus = "active"
+	RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatusPaused   RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus = "paused"
+	RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatusFinished RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus = "finished"
+)
+
+func NewRecurringInvoicesGenerateSalesResponseRecurringInvoiceStatusFromString(s string) (RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus, error) {
+	switch s {
+	case "active":
+		return RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatusActive, nil
+	case "paused":
+		return RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatusPaused, nil
+	case "finished":
+		return RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatusFinished, nil
+	}
+	var t RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus) Ptr() *RecurringInvoicesGenerateSalesResponseRecurringInvoiceStatus {
+	return &r
+}
+
+var (
+	recurringInvoicesGetSalesResponseFieldID            = big.NewInt(1 << 0)
+	recurringInvoicesGetSalesResponseFieldTemplateID    = big.NewInt(1 << 1)
+	recurringInvoicesGetSalesResponseFieldTemplateName  = big.NewInt(1 << 2)
+	recurringInvoicesGetSalesResponseFieldPartnerID     = big.NewInt(1 << 3)
+	recurringInvoicesGetSalesResponseFieldPartnerName   = big.NewInt(1 << 4)
+	recurringInvoicesGetSalesResponseFieldFrequency     = big.NewInt(1 << 5)
+	recurringInvoicesGetSalesResponseFieldInterval      = big.NewInt(1 << 6)
+	recurringInvoicesGetSalesResponseFieldStartDate     = big.NewInt(1 << 7)
+	recurringInvoicesGetSalesResponseFieldEndDate       = big.NewInt(1 << 8)
+	recurringInvoicesGetSalesResponseFieldNextRunDate   = big.NewInt(1 << 9)
+	recurringInvoicesGetSalesResponseFieldStatus        = big.NewInt(1 << 10)
+	recurringInvoicesGetSalesResponseFieldLocale        = big.NewInt(1 << 11)
+	recurringInvoicesGetSalesResponseFieldAutoIssue     = big.NewInt(1 << 12)
+	recurringInvoicesGetSalesResponseFieldAutoSend      = big.NewInt(1 << 13)
+	recurringInvoicesGetSalesResponseFieldSendTo        = big.NewInt(1 << 14)
+	recurringInvoicesGetSalesResponseFieldOccurrences   = big.NewInt(1 << 15)
+	recurringInvoicesGetSalesResponseFieldLastRunAt     = big.NewInt(1 << 16)
+	recurringInvoicesGetSalesResponseFieldLastInvoiceID = big.NewInt(1 << 17)
+	recurringInvoicesGetSalesResponseFieldLastError     = big.NewInt(1 << 18)
+	recurringInvoicesGetSalesResponseFieldCreatedAt     = big.NewInt(1 << 19)
+	recurringInvoicesGetSalesResponseFieldUpdatedAt     = big.NewInt(1 << 20)
+)
+
+type RecurringInvoicesGetSalesResponse struct {
+	ID            string                                     `json:"id" url:"id"`
+	TemplateID    string                                     `json:"templateId" url:"templateId"`
+	TemplateName  *string                                    `json:"templateName,omitempty" url:"templateName,omitempty"`
+	PartnerID     string                                     `json:"partnerId" url:"partnerId"`
+	PartnerName   *string                                    `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	Frequency     RecurringInvoicesGetSalesResponseFrequency `json:"frequency" url:"frequency"`
+	Interval      int64                                      `json:"interval" url:"interval"`
+	StartDate     time.Time                                  `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                 `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	NextRunDate   time.Time                                  `json:"nextRunDate" url:"nextRunDate" format:"date"`
+	Status        RecurringInvoicesGetSalesResponseStatus    `json:"status" url:"status"`
+	Locale        *string                                    `json:"locale,omitempty" url:"locale,omitempty"`
+	AutoIssue     bool                                       `json:"autoIssue" url:"autoIssue"`
+	AutoSend      bool                                       `json:"autoSend" url:"autoSend"`
+	SendTo        *string                                    `json:"sendTo,omitempty" url:"sendTo,omitempty"`
+	Occurrences   int64                                      `json:"occurrences" url:"occurrences"`
+	LastRunAt     *time.Time                                 `json:"lastRunAt,omitempty" url:"lastRunAt,omitempty"`
+	LastInvoiceID *string                                    `json:"lastInvoiceId,omitempty" url:"lastInvoiceId,omitempty"`
+	LastError     *string                                    `json:"lastError,omitempty" url:"lastError,omitempty"`
+	CreatedAt     time.Time                                  `json:"createdAt" url:"createdAt"`
+	UpdatedAt     time.Time                                  `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetTemplateID() string {
+	if r == nil {
+		return ""
+	}
+	return r.TemplateID
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetTemplateName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.TemplateName
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetPartnerID() string {
+	if r == nil {
+		return ""
+	}
+	return r.PartnerID
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetPartnerName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PartnerName
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetFrequency() RecurringInvoicesGetSalesResponseFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetInterval() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Interval
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetStartDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.StartDate
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetEndDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.EndDate
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetNextRunDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.NextRunDate
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetStatus() RecurringInvoicesGetSalesResponseStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetLocale() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Locale
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetAutoIssue() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoIssue
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetAutoSend() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoSend
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetSendTo() *string {
+	if r == nil {
+		return nil
+	}
+	return r.SendTo
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetOccurrences() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Occurrences
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetLastRunAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.LastRunAt
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetLastInvoiceID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastInvoiceID
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetLastError() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastError
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.UpdatedAt
+}
+
+func (r *RecurringInvoicesGetSalesResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesGetSalesResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesGetSalesResponseFieldID)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetTemplateID(templateID string) {
+	r.TemplateID = templateID
+	r.require(recurringInvoicesGetSalesResponseFieldTemplateID)
+}
+
+// SetTemplateName sets the TemplateName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetTemplateName(templateName *string) {
+	r.TemplateName = templateName
+	r.require(recurringInvoicesGetSalesResponseFieldTemplateName)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetPartnerID(partnerID string) {
+	r.PartnerID = partnerID
+	r.require(recurringInvoicesGetSalesResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetPartnerName(partnerName *string) {
+	r.PartnerName = partnerName
+	r.require(recurringInvoicesGetSalesResponseFieldPartnerName)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetFrequency(frequency RecurringInvoicesGetSalesResponseFrequency) {
+	r.Frequency = frequency
+	r.require(recurringInvoicesGetSalesResponseFieldFrequency)
+}
+
+// SetInterval sets the Interval field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetInterval(interval int64) {
+	r.Interval = interval
+	r.require(recurringInvoicesGetSalesResponseFieldInterval)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetStartDate(startDate time.Time) {
+	r.StartDate = startDate
+	r.require(recurringInvoicesGetSalesResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetEndDate(endDate *time.Time) {
+	r.EndDate = endDate
+	r.require(recurringInvoicesGetSalesResponseFieldEndDate)
+}
+
+// SetNextRunDate sets the NextRunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetNextRunDate(nextRunDate time.Time) {
+	r.NextRunDate = nextRunDate
+	r.require(recurringInvoicesGetSalesResponseFieldNextRunDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetStatus(status RecurringInvoicesGetSalesResponseStatus) {
+	r.Status = status
+	r.require(recurringInvoicesGetSalesResponseFieldStatus)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetLocale(locale *string) {
+	r.Locale = locale
+	r.require(recurringInvoicesGetSalesResponseFieldLocale)
+}
+
+// SetAutoIssue sets the AutoIssue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetAutoIssue(autoIssue bool) {
+	r.AutoIssue = autoIssue
+	r.require(recurringInvoicesGetSalesResponseFieldAutoIssue)
+}
+
+// SetAutoSend sets the AutoSend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetAutoSend(autoSend bool) {
+	r.AutoSend = autoSend
+	r.require(recurringInvoicesGetSalesResponseFieldAutoSend)
+}
+
+// SetSendTo sets the SendTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetSendTo(sendTo *string) {
+	r.SendTo = sendTo
+	r.require(recurringInvoicesGetSalesResponseFieldSendTo)
+}
+
+// SetOccurrences sets the Occurrences field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetOccurrences(occurrences int64) {
+	r.Occurrences = occurrences
+	r.require(recurringInvoicesGetSalesResponseFieldOccurrences)
+}
+
+// SetLastRunAt sets the LastRunAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetLastRunAt(lastRunAt *time.Time) {
+	r.LastRunAt = lastRunAt
+	r.require(recurringInvoicesGetSalesResponseFieldLastRunAt)
+}
+
+// SetLastInvoiceID sets the LastInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetLastInvoiceID(lastInvoiceID *string) {
+	r.LastInvoiceID = lastInvoiceID
+	r.require(recurringInvoicesGetSalesResponseFieldLastInvoiceID)
+}
+
+// SetLastError sets the LastError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetLastError(lastError *string) {
+	r.LastError = lastError
+	r.require(recurringInvoicesGetSalesResponseFieldLastError)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(recurringInvoicesGetSalesResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesGetSalesResponse) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(recurringInvoicesGetSalesResponseFieldUpdatedAt)
+}
+
+func (r *RecurringInvoicesGetSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed RecurringInvoicesGetSalesResponse
+	var unmarshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesGetSalesResponse(unmarshaler.embed)
+	r.StartDate = unmarshaler.StartDate.Time()
+	r.EndDate = unmarshaler.EndDate.TimePtr()
+	r.NextRunDate = unmarshaler.NextRunDate.Time()
+	r.LastRunAt = unmarshaler.LastRunAt.TimePtr()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesGetSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesGetSalesResponse
+	var marshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:       embed(*r),
+		StartDate:   internal.NewDate(r.StartDate),
+		EndDate:     internal.NewOptionalDate(r.EndDate),
+		NextRunDate: internal.NewDate(r.NextRunDate),
+		LastRunAt:   internal.NewOptionalDateTime(r.LastRunAt),
+		CreatedAt:   internal.NewDateTime(r.CreatedAt),
+		UpdatedAt:   internal.NewDateTime(r.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesGetSalesResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesGetSalesResponseFrequency string
+
+const (
+	RecurringInvoicesGetSalesResponseFrequencyWeekly    RecurringInvoicesGetSalesResponseFrequency = "weekly"
+	RecurringInvoicesGetSalesResponseFrequencyMonthly   RecurringInvoicesGetSalesResponseFrequency = "monthly"
+	RecurringInvoicesGetSalesResponseFrequencyQuarterly RecurringInvoicesGetSalesResponseFrequency = "quarterly"
+	RecurringInvoicesGetSalesResponseFrequencyAnnual    RecurringInvoicesGetSalesResponseFrequency = "annual"
+)
+
+func NewRecurringInvoicesGetSalesResponseFrequencyFromString(s string) (RecurringInvoicesGetSalesResponseFrequency, error) {
+	switch s {
+	case "weekly":
+		return RecurringInvoicesGetSalesResponseFrequencyWeekly, nil
+	case "monthly":
+		return RecurringInvoicesGetSalesResponseFrequencyMonthly, nil
+	case "quarterly":
+		return RecurringInvoicesGetSalesResponseFrequencyQuarterly, nil
+	case "annual":
+		return RecurringInvoicesGetSalesResponseFrequencyAnnual, nil
+	}
+	var t RecurringInvoicesGetSalesResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesGetSalesResponseFrequency) Ptr() *RecurringInvoicesGetSalesResponseFrequency {
+	return &r
+}
+
+type RecurringInvoicesGetSalesResponseStatus string
+
+const (
+	RecurringInvoicesGetSalesResponseStatusActive   RecurringInvoicesGetSalesResponseStatus = "active"
+	RecurringInvoicesGetSalesResponseStatusPaused   RecurringInvoicesGetSalesResponseStatus = "paused"
+	RecurringInvoicesGetSalesResponseStatusFinished RecurringInvoicesGetSalesResponseStatus = "finished"
+)
+
+func NewRecurringInvoicesGetSalesResponseStatusFromString(s string) (RecurringInvoicesGetSalesResponseStatus, error) {
+	switch s {
+	case "active":
+		return RecurringInvoicesGetSalesResponseStatusActive, nil
+	case "paused":
+		return RecurringInvoicesGetSalesResponseStatusPaused, nil
+	case "finished":
+		return RecurringInvoicesGetSalesResponseStatusFinished, nil
+	}
+	var t RecurringInvoicesGetSalesResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesGetSalesResponseStatus) Ptr() *RecurringInvoicesGetSalesResponseStatus {
+	return &r
+}
+
+var (
+	recurringInvoicesListSalesRequestFilterItemFieldField = big.NewInt(1 << 0)
+	recurringInvoicesListSalesRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	recurringInvoicesListSalesRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type RecurringInvoicesListSalesRequestFilterItem struct {
+	Field string                                            `json:"field" url:"field"`
+	Op    RecurringInvoicesListSalesRequestFilterItemOp     `json:"op" url:"op"`
+	Value *RecurringInvoicesListSalesRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) GetField() string {
+	if r == nil {
+		return ""
+	}
+	return r.Field
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) GetOp() RecurringInvoicesListSalesRequestFilterItemOp {
+	if r == nil {
+		return ""
+	}
+	return r.Op
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) GetValue() *RecurringInvoicesListSalesRequestFilterItemValue {
+	if r == nil {
+		return nil
+	}
+	return r.Value
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequestFilterItem) SetField(field string) {
+	r.Field = field
+	r.require(recurringInvoicesListSalesRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequestFilterItem) SetOp(op RecurringInvoicesListSalesRequestFilterItemOp) {
+	r.Op = op
+	r.require(recurringInvoicesListSalesRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequestFilterItem) SetValue(value *RecurringInvoicesListSalesRequestFilterItemValue) {
+	r.Value = value
+	r.require(recurringInvoicesListSalesRequestFilterItemFieldValue)
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesListSalesRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesListSalesRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesListSalesRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesListSalesRequestFilterItemOp string
+
+const (
+	RecurringInvoicesListSalesRequestFilterItemOpEq       RecurringInvoicesListSalesRequestFilterItemOp = "eq"
+	RecurringInvoicesListSalesRequestFilterItemOpNe       RecurringInvoicesListSalesRequestFilterItemOp = "ne"
+	RecurringInvoicesListSalesRequestFilterItemOpContains RecurringInvoicesListSalesRequestFilterItemOp = "contains"
+	RecurringInvoicesListSalesRequestFilterItemOpGte      RecurringInvoicesListSalesRequestFilterItemOp = "gte"
+	RecurringInvoicesListSalesRequestFilterItemOpLte      RecurringInvoicesListSalesRequestFilterItemOp = "lte"
+	RecurringInvoicesListSalesRequestFilterItemOpIn       RecurringInvoicesListSalesRequestFilterItemOp = "in"
+)
+
+func NewRecurringInvoicesListSalesRequestFilterItemOpFromString(s string) (RecurringInvoicesListSalesRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return RecurringInvoicesListSalesRequestFilterItemOpEq, nil
+	case "ne":
+		return RecurringInvoicesListSalesRequestFilterItemOpNe, nil
+	case "contains":
+		return RecurringInvoicesListSalesRequestFilterItemOpContains, nil
+	case "gte":
+		return RecurringInvoicesListSalesRequestFilterItemOpGte, nil
+	case "lte":
+		return RecurringInvoicesListSalesRequestFilterItemOpLte, nil
+	case "in":
+		return RecurringInvoicesListSalesRequestFilterItemOpIn, nil
+	}
+	var t RecurringInvoicesListSalesRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesListSalesRequestFilterItemOp) Ptr() *RecurringInvoicesListSalesRequestFilterItemOp {
+	return &r
+}
+
+type RecurringInvoicesListSalesRequestFilterItemValue struct {
+	String                                                        string
+	Double                                                        float64
+	Boolean                                                       bool
+	RecurringInvoicesListSalesRequestFilterItemValueThreeItemList []*RecurringInvoicesListSalesRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValue) GetString() string {
+	if r == nil {
+		return ""
+	}
+	return r.String
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValue) GetDouble() float64 {
+	if r == nil {
+		return 0
+	}
+	return r.Double
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValue) GetBoolean() bool {
+	if r == nil {
+		return false
+	}
+	return r.Boolean
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValue) GetRecurringInvoicesListSalesRequestFilterItemValueThreeItemList() []*RecurringInvoicesListSalesRequestFilterItemValueThreeItem {
+	if r == nil {
+		return nil
+	}
+	return r.RecurringInvoicesListSalesRequestFilterItemValueThreeItemList
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		r.typ = "String"
+		r.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		r.typ = "Double"
+		r.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		r.typ = "Boolean"
+		r.Boolean = valueBoolean
+		return nil
+	}
+	var valueRecurringInvoicesListSalesRequestFilterItemValueThreeItemList []*RecurringInvoicesListSalesRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueRecurringInvoicesListSalesRequestFilterItemValueThreeItemList); err == nil {
+		r.typ = "RecurringInvoicesListSalesRequestFilterItemValueThreeItemList"
+		r.RecurringInvoicesListSalesRequestFilterItemValueThreeItemList = valueRecurringInvoicesListSalesRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
+}
+
+func (r RecurringInvoicesListSalesRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
+	}
+	if r.typ == "Boolean" || r.Boolean != false {
+		return json.Marshal(r.Boolean)
+	}
+	if r.typ == "RecurringInvoicesListSalesRequestFilterItemValueThreeItemList" || r.RecurringInvoicesListSalesRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(r.RecurringInvoicesListSalesRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type RecurringInvoicesListSalesRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitRecurringInvoicesListSalesRequestFilterItemValueThreeItemList([]*RecurringInvoicesListSalesRequestFilterItemValueThreeItem) error
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValue) Accept(visitor RecurringInvoicesListSalesRequestFilterItemValueVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
+	}
+	if r.typ == "Boolean" || r.Boolean != false {
+		return visitor.VisitBoolean(r.Boolean)
+	}
+	if r.typ == "RecurringInvoicesListSalesRequestFilterItemValueThreeItemList" || r.RecurringInvoicesListSalesRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitRecurringInvoicesListSalesRequestFilterItemValueThreeItemList(r.RecurringInvoicesListSalesRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type RecurringInvoicesListSalesRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValueThreeItem) GetString() string {
+	if r == nil {
+		return ""
+	}
+	return r.String
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if r == nil {
+		return 0
+	}
+	return r.Double
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		r.typ = "String"
+		r.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		r.typ = "Double"
+		r.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
+}
+
+func (r RecurringInvoicesListSalesRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type RecurringInvoicesListSalesRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (r *RecurringInvoicesListSalesRequestFilterItemValueThreeItem) Accept(visitor RecurringInvoicesListSalesRequestFilterItemValueThreeItemVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+var (
+	recurringInvoicesListSalesRequestSortItemFieldField = big.NewInt(1 << 0)
+	recurringInvoicesListSalesRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type RecurringInvoicesListSalesRequestSortItem struct {
+	Field string                                        `json:"field" url:"field"`
+	Dir   *RecurringInvoicesListSalesRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesListSalesRequestSortItem) GetField() string {
+	if r == nil {
+		return ""
+	}
+	return r.Field
+}
+
+func (r *RecurringInvoicesListSalesRequestSortItem) GetDir() *RecurringInvoicesListSalesRequestSortItemDir {
+	if r == nil {
+		return nil
+	}
+	return r.Dir
+}
+
+func (r *RecurringInvoicesListSalesRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesListSalesRequestSortItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequestSortItem) SetField(field string) {
+	r.Field = field
+	r.require(recurringInvoicesListSalesRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesRequestSortItem) SetDir(dir *RecurringInvoicesListSalesRequestSortItemDir) {
+	r.Dir = dir
+	r.require(recurringInvoicesListSalesRequestSortItemFieldDir)
+}
+
+func (r *RecurringInvoicesListSalesRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesListSalesRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesListSalesRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesListSalesRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesListSalesRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesListSalesRequestSortItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesListSalesRequestSortItemDir string
+
+const (
+	RecurringInvoicesListSalesRequestSortItemDirAsc  RecurringInvoicesListSalesRequestSortItemDir = "asc"
+	RecurringInvoicesListSalesRequestSortItemDirDesc RecurringInvoicesListSalesRequestSortItemDir = "desc"
+)
+
+func NewRecurringInvoicesListSalesRequestSortItemDirFromString(s string) (RecurringInvoicesListSalesRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return RecurringInvoicesListSalesRequestSortItemDirAsc, nil
+	case "desc":
+		return RecurringInvoicesListSalesRequestSortItemDirDesc, nil
+	}
+	var t RecurringInvoicesListSalesRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesListSalesRequestSortItemDir) Ptr() *RecurringInvoicesListSalesRequestSortItemDir {
+	return &r
+}
+
+var (
+	recurringInvoicesListSalesResponseFieldRows             = big.NewInt(1 << 0)
+	recurringInvoicesListSalesResponseFieldPage             = big.NewInt(1 << 1)
+	recurringInvoicesListSalesResponseFieldPageSize         = big.NewInt(1 << 2)
+	recurringInvoicesListSalesResponseFieldTotal            = big.NewInt(1 << 3)
+	recurringInvoicesListSalesResponseFieldTotals           = big.NewInt(1 << 4)
+	recurringInvoicesListSalesResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type RecurringInvoicesListSalesResponse struct {
+	Rows     []*RecurringInvoicesListSalesResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                         `json:"page" url:"page"`
+	PageSize int64                                         `json:"pageSize" url:"pageSize"`
+	Total    int64                                         `json:"total" url:"total"`
+	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesListSalesResponse) GetRows() []*RecurringInvoicesListSalesResponseRowsItem {
+	if r == nil {
+		return nil
+	}
+	return r.Rows
+}
+
+func (r *RecurringInvoicesListSalesResponse) GetPage() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Page
+}
+
+func (r *RecurringInvoicesListSalesResponse) GetPageSize() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.PageSize
+}
+
+func (r *RecurringInvoicesListSalesResponse) GetTotal() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Total
+}
+
+func (r *RecurringInvoicesListSalesResponse) GetTotals() map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.Totals
+}
+
+func (r *RecurringInvoicesListSalesResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.TotalsByCurrency
+}
+
+func (r *RecurringInvoicesListSalesResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesListSalesResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponse) SetRows(rows []*RecurringInvoicesListSalesResponseRowsItem) {
+	r.Rows = rows
+	r.require(recurringInvoicesListSalesResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponse) SetPage(page int64) {
+	r.Page = page
+	r.require(recurringInvoicesListSalesResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponse) SetPageSize(pageSize int64) {
+	r.PageSize = pageSize
+	r.require(recurringInvoicesListSalesResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponse) SetTotal(total int64) {
+	r.Total = total
+	r.require(recurringInvoicesListSalesResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponse) SetTotals(totals map[string]string) {
+	r.Totals = totals
+	r.require(recurringInvoicesListSalesResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	r.TotalsByCurrency = totalsByCurrency
+	r.require(recurringInvoicesListSalesResponseFieldTotalsByCurrency)
+}
+
+func (r *RecurringInvoicesListSalesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesListSalesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesListSalesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesListSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesListSalesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesListSalesResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	recurringInvoicesListSalesResponseRowsItemFieldID            = big.NewInt(1 << 0)
+	recurringInvoicesListSalesResponseRowsItemFieldTemplateID    = big.NewInt(1 << 1)
+	recurringInvoicesListSalesResponseRowsItemFieldTemplateName  = big.NewInt(1 << 2)
+	recurringInvoicesListSalesResponseRowsItemFieldPartnerID     = big.NewInt(1 << 3)
+	recurringInvoicesListSalesResponseRowsItemFieldPartnerName   = big.NewInt(1 << 4)
+	recurringInvoicesListSalesResponseRowsItemFieldFrequency     = big.NewInt(1 << 5)
+	recurringInvoicesListSalesResponseRowsItemFieldInterval      = big.NewInt(1 << 6)
+	recurringInvoicesListSalesResponseRowsItemFieldStartDate     = big.NewInt(1 << 7)
+	recurringInvoicesListSalesResponseRowsItemFieldEndDate       = big.NewInt(1 << 8)
+	recurringInvoicesListSalesResponseRowsItemFieldNextRunDate   = big.NewInt(1 << 9)
+	recurringInvoicesListSalesResponseRowsItemFieldStatus        = big.NewInt(1 << 10)
+	recurringInvoicesListSalesResponseRowsItemFieldLocale        = big.NewInt(1 << 11)
+	recurringInvoicesListSalesResponseRowsItemFieldAutoIssue     = big.NewInt(1 << 12)
+	recurringInvoicesListSalesResponseRowsItemFieldAutoSend      = big.NewInt(1 << 13)
+	recurringInvoicesListSalesResponseRowsItemFieldSendTo        = big.NewInt(1 << 14)
+	recurringInvoicesListSalesResponseRowsItemFieldOccurrences   = big.NewInt(1 << 15)
+	recurringInvoicesListSalesResponseRowsItemFieldLastRunAt     = big.NewInt(1 << 16)
+	recurringInvoicesListSalesResponseRowsItemFieldLastInvoiceID = big.NewInt(1 << 17)
+	recurringInvoicesListSalesResponseRowsItemFieldLastError     = big.NewInt(1 << 18)
+	recurringInvoicesListSalesResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 19)
+	recurringInvoicesListSalesResponseRowsItemFieldUpdatedAt     = big.NewInt(1 << 20)
+)
+
+type RecurringInvoicesListSalesResponseRowsItem struct {
+	ID            string                                              `json:"id" url:"id"`
+	TemplateID    string                                              `json:"templateId" url:"templateId"`
+	TemplateName  *string                                             `json:"templateName,omitempty" url:"templateName,omitempty"`
+	PartnerID     string                                              `json:"partnerId" url:"partnerId"`
+	PartnerName   *string                                             `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	Frequency     RecurringInvoicesListSalesResponseRowsItemFrequency `json:"frequency" url:"frequency"`
+	Interval      int64                                               `json:"interval" url:"interval"`
+	StartDate     time.Time                                           `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                          `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	NextRunDate   time.Time                                           `json:"nextRunDate" url:"nextRunDate" format:"date"`
+	Status        RecurringInvoicesListSalesResponseRowsItemStatus    `json:"status" url:"status"`
+	Locale        *string                                             `json:"locale,omitempty" url:"locale,omitempty"`
+	AutoIssue     bool                                                `json:"autoIssue" url:"autoIssue"`
+	AutoSend      bool                                                `json:"autoSend" url:"autoSend"`
+	SendTo        *string                                             `json:"sendTo,omitempty" url:"sendTo,omitempty"`
+	Occurrences   int64                                               `json:"occurrences" url:"occurrences"`
+	LastRunAt     *time.Time                                          `json:"lastRunAt,omitempty" url:"lastRunAt,omitempty"`
+	LastInvoiceID *string                                             `json:"lastInvoiceId,omitempty" url:"lastInvoiceId,omitempty"`
+	LastError     *string                                             `json:"lastError,omitempty" url:"lastError,omitempty"`
+	CreatedAt     time.Time                                           `json:"createdAt" url:"createdAt"`
+	UpdatedAt     time.Time                                           `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetTemplateID() string {
+	if r == nil {
+		return ""
+	}
+	return r.TemplateID
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetTemplateName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.TemplateName
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetPartnerID() string {
+	if r == nil {
+		return ""
+	}
+	return r.PartnerID
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetPartnerName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PartnerName
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetFrequency() RecurringInvoicesListSalesResponseRowsItemFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetInterval() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Interval
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetStartDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.StartDate
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetEndDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.EndDate
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetNextRunDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.NextRunDate
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetStatus() RecurringInvoicesListSalesResponseRowsItemStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetLocale() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Locale
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetAutoIssue() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoIssue
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetAutoSend() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoSend
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetSendTo() *string {
+	if r == nil {
+		return nil
+	}
+	return r.SendTo
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetOccurrences() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Occurrences
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetLastRunAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.LastRunAt
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetLastInvoiceID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastInvoiceID
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetLastError() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastError
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.UpdatedAt
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldID)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetTemplateID(templateID string) {
+	r.TemplateID = templateID
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldTemplateID)
+}
+
+// SetTemplateName sets the TemplateName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetTemplateName(templateName *string) {
+	r.TemplateName = templateName
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldTemplateName)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetPartnerID(partnerID string) {
+	r.PartnerID = partnerID
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetPartnerName(partnerName *string) {
+	r.PartnerName = partnerName
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldPartnerName)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetFrequency(frequency RecurringInvoicesListSalesResponseRowsItemFrequency) {
+	r.Frequency = frequency
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldFrequency)
+}
+
+// SetInterval sets the Interval field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetInterval(interval int64) {
+	r.Interval = interval
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldInterval)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetStartDate(startDate time.Time) {
+	r.StartDate = startDate
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetEndDate(endDate *time.Time) {
+	r.EndDate = endDate
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldEndDate)
+}
+
+// SetNextRunDate sets the NextRunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetNextRunDate(nextRunDate time.Time) {
+	r.NextRunDate = nextRunDate
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldNextRunDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetStatus(status RecurringInvoicesListSalesResponseRowsItemStatus) {
+	r.Status = status
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldStatus)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetLocale(locale *string) {
+	r.Locale = locale
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldLocale)
+}
+
+// SetAutoIssue sets the AutoIssue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetAutoIssue(autoIssue bool) {
+	r.AutoIssue = autoIssue
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldAutoIssue)
+}
+
+// SetAutoSend sets the AutoSend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetAutoSend(autoSend bool) {
+	r.AutoSend = autoSend
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldAutoSend)
+}
+
+// SetSendTo sets the SendTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetSendTo(sendTo *string) {
+	r.SendTo = sendTo
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldSendTo)
+}
+
+// SetOccurrences sets the Occurrences field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetOccurrences(occurrences int64) {
+	r.Occurrences = occurrences
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldOccurrences)
+}
+
+// SetLastRunAt sets the LastRunAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetLastRunAt(lastRunAt *time.Time) {
+	r.LastRunAt = lastRunAt
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldLastRunAt)
+}
+
+// SetLastInvoiceID sets the LastInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetLastInvoiceID(lastInvoiceID *string) {
+	r.LastInvoiceID = lastInvoiceID
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldLastInvoiceID)
+}
+
+// SetLastError sets the LastError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetLastError(lastError *string) {
+	r.LastError = lastError
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldLastError)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesListSalesResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(recurringInvoicesListSalesResponseRowsItemFieldUpdatedAt)
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed RecurringInvoicesListSalesResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesListSalesResponseRowsItem(unmarshaler.embed)
+	r.StartDate = unmarshaler.StartDate.Time()
+	r.EndDate = unmarshaler.EndDate.TimePtr()
+	r.NextRunDate = unmarshaler.NextRunDate.Time()
+	r.LastRunAt = unmarshaler.LastRunAt.TimePtr()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesListSalesResponseRowsItem
+	var marshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:       embed(*r),
+		StartDate:   internal.NewDate(r.StartDate),
+		EndDate:     internal.NewOptionalDate(r.EndDate),
+		NextRunDate: internal.NewDate(r.NextRunDate),
+		LastRunAt:   internal.NewOptionalDateTime(r.LastRunAt),
+		CreatedAt:   internal.NewDateTime(r.CreatedAt),
+		UpdatedAt:   internal.NewDateTime(r.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesListSalesResponseRowsItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesListSalesResponseRowsItemFrequency string
+
+const (
+	RecurringInvoicesListSalesResponseRowsItemFrequencyWeekly    RecurringInvoicesListSalesResponseRowsItemFrequency = "weekly"
+	RecurringInvoicesListSalesResponseRowsItemFrequencyMonthly   RecurringInvoicesListSalesResponseRowsItemFrequency = "monthly"
+	RecurringInvoicesListSalesResponseRowsItemFrequencyQuarterly RecurringInvoicesListSalesResponseRowsItemFrequency = "quarterly"
+	RecurringInvoicesListSalesResponseRowsItemFrequencyAnnual    RecurringInvoicesListSalesResponseRowsItemFrequency = "annual"
+)
+
+func NewRecurringInvoicesListSalesResponseRowsItemFrequencyFromString(s string) (RecurringInvoicesListSalesResponseRowsItemFrequency, error) {
+	switch s {
+	case "weekly":
+		return RecurringInvoicesListSalesResponseRowsItemFrequencyWeekly, nil
+	case "monthly":
+		return RecurringInvoicesListSalesResponseRowsItemFrequencyMonthly, nil
+	case "quarterly":
+		return RecurringInvoicesListSalesResponseRowsItemFrequencyQuarterly, nil
+	case "annual":
+		return RecurringInvoicesListSalesResponseRowsItemFrequencyAnnual, nil
+	}
+	var t RecurringInvoicesListSalesResponseRowsItemFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesListSalesResponseRowsItemFrequency) Ptr() *RecurringInvoicesListSalesResponseRowsItemFrequency {
+	return &r
+}
+
+type RecurringInvoicesListSalesResponseRowsItemStatus string
+
+const (
+	RecurringInvoicesListSalesResponseRowsItemStatusActive   RecurringInvoicesListSalesResponseRowsItemStatus = "active"
+	RecurringInvoicesListSalesResponseRowsItemStatusPaused   RecurringInvoicesListSalesResponseRowsItemStatus = "paused"
+	RecurringInvoicesListSalesResponseRowsItemStatusFinished RecurringInvoicesListSalesResponseRowsItemStatus = "finished"
+)
+
+func NewRecurringInvoicesListSalesResponseRowsItemStatusFromString(s string) (RecurringInvoicesListSalesResponseRowsItemStatus, error) {
+	switch s {
+	case "active":
+		return RecurringInvoicesListSalesResponseRowsItemStatusActive, nil
+	case "paused":
+		return RecurringInvoicesListSalesResponseRowsItemStatusPaused, nil
+	case "finished":
+		return RecurringInvoicesListSalesResponseRowsItemStatusFinished, nil
+	}
+	var t RecurringInvoicesListSalesResponseRowsItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesListSalesResponseRowsItemStatus) Ptr() *RecurringInvoicesListSalesResponseRowsItemStatus {
+	return &r
+}
+
+var (
+	recurringInvoicesRunSalesResponseFieldGenerated = big.NewInt(1 << 0)
+	recurringInvoicesRunSalesResponseFieldErrors    = big.NewInt(1 << 1)
+)
+
+type RecurringInvoicesRunSalesResponse struct {
+	Generated []*RecurringInvoicesRunSalesResponseGeneratedItem `json:"generated" url:"generated"`
+	Errors    []*RecurringInvoicesRunSalesResponseErrorsItem    `json:"errors" url:"errors"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesRunSalesResponse) GetGenerated() []*RecurringInvoicesRunSalesResponseGeneratedItem {
+	if r == nil {
+		return nil
+	}
+	return r.Generated
+}
+
+func (r *RecurringInvoicesRunSalesResponse) GetErrors() []*RecurringInvoicesRunSalesResponseErrorsItem {
+	if r == nil {
+		return nil
+	}
+	return r.Errors
+}
+
+func (r *RecurringInvoicesRunSalesResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesRunSalesResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetGenerated sets the Generated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponse) SetGenerated(generated []*RecurringInvoicesRunSalesResponseGeneratedItem) {
+	r.Generated = generated
+	r.require(recurringInvoicesRunSalesResponseFieldGenerated)
+}
+
+// SetErrors sets the Errors field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponse) SetErrors(errors []*RecurringInvoicesRunSalesResponseErrorsItem) {
+	r.Errors = errors
+	r.require(recurringInvoicesRunSalesResponseFieldErrors)
+}
+
+func (r *RecurringInvoicesRunSalesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesRunSalesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesRunSalesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesRunSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesRunSalesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesRunSalesResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	recurringInvoicesRunSalesResponseErrorsItemFieldRecurringInvoiceID = big.NewInt(1 << 0)
+	recurringInvoicesRunSalesResponseErrorsItemFieldMessage            = big.NewInt(1 << 1)
+)
+
+type RecurringInvoicesRunSalesResponseErrorsItem struct {
+	RecurringInvoiceID string `json:"recurringInvoiceId" url:"recurringInvoiceId"`
+	Message            string `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) GetRecurringInvoiceID() string {
+	if r == nil {
+		return ""
+	}
+	return r.RecurringInvoiceID
+}
+
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) GetMessage() string {
+	if r == nil {
+		return ""
+	}
+	return r.Message
+}
+
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) SetRecurringInvoiceID(recurringInvoiceID string) {
+	r.RecurringInvoiceID = recurringInvoiceID
+	r.require(recurringInvoicesRunSalesResponseErrorsItemFieldRecurringInvoiceID)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) SetMessage(message string) {
+	r.Message = message
+	r.require(recurringInvoicesRunSalesResponseErrorsItemFieldMessage)
+}
+
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RecurringInvoicesRunSalesResponseErrorsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesRunSalesResponseErrorsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesRunSalesResponseErrorsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesRunSalesResponseErrorsItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	recurringInvoicesRunSalesResponseGeneratedItemFieldRecurringInvoiceID = big.NewInt(1 << 0)
+	recurringInvoicesRunSalesResponseGeneratedItemFieldInvoiceID          = big.NewInt(1 << 1)
+	recurringInvoicesRunSalesResponseGeneratedItemFieldIssueDate          = big.NewInt(1 << 2)
+	recurringInvoicesRunSalesResponseGeneratedItemFieldIssued             = big.NewInt(1 << 3)
+	recurringInvoicesRunSalesResponseGeneratedItemFieldSent               = big.NewInt(1 << 4)
+)
+
+type RecurringInvoicesRunSalesResponseGeneratedItem struct {
+	RecurringInvoiceID string    `json:"recurringInvoiceId" url:"recurringInvoiceId"`
+	InvoiceID          string    `json:"invoiceId" url:"invoiceId"`
+	IssueDate          time.Time `json:"issueDate" url:"issueDate" format:"date"`
+	Issued             bool      `json:"issued" url:"issued"`
+	Sent               bool      `json:"sent" url:"sent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) GetRecurringInvoiceID() string {
+	if r == nil {
+		return ""
+	}
+	return r.RecurringInvoiceID
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) GetInvoiceID() string {
+	if r == nil {
+		return ""
+	}
+	return r.InvoiceID
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) GetIssueDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.IssueDate
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) GetIssued() bool {
+	if r == nil {
+		return false
+	}
+	return r.Issued
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) GetSent() bool {
+	if r == nil {
+		return false
+	}
+	return r.Sent
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) SetRecurringInvoiceID(recurringInvoiceID string) {
+	r.RecurringInvoiceID = recurringInvoiceID
+	r.require(recurringInvoicesRunSalesResponseGeneratedItemFieldRecurringInvoiceID)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) SetInvoiceID(invoiceID string) {
+	r.InvoiceID = invoiceID
+	r.require(recurringInvoicesRunSalesResponseGeneratedItemFieldInvoiceID)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) SetIssueDate(issueDate time.Time) {
+	r.IssueDate = issueDate
+	r.require(recurringInvoicesRunSalesResponseGeneratedItemFieldIssueDate)
+}
+
+// SetIssued sets the Issued field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) SetIssued(issued bool) {
+	r.Issued = issued
+	r.require(recurringInvoicesRunSalesResponseGeneratedItemFieldIssued)
+}
+
+// SetSent sets the Sent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) SetSent(sent bool) {
+	r.Sent = sent
+	r.require(recurringInvoicesRunSalesResponseGeneratedItemFieldSent)
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) UnmarshalJSON(data []byte) error {
+	type embed RecurringInvoicesRunSalesResponseGeneratedItem
+	var unmarshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesRunSalesResponseGeneratedItem(unmarshaler.embed)
+	r.IssueDate = unmarshaler.IssueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesRunSalesResponseGeneratedItem
+	var marshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate"`
+	}{
+		embed:     embed(*r),
+		IssueDate: internal.NewDate(r.IssueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesRunSalesResponseGeneratedItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesUpdateSalesRequestFrequency string
+
+const (
+	RecurringInvoicesUpdateSalesRequestFrequencyWeekly    RecurringInvoicesUpdateSalesRequestFrequency = "weekly"
+	RecurringInvoicesUpdateSalesRequestFrequencyMonthly   RecurringInvoicesUpdateSalesRequestFrequency = "monthly"
+	RecurringInvoicesUpdateSalesRequestFrequencyQuarterly RecurringInvoicesUpdateSalesRequestFrequency = "quarterly"
+	RecurringInvoicesUpdateSalesRequestFrequencyAnnual    RecurringInvoicesUpdateSalesRequestFrequency = "annual"
+)
+
+func NewRecurringInvoicesUpdateSalesRequestFrequencyFromString(s string) (RecurringInvoicesUpdateSalesRequestFrequency, error) {
+	switch s {
+	case "weekly":
+		return RecurringInvoicesUpdateSalesRequestFrequencyWeekly, nil
+	case "monthly":
+		return RecurringInvoicesUpdateSalesRequestFrequencyMonthly, nil
+	case "quarterly":
+		return RecurringInvoicesUpdateSalesRequestFrequencyQuarterly, nil
+	case "annual":
+		return RecurringInvoicesUpdateSalesRequestFrequencyAnnual, nil
+	}
+	var t RecurringInvoicesUpdateSalesRequestFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesUpdateSalesRequestFrequency) Ptr() *RecurringInvoicesUpdateSalesRequestFrequency {
+	return &r
+}
+
+type RecurringInvoicesUpdateSalesRequestLocale string
+
+const (
+	RecurringInvoicesUpdateSalesRequestLocaleEn RecurringInvoicesUpdateSalesRequestLocale = "en"
+	RecurringInvoicesUpdateSalesRequestLocaleLt RecurringInvoicesUpdateSalesRequestLocale = "lt"
+	RecurringInvoicesUpdateSalesRequestLocaleDe RecurringInvoicesUpdateSalesRequestLocale = "de"
+)
+
+func NewRecurringInvoicesUpdateSalesRequestLocaleFromString(s string) (RecurringInvoicesUpdateSalesRequestLocale, error) {
+	switch s {
+	case "en":
+		return RecurringInvoicesUpdateSalesRequestLocaleEn, nil
+	case "lt":
+		return RecurringInvoicesUpdateSalesRequestLocaleLt, nil
+	case "de":
+		return RecurringInvoicesUpdateSalesRequestLocaleDe, nil
+	}
+	var t RecurringInvoicesUpdateSalesRequestLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesUpdateSalesRequestLocale) Ptr() *RecurringInvoicesUpdateSalesRequestLocale {
+	return &r
+}
+
+type RecurringInvoicesUpdateSalesRequestStatus string
+
+const (
+	RecurringInvoicesUpdateSalesRequestStatusActive RecurringInvoicesUpdateSalesRequestStatus = "active"
+	RecurringInvoicesUpdateSalesRequestStatusPaused RecurringInvoicesUpdateSalesRequestStatus = "paused"
+)
+
+func NewRecurringInvoicesUpdateSalesRequestStatusFromString(s string) (RecurringInvoicesUpdateSalesRequestStatus, error) {
+	switch s {
+	case "active":
+		return RecurringInvoicesUpdateSalesRequestStatusActive, nil
+	case "paused":
+		return RecurringInvoicesUpdateSalesRequestStatusPaused, nil
+	}
+	var t RecurringInvoicesUpdateSalesRequestStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesUpdateSalesRequestStatus) Ptr() *RecurringInvoicesUpdateSalesRequestStatus {
+	return &r
+}
+
+var (
+	recurringInvoicesUpdateSalesResponseFieldID            = big.NewInt(1 << 0)
+	recurringInvoicesUpdateSalesResponseFieldTemplateID    = big.NewInt(1 << 1)
+	recurringInvoicesUpdateSalesResponseFieldTemplateName  = big.NewInt(1 << 2)
+	recurringInvoicesUpdateSalesResponseFieldPartnerID     = big.NewInt(1 << 3)
+	recurringInvoicesUpdateSalesResponseFieldPartnerName   = big.NewInt(1 << 4)
+	recurringInvoicesUpdateSalesResponseFieldFrequency     = big.NewInt(1 << 5)
+	recurringInvoicesUpdateSalesResponseFieldInterval      = big.NewInt(1 << 6)
+	recurringInvoicesUpdateSalesResponseFieldStartDate     = big.NewInt(1 << 7)
+	recurringInvoicesUpdateSalesResponseFieldEndDate       = big.NewInt(1 << 8)
+	recurringInvoicesUpdateSalesResponseFieldNextRunDate   = big.NewInt(1 << 9)
+	recurringInvoicesUpdateSalesResponseFieldStatus        = big.NewInt(1 << 10)
+	recurringInvoicesUpdateSalesResponseFieldLocale        = big.NewInt(1 << 11)
+	recurringInvoicesUpdateSalesResponseFieldAutoIssue     = big.NewInt(1 << 12)
+	recurringInvoicesUpdateSalesResponseFieldAutoSend      = big.NewInt(1 << 13)
+	recurringInvoicesUpdateSalesResponseFieldSendTo        = big.NewInt(1 << 14)
+	recurringInvoicesUpdateSalesResponseFieldOccurrences   = big.NewInt(1 << 15)
+	recurringInvoicesUpdateSalesResponseFieldLastRunAt     = big.NewInt(1 << 16)
+	recurringInvoicesUpdateSalesResponseFieldLastInvoiceID = big.NewInt(1 << 17)
+	recurringInvoicesUpdateSalesResponseFieldLastError     = big.NewInt(1 << 18)
+	recurringInvoicesUpdateSalesResponseFieldCreatedAt     = big.NewInt(1 << 19)
+	recurringInvoicesUpdateSalesResponseFieldUpdatedAt     = big.NewInt(1 << 20)
+)
+
+type RecurringInvoicesUpdateSalesResponse struct {
+	ID            string                                        `json:"id" url:"id"`
+	TemplateID    string                                        `json:"templateId" url:"templateId"`
+	TemplateName  *string                                       `json:"templateName,omitempty" url:"templateName,omitempty"`
+	PartnerID     string                                        `json:"partnerId" url:"partnerId"`
+	PartnerName   *string                                       `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	Frequency     RecurringInvoicesUpdateSalesResponseFrequency `json:"frequency" url:"frequency"`
+	Interval      int64                                         `json:"interval" url:"interval"`
+	StartDate     time.Time                                     `json:"startDate" url:"startDate" format:"date"`
+	EndDate       *time.Time                                    `json:"endDate,omitempty" url:"endDate,omitempty" format:"date"`
+	NextRunDate   time.Time                                     `json:"nextRunDate" url:"nextRunDate" format:"date"`
+	Status        RecurringInvoicesUpdateSalesResponseStatus    `json:"status" url:"status"`
+	Locale        *string                                       `json:"locale,omitempty" url:"locale,omitempty"`
+	AutoIssue     bool                                          `json:"autoIssue" url:"autoIssue"`
+	AutoSend      bool                                          `json:"autoSend" url:"autoSend"`
+	SendTo        *string                                       `json:"sendTo,omitempty" url:"sendTo,omitempty"`
+	Occurrences   int64                                         `json:"occurrences" url:"occurrences"`
+	LastRunAt     *time.Time                                    `json:"lastRunAt,omitempty" url:"lastRunAt,omitempty"`
+	LastInvoiceID *string                                       `json:"lastInvoiceId,omitempty" url:"lastInvoiceId,omitempty"`
+	LastError     *string                                       `json:"lastError,omitempty" url:"lastError,omitempty"`
+	CreatedAt     time.Time                                     `json:"createdAt" url:"createdAt"`
+	UpdatedAt     time.Time                                     `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetTemplateID() string {
+	if r == nil {
+		return ""
+	}
+	return r.TemplateID
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetTemplateName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.TemplateName
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetPartnerID() string {
+	if r == nil {
+		return ""
+	}
+	return r.PartnerID
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetPartnerName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PartnerName
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetFrequency() RecurringInvoicesUpdateSalesResponseFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetInterval() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Interval
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetStartDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.StartDate
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetEndDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.EndDate
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetNextRunDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.NextRunDate
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetStatus() RecurringInvoicesUpdateSalesResponseStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetLocale() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Locale
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetAutoIssue() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoIssue
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetAutoSend() bool {
+	if r == nil {
+		return false
+	}
+	return r.AutoSend
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetSendTo() *string {
+	if r == nil {
+		return nil
+	}
+	return r.SendTo
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetOccurrences() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Occurrences
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetLastRunAt() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.LastRunAt
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetLastInvoiceID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastInvoiceID
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetLastError() *string {
+	if r == nil {
+		return nil
+	}
+	return r.LastError
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetUpdatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.UpdatedAt
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetID(id string) {
+	r.ID = id
+	r.require(recurringInvoicesUpdateSalesResponseFieldID)
+}
+
+// SetTemplateID sets the TemplateID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetTemplateID(templateID string) {
+	r.TemplateID = templateID
+	r.require(recurringInvoicesUpdateSalesResponseFieldTemplateID)
+}
+
+// SetTemplateName sets the TemplateName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetTemplateName(templateName *string) {
+	r.TemplateName = templateName
+	r.require(recurringInvoicesUpdateSalesResponseFieldTemplateName)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetPartnerID(partnerID string) {
+	r.PartnerID = partnerID
+	r.require(recurringInvoicesUpdateSalesResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetPartnerName(partnerName *string) {
+	r.PartnerName = partnerName
+	r.require(recurringInvoicesUpdateSalesResponseFieldPartnerName)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetFrequency(frequency RecurringInvoicesUpdateSalesResponseFrequency) {
+	r.Frequency = frequency
+	r.require(recurringInvoicesUpdateSalesResponseFieldFrequency)
+}
+
+// SetInterval sets the Interval field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetInterval(interval int64) {
+	r.Interval = interval
+	r.require(recurringInvoicesUpdateSalesResponseFieldInterval)
+}
+
+// SetStartDate sets the StartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetStartDate(startDate time.Time) {
+	r.StartDate = startDate
+	r.require(recurringInvoicesUpdateSalesResponseFieldStartDate)
+}
+
+// SetEndDate sets the EndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetEndDate(endDate *time.Time) {
+	r.EndDate = endDate
+	r.require(recurringInvoicesUpdateSalesResponseFieldEndDate)
+}
+
+// SetNextRunDate sets the NextRunDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetNextRunDate(nextRunDate time.Time) {
+	r.NextRunDate = nextRunDate
+	r.require(recurringInvoicesUpdateSalesResponseFieldNextRunDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetStatus(status RecurringInvoicesUpdateSalesResponseStatus) {
+	r.Status = status
+	r.require(recurringInvoicesUpdateSalesResponseFieldStatus)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetLocale(locale *string) {
+	r.Locale = locale
+	r.require(recurringInvoicesUpdateSalesResponseFieldLocale)
+}
+
+// SetAutoIssue sets the AutoIssue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetAutoIssue(autoIssue bool) {
+	r.AutoIssue = autoIssue
+	r.require(recurringInvoicesUpdateSalesResponseFieldAutoIssue)
+}
+
+// SetAutoSend sets the AutoSend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetAutoSend(autoSend bool) {
+	r.AutoSend = autoSend
+	r.require(recurringInvoicesUpdateSalesResponseFieldAutoSend)
+}
+
+// SetSendTo sets the SendTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetSendTo(sendTo *string) {
+	r.SendTo = sendTo
+	r.require(recurringInvoicesUpdateSalesResponseFieldSendTo)
+}
+
+// SetOccurrences sets the Occurrences field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetOccurrences(occurrences int64) {
+	r.Occurrences = occurrences
+	r.require(recurringInvoicesUpdateSalesResponseFieldOccurrences)
+}
+
+// SetLastRunAt sets the LastRunAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetLastRunAt(lastRunAt *time.Time) {
+	r.LastRunAt = lastRunAt
+	r.require(recurringInvoicesUpdateSalesResponseFieldLastRunAt)
+}
+
+// SetLastInvoiceID sets the LastInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetLastInvoiceID(lastInvoiceID *string) {
+	r.LastInvoiceID = lastInvoiceID
+	r.require(recurringInvoicesUpdateSalesResponseFieldLastInvoiceID)
+}
+
+// SetLastError sets the LastError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetLastError(lastError *string) {
+	r.LastError = lastError
+	r.require(recurringInvoicesUpdateSalesResponseFieldLastError)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(recurringInvoicesUpdateSalesResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RecurringInvoicesUpdateSalesResponse) SetUpdatedAt(updatedAt time.Time) {
+	r.UpdatedAt = updatedAt
+	r.require(recurringInvoicesUpdateSalesResponseFieldUpdatedAt)
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed RecurringInvoicesUpdateSalesResponse
+	var unmarshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RecurringInvoicesUpdateSalesResponse(unmarshaler.embed)
+	r.StartDate = unmarshaler.StartDate.Time()
+	r.EndDate = unmarshaler.EndDate.TimePtr()
+	r.NextRunDate = unmarshaler.NextRunDate.Time()
+	r.LastRunAt = unmarshaler.LastRunAt.TimePtr()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	r.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed RecurringInvoicesUpdateSalesResponse
+	var marshaler = struct {
+		embed
+		StartDate   *internal.Date     `json:"startDate"`
+		EndDate     *internal.Date     `json:"endDate,omitempty"`
+		NextRunDate *internal.Date     `json:"nextRunDate"`
+		LastRunAt   *internal.DateTime `json:"lastRunAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:       embed(*r),
+		StartDate:   internal.NewDate(r.StartDate),
+		EndDate:     internal.NewOptionalDate(r.EndDate),
+		NextRunDate: internal.NewDate(r.NextRunDate),
+		LastRunAt:   internal.NewOptionalDateTime(r.LastRunAt),
+		CreatedAt:   internal.NewDateTime(r.CreatedAt),
+		UpdatedAt:   internal.NewDateTime(r.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RecurringInvoicesUpdateSalesResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RecurringInvoicesUpdateSalesResponseFrequency string
+
+const (
+	RecurringInvoicesUpdateSalesResponseFrequencyWeekly    RecurringInvoicesUpdateSalesResponseFrequency = "weekly"
+	RecurringInvoicesUpdateSalesResponseFrequencyMonthly   RecurringInvoicesUpdateSalesResponseFrequency = "monthly"
+	RecurringInvoicesUpdateSalesResponseFrequencyQuarterly RecurringInvoicesUpdateSalesResponseFrequency = "quarterly"
+	RecurringInvoicesUpdateSalesResponseFrequencyAnnual    RecurringInvoicesUpdateSalesResponseFrequency = "annual"
+)
+
+func NewRecurringInvoicesUpdateSalesResponseFrequencyFromString(s string) (RecurringInvoicesUpdateSalesResponseFrequency, error) {
+	switch s {
+	case "weekly":
+		return RecurringInvoicesUpdateSalesResponseFrequencyWeekly, nil
+	case "monthly":
+		return RecurringInvoicesUpdateSalesResponseFrequencyMonthly, nil
+	case "quarterly":
+		return RecurringInvoicesUpdateSalesResponseFrequencyQuarterly, nil
+	case "annual":
+		return RecurringInvoicesUpdateSalesResponseFrequencyAnnual, nil
+	}
+	var t RecurringInvoicesUpdateSalesResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesUpdateSalesResponseFrequency) Ptr() *RecurringInvoicesUpdateSalesResponseFrequency {
+	return &r
+}
+
+type RecurringInvoicesUpdateSalesResponseStatus string
+
+const (
+	RecurringInvoicesUpdateSalesResponseStatusActive   RecurringInvoicesUpdateSalesResponseStatus = "active"
+	RecurringInvoicesUpdateSalesResponseStatusPaused   RecurringInvoicesUpdateSalesResponseStatus = "paused"
+	RecurringInvoicesUpdateSalesResponseStatusFinished RecurringInvoicesUpdateSalesResponseStatus = "finished"
+)
+
+func NewRecurringInvoicesUpdateSalesResponseStatusFromString(s string) (RecurringInvoicesUpdateSalesResponseStatus, error) {
+	switch s {
+	case "active":
+		return RecurringInvoicesUpdateSalesResponseStatusActive, nil
+	case "paused":
+		return RecurringInvoicesUpdateSalesResponseStatusPaused, nil
+	case "finished":
+		return RecurringInvoicesUpdateSalesResponseStatusFinished, nil
+	}
+	var t RecurringInvoicesUpdateSalesResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RecurringInvoicesUpdateSalesResponseStatus) Ptr() *RecurringInvoicesUpdateSalesResponseStatus {
+	return &r
 }
 
 var (
