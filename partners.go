@@ -1509,6 +1509,87 @@ func (d *DebtRemindersPreviewPartnersRequest) require(field *big.Int) {
 	d.explicitFields.Or(d.explicitFields, field)
 }
 
+type DebtRemindersSettingsGetPartnersRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DebtRemindersSettingsGetPartnersRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+var (
+	debtRemindersSettingsUpdatePartnersRequestFieldDaysBefore = big.NewInt(1 << 0)
+	debtRemindersSettingsUpdatePartnersRequestFieldRepeatDays = big.NewInt(1 << 1)
+)
+
+type DebtRemindersSettingsUpdatePartnersRequest struct {
+	DaysBefore *int64 `json:"daysBefore,omitempty" url:"-"`
+	RepeatDays *int64 `json:"repeatDays,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDaysBefore sets the DaysBefore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersSettingsUpdatePartnersRequest) SetDaysBefore(daysBefore *int64) {
+	d.DaysBefore = daysBefore
+	d.require(debtRemindersSettingsUpdatePartnersRequestFieldDaysBefore)
+}
+
+// SetRepeatDays sets the RepeatDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersSettingsUpdatePartnersRequest) SetRepeatDays(repeatDays *int64) {
+	d.RepeatDays = repeatDays
+	d.require(debtRemindersSettingsUpdatePartnersRequestFieldRepeatDays)
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DebtRemindersSettingsUpdatePartnersRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*d = DebtRemindersSettingsUpdatePartnersRequest(body)
+	return nil
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersRequest) MarshalJSON() ([]byte, error) {
+	type embed DebtRemindersSettingsUpdatePartnersRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type DebtRemindersUpcomingPartnersRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DebtRemindersUpcomingPartnersRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
 var (
 	deletePartnersRequestFieldID = big.NewInt(1 << 0)
 )
@@ -9243,25 +9324,27 @@ func (d *DebtRemindersListPartnersResponse) String() string {
 var (
 	debtRemindersListPartnersResponseRowsItemFieldID           = big.NewInt(1 << 0)
 	debtRemindersListPartnersResponseRowsItemFieldPartnerID    = big.NewInt(1 << 1)
-	debtRemindersListPartnersResponseRowsItemFieldSentTo       = big.NewInt(1 << 2)
-	debtRemindersListPartnersResponseRowsItemFieldInvoiceCount = big.NewInt(1 << 3)
-	debtRemindersListPartnersResponseRowsItemFieldTotalDue     = big.NewInt(1 << 4)
-	debtRemindersListPartnersResponseRowsItemFieldInterestDue  = big.NewInt(1 << 5)
-	debtRemindersListPartnersResponseRowsItemFieldCurrency     = big.NewInt(1 << 6)
-	debtRemindersListPartnersResponseRowsItemFieldInvoiceIDs   = big.NewInt(1 << 7)
-	debtRemindersListPartnersResponseRowsItemFieldSentAt       = big.NewInt(1 << 8)
+	debtRemindersListPartnersResponseRowsItemFieldKind         = big.NewInt(1 << 2)
+	debtRemindersListPartnersResponseRowsItemFieldSentTo       = big.NewInt(1 << 3)
+	debtRemindersListPartnersResponseRowsItemFieldInvoiceCount = big.NewInt(1 << 4)
+	debtRemindersListPartnersResponseRowsItemFieldTotalDue     = big.NewInt(1 << 5)
+	debtRemindersListPartnersResponseRowsItemFieldInterestDue  = big.NewInt(1 << 6)
+	debtRemindersListPartnersResponseRowsItemFieldCurrency     = big.NewInt(1 << 7)
+	debtRemindersListPartnersResponseRowsItemFieldInvoiceIDs   = big.NewInt(1 << 8)
+	debtRemindersListPartnersResponseRowsItemFieldSentAt       = big.NewInt(1 << 9)
 )
 
 type DebtRemindersListPartnersResponseRowsItem struct {
-	ID           string    `json:"id" url:"id"`
-	PartnerID    string    `json:"partnerId" url:"partnerId"`
-	SentTo       string    `json:"sentTo" url:"sentTo"`
-	InvoiceCount int64     `json:"invoiceCount" url:"invoiceCount"`
-	TotalDue     string    `json:"totalDue" url:"totalDue"`
-	InterestDue  string    `json:"interestDue" url:"interestDue"`
-	Currency     string    `json:"currency" url:"currency"`
-	InvoiceIDs   []string  `json:"invoiceIds" url:"invoiceIds"`
-	SentAt       time.Time `json:"sentAt" url:"sentAt"`
+	ID           string                                        `json:"id" url:"id"`
+	PartnerID    string                                        `json:"partnerId" url:"partnerId"`
+	Kind         DebtRemindersListPartnersResponseRowsItemKind `json:"kind" url:"kind"`
+	SentTo       string                                        `json:"sentTo" url:"sentTo"`
+	InvoiceCount int64                                         `json:"invoiceCount" url:"invoiceCount"`
+	TotalDue     string                                        `json:"totalDue" url:"totalDue"`
+	InterestDue  string                                        `json:"interestDue" url:"interestDue"`
+	Currency     string                                        `json:"currency" url:"currency"`
+	InvoiceIDs   []string                                      `json:"invoiceIds" url:"invoiceIds"`
+	SentAt       time.Time                                     `json:"sentAt" url:"sentAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9282,6 +9365,13 @@ func (d *DebtRemindersListPartnersResponseRowsItem) GetPartnerID() string {
 		return ""
 	}
 	return d.PartnerID
+}
+
+func (d *DebtRemindersListPartnersResponseRowsItem) GetKind() DebtRemindersListPartnersResponseRowsItemKind {
+	if d == nil {
+		return ""
+	}
+	return d.Kind
 }
 
 func (d *DebtRemindersListPartnersResponseRowsItem) GetSentTo() string {
@@ -9359,6 +9449,13 @@ func (d *DebtRemindersListPartnersResponseRowsItem) SetID(id string) {
 func (d *DebtRemindersListPartnersResponseRowsItem) SetPartnerID(partnerID string) {
 	d.PartnerID = partnerID
 	d.require(debtRemindersListPartnersResponseRowsItemFieldPartnerID)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersListPartnersResponseRowsItem) SetKind(kind DebtRemindersListPartnersResponseRowsItemKind) {
+	d.Kind = kind
+	d.require(debtRemindersListPartnersResponseRowsItemFieldKind)
 }
 
 // SetSentTo sets the SentTo field and marks it as non-optional;
@@ -9458,6 +9555,28 @@ func (d *DebtRemindersListPartnersResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DebtRemindersListPartnersResponseRowsItemKind string
+
+const (
+	DebtRemindersListPartnersResponseRowsItemKindBeforeDue DebtRemindersListPartnersResponseRowsItemKind = "before_due"
+	DebtRemindersListPartnersResponseRowsItemKindOverdue   DebtRemindersListPartnersResponseRowsItemKind = "overdue"
+)
+
+func NewDebtRemindersListPartnersResponseRowsItemKindFromString(s string) (DebtRemindersListPartnersResponseRowsItemKind, error) {
+	switch s {
+	case "before_due":
+		return DebtRemindersListPartnersResponseRowsItemKindBeforeDue, nil
+	case "overdue":
+		return DebtRemindersListPartnersResponseRowsItemKindOverdue, nil
+	}
+	var t DebtRemindersListPartnersResponseRowsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DebtRemindersListPartnersResponseRowsItemKind) Ptr() *DebtRemindersListPartnersResponseRowsItemKind {
+	return &d
 }
 
 var (
@@ -10055,6 +10174,536 @@ func (d *DebtRemindersPreviewPartnersResponseRowsItemTotalsItem) String() string
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	debtRemindersSettingsGetPartnersResponseFieldDaysBefore = big.NewInt(1 << 0)
+	debtRemindersSettingsGetPartnersResponseFieldRepeatDays = big.NewInt(1 << 1)
+)
+
+type DebtRemindersSettingsGetPartnersResponse struct {
+	DaysBefore *int64 `json:"daysBefore,omitempty" url:"daysBefore,omitempty"`
+	RepeatDays int64  `json:"repeatDays" url:"repeatDays"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DebtRemindersSettingsGetPartnersResponse) GetDaysBefore() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.DaysBefore
+}
+
+func (d *DebtRemindersSettingsGetPartnersResponse) GetRepeatDays() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.RepeatDays
+}
+
+func (d *DebtRemindersSettingsGetPartnersResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DebtRemindersSettingsGetPartnersResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDaysBefore sets the DaysBefore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersSettingsGetPartnersResponse) SetDaysBefore(daysBefore *int64) {
+	d.DaysBefore = daysBefore
+	d.require(debtRemindersSettingsGetPartnersResponseFieldDaysBefore)
+}
+
+// SetRepeatDays sets the RepeatDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersSettingsGetPartnersResponse) SetRepeatDays(repeatDays int64) {
+	d.RepeatDays = repeatDays
+	d.require(debtRemindersSettingsGetPartnersResponseFieldRepeatDays)
+}
+
+func (d *DebtRemindersSettingsGetPartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DebtRemindersSettingsGetPartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DebtRemindersSettingsGetPartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DebtRemindersSettingsGetPartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed DebtRemindersSettingsGetPartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DebtRemindersSettingsGetPartnersResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	debtRemindersSettingsUpdatePartnersResponseFieldDaysBefore = big.NewInt(1 << 0)
+	debtRemindersSettingsUpdatePartnersResponseFieldRepeatDays = big.NewInt(1 << 1)
+)
+
+type DebtRemindersSettingsUpdatePartnersResponse struct {
+	DaysBefore *int64 `json:"daysBefore,omitempty" url:"daysBefore,omitempty"`
+	RepeatDays int64  `json:"repeatDays" url:"repeatDays"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersResponse) GetDaysBefore() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.DaysBefore
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersResponse) GetRepeatDays() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.RepeatDays
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDaysBefore sets the DaysBefore field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersSettingsUpdatePartnersResponse) SetDaysBefore(daysBefore *int64) {
+	d.DaysBefore = daysBefore
+	d.require(debtRemindersSettingsUpdatePartnersResponseFieldDaysBefore)
+}
+
+// SetRepeatDays sets the RepeatDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersSettingsUpdatePartnersResponse) SetRepeatDays(repeatDays int64) {
+	d.RepeatDays = repeatDays
+	d.require(debtRemindersSettingsUpdatePartnersResponseFieldRepeatDays)
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DebtRemindersSettingsUpdatePartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DebtRemindersSettingsUpdatePartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed DebtRemindersSettingsUpdatePartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DebtRemindersSettingsUpdatePartnersResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	debtRemindersUpcomingPartnersResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type DebtRemindersUpcomingPartnersResponse struct {
+	Rows []*DebtRemindersUpcomingPartnersResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DebtRemindersUpcomingPartnersResponse) GetRows() []*DebtRemindersUpcomingPartnersResponseRowsItem {
+	if d == nil {
+		return nil
+	}
+	return d.Rows
+}
+
+func (d *DebtRemindersUpcomingPartnersResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DebtRemindersUpcomingPartnersResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponse) SetRows(rows []*DebtRemindersUpcomingPartnersResponseRowsItem) {
+	d.Rows = rows
+	d.require(debtRemindersUpcomingPartnersResponseFieldRows)
+}
+
+func (d *DebtRemindersUpcomingPartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DebtRemindersUpcomingPartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DebtRemindersUpcomingPartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DebtRemindersUpcomingPartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed DebtRemindersUpcomingPartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DebtRemindersUpcomingPartnersResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	debtRemindersUpcomingPartnersResponseRowsItemFieldDate        = big.NewInt(1 << 0)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldKind        = big.NewInt(1 << 1)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldInvoiceID   = big.NewInt(1 << 2)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldFullNumber  = big.NewInt(1 << 3)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldPartnerID   = big.NewInt(1 << 4)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldPartnerName = big.NewInt(1 << 5)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldDueDate     = big.NewInt(1 << 6)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldRemaining   = big.NewInt(1 << 7)
+	debtRemindersUpcomingPartnersResponseRowsItemFieldCurrency    = big.NewInt(1 << 8)
+)
+
+type DebtRemindersUpcomingPartnersResponseRowsItem struct {
+	Date        time.Time                                         `json:"date" url:"date" format:"date"`
+	Kind        DebtRemindersUpcomingPartnersResponseRowsItemKind `json:"kind" url:"kind"`
+	InvoiceID   string                                            `json:"invoiceId" url:"invoiceId"`
+	FullNumber  string                                            `json:"fullNumber" url:"fullNumber"`
+	PartnerID   string                                            `json:"partnerId" url:"partnerId"`
+	PartnerName string                                            `json:"partnerName" url:"partnerName"`
+	DueDate     time.Time                                         `json:"dueDate" url:"dueDate" format:"date"`
+	Remaining   string                                            `json:"remaining" url:"remaining"`
+	Currency    string                                            `json:"currency" url:"currency"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetDate() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.Date
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetKind() DebtRemindersUpcomingPartnersResponseRowsItemKind {
+	if d == nil {
+		return ""
+	}
+	return d.Kind
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetInvoiceID() string {
+	if d == nil {
+		return ""
+	}
+	return d.InvoiceID
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetFullNumber() string {
+	if d == nil {
+		return ""
+	}
+	return d.FullNumber
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetPartnerID() string {
+	if d == nil {
+		return ""
+	}
+	return d.PartnerID
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetPartnerName() string {
+	if d == nil {
+		return ""
+	}
+	return d.PartnerName
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetDueDate() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.DueDate
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetRemaining() string {
+	if d == nil {
+		return ""
+	}
+	return d.Remaining
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetCurrency() string {
+	if d == nil {
+		return ""
+	}
+	return d.Currency
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetDate(date time.Time) {
+	d.Date = date
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldDate)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetKind(kind DebtRemindersUpcomingPartnersResponseRowsItemKind) {
+	d.Kind = kind
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldKind)
+}
+
+// SetInvoiceID sets the InvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetInvoiceID(invoiceID string) {
+	d.InvoiceID = invoiceID
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldInvoiceID)
+}
+
+// SetFullNumber sets the FullNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetFullNumber(fullNumber string) {
+	d.FullNumber = fullNumber
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldFullNumber)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetPartnerID(partnerID string) {
+	d.PartnerID = partnerID
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetPartnerName(partnerName string) {
+	d.PartnerName = partnerName
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldPartnerName)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetDueDate(dueDate time.Time) {
+	d.DueDate = dueDate
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldDueDate)
+}
+
+// SetRemaining sets the Remaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetRemaining(remaining string) {
+	d.Remaining = remaining
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldRemaining)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) SetCurrency(currency string) {
+	d.Currency = currency
+	d.require(debtRemindersUpcomingPartnersResponseRowsItemFieldCurrency)
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed DebtRemindersUpcomingPartnersResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		Date    *internal.Date `json:"date"`
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*d = DebtRemindersUpcomingPartnersResponseRowsItem(unmarshaler.embed)
+	d.Date = unmarshaler.Date.Time()
+	d.DueDate = unmarshaler.DueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DebtRemindersUpcomingPartnersResponseRowsItem
+	var marshaler = struct {
+		embed
+		Date    *internal.Date `json:"date"`
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed:   embed(*d),
+		Date:    internal.NewDate(d.Date),
+		DueDate: internal.NewDate(d.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DebtRemindersUpcomingPartnersResponseRowsItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DebtRemindersUpcomingPartnersResponseRowsItemKind string
+
+const (
+	DebtRemindersUpcomingPartnersResponseRowsItemKindBeforeDue DebtRemindersUpcomingPartnersResponseRowsItemKind = "before_due"
+	DebtRemindersUpcomingPartnersResponseRowsItemKindOverdue   DebtRemindersUpcomingPartnersResponseRowsItemKind = "overdue"
+)
+
+func NewDebtRemindersUpcomingPartnersResponseRowsItemKindFromString(s string) (DebtRemindersUpcomingPartnersResponseRowsItemKind, error) {
+	switch s {
+	case "before_due":
+		return DebtRemindersUpcomingPartnersResponseRowsItemKindBeforeDue, nil
+	case "overdue":
+		return DebtRemindersUpcomingPartnersResponseRowsItemKindOverdue, nil
+	}
+	var t DebtRemindersUpcomingPartnersResponseRowsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DebtRemindersUpcomingPartnersResponseRowsItemKind) Ptr() *DebtRemindersUpcomingPartnersResponseRowsItemKind {
+	return &d
 }
 
 var (

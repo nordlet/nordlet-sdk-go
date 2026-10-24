@@ -1223,12 +1223,105 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"sentTo\": \"sentTo\",\n      \"invoiceCount\": 1000000,\n      \"totalDue\": \"totalDue\",\n      \"interestDue\": \"interestDue\",\n      \"currency\": \"currency\",\n      \"invoiceIds\": [\n        \"invoiceIds\"\n      ],\n      \"sentAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"partnerId\": \"partnerId\",\n      \"kind\": \"before_due\",\n      \"sentTo\": \"sentTo\",\n      \"invoiceCount\": 1000000,\n      \"totalDue\": \"totalDue\",\n      \"interestDue\": \"interestDue\",\n      \"currency\": \"currency\",\n      \"invoiceIds\": [\n        \"invoiceIds\"\n      ],\n      \"sentAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "d21caec8-c0eb-4f22-b3fc-3f87ccd9c6b0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "187e4098-27ee-4971-afce-f9c227eed690",
+      "name": "Partners debt reminders settings get - default",
+      "request": {
+        "urlPathTemplate": "/v1/partners/debt-reminders/settings/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"daysBefore\": 1000000,\n  \"repeatDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "187e4098-27ee-4971-afce-f9c227eed690",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "d7cc7e7b-43b0-40c2-8db2-72c3e8430ee2",
+      "name": "Partners debt reminders settings update - default",
+      "request": {
+        "urlPathTemplate": "/v1/partners/debt-reminders/settings/update",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"daysBefore\": 1000000,\n  \"repeatDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "d7cc7e7b-43b0-40c2-8db2-72c3e8430ee2",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "1f220fdd-cada-4d5b-8b10-f61f046a1c77",
+      "name": "Partners debt reminders upcoming - default",
+      "request": {
+        "urlPathTemplate": "/v1/partners/debt-reminders/upcoming",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"rows\": [\n    {\n      \"date\": \"2026-07-01\",\n      \"kind\": \"before_due\",\n      \"invoiceId\": \"invoiceId\",\n      \"fullNumber\": \"fullNumber\",\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"dueDate\": \"2026-07-01\",\n      \"remaining\": \"remaining\",\n      \"currency\": \"currency\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1f220fdd-cada-4d5b-8b10-f61f046a1c77",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -20816,6 +20909,6 @@
     }
   ],
   "meta": {
-    "total": 671
+    "total": 674
   }
 }

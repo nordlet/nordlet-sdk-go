@@ -459,6 +459,78 @@ func TestPartnersDebtRemindersListWithWireMock(
 	VerifyRequestCount(t, "TestPartnersDebtRemindersListWithWireMock", "POST", "/v1/partners/debt-reminders/list", nil, 1)
 }
 
+func TestPartnersDebtRemindersSettingsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DebtRemindersSettingsGetPartnersRequest{}
+	_, invocationErr := client.Partners.DebtRemindersSettingsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersDebtRemindersSettingsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersDebtRemindersSettingsGetWithWireMock", "POST", "/v1/partners/debt-reminders/settings/get", nil, 1)
+}
+
+func TestPartnersDebtRemindersSettingsUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DebtRemindersSettingsUpdatePartnersRequest{}
+	_, invocationErr := client.Partners.DebtRemindersSettingsUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersDebtRemindersSettingsUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersDebtRemindersSettingsUpdateWithWireMock", "POST", "/v1/partners/debt-reminders/settings/update", nil, 1)
+}
+
+func TestPartnersDebtRemindersUpcomingWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DebtRemindersUpcomingPartnersRequest{}
+	_, invocationErr := client.Partners.DebtRemindersUpcoming(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersDebtRemindersUpcomingWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersDebtRemindersUpcomingWithWireMock", "POST", "/v1/partners/debt-reminders/upcoming", nil, 1)
+}
+
 func TestPartnersValidateVatWithWireMock(
 	t *testing.T,
 ) {

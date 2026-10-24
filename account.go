@@ -1497,6 +1497,7 @@ var (
 	loginLinkRequestAccountRequestFieldAcceptTerms  = big.NewInt(1 << 2)
 	loginLinkRequestAccountRequestFieldAcceptDpa    = big.NewInt(1 << 3)
 	loginLinkRequestAccountRequestFieldReferralCode = big.NewInt(1 << 4)
+	loginLinkRequestAccountRequestFieldApp          = big.NewInt(1 << 5)
 )
 
 type LoginLinkRequestAccountRequest struct {
@@ -1505,6 +1506,7 @@ type LoginLinkRequestAccountRequest struct {
 	AcceptTerms  *bool                                 `json:"acceptTerms,omitempty" url:"-"`
 	AcceptDpa    *bool                                 `json:"acceptDpa,omitempty" url:"-"`
 	ReferralCode *string                               `json:"referralCode,omitempty" url:"-"`
+	App          *LoginLinkRequestAccountRequestApp    `json:"app,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1550,6 +1552,13 @@ func (l *LoginLinkRequestAccountRequest) SetAcceptDpa(acceptDpa *bool) {
 func (l *LoginLinkRequestAccountRequest) SetReferralCode(referralCode *string) {
 	l.ReferralCode = referralCode
 	l.require(loginLinkRequestAccountRequestFieldReferralCode)
+}
+
+// SetApp sets the App field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LoginLinkRequestAccountRequest) SetApp(app *LoginLinkRequestAccountRequestApp) {
+	l.App = app
+	l.require(loginLinkRequestAccountRequestFieldApp)
 }
 
 func (l *LoginLinkRequestAccountRequest) UnmarshalJSON(data []byte) error {
@@ -8825,6 +8834,25 @@ func (l *LoginLinkConsumeAccountResponseUser) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", l)
+}
+
+type LoginLinkRequestAccountRequestApp string
+
+const (
+	LoginLinkRequestAccountRequestAppInvoice LoginLinkRequestAccountRequestApp = "invoice"
+)
+
+func NewLoginLinkRequestAccountRequestAppFromString(s string) (LoginLinkRequestAccountRequestApp, error) {
+	switch s {
+	case "invoice":
+		return LoginLinkRequestAccountRequestAppInvoice, nil
+	}
+	var t LoginLinkRequestAccountRequestApp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (l LoginLinkRequestAccountRequestApp) Ptr() *LoginLinkRequestAccountRequestApp {
+	return &l
 }
 
 type LoginLinkRequestAccountRequestLocale string

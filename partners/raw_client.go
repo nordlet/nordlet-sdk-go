@@ -692,6 +692,138 @@ func (r *RawClient) DebtRemindersList(
 	}, nil
 }
 
+func (r *RawClient) DebtRemindersSettingsGet(
+	ctx context.Context,
+	request *nordlet.DebtRemindersSettingsGetPartnersRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.DebtRemindersSettingsGetPartnersResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/partners/debt-reminders/settings/get"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.DebtRemindersSettingsGetPartnersResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.DebtRemindersSettingsGetPartnersResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) DebtRemindersSettingsUpdate(
+	ctx context.Context,
+	request *nordlet.DebtRemindersSettingsUpdatePartnersRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.DebtRemindersSettingsUpdatePartnersResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/partners/debt-reminders/settings/update"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.DebtRemindersSettingsUpdatePartnersResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.DebtRemindersSettingsUpdatePartnersResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) DebtRemindersUpcoming(
+	ctx context.Context,
+	request *nordlet.DebtRemindersUpcomingPartnersRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.DebtRemindersUpcomingPartnersResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/partners/debt-reminders/upcoming"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.DebtRemindersUpcomingPartnersResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.DebtRemindersUpcomingPartnersResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) ValidateVat(
 	ctx context.Context,
 	request *nordlet.ValidateVatPartnersRequest,

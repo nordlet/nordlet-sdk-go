@@ -65,8 +65,8 @@ func (r *RequestOptions) cloneHeader() http.Header {
 	headers := r.HTTPHeader.Clone()
 	headers.Set("X-Fern-Language", "Go")
 	headers.Set("X-Fern-SDK-Name", "github.com/nordlet/nordlet-sdk-go")
-	headers.Set("X-Fern-SDK-Version", "v0.5.5")
-	headers.Set("User-Agent", "github.com/nordlet/nordlet-sdk-go/0.5.5")
+	headers.Set("X-Fern-SDK-Version", "v0.5.6")
+	headers.Set("User-Agent", "github.com/nordlet/nordlet-sdk-go/0.5.6")
 	return headers
 }
 
