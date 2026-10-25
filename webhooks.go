@@ -1380,6 +1380,7 @@ const (
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolFailed       SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_failed"
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolRejected     SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_rejected"
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent         SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceQuoteSent          SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.quote_sent"
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent               SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.sent"
 	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderCreated             SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.created"
 	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderFulfilled           SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.fulfilled"
@@ -1465,6 +1466,8 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolRejected, nil
 	case "sale_invoice.peppol_sent":
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
+	case "sale_invoice.quote_sent":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceQuoteSent, nil
 	case "sale_invoice.sent":
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent, nil
 	case "sales_order.created":
@@ -2744,6 +2747,7 @@ const (
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolFailed       SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_failed"
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolRejected     SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_rejected"
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent         SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceQuoteSent          SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.quote_sent"
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent               SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.sent"
 	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderCreated             SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.created"
 	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderFulfilled           SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.fulfilled"
@@ -2829,6 +2833,8 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolRejected, nil
 	case "sale_invoice.peppol_sent":
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
+	case "sale_invoice.quote_sent":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceQuoteSent, nil
 	case "sale_invoice.sent":
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent, nil
 	case "sales_order.created":

@@ -3089,7 +3089,7 @@ client.Partners.FilesList(
 <dl>
 <dd>
 
-Runs the overdue selection of the daily debt-reminder job for this company as of the company's current date and returns the overdue reminders it would send, without sending or recording anything. A partner is included when it has `autoDebtReminder`, is active, has an e-mail address, got no overdue reminder in the last `repeatDays` days (`partners/debt-reminders/settings/get`) and has issued invoices or advance invoices past their due date with an unpaid remainder; the interest per invoice is the remainder times the partner's `lateInterestPercent` times the days late over 365, and the totals are per currency. Sent reminders are listed by `partners/debt-reminders/list`.
+Runs the overdue selection of the daily debt-reminder job for this company as of the company's current date and returns the overdue reminders it would send, without sending or recording anything. A partner is included when it has `autoDebtReminder`, is active, has an e-mail address, got no overdue reminder in the last `repeatDays` days (`partners/debt-reminders/settings/get`) and has issued invoices or advance invoices with `debtRemindersEnabled` past their due date with an unpaid remainder; the interest per invoice is the remainder times the partner's `lateInterestPercent` times the days late over 365, and the totals are per currency. Sent reminders are listed by `partners/debt-reminders/list`.
 </dd>
 </dl>
 </dd>
@@ -3268,7 +3268,7 @@ client.Partners.DebtRemindersSettingsGet(
 <dl>
 <dd>
 
-Changes the given fields of the company's debt-reminder schedule. `daysBefore` (1 to 90, or null to send nothing before the due date) makes the daily job send one "payment due soon" reminder per invoice that many days before its due date; `repeatDays` (1 to 90) is the number of days between overdue reminders to a partner. Only partners with `autoDebtReminder` get reminders. A body without fields is refused with 400.
+Changes the given fields of the company's debt-reminder schedule. `daysBefore` (1 to 90, or null to send nothing before the due date) makes the daily job send one "payment due soon" reminder per invoice that many days before its due date; `repeatDays` (1 to 90) is the number of days between overdue reminders to a partner. Only partners with `autoDebtReminder` get reminders, and only for invoices with `debtRemindersEnabled`. A body without fields is refused with 400.
 </dd>
 </dl>
 </dd>
@@ -3335,7 +3335,7 @@ client.Partners.DebtRemindersSettingsUpdate(
 <dl>
 <dd>
 
-Returns the next reminder the daily debt-reminder job would send for each unpaid issued invoice or advance invoice of the partners that get reminders (`autoDebtReminder`, active, with an e-mail address), as of the company's current date and sorted by `date`. A `before_due` reminder is sent once per invoice, `daysBefore` days before its due date or on the first daily run after that while the due date is still ahead; `overdue` reminders start the day after the due date and repeat every `repeatDays` days per partner, counting only overdue reminders. Nothing is sent or recorded.
+Returns the next reminder the daily debt-reminder job would send for each unpaid issued invoice or advance invoice with `debtRemindersEnabled` of the partners that get reminders (`autoDebtReminder`, active, with an e-mail address), as of the company's current date and sorted by `date`. A `before_due` reminder is sent once per invoice, `daysBefore` days before its due date or on the first daily run after that while the due date is still ahead; `overdue` reminders start the day after the due date and repeat every `repeatDays` days per partner, counting only overdue reminders. Nothing is sent or recorded.
 </dd>
 </dl>
 </dd>
@@ -3748,6 +3748,22 @@ client.Partners.Create(
 <dl>
 <dd>
 
+**invoiceCurrency:** `*nordlet.CreatePartnersRequestInvoiceCurrency` — Currency a new invoice for this partner starts with when the invoice names none
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceLocale:** `*nordlet.CreatePartnersRequestInvoiceLocale` — Language a new invoice for this partner starts with when the invoice names none
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **creditLimit:** `*string` 
     
 </dd>
@@ -4066,6 +4082,22 @@ client.Partners.FindOrCreate(
 <dd>
 
 **paymentTermDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceCurrency:** `*nordlet.FindOrCreatePartnersRequestInvoiceCurrency` — Currency a new invoice for this partner starts with when the invoice names none
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceLocale:** `*nordlet.FindOrCreatePartnersRequestInvoiceLocale` — Language a new invoice for this partner starts with when the invoice names none
     
 </dd>
 </dl>
@@ -4460,6 +4492,22 @@ client.Partners.Update(
 <dd>
 
 **paymentTermDays:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceCurrency:** `*nordlet.UpdatePartnersRequestInvoiceCurrency` — Currency a new invoice for this partner starts with when the invoice names none
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceLocale:** `*nordlet.UpdatePartnersRequestInvoiceLocale` — Language a new invoice for this partner starts with when the invoice names none
     
 </dd>
 </dl>
@@ -10317,6 +10365,22 @@ client.Sales.InvoicesCreate(
 <dl>
 <dd>
 
+**payLinkEnabled:** `*bool` — Whether the PDF and the e-mail carry the payment link of the company payment link template
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**debtRemindersEnabled:** `*bool` — Whether automatic debt reminders include this invoice when its partner has them turned on
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **operationTypeID:** `*string` 
     
 </dd>
@@ -10382,6 +10446,14 @@ client.Sales.InvoicesCreate(
 <dd>
 
 **discountPercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**salesTaxPercent:** `*string` — Sales tax as a percent of the net total, added to the invoice total. It is not posted to the ledger and is left out of VAT and national tax reports. Invoices only.
     
 </dd>
 </dl>
@@ -10531,6 +10603,67 @@ client.Sales.InvoicesPdf(
 </dl>
 </details>
 
+<details><summary><code>client.Sales.InvoicesView(request) -> *nordlet.InvoicesViewSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return a sale document as its customer sees it: the seller as printed on it (the snapshot taken at issue, else the company), the buyer with address and e-mail, the lines, the totals, `paidOn` (the date of the latest payment once the document is paid), `payUrl` (as in `sales/invoices/payment-link`) and `token`, the document's customer token for `public/invoices/get` and `public/invoices/pdf`, created on first use; `token` is null on a draft.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoicesViewSalesRequest{
+        ID: "id",
+    }
+client.Sales.InvoicesView(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Sales.InvoicesSend(request) -> *nordlet.InvoicesSendSalesResponse</code></summary>
 <dl>
 <dd>
@@ -10543,7 +10676,7 @@ client.Sales.InvoicesPdf(
 <dl>
 <dd>
 
-E-mail an issued sale document as a PDF attachment to `to`, else to the partner's e-mail address, and emit `sale_invoice.sent`. The PDF is the one of `sales/invoices/pdf`. Answers 422 when e-mail sending is not configured, when the document is not issued, or when neither `to` nor the partner's e-mail is set.
+E-mail an issued sale document as a PDF attachment to `to`, else to the partner's e-mail address, and emit `sale_invoice.sent`. The PDF is the one of `sales/invoices/pdf`. With `quote: true` the document must be a draft: it is e-mailed as a quote (PDF titled quote, no payment link), stays a draft, and `sale_invoice.quote_sent` is emitted instead. Answers 422 when e-mail sending is not configured, when the document is not issued (or, with `quote`, not a draft), or when neither `to` nor the partner's e-mail is set.
 </dd>
 </dl>
 </dd>
@@ -10597,6 +10730,14 @@ client.Sales.InvoicesSend(
 <dd>
 
 **locale:** `*nordlet.InvoicesSendSalesRequestLocale` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**quote:** `*bool` 
     
 </dd>
 </dl>
@@ -10986,7 +11127,7 @@ client.Sales.InvoicesEinvoiceStatus(
 <dl>
 <dd>
 
-Change a draft sale document. Fields left out keep their value, `lines` replaces every line, and a changed `discountPercent` recomputes the existing lines. Answers 409 when the document is issued or locked, and 422 under the checks of `sales/invoices/create` (the credited document's partner and currency, the OSS and IOSS country, VAT on the lines, the operation type and document series).
+Change a draft sale document. Fields left out keep their value, `lines` replaces every line, a changed `discountPercent` recomputes the existing lines, and `salesTaxPercent` (invoices only, null removes it) recomputes the sales tax and the total. Answers 409 when the document is issued or locked, and 422 under the checks of `sales/invoices/create` (the credited document's partner and currency, the OSS and IOSS country, VAT on the lines, the operation type and document series).
 </dd>
 </dl>
 </dd>
@@ -11143,6 +11284,22 @@ client.Sales.InvoicesUpdate(
 <dl>
 <dd>
 
+**payLinkEnabled:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**debtRemindersEnabled:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **operationTypeID:** `*string` 
     
 </dd>
@@ -11208,6 +11365,14 @@ client.Sales.InvoicesUpdate(
 <dd>
 
 **receivedByTitle:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**salesTaxPercent:** `*string` 
     
 </dd>
 </dl>
@@ -11515,7 +11680,7 @@ client.Sales.InvoicesUnlock(
 <dl>
 <dd>
 
-Return the customer payment link of a sale document, rendered from the company's payment link template (`sales/invoices/payment-settings/update`); `url` is null when the company has no template or the document is not issued. The document's payment token is created on first use. Answers 409 when the document is already paid.
+Return the customer payment link of a sale document: the Stripe card payment page (`source` `stripe`) when the company's Stripe account is connected and can take charges (`sales/invoices/card-payments/get`), else the link rendered from the company's payment link template (`sales/invoices/payment-settings/update`, `source` `template`); `url` is null when the company has neither, the document is not issued or its `payLinkEnabled` is false. The document's payment token is created on first use. Answers 409 when the document is already paid.
 </dd>
 </dl>
 </dd>
@@ -14520,6 +14685,324 @@ client.Sales.RefundLiabilityTrueUp(
 
 **date:** `*time.Time` 
     
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.PaymentsList(request) -> *nordlet.PaymentsListSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the money received on sale documents between `from` and `to` (inclusive), oldest first: bank payments matched to the document, card settlements of a payment provider and cash receipt orders. A reversed bank match is a row with a negative amount on the date it was reversed. Credit notes, advances applied to a final invoice and balances carried over by a migration are not money received and are left out. `amount` is in the document currency; `method` is `card` for a settlement or a payment into a Stripe bank account, `cash` for a cash order and `bank_transfer` otherwise.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.PaymentsListSalesRequest{
+        From: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+        To: nordlet.MustParseDate(
+            "2026-07-01",
+        ),
+    }
+client.Sales.PaymentsList(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**from:** `time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**to:** `time.Time` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**page:** `*int64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**pageSize:** `*int64` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.ExportsMonth(request) -> *nordlet.ExportsMonthSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Export one calendar month for the accountant as a single file: every invoice and credit note issued in the month (number, dates, client, currency, net, VAT, total and the amount paid so far) and every payment received in the month as listed by `sales/payments/list`. `format` is `csv` (comma separated, UTF-8, one section per table) or `pdf`. `format` `nordlet` instead returns a JSON package that `migration/books/validate` and `migration/books/import` accept: every posted journal transaction dated in the month with its debit and credit lines, the accounts those lines use (with their parent accounts) and the partners of those transactions; its cutoverDate is the day after the month ends. The file comes back base64-encoded in `data`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.ExportsMonthSalesRequest{
+        Month: "month",
+        Format: nordlet.ExportsMonthSalesRequestFormatCsv,
+    }
+client.Sales.ExportsMonth(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**month:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `*nordlet.ExportsMonthSalesRequestFormat` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoicesCardPaymentsGet(request) -> *nordlet.InvoicesCardPaymentsGetSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return whether the company's Stripe account is connected for card payments and whether Stripe lets it take charges yet. While the account is connected but cannot take charges, Stripe is asked again on each call. When `chargesEnabled` is true, payment links of issued invoices open a Stripe Checkout page on that account.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoicesCardPaymentsGetSalesRequest{}
+client.Sales.InvoicesCardPaymentsGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoicesCardPaymentsConnect(request) -> *nordlet.InvoicesCardPaymentsConnectSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start or continue connecting the company's own Stripe account for card payments: creates the Stripe account on first use and returns the Stripe-hosted onboarding `url`. Stripe sends the user back to `returnUrl` when onboarding ends and to `refreshUrl` when the link has expired. Answers 503 when Stripe is not configured.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoicesCardPaymentsConnectSalesRequest{
+        ReturnURL: "returnUrl",
+        RefreshURL: "refreshUrl",
+    }
+client.Sales.InvoicesCardPaymentsConnect(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**returnURL:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**refreshURL:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Sales.InvoicesCardPaymentsDisconnect(request) -> *nordlet.InvoicesCardPaymentsDisconnectSalesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disconnect the company's Stripe account: payment links fall back to the payment link template. The Stripe account itself is left as it is.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoicesCardPaymentsDisconnectSalesRequest{}
+client.Sales.InvoicesCardPaymentsDisconnect(
+        context.TODO(),
+        request,
+    )
+}
+```
 </dd>
 </dl>
 </dd>
@@ -53141,7 +53624,7 @@ client.Public.IntegrationRequests(
 <dl>
 <dd>
 
-Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice or the company has no template, and 409 when the invoice is already paid.
+Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no template, and 409 when the invoice is already paid.
 </dd>
 </dl>
 </dd>
@@ -53160,6 +53643,189 @@ request := &nordlet.PayPublicRequest{
         Token: "token",
     }
 client.Public.Pay(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**token:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Public.InvoicesGet(request) -> *nordlet.InvoicesGetPublicResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return the issued sale document that carries this customer token (`token` of `sales/invoices/view`), in the shape of `sales/invoices/view` without the token. Answers 404 when the token matches no issued document.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoicesGetPublicRequest{
+        Token: "token",
+    }
+client.Public.InvoicesGet(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**token:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Public.InvoicesCheckout(request) -> *nordlet.InvoicesCheckoutPublicResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Open a Stripe Checkout page on the company's connected Stripe account for the amount still unpaid on the issued invoice that carries this customer token, and return its `url`. Stripe sends the customer back to the public invoice page. Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no Stripe account that can take charges, 409 when the invoice is already paid and 422 when Stripe cannot take the amount in the invoice currency.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoicesCheckoutPublicRequest{
+        Token: "token",
+    }
+client.Public.InvoicesCheckout(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**token:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Public.InvoicesPdf(request) -> *nordlet.InvoicesPdfPublicResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return the PDF of the issued sale document that carries this customer token, base64-encoded, as `sales/invoices/pdf` renders it in the document's own language, English when it has none. Answers 404 when the token matches no issued document.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.InvoicesPdfPublicRequest{
+        Token: "token",
+    }
+client.Public.InvoicesPdf(
         context.TODO(),
         request,
     )
@@ -53638,7 +54304,7 @@ client.Billing.TopupConfirm(
 <dl>
 <dd>
 
-Open a Stripe Checkout session for a flat-rate subscription on `plan`, with the trial period of `trialDays` days, and return its URL; a Stripe customer is created for the user when there is none. Answers 409 when a flat-rate subscription is already active and 503 when online payments are not configured or the plan has no price.
+Open a Stripe Checkout session for a flat-rate subscription on `plan`, with the trial period of `trialDays` days, and return its URL; a Stripe customer is created for the user when there is none. The `invoicing` plan of the invoice tool takes its trial days from the server setting `INVOICE_PLAN_TRIAL_DAYS` and returns to the invoice app. Answers 409 when a flat-rate subscription is already active and 503 when online payments are not configured, the plan has no price, or the Invoicing trial is not set.
 </dd>
 </dl>
 </dd>
@@ -53744,6 +54410,50 @@ client.Billing.FlatRateConfirm(
 
 **sessionID:** `string` 
     
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Billing.SubscriptionCancel(request) -> *nordlet.SubscriptionCancelBillingResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancel the user's Stripe subscription at the end of the period already paid: the plan stays active until `subscriptionCancelAt`, and Stripe then ends the subscription, which its `customer.subscription.deleted` webhook records. Answers 503 when online payments are not configured and 409 when the account has no subscription.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.SubscriptionCancelBillingRequest{}
+client.Billing.SubscriptionCancel(
+        context.TODO(),
+        request,
+    )
+}
+```
 </dd>
 </dl>
 </dd>
@@ -55000,6 +55710,62 @@ client.Account.CompaniesCreate(
 <dl>
 <dd>
 
+**bankBic:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankCode:** `*string` — Sort code, routing number, BSB, IFSC or institution number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankBranchCode:** `*string` — Transit number (Canada)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankAccountNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoicePrefix:** `*string` — Prefix of the numbers of invoices issued without a document series; SF when not set
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**defaultInvoiceLocale:** `*nordlet.CompaniesCreateAccountRequestDefaultInvoiceLocale` — Language a new invoice starts with when neither the invoice nor its partner names one
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**defaultInvoiceNote:** `*string` — Note a new invoice, proforma or advance invoice starts with when it names no notes
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **peppolID:** `*string` 
     
 </dd>
@@ -55381,6 +56147,62 @@ client.Account.CompaniesUpdate(
 <dd>
 
 **bankName:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankBic:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankCode:** `*string` — Sort code, routing number, BSB, IFSC or institution number
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankBranchCode:** `*string` — Transit number (Canada)
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**bankAccountNumber:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoicePrefix:** `*string` — Prefix of the numbers of invoices issued without a document series; SF when not set
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**defaultInvoiceLocale:** `*nordlet.CompaniesUpdateAccountRequestDefaultInvoiceLocale` — Language a new invoice starts with when neither the invoice nor its partner names one
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**defaultInvoiceNote:** `*string` — Note a new invoice, proforma or advance invoice starts with when it names no notes
     
 </dd>
 </dl>

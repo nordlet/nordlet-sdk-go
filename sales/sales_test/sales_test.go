@@ -158,6 +158,32 @@ func TestSalesInvoicesPdfWithWireMock(
 	VerifyRequestCount(t, "TestSalesInvoicesPdfWithWireMock", "POST", "/v1/sales/invoices/pdf", nil, 1)
 }
 
+func TestSalesInvoicesViewWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesViewSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.InvoicesView(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesViewWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoicesViewWithWireMock", "POST", "/v1/sales/invoices/view", nil, 1)
+}
+
 func TestSalesInvoicesSendWithWireMock(
 	t *testing.T,
 ) {
@@ -1307,4 +1333,137 @@ func TestSalesRefundLiabilityTrueUpWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestSalesRefundLiabilityTrueUpWithWireMock", "POST", "/v1/sales/refund-liability/true-up", nil, 1)
+}
+
+func TestSalesPaymentsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PaymentsListSalesRequest{
+		From: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		To: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Sales.PaymentsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesPaymentsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesPaymentsListWithWireMock", "POST", "/v1/sales/payments/list", nil, 1)
+}
+
+func TestSalesExportsMonthWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ExportsMonthSalesRequest{
+		Month:  "month",
+		Format: nordlet.ExportsMonthSalesRequestFormatCsv,
+	}
+	_, invocationErr := client.Sales.ExportsMonth(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesExportsMonthWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesExportsMonthWithWireMock", "POST", "/v1/sales/exports/month", nil, 1)
+}
+
+func TestSalesInvoicesCardPaymentsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesCardPaymentsGetSalesRequest{}
+	_, invocationErr := client.Sales.InvoicesCardPaymentsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesCardPaymentsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoicesCardPaymentsGetWithWireMock", "POST", "/v1/sales/invoices/card-payments/get", nil, 1)
+}
+
+func TestSalesInvoicesCardPaymentsConnectWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesCardPaymentsConnectSalesRequest{
+		ReturnURL:  "returnUrl",
+		RefreshURL: "refreshUrl",
+	}
+	_, invocationErr := client.Sales.InvoicesCardPaymentsConnect(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesCardPaymentsConnectWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoicesCardPaymentsConnectWithWireMock", "POST", "/v1/sales/invoices/card-payments/connect", nil, 1)
+}
+
+func TestSalesInvoicesCardPaymentsDisconnectWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesCardPaymentsDisconnectSalesRequest{}
+	_, invocationErr := client.Sales.InvoicesCardPaymentsDisconnect(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesCardPaymentsDisconnectWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoicesCardPaymentsDisconnectWithWireMock", "POST", "/v1/sales/invoices/card-payments/disconnect", nil, 1)
 }

@@ -304,38 +304,57 @@ var (
 	companiesCreateAccountRequestFieldPhone                     = big.NewInt(1 << 11)
 	companiesCreateAccountRequestFieldIban                      = big.NewInt(1 << 12)
 	companiesCreateAccountRequestFieldBankName                  = big.NewInt(1 << 13)
-	companiesCreateAccountRequestFieldPeppolID                  = big.NewInt(1 << 14)
-	companiesCreateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 15)
-	companiesCreateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 16)
-	companiesCreateAccountRequestFieldLegalForm                 = big.NewInt(1 << 17)
-	companiesCreateAccountRequestFieldRegistryName              = big.NewInt(1 << 18)
-	companiesCreateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 19)
-	companiesCreateAccountRequestFieldShareCapital              = big.NewInt(1 << 20)
-	companiesCreateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 21)
-	companiesCreateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 22)
-	companiesCreateAccountRequestFieldAuditorName               = big.NewInt(1 << 23)
-	companiesCreateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 24)
-	companiesCreateAccountRequestFieldAuditRequired             = big.NewInt(1 << 25)
-	companiesCreateAccountRequestFieldCountryCode               = big.NewInt(1 << 26)
-	companiesCreateAccountRequestFieldBaseCurrency              = big.NewInt(1 << 27)
-	companiesCreateAccountRequestFieldIsSandbox                 = big.NewInt(1 << 28)
+	companiesCreateAccountRequestFieldBankBic                   = big.NewInt(1 << 14)
+	companiesCreateAccountRequestFieldBankCode                  = big.NewInt(1 << 15)
+	companiesCreateAccountRequestFieldBankBranchCode            = big.NewInt(1 << 16)
+	companiesCreateAccountRequestFieldBankAccountNumber         = big.NewInt(1 << 17)
+	companiesCreateAccountRequestFieldInvoicePrefix             = big.NewInt(1 << 18)
+	companiesCreateAccountRequestFieldDefaultInvoiceLocale      = big.NewInt(1 << 19)
+	companiesCreateAccountRequestFieldDefaultInvoiceNote        = big.NewInt(1 << 20)
+	companiesCreateAccountRequestFieldPeppolID                  = big.NewInt(1 << 21)
+	companiesCreateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 22)
+	companiesCreateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 23)
+	companiesCreateAccountRequestFieldLegalForm                 = big.NewInt(1 << 24)
+	companiesCreateAccountRequestFieldRegistryName              = big.NewInt(1 << 25)
+	companiesCreateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 26)
+	companiesCreateAccountRequestFieldShareCapital              = big.NewInt(1 << 27)
+	companiesCreateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 28)
+	companiesCreateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 29)
+	companiesCreateAccountRequestFieldAuditorName               = big.NewInt(1 << 30)
+	companiesCreateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 31)
+	companiesCreateAccountRequestFieldAuditRequired             = big.NewInt(1 << 32)
+	companiesCreateAccountRequestFieldCountryCode               = big.NewInt(1 << 33)
+	companiesCreateAccountRequestFieldBaseCurrency              = big.NewInt(1 << 34)
+	companiesCreateAccountRequestFieldIsSandbox                 = big.NewInt(1 << 35)
 )
 
 type CompaniesCreateAccountRequest struct {
-	Name                      string                                       `json:"name" url:"-"`
-	Code                      *string                                      `json:"code,omitempty" url:"-"`
-	VatCode                   *string                                      `json:"vatCode,omitempty" url:"-"`
-	SmeExemptionNumber        *string                                      `json:"smeExemptionNumber,omitempty" url:"-"`
-	IsVatPayer                *bool                                        `json:"isVatPayer,omitempty" url:"-"`
-	VatPeriod                 *CompaniesCreateAccountRequestVatPeriod      `json:"vatPeriod,omitempty" url:"-"`
-	FiscalYearEndMonth        *int64                                       `json:"fiscalYearEndMonth,omitempty" url:"-"`
-	TimeZone                  *string                                      `json:"timeZone,omitempty" url:"-"`
-	FilingOptions             map[string]string                            `json:"filingOptions,omitempty" url:"-"`
-	Address                   *CompaniesCreateAccountRequestAddress        `json:"address,omitempty" url:"-"`
-	Email                     *string                                      `json:"email,omitempty" url:"-"`
-	Phone                     *string                                      `json:"phone,omitempty" url:"-"`
-	Iban                      *string                                      `json:"iban,omitempty" url:"-"`
-	BankName                  *string                                      `json:"bankName,omitempty" url:"-"`
+	Name               string                                  `json:"name" url:"-"`
+	Code               *string                                 `json:"code,omitempty" url:"-"`
+	VatCode            *string                                 `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber *string                                 `json:"smeExemptionNumber,omitempty" url:"-"`
+	IsVatPayer         *bool                                   `json:"isVatPayer,omitempty" url:"-"`
+	VatPeriod          *CompaniesCreateAccountRequestVatPeriod `json:"vatPeriod,omitempty" url:"-"`
+	FiscalYearEndMonth *int64                                  `json:"fiscalYearEndMonth,omitempty" url:"-"`
+	TimeZone           *string                                 `json:"timeZone,omitempty" url:"-"`
+	FilingOptions      map[string]string                       `json:"filingOptions,omitempty" url:"-"`
+	Address            *CompaniesCreateAccountRequestAddress   `json:"address,omitempty" url:"-"`
+	Email              *string                                 `json:"email,omitempty" url:"-"`
+	Phone              *string                                 `json:"phone,omitempty" url:"-"`
+	Iban               *string                                 `json:"iban,omitempty" url:"-"`
+	BankName           *string                                 `json:"bankName,omitempty" url:"-"`
+	BankBic            *string                                 `json:"bankBic,omitempty" url:"-"`
+	// Sort code, routing number, BSB, IFSC or institution number
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Transit number (Canada)
+	BankBranchCode    *string `json:"bankBranchCode,omitempty" url:"-"`
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// Prefix of the numbers of invoices issued without a document series; SF when not set
+	InvoicePrefix *string `json:"invoicePrefix,omitempty" url:"-"`
+	// Language a new invoice starts with when neither the invoice nor its partner names one
+	DefaultInvoiceLocale *CompaniesCreateAccountRequestDefaultInvoiceLocale `json:"defaultInvoiceLocale,omitempty" url:"-"`
+	// Note a new invoice, proforma or advance invoice starts with when it names no notes
+	DefaultInvoiceNote        *string                                      `json:"defaultInvoiceNote,omitempty" url:"-"`
 	PeppolID                  *string                                      `json:"peppolId,omitempty" url:"-"`
 	SepaCreditorID            *string                                      `json:"sepaCreditorId,omitempty" url:"-"`
 	DefaultInvoiceCurrency    *string                                      `json:"defaultInvoiceCurrency,omitempty" url:"-"`
@@ -462,6 +481,55 @@ func (c *CompaniesCreateAccountRequest) SetIban(iban *string) {
 func (c *CompaniesCreateAccountRequest) SetBankName(bankName *string) {
 	c.BankName = bankName
 	c.require(companiesCreateAccountRequestFieldBankName)
+}
+
+// SetBankBic sets the BankBic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetBankBic(bankBic *string) {
+	c.BankBic = bankBic
+	c.require(companiesCreateAccountRequestFieldBankBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetBankCode(bankCode *string) {
+	c.BankCode = bankCode
+	c.require(companiesCreateAccountRequestFieldBankCode)
+}
+
+// SetBankBranchCode sets the BankBranchCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetBankBranchCode(bankBranchCode *string) {
+	c.BankBranchCode = bankBranchCode
+	c.require(companiesCreateAccountRequestFieldBankBranchCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	c.BankAccountNumber = bankAccountNumber
+	c.require(companiesCreateAccountRequestFieldBankAccountNumber)
+}
+
+// SetInvoicePrefix sets the InvoicePrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetInvoicePrefix(invoicePrefix *string) {
+	c.InvoicePrefix = invoicePrefix
+	c.require(companiesCreateAccountRequestFieldInvoicePrefix)
+}
+
+// SetDefaultInvoiceLocale sets the DefaultInvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetDefaultInvoiceLocale(defaultInvoiceLocale *CompaniesCreateAccountRequestDefaultInvoiceLocale) {
+	c.DefaultInvoiceLocale = defaultInvoiceLocale
+	c.require(companiesCreateAccountRequestFieldDefaultInvoiceLocale)
+}
+
+// SetDefaultInvoiceNote sets the DefaultInvoiceNote field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetDefaultInvoiceNote(defaultInvoiceNote *string) {
+	c.DefaultInvoiceNote = defaultInvoiceNote
+	c.require(companiesCreateAccountRequestFieldDefaultInvoiceNote)
 }
 
 // SetPeppolID sets the PeppolID field and marks it as non-optional;
@@ -712,36 +780,55 @@ var (
 	companiesUpdateAccountRequestFieldPhone                     = big.NewInt(1 << 11)
 	companiesUpdateAccountRequestFieldIban                      = big.NewInt(1 << 12)
 	companiesUpdateAccountRequestFieldBankName                  = big.NewInt(1 << 13)
-	companiesUpdateAccountRequestFieldPeppolID                  = big.NewInt(1 << 14)
-	companiesUpdateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 15)
-	companiesUpdateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 16)
-	companiesUpdateAccountRequestFieldLegalForm                 = big.NewInt(1 << 17)
-	companiesUpdateAccountRequestFieldRegistryName              = big.NewInt(1 << 18)
-	companiesUpdateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 19)
-	companiesUpdateAccountRequestFieldShareCapital              = big.NewInt(1 << 20)
-	companiesUpdateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 21)
-	companiesUpdateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 22)
-	companiesUpdateAccountRequestFieldAuditorName               = big.NewInt(1 << 23)
-	companiesUpdateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 24)
-	companiesUpdateAccountRequestFieldAuditRequired             = big.NewInt(1 << 25)
-	companiesUpdateAccountRequestFieldLogo                      = big.NewInt(1 << 26)
+	companiesUpdateAccountRequestFieldBankBic                   = big.NewInt(1 << 14)
+	companiesUpdateAccountRequestFieldBankCode                  = big.NewInt(1 << 15)
+	companiesUpdateAccountRequestFieldBankBranchCode            = big.NewInt(1 << 16)
+	companiesUpdateAccountRequestFieldBankAccountNumber         = big.NewInt(1 << 17)
+	companiesUpdateAccountRequestFieldInvoicePrefix             = big.NewInt(1 << 18)
+	companiesUpdateAccountRequestFieldDefaultInvoiceLocale      = big.NewInt(1 << 19)
+	companiesUpdateAccountRequestFieldDefaultInvoiceNote        = big.NewInt(1 << 20)
+	companiesUpdateAccountRequestFieldPeppolID                  = big.NewInt(1 << 21)
+	companiesUpdateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 22)
+	companiesUpdateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 23)
+	companiesUpdateAccountRequestFieldLegalForm                 = big.NewInt(1 << 24)
+	companiesUpdateAccountRequestFieldRegistryName              = big.NewInt(1 << 25)
+	companiesUpdateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 26)
+	companiesUpdateAccountRequestFieldShareCapital              = big.NewInt(1 << 27)
+	companiesUpdateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 28)
+	companiesUpdateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 29)
+	companiesUpdateAccountRequestFieldAuditorName               = big.NewInt(1 << 30)
+	companiesUpdateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 31)
+	companiesUpdateAccountRequestFieldAuditRequired             = big.NewInt(1 << 32)
+	companiesUpdateAccountRequestFieldLogo                      = big.NewInt(1 << 33)
 )
 
 type CompaniesUpdateAccountRequest struct {
-	Name                      *string                                      `json:"name,omitempty" url:"-"`
-	Code                      *string                                      `json:"code,omitempty" url:"-"`
-	VatCode                   *string                                      `json:"vatCode,omitempty" url:"-"`
-	SmeExemptionNumber        *string                                      `json:"smeExemptionNumber,omitempty" url:"-"`
-	IsVatPayer                *bool                                        `json:"isVatPayer,omitempty" url:"-"`
-	VatPeriod                 *CompaniesUpdateAccountRequestVatPeriod      `json:"vatPeriod,omitempty" url:"-"`
-	FiscalYearEndMonth        *int64                                       `json:"fiscalYearEndMonth,omitempty" url:"-"`
-	TimeZone                  *string                                      `json:"timeZone,omitempty" url:"-"`
-	FilingOptions             map[string]*string                           `json:"filingOptions,omitempty" url:"-"`
-	Address                   *CompaniesUpdateAccountRequestAddress        `json:"address,omitempty" url:"-"`
-	Email                     *string                                      `json:"email,omitempty" url:"-"`
-	Phone                     *string                                      `json:"phone,omitempty" url:"-"`
-	Iban                      *string                                      `json:"iban,omitempty" url:"-"`
-	BankName                  *string                                      `json:"bankName,omitempty" url:"-"`
+	Name               *string                                 `json:"name,omitempty" url:"-"`
+	Code               *string                                 `json:"code,omitempty" url:"-"`
+	VatCode            *string                                 `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber *string                                 `json:"smeExemptionNumber,omitempty" url:"-"`
+	IsVatPayer         *bool                                   `json:"isVatPayer,omitempty" url:"-"`
+	VatPeriod          *CompaniesUpdateAccountRequestVatPeriod `json:"vatPeriod,omitempty" url:"-"`
+	FiscalYearEndMonth *int64                                  `json:"fiscalYearEndMonth,omitempty" url:"-"`
+	TimeZone           *string                                 `json:"timeZone,omitempty" url:"-"`
+	FilingOptions      map[string]*string                      `json:"filingOptions,omitempty" url:"-"`
+	Address            *CompaniesUpdateAccountRequestAddress   `json:"address,omitempty" url:"-"`
+	Email              *string                                 `json:"email,omitempty" url:"-"`
+	Phone              *string                                 `json:"phone,omitempty" url:"-"`
+	Iban               *string                                 `json:"iban,omitempty" url:"-"`
+	BankName           *string                                 `json:"bankName,omitempty" url:"-"`
+	BankBic            *string                                 `json:"bankBic,omitempty" url:"-"`
+	// Sort code, routing number, BSB, IFSC or institution number
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Transit number (Canada)
+	BankBranchCode    *string `json:"bankBranchCode,omitempty" url:"-"`
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// Prefix of the numbers of invoices issued without a document series; SF when not set
+	InvoicePrefix *string `json:"invoicePrefix,omitempty" url:"-"`
+	// Language a new invoice starts with when neither the invoice nor its partner names one
+	DefaultInvoiceLocale *CompaniesUpdateAccountRequestDefaultInvoiceLocale `json:"defaultInvoiceLocale,omitempty" url:"-"`
+	// Note a new invoice, proforma or advance invoice starts with when it names no notes
+	DefaultInvoiceNote        *string                                      `json:"defaultInvoiceNote,omitempty" url:"-"`
 	PeppolID                  *string                                      `json:"peppolId,omitempty" url:"-"`
 	SepaCreditorID            *string                                      `json:"sepaCreditorId,omitempty" url:"-"`
 	DefaultInvoiceCurrency    *string                                      `json:"defaultInvoiceCurrency,omitempty" url:"-"`
@@ -863,6 +950,55 @@ func (c *CompaniesUpdateAccountRequest) SetIban(iban *string) {
 func (c *CompaniesUpdateAccountRequest) SetBankName(bankName *string) {
 	c.BankName = bankName
 	c.require(companiesUpdateAccountRequestFieldBankName)
+}
+
+// SetBankBic sets the BankBic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetBankBic(bankBic *string) {
+	c.BankBic = bankBic
+	c.require(companiesUpdateAccountRequestFieldBankBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetBankCode(bankCode *string) {
+	c.BankCode = bankCode
+	c.require(companiesUpdateAccountRequestFieldBankCode)
+}
+
+// SetBankBranchCode sets the BankBranchCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetBankBranchCode(bankBranchCode *string) {
+	c.BankBranchCode = bankBranchCode
+	c.require(companiesUpdateAccountRequestFieldBankBranchCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	c.BankAccountNumber = bankAccountNumber
+	c.require(companiesUpdateAccountRequestFieldBankAccountNumber)
+}
+
+// SetInvoicePrefix sets the InvoicePrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetInvoicePrefix(invoicePrefix *string) {
+	c.InvoicePrefix = invoicePrefix
+	c.require(companiesUpdateAccountRequestFieldInvoicePrefix)
+}
+
+// SetDefaultInvoiceLocale sets the DefaultInvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetDefaultInvoiceLocale(defaultInvoiceLocale *CompaniesUpdateAccountRequestDefaultInvoiceLocale) {
+	c.DefaultInvoiceLocale = defaultInvoiceLocale
+	c.require(companiesUpdateAccountRequestFieldDefaultInvoiceLocale)
+}
+
+// SetDefaultInvoiceNote sets the DefaultInvoiceNote field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetDefaultInvoiceNote(defaultInvoiceNote *string) {
+	c.DefaultInvoiceNote = defaultInvoiceNote
+	c.require(companiesUpdateAccountRequestFieldDefaultInvoiceNote)
 }
 
 // SetPeppolID sets the PeppolID field and marks it as non-optional;
@@ -3286,6 +3422,119 @@ func (c CompaniesCreateAccountRequestCountryCode) Ptr() *CompaniesCreateAccountR
 	return &c
 }
 
+// Language a new invoice starts with when neither the invoice nor its partner names one
+type CompaniesCreateAccountRequestDefaultInvoiceLocale string
+
+const (
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleEn CompaniesCreateAccountRequestDefaultInvoiceLocale = "en"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleLt CompaniesCreateAccountRequestDefaultInvoiceLocale = "lt"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleDe CompaniesCreateAccountRequestDefaultInvoiceLocale = "de"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleFr CompaniesCreateAccountRequestDefaultInvoiceLocale = "fr"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleEs CompaniesCreateAccountRequestDefaultInvoiceLocale = "es"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleIt CompaniesCreateAccountRequestDefaultInvoiceLocale = "it"
+	CompaniesCreateAccountRequestDefaultInvoiceLocalePt CompaniesCreateAccountRequestDefaultInvoiceLocale = "pt"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleNl CompaniesCreateAccountRequestDefaultInvoiceLocale = "nl"
+	CompaniesCreateAccountRequestDefaultInvoiceLocalePl CompaniesCreateAccountRequestDefaultInvoiceLocale = "pl"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleSv CompaniesCreateAccountRequestDefaultInvoiceLocale = "sv"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleDa CompaniesCreateAccountRequestDefaultInvoiceLocale = "da"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleNo CompaniesCreateAccountRequestDefaultInvoiceLocale = "no"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleFi CompaniesCreateAccountRequestDefaultInvoiceLocale = "fi"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleEt CompaniesCreateAccountRequestDefaultInvoiceLocale = "et"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleLv CompaniesCreateAccountRequestDefaultInvoiceLocale = "lv"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleCs CompaniesCreateAccountRequestDefaultInvoiceLocale = "cs"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleSk CompaniesCreateAccountRequestDefaultInvoiceLocale = "sk"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleHu CompaniesCreateAccountRequestDefaultInvoiceLocale = "hu"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleRo CompaniesCreateAccountRequestDefaultInvoiceLocale = "ro"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleBg CompaniesCreateAccountRequestDefaultInvoiceLocale = "bg"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleHr CompaniesCreateAccountRequestDefaultInvoiceLocale = "hr"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleSl CompaniesCreateAccountRequestDefaultInvoiceLocale = "sl"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleEl CompaniesCreateAccountRequestDefaultInvoiceLocale = "el"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleMt CompaniesCreateAccountRequestDefaultInvoiceLocale = "mt"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleIs CompaniesCreateAccountRequestDefaultInvoiceLocale = "is"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleGa CompaniesCreateAccountRequestDefaultInvoiceLocale = "ga"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleZh CompaniesCreateAccountRequestDefaultInvoiceLocale = "zh"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleJa CompaniesCreateAccountRequestDefaultInvoiceLocale = "ja"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleAr CompaniesCreateAccountRequestDefaultInvoiceLocale = "ar"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleHi CompaniesCreateAccountRequestDefaultInvoiceLocale = "hi"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleRu CompaniesCreateAccountRequestDefaultInvoiceLocale = "ru"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleTr CompaniesCreateAccountRequestDefaultInvoiceLocale = "tr"
+)
+
+func NewCompaniesCreateAccountRequestDefaultInvoiceLocaleFromString(s string) (CompaniesCreateAccountRequestDefaultInvoiceLocale, error) {
+	switch s {
+	case "en":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleEn, nil
+	case "lt":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleLt, nil
+	case "de":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleDe, nil
+	case "fr":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleFr, nil
+	case "es":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleEs, nil
+	case "it":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleIt, nil
+	case "pt":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocalePt, nil
+	case "nl":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleNl, nil
+	case "pl":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocalePl, nil
+	case "sv":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleSv, nil
+	case "da":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleDa, nil
+	case "no":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleNo, nil
+	case "fi":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleFi, nil
+	case "et":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleEt, nil
+	case "lv":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleLv, nil
+	case "cs":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleCs, nil
+	case "sk":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleSk, nil
+	case "hu":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleHu, nil
+	case "ro":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleRo, nil
+	case "bg":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleBg, nil
+	case "hr":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleHr, nil
+	case "sl":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleSl, nil
+	case "el":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleEl, nil
+	case "mt":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleMt, nil
+	case "is":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleIs, nil
+	case "ga":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleGa, nil
+	case "zh":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleZh, nil
+	case "ja":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleJa, nil
+	case "ar":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleAr, nil
+	case "hi":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleHi, nil
+	case "ru":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleRu, nil
+	case "tr":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleTr, nil
+	}
+	var t CompaniesCreateAccountRequestDefaultInvoiceLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesCreateAccountRequestDefaultInvoiceLocale) Ptr() *CompaniesCreateAccountRequestDefaultInvoiceLocale {
+	return &c
+}
+
 type CompaniesCreateAccountRequestVatPeriod string
 
 const (
@@ -3616,22 +3865,30 @@ var (
 	companiesProfileAccountResponseFieldPhone                     = big.NewInt(1 << 15)
 	companiesProfileAccountResponseFieldIban                      = big.NewInt(1 << 16)
 	companiesProfileAccountResponseFieldBankName                  = big.NewInt(1 << 17)
-	companiesProfileAccountResponseFieldPeppolID                  = big.NewInt(1 << 18)
-	companiesProfileAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 19)
-	companiesProfileAccountResponseFieldLogoFileID                = big.NewInt(1 << 20)
-	companiesProfileAccountResponseFieldLegalForm                 = big.NewInt(1 << 21)
-	companiesProfileAccountResponseFieldRegistryName              = big.NewInt(1 << 22)
-	companiesProfileAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 23)
-	companiesProfileAccountResponseFieldShareCapital              = big.NewInt(1 << 24)
-	companiesProfileAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 25)
-	companiesProfileAccountResponseFieldVatPeriod                 = big.NewInt(1 << 26)
-	companiesProfileAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 27)
-	companiesProfileAccountResponseFieldTimeZone                  = big.NewInt(1 << 28)
-	companiesProfileAccountResponseFieldFilingOptions             = big.NewInt(1 << 29)
-	companiesProfileAccountResponseFieldBookkeeperName            = big.NewInt(1 << 30)
-	companiesProfileAccountResponseFieldAuditorName               = big.NewInt(1 << 31)
-	companiesProfileAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 32)
-	companiesProfileAccountResponseFieldAuditRequired             = big.NewInt(1 << 33)
+	companiesProfileAccountResponseFieldBankBic                   = big.NewInt(1 << 18)
+	companiesProfileAccountResponseFieldBankCode                  = big.NewInt(1 << 19)
+	companiesProfileAccountResponseFieldBankBranchCode            = big.NewInt(1 << 20)
+	companiesProfileAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 21)
+	companiesProfileAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 22)
+	companiesProfileAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 23)
+	companiesProfileAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 24)
+	companiesProfileAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 25)
+	companiesProfileAccountResponseFieldPeppolID                  = big.NewInt(1 << 26)
+	companiesProfileAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 27)
+	companiesProfileAccountResponseFieldLogoFileID                = big.NewInt(1 << 28)
+	companiesProfileAccountResponseFieldLegalForm                 = big.NewInt(1 << 29)
+	companiesProfileAccountResponseFieldRegistryName              = big.NewInt(1 << 30)
+	companiesProfileAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 31)
+	companiesProfileAccountResponseFieldShareCapital              = big.NewInt(1 << 32)
+	companiesProfileAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 33)
+	companiesProfileAccountResponseFieldVatPeriod                 = big.NewInt(1 << 34)
+	companiesProfileAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 35)
+	companiesProfileAccountResponseFieldTimeZone                  = big.NewInt(1 << 36)
+	companiesProfileAccountResponseFieldFilingOptions             = big.NewInt(1 << 37)
+	companiesProfileAccountResponseFieldBookkeeperName            = big.NewInt(1 << 38)
+	companiesProfileAccountResponseFieldAuditorName               = big.NewInt(1 << 39)
+	companiesProfileAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 40)
+	companiesProfileAccountResponseFieldAuditRequired             = big.NewInt(1 << 41)
 )
 
 type CompaniesProfileAccountResponse struct {
@@ -3646,15 +3903,25 @@ type CompaniesProfileAccountResponse struct {
 	// Chart of accounts template the company was seeded with
 	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
 	// Chart of accounts template of the company country
-	CountryChartTemplate      string                                         `json:"countryChartTemplate" url:"countryChartTemplate"`
-	BaseCurrency              string                                         `json:"baseCurrency" url:"baseCurrency"`
-	DefaultInvoiceCurrency    string                                         `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
-	Status                    CompaniesProfileAccountResponseStatus          `json:"status" url:"status"`
-	Address                   *CompaniesProfileAccountResponseAddress        `json:"address,omitempty" url:"address,omitempty"`
-	Email                     *string                                        `json:"email,omitempty" url:"email,omitempty"`
-	Phone                     *string                                        `json:"phone,omitempty" url:"phone,omitempty"`
-	Iban                      *string                                        `json:"iban,omitempty" url:"iban,omitempty"`
-	BankName                  *string                                        `json:"bankName,omitempty" url:"bankName,omitempty"`
+	CountryChartTemplate   string                                  `json:"countryChartTemplate" url:"countryChartTemplate"`
+	BaseCurrency           string                                  `json:"baseCurrency" url:"baseCurrency"`
+	DefaultInvoiceCurrency string                                  `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
+	Status                 CompaniesProfileAccountResponseStatus   `json:"status" url:"status"`
+	Address                *CompaniesProfileAccountResponseAddress `json:"address,omitempty" url:"address,omitempty"`
+	Email                  *string                                 `json:"email,omitempty" url:"email,omitempty"`
+	Phone                  *string                                 `json:"phone,omitempty" url:"phone,omitempty"`
+	Iban                   *string                                 `json:"iban,omitempty" url:"iban,omitempty"`
+	BankName               *string                                 `json:"bankName,omitempty" url:"bankName,omitempty"`
+	BankBic                *string                                 `json:"bankBic,omitempty" url:"bankBic,omitempty"`
+	BankCode               *string                                 `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankBranchCode         *string                                 `json:"bankBranchCode,omitempty" url:"bankBranchCode,omitempty"`
+	BankAccountNumber      *string                                 `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
+	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
+	// Number the next invoice issued without a document series gets, before any country-specific format
+	NextInvoiceNumber         string                                         `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
+	DefaultInvoiceLocale      *string                                        `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
+	DefaultInvoiceNote        *string                                        `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
 	PeppolID                  *string                                        `json:"peppolId,omitempty" url:"peppolId,omitempty"`
 	SepaCreditorID            *string                                        `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
 	LogoFileID                *string                                        `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
@@ -3803,6 +4070,62 @@ func (c *CompaniesProfileAccountResponse) GetBankName() *string {
 		return nil
 	}
 	return c.BankName
+}
+
+func (c *CompaniesProfileAccountResponse) GetBankBic() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankBic
+}
+
+func (c *CompaniesProfileAccountResponse) GetBankCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankCode
+}
+
+func (c *CompaniesProfileAccountResponse) GetBankBranchCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankBranchCode
+}
+
+func (c *CompaniesProfileAccountResponse) GetBankAccountNumber() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankAccountNumber
+}
+
+func (c *CompaniesProfileAccountResponse) GetInvoicePrefix() string {
+	if c == nil {
+		return ""
+	}
+	return c.InvoicePrefix
+}
+
+func (c *CompaniesProfileAccountResponse) GetNextInvoiceNumber() string {
+	if c == nil {
+		return ""
+	}
+	return c.NextInvoiceNumber
+}
+
+func (c *CompaniesProfileAccountResponse) GetDefaultInvoiceLocale() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DefaultInvoiceLocale
+}
+
+func (c *CompaniesProfileAccountResponse) GetDefaultInvoiceNote() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DefaultInvoiceNote
 }
 
 func (c *CompaniesProfileAccountResponse) GetPeppolID() *string {
@@ -4055,6 +4378,62 @@ func (c *CompaniesProfileAccountResponse) SetIban(iban *string) {
 func (c *CompaniesProfileAccountResponse) SetBankName(bankName *string) {
 	c.BankName = bankName
 	c.require(companiesProfileAccountResponseFieldBankName)
+}
+
+// SetBankBic sets the BankBic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetBankBic(bankBic *string) {
+	c.BankBic = bankBic
+	c.require(companiesProfileAccountResponseFieldBankBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetBankCode(bankCode *string) {
+	c.BankCode = bankCode
+	c.require(companiesProfileAccountResponseFieldBankCode)
+}
+
+// SetBankBranchCode sets the BankBranchCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetBankBranchCode(bankBranchCode *string) {
+	c.BankBranchCode = bankBranchCode
+	c.require(companiesProfileAccountResponseFieldBankBranchCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	c.BankAccountNumber = bankAccountNumber
+	c.require(companiesProfileAccountResponseFieldBankAccountNumber)
+}
+
+// SetInvoicePrefix sets the InvoicePrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetInvoicePrefix(invoicePrefix string) {
+	c.InvoicePrefix = invoicePrefix
+	c.require(companiesProfileAccountResponseFieldInvoicePrefix)
+}
+
+// SetNextInvoiceNumber sets the NextInvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetNextInvoiceNumber(nextInvoiceNumber string) {
+	c.NextInvoiceNumber = nextInvoiceNumber
+	c.require(companiesProfileAccountResponseFieldNextInvoiceNumber)
+}
+
+// SetDefaultInvoiceLocale sets the DefaultInvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetDefaultInvoiceLocale(defaultInvoiceLocale *string) {
+	c.DefaultInvoiceLocale = defaultInvoiceLocale
+	c.require(companiesProfileAccountResponseFieldDefaultInvoiceLocale)
+}
+
+// SetDefaultInvoiceNote sets the DefaultInvoiceNote field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetDefaultInvoiceNote(defaultInvoiceNote *string) {
+	c.DefaultInvoiceNote = defaultInvoiceNote
+	c.require(companiesProfileAccountResponseFieldDefaultInvoiceNote)
 }
 
 // SetPeppolID sets the PeppolID field and marks it as non-optional;
@@ -4659,6 +5038,119 @@ func (c *CompaniesUpdateAccountRequestAddress) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
+// Language a new invoice starts with when neither the invoice nor its partner names one
+type CompaniesUpdateAccountRequestDefaultInvoiceLocale string
+
+const (
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleEn CompaniesUpdateAccountRequestDefaultInvoiceLocale = "en"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleLt CompaniesUpdateAccountRequestDefaultInvoiceLocale = "lt"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleDe CompaniesUpdateAccountRequestDefaultInvoiceLocale = "de"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleFr CompaniesUpdateAccountRequestDefaultInvoiceLocale = "fr"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleEs CompaniesUpdateAccountRequestDefaultInvoiceLocale = "es"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleIt CompaniesUpdateAccountRequestDefaultInvoiceLocale = "it"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocalePt CompaniesUpdateAccountRequestDefaultInvoiceLocale = "pt"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleNl CompaniesUpdateAccountRequestDefaultInvoiceLocale = "nl"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocalePl CompaniesUpdateAccountRequestDefaultInvoiceLocale = "pl"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleSv CompaniesUpdateAccountRequestDefaultInvoiceLocale = "sv"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleDa CompaniesUpdateAccountRequestDefaultInvoiceLocale = "da"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleNo CompaniesUpdateAccountRequestDefaultInvoiceLocale = "no"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleFi CompaniesUpdateAccountRequestDefaultInvoiceLocale = "fi"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleEt CompaniesUpdateAccountRequestDefaultInvoiceLocale = "et"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleLv CompaniesUpdateAccountRequestDefaultInvoiceLocale = "lv"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleCs CompaniesUpdateAccountRequestDefaultInvoiceLocale = "cs"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleSk CompaniesUpdateAccountRequestDefaultInvoiceLocale = "sk"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleHu CompaniesUpdateAccountRequestDefaultInvoiceLocale = "hu"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleRo CompaniesUpdateAccountRequestDefaultInvoiceLocale = "ro"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleBg CompaniesUpdateAccountRequestDefaultInvoiceLocale = "bg"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleHr CompaniesUpdateAccountRequestDefaultInvoiceLocale = "hr"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleSl CompaniesUpdateAccountRequestDefaultInvoiceLocale = "sl"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleEl CompaniesUpdateAccountRequestDefaultInvoiceLocale = "el"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleMt CompaniesUpdateAccountRequestDefaultInvoiceLocale = "mt"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleIs CompaniesUpdateAccountRequestDefaultInvoiceLocale = "is"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleGa CompaniesUpdateAccountRequestDefaultInvoiceLocale = "ga"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleZh CompaniesUpdateAccountRequestDefaultInvoiceLocale = "zh"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleJa CompaniesUpdateAccountRequestDefaultInvoiceLocale = "ja"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleAr CompaniesUpdateAccountRequestDefaultInvoiceLocale = "ar"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleHi CompaniesUpdateAccountRequestDefaultInvoiceLocale = "hi"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleRu CompaniesUpdateAccountRequestDefaultInvoiceLocale = "ru"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleTr CompaniesUpdateAccountRequestDefaultInvoiceLocale = "tr"
+)
+
+func NewCompaniesUpdateAccountRequestDefaultInvoiceLocaleFromString(s string) (CompaniesUpdateAccountRequestDefaultInvoiceLocale, error) {
+	switch s {
+	case "en":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleEn, nil
+	case "lt":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleLt, nil
+	case "de":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleDe, nil
+	case "fr":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleFr, nil
+	case "es":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleEs, nil
+	case "it":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleIt, nil
+	case "pt":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocalePt, nil
+	case "nl":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleNl, nil
+	case "pl":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocalePl, nil
+	case "sv":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleSv, nil
+	case "da":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleDa, nil
+	case "no":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleNo, nil
+	case "fi":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleFi, nil
+	case "et":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleEt, nil
+	case "lv":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleLv, nil
+	case "cs":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleCs, nil
+	case "sk":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleSk, nil
+	case "hu":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleHu, nil
+	case "ro":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleRo, nil
+	case "bg":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleBg, nil
+	case "hr":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleHr, nil
+	case "sl":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleSl, nil
+	case "el":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleEl, nil
+	case "mt":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleMt, nil
+	case "is":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleIs, nil
+	case "ga":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleGa, nil
+	case "zh":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleZh, nil
+	case "ja":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleJa, nil
+	case "ar":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleAr, nil
+	case "hi":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleHi, nil
+	case "ru":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleRu, nil
+	case "tr":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleTr, nil
+	}
+	var t CompaniesUpdateAccountRequestDefaultInvoiceLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesUpdateAccountRequestDefaultInvoiceLocale) Ptr() *CompaniesUpdateAccountRequestDefaultInvoiceLocale {
+	return &c
+}
+
 var (
 	companiesUpdateAccountRequestLogoFieldFileName = big.NewInt(1 << 0)
 	companiesUpdateAccountRequestLogoFieldMimeType = big.NewInt(1 << 1)
@@ -4826,22 +5318,30 @@ var (
 	companiesUpdateAccountResponseFieldPhone                     = big.NewInt(1 << 15)
 	companiesUpdateAccountResponseFieldIban                      = big.NewInt(1 << 16)
 	companiesUpdateAccountResponseFieldBankName                  = big.NewInt(1 << 17)
-	companiesUpdateAccountResponseFieldPeppolID                  = big.NewInt(1 << 18)
-	companiesUpdateAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 19)
-	companiesUpdateAccountResponseFieldLogoFileID                = big.NewInt(1 << 20)
-	companiesUpdateAccountResponseFieldLegalForm                 = big.NewInt(1 << 21)
-	companiesUpdateAccountResponseFieldRegistryName              = big.NewInt(1 << 22)
-	companiesUpdateAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 23)
-	companiesUpdateAccountResponseFieldShareCapital              = big.NewInt(1 << 24)
-	companiesUpdateAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 25)
-	companiesUpdateAccountResponseFieldVatPeriod                 = big.NewInt(1 << 26)
-	companiesUpdateAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 27)
-	companiesUpdateAccountResponseFieldTimeZone                  = big.NewInt(1 << 28)
-	companiesUpdateAccountResponseFieldFilingOptions             = big.NewInt(1 << 29)
-	companiesUpdateAccountResponseFieldBookkeeperName            = big.NewInt(1 << 30)
-	companiesUpdateAccountResponseFieldAuditorName               = big.NewInt(1 << 31)
-	companiesUpdateAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 32)
-	companiesUpdateAccountResponseFieldAuditRequired             = big.NewInt(1 << 33)
+	companiesUpdateAccountResponseFieldBankBic                   = big.NewInt(1 << 18)
+	companiesUpdateAccountResponseFieldBankCode                  = big.NewInt(1 << 19)
+	companiesUpdateAccountResponseFieldBankBranchCode            = big.NewInt(1 << 20)
+	companiesUpdateAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 21)
+	companiesUpdateAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 22)
+	companiesUpdateAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 23)
+	companiesUpdateAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 24)
+	companiesUpdateAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 25)
+	companiesUpdateAccountResponseFieldPeppolID                  = big.NewInt(1 << 26)
+	companiesUpdateAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 27)
+	companiesUpdateAccountResponseFieldLogoFileID                = big.NewInt(1 << 28)
+	companiesUpdateAccountResponseFieldLegalForm                 = big.NewInt(1 << 29)
+	companiesUpdateAccountResponseFieldRegistryName              = big.NewInt(1 << 30)
+	companiesUpdateAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 31)
+	companiesUpdateAccountResponseFieldShareCapital              = big.NewInt(1 << 32)
+	companiesUpdateAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 33)
+	companiesUpdateAccountResponseFieldVatPeriod                 = big.NewInt(1 << 34)
+	companiesUpdateAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 35)
+	companiesUpdateAccountResponseFieldTimeZone                  = big.NewInt(1 << 36)
+	companiesUpdateAccountResponseFieldFilingOptions             = big.NewInt(1 << 37)
+	companiesUpdateAccountResponseFieldBookkeeperName            = big.NewInt(1 << 38)
+	companiesUpdateAccountResponseFieldAuditorName               = big.NewInt(1 << 39)
+	companiesUpdateAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 40)
+	companiesUpdateAccountResponseFieldAuditRequired             = big.NewInt(1 << 41)
 )
 
 type CompaniesUpdateAccountResponse struct {
@@ -4856,15 +5356,25 @@ type CompaniesUpdateAccountResponse struct {
 	// Chart of accounts template the company was seeded with
 	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
 	// Chart of accounts template of the company country
-	CountryChartTemplate      string                                        `json:"countryChartTemplate" url:"countryChartTemplate"`
-	BaseCurrency              string                                        `json:"baseCurrency" url:"baseCurrency"`
-	DefaultInvoiceCurrency    string                                        `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
-	Status                    CompaniesUpdateAccountResponseStatus          `json:"status" url:"status"`
-	Address                   *CompaniesUpdateAccountResponseAddress        `json:"address,omitempty" url:"address,omitempty"`
-	Email                     *string                                       `json:"email,omitempty" url:"email,omitempty"`
-	Phone                     *string                                       `json:"phone,omitempty" url:"phone,omitempty"`
-	Iban                      *string                                       `json:"iban,omitempty" url:"iban,omitempty"`
-	BankName                  *string                                       `json:"bankName,omitempty" url:"bankName,omitempty"`
+	CountryChartTemplate   string                                 `json:"countryChartTemplate" url:"countryChartTemplate"`
+	BaseCurrency           string                                 `json:"baseCurrency" url:"baseCurrency"`
+	DefaultInvoiceCurrency string                                 `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
+	Status                 CompaniesUpdateAccountResponseStatus   `json:"status" url:"status"`
+	Address                *CompaniesUpdateAccountResponseAddress `json:"address,omitempty" url:"address,omitempty"`
+	Email                  *string                                `json:"email,omitempty" url:"email,omitempty"`
+	Phone                  *string                                `json:"phone,omitempty" url:"phone,omitempty"`
+	Iban                   *string                                `json:"iban,omitempty" url:"iban,omitempty"`
+	BankName               *string                                `json:"bankName,omitempty" url:"bankName,omitempty"`
+	BankBic                *string                                `json:"bankBic,omitempty" url:"bankBic,omitempty"`
+	BankCode               *string                                `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankBranchCode         *string                                `json:"bankBranchCode,omitempty" url:"bankBranchCode,omitempty"`
+	BankAccountNumber      *string                                `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
+	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
+	// Number the next invoice issued without a document series gets, before any country-specific format
+	NextInvoiceNumber         string                                        `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
+	DefaultInvoiceLocale      *string                                       `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
+	DefaultInvoiceNote        *string                                       `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
 	PeppolID                  *string                                       `json:"peppolId,omitempty" url:"peppolId,omitempty"`
 	SepaCreditorID            *string                                       `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
 	LogoFileID                *string                                       `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
@@ -5013,6 +5523,62 @@ func (c *CompaniesUpdateAccountResponse) GetBankName() *string {
 		return nil
 	}
 	return c.BankName
+}
+
+func (c *CompaniesUpdateAccountResponse) GetBankBic() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankBic
+}
+
+func (c *CompaniesUpdateAccountResponse) GetBankCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankCode
+}
+
+func (c *CompaniesUpdateAccountResponse) GetBankBranchCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankBranchCode
+}
+
+func (c *CompaniesUpdateAccountResponse) GetBankAccountNumber() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankAccountNumber
+}
+
+func (c *CompaniesUpdateAccountResponse) GetInvoicePrefix() string {
+	if c == nil {
+		return ""
+	}
+	return c.InvoicePrefix
+}
+
+func (c *CompaniesUpdateAccountResponse) GetNextInvoiceNumber() string {
+	if c == nil {
+		return ""
+	}
+	return c.NextInvoiceNumber
+}
+
+func (c *CompaniesUpdateAccountResponse) GetDefaultInvoiceLocale() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DefaultInvoiceLocale
+}
+
+func (c *CompaniesUpdateAccountResponse) GetDefaultInvoiceNote() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DefaultInvoiceNote
 }
 
 func (c *CompaniesUpdateAccountResponse) GetPeppolID() *string {
@@ -5265,6 +5831,62 @@ func (c *CompaniesUpdateAccountResponse) SetIban(iban *string) {
 func (c *CompaniesUpdateAccountResponse) SetBankName(bankName *string) {
 	c.BankName = bankName
 	c.require(companiesUpdateAccountResponseFieldBankName)
+}
+
+// SetBankBic sets the BankBic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetBankBic(bankBic *string) {
+	c.BankBic = bankBic
+	c.require(companiesUpdateAccountResponseFieldBankBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetBankCode(bankCode *string) {
+	c.BankCode = bankCode
+	c.require(companiesUpdateAccountResponseFieldBankCode)
+}
+
+// SetBankBranchCode sets the BankBranchCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetBankBranchCode(bankBranchCode *string) {
+	c.BankBranchCode = bankBranchCode
+	c.require(companiesUpdateAccountResponseFieldBankBranchCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	c.BankAccountNumber = bankAccountNumber
+	c.require(companiesUpdateAccountResponseFieldBankAccountNumber)
+}
+
+// SetInvoicePrefix sets the InvoicePrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetInvoicePrefix(invoicePrefix string) {
+	c.InvoicePrefix = invoicePrefix
+	c.require(companiesUpdateAccountResponseFieldInvoicePrefix)
+}
+
+// SetNextInvoiceNumber sets the NextInvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetNextInvoiceNumber(nextInvoiceNumber string) {
+	c.NextInvoiceNumber = nextInvoiceNumber
+	c.require(companiesUpdateAccountResponseFieldNextInvoiceNumber)
+}
+
+// SetDefaultInvoiceLocale sets the DefaultInvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetDefaultInvoiceLocale(defaultInvoiceLocale *string) {
+	c.DefaultInvoiceLocale = defaultInvoiceLocale
+	c.require(companiesUpdateAccountResponseFieldDefaultInvoiceLocale)
+}
+
+// SetDefaultInvoiceNote sets the DefaultInvoiceNote field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetDefaultInvoiceNote(defaultInvoiceNote *string) {
+	c.DefaultInvoiceNote = defaultInvoiceNote
+	c.require(companiesUpdateAccountResponseFieldDefaultInvoiceNote)
 }
 
 // SetPeppolID sets the PeppolID field and marks it as non-optional;

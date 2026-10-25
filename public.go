@@ -7,6 +7,7 @@ import (
 	fmt "fmt"
 	internal "github.com/nordlet/nordlet-sdk-go/internal"
 	big "math/big"
+	time "time"
 )
 
 var (
@@ -91,6 +92,144 @@ func (i *IntegrationRequestsPublicRequest) UnmarshalJSON(data []byte) error {
 
 func (i *IntegrationRequestsPublicRequest) MarshalJSON() ([]byte, error) {
 	type embed IntegrationRequestsPublicRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoicesCheckoutPublicRequestFieldToken = big.NewInt(1 << 0)
+)
+
+type InvoicesCheckoutPublicRequest struct {
+	Token string `json:"token" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoicesCheckoutPublicRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetToken sets the Token field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCheckoutPublicRequest) SetToken(token string) {
+	i.Token = token
+	i.require(invoicesCheckoutPublicRequestFieldToken)
+}
+
+func (i *InvoicesCheckoutPublicRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesCheckoutPublicRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoicesCheckoutPublicRequest(body)
+	return nil
+}
+
+func (i *InvoicesCheckoutPublicRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoicesCheckoutPublicRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoicesGetPublicRequestFieldToken = big.NewInt(1 << 0)
+)
+
+type InvoicesGetPublicRequest struct {
+	Token string `json:"token" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoicesGetPublicRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetToken sets the Token field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicRequest) SetToken(token string) {
+	i.Token = token
+	i.require(invoicesGetPublicRequestFieldToken)
+}
+
+func (i *InvoicesGetPublicRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesGetPublicRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoicesGetPublicRequest(body)
+	return nil
+}
+
+func (i *InvoicesGetPublicRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetPublicRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	invoicesPdfPublicRequestFieldToken = big.NewInt(1 << 0)
+)
+
+type InvoicesPdfPublicRequest struct {
+	Token string `json:"token" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoicesPdfPublicRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetToken sets the Token field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPdfPublicRequest) SetToken(token string) {
+	i.Token = token
+	i.require(invoicesPdfPublicRequestFieldToken)
+}
+
+func (i *InvoicesPdfPublicRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesPdfPublicRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoicesPdfPublicRequest(body)
+	return nil
+}
+
+func (i *InvoicesPdfPublicRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoicesPdfPublicRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -195,6 +334,1469 @@ func (i *IntegrationRequestsPublicResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *IntegrationRequestsPublicResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesCheckoutPublicResponseFieldURL = big.NewInt(1 << 0)
+)
+
+type InvoicesCheckoutPublicResponse struct {
+	URL string `json:"url" url:"url"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesCheckoutPublicResponse) GetURL() string {
+	if i == nil {
+		return ""
+	}
+	return i.URL
+}
+
+func (i *InvoicesCheckoutPublicResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesCheckoutPublicResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetURL sets the URL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCheckoutPublicResponse) SetURL(url string) {
+	i.URL = url
+	i.require(invoicesCheckoutPublicResponseFieldURL)
+}
+
+func (i *InvoicesCheckoutPublicResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesCheckoutPublicResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesCheckoutPublicResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesCheckoutPublicResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoicesCheckoutPublicResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesCheckoutPublicResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesGetPublicResponseFieldType            = big.NewInt(1 << 0)
+	invoicesGetPublicResponseFieldStatus          = big.NewInt(1 << 1)
+	invoicesGetPublicResponseFieldPaymentStatus   = big.NewInt(1 << 2)
+	invoicesGetPublicResponseFieldNumber          = big.NewInt(1 << 3)
+	invoicesGetPublicResponseFieldIssueDate       = big.NewInt(1 << 4)
+	invoicesGetPublicResponseFieldDueDate         = big.NewInt(1 << 5)
+	invoicesGetPublicResponseFieldCurrency        = big.NewInt(1 << 6)
+	invoicesGetPublicResponseFieldNetTotal        = big.NewInt(1 << 7)
+	invoicesGetPublicResponseFieldVatTotal        = big.NewInt(1 << 8)
+	invoicesGetPublicResponseFieldSalesTaxPercent = big.NewInt(1 << 9)
+	invoicesGetPublicResponseFieldSalesTaxTotal   = big.NewInt(1 << 10)
+	invoicesGetPublicResponseFieldGrossTotal      = big.NewInt(1 << 11)
+	invoicesGetPublicResponseFieldPaidAmount      = big.NewInt(1 << 12)
+	invoicesGetPublicResponseFieldPaidOn          = big.NewInt(1 << 13)
+	invoicesGetPublicResponseFieldNotes           = big.NewInt(1 << 14)
+	invoicesGetPublicResponseFieldPayURL          = big.NewInt(1 << 15)
+	invoicesGetPublicResponseFieldSeller          = big.NewInt(1 << 16)
+	invoicesGetPublicResponseFieldBuyer           = big.NewInt(1 << 17)
+	invoicesGetPublicResponseFieldLines           = big.NewInt(1 << 18)
+)
+
+type InvoicesGetPublicResponse struct {
+	Type            InvoicesGetPublicResponseType          `json:"type" url:"type"`
+	Status          InvoicesGetPublicResponseStatus        `json:"status" url:"status"`
+	PaymentStatus   InvoicesGetPublicResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Number          *string                                `json:"number,omitempty" url:"number,omitempty"`
+	IssueDate       *time.Time                             `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate         *time.Time                             `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency        string                                 `json:"currency" url:"currency"`
+	NetTotal        string                                 `json:"netTotal" url:"netTotal"`
+	VatTotal        string                                 `json:"vatTotal" url:"vatTotal"`
+	SalesTaxPercent *string                                `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal   string                                 `json:"salesTaxTotal" url:"salesTaxTotal"`
+	GrossTotal      string                                 `json:"grossTotal" url:"grossTotal"`
+	PaidAmount      string                                 `json:"paidAmount" url:"paidAmount"`
+	PaidOn          *string                                `json:"paidOn,omitempty" url:"paidOn,omitempty"`
+	Notes           *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	PayURL          *string                                `json:"payUrl,omitempty" url:"payUrl,omitempty"`
+	Seller          *InvoicesGetPublicResponseSeller       `json:"seller" url:"seller"`
+	Buyer           *InvoicesGetPublicResponseBuyer        `json:"buyer" url:"buyer"`
+	Lines           []*InvoicesGetPublicResponseLinesItem  `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesGetPublicResponse) GetType() InvoicesGetPublicResponseType {
+	if i == nil {
+		return ""
+	}
+	return i.Type
+}
+
+func (i *InvoicesGetPublicResponse) GetStatus() InvoicesGetPublicResponseStatus {
+	if i == nil {
+		return ""
+	}
+	return i.Status
+}
+
+func (i *InvoicesGetPublicResponse) GetPaymentStatus() InvoicesGetPublicResponsePaymentStatus {
+	if i == nil {
+		return ""
+	}
+	return i.PaymentStatus
+}
+
+func (i *InvoicesGetPublicResponse) GetNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Number
+}
+
+func (i *InvoicesGetPublicResponse) GetIssueDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.IssueDate
+}
+
+func (i *InvoicesGetPublicResponse) GetDueDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DueDate
+}
+
+func (i *InvoicesGetPublicResponse) GetCurrency() string {
+	if i == nil {
+		return ""
+	}
+	return i.Currency
+}
+
+func (i *InvoicesGetPublicResponse) GetNetTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.NetTotal
+}
+
+func (i *InvoicesGetPublicResponse) GetVatTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.VatTotal
+}
+
+func (i *InvoicesGetPublicResponse) GetSalesTaxPercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxPercent
+}
+
+func (i *InvoicesGetPublicResponse) GetSalesTaxTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.SalesTaxTotal
+}
+
+func (i *InvoicesGetPublicResponse) GetGrossTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.GrossTotal
+}
+
+func (i *InvoicesGetPublicResponse) GetPaidAmount() string {
+	if i == nil {
+		return ""
+	}
+	return i.PaidAmount
+}
+
+func (i *InvoicesGetPublicResponse) GetPaidOn() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PaidOn
+}
+
+func (i *InvoicesGetPublicResponse) GetNotes() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *InvoicesGetPublicResponse) GetPayURL() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PayURL
+}
+
+func (i *InvoicesGetPublicResponse) GetSeller() *InvoicesGetPublicResponseSeller {
+	if i == nil {
+		return nil
+	}
+	return i.Seller
+}
+
+func (i *InvoicesGetPublicResponse) GetBuyer() *InvoicesGetPublicResponseBuyer {
+	if i == nil {
+		return nil
+	}
+	return i.Buyer
+}
+
+func (i *InvoicesGetPublicResponse) GetLines() []*InvoicesGetPublicResponseLinesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Lines
+}
+
+func (i *InvoicesGetPublicResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesGetPublicResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetType(type_ InvoicesGetPublicResponseType) {
+	i.Type = type_
+	i.require(invoicesGetPublicResponseFieldType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetStatus(status InvoicesGetPublicResponseStatus) {
+	i.Status = status
+	i.require(invoicesGetPublicResponseFieldStatus)
+}
+
+// SetPaymentStatus sets the PaymentStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetPaymentStatus(paymentStatus InvoicesGetPublicResponsePaymentStatus) {
+	i.PaymentStatus = paymentStatus
+	i.require(invoicesGetPublicResponseFieldPaymentStatus)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetNumber(number *string) {
+	i.Number = number
+	i.require(invoicesGetPublicResponseFieldNumber)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetIssueDate(issueDate *time.Time) {
+	i.IssueDate = issueDate
+	i.require(invoicesGetPublicResponseFieldIssueDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetDueDate(dueDate *time.Time) {
+	i.DueDate = dueDate
+	i.require(invoicesGetPublicResponseFieldDueDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetCurrency(currency string) {
+	i.Currency = currency
+	i.require(invoicesGetPublicResponseFieldCurrency)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetNetTotal(netTotal string) {
+	i.NetTotal = netTotal
+	i.require(invoicesGetPublicResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetVatTotal(vatTotal string) {
+	i.VatTotal = vatTotal
+	i.require(invoicesGetPublicResponseFieldVatTotal)
+}
+
+// SetSalesTaxPercent sets the SalesTaxPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetSalesTaxPercent(salesTaxPercent *string) {
+	i.SalesTaxPercent = salesTaxPercent
+	i.require(invoicesGetPublicResponseFieldSalesTaxPercent)
+}
+
+// SetSalesTaxTotal sets the SalesTaxTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetSalesTaxTotal(salesTaxTotal string) {
+	i.SalesTaxTotal = salesTaxTotal
+	i.require(invoicesGetPublicResponseFieldSalesTaxTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetGrossTotal(grossTotal string) {
+	i.GrossTotal = grossTotal
+	i.require(invoicesGetPublicResponseFieldGrossTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetPaidAmount(paidAmount string) {
+	i.PaidAmount = paidAmount
+	i.require(invoicesGetPublicResponseFieldPaidAmount)
+}
+
+// SetPaidOn sets the PaidOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetPaidOn(paidOn *string) {
+	i.PaidOn = paidOn
+	i.require(invoicesGetPublicResponseFieldPaidOn)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoicesGetPublicResponseFieldNotes)
+}
+
+// SetPayURL sets the PayURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetPayURL(payURL *string) {
+	i.PayURL = payURL
+	i.require(invoicesGetPublicResponseFieldPayURL)
+}
+
+// SetSeller sets the Seller field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetSeller(seller *InvoicesGetPublicResponseSeller) {
+	i.Seller = seller
+	i.require(invoicesGetPublicResponseFieldSeller)
+}
+
+// SetBuyer sets the Buyer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetBuyer(buyer *InvoicesGetPublicResponseBuyer) {
+	i.Buyer = buyer
+	i.require(invoicesGetPublicResponseFieldBuyer)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetLines(lines []*InvoicesGetPublicResponseLinesItem) {
+	i.Lines = lines
+	i.require(invoicesGetPublicResponseFieldLines)
+}
+
+func (i *InvoicesGetPublicResponse) UnmarshalJSON(data []byte) error {
+	type embed InvoicesGetPublicResponse
+	var unmarshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate,omitempty"`
+		DueDate   *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesGetPublicResponse(unmarshaler.embed)
+	i.IssueDate = unmarshaler.IssueDate.TimePtr()
+	i.DueDate = unmarshaler.DueDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesGetPublicResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetPublicResponse
+	var marshaler = struct {
+		embed
+		IssueDate *internal.Date `json:"issueDate,omitempty"`
+		DueDate   *internal.Date `json:"dueDate,omitempty"`
+	}{
+		embed:     embed(*i),
+		IssueDate: internal.NewOptionalDate(i.IssueDate),
+		DueDate:   internal.NewOptionalDate(i.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesGetPublicResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesGetPublicResponseBuyerFieldName    = big.NewInt(1 << 0)
+	invoicesGetPublicResponseBuyerFieldVatCode = big.NewInt(1 << 1)
+	invoicesGetPublicResponseBuyerFieldAddress = big.NewInt(1 << 2)
+	invoicesGetPublicResponseBuyerFieldEmail   = big.NewInt(1 << 3)
+)
+
+type InvoicesGetPublicResponseBuyer struct {
+	Name    string                                 `json:"name" url:"name"`
+	VatCode *string                                `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Address *InvoicesGetPublicResponseBuyerAddress `json:"address" url:"address"`
+	Email   *string                                `json:"email,omitempty" url:"email,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesGetPublicResponseBuyer) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *InvoicesGetPublicResponseBuyer) GetVatCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCode
+}
+
+func (i *InvoicesGetPublicResponseBuyer) GetAddress() *InvoicesGetPublicResponseBuyerAddress {
+	if i == nil {
+		return nil
+	}
+	return i.Address
+}
+
+func (i *InvoicesGetPublicResponseBuyer) GetEmail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Email
+}
+
+func (i *InvoicesGetPublicResponseBuyer) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesGetPublicResponseBuyer) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyer) SetName(name string) {
+	i.Name = name
+	i.require(invoicesGetPublicResponseBuyerFieldName)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyer) SetVatCode(vatCode *string) {
+	i.VatCode = vatCode
+	i.require(invoicesGetPublicResponseBuyerFieldVatCode)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyer) SetAddress(address *InvoicesGetPublicResponseBuyerAddress) {
+	i.Address = address
+	i.require(invoicesGetPublicResponseBuyerFieldAddress)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyer) SetEmail(email *string) {
+	i.Email = email
+	i.require(invoicesGetPublicResponseBuyerFieldEmail)
+}
+
+func (i *InvoicesGetPublicResponseBuyer) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesGetPublicResponseBuyer
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesGetPublicResponseBuyer(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesGetPublicResponseBuyer) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetPublicResponseBuyer
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesGetPublicResponseBuyer) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesGetPublicResponseBuyerAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesGetPublicResponseBuyerAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesGetPublicResponseBuyerAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesGetPublicResponseBuyerAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type InvoicesGetPublicResponseBuyerAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyerAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesGetPublicResponseBuyerAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyerAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesGetPublicResponseBuyerAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyerAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesGetPublicResponseBuyerAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseBuyerAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesGetPublicResponseBuyerAddressFieldCountryCode)
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesGetPublicResponseBuyerAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesGetPublicResponseBuyerAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetPublicResponseBuyerAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesGetPublicResponseBuyerAddress) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesGetPublicResponseLinesItemFieldDescription    = big.NewInt(1 << 0)
+	invoicesGetPublicResponseLinesItemFieldUnit           = big.NewInt(1 << 1)
+	invoicesGetPublicResponseLinesItemFieldQuantity       = big.NewInt(1 << 2)
+	invoicesGetPublicResponseLinesItemFieldUnitPrice      = big.NewInt(1 << 3)
+	invoicesGetPublicResponseLinesItemFieldVatRatePercent = big.NewInt(1 << 4)
+	invoicesGetPublicResponseLinesItemFieldLineNet        = big.NewInt(1 << 5)
+)
+
+type InvoicesGetPublicResponseLinesItem struct {
+	Description    string  `json:"description" url:"description"`
+	Unit           string  `json:"unit" url:"unit"`
+	Quantity       string  `json:"quantity" url:"quantity"`
+	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent string  `json:"vatRatePercent" url:"vatRatePercent"`
+	LineNet        string  `json:"lineNet" url:"lineNet"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) GetDescription() string {
+	if i == nil {
+		return ""
+	}
+	return i.Description
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) GetUnit() string {
+	if i == nil {
+		return ""
+	}
+	return i.Unit
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) GetQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.Quantity
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) GetUnitPrice() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPrice
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) GetVatRatePercent() string {
+	if i == nil {
+		return ""
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) GetLineNet() string {
+	if i == nil {
+		return ""
+	}
+	return i.LineNet
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseLinesItem) SetDescription(description string) {
+	i.Description = description
+	i.require(invoicesGetPublicResponseLinesItemFieldDescription)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseLinesItem) SetUnit(unit string) {
+	i.Unit = unit
+	i.require(invoicesGetPublicResponseLinesItemFieldUnit)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseLinesItem) SetQuantity(quantity string) {
+	i.Quantity = quantity
+	i.require(invoicesGetPublicResponseLinesItemFieldQuantity)
+}
+
+// SetUnitPrice sets the UnitPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseLinesItem) SetUnitPrice(unitPrice *string) {
+	i.UnitPrice = unitPrice
+	i.require(invoicesGetPublicResponseLinesItemFieldUnitPrice)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoicesGetPublicResponseLinesItemFieldVatRatePercent)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseLinesItem) SetLineNet(lineNet string) {
+	i.LineNet = lineNet
+	i.require(invoicesGetPublicResponseLinesItemFieldLineNet)
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesGetPublicResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesGetPublicResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetPublicResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesGetPublicResponseLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoicesGetPublicResponsePaymentStatus string
+
+const (
+	InvoicesGetPublicResponsePaymentStatusUnpaid  InvoicesGetPublicResponsePaymentStatus = "unpaid"
+	InvoicesGetPublicResponsePaymentStatusPartial InvoicesGetPublicResponsePaymentStatus = "partial"
+	InvoicesGetPublicResponsePaymentStatusPaid    InvoicesGetPublicResponsePaymentStatus = "paid"
+)
+
+func NewInvoicesGetPublicResponsePaymentStatusFromString(s string) (InvoicesGetPublicResponsePaymentStatus, error) {
+	switch s {
+	case "unpaid":
+		return InvoicesGetPublicResponsePaymentStatusUnpaid, nil
+	case "partial":
+		return InvoicesGetPublicResponsePaymentStatusPartial, nil
+	case "paid":
+		return InvoicesGetPublicResponsePaymentStatusPaid, nil
+	}
+	var t InvoicesGetPublicResponsePaymentStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesGetPublicResponsePaymentStatus) Ptr() *InvoicesGetPublicResponsePaymentStatus {
+	return &i
+}
+
+var (
+	invoicesGetPublicResponseSellerFieldName              = big.NewInt(1 << 0)
+	invoicesGetPublicResponseSellerFieldVatCode           = big.NewInt(1 << 1)
+	invoicesGetPublicResponseSellerFieldCountryCode       = big.NewInt(1 << 2)
+	invoicesGetPublicResponseSellerFieldAddress           = big.NewInt(1 << 3)
+	invoicesGetPublicResponseSellerFieldEmail             = big.NewInt(1 << 4)
+	invoicesGetPublicResponseSellerFieldIban              = big.NewInt(1 << 5)
+	invoicesGetPublicResponseSellerFieldBankName          = big.NewInt(1 << 6)
+	invoicesGetPublicResponseSellerFieldBankBic           = big.NewInt(1 << 7)
+	invoicesGetPublicResponseSellerFieldBankCode          = big.NewInt(1 << 8)
+	invoicesGetPublicResponseSellerFieldBankBranchCode    = big.NewInt(1 << 9)
+	invoicesGetPublicResponseSellerFieldBankAccountNumber = big.NewInt(1 << 10)
+)
+
+type InvoicesGetPublicResponseSeller struct {
+	Name              string                                  `json:"name" url:"name"`
+	VatCode           *string                                 `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	CountryCode       *string                                 `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	Address           *InvoicesGetPublicResponseSellerAddress `json:"address" url:"address"`
+	Email             *string                                 `json:"email,omitempty" url:"email,omitempty"`
+	Iban              *string                                 `json:"iban,omitempty" url:"iban,omitempty"`
+	BankName          *string                                 `json:"bankName,omitempty" url:"bankName,omitempty"`
+	BankBic           *string                                 `json:"bankBic,omitempty" url:"bankBic,omitempty"`
+	BankCode          *string                                 `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankBranchCode    *string                                 `json:"bankBranchCode,omitempty" url:"bankBranchCode,omitempty"`
+	BankAccountNumber *string                                 `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetVatCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCode
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetAddress() *InvoicesGetPublicResponseSellerAddress {
+	if i == nil {
+		return nil
+	}
+	return i.Address
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetEmail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Email
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetIban() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Iban
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetBankName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.BankName
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetBankBic() *string {
+	if i == nil {
+		return nil
+	}
+	return i.BankBic
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetBankCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.BankCode
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetBankBranchCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.BankBranchCode
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetBankAccountNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.BankAccountNumber
+}
+
+func (i *InvoicesGetPublicResponseSeller) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesGetPublicResponseSeller) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetName(name string) {
+	i.Name = name
+	i.require(invoicesGetPublicResponseSellerFieldName)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetVatCode(vatCode *string) {
+	i.VatCode = vatCode
+	i.require(invoicesGetPublicResponseSellerFieldVatCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesGetPublicResponseSellerFieldCountryCode)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetAddress(address *InvoicesGetPublicResponseSellerAddress) {
+	i.Address = address
+	i.require(invoicesGetPublicResponseSellerFieldAddress)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetEmail(email *string) {
+	i.Email = email
+	i.require(invoicesGetPublicResponseSellerFieldEmail)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetIban(iban *string) {
+	i.Iban = iban
+	i.require(invoicesGetPublicResponseSellerFieldIban)
+}
+
+// SetBankName sets the BankName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetBankName(bankName *string) {
+	i.BankName = bankName
+	i.require(invoicesGetPublicResponseSellerFieldBankName)
+}
+
+// SetBankBic sets the BankBic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetBankBic(bankBic *string) {
+	i.BankBic = bankBic
+	i.require(invoicesGetPublicResponseSellerFieldBankBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetBankCode(bankCode *string) {
+	i.BankCode = bankCode
+	i.require(invoicesGetPublicResponseSellerFieldBankCode)
+}
+
+// SetBankBranchCode sets the BankBranchCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetBankBranchCode(bankBranchCode *string) {
+	i.BankBranchCode = bankBranchCode
+	i.require(invoicesGetPublicResponseSellerFieldBankBranchCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSeller) SetBankAccountNumber(bankAccountNumber *string) {
+	i.BankAccountNumber = bankAccountNumber
+	i.require(invoicesGetPublicResponseSellerFieldBankAccountNumber)
+}
+
+func (i *InvoicesGetPublicResponseSeller) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesGetPublicResponseSeller
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesGetPublicResponseSeller(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesGetPublicResponseSeller) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetPublicResponseSeller
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesGetPublicResponseSeller) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesGetPublicResponseSellerAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesGetPublicResponseSellerAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesGetPublicResponseSellerAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesGetPublicResponseSellerAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type InvoicesGetPublicResponseSellerAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSellerAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesGetPublicResponseSellerAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSellerAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesGetPublicResponseSellerAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSellerAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesGetPublicResponseSellerAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponseSellerAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesGetPublicResponseSellerAddressFieldCountryCode)
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesGetPublicResponseSellerAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesGetPublicResponseSellerAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetPublicResponseSellerAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesGetPublicResponseSellerAddress) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoicesGetPublicResponseStatus string
+
+const (
+	InvoicesGetPublicResponseStatusDraft  InvoicesGetPublicResponseStatus = "draft"
+	InvoicesGetPublicResponseStatusIssued InvoicesGetPublicResponseStatus = "issued"
+)
+
+func NewInvoicesGetPublicResponseStatusFromString(s string) (InvoicesGetPublicResponseStatus, error) {
+	switch s {
+	case "draft":
+		return InvoicesGetPublicResponseStatusDraft, nil
+	case "issued":
+		return InvoicesGetPublicResponseStatusIssued, nil
+	}
+	var t InvoicesGetPublicResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesGetPublicResponseStatus) Ptr() *InvoicesGetPublicResponseStatus {
+	return &i
+}
+
+type InvoicesGetPublicResponseType string
+
+const (
+	InvoicesGetPublicResponseTypeInvoice    InvoicesGetPublicResponseType = "invoice"
+	InvoicesGetPublicResponseTypeCreditNote InvoicesGetPublicResponseType = "credit_note"
+	InvoicesGetPublicResponseTypeProforma   InvoicesGetPublicResponseType = "proforma"
+	InvoicesGetPublicResponseTypeAdvance    InvoicesGetPublicResponseType = "advance"
+)
+
+func NewInvoicesGetPublicResponseTypeFromString(s string) (InvoicesGetPublicResponseType, error) {
+	switch s {
+	case "invoice":
+		return InvoicesGetPublicResponseTypeInvoice, nil
+	case "credit_note":
+		return InvoicesGetPublicResponseTypeCreditNote, nil
+	case "proforma":
+		return InvoicesGetPublicResponseTypeProforma, nil
+	case "advance":
+		return InvoicesGetPublicResponseTypeAdvance, nil
+	}
+	var t InvoicesGetPublicResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesGetPublicResponseType) Ptr() *InvoicesGetPublicResponseType {
+	return &i
+}
+
+var (
+	invoicesPdfPublicResponseFieldFileName    = big.NewInt(1 << 0)
+	invoicesPdfPublicResponseFieldContentType = big.NewInt(1 << 1)
+	invoicesPdfPublicResponseFieldData        = big.NewInt(1 << 2)
+)
+
+type InvoicesPdfPublicResponse struct {
+	FileName    string `json:"fileName" url:"fileName"`
+	ContentType string `json:"contentType" url:"contentType"`
+	Data        string `json:"data" url:"data"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesPdfPublicResponse) GetFileName() string {
+	if i == nil {
+		return ""
+	}
+	return i.FileName
+}
+
+func (i *InvoicesPdfPublicResponse) GetContentType() string {
+	if i == nil {
+		return ""
+	}
+	return i.ContentType
+}
+
+func (i *InvoicesPdfPublicResponse) GetData() string {
+	if i == nil {
+		return ""
+	}
+	return i.Data
+}
+
+func (i *InvoicesPdfPublicResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesPdfPublicResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPdfPublicResponse) SetFileName(fileName string) {
+	i.FileName = fileName
+	i.require(invoicesPdfPublicResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPdfPublicResponse) SetContentType(contentType string) {
+	i.ContentType = contentType
+	i.require(invoicesPdfPublicResponseFieldContentType)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesPdfPublicResponse) SetData(data string) {
+	i.Data = data
+	i.require(invoicesPdfPublicResponseFieldData)
+}
+
+func (i *InvoicesPdfPublicResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesPdfPublicResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesPdfPublicResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesPdfPublicResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoicesPdfPublicResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesPdfPublicResponse) String() string {
 	if i == nil {
 		return "<nil>"
 	}

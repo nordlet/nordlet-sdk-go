@@ -2408,6 +2408,22 @@ func TestSettersCreatePartnersRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &CreatePartnersRequest{}
+		var fernTestValueInvoiceCurrency *CreatePartnersRequestInvoiceCurrency
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &CreatePartnersRequest{}
+		var fernTestValueInvoiceLocale *CreatePartnersRequestInvoiceLocale
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &CreatePartnersRequest{}
 		var fernTestValueCreditLimit *string
@@ -2936,6 +2952,68 @@ func TestSettersMarkExplicitCreatePartnersRequest(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersRequest{}
+		var fernTestValueInvoiceCurrency *CreatePartnersRequestInvoiceCurrency
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersRequest{}
+		var fernTestValueInvoiceLocale *CreatePartnersRequestInvoiceLocale
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4199,6 +4277,22 @@ func TestSettersFindOrCreatePartnersRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &FindOrCreatePartnersRequest{}
+		var fernTestValueInvoiceCurrency *FindOrCreatePartnersRequestInvoiceCurrency
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &FindOrCreatePartnersRequest{}
+		var fernTestValueInvoiceLocale *FindOrCreatePartnersRequestInvoiceLocale
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &FindOrCreatePartnersRequest{}
 		var fernTestValueCreditLimit *string
@@ -4727,6 +4821,68 @@ func TestSettersMarkExplicitFindOrCreatePartnersRequest(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersRequest{}
+		var fernTestValueInvoiceCurrency *FindOrCreatePartnersRequestInvoiceCurrency
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersRequest{}
+		var fernTestValueInvoiceLocale *FindOrCreatePartnersRequestInvoiceLocale
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -16370,6 +16526,22 @@ func TestSettersCreatePartnersResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &CreatePartnersResponse{}
+		var fernTestValueInvoiceCurrency *string
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &CreatePartnersResponse{}
+		var fernTestValueInvoiceLocale *string
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &CreatePartnersResponse{}
 		var fernTestValueCreditLimit *string
@@ -16958,6 +17130,72 @@ func TestGettersCreatePartnersResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPaymentTermDays() // Should return zero value
+	})
+
+	t.Run("GetInvoiceCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersResponse{}
+		var expected *string
+		obj.InvoiceCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceCurrency_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersResponse{}
+		obj.InvoiceCurrency = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceCurrency(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreatePartnersResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceCurrency() // Should return zero value
+	})
+
+	t.Run("GetInvoiceLocale", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersResponse{}
+		var expected *string
+		obj.InvoiceLocale = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceLocale(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceLocale_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersResponse{}
+		obj.InvoiceLocale = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceLocale(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceLocale_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreatePartnersResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceLocale() // Should return zero value
 	})
 
 	t.Run("GetCreditLimit", func(t *testing.T) {
@@ -18141,6 +18379,68 @@ func TestSettersMarkExplicitCreatePartnersResponse(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersResponse{}
+		var fernTestValueInvoiceCurrency *string
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreatePartnersResponse{}
+		var fernTestValueInvoiceLocale *string
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -25906,6 +26206,22 @@ func TestSettersFindOrCreatePartnersResponsePartner(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &FindOrCreatePartnersResponsePartner{}
+		var fernTestValueInvoiceCurrency *string
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &FindOrCreatePartnersResponsePartner{}
+		var fernTestValueInvoiceLocale *string
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &FindOrCreatePartnersResponsePartner{}
 		var fernTestValueCreditLimit *string
@@ -26494,6 +26810,72 @@ func TestGettersFindOrCreatePartnersResponsePartner(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPaymentTermDays() // Should return zero value
+	})
+
+	t.Run("GetInvoiceCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersResponsePartner{}
+		var expected *string
+		obj.InvoiceCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceCurrency_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersResponsePartner{}
+		obj.InvoiceCurrency = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceCurrency(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *FindOrCreatePartnersResponsePartner
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceCurrency() // Should return zero value
+	})
+
+	t.Run("GetInvoiceLocale", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersResponsePartner{}
+		var expected *string
+		obj.InvoiceLocale = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceLocale(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceLocale_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersResponsePartner{}
+		obj.InvoiceLocale = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceLocale(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceLocale_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *FindOrCreatePartnersResponsePartner
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceLocale() // Should return zero value
 	})
 
 	t.Run("GetCreditLimit", func(t *testing.T) {
@@ -27677,6 +28059,68 @@ func TestSettersMarkExplicitFindOrCreatePartnersResponsePartner(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersResponsePartner{}
+		var fernTestValueInvoiceCurrency *string
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FindOrCreatePartnersResponsePartner{}
+		var fernTestValueInvoiceLocale *string
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -29495,6 +29939,22 @@ func TestSettersGetPartnersResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &GetPartnersResponse{}
+		var fernTestValueInvoiceCurrency *string
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &GetPartnersResponse{}
+		var fernTestValueInvoiceLocale *string
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &GetPartnersResponse{}
 		var fernTestValueCreditLimit *string
@@ -30083,6 +30543,72 @@ func TestGettersGetPartnersResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPaymentTermDays() // Should return zero value
+	})
+
+	t.Run("GetInvoiceCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetPartnersResponse{}
+		var expected *string
+		obj.InvoiceCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceCurrency_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetPartnersResponse{}
+		obj.InvoiceCurrency = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceCurrency(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetPartnersResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceCurrency() // Should return zero value
+	})
+
+	t.Run("GetInvoiceLocale", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetPartnersResponse{}
+		var expected *string
+		obj.InvoiceLocale = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceLocale(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceLocale_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetPartnersResponse{}
+		obj.InvoiceLocale = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceLocale(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceLocale_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetPartnersResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceLocale() // Should return zero value
 	})
 
 	t.Run("GetCreditLimit", func(t *testing.T) {
@@ -31266,6 +31792,68 @@ func TestSettersMarkExplicitGetPartnersResponse(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetPartnersResponse{}
+		var fernTestValueInvoiceCurrency *string
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetPartnersResponse{}
+		var fernTestValueInvoiceLocale *string
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -39949,6 +40537,22 @@ func TestSettersListPartnersResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &ListPartnersResponseRowsItem{}
+		var fernTestValueInvoiceCurrency *string
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &ListPartnersResponseRowsItem{}
+		var fernTestValueInvoiceLocale *string
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &ListPartnersResponseRowsItem{}
 		var fernTestValueCreditLimit *string
@@ -40537,6 +41141,72 @@ func TestGettersListPartnersResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPaymentTermDays() // Should return zero value
+	})
+
+	t.Run("GetInvoiceCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListPartnersResponseRowsItem{}
+		var expected *string
+		obj.InvoiceCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceCurrency_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListPartnersResponseRowsItem{}
+		obj.InvoiceCurrency = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceCurrency(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListPartnersResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceCurrency() // Should return zero value
+	})
+
+	t.Run("GetInvoiceLocale", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListPartnersResponseRowsItem{}
+		var expected *string
+		obj.InvoiceLocale = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceLocale(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceLocale_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListPartnersResponseRowsItem{}
+		obj.InvoiceLocale = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceLocale(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceLocale_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListPartnersResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceLocale() // Should return zero value
 	})
 
 	t.Run("GetCreditLimit", func(t *testing.T) {
@@ -41720,6 +42390,68 @@ func TestSettersMarkExplicitListPartnersResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListPartnersResponseRowsItem{}
+		var fernTestValueInvoiceCurrency *string
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListPartnersResponseRowsItem{}
+		var fernTestValueInvoiceLocale *string
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -45929,6 +46661,22 @@ func TestSettersUpdatePartnersResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &UpdatePartnersResponse{}
+		var fernTestValueInvoiceCurrency *string
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &UpdatePartnersResponse{}
+		var fernTestValueInvoiceLocale *string
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &UpdatePartnersResponse{}
 		var fernTestValueCreditLimit *string
@@ -46517,6 +47265,72 @@ func TestGettersUpdatePartnersResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPaymentTermDays() // Should return zero value
+	})
+
+	t.Run("GetInvoiceCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersResponse{}
+		var expected *string
+		obj.InvoiceCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceCurrency_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersResponse{}
+		obj.InvoiceCurrency = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceCurrency(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdatePartnersResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceCurrency() // Should return zero value
+	})
+
+	t.Run("GetInvoiceLocale", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersResponse{}
+		var expected *string
+		obj.InvoiceLocale = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceLocale(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceLocale_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersResponse{}
+		obj.InvoiceLocale = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceLocale(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceLocale_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdatePartnersResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceLocale() // Should return zero value
 	})
 
 	t.Run("GetCreditLimit", func(t *testing.T) {
@@ -47700,6 +48514,68 @@ func TestSettersMarkExplicitUpdatePartnersResponse(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersResponse{}
+		var fernTestValueInvoiceCurrency *string
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersResponse{}
+		var fernTestValueInvoiceLocale *string
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -53104,6 +53980,22 @@ func TestSettersUpdatePartnersRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceCurrency", func(t *testing.T) {
+		obj := &UpdatePartnersRequest{}
+		var fernTestValueInvoiceCurrency *UpdatePartnersRequestInvoiceCurrency
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+		assert.Equal(t, fernTestValueInvoiceCurrency, obj.InvoiceCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetInvoiceLocale", func(t *testing.T) {
+		obj := &UpdatePartnersRequest{}
+		var fernTestValueInvoiceLocale *UpdatePartnersRequestInvoiceLocale
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
+		assert.Equal(t, fernTestValueInvoiceLocale, obj.InvoiceLocale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreditLimit", func(t *testing.T) {
 		obj := &UpdatePartnersRequest{}
 		var fernTestValueCreditLimit *string
@@ -53663,6 +54555,68 @@ func TestSettersMarkExplicitUpdatePartnersRequest(t *testing.T) {
 
 		// Act
 		obj.SetPaymentTermDays(fernTestValuePaymentTermDays)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersRequest{}
+		var fernTestValueInvoiceCurrency *UpdatePartnersRequestInvoiceCurrency
+
+		// Act
+		obj.SetInvoiceCurrency(fernTestValueInvoiceCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceLocale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdatePartnersRequest{}
+		var fernTestValueInvoiceLocale *UpdatePartnersRequestInvoiceLocale
+
+		// Act
+		obj.SetInvoiceLocale(fernTestValueInvoiceLocale)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -59532,6 +60486,855 @@ func TestEnumContactsListPartnersRequestSortItemDir(t *testing.T) {
 	})
 }
 
+func TestEnumCreatePartnersRequestInvoiceCurrency(t *testing.T) {
+	t.Run("NewFromString_EUR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("EUR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("EUR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_USD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("USD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("USD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GBP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("GBP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("GBP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PLN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("PLN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("PLN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SEK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("SEK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("SEK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_NOK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("NOK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("NOK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DKK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("DKK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("DKK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CHF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("CHF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("CHF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CZK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("CZK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("CZK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_HUF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("HUF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("HUF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_RON", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("RON")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("RON"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("AED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("AED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AFN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("AFN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("AFN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ALL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("ALL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("ALL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AMD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("AMD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("AMD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ARS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("ARS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("ARS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AUD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("AUD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("AUD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AZN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("AZN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("AZN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BAM", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("BAM")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("BAM"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BDT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("BDT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("BDT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BHD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("BHD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("BHD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BOB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("BOB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("BOB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BRL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("BRL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("BRL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BYN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("BYN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("BYN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CAD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("CAD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("CAD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CLP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("CLP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("CLP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CNY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("CNY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("CNY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_COP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("COP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("COP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DJF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("DJF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("DJF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DZD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("DZD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("DZD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_EGP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("EGP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("EGP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ETB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("ETB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("ETB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GEL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("GEL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("GEL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GNF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("GNF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("GNF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_HKD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("HKD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("HKD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IDR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("IDR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("IDR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ILS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("ILS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("ILS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_INR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("INR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("INR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IQD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("IQD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("IQD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IRR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("IRR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("IRR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ISK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("ISK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("ISK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_JOD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("JOD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("JOD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_JPY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("JPY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("JPY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KES", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("KES")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("KES"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KGS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("KGS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("KGS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KRW", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("KRW")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("KRW"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KWD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("KWD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("KWD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KZT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("KZT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("KZT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LBP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("LBP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("LBP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LKR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("LKR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("LKR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LYD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("LYD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("LYD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MAD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MAD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MAD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MDL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MDL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MDL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MGA", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MGA")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MGA"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MKD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MKD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MKD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MNT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MNT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MNT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MXN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MXN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MXN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MYR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MYR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MYR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MZN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("MZN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("MZN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_NZD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("NZD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("NZD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PAB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("PAB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("PAB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PEN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("PEN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("PEN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PHP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("PHP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("PHP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PKR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("PKR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("PKR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_QAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("QAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("QAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_RSD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("RSD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("RSD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("SAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("SAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SGD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("SGD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("SGD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SYP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("SYP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("SYP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_THB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("THB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("THB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TJS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("TJS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("TJS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TMT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("TMT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("TMT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TND", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("TND")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("TND"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TRY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("TRY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("TRY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TWD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("TWD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("TWD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TZS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("TZS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("TZS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UAH", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("UAH")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("UAH"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UYU", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("UYU")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("UYU"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UZS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("UZS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("UZS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_VES", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("VES")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("VES"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_VND", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("VND")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("VND"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_XAF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("XAF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("XAF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_XOF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("XOF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("XOF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_YER", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("YER")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("YER"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ZAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("ZAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceCurrency("ZAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreatePartnersRequestInvoiceCurrencyFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreatePartnersRequestInvoiceCurrencyFromString("EUR")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCreatePartnersRequestInvoiceLocale(t *testing.T) {
+	t.Run("NewFromString_en", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("en")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("en"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("lt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("lt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_de", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("de")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("de"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreatePartnersRequestInvoiceLocaleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("en")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumCreatePartnersRequestLegalCountryClass(t *testing.T) {
 	t.Run("NewFromString_lt", func(t *testing.T) {
 		t.Parallel()
@@ -59835,6 +61638,855 @@ func TestEnumDebtRemindersUpcomingPartnersResponseRowsItemKind(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewDebtRemindersUpcomingPartnersResponseRowsItemKindFromString("before_due")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumFindOrCreatePartnersRequestInvoiceCurrency(t *testing.T) {
+	t.Run("NewFromString_EUR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("EUR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("EUR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_USD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("USD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("USD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GBP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("GBP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("GBP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PLN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("PLN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("PLN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SEK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("SEK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("SEK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_NOK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("NOK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("NOK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DKK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("DKK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("DKK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CHF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("CHF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("CHF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CZK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("CZK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("CZK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_HUF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("HUF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("HUF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_RON", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("RON")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("RON"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("AED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("AED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AFN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("AFN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("AFN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ALL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("ALL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("ALL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AMD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("AMD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("AMD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ARS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("ARS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("ARS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AUD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("AUD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("AUD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AZN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("AZN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("AZN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BAM", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("BAM")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("BAM"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BDT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("BDT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("BDT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BHD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("BHD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("BHD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BOB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("BOB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("BOB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BRL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("BRL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("BRL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BYN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("BYN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("BYN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CAD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("CAD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("CAD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CLP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("CLP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("CLP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CNY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("CNY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("CNY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_COP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("COP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("COP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DJF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("DJF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("DJF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DZD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("DZD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("DZD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_EGP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("EGP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("EGP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ETB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("ETB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("ETB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GEL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("GEL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("GEL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GNF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("GNF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("GNF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_HKD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("HKD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("HKD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IDR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("IDR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("IDR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ILS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("ILS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("ILS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_INR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("INR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("INR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IQD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("IQD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("IQD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IRR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("IRR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("IRR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ISK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("ISK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("ISK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_JOD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("JOD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("JOD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_JPY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("JPY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("JPY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KES", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("KES")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("KES"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KGS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("KGS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("KGS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KRW", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("KRW")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("KRW"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KWD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("KWD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("KWD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KZT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("KZT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("KZT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LBP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("LBP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("LBP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LKR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("LKR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("LKR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LYD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("LYD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("LYD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MAD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MAD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MAD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MDL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MDL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MDL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MGA", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MGA")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MGA"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MKD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MKD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MKD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MNT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MNT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MNT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MXN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MXN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MXN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MYR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MYR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MYR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MZN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("MZN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("MZN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_NZD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("NZD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("NZD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PAB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("PAB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("PAB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PEN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("PEN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("PEN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PHP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("PHP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("PHP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PKR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("PKR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("PKR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_QAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("QAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("QAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_RSD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("RSD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("RSD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("SAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("SAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SGD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("SGD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("SGD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SYP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("SYP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("SYP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_THB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("THB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("THB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TJS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("TJS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("TJS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TMT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("TMT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("TMT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TND", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("TND")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("TND"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TRY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("TRY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("TRY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TWD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("TWD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("TWD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TZS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("TZS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("TZS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UAH", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("UAH")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("UAH"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UYU", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("UYU")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("UYU"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UZS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("UZS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("UZS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_VES", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("VES")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("VES"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_VND", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("VND")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("VND"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_XAF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("XAF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("XAF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_XOF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("XOF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("XOF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_YER", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("YER")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("YER"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ZAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("ZAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceCurrency("ZAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewFindOrCreatePartnersRequestInvoiceCurrencyFromString("EUR")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumFindOrCreatePartnersRequestInvoiceLocale(t *testing.T) {
+	t.Run("NewFromString_en", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("en")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("en"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("lt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("lt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_de", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("de")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("de"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("en")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -60447,6 +63099,855 @@ func TestEnumListPartnersResponseRowsItemType(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewListPartnersResponseRowsItemTypeFromString("company")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumUpdatePartnersRequestInvoiceCurrency(t *testing.T) {
+	t.Run("NewFromString_EUR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("EUR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("EUR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_USD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("USD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("USD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GBP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("GBP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("GBP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PLN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("PLN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("PLN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SEK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("SEK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("SEK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_NOK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("NOK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("NOK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DKK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("DKK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("DKK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CHF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("CHF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("CHF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CZK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("CZK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("CZK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_HUF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("HUF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("HUF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_RON", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("RON")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("RON"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AED", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("AED")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("AED"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AFN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("AFN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("AFN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ALL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("ALL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("ALL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AMD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("AMD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("AMD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ARS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("ARS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("ARS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AUD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("AUD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("AUD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_AZN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("AZN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("AZN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BAM", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("BAM")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("BAM"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BDT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("BDT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("BDT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BHD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("BHD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("BHD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BOB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("BOB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("BOB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BRL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("BRL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("BRL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_BYN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("BYN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("BYN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CAD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("CAD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("CAD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CLP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("CLP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("CLP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_CNY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("CNY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("CNY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_COP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("COP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("COP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DJF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("DJF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("DJF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_DZD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("DZD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("DZD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_EGP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("EGP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("EGP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ETB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("ETB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("ETB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GEL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("GEL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("GEL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_GNF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("GNF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("GNF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_HKD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("HKD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("HKD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IDR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("IDR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("IDR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ILS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("ILS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("ILS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_INR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("INR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("INR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IQD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("IQD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("IQD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_IRR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("IRR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("IRR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ISK", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("ISK")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("ISK"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_JOD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("JOD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("JOD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_JPY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("JPY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("JPY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KES", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("KES")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("KES"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KGS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("KGS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("KGS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KRW", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("KRW")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("KRW"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KWD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("KWD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("KWD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_KZT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("KZT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("KZT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LBP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("LBP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("LBP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LKR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("LKR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("LKR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_LYD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("LYD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("LYD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MAD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MAD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MAD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MDL", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MDL")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MDL"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MGA", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MGA")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MGA"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MKD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MKD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MKD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MNT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MNT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MNT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MXN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MXN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MXN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MYR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MYR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MYR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_MZN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("MZN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("MZN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_NZD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("NZD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("NZD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PAB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("PAB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("PAB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PEN", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("PEN")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("PEN"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PHP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("PHP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("PHP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_PKR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("PKR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("PKR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_QAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("QAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("QAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_RSD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("RSD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("RSD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("SAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("SAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SGD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("SGD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("SGD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_SYP", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("SYP")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("SYP"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_THB", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("THB")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("THB"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TJS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("TJS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("TJS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TMT", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("TMT")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("TMT"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TND", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("TND")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("TND"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TRY", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("TRY")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("TRY"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TWD", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("TWD")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("TWD"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_TZS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("TZS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("TZS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UAH", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("UAH")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("UAH"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UYU", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("UYU")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("UYU"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_UZS", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("UZS")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("UZS"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_VES", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("VES")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("VES"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_VND", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("VND")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("VND"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_XAF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("XAF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("XAF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_XOF", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("XOF")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("XOF"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_YER", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("YER")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("YER"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ZAR", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("ZAR")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceCurrency("ZAR"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUpdatePartnersRequestInvoiceCurrencyFromString("EUR")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumUpdatePartnersRequestInvoiceLocale(t *testing.T) {
+	t.Run("NewFromString_en", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("en")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("en"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("lt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("lt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_de", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("de")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("de"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUpdatePartnersRequestInvoiceLocaleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("en")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

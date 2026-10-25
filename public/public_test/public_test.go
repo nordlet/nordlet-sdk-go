@@ -130,3 +130,81 @@ func TestPublicPayWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestPublicPayWithWireMock", "GET", "/v1/public/pay/token", nil, 1)
 }
+
+func TestPublicInvoicesGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesGetPublicRequest{
+		Token: "token",
+	}
+	_, invocationErr := client.Public.InvoicesGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPublicInvoicesGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPublicInvoicesGetWithWireMock", "POST", "/v1/public/invoices/get", nil, 1)
+}
+
+func TestPublicInvoicesCheckoutWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesCheckoutPublicRequest{
+		Token: "token",
+	}
+	_, invocationErr := client.Public.InvoicesCheckout(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPublicInvoicesCheckoutWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPublicInvoicesCheckoutWithWireMock", "POST", "/v1/public/invoices/checkout", nil, 1)
+}
+
+func TestPublicInvoicesPdfWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesPdfPublicRequest{
+		Token: "token",
+	}
+	_, invocationErr := client.Public.InvoicesPdf(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPublicInvoicesPdfWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPublicInvoicesPdfWithWireMock", "POST", "/v1/public/invoices/pdf", nil, 1)
+}

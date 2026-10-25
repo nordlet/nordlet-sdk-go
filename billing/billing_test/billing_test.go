@@ -308,6 +308,30 @@ func TestBillingFlatRateConfirmWithWireMock(
 	VerifyRequestCount(t, "TestBillingFlatRateConfirmWithWireMock", "POST", "/v1/billing/flat-rate/confirm", nil, 1)
 }
 
+func TestBillingSubscriptionCancelWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SubscriptionCancelBillingRequest{}
+	_, invocationErr := client.Billing.SubscriptionCancel(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingSubscriptionCancelWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingSubscriptionCancelWithWireMock", "POST", "/v1/billing/subscription/cancel", nil, 1)
+}
+
 func TestBillingPortalCreateWithWireMock(
 	t *testing.T,
 ) {

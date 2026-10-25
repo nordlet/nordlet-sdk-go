@@ -51,7 +51,7 @@ func (c *Client) IntegrationRequests(
 	return response.Body, nil
 }
 
-// Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice or the company has no template, and 409 when the invoice is already paid.
+// Redirect (302) to the company's payment page for the issued invoice that carries this payment token, rendered from the template set with `sales/invoices/payment-settings/update` with the invoice number, the amount still unpaid, the currency, the token, the invoice id and the customer name (see `sales/invoices/payment-link`). Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no template, and 409 when the invoice is already paid.
 func (c *Client) Pay(
 	ctx context.Context,
 	request *nordlet.PayPublicRequest,
@@ -66,4 +66,55 @@ func (c *Client) Pay(
 		return err
 	}
 	return nil
+}
+
+// Return the issued sale document that carries this customer token (`token` of `sales/invoices/view`), in the shape of `sales/invoices/view` without the token. Answers 404 when the token matches no issued document.
+func (c *Client) InvoicesGet(
+	ctx context.Context,
+	request *nordlet.InvoicesGetPublicRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoicesGetPublicResponse, error) {
+	response, err := c.WithRawResponse.InvoicesGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Open a Stripe Checkout page on the company's connected Stripe account for the amount still unpaid on the issued invoice that carries this customer token, and return its `url`. Stripe sends the customer back to the public invoice page. Answers 404 when the token matches no issued invoice, the invoice has `payLinkEnabled` false or the company has no Stripe account that can take charges, 409 when the invoice is already paid and 422 when Stripe cannot take the amount in the invoice currency.
+func (c *Client) InvoicesCheckout(
+	ctx context.Context,
+	request *nordlet.InvoicesCheckoutPublicRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoicesCheckoutPublicResponse, error) {
+	response, err := c.WithRawResponse.InvoicesCheckout(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Return the PDF of the issued sale document that carries this customer token, base64-encoded, as `sales/invoices/pdf` renders it in the document's own language, English when it has none. Answers 404 when the token matches no issued document.
+func (c *Client) InvoicesPdf(
+	ctx context.Context,
+	request *nordlet.InvoicesPdfPublicRequest,
+	opts ...option.RequestOption,
+) (*nordlet.InvoicesPdfPublicResponse, error) {
+	response, err := c.WithRawResponse.InvoicesPdf(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
 }

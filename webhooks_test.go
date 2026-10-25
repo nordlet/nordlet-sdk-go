@@ -6181,6 +6181,13 @@ func TestEnumSubscriptionsCreateWebhooksRequestEventsItem(t *testing.T) {
 		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sale_invoice.peppol_sent"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_sale_invoice_quote_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sale_invoice.quote_sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsCreateWebhooksRequestEventsItem("sale_invoice.quote_sent"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_sale_invoice_sent", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewSubscriptionsCreateWebhooksRequestEventsItemFromString("sale_invoice.sent")
@@ -6674,6 +6681,13 @@ func TestEnumSubscriptionsUpdateWebhooksRequestEventsItem(t *testing.T) {
 		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sale_invoice.peppol_sent")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sale_invoice.peppol_sent"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sale_invoice_quote_sent", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionsUpdateWebhooksRequestEventsItemFromString("sale_invoice.quote_sent")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionsUpdateWebhooksRequestEventsItem("sale_invoice.quote_sent"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_sale_invoice_sent", func(t *testing.T) {

@@ -1020,43 +1020,49 @@ var (
 	createPartnersRequestFieldIsCustomer            = big.NewInt(1 << 9)
 	createPartnersRequestFieldIsSupplier            = big.NewInt(1 << 10)
 	createPartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 11)
-	createPartnersRequestFieldCreditLimit           = big.NewInt(1 << 12)
-	createPartnersRequestFieldPriceListID           = big.NewInt(1 << 13)
-	createPartnersRequestFieldGroupID               = big.NewInt(1 << 14)
-	createPartnersRequestFieldStatusID              = big.NewInt(1 << 15)
-	createPartnersRequestFieldAddress               = big.NewInt(1 << 16)
-	createPartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 17)
-	createPartnersRequestFieldNotes                 = big.NewInt(1 << 18)
-	createPartnersRequestFieldDocumentRef           = big.NewInt(1 << 19)
-	createPartnersRequestFieldShortName             = big.NewInt(1 << 20)
-	createPartnersRequestFieldWebsite               = big.NewInt(1 << 21)
-	createPartnersRequestFieldFax                   = big.NewInt(1 << 22)
-	createPartnersRequestFieldEoriCode              = big.NewInt(1 << 23)
-	createPartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 24)
-	createPartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 25)
-	createPartnersRequestFieldFirstCallDate         = big.NewInt(1 << 26)
-	createPartnersRequestFieldLastCallDate          = big.NewInt(1 << 27)
-	createPartnersRequestFieldNextCallDate          = big.NewInt(1 << 28)
-	createPartnersRequestFieldRating                = big.NewInt(1 << 29)
-	createPartnersRequestFieldIsEmployee            = big.NewInt(1 << 30)
-	createPartnersRequestFieldIsGroupMember         = big.NewInt(1 << 31)
-	createPartnersRequestFieldIsActive              = big.NewInt(1 << 32)
-	createPartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 33)
+	createPartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 12)
+	createPartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 13)
+	createPartnersRequestFieldCreditLimit           = big.NewInt(1 << 14)
+	createPartnersRequestFieldPriceListID           = big.NewInt(1 << 15)
+	createPartnersRequestFieldGroupID               = big.NewInt(1 << 16)
+	createPartnersRequestFieldStatusID              = big.NewInt(1 << 17)
+	createPartnersRequestFieldAddress               = big.NewInt(1 << 18)
+	createPartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 19)
+	createPartnersRequestFieldNotes                 = big.NewInt(1 << 20)
+	createPartnersRequestFieldDocumentRef           = big.NewInt(1 << 21)
+	createPartnersRequestFieldShortName             = big.NewInt(1 << 22)
+	createPartnersRequestFieldWebsite               = big.NewInt(1 << 23)
+	createPartnersRequestFieldFax                   = big.NewInt(1 << 24)
+	createPartnersRequestFieldEoriCode              = big.NewInt(1 << 25)
+	createPartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
+	createPartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
+	createPartnersRequestFieldFirstCallDate         = big.NewInt(1 << 28)
+	createPartnersRequestFieldLastCallDate          = big.NewInt(1 << 29)
+	createPartnersRequestFieldNextCallDate          = big.NewInt(1 << 30)
+	createPartnersRequestFieldRating                = big.NewInt(1 << 31)
+	createPartnersRequestFieldIsEmployee            = big.NewInt(1 << 32)
+	createPartnersRequestFieldIsGroupMember         = big.NewInt(1 << 33)
+	createPartnersRequestFieldIsActive              = big.NewInt(1 << 34)
+	createPartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
 )
 
 type CreatePartnersRequest struct {
-	Type                  *CreatePartnersRequestType                  `json:"type,omitempty" url:"-"`
-	Name                  string                                      `json:"name" url:"-"`
-	Code                  *string                                     `json:"code,omitempty" url:"-"`
-	VatCode               *string                                     `json:"vatCode,omitempty" url:"-"`
-	PeppolID              *string                                     `json:"peppolId,omitempty" url:"-"`
-	Email                 *string                                     `json:"email,omitempty" url:"-"`
-	Phone                 *string                                     `json:"phone,omitempty" url:"-"`
-	SelfEmploymentCertNo  *string                                     `json:"selfEmploymentCertNo,omitempty" url:"-"`
-	BirthDate             *time.Time                                  `json:"birthDate,omitempty" url:"-" format:"date"`
-	IsCustomer            *bool                                       `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier            *bool                                       `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays       *int64                                      `json:"paymentTermDays,omitempty" url:"-"`
+	Type                 *CreatePartnersRequestType `json:"type,omitempty" url:"-"`
+	Name                 string                     `json:"name" url:"-"`
+	Code                 *string                    `json:"code,omitempty" url:"-"`
+	VatCode              *string                    `json:"vatCode,omitempty" url:"-"`
+	PeppolID             *string                    `json:"peppolId,omitempty" url:"-"`
+	Email                *string                    `json:"email,omitempty" url:"-"`
+	Phone                *string                    `json:"phone,omitempty" url:"-"`
+	SelfEmploymentCertNo *string                    `json:"selfEmploymentCertNo,omitempty" url:"-"`
+	BirthDate            *time.Time                 `json:"birthDate,omitempty" url:"-" format:"date"`
+	IsCustomer           *bool                      `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier           *bool                      `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays      *int64                     `json:"paymentTermDays,omitempty" url:"-"`
+	// Currency a new invoice for this partner starts with when the invoice names none
+	InvoiceCurrency *CreatePartnersRequestInvoiceCurrency `json:"invoiceCurrency,omitempty" url:"-"`
+	// Language a new invoice for this partner starts with when the invoice names none
+	InvoiceLocale         *CreatePartnersRequestInvoiceLocale         `json:"invoiceLocale,omitempty" url:"-"`
 	CreditLimit           *string                                     `json:"creditLimit,omitempty" url:"-"`
 	PriceListID           *string                                     `json:"priceListId,omitempty" url:"-"`
 	GroupID               *string                                     `json:"groupId,omitempty" url:"-"`
@@ -1173,6 +1179,20 @@ func (c *CreatePartnersRequest) SetIsSupplier(isSupplier *bool) {
 func (c *CreatePartnersRequest) SetPaymentTermDays(paymentTermDays *int64) {
 	c.PaymentTermDays = paymentTermDays
 	c.require(createPartnersRequestFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersRequest) SetInvoiceCurrency(invoiceCurrency *CreatePartnersRequestInvoiceCurrency) {
+	c.InvoiceCurrency = invoiceCurrency
+	c.require(createPartnersRequestFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersRequest) SetInvoiceLocale(invoiceLocale *CreatePartnersRequestInvoiceLocale) {
+	c.InvoiceLocale = invoiceLocale
+	c.require(createPartnersRequestFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
@@ -1695,43 +1715,49 @@ var (
 	findOrCreatePartnersRequestFieldIsCustomer            = big.NewInt(1 << 9)
 	findOrCreatePartnersRequestFieldIsSupplier            = big.NewInt(1 << 10)
 	findOrCreatePartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 11)
-	findOrCreatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 12)
-	findOrCreatePartnersRequestFieldPriceListID           = big.NewInt(1 << 13)
-	findOrCreatePartnersRequestFieldGroupID               = big.NewInt(1 << 14)
-	findOrCreatePartnersRequestFieldStatusID              = big.NewInt(1 << 15)
-	findOrCreatePartnersRequestFieldAddress               = big.NewInt(1 << 16)
-	findOrCreatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 17)
-	findOrCreatePartnersRequestFieldNotes                 = big.NewInt(1 << 18)
-	findOrCreatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 19)
-	findOrCreatePartnersRequestFieldShortName             = big.NewInt(1 << 20)
-	findOrCreatePartnersRequestFieldWebsite               = big.NewInt(1 << 21)
-	findOrCreatePartnersRequestFieldFax                   = big.NewInt(1 << 22)
-	findOrCreatePartnersRequestFieldEoriCode              = big.NewInt(1 << 23)
-	findOrCreatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 24)
-	findOrCreatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 25)
-	findOrCreatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 26)
-	findOrCreatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 27)
-	findOrCreatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 28)
-	findOrCreatePartnersRequestFieldRating                = big.NewInt(1 << 29)
-	findOrCreatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 30)
-	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 31)
-	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 32)
-	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 33)
+	findOrCreatePartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 12)
+	findOrCreatePartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 13)
+	findOrCreatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 14)
+	findOrCreatePartnersRequestFieldPriceListID           = big.NewInt(1 << 15)
+	findOrCreatePartnersRequestFieldGroupID               = big.NewInt(1 << 16)
+	findOrCreatePartnersRequestFieldStatusID              = big.NewInt(1 << 17)
+	findOrCreatePartnersRequestFieldAddress               = big.NewInt(1 << 18)
+	findOrCreatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 19)
+	findOrCreatePartnersRequestFieldNotes                 = big.NewInt(1 << 20)
+	findOrCreatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 21)
+	findOrCreatePartnersRequestFieldShortName             = big.NewInt(1 << 22)
+	findOrCreatePartnersRequestFieldWebsite               = big.NewInt(1 << 23)
+	findOrCreatePartnersRequestFieldFax                   = big.NewInt(1 << 24)
+	findOrCreatePartnersRequestFieldEoriCode              = big.NewInt(1 << 25)
+	findOrCreatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
+	findOrCreatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
+	findOrCreatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 28)
+	findOrCreatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 29)
+	findOrCreatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 30)
+	findOrCreatePartnersRequestFieldRating                = big.NewInt(1 << 31)
+	findOrCreatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 32)
+	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 33)
+	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 34)
+	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
 )
 
 type FindOrCreatePartnersRequest struct {
-	Type                  *FindOrCreatePartnersRequestType                  `json:"type,omitempty" url:"-"`
-	Name                  string                                            `json:"name" url:"-"`
-	Code                  *string                                           `json:"code,omitempty" url:"-"`
-	VatCode               *string                                           `json:"vatCode,omitempty" url:"-"`
-	PeppolID              *string                                           `json:"peppolId,omitempty" url:"-"`
-	Email                 *string                                           `json:"email,omitempty" url:"-"`
-	Phone                 *string                                           `json:"phone,omitempty" url:"-"`
-	SelfEmploymentCertNo  *string                                           `json:"selfEmploymentCertNo,omitempty" url:"-"`
-	BirthDate             *time.Time                                        `json:"birthDate,omitempty" url:"-" format:"date"`
-	IsCustomer            *bool                                             `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier            *bool                                             `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays       *int64                                            `json:"paymentTermDays,omitempty" url:"-"`
+	Type                 *FindOrCreatePartnersRequestType `json:"type,omitempty" url:"-"`
+	Name                 string                           `json:"name" url:"-"`
+	Code                 *string                          `json:"code,omitempty" url:"-"`
+	VatCode              *string                          `json:"vatCode,omitempty" url:"-"`
+	PeppolID             *string                          `json:"peppolId,omitempty" url:"-"`
+	Email                *string                          `json:"email,omitempty" url:"-"`
+	Phone                *string                          `json:"phone,omitempty" url:"-"`
+	SelfEmploymentCertNo *string                          `json:"selfEmploymentCertNo,omitempty" url:"-"`
+	BirthDate            *time.Time                       `json:"birthDate,omitempty" url:"-" format:"date"`
+	IsCustomer           *bool                            `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier           *bool                            `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays      *int64                           `json:"paymentTermDays,omitempty" url:"-"`
+	// Currency a new invoice for this partner starts with when the invoice names none
+	InvoiceCurrency *FindOrCreatePartnersRequestInvoiceCurrency `json:"invoiceCurrency,omitempty" url:"-"`
+	// Language a new invoice for this partner starts with when the invoice names none
+	InvoiceLocale         *FindOrCreatePartnersRequestInvoiceLocale         `json:"invoiceLocale,omitempty" url:"-"`
 	CreditLimit           *string                                           `json:"creditLimit,omitempty" url:"-"`
 	PriceListID           *string                                           `json:"priceListId,omitempty" url:"-"`
 	GroupID               *string                                           `json:"groupId,omitempty" url:"-"`
@@ -1848,6 +1874,20 @@ func (f *FindOrCreatePartnersRequest) SetIsSupplier(isSupplier *bool) {
 func (f *FindOrCreatePartnersRequest) SetPaymentTermDays(paymentTermDays *int64) {
 	f.PaymentTermDays = paymentTermDays
 	f.require(findOrCreatePartnersRequestFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersRequest) SetInvoiceCurrency(invoiceCurrency *FindOrCreatePartnersRequestInvoiceCurrency) {
+	f.InvoiceCurrency = invoiceCurrency
+	f.require(findOrCreatePartnersRequestFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersRequest) SetInvoiceLocale(invoiceLocale *FindOrCreatePartnersRequestInvoiceLocale) {
+	f.InvoiceLocale = invoiceLocale
+	f.require(findOrCreatePartnersRequestFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
@@ -7376,6 +7416,391 @@ func (c *CreatePartnersRequestCorrespondenceAddress) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
+// Currency a new invoice for this partner starts with when the invoice names none
+type CreatePartnersRequestInvoiceCurrency string
+
+const (
+	CreatePartnersRequestInvoiceCurrencyEur CreatePartnersRequestInvoiceCurrency = "EUR"
+	CreatePartnersRequestInvoiceCurrencyUsd CreatePartnersRequestInvoiceCurrency = "USD"
+	CreatePartnersRequestInvoiceCurrencyGbp CreatePartnersRequestInvoiceCurrency = "GBP"
+	CreatePartnersRequestInvoiceCurrencyPln CreatePartnersRequestInvoiceCurrency = "PLN"
+	CreatePartnersRequestInvoiceCurrencySek CreatePartnersRequestInvoiceCurrency = "SEK"
+	CreatePartnersRequestInvoiceCurrencyNok CreatePartnersRequestInvoiceCurrency = "NOK"
+	CreatePartnersRequestInvoiceCurrencyDkk CreatePartnersRequestInvoiceCurrency = "DKK"
+	CreatePartnersRequestInvoiceCurrencyChf CreatePartnersRequestInvoiceCurrency = "CHF"
+	CreatePartnersRequestInvoiceCurrencyCzk CreatePartnersRequestInvoiceCurrency = "CZK"
+	CreatePartnersRequestInvoiceCurrencyHuf CreatePartnersRequestInvoiceCurrency = "HUF"
+	CreatePartnersRequestInvoiceCurrencyRon CreatePartnersRequestInvoiceCurrency = "RON"
+	CreatePartnersRequestInvoiceCurrencyAed CreatePartnersRequestInvoiceCurrency = "AED"
+	CreatePartnersRequestInvoiceCurrencyAfn CreatePartnersRequestInvoiceCurrency = "AFN"
+	CreatePartnersRequestInvoiceCurrencyAll CreatePartnersRequestInvoiceCurrency = "ALL"
+	CreatePartnersRequestInvoiceCurrencyAmd CreatePartnersRequestInvoiceCurrency = "AMD"
+	CreatePartnersRequestInvoiceCurrencyArs CreatePartnersRequestInvoiceCurrency = "ARS"
+	CreatePartnersRequestInvoiceCurrencyAud CreatePartnersRequestInvoiceCurrency = "AUD"
+	CreatePartnersRequestInvoiceCurrencyAzn CreatePartnersRequestInvoiceCurrency = "AZN"
+	CreatePartnersRequestInvoiceCurrencyBam CreatePartnersRequestInvoiceCurrency = "BAM"
+	CreatePartnersRequestInvoiceCurrencyBdt CreatePartnersRequestInvoiceCurrency = "BDT"
+	CreatePartnersRequestInvoiceCurrencyBhd CreatePartnersRequestInvoiceCurrency = "BHD"
+	CreatePartnersRequestInvoiceCurrencyBob CreatePartnersRequestInvoiceCurrency = "BOB"
+	CreatePartnersRequestInvoiceCurrencyBrl CreatePartnersRequestInvoiceCurrency = "BRL"
+	CreatePartnersRequestInvoiceCurrencyByn CreatePartnersRequestInvoiceCurrency = "BYN"
+	CreatePartnersRequestInvoiceCurrencyCad CreatePartnersRequestInvoiceCurrency = "CAD"
+	CreatePartnersRequestInvoiceCurrencyClp CreatePartnersRequestInvoiceCurrency = "CLP"
+	CreatePartnersRequestInvoiceCurrencyCny CreatePartnersRequestInvoiceCurrency = "CNY"
+	CreatePartnersRequestInvoiceCurrencyCop CreatePartnersRequestInvoiceCurrency = "COP"
+	CreatePartnersRequestInvoiceCurrencyDjf CreatePartnersRequestInvoiceCurrency = "DJF"
+	CreatePartnersRequestInvoiceCurrencyDzd CreatePartnersRequestInvoiceCurrency = "DZD"
+	CreatePartnersRequestInvoiceCurrencyEgp CreatePartnersRequestInvoiceCurrency = "EGP"
+	CreatePartnersRequestInvoiceCurrencyEtb CreatePartnersRequestInvoiceCurrency = "ETB"
+	CreatePartnersRequestInvoiceCurrencyGel CreatePartnersRequestInvoiceCurrency = "GEL"
+	CreatePartnersRequestInvoiceCurrencyGnf CreatePartnersRequestInvoiceCurrency = "GNF"
+	CreatePartnersRequestInvoiceCurrencyHkd CreatePartnersRequestInvoiceCurrency = "HKD"
+	CreatePartnersRequestInvoiceCurrencyIdr CreatePartnersRequestInvoiceCurrency = "IDR"
+	CreatePartnersRequestInvoiceCurrencyIls CreatePartnersRequestInvoiceCurrency = "ILS"
+	CreatePartnersRequestInvoiceCurrencyInr CreatePartnersRequestInvoiceCurrency = "INR"
+	CreatePartnersRequestInvoiceCurrencyIqd CreatePartnersRequestInvoiceCurrency = "IQD"
+	CreatePartnersRequestInvoiceCurrencyIrr CreatePartnersRequestInvoiceCurrency = "IRR"
+	CreatePartnersRequestInvoiceCurrencyIsk CreatePartnersRequestInvoiceCurrency = "ISK"
+	CreatePartnersRequestInvoiceCurrencyJod CreatePartnersRequestInvoiceCurrency = "JOD"
+	CreatePartnersRequestInvoiceCurrencyJpy CreatePartnersRequestInvoiceCurrency = "JPY"
+	CreatePartnersRequestInvoiceCurrencyKes CreatePartnersRequestInvoiceCurrency = "KES"
+	CreatePartnersRequestInvoiceCurrencyKgs CreatePartnersRequestInvoiceCurrency = "KGS"
+	CreatePartnersRequestInvoiceCurrencyKrw CreatePartnersRequestInvoiceCurrency = "KRW"
+	CreatePartnersRequestInvoiceCurrencyKwd CreatePartnersRequestInvoiceCurrency = "KWD"
+	CreatePartnersRequestInvoiceCurrencyKzt CreatePartnersRequestInvoiceCurrency = "KZT"
+	CreatePartnersRequestInvoiceCurrencyLbp CreatePartnersRequestInvoiceCurrency = "LBP"
+	CreatePartnersRequestInvoiceCurrencyLkr CreatePartnersRequestInvoiceCurrency = "LKR"
+	CreatePartnersRequestInvoiceCurrencyLyd CreatePartnersRequestInvoiceCurrency = "LYD"
+	CreatePartnersRequestInvoiceCurrencyMad CreatePartnersRequestInvoiceCurrency = "MAD"
+	CreatePartnersRequestInvoiceCurrencyMdl CreatePartnersRequestInvoiceCurrency = "MDL"
+	CreatePartnersRequestInvoiceCurrencyMga CreatePartnersRequestInvoiceCurrency = "MGA"
+	CreatePartnersRequestInvoiceCurrencyMkd CreatePartnersRequestInvoiceCurrency = "MKD"
+	CreatePartnersRequestInvoiceCurrencyMnt CreatePartnersRequestInvoiceCurrency = "MNT"
+	CreatePartnersRequestInvoiceCurrencyMxn CreatePartnersRequestInvoiceCurrency = "MXN"
+	CreatePartnersRequestInvoiceCurrencyMyr CreatePartnersRequestInvoiceCurrency = "MYR"
+	CreatePartnersRequestInvoiceCurrencyMzn CreatePartnersRequestInvoiceCurrency = "MZN"
+	CreatePartnersRequestInvoiceCurrencyNzd CreatePartnersRequestInvoiceCurrency = "NZD"
+	CreatePartnersRequestInvoiceCurrencyPab CreatePartnersRequestInvoiceCurrency = "PAB"
+	CreatePartnersRequestInvoiceCurrencyPen CreatePartnersRequestInvoiceCurrency = "PEN"
+	CreatePartnersRequestInvoiceCurrencyPhp CreatePartnersRequestInvoiceCurrency = "PHP"
+	CreatePartnersRequestInvoiceCurrencyPkr CreatePartnersRequestInvoiceCurrency = "PKR"
+	CreatePartnersRequestInvoiceCurrencyQar CreatePartnersRequestInvoiceCurrency = "QAR"
+	CreatePartnersRequestInvoiceCurrencyRsd CreatePartnersRequestInvoiceCurrency = "RSD"
+	CreatePartnersRequestInvoiceCurrencySar CreatePartnersRequestInvoiceCurrency = "SAR"
+	CreatePartnersRequestInvoiceCurrencySgd CreatePartnersRequestInvoiceCurrency = "SGD"
+	CreatePartnersRequestInvoiceCurrencySyp CreatePartnersRequestInvoiceCurrency = "SYP"
+	CreatePartnersRequestInvoiceCurrencyThb CreatePartnersRequestInvoiceCurrency = "THB"
+	CreatePartnersRequestInvoiceCurrencyTjs CreatePartnersRequestInvoiceCurrency = "TJS"
+	CreatePartnersRequestInvoiceCurrencyTmt CreatePartnersRequestInvoiceCurrency = "TMT"
+	CreatePartnersRequestInvoiceCurrencyTnd CreatePartnersRequestInvoiceCurrency = "TND"
+	CreatePartnersRequestInvoiceCurrencyTry CreatePartnersRequestInvoiceCurrency = "TRY"
+	CreatePartnersRequestInvoiceCurrencyTwd CreatePartnersRequestInvoiceCurrency = "TWD"
+	CreatePartnersRequestInvoiceCurrencyTzs CreatePartnersRequestInvoiceCurrency = "TZS"
+	CreatePartnersRequestInvoiceCurrencyUah CreatePartnersRequestInvoiceCurrency = "UAH"
+	CreatePartnersRequestInvoiceCurrencyUyu CreatePartnersRequestInvoiceCurrency = "UYU"
+	CreatePartnersRequestInvoiceCurrencyUzs CreatePartnersRequestInvoiceCurrency = "UZS"
+	CreatePartnersRequestInvoiceCurrencyVes CreatePartnersRequestInvoiceCurrency = "VES"
+	CreatePartnersRequestInvoiceCurrencyVnd CreatePartnersRequestInvoiceCurrency = "VND"
+	CreatePartnersRequestInvoiceCurrencyXaf CreatePartnersRequestInvoiceCurrency = "XAF"
+	CreatePartnersRequestInvoiceCurrencyXof CreatePartnersRequestInvoiceCurrency = "XOF"
+	CreatePartnersRequestInvoiceCurrencyYer CreatePartnersRequestInvoiceCurrency = "YER"
+	CreatePartnersRequestInvoiceCurrencyZar CreatePartnersRequestInvoiceCurrency = "ZAR"
+)
+
+func NewCreatePartnersRequestInvoiceCurrencyFromString(s string) (CreatePartnersRequestInvoiceCurrency, error) {
+	switch s {
+	case "EUR":
+		return CreatePartnersRequestInvoiceCurrencyEur, nil
+	case "USD":
+		return CreatePartnersRequestInvoiceCurrencyUsd, nil
+	case "GBP":
+		return CreatePartnersRequestInvoiceCurrencyGbp, nil
+	case "PLN":
+		return CreatePartnersRequestInvoiceCurrencyPln, nil
+	case "SEK":
+		return CreatePartnersRequestInvoiceCurrencySek, nil
+	case "NOK":
+		return CreatePartnersRequestInvoiceCurrencyNok, nil
+	case "DKK":
+		return CreatePartnersRequestInvoiceCurrencyDkk, nil
+	case "CHF":
+		return CreatePartnersRequestInvoiceCurrencyChf, nil
+	case "CZK":
+		return CreatePartnersRequestInvoiceCurrencyCzk, nil
+	case "HUF":
+		return CreatePartnersRequestInvoiceCurrencyHuf, nil
+	case "RON":
+		return CreatePartnersRequestInvoiceCurrencyRon, nil
+	case "AED":
+		return CreatePartnersRequestInvoiceCurrencyAed, nil
+	case "AFN":
+		return CreatePartnersRequestInvoiceCurrencyAfn, nil
+	case "ALL":
+		return CreatePartnersRequestInvoiceCurrencyAll, nil
+	case "AMD":
+		return CreatePartnersRequestInvoiceCurrencyAmd, nil
+	case "ARS":
+		return CreatePartnersRequestInvoiceCurrencyArs, nil
+	case "AUD":
+		return CreatePartnersRequestInvoiceCurrencyAud, nil
+	case "AZN":
+		return CreatePartnersRequestInvoiceCurrencyAzn, nil
+	case "BAM":
+		return CreatePartnersRequestInvoiceCurrencyBam, nil
+	case "BDT":
+		return CreatePartnersRequestInvoiceCurrencyBdt, nil
+	case "BHD":
+		return CreatePartnersRequestInvoiceCurrencyBhd, nil
+	case "BOB":
+		return CreatePartnersRequestInvoiceCurrencyBob, nil
+	case "BRL":
+		return CreatePartnersRequestInvoiceCurrencyBrl, nil
+	case "BYN":
+		return CreatePartnersRequestInvoiceCurrencyByn, nil
+	case "CAD":
+		return CreatePartnersRequestInvoiceCurrencyCad, nil
+	case "CLP":
+		return CreatePartnersRequestInvoiceCurrencyClp, nil
+	case "CNY":
+		return CreatePartnersRequestInvoiceCurrencyCny, nil
+	case "COP":
+		return CreatePartnersRequestInvoiceCurrencyCop, nil
+	case "DJF":
+		return CreatePartnersRequestInvoiceCurrencyDjf, nil
+	case "DZD":
+		return CreatePartnersRequestInvoiceCurrencyDzd, nil
+	case "EGP":
+		return CreatePartnersRequestInvoiceCurrencyEgp, nil
+	case "ETB":
+		return CreatePartnersRequestInvoiceCurrencyEtb, nil
+	case "GEL":
+		return CreatePartnersRequestInvoiceCurrencyGel, nil
+	case "GNF":
+		return CreatePartnersRequestInvoiceCurrencyGnf, nil
+	case "HKD":
+		return CreatePartnersRequestInvoiceCurrencyHkd, nil
+	case "IDR":
+		return CreatePartnersRequestInvoiceCurrencyIdr, nil
+	case "ILS":
+		return CreatePartnersRequestInvoiceCurrencyIls, nil
+	case "INR":
+		return CreatePartnersRequestInvoiceCurrencyInr, nil
+	case "IQD":
+		return CreatePartnersRequestInvoiceCurrencyIqd, nil
+	case "IRR":
+		return CreatePartnersRequestInvoiceCurrencyIrr, nil
+	case "ISK":
+		return CreatePartnersRequestInvoiceCurrencyIsk, nil
+	case "JOD":
+		return CreatePartnersRequestInvoiceCurrencyJod, nil
+	case "JPY":
+		return CreatePartnersRequestInvoiceCurrencyJpy, nil
+	case "KES":
+		return CreatePartnersRequestInvoiceCurrencyKes, nil
+	case "KGS":
+		return CreatePartnersRequestInvoiceCurrencyKgs, nil
+	case "KRW":
+		return CreatePartnersRequestInvoiceCurrencyKrw, nil
+	case "KWD":
+		return CreatePartnersRequestInvoiceCurrencyKwd, nil
+	case "KZT":
+		return CreatePartnersRequestInvoiceCurrencyKzt, nil
+	case "LBP":
+		return CreatePartnersRequestInvoiceCurrencyLbp, nil
+	case "LKR":
+		return CreatePartnersRequestInvoiceCurrencyLkr, nil
+	case "LYD":
+		return CreatePartnersRequestInvoiceCurrencyLyd, nil
+	case "MAD":
+		return CreatePartnersRequestInvoiceCurrencyMad, nil
+	case "MDL":
+		return CreatePartnersRequestInvoiceCurrencyMdl, nil
+	case "MGA":
+		return CreatePartnersRequestInvoiceCurrencyMga, nil
+	case "MKD":
+		return CreatePartnersRequestInvoiceCurrencyMkd, nil
+	case "MNT":
+		return CreatePartnersRequestInvoiceCurrencyMnt, nil
+	case "MXN":
+		return CreatePartnersRequestInvoiceCurrencyMxn, nil
+	case "MYR":
+		return CreatePartnersRequestInvoiceCurrencyMyr, nil
+	case "MZN":
+		return CreatePartnersRequestInvoiceCurrencyMzn, nil
+	case "NZD":
+		return CreatePartnersRequestInvoiceCurrencyNzd, nil
+	case "PAB":
+		return CreatePartnersRequestInvoiceCurrencyPab, nil
+	case "PEN":
+		return CreatePartnersRequestInvoiceCurrencyPen, nil
+	case "PHP":
+		return CreatePartnersRequestInvoiceCurrencyPhp, nil
+	case "PKR":
+		return CreatePartnersRequestInvoiceCurrencyPkr, nil
+	case "QAR":
+		return CreatePartnersRequestInvoiceCurrencyQar, nil
+	case "RSD":
+		return CreatePartnersRequestInvoiceCurrencyRsd, nil
+	case "SAR":
+		return CreatePartnersRequestInvoiceCurrencySar, nil
+	case "SGD":
+		return CreatePartnersRequestInvoiceCurrencySgd, nil
+	case "SYP":
+		return CreatePartnersRequestInvoiceCurrencySyp, nil
+	case "THB":
+		return CreatePartnersRequestInvoiceCurrencyThb, nil
+	case "TJS":
+		return CreatePartnersRequestInvoiceCurrencyTjs, nil
+	case "TMT":
+		return CreatePartnersRequestInvoiceCurrencyTmt, nil
+	case "TND":
+		return CreatePartnersRequestInvoiceCurrencyTnd, nil
+	case "TRY":
+		return CreatePartnersRequestInvoiceCurrencyTry, nil
+	case "TWD":
+		return CreatePartnersRequestInvoiceCurrencyTwd, nil
+	case "TZS":
+		return CreatePartnersRequestInvoiceCurrencyTzs, nil
+	case "UAH":
+		return CreatePartnersRequestInvoiceCurrencyUah, nil
+	case "UYU":
+		return CreatePartnersRequestInvoiceCurrencyUyu, nil
+	case "UZS":
+		return CreatePartnersRequestInvoiceCurrencyUzs, nil
+	case "VES":
+		return CreatePartnersRequestInvoiceCurrencyVes, nil
+	case "VND":
+		return CreatePartnersRequestInvoiceCurrencyVnd, nil
+	case "XAF":
+		return CreatePartnersRequestInvoiceCurrencyXaf, nil
+	case "XOF":
+		return CreatePartnersRequestInvoiceCurrencyXof, nil
+	case "YER":
+		return CreatePartnersRequestInvoiceCurrencyYer, nil
+	case "ZAR":
+		return CreatePartnersRequestInvoiceCurrencyZar, nil
+	}
+	var t CreatePartnersRequestInvoiceCurrency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CreatePartnersRequestInvoiceCurrency) Ptr() *CreatePartnersRequestInvoiceCurrency {
+	return &c
+}
+
+// Language a new invoice for this partner starts with when the invoice names none
+type CreatePartnersRequestInvoiceLocale string
+
+const (
+	CreatePartnersRequestInvoiceLocaleEn CreatePartnersRequestInvoiceLocale = "en"
+	CreatePartnersRequestInvoiceLocaleLt CreatePartnersRequestInvoiceLocale = "lt"
+	CreatePartnersRequestInvoiceLocaleDe CreatePartnersRequestInvoiceLocale = "de"
+	CreatePartnersRequestInvoiceLocaleFr CreatePartnersRequestInvoiceLocale = "fr"
+	CreatePartnersRequestInvoiceLocaleEs CreatePartnersRequestInvoiceLocale = "es"
+	CreatePartnersRequestInvoiceLocaleIt CreatePartnersRequestInvoiceLocale = "it"
+	CreatePartnersRequestInvoiceLocalePt CreatePartnersRequestInvoiceLocale = "pt"
+	CreatePartnersRequestInvoiceLocaleNl CreatePartnersRequestInvoiceLocale = "nl"
+	CreatePartnersRequestInvoiceLocalePl CreatePartnersRequestInvoiceLocale = "pl"
+	CreatePartnersRequestInvoiceLocaleSv CreatePartnersRequestInvoiceLocale = "sv"
+	CreatePartnersRequestInvoiceLocaleDa CreatePartnersRequestInvoiceLocale = "da"
+	CreatePartnersRequestInvoiceLocaleNo CreatePartnersRequestInvoiceLocale = "no"
+	CreatePartnersRequestInvoiceLocaleFi CreatePartnersRequestInvoiceLocale = "fi"
+	CreatePartnersRequestInvoiceLocaleEt CreatePartnersRequestInvoiceLocale = "et"
+	CreatePartnersRequestInvoiceLocaleLv CreatePartnersRequestInvoiceLocale = "lv"
+	CreatePartnersRequestInvoiceLocaleCs CreatePartnersRequestInvoiceLocale = "cs"
+	CreatePartnersRequestInvoiceLocaleSk CreatePartnersRequestInvoiceLocale = "sk"
+	CreatePartnersRequestInvoiceLocaleHu CreatePartnersRequestInvoiceLocale = "hu"
+	CreatePartnersRequestInvoiceLocaleRo CreatePartnersRequestInvoiceLocale = "ro"
+	CreatePartnersRequestInvoiceLocaleBg CreatePartnersRequestInvoiceLocale = "bg"
+	CreatePartnersRequestInvoiceLocaleHr CreatePartnersRequestInvoiceLocale = "hr"
+	CreatePartnersRequestInvoiceLocaleSl CreatePartnersRequestInvoiceLocale = "sl"
+	CreatePartnersRequestInvoiceLocaleEl CreatePartnersRequestInvoiceLocale = "el"
+	CreatePartnersRequestInvoiceLocaleMt CreatePartnersRequestInvoiceLocale = "mt"
+	CreatePartnersRequestInvoiceLocaleIs CreatePartnersRequestInvoiceLocale = "is"
+	CreatePartnersRequestInvoiceLocaleGa CreatePartnersRequestInvoiceLocale = "ga"
+	CreatePartnersRequestInvoiceLocaleZh CreatePartnersRequestInvoiceLocale = "zh"
+	CreatePartnersRequestInvoiceLocaleJa CreatePartnersRequestInvoiceLocale = "ja"
+	CreatePartnersRequestInvoiceLocaleAr CreatePartnersRequestInvoiceLocale = "ar"
+	CreatePartnersRequestInvoiceLocaleHi CreatePartnersRequestInvoiceLocale = "hi"
+	CreatePartnersRequestInvoiceLocaleRu CreatePartnersRequestInvoiceLocale = "ru"
+	CreatePartnersRequestInvoiceLocaleTr CreatePartnersRequestInvoiceLocale = "tr"
+)
+
+func NewCreatePartnersRequestInvoiceLocaleFromString(s string) (CreatePartnersRequestInvoiceLocale, error) {
+	switch s {
+	case "en":
+		return CreatePartnersRequestInvoiceLocaleEn, nil
+	case "lt":
+		return CreatePartnersRequestInvoiceLocaleLt, nil
+	case "de":
+		return CreatePartnersRequestInvoiceLocaleDe, nil
+	case "fr":
+		return CreatePartnersRequestInvoiceLocaleFr, nil
+	case "es":
+		return CreatePartnersRequestInvoiceLocaleEs, nil
+	case "it":
+		return CreatePartnersRequestInvoiceLocaleIt, nil
+	case "pt":
+		return CreatePartnersRequestInvoiceLocalePt, nil
+	case "nl":
+		return CreatePartnersRequestInvoiceLocaleNl, nil
+	case "pl":
+		return CreatePartnersRequestInvoiceLocalePl, nil
+	case "sv":
+		return CreatePartnersRequestInvoiceLocaleSv, nil
+	case "da":
+		return CreatePartnersRequestInvoiceLocaleDa, nil
+	case "no":
+		return CreatePartnersRequestInvoiceLocaleNo, nil
+	case "fi":
+		return CreatePartnersRequestInvoiceLocaleFi, nil
+	case "et":
+		return CreatePartnersRequestInvoiceLocaleEt, nil
+	case "lv":
+		return CreatePartnersRequestInvoiceLocaleLv, nil
+	case "cs":
+		return CreatePartnersRequestInvoiceLocaleCs, nil
+	case "sk":
+		return CreatePartnersRequestInvoiceLocaleSk, nil
+	case "hu":
+		return CreatePartnersRequestInvoiceLocaleHu, nil
+	case "ro":
+		return CreatePartnersRequestInvoiceLocaleRo, nil
+	case "bg":
+		return CreatePartnersRequestInvoiceLocaleBg, nil
+	case "hr":
+		return CreatePartnersRequestInvoiceLocaleHr, nil
+	case "sl":
+		return CreatePartnersRequestInvoiceLocaleSl, nil
+	case "el":
+		return CreatePartnersRequestInvoiceLocaleEl, nil
+	case "mt":
+		return CreatePartnersRequestInvoiceLocaleMt, nil
+	case "is":
+		return CreatePartnersRequestInvoiceLocaleIs, nil
+	case "ga":
+		return CreatePartnersRequestInvoiceLocaleGa, nil
+	case "zh":
+		return CreatePartnersRequestInvoiceLocaleZh, nil
+	case "ja":
+		return CreatePartnersRequestInvoiceLocaleJa, nil
+	case "ar":
+		return CreatePartnersRequestInvoiceLocaleAr, nil
+	case "hi":
+		return CreatePartnersRequestInvoiceLocaleHi, nil
+	case "ru":
+		return CreatePartnersRequestInvoiceLocaleRu, nil
+	case "tr":
+		return CreatePartnersRequestInvoiceLocaleTr, nil
+	}
+	var t CreatePartnersRequestInvoiceLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CreatePartnersRequestInvoiceLocale) Ptr() *CreatePartnersRequestInvoiceLocale {
+	return &c
+}
+
 type CreatePartnersRequestLegalCountryClass string
 
 const (
@@ -7437,32 +7862,34 @@ var (
 	createPartnersResponseFieldIsCustomer            = big.NewInt(1 << 10)
 	createPartnersResponseFieldIsSupplier            = big.NewInt(1 << 11)
 	createPartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
-	createPartnersResponseFieldCreditLimit           = big.NewInt(1 << 13)
-	createPartnersResponseFieldPriceListID           = big.NewInt(1 << 14)
-	createPartnersResponseFieldGroupID               = big.NewInt(1 << 15)
-	createPartnersResponseFieldStatusID              = big.NewInt(1 << 16)
-	createPartnersResponseFieldVatValid              = big.NewInt(1 << 17)
-	createPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 18)
-	createPartnersResponseFieldAddress               = big.NewInt(1 << 19)
-	createPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 20)
-	createPartnersResponseFieldNotes                 = big.NewInt(1 << 21)
-	createPartnersResponseFieldDocumentRef           = big.NewInt(1 << 22)
-	createPartnersResponseFieldShortName             = big.NewInt(1 << 23)
-	createPartnersResponseFieldWebsite               = big.NewInt(1 << 24)
-	createPartnersResponseFieldFax                   = big.NewInt(1 << 25)
-	createPartnersResponseFieldEoriCode              = big.NewInt(1 << 26)
-	createPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 27)
-	createPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 28)
-	createPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 29)
-	createPartnersResponseFieldLastCallDate          = big.NewInt(1 << 30)
-	createPartnersResponseFieldNextCallDate          = big.NewInt(1 << 31)
-	createPartnersResponseFieldRating                = big.NewInt(1 << 32)
-	createPartnersResponseFieldIsEmployee            = big.NewInt(1 << 33)
-	createPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 34)
-	createPartnersResponseFieldIsActive              = big.NewInt(1 << 35)
-	createPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 36)
-	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 37)
-	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 38)
+	createPartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	createPartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 14)
+	createPartnersResponseFieldCreditLimit           = big.NewInt(1 << 15)
+	createPartnersResponseFieldPriceListID           = big.NewInt(1 << 16)
+	createPartnersResponseFieldGroupID               = big.NewInt(1 << 17)
+	createPartnersResponseFieldStatusID              = big.NewInt(1 << 18)
+	createPartnersResponseFieldVatValid              = big.NewInt(1 << 19)
+	createPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 20)
+	createPartnersResponseFieldAddress               = big.NewInt(1 << 21)
+	createPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 22)
+	createPartnersResponseFieldNotes                 = big.NewInt(1 << 23)
+	createPartnersResponseFieldDocumentRef           = big.NewInt(1 << 24)
+	createPartnersResponseFieldShortName             = big.NewInt(1 << 25)
+	createPartnersResponseFieldWebsite               = big.NewInt(1 << 26)
+	createPartnersResponseFieldFax                   = big.NewInt(1 << 27)
+	createPartnersResponseFieldEoriCode              = big.NewInt(1 << 28)
+	createPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	createPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
+	createPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
+	createPartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
+	createPartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
+	createPartnersResponseFieldRating                = big.NewInt(1 << 34)
+	createPartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
+	createPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
+	createPartnersResponseFieldIsActive              = big.NewInt(1 << 37)
+	createPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
+	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
+	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type CreatePartnersResponse struct {
@@ -7479,6 +7906,8 @@ type CreatePartnersResponse struct {
 	IsCustomer            bool                                         `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                         `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                       `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	InvoiceCurrency       *string                                      `json:"invoiceCurrency,omitempty" url:"invoiceCurrency,omitempty"`
+	InvoiceLocale         *string                                      `json:"invoiceLocale,omitempty" url:"invoiceLocale,omitempty"`
 	CreditLimit           *string                                      `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
 	PriceListID           *string                                      `json:"priceListId,omitempty" url:"priceListId,omitempty"`
 	GroupID               *string                                      `json:"groupId,omitempty" url:"groupId,omitempty"`
@@ -7602,6 +8031,20 @@ func (c *CreatePartnersResponse) GetPaymentTermDays() *int64 {
 		return nil
 	}
 	return c.PaymentTermDays
+}
+
+func (c *CreatePartnersResponse) GetInvoiceCurrency() *string {
+	if c == nil {
+		return nil
+	}
+	return c.InvoiceCurrency
+}
+
+func (c *CreatePartnersResponse) GetInvoiceLocale() *string {
+	if c == nil {
+		return nil
+	}
+	return c.InvoiceLocale
 }
 
 func (c *CreatePartnersResponse) GetCreditLimit() *string {
@@ -7889,6 +8332,20 @@ func (c *CreatePartnersResponse) SetIsSupplier(isSupplier bool) {
 func (c *CreatePartnersResponse) SetPaymentTermDays(paymentTermDays *int64) {
 	c.PaymentTermDays = paymentTermDays
 	c.require(createPartnersResponseFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersResponse) SetInvoiceCurrency(invoiceCurrency *string) {
+	c.InvoiceCurrency = invoiceCurrency
+	c.require(createPartnersResponseFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersResponse) SetInvoiceLocale(invoiceLocale *string) {
+	c.InvoiceLocale = invoiceLocale
+	c.require(createPartnersResponseFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
@@ -11422,6 +11879,391 @@ func (f *FindOrCreatePartnersRequestCorrespondenceAddress) String() string {
 	return fmt.Sprintf("%#v", f)
 }
 
+// Currency a new invoice for this partner starts with when the invoice names none
+type FindOrCreatePartnersRequestInvoiceCurrency string
+
+const (
+	FindOrCreatePartnersRequestInvoiceCurrencyEur FindOrCreatePartnersRequestInvoiceCurrency = "EUR"
+	FindOrCreatePartnersRequestInvoiceCurrencyUsd FindOrCreatePartnersRequestInvoiceCurrency = "USD"
+	FindOrCreatePartnersRequestInvoiceCurrencyGbp FindOrCreatePartnersRequestInvoiceCurrency = "GBP"
+	FindOrCreatePartnersRequestInvoiceCurrencyPln FindOrCreatePartnersRequestInvoiceCurrency = "PLN"
+	FindOrCreatePartnersRequestInvoiceCurrencySek FindOrCreatePartnersRequestInvoiceCurrency = "SEK"
+	FindOrCreatePartnersRequestInvoiceCurrencyNok FindOrCreatePartnersRequestInvoiceCurrency = "NOK"
+	FindOrCreatePartnersRequestInvoiceCurrencyDkk FindOrCreatePartnersRequestInvoiceCurrency = "DKK"
+	FindOrCreatePartnersRequestInvoiceCurrencyChf FindOrCreatePartnersRequestInvoiceCurrency = "CHF"
+	FindOrCreatePartnersRequestInvoiceCurrencyCzk FindOrCreatePartnersRequestInvoiceCurrency = "CZK"
+	FindOrCreatePartnersRequestInvoiceCurrencyHuf FindOrCreatePartnersRequestInvoiceCurrency = "HUF"
+	FindOrCreatePartnersRequestInvoiceCurrencyRon FindOrCreatePartnersRequestInvoiceCurrency = "RON"
+	FindOrCreatePartnersRequestInvoiceCurrencyAed FindOrCreatePartnersRequestInvoiceCurrency = "AED"
+	FindOrCreatePartnersRequestInvoiceCurrencyAfn FindOrCreatePartnersRequestInvoiceCurrency = "AFN"
+	FindOrCreatePartnersRequestInvoiceCurrencyAll FindOrCreatePartnersRequestInvoiceCurrency = "ALL"
+	FindOrCreatePartnersRequestInvoiceCurrencyAmd FindOrCreatePartnersRequestInvoiceCurrency = "AMD"
+	FindOrCreatePartnersRequestInvoiceCurrencyArs FindOrCreatePartnersRequestInvoiceCurrency = "ARS"
+	FindOrCreatePartnersRequestInvoiceCurrencyAud FindOrCreatePartnersRequestInvoiceCurrency = "AUD"
+	FindOrCreatePartnersRequestInvoiceCurrencyAzn FindOrCreatePartnersRequestInvoiceCurrency = "AZN"
+	FindOrCreatePartnersRequestInvoiceCurrencyBam FindOrCreatePartnersRequestInvoiceCurrency = "BAM"
+	FindOrCreatePartnersRequestInvoiceCurrencyBdt FindOrCreatePartnersRequestInvoiceCurrency = "BDT"
+	FindOrCreatePartnersRequestInvoiceCurrencyBhd FindOrCreatePartnersRequestInvoiceCurrency = "BHD"
+	FindOrCreatePartnersRequestInvoiceCurrencyBob FindOrCreatePartnersRequestInvoiceCurrency = "BOB"
+	FindOrCreatePartnersRequestInvoiceCurrencyBrl FindOrCreatePartnersRequestInvoiceCurrency = "BRL"
+	FindOrCreatePartnersRequestInvoiceCurrencyByn FindOrCreatePartnersRequestInvoiceCurrency = "BYN"
+	FindOrCreatePartnersRequestInvoiceCurrencyCad FindOrCreatePartnersRequestInvoiceCurrency = "CAD"
+	FindOrCreatePartnersRequestInvoiceCurrencyClp FindOrCreatePartnersRequestInvoiceCurrency = "CLP"
+	FindOrCreatePartnersRequestInvoiceCurrencyCny FindOrCreatePartnersRequestInvoiceCurrency = "CNY"
+	FindOrCreatePartnersRequestInvoiceCurrencyCop FindOrCreatePartnersRequestInvoiceCurrency = "COP"
+	FindOrCreatePartnersRequestInvoiceCurrencyDjf FindOrCreatePartnersRequestInvoiceCurrency = "DJF"
+	FindOrCreatePartnersRequestInvoiceCurrencyDzd FindOrCreatePartnersRequestInvoiceCurrency = "DZD"
+	FindOrCreatePartnersRequestInvoiceCurrencyEgp FindOrCreatePartnersRequestInvoiceCurrency = "EGP"
+	FindOrCreatePartnersRequestInvoiceCurrencyEtb FindOrCreatePartnersRequestInvoiceCurrency = "ETB"
+	FindOrCreatePartnersRequestInvoiceCurrencyGel FindOrCreatePartnersRequestInvoiceCurrency = "GEL"
+	FindOrCreatePartnersRequestInvoiceCurrencyGnf FindOrCreatePartnersRequestInvoiceCurrency = "GNF"
+	FindOrCreatePartnersRequestInvoiceCurrencyHkd FindOrCreatePartnersRequestInvoiceCurrency = "HKD"
+	FindOrCreatePartnersRequestInvoiceCurrencyIdr FindOrCreatePartnersRequestInvoiceCurrency = "IDR"
+	FindOrCreatePartnersRequestInvoiceCurrencyIls FindOrCreatePartnersRequestInvoiceCurrency = "ILS"
+	FindOrCreatePartnersRequestInvoiceCurrencyInr FindOrCreatePartnersRequestInvoiceCurrency = "INR"
+	FindOrCreatePartnersRequestInvoiceCurrencyIqd FindOrCreatePartnersRequestInvoiceCurrency = "IQD"
+	FindOrCreatePartnersRequestInvoiceCurrencyIrr FindOrCreatePartnersRequestInvoiceCurrency = "IRR"
+	FindOrCreatePartnersRequestInvoiceCurrencyIsk FindOrCreatePartnersRequestInvoiceCurrency = "ISK"
+	FindOrCreatePartnersRequestInvoiceCurrencyJod FindOrCreatePartnersRequestInvoiceCurrency = "JOD"
+	FindOrCreatePartnersRequestInvoiceCurrencyJpy FindOrCreatePartnersRequestInvoiceCurrency = "JPY"
+	FindOrCreatePartnersRequestInvoiceCurrencyKes FindOrCreatePartnersRequestInvoiceCurrency = "KES"
+	FindOrCreatePartnersRequestInvoiceCurrencyKgs FindOrCreatePartnersRequestInvoiceCurrency = "KGS"
+	FindOrCreatePartnersRequestInvoiceCurrencyKrw FindOrCreatePartnersRequestInvoiceCurrency = "KRW"
+	FindOrCreatePartnersRequestInvoiceCurrencyKwd FindOrCreatePartnersRequestInvoiceCurrency = "KWD"
+	FindOrCreatePartnersRequestInvoiceCurrencyKzt FindOrCreatePartnersRequestInvoiceCurrency = "KZT"
+	FindOrCreatePartnersRequestInvoiceCurrencyLbp FindOrCreatePartnersRequestInvoiceCurrency = "LBP"
+	FindOrCreatePartnersRequestInvoiceCurrencyLkr FindOrCreatePartnersRequestInvoiceCurrency = "LKR"
+	FindOrCreatePartnersRequestInvoiceCurrencyLyd FindOrCreatePartnersRequestInvoiceCurrency = "LYD"
+	FindOrCreatePartnersRequestInvoiceCurrencyMad FindOrCreatePartnersRequestInvoiceCurrency = "MAD"
+	FindOrCreatePartnersRequestInvoiceCurrencyMdl FindOrCreatePartnersRequestInvoiceCurrency = "MDL"
+	FindOrCreatePartnersRequestInvoiceCurrencyMga FindOrCreatePartnersRequestInvoiceCurrency = "MGA"
+	FindOrCreatePartnersRequestInvoiceCurrencyMkd FindOrCreatePartnersRequestInvoiceCurrency = "MKD"
+	FindOrCreatePartnersRequestInvoiceCurrencyMnt FindOrCreatePartnersRequestInvoiceCurrency = "MNT"
+	FindOrCreatePartnersRequestInvoiceCurrencyMxn FindOrCreatePartnersRequestInvoiceCurrency = "MXN"
+	FindOrCreatePartnersRequestInvoiceCurrencyMyr FindOrCreatePartnersRequestInvoiceCurrency = "MYR"
+	FindOrCreatePartnersRequestInvoiceCurrencyMzn FindOrCreatePartnersRequestInvoiceCurrency = "MZN"
+	FindOrCreatePartnersRequestInvoiceCurrencyNzd FindOrCreatePartnersRequestInvoiceCurrency = "NZD"
+	FindOrCreatePartnersRequestInvoiceCurrencyPab FindOrCreatePartnersRequestInvoiceCurrency = "PAB"
+	FindOrCreatePartnersRequestInvoiceCurrencyPen FindOrCreatePartnersRequestInvoiceCurrency = "PEN"
+	FindOrCreatePartnersRequestInvoiceCurrencyPhp FindOrCreatePartnersRequestInvoiceCurrency = "PHP"
+	FindOrCreatePartnersRequestInvoiceCurrencyPkr FindOrCreatePartnersRequestInvoiceCurrency = "PKR"
+	FindOrCreatePartnersRequestInvoiceCurrencyQar FindOrCreatePartnersRequestInvoiceCurrency = "QAR"
+	FindOrCreatePartnersRequestInvoiceCurrencyRsd FindOrCreatePartnersRequestInvoiceCurrency = "RSD"
+	FindOrCreatePartnersRequestInvoiceCurrencySar FindOrCreatePartnersRequestInvoiceCurrency = "SAR"
+	FindOrCreatePartnersRequestInvoiceCurrencySgd FindOrCreatePartnersRequestInvoiceCurrency = "SGD"
+	FindOrCreatePartnersRequestInvoiceCurrencySyp FindOrCreatePartnersRequestInvoiceCurrency = "SYP"
+	FindOrCreatePartnersRequestInvoiceCurrencyThb FindOrCreatePartnersRequestInvoiceCurrency = "THB"
+	FindOrCreatePartnersRequestInvoiceCurrencyTjs FindOrCreatePartnersRequestInvoiceCurrency = "TJS"
+	FindOrCreatePartnersRequestInvoiceCurrencyTmt FindOrCreatePartnersRequestInvoiceCurrency = "TMT"
+	FindOrCreatePartnersRequestInvoiceCurrencyTnd FindOrCreatePartnersRequestInvoiceCurrency = "TND"
+	FindOrCreatePartnersRequestInvoiceCurrencyTry FindOrCreatePartnersRequestInvoiceCurrency = "TRY"
+	FindOrCreatePartnersRequestInvoiceCurrencyTwd FindOrCreatePartnersRequestInvoiceCurrency = "TWD"
+	FindOrCreatePartnersRequestInvoiceCurrencyTzs FindOrCreatePartnersRequestInvoiceCurrency = "TZS"
+	FindOrCreatePartnersRequestInvoiceCurrencyUah FindOrCreatePartnersRequestInvoiceCurrency = "UAH"
+	FindOrCreatePartnersRequestInvoiceCurrencyUyu FindOrCreatePartnersRequestInvoiceCurrency = "UYU"
+	FindOrCreatePartnersRequestInvoiceCurrencyUzs FindOrCreatePartnersRequestInvoiceCurrency = "UZS"
+	FindOrCreatePartnersRequestInvoiceCurrencyVes FindOrCreatePartnersRequestInvoiceCurrency = "VES"
+	FindOrCreatePartnersRequestInvoiceCurrencyVnd FindOrCreatePartnersRequestInvoiceCurrency = "VND"
+	FindOrCreatePartnersRequestInvoiceCurrencyXaf FindOrCreatePartnersRequestInvoiceCurrency = "XAF"
+	FindOrCreatePartnersRequestInvoiceCurrencyXof FindOrCreatePartnersRequestInvoiceCurrency = "XOF"
+	FindOrCreatePartnersRequestInvoiceCurrencyYer FindOrCreatePartnersRequestInvoiceCurrency = "YER"
+	FindOrCreatePartnersRequestInvoiceCurrencyZar FindOrCreatePartnersRequestInvoiceCurrency = "ZAR"
+)
+
+func NewFindOrCreatePartnersRequestInvoiceCurrencyFromString(s string) (FindOrCreatePartnersRequestInvoiceCurrency, error) {
+	switch s {
+	case "EUR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyEur, nil
+	case "USD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyUsd, nil
+	case "GBP":
+		return FindOrCreatePartnersRequestInvoiceCurrencyGbp, nil
+	case "PLN":
+		return FindOrCreatePartnersRequestInvoiceCurrencyPln, nil
+	case "SEK":
+		return FindOrCreatePartnersRequestInvoiceCurrencySek, nil
+	case "NOK":
+		return FindOrCreatePartnersRequestInvoiceCurrencyNok, nil
+	case "DKK":
+		return FindOrCreatePartnersRequestInvoiceCurrencyDkk, nil
+	case "CHF":
+		return FindOrCreatePartnersRequestInvoiceCurrencyChf, nil
+	case "CZK":
+		return FindOrCreatePartnersRequestInvoiceCurrencyCzk, nil
+	case "HUF":
+		return FindOrCreatePartnersRequestInvoiceCurrencyHuf, nil
+	case "RON":
+		return FindOrCreatePartnersRequestInvoiceCurrencyRon, nil
+	case "AED":
+		return FindOrCreatePartnersRequestInvoiceCurrencyAed, nil
+	case "AFN":
+		return FindOrCreatePartnersRequestInvoiceCurrencyAfn, nil
+	case "ALL":
+		return FindOrCreatePartnersRequestInvoiceCurrencyAll, nil
+	case "AMD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyAmd, nil
+	case "ARS":
+		return FindOrCreatePartnersRequestInvoiceCurrencyArs, nil
+	case "AUD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyAud, nil
+	case "AZN":
+		return FindOrCreatePartnersRequestInvoiceCurrencyAzn, nil
+	case "BAM":
+		return FindOrCreatePartnersRequestInvoiceCurrencyBam, nil
+	case "BDT":
+		return FindOrCreatePartnersRequestInvoiceCurrencyBdt, nil
+	case "BHD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyBhd, nil
+	case "BOB":
+		return FindOrCreatePartnersRequestInvoiceCurrencyBob, nil
+	case "BRL":
+		return FindOrCreatePartnersRequestInvoiceCurrencyBrl, nil
+	case "BYN":
+		return FindOrCreatePartnersRequestInvoiceCurrencyByn, nil
+	case "CAD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyCad, nil
+	case "CLP":
+		return FindOrCreatePartnersRequestInvoiceCurrencyClp, nil
+	case "CNY":
+		return FindOrCreatePartnersRequestInvoiceCurrencyCny, nil
+	case "COP":
+		return FindOrCreatePartnersRequestInvoiceCurrencyCop, nil
+	case "DJF":
+		return FindOrCreatePartnersRequestInvoiceCurrencyDjf, nil
+	case "DZD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyDzd, nil
+	case "EGP":
+		return FindOrCreatePartnersRequestInvoiceCurrencyEgp, nil
+	case "ETB":
+		return FindOrCreatePartnersRequestInvoiceCurrencyEtb, nil
+	case "GEL":
+		return FindOrCreatePartnersRequestInvoiceCurrencyGel, nil
+	case "GNF":
+		return FindOrCreatePartnersRequestInvoiceCurrencyGnf, nil
+	case "HKD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyHkd, nil
+	case "IDR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyIdr, nil
+	case "ILS":
+		return FindOrCreatePartnersRequestInvoiceCurrencyIls, nil
+	case "INR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyInr, nil
+	case "IQD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyIqd, nil
+	case "IRR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyIrr, nil
+	case "ISK":
+		return FindOrCreatePartnersRequestInvoiceCurrencyIsk, nil
+	case "JOD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyJod, nil
+	case "JPY":
+		return FindOrCreatePartnersRequestInvoiceCurrencyJpy, nil
+	case "KES":
+		return FindOrCreatePartnersRequestInvoiceCurrencyKes, nil
+	case "KGS":
+		return FindOrCreatePartnersRequestInvoiceCurrencyKgs, nil
+	case "KRW":
+		return FindOrCreatePartnersRequestInvoiceCurrencyKrw, nil
+	case "KWD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyKwd, nil
+	case "KZT":
+		return FindOrCreatePartnersRequestInvoiceCurrencyKzt, nil
+	case "LBP":
+		return FindOrCreatePartnersRequestInvoiceCurrencyLbp, nil
+	case "LKR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyLkr, nil
+	case "LYD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyLyd, nil
+	case "MAD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMad, nil
+	case "MDL":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMdl, nil
+	case "MGA":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMga, nil
+	case "MKD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMkd, nil
+	case "MNT":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMnt, nil
+	case "MXN":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMxn, nil
+	case "MYR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMyr, nil
+	case "MZN":
+		return FindOrCreatePartnersRequestInvoiceCurrencyMzn, nil
+	case "NZD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyNzd, nil
+	case "PAB":
+		return FindOrCreatePartnersRequestInvoiceCurrencyPab, nil
+	case "PEN":
+		return FindOrCreatePartnersRequestInvoiceCurrencyPen, nil
+	case "PHP":
+		return FindOrCreatePartnersRequestInvoiceCurrencyPhp, nil
+	case "PKR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyPkr, nil
+	case "QAR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyQar, nil
+	case "RSD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyRsd, nil
+	case "SAR":
+		return FindOrCreatePartnersRequestInvoiceCurrencySar, nil
+	case "SGD":
+		return FindOrCreatePartnersRequestInvoiceCurrencySgd, nil
+	case "SYP":
+		return FindOrCreatePartnersRequestInvoiceCurrencySyp, nil
+	case "THB":
+		return FindOrCreatePartnersRequestInvoiceCurrencyThb, nil
+	case "TJS":
+		return FindOrCreatePartnersRequestInvoiceCurrencyTjs, nil
+	case "TMT":
+		return FindOrCreatePartnersRequestInvoiceCurrencyTmt, nil
+	case "TND":
+		return FindOrCreatePartnersRequestInvoiceCurrencyTnd, nil
+	case "TRY":
+		return FindOrCreatePartnersRequestInvoiceCurrencyTry, nil
+	case "TWD":
+		return FindOrCreatePartnersRequestInvoiceCurrencyTwd, nil
+	case "TZS":
+		return FindOrCreatePartnersRequestInvoiceCurrencyTzs, nil
+	case "UAH":
+		return FindOrCreatePartnersRequestInvoiceCurrencyUah, nil
+	case "UYU":
+		return FindOrCreatePartnersRequestInvoiceCurrencyUyu, nil
+	case "UZS":
+		return FindOrCreatePartnersRequestInvoiceCurrencyUzs, nil
+	case "VES":
+		return FindOrCreatePartnersRequestInvoiceCurrencyVes, nil
+	case "VND":
+		return FindOrCreatePartnersRequestInvoiceCurrencyVnd, nil
+	case "XAF":
+		return FindOrCreatePartnersRequestInvoiceCurrencyXaf, nil
+	case "XOF":
+		return FindOrCreatePartnersRequestInvoiceCurrencyXof, nil
+	case "YER":
+		return FindOrCreatePartnersRequestInvoiceCurrencyYer, nil
+	case "ZAR":
+		return FindOrCreatePartnersRequestInvoiceCurrencyZar, nil
+	}
+	var t FindOrCreatePartnersRequestInvoiceCurrency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FindOrCreatePartnersRequestInvoiceCurrency) Ptr() *FindOrCreatePartnersRequestInvoiceCurrency {
+	return &f
+}
+
+// Language a new invoice for this partner starts with when the invoice names none
+type FindOrCreatePartnersRequestInvoiceLocale string
+
+const (
+	FindOrCreatePartnersRequestInvoiceLocaleEn FindOrCreatePartnersRequestInvoiceLocale = "en"
+	FindOrCreatePartnersRequestInvoiceLocaleLt FindOrCreatePartnersRequestInvoiceLocale = "lt"
+	FindOrCreatePartnersRequestInvoiceLocaleDe FindOrCreatePartnersRequestInvoiceLocale = "de"
+	FindOrCreatePartnersRequestInvoiceLocaleFr FindOrCreatePartnersRequestInvoiceLocale = "fr"
+	FindOrCreatePartnersRequestInvoiceLocaleEs FindOrCreatePartnersRequestInvoiceLocale = "es"
+	FindOrCreatePartnersRequestInvoiceLocaleIt FindOrCreatePartnersRequestInvoiceLocale = "it"
+	FindOrCreatePartnersRequestInvoiceLocalePt FindOrCreatePartnersRequestInvoiceLocale = "pt"
+	FindOrCreatePartnersRequestInvoiceLocaleNl FindOrCreatePartnersRequestInvoiceLocale = "nl"
+	FindOrCreatePartnersRequestInvoiceLocalePl FindOrCreatePartnersRequestInvoiceLocale = "pl"
+	FindOrCreatePartnersRequestInvoiceLocaleSv FindOrCreatePartnersRequestInvoiceLocale = "sv"
+	FindOrCreatePartnersRequestInvoiceLocaleDa FindOrCreatePartnersRequestInvoiceLocale = "da"
+	FindOrCreatePartnersRequestInvoiceLocaleNo FindOrCreatePartnersRequestInvoiceLocale = "no"
+	FindOrCreatePartnersRequestInvoiceLocaleFi FindOrCreatePartnersRequestInvoiceLocale = "fi"
+	FindOrCreatePartnersRequestInvoiceLocaleEt FindOrCreatePartnersRequestInvoiceLocale = "et"
+	FindOrCreatePartnersRequestInvoiceLocaleLv FindOrCreatePartnersRequestInvoiceLocale = "lv"
+	FindOrCreatePartnersRequestInvoiceLocaleCs FindOrCreatePartnersRequestInvoiceLocale = "cs"
+	FindOrCreatePartnersRequestInvoiceLocaleSk FindOrCreatePartnersRequestInvoiceLocale = "sk"
+	FindOrCreatePartnersRequestInvoiceLocaleHu FindOrCreatePartnersRequestInvoiceLocale = "hu"
+	FindOrCreatePartnersRequestInvoiceLocaleRo FindOrCreatePartnersRequestInvoiceLocale = "ro"
+	FindOrCreatePartnersRequestInvoiceLocaleBg FindOrCreatePartnersRequestInvoiceLocale = "bg"
+	FindOrCreatePartnersRequestInvoiceLocaleHr FindOrCreatePartnersRequestInvoiceLocale = "hr"
+	FindOrCreatePartnersRequestInvoiceLocaleSl FindOrCreatePartnersRequestInvoiceLocale = "sl"
+	FindOrCreatePartnersRequestInvoiceLocaleEl FindOrCreatePartnersRequestInvoiceLocale = "el"
+	FindOrCreatePartnersRequestInvoiceLocaleMt FindOrCreatePartnersRequestInvoiceLocale = "mt"
+	FindOrCreatePartnersRequestInvoiceLocaleIs FindOrCreatePartnersRequestInvoiceLocale = "is"
+	FindOrCreatePartnersRequestInvoiceLocaleGa FindOrCreatePartnersRequestInvoiceLocale = "ga"
+	FindOrCreatePartnersRequestInvoiceLocaleZh FindOrCreatePartnersRequestInvoiceLocale = "zh"
+	FindOrCreatePartnersRequestInvoiceLocaleJa FindOrCreatePartnersRequestInvoiceLocale = "ja"
+	FindOrCreatePartnersRequestInvoiceLocaleAr FindOrCreatePartnersRequestInvoiceLocale = "ar"
+	FindOrCreatePartnersRequestInvoiceLocaleHi FindOrCreatePartnersRequestInvoiceLocale = "hi"
+	FindOrCreatePartnersRequestInvoiceLocaleRu FindOrCreatePartnersRequestInvoiceLocale = "ru"
+	FindOrCreatePartnersRequestInvoiceLocaleTr FindOrCreatePartnersRequestInvoiceLocale = "tr"
+)
+
+func NewFindOrCreatePartnersRequestInvoiceLocaleFromString(s string) (FindOrCreatePartnersRequestInvoiceLocale, error) {
+	switch s {
+	case "en":
+		return FindOrCreatePartnersRequestInvoiceLocaleEn, nil
+	case "lt":
+		return FindOrCreatePartnersRequestInvoiceLocaleLt, nil
+	case "de":
+		return FindOrCreatePartnersRequestInvoiceLocaleDe, nil
+	case "fr":
+		return FindOrCreatePartnersRequestInvoiceLocaleFr, nil
+	case "es":
+		return FindOrCreatePartnersRequestInvoiceLocaleEs, nil
+	case "it":
+		return FindOrCreatePartnersRequestInvoiceLocaleIt, nil
+	case "pt":
+		return FindOrCreatePartnersRequestInvoiceLocalePt, nil
+	case "nl":
+		return FindOrCreatePartnersRequestInvoiceLocaleNl, nil
+	case "pl":
+		return FindOrCreatePartnersRequestInvoiceLocalePl, nil
+	case "sv":
+		return FindOrCreatePartnersRequestInvoiceLocaleSv, nil
+	case "da":
+		return FindOrCreatePartnersRequestInvoiceLocaleDa, nil
+	case "no":
+		return FindOrCreatePartnersRequestInvoiceLocaleNo, nil
+	case "fi":
+		return FindOrCreatePartnersRequestInvoiceLocaleFi, nil
+	case "et":
+		return FindOrCreatePartnersRequestInvoiceLocaleEt, nil
+	case "lv":
+		return FindOrCreatePartnersRequestInvoiceLocaleLv, nil
+	case "cs":
+		return FindOrCreatePartnersRequestInvoiceLocaleCs, nil
+	case "sk":
+		return FindOrCreatePartnersRequestInvoiceLocaleSk, nil
+	case "hu":
+		return FindOrCreatePartnersRequestInvoiceLocaleHu, nil
+	case "ro":
+		return FindOrCreatePartnersRequestInvoiceLocaleRo, nil
+	case "bg":
+		return FindOrCreatePartnersRequestInvoiceLocaleBg, nil
+	case "hr":
+		return FindOrCreatePartnersRequestInvoiceLocaleHr, nil
+	case "sl":
+		return FindOrCreatePartnersRequestInvoiceLocaleSl, nil
+	case "el":
+		return FindOrCreatePartnersRequestInvoiceLocaleEl, nil
+	case "mt":
+		return FindOrCreatePartnersRequestInvoiceLocaleMt, nil
+	case "is":
+		return FindOrCreatePartnersRequestInvoiceLocaleIs, nil
+	case "ga":
+		return FindOrCreatePartnersRequestInvoiceLocaleGa, nil
+	case "zh":
+		return FindOrCreatePartnersRequestInvoiceLocaleZh, nil
+	case "ja":
+		return FindOrCreatePartnersRequestInvoiceLocaleJa, nil
+	case "ar":
+		return FindOrCreatePartnersRequestInvoiceLocaleAr, nil
+	case "hi":
+		return FindOrCreatePartnersRequestInvoiceLocaleHi, nil
+	case "ru":
+		return FindOrCreatePartnersRequestInvoiceLocaleRu, nil
+	case "tr":
+		return FindOrCreatePartnersRequestInvoiceLocaleTr, nil
+	}
+	var t FindOrCreatePartnersRequestInvoiceLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FindOrCreatePartnersRequestInvoiceLocale) Ptr() *FindOrCreatePartnersRequestInvoiceLocale {
+	return &f
+}
+
 type FindOrCreatePartnersRequestLegalCountryClass string
 
 const (
@@ -11583,32 +12425,34 @@ var (
 	findOrCreatePartnersResponsePartnerFieldIsCustomer            = big.NewInt(1 << 10)
 	findOrCreatePartnersResponsePartnerFieldIsSupplier            = big.NewInt(1 << 11)
 	findOrCreatePartnersResponsePartnerFieldPaymentTermDays       = big.NewInt(1 << 12)
-	findOrCreatePartnersResponsePartnerFieldCreditLimit           = big.NewInt(1 << 13)
-	findOrCreatePartnersResponsePartnerFieldPriceListID           = big.NewInt(1 << 14)
-	findOrCreatePartnersResponsePartnerFieldGroupID               = big.NewInt(1 << 15)
-	findOrCreatePartnersResponsePartnerFieldStatusID              = big.NewInt(1 << 16)
-	findOrCreatePartnersResponsePartnerFieldVatValid              = big.NewInt(1 << 17)
-	findOrCreatePartnersResponsePartnerFieldVatValidatedAt        = big.NewInt(1 << 18)
-	findOrCreatePartnersResponsePartnerFieldAddress               = big.NewInt(1 << 19)
-	findOrCreatePartnersResponsePartnerFieldCorrespondenceAddress = big.NewInt(1 << 20)
-	findOrCreatePartnersResponsePartnerFieldNotes                 = big.NewInt(1 << 21)
-	findOrCreatePartnersResponsePartnerFieldDocumentRef           = big.NewInt(1 << 22)
-	findOrCreatePartnersResponsePartnerFieldShortName             = big.NewInt(1 << 23)
-	findOrCreatePartnersResponsePartnerFieldWebsite               = big.NewInt(1 << 24)
-	findOrCreatePartnersResponsePartnerFieldFax                   = big.NewInt(1 << 25)
-	findOrCreatePartnersResponsePartnerFieldEoriCode              = big.NewInt(1 << 26)
-	findOrCreatePartnersResponsePartnerFieldAutoDebtReminder      = big.NewInt(1 << 27)
-	findOrCreatePartnersResponsePartnerFieldLateInterestPercent   = big.NewInt(1 << 28)
-	findOrCreatePartnersResponsePartnerFieldFirstCallDate         = big.NewInt(1 << 29)
-	findOrCreatePartnersResponsePartnerFieldLastCallDate          = big.NewInt(1 << 30)
-	findOrCreatePartnersResponsePartnerFieldNextCallDate          = big.NewInt(1 << 31)
-	findOrCreatePartnersResponsePartnerFieldRating                = big.NewInt(1 << 32)
-	findOrCreatePartnersResponsePartnerFieldIsEmployee            = big.NewInt(1 << 33)
-	findOrCreatePartnersResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 34)
-	findOrCreatePartnersResponsePartnerFieldIsActive              = big.NewInt(1 << 35)
-	findOrCreatePartnersResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 36)
-	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 37)
-	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 38)
+	findOrCreatePartnersResponsePartnerFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	findOrCreatePartnersResponsePartnerFieldInvoiceLocale         = big.NewInt(1 << 14)
+	findOrCreatePartnersResponsePartnerFieldCreditLimit           = big.NewInt(1 << 15)
+	findOrCreatePartnersResponsePartnerFieldPriceListID           = big.NewInt(1 << 16)
+	findOrCreatePartnersResponsePartnerFieldGroupID               = big.NewInt(1 << 17)
+	findOrCreatePartnersResponsePartnerFieldStatusID              = big.NewInt(1 << 18)
+	findOrCreatePartnersResponsePartnerFieldVatValid              = big.NewInt(1 << 19)
+	findOrCreatePartnersResponsePartnerFieldVatValidatedAt        = big.NewInt(1 << 20)
+	findOrCreatePartnersResponsePartnerFieldAddress               = big.NewInt(1 << 21)
+	findOrCreatePartnersResponsePartnerFieldCorrespondenceAddress = big.NewInt(1 << 22)
+	findOrCreatePartnersResponsePartnerFieldNotes                 = big.NewInt(1 << 23)
+	findOrCreatePartnersResponsePartnerFieldDocumentRef           = big.NewInt(1 << 24)
+	findOrCreatePartnersResponsePartnerFieldShortName             = big.NewInt(1 << 25)
+	findOrCreatePartnersResponsePartnerFieldWebsite               = big.NewInt(1 << 26)
+	findOrCreatePartnersResponsePartnerFieldFax                   = big.NewInt(1 << 27)
+	findOrCreatePartnersResponsePartnerFieldEoriCode              = big.NewInt(1 << 28)
+	findOrCreatePartnersResponsePartnerFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	findOrCreatePartnersResponsePartnerFieldLateInterestPercent   = big.NewInt(1 << 30)
+	findOrCreatePartnersResponsePartnerFieldFirstCallDate         = big.NewInt(1 << 31)
+	findOrCreatePartnersResponsePartnerFieldLastCallDate          = big.NewInt(1 << 32)
+	findOrCreatePartnersResponsePartnerFieldNextCallDate          = big.NewInt(1 << 33)
+	findOrCreatePartnersResponsePartnerFieldRating                = big.NewInt(1 << 34)
+	findOrCreatePartnersResponsePartnerFieldIsEmployee            = big.NewInt(1 << 35)
+	findOrCreatePartnersResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 36)
+	findOrCreatePartnersResponsePartnerFieldIsActive              = big.NewInt(1 << 37)
+	findOrCreatePartnersResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 38)
+	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 39)
+	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type FindOrCreatePartnersResponsePartner struct {
@@ -11625,6 +12469,8 @@ type FindOrCreatePartnersResponsePartner struct {
 	IsCustomer            bool                                                      `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                                      `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                                    `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	InvoiceCurrency       *string                                                   `json:"invoiceCurrency,omitempty" url:"invoiceCurrency,omitempty"`
+	InvoiceLocale         *string                                                   `json:"invoiceLocale,omitempty" url:"invoiceLocale,omitempty"`
 	CreditLimit           *string                                                   `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
 	PriceListID           *string                                                   `json:"priceListId,omitempty" url:"priceListId,omitempty"`
 	GroupID               *string                                                   `json:"groupId,omitempty" url:"groupId,omitempty"`
@@ -11748,6 +12594,20 @@ func (f *FindOrCreatePartnersResponsePartner) GetPaymentTermDays() *int64 {
 		return nil
 	}
 	return f.PaymentTermDays
+}
+
+func (f *FindOrCreatePartnersResponsePartner) GetInvoiceCurrency() *string {
+	if f == nil {
+		return nil
+	}
+	return f.InvoiceCurrency
+}
+
+func (f *FindOrCreatePartnersResponsePartner) GetInvoiceLocale() *string {
+	if f == nil {
+		return nil
+	}
+	return f.InvoiceLocale
 }
 
 func (f *FindOrCreatePartnersResponsePartner) GetCreditLimit() *string {
@@ -12035,6 +12895,20 @@ func (f *FindOrCreatePartnersResponsePartner) SetIsSupplier(isSupplier bool) {
 func (f *FindOrCreatePartnersResponsePartner) SetPaymentTermDays(paymentTermDays *int64) {
 	f.PaymentTermDays = paymentTermDays
 	f.require(findOrCreatePartnersResponsePartnerFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersResponsePartner) SetInvoiceCurrency(invoiceCurrency *string) {
+	f.InvoiceCurrency = invoiceCurrency
+	f.require(findOrCreatePartnersResponsePartnerFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersResponsePartner) SetInvoiceLocale(invoiceLocale *string) {
+	f.InvoiceLocale = invoiceLocale
+	f.require(findOrCreatePartnersResponsePartnerFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
@@ -12682,32 +13556,34 @@ var (
 	getPartnersResponseFieldIsCustomer            = big.NewInt(1 << 10)
 	getPartnersResponseFieldIsSupplier            = big.NewInt(1 << 11)
 	getPartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
-	getPartnersResponseFieldCreditLimit           = big.NewInt(1 << 13)
-	getPartnersResponseFieldPriceListID           = big.NewInt(1 << 14)
-	getPartnersResponseFieldGroupID               = big.NewInt(1 << 15)
-	getPartnersResponseFieldStatusID              = big.NewInt(1 << 16)
-	getPartnersResponseFieldVatValid              = big.NewInt(1 << 17)
-	getPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 18)
-	getPartnersResponseFieldAddress               = big.NewInt(1 << 19)
-	getPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 20)
-	getPartnersResponseFieldNotes                 = big.NewInt(1 << 21)
-	getPartnersResponseFieldDocumentRef           = big.NewInt(1 << 22)
-	getPartnersResponseFieldShortName             = big.NewInt(1 << 23)
-	getPartnersResponseFieldWebsite               = big.NewInt(1 << 24)
-	getPartnersResponseFieldFax                   = big.NewInt(1 << 25)
-	getPartnersResponseFieldEoriCode              = big.NewInt(1 << 26)
-	getPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 27)
-	getPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 28)
-	getPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 29)
-	getPartnersResponseFieldLastCallDate          = big.NewInt(1 << 30)
-	getPartnersResponseFieldNextCallDate          = big.NewInt(1 << 31)
-	getPartnersResponseFieldRating                = big.NewInt(1 << 32)
-	getPartnersResponseFieldIsEmployee            = big.NewInt(1 << 33)
-	getPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 34)
-	getPartnersResponseFieldIsActive              = big.NewInt(1 << 35)
-	getPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 36)
-	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 37)
-	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 38)
+	getPartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	getPartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 14)
+	getPartnersResponseFieldCreditLimit           = big.NewInt(1 << 15)
+	getPartnersResponseFieldPriceListID           = big.NewInt(1 << 16)
+	getPartnersResponseFieldGroupID               = big.NewInt(1 << 17)
+	getPartnersResponseFieldStatusID              = big.NewInt(1 << 18)
+	getPartnersResponseFieldVatValid              = big.NewInt(1 << 19)
+	getPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 20)
+	getPartnersResponseFieldAddress               = big.NewInt(1 << 21)
+	getPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 22)
+	getPartnersResponseFieldNotes                 = big.NewInt(1 << 23)
+	getPartnersResponseFieldDocumentRef           = big.NewInt(1 << 24)
+	getPartnersResponseFieldShortName             = big.NewInt(1 << 25)
+	getPartnersResponseFieldWebsite               = big.NewInt(1 << 26)
+	getPartnersResponseFieldFax                   = big.NewInt(1 << 27)
+	getPartnersResponseFieldEoriCode              = big.NewInt(1 << 28)
+	getPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	getPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
+	getPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
+	getPartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
+	getPartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
+	getPartnersResponseFieldRating                = big.NewInt(1 << 34)
+	getPartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
+	getPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
+	getPartnersResponseFieldIsActive              = big.NewInt(1 << 37)
+	getPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
+	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
+	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type GetPartnersResponse struct {
@@ -12724,6 +13600,8 @@ type GetPartnersResponse struct {
 	IsCustomer            bool                                      `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                      `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                    `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	InvoiceCurrency       *string                                   `json:"invoiceCurrency,omitempty" url:"invoiceCurrency,omitempty"`
+	InvoiceLocale         *string                                   `json:"invoiceLocale,omitempty" url:"invoiceLocale,omitempty"`
 	CreditLimit           *string                                   `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
 	PriceListID           *string                                   `json:"priceListId,omitempty" url:"priceListId,omitempty"`
 	GroupID               *string                                   `json:"groupId,omitempty" url:"groupId,omitempty"`
@@ -12847,6 +13725,20 @@ func (g *GetPartnersResponse) GetPaymentTermDays() *int64 {
 		return nil
 	}
 	return g.PaymentTermDays
+}
+
+func (g *GetPartnersResponse) GetInvoiceCurrency() *string {
+	if g == nil {
+		return nil
+	}
+	return g.InvoiceCurrency
+}
+
+func (g *GetPartnersResponse) GetInvoiceLocale() *string {
+	if g == nil {
+		return nil
+	}
+	return g.InvoiceLocale
 }
 
 func (g *GetPartnersResponse) GetCreditLimit() *string {
@@ -13134,6 +14026,20 @@ func (g *GetPartnersResponse) SetIsSupplier(isSupplier bool) {
 func (g *GetPartnersResponse) SetPaymentTermDays(paymentTermDays *int64) {
 	g.PaymentTermDays = paymentTermDays
 	g.require(getPartnersResponseFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPartnersResponse) SetInvoiceCurrency(invoiceCurrency *string) {
+	g.InvoiceCurrency = invoiceCurrency
+	g.require(getPartnersResponseFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPartnersResponse) SetInvoiceLocale(invoiceLocale *string) {
+	g.InvoiceLocale = invoiceLocale
+	g.require(getPartnersResponseFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
@@ -16996,32 +17902,34 @@ var (
 	listPartnersResponseRowsItemFieldIsCustomer            = big.NewInt(1 << 10)
 	listPartnersResponseRowsItemFieldIsSupplier            = big.NewInt(1 << 11)
 	listPartnersResponseRowsItemFieldPaymentTermDays       = big.NewInt(1 << 12)
-	listPartnersResponseRowsItemFieldCreditLimit           = big.NewInt(1 << 13)
-	listPartnersResponseRowsItemFieldPriceListID           = big.NewInt(1 << 14)
-	listPartnersResponseRowsItemFieldGroupID               = big.NewInt(1 << 15)
-	listPartnersResponseRowsItemFieldStatusID              = big.NewInt(1 << 16)
-	listPartnersResponseRowsItemFieldVatValid              = big.NewInt(1 << 17)
-	listPartnersResponseRowsItemFieldVatValidatedAt        = big.NewInt(1 << 18)
-	listPartnersResponseRowsItemFieldAddress               = big.NewInt(1 << 19)
-	listPartnersResponseRowsItemFieldCorrespondenceAddress = big.NewInt(1 << 20)
-	listPartnersResponseRowsItemFieldNotes                 = big.NewInt(1 << 21)
-	listPartnersResponseRowsItemFieldDocumentRef           = big.NewInt(1 << 22)
-	listPartnersResponseRowsItemFieldShortName             = big.NewInt(1 << 23)
-	listPartnersResponseRowsItemFieldWebsite               = big.NewInt(1 << 24)
-	listPartnersResponseRowsItemFieldFax                   = big.NewInt(1 << 25)
-	listPartnersResponseRowsItemFieldEoriCode              = big.NewInt(1 << 26)
-	listPartnersResponseRowsItemFieldAutoDebtReminder      = big.NewInt(1 << 27)
-	listPartnersResponseRowsItemFieldLateInterestPercent   = big.NewInt(1 << 28)
-	listPartnersResponseRowsItemFieldFirstCallDate         = big.NewInt(1 << 29)
-	listPartnersResponseRowsItemFieldLastCallDate          = big.NewInt(1 << 30)
-	listPartnersResponseRowsItemFieldNextCallDate          = big.NewInt(1 << 31)
-	listPartnersResponseRowsItemFieldRating                = big.NewInt(1 << 32)
-	listPartnersResponseRowsItemFieldIsEmployee            = big.NewInt(1 << 33)
-	listPartnersResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 34)
-	listPartnersResponseRowsItemFieldIsActive              = big.NewInt(1 << 35)
-	listPartnersResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 36)
-	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 37)
-	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 38)
+	listPartnersResponseRowsItemFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	listPartnersResponseRowsItemFieldInvoiceLocale         = big.NewInt(1 << 14)
+	listPartnersResponseRowsItemFieldCreditLimit           = big.NewInt(1 << 15)
+	listPartnersResponseRowsItemFieldPriceListID           = big.NewInt(1 << 16)
+	listPartnersResponseRowsItemFieldGroupID               = big.NewInt(1 << 17)
+	listPartnersResponseRowsItemFieldStatusID              = big.NewInt(1 << 18)
+	listPartnersResponseRowsItemFieldVatValid              = big.NewInt(1 << 19)
+	listPartnersResponseRowsItemFieldVatValidatedAt        = big.NewInt(1 << 20)
+	listPartnersResponseRowsItemFieldAddress               = big.NewInt(1 << 21)
+	listPartnersResponseRowsItemFieldCorrespondenceAddress = big.NewInt(1 << 22)
+	listPartnersResponseRowsItemFieldNotes                 = big.NewInt(1 << 23)
+	listPartnersResponseRowsItemFieldDocumentRef           = big.NewInt(1 << 24)
+	listPartnersResponseRowsItemFieldShortName             = big.NewInt(1 << 25)
+	listPartnersResponseRowsItemFieldWebsite               = big.NewInt(1 << 26)
+	listPartnersResponseRowsItemFieldFax                   = big.NewInt(1 << 27)
+	listPartnersResponseRowsItemFieldEoriCode              = big.NewInt(1 << 28)
+	listPartnersResponseRowsItemFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	listPartnersResponseRowsItemFieldLateInterestPercent   = big.NewInt(1 << 30)
+	listPartnersResponseRowsItemFieldFirstCallDate         = big.NewInt(1 << 31)
+	listPartnersResponseRowsItemFieldLastCallDate          = big.NewInt(1 << 32)
+	listPartnersResponseRowsItemFieldNextCallDate          = big.NewInt(1 << 33)
+	listPartnersResponseRowsItemFieldRating                = big.NewInt(1 << 34)
+	listPartnersResponseRowsItemFieldIsEmployee            = big.NewInt(1 << 35)
+	listPartnersResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 36)
+	listPartnersResponseRowsItemFieldIsActive              = big.NewInt(1 << 37)
+	listPartnersResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 38)
+	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 39)
+	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type ListPartnersResponseRowsItem struct {
@@ -17038,6 +17946,8 @@ type ListPartnersResponseRowsItem struct {
 	IsCustomer            bool                                               `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                               `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                             `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	InvoiceCurrency       *string                                            `json:"invoiceCurrency,omitempty" url:"invoiceCurrency,omitempty"`
+	InvoiceLocale         *string                                            `json:"invoiceLocale,omitempty" url:"invoiceLocale,omitempty"`
 	CreditLimit           *string                                            `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
 	PriceListID           *string                                            `json:"priceListId,omitempty" url:"priceListId,omitempty"`
 	GroupID               *string                                            `json:"groupId,omitempty" url:"groupId,omitempty"`
@@ -17161,6 +18071,20 @@ func (l *ListPartnersResponseRowsItem) GetPaymentTermDays() *int64 {
 		return nil
 	}
 	return l.PaymentTermDays
+}
+
+func (l *ListPartnersResponseRowsItem) GetInvoiceCurrency() *string {
+	if l == nil {
+		return nil
+	}
+	return l.InvoiceCurrency
+}
+
+func (l *ListPartnersResponseRowsItem) GetInvoiceLocale() *string {
+	if l == nil {
+		return nil
+	}
+	return l.InvoiceLocale
 }
 
 func (l *ListPartnersResponseRowsItem) GetCreditLimit() *string {
@@ -17448,6 +18372,20 @@ func (l *ListPartnersResponseRowsItem) SetIsSupplier(isSupplier bool) {
 func (l *ListPartnersResponseRowsItem) SetPaymentTermDays(paymentTermDays *int64) {
 	l.PaymentTermDays = paymentTermDays
 	l.require(listPartnersResponseRowsItemFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListPartnersResponseRowsItem) SetInvoiceCurrency(invoiceCurrency *string) {
+	l.InvoiceCurrency = invoiceCurrency
+	l.require(listPartnersResponseRowsItemFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListPartnersResponseRowsItem) SetInvoiceLocale(invoiceLocale *string) {
+	l.InvoiceLocale = invoiceLocale
+	l.require(listPartnersResponseRowsItemFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
@@ -19277,6 +20215,391 @@ func (u *UpdatePartnersRequestCorrespondenceAddress) String() string {
 	return fmt.Sprintf("%#v", u)
 }
 
+// Currency a new invoice for this partner starts with when the invoice names none
+type UpdatePartnersRequestInvoiceCurrency string
+
+const (
+	UpdatePartnersRequestInvoiceCurrencyEur UpdatePartnersRequestInvoiceCurrency = "EUR"
+	UpdatePartnersRequestInvoiceCurrencyUsd UpdatePartnersRequestInvoiceCurrency = "USD"
+	UpdatePartnersRequestInvoiceCurrencyGbp UpdatePartnersRequestInvoiceCurrency = "GBP"
+	UpdatePartnersRequestInvoiceCurrencyPln UpdatePartnersRequestInvoiceCurrency = "PLN"
+	UpdatePartnersRequestInvoiceCurrencySek UpdatePartnersRequestInvoiceCurrency = "SEK"
+	UpdatePartnersRequestInvoiceCurrencyNok UpdatePartnersRequestInvoiceCurrency = "NOK"
+	UpdatePartnersRequestInvoiceCurrencyDkk UpdatePartnersRequestInvoiceCurrency = "DKK"
+	UpdatePartnersRequestInvoiceCurrencyChf UpdatePartnersRequestInvoiceCurrency = "CHF"
+	UpdatePartnersRequestInvoiceCurrencyCzk UpdatePartnersRequestInvoiceCurrency = "CZK"
+	UpdatePartnersRequestInvoiceCurrencyHuf UpdatePartnersRequestInvoiceCurrency = "HUF"
+	UpdatePartnersRequestInvoiceCurrencyRon UpdatePartnersRequestInvoiceCurrency = "RON"
+	UpdatePartnersRequestInvoiceCurrencyAed UpdatePartnersRequestInvoiceCurrency = "AED"
+	UpdatePartnersRequestInvoiceCurrencyAfn UpdatePartnersRequestInvoiceCurrency = "AFN"
+	UpdatePartnersRequestInvoiceCurrencyAll UpdatePartnersRequestInvoiceCurrency = "ALL"
+	UpdatePartnersRequestInvoiceCurrencyAmd UpdatePartnersRequestInvoiceCurrency = "AMD"
+	UpdatePartnersRequestInvoiceCurrencyArs UpdatePartnersRequestInvoiceCurrency = "ARS"
+	UpdatePartnersRequestInvoiceCurrencyAud UpdatePartnersRequestInvoiceCurrency = "AUD"
+	UpdatePartnersRequestInvoiceCurrencyAzn UpdatePartnersRequestInvoiceCurrency = "AZN"
+	UpdatePartnersRequestInvoiceCurrencyBam UpdatePartnersRequestInvoiceCurrency = "BAM"
+	UpdatePartnersRequestInvoiceCurrencyBdt UpdatePartnersRequestInvoiceCurrency = "BDT"
+	UpdatePartnersRequestInvoiceCurrencyBhd UpdatePartnersRequestInvoiceCurrency = "BHD"
+	UpdatePartnersRequestInvoiceCurrencyBob UpdatePartnersRequestInvoiceCurrency = "BOB"
+	UpdatePartnersRequestInvoiceCurrencyBrl UpdatePartnersRequestInvoiceCurrency = "BRL"
+	UpdatePartnersRequestInvoiceCurrencyByn UpdatePartnersRequestInvoiceCurrency = "BYN"
+	UpdatePartnersRequestInvoiceCurrencyCad UpdatePartnersRequestInvoiceCurrency = "CAD"
+	UpdatePartnersRequestInvoiceCurrencyClp UpdatePartnersRequestInvoiceCurrency = "CLP"
+	UpdatePartnersRequestInvoiceCurrencyCny UpdatePartnersRequestInvoiceCurrency = "CNY"
+	UpdatePartnersRequestInvoiceCurrencyCop UpdatePartnersRequestInvoiceCurrency = "COP"
+	UpdatePartnersRequestInvoiceCurrencyDjf UpdatePartnersRequestInvoiceCurrency = "DJF"
+	UpdatePartnersRequestInvoiceCurrencyDzd UpdatePartnersRequestInvoiceCurrency = "DZD"
+	UpdatePartnersRequestInvoiceCurrencyEgp UpdatePartnersRequestInvoiceCurrency = "EGP"
+	UpdatePartnersRequestInvoiceCurrencyEtb UpdatePartnersRequestInvoiceCurrency = "ETB"
+	UpdatePartnersRequestInvoiceCurrencyGel UpdatePartnersRequestInvoiceCurrency = "GEL"
+	UpdatePartnersRequestInvoiceCurrencyGnf UpdatePartnersRequestInvoiceCurrency = "GNF"
+	UpdatePartnersRequestInvoiceCurrencyHkd UpdatePartnersRequestInvoiceCurrency = "HKD"
+	UpdatePartnersRequestInvoiceCurrencyIdr UpdatePartnersRequestInvoiceCurrency = "IDR"
+	UpdatePartnersRequestInvoiceCurrencyIls UpdatePartnersRequestInvoiceCurrency = "ILS"
+	UpdatePartnersRequestInvoiceCurrencyInr UpdatePartnersRequestInvoiceCurrency = "INR"
+	UpdatePartnersRequestInvoiceCurrencyIqd UpdatePartnersRequestInvoiceCurrency = "IQD"
+	UpdatePartnersRequestInvoiceCurrencyIrr UpdatePartnersRequestInvoiceCurrency = "IRR"
+	UpdatePartnersRequestInvoiceCurrencyIsk UpdatePartnersRequestInvoiceCurrency = "ISK"
+	UpdatePartnersRequestInvoiceCurrencyJod UpdatePartnersRequestInvoiceCurrency = "JOD"
+	UpdatePartnersRequestInvoiceCurrencyJpy UpdatePartnersRequestInvoiceCurrency = "JPY"
+	UpdatePartnersRequestInvoiceCurrencyKes UpdatePartnersRequestInvoiceCurrency = "KES"
+	UpdatePartnersRequestInvoiceCurrencyKgs UpdatePartnersRequestInvoiceCurrency = "KGS"
+	UpdatePartnersRequestInvoiceCurrencyKrw UpdatePartnersRequestInvoiceCurrency = "KRW"
+	UpdatePartnersRequestInvoiceCurrencyKwd UpdatePartnersRequestInvoiceCurrency = "KWD"
+	UpdatePartnersRequestInvoiceCurrencyKzt UpdatePartnersRequestInvoiceCurrency = "KZT"
+	UpdatePartnersRequestInvoiceCurrencyLbp UpdatePartnersRequestInvoiceCurrency = "LBP"
+	UpdatePartnersRequestInvoiceCurrencyLkr UpdatePartnersRequestInvoiceCurrency = "LKR"
+	UpdatePartnersRequestInvoiceCurrencyLyd UpdatePartnersRequestInvoiceCurrency = "LYD"
+	UpdatePartnersRequestInvoiceCurrencyMad UpdatePartnersRequestInvoiceCurrency = "MAD"
+	UpdatePartnersRequestInvoiceCurrencyMdl UpdatePartnersRequestInvoiceCurrency = "MDL"
+	UpdatePartnersRequestInvoiceCurrencyMga UpdatePartnersRequestInvoiceCurrency = "MGA"
+	UpdatePartnersRequestInvoiceCurrencyMkd UpdatePartnersRequestInvoiceCurrency = "MKD"
+	UpdatePartnersRequestInvoiceCurrencyMnt UpdatePartnersRequestInvoiceCurrency = "MNT"
+	UpdatePartnersRequestInvoiceCurrencyMxn UpdatePartnersRequestInvoiceCurrency = "MXN"
+	UpdatePartnersRequestInvoiceCurrencyMyr UpdatePartnersRequestInvoiceCurrency = "MYR"
+	UpdatePartnersRequestInvoiceCurrencyMzn UpdatePartnersRequestInvoiceCurrency = "MZN"
+	UpdatePartnersRequestInvoiceCurrencyNzd UpdatePartnersRequestInvoiceCurrency = "NZD"
+	UpdatePartnersRequestInvoiceCurrencyPab UpdatePartnersRequestInvoiceCurrency = "PAB"
+	UpdatePartnersRequestInvoiceCurrencyPen UpdatePartnersRequestInvoiceCurrency = "PEN"
+	UpdatePartnersRequestInvoiceCurrencyPhp UpdatePartnersRequestInvoiceCurrency = "PHP"
+	UpdatePartnersRequestInvoiceCurrencyPkr UpdatePartnersRequestInvoiceCurrency = "PKR"
+	UpdatePartnersRequestInvoiceCurrencyQar UpdatePartnersRequestInvoiceCurrency = "QAR"
+	UpdatePartnersRequestInvoiceCurrencyRsd UpdatePartnersRequestInvoiceCurrency = "RSD"
+	UpdatePartnersRequestInvoiceCurrencySar UpdatePartnersRequestInvoiceCurrency = "SAR"
+	UpdatePartnersRequestInvoiceCurrencySgd UpdatePartnersRequestInvoiceCurrency = "SGD"
+	UpdatePartnersRequestInvoiceCurrencySyp UpdatePartnersRequestInvoiceCurrency = "SYP"
+	UpdatePartnersRequestInvoiceCurrencyThb UpdatePartnersRequestInvoiceCurrency = "THB"
+	UpdatePartnersRequestInvoiceCurrencyTjs UpdatePartnersRequestInvoiceCurrency = "TJS"
+	UpdatePartnersRequestInvoiceCurrencyTmt UpdatePartnersRequestInvoiceCurrency = "TMT"
+	UpdatePartnersRequestInvoiceCurrencyTnd UpdatePartnersRequestInvoiceCurrency = "TND"
+	UpdatePartnersRequestInvoiceCurrencyTry UpdatePartnersRequestInvoiceCurrency = "TRY"
+	UpdatePartnersRequestInvoiceCurrencyTwd UpdatePartnersRequestInvoiceCurrency = "TWD"
+	UpdatePartnersRequestInvoiceCurrencyTzs UpdatePartnersRequestInvoiceCurrency = "TZS"
+	UpdatePartnersRequestInvoiceCurrencyUah UpdatePartnersRequestInvoiceCurrency = "UAH"
+	UpdatePartnersRequestInvoiceCurrencyUyu UpdatePartnersRequestInvoiceCurrency = "UYU"
+	UpdatePartnersRequestInvoiceCurrencyUzs UpdatePartnersRequestInvoiceCurrency = "UZS"
+	UpdatePartnersRequestInvoiceCurrencyVes UpdatePartnersRequestInvoiceCurrency = "VES"
+	UpdatePartnersRequestInvoiceCurrencyVnd UpdatePartnersRequestInvoiceCurrency = "VND"
+	UpdatePartnersRequestInvoiceCurrencyXaf UpdatePartnersRequestInvoiceCurrency = "XAF"
+	UpdatePartnersRequestInvoiceCurrencyXof UpdatePartnersRequestInvoiceCurrency = "XOF"
+	UpdatePartnersRequestInvoiceCurrencyYer UpdatePartnersRequestInvoiceCurrency = "YER"
+	UpdatePartnersRequestInvoiceCurrencyZar UpdatePartnersRequestInvoiceCurrency = "ZAR"
+)
+
+func NewUpdatePartnersRequestInvoiceCurrencyFromString(s string) (UpdatePartnersRequestInvoiceCurrency, error) {
+	switch s {
+	case "EUR":
+		return UpdatePartnersRequestInvoiceCurrencyEur, nil
+	case "USD":
+		return UpdatePartnersRequestInvoiceCurrencyUsd, nil
+	case "GBP":
+		return UpdatePartnersRequestInvoiceCurrencyGbp, nil
+	case "PLN":
+		return UpdatePartnersRequestInvoiceCurrencyPln, nil
+	case "SEK":
+		return UpdatePartnersRequestInvoiceCurrencySek, nil
+	case "NOK":
+		return UpdatePartnersRequestInvoiceCurrencyNok, nil
+	case "DKK":
+		return UpdatePartnersRequestInvoiceCurrencyDkk, nil
+	case "CHF":
+		return UpdatePartnersRequestInvoiceCurrencyChf, nil
+	case "CZK":
+		return UpdatePartnersRequestInvoiceCurrencyCzk, nil
+	case "HUF":
+		return UpdatePartnersRequestInvoiceCurrencyHuf, nil
+	case "RON":
+		return UpdatePartnersRequestInvoiceCurrencyRon, nil
+	case "AED":
+		return UpdatePartnersRequestInvoiceCurrencyAed, nil
+	case "AFN":
+		return UpdatePartnersRequestInvoiceCurrencyAfn, nil
+	case "ALL":
+		return UpdatePartnersRequestInvoiceCurrencyAll, nil
+	case "AMD":
+		return UpdatePartnersRequestInvoiceCurrencyAmd, nil
+	case "ARS":
+		return UpdatePartnersRequestInvoiceCurrencyArs, nil
+	case "AUD":
+		return UpdatePartnersRequestInvoiceCurrencyAud, nil
+	case "AZN":
+		return UpdatePartnersRequestInvoiceCurrencyAzn, nil
+	case "BAM":
+		return UpdatePartnersRequestInvoiceCurrencyBam, nil
+	case "BDT":
+		return UpdatePartnersRequestInvoiceCurrencyBdt, nil
+	case "BHD":
+		return UpdatePartnersRequestInvoiceCurrencyBhd, nil
+	case "BOB":
+		return UpdatePartnersRequestInvoiceCurrencyBob, nil
+	case "BRL":
+		return UpdatePartnersRequestInvoiceCurrencyBrl, nil
+	case "BYN":
+		return UpdatePartnersRequestInvoiceCurrencyByn, nil
+	case "CAD":
+		return UpdatePartnersRequestInvoiceCurrencyCad, nil
+	case "CLP":
+		return UpdatePartnersRequestInvoiceCurrencyClp, nil
+	case "CNY":
+		return UpdatePartnersRequestInvoiceCurrencyCny, nil
+	case "COP":
+		return UpdatePartnersRequestInvoiceCurrencyCop, nil
+	case "DJF":
+		return UpdatePartnersRequestInvoiceCurrencyDjf, nil
+	case "DZD":
+		return UpdatePartnersRequestInvoiceCurrencyDzd, nil
+	case "EGP":
+		return UpdatePartnersRequestInvoiceCurrencyEgp, nil
+	case "ETB":
+		return UpdatePartnersRequestInvoiceCurrencyEtb, nil
+	case "GEL":
+		return UpdatePartnersRequestInvoiceCurrencyGel, nil
+	case "GNF":
+		return UpdatePartnersRequestInvoiceCurrencyGnf, nil
+	case "HKD":
+		return UpdatePartnersRequestInvoiceCurrencyHkd, nil
+	case "IDR":
+		return UpdatePartnersRequestInvoiceCurrencyIdr, nil
+	case "ILS":
+		return UpdatePartnersRequestInvoiceCurrencyIls, nil
+	case "INR":
+		return UpdatePartnersRequestInvoiceCurrencyInr, nil
+	case "IQD":
+		return UpdatePartnersRequestInvoiceCurrencyIqd, nil
+	case "IRR":
+		return UpdatePartnersRequestInvoiceCurrencyIrr, nil
+	case "ISK":
+		return UpdatePartnersRequestInvoiceCurrencyIsk, nil
+	case "JOD":
+		return UpdatePartnersRequestInvoiceCurrencyJod, nil
+	case "JPY":
+		return UpdatePartnersRequestInvoiceCurrencyJpy, nil
+	case "KES":
+		return UpdatePartnersRequestInvoiceCurrencyKes, nil
+	case "KGS":
+		return UpdatePartnersRequestInvoiceCurrencyKgs, nil
+	case "KRW":
+		return UpdatePartnersRequestInvoiceCurrencyKrw, nil
+	case "KWD":
+		return UpdatePartnersRequestInvoiceCurrencyKwd, nil
+	case "KZT":
+		return UpdatePartnersRequestInvoiceCurrencyKzt, nil
+	case "LBP":
+		return UpdatePartnersRequestInvoiceCurrencyLbp, nil
+	case "LKR":
+		return UpdatePartnersRequestInvoiceCurrencyLkr, nil
+	case "LYD":
+		return UpdatePartnersRequestInvoiceCurrencyLyd, nil
+	case "MAD":
+		return UpdatePartnersRequestInvoiceCurrencyMad, nil
+	case "MDL":
+		return UpdatePartnersRequestInvoiceCurrencyMdl, nil
+	case "MGA":
+		return UpdatePartnersRequestInvoiceCurrencyMga, nil
+	case "MKD":
+		return UpdatePartnersRequestInvoiceCurrencyMkd, nil
+	case "MNT":
+		return UpdatePartnersRequestInvoiceCurrencyMnt, nil
+	case "MXN":
+		return UpdatePartnersRequestInvoiceCurrencyMxn, nil
+	case "MYR":
+		return UpdatePartnersRequestInvoiceCurrencyMyr, nil
+	case "MZN":
+		return UpdatePartnersRequestInvoiceCurrencyMzn, nil
+	case "NZD":
+		return UpdatePartnersRequestInvoiceCurrencyNzd, nil
+	case "PAB":
+		return UpdatePartnersRequestInvoiceCurrencyPab, nil
+	case "PEN":
+		return UpdatePartnersRequestInvoiceCurrencyPen, nil
+	case "PHP":
+		return UpdatePartnersRequestInvoiceCurrencyPhp, nil
+	case "PKR":
+		return UpdatePartnersRequestInvoiceCurrencyPkr, nil
+	case "QAR":
+		return UpdatePartnersRequestInvoiceCurrencyQar, nil
+	case "RSD":
+		return UpdatePartnersRequestInvoiceCurrencyRsd, nil
+	case "SAR":
+		return UpdatePartnersRequestInvoiceCurrencySar, nil
+	case "SGD":
+		return UpdatePartnersRequestInvoiceCurrencySgd, nil
+	case "SYP":
+		return UpdatePartnersRequestInvoiceCurrencySyp, nil
+	case "THB":
+		return UpdatePartnersRequestInvoiceCurrencyThb, nil
+	case "TJS":
+		return UpdatePartnersRequestInvoiceCurrencyTjs, nil
+	case "TMT":
+		return UpdatePartnersRequestInvoiceCurrencyTmt, nil
+	case "TND":
+		return UpdatePartnersRequestInvoiceCurrencyTnd, nil
+	case "TRY":
+		return UpdatePartnersRequestInvoiceCurrencyTry, nil
+	case "TWD":
+		return UpdatePartnersRequestInvoiceCurrencyTwd, nil
+	case "TZS":
+		return UpdatePartnersRequestInvoiceCurrencyTzs, nil
+	case "UAH":
+		return UpdatePartnersRequestInvoiceCurrencyUah, nil
+	case "UYU":
+		return UpdatePartnersRequestInvoiceCurrencyUyu, nil
+	case "UZS":
+		return UpdatePartnersRequestInvoiceCurrencyUzs, nil
+	case "VES":
+		return UpdatePartnersRequestInvoiceCurrencyVes, nil
+	case "VND":
+		return UpdatePartnersRequestInvoiceCurrencyVnd, nil
+	case "XAF":
+		return UpdatePartnersRequestInvoiceCurrencyXaf, nil
+	case "XOF":
+		return UpdatePartnersRequestInvoiceCurrencyXof, nil
+	case "YER":
+		return UpdatePartnersRequestInvoiceCurrencyYer, nil
+	case "ZAR":
+		return UpdatePartnersRequestInvoiceCurrencyZar, nil
+	}
+	var t UpdatePartnersRequestInvoiceCurrency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u UpdatePartnersRequestInvoiceCurrency) Ptr() *UpdatePartnersRequestInvoiceCurrency {
+	return &u
+}
+
+// Language a new invoice for this partner starts with when the invoice names none
+type UpdatePartnersRequestInvoiceLocale string
+
+const (
+	UpdatePartnersRequestInvoiceLocaleEn UpdatePartnersRequestInvoiceLocale = "en"
+	UpdatePartnersRequestInvoiceLocaleLt UpdatePartnersRequestInvoiceLocale = "lt"
+	UpdatePartnersRequestInvoiceLocaleDe UpdatePartnersRequestInvoiceLocale = "de"
+	UpdatePartnersRequestInvoiceLocaleFr UpdatePartnersRequestInvoiceLocale = "fr"
+	UpdatePartnersRequestInvoiceLocaleEs UpdatePartnersRequestInvoiceLocale = "es"
+	UpdatePartnersRequestInvoiceLocaleIt UpdatePartnersRequestInvoiceLocale = "it"
+	UpdatePartnersRequestInvoiceLocalePt UpdatePartnersRequestInvoiceLocale = "pt"
+	UpdatePartnersRequestInvoiceLocaleNl UpdatePartnersRequestInvoiceLocale = "nl"
+	UpdatePartnersRequestInvoiceLocalePl UpdatePartnersRequestInvoiceLocale = "pl"
+	UpdatePartnersRequestInvoiceLocaleSv UpdatePartnersRequestInvoiceLocale = "sv"
+	UpdatePartnersRequestInvoiceLocaleDa UpdatePartnersRequestInvoiceLocale = "da"
+	UpdatePartnersRequestInvoiceLocaleNo UpdatePartnersRequestInvoiceLocale = "no"
+	UpdatePartnersRequestInvoiceLocaleFi UpdatePartnersRequestInvoiceLocale = "fi"
+	UpdatePartnersRequestInvoiceLocaleEt UpdatePartnersRequestInvoiceLocale = "et"
+	UpdatePartnersRequestInvoiceLocaleLv UpdatePartnersRequestInvoiceLocale = "lv"
+	UpdatePartnersRequestInvoiceLocaleCs UpdatePartnersRequestInvoiceLocale = "cs"
+	UpdatePartnersRequestInvoiceLocaleSk UpdatePartnersRequestInvoiceLocale = "sk"
+	UpdatePartnersRequestInvoiceLocaleHu UpdatePartnersRequestInvoiceLocale = "hu"
+	UpdatePartnersRequestInvoiceLocaleRo UpdatePartnersRequestInvoiceLocale = "ro"
+	UpdatePartnersRequestInvoiceLocaleBg UpdatePartnersRequestInvoiceLocale = "bg"
+	UpdatePartnersRequestInvoiceLocaleHr UpdatePartnersRequestInvoiceLocale = "hr"
+	UpdatePartnersRequestInvoiceLocaleSl UpdatePartnersRequestInvoiceLocale = "sl"
+	UpdatePartnersRequestInvoiceLocaleEl UpdatePartnersRequestInvoiceLocale = "el"
+	UpdatePartnersRequestInvoiceLocaleMt UpdatePartnersRequestInvoiceLocale = "mt"
+	UpdatePartnersRequestInvoiceLocaleIs UpdatePartnersRequestInvoiceLocale = "is"
+	UpdatePartnersRequestInvoiceLocaleGa UpdatePartnersRequestInvoiceLocale = "ga"
+	UpdatePartnersRequestInvoiceLocaleZh UpdatePartnersRequestInvoiceLocale = "zh"
+	UpdatePartnersRequestInvoiceLocaleJa UpdatePartnersRequestInvoiceLocale = "ja"
+	UpdatePartnersRequestInvoiceLocaleAr UpdatePartnersRequestInvoiceLocale = "ar"
+	UpdatePartnersRequestInvoiceLocaleHi UpdatePartnersRequestInvoiceLocale = "hi"
+	UpdatePartnersRequestInvoiceLocaleRu UpdatePartnersRequestInvoiceLocale = "ru"
+	UpdatePartnersRequestInvoiceLocaleTr UpdatePartnersRequestInvoiceLocale = "tr"
+)
+
+func NewUpdatePartnersRequestInvoiceLocaleFromString(s string) (UpdatePartnersRequestInvoiceLocale, error) {
+	switch s {
+	case "en":
+		return UpdatePartnersRequestInvoiceLocaleEn, nil
+	case "lt":
+		return UpdatePartnersRequestInvoiceLocaleLt, nil
+	case "de":
+		return UpdatePartnersRequestInvoiceLocaleDe, nil
+	case "fr":
+		return UpdatePartnersRequestInvoiceLocaleFr, nil
+	case "es":
+		return UpdatePartnersRequestInvoiceLocaleEs, nil
+	case "it":
+		return UpdatePartnersRequestInvoiceLocaleIt, nil
+	case "pt":
+		return UpdatePartnersRequestInvoiceLocalePt, nil
+	case "nl":
+		return UpdatePartnersRequestInvoiceLocaleNl, nil
+	case "pl":
+		return UpdatePartnersRequestInvoiceLocalePl, nil
+	case "sv":
+		return UpdatePartnersRequestInvoiceLocaleSv, nil
+	case "da":
+		return UpdatePartnersRequestInvoiceLocaleDa, nil
+	case "no":
+		return UpdatePartnersRequestInvoiceLocaleNo, nil
+	case "fi":
+		return UpdatePartnersRequestInvoiceLocaleFi, nil
+	case "et":
+		return UpdatePartnersRequestInvoiceLocaleEt, nil
+	case "lv":
+		return UpdatePartnersRequestInvoiceLocaleLv, nil
+	case "cs":
+		return UpdatePartnersRequestInvoiceLocaleCs, nil
+	case "sk":
+		return UpdatePartnersRequestInvoiceLocaleSk, nil
+	case "hu":
+		return UpdatePartnersRequestInvoiceLocaleHu, nil
+	case "ro":
+		return UpdatePartnersRequestInvoiceLocaleRo, nil
+	case "bg":
+		return UpdatePartnersRequestInvoiceLocaleBg, nil
+	case "hr":
+		return UpdatePartnersRequestInvoiceLocaleHr, nil
+	case "sl":
+		return UpdatePartnersRequestInvoiceLocaleSl, nil
+	case "el":
+		return UpdatePartnersRequestInvoiceLocaleEl, nil
+	case "mt":
+		return UpdatePartnersRequestInvoiceLocaleMt, nil
+	case "is":
+		return UpdatePartnersRequestInvoiceLocaleIs, nil
+	case "ga":
+		return UpdatePartnersRequestInvoiceLocaleGa, nil
+	case "zh":
+		return UpdatePartnersRequestInvoiceLocaleZh, nil
+	case "ja":
+		return UpdatePartnersRequestInvoiceLocaleJa, nil
+	case "ar":
+		return UpdatePartnersRequestInvoiceLocaleAr, nil
+	case "hi":
+		return UpdatePartnersRequestInvoiceLocaleHi, nil
+	case "ru":
+		return UpdatePartnersRequestInvoiceLocaleRu, nil
+	case "tr":
+		return UpdatePartnersRequestInvoiceLocaleTr, nil
+	}
+	var t UpdatePartnersRequestInvoiceLocale
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u UpdatePartnersRequestInvoiceLocale) Ptr() *UpdatePartnersRequestInvoiceLocale {
+	return &u
+}
+
 type UpdatePartnersRequestLegalCountryClass string
 
 const (
@@ -19338,32 +20661,34 @@ var (
 	updatePartnersResponseFieldIsCustomer            = big.NewInt(1 << 10)
 	updatePartnersResponseFieldIsSupplier            = big.NewInt(1 << 11)
 	updatePartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
-	updatePartnersResponseFieldCreditLimit           = big.NewInt(1 << 13)
-	updatePartnersResponseFieldPriceListID           = big.NewInt(1 << 14)
-	updatePartnersResponseFieldGroupID               = big.NewInt(1 << 15)
-	updatePartnersResponseFieldStatusID              = big.NewInt(1 << 16)
-	updatePartnersResponseFieldVatValid              = big.NewInt(1 << 17)
-	updatePartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 18)
-	updatePartnersResponseFieldAddress               = big.NewInt(1 << 19)
-	updatePartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 20)
-	updatePartnersResponseFieldNotes                 = big.NewInt(1 << 21)
-	updatePartnersResponseFieldDocumentRef           = big.NewInt(1 << 22)
-	updatePartnersResponseFieldShortName             = big.NewInt(1 << 23)
-	updatePartnersResponseFieldWebsite               = big.NewInt(1 << 24)
-	updatePartnersResponseFieldFax                   = big.NewInt(1 << 25)
-	updatePartnersResponseFieldEoriCode              = big.NewInt(1 << 26)
-	updatePartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 27)
-	updatePartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 28)
-	updatePartnersResponseFieldFirstCallDate         = big.NewInt(1 << 29)
-	updatePartnersResponseFieldLastCallDate          = big.NewInt(1 << 30)
-	updatePartnersResponseFieldNextCallDate          = big.NewInt(1 << 31)
-	updatePartnersResponseFieldRating                = big.NewInt(1 << 32)
-	updatePartnersResponseFieldIsEmployee            = big.NewInt(1 << 33)
-	updatePartnersResponseFieldIsGroupMember         = big.NewInt(1 << 34)
-	updatePartnersResponseFieldIsActive              = big.NewInt(1 << 35)
-	updatePartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 36)
-	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 37)
-	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 38)
+	updatePartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	updatePartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 14)
+	updatePartnersResponseFieldCreditLimit           = big.NewInt(1 << 15)
+	updatePartnersResponseFieldPriceListID           = big.NewInt(1 << 16)
+	updatePartnersResponseFieldGroupID               = big.NewInt(1 << 17)
+	updatePartnersResponseFieldStatusID              = big.NewInt(1 << 18)
+	updatePartnersResponseFieldVatValid              = big.NewInt(1 << 19)
+	updatePartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 20)
+	updatePartnersResponseFieldAddress               = big.NewInt(1 << 21)
+	updatePartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 22)
+	updatePartnersResponseFieldNotes                 = big.NewInt(1 << 23)
+	updatePartnersResponseFieldDocumentRef           = big.NewInt(1 << 24)
+	updatePartnersResponseFieldShortName             = big.NewInt(1 << 25)
+	updatePartnersResponseFieldWebsite               = big.NewInt(1 << 26)
+	updatePartnersResponseFieldFax                   = big.NewInt(1 << 27)
+	updatePartnersResponseFieldEoriCode              = big.NewInt(1 << 28)
+	updatePartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
+	updatePartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
+	updatePartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
+	updatePartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
+	updatePartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
+	updatePartnersResponseFieldRating                = big.NewInt(1 << 34)
+	updatePartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
+	updatePartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
+	updatePartnersResponseFieldIsActive              = big.NewInt(1 << 37)
+	updatePartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
+	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
+	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
 )
 
 type UpdatePartnersResponse struct {
@@ -19380,6 +20705,8 @@ type UpdatePartnersResponse struct {
 	IsCustomer            bool                                         `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                         `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                       `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
+	InvoiceCurrency       *string                                      `json:"invoiceCurrency,omitempty" url:"invoiceCurrency,omitempty"`
+	InvoiceLocale         *string                                      `json:"invoiceLocale,omitempty" url:"invoiceLocale,omitempty"`
 	CreditLimit           *string                                      `json:"creditLimit,omitempty" url:"creditLimit,omitempty"`
 	PriceListID           *string                                      `json:"priceListId,omitempty" url:"priceListId,omitempty"`
 	GroupID               *string                                      `json:"groupId,omitempty" url:"groupId,omitempty"`
@@ -19503,6 +20830,20 @@ func (u *UpdatePartnersResponse) GetPaymentTermDays() *int64 {
 		return nil
 	}
 	return u.PaymentTermDays
+}
+
+func (u *UpdatePartnersResponse) GetInvoiceCurrency() *string {
+	if u == nil {
+		return nil
+	}
+	return u.InvoiceCurrency
+}
+
+func (u *UpdatePartnersResponse) GetInvoiceLocale() *string {
+	if u == nil {
+		return nil
+	}
+	return u.InvoiceLocale
 }
 
 func (u *UpdatePartnersResponse) GetCreditLimit() *string {
@@ -19790,6 +21131,20 @@ func (u *UpdatePartnersResponse) SetIsSupplier(isSupplier bool) {
 func (u *UpdatePartnersResponse) SetPaymentTermDays(paymentTermDays *int64) {
 	u.PaymentTermDays = paymentTermDays
 	u.require(updatePartnersResponseFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersResponse) SetInvoiceCurrency(invoiceCurrency *string) {
+	u.InvoiceCurrency = invoiceCurrency
+	u.require(updatePartnersResponseFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersResponse) SetInvoiceLocale(invoiceLocale *string) {
+	u.InvoiceLocale = invoiceLocale
+	u.require(updatePartnersResponseFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
@@ -22225,44 +23580,50 @@ var (
 	updatePartnersRequestFieldIsCustomer            = big.NewInt(1 << 10)
 	updatePartnersRequestFieldIsSupplier            = big.NewInt(1 << 11)
 	updatePartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 12)
-	updatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 13)
-	updatePartnersRequestFieldPriceListID           = big.NewInt(1 << 14)
-	updatePartnersRequestFieldGroupID               = big.NewInt(1 << 15)
-	updatePartnersRequestFieldStatusID              = big.NewInt(1 << 16)
-	updatePartnersRequestFieldAddress               = big.NewInt(1 << 17)
-	updatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 18)
-	updatePartnersRequestFieldNotes                 = big.NewInt(1 << 19)
-	updatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 20)
-	updatePartnersRequestFieldShortName             = big.NewInt(1 << 21)
-	updatePartnersRequestFieldWebsite               = big.NewInt(1 << 22)
-	updatePartnersRequestFieldFax                   = big.NewInt(1 << 23)
-	updatePartnersRequestFieldEoriCode              = big.NewInt(1 << 24)
-	updatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 25)
-	updatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 26)
-	updatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 27)
-	updatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 28)
-	updatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 29)
-	updatePartnersRequestFieldRating                = big.NewInt(1 << 30)
-	updatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 31)
-	updatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 32)
-	updatePartnersRequestFieldIsActive              = big.NewInt(1 << 33)
-	updatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 34)
+	updatePartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	updatePartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 14)
+	updatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 15)
+	updatePartnersRequestFieldPriceListID           = big.NewInt(1 << 16)
+	updatePartnersRequestFieldGroupID               = big.NewInt(1 << 17)
+	updatePartnersRequestFieldStatusID              = big.NewInt(1 << 18)
+	updatePartnersRequestFieldAddress               = big.NewInt(1 << 19)
+	updatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	updatePartnersRequestFieldNotes                 = big.NewInt(1 << 21)
+	updatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 22)
+	updatePartnersRequestFieldShortName             = big.NewInt(1 << 23)
+	updatePartnersRequestFieldWebsite               = big.NewInt(1 << 24)
+	updatePartnersRequestFieldFax                   = big.NewInt(1 << 25)
+	updatePartnersRequestFieldEoriCode              = big.NewInt(1 << 26)
+	updatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	updatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 28)
+	updatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 29)
+	updatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 30)
+	updatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 31)
+	updatePartnersRequestFieldRating                = big.NewInt(1 << 32)
+	updatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 33)
+	updatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 34)
+	updatePartnersRequestFieldIsActive              = big.NewInt(1 << 35)
+	updatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
 )
 
 type UpdatePartnersRequest struct {
-	ID                    string                                      `json:"id" url:"-"`
-	Type                  *UpdatePartnersRequestType                  `json:"type,omitempty" url:"-"`
-	Name                  *string                                     `json:"name,omitempty" url:"-"`
-	Code                  *string                                     `json:"code,omitempty" url:"-"`
-	VatCode               *string                                     `json:"vatCode,omitempty" url:"-"`
-	PeppolID              *string                                     `json:"peppolId,omitempty" url:"-"`
-	Email                 *string                                     `json:"email,omitempty" url:"-"`
-	Phone                 *string                                     `json:"phone,omitempty" url:"-"`
-	SelfEmploymentCertNo  *string                                     `json:"selfEmploymentCertNo,omitempty" url:"-"`
-	BirthDate             *time.Time                                  `json:"birthDate,omitempty" url:"-" format:"date"`
-	IsCustomer            *bool                                       `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier            *bool                                       `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays       *int64                                      `json:"paymentTermDays,omitempty" url:"-"`
+	ID                   string                     `json:"id" url:"-"`
+	Type                 *UpdatePartnersRequestType `json:"type,omitempty" url:"-"`
+	Name                 *string                    `json:"name,omitempty" url:"-"`
+	Code                 *string                    `json:"code,omitempty" url:"-"`
+	VatCode              *string                    `json:"vatCode,omitempty" url:"-"`
+	PeppolID             *string                    `json:"peppolId,omitempty" url:"-"`
+	Email                *string                    `json:"email,omitempty" url:"-"`
+	Phone                *string                    `json:"phone,omitempty" url:"-"`
+	SelfEmploymentCertNo *string                    `json:"selfEmploymentCertNo,omitempty" url:"-"`
+	BirthDate            *time.Time                 `json:"birthDate,omitempty" url:"-" format:"date"`
+	IsCustomer           *bool                      `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier           *bool                      `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays      *int64                     `json:"paymentTermDays,omitempty" url:"-"`
+	// Currency a new invoice for this partner starts with when the invoice names none
+	InvoiceCurrency *UpdatePartnersRequestInvoiceCurrency `json:"invoiceCurrency,omitempty" url:"-"`
+	// Language a new invoice for this partner starts with when the invoice names none
+	InvoiceLocale         *UpdatePartnersRequestInvoiceLocale         `json:"invoiceLocale,omitempty" url:"-"`
 	CreditLimit           *string                                     `json:"creditLimit,omitempty" url:"-"`
 	PriceListID           *string                                     `json:"priceListId,omitempty" url:"-"`
 	GroupID               *string                                     `json:"groupId,omitempty" url:"-"`
@@ -22386,6 +23747,20 @@ func (u *UpdatePartnersRequest) SetIsSupplier(isSupplier *bool) {
 func (u *UpdatePartnersRequest) SetPaymentTermDays(paymentTermDays *int64) {
 	u.PaymentTermDays = paymentTermDays
 	u.require(updatePartnersRequestFieldPaymentTermDays)
+}
+
+// SetInvoiceCurrency sets the InvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersRequest) SetInvoiceCurrency(invoiceCurrency *UpdatePartnersRequestInvoiceCurrency) {
+	u.InvoiceCurrency = invoiceCurrency
+	u.require(updatePartnersRequestFieldInvoiceCurrency)
+}
+
+// SetInvoiceLocale sets the InvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersRequest) SetInvoiceLocale(invoiceLocale *UpdatePartnersRequestInvoiceLocale) {
+	u.InvoiceLocale = invoiceLocale
+	u.require(updatePartnersRequestFieldInvoiceLocale)
 }
 
 // SetCreditLimit sets the CreditLimit field and marks it as non-optional;
