@@ -1552,6 +1552,32 @@ func TestDeclarationsDeReturnsGenerateWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsDeReturnsGenerateWithWireMock", "POST", "/v1/declarations/de/returns/generate", nil, 1)
 }
 
+func TestDeclarationsDeEuerGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.DeEuerGetDeclarationsRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.DeEuerGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsDeEuerGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsDeEuerGetWithWireMock", "POST", "/v1/declarations/de/euer/get", nil, 1)
+}
+
 func TestDeclarationsDeReturnFactsGetWithWireMock(
 	t *testing.T,
 ) {

@@ -1327,6 +1327,52 @@ func (d *DeDeuevGenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	deEuerGetDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type DeEuerGetDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (d *DeEuerGetDeclarationsRequest) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsRequest) SetYear(year int64) {
+	d.Year = year
+	d.require(deEuerGetDeclarationsRequestFieldYear)
+}
+
+func (d *DeEuerGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeEuerGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*d = DeEuerGetDeclarationsRequest(body)
+	return nil
+}
+
+func (d *DeEuerGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed DeEuerGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	deReturnFactsGetDeclarationsRequestFieldYear = big.NewInt(1 << 0)
 )
 
@@ -14153,6 +14199,308 @@ func (d *DeDeuevGenerateDeclarationsResponseRecordsItem) String() string {
 }
 
 var (
+	deEuerGetDeclarationsResponseFieldYear     = big.NewInt(1 << 0)
+	deEuerGetDeclarationsResponseFieldRows     = big.NewInt(1 << 1)
+	deEuerGetDeclarationsResponseFieldWarnings = big.NewInt(1 << 2)
+	deEuerGetDeclarationsResponseFieldSource   = big.NewInt(1 << 3)
+)
+
+type DeEuerGetDeclarationsResponse struct {
+	Year     int64                                    `json:"year" url:"year"`
+	Rows     []*DeEuerGetDeclarationsResponseRowsItem `json:"rows" url:"rows"`
+	Warnings []string                                 `json:"warnings" url:"warnings"`
+	Source   string                                   `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DeEuerGetDeclarationsResponse) GetYear() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.Year
+}
+
+func (d *DeEuerGetDeclarationsResponse) GetRows() []*DeEuerGetDeclarationsResponseRowsItem {
+	if d == nil {
+		return nil
+	}
+	return d.Rows
+}
+
+func (d *DeEuerGetDeclarationsResponse) GetWarnings() []string {
+	if d == nil {
+		return nil
+	}
+	return d.Warnings
+}
+
+func (d *DeEuerGetDeclarationsResponse) GetSource() string {
+	if d == nil {
+		return ""
+	}
+	return d.Source
+}
+
+func (d *DeEuerGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DeEuerGetDeclarationsResponse) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponse) SetYear(year int64) {
+	d.Year = year
+	d.require(deEuerGetDeclarationsResponseFieldYear)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponse) SetRows(rows []*DeEuerGetDeclarationsResponseRowsItem) {
+	d.Rows = rows
+	d.require(deEuerGetDeclarationsResponseFieldRows)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponse) SetWarnings(warnings []string) {
+	d.Warnings = warnings
+	d.require(deEuerGetDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponse) SetSource(source string) {
+	d.Source = source
+	d.require(deEuerGetDeclarationsResponseFieldSource)
+}
+
+func (d *DeEuerGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeEuerGetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DeEuerGetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DeEuerGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed DeEuerGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DeEuerGetDeclarationsResponse) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	deEuerGetDeclarationsResponseRowsItemFieldAnlage   = big.NewInt(1 << 0)
+	deEuerGetDeclarationsResponseRowsItemFieldZeile    = big.NewInt(1 << 1)
+	deEuerGetDeclarationsResponseRowsItemFieldKennzahl = big.NewInt(1 << 2)
+	deEuerGetDeclarationsResponseRowsItemFieldLabel    = big.NewInt(1 << 3)
+	deEuerGetDeclarationsResponseRowsItemFieldValue    = big.NewInt(1 << 4)
+)
+
+type DeEuerGetDeclarationsResponseRowsItem struct {
+	Anlage   DeEuerGetDeclarationsResponseRowsItemAnlage `json:"anlage" url:"anlage"`
+	Zeile    int64                                       `json:"zeile" url:"zeile"`
+	Kennzahl *string                                     `json:"kennzahl,omitempty" url:"kennzahl,omitempty"`
+	Label    string                                      `json:"label" url:"label"`
+	Value    string                                      `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) GetAnlage() DeEuerGetDeclarationsResponseRowsItemAnlage {
+	if d == nil {
+		return ""
+	}
+	return d.Anlage
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) GetZeile() int64 {
+	if d == nil {
+		return 0
+	}
+	return d.Zeile
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) GetKennzahl() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Kennzahl
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) GetLabel() string {
+	if d == nil {
+		return ""
+	}
+	return d.Label
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) GetValue() string {
+	if d == nil {
+		return ""
+	}
+	return d.Value
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if d == nil {
+		return nil
+	}
+	return d.extraProperties
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) require(field *big.Int) {
+	if d.explicitFields == nil {
+		d.explicitFields = big.NewInt(0)
+	}
+	d.explicitFields.Or(d.explicitFields, field)
+}
+
+// SetAnlage sets the Anlage field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponseRowsItem) SetAnlage(anlage DeEuerGetDeclarationsResponseRowsItemAnlage) {
+	d.Anlage = anlage
+	d.require(deEuerGetDeclarationsResponseRowsItemFieldAnlage)
+}
+
+// SetZeile sets the Zeile field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponseRowsItem) SetZeile(zeile int64) {
+	d.Zeile = zeile
+	d.require(deEuerGetDeclarationsResponseRowsItemFieldZeile)
+}
+
+// SetKennzahl sets the Kennzahl field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponseRowsItem) SetKennzahl(kennzahl *string) {
+	d.Kennzahl = kennzahl
+	d.require(deEuerGetDeclarationsResponseRowsItemFieldKennzahl)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponseRowsItem) SetLabel(label string) {
+	d.Label = label
+	d.require(deEuerGetDeclarationsResponseRowsItemFieldLabel)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeEuerGetDeclarationsResponseRowsItem) SetValue(value string) {
+	d.Value = value
+	d.require(deEuerGetDeclarationsResponseRowsItemFieldValue)
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler DeEuerGetDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*d = DeEuerGetDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *d)
+	if err != nil {
+		return err
+	}
+	d.extraProperties = extraProperties
+	d.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed DeEuerGetDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*d),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (d *DeEuerGetDeclarationsResponseRowsItem) String() string {
+	if d == nil {
+		return "<nil>"
+	}
+	if len(d.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(d.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(d); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", d)
+}
+
+type DeEuerGetDeclarationsResponseRowsItemAnlage string
+
+const (
+	DeEuerGetDeclarationsResponseRowsItemAnlageEur   DeEuerGetDeclarationsResponseRowsItemAnlage = "EÜR"
+	DeEuerGetDeclarationsResponseRowsItemAnlageAveur DeEuerGetDeclarationsResponseRowsItemAnlage = "AVEÜR"
+)
+
+func NewDeEuerGetDeclarationsResponseRowsItemAnlageFromString(s string) (DeEuerGetDeclarationsResponseRowsItemAnlage, error) {
+	switch s {
+	case "EÜR":
+		return DeEuerGetDeclarationsResponseRowsItemAnlageEur, nil
+	case "AVEÜR":
+		return DeEuerGetDeclarationsResponseRowsItemAnlageAveur, nil
+	}
+	var t DeEuerGetDeclarationsResponseRowsItemAnlage
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DeEuerGetDeclarationsResponseRowsItemAnlage) Ptr() *DeEuerGetDeclarationsResponseRowsItemAnlage {
+	return &d
+}
+
+var (
 	deReturnFactsGetDeclarationsResponseFieldYear  = big.NewInt(1 << 0)
 	deReturnFactsGetDeclarationsResponseFieldFacts = big.NewInt(1 << 1)
 )
@@ -14278,6 +14626,9 @@ var (
 	deReturnFactsGetDeclarationsResponseFactsFieldRepresentative             = big.NewInt(1 << 22)
 	deReturnFactsGetDeclarationsResponseFactsFieldSingleTransportTax         = big.NewInt(1 << 23)
 	deReturnFactsGetDeclarationsResponseFactsFieldDistanceSales              = big.NewInt(1 << 24)
+	deReturnFactsGetDeclarationsResponseFactsFieldEuerEinkunftsart           = big.NewInt(1 << 25)
+	deReturnFactsGetDeclarationsResponseFactsFieldEuerEntnahmen              = big.NewInt(1 << 26)
+	deReturnFactsGetDeclarationsResponseFactsFieldEuerEinlagen               = big.NewInt(1 << 27)
 )
 
 type DeReturnFactsGetDeclarationsResponseFacts struct {
@@ -14306,6 +14657,9 @@ type DeReturnFactsGetDeclarationsResponseFacts struct {
 	Representative             *DeReturnFactsGetDeclarationsResponseFactsRepresentative       `json:"representative,omitempty" url:"representative,omitempty"`
 	SingleTransportTax         *string                                                        `json:"singleTransportTax,omitempty" url:"singleTransportTax,omitempty"`
 	DistanceSales              *string                                                        `json:"distanceSales,omitempty" url:"distanceSales,omitempty"`
+	EuerEinkunftsart           *DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart     `json:"euerEinkunftsart,omitempty" url:"euerEinkunftsart,omitempty"`
+	EuerEntnahmen              *string                                                        `json:"euerEntnahmen,omitempty" url:"euerEntnahmen,omitempty"`
+	EuerEinlagen               *string                                                        `json:"euerEinlagen,omitempty" url:"euerEinlagen,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14487,6 +14841,27 @@ func (d *DeReturnFactsGetDeclarationsResponseFacts) GetDistanceSales() *string {
 		return nil
 	}
 	return d.DistanceSales
+}
+
+func (d *DeReturnFactsGetDeclarationsResponseFacts) GetEuerEinkunftsart() *DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEinkunftsart
+}
+
+func (d *DeReturnFactsGetDeclarationsResponseFacts) GetEuerEntnahmen() *string {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEntnahmen
+}
+
+func (d *DeReturnFactsGetDeclarationsResponseFacts) GetEuerEinlagen() *string {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEinlagen
 }
 
 func (d *DeReturnFactsGetDeclarationsResponseFacts) GetExtraProperties() map[string]interface{} {
@@ -14676,6 +15051,27 @@ func (d *DeReturnFactsGetDeclarationsResponseFacts) SetSingleTransportTax(single
 func (d *DeReturnFactsGetDeclarationsResponseFacts) SetDistanceSales(distanceSales *string) {
 	d.DistanceSales = distanceSales
 	d.require(deReturnFactsGetDeclarationsResponseFactsFieldDistanceSales)
+}
+
+// SetEuerEinkunftsart sets the EuerEinkunftsart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsGetDeclarationsResponseFacts) SetEuerEinkunftsart(euerEinkunftsart *DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart) {
+	d.EuerEinkunftsart = euerEinkunftsart
+	d.require(deReturnFactsGetDeclarationsResponseFactsFieldEuerEinkunftsart)
+}
+
+// SetEuerEntnahmen sets the EuerEntnahmen field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsGetDeclarationsResponseFacts) SetEuerEntnahmen(euerEntnahmen *string) {
+	d.EuerEntnahmen = euerEntnahmen
+	d.require(deReturnFactsGetDeclarationsResponseFactsFieldEuerEntnahmen)
+}
+
+// SetEuerEinlagen sets the EuerEinlagen field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsGetDeclarationsResponseFacts) SetEuerEinlagen(euerEinlagen *string) {
+	d.EuerEinlagen = euerEinlagen
+	d.require(deReturnFactsGetDeclarationsResponseFactsFieldEuerEinlagen)
 }
 
 func (d *DeReturnFactsGetDeclarationsResponseFacts) UnmarshalJSON(data []byte) error {
@@ -15188,6 +15584,31 @@ func (d *DeReturnFactsGetDeclarationsResponseFactsDistributionsItem) String() st
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart string
+
+const (
+	DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsartOne   DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart = "1"
+	DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsartTwo   DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart = "2"
+	DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsartThree DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart = "3"
+)
+
+func NewDeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsartFromString(s string) (DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart, error) {
+	switch s {
+	case "1":
+		return DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsartOne, nil
+	case "2":
+		return DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsartTwo, nil
+	case "3":
+		return DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsartThree, nil
+	}
+	var t DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart) Ptr() *DeReturnFactsGetDeclarationsResponseFactsEuerEinkunftsart {
+	return &d
 }
 
 var (
@@ -16094,6 +16515,9 @@ var (
 	deReturnFactsSetDeclarationsRequestFactsFieldRepresentative             = big.NewInt(1 << 22)
 	deReturnFactsSetDeclarationsRequestFactsFieldSingleTransportTax         = big.NewInt(1 << 23)
 	deReturnFactsSetDeclarationsRequestFactsFieldDistanceSales              = big.NewInt(1 << 24)
+	deReturnFactsSetDeclarationsRequestFactsFieldEuerEinkunftsart           = big.NewInt(1 << 25)
+	deReturnFactsSetDeclarationsRequestFactsFieldEuerEntnahmen              = big.NewInt(1 << 26)
+	deReturnFactsSetDeclarationsRequestFactsFieldEuerEinlagen               = big.NewInt(1 << 27)
 )
 
 type DeReturnFactsSetDeclarationsRequestFacts struct {
@@ -16122,6 +16546,9 @@ type DeReturnFactsSetDeclarationsRequestFacts struct {
 	Representative             *DeReturnFactsSetDeclarationsRequestFactsRepresentative       `json:"representative,omitempty" url:"representative,omitempty"`
 	SingleTransportTax         *string                                                       `json:"singleTransportTax,omitempty" url:"singleTransportTax,omitempty"`
 	DistanceSales              *string                                                       `json:"distanceSales,omitempty" url:"distanceSales,omitempty"`
+	EuerEinkunftsart           *DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart     `json:"euerEinkunftsart,omitempty" url:"euerEinkunftsart,omitempty"`
+	EuerEntnahmen              *string                                                       `json:"euerEntnahmen,omitempty" url:"euerEntnahmen,omitempty"`
+	EuerEinlagen               *string                                                       `json:"euerEinlagen,omitempty" url:"euerEinlagen,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16303,6 +16730,27 @@ func (d *DeReturnFactsSetDeclarationsRequestFacts) GetDistanceSales() *string {
 		return nil
 	}
 	return d.DistanceSales
+}
+
+func (d *DeReturnFactsSetDeclarationsRequestFacts) GetEuerEinkunftsart() *DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEinkunftsart
+}
+
+func (d *DeReturnFactsSetDeclarationsRequestFacts) GetEuerEntnahmen() *string {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEntnahmen
+}
+
+func (d *DeReturnFactsSetDeclarationsRequestFacts) GetEuerEinlagen() *string {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEinlagen
 }
 
 func (d *DeReturnFactsSetDeclarationsRequestFacts) GetExtraProperties() map[string]interface{} {
@@ -16492,6 +16940,27 @@ func (d *DeReturnFactsSetDeclarationsRequestFacts) SetSingleTransportTax(singleT
 func (d *DeReturnFactsSetDeclarationsRequestFacts) SetDistanceSales(distanceSales *string) {
 	d.DistanceSales = distanceSales
 	d.require(deReturnFactsSetDeclarationsRequestFactsFieldDistanceSales)
+}
+
+// SetEuerEinkunftsart sets the EuerEinkunftsart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsSetDeclarationsRequestFacts) SetEuerEinkunftsart(euerEinkunftsart *DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart) {
+	d.EuerEinkunftsart = euerEinkunftsart
+	d.require(deReturnFactsSetDeclarationsRequestFactsFieldEuerEinkunftsart)
+}
+
+// SetEuerEntnahmen sets the EuerEntnahmen field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsSetDeclarationsRequestFacts) SetEuerEntnahmen(euerEntnahmen *string) {
+	d.EuerEntnahmen = euerEntnahmen
+	d.require(deReturnFactsSetDeclarationsRequestFactsFieldEuerEntnahmen)
+}
+
+// SetEuerEinlagen sets the EuerEinlagen field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsSetDeclarationsRequestFacts) SetEuerEinlagen(euerEinlagen *string) {
+	d.EuerEinlagen = euerEinlagen
+	d.require(deReturnFactsSetDeclarationsRequestFactsFieldEuerEinlagen)
 }
 
 func (d *DeReturnFactsSetDeclarationsRequestFacts) UnmarshalJSON(data []byte) error {
@@ -17004,6 +17473,31 @@ func (d *DeReturnFactsSetDeclarationsRequestFactsDistributionsItem) String() str
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart string
+
+const (
+	DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsartOne   DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart = "1"
+	DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsartTwo   DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart = "2"
+	DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsartThree DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart = "3"
+)
+
+func NewDeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsartFromString(s string) (DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart, error) {
+	switch s {
+	case "1":
+		return DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsartOne, nil
+	case "2":
+		return DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsartTwo, nil
+	case "3":
+		return DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsartThree, nil
+	}
+	var t DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart) Ptr() *DeReturnFactsSetDeclarationsRequestFactsEuerEinkunftsart {
+	return &d
 }
 
 var (
@@ -18010,6 +18504,9 @@ var (
 	deReturnFactsSetDeclarationsResponseFactsFieldRepresentative             = big.NewInt(1 << 22)
 	deReturnFactsSetDeclarationsResponseFactsFieldSingleTransportTax         = big.NewInt(1 << 23)
 	deReturnFactsSetDeclarationsResponseFactsFieldDistanceSales              = big.NewInt(1 << 24)
+	deReturnFactsSetDeclarationsResponseFactsFieldEuerEinkunftsart           = big.NewInt(1 << 25)
+	deReturnFactsSetDeclarationsResponseFactsFieldEuerEntnahmen              = big.NewInt(1 << 26)
+	deReturnFactsSetDeclarationsResponseFactsFieldEuerEinlagen               = big.NewInt(1 << 27)
 )
 
 type DeReturnFactsSetDeclarationsResponseFacts struct {
@@ -18038,6 +18535,9 @@ type DeReturnFactsSetDeclarationsResponseFacts struct {
 	Representative             *DeReturnFactsSetDeclarationsResponseFactsRepresentative       `json:"representative,omitempty" url:"representative,omitempty"`
 	SingleTransportTax         *string                                                        `json:"singleTransportTax,omitempty" url:"singleTransportTax,omitempty"`
 	DistanceSales              *string                                                        `json:"distanceSales,omitempty" url:"distanceSales,omitempty"`
+	EuerEinkunftsart           *DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart     `json:"euerEinkunftsart,omitempty" url:"euerEinkunftsart,omitempty"`
+	EuerEntnahmen              *string                                                        `json:"euerEntnahmen,omitempty" url:"euerEntnahmen,omitempty"`
+	EuerEinlagen               *string                                                        `json:"euerEinlagen,omitempty" url:"euerEinlagen,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18219,6 +18719,27 @@ func (d *DeReturnFactsSetDeclarationsResponseFacts) GetDistanceSales() *string {
 		return nil
 	}
 	return d.DistanceSales
+}
+
+func (d *DeReturnFactsSetDeclarationsResponseFacts) GetEuerEinkunftsart() *DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEinkunftsart
+}
+
+func (d *DeReturnFactsSetDeclarationsResponseFacts) GetEuerEntnahmen() *string {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEntnahmen
+}
+
+func (d *DeReturnFactsSetDeclarationsResponseFacts) GetEuerEinlagen() *string {
+	if d == nil {
+		return nil
+	}
+	return d.EuerEinlagen
 }
 
 func (d *DeReturnFactsSetDeclarationsResponseFacts) GetExtraProperties() map[string]interface{} {
@@ -18408,6 +18929,27 @@ func (d *DeReturnFactsSetDeclarationsResponseFacts) SetSingleTransportTax(single
 func (d *DeReturnFactsSetDeclarationsResponseFacts) SetDistanceSales(distanceSales *string) {
 	d.DistanceSales = distanceSales
 	d.require(deReturnFactsSetDeclarationsResponseFactsFieldDistanceSales)
+}
+
+// SetEuerEinkunftsart sets the EuerEinkunftsart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsSetDeclarationsResponseFacts) SetEuerEinkunftsart(euerEinkunftsart *DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart) {
+	d.EuerEinkunftsart = euerEinkunftsart
+	d.require(deReturnFactsSetDeclarationsResponseFactsFieldEuerEinkunftsart)
+}
+
+// SetEuerEntnahmen sets the EuerEntnahmen field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsSetDeclarationsResponseFacts) SetEuerEntnahmen(euerEntnahmen *string) {
+	d.EuerEntnahmen = euerEntnahmen
+	d.require(deReturnFactsSetDeclarationsResponseFactsFieldEuerEntnahmen)
+}
+
+// SetEuerEinlagen sets the EuerEinlagen field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DeReturnFactsSetDeclarationsResponseFacts) SetEuerEinlagen(euerEinlagen *string) {
+	d.EuerEinlagen = euerEinlagen
+	d.require(deReturnFactsSetDeclarationsResponseFactsFieldEuerEinlagen)
 }
 
 func (d *DeReturnFactsSetDeclarationsResponseFacts) UnmarshalJSON(data []byte) error {
@@ -18920,6 +19462,31 @@ func (d *DeReturnFactsSetDeclarationsResponseFactsDistributionsItem) String() st
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart string
+
+const (
+	DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsartOne   DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart = "1"
+	DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsartTwo   DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart = "2"
+	DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsartThree DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart = "3"
+)
+
+func NewDeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsartFromString(s string) (DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart, error) {
+	switch s {
+	case "1":
+		return DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsartOne, nil
+	case "2":
+		return DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsartTwo, nil
+	case "3":
+		return DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsartThree, nil
+	}
+	var t DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart) Ptr() *DeReturnFactsSetDeclarationsResponseFactsEuerEinkunftsart {
+	return &d
 }
 
 var (
@@ -19810,6 +20377,7 @@ const (
 	DeReturnsGenerateDeclarationsRequestRuleKeyDeAnnualVatReturn       DeReturnsGenerateDeclarationsRequestRuleKey = "de-annual-vat-return"
 	DeReturnsGenerateDeclarationsRequestRuleKeyDePayrollWithholding    DeReturnsGenerateDeclarationsRequestRuleKey = "de-payroll-withholding"
 	DeReturnsGenerateDeclarationsRequestRuleKeyDePayrollStatements     DeReturnsGenerateDeclarationsRequestRuleKey = "de-payroll-statements"
+	DeReturnsGenerateDeclarationsRequestRuleKeyDeEuer                  DeReturnsGenerateDeclarationsRequestRuleKey = "de-euer"
 )
 
 func NewDeReturnsGenerateDeclarationsRequestRuleKeyFromString(s string) (DeReturnsGenerateDeclarationsRequestRuleKey, error) {
@@ -19828,6 +20396,8 @@ func NewDeReturnsGenerateDeclarationsRequestRuleKeyFromString(s string) (DeRetur
 		return DeReturnsGenerateDeclarationsRequestRuleKeyDePayrollWithholding, nil
 	case "de-payroll-statements":
 		return DeReturnsGenerateDeclarationsRequestRuleKeyDePayrollStatements, nil
+	case "de-euer":
+		return DeReturnsGenerateDeclarationsRequestRuleKeyDeEuer, nil
 	}
 	var t DeReturnsGenerateDeclarationsRequestRuleKey
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

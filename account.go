@@ -326,6 +326,7 @@ var (
 	companiesCreateAccountRequestFieldCountryCode               = big.NewInt(1 << 33)
 	companiesCreateAccountRequestFieldBaseCurrency              = big.NewInt(1 << 34)
 	companiesCreateAccountRequestFieldIsSandbox                 = big.NewInt(1 << 35)
+	companiesCreateAccountRequestFieldCashBasis                 = big.NewInt(1 << 36)
 )
 
 type CompaniesCreateAccountRequest struct {
@@ -373,6 +374,8 @@ type CompaniesCreateAccountRequest struct {
 	BaseCurrency *string `json:"baseCurrency,omitempty" url:"-"`
 	// Sandbox companies hold test data and are purged immediately on delete (immutable after creation)
 	IsSandbox *bool `json:"isSandbox,omitempty" url:"-"`
+	// The company determines its profit on a cash basis (receipts and payments, in Germany the Einnahmenüberschussrechnung of § 4 Abs. 3 EStG); it gets the cash-basis returns in its filing calendar (immutable after creation)
+	CashBasis *bool `json:"cashBasis,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -635,6 +638,13 @@ func (c *CompaniesCreateAccountRequest) SetBaseCurrency(baseCurrency *string) {
 func (c *CompaniesCreateAccountRequest) SetIsSandbox(isSandbox *bool) {
 	c.IsSandbox = isSandbox
 	c.require(companiesCreateAccountRequestFieldIsSandbox)
+}
+
+// SetCashBasis sets the CashBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetCashBasis(cashBasis *bool) {
+	c.CashBasis = cashBasis
+	c.require(companiesCreateAccountRequestFieldCashBasis)
 }
 
 func (c *CompaniesCreateAccountRequest) UnmarshalJSON(data []byte) error {
@@ -3319,100 +3329,757 @@ func (c *CompaniesCreateAccountRequestAddress) String() string {
 type CompaniesCreateAccountRequestCountryCode string
 
 const (
+	CompaniesCreateAccountRequestCountryCodeAd CompaniesCreateAccountRequestCountryCode = "AD"
+	CompaniesCreateAccountRequestCountryCodeAe CompaniesCreateAccountRequestCountryCode = "AE"
+	CompaniesCreateAccountRequestCountryCodeAf CompaniesCreateAccountRequestCountryCode = "AF"
+	CompaniesCreateAccountRequestCountryCodeAg CompaniesCreateAccountRequestCountryCode = "AG"
+	CompaniesCreateAccountRequestCountryCodeAi CompaniesCreateAccountRequestCountryCode = "AI"
+	CompaniesCreateAccountRequestCountryCodeAl CompaniesCreateAccountRequestCountryCode = "AL"
+	CompaniesCreateAccountRequestCountryCodeAm CompaniesCreateAccountRequestCountryCode = "AM"
+	CompaniesCreateAccountRequestCountryCodeAo CompaniesCreateAccountRequestCountryCode = "AO"
+	CompaniesCreateAccountRequestCountryCodeAq CompaniesCreateAccountRequestCountryCode = "AQ"
+	CompaniesCreateAccountRequestCountryCodeAr CompaniesCreateAccountRequestCountryCode = "AR"
+	CompaniesCreateAccountRequestCountryCodeAs CompaniesCreateAccountRequestCountryCode = "AS"
 	CompaniesCreateAccountRequestCountryCodeAt CompaniesCreateAccountRequestCountryCode = "AT"
+	CompaniesCreateAccountRequestCountryCodeAu CompaniesCreateAccountRequestCountryCode = "AU"
+	CompaniesCreateAccountRequestCountryCodeAw CompaniesCreateAccountRequestCountryCode = "AW"
+	CompaniesCreateAccountRequestCountryCodeAx CompaniesCreateAccountRequestCountryCode = "AX"
+	CompaniesCreateAccountRequestCountryCodeAz CompaniesCreateAccountRequestCountryCode = "AZ"
+	CompaniesCreateAccountRequestCountryCodeBa CompaniesCreateAccountRequestCountryCode = "BA"
+	CompaniesCreateAccountRequestCountryCodeBb CompaniesCreateAccountRequestCountryCode = "BB"
+	CompaniesCreateAccountRequestCountryCodeBd CompaniesCreateAccountRequestCountryCode = "BD"
 	CompaniesCreateAccountRequestCountryCodeBe CompaniesCreateAccountRequestCountryCode = "BE"
+	CompaniesCreateAccountRequestCountryCodeBf CompaniesCreateAccountRequestCountryCode = "BF"
 	CompaniesCreateAccountRequestCountryCodeBg CompaniesCreateAccountRequestCountryCode = "BG"
+	CompaniesCreateAccountRequestCountryCodeBh CompaniesCreateAccountRequestCountryCode = "BH"
+	CompaniesCreateAccountRequestCountryCodeBi CompaniesCreateAccountRequestCountryCode = "BI"
+	CompaniesCreateAccountRequestCountryCodeBj CompaniesCreateAccountRequestCountryCode = "BJ"
+	CompaniesCreateAccountRequestCountryCodeBl CompaniesCreateAccountRequestCountryCode = "BL"
+	CompaniesCreateAccountRequestCountryCodeBm CompaniesCreateAccountRequestCountryCode = "BM"
+	CompaniesCreateAccountRequestCountryCodeBn CompaniesCreateAccountRequestCountryCode = "BN"
+	CompaniesCreateAccountRequestCountryCodeBo CompaniesCreateAccountRequestCountryCode = "BO"
+	CompaniesCreateAccountRequestCountryCodeBq CompaniesCreateAccountRequestCountryCode = "BQ"
+	CompaniesCreateAccountRequestCountryCodeBr CompaniesCreateAccountRequestCountryCode = "BR"
+	CompaniesCreateAccountRequestCountryCodeBs CompaniesCreateAccountRequestCountryCode = "BS"
+	CompaniesCreateAccountRequestCountryCodeBt CompaniesCreateAccountRequestCountryCode = "BT"
+	CompaniesCreateAccountRequestCountryCodeBv CompaniesCreateAccountRequestCountryCode = "BV"
+	CompaniesCreateAccountRequestCountryCodeBw CompaniesCreateAccountRequestCountryCode = "BW"
+	CompaniesCreateAccountRequestCountryCodeBy CompaniesCreateAccountRequestCountryCode = "BY"
+	CompaniesCreateAccountRequestCountryCodeBz CompaniesCreateAccountRequestCountryCode = "BZ"
+	CompaniesCreateAccountRequestCountryCodeCa CompaniesCreateAccountRequestCountryCode = "CA"
+	CompaniesCreateAccountRequestCountryCodeCc CompaniesCreateAccountRequestCountryCode = "CC"
+	CompaniesCreateAccountRequestCountryCodeCd CompaniesCreateAccountRequestCountryCode = "CD"
+	CompaniesCreateAccountRequestCountryCodeCf CompaniesCreateAccountRequestCountryCode = "CF"
+	CompaniesCreateAccountRequestCountryCodeCg CompaniesCreateAccountRequestCountryCode = "CG"
+	CompaniesCreateAccountRequestCountryCodeCh CompaniesCreateAccountRequestCountryCode = "CH"
+	CompaniesCreateAccountRequestCountryCodeCi CompaniesCreateAccountRequestCountryCode = "CI"
+	CompaniesCreateAccountRequestCountryCodeCk CompaniesCreateAccountRequestCountryCode = "CK"
+	CompaniesCreateAccountRequestCountryCodeCl CompaniesCreateAccountRequestCountryCode = "CL"
+	CompaniesCreateAccountRequestCountryCodeCm CompaniesCreateAccountRequestCountryCode = "CM"
+	CompaniesCreateAccountRequestCountryCodeCn CompaniesCreateAccountRequestCountryCode = "CN"
+	CompaniesCreateAccountRequestCountryCodeCo CompaniesCreateAccountRequestCountryCode = "CO"
+	CompaniesCreateAccountRequestCountryCodeCr CompaniesCreateAccountRequestCountryCode = "CR"
+	CompaniesCreateAccountRequestCountryCodeCu CompaniesCreateAccountRequestCountryCode = "CU"
+	CompaniesCreateAccountRequestCountryCodeCv CompaniesCreateAccountRequestCountryCode = "CV"
+	CompaniesCreateAccountRequestCountryCodeCw CompaniesCreateAccountRequestCountryCode = "CW"
+	CompaniesCreateAccountRequestCountryCodeCx CompaniesCreateAccountRequestCountryCode = "CX"
 	CompaniesCreateAccountRequestCountryCodeCy CompaniesCreateAccountRequestCountryCode = "CY"
 	CompaniesCreateAccountRequestCountryCodeCz CompaniesCreateAccountRequestCountryCode = "CZ"
 	CompaniesCreateAccountRequestCountryCodeDe CompaniesCreateAccountRequestCountryCode = "DE"
+	CompaniesCreateAccountRequestCountryCodeDj CompaniesCreateAccountRequestCountryCode = "DJ"
 	CompaniesCreateAccountRequestCountryCodeDk CompaniesCreateAccountRequestCountryCode = "DK"
+	CompaniesCreateAccountRequestCountryCodeDm CompaniesCreateAccountRequestCountryCode = "DM"
+	CompaniesCreateAccountRequestCountryCodeDo CompaniesCreateAccountRequestCountryCode = "DO"
+	CompaniesCreateAccountRequestCountryCodeDz CompaniesCreateAccountRequestCountryCode = "DZ"
+	CompaniesCreateAccountRequestCountryCodeEc CompaniesCreateAccountRequestCountryCode = "EC"
 	CompaniesCreateAccountRequestCountryCodeEe CompaniesCreateAccountRequestCountryCode = "EE"
+	CompaniesCreateAccountRequestCountryCodeEg CompaniesCreateAccountRequestCountryCode = "EG"
+	CompaniesCreateAccountRequestCountryCodeEh CompaniesCreateAccountRequestCountryCode = "EH"
+	CompaniesCreateAccountRequestCountryCodeEr CompaniesCreateAccountRequestCountryCode = "ER"
 	CompaniesCreateAccountRequestCountryCodeEs CompaniesCreateAccountRequestCountryCode = "ES"
+	CompaniesCreateAccountRequestCountryCodeEt CompaniesCreateAccountRequestCountryCode = "ET"
 	CompaniesCreateAccountRequestCountryCodeFi CompaniesCreateAccountRequestCountryCode = "FI"
+	CompaniesCreateAccountRequestCountryCodeFj CompaniesCreateAccountRequestCountryCode = "FJ"
+	CompaniesCreateAccountRequestCountryCodeFk CompaniesCreateAccountRequestCountryCode = "FK"
+	CompaniesCreateAccountRequestCountryCodeFm CompaniesCreateAccountRequestCountryCode = "FM"
+	CompaniesCreateAccountRequestCountryCodeFo CompaniesCreateAccountRequestCountryCode = "FO"
 	CompaniesCreateAccountRequestCountryCodeFr CompaniesCreateAccountRequestCountryCode = "FR"
+	CompaniesCreateAccountRequestCountryCodeGa CompaniesCreateAccountRequestCountryCode = "GA"
+	CompaniesCreateAccountRequestCountryCodeGb CompaniesCreateAccountRequestCountryCode = "GB"
+	CompaniesCreateAccountRequestCountryCodeGd CompaniesCreateAccountRequestCountryCode = "GD"
+	CompaniesCreateAccountRequestCountryCodeGe CompaniesCreateAccountRequestCountryCode = "GE"
+	CompaniesCreateAccountRequestCountryCodeGf CompaniesCreateAccountRequestCountryCode = "GF"
+	CompaniesCreateAccountRequestCountryCodeGg CompaniesCreateAccountRequestCountryCode = "GG"
+	CompaniesCreateAccountRequestCountryCodeGh CompaniesCreateAccountRequestCountryCode = "GH"
+	CompaniesCreateAccountRequestCountryCodeGi CompaniesCreateAccountRequestCountryCode = "GI"
+	CompaniesCreateAccountRequestCountryCodeGl CompaniesCreateAccountRequestCountryCode = "GL"
+	CompaniesCreateAccountRequestCountryCodeGm CompaniesCreateAccountRequestCountryCode = "GM"
+	CompaniesCreateAccountRequestCountryCodeGn CompaniesCreateAccountRequestCountryCode = "GN"
+	CompaniesCreateAccountRequestCountryCodeGp CompaniesCreateAccountRequestCountryCode = "GP"
+	CompaniesCreateAccountRequestCountryCodeGq CompaniesCreateAccountRequestCountryCode = "GQ"
 	CompaniesCreateAccountRequestCountryCodeGr CompaniesCreateAccountRequestCountryCode = "GR"
+	CompaniesCreateAccountRequestCountryCodeGs CompaniesCreateAccountRequestCountryCode = "GS"
+	CompaniesCreateAccountRequestCountryCodeGt CompaniesCreateAccountRequestCountryCode = "GT"
+	CompaniesCreateAccountRequestCountryCodeGu CompaniesCreateAccountRequestCountryCode = "GU"
+	CompaniesCreateAccountRequestCountryCodeGw CompaniesCreateAccountRequestCountryCode = "GW"
+	CompaniesCreateAccountRequestCountryCodeGy CompaniesCreateAccountRequestCountryCode = "GY"
+	CompaniesCreateAccountRequestCountryCodeHk CompaniesCreateAccountRequestCountryCode = "HK"
+	CompaniesCreateAccountRequestCountryCodeHm CompaniesCreateAccountRequestCountryCode = "HM"
+	CompaniesCreateAccountRequestCountryCodeHn CompaniesCreateAccountRequestCountryCode = "HN"
 	CompaniesCreateAccountRequestCountryCodeHr CompaniesCreateAccountRequestCountryCode = "HR"
+	CompaniesCreateAccountRequestCountryCodeHt CompaniesCreateAccountRequestCountryCode = "HT"
 	CompaniesCreateAccountRequestCountryCodeHu CompaniesCreateAccountRequestCountryCode = "HU"
+	CompaniesCreateAccountRequestCountryCodeID CompaniesCreateAccountRequestCountryCode = "ID"
 	CompaniesCreateAccountRequestCountryCodeIe CompaniesCreateAccountRequestCountryCode = "IE"
+	CompaniesCreateAccountRequestCountryCodeIl CompaniesCreateAccountRequestCountryCode = "IL"
+	CompaniesCreateAccountRequestCountryCodeIm CompaniesCreateAccountRequestCountryCode = "IM"
+	CompaniesCreateAccountRequestCountryCodeIn CompaniesCreateAccountRequestCountryCode = "IN"
+	CompaniesCreateAccountRequestCountryCodeIo CompaniesCreateAccountRequestCountryCode = "IO"
+	CompaniesCreateAccountRequestCountryCodeIq CompaniesCreateAccountRequestCountryCode = "IQ"
+	CompaniesCreateAccountRequestCountryCodeIr CompaniesCreateAccountRequestCountryCode = "IR"
+	CompaniesCreateAccountRequestCountryCodeIs CompaniesCreateAccountRequestCountryCode = "IS"
 	CompaniesCreateAccountRequestCountryCodeIt CompaniesCreateAccountRequestCountryCode = "IT"
+	CompaniesCreateAccountRequestCountryCodeJe CompaniesCreateAccountRequestCountryCode = "JE"
+	CompaniesCreateAccountRequestCountryCodeJm CompaniesCreateAccountRequestCountryCode = "JM"
+	CompaniesCreateAccountRequestCountryCodeJo CompaniesCreateAccountRequestCountryCode = "JO"
+	CompaniesCreateAccountRequestCountryCodeJp CompaniesCreateAccountRequestCountryCode = "JP"
+	CompaniesCreateAccountRequestCountryCodeKe CompaniesCreateAccountRequestCountryCode = "KE"
+	CompaniesCreateAccountRequestCountryCodeKg CompaniesCreateAccountRequestCountryCode = "KG"
+	CompaniesCreateAccountRequestCountryCodeKh CompaniesCreateAccountRequestCountryCode = "KH"
+	CompaniesCreateAccountRequestCountryCodeKi CompaniesCreateAccountRequestCountryCode = "KI"
+	CompaniesCreateAccountRequestCountryCodeKm CompaniesCreateAccountRequestCountryCode = "KM"
+	CompaniesCreateAccountRequestCountryCodeKn CompaniesCreateAccountRequestCountryCode = "KN"
+	CompaniesCreateAccountRequestCountryCodeKp CompaniesCreateAccountRequestCountryCode = "KP"
+	CompaniesCreateAccountRequestCountryCodeKr CompaniesCreateAccountRequestCountryCode = "KR"
+	CompaniesCreateAccountRequestCountryCodeKw CompaniesCreateAccountRequestCountryCode = "KW"
+	CompaniesCreateAccountRequestCountryCodeKy CompaniesCreateAccountRequestCountryCode = "KY"
+	CompaniesCreateAccountRequestCountryCodeKz CompaniesCreateAccountRequestCountryCode = "KZ"
+	CompaniesCreateAccountRequestCountryCodeLa CompaniesCreateAccountRequestCountryCode = "LA"
+	CompaniesCreateAccountRequestCountryCodeLb CompaniesCreateAccountRequestCountryCode = "LB"
+	CompaniesCreateAccountRequestCountryCodeLc CompaniesCreateAccountRequestCountryCode = "LC"
+	CompaniesCreateAccountRequestCountryCodeLi CompaniesCreateAccountRequestCountryCode = "LI"
+	CompaniesCreateAccountRequestCountryCodeLk CompaniesCreateAccountRequestCountryCode = "LK"
+	CompaniesCreateAccountRequestCountryCodeLr CompaniesCreateAccountRequestCountryCode = "LR"
+	CompaniesCreateAccountRequestCountryCodeLs CompaniesCreateAccountRequestCountryCode = "LS"
 	CompaniesCreateAccountRequestCountryCodeLt CompaniesCreateAccountRequestCountryCode = "LT"
 	CompaniesCreateAccountRequestCountryCodeLu CompaniesCreateAccountRequestCountryCode = "LU"
 	CompaniesCreateAccountRequestCountryCodeLv CompaniesCreateAccountRequestCountryCode = "LV"
+	CompaniesCreateAccountRequestCountryCodeLy CompaniesCreateAccountRequestCountryCode = "LY"
+	CompaniesCreateAccountRequestCountryCodeMa CompaniesCreateAccountRequestCountryCode = "MA"
+	CompaniesCreateAccountRequestCountryCodeMc CompaniesCreateAccountRequestCountryCode = "MC"
+	CompaniesCreateAccountRequestCountryCodeMd CompaniesCreateAccountRequestCountryCode = "MD"
+	CompaniesCreateAccountRequestCountryCodeMe CompaniesCreateAccountRequestCountryCode = "ME"
+	CompaniesCreateAccountRequestCountryCodeMf CompaniesCreateAccountRequestCountryCode = "MF"
+	CompaniesCreateAccountRequestCountryCodeMg CompaniesCreateAccountRequestCountryCode = "MG"
+	CompaniesCreateAccountRequestCountryCodeMh CompaniesCreateAccountRequestCountryCode = "MH"
+	CompaniesCreateAccountRequestCountryCodeMk CompaniesCreateAccountRequestCountryCode = "MK"
+	CompaniesCreateAccountRequestCountryCodeMl CompaniesCreateAccountRequestCountryCode = "ML"
+	CompaniesCreateAccountRequestCountryCodeMm CompaniesCreateAccountRequestCountryCode = "MM"
+	CompaniesCreateAccountRequestCountryCodeMn CompaniesCreateAccountRequestCountryCode = "MN"
+	CompaniesCreateAccountRequestCountryCodeMo CompaniesCreateAccountRequestCountryCode = "MO"
+	CompaniesCreateAccountRequestCountryCodeMp CompaniesCreateAccountRequestCountryCode = "MP"
+	CompaniesCreateAccountRequestCountryCodeMq CompaniesCreateAccountRequestCountryCode = "MQ"
+	CompaniesCreateAccountRequestCountryCodeMr CompaniesCreateAccountRequestCountryCode = "MR"
+	CompaniesCreateAccountRequestCountryCodeMs CompaniesCreateAccountRequestCountryCode = "MS"
 	CompaniesCreateAccountRequestCountryCodeMt CompaniesCreateAccountRequestCountryCode = "MT"
+	CompaniesCreateAccountRequestCountryCodeMu CompaniesCreateAccountRequestCountryCode = "MU"
+	CompaniesCreateAccountRequestCountryCodeMv CompaniesCreateAccountRequestCountryCode = "MV"
+	CompaniesCreateAccountRequestCountryCodeMw CompaniesCreateAccountRequestCountryCode = "MW"
+	CompaniesCreateAccountRequestCountryCodeMx CompaniesCreateAccountRequestCountryCode = "MX"
+	CompaniesCreateAccountRequestCountryCodeMy CompaniesCreateAccountRequestCountryCode = "MY"
+	CompaniesCreateAccountRequestCountryCodeMz CompaniesCreateAccountRequestCountryCode = "MZ"
+	CompaniesCreateAccountRequestCountryCodeNa CompaniesCreateAccountRequestCountryCode = "NA"
+	CompaniesCreateAccountRequestCountryCodeNc CompaniesCreateAccountRequestCountryCode = "NC"
+	CompaniesCreateAccountRequestCountryCodeNe CompaniesCreateAccountRequestCountryCode = "NE"
+	CompaniesCreateAccountRequestCountryCodeNf CompaniesCreateAccountRequestCountryCode = "NF"
+	CompaniesCreateAccountRequestCountryCodeNg CompaniesCreateAccountRequestCountryCode = "NG"
+	CompaniesCreateAccountRequestCountryCodeNi CompaniesCreateAccountRequestCountryCode = "NI"
 	CompaniesCreateAccountRequestCountryCodeNl CompaniesCreateAccountRequestCountryCode = "NL"
-	CompaniesCreateAccountRequestCountryCodePl CompaniesCreateAccountRequestCountryCode = "PL"
-	CompaniesCreateAccountRequestCountryCodePt CompaniesCreateAccountRequestCountryCode = "PT"
-	CompaniesCreateAccountRequestCountryCodeRo CompaniesCreateAccountRequestCountryCode = "RO"
-	CompaniesCreateAccountRequestCountryCodeSe CompaniesCreateAccountRequestCountryCode = "SE"
-	CompaniesCreateAccountRequestCountryCodeSi CompaniesCreateAccountRequestCountryCode = "SI"
-	CompaniesCreateAccountRequestCountryCodeSk CompaniesCreateAccountRequestCountryCode = "SK"
-	CompaniesCreateAccountRequestCountryCodeIs CompaniesCreateAccountRequestCountryCode = "IS"
-	CompaniesCreateAccountRequestCountryCodeLi CompaniesCreateAccountRequestCountryCode = "LI"
 	CompaniesCreateAccountRequestCountryCodeNo CompaniesCreateAccountRequestCountryCode = "NO"
+	CompaniesCreateAccountRequestCountryCodeNp CompaniesCreateAccountRequestCountryCode = "NP"
+	CompaniesCreateAccountRequestCountryCodeNr CompaniesCreateAccountRequestCountryCode = "NR"
+	CompaniesCreateAccountRequestCountryCodeNu CompaniesCreateAccountRequestCountryCode = "NU"
+	CompaniesCreateAccountRequestCountryCodeNz CompaniesCreateAccountRequestCountryCode = "NZ"
+	CompaniesCreateAccountRequestCountryCodeOm CompaniesCreateAccountRequestCountryCode = "OM"
+	CompaniesCreateAccountRequestCountryCodePa CompaniesCreateAccountRequestCountryCode = "PA"
+	CompaniesCreateAccountRequestCountryCodePe CompaniesCreateAccountRequestCountryCode = "PE"
+	CompaniesCreateAccountRequestCountryCodePf CompaniesCreateAccountRequestCountryCode = "PF"
+	CompaniesCreateAccountRequestCountryCodePg CompaniesCreateAccountRequestCountryCode = "PG"
+	CompaniesCreateAccountRequestCountryCodePh CompaniesCreateAccountRequestCountryCode = "PH"
+	CompaniesCreateAccountRequestCountryCodePk CompaniesCreateAccountRequestCountryCode = "PK"
+	CompaniesCreateAccountRequestCountryCodePl CompaniesCreateAccountRequestCountryCode = "PL"
+	CompaniesCreateAccountRequestCountryCodePm CompaniesCreateAccountRequestCountryCode = "PM"
+	CompaniesCreateAccountRequestCountryCodePn CompaniesCreateAccountRequestCountryCode = "PN"
+	CompaniesCreateAccountRequestCountryCodePr CompaniesCreateAccountRequestCountryCode = "PR"
+	CompaniesCreateAccountRequestCountryCodePs CompaniesCreateAccountRequestCountryCode = "PS"
+	CompaniesCreateAccountRequestCountryCodePt CompaniesCreateAccountRequestCountryCode = "PT"
+	CompaniesCreateAccountRequestCountryCodePw CompaniesCreateAccountRequestCountryCode = "PW"
+	CompaniesCreateAccountRequestCountryCodePy CompaniesCreateAccountRequestCountryCode = "PY"
+	CompaniesCreateAccountRequestCountryCodeQa CompaniesCreateAccountRequestCountryCode = "QA"
+	CompaniesCreateAccountRequestCountryCodeRe CompaniesCreateAccountRequestCountryCode = "RE"
+	CompaniesCreateAccountRequestCountryCodeRo CompaniesCreateAccountRequestCountryCode = "RO"
+	CompaniesCreateAccountRequestCountryCodeRs CompaniesCreateAccountRequestCountryCode = "RS"
+	CompaniesCreateAccountRequestCountryCodeRu CompaniesCreateAccountRequestCountryCode = "RU"
+	CompaniesCreateAccountRequestCountryCodeRw CompaniesCreateAccountRequestCountryCode = "RW"
+	CompaniesCreateAccountRequestCountryCodeSa CompaniesCreateAccountRequestCountryCode = "SA"
+	CompaniesCreateAccountRequestCountryCodeSb CompaniesCreateAccountRequestCountryCode = "SB"
+	CompaniesCreateAccountRequestCountryCodeSc CompaniesCreateAccountRequestCountryCode = "SC"
+	CompaniesCreateAccountRequestCountryCodeSd CompaniesCreateAccountRequestCountryCode = "SD"
+	CompaniesCreateAccountRequestCountryCodeSe CompaniesCreateAccountRequestCountryCode = "SE"
+	CompaniesCreateAccountRequestCountryCodeSg CompaniesCreateAccountRequestCountryCode = "SG"
+	CompaniesCreateAccountRequestCountryCodeSh CompaniesCreateAccountRequestCountryCode = "SH"
+	CompaniesCreateAccountRequestCountryCodeSi CompaniesCreateAccountRequestCountryCode = "SI"
+	CompaniesCreateAccountRequestCountryCodeSj CompaniesCreateAccountRequestCountryCode = "SJ"
+	CompaniesCreateAccountRequestCountryCodeSk CompaniesCreateAccountRequestCountryCode = "SK"
+	CompaniesCreateAccountRequestCountryCodeSl CompaniesCreateAccountRequestCountryCode = "SL"
+	CompaniesCreateAccountRequestCountryCodeSm CompaniesCreateAccountRequestCountryCode = "SM"
+	CompaniesCreateAccountRequestCountryCodeSn CompaniesCreateAccountRequestCountryCode = "SN"
+	CompaniesCreateAccountRequestCountryCodeSo CompaniesCreateAccountRequestCountryCode = "SO"
+	CompaniesCreateAccountRequestCountryCodeSr CompaniesCreateAccountRequestCountryCode = "SR"
+	CompaniesCreateAccountRequestCountryCodeSs CompaniesCreateAccountRequestCountryCode = "SS"
+	CompaniesCreateAccountRequestCountryCodeSt CompaniesCreateAccountRequestCountryCode = "ST"
+	CompaniesCreateAccountRequestCountryCodeSv CompaniesCreateAccountRequestCountryCode = "SV"
+	CompaniesCreateAccountRequestCountryCodeSx CompaniesCreateAccountRequestCountryCode = "SX"
+	CompaniesCreateAccountRequestCountryCodeSy CompaniesCreateAccountRequestCountryCode = "SY"
+	CompaniesCreateAccountRequestCountryCodeSz CompaniesCreateAccountRequestCountryCode = "SZ"
+	CompaniesCreateAccountRequestCountryCodeTc CompaniesCreateAccountRequestCountryCode = "TC"
+	CompaniesCreateAccountRequestCountryCodeTd CompaniesCreateAccountRequestCountryCode = "TD"
+	CompaniesCreateAccountRequestCountryCodeTf CompaniesCreateAccountRequestCountryCode = "TF"
+	CompaniesCreateAccountRequestCountryCodeTg CompaniesCreateAccountRequestCountryCode = "TG"
+	CompaniesCreateAccountRequestCountryCodeTh CompaniesCreateAccountRequestCountryCode = "TH"
+	CompaniesCreateAccountRequestCountryCodeTj CompaniesCreateAccountRequestCountryCode = "TJ"
+	CompaniesCreateAccountRequestCountryCodeTk CompaniesCreateAccountRequestCountryCode = "TK"
+	CompaniesCreateAccountRequestCountryCodeTl CompaniesCreateAccountRequestCountryCode = "TL"
+	CompaniesCreateAccountRequestCountryCodeTm CompaniesCreateAccountRequestCountryCode = "TM"
+	CompaniesCreateAccountRequestCountryCodeTn CompaniesCreateAccountRequestCountryCode = "TN"
+	CompaniesCreateAccountRequestCountryCodeTo CompaniesCreateAccountRequestCountryCode = "TO"
+	CompaniesCreateAccountRequestCountryCodeTr CompaniesCreateAccountRequestCountryCode = "TR"
+	CompaniesCreateAccountRequestCountryCodeTt CompaniesCreateAccountRequestCountryCode = "TT"
+	CompaniesCreateAccountRequestCountryCodeTv CompaniesCreateAccountRequestCountryCode = "TV"
+	CompaniesCreateAccountRequestCountryCodeTw CompaniesCreateAccountRequestCountryCode = "TW"
+	CompaniesCreateAccountRequestCountryCodeTz CompaniesCreateAccountRequestCountryCode = "TZ"
+	CompaniesCreateAccountRequestCountryCodeUa CompaniesCreateAccountRequestCountryCode = "UA"
+	CompaniesCreateAccountRequestCountryCodeUg CompaniesCreateAccountRequestCountryCode = "UG"
+	CompaniesCreateAccountRequestCountryCodeUm CompaniesCreateAccountRequestCountryCode = "UM"
+	CompaniesCreateAccountRequestCountryCodeUs CompaniesCreateAccountRequestCountryCode = "US"
+	CompaniesCreateAccountRequestCountryCodeUy CompaniesCreateAccountRequestCountryCode = "UY"
+	CompaniesCreateAccountRequestCountryCodeUz CompaniesCreateAccountRequestCountryCode = "UZ"
+	CompaniesCreateAccountRequestCountryCodeVa CompaniesCreateAccountRequestCountryCode = "VA"
+	CompaniesCreateAccountRequestCountryCodeVc CompaniesCreateAccountRequestCountryCode = "VC"
+	CompaniesCreateAccountRequestCountryCodeVe CompaniesCreateAccountRequestCountryCode = "VE"
+	CompaniesCreateAccountRequestCountryCodeVg CompaniesCreateAccountRequestCountryCode = "VG"
+	CompaniesCreateAccountRequestCountryCodeVi CompaniesCreateAccountRequestCountryCode = "VI"
+	CompaniesCreateAccountRequestCountryCodeVn CompaniesCreateAccountRequestCountryCode = "VN"
+	CompaniesCreateAccountRequestCountryCodeVu CompaniesCreateAccountRequestCountryCode = "VU"
+	CompaniesCreateAccountRequestCountryCodeWf CompaniesCreateAccountRequestCountryCode = "WF"
+	CompaniesCreateAccountRequestCountryCodeWs CompaniesCreateAccountRequestCountryCode = "WS"
+	CompaniesCreateAccountRequestCountryCodeYe CompaniesCreateAccountRequestCountryCode = "YE"
+	CompaniesCreateAccountRequestCountryCodeYt CompaniesCreateAccountRequestCountryCode = "YT"
+	CompaniesCreateAccountRequestCountryCodeZa CompaniesCreateAccountRequestCountryCode = "ZA"
+	CompaniesCreateAccountRequestCountryCodeZm CompaniesCreateAccountRequestCountryCode = "ZM"
+	CompaniesCreateAccountRequestCountryCodeZw CompaniesCreateAccountRequestCountryCode = "ZW"
 )
 
 func NewCompaniesCreateAccountRequestCountryCodeFromString(s string) (CompaniesCreateAccountRequestCountryCode, error) {
 	switch s {
+	case "AD":
+		return CompaniesCreateAccountRequestCountryCodeAd, nil
+	case "AE":
+		return CompaniesCreateAccountRequestCountryCodeAe, nil
+	case "AF":
+		return CompaniesCreateAccountRequestCountryCodeAf, nil
+	case "AG":
+		return CompaniesCreateAccountRequestCountryCodeAg, nil
+	case "AI":
+		return CompaniesCreateAccountRequestCountryCodeAi, nil
+	case "AL":
+		return CompaniesCreateAccountRequestCountryCodeAl, nil
+	case "AM":
+		return CompaniesCreateAccountRequestCountryCodeAm, nil
+	case "AO":
+		return CompaniesCreateAccountRequestCountryCodeAo, nil
+	case "AQ":
+		return CompaniesCreateAccountRequestCountryCodeAq, nil
+	case "AR":
+		return CompaniesCreateAccountRequestCountryCodeAr, nil
+	case "AS":
+		return CompaniesCreateAccountRequestCountryCodeAs, nil
 	case "AT":
 		return CompaniesCreateAccountRequestCountryCodeAt, nil
+	case "AU":
+		return CompaniesCreateAccountRequestCountryCodeAu, nil
+	case "AW":
+		return CompaniesCreateAccountRequestCountryCodeAw, nil
+	case "AX":
+		return CompaniesCreateAccountRequestCountryCodeAx, nil
+	case "AZ":
+		return CompaniesCreateAccountRequestCountryCodeAz, nil
+	case "BA":
+		return CompaniesCreateAccountRequestCountryCodeBa, nil
+	case "BB":
+		return CompaniesCreateAccountRequestCountryCodeBb, nil
+	case "BD":
+		return CompaniesCreateAccountRequestCountryCodeBd, nil
 	case "BE":
 		return CompaniesCreateAccountRequestCountryCodeBe, nil
+	case "BF":
+		return CompaniesCreateAccountRequestCountryCodeBf, nil
 	case "BG":
 		return CompaniesCreateAccountRequestCountryCodeBg, nil
+	case "BH":
+		return CompaniesCreateAccountRequestCountryCodeBh, nil
+	case "BI":
+		return CompaniesCreateAccountRequestCountryCodeBi, nil
+	case "BJ":
+		return CompaniesCreateAccountRequestCountryCodeBj, nil
+	case "BL":
+		return CompaniesCreateAccountRequestCountryCodeBl, nil
+	case "BM":
+		return CompaniesCreateAccountRequestCountryCodeBm, nil
+	case "BN":
+		return CompaniesCreateAccountRequestCountryCodeBn, nil
+	case "BO":
+		return CompaniesCreateAccountRequestCountryCodeBo, nil
+	case "BQ":
+		return CompaniesCreateAccountRequestCountryCodeBq, nil
+	case "BR":
+		return CompaniesCreateAccountRequestCountryCodeBr, nil
+	case "BS":
+		return CompaniesCreateAccountRequestCountryCodeBs, nil
+	case "BT":
+		return CompaniesCreateAccountRequestCountryCodeBt, nil
+	case "BV":
+		return CompaniesCreateAccountRequestCountryCodeBv, nil
+	case "BW":
+		return CompaniesCreateAccountRequestCountryCodeBw, nil
+	case "BY":
+		return CompaniesCreateAccountRequestCountryCodeBy, nil
+	case "BZ":
+		return CompaniesCreateAccountRequestCountryCodeBz, nil
+	case "CA":
+		return CompaniesCreateAccountRequestCountryCodeCa, nil
+	case "CC":
+		return CompaniesCreateAccountRequestCountryCodeCc, nil
+	case "CD":
+		return CompaniesCreateAccountRequestCountryCodeCd, nil
+	case "CF":
+		return CompaniesCreateAccountRequestCountryCodeCf, nil
+	case "CG":
+		return CompaniesCreateAccountRequestCountryCodeCg, nil
+	case "CH":
+		return CompaniesCreateAccountRequestCountryCodeCh, nil
+	case "CI":
+		return CompaniesCreateAccountRequestCountryCodeCi, nil
+	case "CK":
+		return CompaniesCreateAccountRequestCountryCodeCk, nil
+	case "CL":
+		return CompaniesCreateAccountRequestCountryCodeCl, nil
+	case "CM":
+		return CompaniesCreateAccountRequestCountryCodeCm, nil
+	case "CN":
+		return CompaniesCreateAccountRequestCountryCodeCn, nil
+	case "CO":
+		return CompaniesCreateAccountRequestCountryCodeCo, nil
+	case "CR":
+		return CompaniesCreateAccountRequestCountryCodeCr, nil
+	case "CU":
+		return CompaniesCreateAccountRequestCountryCodeCu, nil
+	case "CV":
+		return CompaniesCreateAccountRequestCountryCodeCv, nil
+	case "CW":
+		return CompaniesCreateAccountRequestCountryCodeCw, nil
+	case "CX":
+		return CompaniesCreateAccountRequestCountryCodeCx, nil
 	case "CY":
 		return CompaniesCreateAccountRequestCountryCodeCy, nil
 	case "CZ":
 		return CompaniesCreateAccountRequestCountryCodeCz, nil
 	case "DE":
 		return CompaniesCreateAccountRequestCountryCodeDe, nil
+	case "DJ":
+		return CompaniesCreateAccountRequestCountryCodeDj, nil
 	case "DK":
 		return CompaniesCreateAccountRequestCountryCodeDk, nil
+	case "DM":
+		return CompaniesCreateAccountRequestCountryCodeDm, nil
+	case "DO":
+		return CompaniesCreateAccountRequestCountryCodeDo, nil
+	case "DZ":
+		return CompaniesCreateAccountRequestCountryCodeDz, nil
+	case "EC":
+		return CompaniesCreateAccountRequestCountryCodeEc, nil
 	case "EE":
 		return CompaniesCreateAccountRequestCountryCodeEe, nil
+	case "EG":
+		return CompaniesCreateAccountRequestCountryCodeEg, nil
+	case "EH":
+		return CompaniesCreateAccountRequestCountryCodeEh, nil
+	case "ER":
+		return CompaniesCreateAccountRequestCountryCodeEr, nil
 	case "ES":
 		return CompaniesCreateAccountRequestCountryCodeEs, nil
+	case "ET":
+		return CompaniesCreateAccountRequestCountryCodeEt, nil
 	case "FI":
 		return CompaniesCreateAccountRequestCountryCodeFi, nil
+	case "FJ":
+		return CompaniesCreateAccountRequestCountryCodeFj, nil
+	case "FK":
+		return CompaniesCreateAccountRequestCountryCodeFk, nil
+	case "FM":
+		return CompaniesCreateAccountRequestCountryCodeFm, nil
+	case "FO":
+		return CompaniesCreateAccountRequestCountryCodeFo, nil
 	case "FR":
 		return CompaniesCreateAccountRequestCountryCodeFr, nil
+	case "GA":
+		return CompaniesCreateAccountRequestCountryCodeGa, nil
+	case "GB":
+		return CompaniesCreateAccountRequestCountryCodeGb, nil
+	case "GD":
+		return CompaniesCreateAccountRequestCountryCodeGd, nil
+	case "GE":
+		return CompaniesCreateAccountRequestCountryCodeGe, nil
+	case "GF":
+		return CompaniesCreateAccountRequestCountryCodeGf, nil
+	case "GG":
+		return CompaniesCreateAccountRequestCountryCodeGg, nil
+	case "GH":
+		return CompaniesCreateAccountRequestCountryCodeGh, nil
+	case "GI":
+		return CompaniesCreateAccountRequestCountryCodeGi, nil
+	case "GL":
+		return CompaniesCreateAccountRequestCountryCodeGl, nil
+	case "GM":
+		return CompaniesCreateAccountRequestCountryCodeGm, nil
+	case "GN":
+		return CompaniesCreateAccountRequestCountryCodeGn, nil
+	case "GP":
+		return CompaniesCreateAccountRequestCountryCodeGp, nil
+	case "GQ":
+		return CompaniesCreateAccountRequestCountryCodeGq, nil
 	case "GR":
 		return CompaniesCreateAccountRequestCountryCodeGr, nil
+	case "GS":
+		return CompaniesCreateAccountRequestCountryCodeGs, nil
+	case "GT":
+		return CompaniesCreateAccountRequestCountryCodeGt, nil
+	case "GU":
+		return CompaniesCreateAccountRequestCountryCodeGu, nil
+	case "GW":
+		return CompaniesCreateAccountRequestCountryCodeGw, nil
+	case "GY":
+		return CompaniesCreateAccountRequestCountryCodeGy, nil
+	case "HK":
+		return CompaniesCreateAccountRequestCountryCodeHk, nil
+	case "HM":
+		return CompaniesCreateAccountRequestCountryCodeHm, nil
+	case "HN":
+		return CompaniesCreateAccountRequestCountryCodeHn, nil
 	case "HR":
 		return CompaniesCreateAccountRequestCountryCodeHr, nil
+	case "HT":
+		return CompaniesCreateAccountRequestCountryCodeHt, nil
 	case "HU":
 		return CompaniesCreateAccountRequestCountryCodeHu, nil
+	case "ID":
+		return CompaniesCreateAccountRequestCountryCodeID, nil
 	case "IE":
 		return CompaniesCreateAccountRequestCountryCodeIe, nil
+	case "IL":
+		return CompaniesCreateAccountRequestCountryCodeIl, nil
+	case "IM":
+		return CompaniesCreateAccountRequestCountryCodeIm, nil
+	case "IN":
+		return CompaniesCreateAccountRequestCountryCodeIn, nil
+	case "IO":
+		return CompaniesCreateAccountRequestCountryCodeIo, nil
+	case "IQ":
+		return CompaniesCreateAccountRequestCountryCodeIq, nil
+	case "IR":
+		return CompaniesCreateAccountRequestCountryCodeIr, nil
+	case "IS":
+		return CompaniesCreateAccountRequestCountryCodeIs, nil
 	case "IT":
 		return CompaniesCreateAccountRequestCountryCodeIt, nil
+	case "JE":
+		return CompaniesCreateAccountRequestCountryCodeJe, nil
+	case "JM":
+		return CompaniesCreateAccountRequestCountryCodeJm, nil
+	case "JO":
+		return CompaniesCreateAccountRequestCountryCodeJo, nil
+	case "JP":
+		return CompaniesCreateAccountRequestCountryCodeJp, nil
+	case "KE":
+		return CompaniesCreateAccountRequestCountryCodeKe, nil
+	case "KG":
+		return CompaniesCreateAccountRequestCountryCodeKg, nil
+	case "KH":
+		return CompaniesCreateAccountRequestCountryCodeKh, nil
+	case "KI":
+		return CompaniesCreateAccountRequestCountryCodeKi, nil
+	case "KM":
+		return CompaniesCreateAccountRequestCountryCodeKm, nil
+	case "KN":
+		return CompaniesCreateAccountRequestCountryCodeKn, nil
+	case "KP":
+		return CompaniesCreateAccountRequestCountryCodeKp, nil
+	case "KR":
+		return CompaniesCreateAccountRequestCountryCodeKr, nil
+	case "KW":
+		return CompaniesCreateAccountRequestCountryCodeKw, nil
+	case "KY":
+		return CompaniesCreateAccountRequestCountryCodeKy, nil
+	case "KZ":
+		return CompaniesCreateAccountRequestCountryCodeKz, nil
+	case "LA":
+		return CompaniesCreateAccountRequestCountryCodeLa, nil
+	case "LB":
+		return CompaniesCreateAccountRequestCountryCodeLb, nil
+	case "LC":
+		return CompaniesCreateAccountRequestCountryCodeLc, nil
+	case "LI":
+		return CompaniesCreateAccountRequestCountryCodeLi, nil
+	case "LK":
+		return CompaniesCreateAccountRequestCountryCodeLk, nil
+	case "LR":
+		return CompaniesCreateAccountRequestCountryCodeLr, nil
+	case "LS":
+		return CompaniesCreateAccountRequestCountryCodeLs, nil
 	case "LT":
 		return CompaniesCreateAccountRequestCountryCodeLt, nil
 	case "LU":
 		return CompaniesCreateAccountRequestCountryCodeLu, nil
 	case "LV":
 		return CompaniesCreateAccountRequestCountryCodeLv, nil
+	case "LY":
+		return CompaniesCreateAccountRequestCountryCodeLy, nil
+	case "MA":
+		return CompaniesCreateAccountRequestCountryCodeMa, nil
+	case "MC":
+		return CompaniesCreateAccountRequestCountryCodeMc, nil
+	case "MD":
+		return CompaniesCreateAccountRequestCountryCodeMd, nil
+	case "ME":
+		return CompaniesCreateAccountRequestCountryCodeMe, nil
+	case "MF":
+		return CompaniesCreateAccountRequestCountryCodeMf, nil
+	case "MG":
+		return CompaniesCreateAccountRequestCountryCodeMg, nil
+	case "MH":
+		return CompaniesCreateAccountRequestCountryCodeMh, nil
+	case "MK":
+		return CompaniesCreateAccountRequestCountryCodeMk, nil
+	case "ML":
+		return CompaniesCreateAccountRequestCountryCodeMl, nil
+	case "MM":
+		return CompaniesCreateAccountRequestCountryCodeMm, nil
+	case "MN":
+		return CompaniesCreateAccountRequestCountryCodeMn, nil
+	case "MO":
+		return CompaniesCreateAccountRequestCountryCodeMo, nil
+	case "MP":
+		return CompaniesCreateAccountRequestCountryCodeMp, nil
+	case "MQ":
+		return CompaniesCreateAccountRequestCountryCodeMq, nil
+	case "MR":
+		return CompaniesCreateAccountRequestCountryCodeMr, nil
+	case "MS":
+		return CompaniesCreateAccountRequestCountryCodeMs, nil
 	case "MT":
 		return CompaniesCreateAccountRequestCountryCodeMt, nil
+	case "MU":
+		return CompaniesCreateAccountRequestCountryCodeMu, nil
+	case "MV":
+		return CompaniesCreateAccountRequestCountryCodeMv, nil
+	case "MW":
+		return CompaniesCreateAccountRequestCountryCodeMw, nil
+	case "MX":
+		return CompaniesCreateAccountRequestCountryCodeMx, nil
+	case "MY":
+		return CompaniesCreateAccountRequestCountryCodeMy, nil
+	case "MZ":
+		return CompaniesCreateAccountRequestCountryCodeMz, nil
+	case "NA":
+		return CompaniesCreateAccountRequestCountryCodeNa, nil
+	case "NC":
+		return CompaniesCreateAccountRequestCountryCodeNc, nil
+	case "NE":
+		return CompaniesCreateAccountRequestCountryCodeNe, nil
+	case "NF":
+		return CompaniesCreateAccountRequestCountryCodeNf, nil
+	case "NG":
+		return CompaniesCreateAccountRequestCountryCodeNg, nil
+	case "NI":
+		return CompaniesCreateAccountRequestCountryCodeNi, nil
 	case "NL":
 		return CompaniesCreateAccountRequestCountryCodeNl, nil
-	case "PL":
-		return CompaniesCreateAccountRequestCountryCodePl, nil
-	case "PT":
-		return CompaniesCreateAccountRequestCountryCodePt, nil
-	case "RO":
-		return CompaniesCreateAccountRequestCountryCodeRo, nil
-	case "SE":
-		return CompaniesCreateAccountRequestCountryCodeSe, nil
-	case "SI":
-		return CompaniesCreateAccountRequestCountryCodeSi, nil
-	case "SK":
-		return CompaniesCreateAccountRequestCountryCodeSk, nil
-	case "IS":
-		return CompaniesCreateAccountRequestCountryCodeIs, nil
-	case "LI":
-		return CompaniesCreateAccountRequestCountryCodeLi, nil
 	case "NO":
 		return CompaniesCreateAccountRequestCountryCodeNo, nil
+	case "NP":
+		return CompaniesCreateAccountRequestCountryCodeNp, nil
+	case "NR":
+		return CompaniesCreateAccountRequestCountryCodeNr, nil
+	case "NU":
+		return CompaniesCreateAccountRequestCountryCodeNu, nil
+	case "NZ":
+		return CompaniesCreateAccountRequestCountryCodeNz, nil
+	case "OM":
+		return CompaniesCreateAccountRequestCountryCodeOm, nil
+	case "PA":
+		return CompaniesCreateAccountRequestCountryCodePa, nil
+	case "PE":
+		return CompaniesCreateAccountRequestCountryCodePe, nil
+	case "PF":
+		return CompaniesCreateAccountRequestCountryCodePf, nil
+	case "PG":
+		return CompaniesCreateAccountRequestCountryCodePg, nil
+	case "PH":
+		return CompaniesCreateAccountRequestCountryCodePh, nil
+	case "PK":
+		return CompaniesCreateAccountRequestCountryCodePk, nil
+	case "PL":
+		return CompaniesCreateAccountRequestCountryCodePl, nil
+	case "PM":
+		return CompaniesCreateAccountRequestCountryCodePm, nil
+	case "PN":
+		return CompaniesCreateAccountRequestCountryCodePn, nil
+	case "PR":
+		return CompaniesCreateAccountRequestCountryCodePr, nil
+	case "PS":
+		return CompaniesCreateAccountRequestCountryCodePs, nil
+	case "PT":
+		return CompaniesCreateAccountRequestCountryCodePt, nil
+	case "PW":
+		return CompaniesCreateAccountRequestCountryCodePw, nil
+	case "PY":
+		return CompaniesCreateAccountRequestCountryCodePy, nil
+	case "QA":
+		return CompaniesCreateAccountRequestCountryCodeQa, nil
+	case "RE":
+		return CompaniesCreateAccountRequestCountryCodeRe, nil
+	case "RO":
+		return CompaniesCreateAccountRequestCountryCodeRo, nil
+	case "RS":
+		return CompaniesCreateAccountRequestCountryCodeRs, nil
+	case "RU":
+		return CompaniesCreateAccountRequestCountryCodeRu, nil
+	case "RW":
+		return CompaniesCreateAccountRequestCountryCodeRw, nil
+	case "SA":
+		return CompaniesCreateAccountRequestCountryCodeSa, nil
+	case "SB":
+		return CompaniesCreateAccountRequestCountryCodeSb, nil
+	case "SC":
+		return CompaniesCreateAccountRequestCountryCodeSc, nil
+	case "SD":
+		return CompaniesCreateAccountRequestCountryCodeSd, nil
+	case "SE":
+		return CompaniesCreateAccountRequestCountryCodeSe, nil
+	case "SG":
+		return CompaniesCreateAccountRequestCountryCodeSg, nil
+	case "SH":
+		return CompaniesCreateAccountRequestCountryCodeSh, nil
+	case "SI":
+		return CompaniesCreateAccountRequestCountryCodeSi, nil
+	case "SJ":
+		return CompaniesCreateAccountRequestCountryCodeSj, nil
+	case "SK":
+		return CompaniesCreateAccountRequestCountryCodeSk, nil
+	case "SL":
+		return CompaniesCreateAccountRequestCountryCodeSl, nil
+	case "SM":
+		return CompaniesCreateAccountRequestCountryCodeSm, nil
+	case "SN":
+		return CompaniesCreateAccountRequestCountryCodeSn, nil
+	case "SO":
+		return CompaniesCreateAccountRequestCountryCodeSo, nil
+	case "SR":
+		return CompaniesCreateAccountRequestCountryCodeSr, nil
+	case "SS":
+		return CompaniesCreateAccountRequestCountryCodeSs, nil
+	case "ST":
+		return CompaniesCreateAccountRequestCountryCodeSt, nil
+	case "SV":
+		return CompaniesCreateAccountRequestCountryCodeSv, nil
+	case "SX":
+		return CompaniesCreateAccountRequestCountryCodeSx, nil
+	case "SY":
+		return CompaniesCreateAccountRequestCountryCodeSy, nil
+	case "SZ":
+		return CompaniesCreateAccountRequestCountryCodeSz, nil
+	case "TC":
+		return CompaniesCreateAccountRequestCountryCodeTc, nil
+	case "TD":
+		return CompaniesCreateAccountRequestCountryCodeTd, nil
+	case "TF":
+		return CompaniesCreateAccountRequestCountryCodeTf, nil
+	case "TG":
+		return CompaniesCreateAccountRequestCountryCodeTg, nil
+	case "TH":
+		return CompaniesCreateAccountRequestCountryCodeTh, nil
+	case "TJ":
+		return CompaniesCreateAccountRequestCountryCodeTj, nil
+	case "TK":
+		return CompaniesCreateAccountRequestCountryCodeTk, nil
+	case "TL":
+		return CompaniesCreateAccountRequestCountryCodeTl, nil
+	case "TM":
+		return CompaniesCreateAccountRequestCountryCodeTm, nil
+	case "TN":
+		return CompaniesCreateAccountRequestCountryCodeTn, nil
+	case "TO":
+		return CompaniesCreateAccountRequestCountryCodeTo, nil
+	case "TR":
+		return CompaniesCreateAccountRequestCountryCodeTr, nil
+	case "TT":
+		return CompaniesCreateAccountRequestCountryCodeTt, nil
+	case "TV":
+		return CompaniesCreateAccountRequestCountryCodeTv, nil
+	case "TW":
+		return CompaniesCreateAccountRequestCountryCodeTw, nil
+	case "TZ":
+		return CompaniesCreateAccountRequestCountryCodeTz, nil
+	case "UA":
+		return CompaniesCreateAccountRequestCountryCodeUa, nil
+	case "UG":
+		return CompaniesCreateAccountRequestCountryCodeUg, nil
+	case "UM":
+		return CompaniesCreateAccountRequestCountryCodeUm, nil
+	case "US":
+		return CompaniesCreateAccountRequestCountryCodeUs, nil
+	case "UY":
+		return CompaniesCreateAccountRequestCountryCodeUy, nil
+	case "UZ":
+		return CompaniesCreateAccountRequestCountryCodeUz, nil
+	case "VA":
+		return CompaniesCreateAccountRequestCountryCodeVa, nil
+	case "VC":
+		return CompaniesCreateAccountRequestCountryCodeVc, nil
+	case "VE":
+		return CompaniesCreateAccountRequestCountryCodeVe, nil
+	case "VG":
+		return CompaniesCreateAccountRequestCountryCodeVg, nil
+	case "VI":
+		return CompaniesCreateAccountRequestCountryCodeVi, nil
+	case "VN":
+		return CompaniesCreateAccountRequestCountryCodeVn, nil
+	case "VU":
+		return CompaniesCreateAccountRequestCountryCodeVu, nil
+	case "WF":
+		return CompaniesCreateAccountRequestCountryCodeWf, nil
+	case "WS":
+		return CompaniesCreateAccountRequestCountryCodeWs, nil
+	case "YE":
+		return CompaniesCreateAccountRequestCountryCodeYe, nil
+	case "YT":
+		return CompaniesCreateAccountRequestCountryCodeYt, nil
+	case "ZA":
+		return CompaniesCreateAccountRequestCountryCodeZa, nil
+	case "ZM":
+		return CompaniesCreateAccountRequestCountryCodeZm, nil
+	case "ZW":
+		return CompaniesCreateAccountRequestCountryCodeZw, nil
 	}
 	var t CompaniesCreateAccountRequestCountryCode
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -3573,6 +4240,7 @@ var (
 	companiesCreateAccountResponseFieldVatCode   = big.NewInt(1 << 3)
 	companiesCreateAccountResponseFieldRole      = big.NewInt(1 << 4)
 	companiesCreateAccountResponseFieldIsSandbox = big.NewInt(1 << 5)
+	companiesCreateAccountResponseFieldCashBasis = big.NewInt(1 << 6)
 )
 
 type CompaniesCreateAccountResponse struct {
@@ -3582,6 +4250,7 @@ type CompaniesCreateAccountResponse struct {
 	VatCode   *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
 	Role      string  `json:"role" url:"role"`
 	IsSandbox bool    `json:"isSandbox" url:"isSandbox"`
+	CashBasis bool    `json:"cashBasis" url:"cashBasis"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3630,6 +4299,13 @@ func (c *CompaniesCreateAccountResponse) GetIsSandbox() bool {
 		return false
 	}
 	return c.IsSandbox
+}
+
+func (c *CompaniesCreateAccountResponse) GetCashBasis() bool {
+	if c == nil {
+		return false
+	}
+	return c.CashBasis
 }
 
 func (c *CompaniesCreateAccountResponse) GetExtraProperties() map[string]interface{} {
@@ -3686,6 +4362,13 @@ func (c *CompaniesCreateAccountResponse) SetRole(role string) {
 func (c *CompaniesCreateAccountResponse) SetIsSandbox(isSandbox bool) {
 	c.IsSandbox = isSandbox
 	c.require(companiesCreateAccountResponseFieldIsSandbox)
+}
+
+// SetCashBasis sets the CashBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountResponse) SetCashBasis(cashBasis bool) {
+	c.CashBasis = cashBasis
+	c.require(companiesCreateAccountResponseFieldCashBasis)
 }
 
 func (c *CompaniesCreateAccountResponse) UnmarshalJSON(data []byte) error {
@@ -3854,41 +4537,42 @@ var (
 	companiesProfileAccountResponseFieldSmeExemptionNumber        = big.NewInt(1 << 4)
 	companiesProfileAccountResponseFieldIsVatPayer                = big.NewInt(1 << 5)
 	companiesProfileAccountResponseFieldIsSandbox                 = big.NewInt(1 << 6)
-	companiesProfileAccountResponseFieldCountryCode               = big.NewInt(1 << 7)
-	companiesProfileAccountResponseFieldChartTemplate             = big.NewInt(1 << 8)
-	companiesProfileAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 9)
-	companiesProfileAccountResponseFieldBaseCurrency              = big.NewInt(1 << 10)
-	companiesProfileAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 11)
-	companiesProfileAccountResponseFieldStatus                    = big.NewInt(1 << 12)
-	companiesProfileAccountResponseFieldAddress                   = big.NewInt(1 << 13)
-	companiesProfileAccountResponseFieldEmail                     = big.NewInt(1 << 14)
-	companiesProfileAccountResponseFieldPhone                     = big.NewInt(1 << 15)
-	companiesProfileAccountResponseFieldIban                      = big.NewInt(1 << 16)
-	companiesProfileAccountResponseFieldBankName                  = big.NewInt(1 << 17)
-	companiesProfileAccountResponseFieldBankBic                   = big.NewInt(1 << 18)
-	companiesProfileAccountResponseFieldBankCode                  = big.NewInt(1 << 19)
-	companiesProfileAccountResponseFieldBankBranchCode            = big.NewInt(1 << 20)
-	companiesProfileAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 21)
-	companiesProfileAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 22)
-	companiesProfileAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 23)
-	companiesProfileAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 24)
-	companiesProfileAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 25)
-	companiesProfileAccountResponseFieldPeppolID                  = big.NewInt(1 << 26)
-	companiesProfileAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 27)
-	companiesProfileAccountResponseFieldLogoFileID                = big.NewInt(1 << 28)
-	companiesProfileAccountResponseFieldLegalForm                 = big.NewInt(1 << 29)
-	companiesProfileAccountResponseFieldRegistryName              = big.NewInt(1 << 30)
-	companiesProfileAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 31)
-	companiesProfileAccountResponseFieldShareCapital              = big.NewInt(1 << 32)
-	companiesProfileAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 33)
-	companiesProfileAccountResponseFieldVatPeriod                 = big.NewInt(1 << 34)
-	companiesProfileAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 35)
-	companiesProfileAccountResponseFieldTimeZone                  = big.NewInt(1 << 36)
-	companiesProfileAccountResponseFieldFilingOptions             = big.NewInt(1 << 37)
-	companiesProfileAccountResponseFieldBookkeeperName            = big.NewInt(1 << 38)
-	companiesProfileAccountResponseFieldAuditorName               = big.NewInt(1 << 39)
-	companiesProfileAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 40)
-	companiesProfileAccountResponseFieldAuditRequired             = big.NewInt(1 << 41)
+	companiesProfileAccountResponseFieldCashBasis                 = big.NewInt(1 << 7)
+	companiesProfileAccountResponseFieldCountryCode               = big.NewInt(1 << 8)
+	companiesProfileAccountResponseFieldChartTemplate             = big.NewInt(1 << 9)
+	companiesProfileAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 10)
+	companiesProfileAccountResponseFieldBaseCurrency              = big.NewInt(1 << 11)
+	companiesProfileAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 12)
+	companiesProfileAccountResponseFieldStatus                    = big.NewInt(1 << 13)
+	companiesProfileAccountResponseFieldAddress                   = big.NewInt(1 << 14)
+	companiesProfileAccountResponseFieldEmail                     = big.NewInt(1 << 15)
+	companiesProfileAccountResponseFieldPhone                     = big.NewInt(1 << 16)
+	companiesProfileAccountResponseFieldIban                      = big.NewInt(1 << 17)
+	companiesProfileAccountResponseFieldBankName                  = big.NewInt(1 << 18)
+	companiesProfileAccountResponseFieldBankBic                   = big.NewInt(1 << 19)
+	companiesProfileAccountResponseFieldBankCode                  = big.NewInt(1 << 20)
+	companiesProfileAccountResponseFieldBankBranchCode            = big.NewInt(1 << 21)
+	companiesProfileAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 22)
+	companiesProfileAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 23)
+	companiesProfileAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 24)
+	companiesProfileAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 25)
+	companiesProfileAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 26)
+	companiesProfileAccountResponseFieldPeppolID                  = big.NewInt(1 << 27)
+	companiesProfileAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 28)
+	companiesProfileAccountResponseFieldLogoFileID                = big.NewInt(1 << 29)
+	companiesProfileAccountResponseFieldLegalForm                 = big.NewInt(1 << 30)
+	companiesProfileAccountResponseFieldRegistryName              = big.NewInt(1 << 31)
+	companiesProfileAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 32)
+	companiesProfileAccountResponseFieldShareCapital              = big.NewInt(1 << 33)
+	companiesProfileAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 34)
+	companiesProfileAccountResponseFieldVatPeriod                 = big.NewInt(1 << 35)
+	companiesProfileAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 36)
+	companiesProfileAccountResponseFieldTimeZone                  = big.NewInt(1 << 37)
+	companiesProfileAccountResponseFieldFilingOptions             = big.NewInt(1 << 38)
+	companiesProfileAccountResponseFieldBookkeeperName            = big.NewInt(1 << 39)
+	companiesProfileAccountResponseFieldAuditorName               = big.NewInt(1 << 40)
+	companiesProfileAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 41)
+	companiesProfileAccountResponseFieldAuditRequired             = big.NewInt(1 << 42)
 )
 
 type CompaniesProfileAccountResponse struct {
@@ -3899,6 +4583,7 @@ type CompaniesProfileAccountResponse struct {
 	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
 	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
 	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool    `json:"cashBasis" url:"cashBasis"`
 	CountryCode        string  `json:"countryCode" url:"countryCode"`
 	// Chart of accounts template the company was seeded with
 	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
@@ -3993,6 +4678,13 @@ func (c *CompaniesProfileAccountResponse) GetIsSandbox() bool {
 		return false
 	}
 	return c.IsSandbox
+}
+
+func (c *CompaniesProfileAccountResponse) GetCashBasis() bool {
+	if c == nil {
+		return false
+	}
+	return c.CashBasis
 }
 
 func (c *CompaniesProfileAccountResponse) GetCountryCode() string {
@@ -4301,6 +4993,13 @@ func (c *CompaniesProfileAccountResponse) SetIsVatPayer(isVatPayer bool) {
 func (c *CompaniesProfileAccountResponse) SetIsSandbox(isSandbox bool) {
 	c.IsSandbox = isSandbox
 	c.require(companiesProfileAccountResponseFieldIsSandbox)
+}
+
+// SetCashBasis sets the CashBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetCashBasis(cashBasis bool) {
+	c.CashBasis = cashBasis
+	c.require(companiesProfileAccountResponseFieldCashBasis)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -5307,41 +6006,42 @@ var (
 	companiesUpdateAccountResponseFieldSmeExemptionNumber        = big.NewInt(1 << 4)
 	companiesUpdateAccountResponseFieldIsVatPayer                = big.NewInt(1 << 5)
 	companiesUpdateAccountResponseFieldIsSandbox                 = big.NewInt(1 << 6)
-	companiesUpdateAccountResponseFieldCountryCode               = big.NewInt(1 << 7)
-	companiesUpdateAccountResponseFieldChartTemplate             = big.NewInt(1 << 8)
-	companiesUpdateAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 9)
-	companiesUpdateAccountResponseFieldBaseCurrency              = big.NewInt(1 << 10)
-	companiesUpdateAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 11)
-	companiesUpdateAccountResponseFieldStatus                    = big.NewInt(1 << 12)
-	companiesUpdateAccountResponseFieldAddress                   = big.NewInt(1 << 13)
-	companiesUpdateAccountResponseFieldEmail                     = big.NewInt(1 << 14)
-	companiesUpdateAccountResponseFieldPhone                     = big.NewInt(1 << 15)
-	companiesUpdateAccountResponseFieldIban                      = big.NewInt(1 << 16)
-	companiesUpdateAccountResponseFieldBankName                  = big.NewInt(1 << 17)
-	companiesUpdateAccountResponseFieldBankBic                   = big.NewInt(1 << 18)
-	companiesUpdateAccountResponseFieldBankCode                  = big.NewInt(1 << 19)
-	companiesUpdateAccountResponseFieldBankBranchCode            = big.NewInt(1 << 20)
-	companiesUpdateAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 21)
-	companiesUpdateAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 22)
-	companiesUpdateAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 23)
-	companiesUpdateAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 24)
-	companiesUpdateAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 25)
-	companiesUpdateAccountResponseFieldPeppolID                  = big.NewInt(1 << 26)
-	companiesUpdateAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 27)
-	companiesUpdateAccountResponseFieldLogoFileID                = big.NewInt(1 << 28)
-	companiesUpdateAccountResponseFieldLegalForm                 = big.NewInt(1 << 29)
-	companiesUpdateAccountResponseFieldRegistryName              = big.NewInt(1 << 30)
-	companiesUpdateAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 31)
-	companiesUpdateAccountResponseFieldShareCapital              = big.NewInt(1 << 32)
-	companiesUpdateAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 33)
-	companiesUpdateAccountResponseFieldVatPeriod                 = big.NewInt(1 << 34)
-	companiesUpdateAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 35)
-	companiesUpdateAccountResponseFieldTimeZone                  = big.NewInt(1 << 36)
-	companiesUpdateAccountResponseFieldFilingOptions             = big.NewInt(1 << 37)
-	companiesUpdateAccountResponseFieldBookkeeperName            = big.NewInt(1 << 38)
-	companiesUpdateAccountResponseFieldAuditorName               = big.NewInt(1 << 39)
-	companiesUpdateAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 40)
-	companiesUpdateAccountResponseFieldAuditRequired             = big.NewInt(1 << 41)
+	companiesUpdateAccountResponseFieldCashBasis                 = big.NewInt(1 << 7)
+	companiesUpdateAccountResponseFieldCountryCode               = big.NewInt(1 << 8)
+	companiesUpdateAccountResponseFieldChartTemplate             = big.NewInt(1 << 9)
+	companiesUpdateAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 10)
+	companiesUpdateAccountResponseFieldBaseCurrency              = big.NewInt(1 << 11)
+	companiesUpdateAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 12)
+	companiesUpdateAccountResponseFieldStatus                    = big.NewInt(1 << 13)
+	companiesUpdateAccountResponseFieldAddress                   = big.NewInt(1 << 14)
+	companiesUpdateAccountResponseFieldEmail                     = big.NewInt(1 << 15)
+	companiesUpdateAccountResponseFieldPhone                     = big.NewInt(1 << 16)
+	companiesUpdateAccountResponseFieldIban                      = big.NewInt(1 << 17)
+	companiesUpdateAccountResponseFieldBankName                  = big.NewInt(1 << 18)
+	companiesUpdateAccountResponseFieldBankBic                   = big.NewInt(1 << 19)
+	companiesUpdateAccountResponseFieldBankCode                  = big.NewInt(1 << 20)
+	companiesUpdateAccountResponseFieldBankBranchCode            = big.NewInt(1 << 21)
+	companiesUpdateAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 22)
+	companiesUpdateAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 23)
+	companiesUpdateAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 24)
+	companiesUpdateAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 25)
+	companiesUpdateAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 26)
+	companiesUpdateAccountResponseFieldPeppolID                  = big.NewInt(1 << 27)
+	companiesUpdateAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 28)
+	companiesUpdateAccountResponseFieldLogoFileID                = big.NewInt(1 << 29)
+	companiesUpdateAccountResponseFieldLegalForm                 = big.NewInt(1 << 30)
+	companiesUpdateAccountResponseFieldRegistryName              = big.NewInt(1 << 31)
+	companiesUpdateAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 32)
+	companiesUpdateAccountResponseFieldShareCapital              = big.NewInt(1 << 33)
+	companiesUpdateAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 34)
+	companiesUpdateAccountResponseFieldVatPeriod                 = big.NewInt(1 << 35)
+	companiesUpdateAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 36)
+	companiesUpdateAccountResponseFieldTimeZone                  = big.NewInt(1 << 37)
+	companiesUpdateAccountResponseFieldFilingOptions             = big.NewInt(1 << 38)
+	companiesUpdateAccountResponseFieldBookkeeperName            = big.NewInt(1 << 39)
+	companiesUpdateAccountResponseFieldAuditorName               = big.NewInt(1 << 40)
+	companiesUpdateAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 41)
+	companiesUpdateAccountResponseFieldAuditRequired             = big.NewInt(1 << 42)
 )
 
 type CompaniesUpdateAccountResponse struct {
@@ -5352,6 +6052,7 @@ type CompaniesUpdateAccountResponse struct {
 	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
 	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
 	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool    `json:"cashBasis" url:"cashBasis"`
 	CountryCode        string  `json:"countryCode" url:"countryCode"`
 	// Chart of accounts template the company was seeded with
 	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
@@ -5446,6 +6147,13 @@ func (c *CompaniesUpdateAccountResponse) GetIsSandbox() bool {
 		return false
 	}
 	return c.IsSandbox
+}
+
+func (c *CompaniesUpdateAccountResponse) GetCashBasis() bool {
+	if c == nil {
+		return false
+	}
+	return c.CashBasis
 }
 
 func (c *CompaniesUpdateAccountResponse) GetCountryCode() string {
@@ -5754,6 +6462,13 @@ func (c *CompaniesUpdateAccountResponse) SetIsVatPayer(isVatPayer bool) {
 func (c *CompaniesUpdateAccountResponse) SetIsSandbox(isSandbox bool) {
 	c.IsSandbox = isSandbox
 	c.require(companiesUpdateAccountResponseFieldIsSandbox)
+}
+
+// SetCashBasis sets the CashBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetCashBasis(cashBasis bool) {
+	c.CashBasis = cashBasis
+	c.require(companiesUpdateAccountResponseFieldCashBasis)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -10188,8 +10903,9 @@ var (
 	meAccountResponseCompaniesItemFieldVatCode   = big.NewInt(1 << 3)
 	meAccountResponseCompaniesItemFieldRole      = big.NewInt(1 << 4)
 	meAccountResponseCompaniesItemFieldIsSandbox = big.NewInt(1 << 5)
-	meAccountResponseCompaniesItemFieldStatus    = big.NewInt(1 << 6)
-	meAccountResponseCompaniesItemFieldDeletedAt = big.NewInt(1 << 7)
+	meAccountResponseCompaniesItemFieldCashBasis = big.NewInt(1 << 6)
+	meAccountResponseCompaniesItemFieldStatus    = big.NewInt(1 << 7)
+	meAccountResponseCompaniesItemFieldDeletedAt = big.NewInt(1 << 8)
 )
 
 type MeAccountResponseCompaniesItem struct {
@@ -10199,6 +10915,7 @@ type MeAccountResponseCompaniesItem struct {
 	VatCode   *string                              `json:"vatCode,omitempty" url:"vatCode,omitempty"`
 	Role      string                               `json:"role" url:"role"`
 	IsSandbox bool                                 `json:"isSandbox" url:"isSandbox"`
+	CashBasis bool                                 `json:"cashBasis" url:"cashBasis"`
 	Status    MeAccountResponseCompaniesItemStatus `json:"status" url:"status"`
 	DeletedAt *time.Time                           `json:"deletedAt,omitempty" url:"deletedAt,omitempty"`
 
@@ -10249,6 +10966,13 @@ func (m *MeAccountResponseCompaniesItem) GetIsSandbox() bool {
 		return false
 	}
 	return m.IsSandbox
+}
+
+func (m *MeAccountResponseCompaniesItem) GetCashBasis() bool {
+	if m == nil {
+		return false
+	}
+	return m.CashBasis
 }
 
 func (m *MeAccountResponseCompaniesItem) GetStatus() MeAccountResponseCompaniesItemStatus {
@@ -10319,6 +11043,13 @@ func (m *MeAccountResponseCompaniesItem) SetRole(role string) {
 func (m *MeAccountResponseCompaniesItem) SetIsSandbox(isSandbox bool) {
 	m.IsSandbox = isSandbox
 	m.require(meAccountResponseCompaniesItemFieldIsSandbox)
+}
+
+// SetCashBasis sets the CashBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseCompaniesItem) SetCashBasis(cashBasis bool) {
+	m.CashBasis = cashBasis
+	m.require(meAccountResponseCompaniesItemFieldCashBasis)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
