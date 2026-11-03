@@ -24813,6 +24813,216 @@ func TestEnumPaymentsExportPayrollRequestLocale(t *testing.T) {
 		assert.Equal(t, PaymentsExportPayrollRequestLocale("de"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPaymentsExportPayrollRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PaymentsExportPayrollRequestLocale("uk"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewPaymentsExportPayrollRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)

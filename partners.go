@@ -7724,6 +7724,7 @@ const (
 	CreatePartnersRequestInvoiceLocaleHi CreatePartnersRequestInvoiceLocale = "hi"
 	CreatePartnersRequestInvoiceLocaleRu CreatePartnersRequestInvoiceLocale = "ru"
 	CreatePartnersRequestInvoiceLocaleTr CreatePartnersRequestInvoiceLocale = "tr"
+	CreatePartnersRequestInvoiceLocaleUk CreatePartnersRequestInvoiceLocale = "uk"
 )
 
 func NewCreatePartnersRequestInvoiceLocaleFromString(s string) (CreatePartnersRequestInvoiceLocale, error) {
@@ -7792,6 +7793,8 @@ func NewCreatePartnersRequestInvoiceLocaleFromString(s string) (CreatePartnersRe
 		return CreatePartnersRequestInvoiceLocaleRu, nil
 	case "tr":
 		return CreatePartnersRequestInvoiceLocaleTr, nil
+	case "uk":
+		return CreatePartnersRequestInvoiceLocaleUk, nil
 	}
 	var t CreatePartnersRequestInvoiceLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -10498,6 +10501,36 @@ const (
 	DebtRemindersPreviewPartnersResponseRowsItemLocaleEn DebtRemindersPreviewPartnersResponseRowsItemLocale = "en"
 	DebtRemindersPreviewPartnersResponseRowsItemLocaleLt DebtRemindersPreviewPartnersResponseRowsItemLocale = "lt"
 	DebtRemindersPreviewPartnersResponseRowsItemLocaleDe DebtRemindersPreviewPartnersResponseRowsItemLocale = "de"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleFr DebtRemindersPreviewPartnersResponseRowsItemLocale = "fr"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleEs DebtRemindersPreviewPartnersResponseRowsItemLocale = "es"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleIt DebtRemindersPreviewPartnersResponseRowsItemLocale = "it"
+	DebtRemindersPreviewPartnersResponseRowsItemLocalePt DebtRemindersPreviewPartnersResponseRowsItemLocale = "pt"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleNl DebtRemindersPreviewPartnersResponseRowsItemLocale = "nl"
+	DebtRemindersPreviewPartnersResponseRowsItemLocalePl DebtRemindersPreviewPartnersResponseRowsItemLocale = "pl"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleSv DebtRemindersPreviewPartnersResponseRowsItemLocale = "sv"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleDa DebtRemindersPreviewPartnersResponseRowsItemLocale = "da"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleNo DebtRemindersPreviewPartnersResponseRowsItemLocale = "no"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleFi DebtRemindersPreviewPartnersResponseRowsItemLocale = "fi"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleEt DebtRemindersPreviewPartnersResponseRowsItemLocale = "et"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleLv DebtRemindersPreviewPartnersResponseRowsItemLocale = "lv"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleCs DebtRemindersPreviewPartnersResponseRowsItemLocale = "cs"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleSk DebtRemindersPreviewPartnersResponseRowsItemLocale = "sk"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleHu DebtRemindersPreviewPartnersResponseRowsItemLocale = "hu"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleRo DebtRemindersPreviewPartnersResponseRowsItemLocale = "ro"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleBg DebtRemindersPreviewPartnersResponseRowsItemLocale = "bg"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleHr DebtRemindersPreviewPartnersResponseRowsItemLocale = "hr"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleSl DebtRemindersPreviewPartnersResponseRowsItemLocale = "sl"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleEl DebtRemindersPreviewPartnersResponseRowsItemLocale = "el"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleMt DebtRemindersPreviewPartnersResponseRowsItemLocale = "mt"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleIs DebtRemindersPreviewPartnersResponseRowsItemLocale = "is"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleGa DebtRemindersPreviewPartnersResponseRowsItemLocale = "ga"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleZh DebtRemindersPreviewPartnersResponseRowsItemLocale = "zh"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleJa DebtRemindersPreviewPartnersResponseRowsItemLocale = "ja"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleAr DebtRemindersPreviewPartnersResponseRowsItemLocale = "ar"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleHi DebtRemindersPreviewPartnersResponseRowsItemLocale = "hi"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleRu DebtRemindersPreviewPartnersResponseRowsItemLocale = "ru"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleTr DebtRemindersPreviewPartnersResponseRowsItemLocale = "tr"
+	DebtRemindersPreviewPartnersResponseRowsItemLocaleUk DebtRemindersPreviewPartnersResponseRowsItemLocale = "uk"
 )
 
 func NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString(s string) (DebtRemindersPreviewPartnersResponseRowsItemLocale, error) {
@@ -10508,6 +10541,66 @@ func NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString(s string) (
 		return DebtRemindersPreviewPartnersResponseRowsItemLocaleLt, nil
 	case "de":
 		return DebtRemindersPreviewPartnersResponseRowsItemLocaleDe, nil
+	case "fr":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleFr, nil
+	case "es":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleEs, nil
+	case "it":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleIt, nil
+	case "pt":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocalePt, nil
+	case "nl":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleNl, nil
+	case "pl":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocalePl, nil
+	case "sv":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleSv, nil
+	case "da":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleDa, nil
+	case "no":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleNo, nil
+	case "fi":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleFi, nil
+	case "et":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleEt, nil
+	case "lv":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleLv, nil
+	case "cs":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleCs, nil
+	case "sk":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleSk, nil
+	case "hu":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleHu, nil
+	case "ro":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleRo, nil
+	case "bg":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleBg, nil
+	case "hr":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleHr, nil
+	case "sl":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleSl, nil
+	case "el":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleEl, nil
+	case "mt":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleMt, nil
+	case "is":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleIs, nil
+	case "ga":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleGa, nil
+	case "zh":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleZh, nil
+	case "ja":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleJa, nil
+	case "ar":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleAr, nil
+	case "hi":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleHi, nil
+	case "ru":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleRu, nil
+	case "tr":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleTr, nil
+	case "uk":
+		return DebtRemindersPreviewPartnersResponseRowsItemLocaleUk, nil
 	}
 	var t DebtRemindersPreviewPartnersResponseRowsItemLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -12187,6 +12280,7 @@ const (
 	FindOrCreatePartnersRequestInvoiceLocaleHi FindOrCreatePartnersRequestInvoiceLocale = "hi"
 	FindOrCreatePartnersRequestInvoiceLocaleRu FindOrCreatePartnersRequestInvoiceLocale = "ru"
 	FindOrCreatePartnersRequestInvoiceLocaleTr FindOrCreatePartnersRequestInvoiceLocale = "tr"
+	FindOrCreatePartnersRequestInvoiceLocaleUk FindOrCreatePartnersRequestInvoiceLocale = "uk"
 )
 
 func NewFindOrCreatePartnersRequestInvoiceLocaleFromString(s string) (FindOrCreatePartnersRequestInvoiceLocale, error) {
@@ -12255,6 +12349,8 @@ func NewFindOrCreatePartnersRequestInvoiceLocaleFromString(s string) (FindOrCrea
 		return FindOrCreatePartnersRequestInvoiceLocaleRu, nil
 	case "tr":
 		return FindOrCreatePartnersRequestInvoiceLocaleTr, nil
+	case "uk":
+		return FindOrCreatePartnersRequestInvoiceLocaleUk, nil
 	}
 	var t FindOrCreatePartnersRequestInvoiceLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -20523,6 +20619,7 @@ const (
 	UpdatePartnersRequestInvoiceLocaleHi UpdatePartnersRequestInvoiceLocale = "hi"
 	UpdatePartnersRequestInvoiceLocaleRu UpdatePartnersRequestInvoiceLocale = "ru"
 	UpdatePartnersRequestInvoiceLocaleTr UpdatePartnersRequestInvoiceLocale = "tr"
+	UpdatePartnersRequestInvoiceLocaleUk UpdatePartnersRequestInvoiceLocale = "uk"
 )
 
 func NewUpdatePartnersRequestInvoiceLocaleFromString(s string) (UpdatePartnersRequestInvoiceLocale, error) {
@@ -20591,6 +20688,8 @@ func NewUpdatePartnersRequestInvoiceLocaleFromString(s string) (UpdatePartnersRe
 		return UpdatePartnersRequestInvoiceLocaleRu, nil
 	case "tr":
 		return UpdatePartnersRequestInvoiceLocaleTr, nil
+	case "uk":
+		return UpdatePartnersRequestInvoiceLocaleUk, nil
 	}
 	var t UpdatePartnersRequestInvoiceLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

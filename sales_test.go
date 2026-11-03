@@ -20727,6 +20727,14 @@ func TestSettersInvoiceTemplatesCreateSalesRequestLinesItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatClassifierCode", func(t *testing.T) {
+		obj := &InvoiceTemplatesCreateSalesRequestLinesItem{}
+		var fernTestValueVatClassifierCode *string
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetVatExemptionBasis", func(t *testing.T) {
 		obj := &InvoiceTemplatesCreateSalesRequestLinesItem{}
 		var fernTestValueVatExemptionBasis *string
@@ -20917,6 +20925,39 @@ func TestGettersInvoiceTemplatesCreateSalesRequestLinesItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesCreateSalesRequestLinesItem{}
+		var expected *string
+		obj.VatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesCreateSalesRequestLinesItem{}
+		obj.VatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoiceTemplatesCreateSalesRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetVatExemptionBasis", func(t *testing.T) {
@@ -21153,6 +21194,37 @@ func TestSettersMarkExplicitInvoiceTemplatesCreateSalesRequestLinesItem(t *testi
 
 		// Act
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesCreateSalesRequestLinesItem{}
+		var fernTestValueVatClassifierCode *string
+
+		// Act
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -23215,6 +23287,14 @@ func TestSettersInvoiceTemplatesCreateSalesResponseLinesItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatClassifierCode", func(t *testing.T) {
+		obj := &InvoiceTemplatesCreateSalesResponseLinesItem{}
+		var fernTestValueVatClassifierCode *string
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetVatExemptionBasis", func(t *testing.T) {
 		obj := &InvoiceTemplatesCreateSalesResponseLinesItem{}
 		var fernTestValueVatExemptionBasis *string
@@ -23405,6 +23485,39 @@ func TestGettersInvoiceTemplatesCreateSalesResponseLinesItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesCreateSalesResponseLinesItem{}
+		var expected *string
+		obj.VatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesCreateSalesResponseLinesItem{}
+		obj.VatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoiceTemplatesCreateSalesResponseLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetVatExemptionBasis", func(t *testing.T) {
@@ -23641,6 +23754,37 @@ func TestSettersMarkExplicitInvoiceTemplatesCreateSalesResponseLinesItem(t *test
 
 		// Act
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesCreateSalesResponseLinesItem{}
+		var fernTestValueVatClassifierCode *string
+
+		// Act
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -25774,6 +25918,14 @@ func TestSettersInvoiceTemplatesGetSalesResponseLinesItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatClassifierCode", func(t *testing.T) {
+		obj := &InvoiceTemplatesGetSalesResponseLinesItem{}
+		var fernTestValueVatClassifierCode *string
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetVatExemptionBasis", func(t *testing.T) {
 		obj := &InvoiceTemplatesGetSalesResponseLinesItem{}
 		var fernTestValueVatExemptionBasis *string
@@ -25964,6 +26116,39 @@ func TestGettersInvoiceTemplatesGetSalesResponseLinesItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesGetSalesResponseLinesItem{}
+		var expected *string
+		obj.VatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesGetSalesResponseLinesItem{}
+		obj.VatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoiceTemplatesGetSalesResponseLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetVatExemptionBasis", func(t *testing.T) {
@@ -26200,6 +26385,37 @@ func TestSettersMarkExplicitInvoiceTemplatesGetSalesResponseLinesItem(t *testing
 
 		// Act
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesGetSalesResponseLinesItem{}
+		var fernTestValueVatClassifierCode *string
+
+		// Act
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -29175,6 +29391,14 @@ func TestSettersInvoiceTemplatesListSalesResponseRowsItemLinesItem(t *testing.T)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatClassifierCode", func(t *testing.T) {
+		obj := &InvoiceTemplatesListSalesResponseRowsItemLinesItem{}
+		var fernTestValueVatClassifierCode *string
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetVatExemptionBasis", func(t *testing.T) {
 		obj := &InvoiceTemplatesListSalesResponseRowsItemLinesItem{}
 		var fernTestValueVatExemptionBasis *string
@@ -29365,6 +29589,39 @@ func TestGettersInvoiceTemplatesListSalesResponseRowsItemLinesItem(t *testing.T)
 			}
 		}()
 		_ = obj.GetVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesListSalesResponseRowsItemLinesItem{}
+		var expected *string
+		obj.VatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesListSalesResponseRowsItemLinesItem{}
+		obj.VatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoiceTemplatesListSalesResponseRowsItemLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetVatExemptionBasis", func(t *testing.T) {
@@ -29624,6 +29881,37 @@ func TestSettersMarkExplicitInvoiceTemplatesListSalesResponseRowsItemLinesItem(t
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesListSalesResponseRowsItemLinesItem{}
+		var fernTestValueVatClassifierCode *string
+
+		// Act
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetVatExemptionBasis_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -29757,6 +30045,14 @@ func TestSettersInvoiceTemplatesUpdateSalesRequestLinesItem(t *testing.T) {
 		var fernTestValueVatRatePercent *string
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
 		assert.Equal(t, fernTestValueVatRatePercent, obj.VatRatePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVatClassifierCode", func(t *testing.T) {
+		obj := &InvoiceTemplatesUpdateSalesRequestLinesItem{}
+		var fernTestValueVatClassifierCode *string
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -29950,6 +30246,39 @@ func TestGettersInvoiceTemplatesUpdateSalesRequestLinesItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesUpdateSalesRequestLinesItem{}
+		var expected *string
+		obj.VatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesUpdateSalesRequestLinesItem{}
+		obj.VatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoiceTemplatesUpdateSalesRequestLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetVatExemptionBasis", func(t *testing.T) {
@@ -30186,6 +30515,37 @@ func TestSettersMarkExplicitInvoiceTemplatesUpdateSalesRequestLinesItem(t *testi
 
 		// Act
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesUpdateSalesRequestLinesItem{}
+		var fernTestValueVatClassifierCode *string
+
+		// Act
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -32248,6 +32608,14 @@ func TestSettersInvoiceTemplatesUpdateSalesResponseLinesItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatClassifierCode", func(t *testing.T) {
+		obj := &InvoiceTemplatesUpdateSalesResponseLinesItem{}
+		var fernTestValueVatClassifierCode *string
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
+		assert.Equal(t, fernTestValueVatClassifierCode, obj.VatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetVatExemptionBasis", func(t *testing.T) {
 		obj := &InvoiceTemplatesUpdateSalesResponseLinesItem{}
 		var fernTestValueVatExemptionBasis *string
@@ -32438,6 +32806,39 @@ func TestGettersInvoiceTemplatesUpdateSalesResponseLinesItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesUpdateSalesResponseLinesItem{}
+		var expected *string
+		obj.VatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesUpdateSalesResponseLinesItem{}
+		obj.VatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoiceTemplatesUpdateSalesResponseLinesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetVatExemptionBasis", func(t *testing.T) {
@@ -32674,6 +33075,37 @@ func TestSettersMarkExplicitInvoiceTemplatesUpdateSalesResponseLinesItem(t *test
 
 		// Act
 		obj.SetVatRatePercent(fernTestValueVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoiceTemplatesUpdateSalesResponseLinesItem{}
+		var fernTestValueVatClassifierCode *string
+
+		// Act
+		obj.SetVatClassifierCode(fernTestValueVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -135183,6 +135615,216 @@ func TestEnumActsPdfSalesRequestLocale(t *testing.T) {
 		assert.Equal(t, ActsPdfSalesRequestLocale("de"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewActsPdfSalesRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ActsPdfSalesRequestLocale("uk"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewActsPdfSalesRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
@@ -136454,6 +137096,13 @@ func TestEnumInvoicesCreateSalesRequestLocale(t *testing.T) {
 		val, err := NewInvoicesCreateSalesRequestLocaleFromString("tr")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesCreateSalesRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesCreateSalesRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesCreateSalesRequestLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -138163,6 +138812,13 @@ func TestEnumInvoicesPdfSalesRequestLocale(t *testing.T) {
 		assert.Equal(t, InvoicesPdfSalesRequestLocale("tr"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesPdfSalesRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesPdfSalesRequestLocale("uk"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewInvoicesPdfSalesRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
@@ -138486,6 +139142,13 @@ func TestEnumInvoicesSendSalesRequestLocale(t *testing.T) {
 		val, err := NewInvoicesSendSalesRequestLocaleFromString("tr")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesSendSalesRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesSendSalesRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesSendSalesRequestLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -138997,6 +139660,13 @@ func TestEnumInvoicesUpdateSalesRequestLocale(t *testing.T) {
 		val, err := NewInvoicesUpdateSalesRequestLocaleFromString("tr")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesUpdateSalesRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesUpdateSalesRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesUpdateSalesRequestLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -140198,6 +140868,13 @@ func TestEnumRecurringInvoicesCreateSalesRequestLocale(t *testing.T) {
 		assert.Equal(t, RecurringInvoicesCreateSalesRequestLocale("tr"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewRecurringInvoicesCreateSalesRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, RecurringInvoicesCreateSalesRequestLocale("uk"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewRecurringInvoicesCreateSalesRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
@@ -140880,6 +141557,13 @@ func TestEnumRecurringInvoicesUpdateSalesRequestLocale(t *testing.T) {
 		val, err := NewRecurringInvoicesUpdateSalesRequestLocaleFromString("tr")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, RecurringInvoicesUpdateSalesRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewRecurringInvoicesUpdateSalesRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, RecurringInvoicesUpdateSalesRequestLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {

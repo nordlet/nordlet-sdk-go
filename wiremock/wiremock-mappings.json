@@ -417,7 +417,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"countryCode\": \"countryCode\",\n      \"name\": \"name\",\n      \"ratePercent\": \"ratePercent\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"code\": \"code\",\n      \"countryCode\": \"countryCode\",\n      \"name\": \"name\",\n      \"nameEn\": \"nameEn\",\n      \"ratePercent\": \"ratePercent\",\n      \"side\": \"sale\",\n      \"scheme\": \"domestic\",\n      \"rateFromLine\": {\n        \"sale\": true,\n        \"purchase\": true\n      }\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4478,7 +4478,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4509,7 +4509,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4540,7 +4540,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"documentType\": \"invoice\",\n  \"partnerId\": \"partnerId\",\n  \"currency\": \"currency\",\n  \"paymentTermDays\": 1000000,\n  \"vatScheme\": \"vatScheme\",\n  \"vatCountryCode\": \"vatCountryCode\",\n  \"agreementId\": \"agreementId\",\n  \"operationTypeId\": \"operationTypeId\",\n  \"documentSeriesId\": \"documentSeriesId\",\n  \"discountPercent\": \"discountPercent\",\n  \"issuedByName\": \"issuedByName\",\n  \"issuedByTitle\": \"issuedByTitle\",\n  \"receivedByName\": \"receivedByName\",\n  \"receivedByTitle\": \"receivedByTitle\",\n  \"notes\": \"notes\",\n  \"supplyType\": \"goods\",\n  \"seriesLabel\": \"seriesLabel\",\n  \"orderNumber\": \"orderNumber\",\n  \"intrastatTransportMode\": \"intrastatTransportMode\",\n  \"intrastatDeliveryTerms\": \"intrastatDeliveryTerms\",\n  \"intrastatRegion\": \"intrastatRegion\",\n  \"intrastatNatureOfTransaction\": \"intrastatNatureOfTransaction\",\n  \"lines\": [\n    {\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\",\n      \"vatExemptionBasis\": \"vatExemptionBasis\",\n      \"projectId\": \"projectId\",\n      \"unit\": \"unit\"\n    }\n  ],\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13042,7 +13042,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"kind\": \"customer\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"kind\": \"customer\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13073,7 +13073,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"kind\": \"customer\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"kind\": \"customer\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -13104,7 +13104,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"kind\": \"customer\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"typeId\": \"typeId\",\n  \"kind\": \"customer\",\n  \"partnerId\": \"partnerId\",\n  \"employeeId\": \"employeeId\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"number\": \"number\",\n  \"name\": \"name\",\n  \"startDate\": \"2026-07-01\",\n  \"endDate\": \"2026-07-01\",\n  \"autoRenew\": true,\n  \"value\": \"value\",\n  \"billingPeriod\": \"monthly\",\n  \"currency\": \"currency\",\n  \"status\": \"draft\",\n  \"notes\": \"notes\",\n  \"documentRef\": \"documentRef\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"items\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPrice\": \"unitPrice\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14685,7 +14685,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14716,7 +14716,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14778,7 +14778,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14809,7 +14809,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -14840,7 +14840,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\"\n    }\n  ]\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"channel\": \"channel\",\n  \"externalRef\": \"externalRef\",\n  \"partnerId\": \"partnerId\",\n  \"warehouseId\": \"warehouseId\",\n  \"currency\": \"currency\",\n  \"status\": \"new\",\n  \"invoiceId\": \"invoiceId\",\n  \"shipToCountryCode\": \"shipToCountryCode\",\n  \"marketplace\": \"marketplace\",\n  \"notes\": \"notes\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"lines\": [\n    {\n      \"id\": \"id\",\n      \"itemId\": \"itemId\",\n      \"description\": \"description\",\n      \"quantity\": \"quantity\",\n      \"unitPriceExclVat\": \"unitPriceExclVat\",\n      \"vatRatePercent\": \"vatRatePercent\",\n      \"vatClassifierCode\": \"vatClassifierCode\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16855,7 +16855,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"invoiceVatClassifierCode\": \"invoiceVatClassifierCode\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16886,7 +16886,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"invoiceVatClassifierCode\": \"invoiceVatClassifierCode\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16948,7 +16948,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"type\": \"stripe\",\n  \"fields\": [\n    {\n      \"name\": \"name\",\n      \"accountCode\": \"accountCode\",\n      \"createPartner\": true\n    }\n  ],\n  \"metaFields\": [\n    \"metaFields\"\n  ],\n  \"invoiceMetaField\": \"invoiceMetaField\",\n  \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n  \"invoiceVatClassifierCode\": \"invoiceVatClassifierCode\",\n  \"companyMetaField\": \"companyMetaField\",\n  \"invoiceItemId\": \"invoiceItemId\",\n  \"advanceInvoices\": true,\n  \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n  \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n  \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n  \"lenderMetaField\": \"lenderMetaField\",\n  \"partialRefundLabel\": \"partialRefundLabel\",\n  \"fullRefundLabel\": \"fullRefundLabel\",\n  \"builtin\": true,\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"updatedAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16979,7 +16979,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"builtin\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"invoiceVatClassifierCode\": \"invoiceVatClassifierCode\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"builtin\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -17010,7 +17010,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"builtin\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"type\": \"stripe\",\n      \"fields\": [\n        {\n          \"name\": \"name\",\n          \"accountCode\": null,\n          \"createPartner\": true\n        }\n      ],\n      \"metaFields\": [\n        \"metaFields\"\n      ],\n      \"invoiceMetaField\": \"invoiceMetaField\",\n      \"invoiceVatRatePercent\": \"invoiceVatRatePercent\",\n      \"invoiceVatClassifierCode\": \"invoiceVatClassifierCode\",\n      \"companyMetaField\": \"companyMetaField\",\n      \"invoiceItemId\": \"invoiceItemId\",\n      \"advanceInvoices\": true,\n      \"authorizationOperationTypeId\": \"authorizationOperationTypeId\",\n      \"payoutOperationTypeId\": \"payoutOperationTypeId\",\n      \"commissionOperationTypeId\": \"commissionOperationTypeId\",\n      \"lenderMetaField\": \"lenderMetaField\",\n      \"partialRefundLabel\": \"partialRefundLabel\",\n      \"fullRefundLabel\": \"fullRefundLabel\",\n      \"builtin\": true,\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"updatedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19681,7 +19681,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19712,7 +19712,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19743,7 +19743,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19774,7 +19774,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19805,7 +19805,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19867,7 +19867,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19929,7 +19929,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19960,7 +19960,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20053,7 +20053,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"companyId\": \"companyId\",\n      \"date\": \"2026-07-01\",\n      \"metric\": \"api_request\",\n      \"quantity\": 1.1\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"companyId\": \"companyId\",\n      \"site\": \"app\",\n      \"date\": \"2026-07-01\",\n      \"metric\": \"api_request\",\n      \"quantity\": 1.1\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20766,7 +20766,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"scopes\": [\n        \"scopes\"\n      ],\n      \"lastUsedAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"replacedByKeyId\": \"replacedByKeyId\",\n      \"createdByUserId\": \"createdByUserId\",\n      \"revokedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"scopes\": [\n        \"scopes\"\n      ],\n      \"lastUsedAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"replacedByKeyId\": \"replacedByKeyId\",\n      \"revokedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -21045,7 +21045,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"generatedAt\": \"2026-07-01T09:30:00Z\",\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"memberships\": [\n    {\n      \"companyId\": \"companyId\",\n      \"companyName\": \"companyName\",\n      \"role\": \"role\",\n      \"since\": \"since\"\n    }\n  ],\n  \"sessions\": [\n    {\n      \"id\": \"id\",\n      \"companyId\": \"companyId\",\n      \"ipAddress\": \"ipAddress\",\n      \"userAgent\": \"userAgent\",\n      \"lastSeenAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"current\": true\n    }\n  ],\n  \"billing\": {\n    \"status\": \"status\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"firstTopUpAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"creditTransactions\": [\n    {\n      \"id\": \"id\",\n      \"type\": \"type\",\n      \"amountCents\": 1000000,\n      \"balanceAfterCents\": 1000000,\n      \"description\": \"description\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"auditEntries\": [\n    {\n      \"id\": 1000000,\n      \"companyId\": \"companyId\",\n      \"action\": \"action\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"generatedAt\": \"2026-07-01T09:30:00Z\",\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"memberships\": [\n    {\n      \"companyId\": \"companyId\",\n      \"companyName\": \"companyName\",\n      \"role\": \"role\",\n      \"since\": \"since\"\n    }\n  ],\n  \"sessions\": [\n    {\n      \"id\": \"id\",\n      \"companyId\": \"companyId\",\n      \"ipAddress\": \"ipAddress\",\n      \"userAgent\": \"userAgent\",\n      \"lastSeenAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"current\": true\n    }\n  ],\n  \"billing\": {\n    \"status\": \"status\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"firstTopUpAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"billingAccounts\": [\n    {\n      \"site\": \"app\",\n      \"status\": \"status\",\n      \"plan\": \"plan\",\n      \"balanceCents\": 1000000,\n      \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n      \"firstTopUpAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"creditTransactions\": [\n    {\n      \"id\": \"id\",\n      \"site\": \"app\",\n      \"type\": \"type\",\n      \"amountCents\": 1000000,\n      \"balanceAfterCents\": 1000000,\n      \"description\": \"description\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"auditEntries\": [\n    {\n      \"id\": 1000000,\n      \"companyId\": \"companyId\",\n      \"action\": \"action\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -21247,9 +21247,102 @@
           }
         }
       }
+    },
+    {
+      "id": "3970efc5-7ce0-46ac-be93-d47ad623e0f4",
+      "name": "Account oauth authorize describe - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/oauth/authorize/describe",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"clientName\": \"clientName\",\n  \"redirectUri\": \"redirectUri\",\n  \"redirectHost\": \"redirectHost\",\n  \"scopes\": [\n    \"scopes\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3970efc5-7ce0-46ac-be93-d47ad623e0f4",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "a0f2ab3b-59dc-48f8-a6e5-7f618226c942",
+      "name": "Account oauth authorize approve - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/oauth/authorize/approve",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"redirectTo\": \"redirectTo\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "a0f2ab3b-59dc-48f8-a6e5-7f618226c942",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "8b41b484-441e-42dd-a9bd-e9ccf98da415",
+      "name": "Account oauth authorize deny - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/oauth/authorize/deny",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"redirectTo\": \"redirectTo\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "8b41b484-441e-42dd-a9bd-e9ccf98da415",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
     }
   ],
   "meta": {
-    "total": 685
+    "total": 688
   }
 }

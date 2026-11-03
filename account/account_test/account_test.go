@@ -1041,3 +1041,81 @@ func TestAccountTableSettingsListWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestAccountTableSettingsListWithWireMock", "POST", "/v1/account/table-settings/list", nil, 1)
 }
+
+func TestAccountOauthAuthorizeDescribeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.OauthAuthorizeDescribeAccountRequest{
+		ClientID: "clientId",
+	}
+	_, invocationErr := client.Account.OauthAuthorizeDescribe(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountOauthAuthorizeDescribeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountOauthAuthorizeDescribeWithWireMock", "POST", "/v1/account/oauth/authorize/describe", nil, 1)
+}
+
+func TestAccountOauthAuthorizeApproveWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.OauthAuthorizeApproveAccountRequest{
+		ClientID: "clientId",
+	}
+	_, invocationErr := client.Account.OauthAuthorizeApprove(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountOauthAuthorizeApproveWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountOauthAuthorizeApproveWithWireMock", "POST", "/v1/account/oauth/authorize/approve", nil, 1)
+}
+
+func TestAccountOauthAuthorizeDenyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.OauthAuthorizeDenyAccountRequest{
+		ClientID: "clientId",
+	}
+	_, invocationErr := client.Account.OauthAuthorizeDeny(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountOauthAuthorizeDenyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountOauthAuthorizeDenyWithWireMock", "POST", "/v1/account/oauth/authorize/deny", nil, 1)
+}

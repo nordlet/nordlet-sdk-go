@@ -2171,6 +2171,14 @@ func TestSettersImportTemplatesCreateBankRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceVatClassifierCode", func(t *testing.T) {
+		obj := &ImportTemplatesCreateBankRequest{}
+		var fernTestValueInvoiceVatClassifierCode *string
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
+		assert.Equal(t, fernTestValueInvoiceVatClassifierCode, obj.InvoiceVatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCompanyMetaField", func(t *testing.T) {
 		obj := &ImportTemplatesCreateBankRequest{}
 		var fernTestValueCompanyMetaField *string
@@ -2409,6 +2417,37 @@ func TestSettersMarkExplicitImportTemplatesCreateBankRequest(t *testing.T) {
 
 		// Act
 		obj.SetInvoiceVatRatePercent(fernTestValueInvoiceVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesCreateBankRequest{}
+		var fernTestValueInvoiceVatClassifierCode *string
+
+		// Act
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -3053,6 +3092,14 @@ func TestSettersImportTemplatesUpdateBankRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceVatClassifierCode", func(t *testing.T) {
+		obj := &ImportTemplatesUpdateBankRequest{}
+		var fernTestValueInvoiceVatClassifierCode *string
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
+		assert.Equal(t, fernTestValueInvoiceVatClassifierCode, obj.InvoiceVatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCompanyMetaField", func(t *testing.T) {
 		obj := &ImportTemplatesUpdateBankRequest{}
 		var fernTestValueCompanyMetaField *string
@@ -3299,6 +3346,37 @@ func TestSettersMarkExplicitImportTemplatesUpdateBankRequest(t *testing.T) {
 
 		// Act
 		obj.SetInvoiceVatRatePercent(fernTestValueInvoiceVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesUpdateBankRequest{}
+		var fernTestValueInvoiceVatClassifierCode *string
+
+		// Act
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -21099,6 +21177,14 @@ func TestSettersImportTemplatesCreateBankResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceVatClassifierCode", func(t *testing.T) {
+		obj := &ImportTemplatesCreateBankResponse{}
+		var fernTestValueInvoiceVatClassifierCode *string
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
+		assert.Equal(t, fernTestValueInvoiceVatClassifierCode, obj.InvoiceVatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCompanyMetaField", func(t *testing.T) {
 		obj := &ImportTemplatesCreateBankResponse{}
 		var fernTestValueCompanyMetaField *string
@@ -21397,6 +21483,39 @@ func TestGettersImportTemplatesCreateBankResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetInvoiceVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetInvoiceVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesCreateBankResponse{}
+		var expected *string
+		obj.InvoiceVatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesCreateBankResponse{}
+		obj.InvoiceVatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ImportTemplatesCreateBankResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetCompanyMetaField", func(t *testing.T) {
@@ -21952,6 +22071,37 @@ func TestSettersMarkExplicitImportTemplatesCreateBankResponse(t *testing.T) {
 
 		// Act
 		obj.SetInvoiceVatRatePercent(fernTestValueInvoiceVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesCreateBankResponse{}
+		var fernTestValueInvoiceVatClassifierCode *string
+
+		// Act
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -22744,6 +22894,14 @@ func TestSettersImportTemplatesGetBankResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceVatClassifierCode", func(t *testing.T) {
+		obj := &ImportTemplatesGetBankResponse{}
+		var fernTestValueInvoiceVatClassifierCode *string
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
+		assert.Equal(t, fernTestValueInvoiceVatClassifierCode, obj.InvoiceVatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCompanyMetaField", func(t *testing.T) {
 		obj := &ImportTemplatesGetBankResponse{}
 		var fernTestValueCompanyMetaField *string
@@ -23042,6 +23200,39 @@ func TestGettersImportTemplatesGetBankResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetInvoiceVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetInvoiceVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesGetBankResponse{}
+		var expected *string
+		obj.InvoiceVatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesGetBankResponse{}
+		obj.InvoiceVatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ImportTemplatesGetBankResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetCompanyMetaField", func(t *testing.T) {
@@ -23597,6 +23788,37 @@ func TestSettersMarkExplicitImportTemplatesGetBankResponse(t *testing.T) {
 
 		// Act
 		obj.SetInvoiceVatRatePercent(fernTestValueInvoiceVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesGetBankResponse{}
+		var fernTestValueInvoiceVatClassifierCode *string
+
+		// Act
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -25169,6 +25391,14 @@ func TestSettersImportTemplatesListBankResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceVatClassifierCode", func(t *testing.T) {
+		obj := &ImportTemplatesListBankResponseRowsItem{}
+		var fernTestValueInvoiceVatClassifierCode *string
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
+		assert.Equal(t, fernTestValueInvoiceVatClassifierCode, obj.InvoiceVatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCompanyMetaField", func(t *testing.T) {
 		obj := &ImportTemplatesListBankResponseRowsItem{}
 		var fernTestValueCompanyMetaField *string
@@ -25467,6 +25697,39 @@ func TestGettersImportTemplatesListBankResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetInvoiceVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetInvoiceVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesListBankResponseRowsItem{}
+		var expected *string
+		obj.InvoiceVatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesListBankResponseRowsItem{}
+		obj.InvoiceVatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ImportTemplatesListBankResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetCompanyMetaField", func(t *testing.T) {
@@ -26022,6 +26285,37 @@ func TestSettersMarkExplicitImportTemplatesListBankResponseRowsItem(t *testing.T
 
 		// Act
 		obj.SetInvoiceVatRatePercent(fernTestValueInvoiceVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesListBankResponseRowsItem{}
+		var fernTestValueInvoiceVatClassifierCode *string
+
+		// Act
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -26762,6 +27056,14 @@ func TestSettersImportTemplatesListBuiltinBankResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceVatClassifierCode", func(t *testing.T) {
+		obj := &ImportTemplatesListBuiltinBankResponseRowsItem{}
+		var fernTestValueInvoiceVatClassifierCode *string
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
+		assert.Equal(t, fernTestValueInvoiceVatClassifierCode, obj.InvoiceVatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCompanyMetaField", func(t *testing.T) {
 		obj := &ImportTemplatesListBuiltinBankResponseRowsItem{}
 		var fernTestValueCompanyMetaField *string
@@ -27060,6 +27362,39 @@ func TestGettersImportTemplatesListBuiltinBankResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetInvoiceVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetInvoiceVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesListBuiltinBankResponseRowsItem{}
+		var expected *string
+		obj.InvoiceVatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesListBuiltinBankResponseRowsItem{}
+		obj.InvoiceVatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ImportTemplatesListBuiltinBankResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetCompanyMetaField", func(t *testing.T) {
@@ -27615,6 +27950,37 @@ func TestSettersMarkExplicitImportTemplatesListBuiltinBankResponseRowsItem(t *te
 
 		// Act
 		obj.SetInvoiceVatRatePercent(fernTestValueInvoiceVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesListBuiltinBankResponseRowsItem{}
+		var fernTestValueInvoiceVatClassifierCode *string
+
+		// Act
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -28489,6 +28855,14 @@ func TestSettersImportTemplatesUpdateBankResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetInvoiceVatClassifierCode", func(t *testing.T) {
+		obj := &ImportTemplatesUpdateBankResponse{}
+		var fernTestValueInvoiceVatClassifierCode *string
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
+		assert.Equal(t, fernTestValueInvoiceVatClassifierCode, obj.InvoiceVatClassifierCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCompanyMetaField", func(t *testing.T) {
 		obj := &ImportTemplatesUpdateBankResponse{}
 		var fernTestValueCompanyMetaField *string
@@ -28787,6 +29161,39 @@ func TestGettersImportTemplatesUpdateBankResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetInvoiceVatRatePercent() // Should return zero value
+	})
+
+	t.Run("GetInvoiceVatClassifierCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesUpdateBankResponse{}
+		var expected *string
+		obj.InvoiceVatClassifierCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetInvoiceVatClassifierCode(), "getter should return the property value")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesUpdateBankResponse{}
+		obj.InvoiceVatClassifierCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetInvoiceVatClassifierCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetInvoiceVatClassifierCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ImportTemplatesUpdateBankResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetInvoiceVatClassifierCode() // Should return zero value
 	})
 
 	t.Run("GetCompanyMetaField", func(t *testing.T) {
@@ -29342,6 +29749,37 @@ func TestSettersMarkExplicitImportTemplatesUpdateBankResponse(t *testing.T) {
 
 		// Act
 		obj.SetInvoiceVatRatePercent(fernTestValueInvoiceVatRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetInvoiceVatClassifierCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ImportTemplatesUpdateBankResponse{}
+		var fernTestValueInvoiceVatClassifierCode *string
+
+		// Act
+		obj.SetInvoiceVatClassifierCode(fernTestValueInvoiceVatClassifierCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

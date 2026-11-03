@@ -16368,11 +16368,43 @@ func TestSettersVatClassifiersListReferenceResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetNameEn", func(t *testing.T) {
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueNameEn *string
+		obj.SetNameEn(fernTestValueNameEn)
+		assert.Equal(t, fernTestValueNameEn, obj.NameEn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetRatePercent", func(t *testing.T) {
 		obj := &VatClassifiersListReferenceResponseRowsItem{}
 		var fernTestValueRatePercent *string
 		obj.SetRatePercent(fernTestValueRatePercent)
 		assert.Equal(t, fernTestValueRatePercent, obj.RatePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSide", func(t *testing.T) {
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueSide VatClassifiersListReferenceResponseRowsItemSide
+		obj.SetSide(fernTestValueSide)
+		assert.Equal(t, fernTestValueSide, obj.Side)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetScheme", func(t *testing.T) {
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueScheme *VatClassifiersListReferenceResponseRowsItemScheme
+		obj.SetScheme(fernTestValueScheme)
+		assert.Equal(t, fernTestValueScheme, obj.Scheme)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRateFromLine", func(t *testing.T) {
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueRateFromLine *VatClassifiersListReferenceResponseRowsItemRateFromLine
+		obj.SetRateFromLine(fernTestValueRateFromLine)
+		assert.Equal(t, fernTestValueRateFromLine, obj.RateFromLine)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -16448,6 +16480,39 @@ func TestGettersVatClassifiersListReferenceResponseRowsItem(t *testing.T) {
 		_ = obj.GetName() // Should return zero value
 	})
 
+	t.Run("GetNameEn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var expected *string
+		obj.NameEn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetNameEn(), "getter should return the property value")
+	})
+
+	t.Run("GetNameEn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		obj.NameEn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetNameEn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetNameEn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetNameEn() // Should return zero value
+	})
+
 	t.Run("GetRatePercent", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -16479,6 +16544,95 @@ func TestGettersVatClassifiersListReferenceResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetRatePercent() // Should return zero value
+	})
+
+	t.Run("GetSide", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var expected VatClassifiersListReferenceResponseRowsItemSide
+		obj.Side = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSide(), "getter should return the property value")
+	})
+
+	t.Run("GetSide_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSide() // Should return zero value
+	})
+
+	t.Run("GetScheme", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var expected *VatClassifiersListReferenceResponseRowsItemScheme
+		obj.Scheme = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetScheme(), "getter should return the property value")
+	})
+
+	t.Run("GetScheme_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		obj.Scheme = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetScheme(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetScheme_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetScheme() // Should return zero value
+	})
+
+	t.Run("GetRateFromLine", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var expected *VatClassifiersListReferenceResponseRowsItemRateFromLine
+		obj.RateFromLine = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRateFromLine(), "getter should return the property value")
+	})
+
+	t.Run("GetRateFromLine_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		obj.RateFromLine = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRateFromLine(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRateFromLine_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRateFromLine() // Should return zero value
 	})
 
 }
@@ -16577,6 +16731,37 @@ func TestSettersMarkExplicitVatClassifiersListReferenceResponseRowsItem(t *testi
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetNameEn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueNameEn *string
+
+		// Act
+		obj.SetNameEn(fernTestValueNameEn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetRatePercent_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -16585,6 +16770,232 @@ func TestSettersMarkExplicitVatClassifiersListReferenceResponseRowsItem(t *testi
 
 		// Act
 		obj.SetRatePercent(fernTestValueRatePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSide_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueSide VatClassifiersListReferenceResponseRowsItemSide
+
+		// Act
+		obj.SetSide(fernTestValueSide)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetScheme_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueScheme *VatClassifiersListReferenceResponseRowsItemScheme
+
+		// Act
+		obj.SetScheme(fernTestValueScheme)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRateFromLine_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItem{}
+		var fernTestValueRateFromLine *VatClassifiersListReferenceResponseRowsItemRateFromLine
+
+		// Act
+		obj.SetRateFromLine(fernTestValueRateFromLine)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersVatClassifiersListReferenceResponseRowsItemRateFromLine(t *testing.T) {
+	t.Run("SetSale", func(t *testing.T) {
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		var fernTestValueSale bool
+		obj.SetSale(fernTestValueSale)
+		assert.Equal(t, fernTestValueSale, obj.Sale)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPurchase", func(t *testing.T) {
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		var fernTestValuePurchase bool
+		obj.SetPurchase(fernTestValuePurchase)
+		assert.Equal(t, fernTestValuePurchase, obj.Purchase)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersVatClassifiersListReferenceResponseRowsItemRateFromLine(t *testing.T) {
+	t.Run("GetSale", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		var expected bool
+		obj.Sale = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSale(), "getter should return the property value")
+	})
+
+	t.Run("GetSale_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItemRateFromLine
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSale() // Should return zero value
+	})
+
+	t.Run("GetPurchase", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		var expected bool
+		obj.Purchase = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetPurchase(), "getter should return the property value")
+	})
+
+	t.Run("GetPurchase_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItemRateFromLine
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetPurchase() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitVatClassifiersListReferenceResponseRowsItemRateFromLine(t *testing.T) {
+	t.Run("SetSale_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		var fernTestValueSale bool
+
+		// Act
+		obj.SetSale(fernTestValueSale)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPurchase_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		var fernTestValuePurchase bool
+
+		// Act
+		obj.SetPurchase(fernTestValuePurchase)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -20617,6 +21028,39 @@ func TestJSONMarshalingVatClassifiersListReferenceResponseRowsItem(t *testing.T)
 	})
 }
 
+func TestJSONMarshalingVatClassifiersListReferenceResponseRowsItemRateFromLine(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled VatClassifiersListReferenceResponseRowsItemRateFromLine
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj VatClassifiersListReferenceResponseRowsItemRateFromLine
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj VatClassifiersListReferenceResponseRowsItemRateFromLine
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingVatClassifiersUpsertReferenceRequestRowsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -21677,6 +22121,22 @@ func TestStringVatClassifiersListReferenceResponseRowsItem(t *testing.T) {
 	})
 }
 
+func TestStringVatClassifiersListReferenceResponseRowsItemRateFromLine(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItemRateFromLine
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringVatClassifiersUpsertReferenceRequestRowsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -22609,6 +23069,120 @@ func TestEnumVatClassifiersListReferenceRequestSortItemDir(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewVatClassifiersListReferenceRequestSortItemDirFromString("asc")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumVatClassifiersListReferenceResponseRowsItemScheme(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("domestic")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("domestic"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_intra_eu_b2b", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("intra_eu_b2b")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("intra_eu_b2b"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reverse_charge", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("reverse_charge")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("reverse_charge"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_oss_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("oss_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("oss_union"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ioss", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("ioss")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("ioss"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_marketplace_deemed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("marketplace_deemed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("marketplace_deemed"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_export", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("export")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("export"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_out_of_scope", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("out_of_scope")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("out_of_scope"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sme_exempt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("sme_exempt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("sme_exempt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("domestic")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumVatClassifiersListReferenceResponseRowsItemSide(t *testing.T) {
+	t.Run("NewFromString_sale", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSideFromString("sale")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemSide("sale"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_purchase", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSideFromString("purchase")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemSide("purchase"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_both", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSideFromString("both")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemSide("both"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewVatClassifiersListReferenceResponseRowsItemSideFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSideFromString("sale")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -24160,6 +24734,29 @@ func TestExtraPropertiesVatClassifiersListReferenceResponseRowsItem(t *testing.T
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *VatClassifiersListReferenceResponseRowsItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesVatClassifiersListReferenceResponseRowsItemRateFromLine(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &VatClassifiersListReferenceResponseRowsItemRateFromLine{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VatClassifiersListReferenceResponseRowsItemRateFromLine
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

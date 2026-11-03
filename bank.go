@@ -1014,15 +1014,16 @@ var (
 	importTemplatesCreateBankRequestFieldMetaFields                   = big.NewInt(1 << 3)
 	importTemplatesCreateBankRequestFieldInvoiceMetaField             = big.NewInt(1 << 4)
 	importTemplatesCreateBankRequestFieldInvoiceVatRatePercent        = big.NewInt(1 << 5)
-	importTemplatesCreateBankRequestFieldCompanyMetaField             = big.NewInt(1 << 6)
-	importTemplatesCreateBankRequestFieldInvoiceItemID                = big.NewInt(1 << 7)
-	importTemplatesCreateBankRequestFieldAdvanceInvoices              = big.NewInt(1 << 8)
-	importTemplatesCreateBankRequestFieldAuthorizationOperationTypeID = big.NewInt(1 << 9)
-	importTemplatesCreateBankRequestFieldPayoutOperationTypeID        = big.NewInt(1 << 10)
-	importTemplatesCreateBankRequestFieldCommissionOperationTypeID    = big.NewInt(1 << 11)
-	importTemplatesCreateBankRequestFieldLenderMetaField              = big.NewInt(1 << 12)
-	importTemplatesCreateBankRequestFieldPartialRefundLabel           = big.NewInt(1 << 13)
-	importTemplatesCreateBankRequestFieldFullRefundLabel              = big.NewInt(1 << 14)
+	importTemplatesCreateBankRequestFieldInvoiceVatClassifierCode     = big.NewInt(1 << 6)
+	importTemplatesCreateBankRequestFieldCompanyMetaField             = big.NewInt(1 << 7)
+	importTemplatesCreateBankRequestFieldInvoiceItemID                = big.NewInt(1 << 8)
+	importTemplatesCreateBankRequestFieldAdvanceInvoices              = big.NewInt(1 << 9)
+	importTemplatesCreateBankRequestFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
+	importTemplatesCreateBankRequestFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
+	importTemplatesCreateBankRequestFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
+	importTemplatesCreateBankRequestFieldLenderMetaField              = big.NewInt(1 << 13)
+	importTemplatesCreateBankRequestFieldPartialRefundLabel           = big.NewInt(1 << 14)
+	importTemplatesCreateBankRequestFieldFullRefundLabel              = big.NewInt(1 << 15)
 )
 
 type ImportTemplatesCreateBankRequest struct {
@@ -1032,6 +1033,7 @@ type ImportTemplatesCreateBankRequest struct {
 	MetaFields                   []string                                      `json:"metaFields,omitempty" url:"-"`
 	InvoiceMetaField             *string                                       `json:"invoiceMetaField,omitempty" url:"-"`
 	InvoiceVatRatePercent        *string                                       `json:"invoiceVatRatePercent,omitempty" url:"-"`
+	InvoiceVatClassifierCode     *string                                       `json:"invoiceVatClassifierCode,omitempty" url:"-"`
 	CompanyMetaField             *string                                       `json:"companyMetaField,omitempty" url:"-"`
 	InvoiceItemID                *string                                       `json:"invoiceItemId,omitempty" url:"-"`
 	AdvanceInvoices              *bool                                         `json:"advanceInvoices,omitempty" url:"-"`
@@ -1093,6 +1095,13 @@ func (i *ImportTemplatesCreateBankRequest) SetInvoiceMetaField(invoiceMetaField 
 func (i *ImportTemplatesCreateBankRequest) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
 	i.InvoiceVatRatePercent = invoiceVatRatePercent
 	i.require(importTemplatesCreateBankRequestFieldInvoiceVatRatePercent)
+}
+
+// SetInvoiceVatClassifierCode sets the InvoiceVatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesCreateBankRequest) SetInvoiceVatClassifierCode(invoiceVatClassifierCode *string) {
+	i.InvoiceVatClassifierCode = invoiceVatClassifierCode
+	i.require(importTemplatesCreateBankRequestFieldInvoiceVatClassifierCode)
 }
 
 // SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
@@ -1374,16 +1383,17 @@ var (
 	importTemplatesUpdateBankRequestFieldMetaFields                   = big.NewInt(1 << 3)
 	importTemplatesUpdateBankRequestFieldInvoiceMetaField             = big.NewInt(1 << 4)
 	importTemplatesUpdateBankRequestFieldInvoiceVatRatePercent        = big.NewInt(1 << 5)
-	importTemplatesUpdateBankRequestFieldCompanyMetaField             = big.NewInt(1 << 6)
-	importTemplatesUpdateBankRequestFieldInvoiceItemID                = big.NewInt(1 << 7)
-	importTemplatesUpdateBankRequestFieldAdvanceInvoices              = big.NewInt(1 << 8)
-	importTemplatesUpdateBankRequestFieldAuthorizationOperationTypeID = big.NewInt(1 << 9)
-	importTemplatesUpdateBankRequestFieldPayoutOperationTypeID        = big.NewInt(1 << 10)
-	importTemplatesUpdateBankRequestFieldCommissionOperationTypeID    = big.NewInt(1 << 11)
-	importTemplatesUpdateBankRequestFieldLenderMetaField              = big.NewInt(1 << 12)
-	importTemplatesUpdateBankRequestFieldPartialRefundLabel           = big.NewInt(1 << 13)
-	importTemplatesUpdateBankRequestFieldFullRefundLabel              = big.NewInt(1 << 14)
-	importTemplatesUpdateBankRequestFieldID                           = big.NewInt(1 << 15)
+	importTemplatesUpdateBankRequestFieldInvoiceVatClassifierCode     = big.NewInt(1 << 6)
+	importTemplatesUpdateBankRequestFieldCompanyMetaField             = big.NewInt(1 << 7)
+	importTemplatesUpdateBankRequestFieldInvoiceItemID                = big.NewInt(1 << 8)
+	importTemplatesUpdateBankRequestFieldAdvanceInvoices              = big.NewInt(1 << 9)
+	importTemplatesUpdateBankRequestFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
+	importTemplatesUpdateBankRequestFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
+	importTemplatesUpdateBankRequestFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
+	importTemplatesUpdateBankRequestFieldLenderMetaField              = big.NewInt(1 << 13)
+	importTemplatesUpdateBankRequestFieldPartialRefundLabel           = big.NewInt(1 << 14)
+	importTemplatesUpdateBankRequestFieldFullRefundLabel              = big.NewInt(1 << 15)
+	importTemplatesUpdateBankRequestFieldID                           = big.NewInt(1 << 16)
 )
 
 type ImportTemplatesUpdateBankRequest struct {
@@ -1393,6 +1403,7 @@ type ImportTemplatesUpdateBankRequest struct {
 	MetaFields                   []string                                      `json:"metaFields,omitempty" url:"-"`
 	InvoiceMetaField             *string                                       `json:"invoiceMetaField,omitempty" url:"-"`
 	InvoiceVatRatePercent        *string                                       `json:"invoiceVatRatePercent,omitempty" url:"-"`
+	InvoiceVatClassifierCode     *string                                       `json:"invoiceVatClassifierCode,omitempty" url:"-"`
 	CompanyMetaField             *string                                       `json:"companyMetaField,omitempty" url:"-"`
 	InvoiceItemID                *string                                       `json:"invoiceItemId,omitempty" url:"-"`
 	AdvanceInvoices              *bool                                         `json:"advanceInvoices,omitempty" url:"-"`
@@ -1455,6 +1466,13 @@ func (i *ImportTemplatesUpdateBankRequest) SetInvoiceMetaField(invoiceMetaField 
 func (i *ImportTemplatesUpdateBankRequest) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
 	i.InvoiceVatRatePercent = invoiceVatRatePercent
 	i.require(importTemplatesUpdateBankRequestFieldInvoiceVatRatePercent)
+}
+
+// SetInvoiceVatClassifierCode sets the InvoiceVatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesUpdateBankRequest) SetInvoiceVatClassifierCode(invoiceVatClassifierCode *string) {
+	i.InvoiceVatClassifierCode = invoiceVatClassifierCode
+	i.require(importTemplatesUpdateBankRequestFieldInvoiceVatClassifierCode)
 }
 
 // SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
@@ -9900,18 +9918,19 @@ var (
 	importTemplatesCreateBankResponseFieldMetaFields                   = big.NewInt(1 << 4)
 	importTemplatesCreateBankResponseFieldInvoiceMetaField             = big.NewInt(1 << 5)
 	importTemplatesCreateBankResponseFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
-	importTemplatesCreateBankResponseFieldCompanyMetaField             = big.NewInt(1 << 7)
-	importTemplatesCreateBankResponseFieldInvoiceItemID                = big.NewInt(1 << 8)
-	importTemplatesCreateBankResponseFieldAdvanceInvoices              = big.NewInt(1 << 9)
-	importTemplatesCreateBankResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
-	importTemplatesCreateBankResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
-	importTemplatesCreateBankResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
-	importTemplatesCreateBankResponseFieldLenderMetaField              = big.NewInt(1 << 13)
-	importTemplatesCreateBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
-	importTemplatesCreateBankResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesCreateBankResponseFieldBuiltin                      = big.NewInt(1 << 16)
-	importTemplatesCreateBankResponseFieldCreatedAt                    = big.NewInt(1 << 17)
-	importTemplatesCreateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 18)
+	importTemplatesCreateBankResponseFieldInvoiceVatClassifierCode     = big.NewInt(1 << 7)
+	importTemplatesCreateBankResponseFieldCompanyMetaField             = big.NewInt(1 << 8)
+	importTemplatesCreateBankResponseFieldInvoiceItemID                = big.NewInt(1 << 9)
+	importTemplatesCreateBankResponseFieldAdvanceInvoices              = big.NewInt(1 << 10)
+	importTemplatesCreateBankResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 11)
+	importTemplatesCreateBankResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 12)
+	importTemplatesCreateBankResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 13)
+	importTemplatesCreateBankResponseFieldLenderMetaField              = big.NewInt(1 << 14)
+	importTemplatesCreateBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 15)
+	importTemplatesCreateBankResponseFieldFullRefundLabel              = big.NewInt(1 << 16)
+	importTemplatesCreateBankResponseFieldBuiltin                      = big.NewInt(1 << 17)
+	importTemplatesCreateBankResponseFieldCreatedAt                    = big.NewInt(1 << 18)
+	importTemplatesCreateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 19)
 )
 
 type ImportTemplatesCreateBankResponse struct {
@@ -9922,6 +9941,7 @@ type ImportTemplatesCreateBankResponse struct {
 	MetaFields                   []string                                       `json:"metaFields" url:"metaFields"`
 	InvoiceMetaField             *string                                        `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
 	InvoiceVatRatePercent        *string                                        `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	InvoiceVatClassifierCode     *string                                        `json:"invoiceVatClassifierCode,omitempty" url:"invoiceVatClassifierCode,omitempty"`
 	CompanyMetaField             *string                                        `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
 	InvoiceItemID                *string                                        `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
 	AdvanceInvoices              bool                                           `json:"advanceInvoices" url:"advanceInvoices"`
@@ -9990,6 +10010,13 @@ func (i *ImportTemplatesCreateBankResponse) GetInvoiceVatRatePercent() *string {
 		return nil
 	}
 	return i.InvoiceVatRatePercent
+}
+
+func (i *ImportTemplatesCreateBankResponse) GetInvoiceVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceVatClassifierCode
 }
 
 func (i *ImportTemplatesCreateBankResponse) GetCompanyMetaField() *string {
@@ -10137,6 +10164,13 @@ func (i *ImportTemplatesCreateBankResponse) SetInvoiceMetaField(invoiceMetaField
 func (i *ImportTemplatesCreateBankResponse) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
 	i.InvoiceVatRatePercent = invoiceVatRatePercent
 	i.require(importTemplatesCreateBankResponseFieldInvoiceVatRatePercent)
+}
+
+// SetInvoiceVatClassifierCode sets the InvoiceVatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesCreateBankResponse) SetInvoiceVatClassifierCode(invoiceVatClassifierCode *string) {
+	i.InvoiceVatClassifierCode = invoiceVatClassifierCode
+	i.require(importTemplatesCreateBankResponseFieldInvoiceVatClassifierCode)
 }
 
 // SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
@@ -10529,18 +10563,19 @@ var (
 	importTemplatesGetBankResponseFieldMetaFields                   = big.NewInt(1 << 4)
 	importTemplatesGetBankResponseFieldInvoiceMetaField             = big.NewInt(1 << 5)
 	importTemplatesGetBankResponseFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
-	importTemplatesGetBankResponseFieldCompanyMetaField             = big.NewInt(1 << 7)
-	importTemplatesGetBankResponseFieldInvoiceItemID                = big.NewInt(1 << 8)
-	importTemplatesGetBankResponseFieldAdvanceInvoices              = big.NewInt(1 << 9)
-	importTemplatesGetBankResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
-	importTemplatesGetBankResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
-	importTemplatesGetBankResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
-	importTemplatesGetBankResponseFieldLenderMetaField              = big.NewInt(1 << 13)
-	importTemplatesGetBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
-	importTemplatesGetBankResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesGetBankResponseFieldBuiltin                      = big.NewInt(1 << 16)
-	importTemplatesGetBankResponseFieldCreatedAt                    = big.NewInt(1 << 17)
-	importTemplatesGetBankResponseFieldUpdatedAt                    = big.NewInt(1 << 18)
+	importTemplatesGetBankResponseFieldInvoiceVatClassifierCode     = big.NewInt(1 << 7)
+	importTemplatesGetBankResponseFieldCompanyMetaField             = big.NewInt(1 << 8)
+	importTemplatesGetBankResponseFieldInvoiceItemID                = big.NewInt(1 << 9)
+	importTemplatesGetBankResponseFieldAdvanceInvoices              = big.NewInt(1 << 10)
+	importTemplatesGetBankResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 11)
+	importTemplatesGetBankResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 12)
+	importTemplatesGetBankResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 13)
+	importTemplatesGetBankResponseFieldLenderMetaField              = big.NewInt(1 << 14)
+	importTemplatesGetBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 15)
+	importTemplatesGetBankResponseFieldFullRefundLabel              = big.NewInt(1 << 16)
+	importTemplatesGetBankResponseFieldBuiltin                      = big.NewInt(1 << 17)
+	importTemplatesGetBankResponseFieldCreatedAt                    = big.NewInt(1 << 18)
+	importTemplatesGetBankResponseFieldUpdatedAt                    = big.NewInt(1 << 19)
 )
 
 type ImportTemplatesGetBankResponse struct {
@@ -10551,6 +10586,7 @@ type ImportTemplatesGetBankResponse struct {
 	MetaFields                   []string                                    `json:"metaFields" url:"metaFields"`
 	InvoiceMetaField             *string                                     `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
 	InvoiceVatRatePercent        *string                                     `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	InvoiceVatClassifierCode     *string                                     `json:"invoiceVatClassifierCode,omitempty" url:"invoiceVatClassifierCode,omitempty"`
 	CompanyMetaField             *string                                     `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
 	InvoiceItemID                *string                                     `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
 	AdvanceInvoices              bool                                        `json:"advanceInvoices" url:"advanceInvoices"`
@@ -10619,6 +10655,13 @@ func (i *ImportTemplatesGetBankResponse) GetInvoiceVatRatePercent() *string {
 		return nil
 	}
 	return i.InvoiceVatRatePercent
+}
+
+func (i *ImportTemplatesGetBankResponse) GetInvoiceVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceVatClassifierCode
 }
 
 func (i *ImportTemplatesGetBankResponse) GetCompanyMetaField() *string {
@@ -10766,6 +10809,13 @@ func (i *ImportTemplatesGetBankResponse) SetInvoiceMetaField(invoiceMetaField *s
 func (i *ImportTemplatesGetBankResponse) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
 	i.InvoiceVatRatePercent = invoiceVatRatePercent
 	i.require(importTemplatesGetBankResponseFieldInvoiceVatRatePercent)
+}
+
+// SetInvoiceVatClassifierCode sets the InvoiceVatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesGetBankResponse) SetInvoiceVatClassifierCode(invoiceVatClassifierCode *string) {
+	i.InvoiceVatClassifierCode = invoiceVatClassifierCode
+	i.require(importTemplatesGetBankResponseFieldInvoiceVatClassifierCode)
 }
 
 // SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
@@ -11661,18 +11711,19 @@ var (
 	importTemplatesListBankResponseRowsItemFieldMetaFields                   = big.NewInt(1 << 4)
 	importTemplatesListBankResponseRowsItemFieldInvoiceMetaField             = big.NewInt(1 << 5)
 	importTemplatesListBankResponseRowsItemFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
-	importTemplatesListBankResponseRowsItemFieldCompanyMetaField             = big.NewInt(1 << 7)
-	importTemplatesListBankResponseRowsItemFieldInvoiceItemID                = big.NewInt(1 << 8)
-	importTemplatesListBankResponseRowsItemFieldAdvanceInvoices              = big.NewInt(1 << 9)
-	importTemplatesListBankResponseRowsItemFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
-	importTemplatesListBankResponseRowsItemFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
-	importTemplatesListBankResponseRowsItemFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
-	importTemplatesListBankResponseRowsItemFieldLenderMetaField              = big.NewInt(1 << 13)
-	importTemplatesListBankResponseRowsItemFieldPartialRefundLabel           = big.NewInt(1 << 14)
-	importTemplatesListBankResponseRowsItemFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesListBankResponseRowsItemFieldBuiltin                      = big.NewInt(1 << 16)
-	importTemplatesListBankResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 17)
-	importTemplatesListBankResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 18)
+	importTemplatesListBankResponseRowsItemFieldInvoiceVatClassifierCode     = big.NewInt(1 << 7)
+	importTemplatesListBankResponseRowsItemFieldCompanyMetaField             = big.NewInt(1 << 8)
+	importTemplatesListBankResponseRowsItemFieldInvoiceItemID                = big.NewInt(1 << 9)
+	importTemplatesListBankResponseRowsItemFieldAdvanceInvoices              = big.NewInt(1 << 10)
+	importTemplatesListBankResponseRowsItemFieldAuthorizationOperationTypeID = big.NewInt(1 << 11)
+	importTemplatesListBankResponseRowsItemFieldPayoutOperationTypeID        = big.NewInt(1 << 12)
+	importTemplatesListBankResponseRowsItemFieldCommissionOperationTypeID    = big.NewInt(1 << 13)
+	importTemplatesListBankResponseRowsItemFieldLenderMetaField              = big.NewInt(1 << 14)
+	importTemplatesListBankResponseRowsItemFieldPartialRefundLabel           = big.NewInt(1 << 15)
+	importTemplatesListBankResponseRowsItemFieldFullRefundLabel              = big.NewInt(1 << 16)
+	importTemplatesListBankResponseRowsItemFieldBuiltin                      = big.NewInt(1 << 17)
+	importTemplatesListBankResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 18)
+	importTemplatesListBankResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 19)
 )
 
 type ImportTemplatesListBankResponseRowsItem struct {
@@ -11683,6 +11734,7 @@ type ImportTemplatesListBankResponseRowsItem struct {
 	MetaFields                   []string                                             `json:"metaFields" url:"metaFields"`
 	InvoiceMetaField             *string                                              `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
 	InvoiceVatRatePercent        *string                                              `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	InvoiceVatClassifierCode     *string                                              `json:"invoiceVatClassifierCode,omitempty" url:"invoiceVatClassifierCode,omitempty"`
 	CompanyMetaField             *string                                              `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
 	InvoiceItemID                *string                                              `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
 	AdvanceInvoices              bool                                                 `json:"advanceInvoices" url:"advanceInvoices"`
@@ -11751,6 +11803,13 @@ func (i *ImportTemplatesListBankResponseRowsItem) GetInvoiceVatRatePercent() *st
 		return nil
 	}
 	return i.InvoiceVatRatePercent
+}
+
+func (i *ImportTemplatesListBankResponseRowsItem) GetInvoiceVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceVatClassifierCode
 }
 
 func (i *ImportTemplatesListBankResponseRowsItem) GetCompanyMetaField() *string {
@@ -11898,6 +11957,13 @@ func (i *ImportTemplatesListBankResponseRowsItem) SetInvoiceMetaField(invoiceMet
 func (i *ImportTemplatesListBankResponseRowsItem) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
 	i.InvoiceVatRatePercent = invoiceVatRatePercent
 	i.require(importTemplatesListBankResponseRowsItemFieldInvoiceVatRatePercent)
+}
+
+// SetInvoiceVatClassifierCode sets the InvoiceVatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBankResponseRowsItem) SetInvoiceVatClassifierCode(invoiceVatClassifierCode *string) {
+	i.InvoiceVatClassifierCode = invoiceVatClassifierCode
+	i.require(importTemplatesListBankResponseRowsItemFieldInvoiceVatClassifierCode)
 }
 
 // SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
@@ -12274,18 +12340,19 @@ var (
 	importTemplatesListBuiltinBankResponseRowsItemFieldMetaFields                   = big.NewInt(1 << 4)
 	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceMetaField             = big.NewInt(1 << 5)
 	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
-	importTemplatesListBuiltinBankResponseRowsItemFieldCompanyMetaField             = big.NewInt(1 << 7)
-	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceItemID                = big.NewInt(1 << 8)
-	importTemplatesListBuiltinBankResponseRowsItemFieldAdvanceInvoices              = big.NewInt(1 << 9)
-	importTemplatesListBuiltinBankResponseRowsItemFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
-	importTemplatesListBuiltinBankResponseRowsItemFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
-	importTemplatesListBuiltinBankResponseRowsItemFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
-	importTemplatesListBuiltinBankResponseRowsItemFieldLenderMetaField              = big.NewInt(1 << 13)
-	importTemplatesListBuiltinBankResponseRowsItemFieldPartialRefundLabel           = big.NewInt(1 << 14)
-	importTemplatesListBuiltinBankResponseRowsItemFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesListBuiltinBankResponseRowsItemFieldBuiltin                      = big.NewInt(1 << 16)
-	importTemplatesListBuiltinBankResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 17)
-	importTemplatesListBuiltinBankResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 18)
+	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceVatClassifierCode     = big.NewInt(1 << 7)
+	importTemplatesListBuiltinBankResponseRowsItemFieldCompanyMetaField             = big.NewInt(1 << 8)
+	importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceItemID                = big.NewInt(1 << 9)
+	importTemplatesListBuiltinBankResponseRowsItemFieldAdvanceInvoices              = big.NewInt(1 << 10)
+	importTemplatesListBuiltinBankResponseRowsItemFieldAuthorizationOperationTypeID = big.NewInt(1 << 11)
+	importTemplatesListBuiltinBankResponseRowsItemFieldPayoutOperationTypeID        = big.NewInt(1 << 12)
+	importTemplatesListBuiltinBankResponseRowsItemFieldCommissionOperationTypeID    = big.NewInt(1 << 13)
+	importTemplatesListBuiltinBankResponseRowsItemFieldLenderMetaField              = big.NewInt(1 << 14)
+	importTemplatesListBuiltinBankResponseRowsItemFieldPartialRefundLabel           = big.NewInt(1 << 15)
+	importTemplatesListBuiltinBankResponseRowsItemFieldFullRefundLabel              = big.NewInt(1 << 16)
+	importTemplatesListBuiltinBankResponseRowsItemFieldBuiltin                      = big.NewInt(1 << 17)
+	importTemplatesListBuiltinBankResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 18)
+	importTemplatesListBuiltinBankResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 19)
 )
 
 type ImportTemplatesListBuiltinBankResponseRowsItem struct {
@@ -12296,6 +12363,7 @@ type ImportTemplatesListBuiltinBankResponseRowsItem struct {
 	MetaFields                   []string                                                    `json:"metaFields" url:"metaFields"`
 	InvoiceMetaField             *string                                                     `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
 	InvoiceVatRatePercent        *string                                                     `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	InvoiceVatClassifierCode     *string                                                     `json:"invoiceVatClassifierCode,omitempty" url:"invoiceVatClassifierCode,omitempty"`
 	CompanyMetaField             *string                                                     `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
 	InvoiceItemID                *string                                                     `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
 	AdvanceInvoices              bool                                                        `json:"advanceInvoices" url:"advanceInvoices"`
@@ -12364,6 +12432,13 @@ func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetInvoiceVatRatePercen
 		return nil
 	}
 	return i.InvoiceVatRatePercent
+}
+
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetInvoiceVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceVatClassifierCode
 }
 
 func (i *ImportTemplatesListBuiltinBankResponseRowsItem) GetCompanyMetaField() *string {
@@ -12511,6 +12586,13 @@ func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetInvoiceMetaField(inv
 func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
 	i.InvoiceVatRatePercent = invoiceVatRatePercent
 	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceVatRatePercent)
+}
+
+// SetInvoiceVatClassifierCode sets the InvoiceVatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesListBuiltinBankResponseRowsItem) SetInvoiceVatClassifierCode(invoiceVatClassifierCode *string) {
+	i.InvoiceVatClassifierCode = invoiceVatClassifierCode
+	i.require(importTemplatesListBuiltinBankResponseRowsItemFieldInvoiceVatClassifierCode)
 }
 
 // SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;
@@ -12947,18 +13029,19 @@ var (
 	importTemplatesUpdateBankResponseFieldMetaFields                   = big.NewInt(1 << 4)
 	importTemplatesUpdateBankResponseFieldInvoiceMetaField             = big.NewInt(1 << 5)
 	importTemplatesUpdateBankResponseFieldInvoiceVatRatePercent        = big.NewInt(1 << 6)
-	importTemplatesUpdateBankResponseFieldCompanyMetaField             = big.NewInt(1 << 7)
-	importTemplatesUpdateBankResponseFieldInvoiceItemID                = big.NewInt(1 << 8)
-	importTemplatesUpdateBankResponseFieldAdvanceInvoices              = big.NewInt(1 << 9)
-	importTemplatesUpdateBankResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 10)
-	importTemplatesUpdateBankResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 11)
-	importTemplatesUpdateBankResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 12)
-	importTemplatesUpdateBankResponseFieldLenderMetaField              = big.NewInt(1 << 13)
-	importTemplatesUpdateBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 14)
-	importTemplatesUpdateBankResponseFieldFullRefundLabel              = big.NewInt(1 << 15)
-	importTemplatesUpdateBankResponseFieldBuiltin                      = big.NewInt(1 << 16)
-	importTemplatesUpdateBankResponseFieldCreatedAt                    = big.NewInt(1 << 17)
-	importTemplatesUpdateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 18)
+	importTemplatesUpdateBankResponseFieldInvoiceVatClassifierCode     = big.NewInt(1 << 7)
+	importTemplatesUpdateBankResponseFieldCompanyMetaField             = big.NewInt(1 << 8)
+	importTemplatesUpdateBankResponseFieldInvoiceItemID                = big.NewInt(1 << 9)
+	importTemplatesUpdateBankResponseFieldAdvanceInvoices              = big.NewInt(1 << 10)
+	importTemplatesUpdateBankResponseFieldAuthorizationOperationTypeID = big.NewInt(1 << 11)
+	importTemplatesUpdateBankResponseFieldPayoutOperationTypeID        = big.NewInt(1 << 12)
+	importTemplatesUpdateBankResponseFieldCommissionOperationTypeID    = big.NewInt(1 << 13)
+	importTemplatesUpdateBankResponseFieldLenderMetaField              = big.NewInt(1 << 14)
+	importTemplatesUpdateBankResponseFieldPartialRefundLabel           = big.NewInt(1 << 15)
+	importTemplatesUpdateBankResponseFieldFullRefundLabel              = big.NewInt(1 << 16)
+	importTemplatesUpdateBankResponseFieldBuiltin                      = big.NewInt(1 << 17)
+	importTemplatesUpdateBankResponseFieldCreatedAt                    = big.NewInt(1 << 18)
+	importTemplatesUpdateBankResponseFieldUpdatedAt                    = big.NewInt(1 << 19)
 )
 
 type ImportTemplatesUpdateBankResponse struct {
@@ -12969,6 +13052,7 @@ type ImportTemplatesUpdateBankResponse struct {
 	MetaFields                   []string                                       `json:"metaFields" url:"metaFields"`
 	InvoiceMetaField             *string                                        `json:"invoiceMetaField,omitempty" url:"invoiceMetaField,omitempty"`
 	InvoiceVatRatePercent        *string                                        `json:"invoiceVatRatePercent,omitempty" url:"invoiceVatRatePercent,omitempty"`
+	InvoiceVatClassifierCode     *string                                        `json:"invoiceVatClassifierCode,omitempty" url:"invoiceVatClassifierCode,omitempty"`
 	CompanyMetaField             *string                                        `json:"companyMetaField,omitempty" url:"companyMetaField,omitempty"`
 	InvoiceItemID                *string                                        `json:"invoiceItemId,omitempty" url:"invoiceItemId,omitempty"`
 	AdvanceInvoices              bool                                           `json:"advanceInvoices" url:"advanceInvoices"`
@@ -13037,6 +13121,13 @@ func (i *ImportTemplatesUpdateBankResponse) GetInvoiceVatRatePercent() *string {
 		return nil
 	}
 	return i.InvoiceVatRatePercent
+}
+
+func (i *ImportTemplatesUpdateBankResponse) GetInvoiceVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.InvoiceVatClassifierCode
 }
 
 func (i *ImportTemplatesUpdateBankResponse) GetCompanyMetaField() *string {
@@ -13184,6 +13275,13 @@ func (i *ImportTemplatesUpdateBankResponse) SetInvoiceMetaField(invoiceMetaField
 func (i *ImportTemplatesUpdateBankResponse) SetInvoiceVatRatePercent(invoiceVatRatePercent *string) {
 	i.InvoiceVatRatePercent = invoiceVatRatePercent
 	i.require(importTemplatesUpdateBankResponseFieldInvoiceVatRatePercent)
+}
+
+// SetInvoiceVatClassifierCode sets the InvoiceVatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImportTemplatesUpdateBankResponse) SetInvoiceVatClassifierCode(invoiceVatClassifierCode *string) {
+	i.InvoiceVatClassifierCode = invoiceVatClassifierCode
+	i.require(importTemplatesUpdateBankResponseFieldInvoiceVatClassifierCode)
 }
 
 // SetCompanyMetaField sets the CompanyMetaField field and marks it as non-optional;

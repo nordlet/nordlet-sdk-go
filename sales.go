@@ -7545,6 +7545,36 @@ const (
 	ActsPdfSalesRequestLocaleEn ActsPdfSalesRequestLocale = "en"
 	ActsPdfSalesRequestLocaleLt ActsPdfSalesRequestLocale = "lt"
 	ActsPdfSalesRequestLocaleDe ActsPdfSalesRequestLocale = "de"
+	ActsPdfSalesRequestLocaleFr ActsPdfSalesRequestLocale = "fr"
+	ActsPdfSalesRequestLocaleEs ActsPdfSalesRequestLocale = "es"
+	ActsPdfSalesRequestLocaleIt ActsPdfSalesRequestLocale = "it"
+	ActsPdfSalesRequestLocalePt ActsPdfSalesRequestLocale = "pt"
+	ActsPdfSalesRequestLocaleNl ActsPdfSalesRequestLocale = "nl"
+	ActsPdfSalesRequestLocalePl ActsPdfSalesRequestLocale = "pl"
+	ActsPdfSalesRequestLocaleSv ActsPdfSalesRequestLocale = "sv"
+	ActsPdfSalesRequestLocaleDa ActsPdfSalesRequestLocale = "da"
+	ActsPdfSalesRequestLocaleNo ActsPdfSalesRequestLocale = "no"
+	ActsPdfSalesRequestLocaleFi ActsPdfSalesRequestLocale = "fi"
+	ActsPdfSalesRequestLocaleEt ActsPdfSalesRequestLocale = "et"
+	ActsPdfSalesRequestLocaleLv ActsPdfSalesRequestLocale = "lv"
+	ActsPdfSalesRequestLocaleCs ActsPdfSalesRequestLocale = "cs"
+	ActsPdfSalesRequestLocaleSk ActsPdfSalesRequestLocale = "sk"
+	ActsPdfSalesRequestLocaleHu ActsPdfSalesRequestLocale = "hu"
+	ActsPdfSalesRequestLocaleRo ActsPdfSalesRequestLocale = "ro"
+	ActsPdfSalesRequestLocaleBg ActsPdfSalesRequestLocale = "bg"
+	ActsPdfSalesRequestLocaleHr ActsPdfSalesRequestLocale = "hr"
+	ActsPdfSalesRequestLocaleSl ActsPdfSalesRequestLocale = "sl"
+	ActsPdfSalesRequestLocaleEl ActsPdfSalesRequestLocale = "el"
+	ActsPdfSalesRequestLocaleMt ActsPdfSalesRequestLocale = "mt"
+	ActsPdfSalesRequestLocaleIs ActsPdfSalesRequestLocale = "is"
+	ActsPdfSalesRequestLocaleGa ActsPdfSalesRequestLocale = "ga"
+	ActsPdfSalesRequestLocaleZh ActsPdfSalesRequestLocale = "zh"
+	ActsPdfSalesRequestLocaleJa ActsPdfSalesRequestLocale = "ja"
+	ActsPdfSalesRequestLocaleAr ActsPdfSalesRequestLocale = "ar"
+	ActsPdfSalesRequestLocaleHi ActsPdfSalesRequestLocale = "hi"
+	ActsPdfSalesRequestLocaleRu ActsPdfSalesRequestLocale = "ru"
+	ActsPdfSalesRequestLocaleTr ActsPdfSalesRequestLocale = "tr"
+	ActsPdfSalesRequestLocaleUk ActsPdfSalesRequestLocale = "uk"
 )
 
 func NewActsPdfSalesRequestLocaleFromString(s string) (ActsPdfSalesRequestLocale, error) {
@@ -7555,6 +7585,66 @@ func NewActsPdfSalesRequestLocaleFromString(s string) (ActsPdfSalesRequestLocale
 		return ActsPdfSalesRequestLocaleLt, nil
 	case "de":
 		return ActsPdfSalesRequestLocaleDe, nil
+	case "fr":
+		return ActsPdfSalesRequestLocaleFr, nil
+	case "es":
+		return ActsPdfSalesRequestLocaleEs, nil
+	case "it":
+		return ActsPdfSalesRequestLocaleIt, nil
+	case "pt":
+		return ActsPdfSalesRequestLocalePt, nil
+	case "nl":
+		return ActsPdfSalesRequestLocaleNl, nil
+	case "pl":
+		return ActsPdfSalesRequestLocalePl, nil
+	case "sv":
+		return ActsPdfSalesRequestLocaleSv, nil
+	case "da":
+		return ActsPdfSalesRequestLocaleDa, nil
+	case "no":
+		return ActsPdfSalesRequestLocaleNo, nil
+	case "fi":
+		return ActsPdfSalesRequestLocaleFi, nil
+	case "et":
+		return ActsPdfSalesRequestLocaleEt, nil
+	case "lv":
+		return ActsPdfSalesRequestLocaleLv, nil
+	case "cs":
+		return ActsPdfSalesRequestLocaleCs, nil
+	case "sk":
+		return ActsPdfSalesRequestLocaleSk, nil
+	case "hu":
+		return ActsPdfSalesRequestLocaleHu, nil
+	case "ro":
+		return ActsPdfSalesRequestLocaleRo, nil
+	case "bg":
+		return ActsPdfSalesRequestLocaleBg, nil
+	case "hr":
+		return ActsPdfSalesRequestLocaleHr, nil
+	case "sl":
+		return ActsPdfSalesRequestLocaleSl, nil
+	case "el":
+		return ActsPdfSalesRequestLocaleEl, nil
+	case "mt":
+		return ActsPdfSalesRequestLocaleMt, nil
+	case "is":
+		return ActsPdfSalesRequestLocaleIs, nil
+	case "ga":
+		return ActsPdfSalesRequestLocaleGa, nil
+	case "zh":
+		return ActsPdfSalesRequestLocaleZh, nil
+	case "ja":
+		return ActsPdfSalesRequestLocaleJa, nil
+	case "ar":
+		return ActsPdfSalesRequestLocaleAr, nil
+	case "hi":
+		return ActsPdfSalesRequestLocaleHi, nil
+	case "ru":
+		return ActsPdfSalesRequestLocaleRu, nil
+	case "tr":
+		return ActsPdfSalesRequestLocaleTr, nil
+	case "uk":
+		return ActsPdfSalesRequestLocaleUk, nil
 	}
 	var t ActsPdfSalesRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -8602,9 +8692,10 @@ var (
 	invoiceTemplatesCreateSalesRequestLinesItemFieldQuantity          = big.NewInt(1 << 2)
 	invoiceTemplatesCreateSalesRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
 	invoiceTemplatesCreateSalesRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
-	invoiceTemplatesCreateSalesRequestLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
-	invoiceTemplatesCreateSalesRequestLinesItemFieldProjectID         = big.NewInt(1 << 6)
-	invoiceTemplatesCreateSalesRequestLinesItemFieldUnit              = big.NewInt(1 << 7)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldVatExemptionBasis = big.NewInt(1 << 6)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldProjectID         = big.NewInt(1 << 7)
+	invoiceTemplatesCreateSalesRequestLinesItemFieldUnit              = big.NewInt(1 << 8)
 )
 
 type InvoiceTemplatesCreateSalesRequestLinesItem struct {
@@ -8613,6 +8704,7 @@ type InvoiceTemplatesCreateSalesRequestLinesItem struct {
 	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -8657,6 +8749,13 @@ func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetVatRatePercent() *strin
 		return nil
 	}
 	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
 }
 
 func (i *InvoiceTemplatesCreateSalesRequestLinesItem) GetVatExemptionBasis() *string {
@@ -8727,6 +8826,13 @@ func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetUnitPriceExclVat(unitPr
 func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
 	i.VatRatePercent = vatRatePercent
 	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesRequestLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoiceTemplatesCreateSalesRequestLinesItemFieldVatClassifierCode)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -9400,9 +9506,10 @@ var (
 	invoiceTemplatesCreateSalesResponseLinesItemFieldQuantity          = big.NewInt(1 << 2)
 	invoiceTemplatesCreateSalesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
 	invoiceTemplatesCreateSalesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
-	invoiceTemplatesCreateSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
-	invoiceTemplatesCreateSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 6)
-	invoiceTemplatesCreateSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 7)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 6)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 7)
+	invoiceTemplatesCreateSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 8)
 )
 
 type InvoiceTemplatesCreateSalesResponseLinesItem struct {
@@ -9411,6 +9518,7 @@ type InvoiceTemplatesCreateSalesResponseLinesItem struct {
 	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -9455,6 +9563,13 @@ func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetVatRatePercent() *stri
 		return nil
 	}
 	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
 }
 
 func (i *InvoiceTemplatesCreateSalesResponseLinesItem) GetVatExemptionBasis() *string {
@@ -9525,6 +9640,13 @@ func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetUnitPriceExclVat(unitP
 func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetVatRatePercent(vatRatePercent *string) {
 	i.VatRatePercent = vatRatePercent
 	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesCreateSalesResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoiceTemplatesCreateSalesResponseLinesItemFieldVatClassifierCode)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -10239,9 +10361,10 @@ var (
 	invoiceTemplatesGetSalesResponseLinesItemFieldQuantity          = big.NewInt(1 << 2)
 	invoiceTemplatesGetSalesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
 	invoiceTemplatesGetSalesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
-	invoiceTemplatesGetSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
-	invoiceTemplatesGetSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 6)
-	invoiceTemplatesGetSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 7)
+	invoiceTemplatesGetSalesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	invoiceTemplatesGetSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 6)
+	invoiceTemplatesGetSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 7)
+	invoiceTemplatesGetSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 8)
 )
 
 type InvoiceTemplatesGetSalesResponseLinesItem struct {
@@ -10250,6 +10373,7 @@ type InvoiceTemplatesGetSalesResponseLinesItem struct {
 	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -10294,6 +10418,13 @@ func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetVatRatePercent() *string 
 		return nil
 	}
 	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
 }
 
 func (i *InvoiceTemplatesGetSalesResponseLinesItem) GetVatExemptionBasis() *string {
@@ -10364,6 +10495,13 @@ func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetUnitPriceExclVat(unitPric
 func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetVatRatePercent(vatRatePercent *string) {
 	i.VatRatePercent = vatRatePercent
 	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesGetSalesResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoiceTemplatesGetSalesResponseLinesItemFieldVatClassifierCode)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -11597,9 +11735,10 @@ var (
 	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldQuantity          = big.NewInt(1 << 2)
 	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
 	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
-	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
-	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldProjectID         = big.NewInt(1 << 6)
-	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldUnit              = big.NewInt(1 << 7)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatExemptionBasis = big.NewInt(1 << 6)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldProjectID         = big.NewInt(1 << 7)
+	invoiceTemplatesListSalesResponseRowsItemLinesItemFieldUnit              = big.NewInt(1 << 8)
 )
 
 type InvoiceTemplatesListSalesResponseRowsItemLinesItem struct {
@@ -11608,6 +11747,7 @@ type InvoiceTemplatesListSalesResponseRowsItemLinesItem struct {
 	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -11652,6 +11792,13 @@ func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetVatRatePercent()
 		return nil
 	}
 	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
 }
 
 func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) GetVatExemptionBasis() *string {
@@ -11722,6 +11869,13 @@ func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetUnitPriceExclVat
 func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetVatRatePercent(vatRatePercent *string) {
 	i.VatRatePercent = vatRatePercent
 	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesListSalesResponseRowsItemLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoiceTemplatesListSalesResponseRowsItemLinesItemFieldVatClassifierCode)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -11840,9 +11994,10 @@ var (
 	invoiceTemplatesUpdateSalesRequestLinesItemFieldQuantity          = big.NewInt(1 << 2)
 	invoiceTemplatesUpdateSalesRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
 	invoiceTemplatesUpdateSalesRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
-	invoiceTemplatesUpdateSalesRequestLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
-	invoiceTemplatesUpdateSalesRequestLinesItemFieldProjectID         = big.NewInt(1 << 6)
-	invoiceTemplatesUpdateSalesRequestLinesItemFieldUnit              = big.NewInt(1 << 7)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldVatExemptionBasis = big.NewInt(1 << 6)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldProjectID         = big.NewInt(1 << 7)
+	invoiceTemplatesUpdateSalesRequestLinesItemFieldUnit              = big.NewInt(1 << 8)
 )
 
 type InvoiceTemplatesUpdateSalesRequestLinesItem struct {
@@ -11851,6 +12006,7 @@ type InvoiceTemplatesUpdateSalesRequestLinesItem struct {
 	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -11895,6 +12051,13 @@ func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetVatRatePercent() *strin
 		return nil
 	}
 	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
 }
 
 func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) GetVatExemptionBasis() *string {
@@ -11965,6 +12128,13 @@ func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetUnitPriceExclVat(unitPr
 func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
 	i.VatRatePercent = vatRatePercent
 	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesRequestLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoiceTemplatesUpdateSalesRequestLinesItemFieldVatClassifierCode)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -12638,9 +12808,10 @@ var (
 	invoiceTemplatesUpdateSalesResponseLinesItemFieldQuantity          = big.NewInt(1 << 2)
 	invoiceTemplatesUpdateSalesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
 	invoiceTemplatesUpdateSalesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
-	invoiceTemplatesUpdateSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 5)
-	invoiceTemplatesUpdateSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 6)
-	invoiceTemplatesUpdateSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 7)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldVatExemptionBasis = big.NewInt(1 << 6)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldProjectID         = big.NewInt(1 << 7)
+	invoiceTemplatesUpdateSalesResponseLinesItemFieldUnit              = big.NewInt(1 << 8)
 )
 
 type InvoiceTemplatesUpdateSalesResponseLinesItem struct {
@@ -12649,6 +12820,7 @@ type InvoiceTemplatesUpdateSalesResponseLinesItem struct {
 	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
 	ProjectID         *string `json:"projectId,omitempty" url:"projectId,omitempty"`
 	Unit              *string `json:"unit,omitempty" url:"unit,omitempty"`
@@ -12693,6 +12865,13 @@ func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetVatRatePercent() *stri
 		return nil
 	}
 	return i.VatRatePercent
+}
+
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
 }
 
 func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) GetVatExemptionBasis() *string {
@@ -12763,6 +12942,13 @@ func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetUnitPriceExclVat(unitP
 func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetVatRatePercent(vatRatePercent *string) {
 	i.VatRatePercent = vatRatePercent
 	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoiceTemplatesUpdateSalesResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoiceTemplatesUpdateSalesResponseLinesItemFieldVatClassifierCode)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -16766,6 +16952,7 @@ const (
 	InvoicesCreateSalesRequestLocaleHi InvoicesCreateSalesRequestLocale = "hi"
 	InvoicesCreateSalesRequestLocaleRu InvoicesCreateSalesRequestLocale = "ru"
 	InvoicesCreateSalesRequestLocaleTr InvoicesCreateSalesRequestLocale = "tr"
+	InvoicesCreateSalesRequestLocaleUk InvoicesCreateSalesRequestLocale = "uk"
 )
 
 func NewInvoicesCreateSalesRequestLocaleFromString(s string) (InvoicesCreateSalesRequestLocale, error) {
@@ -16834,6 +17021,8 @@ func NewInvoicesCreateSalesRequestLocaleFromString(s string) (InvoicesCreateSale
 		return InvoicesCreateSalesRequestLocaleRu, nil
 	case "tr":
 		return InvoicesCreateSalesRequestLocaleTr, nil
+	case "uk":
+		return InvoicesCreateSalesRequestLocaleUk, nil
 	}
 	var t InvoicesCreateSalesRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -31490,6 +31679,7 @@ const (
 	InvoicesPdfSalesRequestLocaleHi InvoicesPdfSalesRequestLocale = "hi"
 	InvoicesPdfSalesRequestLocaleRu InvoicesPdfSalesRequestLocale = "ru"
 	InvoicesPdfSalesRequestLocaleTr InvoicesPdfSalesRequestLocale = "tr"
+	InvoicesPdfSalesRequestLocaleUk InvoicesPdfSalesRequestLocale = "uk"
 )
 
 func NewInvoicesPdfSalesRequestLocaleFromString(s string) (InvoicesPdfSalesRequestLocale, error) {
@@ -31558,6 +31748,8 @@ func NewInvoicesPdfSalesRequestLocaleFromString(s string) (InvoicesPdfSalesReque
 		return InvoicesPdfSalesRequestLocaleRu, nil
 	case "tr":
 		return InvoicesPdfSalesRequestLocaleTr, nil
+	case "uk":
+		return InvoicesPdfSalesRequestLocaleUk, nil
 	}
 	var t InvoicesPdfSalesRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -32226,6 +32418,7 @@ const (
 	InvoicesSendSalesRequestLocaleHi InvoicesSendSalesRequestLocale = "hi"
 	InvoicesSendSalesRequestLocaleRu InvoicesSendSalesRequestLocale = "ru"
 	InvoicesSendSalesRequestLocaleTr InvoicesSendSalesRequestLocale = "tr"
+	InvoicesSendSalesRequestLocaleUk InvoicesSendSalesRequestLocale = "uk"
 )
 
 func NewInvoicesSendSalesRequestLocaleFromString(s string) (InvoicesSendSalesRequestLocale, error) {
@@ -32294,6 +32487,8 @@ func NewInvoicesSendSalesRequestLocaleFromString(s string) (InvoicesSendSalesReq
 		return InvoicesSendSalesRequestLocaleRu, nil
 	case "tr":
 		return InvoicesSendSalesRequestLocaleTr, nil
+	case "uk":
+		return InvoicesSendSalesRequestLocaleUk, nil
 	}
 	var t InvoicesSendSalesRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -35999,6 +36194,7 @@ const (
 	InvoicesUpdateSalesRequestLocaleHi InvoicesUpdateSalesRequestLocale = "hi"
 	InvoicesUpdateSalesRequestLocaleRu InvoicesUpdateSalesRequestLocale = "ru"
 	InvoicesUpdateSalesRequestLocaleTr InvoicesUpdateSalesRequestLocale = "tr"
+	InvoicesUpdateSalesRequestLocaleUk InvoicesUpdateSalesRequestLocale = "uk"
 )
 
 func NewInvoicesUpdateSalesRequestLocaleFromString(s string) (InvoicesUpdateSalesRequestLocale, error) {
@@ -36067,6 +36263,8 @@ func NewInvoicesUpdateSalesRequestLocaleFromString(s string) (InvoicesUpdateSale
 		return InvoicesUpdateSalesRequestLocaleRu, nil
 	case "tr":
 		return InvoicesUpdateSalesRequestLocaleTr, nil
+	case "uk":
+		return InvoicesUpdateSalesRequestLocaleUk, nil
 	}
 	var t InvoicesUpdateSalesRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -44064,6 +44262,7 @@ const (
 	RecurringInvoicesCreateSalesRequestLocaleHi RecurringInvoicesCreateSalesRequestLocale = "hi"
 	RecurringInvoicesCreateSalesRequestLocaleRu RecurringInvoicesCreateSalesRequestLocale = "ru"
 	RecurringInvoicesCreateSalesRequestLocaleTr RecurringInvoicesCreateSalesRequestLocale = "tr"
+	RecurringInvoicesCreateSalesRequestLocaleUk RecurringInvoicesCreateSalesRequestLocale = "uk"
 )
 
 func NewRecurringInvoicesCreateSalesRequestLocaleFromString(s string) (RecurringInvoicesCreateSalesRequestLocale, error) {
@@ -44132,6 +44331,8 @@ func NewRecurringInvoicesCreateSalesRequestLocaleFromString(s string) (Recurring
 		return RecurringInvoicesCreateSalesRequestLocaleRu, nil
 	case "tr":
 		return RecurringInvoicesCreateSalesRequestLocaleTr, nil
+	case "uk":
+		return RecurringInvoicesCreateSalesRequestLocaleUk, nil
 	}
 	var t RecurringInvoicesCreateSalesRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -47359,6 +47560,7 @@ const (
 	RecurringInvoicesUpdateSalesRequestLocaleHi RecurringInvoicesUpdateSalesRequestLocale = "hi"
 	RecurringInvoicesUpdateSalesRequestLocaleRu RecurringInvoicesUpdateSalesRequestLocale = "ru"
 	RecurringInvoicesUpdateSalesRequestLocaleTr RecurringInvoicesUpdateSalesRequestLocale = "tr"
+	RecurringInvoicesUpdateSalesRequestLocaleUk RecurringInvoicesUpdateSalesRequestLocale = "uk"
 )
 
 func NewRecurringInvoicesUpdateSalesRequestLocaleFromString(s string) (RecurringInvoicesUpdateSalesRequestLocale, error) {
@@ -47427,6 +47629,8 @@ func NewRecurringInvoicesUpdateSalesRequestLocaleFromString(s string) (Recurring
 		return RecurringInvoicesUpdateSalesRequestLocaleRu, nil
 	case "tr":
 		return RecurringInvoicesUpdateSalesRequestLocaleTr, nil
+	case "uk":
+		return RecurringInvoicesUpdateSalesRequestLocaleUk, nil
 	}
 	var t RecurringInvoicesUpdateSalesRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

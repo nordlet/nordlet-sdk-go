@@ -2746,6 +2746,36 @@ const (
 	PaymentsExportPayrollRequestLocaleEn PaymentsExportPayrollRequestLocale = "en"
 	PaymentsExportPayrollRequestLocaleLt PaymentsExportPayrollRequestLocale = "lt"
 	PaymentsExportPayrollRequestLocaleDe PaymentsExportPayrollRequestLocale = "de"
+	PaymentsExportPayrollRequestLocaleFr PaymentsExportPayrollRequestLocale = "fr"
+	PaymentsExportPayrollRequestLocaleEs PaymentsExportPayrollRequestLocale = "es"
+	PaymentsExportPayrollRequestLocaleIt PaymentsExportPayrollRequestLocale = "it"
+	PaymentsExportPayrollRequestLocalePt PaymentsExportPayrollRequestLocale = "pt"
+	PaymentsExportPayrollRequestLocaleNl PaymentsExportPayrollRequestLocale = "nl"
+	PaymentsExportPayrollRequestLocalePl PaymentsExportPayrollRequestLocale = "pl"
+	PaymentsExportPayrollRequestLocaleSv PaymentsExportPayrollRequestLocale = "sv"
+	PaymentsExportPayrollRequestLocaleDa PaymentsExportPayrollRequestLocale = "da"
+	PaymentsExportPayrollRequestLocaleNo PaymentsExportPayrollRequestLocale = "no"
+	PaymentsExportPayrollRequestLocaleFi PaymentsExportPayrollRequestLocale = "fi"
+	PaymentsExportPayrollRequestLocaleEt PaymentsExportPayrollRequestLocale = "et"
+	PaymentsExportPayrollRequestLocaleLv PaymentsExportPayrollRequestLocale = "lv"
+	PaymentsExportPayrollRequestLocaleCs PaymentsExportPayrollRequestLocale = "cs"
+	PaymentsExportPayrollRequestLocaleSk PaymentsExportPayrollRequestLocale = "sk"
+	PaymentsExportPayrollRequestLocaleHu PaymentsExportPayrollRequestLocale = "hu"
+	PaymentsExportPayrollRequestLocaleRo PaymentsExportPayrollRequestLocale = "ro"
+	PaymentsExportPayrollRequestLocaleBg PaymentsExportPayrollRequestLocale = "bg"
+	PaymentsExportPayrollRequestLocaleHr PaymentsExportPayrollRequestLocale = "hr"
+	PaymentsExportPayrollRequestLocaleSl PaymentsExportPayrollRequestLocale = "sl"
+	PaymentsExportPayrollRequestLocaleEl PaymentsExportPayrollRequestLocale = "el"
+	PaymentsExportPayrollRequestLocaleMt PaymentsExportPayrollRequestLocale = "mt"
+	PaymentsExportPayrollRequestLocaleIs PaymentsExportPayrollRequestLocale = "is"
+	PaymentsExportPayrollRequestLocaleGa PaymentsExportPayrollRequestLocale = "ga"
+	PaymentsExportPayrollRequestLocaleZh PaymentsExportPayrollRequestLocale = "zh"
+	PaymentsExportPayrollRequestLocaleJa PaymentsExportPayrollRequestLocale = "ja"
+	PaymentsExportPayrollRequestLocaleAr PaymentsExportPayrollRequestLocale = "ar"
+	PaymentsExportPayrollRequestLocaleHi PaymentsExportPayrollRequestLocale = "hi"
+	PaymentsExportPayrollRequestLocaleRu PaymentsExportPayrollRequestLocale = "ru"
+	PaymentsExportPayrollRequestLocaleTr PaymentsExportPayrollRequestLocale = "tr"
+	PaymentsExportPayrollRequestLocaleUk PaymentsExportPayrollRequestLocale = "uk"
 )
 
 func NewPaymentsExportPayrollRequestLocaleFromString(s string) (PaymentsExportPayrollRequestLocale, error) {
@@ -2756,6 +2786,66 @@ func NewPaymentsExportPayrollRequestLocaleFromString(s string) (PaymentsExportPa
 		return PaymentsExportPayrollRequestLocaleLt, nil
 	case "de":
 		return PaymentsExportPayrollRequestLocaleDe, nil
+	case "fr":
+		return PaymentsExportPayrollRequestLocaleFr, nil
+	case "es":
+		return PaymentsExportPayrollRequestLocaleEs, nil
+	case "it":
+		return PaymentsExportPayrollRequestLocaleIt, nil
+	case "pt":
+		return PaymentsExportPayrollRequestLocalePt, nil
+	case "nl":
+		return PaymentsExportPayrollRequestLocaleNl, nil
+	case "pl":
+		return PaymentsExportPayrollRequestLocalePl, nil
+	case "sv":
+		return PaymentsExportPayrollRequestLocaleSv, nil
+	case "da":
+		return PaymentsExportPayrollRequestLocaleDa, nil
+	case "no":
+		return PaymentsExportPayrollRequestLocaleNo, nil
+	case "fi":
+		return PaymentsExportPayrollRequestLocaleFi, nil
+	case "et":
+		return PaymentsExportPayrollRequestLocaleEt, nil
+	case "lv":
+		return PaymentsExportPayrollRequestLocaleLv, nil
+	case "cs":
+		return PaymentsExportPayrollRequestLocaleCs, nil
+	case "sk":
+		return PaymentsExportPayrollRequestLocaleSk, nil
+	case "hu":
+		return PaymentsExportPayrollRequestLocaleHu, nil
+	case "ro":
+		return PaymentsExportPayrollRequestLocaleRo, nil
+	case "bg":
+		return PaymentsExportPayrollRequestLocaleBg, nil
+	case "hr":
+		return PaymentsExportPayrollRequestLocaleHr, nil
+	case "sl":
+		return PaymentsExportPayrollRequestLocaleSl, nil
+	case "el":
+		return PaymentsExportPayrollRequestLocaleEl, nil
+	case "mt":
+		return PaymentsExportPayrollRequestLocaleMt, nil
+	case "is":
+		return PaymentsExportPayrollRequestLocaleIs, nil
+	case "ga":
+		return PaymentsExportPayrollRequestLocaleGa, nil
+	case "zh":
+		return PaymentsExportPayrollRequestLocaleZh, nil
+	case "ja":
+		return PaymentsExportPayrollRequestLocaleJa, nil
+	case "ar":
+		return PaymentsExportPayrollRequestLocaleAr, nil
+	case "hi":
+		return PaymentsExportPayrollRequestLocaleHi, nil
+	case "ru":
+		return PaymentsExportPayrollRequestLocaleRu, nil
+	case "tr":
+		return PaymentsExportPayrollRequestLocaleTr, nil
+	case "uk":
+		return PaymentsExportPayrollRequestLocaleUk, nil
 	}
 	var t PaymentsExportPayrollRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

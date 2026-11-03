@@ -11983,6 +11983,36 @@ const (
 	UnitsOptionsCatalogRequestLocaleEn UnitsOptionsCatalogRequestLocale = "en"
 	UnitsOptionsCatalogRequestLocaleLt UnitsOptionsCatalogRequestLocale = "lt"
 	UnitsOptionsCatalogRequestLocaleDe UnitsOptionsCatalogRequestLocale = "de"
+	UnitsOptionsCatalogRequestLocaleFr UnitsOptionsCatalogRequestLocale = "fr"
+	UnitsOptionsCatalogRequestLocaleEs UnitsOptionsCatalogRequestLocale = "es"
+	UnitsOptionsCatalogRequestLocaleIt UnitsOptionsCatalogRequestLocale = "it"
+	UnitsOptionsCatalogRequestLocalePt UnitsOptionsCatalogRequestLocale = "pt"
+	UnitsOptionsCatalogRequestLocaleNl UnitsOptionsCatalogRequestLocale = "nl"
+	UnitsOptionsCatalogRequestLocalePl UnitsOptionsCatalogRequestLocale = "pl"
+	UnitsOptionsCatalogRequestLocaleSv UnitsOptionsCatalogRequestLocale = "sv"
+	UnitsOptionsCatalogRequestLocaleDa UnitsOptionsCatalogRequestLocale = "da"
+	UnitsOptionsCatalogRequestLocaleNo UnitsOptionsCatalogRequestLocale = "no"
+	UnitsOptionsCatalogRequestLocaleFi UnitsOptionsCatalogRequestLocale = "fi"
+	UnitsOptionsCatalogRequestLocaleEt UnitsOptionsCatalogRequestLocale = "et"
+	UnitsOptionsCatalogRequestLocaleLv UnitsOptionsCatalogRequestLocale = "lv"
+	UnitsOptionsCatalogRequestLocaleCs UnitsOptionsCatalogRequestLocale = "cs"
+	UnitsOptionsCatalogRequestLocaleSk UnitsOptionsCatalogRequestLocale = "sk"
+	UnitsOptionsCatalogRequestLocaleHu UnitsOptionsCatalogRequestLocale = "hu"
+	UnitsOptionsCatalogRequestLocaleRo UnitsOptionsCatalogRequestLocale = "ro"
+	UnitsOptionsCatalogRequestLocaleBg UnitsOptionsCatalogRequestLocale = "bg"
+	UnitsOptionsCatalogRequestLocaleHr UnitsOptionsCatalogRequestLocale = "hr"
+	UnitsOptionsCatalogRequestLocaleSl UnitsOptionsCatalogRequestLocale = "sl"
+	UnitsOptionsCatalogRequestLocaleEl UnitsOptionsCatalogRequestLocale = "el"
+	UnitsOptionsCatalogRequestLocaleMt UnitsOptionsCatalogRequestLocale = "mt"
+	UnitsOptionsCatalogRequestLocaleIs UnitsOptionsCatalogRequestLocale = "is"
+	UnitsOptionsCatalogRequestLocaleGa UnitsOptionsCatalogRequestLocale = "ga"
+	UnitsOptionsCatalogRequestLocaleZh UnitsOptionsCatalogRequestLocale = "zh"
+	UnitsOptionsCatalogRequestLocaleJa UnitsOptionsCatalogRequestLocale = "ja"
+	UnitsOptionsCatalogRequestLocaleAr UnitsOptionsCatalogRequestLocale = "ar"
+	UnitsOptionsCatalogRequestLocaleHi UnitsOptionsCatalogRequestLocale = "hi"
+	UnitsOptionsCatalogRequestLocaleRu UnitsOptionsCatalogRequestLocale = "ru"
+	UnitsOptionsCatalogRequestLocaleTr UnitsOptionsCatalogRequestLocale = "tr"
+	UnitsOptionsCatalogRequestLocaleUk UnitsOptionsCatalogRequestLocale = "uk"
 )
 
 func NewUnitsOptionsCatalogRequestLocaleFromString(s string) (UnitsOptionsCatalogRequestLocale, error) {
@@ -11993,6 +12023,66 @@ func NewUnitsOptionsCatalogRequestLocaleFromString(s string) (UnitsOptionsCatalo
 		return UnitsOptionsCatalogRequestLocaleLt, nil
 	case "de":
 		return UnitsOptionsCatalogRequestLocaleDe, nil
+	case "fr":
+		return UnitsOptionsCatalogRequestLocaleFr, nil
+	case "es":
+		return UnitsOptionsCatalogRequestLocaleEs, nil
+	case "it":
+		return UnitsOptionsCatalogRequestLocaleIt, nil
+	case "pt":
+		return UnitsOptionsCatalogRequestLocalePt, nil
+	case "nl":
+		return UnitsOptionsCatalogRequestLocaleNl, nil
+	case "pl":
+		return UnitsOptionsCatalogRequestLocalePl, nil
+	case "sv":
+		return UnitsOptionsCatalogRequestLocaleSv, nil
+	case "da":
+		return UnitsOptionsCatalogRequestLocaleDa, nil
+	case "no":
+		return UnitsOptionsCatalogRequestLocaleNo, nil
+	case "fi":
+		return UnitsOptionsCatalogRequestLocaleFi, nil
+	case "et":
+		return UnitsOptionsCatalogRequestLocaleEt, nil
+	case "lv":
+		return UnitsOptionsCatalogRequestLocaleLv, nil
+	case "cs":
+		return UnitsOptionsCatalogRequestLocaleCs, nil
+	case "sk":
+		return UnitsOptionsCatalogRequestLocaleSk, nil
+	case "hu":
+		return UnitsOptionsCatalogRequestLocaleHu, nil
+	case "ro":
+		return UnitsOptionsCatalogRequestLocaleRo, nil
+	case "bg":
+		return UnitsOptionsCatalogRequestLocaleBg, nil
+	case "hr":
+		return UnitsOptionsCatalogRequestLocaleHr, nil
+	case "sl":
+		return UnitsOptionsCatalogRequestLocaleSl, nil
+	case "el":
+		return UnitsOptionsCatalogRequestLocaleEl, nil
+	case "mt":
+		return UnitsOptionsCatalogRequestLocaleMt, nil
+	case "is":
+		return UnitsOptionsCatalogRequestLocaleIs, nil
+	case "ga":
+		return UnitsOptionsCatalogRequestLocaleGa, nil
+	case "zh":
+		return UnitsOptionsCatalogRequestLocaleZh, nil
+	case "ja":
+		return UnitsOptionsCatalogRequestLocaleJa, nil
+	case "ar":
+		return UnitsOptionsCatalogRequestLocaleAr, nil
+	case "hi":
+		return UnitsOptionsCatalogRequestLocaleHi, nil
+	case "ru":
+		return UnitsOptionsCatalogRequestLocaleRu, nil
+	case "tr":
+		return UnitsOptionsCatalogRequestLocaleTr, nil
+	case "uk":
+		return UnitsOptionsCatalogRequestLocaleUk, nil
 	}
 	var t UnitsOptionsCatalogRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

@@ -1297,19 +1297,21 @@ func (a AgreementsCreateAgreementsRequestBillingPeriod) Ptr() *AgreementsCreateA
 }
 
 var (
-	agreementsCreateAgreementsRequestItemsItemFieldItemID         = big.NewInt(1 << 0)
-	agreementsCreateAgreementsRequestItemsItemFieldDescription    = big.NewInt(1 << 1)
-	agreementsCreateAgreementsRequestItemsItemFieldQuantity       = big.NewInt(1 << 2)
-	agreementsCreateAgreementsRequestItemsItemFieldUnitPrice      = big.NewInt(1 << 3)
-	agreementsCreateAgreementsRequestItemsItemFieldVatRatePercent = big.NewInt(1 << 4)
+	agreementsCreateAgreementsRequestItemsItemFieldItemID            = big.NewInt(1 << 0)
+	agreementsCreateAgreementsRequestItemsItemFieldDescription       = big.NewInt(1 << 1)
+	agreementsCreateAgreementsRequestItemsItemFieldQuantity          = big.NewInt(1 << 2)
+	agreementsCreateAgreementsRequestItemsItemFieldUnitPrice         = big.NewInt(1 << 3)
+	agreementsCreateAgreementsRequestItemsItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	agreementsCreateAgreementsRequestItemsItemFieldVatClassifierCode = big.NewInt(1 << 5)
 )
 
 type AgreementsCreateAgreementsRequestItemsItem struct {
-	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description    string  `json:"description" url:"description"`
-	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
-	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice         *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1351,6 +1353,13 @@ func (a *AgreementsCreateAgreementsRequestItemsItem) GetVatRatePercent() *string
 		return nil
 	}
 	return a.VatRatePercent
+}
+
+func (a *AgreementsCreateAgreementsRequestItemsItem) GetVatClassifierCode() *string {
+	if a == nil {
+		return nil
+	}
+	return a.VatClassifierCode
 }
 
 func (a *AgreementsCreateAgreementsRequestItemsItem) GetExtraProperties() map[string]interface{} {
@@ -1400,6 +1409,13 @@ func (a *AgreementsCreateAgreementsRequestItemsItem) SetUnitPrice(unitPrice *str
 func (a *AgreementsCreateAgreementsRequestItemsItem) SetVatRatePercent(vatRatePercent *string) {
 	a.VatRatePercent = vatRatePercent
 	a.require(agreementsCreateAgreementsRequestItemsItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsCreateAgreementsRequestItemsItem) SetVatClassifierCode(vatClassifierCode *string) {
+	a.VatClassifierCode = vatClassifierCode
+	a.require(agreementsCreateAgreementsRequestItemsItemFieldVatClassifierCode)
 }
 
 func (a *AgreementsCreateAgreementsRequestItemsItem) UnmarshalJSON(data []byte) error {
@@ -1923,21 +1939,23 @@ func (a AgreementsCreateAgreementsResponseBillingPeriod) Ptr() *AgreementsCreate
 }
 
 var (
-	agreementsCreateAgreementsResponseItemsItemFieldID             = big.NewInt(1 << 0)
-	agreementsCreateAgreementsResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
-	agreementsCreateAgreementsResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
-	agreementsCreateAgreementsResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
-	agreementsCreateAgreementsResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
-	agreementsCreateAgreementsResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
+	agreementsCreateAgreementsResponseItemsItemFieldID                = big.NewInt(1 << 0)
+	agreementsCreateAgreementsResponseItemsItemFieldItemID            = big.NewInt(1 << 1)
+	agreementsCreateAgreementsResponseItemsItemFieldDescription       = big.NewInt(1 << 2)
+	agreementsCreateAgreementsResponseItemsItemFieldQuantity          = big.NewInt(1 << 3)
+	agreementsCreateAgreementsResponseItemsItemFieldUnitPrice         = big.NewInt(1 << 4)
+	agreementsCreateAgreementsResponseItemsItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	agreementsCreateAgreementsResponseItemsItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type AgreementsCreateAgreementsResponseItemsItem struct {
-	ID             string  `json:"id" url:"id"`
-	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description    string  `json:"description" url:"description"`
-	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
-	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice         *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1986,6 +2004,13 @@ func (a *AgreementsCreateAgreementsResponseItemsItem) GetVatRatePercent() *strin
 		return nil
 	}
 	return a.VatRatePercent
+}
+
+func (a *AgreementsCreateAgreementsResponseItemsItem) GetVatClassifierCode() *string {
+	if a == nil {
+		return nil
+	}
+	return a.VatClassifierCode
 }
 
 func (a *AgreementsCreateAgreementsResponseItemsItem) GetExtraProperties() map[string]interface{} {
@@ -2042,6 +2067,13 @@ func (a *AgreementsCreateAgreementsResponseItemsItem) SetUnitPrice(unitPrice *st
 func (a *AgreementsCreateAgreementsResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
 	a.VatRatePercent = vatRatePercent
 	a.require(agreementsCreateAgreementsResponseItemsItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsCreateAgreementsResponseItemsItem) SetVatClassifierCode(vatClassifierCode *string) {
+	a.VatClassifierCode = vatClassifierCode
+	a.require(agreementsCreateAgreementsResponseItemsItemFieldVatClassifierCode)
 }
 
 func (a *AgreementsCreateAgreementsResponseItemsItem) UnmarshalJSON(data []byte) error {
@@ -2789,21 +2821,23 @@ func (a AgreementsGetAgreementsResponseBillingPeriod) Ptr() *AgreementsGetAgreem
 }
 
 var (
-	agreementsGetAgreementsResponseItemsItemFieldID             = big.NewInt(1 << 0)
-	agreementsGetAgreementsResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
-	agreementsGetAgreementsResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
-	agreementsGetAgreementsResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
-	agreementsGetAgreementsResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
-	agreementsGetAgreementsResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
+	agreementsGetAgreementsResponseItemsItemFieldID                = big.NewInt(1 << 0)
+	agreementsGetAgreementsResponseItemsItemFieldItemID            = big.NewInt(1 << 1)
+	agreementsGetAgreementsResponseItemsItemFieldDescription       = big.NewInt(1 << 2)
+	agreementsGetAgreementsResponseItemsItemFieldQuantity          = big.NewInt(1 << 3)
+	agreementsGetAgreementsResponseItemsItemFieldUnitPrice         = big.NewInt(1 << 4)
+	agreementsGetAgreementsResponseItemsItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	agreementsGetAgreementsResponseItemsItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type AgreementsGetAgreementsResponseItemsItem struct {
-	ID             string  `json:"id" url:"id"`
-	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description    string  `json:"description" url:"description"`
-	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
-	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice         *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2852,6 +2886,13 @@ func (a *AgreementsGetAgreementsResponseItemsItem) GetVatRatePercent() *string {
 		return nil
 	}
 	return a.VatRatePercent
+}
+
+func (a *AgreementsGetAgreementsResponseItemsItem) GetVatClassifierCode() *string {
+	if a == nil {
+		return nil
+	}
+	return a.VatClassifierCode
 }
 
 func (a *AgreementsGetAgreementsResponseItemsItem) GetExtraProperties() map[string]interface{} {
@@ -2908,6 +2949,13 @@ func (a *AgreementsGetAgreementsResponseItemsItem) SetUnitPrice(unitPrice *strin
 func (a *AgreementsGetAgreementsResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
 	a.VatRatePercent = vatRatePercent
 	a.require(agreementsGetAgreementsResponseItemsItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsGetAgreementsResponseItemsItem) SetVatClassifierCode(vatClassifierCode *string) {
+	a.VatClassifierCode = vatClassifierCode
+	a.require(agreementsGetAgreementsResponseItemsItemFieldVatClassifierCode)
 }
 
 func (a *AgreementsGetAgreementsResponseItemsItem) UnmarshalJSON(data []byte) error {
@@ -4602,21 +4650,23 @@ func (a AgreementsUpdateAgreementsResponseBillingPeriod) Ptr() *AgreementsUpdate
 }
 
 var (
-	agreementsUpdateAgreementsResponseItemsItemFieldID             = big.NewInt(1 << 0)
-	agreementsUpdateAgreementsResponseItemsItemFieldItemID         = big.NewInt(1 << 1)
-	agreementsUpdateAgreementsResponseItemsItemFieldDescription    = big.NewInt(1 << 2)
-	agreementsUpdateAgreementsResponseItemsItemFieldQuantity       = big.NewInt(1 << 3)
-	agreementsUpdateAgreementsResponseItemsItemFieldUnitPrice      = big.NewInt(1 << 4)
-	agreementsUpdateAgreementsResponseItemsItemFieldVatRatePercent = big.NewInt(1 << 5)
+	agreementsUpdateAgreementsResponseItemsItemFieldID                = big.NewInt(1 << 0)
+	agreementsUpdateAgreementsResponseItemsItemFieldItemID            = big.NewInt(1 << 1)
+	agreementsUpdateAgreementsResponseItemsItemFieldDescription       = big.NewInt(1 << 2)
+	agreementsUpdateAgreementsResponseItemsItemFieldQuantity          = big.NewInt(1 << 3)
+	agreementsUpdateAgreementsResponseItemsItemFieldUnitPrice         = big.NewInt(1 << 4)
+	agreementsUpdateAgreementsResponseItemsItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	agreementsUpdateAgreementsResponseItemsItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type AgreementsUpdateAgreementsResponseItemsItem struct {
-	ID             string  `json:"id" url:"id"`
-	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description    string  `json:"description" url:"description"`
-	Quantity       *string `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPrice      *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
-	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          *string `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPrice         *string `json:"unitPrice,omitempty" url:"unitPrice,omitempty"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4665,6 +4715,13 @@ func (a *AgreementsUpdateAgreementsResponseItemsItem) GetVatRatePercent() *strin
 		return nil
 	}
 	return a.VatRatePercent
+}
+
+func (a *AgreementsUpdateAgreementsResponseItemsItem) GetVatClassifierCode() *string {
+	if a == nil {
+		return nil
+	}
+	return a.VatClassifierCode
 }
 
 func (a *AgreementsUpdateAgreementsResponseItemsItem) GetExtraProperties() map[string]interface{} {
@@ -4721,6 +4778,13 @@ func (a *AgreementsUpdateAgreementsResponseItemsItem) SetUnitPrice(unitPrice *st
 func (a *AgreementsUpdateAgreementsResponseItemsItem) SetVatRatePercent(vatRatePercent *string) {
 	a.VatRatePercent = vatRatePercent
 	a.require(agreementsUpdateAgreementsResponseItemsItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsUpdateAgreementsResponseItemsItem) SetVatClassifierCode(vatClassifierCode *string) {
+	a.VatClassifierCode = vatClassifierCode
+	a.require(agreementsUpdateAgreementsResponseItemsItemFieldVatClassifierCode)
 }
 
 func (a *AgreementsUpdateAgreementsResponseItemsItem) UnmarshalJSON(data []byte) error {

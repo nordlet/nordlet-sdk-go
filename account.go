@@ -1924,6 +1924,333 @@ func (m *MembersTransferOwnershipAccountRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	oauthAuthorizeApproveAccountRequestFieldClientID            = big.NewInt(1 << 0)
+	oauthAuthorizeApproveAccountRequestFieldRedirectURI         = big.NewInt(1 << 1)
+	oauthAuthorizeApproveAccountRequestFieldResponseType        = big.NewInt(1 << 2)
+	oauthAuthorizeApproveAccountRequestFieldCodeChallenge       = big.NewInt(1 << 3)
+	oauthAuthorizeApproveAccountRequestFieldCodeChallengeMethod = big.NewInt(1 << 4)
+	oauthAuthorizeApproveAccountRequestFieldState               = big.NewInt(1 << 5)
+	oauthAuthorizeApproveAccountRequestFieldScope               = big.NewInt(1 << 6)
+	oauthAuthorizeApproveAccountRequestFieldResource            = big.NewInt(1 << 7)
+)
+
+type OauthAuthorizeApproveAccountRequest struct {
+	ClientID            string  `json:"clientId" url:"-"`
+	RedirectURI         *string `json:"redirectUri,omitempty" url:"-"`
+	ResponseType        *string `json:"responseType,omitempty" url:"-"`
+	CodeChallenge       *string `json:"codeChallenge,omitempty" url:"-"`
+	CodeChallengeMethod *string `json:"codeChallengeMethod,omitempty" url:"-"`
+	State               *string `json:"state,omitempty" url:"-"`
+	Scope               *string `json:"scope,omitempty" url:"-"`
+	Resource            *string `json:"resource,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (o *OauthAuthorizeApproveAccountRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
+	}
+	o.explicitFields.Or(o.explicitFields, field)
+}
+
+// SetClientID sets the ClientID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetClientID(clientID string) {
+	o.ClientID = clientID
+	o.require(oauthAuthorizeApproveAccountRequestFieldClientID)
+}
+
+// SetRedirectURI sets the RedirectURI field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetRedirectURI(redirectURI *string) {
+	o.RedirectURI = redirectURI
+	o.require(oauthAuthorizeApproveAccountRequestFieldRedirectURI)
+}
+
+// SetResponseType sets the ResponseType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetResponseType(responseType *string) {
+	o.ResponseType = responseType
+	o.require(oauthAuthorizeApproveAccountRequestFieldResponseType)
+}
+
+// SetCodeChallenge sets the CodeChallenge field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetCodeChallenge(codeChallenge *string) {
+	o.CodeChallenge = codeChallenge
+	o.require(oauthAuthorizeApproveAccountRequestFieldCodeChallenge)
+}
+
+// SetCodeChallengeMethod sets the CodeChallengeMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetCodeChallengeMethod(codeChallengeMethod *string) {
+	o.CodeChallengeMethod = codeChallengeMethod
+	o.require(oauthAuthorizeApproveAccountRequestFieldCodeChallengeMethod)
+}
+
+// SetState sets the State field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetState(state *string) {
+	o.State = state
+	o.require(oauthAuthorizeApproveAccountRequestFieldState)
+}
+
+// SetScope sets the Scope field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetScope(scope *string) {
+	o.Scope = scope
+	o.require(oauthAuthorizeApproveAccountRequestFieldScope)
+}
+
+// SetResource sets the Resource field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountRequest) SetResource(resource *string) {
+	o.Resource = resource
+	o.require(oauthAuthorizeApproveAccountRequestFieldResource)
+}
+
+func (o *OauthAuthorizeApproveAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OauthAuthorizeApproveAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*o = OauthAuthorizeApproveAccountRequest(body)
+	return nil
+}
+
+func (o *OauthAuthorizeApproveAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed OauthAuthorizeApproveAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*o),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	oauthAuthorizeDenyAccountRequestFieldClientID            = big.NewInt(1 << 0)
+	oauthAuthorizeDenyAccountRequestFieldRedirectURI         = big.NewInt(1 << 1)
+	oauthAuthorizeDenyAccountRequestFieldResponseType        = big.NewInt(1 << 2)
+	oauthAuthorizeDenyAccountRequestFieldCodeChallenge       = big.NewInt(1 << 3)
+	oauthAuthorizeDenyAccountRequestFieldCodeChallengeMethod = big.NewInt(1 << 4)
+	oauthAuthorizeDenyAccountRequestFieldState               = big.NewInt(1 << 5)
+	oauthAuthorizeDenyAccountRequestFieldScope               = big.NewInt(1 << 6)
+	oauthAuthorizeDenyAccountRequestFieldResource            = big.NewInt(1 << 7)
+)
+
+type OauthAuthorizeDenyAccountRequest struct {
+	ClientID            string  `json:"clientId" url:"-"`
+	RedirectURI         *string `json:"redirectUri,omitempty" url:"-"`
+	ResponseType        *string `json:"responseType,omitempty" url:"-"`
+	CodeChallenge       *string `json:"codeChallenge,omitempty" url:"-"`
+	CodeChallengeMethod *string `json:"codeChallengeMethod,omitempty" url:"-"`
+	State               *string `json:"state,omitempty" url:"-"`
+	Scope               *string `json:"scope,omitempty" url:"-"`
+	Resource            *string `json:"resource,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (o *OauthAuthorizeDenyAccountRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
+	}
+	o.explicitFields.Or(o.explicitFields, field)
+}
+
+// SetClientID sets the ClientID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetClientID(clientID string) {
+	o.ClientID = clientID
+	o.require(oauthAuthorizeDenyAccountRequestFieldClientID)
+}
+
+// SetRedirectURI sets the RedirectURI field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetRedirectURI(redirectURI *string) {
+	o.RedirectURI = redirectURI
+	o.require(oauthAuthorizeDenyAccountRequestFieldRedirectURI)
+}
+
+// SetResponseType sets the ResponseType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetResponseType(responseType *string) {
+	o.ResponseType = responseType
+	o.require(oauthAuthorizeDenyAccountRequestFieldResponseType)
+}
+
+// SetCodeChallenge sets the CodeChallenge field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetCodeChallenge(codeChallenge *string) {
+	o.CodeChallenge = codeChallenge
+	o.require(oauthAuthorizeDenyAccountRequestFieldCodeChallenge)
+}
+
+// SetCodeChallengeMethod sets the CodeChallengeMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetCodeChallengeMethod(codeChallengeMethod *string) {
+	o.CodeChallengeMethod = codeChallengeMethod
+	o.require(oauthAuthorizeDenyAccountRequestFieldCodeChallengeMethod)
+}
+
+// SetState sets the State field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetState(state *string) {
+	o.State = state
+	o.require(oauthAuthorizeDenyAccountRequestFieldState)
+}
+
+// SetScope sets the Scope field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetScope(scope *string) {
+	o.Scope = scope
+	o.require(oauthAuthorizeDenyAccountRequestFieldScope)
+}
+
+// SetResource sets the Resource field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountRequest) SetResource(resource *string) {
+	o.Resource = resource
+	o.require(oauthAuthorizeDenyAccountRequestFieldResource)
+}
+
+func (o *OauthAuthorizeDenyAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OauthAuthorizeDenyAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*o = OauthAuthorizeDenyAccountRequest(body)
+	return nil
+}
+
+func (o *OauthAuthorizeDenyAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed OauthAuthorizeDenyAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*o),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	oauthAuthorizeDescribeAccountRequestFieldClientID            = big.NewInt(1 << 0)
+	oauthAuthorizeDescribeAccountRequestFieldRedirectURI         = big.NewInt(1 << 1)
+	oauthAuthorizeDescribeAccountRequestFieldResponseType        = big.NewInt(1 << 2)
+	oauthAuthorizeDescribeAccountRequestFieldCodeChallenge       = big.NewInt(1 << 3)
+	oauthAuthorizeDescribeAccountRequestFieldCodeChallengeMethod = big.NewInt(1 << 4)
+	oauthAuthorizeDescribeAccountRequestFieldState               = big.NewInt(1 << 5)
+	oauthAuthorizeDescribeAccountRequestFieldScope               = big.NewInt(1 << 6)
+	oauthAuthorizeDescribeAccountRequestFieldResource            = big.NewInt(1 << 7)
+)
+
+type OauthAuthorizeDescribeAccountRequest struct {
+	ClientID            string  `json:"clientId" url:"-"`
+	RedirectURI         *string `json:"redirectUri,omitempty" url:"-"`
+	ResponseType        *string `json:"responseType,omitempty" url:"-"`
+	CodeChallenge       *string `json:"codeChallenge,omitempty" url:"-"`
+	CodeChallengeMethod *string `json:"codeChallengeMethod,omitempty" url:"-"`
+	State               *string `json:"state,omitempty" url:"-"`
+	Scope               *string `json:"scope,omitempty" url:"-"`
+	Resource            *string `json:"resource,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (o *OauthAuthorizeDescribeAccountRequest) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
+	}
+	o.explicitFields.Or(o.explicitFields, field)
+}
+
+// SetClientID sets the ClientID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetClientID(clientID string) {
+	o.ClientID = clientID
+	o.require(oauthAuthorizeDescribeAccountRequestFieldClientID)
+}
+
+// SetRedirectURI sets the RedirectURI field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetRedirectURI(redirectURI *string) {
+	o.RedirectURI = redirectURI
+	o.require(oauthAuthorizeDescribeAccountRequestFieldRedirectURI)
+}
+
+// SetResponseType sets the ResponseType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetResponseType(responseType *string) {
+	o.ResponseType = responseType
+	o.require(oauthAuthorizeDescribeAccountRequestFieldResponseType)
+}
+
+// SetCodeChallenge sets the CodeChallenge field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetCodeChallenge(codeChallenge *string) {
+	o.CodeChallenge = codeChallenge
+	o.require(oauthAuthorizeDescribeAccountRequestFieldCodeChallenge)
+}
+
+// SetCodeChallengeMethod sets the CodeChallengeMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetCodeChallengeMethod(codeChallengeMethod *string) {
+	o.CodeChallengeMethod = codeChallengeMethod
+	o.require(oauthAuthorizeDescribeAccountRequestFieldCodeChallengeMethod)
+}
+
+// SetState sets the State field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetState(state *string) {
+	o.State = state
+	o.require(oauthAuthorizeDescribeAccountRequestFieldState)
+}
+
+// SetScope sets the Scope field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetScope(scope *string) {
+	o.Scope = scope
+	o.require(oauthAuthorizeDescribeAccountRequestFieldScope)
+}
+
+// SetResource sets the Resource field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountRequest) SetResource(resource *string) {
+	o.Resource = resource
+	o.require(oauthAuthorizeDescribeAccountRequestFieldResource)
+}
+
+func (o *OauthAuthorizeDescribeAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler OauthAuthorizeDescribeAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*o = OauthAuthorizeDescribeAccountRequest(body)
+	return nil
+}
+
+func (o *OauthAuthorizeDescribeAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed OauthAuthorizeDescribeAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*o),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	profileUpdateAccountRequestFieldName = big.NewInt(1 << 0)
 )
 
@@ -2470,9 +2797,8 @@ var (
 	aPIKeysListAccountResponseRowsItemFieldLastUsedAt      = big.NewInt(1 << 3)
 	aPIKeysListAccountResponseRowsItemFieldExpiresAt       = big.NewInt(1 << 4)
 	aPIKeysListAccountResponseRowsItemFieldReplacedByKeyID = big.NewInt(1 << 5)
-	aPIKeysListAccountResponseRowsItemFieldCreatedByUserID = big.NewInt(1 << 6)
-	aPIKeysListAccountResponseRowsItemFieldRevokedAt       = big.NewInt(1 << 7)
-	aPIKeysListAccountResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 8)
+	aPIKeysListAccountResponseRowsItemFieldRevokedAt       = big.NewInt(1 << 6)
+	aPIKeysListAccountResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 7)
 )
 
 type APIKeysListAccountResponseRowsItem struct {
@@ -2482,7 +2808,6 @@ type APIKeysListAccountResponseRowsItem struct {
 	LastUsedAt      *time.Time `json:"lastUsedAt,omitempty" url:"lastUsedAt,omitempty"`
 	ExpiresAt       *time.Time `json:"expiresAt,omitempty" url:"expiresAt,omitempty"`
 	ReplacedByKeyID *string    `json:"replacedByKeyId,omitempty" url:"replacedByKeyId,omitempty"`
-	CreatedByUserID *string    `json:"createdByUserId,omitempty" url:"createdByUserId,omitempty"`
 	RevokedAt       *time.Time `json:"revokedAt,omitempty" url:"revokedAt,omitempty"`
 	CreatedAt       time.Time  `json:"createdAt" url:"createdAt"`
 
@@ -2533,13 +2858,6 @@ func (a *APIKeysListAccountResponseRowsItem) GetReplacedByKeyID() *string {
 		return nil
 	}
 	return a.ReplacedByKeyID
-}
-
-func (a *APIKeysListAccountResponseRowsItem) GetCreatedByUserID() *string {
-	if a == nil {
-		return nil
-	}
-	return a.CreatedByUserID
 }
 
 func (a *APIKeysListAccountResponseRowsItem) GetRevokedAt() *time.Time {
@@ -2610,13 +2928,6 @@ func (a *APIKeysListAccountResponseRowsItem) SetExpiresAt(expiresAt *time.Time) 
 func (a *APIKeysListAccountResponseRowsItem) SetReplacedByKeyID(replacedByKeyID *string) {
 	a.ReplacedByKeyID = replacedByKeyID
 	a.require(aPIKeysListAccountResponseRowsItemFieldReplacedByKeyID)
-}
-
-// SetCreatedByUserID sets the CreatedByUserID field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (a *APIKeysListAccountResponseRowsItem) SetCreatedByUserID(createdByUserID *string) {
-	a.CreatedByUserID = createdByUserID
-	a.require(aPIKeysListAccountResponseRowsItemFieldCreatedByUserID)
 }
 
 // SetRevokedAt sets the RevokedAt field and marks it as non-optional;
@@ -4125,6 +4436,7 @@ const (
 	CompaniesCreateAccountRequestDefaultInvoiceLocaleHi CompaniesCreateAccountRequestDefaultInvoiceLocale = "hi"
 	CompaniesCreateAccountRequestDefaultInvoiceLocaleRu CompaniesCreateAccountRequestDefaultInvoiceLocale = "ru"
 	CompaniesCreateAccountRequestDefaultInvoiceLocaleTr CompaniesCreateAccountRequestDefaultInvoiceLocale = "tr"
+	CompaniesCreateAccountRequestDefaultInvoiceLocaleUk CompaniesCreateAccountRequestDefaultInvoiceLocale = "uk"
 )
 
 func NewCompaniesCreateAccountRequestDefaultInvoiceLocaleFromString(s string) (CompaniesCreateAccountRequestDefaultInvoiceLocale, error) {
@@ -4193,6 +4505,8 @@ func NewCompaniesCreateAccountRequestDefaultInvoiceLocaleFromString(s string) (C
 		return CompaniesCreateAccountRequestDefaultInvoiceLocaleRu, nil
 	case "tr":
 		return CompaniesCreateAccountRequestDefaultInvoiceLocaleTr, nil
+	case "uk":
+		return CompaniesCreateAccountRequestDefaultInvoiceLocaleUk, nil
 	}
 	var t CompaniesCreateAccountRequestDefaultInvoiceLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -5773,6 +6087,7 @@ const (
 	CompaniesUpdateAccountRequestDefaultInvoiceLocaleHi CompaniesUpdateAccountRequestDefaultInvoiceLocale = "hi"
 	CompaniesUpdateAccountRequestDefaultInvoiceLocaleRu CompaniesUpdateAccountRequestDefaultInvoiceLocale = "ru"
 	CompaniesUpdateAccountRequestDefaultInvoiceLocaleTr CompaniesUpdateAccountRequestDefaultInvoiceLocale = "tr"
+	CompaniesUpdateAccountRequestDefaultInvoiceLocaleUk CompaniesUpdateAccountRequestDefaultInvoiceLocale = "uk"
 )
 
 func NewCompaniesUpdateAccountRequestDefaultInvoiceLocaleFromString(s string) (CompaniesUpdateAccountRequestDefaultInvoiceLocale, error) {
@@ -5841,6 +6156,8 @@ func NewCompaniesUpdateAccountRequestDefaultInvoiceLocaleFromString(s string) (C
 		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleRu, nil
 	case "tr":
 		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleTr, nil
+	case "uk":
+		return CompaniesUpdateAccountRequestDefaultInvoiceLocaleUk, nil
 	}
 	var t CompaniesUpdateAccountRequestDefaultInvoiceLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7250,6 +7567,36 @@ const (
 	EmailChangeRequestAccountRequestLocaleEn EmailChangeRequestAccountRequestLocale = "en"
 	EmailChangeRequestAccountRequestLocaleLt EmailChangeRequestAccountRequestLocale = "lt"
 	EmailChangeRequestAccountRequestLocaleDe EmailChangeRequestAccountRequestLocale = "de"
+	EmailChangeRequestAccountRequestLocaleFr EmailChangeRequestAccountRequestLocale = "fr"
+	EmailChangeRequestAccountRequestLocaleEs EmailChangeRequestAccountRequestLocale = "es"
+	EmailChangeRequestAccountRequestLocaleIt EmailChangeRequestAccountRequestLocale = "it"
+	EmailChangeRequestAccountRequestLocalePt EmailChangeRequestAccountRequestLocale = "pt"
+	EmailChangeRequestAccountRequestLocaleNl EmailChangeRequestAccountRequestLocale = "nl"
+	EmailChangeRequestAccountRequestLocalePl EmailChangeRequestAccountRequestLocale = "pl"
+	EmailChangeRequestAccountRequestLocaleSv EmailChangeRequestAccountRequestLocale = "sv"
+	EmailChangeRequestAccountRequestLocaleDa EmailChangeRequestAccountRequestLocale = "da"
+	EmailChangeRequestAccountRequestLocaleNo EmailChangeRequestAccountRequestLocale = "no"
+	EmailChangeRequestAccountRequestLocaleFi EmailChangeRequestAccountRequestLocale = "fi"
+	EmailChangeRequestAccountRequestLocaleEt EmailChangeRequestAccountRequestLocale = "et"
+	EmailChangeRequestAccountRequestLocaleLv EmailChangeRequestAccountRequestLocale = "lv"
+	EmailChangeRequestAccountRequestLocaleCs EmailChangeRequestAccountRequestLocale = "cs"
+	EmailChangeRequestAccountRequestLocaleSk EmailChangeRequestAccountRequestLocale = "sk"
+	EmailChangeRequestAccountRequestLocaleHu EmailChangeRequestAccountRequestLocale = "hu"
+	EmailChangeRequestAccountRequestLocaleRo EmailChangeRequestAccountRequestLocale = "ro"
+	EmailChangeRequestAccountRequestLocaleBg EmailChangeRequestAccountRequestLocale = "bg"
+	EmailChangeRequestAccountRequestLocaleHr EmailChangeRequestAccountRequestLocale = "hr"
+	EmailChangeRequestAccountRequestLocaleSl EmailChangeRequestAccountRequestLocale = "sl"
+	EmailChangeRequestAccountRequestLocaleEl EmailChangeRequestAccountRequestLocale = "el"
+	EmailChangeRequestAccountRequestLocaleMt EmailChangeRequestAccountRequestLocale = "mt"
+	EmailChangeRequestAccountRequestLocaleIs EmailChangeRequestAccountRequestLocale = "is"
+	EmailChangeRequestAccountRequestLocaleGa EmailChangeRequestAccountRequestLocale = "ga"
+	EmailChangeRequestAccountRequestLocaleZh EmailChangeRequestAccountRequestLocale = "zh"
+	EmailChangeRequestAccountRequestLocaleJa EmailChangeRequestAccountRequestLocale = "ja"
+	EmailChangeRequestAccountRequestLocaleAr EmailChangeRequestAccountRequestLocale = "ar"
+	EmailChangeRequestAccountRequestLocaleHi EmailChangeRequestAccountRequestLocale = "hi"
+	EmailChangeRequestAccountRequestLocaleRu EmailChangeRequestAccountRequestLocale = "ru"
+	EmailChangeRequestAccountRequestLocaleTr EmailChangeRequestAccountRequestLocale = "tr"
+	EmailChangeRequestAccountRequestLocaleUk EmailChangeRequestAccountRequestLocale = "uk"
 )
 
 func NewEmailChangeRequestAccountRequestLocaleFromString(s string) (EmailChangeRequestAccountRequestLocale, error) {
@@ -7260,6 +7607,66 @@ func NewEmailChangeRequestAccountRequestLocaleFromString(s string) (EmailChangeR
 		return EmailChangeRequestAccountRequestLocaleLt, nil
 	case "de":
 		return EmailChangeRequestAccountRequestLocaleDe, nil
+	case "fr":
+		return EmailChangeRequestAccountRequestLocaleFr, nil
+	case "es":
+		return EmailChangeRequestAccountRequestLocaleEs, nil
+	case "it":
+		return EmailChangeRequestAccountRequestLocaleIt, nil
+	case "pt":
+		return EmailChangeRequestAccountRequestLocalePt, nil
+	case "nl":
+		return EmailChangeRequestAccountRequestLocaleNl, nil
+	case "pl":
+		return EmailChangeRequestAccountRequestLocalePl, nil
+	case "sv":
+		return EmailChangeRequestAccountRequestLocaleSv, nil
+	case "da":
+		return EmailChangeRequestAccountRequestLocaleDa, nil
+	case "no":
+		return EmailChangeRequestAccountRequestLocaleNo, nil
+	case "fi":
+		return EmailChangeRequestAccountRequestLocaleFi, nil
+	case "et":
+		return EmailChangeRequestAccountRequestLocaleEt, nil
+	case "lv":
+		return EmailChangeRequestAccountRequestLocaleLv, nil
+	case "cs":
+		return EmailChangeRequestAccountRequestLocaleCs, nil
+	case "sk":
+		return EmailChangeRequestAccountRequestLocaleSk, nil
+	case "hu":
+		return EmailChangeRequestAccountRequestLocaleHu, nil
+	case "ro":
+		return EmailChangeRequestAccountRequestLocaleRo, nil
+	case "bg":
+		return EmailChangeRequestAccountRequestLocaleBg, nil
+	case "hr":
+		return EmailChangeRequestAccountRequestLocaleHr, nil
+	case "sl":
+		return EmailChangeRequestAccountRequestLocaleSl, nil
+	case "el":
+		return EmailChangeRequestAccountRequestLocaleEl, nil
+	case "mt":
+		return EmailChangeRequestAccountRequestLocaleMt, nil
+	case "is":
+		return EmailChangeRequestAccountRequestLocaleIs, nil
+	case "ga":
+		return EmailChangeRequestAccountRequestLocaleGa, nil
+	case "zh":
+		return EmailChangeRequestAccountRequestLocaleZh, nil
+	case "ja":
+		return EmailChangeRequestAccountRequestLocaleJa, nil
+	case "ar":
+		return EmailChangeRequestAccountRequestLocaleAr, nil
+	case "hi":
+		return EmailChangeRequestAccountRequestLocaleHi, nil
+	case "ru":
+		return EmailChangeRequestAccountRequestLocaleRu, nil
+	case "tr":
+		return EmailChangeRequestAccountRequestLocaleTr, nil
+	case "uk":
+		return EmailChangeRequestAccountRequestLocaleUk, nil
 	}
 	var t EmailChangeRequestAccountRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7360,8 +7767,9 @@ var (
 	exportAccountResponseFieldMemberships        = big.NewInt(1 << 3)
 	exportAccountResponseFieldSessions           = big.NewInt(1 << 4)
 	exportAccountResponseFieldBilling            = big.NewInt(1 << 5)
-	exportAccountResponseFieldCreditTransactions = big.NewInt(1 << 6)
-	exportAccountResponseFieldAuditEntries       = big.NewInt(1 << 7)
+	exportAccountResponseFieldBillingAccounts    = big.NewInt(1 << 6)
+	exportAccountResponseFieldCreditTransactions = big.NewInt(1 << 7)
+	exportAccountResponseFieldAuditEntries       = big.NewInt(1 << 8)
 )
 
 type ExportAccountResponse struct {
@@ -7371,6 +7779,7 @@ type ExportAccountResponse struct {
 	Memberships        []*ExportAccountResponseMembershipsItem        `json:"memberships" url:"memberships"`
 	Sessions           []*ExportAccountResponseSessionsItem           `json:"sessions" url:"sessions"`
 	Billing            *ExportAccountResponseBilling                  `json:"billing,omitempty" url:"billing,omitempty"`
+	BillingAccounts    []*ExportAccountResponseBillingAccountsItem    `json:"billingAccounts" url:"billingAccounts"`
 	CreditTransactions []*ExportAccountResponseCreditTransactionsItem `json:"creditTransactions" url:"creditTransactions"`
 	AuditEntries       []*ExportAccountResponseAuditEntriesItem       `json:"auditEntries" url:"auditEntries"`
 
@@ -7421,6 +7830,13 @@ func (e *ExportAccountResponse) GetBilling() *ExportAccountResponseBilling {
 		return nil
 	}
 	return e.Billing
+}
+
+func (e *ExportAccountResponse) GetBillingAccounts() []*ExportAccountResponseBillingAccountsItem {
+	if e == nil {
+		return nil
+	}
+	return e.BillingAccounts
 }
 
 func (e *ExportAccountResponse) GetCreditTransactions() []*ExportAccountResponseCreditTransactionsItem {
@@ -7491,6 +7907,13 @@ func (e *ExportAccountResponse) SetSessions(sessions []*ExportAccountResponseSes
 func (e *ExportAccountResponse) SetBilling(billing *ExportAccountResponseBilling) {
 	e.Billing = billing
 	e.require(exportAccountResponseFieldBilling)
+}
+
+// SetBillingAccounts sets the BillingAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponse) SetBillingAccounts(billingAccounts []*ExportAccountResponseBillingAccountsItem) {
+	e.BillingAccounts = billingAccounts
+	e.require(exportAccountResponseFieldBillingAccounts)
 }
 
 // SetCreditTransactions sets the CreditTransactions field and marks it as non-optional;
@@ -7890,6 +8313,204 @@ func (e *ExportAccountResponseBilling) String() string {
 }
 
 var (
+	exportAccountResponseBillingAccountsItemFieldSite         = big.NewInt(1 << 0)
+	exportAccountResponseBillingAccountsItemFieldStatus       = big.NewInt(1 << 1)
+	exportAccountResponseBillingAccountsItemFieldPlan         = big.NewInt(1 << 2)
+	exportAccountResponseBillingAccountsItemFieldBalanceCents = big.NewInt(1 << 3)
+	exportAccountResponseBillingAccountsItemFieldTrialEndsAt  = big.NewInt(1 << 4)
+	exportAccountResponseBillingAccountsItemFieldFirstTopUpAt = big.NewInt(1 << 5)
+)
+
+type ExportAccountResponseBillingAccountsItem struct {
+	Site         ExportAccountResponseBillingAccountsItemSite `json:"site" url:"site"`
+	Status       string                                       `json:"status" url:"status"`
+	Plan         string                                       `json:"plan" url:"plan"`
+	BalanceCents int64                                        `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                                   `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	FirstTopUpAt *time.Time                                   `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) GetSite() ExportAccountResponseBillingAccountsItemSite {
+	if e == nil {
+		return ""
+	}
+	return e.Site
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) GetStatus() string {
+	if e == nil {
+		return ""
+	}
+	return e.Status
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) GetPlan() string {
+	if e == nil {
+		return ""
+	}
+	return e.Plan
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) GetBalanceCents() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.BalanceCents
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) GetTrialEndsAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.TrialEndsAt
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) GetFirstTopUpAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.FirstTopUpAt
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseBillingAccountsItem) SetSite(site ExportAccountResponseBillingAccountsItemSite) {
+	e.Site = site
+	e.require(exportAccountResponseBillingAccountsItemFieldSite)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseBillingAccountsItem) SetStatus(status string) {
+	e.Status = status
+	e.require(exportAccountResponseBillingAccountsItemFieldStatus)
+}
+
+// SetPlan sets the Plan field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseBillingAccountsItem) SetPlan(plan string) {
+	e.Plan = plan
+	e.require(exportAccountResponseBillingAccountsItemFieldPlan)
+}
+
+// SetBalanceCents sets the BalanceCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseBillingAccountsItem) SetBalanceCents(balanceCents int64) {
+	e.BalanceCents = balanceCents
+	e.require(exportAccountResponseBillingAccountsItemFieldBalanceCents)
+}
+
+// SetTrialEndsAt sets the TrialEndsAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseBillingAccountsItem) SetTrialEndsAt(trialEndsAt *time.Time) {
+	e.TrialEndsAt = trialEndsAt
+	e.require(exportAccountResponseBillingAccountsItemFieldTrialEndsAt)
+}
+
+// SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseBillingAccountsItem) SetFirstTopUpAt(firstTopUpAt *time.Time) {
+	e.FirstTopUpAt = firstTopUpAt
+	e.require(exportAccountResponseBillingAccountsItemFieldFirstTopUpAt)
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) UnmarshalJSON(data []byte) error {
+	type embed ExportAccountResponseBillingAccountsItem
+	var unmarshaler = struct {
+		embed
+		TrialEndsAt  *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FirstTopUpAt *internal.DateTime `json:"firstTopUpAt,omitempty"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExportAccountResponseBillingAccountsItem(unmarshaler.embed)
+	e.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	e.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) MarshalJSON() ([]byte, error) {
+	type embed ExportAccountResponseBillingAccountsItem
+	var marshaler = struct {
+		embed
+		TrialEndsAt  *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FirstTopUpAt *internal.DateTime `json:"firstTopUpAt,omitempty"`
+	}{
+		embed:        embed(*e),
+		TrialEndsAt:  internal.NewOptionalDateTime(e.TrialEndsAt),
+		FirstTopUpAt: internal.NewOptionalDateTime(e.FirstTopUpAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExportAccountResponseBillingAccountsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type ExportAccountResponseBillingAccountsItemSite string
+
+const (
+	ExportAccountResponseBillingAccountsItemSiteApp     ExportAccountResponseBillingAccountsItemSite = "app"
+	ExportAccountResponseBillingAccountsItemSiteInvoice ExportAccountResponseBillingAccountsItemSite = "invoice"
+)
+
+func NewExportAccountResponseBillingAccountsItemSiteFromString(s string) (ExportAccountResponseBillingAccountsItemSite, error) {
+	switch s {
+	case "app":
+		return ExportAccountResponseBillingAccountsItemSiteApp, nil
+	case "invoice":
+		return ExportAccountResponseBillingAccountsItemSiteInvoice, nil
+	}
+	var t ExportAccountResponseBillingAccountsItemSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e ExportAccountResponseBillingAccountsItemSite) Ptr() *ExportAccountResponseBillingAccountsItemSite {
+	return &e
+}
+
+var (
 	exportAccountResponseConsentFieldTermsVersion        = big.NewInt(1 << 0)
 	exportAccountResponseConsentFieldTermsAcceptedAt     = big.NewInt(1 << 1)
 	exportAccountResponseConsentFieldDpaVersion          = big.NewInt(1 << 2)
@@ -8083,20 +8704,22 @@ func (e *ExportAccountResponseConsent) String() string {
 
 var (
 	exportAccountResponseCreditTransactionsItemFieldID                = big.NewInt(1 << 0)
-	exportAccountResponseCreditTransactionsItemFieldType              = big.NewInt(1 << 1)
-	exportAccountResponseCreditTransactionsItemFieldAmountCents       = big.NewInt(1 << 2)
-	exportAccountResponseCreditTransactionsItemFieldBalanceAfterCents = big.NewInt(1 << 3)
-	exportAccountResponseCreditTransactionsItemFieldDescription       = big.NewInt(1 << 4)
-	exportAccountResponseCreditTransactionsItemFieldCreatedAt         = big.NewInt(1 << 5)
+	exportAccountResponseCreditTransactionsItemFieldSite              = big.NewInt(1 << 1)
+	exportAccountResponseCreditTransactionsItemFieldType              = big.NewInt(1 << 2)
+	exportAccountResponseCreditTransactionsItemFieldAmountCents       = big.NewInt(1 << 3)
+	exportAccountResponseCreditTransactionsItemFieldBalanceAfterCents = big.NewInt(1 << 4)
+	exportAccountResponseCreditTransactionsItemFieldDescription       = big.NewInt(1 << 5)
+	exportAccountResponseCreditTransactionsItemFieldCreatedAt         = big.NewInt(1 << 6)
 )
 
 type ExportAccountResponseCreditTransactionsItem struct {
-	ID                string    `json:"id" url:"id"`
-	Type              string    `json:"type" url:"type"`
-	AmountCents       int64     `json:"amountCents" url:"amountCents"`
-	BalanceAfterCents int64     `json:"balanceAfterCents" url:"balanceAfterCents"`
-	Description       string    `json:"description" url:"description"`
-	CreatedAt         time.Time `json:"createdAt" url:"createdAt"`
+	ID                string                                          `json:"id" url:"id"`
+	Site              ExportAccountResponseCreditTransactionsItemSite `json:"site" url:"site"`
+	Type              string                                          `json:"type" url:"type"`
+	AmountCents       int64                                           `json:"amountCents" url:"amountCents"`
+	BalanceAfterCents int64                                           `json:"balanceAfterCents" url:"balanceAfterCents"`
+	Description       string                                          `json:"description" url:"description"`
+	CreatedAt         time.Time                                       `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8110,6 +8733,13 @@ func (e *ExportAccountResponseCreditTransactionsItem) GetID() string {
 		return ""
 	}
 	return e.ID
+}
+
+func (e *ExportAccountResponseCreditTransactionsItem) GetSite() ExportAccountResponseCreditTransactionsItemSite {
+	if e == nil {
+		return ""
+	}
+	return e.Site
 }
 
 func (e *ExportAccountResponseCreditTransactionsItem) GetType() string {
@@ -8166,6 +8796,13 @@ func (e *ExportAccountResponseCreditTransactionsItem) require(field *big.Int) {
 func (e *ExportAccountResponseCreditTransactionsItem) SetID(id string) {
 	e.ID = id
 	e.require(exportAccountResponseCreditTransactionsItemFieldID)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseCreditTransactionsItem) SetSite(site ExportAccountResponseCreditTransactionsItemSite) {
+	e.Site = site
+	e.require(exportAccountResponseCreditTransactionsItemFieldSite)
 }
 
 // SetType sets the Type field and marks it as non-optional;
@@ -8251,6 +8888,28 @@ func (e *ExportAccountResponseCreditTransactionsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", e)
+}
+
+type ExportAccountResponseCreditTransactionsItemSite string
+
+const (
+	ExportAccountResponseCreditTransactionsItemSiteApp     ExportAccountResponseCreditTransactionsItemSite = "app"
+	ExportAccountResponseCreditTransactionsItemSiteInvoice ExportAccountResponseCreditTransactionsItemSite = "invoice"
+)
+
+func NewExportAccountResponseCreditTransactionsItemSiteFromString(s string) (ExportAccountResponseCreditTransactionsItemSite, error) {
+	switch s {
+	case "app":
+		return ExportAccountResponseCreditTransactionsItemSiteApp, nil
+	case "invoice":
+		return ExportAccountResponseCreditTransactionsItemSiteInvoice, nil
+	}
+	var t ExportAccountResponseCreditTransactionsItemSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e ExportAccountResponseCreditTransactionsItemSite) Ptr() *ExportAccountResponseCreditTransactionsItemSite {
+	return &e
 }
 
 var (
@@ -8775,6 +9434,36 @@ const (
 	InvitesAcceptAccountRequestLocaleEn InvitesAcceptAccountRequestLocale = "en"
 	InvitesAcceptAccountRequestLocaleLt InvitesAcceptAccountRequestLocale = "lt"
 	InvitesAcceptAccountRequestLocaleDe InvitesAcceptAccountRequestLocale = "de"
+	InvitesAcceptAccountRequestLocaleFr InvitesAcceptAccountRequestLocale = "fr"
+	InvitesAcceptAccountRequestLocaleEs InvitesAcceptAccountRequestLocale = "es"
+	InvitesAcceptAccountRequestLocaleIt InvitesAcceptAccountRequestLocale = "it"
+	InvitesAcceptAccountRequestLocalePt InvitesAcceptAccountRequestLocale = "pt"
+	InvitesAcceptAccountRequestLocaleNl InvitesAcceptAccountRequestLocale = "nl"
+	InvitesAcceptAccountRequestLocalePl InvitesAcceptAccountRequestLocale = "pl"
+	InvitesAcceptAccountRequestLocaleSv InvitesAcceptAccountRequestLocale = "sv"
+	InvitesAcceptAccountRequestLocaleDa InvitesAcceptAccountRequestLocale = "da"
+	InvitesAcceptAccountRequestLocaleNo InvitesAcceptAccountRequestLocale = "no"
+	InvitesAcceptAccountRequestLocaleFi InvitesAcceptAccountRequestLocale = "fi"
+	InvitesAcceptAccountRequestLocaleEt InvitesAcceptAccountRequestLocale = "et"
+	InvitesAcceptAccountRequestLocaleLv InvitesAcceptAccountRequestLocale = "lv"
+	InvitesAcceptAccountRequestLocaleCs InvitesAcceptAccountRequestLocale = "cs"
+	InvitesAcceptAccountRequestLocaleSk InvitesAcceptAccountRequestLocale = "sk"
+	InvitesAcceptAccountRequestLocaleHu InvitesAcceptAccountRequestLocale = "hu"
+	InvitesAcceptAccountRequestLocaleRo InvitesAcceptAccountRequestLocale = "ro"
+	InvitesAcceptAccountRequestLocaleBg InvitesAcceptAccountRequestLocale = "bg"
+	InvitesAcceptAccountRequestLocaleHr InvitesAcceptAccountRequestLocale = "hr"
+	InvitesAcceptAccountRequestLocaleSl InvitesAcceptAccountRequestLocale = "sl"
+	InvitesAcceptAccountRequestLocaleEl InvitesAcceptAccountRequestLocale = "el"
+	InvitesAcceptAccountRequestLocaleMt InvitesAcceptAccountRequestLocale = "mt"
+	InvitesAcceptAccountRequestLocaleIs InvitesAcceptAccountRequestLocale = "is"
+	InvitesAcceptAccountRequestLocaleGa InvitesAcceptAccountRequestLocale = "ga"
+	InvitesAcceptAccountRequestLocaleZh InvitesAcceptAccountRequestLocale = "zh"
+	InvitesAcceptAccountRequestLocaleJa InvitesAcceptAccountRequestLocale = "ja"
+	InvitesAcceptAccountRequestLocaleAr InvitesAcceptAccountRequestLocale = "ar"
+	InvitesAcceptAccountRequestLocaleHi InvitesAcceptAccountRequestLocale = "hi"
+	InvitesAcceptAccountRequestLocaleRu InvitesAcceptAccountRequestLocale = "ru"
+	InvitesAcceptAccountRequestLocaleTr InvitesAcceptAccountRequestLocale = "tr"
+	InvitesAcceptAccountRequestLocaleUk InvitesAcceptAccountRequestLocale = "uk"
 )
 
 func NewInvitesAcceptAccountRequestLocaleFromString(s string) (InvitesAcceptAccountRequestLocale, error) {
@@ -8785,6 +9474,66 @@ func NewInvitesAcceptAccountRequestLocaleFromString(s string) (InvitesAcceptAcco
 		return InvitesAcceptAccountRequestLocaleLt, nil
 	case "de":
 		return InvitesAcceptAccountRequestLocaleDe, nil
+	case "fr":
+		return InvitesAcceptAccountRequestLocaleFr, nil
+	case "es":
+		return InvitesAcceptAccountRequestLocaleEs, nil
+	case "it":
+		return InvitesAcceptAccountRequestLocaleIt, nil
+	case "pt":
+		return InvitesAcceptAccountRequestLocalePt, nil
+	case "nl":
+		return InvitesAcceptAccountRequestLocaleNl, nil
+	case "pl":
+		return InvitesAcceptAccountRequestLocalePl, nil
+	case "sv":
+		return InvitesAcceptAccountRequestLocaleSv, nil
+	case "da":
+		return InvitesAcceptAccountRequestLocaleDa, nil
+	case "no":
+		return InvitesAcceptAccountRequestLocaleNo, nil
+	case "fi":
+		return InvitesAcceptAccountRequestLocaleFi, nil
+	case "et":
+		return InvitesAcceptAccountRequestLocaleEt, nil
+	case "lv":
+		return InvitesAcceptAccountRequestLocaleLv, nil
+	case "cs":
+		return InvitesAcceptAccountRequestLocaleCs, nil
+	case "sk":
+		return InvitesAcceptAccountRequestLocaleSk, nil
+	case "hu":
+		return InvitesAcceptAccountRequestLocaleHu, nil
+	case "ro":
+		return InvitesAcceptAccountRequestLocaleRo, nil
+	case "bg":
+		return InvitesAcceptAccountRequestLocaleBg, nil
+	case "hr":
+		return InvitesAcceptAccountRequestLocaleHr, nil
+	case "sl":
+		return InvitesAcceptAccountRequestLocaleSl, nil
+	case "el":
+		return InvitesAcceptAccountRequestLocaleEl, nil
+	case "mt":
+		return InvitesAcceptAccountRequestLocaleMt, nil
+	case "is":
+		return InvitesAcceptAccountRequestLocaleIs, nil
+	case "ga":
+		return InvitesAcceptAccountRequestLocaleGa, nil
+	case "zh":
+		return InvitesAcceptAccountRequestLocaleZh, nil
+	case "ja":
+		return InvitesAcceptAccountRequestLocaleJa, nil
+	case "ar":
+		return InvitesAcceptAccountRequestLocaleAr, nil
+	case "hi":
+		return InvitesAcceptAccountRequestLocaleHi, nil
+	case "ru":
+		return InvitesAcceptAccountRequestLocaleRu, nil
+	case "tr":
+		return InvitesAcceptAccountRequestLocaleTr, nil
+	case "uk":
+		return InvitesAcceptAccountRequestLocaleUk, nil
 	}
 	var t InvitesAcceptAccountRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -9056,6 +9805,36 @@ const (
 	InvitesCreateAccountRequestLocaleEn InvitesCreateAccountRequestLocale = "en"
 	InvitesCreateAccountRequestLocaleLt InvitesCreateAccountRequestLocale = "lt"
 	InvitesCreateAccountRequestLocaleDe InvitesCreateAccountRequestLocale = "de"
+	InvitesCreateAccountRequestLocaleFr InvitesCreateAccountRequestLocale = "fr"
+	InvitesCreateAccountRequestLocaleEs InvitesCreateAccountRequestLocale = "es"
+	InvitesCreateAccountRequestLocaleIt InvitesCreateAccountRequestLocale = "it"
+	InvitesCreateAccountRequestLocalePt InvitesCreateAccountRequestLocale = "pt"
+	InvitesCreateAccountRequestLocaleNl InvitesCreateAccountRequestLocale = "nl"
+	InvitesCreateAccountRequestLocalePl InvitesCreateAccountRequestLocale = "pl"
+	InvitesCreateAccountRequestLocaleSv InvitesCreateAccountRequestLocale = "sv"
+	InvitesCreateAccountRequestLocaleDa InvitesCreateAccountRequestLocale = "da"
+	InvitesCreateAccountRequestLocaleNo InvitesCreateAccountRequestLocale = "no"
+	InvitesCreateAccountRequestLocaleFi InvitesCreateAccountRequestLocale = "fi"
+	InvitesCreateAccountRequestLocaleEt InvitesCreateAccountRequestLocale = "et"
+	InvitesCreateAccountRequestLocaleLv InvitesCreateAccountRequestLocale = "lv"
+	InvitesCreateAccountRequestLocaleCs InvitesCreateAccountRequestLocale = "cs"
+	InvitesCreateAccountRequestLocaleSk InvitesCreateAccountRequestLocale = "sk"
+	InvitesCreateAccountRequestLocaleHu InvitesCreateAccountRequestLocale = "hu"
+	InvitesCreateAccountRequestLocaleRo InvitesCreateAccountRequestLocale = "ro"
+	InvitesCreateAccountRequestLocaleBg InvitesCreateAccountRequestLocale = "bg"
+	InvitesCreateAccountRequestLocaleHr InvitesCreateAccountRequestLocale = "hr"
+	InvitesCreateAccountRequestLocaleSl InvitesCreateAccountRequestLocale = "sl"
+	InvitesCreateAccountRequestLocaleEl InvitesCreateAccountRequestLocale = "el"
+	InvitesCreateAccountRequestLocaleMt InvitesCreateAccountRequestLocale = "mt"
+	InvitesCreateAccountRequestLocaleIs InvitesCreateAccountRequestLocale = "is"
+	InvitesCreateAccountRequestLocaleGa InvitesCreateAccountRequestLocale = "ga"
+	InvitesCreateAccountRequestLocaleZh InvitesCreateAccountRequestLocale = "zh"
+	InvitesCreateAccountRequestLocaleJa InvitesCreateAccountRequestLocale = "ja"
+	InvitesCreateAccountRequestLocaleAr InvitesCreateAccountRequestLocale = "ar"
+	InvitesCreateAccountRequestLocaleHi InvitesCreateAccountRequestLocale = "hi"
+	InvitesCreateAccountRequestLocaleRu InvitesCreateAccountRequestLocale = "ru"
+	InvitesCreateAccountRequestLocaleTr InvitesCreateAccountRequestLocale = "tr"
+	InvitesCreateAccountRequestLocaleUk InvitesCreateAccountRequestLocale = "uk"
 )
 
 func NewInvitesCreateAccountRequestLocaleFromString(s string) (InvitesCreateAccountRequestLocale, error) {
@@ -9066,6 +9845,66 @@ func NewInvitesCreateAccountRequestLocaleFromString(s string) (InvitesCreateAcco
 		return InvitesCreateAccountRequestLocaleLt, nil
 	case "de":
 		return InvitesCreateAccountRequestLocaleDe, nil
+	case "fr":
+		return InvitesCreateAccountRequestLocaleFr, nil
+	case "es":
+		return InvitesCreateAccountRequestLocaleEs, nil
+	case "it":
+		return InvitesCreateAccountRequestLocaleIt, nil
+	case "pt":
+		return InvitesCreateAccountRequestLocalePt, nil
+	case "nl":
+		return InvitesCreateAccountRequestLocaleNl, nil
+	case "pl":
+		return InvitesCreateAccountRequestLocalePl, nil
+	case "sv":
+		return InvitesCreateAccountRequestLocaleSv, nil
+	case "da":
+		return InvitesCreateAccountRequestLocaleDa, nil
+	case "no":
+		return InvitesCreateAccountRequestLocaleNo, nil
+	case "fi":
+		return InvitesCreateAccountRequestLocaleFi, nil
+	case "et":
+		return InvitesCreateAccountRequestLocaleEt, nil
+	case "lv":
+		return InvitesCreateAccountRequestLocaleLv, nil
+	case "cs":
+		return InvitesCreateAccountRequestLocaleCs, nil
+	case "sk":
+		return InvitesCreateAccountRequestLocaleSk, nil
+	case "hu":
+		return InvitesCreateAccountRequestLocaleHu, nil
+	case "ro":
+		return InvitesCreateAccountRequestLocaleRo, nil
+	case "bg":
+		return InvitesCreateAccountRequestLocaleBg, nil
+	case "hr":
+		return InvitesCreateAccountRequestLocaleHr, nil
+	case "sl":
+		return InvitesCreateAccountRequestLocaleSl, nil
+	case "el":
+		return InvitesCreateAccountRequestLocaleEl, nil
+	case "mt":
+		return InvitesCreateAccountRequestLocaleMt, nil
+	case "is":
+		return InvitesCreateAccountRequestLocaleIs, nil
+	case "ga":
+		return InvitesCreateAccountRequestLocaleGa, nil
+	case "zh":
+		return InvitesCreateAccountRequestLocaleZh, nil
+	case "ja":
+		return InvitesCreateAccountRequestLocaleJa, nil
+	case "ar":
+		return InvitesCreateAccountRequestLocaleAr, nil
+	case "hi":
+		return InvitesCreateAccountRequestLocaleHi, nil
+	case "ru":
+		return InvitesCreateAccountRequestLocaleRu, nil
+	case "tr":
+		return InvitesCreateAccountRequestLocaleTr, nil
+	case "uk":
+		return InvitesCreateAccountRequestLocaleUk, nil
 	}
 	var t InvitesCreateAccountRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -9760,6 +10599,36 @@ const (
 	LocaleSetAccountRequestLocaleEn LocaleSetAccountRequestLocale = "en"
 	LocaleSetAccountRequestLocaleLt LocaleSetAccountRequestLocale = "lt"
 	LocaleSetAccountRequestLocaleDe LocaleSetAccountRequestLocale = "de"
+	LocaleSetAccountRequestLocaleFr LocaleSetAccountRequestLocale = "fr"
+	LocaleSetAccountRequestLocaleEs LocaleSetAccountRequestLocale = "es"
+	LocaleSetAccountRequestLocaleIt LocaleSetAccountRequestLocale = "it"
+	LocaleSetAccountRequestLocalePt LocaleSetAccountRequestLocale = "pt"
+	LocaleSetAccountRequestLocaleNl LocaleSetAccountRequestLocale = "nl"
+	LocaleSetAccountRequestLocalePl LocaleSetAccountRequestLocale = "pl"
+	LocaleSetAccountRequestLocaleSv LocaleSetAccountRequestLocale = "sv"
+	LocaleSetAccountRequestLocaleDa LocaleSetAccountRequestLocale = "da"
+	LocaleSetAccountRequestLocaleNo LocaleSetAccountRequestLocale = "no"
+	LocaleSetAccountRequestLocaleFi LocaleSetAccountRequestLocale = "fi"
+	LocaleSetAccountRequestLocaleEt LocaleSetAccountRequestLocale = "et"
+	LocaleSetAccountRequestLocaleLv LocaleSetAccountRequestLocale = "lv"
+	LocaleSetAccountRequestLocaleCs LocaleSetAccountRequestLocale = "cs"
+	LocaleSetAccountRequestLocaleSk LocaleSetAccountRequestLocale = "sk"
+	LocaleSetAccountRequestLocaleHu LocaleSetAccountRequestLocale = "hu"
+	LocaleSetAccountRequestLocaleRo LocaleSetAccountRequestLocale = "ro"
+	LocaleSetAccountRequestLocaleBg LocaleSetAccountRequestLocale = "bg"
+	LocaleSetAccountRequestLocaleHr LocaleSetAccountRequestLocale = "hr"
+	LocaleSetAccountRequestLocaleSl LocaleSetAccountRequestLocale = "sl"
+	LocaleSetAccountRequestLocaleEl LocaleSetAccountRequestLocale = "el"
+	LocaleSetAccountRequestLocaleMt LocaleSetAccountRequestLocale = "mt"
+	LocaleSetAccountRequestLocaleIs LocaleSetAccountRequestLocale = "is"
+	LocaleSetAccountRequestLocaleGa LocaleSetAccountRequestLocale = "ga"
+	LocaleSetAccountRequestLocaleZh LocaleSetAccountRequestLocale = "zh"
+	LocaleSetAccountRequestLocaleJa LocaleSetAccountRequestLocale = "ja"
+	LocaleSetAccountRequestLocaleAr LocaleSetAccountRequestLocale = "ar"
+	LocaleSetAccountRequestLocaleHi LocaleSetAccountRequestLocale = "hi"
+	LocaleSetAccountRequestLocaleRu LocaleSetAccountRequestLocale = "ru"
+	LocaleSetAccountRequestLocaleTr LocaleSetAccountRequestLocale = "tr"
+	LocaleSetAccountRequestLocaleUk LocaleSetAccountRequestLocale = "uk"
 )
 
 func NewLocaleSetAccountRequestLocaleFromString(s string) (LocaleSetAccountRequestLocale, error) {
@@ -9770,6 +10639,66 @@ func NewLocaleSetAccountRequestLocaleFromString(s string) (LocaleSetAccountReque
 		return LocaleSetAccountRequestLocaleLt, nil
 	case "de":
 		return LocaleSetAccountRequestLocaleDe, nil
+	case "fr":
+		return LocaleSetAccountRequestLocaleFr, nil
+	case "es":
+		return LocaleSetAccountRequestLocaleEs, nil
+	case "it":
+		return LocaleSetAccountRequestLocaleIt, nil
+	case "pt":
+		return LocaleSetAccountRequestLocalePt, nil
+	case "nl":
+		return LocaleSetAccountRequestLocaleNl, nil
+	case "pl":
+		return LocaleSetAccountRequestLocalePl, nil
+	case "sv":
+		return LocaleSetAccountRequestLocaleSv, nil
+	case "da":
+		return LocaleSetAccountRequestLocaleDa, nil
+	case "no":
+		return LocaleSetAccountRequestLocaleNo, nil
+	case "fi":
+		return LocaleSetAccountRequestLocaleFi, nil
+	case "et":
+		return LocaleSetAccountRequestLocaleEt, nil
+	case "lv":
+		return LocaleSetAccountRequestLocaleLv, nil
+	case "cs":
+		return LocaleSetAccountRequestLocaleCs, nil
+	case "sk":
+		return LocaleSetAccountRequestLocaleSk, nil
+	case "hu":
+		return LocaleSetAccountRequestLocaleHu, nil
+	case "ro":
+		return LocaleSetAccountRequestLocaleRo, nil
+	case "bg":
+		return LocaleSetAccountRequestLocaleBg, nil
+	case "hr":
+		return LocaleSetAccountRequestLocaleHr, nil
+	case "sl":
+		return LocaleSetAccountRequestLocaleSl, nil
+	case "el":
+		return LocaleSetAccountRequestLocaleEl, nil
+	case "mt":
+		return LocaleSetAccountRequestLocaleMt, nil
+	case "is":
+		return LocaleSetAccountRequestLocaleIs, nil
+	case "ga":
+		return LocaleSetAccountRequestLocaleGa, nil
+	case "zh":
+		return LocaleSetAccountRequestLocaleZh, nil
+	case "ja":
+		return LocaleSetAccountRequestLocaleJa, nil
+	case "ar":
+		return LocaleSetAccountRequestLocaleAr, nil
+	case "hi":
+		return LocaleSetAccountRequestLocaleHi, nil
+	case "ru":
+		return LocaleSetAccountRequestLocaleRu, nil
+	case "tr":
+		return LocaleSetAccountRequestLocaleTr, nil
+	case "uk":
+		return LocaleSetAccountRequestLocaleUk, nil
 	}
 	var t LocaleSetAccountRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -10198,6 +11127,36 @@ const (
 	LoginLinkRequestAccountRequestLocaleEn LoginLinkRequestAccountRequestLocale = "en"
 	LoginLinkRequestAccountRequestLocaleLt LoginLinkRequestAccountRequestLocale = "lt"
 	LoginLinkRequestAccountRequestLocaleDe LoginLinkRequestAccountRequestLocale = "de"
+	LoginLinkRequestAccountRequestLocaleFr LoginLinkRequestAccountRequestLocale = "fr"
+	LoginLinkRequestAccountRequestLocaleEs LoginLinkRequestAccountRequestLocale = "es"
+	LoginLinkRequestAccountRequestLocaleIt LoginLinkRequestAccountRequestLocale = "it"
+	LoginLinkRequestAccountRequestLocalePt LoginLinkRequestAccountRequestLocale = "pt"
+	LoginLinkRequestAccountRequestLocaleNl LoginLinkRequestAccountRequestLocale = "nl"
+	LoginLinkRequestAccountRequestLocalePl LoginLinkRequestAccountRequestLocale = "pl"
+	LoginLinkRequestAccountRequestLocaleSv LoginLinkRequestAccountRequestLocale = "sv"
+	LoginLinkRequestAccountRequestLocaleDa LoginLinkRequestAccountRequestLocale = "da"
+	LoginLinkRequestAccountRequestLocaleNo LoginLinkRequestAccountRequestLocale = "no"
+	LoginLinkRequestAccountRequestLocaleFi LoginLinkRequestAccountRequestLocale = "fi"
+	LoginLinkRequestAccountRequestLocaleEt LoginLinkRequestAccountRequestLocale = "et"
+	LoginLinkRequestAccountRequestLocaleLv LoginLinkRequestAccountRequestLocale = "lv"
+	LoginLinkRequestAccountRequestLocaleCs LoginLinkRequestAccountRequestLocale = "cs"
+	LoginLinkRequestAccountRequestLocaleSk LoginLinkRequestAccountRequestLocale = "sk"
+	LoginLinkRequestAccountRequestLocaleHu LoginLinkRequestAccountRequestLocale = "hu"
+	LoginLinkRequestAccountRequestLocaleRo LoginLinkRequestAccountRequestLocale = "ro"
+	LoginLinkRequestAccountRequestLocaleBg LoginLinkRequestAccountRequestLocale = "bg"
+	LoginLinkRequestAccountRequestLocaleHr LoginLinkRequestAccountRequestLocale = "hr"
+	LoginLinkRequestAccountRequestLocaleSl LoginLinkRequestAccountRequestLocale = "sl"
+	LoginLinkRequestAccountRequestLocaleEl LoginLinkRequestAccountRequestLocale = "el"
+	LoginLinkRequestAccountRequestLocaleMt LoginLinkRequestAccountRequestLocale = "mt"
+	LoginLinkRequestAccountRequestLocaleIs LoginLinkRequestAccountRequestLocale = "is"
+	LoginLinkRequestAccountRequestLocaleGa LoginLinkRequestAccountRequestLocale = "ga"
+	LoginLinkRequestAccountRequestLocaleZh LoginLinkRequestAccountRequestLocale = "zh"
+	LoginLinkRequestAccountRequestLocaleJa LoginLinkRequestAccountRequestLocale = "ja"
+	LoginLinkRequestAccountRequestLocaleAr LoginLinkRequestAccountRequestLocale = "ar"
+	LoginLinkRequestAccountRequestLocaleHi LoginLinkRequestAccountRequestLocale = "hi"
+	LoginLinkRequestAccountRequestLocaleRu LoginLinkRequestAccountRequestLocale = "ru"
+	LoginLinkRequestAccountRequestLocaleTr LoginLinkRequestAccountRequestLocale = "tr"
+	LoginLinkRequestAccountRequestLocaleUk LoginLinkRequestAccountRequestLocale = "uk"
 )
 
 func NewLoginLinkRequestAccountRequestLocaleFromString(s string) (LoginLinkRequestAccountRequestLocale, error) {
@@ -10208,6 +11167,66 @@ func NewLoginLinkRequestAccountRequestLocaleFromString(s string) (LoginLinkReque
 		return LoginLinkRequestAccountRequestLocaleLt, nil
 	case "de":
 		return LoginLinkRequestAccountRequestLocaleDe, nil
+	case "fr":
+		return LoginLinkRequestAccountRequestLocaleFr, nil
+	case "es":
+		return LoginLinkRequestAccountRequestLocaleEs, nil
+	case "it":
+		return LoginLinkRequestAccountRequestLocaleIt, nil
+	case "pt":
+		return LoginLinkRequestAccountRequestLocalePt, nil
+	case "nl":
+		return LoginLinkRequestAccountRequestLocaleNl, nil
+	case "pl":
+		return LoginLinkRequestAccountRequestLocalePl, nil
+	case "sv":
+		return LoginLinkRequestAccountRequestLocaleSv, nil
+	case "da":
+		return LoginLinkRequestAccountRequestLocaleDa, nil
+	case "no":
+		return LoginLinkRequestAccountRequestLocaleNo, nil
+	case "fi":
+		return LoginLinkRequestAccountRequestLocaleFi, nil
+	case "et":
+		return LoginLinkRequestAccountRequestLocaleEt, nil
+	case "lv":
+		return LoginLinkRequestAccountRequestLocaleLv, nil
+	case "cs":
+		return LoginLinkRequestAccountRequestLocaleCs, nil
+	case "sk":
+		return LoginLinkRequestAccountRequestLocaleSk, nil
+	case "hu":
+		return LoginLinkRequestAccountRequestLocaleHu, nil
+	case "ro":
+		return LoginLinkRequestAccountRequestLocaleRo, nil
+	case "bg":
+		return LoginLinkRequestAccountRequestLocaleBg, nil
+	case "hr":
+		return LoginLinkRequestAccountRequestLocaleHr, nil
+	case "sl":
+		return LoginLinkRequestAccountRequestLocaleSl, nil
+	case "el":
+		return LoginLinkRequestAccountRequestLocaleEl, nil
+	case "mt":
+		return LoginLinkRequestAccountRequestLocaleMt, nil
+	case "is":
+		return LoginLinkRequestAccountRequestLocaleIs, nil
+	case "ga":
+		return LoginLinkRequestAccountRequestLocaleGa, nil
+	case "zh":
+		return LoginLinkRequestAccountRequestLocaleZh, nil
+	case "ja":
+		return LoginLinkRequestAccountRequestLocaleJa, nil
+	case "ar":
+		return LoginLinkRequestAccountRequestLocaleAr, nil
+	case "hi":
+		return LoginLinkRequestAccountRequestLocaleHi, nil
+	case "ru":
+		return LoginLinkRequestAccountRequestLocaleRu, nil
+	case "tr":
+		return LoginLinkRequestAccountRequestLocaleTr, nil
+	case "uk":
+		return LoginLinkRequestAccountRequestLocaleUk, nil
 	}
 	var t LoginLinkRequestAccountRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -12066,6 +13085,306 @@ func (m *MembersTransferOwnershipAccountResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", m)
+}
+
+var (
+	oauthAuthorizeApproveAccountResponseFieldRedirectTo = big.NewInt(1 << 0)
+)
+
+type OauthAuthorizeApproveAccountResponse struct {
+	RedirectTo string `json:"redirectTo" url:"redirectTo"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (o *OauthAuthorizeApproveAccountResponse) GetRedirectTo() string {
+	if o == nil {
+		return ""
+	}
+	return o.RedirectTo
+}
+
+func (o *OauthAuthorizeApproveAccountResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.extraProperties
+}
+
+func (o *OauthAuthorizeApproveAccountResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
+	}
+	o.explicitFields.Or(o.explicitFields, field)
+}
+
+// SetRedirectTo sets the RedirectTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeApproveAccountResponse) SetRedirectTo(redirectTo string) {
+	o.RedirectTo = redirectTo
+	o.require(oauthAuthorizeApproveAccountResponseFieldRedirectTo)
+}
+
+func (o *OauthAuthorizeApproveAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler OauthAuthorizeApproveAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*o = OauthAuthorizeApproveAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
+	if err != nil {
+		return err
+	}
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (o *OauthAuthorizeApproveAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed OauthAuthorizeApproveAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*o),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (o *OauthAuthorizeApproveAccountResponse) String() string {
+	if o == nil {
+		return "<nil>"
+	}
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(o); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", o)
+}
+
+var (
+	oauthAuthorizeDenyAccountResponseFieldRedirectTo = big.NewInt(1 << 0)
+)
+
+type OauthAuthorizeDenyAccountResponse struct {
+	RedirectTo string `json:"redirectTo" url:"redirectTo"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (o *OauthAuthorizeDenyAccountResponse) GetRedirectTo() string {
+	if o == nil {
+		return ""
+	}
+	return o.RedirectTo
+}
+
+func (o *OauthAuthorizeDenyAccountResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.extraProperties
+}
+
+func (o *OauthAuthorizeDenyAccountResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
+	}
+	o.explicitFields.Or(o.explicitFields, field)
+}
+
+// SetRedirectTo sets the RedirectTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDenyAccountResponse) SetRedirectTo(redirectTo string) {
+	o.RedirectTo = redirectTo
+	o.require(oauthAuthorizeDenyAccountResponseFieldRedirectTo)
+}
+
+func (o *OauthAuthorizeDenyAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler OauthAuthorizeDenyAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*o = OauthAuthorizeDenyAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
+	if err != nil {
+		return err
+	}
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (o *OauthAuthorizeDenyAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed OauthAuthorizeDenyAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*o),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (o *OauthAuthorizeDenyAccountResponse) String() string {
+	if o == nil {
+		return "<nil>"
+	}
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(o); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", o)
+}
+
+var (
+	oauthAuthorizeDescribeAccountResponseFieldClientName   = big.NewInt(1 << 0)
+	oauthAuthorizeDescribeAccountResponseFieldRedirectURI  = big.NewInt(1 << 1)
+	oauthAuthorizeDescribeAccountResponseFieldRedirectHost = big.NewInt(1 << 2)
+	oauthAuthorizeDescribeAccountResponseFieldScopes       = big.NewInt(1 << 3)
+)
+
+type OauthAuthorizeDescribeAccountResponse struct {
+	ClientName   string   `json:"clientName" url:"clientName"`
+	RedirectURI  string   `json:"redirectUri" url:"redirectUri"`
+	RedirectHost string   `json:"redirectHost" url:"redirectHost"`
+	Scopes       []string `json:"scopes" url:"scopes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) GetClientName() string {
+	if o == nil {
+		return ""
+	}
+	return o.ClientName
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) GetRedirectURI() string {
+	if o == nil {
+		return ""
+	}
+	return o.RedirectURI
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) GetRedirectHost() string {
+	if o == nil {
+		return ""
+	}
+	return o.RedirectHost
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) GetScopes() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Scopes
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) GetExtraProperties() map[string]interface{} {
+	if o == nil {
+		return nil
+	}
+	return o.extraProperties
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) require(field *big.Int) {
+	if o.explicitFields == nil {
+		o.explicitFields = big.NewInt(0)
+	}
+	o.explicitFields.Or(o.explicitFields, field)
+}
+
+// SetClientName sets the ClientName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountResponse) SetClientName(clientName string) {
+	o.ClientName = clientName
+	o.require(oauthAuthorizeDescribeAccountResponseFieldClientName)
+}
+
+// SetRedirectURI sets the RedirectURI field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountResponse) SetRedirectURI(redirectURI string) {
+	o.RedirectURI = redirectURI
+	o.require(oauthAuthorizeDescribeAccountResponseFieldRedirectURI)
+}
+
+// SetRedirectHost sets the RedirectHost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountResponse) SetRedirectHost(redirectHost string) {
+	o.RedirectHost = redirectHost
+	o.require(oauthAuthorizeDescribeAccountResponseFieldRedirectHost)
+}
+
+// SetScopes sets the Scopes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OauthAuthorizeDescribeAccountResponse) SetScopes(scopes []string) {
+	o.Scopes = scopes
+	o.require(oauthAuthorizeDescribeAccountResponseFieldScopes)
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler OauthAuthorizeDescribeAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*o = OauthAuthorizeDescribeAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *o)
+	if err != nil {
+		return err
+	}
+	o.extraProperties = extraProperties
+	o.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed OauthAuthorizeDescribeAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*o),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (o *OauthAuthorizeDescribeAccountResponse) String() string {
+	if o == nil {
+		return "<nil>"
+	}
+	if len(o.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(o.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(o); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", o)
 }
 
 var (

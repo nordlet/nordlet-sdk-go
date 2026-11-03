@@ -617,6 +617,14 @@ func TestSettersMarkExplicitTransactionsListBillingRequest(t *testing.T) {
 }
 
 func TestSettersAccountGetBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueSite AccountGetBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &AccountGetBillingResponse{}
 		var fernTestValuePlan AccountGetBillingResponsePlan
@@ -788,6 +796,29 @@ func TestSettersAccountGetBillingResponse(t *testing.T) {
 }
 
 func TestGettersAccountGetBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountGetBillingResponse{}
+		var expected AccountGetBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AccountGetBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -1374,6 +1405,37 @@ func TestGettersAccountGetBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitAccountGetBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountGetBillingResponse{}
+		var fernTestValueSite AccountGetBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -3242,6 +3304,14 @@ func TestSettersMarkExplicitAccountGetBillingResponseTopUp(t *testing.T) {
 }
 
 func TestSettersAccountSetAccountTypeBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &AccountSetAccountTypeBillingResponse{}
+		var fernTestValueSite AccountSetAccountTypeBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &AccountSetAccountTypeBillingResponse{}
 		var fernTestValuePlan AccountSetAccountTypeBillingResponsePlan
@@ -3413,6 +3483,29 @@ func TestSettersAccountSetAccountTypeBillingResponse(t *testing.T) {
 }
 
 func TestGettersAccountSetAccountTypeBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetAccountTypeBillingResponse{}
+		var expected AccountSetAccountTypeBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AccountSetAccountTypeBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -3999,6 +4092,37 @@ func TestGettersAccountSetAccountTypeBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitAccountSetAccountTypeBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetAccountTypeBillingResponse{}
+		var fernTestValueSite AccountSetAccountTypeBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -5867,6 +5991,14 @@ func TestSettersMarkExplicitAccountSetAccountTypeBillingResponseTopUp(t *testing
 }
 
 func TestSettersAccountSetAutoTopUpBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &AccountSetAutoTopUpBillingResponse{}
+		var fernTestValueSite AccountSetAutoTopUpBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &AccountSetAutoTopUpBillingResponse{}
 		var fernTestValuePlan AccountSetAutoTopUpBillingResponsePlan
@@ -6038,6 +6170,29 @@ func TestSettersAccountSetAutoTopUpBillingResponse(t *testing.T) {
 }
 
 func TestGettersAccountSetAutoTopUpBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetAutoTopUpBillingResponse{}
+		var expected AccountSetAutoTopUpBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AccountSetAutoTopUpBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -6624,6 +6779,37 @@ func TestGettersAccountSetAutoTopUpBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitAccountSetAutoTopUpBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetAutoTopUpBillingResponse{}
+		var fernTestValueSite AccountSetAutoTopUpBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -8492,6 +8678,14 @@ func TestSettersMarkExplicitAccountSetAutoTopUpBillingResponseTopUp(t *testing.T
 }
 
 func TestSettersAccountSetOverdraftCapBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &AccountSetOverdraftCapBillingResponse{}
+		var fernTestValueSite AccountSetOverdraftCapBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &AccountSetOverdraftCapBillingResponse{}
 		var fernTestValuePlan AccountSetOverdraftCapBillingResponsePlan
@@ -8663,6 +8857,29 @@ func TestSettersAccountSetOverdraftCapBillingResponse(t *testing.T) {
 }
 
 func TestGettersAccountSetOverdraftCapBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetOverdraftCapBillingResponse{}
+		var expected AccountSetOverdraftCapBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AccountSetOverdraftCapBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -9249,6 +9466,37 @@ func TestGettersAccountSetOverdraftCapBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitAccountSetOverdraftCapBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetOverdraftCapBillingResponse{}
+		var fernTestValueSite AccountSetOverdraftCapBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -11117,6 +11365,14 @@ func TestSettersMarkExplicitAccountSetOverdraftCapBillingResponseTopUp(t *testin
 }
 
 func TestSettersAccountSetPlanBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueSite AccountSetPlanBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &AccountSetPlanBillingResponse{}
 		var fernTestValuePlan AccountSetPlanBillingResponsePlan
@@ -11288,6 +11544,29 @@ func TestSettersAccountSetPlanBillingResponse(t *testing.T) {
 }
 
 func TestGettersAccountSetPlanBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetPlanBillingResponse{}
+		var expected AccountSetPlanBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AccountSetPlanBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -11874,6 +12153,37 @@ func TestGettersAccountSetPlanBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitAccountSetPlanBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AccountSetPlanBillingResponse{}
+		var fernTestValueSite AccountSetPlanBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -13742,6 +14052,14 @@ func TestSettersMarkExplicitAccountSetPlanBillingResponseTopUp(t *testing.T) {
 }
 
 func TestSettersFlatRateConfirmBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &FlatRateConfirmBillingResponse{}
+		var fernTestValueSite FlatRateConfirmBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &FlatRateConfirmBillingResponse{}
 		var fernTestValuePlan FlatRateConfirmBillingResponsePlan
@@ -13913,6 +14231,29 @@ func TestSettersFlatRateConfirmBillingResponse(t *testing.T) {
 }
 
 func TestGettersFlatRateConfirmBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FlatRateConfirmBillingResponse{}
+		var expected FlatRateConfirmBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *FlatRateConfirmBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -14499,6 +14840,37 @@ func TestGettersFlatRateConfirmBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitFlatRateConfirmBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &FlatRateConfirmBillingResponse{}
+		var fernTestValueSite FlatRateConfirmBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -16571,6 +16943,14 @@ func TestSettersMarkExplicitPortalCreateBillingResponse(t *testing.T) {
 }
 
 func TestSettersSubscriptionCancelBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &SubscriptionCancelBillingResponse{}
+		var fernTestValueSite SubscriptionCancelBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &SubscriptionCancelBillingResponse{}
 		var fernTestValuePlan SubscriptionCancelBillingResponsePlan
@@ -16742,6 +17122,29 @@ func TestSettersSubscriptionCancelBillingResponse(t *testing.T) {
 }
 
 func TestGettersSubscriptionCancelBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionCancelBillingResponse{}
+		var expected SubscriptionCancelBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubscriptionCancelBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -17328,6 +17731,37 @@ func TestGettersSubscriptionCancelBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitSubscriptionCancelBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubscriptionCancelBillingResponse{}
+		var fernTestValueSite SubscriptionCancelBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -19196,6 +19630,14 @@ func TestSettersMarkExplicitSubscriptionCancelBillingResponseTopUp(t *testing.T)
 }
 
 func TestSettersTopupConfirmBillingResponse(t *testing.T) {
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &TopupConfirmBillingResponse{}
+		var fernTestValueSite TopupConfirmBillingResponseSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetPlan", func(t *testing.T) {
 		obj := &TopupConfirmBillingResponse{}
 		var fernTestValuePlan TopupConfirmBillingResponsePlan
@@ -19367,6 +19809,29 @@ func TestSettersTopupConfirmBillingResponse(t *testing.T) {
 }
 
 func TestGettersTopupConfirmBillingResponse(t *testing.T) {
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &TopupConfirmBillingResponse{}
+		var expected TopupConfirmBillingResponseSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *TopupConfirmBillingResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
+	})
+
 	t.Run("GetPlan", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -19953,6 +20418,37 @@ func TestGettersTopupConfirmBillingResponse(t *testing.T) {
 }
 
 func TestSettersMarkExplicitTopupConfirmBillingResponse(t *testing.T) {
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &TopupConfirmBillingResponse{}
+		var fernTestValueSite TopupConfirmBillingResponseSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetPlan_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -22649,6 +23145,14 @@ func TestSettersUsageListBillingResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSite", func(t *testing.T) {
+		obj := &UsageListBillingResponseRowsItem{}
+		var fernTestValueSite UsageListBillingResponseRowsItemSite
+		obj.SetSite(fernTestValueSite)
+		assert.Equal(t, fernTestValueSite, obj.Site)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetDate", func(t *testing.T) {
 		obj := &UsageListBillingResponseRowsItem{}
 		var fernTestValueDate time.Time
@@ -22697,6 +23201,29 @@ func TestGettersUsageListBillingResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCompanyID() // Should return zero value
+	})
+
+	t.Run("GetSite", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UsageListBillingResponseRowsItem{}
+		var expected UsageListBillingResponseRowsItemSite
+		obj.Site = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSite(), "getter should return the property value")
+	})
+
+	t.Run("GetSite_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UsageListBillingResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSite() // Should return zero value
 	})
 
 	t.Run("GetDate", func(t *testing.T) {
@@ -22779,6 +23306,37 @@ func TestSettersMarkExplicitUsageListBillingResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetCompanyID(fernTestValueCompanyID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSite_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UsageListBillingResponseRowsItem{}
+		var fernTestValueSite UsageListBillingResponseRowsItemSite
+
+		// Act
+		obj.SetSite(fernTestValueSite)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -25356,6 +25914,35 @@ func TestEnumAccountGetBillingResponsePlan(t *testing.T) {
 	})
 }
 
+func TestEnumAccountGetBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountGetBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountGetBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountGetBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountGetBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAccountGetBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAccountGetBillingResponseSiteFromString("app")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumAccountGetBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
@@ -25493,6 +26080,35 @@ func TestEnumAccountSetAccountTypeBillingResponsePlan(t *testing.T) {
 	})
 }
 
+func TestEnumAccountSetAccountTypeBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetAccountTypeBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetAccountTypeBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetAccountTypeBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetAccountTypeBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAccountSetAccountTypeBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAccountSetAccountTypeBillingResponseSiteFromString("app")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumAccountSetAccountTypeBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
@@ -25601,6 +26217,35 @@ func TestEnumAccountSetAutoTopUpBillingResponsePlan(t *testing.T) {
 	})
 }
 
+func TestEnumAccountSetAutoTopUpBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetAutoTopUpBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetAutoTopUpBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetAutoTopUpBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetAutoTopUpBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAccountSetAutoTopUpBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAccountSetAutoTopUpBillingResponseSiteFromString("app")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumAccountSetAutoTopUpBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
@@ -25702,6 +26347,35 @@ func TestEnumAccountSetOverdraftCapBillingResponsePlan(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewAccountSetOverdraftCapBillingResponsePlanFromString("starter")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumAccountSetOverdraftCapBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetOverdraftCapBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetOverdraftCapBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetOverdraftCapBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetOverdraftCapBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAccountSetOverdraftCapBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAccountSetOverdraftCapBillingResponseSiteFromString("app")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -25860,6 +26534,35 @@ func TestEnumAccountSetPlanBillingResponsePlan(t *testing.T) {
 	})
 }
 
+func TestEnumAccountSetPlanBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetPlanBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetPlanBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewAccountSetPlanBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, AccountSetPlanBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewAccountSetPlanBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewAccountSetPlanBillingResponseSiteFromString("app")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumAccountSetPlanBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
@@ -25968,6 +26671,35 @@ func TestEnumFlatRateConfirmBillingResponsePlan(t *testing.T) {
 	})
 }
 
+func TestEnumFlatRateConfirmBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateConfirmBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateConfirmBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateConfirmBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateConfirmBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewFlatRateConfirmBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewFlatRateConfirmBillingResponseSiteFromString("app")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumFlatRateConfirmBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
@@ -26024,6 +26756,216 @@ func TestEnumFlatRateCreateBillingRequestLocale(t *testing.T) {
 		val, err := NewFlatRateCreateBillingRequestLocaleFromString("de")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, FlatRateCreateBillingRequestLocale("de"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFlatRateCreateBillingRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FlatRateCreateBillingRequestLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -26105,6 +27047,216 @@ func TestEnumPortalCreateBillingRequestLocale(t *testing.T) {
 		assert.Equal(t, PortalCreateBillingRequestLocale("de"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPortalCreateBillingRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PortalCreateBillingRequestLocale("uk"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewPortalCreateBillingRequestLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
@@ -26184,6 +27336,35 @@ func TestEnumSubscriptionCancelBillingResponsePlan(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewSubscriptionCancelBillingResponsePlanFromString("starter")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumSubscriptionCancelBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionCancelBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionCancelBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewSubscriptionCancelBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, SubscriptionCancelBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewSubscriptionCancelBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewSubscriptionCancelBillingResponseSiteFromString("app")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -26299,6 +27480,35 @@ func TestEnumTopupConfirmBillingResponsePlan(t *testing.T) {
 	})
 }
 
+func TestEnumTopupConfirmBillingResponseSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupConfirmBillingResponseSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupConfirmBillingResponseSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupConfirmBillingResponseSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupConfirmBillingResponseSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewTopupConfirmBillingResponseSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewTopupConfirmBillingResponseSiteFromString("app")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumTopupConfirmBillingResponseStatus(t *testing.T) {
 	t.Run("NewFromString_trial", func(t *testing.T) {
 		t.Parallel()
@@ -26355,6 +27565,216 @@ func TestEnumTopupCreateBillingRequestLocale(t *testing.T) {
 		val, err := NewTopupCreateBillingRequestLocaleFromString("de")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, TopupCreateBillingRequestLocale("de"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewTopupCreateBillingRequestLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, TopupCreateBillingRequestLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -26493,6 +27913,35 @@ func TestEnumUsageListBillingResponseRowsItemMetric(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewUsageListBillingResponseRowsItemMetricFromString("api_request")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumUsageListBillingResponseRowsItemSite(t *testing.T) {
+	t.Run("NewFromString_app", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUsageListBillingResponseRowsItemSiteFromString("app")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UsageListBillingResponseRowsItemSite("app"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_invoice", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUsageListBillingResponseRowsItemSiteFromString("invoice")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UsageListBillingResponseRowsItemSite("invoice"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUsageListBillingResponseRowsItemSiteFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUsageListBillingResponseRowsItemSiteFromString("app")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

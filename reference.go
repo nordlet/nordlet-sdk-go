@@ -10068,17 +10068,25 @@ func (v *VatClassifiersListReferenceResponse) String() string {
 }
 
 var (
-	vatClassifiersListReferenceResponseRowsItemFieldCode        = big.NewInt(1 << 0)
-	vatClassifiersListReferenceResponseRowsItemFieldCountryCode = big.NewInt(1 << 1)
-	vatClassifiersListReferenceResponseRowsItemFieldName        = big.NewInt(1 << 2)
-	vatClassifiersListReferenceResponseRowsItemFieldRatePercent = big.NewInt(1 << 3)
+	vatClassifiersListReferenceResponseRowsItemFieldCode         = big.NewInt(1 << 0)
+	vatClassifiersListReferenceResponseRowsItemFieldCountryCode  = big.NewInt(1 << 1)
+	vatClassifiersListReferenceResponseRowsItemFieldName         = big.NewInt(1 << 2)
+	vatClassifiersListReferenceResponseRowsItemFieldNameEn       = big.NewInt(1 << 3)
+	vatClassifiersListReferenceResponseRowsItemFieldRatePercent  = big.NewInt(1 << 4)
+	vatClassifiersListReferenceResponseRowsItemFieldSide         = big.NewInt(1 << 5)
+	vatClassifiersListReferenceResponseRowsItemFieldScheme       = big.NewInt(1 << 6)
+	vatClassifiersListReferenceResponseRowsItemFieldRateFromLine = big.NewInt(1 << 7)
 )
 
 type VatClassifiersListReferenceResponseRowsItem struct {
-	Code        string  `json:"code" url:"code"`
-	CountryCode string  `json:"countryCode" url:"countryCode"`
-	Name        string  `json:"name" url:"name"`
-	RatePercent *string `json:"ratePercent,omitempty" url:"ratePercent,omitempty"`
+	Code         string                                                   `json:"code" url:"code"`
+	CountryCode  string                                                   `json:"countryCode" url:"countryCode"`
+	Name         string                                                   `json:"name" url:"name"`
+	NameEn       *string                                                  `json:"nameEn,omitempty" url:"nameEn,omitempty"`
+	RatePercent  *string                                                  `json:"ratePercent,omitempty" url:"ratePercent,omitempty"`
+	Side         VatClassifiersListReferenceResponseRowsItemSide          `json:"side" url:"side"`
+	Scheme       *VatClassifiersListReferenceResponseRowsItemScheme       `json:"scheme,omitempty" url:"scheme,omitempty"`
+	RateFromLine *VatClassifiersListReferenceResponseRowsItemRateFromLine `json:"rateFromLine" url:"rateFromLine"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10108,11 +10116,39 @@ func (v *VatClassifiersListReferenceResponseRowsItem) GetName() string {
 	return v.Name
 }
 
+func (v *VatClassifiersListReferenceResponseRowsItem) GetNameEn() *string {
+	if v == nil {
+		return nil
+	}
+	return v.NameEn
+}
+
 func (v *VatClassifiersListReferenceResponseRowsItem) GetRatePercent() *string {
 	if v == nil {
 		return nil
 	}
 	return v.RatePercent
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItem) GetSide() VatClassifiersListReferenceResponseRowsItemSide {
+	if v == nil {
+		return ""
+	}
+	return v.Side
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItem) GetScheme() *VatClassifiersListReferenceResponseRowsItemScheme {
+	if v == nil {
+		return nil
+	}
+	return v.Scheme
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItem) GetRateFromLine() *VatClassifiersListReferenceResponseRowsItemRateFromLine {
+	if v == nil {
+		return nil
+	}
+	return v.RateFromLine
 }
 
 func (v *VatClassifiersListReferenceResponseRowsItem) GetExtraProperties() map[string]interface{} {
@@ -10150,11 +10186,39 @@ func (v *VatClassifiersListReferenceResponseRowsItem) SetName(name string) {
 	v.require(vatClassifiersListReferenceResponseRowsItemFieldName)
 }
 
+// SetNameEn sets the NameEn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatClassifiersListReferenceResponseRowsItem) SetNameEn(nameEn *string) {
+	v.NameEn = nameEn
+	v.require(vatClassifiersListReferenceResponseRowsItemFieldNameEn)
+}
+
 // SetRatePercent sets the RatePercent field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (v *VatClassifiersListReferenceResponseRowsItem) SetRatePercent(ratePercent *string) {
 	v.RatePercent = ratePercent
 	v.require(vatClassifiersListReferenceResponseRowsItemFieldRatePercent)
+}
+
+// SetSide sets the Side field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatClassifiersListReferenceResponseRowsItem) SetSide(side VatClassifiersListReferenceResponseRowsItemSide) {
+	v.Side = side
+	v.require(vatClassifiersListReferenceResponseRowsItemFieldSide)
+}
+
+// SetScheme sets the Scheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatClassifiersListReferenceResponseRowsItem) SetScheme(scheme *VatClassifiersListReferenceResponseRowsItemScheme) {
+	v.Scheme = scheme
+	v.require(vatClassifiersListReferenceResponseRowsItemFieldScheme)
+}
+
+// SetRateFromLine sets the RateFromLine field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatClassifiersListReferenceResponseRowsItem) SetRateFromLine(rateFromLine *VatClassifiersListReferenceResponseRowsItemRateFromLine) {
+	v.RateFromLine = rateFromLine
+	v.require(vatClassifiersListReferenceResponseRowsItemFieldRateFromLine)
 }
 
 func (v *VatClassifiersListReferenceResponseRowsItem) UnmarshalJSON(data []byte) error {
@@ -10197,6 +10261,174 @@ func (v *VatClassifiersListReferenceResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatClassifiersListReferenceResponseRowsItemRateFromLineFieldSale     = big.NewInt(1 << 0)
+	vatClassifiersListReferenceResponseRowsItemRateFromLineFieldPurchase = big.NewInt(1 << 1)
+)
+
+type VatClassifiersListReferenceResponseRowsItemRateFromLine struct {
+	Sale     bool `json:"sale" url:"sale"`
+	Purchase bool `json:"purchase" url:"purchase"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) GetSale() bool {
+	if v == nil {
+		return false
+	}
+	return v.Sale
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) GetPurchase() bool {
+	if v == nil {
+		return false
+	}
+	return v.Purchase
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetSale sets the Sale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) SetSale(sale bool) {
+	v.Sale = sale
+	v.require(vatClassifiersListReferenceResponseRowsItemRateFromLineFieldSale)
+}
+
+// SetPurchase sets the Purchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) SetPurchase(purchase bool) {
+	v.Purchase = purchase
+	v.require(vatClassifiersListReferenceResponseRowsItemRateFromLineFieldPurchase)
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatClassifiersListReferenceResponseRowsItemRateFromLine
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatClassifiersListReferenceResponseRowsItemRateFromLine(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) MarshalJSON() ([]byte, error) {
+	type embed VatClassifiersListReferenceResponseRowsItemRateFromLine
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatClassifiersListReferenceResponseRowsItemRateFromLine) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+type VatClassifiersListReferenceResponseRowsItemScheme string
+
+const (
+	VatClassifiersListReferenceResponseRowsItemSchemeDomestic          VatClassifiersListReferenceResponseRowsItemScheme = "domestic"
+	VatClassifiersListReferenceResponseRowsItemSchemeIntraEuB2B        VatClassifiersListReferenceResponseRowsItemScheme = "intra_eu_b2b"
+	VatClassifiersListReferenceResponseRowsItemSchemeReverseCharge     VatClassifiersListReferenceResponseRowsItemScheme = "reverse_charge"
+	VatClassifiersListReferenceResponseRowsItemSchemeOssUnion          VatClassifiersListReferenceResponseRowsItemScheme = "oss_union"
+	VatClassifiersListReferenceResponseRowsItemSchemeIoss              VatClassifiersListReferenceResponseRowsItemScheme = "ioss"
+	VatClassifiersListReferenceResponseRowsItemSchemeMarketplaceDeemed VatClassifiersListReferenceResponseRowsItemScheme = "marketplace_deemed"
+	VatClassifiersListReferenceResponseRowsItemSchemeExport            VatClassifiersListReferenceResponseRowsItemScheme = "export"
+	VatClassifiersListReferenceResponseRowsItemSchemeOutOfScope        VatClassifiersListReferenceResponseRowsItemScheme = "out_of_scope"
+	VatClassifiersListReferenceResponseRowsItemSchemeSmeExempt         VatClassifiersListReferenceResponseRowsItemScheme = "sme_exempt"
+)
+
+func NewVatClassifiersListReferenceResponseRowsItemSchemeFromString(s string) (VatClassifiersListReferenceResponseRowsItemScheme, error) {
+	switch s {
+	case "domestic":
+		return VatClassifiersListReferenceResponseRowsItemSchemeDomestic, nil
+	case "intra_eu_b2b":
+		return VatClassifiersListReferenceResponseRowsItemSchemeIntraEuB2B, nil
+	case "reverse_charge":
+		return VatClassifiersListReferenceResponseRowsItemSchemeReverseCharge, nil
+	case "oss_union":
+		return VatClassifiersListReferenceResponseRowsItemSchemeOssUnion, nil
+	case "ioss":
+		return VatClassifiersListReferenceResponseRowsItemSchemeIoss, nil
+	case "marketplace_deemed":
+		return VatClassifiersListReferenceResponseRowsItemSchemeMarketplaceDeemed, nil
+	case "export":
+		return VatClassifiersListReferenceResponseRowsItemSchemeExport, nil
+	case "out_of_scope":
+		return VatClassifiersListReferenceResponseRowsItemSchemeOutOfScope, nil
+	case "sme_exempt":
+		return VatClassifiersListReferenceResponseRowsItemSchemeSmeExempt, nil
+	}
+	var t VatClassifiersListReferenceResponseRowsItemScheme
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VatClassifiersListReferenceResponseRowsItemScheme) Ptr() *VatClassifiersListReferenceResponseRowsItemScheme {
+	return &v
+}
+
+type VatClassifiersListReferenceResponseRowsItemSide string
+
+const (
+	VatClassifiersListReferenceResponseRowsItemSideSale     VatClassifiersListReferenceResponseRowsItemSide = "sale"
+	VatClassifiersListReferenceResponseRowsItemSidePurchase VatClassifiersListReferenceResponseRowsItemSide = "purchase"
+	VatClassifiersListReferenceResponseRowsItemSideBoth     VatClassifiersListReferenceResponseRowsItemSide = "both"
+)
+
+func NewVatClassifiersListReferenceResponseRowsItemSideFromString(s string) (VatClassifiersListReferenceResponseRowsItemSide, error) {
+	switch s {
+	case "sale":
+		return VatClassifiersListReferenceResponseRowsItemSideSale, nil
+	case "purchase":
+		return VatClassifiersListReferenceResponseRowsItemSidePurchase, nil
+	case "both":
+		return VatClassifiersListReferenceResponseRowsItemSideBoth, nil
+	}
+	var t VatClassifiersListReferenceResponseRowsItemSide
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VatClassifiersListReferenceResponseRowsItemSide) Ptr() *VatClassifiersListReferenceResponseRowsItemSide {
+	return &v
 }
 
 var (

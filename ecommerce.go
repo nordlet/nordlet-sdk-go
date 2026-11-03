@@ -857,21 +857,23 @@ func (o *OrdersCancelEcommerceResponse) String() string {
 }
 
 var (
-	ordersCancelEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	ordersCancelEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	ordersCancelEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	ordersCancelEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	ordersCancelEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	ordersCancelEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersCancelEcommerceResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	ordersCancelEcommerceResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
+	ordersCancelEcommerceResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
+	ordersCancelEcommerceResponseLinesItemFieldQuantity          = big.NewInt(1 << 3)
+	ordersCancelEcommerceResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
+	ordersCancelEcommerceResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	ordersCancelEcommerceResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type OrdersCancelEcommerceResponseLinesItem struct {
-	ID               string  `json:"id" url:"id"`
-	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description      string  `json:"description" url:"description"`
-	Quantity         string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
-	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
+	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -920,6 +922,13 @@ func (o *OrdersCancelEcommerceResponseLinesItem) GetVatRatePercent() string {
 		return ""
 	}
 	return o.VatRatePercent
+}
+
+func (o *OrdersCancelEcommerceResponseLinesItem) GetVatClassifierCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.VatClassifierCode
 }
 
 func (o *OrdersCancelEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -976,6 +985,13 @@ func (o *OrdersCancelEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceEx
 func (o *OrdersCancelEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
 	o.VatRatePercent = vatRatePercent
 	o.require(ordersCancelEcommerceResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCancelEcommerceResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	o.VatClassifierCode = vatClassifierCode
+	o.require(ordersCancelEcommerceResponseLinesItemFieldVatClassifierCode)
 }
 
 func (o *OrdersCancelEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -1049,19 +1065,21 @@ func (o OrdersCancelEcommerceResponseStatus) Ptr() *OrdersCancelEcommerceRespons
 }
 
 var (
-	ordersCreateEcommerceRequestLinesItemFieldItemID           = big.NewInt(1 << 0)
-	ordersCreateEcommerceRequestLinesItemFieldDescription      = big.NewInt(1 << 1)
-	ordersCreateEcommerceRequestLinesItemFieldQuantity         = big.NewInt(1 << 2)
-	ordersCreateEcommerceRequestLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 3)
-	ordersCreateEcommerceRequestLinesItemFieldVatRatePercent   = big.NewInt(1 << 4)
+	ordersCreateEcommerceRequestLinesItemFieldItemID            = big.NewInt(1 << 0)
+	ordersCreateEcommerceRequestLinesItemFieldDescription       = big.NewInt(1 << 1)
+	ordersCreateEcommerceRequestLinesItemFieldQuantity          = big.NewInt(1 << 2)
+	ordersCreateEcommerceRequestLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 3)
+	ordersCreateEcommerceRequestLinesItemFieldVatRatePercent    = big.NewInt(1 << 4)
+	ordersCreateEcommerceRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
 )
 
 type OrdersCreateEcommerceRequestLinesItem struct {
-	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description      string  `json:"description" url:"description"`
-	Quantity         string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
-	VatRatePercent   *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
+	VatRatePercent    *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1103,6 +1121,13 @@ func (o *OrdersCreateEcommerceRequestLinesItem) GetVatRatePercent() *string {
 		return nil
 	}
 	return o.VatRatePercent
+}
+
+func (o *OrdersCreateEcommerceRequestLinesItem) GetVatClassifierCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.VatClassifierCode
 }
 
 func (o *OrdersCreateEcommerceRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1152,6 +1177,13 @@ func (o *OrdersCreateEcommerceRequestLinesItem) SetUnitPriceExclVat(unitPriceExc
 func (o *OrdersCreateEcommerceRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
 	o.VatRatePercent = vatRatePercent
 	o.require(ordersCreateEcommerceRequestLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreateEcommerceRequestLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	o.VatClassifierCode = vatClassifierCode
+	o.require(ordersCreateEcommerceRequestLinesItemFieldVatClassifierCode)
 }
 
 func (o *OrdersCreateEcommerceRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -1597,21 +1629,23 @@ func (o *OrdersCreateEcommerceResponse) String() string {
 }
 
 var (
-	ordersCreateEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	ordersCreateEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	ordersCreateEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	ordersCreateEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	ordersCreateEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	ordersCreateEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersCreateEcommerceResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	ordersCreateEcommerceResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
+	ordersCreateEcommerceResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
+	ordersCreateEcommerceResponseLinesItemFieldQuantity          = big.NewInt(1 << 3)
+	ordersCreateEcommerceResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
+	ordersCreateEcommerceResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	ordersCreateEcommerceResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type OrdersCreateEcommerceResponseLinesItem struct {
-	ID               string  `json:"id" url:"id"`
-	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description      string  `json:"description" url:"description"`
-	Quantity         string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
-	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
+	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1660,6 +1694,13 @@ func (o *OrdersCreateEcommerceResponseLinesItem) GetVatRatePercent() string {
 		return ""
 	}
 	return o.VatRatePercent
+}
+
+func (o *OrdersCreateEcommerceResponseLinesItem) GetVatClassifierCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.VatClassifierCode
 }
 
 func (o *OrdersCreateEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1716,6 +1757,13 @@ func (o *OrdersCreateEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceEx
 func (o *OrdersCreateEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
 	o.VatRatePercent = vatRatePercent
 	o.require(ordersCreateEcommerceResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreateEcommerceResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	o.VatClassifierCode = vatClassifierCode
+	o.require(ordersCreateEcommerceResponseLinesItemFieldVatClassifierCode)
 }
 
 func (o *OrdersCreateEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -2073,21 +2121,23 @@ func (o *OrdersFulfillEcommerceResponse) String() string {
 }
 
 var (
-	ordersFulfillEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	ordersFulfillEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	ordersFulfillEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	ordersFulfillEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	ordersFulfillEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	ordersFulfillEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersFulfillEcommerceResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	ordersFulfillEcommerceResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
+	ordersFulfillEcommerceResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
+	ordersFulfillEcommerceResponseLinesItemFieldQuantity          = big.NewInt(1 << 3)
+	ordersFulfillEcommerceResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
+	ordersFulfillEcommerceResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	ordersFulfillEcommerceResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type OrdersFulfillEcommerceResponseLinesItem struct {
-	ID               string  `json:"id" url:"id"`
-	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description      string  `json:"description" url:"description"`
-	Quantity         string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
-	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
+	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2136,6 +2186,13 @@ func (o *OrdersFulfillEcommerceResponseLinesItem) GetVatRatePercent() string {
 		return ""
 	}
 	return o.VatRatePercent
+}
+
+func (o *OrdersFulfillEcommerceResponseLinesItem) GetVatClassifierCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.VatClassifierCode
 }
 
 func (o *OrdersFulfillEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -2192,6 +2249,13 @@ func (o *OrdersFulfillEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceE
 func (o *OrdersFulfillEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
 	o.VatRatePercent = vatRatePercent
 	o.require(ordersFulfillEcommerceResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersFulfillEcommerceResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	o.VatClassifierCode = vatClassifierCode
+	o.require(ordersFulfillEcommerceResponseLinesItemFieldVatClassifierCode)
 }
 
 func (o *OrdersFulfillEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -2549,21 +2613,23 @@ func (o *OrdersGetEcommerceResponse) String() string {
 }
 
 var (
-	ordersGetEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	ordersGetEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	ordersGetEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	ordersGetEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	ordersGetEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	ordersGetEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersGetEcommerceResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	ordersGetEcommerceResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
+	ordersGetEcommerceResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
+	ordersGetEcommerceResponseLinesItemFieldQuantity          = big.NewInt(1 << 3)
+	ordersGetEcommerceResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
+	ordersGetEcommerceResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	ordersGetEcommerceResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type OrdersGetEcommerceResponseLinesItem struct {
-	ID               string  `json:"id" url:"id"`
-	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description      string  `json:"description" url:"description"`
-	Quantity         string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
-	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
+	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2612,6 +2678,13 @@ func (o *OrdersGetEcommerceResponseLinesItem) GetVatRatePercent() string {
 		return ""
 	}
 	return o.VatRatePercent
+}
+
+func (o *OrdersGetEcommerceResponseLinesItem) GetVatClassifierCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.VatClassifierCode
 }
 
 func (o *OrdersGetEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -2668,6 +2741,13 @@ func (o *OrdersGetEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceExclV
 func (o *OrdersGetEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
 	o.VatRatePercent = vatRatePercent
 	o.require(ordersGetEcommerceResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersGetEcommerceResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	o.VatClassifierCode = vatClassifierCode
+	o.require(ordersGetEcommerceResponseLinesItemFieldVatClassifierCode)
 }
 
 func (o *OrdersGetEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -3924,21 +4004,23 @@ func (o *OrdersReserveEcommerceResponse) String() string {
 }
 
 var (
-	ordersReserveEcommerceResponseLinesItemFieldID               = big.NewInt(1 << 0)
-	ordersReserveEcommerceResponseLinesItemFieldItemID           = big.NewInt(1 << 1)
-	ordersReserveEcommerceResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
-	ordersReserveEcommerceResponseLinesItemFieldQuantity         = big.NewInt(1 << 3)
-	ordersReserveEcommerceResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 4)
-	ordersReserveEcommerceResponseLinesItemFieldVatRatePercent   = big.NewInt(1 << 5)
+	ordersReserveEcommerceResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	ordersReserveEcommerceResponseLinesItemFieldItemID            = big.NewInt(1 << 1)
+	ordersReserveEcommerceResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
+	ordersReserveEcommerceResponseLinesItemFieldQuantity          = big.NewInt(1 << 3)
+	ordersReserveEcommerceResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 4)
+	ordersReserveEcommerceResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 5)
+	ordersReserveEcommerceResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 6)
 )
 
 type OrdersReserveEcommerceResponseLinesItem struct {
-	ID               string  `json:"id" url:"id"`
-	ItemID           *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description      string  `json:"description" url:"description"`
-	Quantity         string  `json:"quantity" url:"quantity"`
-	UnitPriceExclVat string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
-	VatRatePercent   string  `json:"vatRatePercent" url:"vatRatePercent"`
+	ID                string  `json:"id" url:"id"`
+	ItemID            *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitPriceExclVat  string  `json:"unitPriceExclVat" url:"unitPriceExclVat"`
+	VatRatePercent    string  `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3987,6 +4069,13 @@ func (o *OrdersReserveEcommerceResponseLinesItem) GetVatRatePercent() string {
 		return ""
 	}
 	return o.VatRatePercent
+}
+
+func (o *OrdersReserveEcommerceResponseLinesItem) GetVatClassifierCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.VatClassifierCode
 }
 
 func (o *OrdersReserveEcommerceResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -4043,6 +4132,13 @@ func (o *OrdersReserveEcommerceResponseLinesItem) SetUnitPriceExclVat(unitPriceE
 func (o *OrdersReserveEcommerceResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
 	o.VatRatePercent = vatRatePercent
 	o.require(ordersReserveEcommerceResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersReserveEcommerceResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	o.VatClassifierCode = vatClassifierCode
+	o.require(ordersReserveEcommerceResponseLinesItemFieldVatClassifierCode)
 }
 
 func (o *OrdersReserveEcommerceResponseLinesItem) UnmarshalJSON(data []byte) error {

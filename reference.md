@@ -941,7 +941,7 @@ client.Reference.CurrenciesList(
 <dl>
 <dd>
 
-Lists the company's VAT classifiers (code, country, name and rate). A document line that names a classifier in `vatClassifierCode` takes its rate from it when neither the line nor the item has a rate. Filterable by `code`, `countryCode` and `ratePercent`; sortable by `code` and `ratePercent`.
+Lists the company's VAT types (code, country, name and rate). A document line names one in `vatClassifierCode` and takes its rate, VAT scheme and return boxes from it; a company that has VAT types refuses a line without one (422). `side` says whether the type is for sale lines, purchase lines or both, `scheme` is its VAT scheme and `nameEn` its English name; both are null for a type the company added itself. A type without a rate takes the line's `vatRatePercent` on the sides where `rateFromLine` is true, and 0% elsewhere. Filterable by `code`, `countryCode` and `ratePercent`; sortable by `code` and `ratePercent`.
 </dd>
 </dl>
 </dd>
@@ -11680,7 +11680,7 @@ client.Sales.InvoicesUnlock(
 <dl>
 <dd>
 
-Return the customer payment link of a sale document: the Stripe card payment page (`source` `stripe`) when the company's Stripe account is connected and can take charges (`sales/invoices/card-payments/get`), else the link rendered from the company's payment link template (`sales/invoices/payment-settings/update`, `source` `template`); `url` is null when the company has neither, the document is not issued or its `payLinkEnabled` is false. The document's payment token is created on first use. Answers 409 when the document is already paid.
+Return the customer payment link of a sale document: the Stripe card payment page (`source` `stripe`) when the company's Stripe account is connected and can take charges (`sales/invoices/card-payments/get`), else the link rendered from the company's payment link template (`sales/invoices/payment-settings/update`, `source` `template`); `url` is null when the company has neither, the document is a credit note, is not issued or its `payLinkEnabled` is false. The document's payment token is created on first use. Answers 409 when the document is already paid.
 </dd>
 </dl>
 </dd>
@@ -46886,7 +46886,7 @@ client.Bank.PaymentsExport(
 <dl>
 <dd>
 
-A template of type stripe, iso20022, revolut or bank_connection names the fields of the file or feed: a field with an `accountCode` is posted to that ledger account on import, a field with `createPartner` creates the customer, supplier or fee partner. `invoiceMetaField` is the Stripe metadata key (stripe) or the reference field (other types) by which payments are linked to invoices; with it `invoiceVatRatePercent`, `invoiceItemId` and, outside Stripe, `advanceInvoices` apply. `companyMetaField`, `lenderMetaField`, the operation types and the refund labels are for Stripe templates only. A template with the same name already existing answers 409.
+A template of type stripe, iso20022, revolut or bank_connection names the fields of the file or feed: a field with an `accountCode` is posted to that ledger account on import, a field with `createPartner` creates the customer, supplier or fee partner. `invoiceMetaField` is the Stripe metadata key (stripe) or the reference field (other types) by which payments are linked to invoices; with it `invoiceVatClassifierCode`, `invoiceVatRatePercent`, `invoiceItemId` and, outside Stripe, `advanceInvoices` apply. `companyMetaField`, `lenderMetaField`, the operation types and the refund labels are for Stripe templates only. A template with the same name already existing answers 409.
 </dd>
 </dl>
 </dd>
@@ -46965,6 +46965,14 @@ client.Bank.ImportTemplatesCreate(
 <dd>
 
 **invoiceVatRatePercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceVatClassifierCode:** `*string` 
     
 </dd>
 </dl>
@@ -47138,6 +47146,14 @@ client.Bank.ImportTemplatesUpdate(
 <dd>
 
 **invoiceVatRatePercent:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**invoiceVatClassifierCode:** `*string` 
     
 </dd>
 </dl>
@@ -53930,7 +53946,7 @@ client.Public.InvoicesPdf(
 <dl>
 <dd>
 
-Return the signed-in user's billing account: plan, account type, status, balance, trial and payment state, the month-to-date usage of the companies the user pays for with an estimate of today's charge, the plan catalogue, and the top-up, automatic top-up and overdraft settings.
+Return the signed-in user's billing account of the site named by the `x-nordlet-site` header (`app` when absent): plan, account type, status, balance, trial and payment state, the month-to-date usage of that site in the companies the user pays for with an estimate of today's charge, the plan catalogue, and the top-up, automatic top-up and overdraft settings. Each site has its own account and plan.
 </dd>
 </dl>
 </dd>
@@ -53974,7 +53990,7 @@ client.Billing.AccountGet(
 <dl>
 <dd>
 
-Change the plan of the user's flat-rate billing account; answers 409 when the account type is not `flat_rate`. With a Stripe subscription and payments configured, the subscription is moved to the new plan.
+Change the plan of the user's flat-rate billing account of the request's site; answers 422 when the plan is not one of that site's plans and 409 when the account type is not `flat_rate`. With a Stripe subscription and payments configured, the subscription is moved to the new plan.
 </dd>
 </dl>
 </dd>
@@ -54035,7 +54051,7 @@ client.Billing.AccountSetPlan(
 <dl>
 <dd>
 
-Switch the user's billing account between `flat_rate` and `per_request`. With a Stripe subscription and payments configured, the subscription is moved to the plan's price for `flat_rate`; for `per_request` the plan is taken off the subscription, and a subscription that carried only the plan is cancelled, leaving the account without one. When Stripe refuses the change, the previous account type is restored.
+Switch the user's billing account of the request's site between `flat_rate` and `per_request`; answers 422 for an account type the site does not offer (the `invoice` site has `flat_rate` only). With a Stripe subscription and payments configured, the subscription is moved to the plan's price for `flat_rate`; for `per_request` the plan is taken off the subscription, and a subscription that carried only the plan is cancelled, leaving the account without one. When Stripe refuses the change, the previous account type is restored.
 </dd>
 </dl>
 </dd>
@@ -54096,7 +54112,7 @@ client.Billing.AccountSetAccountType(
 <dl>
 <dd>
 
-Switch automatic top-ups on or off and set their amount. Switching them on needs a Stripe customer, which the first card top-up creates (400 otherwise); when switched on, a top-up is charged at once if the balance is at or below zero, no payment has failed and no top-up was requested in the last 24 hours.
+Switch automatic top-ups on or off and set their amount; answers 409 on a site without top-ups. Switching them on needs a Stripe customer, which the first card top-up creates (400 otherwise); when switched on, a top-up is charged at once if the balance is at or below zero, no payment has failed and no top-up was requested in the last 24 hours.
 </dd>
 </dl>
 </dd>
@@ -54166,7 +54182,7 @@ client.Billing.AccountSetAutoTopUp(
 <dl>
 <dd>
 
-Set the overdraft cap of the user's billing account: how far usage charges may take the balance below zero before the account is suspended. A suspended account whose balance is within the new cap is activated again.
+Set the overdraft cap of the user's billing account: how far usage charges may take the balance below zero before the account is suspended. A suspended account whose balance is within the new cap is activated again. Answers 409 on a site without top-ups.
 </dd>
 </dl>
 </dd>
@@ -54227,7 +54243,7 @@ client.Billing.AccountSetOverdraftCap(
 <dl>
 <dd>
 
-Open a Stripe Checkout session for a one-time credit top-up of `amountCents` and return its URL; a Stripe customer is created for the user when there is none. `returnTo` chooses whether Checkout returns to the credits page or to the onboarding plan page, in `locale`. Answers 503 when online payments are not configured.
+Open a Stripe Checkout session for a one-time credit top-up of `amountCents` and return its URL; a Stripe customer is created for the user when there is none. `returnTo` chooses whether Checkout returns to the credits page or to the onboarding plan page, in `locale`. Answers 409 on a site without top-ups and 503 when online payments are not configured.
 </dd>
 </dl>
 </dd>
@@ -54304,7 +54320,7 @@ client.Billing.TopupCreate(
 <dl>
 <dd>
 
-Confirm a paid top-up Checkout session by `sessionId` and credit the account at once instead of waiting for the Stripe webhook; a session is credited only once. Answers 404 when the session is not the user's own or is not paid.
+Confirm a paid top-up Checkout session by `sessionId` and credit the account at once instead of waiting for the Stripe webhook; a session is credited only once. Answers 404 when the session is not the user's own or is not paid, and 409 on a site without top-ups.
 </dd>
 </dl>
 </dd>
@@ -54365,7 +54381,7 @@ client.Billing.TopupConfirm(
 <dl>
 <dd>
 
-Open a Stripe Checkout session for a flat-rate subscription on `plan`, with the trial period of `trialDays` days, and return its URL; a Stripe customer is created for the user when there is none. The `invoicing` plan of the invoice tool takes its trial days from the server setting `INVOICE_PLAN_TRIAL_DAYS` and returns to the invoice app. Answers 409 when a flat-rate subscription is already active and 503 when online payments are not configured, the plan has no price, or the Invoicing trial is not set.
+Open a Stripe Checkout session for a flat-rate subscription on `plan` (by default the first plan of the request's site) for the billing account of the request's site, with the trial period of `trialDays` days, and return its URL; a Stripe customer is created for that account when it has none. The `invoicing` plan of the `invoice` site takes its trial days from the server setting `INVOICE_PLAN_TRIAL_DAYS` and returns to the invoice app. Answers 422 when the plan is not one of the site's plans, 409 when the site's flat-rate subscription is already active and 503 when online payments are not configured, the plan has no price, or the Invoicing trial is not set.
 </dd>
 </dl>
 </dd>
@@ -54432,7 +54448,7 @@ client.Billing.FlatRateCreate(
 <dl>
 <dd>
 
-Confirm a completed flat-rate Checkout session by `sessionId`: the account becomes `flat_rate` on the session's plan with status `active` and the subscription attached, unless the Stripe webhook already did this. Answers 404 when the session is not the user's own or not completed.
+Confirm a completed flat-rate Checkout session by `sessionId`: the billing account of the site of the session's plan becomes `flat_rate` on that plan with status `active` and the subscription attached, unless the Stripe webhook already did this. Answers 404 when the session is not the user's own or not completed.
 </dd>
 </dl>
 </dd>
@@ -54493,7 +54509,7 @@ client.Billing.FlatRateConfirm(
 <dl>
 <dd>
 
-Cancel the user's Stripe subscription at the end of the period already paid: the plan stays active until `subscriptionCancelAt`, and Stripe then ends the subscription, which its `customer.subscription.deleted` webhook records. Answers 503 when online payments are not configured and 409 when the account has no subscription.
+Cancel the Stripe subscription of the user's billing account of the request's site at the end of the period already paid: the plan stays active until `subscriptionCancelAt`, and Stripe then ends the subscription, which its `customer.subscription.deleted` webhook records. Answers 503 when online payments are not configured and 409 when the account has no subscription.
 </dd>
 </dl>
 </dd>
@@ -54537,7 +54553,7 @@ client.Billing.SubscriptionCancel(
 <dl>
 <dd>
 
-Open a Stripe customer portal session that returns to the credits page in `locale`, and return its URL. Answers 503 when online payments are not configured and 400 when the user has no Stripe customer yet.
+Open a Stripe customer portal session for the billing account of the request's site that returns to that site's credits page (the plan page on the `invoice` site) in `locale`, and return its URL. Answers 503 when online payments are not configured and 400 when the account has no Stripe customer yet.
 </dd>
 </dl>
 </dd>
@@ -54596,7 +54612,7 @@ client.Billing.PortalCreate(
 <dl>
 <dd>
 
-List the newest credit transactions of the user's billing account, up to `limit`: trial grants, top-ups, usage charges, activations and adjustments, each with the balance after it.
+List the newest credit transactions of the user's billing account of the request's site, up to `limit`: trial grants, top-ups, usage charges, activations and adjustments, each with the balance after it.
 </dd>
 </dl>
 </dd>
@@ -54655,7 +54671,7 @@ client.Billing.TransactionsList(
 <dl>
 <dd>
 
-List the daily usage records of the companies the user pays for, from `from` to `to`: one row per company, date and metric (API requests, OCR pages, file storage bytes, database bytes, sale invoices).
+List the daily usage records of the request's site in the companies the user pays for, from `from` to `to`: one row per company, date and metric (API requests, OCR pages, file storage bytes, database bytes, sale invoices). Requests, OCR pages and invoices count on the site the request came from; storage counts on the `app` site.
 </dd>
 </dl>
 </dd>
@@ -54936,7 +54952,7 @@ client.Account.Logout(
 <dl>
 <dd>
 
-Return the signed-in user, their active company and role in it, the companies they belong to and their consent state. `billing` is the billing account that pays for the active company (its payer, or the user when there is none or no company), with `isPayer` saying whether that is the user; `referralPoints` is the user's current points balance.
+Return the signed-in user, their active company and role in it, the companies they belong to and their consent state. `billing` is the billing account of the request's site (the `x-nordlet-site` header, `app` when absent) that pays for the active company (its payer, or the user when there is none or no company), with `isPayer` saying whether that is the user; `referralPoints` is the user's current points balance. An API key may call it too: the active company is then the one named in the `x-nordlet-company` header, and `companies` lists every company the key works in.
 </dd>
 </dl>
 </dd>
@@ -55163,7 +55179,7 @@ client.Account.MembersTransferOwnership(
 <dl>
 <dd>
 
-Remove a member from the active company; owners and admins may call it. Their sessions lose this company as the active one and the API keys they created for it are revoked. Refused with 422 for the caller themself and with 403 for the owner.
+Remove a member from the active company; owners and admins may call it. Their sessions lose this company as the active one and their API keys stop working in it. Refused with 422 for the caller themself and with 403 for the owner.
 </dd>
 </dl>
 </dd>
@@ -55971,7 +55987,7 @@ client.Account.CompaniesCreate(
 <dl>
 <dd>
 
-Make one of the caller's companies the active company of the session. Refused with 403 when the caller is not a member and with 422 when the company is archived or deleted.
+Make one of the caller's companies the active company of the session. Refused with 403 when the caller is not a member, with 422 when the company is archived or deleted, and with 422 for an API key, which names the company in the `x-nordlet-company` header of each call instead.
 </dd>
 </dl>
 </dd>
@@ -56582,7 +56598,7 @@ client.Account.CompaniesActivate(
 <dl>
 <dd>
 
-Create an API key for the active company and return the key itself once; owners, admins and developers may call it. `scopes` defaults to the caller's own scopes and may not exceed them (403); without `expiresInDays` the key does not expire.
+Create an API key for the signed-in person and return the key itself once. Owners, admins and developers of the active company may call it. The key works in every company the person is a member of, with the rights of their role in each; every call names the company in the `x-nordlet-company` header. `scopes` defaults to the caller's scopes in the active company and may not exceed them (403); in each company the key's scopes are further limited to the person's role there. Without `expiresInDays` the key does not expire.
 </dd>
 </dl>
 </dd>
@@ -56659,7 +56675,7 @@ client.Account.APIKeysCreate(
 <dl>
 <dd>
 
-List the API keys of the active company, including expired and revoked ones.
+List the signed-in person's API keys, including expired and revoked ones.
 </dd>
 </dl>
 </dd>
@@ -56703,7 +56719,7 @@ client.Account.APIKeysList(
 <dl>
 <dd>
 
-Create a new key with the name and scopes of the key `id` and return it once; the old key keeps working for `overlapHours` and then expires, and its `replacedByKeyId` points to the new one. `expiresInDays` applies to the new key. Refused with 409 when the old key is revoked.
+Create a new key with the name and scopes of the signed-in person's key `id` and return it once; the old key keeps working for `overlapHours` and then expires, and its `replacedByKeyId` points to the new one. `expiresInDays` applies to the new key. Refused with 409 when the old key is revoked or belongs to an app connected through OAuth, which renews its own access.
 </dd>
 </dl>
 </dd>
@@ -56780,7 +56796,7 @@ client.Account.APIKeysRotate(
 <dl>
 <dd>
 
-Revoke an API key of the active company at once.
+Revoke one of the signed-in person's API keys at once.
 </dd>
 </dl>
 </dd>
@@ -57188,7 +57204,7 @@ client.Account.SessionsRevokeOthers(
 <dl>
 <dd>
 
-Return the user's profile, consent state, memberships, unexpired sessions, billing account, credit transactions and the audit entries they made in their companies (the most recent 5000 of each of the last two).
+Return the user's profile, consent state, memberships, unexpired sessions, billing accounts (`billing` is the `app` site's, `billingAccounts` has one per site), credit transactions and the audit entries they made in their companies (the most recent 5000 of each of the last two).
 </dd>
 </dl>
 </dd>
@@ -57558,6 +57574,357 @@ client.Account.TableSettingsList(
     )
 }
 ```
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.OauthAuthorizeDescribe(request) -> *nordlet.OauthAuthorizeDescribeAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Check an OAuth authorization request of an app that wants to connect to Nordlet (such as Claude) and return the name the app registered, the address the signed-in person is sent back to and the scopes asked for. Refused with 422 when the request is invalid: unknown app, redirect address not registered for it, no PKCE (S256), unknown scope or a resource other than the MCP server.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.OauthAuthorizeDescribeAccountRequest{
+        ClientID: "clientId",
+    }
+client.Account.OauthAuthorizeDescribe(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**clientID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirectURI:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**responseType:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**codeChallenge:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**codeChallengeMethod:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resource:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.OauthAuthorizeApprove(request) -> *nordlet.OauthAuthorizeApproveAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Allow the app of an OAuth authorization request to act for the signed-in person and return the app's redirect address with a one-time authorization code (valid for 5 minutes). The app exchanges the code at `/oauth/token` for an access token that works like an API key of the person: in every company they are a member of, with the rights of their role there. The connection is listed among the person's API keys under the app's name and is revoked there. Refused with 422 like `account/oauth/authorize/describe`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.OauthAuthorizeApproveAccountRequest{
+        ClientID: "clientId",
+    }
+client.Account.OauthAuthorizeApprove(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**clientID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirectURI:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**responseType:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**codeChallenge:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**codeChallengeMethod:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resource:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Account.OauthAuthorizeDeny(request) -> *nordlet.OauthAuthorizeDenyAccountResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Refuse an OAuth authorization request and return the app's redirect address with the error `access_denied`. Refused with 422 like `account/oauth/authorize/describe`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &nordlet.OauthAuthorizeDenyAccountRequest{
+        ClientID: "clientId",
+    }
+client.Account.OauthAuthorizeDeny(
+        context.TODO(),
+        request,
+    )
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**clientID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**redirectURI:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**responseType:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**codeChallenge:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**codeChallengeMethod:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scope:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resource:** `*string` 
+    
 </dd>
 </dl>
 </dd>

@@ -533,30 +533,33 @@ func (t *TransactionsListBillingRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	accountGetBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	accountGetBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	accountGetBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	accountGetBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	accountGetBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	accountGetBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	accountGetBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	accountGetBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	accountGetBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	accountGetBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	accountGetBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	accountGetBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	accountGetBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	accountGetBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	accountGetBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	accountGetBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	accountGetBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	accountGetBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	accountGetBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	accountGetBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	accountGetBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	accountGetBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	accountGetBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	accountGetBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	accountGetBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	accountGetBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	accountGetBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	accountGetBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	accountGetBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	accountGetBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	accountGetBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	accountGetBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	accountGetBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	accountGetBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	accountGetBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	accountGetBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	accountGetBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	accountGetBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	accountGetBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	accountGetBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	accountGetBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	accountGetBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	accountGetBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type AccountGetBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               AccountGetBillingResponseSite        `json:"site" url:"site"`
 	Plan               AccountGetBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        AccountGetBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             AccountGetBillingResponseStatus      `json:"status" url:"status"`
@@ -585,6 +588,13 @@ type AccountGetBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (a *AccountGetBillingResponse) GetSite() AccountGetBillingResponseSite {
+	if a == nil {
+		return ""
+	}
+	return a.Site
 }
 
 func (a *AccountGetBillingResponse) GetPlan() AccountGetBillingResponsePlan {
@@ -746,6 +756,13 @@ func (a *AccountGetBillingResponse) require(field *big.Int) {
 		a.explicitFields = big.NewInt(0)
 	}
 	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountGetBillingResponse) SetSite(site AccountGetBillingResponseSite) {
+	a.Site = site
+	a.require(accountGetBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -1487,6 +1504,29 @@ func (a *AccountGetBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type AccountGetBillingResponseSite string
+
+const (
+	AccountGetBillingResponseSiteApp     AccountGetBillingResponseSite = "app"
+	AccountGetBillingResponseSiteInvoice AccountGetBillingResponseSite = "invoice"
+)
+
+func NewAccountGetBillingResponseSiteFromString(s string) (AccountGetBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return AccountGetBillingResponseSiteApp, nil
+	case "invoice":
+		return AccountGetBillingResponseSiteInvoice, nil
+	}
+	var t AccountGetBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountGetBillingResponseSite) Ptr() *AccountGetBillingResponseSite {
+	return &a
+}
+
 type AccountGetBillingResponseStatus string
 
 const (
@@ -1635,30 +1675,33 @@ func (a AccountSetAccountTypeBillingRequestAccountType) Ptr() *AccountSetAccount
 }
 
 var (
-	accountSetAccountTypeBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	accountSetAccountTypeBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	accountSetAccountTypeBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	accountSetAccountTypeBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	accountSetAccountTypeBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	accountSetAccountTypeBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	accountSetAccountTypeBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	accountSetAccountTypeBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	accountSetAccountTypeBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	accountSetAccountTypeBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	accountSetAccountTypeBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	accountSetAccountTypeBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	accountSetAccountTypeBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	accountSetAccountTypeBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	accountSetAccountTypeBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	accountSetAccountTypeBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	accountSetAccountTypeBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	accountSetAccountTypeBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	accountSetAccountTypeBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	accountSetAccountTypeBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	accountSetAccountTypeBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	accountSetAccountTypeBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	accountSetAccountTypeBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	accountSetAccountTypeBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	accountSetAccountTypeBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	accountSetAccountTypeBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	accountSetAccountTypeBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	accountSetAccountTypeBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	accountSetAccountTypeBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	accountSetAccountTypeBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	accountSetAccountTypeBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	accountSetAccountTypeBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	accountSetAccountTypeBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	accountSetAccountTypeBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	accountSetAccountTypeBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	accountSetAccountTypeBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	accountSetAccountTypeBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	accountSetAccountTypeBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	accountSetAccountTypeBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	accountSetAccountTypeBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	accountSetAccountTypeBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	accountSetAccountTypeBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	accountSetAccountTypeBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type AccountSetAccountTypeBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               AccountSetAccountTypeBillingResponseSite        `json:"site" url:"site"`
 	Plan               AccountSetAccountTypeBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        AccountSetAccountTypeBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             AccountSetAccountTypeBillingResponseStatus      `json:"status" url:"status"`
@@ -1687,6 +1730,13 @@ type AccountSetAccountTypeBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (a *AccountSetAccountTypeBillingResponse) GetSite() AccountSetAccountTypeBillingResponseSite {
+	if a == nil {
+		return ""
+	}
+	return a.Site
 }
 
 func (a *AccountSetAccountTypeBillingResponse) GetPlan() AccountSetAccountTypeBillingResponsePlan {
@@ -1848,6 +1898,13 @@ func (a *AccountSetAccountTypeBillingResponse) require(field *big.Int) {
 		a.explicitFields = big.NewInt(0)
 	}
 	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetAccountTypeBillingResponse) SetSite(site AccountSetAccountTypeBillingResponseSite) {
+	a.Site = site
+	a.require(accountSetAccountTypeBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -2589,6 +2646,29 @@ func (a *AccountSetAccountTypeBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type AccountSetAccountTypeBillingResponseSite string
+
+const (
+	AccountSetAccountTypeBillingResponseSiteApp     AccountSetAccountTypeBillingResponseSite = "app"
+	AccountSetAccountTypeBillingResponseSiteInvoice AccountSetAccountTypeBillingResponseSite = "invoice"
+)
+
+func NewAccountSetAccountTypeBillingResponseSiteFromString(s string) (AccountSetAccountTypeBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return AccountSetAccountTypeBillingResponseSiteApp, nil
+	case "invoice":
+		return AccountSetAccountTypeBillingResponseSiteInvoice, nil
+	}
+	var t AccountSetAccountTypeBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountSetAccountTypeBillingResponseSite) Ptr() *AccountSetAccountTypeBillingResponseSite {
+	return &a
+}
+
 type AccountSetAccountTypeBillingResponseStatus string
 
 const (
@@ -2715,30 +2795,33 @@ func (a *AccountSetAccountTypeBillingResponseTopUp) String() string {
 }
 
 var (
-	accountSetAutoTopUpBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	accountSetAutoTopUpBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	accountSetAutoTopUpBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	accountSetAutoTopUpBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	accountSetAutoTopUpBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	accountSetAutoTopUpBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	accountSetAutoTopUpBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	accountSetAutoTopUpBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	accountSetAutoTopUpBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	accountSetAutoTopUpBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	accountSetAutoTopUpBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	accountSetAutoTopUpBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	accountSetAutoTopUpBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	accountSetAutoTopUpBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	accountSetAutoTopUpBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	accountSetAutoTopUpBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	accountSetAutoTopUpBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	accountSetAutoTopUpBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	accountSetAutoTopUpBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	accountSetAutoTopUpBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	accountSetAutoTopUpBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	accountSetAutoTopUpBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	accountSetAutoTopUpBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	accountSetAutoTopUpBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	accountSetAutoTopUpBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	accountSetAutoTopUpBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	accountSetAutoTopUpBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	accountSetAutoTopUpBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	accountSetAutoTopUpBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	accountSetAutoTopUpBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	accountSetAutoTopUpBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	accountSetAutoTopUpBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	accountSetAutoTopUpBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	accountSetAutoTopUpBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	accountSetAutoTopUpBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	accountSetAutoTopUpBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	accountSetAutoTopUpBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	accountSetAutoTopUpBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	accountSetAutoTopUpBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	accountSetAutoTopUpBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	accountSetAutoTopUpBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	accountSetAutoTopUpBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	accountSetAutoTopUpBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type AccountSetAutoTopUpBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               AccountSetAutoTopUpBillingResponseSite        `json:"site" url:"site"`
 	Plan               AccountSetAutoTopUpBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        AccountSetAutoTopUpBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             AccountSetAutoTopUpBillingResponseStatus      `json:"status" url:"status"`
@@ -2767,6 +2850,13 @@ type AccountSetAutoTopUpBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (a *AccountSetAutoTopUpBillingResponse) GetSite() AccountSetAutoTopUpBillingResponseSite {
+	if a == nil {
+		return ""
+	}
+	return a.Site
 }
 
 func (a *AccountSetAutoTopUpBillingResponse) GetPlan() AccountSetAutoTopUpBillingResponsePlan {
@@ -2928,6 +3018,13 @@ func (a *AccountSetAutoTopUpBillingResponse) require(field *big.Int) {
 		a.explicitFields = big.NewInt(0)
 	}
 	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetAutoTopUpBillingResponse) SetSite(site AccountSetAutoTopUpBillingResponseSite) {
+	a.Site = site
+	a.require(accountSetAutoTopUpBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -3669,6 +3766,29 @@ func (a *AccountSetAutoTopUpBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type AccountSetAutoTopUpBillingResponseSite string
+
+const (
+	AccountSetAutoTopUpBillingResponseSiteApp     AccountSetAutoTopUpBillingResponseSite = "app"
+	AccountSetAutoTopUpBillingResponseSiteInvoice AccountSetAutoTopUpBillingResponseSite = "invoice"
+)
+
+func NewAccountSetAutoTopUpBillingResponseSiteFromString(s string) (AccountSetAutoTopUpBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return AccountSetAutoTopUpBillingResponseSiteApp, nil
+	case "invoice":
+		return AccountSetAutoTopUpBillingResponseSiteInvoice, nil
+	}
+	var t AccountSetAutoTopUpBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountSetAutoTopUpBillingResponseSite) Ptr() *AccountSetAutoTopUpBillingResponseSite {
+	return &a
+}
+
 type AccountSetAutoTopUpBillingResponseStatus string
 
 const (
@@ -3795,30 +3915,33 @@ func (a *AccountSetAutoTopUpBillingResponseTopUp) String() string {
 }
 
 var (
-	accountSetOverdraftCapBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	accountSetOverdraftCapBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	accountSetOverdraftCapBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	accountSetOverdraftCapBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	accountSetOverdraftCapBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	accountSetOverdraftCapBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	accountSetOverdraftCapBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	accountSetOverdraftCapBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	accountSetOverdraftCapBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	accountSetOverdraftCapBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	accountSetOverdraftCapBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	accountSetOverdraftCapBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	accountSetOverdraftCapBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	accountSetOverdraftCapBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	accountSetOverdraftCapBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	accountSetOverdraftCapBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	accountSetOverdraftCapBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	accountSetOverdraftCapBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	accountSetOverdraftCapBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	accountSetOverdraftCapBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	accountSetOverdraftCapBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	accountSetOverdraftCapBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	accountSetOverdraftCapBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	accountSetOverdraftCapBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	accountSetOverdraftCapBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	accountSetOverdraftCapBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	accountSetOverdraftCapBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	accountSetOverdraftCapBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	accountSetOverdraftCapBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	accountSetOverdraftCapBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	accountSetOverdraftCapBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	accountSetOverdraftCapBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	accountSetOverdraftCapBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	accountSetOverdraftCapBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	accountSetOverdraftCapBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	accountSetOverdraftCapBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	accountSetOverdraftCapBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	accountSetOverdraftCapBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	accountSetOverdraftCapBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	accountSetOverdraftCapBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	accountSetOverdraftCapBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	accountSetOverdraftCapBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	accountSetOverdraftCapBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type AccountSetOverdraftCapBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               AccountSetOverdraftCapBillingResponseSite        `json:"site" url:"site"`
 	Plan               AccountSetOverdraftCapBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        AccountSetOverdraftCapBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             AccountSetOverdraftCapBillingResponseStatus      `json:"status" url:"status"`
@@ -3847,6 +3970,13 @@ type AccountSetOverdraftCapBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (a *AccountSetOverdraftCapBillingResponse) GetSite() AccountSetOverdraftCapBillingResponseSite {
+	if a == nil {
+		return ""
+	}
+	return a.Site
 }
 
 func (a *AccountSetOverdraftCapBillingResponse) GetPlan() AccountSetOverdraftCapBillingResponsePlan {
@@ -4008,6 +4138,13 @@ func (a *AccountSetOverdraftCapBillingResponse) require(field *big.Int) {
 		a.explicitFields = big.NewInt(0)
 	}
 	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetOverdraftCapBillingResponse) SetSite(site AccountSetOverdraftCapBillingResponseSite) {
+	a.Site = site
+	a.require(accountSetOverdraftCapBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -4749,6 +4886,29 @@ func (a *AccountSetOverdraftCapBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type AccountSetOverdraftCapBillingResponseSite string
+
+const (
+	AccountSetOverdraftCapBillingResponseSiteApp     AccountSetOverdraftCapBillingResponseSite = "app"
+	AccountSetOverdraftCapBillingResponseSiteInvoice AccountSetOverdraftCapBillingResponseSite = "invoice"
+)
+
+func NewAccountSetOverdraftCapBillingResponseSiteFromString(s string) (AccountSetOverdraftCapBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return AccountSetOverdraftCapBillingResponseSiteApp, nil
+	case "invoice":
+		return AccountSetOverdraftCapBillingResponseSiteInvoice, nil
+	}
+	var t AccountSetOverdraftCapBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountSetOverdraftCapBillingResponseSite) Ptr() *AccountSetOverdraftCapBillingResponseSite {
+	return &a
+}
+
 type AccountSetOverdraftCapBillingResponseStatus string
 
 const (
@@ -4903,30 +5063,33 @@ func (a AccountSetPlanBillingRequestPlan) Ptr() *AccountSetPlanBillingRequestPla
 }
 
 var (
-	accountSetPlanBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	accountSetPlanBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	accountSetPlanBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	accountSetPlanBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	accountSetPlanBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	accountSetPlanBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	accountSetPlanBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	accountSetPlanBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	accountSetPlanBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	accountSetPlanBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	accountSetPlanBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	accountSetPlanBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	accountSetPlanBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	accountSetPlanBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	accountSetPlanBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	accountSetPlanBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	accountSetPlanBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	accountSetPlanBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	accountSetPlanBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	accountSetPlanBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	accountSetPlanBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	accountSetPlanBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	accountSetPlanBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	accountSetPlanBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	accountSetPlanBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	accountSetPlanBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	accountSetPlanBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	accountSetPlanBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	accountSetPlanBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	accountSetPlanBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	accountSetPlanBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	accountSetPlanBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	accountSetPlanBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	accountSetPlanBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	accountSetPlanBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	accountSetPlanBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	accountSetPlanBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	accountSetPlanBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	accountSetPlanBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	accountSetPlanBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	accountSetPlanBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	accountSetPlanBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	accountSetPlanBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type AccountSetPlanBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               AccountSetPlanBillingResponseSite        `json:"site" url:"site"`
 	Plan               AccountSetPlanBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        AccountSetPlanBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             AccountSetPlanBillingResponseStatus      `json:"status" url:"status"`
@@ -4955,6 +5118,13 @@ type AccountSetPlanBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (a *AccountSetPlanBillingResponse) GetSite() AccountSetPlanBillingResponseSite {
+	if a == nil {
+		return ""
+	}
+	return a.Site
 }
 
 func (a *AccountSetPlanBillingResponse) GetPlan() AccountSetPlanBillingResponsePlan {
@@ -5116,6 +5286,13 @@ func (a *AccountSetPlanBillingResponse) require(field *big.Int) {
 		a.explicitFields = big.NewInt(0)
 	}
 	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetPlanBillingResponse) SetSite(site AccountSetPlanBillingResponseSite) {
+	a.Site = site
+	a.require(accountSetPlanBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -5857,6 +6034,29 @@ func (a *AccountSetPlanBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type AccountSetPlanBillingResponseSite string
+
+const (
+	AccountSetPlanBillingResponseSiteApp     AccountSetPlanBillingResponseSite = "app"
+	AccountSetPlanBillingResponseSiteInvoice AccountSetPlanBillingResponseSite = "invoice"
+)
+
+func NewAccountSetPlanBillingResponseSiteFromString(s string) (AccountSetPlanBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return AccountSetPlanBillingResponseSiteApp, nil
+	case "invoice":
+		return AccountSetPlanBillingResponseSiteInvoice, nil
+	}
+	var t AccountSetPlanBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AccountSetPlanBillingResponseSite) Ptr() *AccountSetPlanBillingResponseSite {
+	return &a
+}
+
 type AccountSetPlanBillingResponseStatus string
 
 const (
@@ -5983,30 +6183,33 @@ func (a *AccountSetPlanBillingResponseTopUp) String() string {
 }
 
 var (
-	flatRateConfirmBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	flatRateConfirmBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	flatRateConfirmBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	flatRateConfirmBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	flatRateConfirmBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	flatRateConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	flatRateConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	flatRateConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	flatRateConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	flatRateConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	flatRateConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	flatRateConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	flatRateConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	flatRateConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	flatRateConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	flatRateConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	flatRateConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	flatRateConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	flatRateConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	flatRateConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	flatRateConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	flatRateConfirmBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	flatRateConfirmBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	flatRateConfirmBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	flatRateConfirmBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	flatRateConfirmBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	flatRateConfirmBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	flatRateConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	flatRateConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	flatRateConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	flatRateConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	flatRateConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	flatRateConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	flatRateConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	flatRateConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	flatRateConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	flatRateConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	flatRateConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	flatRateConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	flatRateConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	flatRateConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	flatRateConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	flatRateConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type FlatRateConfirmBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               FlatRateConfirmBillingResponseSite        `json:"site" url:"site"`
 	Plan               FlatRateConfirmBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        FlatRateConfirmBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             FlatRateConfirmBillingResponseStatus      `json:"status" url:"status"`
@@ -6035,6 +6238,13 @@ type FlatRateConfirmBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (f *FlatRateConfirmBillingResponse) GetSite() FlatRateConfirmBillingResponseSite {
+	if f == nil {
+		return ""
+	}
+	return f.Site
 }
 
 func (f *FlatRateConfirmBillingResponse) GetPlan() FlatRateConfirmBillingResponsePlan {
@@ -6196,6 +6406,13 @@ func (f *FlatRateConfirmBillingResponse) require(field *big.Int) {
 		f.explicitFields = big.NewInt(0)
 	}
 	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FlatRateConfirmBillingResponse) SetSite(site FlatRateConfirmBillingResponseSite) {
+	f.Site = site
+	f.require(flatRateConfirmBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -6937,6 +7154,29 @@ func (f *FlatRateConfirmBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", f)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type FlatRateConfirmBillingResponseSite string
+
+const (
+	FlatRateConfirmBillingResponseSiteApp     FlatRateConfirmBillingResponseSite = "app"
+	FlatRateConfirmBillingResponseSiteInvoice FlatRateConfirmBillingResponseSite = "invoice"
+)
+
+func NewFlatRateConfirmBillingResponseSiteFromString(s string) (FlatRateConfirmBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return FlatRateConfirmBillingResponseSiteApp, nil
+	case "invoice":
+		return FlatRateConfirmBillingResponseSiteInvoice, nil
+	}
+	var t FlatRateConfirmBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FlatRateConfirmBillingResponseSite) Ptr() *FlatRateConfirmBillingResponseSite {
+	return &f
+}
+
 type FlatRateConfirmBillingResponseStatus string
 
 const (
@@ -7068,6 +7308,36 @@ const (
 	FlatRateCreateBillingRequestLocaleEn FlatRateCreateBillingRequestLocale = "en"
 	FlatRateCreateBillingRequestLocaleLt FlatRateCreateBillingRequestLocale = "lt"
 	FlatRateCreateBillingRequestLocaleDe FlatRateCreateBillingRequestLocale = "de"
+	FlatRateCreateBillingRequestLocaleFr FlatRateCreateBillingRequestLocale = "fr"
+	FlatRateCreateBillingRequestLocaleEs FlatRateCreateBillingRequestLocale = "es"
+	FlatRateCreateBillingRequestLocaleIt FlatRateCreateBillingRequestLocale = "it"
+	FlatRateCreateBillingRequestLocalePt FlatRateCreateBillingRequestLocale = "pt"
+	FlatRateCreateBillingRequestLocaleNl FlatRateCreateBillingRequestLocale = "nl"
+	FlatRateCreateBillingRequestLocalePl FlatRateCreateBillingRequestLocale = "pl"
+	FlatRateCreateBillingRequestLocaleSv FlatRateCreateBillingRequestLocale = "sv"
+	FlatRateCreateBillingRequestLocaleDa FlatRateCreateBillingRequestLocale = "da"
+	FlatRateCreateBillingRequestLocaleNo FlatRateCreateBillingRequestLocale = "no"
+	FlatRateCreateBillingRequestLocaleFi FlatRateCreateBillingRequestLocale = "fi"
+	FlatRateCreateBillingRequestLocaleEt FlatRateCreateBillingRequestLocale = "et"
+	FlatRateCreateBillingRequestLocaleLv FlatRateCreateBillingRequestLocale = "lv"
+	FlatRateCreateBillingRequestLocaleCs FlatRateCreateBillingRequestLocale = "cs"
+	FlatRateCreateBillingRequestLocaleSk FlatRateCreateBillingRequestLocale = "sk"
+	FlatRateCreateBillingRequestLocaleHu FlatRateCreateBillingRequestLocale = "hu"
+	FlatRateCreateBillingRequestLocaleRo FlatRateCreateBillingRequestLocale = "ro"
+	FlatRateCreateBillingRequestLocaleBg FlatRateCreateBillingRequestLocale = "bg"
+	FlatRateCreateBillingRequestLocaleHr FlatRateCreateBillingRequestLocale = "hr"
+	FlatRateCreateBillingRequestLocaleSl FlatRateCreateBillingRequestLocale = "sl"
+	FlatRateCreateBillingRequestLocaleEl FlatRateCreateBillingRequestLocale = "el"
+	FlatRateCreateBillingRequestLocaleMt FlatRateCreateBillingRequestLocale = "mt"
+	FlatRateCreateBillingRequestLocaleIs FlatRateCreateBillingRequestLocale = "is"
+	FlatRateCreateBillingRequestLocaleGa FlatRateCreateBillingRequestLocale = "ga"
+	FlatRateCreateBillingRequestLocaleZh FlatRateCreateBillingRequestLocale = "zh"
+	FlatRateCreateBillingRequestLocaleJa FlatRateCreateBillingRequestLocale = "ja"
+	FlatRateCreateBillingRequestLocaleAr FlatRateCreateBillingRequestLocale = "ar"
+	FlatRateCreateBillingRequestLocaleHi FlatRateCreateBillingRequestLocale = "hi"
+	FlatRateCreateBillingRequestLocaleRu FlatRateCreateBillingRequestLocale = "ru"
+	FlatRateCreateBillingRequestLocaleTr FlatRateCreateBillingRequestLocale = "tr"
+	FlatRateCreateBillingRequestLocaleUk FlatRateCreateBillingRequestLocale = "uk"
 )
 
 func NewFlatRateCreateBillingRequestLocaleFromString(s string) (FlatRateCreateBillingRequestLocale, error) {
@@ -7078,6 +7348,66 @@ func NewFlatRateCreateBillingRequestLocaleFromString(s string) (FlatRateCreateBi
 		return FlatRateCreateBillingRequestLocaleLt, nil
 	case "de":
 		return FlatRateCreateBillingRequestLocaleDe, nil
+	case "fr":
+		return FlatRateCreateBillingRequestLocaleFr, nil
+	case "es":
+		return FlatRateCreateBillingRequestLocaleEs, nil
+	case "it":
+		return FlatRateCreateBillingRequestLocaleIt, nil
+	case "pt":
+		return FlatRateCreateBillingRequestLocalePt, nil
+	case "nl":
+		return FlatRateCreateBillingRequestLocaleNl, nil
+	case "pl":
+		return FlatRateCreateBillingRequestLocalePl, nil
+	case "sv":
+		return FlatRateCreateBillingRequestLocaleSv, nil
+	case "da":
+		return FlatRateCreateBillingRequestLocaleDa, nil
+	case "no":
+		return FlatRateCreateBillingRequestLocaleNo, nil
+	case "fi":
+		return FlatRateCreateBillingRequestLocaleFi, nil
+	case "et":
+		return FlatRateCreateBillingRequestLocaleEt, nil
+	case "lv":
+		return FlatRateCreateBillingRequestLocaleLv, nil
+	case "cs":
+		return FlatRateCreateBillingRequestLocaleCs, nil
+	case "sk":
+		return FlatRateCreateBillingRequestLocaleSk, nil
+	case "hu":
+		return FlatRateCreateBillingRequestLocaleHu, nil
+	case "ro":
+		return FlatRateCreateBillingRequestLocaleRo, nil
+	case "bg":
+		return FlatRateCreateBillingRequestLocaleBg, nil
+	case "hr":
+		return FlatRateCreateBillingRequestLocaleHr, nil
+	case "sl":
+		return FlatRateCreateBillingRequestLocaleSl, nil
+	case "el":
+		return FlatRateCreateBillingRequestLocaleEl, nil
+	case "mt":
+		return FlatRateCreateBillingRequestLocaleMt, nil
+	case "is":
+		return FlatRateCreateBillingRequestLocaleIs, nil
+	case "ga":
+		return FlatRateCreateBillingRequestLocaleGa, nil
+	case "zh":
+		return FlatRateCreateBillingRequestLocaleZh, nil
+	case "ja":
+		return FlatRateCreateBillingRequestLocaleJa, nil
+	case "ar":
+		return FlatRateCreateBillingRequestLocaleAr, nil
+	case "hi":
+		return FlatRateCreateBillingRequestLocaleHi, nil
+	case "ru":
+		return FlatRateCreateBillingRequestLocaleRu, nil
+	case "tr":
+		return FlatRateCreateBillingRequestLocaleTr, nil
+	case "uk":
+		return FlatRateCreateBillingRequestLocaleUk, nil
 	}
 	var t FlatRateCreateBillingRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7221,6 +7551,36 @@ const (
 	PortalCreateBillingRequestLocaleEn PortalCreateBillingRequestLocale = "en"
 	PortalCreateBillingRequestLocaleLt PortalCreateBillingRequestLocale = "lt"
 	PortalCreateBillingRequestLocaleDe PortalCreateBillingRequestLocale = "de"
+	PortalCreateBillingRequestLocaleFr PortalCreateBillingRequestLocale = "fr"
+	PortalCreateBillingRequestLocaleEs PortalCreateBillingRequestLocale = "es"
+	PortalCreateBillingRequestLocaleIt PortalCreateBillingRequestLocale = "it"
+	PortalCreateBillingRequestLocalePt PortalCreateBillingRequestLocale = "pt"
+	PortalCreateBillingRequestLocaleNl PortalCreateBillingRequestLocale = "nl"
+	PortalCreateBillingRequestLocalePl PortalCreateBillingRequestLocale = "pl"
+	PortalCreateBillingRequestLocaleSv PortalCreateBillingRequestLocale = "sv"
+	PortalCreateBillingRequestLocaleDa PortalCreateBillingRequestLocale = "da"
+	PortalCreateBillingRequestLocaleNo PortalCreateBillingRequestLocale = "no"
+	PortalCreateBillingRequestLocaleFi PortalCreateBillingRequestLocale = "fi"
+	PortalCreateBillingRequestLocaleEt PortalCreateBillingRequestLocale = "et"
+	PortalCreateBillingRequestLocaleLv PortalCreateBillingRequestLocale = "lv"
+	PortalCreateBillingRequestLocaleCs PortalCreateBillingRequestLocale = "cs"
+	PortalCreateBillingRequestLocaleSk PortalCreateBillingRequestLocale = "sk"
+	PortalCreateBillingRequestLocaleHu PortalCreateBillingRequestLocale = "hu"
+	PortalCreateBillingRequestLocaleRo PortalCreateBillingRequestLocale = "ro"
+	PortalCreateBillingRequestLocaleBg PortalCreateBillingRequestLocale = "bg"
+	PortalCreateBillingRequestLocaleHr PortalCreateBillingRequestLocale = "hr"
+	PortalCreateBillingRequestLocaleSl PortalCreateBillingRequestLocale = "sl"
+	PortalCreateBillingRequestLocaleEl PortalCreateBillingRequestLocale = "el"
+	PortalCreateBillingRequestLocaleMt PortalCreateBillingRequestLocale = "mt"
+	PortalCreateBillingRequestLocaleIs PortalCreateBillingRequestLocale = "is"
+	PortalCreateBillingRequestLocaleGa PortalCreateBillingRequestLocale = "ga"
+	PortalCreateBillingRequestLocaleZh PortalCreateBillingRequestLocale = "zh"
+	PortalCreateBillingRequestLocaleJa PortalCreateBillingRequestLocale = "ja"
+	PortalCreateBillingRequestLocaleAr PortalCreateBillingRequestLocale = "ar"
+	PortalCreateBillingRequestLocaleHi PortalCreateBillingRequestLocale = "hi"
+	PortalCreateBillingRequestLocaleRu PortalCreateBillingRequestLocale = "ru"
+	PortalCreateBillingRequestLocaleTr PortalCreateBillingRequestLocale = "tr"
+	PortalCreateBillingRequestLocaleUk PortalCreateBillingRequestLocale = "uk"
 )
 
 func NewPortalCreateBillingRequestLocaleFromString(s string) (PortalCreateBillingRequestLocale, error) {
@@ -7231,6 +7591,66 @@ func NewPortalCreateBillingRequestLocaleFromString(s string) (PortalCreateBillin
 		return PortalCreateBillingRequestLocaleLt, nil
 	case "de":
 		return PortalCreateBillingRequestLocaleDe, nil
+	case "fr":
+		return PortalCreateBillingRequestLocaleFr, nil
+	case "es":
+		return PortalCreateBillingRequestLocaleEs, nil
+	case "it":
+		return PortalCreateBillingRequestLocaleIt, nil
+	case "pt":
+		return PortalCreateBillingRequestLocalePt, nil
+	case "nl":
+		return PortalCreateBillingRequestLocaleNl, nil
+	case "pl":
+		return PortalCreateBillingRequestLocalePl, nil
+	case "sv":
+		return PortalCreateBillingRequestLocaleSv, nil
+	case "da":
+		return PortalCreateBillingRequestLocaleDa, nil
+	case "no":
+		return PortalCreateBillingRequestLocaleNo, nil
+	case "fi":
+		return PortalCreateBillingRequestLocaleFi, nil
+	case "et":
+		return PortalCreateBillingRequestLocaleEt, nil
+	case "lv":
+		return PortalCreateBillingRequestLocaleLv, nil
+	case "cs":
+		return PortalCreateBillingRequestLocaleCs, nil
+	case "sk":
+		return PortalCreateBillingRequestLocaleSk, nil
+	case "hu":
+		return PortalCreateBillingRequestLocaleHu, nil
+	case "ro":
+		return PortalCreateBillingRequestLocaleRo, nil
+	case "bg":
+		return PortalCreateBillingRequestLocaleBg, nil
+	case "hr":
+		return PortalCreateBillingRequestLocaleHr, nil
+	case "sl":
+		return PortalCreateBillingRequestLocaleSl, nil
+	case "el":
+		return PortalCreateBillingRequestLocaleEl, nil
+	case "mt":
+		return PortalCreateBillingRequestLocaleMt, nil
+	case "is":
+		return PortalCreateBillingRequestLocaleIs, nil
+	case "ga":
+		return PortalCreateBillingRequestLocaleGa, nil
+	case "zh":
+		return PortalCreateBillingRequestLocaleZh, nil
+	case "ja":
+		return PortalCreateBillingRequestLocaleJa, nil
+	case "ar":
+		return PortalCreateBillingRequestLocaleAr, nil
+	case "hi":
+		return PortalCreateBillingRequestLocaleHi, nil
+	case "ru":
+		return PortalCreateBillingRequestLocaleRu, nil
+	case "tr":
+		return PortalCreateBillingRequestLocaleTr, nil
+	case "uk":
+		return PortalCreateBillingRequestLocaleUk, nil
 	}
 	var t PortalCreateBillingRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7325,30 +7745,33 @@ func (p *PortalCreateBillingResponse) String() string {
 }
 
 var (
-	subscriptionCancelBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	subscriptionCancelBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	subscriptionCancelBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	subscriptionCancelBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	subscriptionCancelBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	subscriptionCancelBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	subscriptionCancelBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	subscriptionCancelBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	subscriptionCancelBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	subscriptionCancelBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	subscriptionCancelBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	subscriptionCancelBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	subscriptionCancelBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	subscriptionCancelBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	subscriptionCancelBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	subscriptionCancelBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	subscriptionCancelBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	subscriptionCancelBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	subscriptionCancelBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	subscriptionCancelBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	subscriptionCancelBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	subscriptionCancelBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	subscriptionCancelBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	subscriptionCancelBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	subscriptionCancelBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	subscriptionCancelBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	subscriptionCancelBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	subscriptionCancelBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	subscriptionCancelBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	subscriptionCancelBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	subscriptionCancelBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	subscriptionCancelBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	subscriptionCancelBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	subscriptionCancelBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	subscriptionCancelBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	subscriptionCancelBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	subscriptionCancelBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	subscriptionCancelBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	subscriptionCancelBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	subscriptionCancelBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	subscriptionCancelBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	subscriptionCancelBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	subscriptionCancelBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type SubscriptionCancelBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               SubscriptionCancelBillingResponseSite        `json:"site" url:"site"`
 	Plan               SubscriptionCancelBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        SubscriptionCancelBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             SubscriptionCancelBillingResponseStatus      `json:"status" url:"status"`
@@ -7377,6 +7800,13 @@ type SubscriptionCancelBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (s *SubscriptionCancelBillingResponse) GetSite() SubscriptionCancelBillingResponseSite {
+	if s == nil {
+		return ""
+	}
+	return s.Site
 }
 
 func (s *SubscriptionCancelBillingResponse) GetPlan() SubscriptionCancelBillingResponsePlan {
@@ -7538,6 +7968,13 @@ func (s *SubscriptionCancelBillingResponse) require(field *big.Int) {
 		s.explicitFields = big.NewInt(0)
 	}
 	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionCancelBillingResponse) SetSite(site SubscriptionCancelBillingResponseSite) {
+	s.Site = site
+	s.require(subscriptionCancelBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -8279,6 +8716,29 @@ func (s *SubscriptionCancelBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", s)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type SubscriptionCancelBillingResponseSite string
+
+const (
+	SubscriptionCancelBillingResponseSiteApp     SubscriptionCancelBillingResponseSite = "app"
+	SubscriptionCancelBillingResponseSiteInvoice SubscriptionCancelBillingResponseSite = "invoice"
+)
+
+func NewSubscriptionCancelBillingResponseSiteFromString(s string) (SubscriptionCancelBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return SubscriptionCancelBillingResponseSiteApp, nil
+	case "invoice":
+		return SubscriptionCancelBillingResponseSiteInvoice, nil
+	}
+	var t SubscriptionCancelBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubscriptionCancelBillingResponseSite) Ptr() *SubscriptionCancelBillingResponseSite {
+	return &s
+}
+
 type SubscriptionCancelBillingResponseStatus string
 
 const (
@@ -8405,30 +8865,33 @@ func (s *SubscriptionCancelBillingResponseTopUp) String() string {
 }
 
 var (
-	topupConfirmBillingResponseFieldPlan                    = big.NewInt(1 << 0)
-	topupConfirmBillingResponseFieldAccountType             = big.NewInt(1 << 1)
-	topupConfirmBillingResponseFieldStatus                  = big.NewInt(1 << 2)
-	topupConfirmBillingResponseFieldBalanceCents            = big.NewInt(1 << 3)
-	topupConfirmBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 4)
-	topupConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 5)
-	topupConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 6)
-	topupConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 7)
-	topupConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 8)
-	topupConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 9)
-	topupConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 10)
-	topupConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 11)
-	topupConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 12)
-	topupConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 13)
-	topupConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 14)
-	topupConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 15)
-	topupConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 16)
-	topupConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 17)
-	topupConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 18)
-	topupConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 19)
-	topupConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 20)
+	topupConfirmBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	topupConfirmBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	topupConfirmBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	topupConfirmBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	topupConfirmBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	topupConfirmBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	topupConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
+	topupConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
+	topupConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
+	topupConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
+	topupConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
+	topupConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
+	topupConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
+	topupConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
+	topupConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
+	topupConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 15)
+	topupConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
+	topupConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
+	topupConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
+	topupConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
+	topupConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
+	topupConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
 )
 
 type TopupConfirmBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site               TopupConfirmBillingResponseSite        `json:"site" url:"site"`
 	Plan               TopupConfirmBillingResponsePlan        `json:"plan" url:"plan"`
 	AccountType        TopupConfirmBillingResponseAccountType `json:"accountType" url:"accountType"`
 	Status             TopupConfirmBillingResponseStatus      `json:"status" url:"status"`
@@ -8457,6 +8920,13 @@ type TopupConfirmBillingResponse struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (t *TopupConfirmBillingResponse) GetSite() TopupConfirmBillingResponseSite {
+	if t == nil {
+		return ""
+	}
+	return t.Site
 }
 
 func (t *TopupConfirmBillingResponse) GetPlan() TopupConfirmBillingResponsePlan {
@@ -8618,6 +9088,13 @@ func (t *TopupConfirmBillingResponse) require(field *big.Int) {
 		t.explicitFields = big.NewInt(0)
 	}
 	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TopupConfirmBillingResponse) SetSite(site TopupConfirmBillingResponseSite) {
+	t.Site = site
+	t.require(topupConfirmBillingResponseFieldSite)
 }
 
 // SetPlan sets the Plan field and marks it as non-optional;
@@ -9359,6 +9836,29 @@ func (t *TopupConfirmBillingResponsePlansValue) String() string {
 	return fmt.Sprintf("%#v", t)
 }
 
+// The site whose plan this is, from the `x-nordlet-site` header
+type TopupConfirmBillingResponseSite string
+
+const (
+	TopupConfirmBillingResponseSiteApp     TopupConfirmBillingResponseSite = "app"
+	TopupConfirmBillingResponseSiteInvoice TopupConfirmBillingResponseSite = "invoice"
+)
+
+func NewTopupConfirmBillingResponseSiteFromString(s string) (TopupConfirmBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return TopupConfirmBillingResponseSiteApp, nil
+	case "invoice":
+		return TopupConfirmBillingResponseSiteInvoice, nil
+	}
+	var t TopupConfirmBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TopupConfirmBillingResponseSite) Ptr() *TopupConfirmBillingResponseSite {
+	return &t
+}
+
 type TopupConfirmBillingResponseStatus string
 
 const (
@@ -9490,6 +9990,36 @@ const (
 	TopupCreateBillingRequestLocaleEn TopupCreateBillingRequestLocale = "en"
 	TopupCreateBillingRequestLocaleLt TopupCreateBillingRequestLocale = "lt"
 	TopupCreateBillingRequestLocaleDe TopupCreateBillingRequestLocale = "de"
+	TopupCreateBillingRequestLocaleFr TopupCreateBillingRequestLocale = "fr"
+	TopupCreateBillingRequestLocaleEs TopupCreateBillingRequestLocale = "es"
+	TopupCreateBillingRequestLocaleIt TopupCreateBillingRequestLocale = "it"
+	TopupCreateBillingRequestLocalePt TopupCreateBillingRequestLocale = "pt"
+	TopupCreateBillingRequestLocaleNl TopupCreateBillingRequestLocale = "nl"
+	TopupCreateBillingRequestLocalePl TopupCreateBillingRequestLocale = "pl"
+	TopupCreateBillingRequestLocaleSv TopupCreateBillingRequestLocale = "sv"
+	TopupCreateBillingRequestLocaleDa TopupCreateBillingRequestLocale = "da"
+	TopupCreateBillingRequestLocaleNo TopupCreateBillingRequestLocale = "no"
+	TopupCreateBillingRequestLocaleFi TopupCreateBillingRequestLocale = "fi"
+	TopupCreateBillingRequestLocaleEt TopupCreateBillingRequestLocale = "et"
+	TopupCreateBillingRequestLocaleLv TopupCreateBillingRequestLocale = "lv"
+	TopupCreateBillingRequestLocaleCs TopupCreateBillingRequestLocale = "cs"
+	TopupCreateBillingRequestLocaleSk TopupCreateBillingRequestLocale = "sk"
+	TopupCreateBillingRequestLocaleHu TopupCreateBillingRequestLocale = "hu"
+	TopupCreateBillingRequestLocaleRo TopupCreateBillingRequestLocale = "ro"
+	TopupCreateBillingRequestLocaleBg TopupCreateBillingRequestLocale = "bg"
+	TopupCreateBillingRequestLocaleHr TopupCreateBillingRequestLocale = "hr"
+	TopupCreateBillingRequestLocaleSl TopupCreateBillingRequestLocale = "sl"
+	TopupCreateBillingRequestLocaleEl TopupCreateBillingRequestLocale = "el"
+	TopupCreateBillingRequestLocaleMt TopupCreateBillingRequestLocale = "mt"
+	TopupCreateBillingRequestLocaleIs TopupCreateBillingRequestLocale = "is"
+	TopupCreateBillingRequestLocaleGa TopupCreateBillingRequestLocale = "ga"
+	TopupCreateBillingRequestLocaleZh TopupCreateBillingRequestLocale = "zh"
+	TopupCreateBillingRequestLocaleJa TopupCreateBillingRequestLocale = "ja"
+	TopupCreateBillingRequestLocaleAr TopupCreateBillingRequestLocale = "ar"
+	TopupCreateBillingRequestLocaleHi TopupCreateBillingRequestLocale = "hi"
+	TopupCreateBillingRequestLocaleRu TopupCreateBillingRequestLocale = "ru"
+	TopupCreateBillingRequestLocaleTr TopupCreateBillingRequestLocale = "tr"
+	TopupCreateBillingRequestLocaleUk TopupCreateBillingRequestLocale = "uk"
 )
 
 func NewTopupCreateBillingRequestLocaleFromString(s string) (TopupCreateBillingRequestLocale, error) {
@@ -9500,6 +10030,66 @@ func NewTopupCreateBillingRequestLocaleFromString(s string) (TopupCreateBillingR
 		return TopupCreateBillingRequestLocaleLt, nil
 	case "de":
 		return TopupCreateBillingRequestLocaleDe, nil
+	case "fr":
+		return TopupCreateBillingRequestLocaleFr, nil
+	case "es":
+		return TopupCreateBillingRequestLocaleEs, nil
+	case "it":
+		return TopupCreateBillingRequestLocaleIt, nil
+	case "pt":
+		return TopupCreateBillingRequestLocalePt, nil
+	case "nl":
+		return TopupCreateBillingRequestLocaleNl, nil
+	case "pl":
+		return TopupCreateBillingRequestLocalePl, nil
+	case "sv":
+		return TopupCreateBillingRequestLocaleSv, nil
+	case "da":
+		return TopupCreateBillingRequestLocaleDa, nil
+	case "no":
+		return TopupCreateBillingRequestLocaleNo, nil
+	case "fi":
+		return TopupCreateBillingRequestLocaleFi, nil
+	case "et":
+		return TopupCreateBillingRequestLocaleEt, nil
+	case "lv":
+		return TopupCreateBillingRequestLocaleLv, nil
+	case "cs":
+		return TopupCreateBillingRequestLocaleCs, nil
+	case "sk":
+		return TopupCreateBillingRequestLocaleSk, nil
+	case "hu":
+		return TopupCreateBillingRequestLocaleHu, nil
+	case "ro":
+		return TopupCreateBillingRequestLocaleRo, nil
+	case "bg":
+		return TopupCreateBillingRequestLocaleBg, nil
+	case "hr":
+		return TopupCreateBillingRequestLocaleHr, nil
+	case "sl":
+		return TopupCreateBillingRequestLocaleSl, nil
+	case "el":
+		return TopupCreateBillingRequestLocaleEl, nil
+	case "mt":
+		return TopupCreateBillingRequestLocaleMt, nil
+	case "is":
+		return TopupCreateBillingRequestLocaleIs, nil
+	case "ga":
+		return TopupCreateBillingRequestLocaleGa, nil
+	case "zh":
+		return TopupCreateBillingRequestLocaleZh, nil
+	case "ja":
+		return TopupCreateBillingRequestLocaleJa, nil
+	case "ar":
+		return TopupCreateBillingRequestLocaleAr, nil
+	case "hi":
+		return TopupCreateBillingRequestLocaleHi, nil
+	case "ru":
+		return TopupCreateBillingRequestLocaleRu, nil
+	case "tr":
+		return TopupCreateBillingRequestLocaleTr, nil
+	case "uk":
+		return TopupCreateBillingRequestLocaleUk, nil
 	}
 	var t TopupCreateBillingRequestLocale
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -10040,13 +10630,15 @@ func (u *UsageListBillingResponse) String() string {
 
 var (
 	usageListBillingResponseRowsItemFieldCompanyID = big.NewInt(1 << 0)
-	usageListBillingResponseRowsItemFieldDate      = big.NewInt(1 << 1)
-	usageListBillingResponseRowsItemFieldMetric    = big.NewInt(1 << 2)
-	usageListBillingResponseRowsItemFieldQuantity  = big.NewInt(1 << 3)
+	usageListBillingResponseRowsItemFieldSite      = big.NewInt(1 << 1)
+	usageListBillingResponseRowsItemFieldDate      = big.NewInt(1 << 2)
+	usageListBillingResponseRowsItemFieldMetric    = big.NewInt(1 << 3)
+	usageListBillingResponseRowsItemFieldQuantity  = big.NewInt(1 << 4)
 )
 
 type UsageListBillingResponseRowsItem struct {
 	CompanyID string                                 `json:"companyId" url:"companyId"`
+	Site      UsageListBillingResponseRowsItemSite   `json:"site" url:"site"`
 	Date      time.Time                              `json:"date" url:"date" format:"date"`
 	Metric    UsageListBillingResponseRowsItemMetric `json:"metric" url:"metric"`
 	Quantity  float64                                `json:"quantity" url:"quantity"`
@@ -10063,6 +10655,13 @@ func (u *UsageListBillingResponseRowsItem) GetCompanyID() string {
 		return ""
 	}
 	return u.CompanyID
+}
+
+func (u *UsageListBillingResponseRowsItem) GetSite() UsageListBillingResponseRowsItemSite {
+	if u == nil {
+		return ""
+	}
+	return u.Site
 }
 
 func (u *UsageListBillingResponseRowsItem) GetDate() time.Time {
@@ -10105,6 +10704,13 @@ func (u *UsageListBillingResponseRowsItem) require(field *big.Int) {
 func (u *UsageListBillingResponseRowsItem) SetCompanyID(companyID string) {
 	u.CompanyID = companyID
 	u.require(usageListBillingResponseRowsItemFieldCompanyID)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsageListBillingResponseRowsItem) SetSite(site UsageListBillingResponseRowsItemSite) {
+	u.Site = site
+	u.require(usageListBillingResponseRowsItemFieldSite)
 }
 
 // SetDate sets the Date field and marks it as non-optional;
@@ -10206,6 +10812,28 @@ func NewUsageListBillingResponseRowsItemMetricFromString(s string) (UsageListBil
 }
 
 func (u UsageListBillingResponseRowsItemMetric) Ptr() *UsageListBillingResponseRowsItemMetric {
+	return &u
+}
+
+type UsageListBillingResponseRowsItemSite string
+
+const (
+	UsageListBillingResponseRowsItemSiteApp     UsageListBillingResponseRowsItemSite = "app"
+	UsageListBillingResponseRowsItemSiteInvoice UsageListBillingResponseRowsItemSite = "invoice"
+)
+
+func NewUsageListBillingResponseRowsItemSiteFromString(s string) (UsageListBillingResponseRowsItemSite, error) {
+	switch s {
+	case "app":
+		return UsageListBillingResponseRowsItemSiteApp, nil
+	case "invoice":
+		return UsageListBillingResponseRowsItemSiteInvoice, nil
+	}
+	var t UsageListBillingResponseRowsItemSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u UsageListBillingResponseRowsItemSite) Ptr() *UsageListBillingResponseRowsItemSite {
 	return &u
 }
 

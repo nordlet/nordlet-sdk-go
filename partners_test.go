@@ -61321,6 +61321,13 @@ func TestEnumCreatePartnersRequestInvoiceLocale(t *testing.T) {
 		assert.Equal(t, CreatePartnersRequestInvoiceLocale("tr"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreatePartnersRequestInvoiceLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreatePartnersRequestInvoiceLocale("uk"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewCreatePartnersRequestInvoiceLocaleFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
@@ -61600,6 +61607,216 @@ func TestEnumDebtRemindersPreviewPartnersResponseRowsItemLocale(t *testing.T) {
 		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("de")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("de"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("fr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("fr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_es", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("es")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("es"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_it", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("it")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("it"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("pt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("pt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("nl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("nl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("pl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("pl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("sv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("sv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_da", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("da")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("da"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_no", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("no")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("no"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("fi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("fi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_et", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("et")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("et"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_lv", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("lv")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("lv"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_cs", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("cs")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("cs"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("sk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("sk"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hu", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("hu")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("hu"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ro", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("ro")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("ro"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_bg", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("bg")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("bg"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("hr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("hr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_sl", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("sl")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("sl"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_el", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("el")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("el"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_mt", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("mt")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("mt"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_is", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("is")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("is"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ga", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("ga")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("ga"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_zh", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("zh")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("zh"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ja", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("ja")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("ja"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ar", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("ar")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("ar"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_hi", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("hi")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("hi"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_ru", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("ru")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("ru"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_tr", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("tr")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewDebtRemindersPreviewPartnersResponseRowsItemLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, DebtRemindersPreviewPartnersResponseRowsItemLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -62478,6 +62695,13 @@ func TestEnumFindOrCreatePartnersRequestInvoiceLocale(t *testing.T) {
 		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("tr")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewFindOrCreatePartnersRequestInvoiceLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, FindOrCreatePartnersRequestInvoiceLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
@@ -63939,6 +64163,13 @@ func TestEnumUpdatePartnersRequestInvoiceLocale(t *testing.T) {
 		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("tr")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("tr"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_uk", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdatePartnersRequestInvoiceLocaleFromString("uk")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdatePartnersRequestInvoiceLocale("uk"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
