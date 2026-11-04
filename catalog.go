@@ -1331,6 +1331,271 @@ func (i *ItemsSuppliersUpsertCatalogRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	itemsUnitsCreateCatalogRequestFieldItemID            = big.NewInt(1 << 0)
+	itemsUnitsCreateCatalogRequestFieldUnitCode          = big.NewInt(1 << 1)
+	itemsUnitsCreateCatalogRequestFieldFactor            = big.NewInt(1 << 2)
+	itemsUnitsCreateCatalogRequestFieldIsDefaultSale     = big.NewInt(1 << 3)
+	itemsUnitsCreateCatalogRequestFieldIsDefaultPurchase = big.NewInt(1 << 4)
+	itemsUnitsCreateCatalogRequestFieldBarcode           = big.NewInt(1 << 5)
+)
+
+type ItemsUnitsCreateCatalogRequest struct {
+	ItemID            string  `json:"itemId" url:"-"`
+	UnitCode          string  `json:"unitCode" url:"-"`
+	Factor            string  `json:"factor" url:"-"`
+	IsDefaultSale     *bool   `json:"isDefaultSale,omitempty" url:"-"`
+	IsDefaultPurchase *bool   `json:"isDefaultPurchase,omitempty" url:"-"`
+	Barcode           *string `json:"barcode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItemsUnitsCreateCatalogRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogRequest) SetItemID(itemID string) {
+	i.ItemID = itemID
+	i.require(itemsUnitsCreateCatalogRequestFieldItemID)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogRequest) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsUnitsCreateCatalogRequestFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogRequest) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsUnitsCreateCatalogRequestFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogRequest) SetIsDefaultSale(isDefaultSale *bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsUnitsCreateCatalogRequestFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogRequest) SetIsDefaultPurchase(isDefaultPurchase *bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsUnitsCreateCatalogRequestFieldIsDefaultPurchase)
+}
+
+// SetBarcode sets the Barcode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogRequest) SetBarcode(barcode *string) {
+	i.Barcode = barcode
+	i.require(itemsUnitsCreateCatalogRequestFieldBarcode)
+}
+
+func (i *ItemsUnitsCreateCatalogRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsUnitsCreateCatalogRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItemsUnitsCreateCatalogRequest(body)
+	return nil
+}
+
+func (i *ItemsUnitsCreateCatalogRequest) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsCreateCatalogRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itemsUnitsDeleteCatalogRequestFieldID = big.NewInt(1 << 0)
+)
+
+type ItemsUnitsDeleteCatalogRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItemsUnitsDeleteCatalogRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsDeleteCatalogRequest) SetID(id string) {
+	i.ID = id
+	i.require(itemsUnitsDeleteCatalogRequestFieldID)
+}
+
+func (i *ItemsUnitsDeleteCatalogRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsUnitsDeleteCatalogRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItemsUnitsDeleteCatalogRequest(body)
+	return nil
+}
+
+func (i *ItemsUnitsDeleteCatalogRequest) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsDeleteCatalogRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itemsUnitsListCatalogRequestFieldItemID = big.NewInt(1 << 0)
+)
+
+type ItemsUnitsListCatalogRequest struct {
+	ItemID string `json:"itemId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItemsUnitsListCatalogRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogRequest) SetItemID(itemID string) {
+	i.ItemID = itemID
+	i.require(itemsUnitsListCatalogRequestFieldItemID)
+}
+
+func (i *ItemsUnitsListCatalogRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsUnitsListCatalogRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItemsUnitsListCatalogRequest(body)
+	return nil
+}
+
+func (i *ItemsUnitsListCatalogRequest) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsListCatalogRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itemsUnitsUpdateCatalogRequestFieldID                = big.NewInt(1 << 0)
+	itemsUnitsUpdateCatalogRequestFieldFactor            = big.NewInt(1 << 1)
+	itemsUnitsUpdateCatalogRequestFieldIsDefaultSale     = big.NewInt(1 << 2)
+	itemsUnitsUpdateCatalogRequestFieldIsDefaultPurchase = big.NewInt(1 << 3)
+	itemsUnitsUpdateCatalogRequestFieldBarcode           = big.NewInt(1 << 4)
+)
+
+type ItemsUnitsUpdateCatalogRequest struct {
+	ID                string  `json:"id" url:"-"`
+	Factor            *string `json:"factor,omitempty" url:"-"`
+	IsDefaultSale     *bool   `json:"isDefaultSale,omitempty" url:"-"`
+	IsDefaultPurchase *bool   `json:"isDefaultPurchase,omitempty" url:"-"`
+	Barcode           *string `json:"barcode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItemsUnitsUpdateCatalogRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogRequest) SetID(id string) {
+	i.ID = id
+	i.require(itemsUnitsUpdateCatalogRequestFieldID)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogRequest) SetFactor(factor *string) {
+	i.Factor = factor
+	i.require(itemsUnitsUpdateCatalogRequestFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogRequest) SetIsDefaultSale(isDefaultSale *bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsUnitsUpdateCatalogRequestFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogRequest) SetIsDefaultPurchase(isDefaultPurchase *bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsUnitsUpdateCatalogRequestFieldIsDefaultPurchase)
+}
+
+// SetBarcode sets the Barcode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogRequest) SetBarcode(barcode *string) {
+	i.Barcode = barcode
+	i.require(itemsUnitsUpdateCatalogRequestFieldBarcode)
+}
+
+func (i *ItemsUnitsUpdateCatalogRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsUnitsUpdateCatalogRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItemsUnitsUpdateCatalogRequest(body)
+	return nil
+}
+
+func (i *ItemsUnitsUpdateCatalogRequest) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsUpdateCatalogRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	itemsUpdateCatalogRequestFieldID                      = big.NewInt(1 << 0)
 	itemsUpdateCatalogRequestFieldType                    = big.NewInt(1 << 1)
 	itemsUpdateCatalogRequestFieldTracking                = big.NewInt(1 << 2)
@@ -3051,35 +3316,36 @@ var (
 	itemsCreateCatalogResponseFieldDocumentRef             = big.NewInt(1 << 19)
 	itemsCreateCatalogResponseFieldTranslations            = big.NewInt(1 << 20)
 	itemsCreateCatalogResponseFieldComponents              = big.NewInt(1 << 21)
-	itemsCreateCatalogResponseFieldKindID                  = big.NewInt(1 << 22)
-	itemsCreateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 23)
-	itemsCreateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 24)
-	itemsCreateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 25)
-	itemsCreateCatalogResponseFieldManufacturer            = big.NewInt(1 << 26)
-	itemsCreateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 27)
-	itemsCreateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 28)
-	itemsCreateCatalogResponseFieldCostPrice               = big.NewInt(1 << 29)
-	itemsCreateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 30)
-	itemsCreateCatalogResponseFieldExternalID              = big.NewInt(1 << 31)
-	itemsCreateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 32)
-	itemsCreateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 33)
-	itemsCreateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 34)
-	itemsCreateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 35)
-	itemsCreateCatalogResponseFieldMinPrice                = big.NewInt(1 << 36)
-	itemsCreateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 37)
-	itemsCreateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 38)
-	itemsCreateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 39)
-	itemsCreateCatalogResponseFieldDepartment              = big.NewInt(1 << 40)
-	itemsCreateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 41)
-	itemsCreateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 42)
-	itemsCreateCatalogResponseFieldTaraCode                = big.NewInt(1 << 43)
-	itemsCreateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 44)
-	itemsCreateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 45)
-	itemsCreateCatalogResponseFieldValidFrom               = big.NewInt(1 << 46)
-	itemsCreateCatalogResponseFieldValidTo                 = big.NewInt(1 << 47)
-	itemsCreateCatalogResponseFieldPosFlags                = big.NewInt(1 << 48)
-	itemsCreateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 49)
-	itemsCreateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 50)
+	itemsCreateCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 22)
+	itemsCreateCatalogResponseFieldKindID                  = big.NewInt(1 << 23)
+	itemsCreateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 24)
+	itemsCreateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 25)
+	itemsCreateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 26)
+	itemsCreateCatalogResponseFieldManufacturer            = big.NewInt(1 << 27)
+	itemsCreateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 28)
+	itemsCreateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 29)
+	itemsCreateCatalogResponseFieldCostPrice               = big.NewInt(1 << 30)
+	itemsCreateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 31)
+	itemsCreateCatalogResponseFieldExternalID              = big.NewInt(1 << 32)
+	itemsCreateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 33)
+	itemsCreateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 34)
+	itemsCreateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 35)
+	itemsCreateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 36)
+	itemsCreateCatalogResponseFieldMinPrice                = big.NewInt(1 << 37)
+	itemsCreateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 38)
+	itemsCreateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 39)
+	itemsCreateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 40)
+	itemsCreateCatalogResponseFieldDepartment              = big.NewInt(1 << 41)
+	itemsCreateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 42)
+	itemsCreateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 43)
+	itemsCreateCatalogResponseFieldTaraCode                = big.NewInt(1 << 44)
+	itemsCreateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 45)
+	itemsCreateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 46)
+	itemsCreateCatalogResponseFieldValidFrom               = big.NewInt(1 << 47)
+	itemsCreateCatalogResponseFieldValidTo                 = big.NewInt(1 << 48)
+	itemsCreateCatalogResponseFieldPosFlags                = big.NewInt(1 << 49)
+	itemsCreateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 50)
+	itemsCreateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 51)
 )
 
 type ItemsCreateCatalogResponse struct {
@@ -3105,6 +3371,7 @@ type ItemsCreateCatalogResponse struct {
 	DocumentRef             *string                                                 `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*ItemsCreateCatalogResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*ItemsCreateCatalogResponseComponentsItem             `json:"components" url:"components"`
+	AlternativeUnits        []*ItemsCreateCatalogResponseAlternativeUnitsItem       `json:"alternativeUnits" url:"alternativeUnits"`
 	KindID                  *string                                                 `json:"kindId,omitempty" url:"kindId,omitempty"`
 	SaleAccountCode         *string                                                 `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
 	PurchaseAccountCode     *string                                                 `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
@@ -3294,6 +3561,13 @@ func (i *ItemsCreateCatalogResponse) GetComponents() []*ItemsCreateCatalogRespon
 		return nil
 	}
 	return i.Components
+}
+
+func (i *ItemsCreateCatalogResponse) GetAlternativeUnits() []*ItemsCreateCatalogResponseAlternativeUnitsItem {
+	if i == nil {
+		return nil
+	}
+	return i.AlternativeUnits
 }
 
 func (i *ItemsCreateCatalogResponse) GetKindID() *string {
@@ -3667,6 +3941,13 @@ func (i *ItemsCreateCatalogResponse) SetComponents(components []*ItemsCreateCata
 	i.require(itemsCreateCatalogResponseFieldComponents)
 }
 
+// SetAlternativeUnits sets the AlternativeUnits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponse) SetAlternativeUnits(alternativeUnits []*ItemsCreateCatalogResponseAlternativeUnitsItem) {
+	i.AlternativeUnits = alternativeUnits
+	i.require(itemsCreateCatalogResponseFieldAlternativeUnits)
+}
+
 // SetKindID sets the KindID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *ItemsCreateCatalogResponse) SetKindID(kindID *string) {
@@ -3914,6 +4195,170 @@ func (i *ItemsCreateCatalogResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *ItemsCreateCatalogResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsCreateCatalogResponseAlternativeUnitsItemFieldUnitCode             = big.NewInt(1 << 0)
+	itemsCreateCatalogResponseAlternativeUnitsItemFieldFactor               = big.NewInt(1 << 1)
+	itemsCreateCatalogResponseAlternativeUnitsItemFieldIsDefaultSale        = big.NewInt(1 << 2)
+	itemsCreateCatalogResponseAlternativeUnitsItemFieldIsDefaultPurchase    = big.NewInt(1 << 3)
+	itemsCreateCatalogResponseAlternativeUnitsItemFieldSalePriceExclVat     = big.NewInt(1 << 4)
+	itemsCreateCatalogResponseAlternativeUnitsItemFieldPurchasePriceExclVat = big.NewInt(1 << 5)
+)
+
+type ItemsCreateCatalogResponseAlternativeUnitsItem struct {
+	UnitCode             string  `json:"unitCode" url:"unitCode"`
+	Factor               string  `json:"factor" url:"factor"`
+	IsDefaultSale        bool    `json:"isDefaultSale" url:"isDefaultSale"`
+	IsDefaultPurchase    bool    `json:"isDefaultPurchase" url:"isDefaultPurchase"`
+	SalePriceExclVat     *string `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
+	PurchasePriceExclVat *string `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) GetUnitCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitCode
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) GetFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.Factor
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) GetIsDefaultSale() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultSale
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) GetIsDefaultPurchase() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultPurchase
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) GetSalePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalePriceExclVat
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) GetPurchasePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PurchasePriceExclVat
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsCreateCatalogResponseAlternativeUnitsItemFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsCreateCatalogResponseAlternativeUnitsItemFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) SetIsDefaultSale(isDefaultSale bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsCreateCatalogResponseAlternativeUnitsItemFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) SetIsDefaultPurchase(isDefaultPurchase bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsCreateCatalogResponseAlternativeUnitsItemFieldIsDefaultPurchase)
+}
+
+// SetSalePriceExclVat sets the SalePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) SetSalePriceExclVat(salePriceExclVat *string) {
+	i.SalePriceExclVat = salePriceExclVat
+	i.require(itemsCreateCatalogResponseAlternativeUnitsItemFieldSalePriceExclVat)
+}
+
+// SetPurchasePriceExclVat sets the PurchasePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
+	i.PurchasePriceExclVat = purchasePriceExclVat
+	i.require(itemsCreateCatalogResponseAlternativeUnitsItemFieldPurchasePriceExclVat)
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsCreateCatalogResponseAlternativeUnitsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItemsCreateCatalogResponseAlternativeUnitsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) MarshalJSON() ([]byte, error) {
+	type embed ItemsCreateCatalogResponseAlternativeUnitsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsCreateCatalogResponseAlternativeUnitsItem) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -4605,35 +5050,36 @@ var (
 	itemsGetCatalogResponseFieldDocumentRef             = big.NewInt(1 << 19)
 	itemsGetCatalogResponseFieldTranslations            = big.NewInt(1 << 20)
 	itemsGetCatalogResponseFieldComponents              = big.NewInt(1 << 21)
-	itemsGetCatalogResponseFieldKindID                  = big.NewInt(1 << 22)
-	itemsGetCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 23)
-	itemsGetCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 24)
-	itemsGetCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 25)
-	itemsGetCatalogResponseFieldManufacturer            = big.NewInt(1 << 26)
-	itemsGetCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 27)
-	itemsGetCatalogResponseFieldMinQuantity             = big.NewInt(1 << 28)
-	itemsGetCatalogResponseFieldCostPrice               = big.NewInt(1 << 29)
-	itemsGetCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 30)
-	itemsGetCatalogResponseFieldExternalID              = big.NewInt(1 << 31)
-	itemsGetCatalogResponseFieldIsReturnable            = big.NewInt(1 << 32)
-	itemsGetCatalogResponseFieldCommentRequired         = big.NewInt(1 << 33)
-	itemsGetCatalogResponseFieldPriceFrom               = big.NewInt(1 << 34)
-	itemsGetCatalogResponseFieldPriceTo                 = big.NewInt(1 << 35)
-	itemsGetCatalogResponseFieldMinPrice                = big.NewInt(1 << 36)
-	itemsGetCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 37)
-	itemsGetCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 38)
-	itemsGetCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 39)
-	itemsGetCatalogResponseFieldDepartment              = big.NewInt(1 << 40)
-	itemsGetCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 41)
-	itemsGetCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 42)
-	itemsGetCatalogResponseFieldTaraCode                = big.NewInt(1 << 43)
-	itemsGetCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 44)
-	itemsGetCatalogResponseFieldCertificateDate         = big.NewInt(1 << 45)
-	itemsGetCatalogResponseFieldValidFrom               = big.NewInt(1 << 46)
-	itemsGetCatalogResponseFieldValidTo                 = big.NewInt(1 << 47)
-	itemsGetCatalogResponseFieldPosFlags                = big.NewInt(1 << 48)
-	itemsGetCatalogResponseFieldCreatedAt               = big.NewInt(1 << 49)
-	itemsGetCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 50)
+	itemsGetCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 22)
+	itemsGetCatalogResponseFieldKindID                  = big.NewInt(1 << 23)
+	itemsGetCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 24)
+	itemsGetCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 25)
+	itemsGetCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 26)
+	itemsGetCatalogResponseFieldManufacturer            = big.NewInt(1 << 27)
+	itemsGetCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 28)
+	itemsGetCatalogResponseFieldMinQuantity             = big.NewInt(1 << 29)
+	itemsGetCatalogResponseFieldCostPrice               = big.NewInt(1 << 30)
+	itemsGetCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 31)
+	itemsGetCatalogResponseFieldExternalID              = big.NewInt(1 << 32)
+	itemsGetCatalogResponseFieldIsReturnable            = big.NewInt(1 << 33)
+	itemsGetCatalogResponseFieldCommentRequired         = big.NewInt(1 << 34)
+	itemsGetCatalogResponseFieldPriceFrom               = big.NewInt(1 << 35)
+	itemsGetCatalogResponseFieldPriceTo                 = big.NewInt(1 << 36)
+	itemsGetCatalogResponseFieldMinPrice                = big.NewInt(1 << 37)
+	itemsGetCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 38)
+	itemsGetCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 39)
+	itemsGetCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 40)
+	itemsGetCatalogResponseFieldDepartment              = big.NewInt(1 << 41)
+	itemsGetCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 42)
+	itemsGetCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 43)
+	itemsGetCatalogResponseFieldTaraCode                = big.NewInt(1 << 44)
+	itemsGetCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 45)
+	itemsGetCatalogResponseFieldCertificateDate         = big.NewInt(1 << 46)
+	itemsGetCatalogResponseFieldValidFrom               = big.NewInt(1 << 47)
+	itemsGetCatalogResponseFieldValidTo                 = big.NewInt(1 << 48)
+	itemsGetCatalogResponseFieldPosFlags                = big.NewInt(1 << 49)
+	itemsGetCatalogResponseFieldCreatedAt               = big.NewInt(1 << 50)
+	itemsGetCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 51)
 )
 
 type ItemsGetCatalogResponse struct {
@@ -4659,6 +5105,7 @@ type ItemsGetCatalogResponse struct {
 	DocumentRef             *string                                              `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*ItemsGetCatalogResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*ItemsGetCatalogResponseComponentsItem             `json:"components" url:"components"`
+	AlternativeUnits        []*ItemsGetCatalogResponseAlternativeUnitsItem       `json:"alternativeUnits" url:"alternativeUnits"`
 	KindID                  *string                                              `json:"kindId,omitempty" url:"kindId,omitempty"`
 	SaleAccountCode         *string                                              `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
 	PurchaseAccountCode     *string                                              `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
@@ -4848,6 +5295,13 @@ func (i *ItemsGetCatalogResponse) GetComponents() []*ItemsGetCatalogResponseComp
 		return nil
 	}
 	return i.Components
+}
+
+func (i *ItemsGetCatalogResponse) GetAlternativeUnits() []*ItemsGetCatalogResponseAlternativeUnitsItem {
+	if i == nil {
+		return nil
+	}
+	return i.AlternativeUnits
 }
 
 func (i *ItemsGetCatalogResponse) GetKindID() *string {
@@ -5221,6 +5675,13 @@ func (i *ItemsGetCatalogResponse) SetComponents(components []*ItemsGetCatalogRes
 	i.require(itemsGetCatalogResponseFieldComponents)
 }
 
+// SetAlternativeUnits sets the AlternativeUnits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponse) SetAlternativeUnits(alternativeUnits []*ItemsGetCatalogResponseAlternativeUnitsItem) {
+	i.AlternativeUnits = alternativeUnits
+	i.require(itemsGetCatalogResponseFieldAlternativeUnits)
+}
+
 // SetKindID sets the KindID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *ItemsGetCatalogResponse) SetKindID(kindID *string) {
@@ -5468,6 +5929,170 @@ func (i *ItemsGetCatalogResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *ItemsGetCatalogResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsGetCatalogResponseAlternativeUnitsItemFieldUnitCode             = big.NewInt(1 << 0)
+	itemsGetCatalogResponseAlternativeUnitsItemFieldFactor               = big.NewInt(1 << 1)
+	itemsGetCatalogResponseAlternativeUnitsItemFieldIsDefaultSale        = big.NewInt(1 << 2)
+	itemsGetCatalogResponseAlternativeUnitsItemFieldIsDefaultPurchase    = big.NewInt(1 << 3)
+	itemsGetCatalogResponseAlternativeUnitsItemFieldSalePriceExclVat     = big.NewInt(1 << 4)
+	itemsGetCatalogResponseAlternativeUnitsItemFieldPurchasePriceExclVat = big.NewInt(1 << 5)
+)
+
+type ItemsGetCatalogResponseAlternativeUnitsItem struct {
+	UnitCode             string  `json:"unitCode" url:"unitCode"`
+	Factor               string  `json:"factor" url:"factor"`
+	IsDefaultSale        bool    `json:"isDefaultSale" url:"isDefaultSale"`
+	IsDefaultPurchase    bool    `json:"isDefaultPurchase" url:"isDefaultPurchase"`
+	SalePriceExclVat     *string `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
+	PurchasePriceExclVat *string `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) GetUnitCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitCode
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) GetFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.Factor
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) GetIsDefaultSale() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultSale
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) GetIsDefaultPurchase() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultPurchase
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) GetSalePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalePriceExclVat
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) GetPurchasePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PurchasePriceExclVat
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsGetCatalogResponseAlternativeUnitsItemFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsGetCatalogResponseAlternativeUnitsItemFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) SetIsDefaultSale(isDefaultSale bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsGetCatalogResponseAlternativeUnitsItemFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) SetIsDefaultPurchase(isDefaultPurchase bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsGetCatalogResponseAlternativeUnitsItemFieldIsDefaultPurchase)
+}
+
+// SetSalePriceExclVat sets the SalePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) SetSalePriceExclVat(salePriceExclVat *string) {
+	i.SalePriceExclVat = salePriceExclVat
+	i.require(itemsGetCatalogResponseAlternativeUnitsItemFieldSalePriceExclVat)
+}
+
+// SetPurchasePriceExclVat sets the PurchasePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
+	i.PurchasePriceExclVat = purchasePriceExclVat
+	i.require(itemsGetCatalogResponseAlternativeUnitsItemFieldPurchasePriceExclVat)
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsGetCatalogResponseAlternativeUnitsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItemsGetCatalogResponseAlternativeUnitsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) MarshalJSON() ([]byte, error) {
+	type embed ItemsGetCatalogResponseAlternativeUnitsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsGetCatalogResponseAlternativeUnitsItem) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -7246,35 +7871,36 @@ var (
 	itemsListCatalogResponseRowsItemFieldDocumentRef             = big.NewInt(1 << 19)
 	itemsListCatalogResponseRowsItemFieldTranslations            = big.NewInt(1 << 20)
 	itemsListCatalogResponseRowsItemFieldComponents              = big.NewInt(1 << 21)
-	itemsListCatalogResponseRowsItemFieldKindID                  = big.NewInt(1 << 22)
-	itemsListCatalogResponseRowsItemFieldSaleAccountCode         = big.NewInt(1 << 23)
-	itemsListCatalogResponseRowsItemFieldPurchaseAccountCode     = big.NewInt(1 << 24)
-	itemsListCatalogResponseRowsItemFieldExpenseAccountCode      = big.NewInt(1 << 25)
-	itemsListCatalogResponseRowsItemFieldManufacturer            = big.NewInt(1 << 26)
-	itemsListCatalogResponseRowsItemFieldGrossMassKg             = big.NewInt(1 << 27)
-	itemsListCatalogResponseRowsItemFieldMinQuantity             = big.NewInt(1 << 28)
-	itemsListCatalogResponseRowsItemFieldCostPrice               = big.NewInt(1 << 29)
-	itemsListCatalogResponseRowsItemFieldIsFreePrice             = big.NewInt(1 << 30)
-	itemsListCatalogResponseRowsItemFieldExternalID              = big.NewInt(1 << 31)
-	itemsListCatalogResponseRowsItemFieldIsReturnable            = big.NewInt(1 << 32)
-	itemsListCatalogResponseRowsItemFieldCommentRequired         = big.NewInt(1 << 33)
-	itemsListCatalogResponseRowsItemFieldPriceFrom               = big.NewInt(1 << 34)
-	itemsListCatalogResponseRowsItemFieldPriceTo                 = big.NewInt(1 << 35)
-	itemsListCatalogResponseRowsItemFieldMinPrice                = big.NewInt(1 << 36)
-	itemsListCatalogResponseRowsItemFieldDiscountPercent         = big.NewInt(1 << 37)
-	itemsListCatalogResponseRowsItemFieldMaxDiscountPercent      = big.NewInt(1 << 38)
-	itemsListCatalogResponseRowsItemFieldLoyaltyPoints           = big.NewInt(1 << 39)
-	itemsListCatalogResponseRowsItemFieldDepartment              = big.NewInt(1 << 40)
-	itemsListCatalogResponseRowsItemFieldAgeRestriction          = big.NewInt(1 << 41)
-	itemsListCatalogResponseRowsItemFieldPackageQuantity         = big.NewInt(1 << 42)
-	itemsListCatalogResponseRowsItemFieldTaraCode                = big.NewInt(1 << 43)
-	itemsListCatalogResponseRowsItemFieldCertificateNumber       = big.NewInt(1 << 44)
-	itemsListCatalogResponseRowsItemFieldCertificateDate         = big.NewInt(1 << 45)
-	itemsListCatalogResponseRowsItemFieldValidFrom               = big.NewInt(1 << 46)
-	itemsListCatalogResponseRowsItemFieldValidTo                 = big.NewInt(1 << 47)
-	itemsListCatalogResponseRowsItemFieldPosFlags                = big.NewInt(1 << 48)
-	itemsListCatalogResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 49)
-	itemsListCatalogResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 50)
+	itemsListCatalogResponseRowsItemFieldAlternativeUnits        = big.NewInt(1 << 22)
+	itemsListCatalogResponseRowsItemFieldKindID                  = big.NewInt(1 << 23)
+	itemsListCatalogResponseRowsItemFieldSaleAccountCode         = big.NewInt(1 << 24)
+	itemsListCatalogResponseRowsItemFieldPurchaseAccountCode     = big.NewInt(1 << 25)
+	itemsListCatalogResponseRowsItemFieldExpenseAccountCode      = big.NewInt(1 << 26)
+	itemsListCatalogResponseRowsItemFieldManufacturer            = big.NewInt(1 << 27)
+	itemsListCatalogResponseRowsItemFieldGrossMassKg             = big.NewInt(1 << 28)
+	itemsListCatalogResponseRowsItemFieldMinQuantity             = big.NewInt(1 << 29)
+	itemsListCatalogResponseRowsItemFieldCostPrice               = big.NewInt(1 << 30)
+	itemsListCatalogResponseRowsItemFieldIsFreePrice             = big.NewInt(1 << 31)
+	itemsListCatalogResponseRowsItemFieldExternalID              = big.NewInt(1 << 32)
+	itemsListCatalogResponseRowsItemFieldIsReturnable            = big.NewInt(1 << 33)
+	itemsListCatalogResponseRowsItemFieldCommentRequired         = big.NewInt(1 << 34)
+	itemsListCatalogResponseRowsItemFieldPriceFrom               = big.NewInt(1 << 35)
+	itemsListCatalogResponseRowsItemFieldPriceTo                 = big.NewInt(1 << 36)
+	itemsListCatalogResponseRowsItemFieldMinPrice                = big.NewInt(1 << 37)
+	itemsListCatalogResponseRowsItemFieldDiscountPercent         = big.NewInt(1 << 38)
+	itemsListCatalogResponseRowsItemFieldMaxDiscountPercent      = big.NewInt(1 << 39)
+	itemsListCatalogResponseRowsItemFieldLoyaltyPoints           = big.NewInt(1 << 40)
+	itemsListCatalogResponseRowsItemFieldDepartment              = big.NewInt(1 << 41)
+	itemsListCatalogResponseRowsItemFieldAgeRestriction          = big.NewInt(1 << 42)
+	itemsListCatalogResponseRowsItemFieldPackageQuantity         = big.NewInt(1 << 43)
+	itemsListCatalogResponseRowsItemFieldTaraCode                = big.NewInt(1 << 44)
+	itemsListCatalogResponseRowsItemFieldCertificateNumber       = big.NewInt(1 << 45)
+	itemsListCatalogResponseRowsItemFieldCertificateDate         = big.NewInt(1 << 46)
+	itemsListCatalogResponseRowsItemFieldValidFrom               = big.NewInt(1 << 47)
+	itemsListCatalogResponseRowsItemFieldValidTo                 = big.NewInt(1 << 48)
+	itemsListCatalogResponseRowsItemFieldPosFlags                = big.NewInt(1 << 49)
+	itemsListCatalogResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 50)
+	itemsListCatalogResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 51)
 )
 
 type ItemsListCatalogResponseRowsItem struct {
@@ -7300,6 +7926,7 @@ type ItemsListCatalogResponseRowsItem struct {
 	DocumentRef             *string                                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*ItemsListCatalogResponseRowsItemTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*ItemsListCatalogResponseRowsItemComponentsItem             `json:"components" url:"components"`
+	AlternativeUnits        []*ItemsListCatalogResponseRowsItemAlternativeUnitsItem       `json:"alternativeUnits" url:"alternativeUnits"`
 	KindID                  *string                                                       `json:"kindId,omitempty" url:"kindId,omitempty"`
 	SaleAccountCode         *string                                                       `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
 	PurchaseAccountCode     *string                                                       `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
@@ -7489,6 +8116,13 @@ func (i *ItemsListCatalogResponseRowsItem) GetComponents() []*ItemsListCatalogRe
 		return nil
 	}
 	return i.Components
+}
+
+func (i *ItemsListCatalogResponseRowsItem) GetAlternativeUnits() []*ItemsListCatalogResponseRowsItemAlternativeUnitsItem {
+	if i == nil {
+		return nil
+	}
+	return i.AlternativeUnits
 }
 
 func (i *ItemsListCatalogResponseRowsItem) GetKindID() *string {
@@ -7862,6 +8496,13 @@ func (i *ItemsListCatalogResponseRowsItem) SetComponents(components []*ItemsList
 	i.require(itemsListCatalogResponseRowsItemFieldComponents)
 }
 
+// SetAlternativeUnits sets the AlternativeUnits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItem) SetAlternativeUnits(alternativeUnits []*ItemsListCatalogResponseRowsItemAlternativeUnitsItem) {
+	i.AlternativeUnits = alternativeUnits
+	i.require(itemsListCatalogResponseRowsItemFieldAlternativeUnits)
+}
+
 // SetKindID sets the KindID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *ItemsListCatalogResponseRowsItem) SetKindID(kindID *string) {
@@ -8109,6 +8750,170 @@ func (i *ItemsListCatalogResponseRowsItem) MarshalJSON() ([]byte, error) {
 }
 
 func (i *ItemsListCatalogResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldUnitCode             = big.NewInt(1 << 0)
+	itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldFactor               = big.NewInt(1 << 1)
+	itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldIsDefaultSale        = big.NewInt(1 << 2)
+	itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldIsDefaultPurchase    = big.NewInt(1 << 3)
+	itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldSalePriceExclVat     = big.NewInt(1 << 4)
+	itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldPurchasePriceExclVat = big.NewInt(1 << 5)
+)
+
+type ItemsListCatalogResponseRowsItemAlternativeUnitsItem struct {
+	UnitCode             string  `json:"unitCode" url:"unitCode"`
+	Factor               string  `json:"factor" url:"factor"`
+	IsDefaultSale        bool    `json:"isDefaultSale" url:"isDefaultSale"`
+	IsDefaultPurchase    bool    `json:"isDefaultPurchase" url:"isDefaultPurchase"`
+	SalePriceExclVat     *string `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
+	PurchasePriceExclVat *string `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) GetUnitCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitCode
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) GetFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.Factor
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) GetIsDefaultSale() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultSale
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) GetIsDefaultPurchase() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultPurchase
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) GetSalePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalePriceExclVat
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) GetPurchasePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PurchasePriceExclVat
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) SetIsDefaultSale(isDefaultSale bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) SetIsDefaultPurchase(isDefaultPurchase bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldIsDefaultPurchase)
+}
+
+// SetSalePriceExclVat sets the SalePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) SetSalePriceExclVat(salePriceExclVat *string) {
+	i.SalePriceExclVat = salePriceExclVat
+	i.require(itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldSalePriceExclVat)
+}
+
+// SetPurchasePriceExclVat sets the PurchasePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
+	i.PurchasePriceExclVat = purchasePriceExclVat
+	i.require(itemsListCatalogResponseRowsItemAlternativeUnitsItemFieldPurchasePriceExclVat)
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsListCatalogResponseRowsItemAlternativeUnitsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItemsListCatalogResponseRowsItemAlternativeUnitsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) MarshalJSON() ([]byte, error) {
+	type embed ItemsListCatalogResponseRowsItemAlternativeUnitsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsListCatalogResponseRowsItemAlternativeUnitsItem) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -8998,6 +9803,846 @@ func (i *ItemsSuppliersUpsertCatalogResponse) String() string {
 }
 
 var (
+	itemsUnitsCreateCatalogResponseFieldID                = big.NewInt(1 << 0)
+	itemsUnitsCreateCatalogResponseFieldItemID            = big.NewInt(1 << 1)
+	itemsUnitsCreateCatalogResponseFieldUnitCode          = big.NewInt(1 << 2)
+	itemsUnitsCreateCatalogResponseFieldFactor            = big.NewInt(1 << 3)
+	itemsUnitsCreateCatalogResponseFieldIsDefaultSale     = big.NewInt(1 << 4)
+	itemsUnitsCreateCatalogResponseFieldIsDefaultPurchase = big.NewInt(1 << 5)
+	itemsUnitsCreateCatalogResponseFieldBarcode           = big.NewInt(1 << 6)
+	itemsUnitsCreateCatalogResponseFieldCreatedAt         = big.NewInt(1 << 7)
+	itemsUnitsCreateCatalogResponseFieldUpdatedAt         = big.NewInt(1 << 8)
+)
+
+type ItemsUnitsCreateCatalogResponse struct {
+	ID                string    `json:"id" url:"id"`
+	ItemID            string    `json:"itemId" url:"itemId"`
+	UnitCode          string    `json:"unitCode" url:"unitCode"`
+	Factor            string    `json:"factor" url:"factor"`
+	IsDefaultSale     bool      `json:"isDefaultSale" url:"isDefaultSale"`
+	IsDefaultPurchase bool      `json:"isDefaultPurchase" url:"isDefaultPurchase"`
+	Barcode           *string   `json:"barcode,omitempty" url:"barcode,omitempty"`
+	CreatedAt         time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetItemID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ItemID
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetUnitCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitCode
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.Factor
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetIsDefaultSale() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultSale
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetIsDefaultPurchase() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultPurchase
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetBarcode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Barcode
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetID(id string) {
+	i.ID = id
+	i.require(itemsUnitsCreateCatalogResponseFieldID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetItemID(itemID string) {
+	i.ItemID = itemID
+	i.require(itemsUnitsCreateCatalogResponseFieldItemID)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsUnitsCreateCatalogResponseFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsUnitsCreateCatalogResponseFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetIsDefaultSale(isDefaultSale bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsUnitsCreateCatalogResponseFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetIsDefaultPurchase(isDefaultPurchase bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsUnitsCreateCatalogResponseFieldIsDefaultPurchase)
+}
+
+// SetBarcode sets the Barcode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetBarcode(barcode *string) {
+	i.Barcode = barcode
+	i.require(itemsUnitsCreateCatalogResponseFieldBarcode)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(itemsUnitsCreateCatalogResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsCreateCatalogResponse) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(itemsUnitsCreateCatalogResponseFieldUpdatedAt)
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) UnmarshalJSON(data []byte) error {
+	type embed ItemsUnitsCreateCatalogResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItemsUnitsCreateCatalogResponse(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsCreateCatalogResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsUnitsCreateCatalogResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsUnitsDeleteCatalogResponseFieldID = big.NewInt(1 << 0)
+)
+
+type ItemsUnitsDeleteCatalogResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsUnitsDeleteCatalogResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *ItemsUnitsDeleteCatalogResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsUnitsDeleteCatalogResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsDeleteCatalogResponse) SetID(id string) {
+	i.ID = id
+	i.require(itemsUnitsDeleteCatalogResponseFieldID)
+}
+
+func (i *ItemsUnitsDeleteCatalogResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsUnitsDeleteCatalogResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItemsUnitsDeleteCatalogResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsUnitsDeleteCatalogResponse) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsDeleteCatalogResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsUnitsDeleteCatalogResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsUnitsListCatalogResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type ItemsUnitsListCatalogResponse struct {
+	Rows []*ItemsUnitsListCatalogResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsUnitsListCatalogResponse) GetRows() []*ItemsUnitsListCatalogResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *ItemsUnitsListCatalogResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsUnitsListCatalogResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponse) SetRows(rows []*ItemsUnitsListCatalogResponseRowsItem) {
+	i.Rows = rows
+	i.require(itemsUnitsListCatalogResponseFieldRows)
+}
+
+func (i *ItemsUnitsListCatalogResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsUnitsListCatalogResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItemsUnitsListCatalogResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsUnitsListCatalogResponse) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsListCatalogResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsUnitsListCatalogResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsUnitsListCatalogResponseRowsItemFieldID                = big.NewInt(1 << 0)
+	itemsUnitsListCatalogResponseRowsItemFieldItemID            = big.NewInt(1 << 1)
+	itemsUnitsListCatalogResponseRowsItemFieldUnitCode          = big.NewInt(1 << 2)
+	itemsUnitsListCatalogResponseRowsItemFieldFactor            = big.NewInt(1 << 3)
+	itemsUnitsListCatalogResponseRowsItemFieldIsDefaultSale     = big.NewInt(1 << 4)
+	itemsUnitsListCatalogResponseRowsItemFieldIsDefaultPurchase = big.NewInt(1 << 5)
+	itemsUnitsListCatalogResponseRowsItemFieldBarcode           = big.NewInt(1 << 6)
+	itemsUnitsListCatalogResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 7)
+	itemsUnitsListCatalogResponseRowsItemFieldUpdatedAt         = big.NewInt(1 << 8)
+)
+
+type ItemsUnitsListCatalogResponseRowsItem struct {
+	ID                string    `json:"id" url:"id"`
+	ItemID            string    `json:"itemId" url:"itemId"`
+	UnitCode          string    `json:"unitCode" url:"unitCode"`
+	Factor            string    `json:"factor" url:"factor"`
+	IsDefaultSale     bool      `json:"isDefaultSale" url:"isDefaultSale"`
+	IsDefaultPurchase bool      `json:"isDefaultPurchase" url:"isDefaultPurchase"`
+	Barcode           *string   `json:"barcode,omitempty" url:"barcode,omitempty"`
+	CreatedAt         time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetItemID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ItemID
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetUnitCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitCode
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.Factor
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetIsDefaultSale() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultSale
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetIsDefaultPurchase() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultPurchase
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetBarcode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Barcode
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetID(id string) {
+	i.ID = id
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetItemID(itemID string) {
+	i.ItemID = itemID
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldItemID)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetIsDefaultSale(isDefaultSale bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetIsDefaultPurchase(isDefaultPurchase bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldIsDefaultPurchase)
+}
+
+// SetBarcode sets the Barcode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetBarcode(barcode *string) {
+	i.Barcode = barcode
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldBarcode)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsListCatalogResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(itemsUnitsListCatalogResponseRowsItemFieldUpdatedAt)
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed ItemsUnitsListCatalogResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItemsUnitsListCatalogResponseRowsItem(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsListCatalogResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsUnitsListCatalogResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsUnitsUpdateCatalogResponseFieldID                = big.NewInt(1 << 0)
+	itemsUnitsUpdateCatalogResponseFieldItemID            = big.NewInt(1 << 1)
+	itemsUnitsUpdateCatalogResponseFieldUnitCode          = big.NewInt(1 << 2)
+	itemsUnitsUpdateCatalogResponseFieldFactor            = big.NewInt(1 << 3)
+	itemsUnitsUpdateCatalogResponseFieldIsDefaultSale     = big.NewInt(1 << 4)
+	itemsUnitsUpdateCatalogResponseFieldIsDefaultPurchase = big.NewInt(1 << 5)
+	itemsUnitsUpdateCatalogResponseFieldBarcode           = big.NewInt(1 << 6)
+	itemsUnitsUpdateCatalogResponseFieldCreatedAt         = big.NewInt(1 << 7)
+	itemsUnitsUpdateCatalogResponseFieldUpdatedAt         = big.NewInt(1 << 8)
+)
+
+type ItemsUnitsUpdateCatalogResponse struct {
+	ID                string    `json:"id" url:"id"`
+	ItemID            string    `json:"itemId" url:"itemId"`
+	UnitCode          string    `json:"unitCode" url:"unitCode"`
+	Factor            string    `json:"factor" url:"factor"`
+	IsDefaultSale     bool      `json:"isDefaultSale" url:"isDefaultSale"`
+	IsDefaultPurchase bool      `json:"isDefaultPurchase" url:"isDefaultPurchase"`
+	Barcode           *string   `json:"barcode,omitempty" url:"barcode,omitempty"`
+	CreatedAt         time.Time `json:"createdAt" url:"createdAt"`
+	UpdatedAt         time.Time `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetItemID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ItemID
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetUnitCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitCode
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.Factor
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetIsDefaultSale() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultSale
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetIsDefaultPurchase() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultPurchase
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetBarcode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Barcode
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetID(id string) {
+	i.ID = id
+	i.require(itemsUnitsUpdateCatalogResponseFieldID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetItemID(itemID string) {
+	i.ItemID = itemID
+	i.require(itemsUnitsUpdateCatalogResponseFieldItemID)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsUnitsUpdateCatalogResponseFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsUnitsUpdateCatalogResponseFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetIsDefaultSale(isDefaultSale bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsUnitsUpdateCatalogResponseFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetIsDefaultPurchase(isDefaultPurchase bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsUnitsUpdateCatalogResponseFieldIsDefaultPurchase)
+}
+
+// SetBarcode sets the Barcode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetBarcode(barcode *string) {
+	i.Barcode = barcode
+	i.require(itemsUnitsUpdateCatalogResponseFieldBarcode)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(itemsUnitsUpdateCatalogResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUnitsUpdateCatalogResponse) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(itemsUnitsUpdateCatalogResponseFieldUpdatedAt)
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) UnmarshalJSON(data []byte) error {
+	type embed ItemsUnitsUpdateCatalogResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItemsUnitsUpdateCatalogResponse(unmarshaler.embed)
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) MarshalJSON() ([]byte, error) {
+	type embed ItemsUnitsUpdateCatalogResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		UpdatedAt *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:     embed(*i),
+		CreatedAt: internal.NewDateTime(i.CreatedAt),
+		UpdatedAt: internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsUnitsUpdateCatalogResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
 	itemsUpdateCatalogRequestComponentsItemFieldItemID   = big.NewInt(1 << 0)
 	itemsUpdateCatalogRequestComponentsItemFieldQuantity = big.NewInt(1 << 1)
 )
@@ -9270,35 +10915,36 @@ var (
 	itemsUpdateCatalogResponseFieldDocumentRef             = big.NewInt(1 << 19)
 	itemsUpdateCatalogResponseFieldTranslations            = big.NewInt(1 << 20)
 	itemsUpdateCatalogResponseFieldComponents              = big.NewInt(1 << 21)
-	itemsUpdateCatalogResponseFieldKindID                  = big.NewInt(1 << 22)
-	itemsUpdateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 23)
-	itemsUpdateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 24)
-	itemsUpdateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 25)
-	itemsUpdateCatalogResponseFieldManufacturer            = big.NewInt(1 << 26)
-	itemsUpdateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 27)
-	itemsUpdateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 28)
-	itemsUpdateCatalogResponseFieldCostPrice               = big.NewInt(1 << 29)
-	itemsUpdateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 30)
-	itemsUpdateCatalogResponseFieldExternalID              = big.NewInt(1 << 31)
-	itemsUpdateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 32)
-	itemsUpdateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 33)
-	itemsUpdateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 34)
-	itemsUpdateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 35)
-	itemsUpdateCatalogResponseFieldMinPrice                = big.NewInt(1 << 36)
-	itemsUpdateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 37)
-	itemsUpdateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 38)
-	itemsUpdateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 39)
-	itemsUpdateCatalogResponseFieldDepartment              = big.NewInt(1 << 40)
-	itemsUpdateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 41)
-	itemsUpdateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 42)
-	itemsUpdateCatalogResponseFieldTaraCode                = big.NewInt(1 << 43)
-	itemsUpdateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 44)
-	itemsUpdateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 45)
-	itemsUpdateCatalogResponseFieldValidFrom               = big.NewInt(1 << 46)
-	itemsUpdateCatalogResponseFieldValidTo                 = big.NewInt(1 << 47)
-	itemsUpdateCatalogResponseFieldPosFlags                = big.NewInt(1 << 48)
-	itemsUpdateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 49)
-	itemsUpdateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 50)
+	itemsUpdateCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 22)
+	itemsUpdateCatalogResponseFieldKindID                  = big.NewInt(1 << 23)
+	itemsUpdateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 24)
+	itemsUpdateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 25)
+	itemsUpdateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 26)
+	itemsUpdateCatalogResponseFieldManufacturer            = big.NewInt(1 << 27)
+	itemsUpdateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 28)
+	itemsUpdateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 29)
+	itemsUpdateCatalogResponseFieldCostPrice               = big.NewInt(1 << 30)
+	itemsUpdateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 31)
+	itemsUpdateCatalogResponseFieldExternalID              = big.NewInt(1 << 32)
+	itemsUpdateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 33)
+	itemsUpdateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 34)
+	itemsUpdateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 35)
+	itemsUpdateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 36)
+	itemsUpdateCatalogResponseFieldMinPrice                = big.NewInt(1 << 37)
+	itemsUpdateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 38)
+	itemsUpdateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 39)
+	itemsUpdateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 40)
+	itemsUpdateCatalogResponseFieldDepartment              = big.NewInt(1 << 41)
+	itemsUpdateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 42)
+	itemsUpdateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 43)
+	itemsUpdateCatalogResponseFieldTaraCode                = big.NewInt(1 << 44)
+	itemsUpdateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 45)
+	itemsUpdateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 46)
+	itemsUpdateCatalogResponseFieldValidFrom               = big.NewInt(1 << 47)
+	itemsUpdateCatalogResponseFieldValidTo                 = big.NewInt(1 << 48)
+	itemsUpdateCatalogResponseFieldPosFlags                = big.NewInt(1 << 49)
+	itemsUpdateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 50)
+	itemsUpdateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 51)
 )
 
 type ItemsUpdateCatalogResponse struct {
@@ -9324,6 +10970,7 @@ type ItemsUpdateCatalogResponse struct {
 	DocumentRef             *string                                                 `json:"documentRef,omitempty" url:"documentRef,omitempty"`
 	Translations            map[string]*ItemsUpdateCatalogResponseTranslationsValue `json:"translations,omitempty" url:"translations,omitempty"`
 	Components              []*ItemsUpdateCatalogResponseComponentsItem             `json:"components" url:"components"`
+	AlternativeUnits        []*ItemsUpdateCatalogResponseAlternativeUnitsItem       `json:"alternativeUnits" url:"alternativeUnits"`
 	KindID                  *string                                                 `json:"kindId,omitempty" url:"kindId,omitempty"`
 	SaleAccountCode         *string                                                 `json:"saleAccountCode,omitempty" url:"saleAccountCode,omitempty"`
 	PurchaseAccountCode     *string                                                 `json:"purchaseAccountCode,omitempty" url:"purchaseAccountCode,omitempty"`
@@ -9513,6 +11160,13 @@ func (i *ItemsUpdateCatalogResponse) GetComponents() []*ItemsUpdateCatalogRespon
 		return nil
 	}
 	return i.Components
+}
+
+func (i *ItemsUpdateCatalogResponse) GetAlternativeUnits() []*ItemsUpdateCatalogResponseAlternativeUnitsItem {
+	if i == nil {
+		return nil
+	}
+	return i.AlternativeUnits
 }
 
 func (i *ItemsUpdateCatalogResponse) GetKindID() *string {
@@ -9886,6 +11540,13 @@ func (i *ItemsUpdateCatalogResponse) SetComponents(components []*ItemsUpdateCata
 	i.require(itemsUpdateCatalogResponseFieldComponents)
 }
 
+// SetAlternativeUnits sets the AlternativeUnits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponse) SetAlternativeUnits(alternativeUnits []*ItemsUpdateCatalogResponseAlternativeUnitsItem) {
+	i.AlternativeUnits = alternativeUnits
+	i.require(itemsUpdateCatalogResponseFieldAlternativeUnits)
+}
+
 // SetKindID sets the KindID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *ItemsUpdateCatalogResponse) SetKindID(kindID *string) {
@@ -10133,6 +11794,170 @@ func (i *ItemsUpdateCatalogResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *ItemsUpdateCatalogResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itemsUpdateCatalogResponseAlternativeUnitsItemFieldUnitCode             = big.NewInt(1 << 0)
+	itemsUpdateCatalogResponseAlternativeUnitsItemFieldFactor               = big.NewInt(1 << 1)
+	itemsUpdateCatalogResponseAlternativeUnitsItemFieldIsDefaultSale        = big.NewInt(1 << 2)
+	itemsUpdateCatalogResponseAlternativeUnitsItemFieldIsDefaultPurchase    = big.NewInt(1 << 3)
+	itemsUpdateCatalogResponseAlternativeUnitsItemFieldSalePriceExclVat     = big.NewInt(1 << 4)
+	itemsUpdateCatalogResponseAlternativeUnitsItemFieldPurchasePriceExclVat = big.NewInt(1 << 5)
+)
+
+type ItemsUpdateCatalogResponseAlternativeUnitsItem struct {
+	UnitCode             string  `json:"unitCode" url:"unitCode"`
+	Factor               string  `json:"factor" url:"factor"`
+	IsDefaultSale        bool    `json:"isDefaultSale" url:"isDefaultSale"`
+	IsDefaultPurchase    bool    `json:"isDefaultPurchase" url:"isDefaultPurchase"`
+	SalePriceExclVat     *string `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
+	PurchasePriceExclVat *string `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) GetUnitCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitCode
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) GetFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.Factor
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) GetIsDefaultSale() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultSale
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) GetIsDefaultPurchase() bool {
+	if i == nil {
+		return false
+	}
+	return i.IsDefaultPurchase
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) GetSalePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalePriceExclVat
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) GetPurchasePriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PurchasePriceExclVat
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetUnitCode sets the UnitCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) SetUnitCode(unitCode string) {
+	i.UnitCode = unitCode
+	i.require(itemsUpdateCatalogResponseAlternativeUnitsItemFieldUnitCode)
+}
+
+// SetFactor sets the Factor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) SetFactor(factor string) {
+	i.Factor = factor
+	i.require(itemsUpdateCatalogResponseAlternativeUnitsItemFieldFactor)
+}
+
+// SetIsDefaultSale sets the IsDefaultSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) SetIsDefaultSale(isDefaultSale bool) {
+	i.IsDefaultSale = isDefaultSale
+	i.require(itemsUpdateCatalogResponseAlternativeUnitsItemFieldIsDefaultSale)
+}
+
+// SetIsDefaultPurchase sets the IsDefaultPurchase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) SetIsDefaultPurchase(isDefaultPurchase bool) {
+	i.IsDefaultPurchase = isDefaultPurchase
+	i.require(itemsUpdateCatalogResponseAlternativeUnitsItemFieldIsDefaultPurchase)
+}
+
+// SetSalePriceExclVat sets the SalePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) SetSalePriceExclVat(salePriceExclVat *string) {
+	i.SalePriceExclVat = salePriceExclVat
+	i.require(itemsUpdateCatalogResponseAlternativeUnitsItemFieldSalePriceExclVat)
+}
+
+// SetPurchasePriceExclVat sets the PurchasePriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) SetPurchasePriceExclVat(purchasePriceExclVat *string) {
+	i.PurchasePriceExclVat = purchasePriceExclVat
+	i.require(itemsUpdateCatalogResponseAlternativeUnitsItemFieldPurchasePriceExclVat)
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItemsUpdateCatalogResponseAlternativeUnitsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItemsUpdateCatalogResponseAlternativeUnitsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) MarshalJSON() ([]byte, error) {
+	type embed ItemsUpdateCatalogResponseAlternativeUnitsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItemsUpdateCatalogResponseAlternativeUnitsItem) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -11501,14 +13326,16 @@ var (
 	unitsCreateCatalogResponseFieldID        = big.NewInt(1 << 0)
 	unitsCreateCatalogResponseFieldCode      = big.NewInt(1 << 1)
 	unitsCreateCatalogResponseFieldName      = big.NewInt(1 << 2)
-	unitsCreateCatalogResponseFieldIsActive  = big.NewInt(1 << 3)
-	unitsCreateCatalogResponseFieldCreatedAt = big.NewInt(1 << 4)
+	unitsCreateCatalogResponseFieldRec20Code = big.NewInt(1 << 3)
+	unitsCreateCatalogResponseFieldIsActive  = big.NewInt(1 << 4)
+	unitsCreateCatalogResponseFieldCreatedAt = big.NewInt(1 << 5)
 )
 
 type UnitsCreateCatalogResponse struct {
 	ID        string    `json:"id" url:"id"`
 	Code      string    `json:"code" url:"code"`
 	Name      string    `json:"name" url:"name"`
+	Rec20Code *string   `json:"rec20Code,omitempty" url:"rec20Code,omitempty"`
 	IsActive  bool      `json:"isActive" url:"isActive"`
 	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
 
@@ -11538,6 +13365,13 @@ func (u *UnitsCreateCatalogResponse) GetName() string {
 		return ""
 	}
 	return u.Name
+}
+
+func (u *UnitsCreateCatalogResponse) GetRec20Code() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Rec20Code
 }
 
 func (u *UnitsCreateCatalogResponse) GetIsActive() bool {
@@ -11587,6 +13421,13 @@ func (u *UnitsCreateCatalogResponse) SetCode(code string) {
 func (u *UnitsCreateCatalogResponse) SetName(name string) {
 	u.Name = name
 	u.require(unitsCreateCatalogResponseFieldName)
+}
+
+// SetRec20Code sets the Rec20Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UnitsCreateCatalogResponse) SetRec20Code(rec20Code *string) {
+	u.Rec20Code = rec20Code
+	u.require(unitsCreateCatalogResponseFieldRec20Code)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
@@ -11825,14 +13666,16 @@ var (
 	unitsListCatalogResponseRowsItemFieldID        = big.NewInt(1 << 0)
 	unitsListCatalogResponseRowsItemFieldCode      = big.NewInt(1 << 1)
 	unitsListCatalogResponseRowsItemFieldName      = big.NewInt(1 << 2)
-	unitsListCatalogResponseRowsItemFieldIsActive  = big.NewInt(1 << 3)
-	unitsListCatalogResponseRowsItemFieldCreatedAt = big.NewInt(1 << 4)
+	unitsListCatalogResponseRowsItemFieldRec20Code = big.NewInt(1 << 3)
+	unitsListCatalogResponseRowsItemFieldIsActive  = big.NewInt(1 << 4)
+	unitsListCatalogResponseRowsItemFieldCreatedAt = big.NewInt(1 << 5)
 )
 
 type UnitsListCatalogResponseRowsItem struct {
 	ID        string    `json:"id" url:"id"`
 	Code      string    `json:"code" url:"code"`
 	Name      string    `json:"name" url:"name"`
+	Rec20Code *string   `json:"rec20Code,omitempty" url:"rec20Code,omitempty"`
 	IsActive  bool      `json:"isActive" url:"isActive"`
 	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
 
@@ -11862,6 +13705,13 @@ func (u *UnitsListCatalogResponseRowsItem) GetName() string {
 		return ""
 	}
 	return u.Name
+}
+
+func (u *UnitsListCatalogResponseRowsItem) GetRec20Code() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Rec20Code
 }
 
 func (u *UnitsListCatalogResponseRowsItem) GetIsActive() bool {
@@ -11911,6 +13761,13 @@ func (u *UnitsListCatalogResponseRowsItem) SetCode(code string) {
 func (u *UnitsListCatalogResponseRowsItem) SetName(name string) {
 	u.Name = name
 	u.require(unitsListCatalogResponseRowsItemFieldName)
+}
+
+// SetRec20Code sets the Rec20Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UnitsListCatalogResponseRowsItem) SetRec20Code(rec20Code *string) {
+	u.Rec20Code = rec20Code
+	u.require(unitsListCatalogResponseRowsItemFieldRec20Code)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
@@ -12318,14 +14175,16 @@ var (
 	unitsUpdateCatalogResponseFieldID        = big.NewInt(1 << 0)
 	unitsUpdateCatalogResponseFieldCode      = big.NewInt(1 << 1)
 	unitsUpdateCatalogResponseFieldName      = big.NewInt(1 << 2)
-	unitsUpdateCatalogResponseFieldIsActive  = big.NewInt(1 << 3)
-	unitsUpdateCatalogResponseFieldCreatedAt = big.NewInt(1 << 4)
+	unitsUpdateCatalogResponseFieldRec20Code = big.NewInt(1 << 3)
+	unitsUpdateCatalogResponseFieldIsActive  = big.NewInt(1 << 4)
+	unitsUpdateCatalogResponseFieldCreatedAt = big.NewInt(1 << 5)
 )
 
 type UnitsUpdateCatalogResponse struct {
 	ID        string    `json:"id" url:"id"`
 	Code      string    `json:"code" url:"code"`
 	Name      string    `json:"name" url:"name"`
+	Rec20Code *string   `json:"rec20Code,omitempty" url:"rec20Code,omitempty"`
 	IsActive  bool      `json:"isActive" url:"isActive"`
 	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
 
@@ -12355,6 +14214,13 @@ func (u *UnitsUpdateCatalogResponse) GetName() string {
 		return ""
 	}
 	return u.Name
+}
+
+func (u *UnitsUpdateCatalogResponse) GetRec20Code() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Rec20Code
 }
 
 func (u *UnitsUpdateCatalogResponse) GetIsActive() bool {
@@ -12404,6 +14270,13 @@ func (u *UnitsUpdateCatalogResponse) SetCode(code string) {
 func (u *UnitsUpdateCatalogResponse) SetName(name string) {
 	u.Name = name
 	u.require(unitsUpdateCatalogResponseFieldName)
+}
+
+// SetRec20Code sets the Rec20Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UnitsUpdateCatalogResponse) SetRec20Code(rec20Code *string) {
+	u.Rec20Code = rec20Code
+	u.require(unitsUpdateCatalogResponseFieldRec20Code)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
@@ -12471,15 +14344,17 @@ func (u *UnitsUpdateCatalogResponse) String() string {
 }
 
 var (
-	unitsCreateCatalogRequestFieldCode     = big.NewInt(1 << 0)
-	unitsCreateCatalogRequestFieldName     = big.NewInt(1 << 1)
-	unitsCreateCatalogRequestFieldIsActive = big.NewInt(1 << 2)
+	unitsCreateCatalogRequestFieldCode      = big.NewInt(1 << 0)
+	unitsCreateCatalogRequestFieldName      = big.NewInt(1 << 1)
+	unitsCreateCatalogRequestFieldRec20Code = big.NewInt(1 << 2)
+	unitsCreateCatalogRequestFieldIsActive  = big.NewInt(1 << 3)
 )
 
 type UnitsCreateCatalogRequest struct {
-	Code     string `json:"code" url:"-"`
-	Name     string `json:"name" url:"-"`
-	IsActive *bool  `json:"isActive,omitempty" url:"-"`
+	Code      string  `json:"code" url:"-"`
+	Name      string  `json:"name" url:"-"`
+	Rec20Code *string `json:"rec20Code,omitempty" url:"-"`
+	IsActive  *bool   `json:"isActive,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12504,6 +14379,13 @@ func (u *UnitsCreateCatalogRequest) SetCode(code string) {
 func (u *UnitsCreateCatalogRequest) SetName(name string) {
 	u.Name = name
 	u.require(unitsCreateCatalogRequestFieldName)
+}
+
+// SetRec20Code sets the Rec20Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UnitsCreateCatalogRequest) SetRec20Code(rec20Code *string) {
+	u.Rec20Code = rec20Code
+	u.require(unitsCreateCatalogRequestFieldRec20Code)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;
@@ -12640,17 +14522,19 @@ func (u *UnitsOptionsCatalogRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	unitsUpdateCatalogRequestFieldID       = big.NewInt(1 << 0)
-	unitsUpdateCatalogRequestFieldCode     = big.NewInt(1 << 1)
-	unitsUpdateCatalogRequestFieldName     = big.NewInt(1 << 2)
-	unitsUpdateCatalogRequestFieldIsActive = big.NewInt(1 << 3)
+	unitsUpdateCatalogRequestFieldID        = big.NewInt(1 << 0)
+	unitsUpdateCatalogRequestFieldCode      = big.NewInt(1 << 1)
+	unitsUpdateCatalogRequestFieldName      = big.NewInt(1 << 2)
+	unitsUpdateCatalogRequestFieldRec20Code = big.NewInt(1 << 3)
+	unitsUpdateCatalogRequestFieldIsActive  = big.NewInt(1 << 4)
 )
 
 type UnitsUpdateCatalogRequest struct {
-	ID       string  `json:"id" url:"-"`
-	Code     *string `json:"code,omitempty" url:"-"`
-	Name     *string `json:"name,omitempty" url:"-"`
-	IsActive *bool   `json:"isActive,omitempty" url:"-"`
+	ID        string  `json:"id" url:"-"`
+	Code      *string `json:"code,omitempty" url:"-"`
+	Name      *string `json:"name,omitempty" url:"-"`
+	Rec20Code *string `json:"rec20Code,omitempty" url:"-"`
+	IsActive  *bool   `json:"isActive,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12682,6 +14566,13 @@ func (u *UnitsUpdateCatalogRequest) SetCode(code *string) {
 func (u *UnitsUpdateCatalogRequest) SetName(name *string) {
 	u.Name = name
 	u.require(unitsUpdateCatalogRequestFieldName)
+}
+
+// SetRec20Code sets the Rec20Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UnitsUpdateCatalogRequest) SetRec20Code(rec20Code *string) {
+	u.Rec20Code = rec20Code
+	u.require(unitsUpdateCatalogRequestFieldRec20Code)
 }
 
 // SetIsActive sets the IsActive field and marks it as non-optional;

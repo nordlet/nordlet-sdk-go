@@ -4714,6 +4714,14 @@ func TestSettersVehiclesCreateFleetResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &VehiclesCreateFleetResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetNotes", func(t *testing.T) {
 		obj := &VehiclesCreateFleetResponse{}
 		var fernTestValueNotes *string
@@ -5116,6 +5124,39 @@ func TestGettersVehiclesCreateFleetResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesCreateFleetResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesCreateFleetResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VehiclesCreateFleetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
 	})
 
 	t.Run("GetNotes", func(t *testing.T) {
@@ -5623,6 +5664,37 @@ func TestSettersMarkExplicitVehiclesCreateFleetResponse(t *testing.T) {
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesCreateFleetResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -6391,6 +6463,14 @@ func TestSettersVehiclesGetFleetResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &VehiclesGetFleetResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetNotes", func(t *testing.T) {
 		obj := &VehiclesGetFleetResponse{}
 		var fernTestValueNotes *string
@@ -6793,6 +6873,39 @@ func TestGettersVehiclesGetFleetResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesGetFleetResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesGetFleetResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VehiclesGetFleetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
 	})
 
 	t.Run("GetNotes", func(t *testing.T) {
@@ -7300,6 +7413,37 @@ func TestSettersMarkExplicitVehiclesGetFleetResponse(t *testing.T) {
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesGetFleetResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -8981,6 +9125,14 @@ func TestSettersVehiclesListFleetResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &VehiclesListFleetResponseRowsItem{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetNotes", func(t *testing.T) {
 		obj := &VehiclesListFleetResponseRowsItem{}
 		var fernTestValueNotes *string
@@ -9383,6 +9535,39 @@ func TestGettersVehiclesListFleetResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesListFleetResponseRowsItem{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesListFleetResponseRowsItem{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VehiclesListFleetResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
 	})
 
 	t.Run("GetNotes", func(t *testing.T) {
@@ -9890,6 +10075,37 @@ func TestSettersMarkExplicitVehiclesListFleetResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesListFleetResponseRowsItem{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -10658,6 +10874,14 @@ func TestSettersVehiclesUpdateFleetResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &VehiclesUpdateFleetResponse{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetNotes", func(t *testing.T) {
 		obj := &VehiclesUpdateFleetResponse{}
 		var fernTestValueNotes *string
@@ -11060,6 +11284,39 @@ func TestGettersVehiclesUpdateFleetResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetDisposalDate", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesUpdateFleetResponse{}
+		var expected *time.Time
+		obj.DisposalDate = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalDate(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalDate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesUpdateFleetResponse{}
+		obj.DisposalDate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalDate(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalDate_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *VehiclesUpdateFleetResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalDate() // Should return zero value
 	})
 
 	t.Run("GetNotes", func(t *testing.T) {
@@ -11567,6 +11824,37 @@ func TestSettersMarkExplicitVehiclesUpdateFleetResponse(t *testing.T) {
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesUpdateFleetResponse{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -12319,6 +12607,14 @@ func TestSettersVehiclesCreateFleetRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &VehiclesCreateFleetRequest{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetNotes", func(t *testing.T) {
 		obj := &VehiclesCreateFleetRequest{}
 		var fernTestValueNotes *string
@@ -12656,6 +12952,37 @@ func TestSettersMarkExplicitVehiclesCreateFleetRequest(t *testing.T) {
 
 		// Act
 		obj.SetInsuranceDue(fernTestValueInsuranceDue)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesCreateFleetRequest{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -13094,6 +13421,14 @@ func TestSettersVehiclesUpdateFleetRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalDate", func(t *testing.T) {
+		obj := &VehiclesUpdateFleetRequest{}
+		var fernTestValueDisposalDate *time.Time
+		obj.SetDisposalDate(fernTestValueDisposalDate)
+		assert.Equal(t, fernTestValueDisposalDate, obj.DisposalDate)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetNotes", func(t *testing.T) {
 		obj := &VehiclesUpdateFleetRequest{}
 		var fernTestValueNotes *string
@@ -13485,6 +13820,37 @@ func TestSettersMarkExplicitVehiclesUpdateFleetRequest(t *testing.T) {
 
 		// Act
 		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalDate_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &VehiclesUpdateFleetRequest{}
+		var fernTestValueDisposalDate *time.Time
+
+		// Act
+		obj.SetDisposalDate(fernTestValueDisposalDate)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

@@ -1778,6 +1778,14 @@ func TestSettersCreateCalendarResponseSubmission(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSentSha256", func(t *testing.T) {
 		obj := &CreateCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
@@ -2539,6 +2547,29 @@ func TestGettersCreateCalendarResponseSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -3466,6 +3497,37 @@ func TestSettersMarkExplicitCreateCalendarResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -3844,6 +3906,14 @@ func TestSettersCreateCalendarResponseSubmissionsItem(t *testing.T) {
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -4608,6 +4678,29 @@ func TestGettersCreateCalendarResponseSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -5512,6 +5605,37 @@ func TestSettersMarkExplicitCreateCalendarResponseSubmissionsItem(t *testing.T) 
 
 		// Act
 		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7459,6 +7583,14 @@ func TestSettersGetCalendarResponseSubmission(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSentSha256", func(t *testing.T) {
 		obj := &GetCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
@@ -8220,6 +8352,29 @@ func TestGettersGetCalendarResponseSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -9147,6 +9302,37 @@ func TestSettersMarkExplicitGetCalendarResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -9525,6 +9711,14 @@ func TestSettersGetCalendarResponseSubmissionsItem(t *testing.T) {
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -10289,6 +10483,29 @@ func TestGettersGetCalendarResponseSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -11193,6 +11410,37 @@ func TestSettersMarkExplicitGetCalendarResponseSubmissionsItem(t *testing.T) {
 
 		// Act
 		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -12749,6 +12997,14 @@ func TestSettersListCalendarResponseRowsItemSubmission(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSentSha256", func(t *testing.T) {
 		obj := &ListCalendarResponseRowsItemSubmission{}
 		var fernTestValueSentSha256 *string
@@ -13510,6 +13766,29 @@ func TestGettersListCalendarResponseRowsItemSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -14437,6 +14716,37 @@ func TestSettersMarkExplicitListCalendarResponseRowsItemSubmission(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -14815,6 +15125,14 @@ func TestSettersListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -15579,6 +15897,29 @@ func TestGettersListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -16506,6 +16847,37 @@ func TestSettersMarkExplicitListCalendarResponseRowsItemSubmissionsItem(t *testi
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -16884,6 +17256,14 @@ func TestSettersSubmitCalendarResponse(t *testing.T) {
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -17648,6 +18028,29 @@ func TestGettersSubmitCalendarResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -18552,6 +18955,37 @@ func TestSettersMarkExplicitSubmitCalendarResponse(t *testing.T) {
 
 		// Act
 		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -20027,6 +20461,14 @@ func TestSettersUpdateCalendarResponseSubmission(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSentSha256", func(t *testing.T) {
 		obj := &UpdateCalendarResponseSubmission{}
 		var fernTestValueSentSha256 *string
@@ -20788,6 +21230,29 @@ func TestGettersUpdateCalendarResponseSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -21715,6 +22180,37 @@ func TestSettersMarkExplicitUpdateCalendarResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSentSha256_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -22093,6 +22589,14 @@ func TestSettersUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 		var fernTestValueDeliveryError *string
 		obj.SetDeliveryError(fernTestValueDeliveryError)
 		assert.Equal(t, fernTestValueDeliveryError, obj.DeliveryError)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetConfirmationPending", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
+		assert.Equal(t, fernTestValueConfirmationPending, obj.ConfirmationPending)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -22857,6 +23361,29 @@ func TestGettersUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDeliveryError() // Should return zero value
+	})
+
+	t.Run("GetConfirmationPending", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected bool
+		obj.ConfirmationPending = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetConfirmationPending(), "getter should return the property value")
+	})
+
+	t.Run("GetConfirmationPending_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetConfirmationPending() // Should return zero value
 	})
 
 	t.Run("GetSentSha256", func(t *testing.T) {
@@ -23761,6 +24288,37 @@ func TestSettersMarkExplicitUpdateCalendarResponseSubmissionsItem(t *testing.T) 
 
 		// Act
 		obj.SetDeliveryError(fernTestValueDeliveryError)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetConfirmationPending_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueConfirmationPending bool
+
+		// Act
+		obj.SetConfirmationPending(fernTestValueConfirmationPending)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

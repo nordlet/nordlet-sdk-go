@@ -433,47 +433,49 @@ func (i *InvoicesCheckoutPublicResponse) String() string {
 }
 
 var (
-	invoicesGetPublicResponseFieldType            = big.NewInt(1 << 0)
-	invoicesGetPublicResponseFieldStatus          = big.NewInt(1 << 1)
-	invoicesGetPublicResponseFieldPaymentStatus   = big.NewInt(1 << 2)
-	invoicesGetPublicResponseFieldNumber          = big.NewInt(1 << 3)
-	invoicesGetPublicResponseFieldIssueDate       = big.NewInt(1 << 4)
-	invoicesGetPublicResponseFieldDueDate         = big.NewInt(1 << 5)
-	invoicesGetPublicResponseFieldCurrency        = big.NewInt(1 << 6)
-	invoicesGetPublicResponseFieldNetTotal        = big.NewInt(1 << 7)
-	invoicesGetPublicResponseFieldVatTotal        = big.NewInt(1 << 8)
-	invoicesGetPublicResponseFieldSalesTaxPercent = big.NewInt(1 << 9)
-	invoicesGetPublicResponseFieldSalesTaxTotal   = big.NewInt(1 << 10)
-	invoicesGetPublicResponseFieldGrossTotal      = big.NewInt(1 << 11)
-	invoicesGetPublicResponseFieldPaidAmount      = big.NewInt(1 << 12)
-	invoicesGetPublicResponseFieldPaidOn          = big.NewInt(1 << 13)
-	invoicesGetPublicResponseFieldNotes           = big.NewInt(1 << 14)
-	invoicesGetPublicResponseFieldPayURL          = big.NewInt(1 << 15)
-	invoicesGetPublicResponseFieldSeller          = big.NewInt(1 << 16)
-	invoicesGetPublicResponseFieldBuyer           = big.NewInt(1 << 17)
-	invoicesGetPublicResponseFieldLines           = big.NewInt(1 << 18)
+	invoicesGetPublicResponseFieldType                = big.NewInt(1 << 0)
+	invoicesGetPublicResponseFieldStatus              = big.NewInt(1 << 1)
+	invoicesGetPublicResponseFieldPaymentStatus       = big.NewInt(1 << 2)
+	invoicesGetPublicResponseFieldNumber              = big.NewInt(1 << 3)
+	invoicesGetPublicResponseFieldIssueDate           = big.NewInt(1 << 4)
+	invoicesGetPublicResponseFieldDueDate             = big.NewInt(1 << 5)
+	invoicesGetPublicResponseFieldCurrency            = big.NewInt(1 << 6)
+	invoicesGetPublicResponseFieldNetTotal            = big.NewInt(1 << 7)
+	invoicesGetPublicResponseFieldVatTotal            = big.NewInt(1 << 8)
+	invoicesGetPublicResponseFieldSalesTaxPercent     = big.NewInt(1 << 9)
+	invoicesGetPublicResponseFieldSalesTaxTotal       = big.NewInt(1 << 10)
+	invoicesGetPublicResponseFieldGrossTotal          = big.NewInt(1 << 11)
+	invoicesGetPublicResponseFieldPaidAmount          = big.NewInt(1 << 12)
+	invoicesGetPublicResponseFieldPaidOn              = big.NewInt(1 << 13)
+	invoicesGetPublicResponseFieldNotes               = big.NewInt(1 << 14)
+	invoicesGetPublicResponseFieldPayURL              = big.NewInt(1 << 15)
+	invoicesGetPublicResponseFieldCardPaymentReceived = big.NewInt(1 << 16)
+	invoicesGetPublicResponseFieldSeller              = big.NewInt(1 << 17)
+	invoicesGetPublicResponseFieldBuyer               = big.NewInt(1 << 18)
+	invoicesGetPublicResponseFieldLines               = big.NewInt(1 << 19)
 )
 
 type InvoicesGetPublicResponse struct {
-	Type            InvoicesGetPublicResponseType          `json:"type" url:"type"`
-	Status          InvoicesGetPublicResponseStatus        `json:"status" url:"status"`
-	PaymentStatus   InvoicesGetPublicResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Number          *string                                `json:"number,omitempty" url:"number,omitempty"`
-	IssueDate       *time.Time                             `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate         *time.Time                             `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency        string                                 `json:"currency" url:"currency"`
-	NetTotal        string                                 `json:"netTotal" url:"netTotal"`
-	VatTotal        string                                 `json:"vatTotal" url:"vatTotal"`
-	SalesTaxPercent *string                                `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal   string                                 `json:"salesTaxTotal" url:"salesTaxTotal"`
-	GrossTotal      string                                 `json:"grossTotal" url:"grossTotal"`
-	PaidAmount      string                                 `json:"paidAmount" url:"paidAmount"`
-	PaidOn          *string                                `json:"paidOn,omitempty" url:"paidOn,omitempty"`
-	Notes           *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	PayURL          *string                                `json:"payUrl,omitempty" url:"payUrl,omitempty"`
-	Seller          *InvoicesGetPublicResponseSeller       `json:"seller" url:"seller"`
-	Buyer           *InvoicesGetPublicResponseBuyer        `json:"buyer" url:"buyer"`
-	Lines           []*InvoicesGetPublicResponseLinesItem  `json:"lines" url:"lines"`
+	Type                InvoicesGetPublicResponseType          `json:"type" url:"type"`
+	Status              InvoicesGetPublicResponseStatus        `json:"status" url:"status"`
+	PaymentStatus       InvoicesGetPublicResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Number              *string                                `json:"number,omitempty" url:"number,omitempty"`
+	IssueDate           *time.Time                             `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate             *time.Time                             `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency            string                                 `json:"currency" url:"currency"`
+	NetTotal            string                                 `json:"netTotal" url:"netTotal"`
+	VatTotal            string                                 `json:"vatTotal" url:"vatTotal"`
+	SalesTaxPercent     *string                                `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal       string                                 `json:"salesTaxTotal" url:"salesTaxTotal"`
+	GrossTotal          string                                 `json:"grossTotal" url:"grossTotal"`
+	PaidAmount          string                                 `json:"paidAmount" url:"paidAmount"`
+	PaidOn              *string                                `json:"paidOn,omitempty" url:"paidOn,omitempty"`
+	Notes               *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	PayURL              *string                                `json:"payUrl,omitempty" url:"payUrl,omitempty"`
+	CardPaymentReceived bool                                   `json:"cardPaymentReceived" url:"cardPaymentReceived"`
+	Seller              *InvoicesGetPublicResponseSeller       `json:"seller" url:"seller"`
+	Buyer               *InvoicesGetPublicResponseBuyer        `json:"buyer" url:"buyer"`
+	Lines               []*InvoicesGetPublicResponseLinesItem  `json:"lines" url:"lines"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -592,6 +594,13 @@ func (i *InvoicesGetPublicResponse) GetPayURL() *string {
 		return nil
 	}
 	return i.PayURL
+}
+
+func (i *InvoicesGetPublicResponse) GetCardPaymentReceived() bool {
+	if i == nil {
+		return false
+	}
+	return i.CardPaymentReceived
 }
 
 func (i *InvoicesGetPublicResponse) GetSeller() *InvoicesGetPublicResponseSeller {
@@ -739,6 +748,13 @@ func (i *InvoicesGetPublicResponse) SetNotes(notes *string) {
 func (i *InvoicesGetPublicResponse) SetPayURL(payURL *string) {
 	i.PayURL = payURL
 	i.require(invoicesGetPublicResponseFieldPayURL)
+}
+
+// SetCardPaymentReceived sets the CardPaymentReceived field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetCardPaymentReceived(cardPaymentReceived bool) {
+	i.CardPaymentReceived = cardPaymentReceived
+	i.require(invoicesGetPublicResponseFieldCardPaymentReceived)
 }
 
 // SetSeller sets the Seller field and marks it as non-optional;

@@ -1056,23 +1056,27 @@ func (w *WaybillsCreateTransportResponse) String() string {
 }
 
 var (
-	waybillsCreateTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	waybillsCreateTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	waybillsCreateTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	waybillsCreateTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	waybillsCreateTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	waybillsCreateTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	waybillsCreateTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsCreateTransportResponseLinesItemFieldID           = big.NewInt(1 << 0)
+	waybillsCreateTransportResponseLinesItemFieldItemID       = big.NewInt(1 << 1)
+	waybillsCreateTransportResponseLinesItemFieldDescription  = big.NewInt(1 << 2)
+	waybillsCreateTransportResponseLinesItemFieldUnit         = big.NewInt(1 << 3)
+	waybillsCreateTransportResponseLinesItemFieldQuantity     = big.NewInt(1 << 4)
+	waybillsCreateTransportResponseLinesItemFieldUnitFactor   = big.NewInt(1 << 5)
+	waybillsCreateTransportResponseLinesItemFieldBaseQuantity = big.NewInt(1 << 6)
+	waybillsCreateTransportResponseLinesItemFieldProductCode  = big.NewInt(1 << 7)
+	waybillsCreateTransportResponseLinesItemFieldSortOrder    = big.NewInt(1 << 8)
 )
 
 type WaybillsCreateTransportResponseLinesItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Unit        string  `json:"unit" url:"unit"`
-	Quantity    string  `json:"quantity" url:"quantity"`
-	ProductCode *string `json:"productCode,omitempty" url:"productCode,omitempty"`
-	SortOrder   int64   `json:"sortOrder" url:"sortOrder"`
+	ID           string  `json:"id" url:"id"`
+	ItemID       *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description  string  `json:"description" url:"description"`
+	Unit         string  `json:"unit" url:"unit"`
+	Quantity     string  `json:"quantity" url:"quantity"`
+	UnitFactor   string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity string  `json:"baseQuantity" url:"baseQuantity"`
+	ProductCode  *string `json:"productCode,omitempty" url:"productCode,omitempty"`
+	SortOrder    int64   `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1114,6 +1118,20 @@ func (w *WaybillsCreateTransportResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return w.Quantity
+}
+
+func (w *WaybillsCreateTransportResponseLinesItem) GetUnitFactor() string {
+	if w == nil {
+		return ""
+	}
+	return w.UnitFactor
+}
+
+func (w *WaybillsCreateTransportResponseLinesItem) GetBaseQuantity() string {
+	if w == nil {
+		return ""
+	}
+	return w.BaseQuantity
 }
 
 func (w *WaybillsCreateTransportResponseLinesItem) GetProductCode() *string {
@@ -1177,6 +1195,20 @@ func (w *WaybillsCreateTransportResponseLinesItem) SetUnit(unit string) {
 func (w *WaybillsCreateTransportResponseLinesItem) SetQuantity(quantity string) {
 	w.Quantity = quantity
 	w.require(waybillsCreateTransportResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportResponseLinesItem) SetUnitFactor(unitFactor string) {
+	w.UnitFactor = unitFactor
+	w.require(waybillsCreateTransportResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsCreateTransportResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	w.BaseQuantity = baseQuantity
+	w.require(waybillsCreateTransportResponseLinesItemFieldBaseQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
@@ -1705,23 +1737,27 @@ func (w *WaybillsGetTransportResponse) String() string {
 }
 
 var (
-	waybillsGetTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	waybillsGetTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	waybillsGetTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	waybillsGetTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	waybillsGetTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	waybillsGetTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	waybillsGetTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsGetTransportResponseLinesItemFieldID           = big.NewInt(1 << 0)
+	waybillsGetTransportResponseLinesItemFieldItemID       = big.NewInt(1 << 1)
+	waybillsGetTransportResponseLinesItemFieldDescription  = big.NewInt(1 << 2)
+	waybillsGetTransportResponseLinesItemFieldUnit         = big.NewInt(1 << 3)
+	waybillsGetTransportResponseLinesItemFieldQuantity     = big.NewInt(1 << 4)
+	waybillsGetTransportResponseLinesItemFieldUnitFactor   = big.NewInt(1 << 5)
+	waybillsGetTransportResponseLinesItemFieldBaseQuantity = big.NewInt(1 << 6)
+	waybillsGetTransportResponseLinesItemFieldProductCode  = big.NewInt(1 << 7)
+	waybillsGetTransportResponseLinesItemFieldSortOrder    = big.NewInt(1 << 8)
 )
 
 type WaybillsGetTransportResponseLinesItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Unit        string  `json:"unit" url:"unit"`
-	Quantity    string  `json:"quantity" url:"quantity"`
-	ProductCode *string `json:"productCode,omitempty" url:"productCode,omitempty"`
-	SortOrder   int64   `json:"sortOrder" url:"sortOrder"`
+	ID           string  `json:"id" url:"id"`
+	ItemID       *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description  string  `json:"description" url:"description"`
+	Unit         string  `json:"unit" url:"unit"`
+	Quantity     string  `json:"quantity" url:"quantity"`
+	UnitFactor   string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity string  `json:"baseQuantity" url:"baseQuantity"`
+	ProductCode  *string `json:"productCode,omitempty" url:"productCode,omitempty"`
+	SortOrder    int64   `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1763,6 +1799,20 @@ func (w *WaybillsGetTransportResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return w.Quantity
+}
+
+func (w *WaybillsGetTransportResponseLinesItem) GetUnitFactor() string {
+	if w == nil {
+		return ""
+	}
+	return w.UnitFactor
+}
+
+func (w *WaybillsGetTransportResponseLinesItem) GetBaseQuantity() string {
+	if w == nil {
+		return ""
+	}
+	return w.BaseQuantity
 }
 
 func (w *WaybillsGetTransportResponseLinesItem) GetProductCode() *string {
@@ -1826,6 +1876,20 @@ func (w *WaybillsGetTransportResponseLinesItem) SetUnit(unit string) {
 func (w *WaybillsGetTransportResponseLinesItem) SetQuantity(quantity string) {
 	w.Quantity = quantity
 	w.require(waybillsGetTransportResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsGetTransportResponseLinesItem) SetUnitFactor(unitFactor string) {
+	w.UnitFactor = unitFactor
+	w.require(waybillsGetTransportResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsGetTransportResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	w.BaseQuantity = baseQuantity
+	w.require(waybillsGetTransportResponseLinesItemFieldBaseQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
@@ -2354,23 +2418,27 @@ func (w *WaybillsIssueTransportResponse) String() string {
 }
 
 var (
-	waybillsIssueTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	waybillsIssueTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	waybillsIssueTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	waybillsIssueTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	waybillsIssueTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	waybillsIssueTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	waybillsIssueTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsIssueTransportResponseLinesItemFieldID           = big.NewInt(1 << 0)
+	waybillsIssueTransportResponseLinesItemFieldItemID       = big.NewInt(1 << 1)
+	waybillsIssueTransportResponseLinesItemFieldDescription  = big.NewInt(1 << 2)
+	waybillsIssueTransportResponseLinesItemFieldUnit         = big.NewInt(1 << 3)
+	waybillsIssueTransportResponseLinesItemFieldQuantity     = big.NewInt(1 << 4)
+	waybillsIssueTransportResponseLinesItemFieldUnitFactor   = big.NewInt(1 << 5)
+	waybillsIssueTransportResponseLinesItemFieldBaseQuantity = big.NewInt(1 << 6)
+	waybillsIssueTransportResponseLinesItemFieldProductCode  = big.NewInt(1 << 7)
+	waybillsIssueTransportResponseLinesItemFieldSortOrder    = big.NewInt(1 << 8)
 )
 
 type WaybillsIssueTransportResponseLinesItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Unit        string  `json:"unit" url:"unit"`
-	Quantity    string  `json:"quantity" url:"quantity"`
-	ProductCode *string `json:"productCode,omitempty" url:"productCode,omitempty"`
-	SortOrder   int64   `json:"sortOrder" url:"sortOrder"`
+	ID           string  `json:"id" url:"id"`
+	ItemID       *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description  string  `json:"description" url:"description"`
+	Unit         string  `json:"unit" url:"unit"`
+	Quantity     string  `json:"quantity" url:"quantity"`
+	UnitFactor   string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity string  `json:"baseQuantity" url:"baseQuantity"`
+	ProductCode  *string `json:"productCode,omitempty" url:"productCode,omitempty"`
+	SortOrder    int64   `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2412,6 +2480,20 @@ func (w *WaybillsIssueTransportResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return w.Quantity
+}
+
+func (w *WaybillsIssueTransportResponseLinesItem) GetUnitFactor() string {
+	if w == nil {
+		return ""
+	}
+	return w.UnitFactor
+}
+
+func (w *WaybillsIssueTransportResponseLinesItem) GetBaseQuantity() string {
+	if w == nil {
+		return ""
+	}
+	return w.BaseQuantity
 }
 
 func (w *WaybillsIssueTransportResponseLinesItem) GetProductCode() *string {
@@ -2475,6 +2557,20 @@ func (w *WaybillsIssueTransportResponseLinesItem) SetUnit(unit string) {
 func (w *WaybillsIssueTransportResponseLinesItem) SetQuantity(quantity string) {
 	w.Quantity = quantity
 	w.require(waybillsIssueTransportResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsIssueTransportResponseLinesItem) SetUnitFactor(unitFactor string) {
+	w.UnitFactor = unitFactor
+	w.require(waybillsIssueTransportResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsIssueTransportResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	w.BaseQuantity = baseQuantity
+	w.require(waybillsIssueTransportResponseLinesItemFieldBaseQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;
@@ -4223,23 +4319,27 @@ func (w *WaybillsUpdateTransportResponse) String() string {
 }
 
 var (
-	waybillsUpdateTransportResponseLinesItemFieldID          = big.NewInt(1 << 0)
-	waybillsUpdateTransportResponseLinesItemFieldItemID      = big.NewInt(1 << 1)
-	waybillsUpdateTransportResponseLinesItemFieldDescription = big.NewInt(1 << 2)
-	waybillsUpdateTransportResponseLinesItemFieldUnit        = big.NewInt(1 << 3)
-	waybillsUpdateTransportResponseLinesItemFieldQuantity    = big.NewInt(1 << 4)
-	waybillsUpdateTransportResponseLinesItemFieldProductCode = big.NewInt(1 << 5)
-	waybillsUpdateTransportResponseLinesItemFieldSortOrder   = big.NewInt(1 << 6)
+	waybillsUpdateTransportResponseLinesItemFieldID           = big.NewInt(1 << 0)
+	waybillsUpdateTransportResponseLinesItemFieldItemID       = big.NewInt(1 << 1)
+	waybillsUpdateTransportResponseLinesItemFieldDescription  = big.NewInt(1 << 2)
+	waybillsUpdateTransportResponseLinesItemFieldUnit         = big.NewInt(1 << 3)
+	waybillsUpdateTransportResponseLinesItemFieldQuantity     = big.NewInt(1 << 4)
+	waybillsUpdateTransportResponseLinesItemFieldUnitFactor   = big.NewInt(1 << 5)
+	waybillsUpdateTransportResponseLinesItemFieldBaseQuantity = big.NewInt(1 << 6)
+	waybillsUpdateTransportResponseLinesItemFieldProductCode  = big.NewInt(1 << 7)
+	waybillsUpdateTransportResponseLinesItemFieldSortOrder    = big.NewInt(1 << 8)
 )
 
 type WaybillsUpdateTransportResponseLinesItem struct {
-	ID          string  `json:"id" url:"id"`
-	ItemID      *string `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description string  `json:"description" url:"description"`
-	Unit        string  `json:"unit" url:"unit"`
-	Quantity    string  `json:"quantity" url:"quantity"`
-	ProductCode *string `json:"productCode,omitempty" url:"productCode,omitempty"`
-	SortOrder   int64   `json:"sortOrder" url:"sortOrder"`
+	ID           string  `json:"id" url:"id"`
+	ItemID       *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description  string  `json:"description" url:"description"`
+	Unit         string  `json:"unit" url:"unit"`
+	Quantity     string  `json:"quantity" url:"quantity"`
+	UnitFactor   string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity string  `json:"baseQuantity" url:"baseQuantity"`
+	ProductCode  *string `json:"productCode,omitempty" url:"productCode,omitempty"`
+	SortOrder    int64   `json:"sortOrder" url:"sortOrder"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4281,6 +4381,20 @@ func (w *WaybillsUpdateTransportResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return w.Quantity
+}
+
+func (w *WaybillsUpdateTransportResponseLinesItem) GetUnitFactor() string {
+	if w == nil {
+		return ""
+	}
+	return w.UnitFactor
+}
+
+func (w *WaybillsUpdateTransportResponseLinesItem) GetBaseQuantity() string {
+	if w == nil {
+		return ""
+	}
+	return w.BaseQuantity
 }
 
 func (w *WaybillsUpdateTransportResponseLinesItem) GetProductCode() *string {
@@ -4344,6 +4458,20 @@ func (w *WaybillsUpdateTransportResponseLinesItem) SetUnit(unit string) {
 func (w *WaybillsUpdateTransportResponseLinesItem) SetQuantity(quantity string) {
 	w.Quantity = quantity
 	w.require(waybillsUpdateTransportResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportResponseLinesItem) SetUnitFactor(unitFactor string) {
+	w.UnitFactor = unitFactor
+	w.require(waybillsUpdateTransportResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WaybillsUpdateTransportResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	w.BaseQuantity = baseQuantity
+	w.require(waybillsUpdateTransportResponseLinesItemFieldBaseQuantity)
 }
 
 // SetProductCode sets the ProductCode field and marks it as non-optional;

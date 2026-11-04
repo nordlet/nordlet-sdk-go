@@ -3071,13 +3071,15 @@ func (l *LtIsafGenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	ltIvazAmendDeclarationsRequestFieldWaybillIDs = big.NewInt(1 << 0)
-	ltIvazAmendDeclarationsRequestFieldPersist    = big.NewInt(1 << 1)
+	ltIvazAmendDeclarationsRequestFieldWaybillIDs  = big.NewInt(1 << 0)
+	ltIvazAmendDeclarationsRequestFieldPersist     = big.NewInt(1 << 1)
+	ltIvazAmendDeclarationsRequestFieldCorrections = big.NewInt(1 << 2)
 )
 
 type LtIvazAmendDeclarationsRequest struct {
-	WaybillIDs []string `json:"waybillIds" url:"-"`
-	Persist    *bool    `json:"persist,omitempty" url:"-"`
+	WaybillIDs  []string                                         `json:"waybillIds" url:"-"`
+	Persist     *bool                                            `json:"persist,omitempty" url:"-"`
+	Corrections []*LtIvazAmendDeclarationsRequestCorrectionsItem `json:"corrections,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3102,6 +3104,13 @@ func (l *LtIvazAmendDeclarationsRequest) SetWaybillIDs(waybillIDs []string) {
 func (l *LtIvazAmendDeclarationsRequest) SetPersist(persist *bool) {
 	l.Persist = persist
 	l.require(ltIvazAmendDeclarationsRequestFieldPersist)
+}
+
+// SetCorrections sets the Corrections field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequest) SetCorrections(corrections []*LtIvazAmendDeclarationsRequestCorrectionsItem) {
+	l.Corrections = corrections
+	l.require(ltIvazAmendDeclarationsRequestFieldCorrections)
 }
 
 func (l *LtIvazAmendDeclarationsRequest) UnmarshalJSON(data []byte) error {
@@ -4757,6 +4766,52 @@ func (r *RoEtransportSubmitDeclarationsRequest) MarshalJSON() ([]byte, error) {
 		embed: embed(*r),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	submissionsConfirmDeclarationsRequestFieldID = big.NewInt(1 << 0)
+)
+
+type SubmissionsConfirmDeclarationsRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SubmissionsConfirmDeclarationsRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsRequest) SetID(id string) {
+	s.ID = id
+	s.require(submissionsConfirmDeclarationsRequestFieldID)
+}
+
+func (s *SubmissionsConfirmDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsConfirmDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SubmissionsConfirmDeclarationsRequest(body)
+	return nil
+}
+
+func (s *SubmissionsConfirmDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsConfirmDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
@@ -35765,6 +35820,302 @@ func (l *LtIsafGenerateDeclarationsResponseCounts) String() string {
 }
 
 var (
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldWaybillID          = big.NewInt(1 << 0)
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldConsigneePartnerID = big.NewInt(1 << 1)
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldUnloadAddress      = big.NewInt(1 << 2)
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldVehiclePlate       = big.NewInt(1 << 3)
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldTrailerPlate       = big.NewInt(1 << 4)
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldDriverName         = big.NewInt(1 << 5)
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldDriverSurname      = big.NewInt(1 << 6)
+	ltIvazAmendDeclarationsRequestCorrectionsItemFieldLines              = big.NewInt(1 << 7)
+)
+
+type LtIvazAmendDeclarationsRequestCorrectionsItem struct {
+	WaybillID          string                                                    `json:"waybillId" url:"waybillId"`
+	ConsigneePartnerID *string                                                   `json:"consigneePartnerId,omitempty" url:"consigneePartnerId,omitempty"`
+	UnloadAddress      *string                                                   `json:"unloadAddress,omitempty" url:"unloadAddress,omitempty"`
+	VehiclePlate       *string                                                   `json:"vehiclePlate,omitempty" url:"vehiclePlate,omitempty"`
+	TrailerPlate       *string                                                   `json:"trailerPlate,omitempty" url:"trailerPlate,omitempty"`
+	DriverName         *string                                                   `json:"driverName,omitempty" url:"driverName,omitempty"`
+	DriverSurname      *string                                                   `json:"driverSurname,omitempty" url:"driverSurname,omitempty"`
+	Lines              []*LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem `json:"lines,omitempty" url:"lines,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetWaybillID() string {
+	if l == nil {
+		return ""
+	}
+	return l.WaybillID
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetConsigneePartnerID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.ConsigneePartnerID
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetUnloadAddress() *string {
+	if l == nil {
+		return nil
+	}
+	return l.UnloadAddress
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetVehiclePlate() *string {
+	if l == nil {
+		return nil
+	}
+	return l.VehiclePlate
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetTrailerPlate() *string {
+	if l == nil {
+		return nil
+	}
+	return l.TrailerPlate
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetDriverName() *string {
+	if l == nil {
+		return nil
+	}
+	return l.DriverName
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetDriverSurname() *string {
+	if l == nil {
+		return nil
+	}
+	return l.DriverSurname
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetLines() []*LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem {
+	if l == nil {
+		return nil
+	}
+	return l.Lines
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetWaybillID sets the WaybillID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetWaybillID(waybillID string) {
+	l.WaybillID = waybillID
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldWaybillID)
+}
+
+// SetConsigneePartnerID sets the ConsigneePartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetConsigneePartnerID(consigneePartnerID *string) {
+	l.ConsigneePartnerID = consigneePartnerID
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldConsigneePartnerID)
+}
+
+// SetUnloadAddress sets the UnloadAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetUnloadAddress(unloadAddress *string) {
+	l.UnloadAddress = unloadAddress
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldUnloadAddress)
+}
+
+// SetVehiclePlate sets the VehiclePlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetVehiclePlate(vehiclePlate *string) {
+	l.VehiclePlate = vehiclePlate
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldVehiclePlate)
+}
+
+// SetTrailerPlate sets the TrailerPlate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetTrailerPlate(trailerPlate *string) {
+	l.TrailerPlate = trailerPlate
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldTrailerPlate)
+}
+
+// SetDriverName sets the DriverName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetDriverName(driverName *string) {
+	l.DriverName = driverName
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldDriverName)
+}
+
+// SetDriverSurname sets the DriverSurname field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetDriverSurname(driverSurname *string) {
+	l.DriverSurname = driverSurname
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldDriverSurname)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) SetLines(lines []*LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) {
+	l.Lines = lines
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemFieldLines)
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LtIvazAmendDeclarationsRequestCorrectionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*l = LtIvazAmendDeclarationsRequestCorrectionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) MarshalJSON() ([]byte, error) {
+	type embed LtIvazAmendDeclarationsRequestCorrectionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItem) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
+var (
+	ltIvazAmendDeclarationsRequestCorrectionsItemLinesItemFieldID       = big.NewInt(1 << 0)
+	ltIvazAmendDeclarationsRequestCorrectionsItemLinesItemFieldQuantity = big.NewInt(1 << 1)
+)
+
+type LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem struct {
+	ID       string `json:"id" url:"id"`
+	Quantity string `json:"quantity" url:"quantity"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) GetID() string {
+	if l == nil {
+		return ""
+	}
+	return l.ID
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) GetQuantity() string {
+	if l == nil {
+		return ""
+	}
+	return l.Quantity
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) SetID(id string) {
+	l.ID = id
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemLinesItemFieldID)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) SetQuantity(quantity string) {
+	l.Quantity = quantity
+	l.require(ltIvazAmendDeclarationsRequestCorrectionsItemLinesItemFieldQuantity)
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*l = LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) MarshalJSON() ([]byte, error) {
+	type embed LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *LtIvazAmendDeclarationsRequestCorrectionsItemLinesItem) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
+var (
 	ltIvazAmendDeclarationsResponseFieldFileName = big.NewInt(1 << 0)
 	ltIvazAmendDeclarationsResponseFieldFileID   = big.NewInt(1 << 1)
 	ltIvazAmendDeclarationsResponseFieldCounts   = big.NewInt(1 << 2)
@@ -46600,6 +46951,652 @@ func (r RoEtransportSubmitDeclarationsResponseState) Ptr() *RoEtransportSubmitDe
 	return &r
 }
 
+var (
+	submissionsConfirmDeclarationsResponseFieldID                     = big.NewInt(1 << 0)
+	submissionsConfirmDeclarationsResponseFieldObligation             = big.NewInt(1 << 1)
+	submissionsConfirmDeclarationsResponseFieldPeriodYear             = big.NewInt(1 << 2)
+	submissionsConfirmDeclarationsResponseFieldPeriodMonth            = big.NewInt(1 << 3)
+	submissionsConfirmDeclarationsResponseFieldVariant                = big.NewInt(1 << 4)
+	submissionsConfirmDeclarationsResponseFieldStatus                 = big.NewInt(1 << 5)
+	submissionsConfirmDeclarationsResponseFieldFileName               = big.NewInt(1 << 6)
+	submissionsConfirmDeclarationsResponseFieldFileID                 = big.NewInt(1 << 7)
+	submissionsConfirmDeclarationsResponseFieldExternalRef            = big.NewInt(1 << 8)
+	submissionsConfirmDeclarationsResponseFieldMessage                = big.NewInt(1 << 9)
+	submissionsConfirmDeclarationsResponseFieldRuleKey                = big.NewInt(1 << 10)
+	submissionsConfirmDeclarationsResponseFieldPeriod                 = big.NewInt(1 << 11)
+	submissionsConfirmDeclarationsResponseFieldDocumentKey            = big.NewInt(1 << 12)
+	submissionsConfirmDeclarationsResponseFieldAmendment              = big.NewInt(1 << 13)
+	submissionsConfirmDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 14)
+	submissionsConfirmDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 15)
+	submissionsConfirmDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 16)
+	submissionsConfirmDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 17)
+	submissionsConfirmDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 18)
+	submissionsConfirmDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 19)
+	submissionsConfirmDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 20)
+	submissionsConfirmDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
+	submissionsConfirmDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
+	submissionsConfirmDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
+	submissionsConfirmDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
+	submissionsConfirmDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
+	submissionsConfirmDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
+	submissionsConfirmDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	submissionsConfirmDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	submissionsConfirmDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
+	submissionsConfirmDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
+)
+
+type SubmissionsConfirmDeclarationsResponse struct {
+	ID                     string                                             `json:"id" url:"id"`
+	Obligation             string                                             `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                              `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                             `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                            `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 SubmissionsConfirmDeclarationsResponseStatus       `json:"status" url:"status"`
+	FileName               string                                             `json:"fileName" url:"fileName"`
+	FileID                 *string                                            `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                            `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                            `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                            `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                            `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                            `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                              `json:"amendment" url:"amendment"`
+	Origin                 string                                             `json:"origin" url:"origin"`
+	TransportSystem        *string                                            `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *SubmissionsConfirmDeclarationsResponseEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                         `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                         `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                         `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                         `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                         `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                              `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                               `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                            `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                          `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                          `json:"updatedAt" url:"updatedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetObligation() string {
+	if s == nil {
+		return ""
+	}
+	return s.Obligation
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetPeriodYear() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.PeriodYear
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetPeriodMonth() *int64 {
+	if s == nil {
+		return nil
+	}
+	return s.PeriodMonth
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetVariant() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Variant
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetStatus() SubmissionsConfirmDeclarationsResponseStatus {
+	if s == nil {
+		return ""
+	}
+	return s.Status
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetFileName() string {
+	if s == nil {
+		return ""
+	}
+	return s.FileName
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetFileID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.FileID
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetExternalRef() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ExternalRef
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetMessage() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Message
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetRuleKey() *string {
+	if s == nil {
+		return nil
+	}
+	return s.RuleKey
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetPeriod() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Period
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetDocumentKey() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DocumentKey
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetAmendment() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Amendment
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetOrigin() string {
+	if s == nil {
+		return ""
+	}
+	return s.Origin
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetTransportSystem() *string {
+	if s == nil {
+		return nil
+	}
+	return s.TransportSystem
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetEnvironment() *SubmissionsConfirmDeclarationsResponseEnvironment {
+	if s == nil {
+		return nil
+	}
+	return s.Environment
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetSubmittedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.SubmittedAt
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetAcceptedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.AcceptedAt
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetRejectedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.RejectedAt
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetCheckedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.CheckedAt
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetNextCheckAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.NextCheckAt
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetAttempts() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Attempts
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetDeliveryError() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DeliveryError
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetConfirmationPending() bool {
+	if s == nil {
+		return false
+	}
+	return s.ConfirmationPending
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetSentSha256() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SentSha256
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetCertificateFingerprint() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CertificateFingerprint
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetSubmittedByActorType() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SubmittedByActorType
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetSubmittedByActorID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SubmittedByActorID
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetUpdatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.UpdatedAt
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetID(id string) {
+	s.ID = id
+	s.require(submissionsConfirmDeclarationsResponseFieldID)
+}
+
+// SetObligation sets the Obligation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetObligation(obligation string) {
+	s.Obligation = obligation
+	s.require(submissionsConfirmDeclarationsResponseFieldObligation)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetPeriodYear(periodYear int64) {
+	s.PeriodYear = periodYear
+	s.require(submissionsConfirmDeclarationsResponseFieldPeriodYear)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetPeriodMonth(periodMonth *int64) {
+	s.PeriodMonth = periodMonth
+	s.require(submissionsConfirmDeclarationsResponseFieldPeriodMonth)
+}
+
+// SetVariant sets the Variant field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetVariant(variant *string) {
+	s.Variant = variant
+	s.require(submissionsConfirmDeclarationsResponseFieldVariant)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetStatus(status SubmissionsConfirmDeclarationsResponseStatus) {
+	s.Status = status
+	s.require(submissionsConfirmDeclarationsResponseFieldStatus)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetFileName(fileName string) {
+	s.FileName = fileName
+	s.require(submissionsConfirmDeclarationsResponseFieldFileName)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetFileID(fileID *string) {
+	s.FileID = fileID
+	s.require(submissionsConfirmDeclarationsResponseFieldFileID)
+}
+
+// SetExternalRef sets the ExternalRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetExternalRef(externalRef *string) {
+	s.ExternalRef = externalRef
+	s.require(submissionsConfirmDeclarationsResponseFieldExternalRef)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetMessage(message *string) {
+	s.Message = message
+	s.require(submissionsConfirmDeclarationsResponseFieldMessage)
+}
+
+// SetRuleKey sets the RuleKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetRuleKey(ruleKey *string) {
+	s.RuleKey = ruleKey
+	s.require(submissionsConfirmDeclarationsResponseFieldRuleKey)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetPeriod(period *string) {
+	s.Period = period
+	s.require(submissionsConfirmDeclarationsResponseFieldPeriod)
+}
+
+// SetDocumentKey sets the DocumentKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetDocumentKey(documentKey *string) {
+	s.DocumentKey = documentKey
+	s.require(submissionsConfirmDeclarationsResponseFieldDocumentKey)
+}
+
+// SetAmendment sets the Amendment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetAmendment(amendment int64) {
+	s.Amendment = amendment
+	s.require(submissionsConfirmDeclarationsResponseFieldAmendment)
+}
+
+// SetOrigin sets the Origin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetOrigin(origin string) {
+	s.Origin = origin
+	s.require(submissionsConfirmDeclarationsResponseFieldOrigin)
+}
+
+// SetTransportSystem sets the TransportSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetTransportSystem(transportSystem *string) {
+	s.TransportSystem = transportSystem
+	s.require(submissionsConfirmDeclarationsResponseFieldTransportSystem)
+}
+
+// SetEnvironment sets the Environment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetEnvironment(environment *SubmissionsConfirmDeclarationsResponseEnvironment) {
+	s.Environment = environment
+	s.require(submissionsConfirmDeclarationsResponseFieldEnvironment)
+}
+
+// SetSubmittedAt sets the SubmittedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetSubmittedAt(submittedAt *time.Time) {
+	s.SubmittedAt = submittedAt
+	s.require(submissionsConfirmDeclarationsResponseFieldSubmittedAt)
+}
+
+// SetAcceptedAt sets the AcceptedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetAcceptedAt(acceptedAt *time.Time) {
+	s.AcceptedAt = acceptedAt
+	s.require(submissionsConfirmDeclarationsResponseFieldAcceptedAt)
+}
+
+// SetRejectedAt sets the RejectedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetRejectedAt(rejectedAt *time.Time) {
+	s.RejectedAt = rejectedAt
+	s.require(submissionsConfirmDeclarationsResponseFieldRejectedAt)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetCheckedAt(checkedAt *time.Time) {
+	s.CheckedAt = checkedAt
+	s.require(submissionsConfirmDeclarationsResponseFieldCheckedAt)
+}
+
+// SetNextCheckAt sets the NextCheckAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetNextCheckAt(nextCheckAt *time.Time) {
+	s.NextCheckAt = nextCheckAt
+	s.require(submissionsConfirmDeclarationsResponseFieldNextCheckAt)
+}
+
+// SetAttempts sets the Attempts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetAttempts(attempts int64) {
+	s.Attempts = attempts
+	s.require(submissionsConfirmDeclarationsResponseFieldAttempts)
+}
+
+// SetDeliveryError sets the DeliveryError field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetDeliveryError(deliveryError *string) {
+	s.DeliveryError = deliveryError
+	s.require(submissionsConfirmDeclarationsResponseFieldDeliveryError)
+}
+
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetConfirmationPending(confirmationPending bool) {
+	s.ConfirmationPending = confirmationPending
+	s.require(submissionsConfirmDeclarationsResponseFieldConfirmationPending)
+}
+
+// SetSentSha256 sets the SentSha256 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetSentSha256(sentSha256 *string) {
+	s.SentSha256 = sentSha256
+	s.require(submissionsConfirmDeclarationsResponseFieldSentSha256)
+}
+
+// SetCertificateFingerprint sets the CertificateFingerprint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetCertificateFingerprint(certificateFingerprint *string) {
+	s.CertificateFingerprint = certificateFingerprint
+	s.require(submissionsConfirmDeclarationsResponseFieldCertificateFingerprint)
+}
+
+// SetSubmittedByActorType sets the SubmittedByActorType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetSubmittedByActorType(submittedByActorType *string) {
+	s.SubmittedByActorType = submittedByActorType
+	s.require(submissionsConfirmDeclarationsResponseFieldSubmittedByActorType)
+}
+
+// SetSubmittedByActorID sets the SubmittedByActorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetSubmittedByActorID(submittedByActorID *string) {
+	s.SubmittedByActorID = submittedByActorID
+	s.require(submissionsConfirmDeclarationsResponseFieldSubmittedByActorID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(submissionsConfirmDeclarationsResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetUpdatedAt(updatedAt time.Time) {
+	s.UpdatedAt = updatedAt
+	s.require(submissionsConfirmDeclarationsResponseFieldUpdatedAt)
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed SubmissionsConfirmDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		SubmittedAt *internal.DateTime `json:"submittedAt,omitempty"`
+		AcceptedAt  *internal.DateTime `json:"acceptedAt,omitempty"`
+		RejectedAt  *internal.DateTime `json:"rejectedAt,omitempty"`
+		CheckedAt   *internal.DateTime `json:"checkedAt,omitempty"`
+		NextCheckAt *internal.DateTime `json:"nextCheckAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SubmissionsConfirmDeclarationsResponse(unmarshaler.embed)
+	s.SubmittedAt = unmarshaler.SubmittedAt.TimePtr()
+	s.AcceptedAt = unmarshaler.AcceptedAt.TimePtr()
+	s.RejectedAt = unmarshaler.RejectedAt.TimePtr()
+	s.CheckedAt = unmarshaler.CheckedAt.TimePtr()
+	s.NextCheckAt = unmarshaler.NextCheckAt.TimePtr()
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	s.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsConfirmDeclarationsResponse
+	var marshaler = struct {
+		embed
+		SubmittedAt *internal.DateTime `json:"submittedAt,omitempty"`
+		AcceptedAt  *internal.DateTime `json:"acceptedAt,omitempty"`
+		RejectedAt  *internal.DateTime `json:"rejectedAt,omitempty"`
+		CheckedAt   *internal.DateTime `json:"checkedAt,omitempty"`
+		NextCheckAt *internal.DateTime `json:"nextCheckAt,omitempty"`
+		CreatedAt   *internal.DateTime `json:"createdAt"`
+		UpdatedAt   *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:       embed(*s),
+		SubmittedAt: internal.NewOptionalDateTime(s.SubmittedAt),
+		AcceptedAt:  internal.NewOptionalDateTime(s.AcceptedAt),
+		RejectedAt:  internal.NewOptionalDateTime(s.RejectedAt),
+		CheckedAt:   internal.NewOptionalDateTime(s.CheckedAt),
+		NextCheckAt: internal.NewOptionalDateTime(s.NextCheckAt),
+		CreatedAt:   internal.NewDateTime(s.CreatedAt),
+		UpdatedAt:   internal.NewDateTime(s.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SubmissionsConfirmDeclarationsResponseEnvironment string
+
+const (
+	SubmissionsConfirmDeclarationsResponseEnvironmentTest       SubmissionsConfirmDeclarationsResponseEnvironment = "test"
+	SubmissionsConfirmDeclarationsResponseEnvironmentProduction SubmissionsConfirmDeclarationsResponseEnvironment = "production"
+)
+
+func NewSubmissionsConfirmDeclarationsResponseEnvironmentFromString(s string) (SubmissionsConfirmDeclarationsResponseEnvironment, error) {
+	switch s {
+	case "test":
+		return SubmissionsConfirmDeclarationsResponseEnvironmentTest, nil
+	case "production":
+		return SubmissionsConfirmDeclarationsResponseEnvironmentProduction, nil
+	}
+	var t SubmissionsConfirmDeclarationsResponseEnvironment
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubmissionsConfirmDeclarationsResponseEnvironment) Ptr() *SubmissionsConfirmDeclarationsResponseEnvironment {
+	return &s
+}
+
+type SubmissionsConfirmDeclarationsResponseStatus string
+
+const (
+	SubmissionsConfirmDeclarationsResponseStatusGenerated SubmissionsConfirmDeclarationsResponseStatus = "generated"
+	SubmissionsConfirmDeclarationsResponseStatusSubmitted SubmissionsConfirmDeclarationsResponseStatus = "submitted"
+	SubmissionsConfirmDeclarationsResponseStatusAccepted  SubmissionsConfirmDeclarationsResponseStatus = "accepted"
+	SubmissionsConfirmDeclarationsResponseStatusRejected  SubmissionsConfirmDeclarationsResponseStatus = "rejected"
+)
+
+func NewSubmissionsConfirmDeclarationsResponseStatusFromString(s string) (SubmissionsConfirmDeclarationsResponseStatus, error) {
+	switch s {
+	case "generated":
+		return SubmissionsConfirmDeclarationsResponseStatusGenerated, nil
+	case "submitted":
+		return SubmissionsConfirmDeclarationsResponseStatusSubmitted, nil
+	case "accepted":
+		return SubmissionsConfirmDeclarationsResponseStatusAccepted, nil
+	case "rejected":
+		return SubmissionsConfirmDeclarationsResponseStatusRejected, nil
+	}
+	var t SubmissionsConfirmDeclarationsResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubmissionsConfirmDeclarationsResponseStatus) Ptr() *SubmissionsConfirmDeclarationsResponseStatus {
+	return &s
+}
+
 type SubmissionsCreateDeclarationsRequestDataType string
 
 const (
@@ -46669,13 +47666,14 @@ var (
 	submissionsCreateDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
 	submissionsCreateDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
 	submissionsCreateDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsCreateDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 24)
-	submissionsCreateDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 25)
-	submissionsCreateDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	submissionsCreateDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	submissionsCreateDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 28)
-	submissionsCreateDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 29)
-	submissionsCreateDeclarationsResponseFieldWarnings               = big.NewInt(1 << 30)
+	submissionsCreateDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
+	submissionsCreateDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
+	submissionsCreateDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
+	submissionsCreateDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	submissionsCreateDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	submissionsCreateDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
+	submissionsCreateDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
+	submissionsCreateDeclarationsResponseFieldWarnings               = big.NewInt(1 << 31)
 )
 
 type SubmissionsCreateDeclarationsResponse struct {
@@ -46703,6 +47701,7 @@ type SubmissionsCreateDeclarationsResponse struct {
 	NextCheckAt            *time.Time                                        `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                             `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                           `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                              `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                           `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                           `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                           `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -46884,6 +47883,13 @@ func (s *SubmissionsCreateDeclarationsResponse) GetDeliveryError() *string {
 		return nil
 	}
 	return s.DeliveryError
+}
+
+func (s *SubmissionsCreateDeclarationsResponse) GetConfirmationPending() bool {
+	if s == nil {
+		return false
+	}
+	return s.ConfirmationPending
 }
 
 func (s *SubmissionsCreateDeclarationsResponse) GetSentSha256() *string {
@@ -47115,6 +48121,13 @@ func (s *SubmissionsCreateDeclarationsResponse) SetAttempts(attempts int64) {
 func (s *SubmissionsCreateDeclarationsResponse) SetDeliveryError(deliveryError *string) {
 	s.DeliveryError = deliveryError
 	s.require(submissionsCreateDeclarationsResponseFieldDeliveryError)
+}
+
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCreateDeclarationsResponse) SetConfirmationPending(confirmationPending bool) {
+	s.ConfirmationPending = confirmationPending
+	s.require(submissionsCreateDeclarationsResponseFieldConfirmationPending)
 }
 
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
@@ -47918,12 +48931,13 @@ var (
 	submissionsListDeclarationsResponseRowsItemFieldNextCheckAt            = big.NewInt(1 << 21)
 	submissionsListDeclarationsResponseRowsItemFieldAttempts               = big.NewInt(1 << 22)
 	submissionsListDeclarationsResponseRowsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsListDeclarationsResponseRowsItemFieldSentSha256             = big.NewInt(1 << 24)
-	submissionsListDeclarationsResponseRowsItemFieldCertificateFingerprint = big.NewInt(1 << 25)
-	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	submissionsListDeclarationsResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 28)
-	submissionsListDeclarationsResponseRowsItemFieldUpdatedAt              = big.NewInt(1 << 29)
+	submissionsListDeclarationsResponseRowsItemFieldConfirmationPending    = big.NewInt(1 << 24)
+	submissionsListDeclarationsResponseRowsItemFieldSentSha256             = big.NewInt(1 << 25)
+	submissionsListDeclarationsResponseRowsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
+	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	submissionsListDeclarationsResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 29)
+	submissionsListDeclarationsResponseRowsItemFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type SubmissionsListDeclarationsResponseRowsItem struct {
@@ -47951,6 +48965,7 @@ type SubmissionsListDeclarationsResponseRowsItem struct {
 	NextCheckAt            *time.Time                                              `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                                   `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                                 `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                    `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                                 `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                                 `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                                 `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -48131,6 +49146,13 @@ func (s *SubmissionsListDeclarationsResponseRowsItem) GetDeliveryError() *string
 		return nil
 	}
 	return s.DeliveryError
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItem) GetConfirmationPending() bool {
+	if s == nil {
+		return false
+	}
+	return s.ConfirmationPending
 }
 
 func (s *SubmissionsListDeclarationsResponseRowsItem) GetSentSha256() *string {
@@ -48357,6 +49379,13 @@ func (s *SubmissionsListDeclarationsResponseRowsItem) SetDeliveryError(deliveryE
 	s.require(submissionsListDeclarationsResponseRowsItemFieldDeliveryError)
 }
 
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItem) SetConfirmationPending(confirmationPending bool) {
+	s.ConfirmationPending = confirmationPending
+	s.require(submissionsListDeclarationsResponseRowsItemFieldConfirmationPending)
+}
+
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubmissionsListDeclarationsResponseRowsItem) SetSentSha256(sentSha256 *string) {
@@ -48573,12 +49602,13 @@ var (
 	submissionsMarkDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
 	submissionsMarkDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
 	submissionsMarkDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsMarkDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 24)
-	submissionsMarkDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 25)
-	submissionsMarkDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	submissionsMarkDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	submissionsMarkDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 28)
-	submissionsMarkDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 29)
+	submissionsMarkDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
+	submissionsMarkDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
+	submissionsMarkDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
+	submissionsMarkDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	submissionsMarkDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	submissionsMarkDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
+	submissionsMarkDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type SubmissionsMarkDeclarationsResponse struct {
@@ -48606,6 +49636,7 @@ type SubmissionsMarkDeclarationsResponse struct {
 	NextCheckAt            *time.Time                                      `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                           `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                         `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                            `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                         `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                         `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                         `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -48786,6 +49817,13 @@ func (s *SubmissionsMarkDeclarationsResponse) GetDeliveryError() *string {
 		return nil
 	}
 	return s.DeliveryError
+}
+
+func (s *SubmissionsMarkDeclarationsResponse) GetConfirmationPending() bool {
+	if s == nil {
+		return false
+	}
+	return s.ConfirmationPending
 }
 
 func (s *SubmissionsMarkDeclarationsResponse) GetSentSha256() *string {
@@ -49012,6 +50050,13 @@ func (s *SubmissionsMarkDeclarationsResponse) SetDeliveryError(deliveryError *st
 	s.require(submissionsMarkDeclarationsResponseFieldDeliveryError)
 }
 
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsMarkDeclarationsResponse) SetConfirmationPending(confirmationPending bool) {
+	s.ConfirmationPending = confirmationPending
+	s.require(submissionsMarkDeclarationsResponseFieldConfirmationPending)
+}
+
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubmissionsMarkDeclarationsResponse) SetSentSha256(sentSha256 *string) {
@@ -49203,12 +50248,13 @@ var (
 	submissionsRetryDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
 	submissionsRetryDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
 	submissionsRetryDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsRetryDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 24)
-	submissionsRetryDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 25)
-	submissionsRetryDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	submissionsRetryDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	submissionsRetryDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 28)
-	submissionsRetryDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 29)
+	submissionsRetryDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
+	submissionsRetryDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
+	submissionsRetryDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
+	submissionsRetryDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	submissionsRetryDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	submissionsRetryDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
+	submissionsRetryDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type SubmissionsRetryDeclarationsResponse struct {
@@ -49236,6 +50282,7 @@ type SubmissionsRetryDeclarationsResponse struct {
 	NextCheckAt            *time.Time                                       `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                            `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                          `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                             `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                          `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                          `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                          `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -49416,6 +50463,13 @@ func (s *SubmissionsRetryDeclarationsResponse) GetDeliveryError() *string {
 		return nil
 	}
 	return s.DeliveryError
+}
+
+func (s *SubmissionsRetryDeclarationsResponse) GetConfirmationPending() bool {
+	if s == nil {
+		return false
+	}
+	return s.ConfirmationPending
 }
 
 func (s *SubmissionsRetryDeclarationsResponse) GetSentSha256() *string {
@@ -49640,6 +50694,13 @@ func (s *SubmissionsRetryDeclarationsResponse) SetAttempts(attempts int64) {
 func (s *SubmissionsRetryDeclarationsResponse) SetDeliveryError(deliveryError *string) {
 	s.DeliveryError = deliveryError
 	s.require(submissionsRetryDeclarationsResponseFieldDeliveryError)
+}
+
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsRetryDeclarationsResponse) SetConfirmationPending(confirmationPending bool) {
+	s.ConfirmationPending = confirmationPending
+	s.require(submissionsRetryDeclarationsResponseFieldConfirmationPending)
 }
 
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;

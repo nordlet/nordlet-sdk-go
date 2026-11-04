@@ -641,6 +641,112 @@ func TestCatalogItemsSuppliersDeleteWithWireMock(
 	VerifyRequestCount(t, "TestCatalogItemsSuppliersDeleteWithWireMock", "POST", "/v1/catalog/items/suppliers/delete", nil, 1)
 }
 
+func TestCatalogItemsUnitsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItemsUnitsCreateCatalogRequest{
+		ItemID:   "itemId",
+		UnitCode: "unitCode",
+		Factor:   "121.000000",
+	}
+	_, invocationErr := client.Catalog.ItemsUnitsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsUnitsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCatalogItemsUnitsCreateWithWireMock", "POST", "/v1/catalog/items/units/create", nil, 1)
+}
+
+func TestCatalogItemsUnitsUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItemsUnitsUpdateCatalogRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Catalog.ItemsUnitsUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsUnitsUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCatalogItemsUnitsUpdateWithWireMock", "POST", "/v1/catalog/items/units/update", nil, 1)
+}
+
+func TestCatalogItemsUnitsDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItemsUnitsDeleteCatalogRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Catalog.ItemsUnitsDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsUnitsDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCatalogItemsUnitsDeleteWithWireMock", "POST", "/v1/catalog/items/units/delete", nil, 1)
+}
+
+func TestCatalogItemsUnitsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItemsUnitsListCatalogRequest{
+		ItemID: "itemId",
+	}
+	_, invocationErr := client.Catalog.ItemsUnitsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestCatalogItemsUnitsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestCatalogItemsUnitsListWithWireMock", "POST", "/v1/catalog/items/units/list", nil, 1)
+}
+
 func TestCatalogPriceListsCreateWithWireMock(
 	t *testing.T,
 ) {

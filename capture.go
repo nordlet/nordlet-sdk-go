@@ -658,6 +658,8 @@ var (
 	documentsConfirmCaptureRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
 	documentsConfirmCaptureRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
 	documentsConfirmCaptureRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
+	documentsConfirmCaptureRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
+	documentsConfirmCaptureRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
 )
 
 type DocumentsConfirmCaptureRequestLinesItem struct {
@@ -674,6 +676,8 @@ type DocumentsConfirmCaptureRequestLinesItem struct {
 	AccountCode       *string                                          `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time                                       `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string                                          `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time                                       `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -771,6 +775,20 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) GetDeferralEndDate() *time.Tim
 		return nil
 	}
 	return d.DeferralEndDate
+}
+
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetLotNumber() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LotNumber
+}
+
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetExpiryDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.ExpiryDate
 }
 
 func (d *DocumentsConfirmCaptureRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -878,12 +896,27 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) SetDeferralEndDate(deferralEnd
 	d.require(documentsConfirmCaptureRequestLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetLotNumber(lotNumber *string) {
+	d.LotNumber = lotNumber
+	d.require(documentsConfirmCaptureRequestLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	d.ExpiryDate = expiryDate
+	d.require(documentsConfirmCaptureRequestLinesItemFieldExpiryDate)
+}
+
 func (d *DocumentsConfirmCaptureRequestLinesItem) UnmarshalJSON(data []byte) error {
 	type embed DocumentsConfirmCaptureRequestLinesItem
 	var unmarshaler = struct {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*d),
 	}
@@ -893,6 +926,7 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) UnmarshalJSON(data []byte) err
 	*d = DocumentsConfirmCaptureRequestLinesItem(unmarshaler.embed)
 	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	d.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -908,10 +942,12 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) MarshalJSON() ([]byte, error) 
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*d),
 		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(d.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -1140,6 +1176,8 @@ var (
 	documentsConfirmCaptureRequestOppositeLinesItemFieldAccountCode       = big.NewInt(1 << 10)
 	documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
 	documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldLotNumber         = big.NewInt(1 << 13)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
 )
 
 type DocumentsConfirmCaptureRequestOppositeLinesItem struct {
@@ -1156,6 +1194,8 @@ type DocumentsConfirmCaptureRequestOppositeLinesItem struct {
 	AccountCode       *string                                                  `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time                                               `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time                                               `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string                                                  `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time                                               `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1253,6 +1293,20 @@ func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetDeferralEndDate() *
 		return nil
 	}
 	return d.DeferralEndDate
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetLotNumber() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LotNumber
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetExpiryDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.ExpiryDate
 }
 
 func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1360,12 +1414,27 @@ func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetDeferralEndDate(def
 	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetLotNumber(lotNumber *string) {
+	d.LotNumber = lotNumber
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	d.ExpiryDate = expiryDate
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldExpiryDate)
+}
+
 func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) UnmarshalJSON(data []byte) error {
 	type embed DocumentsConfirmCaptureRequestOppositeLinesItem
 	var unmarshaler = struct {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*d),
 	}
@@ -1375,6 +1444,7 @@ func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) UnmarshalJSON(data []b
 	*d = DocumentsConfirmCaptureRequestOppositeLinesItem(unmarshaler.embed)
 	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	d.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -1390,10 +1460,12 @@ func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) MarshalJSON() ([]byte,
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*d),
 		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(d.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -3358,19 +3430,23 @@ var (
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldDescription       = big.NewInt(1 << 2)
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnit              = big.NewInt(1 << 3)
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 10)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLotNumber         = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 18)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 19)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 20)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 21)
 )
 
 type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
@@ -3379,6 +3455,8 @@ type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
 	Description       string     `json:"description" url:"description"`
 	Unit              string     `json:"unit" url:"unit"`
 	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitFactor        string     `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string     `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
@@ -3388,6 +3466,8 @@ type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -3433,6 +3513,20 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetQuantity() string {
 		return ""
 	}
 	return d.Quantity
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetUnitFactor() string {
+	if d == nil {
+		return ""
+	}
+	return d.UnitFactor
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetBaseQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.BaseQuantity
 }
 
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetUnitPriceExclVat() *string {
@@ -3496,6 +3590,20 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetDeferralEndDate() *
 		return nil
 	}
 	return d.DeferralEndDate
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetLotNumber() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LotNumber
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetExpiryDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.ExpiryDate
 }
 
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetLineNet() string {
@@ -3575,6 +3683,20 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetQuantity(quantity s
 	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldQuantity)
 }
 
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetUnitFactor(unitFactor string) {
+	d.UnitFactor = unitFactor
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetBaseQuantity(baseQuantity string) {
+	d.BaseQuantity = baseQuantity
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldBaseQuantity)
+}
+
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
@@ -3638,6 +3760,20 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetDeferralEndDate(def
 	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetLotNumber(lotNumber *string) {
+	d.LotNumber = lotNumber
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	d.ExpiryDate = expiryDate
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldExpiryDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetLineNet(lineNet string) {
@@ -3672,6 +3808,7 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) UnmarshalJSON(data []b
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*d),
 	}
@@ -3681,6 +3818,7 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) UnmarshalJSON(data []b
 	*d = DocumentsConfirmCaptureResponseInvoiceLinesItem(unmarshaler.embed)
 	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	d.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -3696,10 +3834,12 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) MarshalJSON() ([]byte,
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*d),
 		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(d.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -4335,19 +4475,23 @@ var (
 	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDescription       = big.NewInt(1 << 2)
 	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnit              = big.NewInt(1 << 3)
 	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 10)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLotNumber         = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 18)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 19)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 20)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 21)
 )
 
 type DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem struct {
@@ -4356,6 +4500,8 @@ type DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem struct {
 	Description       string     `json:"description" url:"description"`
 	Unit              string     `json:"unit" url:"unit"`
 	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitFactor        string     `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string     `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
@@ -4365,6 +4511,8 @@ type DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem struct {
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -4410,6 +4558,20 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetQuantity() 
 		return ""
 	}
 	return d.Quantity
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetUnitFactor() string {
+	if d == nil {
+		return ""
+	}
+	return d.UnitFactor
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetBaseQuantity() string {
+	if d == nil {
+		return ""
+	}
+	return d.BaseQuantity
 }
 
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetUnitPriceExclVat() *string {
@@ -4473,6 +4635,20 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetDeferralEnd
 		return nil
 	}
 	return d.DeferralEndDate
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetLotNumber() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LotNumber
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetExpiryDate() *time.Time {
+	if d == nil {
+		return nil
+	}
+	return d.ExpiryDate
 }
 
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetLineNet() string {
@@ -4552,6 +4728,20 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetQuantity(qu
 	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldQuantity)
 }
 
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetUnitFactor(unitFactor string) {
+	d.UnitFactor = unitFactor
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetBaseQuantity(baseQuantity string) {
+	d.BaseQuantity = baseQuantity
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldBaseQuantity)
+}
+
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
@@ -4615,6 +4805,20 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetDeferralEnd
 	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetLotNumber(lotNumber *string) {
+	d.LotNumber = lotNumber
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	d.ExpiryDate = expiryDate
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldExpiryDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetLineNet(lineNet string) {
@@ -4649,6 +4853,7 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) UnmarshalJSON(
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*d),
 	}
@@ -4658,6 +4863,7 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) UnmarshalJSON(
 	*d = DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem(unmarshaler.embed)
 	d.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	d.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	d.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -4673,10 +4879,12 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) MarshalJSON() 
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*d),
 		DeferralStartDate: internal.NewOptionalDate(d.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(d.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(d.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)

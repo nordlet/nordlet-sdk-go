@@ -4080,6 +4080,50 @@ func (r *RawClient) SubmissionsRetry(
 	}, nil
 }
 
+func (r *RawClient) SubmissionsConfirm(
+	ctx context.Context,
+	request *nordlet.SubmissionsConfirmDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.SubmissionsConfirmDeclarationsResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/declarations/submissions/confirm"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.SubmissionsConfirmDeclarationsResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.SubmissionsConfirmDeclarationsResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) SubmissionsCreate(
 	ctx context.Context,
 	request *nordlet.SubmissionsCreateDeclarationsRequest,

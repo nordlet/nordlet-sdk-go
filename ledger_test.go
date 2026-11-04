@@ -29180,6 +29180,20 @@ func TestEnumPostingRulesUpdateLedgerRequestRulesItemKey(t *testing.T) {
 		assert.Equal(t, PostingRulesUpdateLedgerRequestRulesItemKey("production.scrap"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_pos_cashShortage", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString("pos.cashShortage")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostingRulesUpdateLedgerRequestRulesItemKey("pos.cashShortage"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_pos_cashSurplus", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString("pos.cashSurplus")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PostingRulesUpdateLedgerRequestRulesItemKey("pos.cashSurplus"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_bank_fxGain", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString("bank.fxGain")

@@ -399,6 +399,89 @@ func TestPosReceiptsGetWithWireMock(
 	VerifyRequestCount(t, "TestPosReceiptsGetWithWireMock", "POST", "/v1/pos/receipts/get", nil, 1)
 }
 
+func TestPosRefundsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RefundsCreatePosRequest{
+		ShiftID:   "shiftId",
+		ReceiptID: "receiptId",
+		Lines: []*nordlet.RefundsCreatePosRequestLinesItem{
+			&nordlet.RefundsCreatePosRequestLinesItem{
+				ReceiptLineID: "receiptLineId",
+				Quantity:      "121.0000",
+			},
+		},
+	}
+	_, invocationErr := client.Pos.RefundsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosRefundsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosRefundsCreateWithWireMock", "POST", "/v1/pos/refunds/create", nil, 1)
+}
+
+func TestPosRefundsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RefundsGetPosRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Pos.RefundsGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosRefundsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosRefundsGetWithWireMock", "POST", "/v1/pos/refunds/get", nil, 1)
+}
+
+func TestPosRefundsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.RefundsListPosRequest{}
+	_, invocationErr := client.Pos.RefundsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPosRefundsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPosRefundsListWithWireMock", "POST", "/v1/pos/refunds/list", nil, 1)
+}
+
 func TestPosShiftsCloseWithWireMock(
 	t *testing.T,
 ) {

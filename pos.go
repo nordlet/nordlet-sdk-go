@@ -478,6 +478,210 @@ func (r *ReceiptsListPosRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	refundsCreatePosRequestFieldShiftID   = big.NewInt(1 << 0)
+	refundsCreatePosRequestFieldReceiptID = big.NewInt(1 << 1)
+	refundsCreatePosRequestFieldDate      = big.NewInt(1 << 2)
+	refundsCreatePosRequestFieldLines     = big.NewInt(1 << 3)
+)
+
+type RefundsCreatePosRequest struct {
+	ShiftID   string                              `json:"shiftId" url:"-"`
+	ReceiptID string                              `json:"receiptId" url:"-"`
+	Date      *time.Time                          `json:"date,omitempty" url:"-" format:"date"`
+	Lines     []*RefundsCreatePosRequestLinesItem `json:"lines" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RefundsCreatePosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosRequest) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(refundsCreatePosRequestFieldShiftID)
+}
+
+// SetReceiptID sets the ReceiptID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosRequest) SetReceiptID(receiptID string) {
+	r.ReceiptID = receiptID
+	r.require(refundsCreatePosRequestFieldReceiptID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosRequest) SetDate(date *time.Time) {
+	r.Date = date
+	r.require(refundsCreatePosRequestFieldDate)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosRequest) SetLines(lines []*RefundsCreatePosRequestLinesItem) {
+	r.Lines = lines
+	r.require(refundsCreatePosRequestFieldLines)
+}
+
+func (r *RefundsCreatePosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsCreatePosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RefundsCreatePosRequest(body)
+	return nil
+}
+
+func (r *RefundsCreatePosRequest) MarshalJSON() ([]byte, error) {
+	type embed RefundsCreatePosRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date,omitempty"`
+	}{
+		embed: embed(*r),
+		Date:  internal.NewOptionalDate(r.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	refundsGetPosRequestFieldID = big.NewInt(1 << 0)
+)
+
+type RefundsGetPosRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RefundsGetPosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosRequest) SetID(id string) {
+	r.ID = id
+	r.require(refundsGetPosRequestFieldID)
+}
+
+func (r *RefundsGetPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsGetPosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RefundsGetPosRequest(body)
+	return nil
+}
+
+func (r *RefundsGetPosRequest) MarshalJSON() ([]byte, error) {
+	type embed RefundsGetPosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	refundsListPosRequestFieldPage     = big.NewInt(1 << 0)
+	refundsListPosRequestFieldPageSize = big.NewInt(1 << 1)
+	refundsListPosRequestFieldSort     = big.NewInt(1 << 2)
+	refundsListPosRequestFieldFilter   = big.NewInt(1 << 3)
+	refundsListPosRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type RefundsListPosRequest struct {
+	Page     *int64                             `json:"page,omitempty" url:"-"`
+	PageSize *int64                             `json:"pageSize,omitempty" url:"-"`
+	Sort     []*RefundsListPosRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*RefundsListPosRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RefundsListPosRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequest) SetPage(page *int64) {
+	r.Page = page
+	r.require(refundsListPosRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequest) SetPageSize(pageSize *int64) {
+	r.PageSize = pageSize
+	r.require(refundsListPosRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequest) SetSort(sort []*RefundsListPosRequestSortItem) {
+	r.Sort = sort
+	r.require(refundsListPosRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequest) SetFilter(filter []*RefundsListPosRequestFilterItem) {
+	r.Filter = filter
+	r.require(refundsListPosRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequest) SetTotals(totals []string) {
+	r.Totals = totals
+	r.require(refundsListPosRequestFieldTotals)
+}
+
+func (r *RefundsListPosRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsListPosRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RefundsListPosRequest(body)
+	return nil
+}
+
+func (r *RefundsListPosRequest) MarshalJSON() ([]byte, error) {
+	type embed RefundsListPosRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	reportsCreatePosRequestFieldReportNumber         = big.NewInt(1 << 0)
 	reportsCreatePosRequestFieldDate                 = big.NewInt(1 << 1)
 	reportsCreatePosRequestFieldDeviceID             = big.NewInt(1 << 2)
@@ -4116,6 +4320,1869 @@ func (r *ReceiptsListPosResponseRowsItem) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReceiptsListPosResponseRowsItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	refundsCreatePosRequestLinesItemFieldReceiptLineID = big.NewInt(1 << 0)
+	refundsCreatePosRequestLinesItemFieldQuantity      = big.NewInt(1 << 1)
+)
+
+type RefundsCreatePosRequestLinesItem struct {
+	ReceiptLineID string `json:"receiptLineId" url:"receiptLineId"`
+	Quantity      string `json:"quantity" url:"quantity"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsCreatePosRequestLinesItem) GetReceiptLineID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ReceiptLineID
+}
+
+func (r *RefundsCreatePosRequestLinesItem) GetQuantity() string {
+	if r == nil {
+		return ""
+	}
+	return r.Quantity
+}
+
+func (r *RefundsCreatePosRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsCreatePosRequestLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetReceiptLineID sets the ReceiptLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosRequestLinesItem) SetReceiptLineID(receiptLineID string) {
+	r.ReceiptLineID = receiptLineID
+	r.require(refundsCreatePosRequestLinesItemFieldReceiptLineID)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosRequestLinesItem) SetQuantity(quantity string) {
+	r.Quantity = quantity
+	r.require(refundsCreatePosRequestLinesItemFieldQuantity)
+}
+
+func (r *RefundsCreatePosRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsCreatePosRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RefundsCreatePosRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsCreatePosRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed RefundsCreatePosRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsCreatePosRequestLinesItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	refundsCreatePosResponseFieldID                   = big.NewInt(1 << 0)
+	refundsCreatePosResponseFieldShiftID              = big.NewInt(1 << 1)
+	refundsCreatePosResponseFieldReceiptID            = big.NewInt(1 << 2)
+	refundsCreatePosResponseFieldDate                 = big.NewInt(1 << 3)
+	refundsCreatePosResponseFieldNetTotal             = big.NewInt(1 << 4)
+	refundsCreatePosResponseFieldVatTotal             = big.NewInt(1 << 5)
+	refundsCreatePosResponseFieldGrossTotal           = big.NewInt(1 << 6)
+	refundsCreatePosResponseFieldCashAmount           = big.NewInt(1 << 7)
+	refundsCreatePosResponseFieldCogsTotal            = big.NewInt(1 << 8)
+	refundsCreatePosResponseFieldJournalTransactionID = big.NewInt(1 << 9)
+	refundsCreatePosResponseFieldCreatedAt            = big.NewInt(1 << 10)
+	refundsCreatePosResponseFieldLines                = big.NewInt(1 << 11)
+)
+
+type RefundsCreatePosResponse struct {
+	ID                   string                               `json:"id" url:"id"`
+	ShiftID              string                               `json:"shiftId" url:"shiftId"`
+	ReceiptID            string                               `json:"receiptId" url:"receiptId"`
+	Date                 time.Time                            `json:"date" url:"date" format:"date"`
+	NetTotal             string                               `json:"netTotal" url:"netTotal"`
+	VatTotal             string                               `json:"vatTotal" url:"vatTotal"`
+	GrossTotal           string                               `json:"grossTotal" url:"grossTotal"`
+	CashAmount           string                               `json:"cashAmount" url:"cashAmount"`
+	CogsTotal            *string                              `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
+	JournalTransactionID *string                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreatedAt            time.Time                            `json:"createdAt" url:"createdAt"`
+	Lines                []*RefundsCreatePosResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsCreatePosResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RefundsCreatePosResponse) GetShiftID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ShiftID
+}
+
+func (r *RefundsCreatePosResponse) GetReceiptID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ReceiptID
+}
+
+func (r *RefundsCreatePosResponse) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.Date
+}
+
+func (r *RefundsCreatePosResponse) GetNetTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetTotal
+}
+
+func (r *RefundsCreatePosResponse) GetVatTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatTotal
+}
+
+func (r *RefundsCreatePosResponse) GetGrossTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossTotal
+}
+
+func (r *RefundsCreatePosResponse) GetCashAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CashAmount
+}
+
+func (r *RefundsCreatePosResponse) GetCogsTotal() *string {
+	if r == nil {
+		return nil
+	}
+	return r.CogsTotal
+}
+
+func (r *RefundsCreatePosResponse) GetJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.JournalTransactionID
+}
+
+func (r *RefundsCreatePosResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RefundsCreatePosResponse) GetLines() []*RefundsCreatePosResponseLinesItem {
+	if r == nil {
+		return nil
+	}
+	return r.Lines
+}
+
+func (r *RefundsCreatePosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsCreatePosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetID(id string) {
+	r.ID = id
+	r.require(refundsCreatePosResponseFieldID)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(refundsCreatePosResponseFieldShiftID)
+}
+
+// SetReceiptID sets the ReceiptID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetReceiptID(receiptID string) {
+	r.ReceiptID = receiptID
+	r.require(refundsCreatePosResponseFieldReceiptID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetDate(date time.Time) {
+	r.Date = date
+	r.require(refundsCreatePosResponseFieldDate)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(refundsCreatePosResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(refundsCreatePosResponseFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(refundsCreatePosResponseFieldGrossTotal)
+}
+
+// SetCashAmount sets the CashAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(refundsCreatePosResponseFieldCashAmount)
+}
+
+// SetCogsTotal sets the CogsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetCogsTotal(cogsTotal *string) {
+	r.CogsTotal = cogsTotal
+	r.require(refundsCreatePosResponseFieldCogsTotal)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(refundsCreatePosResponseFieldJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(refundsCreatePosResponseFieldCreatedAt)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponse) SetLines(lines []*RefundsCreatePosResponseLinesItem) {
+	r.Lines = lines
+	r.require(refundsCreatePosResponseFieldLines)
+}
+
+func (r *RefundsCreatePosResponse) UnmarshalJSON(data []byte) error {
+	type embed RefundsCreatePosResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RefundsCreatePosResponse(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsCreatePosResponse) MarshalJSON() ([]byte, error) {
+	type embed RefundsCreatePosResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*r),
+		Date:      internal.NewDate(r.Date),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsCreatePosResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	refundsCreatePosResponseLinesItemFieldID            = big.NewInt(1 << 0)
+	refundsCreatePosResponseLinesItemFieldReceiptLineID = big.NewInt(1 << 1)
+	refundsCreatePosResponseLinesItemFieldItemID        = big.NewInt(1 << 2)
+	refundsCreatePosResponseLinesItemFieldQuantity      = big.NewInt(1 << 3)
+	refundsCreatePosResponseLinesItemFieldNetAmount     = big.NewInt(1 << 4)
+	refundsCreatePosResponseLinesItemFieldVatAmount     = big.NewInt(1 << 5)
+	refundsCreatePosResponseLinesItemFieldGrossAmount   = big.NewInt(1 << 6)
+)
+
+type RefundsCreatePosResponseLinesItem struct {
+	ID            string  `json:"id" url:"id"`
+	ReceiptLineID string  `json:"receiptLineId" url:"receiptLineId"`
+	ItemID        *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Quantity      string  `json:"quantity" url:"quantity"`
+	NetAmount     string  `json:"netAmount" url:"netAmount"`
+	VatAmount     string  `json:"vatAmount" url:"vatAmount"`
+	GrossAmount   string  `json:"grossAmount" url:"grossAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetReceiptLineID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ReceiptLineID
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetItemID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ItemID
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetQuantity() string {
+	if r == nil {
+		return ""
+	}
+	return r.Quantity
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetNetAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetAmount
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetVatAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatAmount
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetGrossAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossAmount
+}
+
+func (r *RefundsCreatePosResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsCreatePosResponseLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponseLinesItem) SetID(id string) {
+	r.ID = id
+	r.require(refundsCreatePosResponseLinesItemFieldID)
+}
+
+// SetReceiptLineID sets the ReceiptLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponseLinesItem) SetReceiptLineID(receiptLineID string) {
+	r.ReceiptLineID = receiptLineID
+	r.require(refundsCreatePosResponseLinesItemFieldReceiptLineID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponseLinesItem) SetItemID(itemID *string) {
+	r.ItemID = itemID
+	r.require(refundsCreatePosResponseLinesItemFieldItemID)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponseLinesItem) SetQuantity(quantity string) {
+	r.Quantity = quantity
+	r.require(refundsCreatePosResponseLinesItemFieldQuantity)
+}
+
+// SetNetAmount sets the NetAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponseLinesItem) SetNetAmount(netAmount string) {
+	r.NetAmount = netAmount
+	r.require(refundsCreatePosResponseLinesItemFieldNetAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponseLinesItem) SetVatAmount(vatAmount string) {
+	r.VatAmount = vatAmount
+	r.require(refundsCreatePosResponseLinesItemFieldVatAmount)
+}
+
+// SetGrossAmount sets the GrossAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsCreatePosResponseLinesItem) SetGrossAmount(grossAmount string) {
+	r.GrossAmount = grossAmount
+	r.require(refundsCreatePosResponseLinesItemFieldGrossAmount)
+}
+
+func (r *RefundsCreatePosResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsCreatePosResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RefundsCreatePosResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsCreatePosResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed RefundsCreatePosResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsCreatePosResponseLinesItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	refundsGetPosResponseFieldID                   = big.NewInt(1 << 0)
+	refundsGetPosResponseFieldShiftID              = big.NewInt(1 << 1)
+	refundsGetPosResponseFieldReceiptID            = big.NewInt(1 << 2)
+	refundsGetPosResponseFieldDate                 = big.NewInt(1 << 3)
+	refundsGetPosResponseFieldNetTotal             = big.NewInt(1 << 4)
+	refundsGetPosResponseFieldVatTotal             = big.NewInt(1 << 5)
+	refundsGetPosResponseFieldGrossTotal           = big.NewInt(1 << 6)
+	refundsGetPosResponseFieldCashAmount           = big.NewInt(1 << 7)
+	refundsGetPosResponseFieldCogsTotal            = big.NewInt(1 << 8)
+	refundsGetPosResponseFieldJournalTransactionID = big.NewInt(1 << 9)
+	refundsGetPosResponseFieldCreatedAt            = big.NewInt(1 << 10)
+	refundsGetPosResponseFieldLines                = big.NewInt(1 << 11)
+)
+
+type RefundsGetPosResponse struct {
+	ID                   string                            `json:"id" url:"id"`
+	ShiftID              string                            `json:"shiftId" url:"shiftId"`
+	ReceiptID            string                            `json:"receiptId" url:"receiptId"`
+	Date                 time.Time                         `json:"date" url:"date" format:"date"`
+	NetTotal             string                            `json:"netTotal" url:"netTotal"`
+	VatTotal             string                            `json:"vatTotal" url:"vatTotal"`
+	GrossTotal           string                            `json:"grossTotal" url:"grossTotal"`
+	CashAmount           string                            `json:"cashAmount" url:"cashAmount"`
+	CogsTotal            *string                           `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
+	JournalTransactionID *string                           `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreatedAt            time.Time                         `json:"createdAt" url:"createdAt"`
+	Lines                []*RefundsGetPosResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsGetPosResponse) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RefundsGetPosResponse) GetShiftID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ShiftID
+}
+
+func (r *RefundsGetPosResponse) GetReceiptID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ReceiptID
+}
+
+func (r *RefundsGetPosResponse) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.Date
+}
+
+func (r *RefundsGetPosResponse) GetNetTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetTotal
+}
+
+func (r *RefundsGetPosResponse) GetVatTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatTotal
+}
+
+func (r *RefundsGetPosResponse) GetGrossTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossTotal
+}
+
+func (r *RefundsGetPosResponse) GetCashAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CashAmount
+}
+
+func (r *RefundsGetPosResponse) GetCogsTotal() *string {
+	if r == nil {
+		return nil
+	}
+	return r.CogsTotal
+}
+
+func (r *RefundsGetPosResponse) GetJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.JournalTransactionID
+}
+
+func (r *RefundsGetPosResponse) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RefundsGetPosResponse) GetLines() []*RefundsGetPosResponseLinesItem {
+	if r == nil {
+		return nil
+	}
+	return r.Lines
+}
+
+func (r *RefundsGetPosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsGetPosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetID(id string) {
+	r.ID = id
+	r.require(refundsGetPosResponseFieldID)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(refundsGetPosResponseFieldShiftID)
+}
+
+// SetReceiptID sets the ReceiptID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetReceiptID(receiptID string) {
+	r.ReceiptID = receiptID
+	r.require(refundsGetPosResponseFieldReceiptID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetDate(date time.Time) {
+	r.Date = date
+	r.require(refundsGetPosResponseFieldDate)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(refundsGetPosResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(refundsGetPosResponseFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(refundsGetPosResponseFieldGrossTotal)
+}
+
+// SetCashAmount sets the CashAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(refundsGetPosResponseFieldCashAmount)
+}
+
+// SetCogsTotal sets the CogsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetCogsTotal(cogsTotal *string) {
+	r.CogsTotal = cogsTotal
+	r.require(refundsGetPosResponseFieldCogsTotal)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(refundsGetPosResponseFieldJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(refundsGetPosResponseFieldCreatedAt)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponse) SetLines(lines []*RefundsGetPosResponseLinesItem) {
+	r.Lines = lines
+	r.require(refundsGetPosResponseFieldLines)
+}
+
+func (r *RefundsGetPosResponse) UnmarshalJSON(data []byte) error {
+	type embed RefundsGetPosResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RefundsGetPosResponse(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsGetPosResponse) MarshalJSON() ([]byte, error) {
+	type embed RefundsGetPosResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*r),
+		Date:      internal.NewDate(r.Date),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsGetPosResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	refundsGetPosResponseLinesItemFieldID            = big.NewInt(1 << 0)
+	refundsGetPosResponseLinesItemFieldReceiptLineID = big.NewInt(1 << 1)
+	refundsGetPosResponseLinesItemFieldItemID        = big.NewInt(1 << 2)
+	refundsGetPosResponseLinesItemFieldQuantity      = big.NewInt(1 << 3)
+	refundsGetPosResponseLinesItemFieldNetAmount     = big.NewInt(1 << 4)
+	refundsGetPosResponseLinesItemFieldVatAmount     = big.NewInt(1 << 5)
+	refundsGetPosResponseLinesItemFieldGrossAmount   = big.NewInt(1 << 6)
+)
+
+type RefundsGetPosResponseLinesItem struct {
+	ID            string  `json:"id" url:"id"`
+	ReceiptLineID string  `json:"receiptLineId" url:"receiptLineId"`
+	ItemID        *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Quantity      string  `json:"quantity" url:"quantity"`
+	NetAmount     string  `json:"netAmount" url:"netAmount"`
+	VatAmount     string  `json:"vatAmount" url:"vatAmount"`
+	GrossAmount   string  `json:"grossAmount" url:"grossAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetReceiptLineID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ReceiptLineID
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetItemID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ItemID
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetQuantity() string {
+	if r == nil {
+		return ""
+	}
+	return r.Quantity
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetNetAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetAmount
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetVatAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatAmount
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetGrossAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossAmount
+}
+
+func (r *RefundsGetPosResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsGetPosResponseLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponseLinesItem) SetID(id string) {
+	r.ID = id
+	r.require(refundsGetPosResponseLinesItemFieldID)
+}
+
+// SetReceiptLineID sets the ReceiptLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponseLinesItem) SetReceiptLineID(receiptLineID string) {
+	r.ReceiptLineID = receiptLineID
+	r.require(refundsGetPosResponseLinesItemFieldReceiptLineID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponseLinesItem) SetItemID(itemID *string) {
+	r.ItemID = itemID
+	r.require(refundsGetPosResponseLinesItemFieldItemID)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponseLinesItem) SetQuantity(quantity string) {
+	r.Quantity = quantity
+	r.require(refundsGetPosResponseLinesItemFieldQuantity)
+}
+
+// SetNetAmount sets the NetAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponseLinesItem) SetNetAmount(netAmount string) {
+	r.NetAmount = netAmount
+	r.require(refundsGetPosResponseLinesItemFieldNetAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponseLinesItem) SetVatAmount(vatAmount string) {
+	r.VatAmount = vatAmount
+	r.require(refundsGetPosResponseLinesItemFieldVatAmount)
+}
+
+// SetGrossAmount sets the GrossAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsGetPosResponseLinesItem) SetGrossAmount(grossAmount string) {
+	r.GrossAmount = grossAmount
+	r.require(refundsGetPosResponseLinesItemFieldGrossAmount)
+}
+
+func (r *RefundsGetPosResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsGetPosResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RefundsGetPosResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsGetPosResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed RefundsGetPosResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsGetPosResponseLinesItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	refundsListPosRequestFilterItemFieldField = big.NewInt(1 << 0)
+	refundsListPosRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	refundsListPosRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type RefundsListPosRequestFilterItem struct {
+	Field string                                `json:"field" url:"field"`
+	Op    RefundsListPosRequestFilterItemOp     `json:"op" url:"op"`
+	Value *RefundsListPosRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsListPosRequestFilterItem) GetField() string {
+	if r == nil {
+		return ""
+	}
+	return r.Field
+}
+
+func (r *RefundsListPosRequestFilterItem) GetOp() RefundsListPosRequestFilterItemOp {
+	if r == nil {
+		return ""
+	}
+	return r.Op
+}
+
+func (r *RefundsListPosRequestFilterItem) GetValue() *RefundsListPosRequestFilterItemValue {
+	if r == nil {
+		return nil
+	}
+	return r.Value
+}
+
+func (r *RefundsListPosRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsListPosRequestFilterItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequestFilterItem) SetField(field string) {
+	r.Field = field
+	r.require(refundsListPosRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequestFilterItem) SetOp(op RefundsListPosRequestFilterItemOp) {
+	r.Op = op
+	r.require(refundsListPosRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequestFilterItem) SetValue(value *RefundsListPosRequestFilterItemValue) {
+	r.Value = value
+	r.require(refundsListPosRequestFilterItemFieldValue)
+}
+
+func (r *RefundsListPosRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsListPosRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RefundsListPosRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsListPosRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed RefundsListPosRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsListPosRequestFilterItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RefundsListPosRequestFilterItemOp string
+
+const (
+	RefundsListPosRequestFilterItemOpEq       RefundsListPosRequestFilterItemOp = "eq"
+	RefundsListPosRequestFilterItemOpNe       RefundsListPosRequestFilterItemOp = "ne"
+	RefundsListPosRequestFilterItemOpContains RefundsListPosRequestFilterItemOp = "contains"
+	RefundsListPosRequestFilterItemOpGte      RefundsListPosRequestFilterItemOp = "gte"
+	RefundsListPosRequestFilterItemOpLte      RefundsListPosRequestFilterItemOp = "lte"
+	RefundsListPosRequestFilterItemOpIn       RefundsListPosRequestFilterItemOp = "in"
+)
+
+func NewRefundsListPosRequestFilterItemOpFromString(s string) (RefundsListPosRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return RefundsListPosRequestFilterItemOpEq, nil
+	case "ne":
+		return RefundsListPosRequestFilterItemOpNe, nil
+	case "contains":
+		return RefundsListPosRequestFilterItemOpContains, nil
+	case "gte":
+		return RefundsListPosRequestFilterItemOpGte, nil
+	case "lte":
+		return RefundsListPosRequestFilterItemOpLte, nil
+	case "in":
+		return RefundsListPosRequestFilterItemOpIn, nil
+	}
+	var t RefundsListPosRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RefundsListPosRequestFilterItemOp) Ptr() *RefundsListPosRequestFilterItemOp {
+	return &r
+}
+
+type RefundsListPosRequestFilterItemValue struct {
+	String                                            string
+	Double                                            float64
+	Boolean                                           bool
+	RefundsListPosRequestFilterItemValueThreeItemList []*RefundsListPosRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (r *RefundsListPosRequestFilterItemValue) GetString() string {
+	if r == nil {
+		return ""
+	}
+	return r.String
+}
+
+func (r *RefundsListPosRequestFilterItemValue) GetDouble() float64 {
+	if r == nil {
+		return 0
+	}
+	return r.Double
+}
+
+func (r *RefundsListPosRequestFilterItemValue) GetBoolean() bool {
+	if r == nil {
+		return false
+	}
+	return r.Boolean
+}
+
+func (r *RefundsListPosRequestFilterItemValue) GetRefundsListPosRequestFilterItemValueThreeItemList() []*RefundsListPosRequestFilterItemValueThreeItem {
+	if r == nil {
+		return nil
+	}
+	return r.RefundsListPosRequestFilterItemValueThreeItemList
+}
+
+func (r *RefundsListPosRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		r.typ = "String"
+		r.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		r.typ = "Double"
+		r.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		r.typ = "Boolean"
+		r.Boolean = valueBoolean
+		return nil
+	}
+	var valueRefundsListPosRequestFilterItemValueThreeItemList []*RefundsListPosRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueRefundsListPosRequestFilterItemValueThreeItemList); err == nil {
+		r.typ = "RefundsListPosRequestFilterItemValueThreeItemList"
+		r.RefundsListPosRequestFilterItemValueThreeItemList = valueRefundsListPosRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
+}
+
+func (r RefundsListPosRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
+	}
+	if r.typ == "Boolean" || r.Boolean != false {
+		return json.Marshal(r.Boolean)
+	}
+	if r.typ == "RefundsListPosRequestFilterItemValueThreeItemList" || r.RefundsListPosRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(r.RefundsListPosRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type RefundsListPosRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitRefundsListPosRequestFilterItemValueThreeItemList([]*RefundsListPosRequestFilterItemValueThreeItem) error
+}
+
+func (r *RefundsListPosRequestFilterItemValue) Accept(visitor RefundsListPosRequestFilterItemValueVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
+	}
+	if r.typ == "Boolean" || r.Boolean != false {
+		return visitor.VisitBoolean(r.Boolean)
+	}
+	if r.typ == "RefundsListPosRequestFilterItemValueThreeItemList" || r.RefundsListPosRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitRefundsListPosRequestFilterItemValueThreeItemList(r.RefundsListPosRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type RefundsListPosRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (r *RefundsListPosRequestFilterItemValueThreeItem) GetString() string {
+	if r == nil {
+		return ""
+	}
+	return r.String
+}
+
+func (r *RefundsListPosRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if r == nil {
+		return 0
+	}
+	return r.Double
+}
+
+func (r *RefundsListPosRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		r.typ = "String"
+		r.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		r.typ = "Double"
+		r.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, r)
+}
+
+func (r RefundsListPosRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if r.typ == "String" || r.String != "" {
+		return json.Marshal(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return json.Marshal(r.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+type RefundsListPosRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (r *RefundsListPosRequestFilterItemValueThreeItem) Accept(visitor RefundsListPosRequestFilterItemValueThreeItemVisitor) error {
+	if r.typ == "String" || r.String != "" {
+		return visitor.VisitString(r.String)
+	}
+	if r.typ == "Double" || r.Double != 0 {
+		return visitor.VisitDouble(r.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", r)
+}
+
+var (
+	refundsListPosRequestSortItemFieldField = big.NewInt(1 << 0)
+	refundsListPosRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type RefundsListPosRequestSortItem struct {
+	Field string                            `json:"field" url:"field"`
+	Dir   *RefundsListPosRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsListPosRequestSortItem) GetField() string {
+	if r == nil {
+		return ""
+	}
+	return r.Field
+}
+
+func (r *RefundsListPosRequestSortItem) GetDir() *RefundsListPosRequestSortItemDir {
+	if r == nil {
+		return nil
+	}
+	return r.Dir
+}
+
+func (r *RefundsListPosRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsListPosRequestSortItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequestSortItem) SetField(field string) {
+	r.Field = field
+	r.require(refundsListPosRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosRequestSortItem) SetDir(dir *RefundsListPosRequestSortItemDir) {
+	r.Dir = dir
+	r.require(refundsListPosRequestSortItemFieldDir)
+}
+
+func (r *RefundsListPosRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsListPosRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RefundsListPosRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsListPosRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed RefundsListPosRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsListPosRequestSortItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type RefundsListPosRequestSortItemDir string
+
+const (
+	RefundsListPosRequestSortItemDirAsc  RefundsListPosRequestSortItemDir = "asc"
+	RefundsListPosRequestSortItemDirDesc RefundsListPosRequestSortItemDir = "desc"
+)
+
+func NewRefundsListPosRequestSortItemDirFromString(s string) (RefundsListPosRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return RefundsListPosRequestSortItemDirAsc, nil
+	case "desc":
+		return RefundsListPosRequestSortItemDirDesc, nil
+	}
+	var t RefundsListPosRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RefundsListPosRequestSortItemDir) Ptr() *RefundsListPosRequestSortItemDir {
+	return &r
+}
+
+var (
+	refundsListPosResponseFieldRows             = big.NewInt(1 << 0)
+	refundsListPosResponseFieldPage             = big.NewInt(1 << 1)
+	refundsListPosResponseFieldPageSize         = big.NewInt(1 << 2)
+	refundsListPosResponseFieldTotal            = big.NewInt(1 << 3)
+	refundsListPosResponseFieldTotals           = big.NewInt(1 << 4)
+	refundsListPosResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type RefundsListPosResponse struct {
+	Rows     []*RefundsListPosResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                             `json:"page" url:"page"`
+	PageSize int64                             `json:"pageSize" url:"pageSize"`
+	Total    int64                             `json:"total" url:"total"`
+	Totals   map[string]string                 `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsListPosResponse) GetRows() []*RefundsListPosResponseRowsItem {
+	if r == nil {
+		return nil
+	}
+	return r.Rows
+}
+
+func (r *RefundsListPosResponse) GetPage() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Page
+}
+
+func (r *RefundsListPosResponse) GetPageSize() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.PageSize
+}
+
+func (r *RefundsListPosResponse) GetTotal() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.Total
+}
+
+func (r *RefundsListPosResponse) GetTotals() map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.Totals
+}
+
+func (r *RefundsListPosResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if r == nil {
+		return nil
+	}
+	return r.TotalsByCurrency
+}
+
+func (r *RefundsListPosResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsListPosResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponse) SetRows(rows []*RefundsListPosResponseRowsItem) {
+	r.Rows = rows
+	r.require(refundsListPosResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponse) SetPage(page int64) {
+	r.Page = page
+	r.require(refundsListPosResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponse) SetPageSize(pageSize int64) {
+	r.PageSize = pageSize
+	r.require(refundsListPosResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponse) SetTotal(total int64) {
+	r.Total = total
+	r.require(refundsListPosResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponse) SetTotals(totals map[string]string) {
+	r.Totals = totals
+	r.require(refundsListPosResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	r.TotalsByCurrency = totalsByCurrency
+	r.require(refundsListPosResponseFieldTotalsByCurrency)
+}
+
+func (r *RefundsListPosResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler RefundsListPosResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RefundsListPosResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsListPosResponse) MarshalJSON() ([]byte, error) {
+	type embed RefundsListPosResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsListPosResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	refundsListPosResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	refundsListPosResponseRowsItemFieldShiftID              = big.NewInt(1 << 1)
+	refundsListPosResponseRowsItemFieldReceiptID            = big.NewInt(1 << 2)
+	refundsListPosResponseRowsItemFieldDate                 = big.NewInt(1 << 3)
+	refundsListPosResponseRowsItemFieldNetTotal             = big.NewInt(1 << 4)
+	refundsListPosResponseRowsItemFieldVatTotal             = big.NewInt(1 << 5)
+	refundsListPosResponseRowsItemFieldGrossTotal           = big.NewInt(1 << 6)
+	refundsListPosResponseRowsItemFieldCashAmount           = big.NewInt(1 << 7)
+	refundsListPosResponseRowsItemFieldCogsTotal            = big.NewInt(1 << 8)
+	refundsListPosResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 9)
+	refundsListPosResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 10)
+)
+
+type RefundsListPosResponseRowsItem struct {
+	ID                   string    `json:"id" url:"id"`
+	ShiftID              string    `json:"shiftId" url:"shiftId"`
+	ReceiptID            string    `json:"receiptId" url:"receiptId"`
+	Date                 time.Time `json:"date" url:"date" format:"date"`
+	NetTotal             string    `json:"netTotal" url:"netTotal"`
+	VatTotal             string    `json:"vatTotal" url:"vatTotal"`
+	GrossTotal           string    `json:"grossTotal" url:"grossTotal"`
+	CashAmount           string    `json:"cashAmount" url:"cashAmount"`
+	CogsTotal            *string   `json:"cogsTotal,omitempty" url:"cogsTotal,omitempty"`
+	JournalTransactionID *string   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RefundsListPosResponseRowsItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RefundsListPosResponseRowsItem) GetShiftID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ShiftID
+}
+
+func (r *RefundsListPosResponseRowsItem) GetReceiptID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ReceiptID
+}
+
+func (r *RefundsListPosResponseRowsItem) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.Date
+}
+
+func (r *RefundsListPosResponseRowsItem) GetNetTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.NetTotal
+}
+
+func (r *RefundsListPosResponseRowsItem) GetVatTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.VatTotal
+}
+
+func (r *RefundsListPosResponseRowsItem) GetGrossTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.GrossTotal
+}
+
+func (r *RefundsListPosResponseRowsItem) GetCashAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.CashAmount
+}
+
+func (r *RefundsListPosResponseRowsItem) GetCogsTotal() *string {
+	if r == nil {
+		return nil
+	}
+	return r.CogsTotal
+}
+
+func (r *RefundsListPosResponseRowsItem) GetJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.JournalTransactionID
+}
+
+func (r *RefundsListPosResponseRowsItem) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *RefundsListPosResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RefundsListPosResponseRowsItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetID(id string) {
+	r.ID = id
+	r.require(refundsListPosResponseRowsItemFieldID)
+}
+
+// SetShiftID sets the ShiftID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetShiftID(shiftID string) {
+	r.ShiftID = shiftID
+	r.require(refundsListPosResponseRowsItemFieldShiftID)
+}
+
+// SetReceiptID sets the ReceiptID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetReceiptID(receiptID string) {
+	r.ReceiptID = receiptID
+	r.require(refundsListPosResponseRowsItemFieldReceiptID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetDate(date time.Time) {
+	r.Date = date
+	r.require(refundsListPosResponseRowsItemFieldDate)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetNetTotal(netTotal string) {
+	r.NetTotal = netTotal
+	r.require(refundsListPosResponseRowsItemFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetVatTotal(vatTotal string) {
+	r.VatTotal = vatTotal
+	r.require(refundsListPosResponseRowsItemFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetGrossTotal(grossTotal string) {
+	r.GrossTotal = grossTotal
+	r.require(refundsListPosResponseRowsItemFieldGrossTotal)
+}
+
+// SetCashAmount sets the CashAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetCashAmount(cashAmount string) {
+	r.CashAmount = cashAmount
+	r.require(refundsListPosResponseRowsItemFieldCashAmount)
+}
+
+// SetCogsTotal sets the CogsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetCogsTotal(cogsTotal *string) {
+	r.CogsTotal = cogsTotal
+	r.require(refundsListPosResponseRowsItemFieldCogsTotal)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(refundsListPosResponseRowsItemFieldJournalTransactionID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RefundsListPosResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(refundsListPosResponseRowsItemFieldCreatedAt)
+}
+
+func (r *RefundsListPosResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed RefundsListPosResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = RefundsListPosResponseRowsItem(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RefundsListPosResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed RefundsListPosResponseRowsItem
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*r),
+		Date:      internal.NewDate(r.Date),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RefundsListPosResponseRowsItem) String() string {
 	if r == nil {
 		return "<nil>"
 	}

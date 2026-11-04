@@ -2708,6 +2708,8 @@ var (
 	invoicesCreatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
 	invoicesCreatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
 	invoicesCreatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
+	invoicesCreatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
+	invoicesCreatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
 )
 
 type InvoicesCreatePurchasesRequestLinesItem struct {
@@ -2724,6 +2726,8 @@ type InvoicesCreatePurchasesRequestLinesItem struct {
 	AccountCode       *string                                          `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time                                       `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string                                          `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time                                       `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2821,6 +2825,20 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Tim
 		return nil
 	}
 	return i.DeferralEndDate
+}
+
+func (i *InvoicesCreatePurchasesRequestLinesItem) GetLotNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LotNumber
+}
+
+func (i *InvoicesCreatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ExpiryDate
 }
 
 func (i *InvoicesCreatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -2928,12 +2946,27 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEnd
 	i.require(invoicesCreatePurchasesRequestLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string) {
+	i.LotNumber = lotNumber
+	i.require(invoicesCreatePurchasesRequestLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	i.ExpiryDate = expiryDate
+	i.require(invoicesCreatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
 func (i *InvoicesCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
 	type embed InvoicesCreatePurchasesRequestLinesItem
 	var unmarshaler = struct {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*i),
 	}
@@ -2943,6 +2976,7 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) err
 	*i = InvoicesCreatePurchasesRequestLinesItem(unmarshaler.embed)
 	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	i.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -2958,10 +2992,12 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) 
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*i),
 		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(i.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -3612,19 +3648,23 @@ var (
 	invoicesCreatePurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	invoicesCreatePurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	invoicesCreatePurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	invoicesCreatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	invoicesCreatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	invoicesCreatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	invoicesCreatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	invoicesCreatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	invoicesCreatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
-	invoicesCreatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesCreatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
-	invoicesCreatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
-	invoicesCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	invoicesCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	invoicesCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	invoicesCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	invoicesCreatePurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	invoicesCreatePurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	invoicesCreatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
+	invoicesCreatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
+	invoicesCreatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
+	invoicesCreatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
+	invoicesCreatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
+	invoicesCreatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
+	invoicesCreatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
+	invoicesCreatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
+	invoicesCreatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
+	invoicesCreatePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
+	invoicesCreatePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
+	invoicesCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
+	invoicesCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
+	invoicesCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
+	invoicesCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
 )
 
 type InvoicesCreatePurchasesResponseLinesItem struct {
@@ -3633,6 +3673,8 @@ type InvoicesCreatePurchasesResponseLinesItem struct {
 	Description       string     `json:"description" url:"description"`
 	Unit              string     `json:"unit" url:"unit"`
 	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitFactor        string     `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string     `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
@@ -3642,6 +3684,8 @@ type InvoicesCreatePurchasesResponseLinesItem struct {
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -3687,6 +3731,20 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesCreatePurchasesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -3750,6 +3808,20 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) GetDeferralEndDate() *time.Ti
 		return nil
 	}
 	return i.DeferralEndDate
+}
+
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetLotNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LotNumber
+}
+
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetExpiryDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ExpiryDate
 }
 
 func (i *InvoicesCreatePurchasesResponseLinesItem) GetLineNet() string {
@@ -3829,6 +3901,20 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) SetQuantity(quantity string) 
 	i.require(invoicesCreatePurchasesResponseLinesItemFieldQuantity)
 }
 
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldBaseQuantity)
+}
+
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreatePurchasesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
@@ -3892,6 +3978,20 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) SetDeferralEndDate(deferralEn
 	i.require(invoicesCreatePurchasesResponseLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetLotNumber(lotNumber *string) {
+	i.LotNumber = lotNumber
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	i.ExpiryDate = expiryDate
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldExpiryDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreatePurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -3926,6 +4026,7 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) UnmarshalJSON(data []byte) er
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*i),
 	}
@@ -3935,6 +4036,7 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) UnmarshalJSON(data []byte) er
 	*i = InvoicesCreatePurchasesResponseLinesItem(unmarshaler.embed)
 	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	i.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -3950,10 +4052,12 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) MarshalJSON() ([]byte, error)
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*i),
 		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(i.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -4673,19 +4777,23 @@ var (
 	invoicesGetPurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	invoicesGetPurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	invoicesGetPurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	invoicesGetPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	invoicesGetPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	invoicesGetPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	invoicesGetPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	invoicesGetPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	invoicesGetPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
-	invoicesGetPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesGetPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
-	invoicesGetPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
-	invoicesGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	invoicesGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	invoicesGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	invoicesGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	invoicesGetPurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	invoicesGetPurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	invoicesGetPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
+	invoicesGetPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
+	invoicesGetPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
+	invoicesGetPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
+	invoicesGetPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
+	invoicesGetPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
+	invoicesGetPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
+	invoicesGetPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
+	invoicesGetPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
+	invoicesGetPurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
+	invoicesGetPurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
+	invoicesGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
+	invoicesGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
+	invoicesGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
+	invoicesGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
 )
 
 type InvoicesGetPurchasesResponseLinesItem struct {
@@ -4694,6 +4802,8 @@ type InvoicesGetPurchasesResponseLinesItem struct {
 	Description       string     `json:"description" url:"description"`
 	Unit              string     `json:"unit" url:"unit"`
 	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitFactor        string     `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string     `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
@@ -4703,6 +4813,8 @@ type InvoicesGetPurchasesResponseLinesItem struct {
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -4748,6 +4860,20 @@ func (i *InvoicesGetPurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesGetPurchasesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesGetPurchasesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesGetPurchasesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -4811,6 +4937,20 @@ func (i *InvoicesGetPurchasesResponseLinesItem) GetDeferralEndDate() *time.Time 
 		return nil
 	}
 	return i.DeferralEndDate
+}
+
+func (i *InvoicesGetPurchasesResponseLinesItem) GetLotNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LotNumber
+}
+
+func (i *InvoicesGetPurchasesResponseLinesItem) GetExpiryDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ExpiryDate
 }
 
 func (i *InvoicesGetPurchasesResponseLinesItem) GetLineNet() string {
@@ -4890,6 +5030,20 @@ func (i *InvoicesGetPurchasesResponseLinesItem) SetQuantity(quantity string) {
 	i.require(invoicesGetPurchasesResponseLinesItemFieldQuantity)
 }
 
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesGetPurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesGetPurchasesResponseLinesItemFieldBaseQuantity)
+}
+
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetPurchasesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
@@ -4953,6 +5107,20 @@ func (i *InvoicesGetPurchasesResponseLinesItem) SetDeferralEndDate(deferralEndDa
 	i.require(invoicesGetPurchasesResponseLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetLotNumber(lotNumber *string) {
+	i.LotNumber = lotNumber
+	i.require(invoicesGetPurchasesResponseLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	i.ExpiryDate = expiryDate
+	i.require(invoicesGetPurchasesResponseLinesItemFieldExpiryDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetPurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -4987,6 +5155,7 @@ func (i *InvoicesGetPurchasesResponseLinesItem) UnmarshalJSON(data []byte) error
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*i),
 	}
@@ -4996,6 +5165,7 @@ func (i *InvoicesGetPurchasesResponseLinesItem) UnmarshalJSON(data []byte) error
 	*i = InvoicesGetPurchasesResponseLinesItem(unmarshaler.embed)
 	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	i.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -5011,10 +5181,12 @@ func (i *InvoicesGetPurchasesResponseLinesItem) MarshalJSON() ([]byte, error) {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*i),
 		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(i.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -7262,19 +7434,23 @@ var (
 	invoicesRegisterPurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	invoicesRegisterPurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	invoicesRegisterPurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	invoicesRegisterPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	invoicesRegisterPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	invoicesRegisterPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	invoicesRegisterPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	invoicesRegisterPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	invoicesRegisterPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
-	invoicesRegisterPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesRegisterPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
-	invoicesRegisterPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	invoicesRegisterPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	invoicesRegisterPurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	invoicesRegisterPurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	invoicesRegisterPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
+	invoicesRegisterPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
+	invoicesRegisterPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
+	invoicesRegisterPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
+	invoicesRegisterPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
+	invoicesRegisterPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
+	invoicesRegisterPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
+	invoicesRegisterPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
+	invoicesRegisterPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
+	invoicesRegisterPurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
+	invoicesRegisterPurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
+	invoicesRegisterPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
 )
 
 type InvoicesRegisterPurchasesResponseLinesItem struct {
@@ -7283,6 +7459,8 @@ type InvoicesRegisterPurchasesResponseLinesItem struct {
 	Description       string     `json:"description" url:"description"`
 	Unit              string     `json:"unit" url:"unit"`
 	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitFactor        string     `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string     `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
@@ -7292,6 +7470,8 @@ type InvoicesRegisterPurchasesResponseLinesItem struct {
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -7337,6 +7517,20 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesRegisterPurchasesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -7400,6 +7594,20 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) GetDeferralEndDate() *time.
 		return nil
 	}
 	return i.DeferralEndDate
+}
+
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetLotNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LotNumber
+}
+
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetExpiryDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ExpiryDate
 }
 
 func (i *InvoicesRegisterPurchasesResponseLinesItem) GetLineNet() string {
@@ -7479,6 +7687,20 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) SetQuantity(quantity string
 	i.require(invoicesRegisterPurchasesResponseLinesItemFieldQuantity)
 }
 
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldBaseQuantity)
+}
+
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesRegisterPurchasesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
@@ -7542,6 +7764,20 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) SetDeferralEndDate(deferral
 	i.require(invoicesRegisterPurchasesResponseLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetLotNumber(lotNumber *string) {
+	i.LotNumber = lotNumber
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	i.ExpiryDate = expiryDate
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldExpiryDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesRegisterPurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -7576,6 +7812,7 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) UnmarshalJSON(data []byte) 
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*i),
 	}
@@ -7585,6 +7822,7 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) UnmarshalJSON(data []byte) 
 	*i = InvoicesRegisterPurchasesResponseLinesItem(unmarshaler.embed)
 	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	i.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -7600,10 +7838,12 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) MarshalJSON() ([]byte, erro
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*i),
 		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(i.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -7707,6 +7947,8 @@ var (
 	invoicesUpdatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
 	invoicesUpdatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
 	invoicesUpdatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
+	invoicesUpdatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
+	invoicesUpdatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
 )
 
 type InvoicesUpdatePurchasesRequestLinesItem struct {
@@ -7723,6 +7965,8 @@ type InvoicesUpdatePurchasesRequestLinesItem struct {
 	AccountCode       *string                                          `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time                                       `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string                                          `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time                                       `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7820,6 +8064,20 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Tim
 		return nil
 	}
 	return i.DeferralEndDate
+}
+
+func (i *InvoicesUpdatePurchasesRequestLinesItem) GetLotNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LotNumber
+}
+
+func (i *InvoicesUpdatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ExpiryDate
 }
 
 func (i *InvoicesUpdatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -7927,12 +8185,27 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEnd
 	i.require(invoicesUpdatePurchasesRequestLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string) {
+	i.LotNumber = lotNumber
+	i.require(invoicesUpdatePurchasesRequestLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	i.ExpiryDate = expiryDate
+	i.require(invoicesUpdatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
 func (i *InvoicesUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
 	type embed InvoicesUpdatePurchasesRequestLinesItem
 	var unmarshaler = struct {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*i),
 	}
@@ -7942,6 +8215,7 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) err
 	*i = InvoicesUpdatePurchasesRequestLinesItem(unmarshaler.embed)
 	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	i.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -7957,10 +8231,12 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) 
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*i),
 		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(i.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -8589,19 +8865,23 @@ var (
 	invoicesUpdatePurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	invoicesUpdatePurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	invoicesUpdatePurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	invoicesUpdatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 5)
-	invoicesUpdatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 6)
-	invoicesUpdatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 7)
-	invoicesUpdatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 8)
-	invoicesUpdatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 9)
-	invoicesUpdatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 10)
-	invoicesUpdatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 11)
-	invoicesUpdatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 12)
-	invoicesUpdatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 13)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	invoicesUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	invoicesUpdatePurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	invoicesUpdatePurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	invoicesUpdatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
+	invoicesUpdatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
+	invoicesUpdatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
+	invoicesUpdatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
+	invoicesUpdatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
+	invoicesUpdatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
+	invoicesUpdatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
+	invoicesUpdatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
+	invoicesUpdatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
+	invoicesUpdatePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
+	invoicesUpdatePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
+	invoicesUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
 )
 
 type InvoicesUpdatePurchasesResponseLinesItem struct {
@@ -8610,6 +8890,8 @@ type InvoicesUpdatePurchasesResponseLinesItem struct {
 	Description       string     `json:"description" url:"description"`
 	Unit              string     `json:"unit" url:"unit"`
 	Quantity          string     `json:"quantity" url:"quantity"`
+	UnitFactor        string     `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string     `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat  *string    `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
@@ -8619,6 +8901,8 @@ type InvoicesUpdatePurchasesResponseLinesItem struct {
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -8664,6 +8948,20 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesUpdatePurchasesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -8727,6 +9025,20 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) GetDeferralEndDate() *time.Ti
 		return nil
 	}
 	return i.DeferralEndDate
+}
+
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetLotNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LotNumber
+}
+
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetExpiryDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ExpiryDate
 }
 
 func (i *InvoicesUpdatePurchasesResponseLinesItem) GetLineNet() string {
@@ -8806,6 +9118,20 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) SetQuantity(quantity string) 
 	i.require(invoicesUpdatePurchasesResponseLinesItemFieldQuantity)
 }
 
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldBaseQuantity)
+}
+
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdatePurchasesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
@@ -8869,6 +9195,20 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) SetDeferralEndDate(deferralEn
 	i.require(invoicesUpdatePurchasesResponseLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetLotNumber(lotNumber *string) {
+	i.LotNumber = lotNumber
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	i.ExpiryDate = expiryDate
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldExpiryDate)
+}
+
 // SetLineNet sets the LineNet field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdatePurchasesResponseLinesItem) SetLineNet(lineNet string) {
@@ -8903,6 +9243,7 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) UnmarshalJSON(data []byte) er
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*i),
 	}
@@ -8912,6 +9253,7 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) UnmarshalJSON(data []byte) er
 	*i = InvoicesUpdatePurchasesResponseLinesItem(unmarshaler.embed)
 	i.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	i.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	i.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *i)
 	if err != nil {
 		return err
@@ -8927,10 +9269,12 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) MarshalJSON() ([]byte, error)
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*i),
 		DeferralStartDate: internal.NewOptionalDate(i.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(i.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(i.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -9406,19 +9750,21 @@ var (
 	ordersApprovePurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersApprovePurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersApprovePurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersApprovePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersApprovePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersApprovePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersApprovePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersApprovePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersApprovePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersApprovePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersApprovePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersApprovePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersApprovePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersApprovePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersApprovePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersApprovePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersApprovePurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersApprovePurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersApprovePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersApprovePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersApprovePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersApprovePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersApprovePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersApprovePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersApprovePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersApprovePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersApprovePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersApprovePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersApprovePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersApprovePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersApprovePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersApprovePurchasesResponseLinesItem struct {
@@ -9427,6 +9773,8 @@ type OrdersApprovePurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -9481,6 +9829,20 @@ func (o *OrdersApprovePurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersApprovePurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersApprovePurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersApprovePurchasesResponseLinesItem) GetReceivedQty() string {
@@ -9621,6 +9983,20 @@ func (o *OrdersApprovePurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersApprovePurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersApprovePurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersApprovePurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersApprovePurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersApprovePurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersApprovePurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;
@@ -10179,19 +10555,21 @@ var (
 	ordersCancelPurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersCancelPurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersCancelPurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersCancelPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersCancelPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersCancelPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersCancelPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersCancelPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersCancelPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersCancelPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersCancelPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersCancelPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersCancelPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersCancelPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersCancelPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersCancelPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersCancelPurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersCancelPurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersCancelPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersCancelPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersCancelPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersCancelPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersCancelPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersCancelPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersCancelPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersCancelPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersCancelPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersCancelPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersCancelPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersCancelPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersCancelPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersCancelPurchasesResponseLinesItem struct {
@@ -10200,6 +10578,8 @@ type OrdersCancelPurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -10254,6 +10634,20 @@ func (o *OrdersCancelPurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersCancelPurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersCancelPurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersCancelPurchasesResponseLinesItem) GetReceivedQty() string {
@@ -10394,6 +10788,20 @@ func (o *OrdersCancelPurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersCancelPurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersCancelPurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCancelPurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersCancelPurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCancelPurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersCancelPurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;
@@ -10952,19 +11360,21 @@ var (
 	ordersClosePurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersClosePurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersClosePurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersClosePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersClosePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersClosePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersClosePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersClosePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersClosePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersClosePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersClosePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersClosePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersClosePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersClosePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersClosePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersClosePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersClosePurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersClosePurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersClosePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersClosePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersClosePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersClosePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersClosePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersClosePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersClosePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersClosePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersClosePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersClosePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersClosePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersClosePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersClosePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersClosePurchasesResponseLinesItem struct {
@@ -10973,6 +11383,8 @@ type OrdersClosePurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -11027,6 +11439,20 @@ func (o *OrdersClosePurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersClosePurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersClosePurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersClosePurchasesResponseLinesItem) GetReceivedQty() string {
@@ -11167,6 +11593,20 @@ func (o *OrdersClosePurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersClosePurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersClosePurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersClosePurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersClosePurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersClosePurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersClosePurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;
@@ -11353,6 +11793,8 @@ var (
 	ordersCreatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
 	ordersCreatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
 	ordersCreatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
+	ordersCreatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
+	ordersCreatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
 )
 
 type OrdersCreatePurchasesRequestLinesItem struct {
@@ -11369,6 +11811,8 @@ type OrdersCreatePurchasesRequestLinesItem struct {
 	AccountCode       *string                                        `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time                                     `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time                                     `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string                                        `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time                                     `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11466,6 +11910,20 @@ func (o *OrdersCreatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Time 
 		return nil
 	}
 	return o.DeferralEndDate
+}
+
+func (o *OrdersCreatePurchasesRequestLinesItem) GetLotNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LotNumber
+}
+
+func (o *OrdersCreatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ExpiryDate
 }
 
 func (o *OrdersCreatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -11573,12 +12031,27 @@ func (o *OrdersCreatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEndDa
 	o.require(ordersCreatePurchasesRequestLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string) {
+	o.LotNumber = lotNumber
+	o.require(ordersCreatePurchasesRequestLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	o.ExpiryDate = expiryDate
+	o.require(ordersCreatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
 func (o *OrdersCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
 	type embed OrdersCreatePurchasesRequestLinesItem
 	var unmarshaler = struct {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*o),
 	}
@@ -11588,6 +12061,7 @@ func (o *OrdersCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error
 	*o = OrdersCreatePurchasesRequestLinesItem(unmarshaler.embed)
 	o.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	o.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	o.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
@@ -11603,10 +12077,12 @@ func (o *OrdersCreatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*o),
 		DeferralStartDate: internal.NewOptionalDate(o.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(o.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(o.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -12075,19 +12551,21 @@ var (
 	ordersCreatePurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersCreatePurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersCreatePurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersCreatePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersCreatePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersCreatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersCreatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersCreatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersCreatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersCreatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersCreatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersCreatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersCreatePurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersCreatePurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersCreatePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersCreatePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersCreatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersCreatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersCreatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersCreatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersCreatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersCreatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersCreatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersCreatePurchasesResponseLinesItem struct {
@@ -12096,6 +12574,8 @@ type OrdersCreatePurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -12150,6 +12630,20 @@ func (o *OrdersCreatePurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersCreatePurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersCreatePurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersCreatePurchasesResponseLinesItem) GetReceivedQty() string {
@@ -12290,6 +12784,20 @@ func (o *OrdersCreatePurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersCreatePurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersCreatePurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersCreatePurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersCreatePurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;
@@ -12932,19 +13440,21 @@ var (
 	ordersGetPurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersGetPurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersGetPurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersGetPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersGetPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersGetPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersGetPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersGetPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersGetPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersGetPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersGetPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersGetPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersGetPurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersGetPurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersGetPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersGetPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersGetPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersGetPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersGetPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersGetPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersGetPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersGetPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersGetPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersGetPurchasesResponseLinesItem struct {
@@ -12953,6 +13463,8 @@ type OrdersGetPurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -13007,6 +13519,20 @@ func (o *OrdersGetPurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersGetPurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersGetPurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersGetPurchasesResponseLinesItem) GetReceivedQty() string {
@@ -13147,6 +13673,20 @@ func (o *OrdersGetPurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersGetPurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersGetPurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersGetPurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersGetPurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersGetPurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersGetPurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;
@@ -14725,19 +15265,21 @@ var (
 	ordersRejectPurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersRejectPurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersRejectPurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersRejectPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersRejectPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersRejectPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersRejectPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersRejectPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersRejectPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersRejectPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersRejectPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersRejectPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersRejectPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersRejectPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersRejectPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersRejectPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersRejectPurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersRejectPurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersRejectPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersRejectPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersRejectPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersRejectPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersRejectPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersRejectPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersRejectPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersRejectPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersRejectPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersRejectPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersRejectPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersRejectPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersRejectPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersRejectPurchasesResponseLinesItem struct {
@@ -14746,6 +15288,8 @@ type OrdersRejectPurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -14800,6 +15344,20 @@ func (o *OrdersRejectPurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersRejectPurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersRejectPurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersRejectPurchasesResponseLinesItem) GetReceivedQty() string {
@@ -14940,6 +15498,20 @@ func (o *OrdersRejectPurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersRejectPurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersRejectPurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersRejectPurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersRejectPurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersRejectPurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersRejectPurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;
@@ -15498,19 +16070,21 @@ var (
 	ordersSubmitPurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersSubmitPurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersSubmitPurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersSubmitPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersSubmitPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersSubmitPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersSubmitPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersSubmitPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersSubmitPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersSubmitPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersSubmitPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersSubmitPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersSubmitPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersSubmitPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersSubmitPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersSubmitPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersSubmitPurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersSubmitPurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersSubmitPurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersSubmitPurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersSubmitPurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersSubmitPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersSubmitPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersSubmitPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersSubmitPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersSubmitPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersSubmitPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersSubmitPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersSubmitPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersSubmitPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersSubmitPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersSubmitPurchasesResponseLinesItem struct {
@@ -15519,6 +16093,8 @@ type OrdersSubmitPurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -15573,6 +16149,20 @@ func (o *OrdersSubmitPurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersSubmitPurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersSubmitPurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersSubmitPurchasesResponseLinesItem) GetReceivedQty() string {
@@ -15713,6 +16303,20 @@ func (o *OrdersSubmitPurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersSubmitPurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersSubmitPurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersSubmitPurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersSubmitPurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersSubmitPurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersSubmitPurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;
@@ -15899,6 +16503,8 @@ var (
 	ordersUpdatePurchasesRequestLinesItemFieldAccountCode       = big.NewInt(1 << 10)
 	ordersUpdatePurchasesRequestLinesItemFieldDeferralStartDate = big.NewInt(1 << 11)
 	ordersUpdatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
+	ordersUpdatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
+	ordersUpdatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
 )
 
 type OrdersUpdatePurchasesRequestLinesItem struct {
@@ -15915,6 +16521,8 @@ type OrdersUpdatePurchasesRequestLinesItem struct {
 	AccountCode       *string                                        `json:"accountCode,omitempty" url:"accountCode,omitempty"`
 	DeferralStartDate *time.Time                                     `json:"deferralStartDate,omitempty" url:"deferralStartDate,omitempty" format:"date"`
 	DeferralEndDate   *time.Time                                     `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
+	LotNumber         *string                                        `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
+	ExpiryDate        *time.Time                                     `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16012,6 +16620,20 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) GetDeferralEndDate() *time.Time 
 		return nil
 	}
 	return o.DeferralEndDate
+}
+
+func (o *OrdersUpdatePurchasesRequestLinesItem) GetLotNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LotNumber
+}
+
+func (o *OrdersUpdatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ExpiryDate
 }
 
 func (o *OrdersUpdatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -16119,12 +16741,27 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) SetDeferralEndDate(deferralEndDa
 	o.require(ordersUpdatePurchasesRequestLinesItemFieldDeferralEndDate)
 }
 
+// SetLotNumber sets the LotNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string) {
+	o.LotNumber = lotNumber
+	o.require(ordersUpdatePurchasesRequestLinesItemFieldLotNumber)
+}
+
+// SetExpiryDate sets the ExpiryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
+	o.ExpiryDate = expiryDate
+	o.require(ordersUpdatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
 func (o *OrdersUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
 	type embed OrdersUpdatePurchasesRequestLinesItem
 	var unmarshaler = struct {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed: embed(*o),
 	}
@@ -16134,6 +16771,7 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error
 	*o = OrdersUpdatePurchasesRequestLinesItem(unmarshaler.embed)
 	o.DeferralStartDate = unmarshaler.DeferralStartDate.TimePtr()
 	o.DeferralEndDate = unmarshaler.DeferralEndDate.TimePtr()
+	o.ExpiryDate = unmarshaler.ExpiryDate.TimePtr()
 	extraProperties, err := internal.ExtractExtraProperties(data, *o)
 	if err != nil {
 		return err
@@ -16149,10 +16787,12 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) MarshalJSON() ([]byte, error) {
 		embed
 		DeferralStartDate *internal.Date `json:"deferralStartDate,omitempty"`
 		DeferralEndDate   *internal.Date `json:"deferralEndDate,omitempty"`
+		ExpiryDate        *internal.Date `json:"expiryDate,omitempty"`
 	}{
 		embed:             embed(*o),
 		DeferralStartDate: internal.NewOptionalDate(o.DeferralStartDate),
 		DeferralEndDate:   internal.NewOptionalDate(o.DeferralEndDate),
+		ExpiryDate:        internal.NewOptionalDate(o.ExpiryDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, o.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -16621,19 +17261,21 @@ var (
 	ordersUpdatePurchasesResponseLinesItemFieldDescription       = big.NewInt(1 << 2)
 	ordersUpdatePurchasesResponseLinesItemFieldUnit              = big.NewInt(1 << 3)
 	ordersUpdatePurchasesResponseLinesItemFieldQuantity          = big.NewInt(1 << 4)
-	ordersUpdatePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 5)
-	ordersUpdatePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 6)
-	ordersUpdatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 7)
-	ordersUpdatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
-	ordersUpdatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
-	ordersUpdatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	ordersUpdatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	ordersUpdatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	ordersUpdatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	ordersUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 14)
-	ordersUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 15)
-	ordersUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 16)
-	ordersUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 17)
+	ordersUpdatePurchasesResponseLinesItemFieldUnitFactor        = big.NewInt(1 << 5)
+	ordersUpdatePurchasesResponseLinesItemFieldBaseQuantity      = big.NewInt(1 << 6)
+	ordersUpdatePurchasesResponseLinesItemFieldReceivedQty       = big.NewInt(1 << 7)
+	ordersUpdatePurchasesResponseLinesItemFieldRemainingQty      = big.NewInt(1 << 8)
+	ordersUpdatePurchasesResponseLinesItemFieldUnitPriceExclVat  = big.NewInt(1 << 9)
+	ordersUpdatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 10)
+	ordersUpdatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 11)
+	ordersUpdatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 12)
+	ordersUpdatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 13)
+	ordersUpdatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 14)
+	ordersUpdatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 15)
+	ordersUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 16)
+	ordersUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 17)
+	ordersUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 18)
+	ordersUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 19)
 )
 
 type OrdersUpdatePurchasesResponseLinesItem struct {
@@ -16642,6 +17284,8 @@ type OrdersUpdatePurchasesResponseLinesItem struct {
 	Description       string  `json:"description" url:"description"`
 	Unit              string  `json:"unit" url:"unit"`
 	Quantity          string  `json:"quantity" url:"quantity"`
+	UnitFactor        string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity      string  `json:"baseQuantity" url:"baseQuantity"`
 	ReceivedQty       string  `json:"receivedQty" url:"receivedQty"`
 	RemainingQty      string  `json:"remainingQty" url:"remainingQty"`
 	UnitPriceExclVat  *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
@@ -16696,6 +17340,20 @@ func (o *OrdersUpdatePurchasesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return o.Quantity
+}
+
+func (o *OrdersUpdatePurchasesResponseLinesItem) GetUnitFactor() string {
+	if o == nil {
+		return ""
+	}
+	return o.UnitFactor
+}
+
+func (o *OrdersUpdatePurchasesResponseLinesItem) GetBaseQuantity() string {
+	if o == nil {
+		return ""
+	}
+	return o.BaseQuantity
 }
 
 func (o *OrdersUpdatePurchasesResponseLinesItem) GetReceivedQty() string {
@@ -16836,6 +17494,20 @@ func (o *OrdersUpdatePurchasesResponseLinesItem) SetUnit(unit string) {
 func (o *OrdersUpdatePurchasesResponseLinesItem) SetQuantity(quantity string) {
 	o.Quantity = quantity
 	o.require(ordersUpdatePurchasesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	o.UnitFactor = unitFactor
+	o.require(ordersUpdatePurchasesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	o.BaseQuantity = baseQuantity
+	o.require(ordersUpdatePurchasesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetReceivedQty sets the ReceivedQty field and marks it as non-optional;

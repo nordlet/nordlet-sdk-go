@@ -2168,10 +2168,11 @@ var (
 	vehiclesCreateFleetResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
 	vehiclesCreateFleetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
 	vehiclesCreateFleetResponseFieldStatus                 = big.NewInt(1 << 12)
-	vehiclesCreateFleetResponseFieldNotes                  = big.NewInt(1 << 13)
-	vehiclesCreateFleetResponseFieldDocuments              = big.NewInt(1 << 14)
-	vehiclesCreateFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
-	vehiclesCreateFleetResponseFieldCreatedAt              = big.NewInt(1 << 16)
+	vehiclesCreateFleetResponseFieldDisposalDate           = big.NewInt(1 << 13)
+	vehiclesCreateFleetResponseFieldNotes                  = big.NewInt(1 << 14)
+	vehiclesCreateFleetResponseFieldDocuments              = big.NewInt(1 << 15)
+	vehiclesCreateFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 16)
+	vehiclesCreateFleetResponseFieldCreatedAt              = big.NewInt(1 << 17)
 )
 
 type VehiclesCreateFleetResponse struct {
@@ -2188,6 +2189,7 @@ type VehiclesCreateFleetResponse struct {
 	TechnicalInspectionDue *string                                       `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
 	InsuranceDue           *string                                       `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 VehiclesCreateFleetResponseStatus             `json:"status" url:"status"`
+	DisposalDate           *time.Time                                    `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
 	Notes                  *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
 	Documents              []*VehiclesCreateFleetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *VehiclesCreateFleetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
@@ -2289,6 +2291,13 @@ func (v *VehiclesCreateFleetResponse) GetStatus() VehiclesCreateFleetResponseSta
 		return ""
 	}
 	return v.Status
+}
+
+func (v *VehiclesCreateFleetResponse) GetDisposalDate() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.DisposalDate
 }
 
 func (v *VehiclesCreateFleetResponse) GetNotes() *string {
@@ -2424,6 +2433,13 @@ func (v *VehiclesCreateFleetResponse) SetStatus(status VehiclesCreateFleetRespon
 	v.require(vehiclesCreateFleetResponseFieldStatus)
 }
 
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetResponse) SetDisposalDate(disposalDate *time.Time) {
+	v.DisposalDate = disposalDate
+	v.require(vehiclesCreateFleetResponseFieldDisposalDate)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (v *VehiclesCreateFleetResponse) SetNotes(notes *string) {
@@ -2457,6 +2473,7 @@ func (v *VehiclesCreateFleetResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed: embed(*v),
@@ -2466,6 +2483,7 @@ func (v *VehiclesCreateFleetResponse) UnmarshalJSON(data []byte) error {
 	}
 	*v = VehiclesCreateFleetResponse(unmarshaler.embed)
 	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.DisposalDate = unmarshaler.DisposalDate.TimePtr()
 	v.CreatedAt = unmarshaler.CreatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
@@ -2481,10 +2499,12 @@ func (v *VehiclesCreateFleetResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed:           embed(*v),
 		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		DisposalDate:    internal.NewOptionalDate(v.DisposalDate),
 		CreatedAt:       internal.NewDateTime(v.CreatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
@@ -2817,10 +2837,11 @@ var (
 	vehiclesGetFleetResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
 	vehiclesGetFleetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
 	vehiclesGetFleetResponseFieldStatus                 = big.NewInt(1 << 12)
-	vehiclesGetFleetResponseFieldNotes                  = big.NewInt(1 << 13)
-	vehiclesGetFleetResponseFieldDocuments              = big.NewInt(1 << 14)
-	vehiclesGetFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
-	vehiclesGetFleetResponseFieldCreatedAt              = big.NewInt(1 << 16)
+	vehiclesGetFleetResponseFieldDisposalDate           = big.NewInt(1 << 13)
+	vehiclesGetFleetResponseFieldNotes                  = big.NewInt(1 << 14)
+	vehiclesGetFleetResponseFieldDocuments              = big.NewInt(1 << 15)
+	vehiclesGetFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 16)
+	vehiclesGetFleetResponseFieldCreatedAt              = big.NewInt(1 << 17)
 )
 
 type VehiclesGetFleetResponse struct {
@@ -2837,6 +2858,7 @@ type VehiclesGetFleetResponse struct {
 	TechnicalInspectionDue *string                                    `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
 	InsuranceDue           *string                                    `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 VehiclesGetFleetResponseStatus             `json:"status" url:"status"`
+	DisposalDate           *time.Time                                 `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
 	Notes                  *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
 	Documents              []*VehiclesGetFleetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *VehiclesGetFleetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
@@ -2938,6 +2960,13 @@ func (v *VehiclesGetFleetResponse) GetStatus() VehiclesGetFleetResponseStatus {
 		return ""
 	}
 	return v.Status
+}
+
+func (v *VehiclesGetFleetResponse) GetDisposalDate() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.DisposalDate
 }
 
 func (v *VehiclesGetFleetResponse) GetNotes() *string {
@@ -3073,6 +3102,13 @@ func (v *VehiclesGetFleetResponse) SetStatus(status VehiclesGetFleetResponseStat
 	v.require(vehiclesGetFleetResponseFieldStatus)
 }
 
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesGetFleetResponse) SetDisposalDate(disposalDate *time.Time) {
+	v.DisposalDate = disposalDate
+	v.require(vehiclesGetFleetResponseFieldDisposalDate)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (v *VehiclesGetFleetResponse) SetNotes(notes *string) {
@@ -3106,6 +3142,7 @@ func (v *VehiclesGetFleetResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed: embed(*v),
@@ -3115,6 +3152,7 @@ func (v *VehiclesGetFleetResponse) UnmarshalJSON(data []byte) error {
 	}
 	*v = VehiclesGetFleetResponse(unmarshaler.embed)
 	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.DisposalDate = unmarshaler.DisposalDate.TimePtr()
 	v.CreatedAt = unmarshaler.CreatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
@@ -3130,10 +3168,12 @@ func (v *VehiclesGetFleetResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed:           embed(*v),
 		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		DisposalDate:    internal.NewOptionalDate(v.DisposalDate),
 		CreatedAt:       internal.NewDateTime(v.CreatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
@@ -4069,10 +4109,11 @@ var (
 	vehiclesListFleetResponseRowsItemFieldTechnicalInspectionDue = big.NewInt(1 << 10)
 	vehiclesListFleetResponseRowsItemFieldInsuranceDue           = big.NewInt(1 << 11)
 	vehiclesListFleetResponseRowsItemFieldStatus                 = big.NewInt(1 << 12)
-	vehiclesListFleetResponseRowsItemFieldNotes                  = big.NewInt(1 << 13)
-	vehiclesListFleetResponseRowsItemFieldDocuments              = big.NewInt(1 << 14)
-	vehiclesListFleetResponseRowsItemFieldCurrentAssignment      = big.NewInt(1 << 15)
-	vehiclesListFleetResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 16)
+	vehiclesListFleetResponseRowsItemFieldDisposalDate           = big.NewInt(1 << 13)
+	vehiclesListFleetResponseRowsItemFieldNotes                  = big.NewInt(1 << 14)
+	vehiclesListFleetResponseRowsItemFieldDocuments              = big.NewInt(1 << 15)
+	vehiclesListFleetResponseRowsItemFieldCurrentAssignment      = big.NewInt(1 << 16)
+	vehiclesListFleetResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 17)
 )
 
 type VehiclesListFleetResponseRowsItem struct {
@@ -4089,6 +4130,7 @@ type VehiclesListFleetResponseRowsItem struct {
 	TechnicalInspectionDue *string                                             `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
 	InsuranceDue           *string                                             `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 VehiclesListFleetResponseRowsItemStatus             `json:"status" url:"status"`
+	DisposalDate           *time.Time                                          `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
 	Notes                  *string                                             `json:"notes,omitempty" url:"notes,omitempty"`
 	Documents              []*VehiclesListFleetResponseRowsItemDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *VehiclesListFleetResponseRowsItemCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
@@ -4190,6 +4232,13 @@ func (v *VehiclesListFleetResponseRowsItem) GetStatus() VehiclesListFleetRespons
 		return ""
 	}
 	return v.Status
+}
+
+func (v *VehiclesListFleetResponseRowsItem) GetDisposalDate() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.DisposalDate
 }
 
 func (v *VehiclesListFleetResponseRowsItem) GetNotes() *string {
@@ -4325,6 +4374,13 @@ func (v *VehiclesListFleetResponseRowsItem) SetStatus(status VehiclesListFleetRe
 	v.require(vehiclesListFleetResponseRowsItemFieldStatus)
 }
 
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesListFleetResponseRowsItem) SetDisposalDate(disposalDate *time.Time) {
+	v.DisposalDate = disposalDate
+	v.require(vehiclesListFleetResponseRowsItemFieldDisposalDate)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (v *VehiclesListFleetResponseRowsItem) SetNotes(notes *string) {
@@ -4358,6 +4414,7 @@ func (v *VehiclesListFleetResponseRowsItem) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed: embed(*v),
@@ -4367,6 +4424,7 @@ func (v *VehiclesListFleetResponseRowsItem) UnmarshalJSON(data []byte) error {
 	}
 	*v = VehiclesListFleetResponseRowsItem(unmarshaler.embed)
 	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.DisposalDate = unmarshaler.DisposalDate.TimePtr()
 	v.CreatedAt = unmarshaler.CreatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
@@ -4382,10 +4440,12 @@ func (v *VehiclesListFleetResponseRowsItem) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed:           embed(*v),
 		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		DisposalDate:    internal.NewOptionalDate(v.DisposalDate),
 		CreatedAt:       internal.NewDateTime(v.CreatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
@@ -4777,10 +4837,11 @@ var (
 	vehiclesUpdateFleetResponseFieldTechnicalInspectionDue = big.NewInt(1 << 10)
 	vehiclesUpdateFleetResponseFieldInsuranceDue           = big.NewInt(1 << 11)
 	vehiclesUpdateFleetResponseFieldStatus                 = big.NewInt(1 << 12)
-	vehiclesUpdateFleetResponseFieldNotes                  = big.NewInt(1 << 13)
-	vehiclesUpdateFleetResponseFieldDocuments              = big.NewInt(1 << 14)
-	vehiclesUpdateFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 15)
-	vehiclesUpdateFleetResponseFieldCreatedAt              = big.NewInt(1 << 16)
+	vehiclesUpdateFleetResponseFieldDisposalDate           = big.NewInt(1 << 13)
+	vehiclesUpdateFleetResponseFieldNotes                  = big.NewInt(1 << 14)
+	vehiclesUpdateFleetResponseFieldDocuments              = big.NewInt(1 << 15)
+	vehiclesUpdateFleetResponseFieldCurrentAssignment      = big.NewInt(1 << 16)
+	vehiclesUpdateFleetResponseFieldCreatedAt              = big.NewInt(1 << 17)
 )
 
 type VehiclesUpdateFleetResponse struct {
@@ -4797,6 +4858,7 @@ type VehiclesUpdateFleetResponse struct {
 	TechnicalInspectionDue *string                                       `json:"technicalInspectionDue,omitempty" url:"technicalInspectionDue,omitempty"`
 	InsuranceDue           *string                                       `json:"insuranceDue,omitempty" url:"insuranceDue,omitempty"`
 	Status                 VehiclesUpdateFleetResponseStatus             `json:"status" url:"status"`
+	DisposalDate           *time.Time                                    `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
 	Notes                  *string                                       `json:"notes,omitempty" url:"notes,omitempty"`
 	Documents              []*VehiclesUpdateFleetResponseDocumentsItem   `json:"documents,omitempty" url:"documents,omitempty"`
 	CurrentAssignment      *VehiclesUpdateFleetResponseCurrentAssignment `json:"currentAssignment,omitempty" url:"currentAssignment,omitempty"`
@@ -4898,6 +4960,13 @@ func (v *VehiclesUpdateFleetResponse) GetStatus() VehiclesUpdateFleetResponseSta
 		return ""
 	}
 	return v.Status
+}
+
+func (v *VehiclesUpdateFleetResponse) GetDisposalDate() *time.Time {
+	if v == nil {
+		return nil
+	}
+	return v.DisposalDate
 }
 
 func (v *VehiclesUpdateFleetResponse) GetNotes() *string {
@@ -5033,6 +5102,13 @@ func (v *VehiclesUpdateFleetResponse) SetStatus(status VehiclesUpdateFleetRespon
 	v.require(vehiclesUpdateFleetResponseFieldStatus)
 }
 
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetResponse) SetDisposalDate(disposalDate *time.Time) {
+	v.DisposalDate = disposalDate
+	v.require(vehiclesUpdateFleetResponseFieldDisposalDate)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (v *VehiclesUpdateFleetResponse) SetNotes(notes *string) {
@@ -5066,6 +5142,7 @@ func (v *VehiclesUpdateFleetResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed: embed(*v),
@@ -5075,6 +5152,7 @@ func (v *VehiclesUpdateFleetResponse) UnmarshalJSON(data []byte) error {
 	}
 	*v = VehiclesUpdateFleetResponse(unmarshaler.embed)
 	v.AcquisitionDate = unmarshaler.AcquisitionDate.TimePtr()
+	v.DisposalDate = unmarshaler.DisposalDate.TimePtr()
 	v.CreatedAt = unmarshaler.CreatedAt.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *v)
 	if err != nil {
@@ -5090,10 +5168,12 @@ func (v *VehiclesUpdateFleetResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		AcquisitionDate *internal.Date     `json:"acquisitionDate,omitempty"`
+		DisposalDate    *internal.Date     `json:"disposalDate,omitempty"`
 		CreatedAt       *internal.DateTime `json:"createdAt"`
 	}{
 		embed:           embed(*v),
 		AcquisitionDate: internal.NewOptionalDate(v.AcquisitionDate),
+		DisposalDate:    internal.NewOptionalDate(v.DisposalDate),
 		CreatedAt:       internal.NewDateTime(v.CreatedAt),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
@@ -5424,8 +5504,9 @@ var (
 	vehiclesCreateFleetRequestFieldFixedAssetID           = big.NewInt(1 << 8)
 	vehiclesCreateFleetRequestFieldTechnicalInspectionDue = big.NewInt(1 << 9)
 	vehiclesCreateFleetRequestFieldInsuranceDue           = big.NewInt(1 << 10)
-	vehiclesCreateFleetRequestFieldNotes                  = big.NewInt(1 << 11)
-	vehiclesCreateFleetRequestFieldDocuments              = big.NewInt(1 << 12)
+	vehiclesCreateFleetRequestFieldDisposalDate           = big.NewInt(1 << 11)
+	vehiclesCreateFleetRequestFieldNotes                  = big.NewInt(1 << 12)
+	vehiclesCreateFleetRequestFieldDocuments              = big.NewInt(1 << 13)
 )
 
 type VehiclesCreateFleetRequest struct {
@@ -5440,6 +5521,7 @@ type VehiclesCreateFleetRequest struct {
 	FixedAssetID           *string                                    `json:"fixedAssetId,omitempty" url:"-"`
 	TechnicalInspectionDue *time.Time                                 `json:"technicalInspectionDue,omitempty" url:"-" format:"date"`
 	InsuranceDue           *time.Time                                 `json:"insuranceDue,omitempty" url:"-" format:"date"`
+	DisposalDate           *time.Time                                 `json:"disposalDate,omitempty" url:"-" format:"date"`
 	Notes                  *string                                    `json:"notes,omitempty" url:"-"`
 	Documents              []*VehiclesCreateFleetRequestDocumentsItem `json:"documents,omitempty" url:"-"`
 
@@ -5531,6 +5613,13 @@ func (v *VehiclesCreateFleetRequest) SetInsuranceDue(insuranceDue *time.Time) {
 	v.require(vehiclesCreateFleetRequestFieldInsuranceDue)
 }
 
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesCreateFleetRequest) SetDisposalDate(disposalDate *time.Time) {
+	v.DisposalDate = disposalDate
+	v.require(vehiclesCreateFleetRequestFieldDisposalDate)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (v *VehiclesCreateFleetRequest) SetNotes(notes *string) {
@@ -5562,11 +5651,13 @@ func (v *VehiclesCreateFleetRequest) MarshalJSON() ([]byte, error) {
 		AcquisitionDate        *internal.Date `json:"acquisitionDate,omitempty"`
 		TechnicalInspectionDue *internal.Date `json:"technicalInspectionDue,omitempty"`
 		InsuranceDue           *internal.Date `json:"insuranceDue,omitempty"`
+		DisposalDate           *internal.Date `json:"disposalDate,omitempty"`
 	}{
 		embed:                  embed(*v),
 		AcquisitionDate:        internal.NewOptionalDate(v.AcquisitionDate),
 		TechnicalInspectionDue: internal.NewOptionalDate(v.TechnicalInspectionDue),
 		InsuranceDue:           internal.NewOptionalDate(v.InsuranceDue),
+		DisposalDate:           internal.NewOptionalDate(v.DisposalDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -5715,7 +5806,8 @@ var (
 	vehiclesUpdateFleetRequestFieldTechnicalInspectionDue = big.NewInt(1 << 10)
 	vehiclesUpdateFleetRequestFieldInsuranceDue           = big.NewInt(1 << 11)
 	vehiclesUpdateFleetRequestFieldStatus                 = big.NewInt(1 << 12)
-	vehiclesUpdateFleetRequestFieldNotes                  = big.NewInt(1 << 13)
+	vehiclesUpdateFleetRequestFieldDisposalDate           = big.NewInt(1 << 13)
+	vehiclesUpdateFleetRequestFieldNotes                  = big.NewInt(1 << 14)
 )
 
 type VehiclesUpdateFleetRequest struct {
@@ -5732,6 +5824,7 @@ type VehiclesUpdateFleetRequest struct {
 	TechnicalInspectionDue *time.Time                          `json:"technicalInspectionDue,omitempty" url:"-" format:"date"`
 	InsuranceDue           *time.Time                          `json:"insuranceDue,omitempty" url:"-" format:"date"`
 	Status                 *VehiclesUpdateFleetRequestStatus   `json:"status,omitempty" url:"-"`
+	DisposalDate           *time.Time                          `json:"disposalDate,omitempty" url:"-" format:"date"`
 	Notes                  *string                             `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -5836,6 +5929,13 @@ func (v *VehiclesUpdateFleetRequest) SetStatus(status *VehiclesUpdateFleetReques
 	v.require(vehiclesUpdateFleetRequestFieldStatus)
 }
 
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VehiclesUpdateFleetRequest) SetDisposalDate(disposalDate *time.Time) {
+	v.DisposalDate = disposalDate
+	v.require(vehiclesUpdateFleetRequestFieldDisposalDate)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (v *VehiclesUpdateFleetRequest) SetNotes(notes *string) {
@@ -5860,11 +5960,13 @@ func (v *VehiclesUpdateFleetRequest) MarshalJSON() ([]byte, error) {
 		AcquisitionDate        *internal.Date `json:"acquisitionDate,omitempty"`
 		TechnicalInspectionDue *internal.Date `json:"technicalInspectionDue,omitempty"`
 		InsuranceDue           *internal.Date `json:"insuranceDue,omitempty"`
+		DisposalDate           *internal.Date `json:"disposalDate,omitempty"`
 	}{
 		embed:                  embed(*v),
 		AcquisitionDate:        internal.NewOptionalDate(v.AcquisitionDate),
 		TechnicalInspectionDue: internal.NewOptionalDate(v.TechnicalInspectionDue),
 		InsuranceDue:           internal.NewOptionalDate(v.InsuranceDue),
+		DisposalDate:           internal.NewOptionalDate(v.DisposalDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)

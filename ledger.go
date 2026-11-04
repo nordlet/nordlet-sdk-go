@@ -11191,6 +11191,8 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeyInventoryStock               PostingRulesUpdateLedgerRequestRulesItemKey = "inventory.stock"
 	PostingRulesUpdateLedgerRequestRulesItemKeyProductionLaborApplied       PostingRulesUpdateLedgerRequestRulesItemKey = "production.laborApplied"
 	PostingRulesUpdateLedgerRequestRulesItemKeyProductionScrap              PostingRulesUpdateLedgerRequestRulesItemKey = "production.scrap"
+	PostingRulesUpdateLedgerRequestRulesItemKeyPosCashShortage              PostingRulesUpdateLedgerRequestRulesItemKey = "pos.cashShortage"
+	PostingRulesUpdateLedgerRequestRulesItemKeyPosCashSurplus               PostingRulesUpdateLedgerRequestRulesItemKey = "pos.cashSurplus"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxGain                   PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxGain"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxLoss                   PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxLoss"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFees                     PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fees"
@@ -11248,6 +11250,10 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeyProductionLaborApplied, nil
 	case "production.scrap":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyProductionScrap, nil
+	case "pos.cashShortage":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyPosCashShortage, nil
+	case "pos.cashSurplus":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyPosCashSurplus, nil
 	case "bank.fxGain":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFxGain, nil
 	case "bank.fxLoss":

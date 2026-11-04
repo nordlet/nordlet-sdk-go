@@ -2572,6 +2572,32 @@ func TestDeclarationsSubmissionsRetryWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsSubmissionsRetryWithWireMock", "POST", "/v1/declarations/submissions/retry", nil, 1)
 }
 
+func TestDeclarationsSubmissionsConfirmWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SubmissionsConfirmDeclarationsRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.SubmissionsConfirm(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsSubmissionsConfirmWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsSubmissionsConfirmWithWireMock", "POST", "/v1/declarations/submissions/confirm", nil, 1)
+}
+
 func TestDeclarationsSubmissionsCreateWithWireMock(
 	t *testing.T,
 ) {

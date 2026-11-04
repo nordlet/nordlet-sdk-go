@@ -277,19 +277,21 @@ func (m *MaintenanceCancelProductionRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	maintenanceCompleteProductionRequestFieldID            = big.NewInt(1 << 0)
-	maintenanceCompleteProductionRequestFieldCompletedDate = big.NewInt(1 << 1)
-	maintenanceCompleteProductionRequestFieldDowntimeHours = big.NewInt(1 << 2)
-	maintenanceCompleteProductionRequestFieldCost          = big.NewInt(1 << 3)
-	maintenanceCompleteProductionRequestFieldNotes         = big.NewInt(1 << 4)
+	maintenanceCompleteProductionRequestFieldID                = big.NewInt(1 << 0)
+	maintenanceCompleteProductionRequestFieldCompletedDate     = big.NewInt(1 << 1)
+	maintenanceCompleteProductionRequestFieldDowntimeHours     = big.NewInt(1 << 2)
+	maintenanceCompleteProductionRequestFieldCost              = big.NewInt(1 << 3)
+	maintenanceCompleteProductionRequestFieldPurchaseInvoiceID = big.NewInt(1 << 4)
+	maintenanceCompleteProductionRequestFieldNotes             = big.NewInt(1 << 5)
 )
 
 type MaintenanceCompleteProductionRequest struct {
-	ID            string    `json:"id" url:"-"`
-	CompletedDate time.Time `json:"completedDate" url:"-" format:"date"`
-	DowntimeHours *string   `json:"downtimeHours,omitempty" url:"-"`
-	Cost          *string   `json:"cost,omitempty" url:"-"`
-	Notes         *string   `json:"notes,omitempty" url:"-"`
+	ID                string    `json:"id" url:"-"`
+	CompletedDate     time.Time `json:"completedDate" url:"-" format:"date"`
+	DowntimeHours     *string   `json:"downtimeHours,omitempty" url:"-"`
+	Cost              *string   `json:"cost,omitempty" url:"-"`
+	PurchaseInvoiceID *string   `json:"purchaseInvoiceId,omitempty" url:"-"`
+	Notes             *string   `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -330,6 +332,13 @@ func (m *MaintenanceCompleteProductionRequest) SetCost(cost *string) {
 	m.require(maintenanceCompleteProductionRequestFieldCost)
 }
 
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MaintenanceCompleteProductionRequest) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	m.PurchaseInvoiceID = purchaseInvoiceID
+	m.require(maintenanceCompleteProductionRequestFieldPurchaseInvoiceID)
+}
+
 // SetNotes sets the Notes field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (m *MaintenanceCompleteProductionRequest) SetNotes(notes *string) {
@@ -361,19 +370,21 @@ func (m *MaintenanceCompleteProductionRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	maintenanceCreateProductionRequestFieldWorkCenterID = big.NewInt(1 << 0)
-	maintenanceCreateProductionRequestFieldType         = big.NewInt(1 << 1)
-	maintenanceCreateProductionRequestFieldPlannedDate  = big.NewInt(1 << 2)
-	maintenanceCreateProductionRequestFieldDescription  = big.NewInt(1 << 3)
-	maintenanceCreateProductionRequestFieldNotes        = big.NewInt(1 << 4)
+	maintenanceCreateProductionRequestFieldWorkCenterID      = big.NewInt(1 << 0)
+	maintenanceCreateProductionRequestFieldType              = big.NewInt(1 << 1)
+	maintenanceCreateProductionRequestFieldPlannedDate       = big.NewInt(1 << 2)
+	maintenanceCreateProductionRequestFieldDescription       = big.NewInt(1 << 3)
+	maintenanceCreateProductionRequestFieldPurchaseInvoiceID = big.NewInt(1 << 4)
+	maintenanceCreateProductionRequestFieldNotes             = big.NewInt(1 << 5)
 )
 
 type MaintenanceCreateProductionRequest struct {
-	WorkCenterID string                                 `json:"workCenterId" url:"-"`
-	Type         MaintenanceCreateProductionRequestType `json:"type" url:"-"`
-	PlannedDate  time.Time                              `json:"plannedDate" url:"-" format:"date"`
-	Description  *string                                `json:"description,omitempty" url:"-"`
-	Notes        *string                                `json:"notes,omitempty" url:"-"`
+	WorkCenterID      string                                 `json:"workCenterId" url:"-"`
+	Type              MaintenanceCreateProductionRequestType `json:"type" url:"-"`
+	PlannedDate       time.Time                              `json:"plannedDate" url:"-" format:"date"`
+	Description       *string                                `json:"description,omitempty" url:"-"`
+	PurchaseInvoiceID *string                                `json:"purchaseInvoiceId,omitempty" url:"-"`
+	Notes             *string                                `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -412,6 +423,13 @@ func (m *MaintenanceCreateProductionRequest) SetPlannedDate(plannedDate time.Tim
 func (m *MaintenanceCreateProductionRequest) SetDescription(description *string) {
 	m.Description = description
 	m.require(maintenanceCreateProductionRequestFieldDescription)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MaintenanceCreateProductionRequest) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	m.PurchaseInvoiceID = purchaseInvoiceID
+	m.require(maintenanceCreateProductionRequestFieldPurchaseInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -2855,31 +2873,33 @@ func (b *BomsListProductionResponseRowsItem) String() string {
 }
 
 var (
-	maintenanceCancelProductionResponseFieldID            = big.NewInt(1 << 0)
-	maintenanceCancelProductionResponseFieldWorkCenterID  = big.NewInt(1 << 1)
-	maintenanceCancelProductionResponseFieldType          = big.NewInt(1 << 2)
-	maintenanceCancelProductionResponseFieldStatus        = big.NewInt(1 << 3)
-	maintenanceCancelProductionResponseFieldPlannedDate   = big.NewInt(1 << 4)
-	maintenanceCancelProductionResponseFieldCompletedDate = big.NewInt(1 << 5)
-	maintenanceCancelProductionResponseFieldDescription   = big.NewInt(1 << 6)
-	maintenanceCancelProductionResponseFieldDowntimeHours = big.NewInt(1 << 7)
-	maintenanceCancelProductionResponseFieldCost          = big.NewInt(1 << 8)
-	maintenanceCancelProductionResponseFieldNotes         = big.NewInt(1 << 9)
-	maintenanceCancelProductionResponseFieldCreatedAt     = big.NewInt(1 << 10)
+	maintenanceCancelProductionResponseFieldID                = big.NewInt(1 << 0)
+	maintenanceCancelProductionResponseFieldWorkCenterID      = big.NewInt(1 << 1)
+	maintenanceCancelProductionResponseFieldType              = big.NewInt(1 << 2)
+	maintenanceCancelProductionResponseFieldStatus            = big.NewInt(1 << 3)
+	maintenanceCancelProductionResponseFieldPlannedDate       = big.NewInt(1 << 4)
+	maintenanceCancelProductionResponseFieldCompletedDate     = big.NewInt(1 << 5)
+	maintenanceCancelProductionResponseFieldDescription       = big.NewInt(1 << 6)
+	maintenanceCancelProductionResponseFieldDowntimeHours     = big.NewInt(1 << 7)
+	maintenanceCancelProductionResponseFieldCost              = big.NewInt(1 << 8)
+	maintenanceCancelProductionResponseFieldPurchaseInvoiceID = big.NewInt(1 << 9)
+	maintenanceCancelProductionResponseFieldNotes             = big.NewInt(1 << 10)
+	maintenanceCancelProductionResponseFieldCreatedAt         = big.NewInt(1 << 11)
 )
 
 type MaintenanceCancelProductionResponse struct {
-	ID            string                                    `json:"id" url:"id"`
-	WorkCenterID  string                                    `json:"workCenterId" url:"workCenterId"`
-	Type          MaintenanceCancelProductionResponseType   `json:"type" url:"type"`
-	Status        MaintenanceCancelProductionResponseStatus `json:"status" url:"status"`
-	PlannedDate   time.Time                                 `json:"plannedDate" url:"plannedDate" format:"date"`
-	CompletedDate *time.Time                                `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
-	Description   *string                                   `json:"description,omitempty" url:"description,omitempty"`
-	DowntimeHours *string                                   `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
-	Cost          *string                                   `json:"cost,omitempty" url:"cost,omitempty"`
-	Notes         *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt     time.Time                                 `json:"createdAt" url:"createdAt"`
+	ID                string                                    `json:"id" url:"id"`
+	WorkCenterID      string                                    `json:"workCenterId" url:"workCenterId"`
+	Type              MaintenanceCancelProductionResponseType   `json:"type" url:"type"`
+	Status            MaintenanceCancelProductionResponseStatus `json:"status" url:"status"`
+	PlannedDate       time.Time                                 `json:"plannedDate" url:"plannedDate" format:"date"`
+	CompletedDate     *time.Time                                `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
+	Description       *string                                   `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours     *string                                   `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost              *string                                   `json:"cost,omitempty" url:"cost,omitempty"`
+	PurchaseInvoiceID *string                                   `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Notes             *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2949,6 +2969,13 @@ func (m *MaintenanceCancelProductionResponse) GetCost() *string {
 		return nil
 	}
 	return m.Cost
+}
+
+func (m *MaintenanceCancelProductionResponse) GetPurchaseInvoiceID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.PurchaseInvoiceID
 }
 
 func (m *MaintenanceCancelProductionResponse) GetNotes() *string {
@@ -3040,6 +3067,13 @@ func (m *MaintenanceCancelProductionResponse) SetDowntimeHours(downtimeHours *st
 func (m *MaintenanceCancelProductionResponse) SetCost(cost *string) {
 	m.Cost = cost
 	m.require(maintenanceCancelProductionResponseFieldCost)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MaintenanceCancelProductionResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	m.PurchaseInvoiceID = purchaseInvoiceID
+	m.require(maintenanceCancelProductionResponseFieldPurchaseInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -3162,31 +3196,33 @@ func (m MaintenanceCancelProductionResponseType) Ptr() *MaintenanceCancelProduct
 }
 
 var (
-	maintenanceCompleteProductionResponseFieldID            = big.NewInt(1 << 0)
-	maintenanceCompleteProductionResponseFieldWorkCenterID  = big.NewInt(1 << 1)
-	maintenanceCompleteProductionResponseFieldType          = big.NewInt(1 << 2)
-	maintenanceCompleteProductionResponseFieldStatus        = big.NewInt(1 << 3)
-	maintenanceCompleteProductionResponseFieldPlannedDate   = big.NewInt(1 << 4)
-	maintenanceCompleteProductionResponseFieldCompletedDate = big.NewInt(1 << 5)
-	maintenanceCompleteProductionResponseFieldDescription   = big.NewInt(1 << 6)
-	maintenanceCompleteProductionResponseFieldDowntimeHours = big.NewInt(1 << 7)
-	maintenanceCompleteProductionResponseFieldCost          = big.NewInt(1 << 8)
-	maintenanceCompleteProductionResponseFieldNotes         = big.NewInt(1 << 9)
-	maintenanceCompleteProductionResponseFieldCreatedAt     = big.NewInt(1 << 10)
+	maintenanceCompleteProductionResponseFieldID                = big.NewInt(1 << 0)
+	maintenanceCompleteProductionResponseFieldWorkCenterID      = big.NewInt(1 << 1)
+	maintenanceCompleteProductionResponseFieldType              = big.NewInt(1 << 2)
+	maintenanceCompleteProductionResponseFieldStatus            = big.NewInt(1 << 3)
+	maintenanceCompleteProductionResponseFieldPlannedDate       = big.NewInt(1 << 4)
+	maintenanceCompleteProductionResponseFieldCompletedDate     = big.NewInt(1 << 5)
+	maintenanceCompleteProductionResponseFieldDescription       = big.NewInt(1 << 6)
+	maintenanceCompleteProductionResponseFieldDowntimeHours     = big.NewInt(1 << 7)
+	maintenanceCompleteProductionResponseFieldCost              = big.NewInt(1 << 8)
+	maintenanceCompleteProductionResponseFieldPurchaseInvoiceID = big.NewInt(1 << 9)
+	maintenanceCompleteProductionResponseFieldNotes             = big.NewInt(1 << 10)
+	maintenanceCompleteProductionResponseFieldCreatedAt         = big.NewInt(1 << 11)
 )
 
 type MaintenanceCompleteProductionResponse struct {
-	ID            string                                      `json:"id" url:"id"`
-	WorkCenterID  string                                      `json:"workCenterId" url:"workCenterId"`
-	Type          MaintenanceCompleteProductionResponseType   `json:"type" url:"type"`
-	Status        MaintenanceCompleteProductionResponseStatus `json:"status" url:"status"`
-	PlannedDate   time.Time                                   `json:"plannedDate" url:"plannedDate" format:"date"`
-	CompletedDate *time.Time                                  `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
-	Description   *string                                     `json:"description,omitempty" url:"description,omitempty"`
-	DowntimeHours *string                                     `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
-	Cost          *string                                     `json:"cost,omitempty" url:"cost,omitempty"`
-	Notes         *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt     time.Time                                   `json:"createdAt" url:"createdAt"`
+	ID                string                                      `json:"id" url:"id"`
+	WorkCenterID      string                                      `json:"workCenterId" url:"workCenterId"`
+	Type              MaintenanceCompleteProductionResponseType   `json:"type" url:"type"`
+	Status            MaintenanceCompleteProductionResponseStatus `json:"status" url:"status"`
+	PlannedDate       time.Time                                   `json:"plannedDate" url:"plannedDate" format:"date"`
+	CompletedDate     *time.Time                                  `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
+	Description       *string                                     `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours     *string                                     `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost              *string                                     `json:"cost,omitempty" url:"cost,omitempty"`
+	PurchaseInvoiceID *string                                     `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Notes             *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                   `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3256,6 +3292,13 @@ func (m *MaintenanceCompleteProductionResponse) GetCost() *string {
 		return nil
 	}
 	return m.Cost
+}
+
+func (m *MaintenanceCompleteProductionResponse) GetPurchaseInvoiceID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.PurchaseInvoiceID
 }
 
 func (m *MaintenanceCompleteProductionResponse) GetNotes() *string {
@@ -3347,6 +3390,13 @@ func (m *MaintenanceCompleteProductionResponse) SetDowntimeHours(downtimeHours *
 func (m *MaintenanceCompleteProductionResponse) SetCost(cost *string) {
 	m.Cost = cost
 	m.require(maintenanceCompleteProductionResponseFieldCost)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MaintenanceCompleteProductionResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	m.PurchaseInvoiceID = purchaseInvoiceID
+	m.require(maintenanceCompleteProductionResponseFieldPurchaseInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -3491,31 +3541,33 @@ func (m MaintenanceCreateProductionRequestType) Ptr() *MaintenanceCreateProducti
 }
 
 var (
-	maintenanceCreateProductionResponseFieldID            = big.NewInt(1 << 0)
-	maintenanceCreateProductionResponseFieldWorkCenterID  = big.NewInt(1 << 1)
-	maintenanceCreateProductionResponseFieldType          = big.NewInt(1 << 2)
-	maintenanceCreateProductionResponseFieldStatus        = big.NewInt(1 << 3)
-	maintenanceCreateProductionResponseFieldPlannedDate   = big.NewInt(1 << 4)
-	maintenanceCreateProductionResponseFieldCompletedDate = big.NewInt(1 << 5)
-	maintenanceCreateProductionResponseFieldDescription   = big.NewInt(1 << 6)
-	maintenanceCreateProductionResponseFieldDowntimeHours = big.NewInt(1 << 7)
-	maintenanceCreateProductionResponseFieldCost          = big.NewInt(1 << 8)
-	maintenanceCreateProductionResponseFieldNotes         = big.NewInt(1 << 9)
-	maintenanceCreateProductionResponseFieldCreatedAt     = big.NewInt(1 << 10)
+	maintenanceCreateProductionResponseFieldID                = big.NewInt(1 << 0)
+	maintenanceCreateProductionResponseFieldWorkCenterID      = big.NewInt(1 << 1)
+	maintenanceCreateProductionResponseFieldType              = big.NewInt(1 << 2)
+	maintenanceCreateProductionResponseFieldStatus            = big.NewInt(1 << 3)
+	maintenanceCreateProductionResponseFieldPlannedDate       = big.NewInt(1 << 4)
+	maintenanceCreateProductionResponseFieldCompletedDate     = big.NewInt(1 << 5)
+	maintenanceCreateProductionResponseFieldDescription       = big.NewInt(1 << 6)
+	maintenanceCreateProductionResponseFieldDowntimeHours     = big.NewInt(1 << 7)
+	maintenanceCreateProductionResponseFieldCost              = big.NewInt(1 << 8)
+	maintenanceCreateProductionResponseFieldPurchaseInvoiceID = big.NewInt(1 << 9)
+	maintenanceCreateProductionResponseFieldNotes             = big.NewInt(1 << 10)
+	maintenanceCreateProductionResponseFieldCreatedAt         = big.NewInt(1 << 11)
 )
 
 type MaintenanceCreateProductionResponse struct {
-	ID            string                                    `json:"id" url:"id"`
-	WorkCenterID  string                                    `json:"workCenterId" url:"workCenterId"`
-	Type          MaintenanceCreateProductionResponseType   `json:"type" url:"type"`
-	Status        MaintenanceCreateProductionResponseStatus `json:"status" url:"status"`
-	PlannedDate   time.Time                                 `json:"plannedDate" url:"plannedDate" format:"date"`
-	CompletedDate *time.Time                                `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
-	Description   *string                                   `json:"description,omitempty" url:"description,omitempty"`
-	DowntimeHours *string                                   `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
-	Cost          *string                                   `json:"cost,omitempty" url:"cost,omitempty"`
-	Notes         *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt     time.Time                                 `json:"createdAt" url:"createdAt"`
+	ID                string                                    `json:"id" url:"id"`
+	WorkCenterID      string                                    `json:"workCenterId" url:"workCenterId"`
+	Type              MaintenanceCreateProductionResponseType   `json:"type" url:"type"`
+	Status            MaintenanceCreateProductionResponseStatus `json:"status" url:"status"`
+	PlannedDate       time.Time                                 `json:"plannedDate" url:"plannedDate" format:"date"`
+	CompletedDate     *time.Time                                `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
+	Description       *string                                   `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours     *string                                   `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost              *string                                   `json:"cost,omitempty" url:"cost,omitempty"`
+	PurchaseInvoiceID *string                                   `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Notes             *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3585,6 +3637,13 @@ func (m *MaintenanceCreateProductionResponse) GetCost() *string {
 		return nil
 	}
 	return m.Cost
+}
+
+func (m *MaintenanceCreateProductionResponse) GetPurchaseInvoiceID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.PurchaseInvoiceID
 }
 
 func (m *MaintenanceCreateProductionResponse) GetNotes() *string {
@@ -3676,6 +3735,13 @@ func (m *MaintenanceCreateProductionResponse) SetDowntimeHours(downtimeHours *st
 func (m *MaintenanceCreateProductionResponse) SetCost(cost *string) {
 	m.Cost = cost
 	m.require(maintenanceCreateProductionResponseFieldCost)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MaintenanceCreateProductionResponse) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	m.PurchaseInvoiceID = purchaseInvoiceID
+	m.require(maintenanceCreateProductionResponseFieldPurchaseInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -4401,31 +4467,33 @@ func (m *MaintenanceListProductionResponse) String() string {
 }
 
 var (
-	maintenanceListProductionResponseRowsItemFieldID            = big.NewInt(1 << 0)
-	maintenanceListProductionResponseRowsItemFieldWorkCenterID  = big.NewInt(1 << 1)
-	maintenanceListProductionResponseRowsItemFieldType          = big.NewInt(1 << 2)
-	maintenanceListProductionResponseRowsItemFieldStatus        = big.NewInt(1 << 3)
-	maintenanceListProductionResponseRowsItemFieldPlannedDate   = big.NewInt(1 << 4)
-	maintenanceListProductionResponseRowsItemFieldCompletedDate = big.NewInt(1 << 5)
-	maintenanceListProductionResponseRowsItemFieldDescription   = big.NewInt(1 << 6)
-	maintenanceListProductionResponseRowsItemFieldDowntimeHours = big.NewInt(1 << 7)
-	maintenanceListProductionResponseRowsItemFieldCost          = big.NewInt(1 << 8)
-	maintenanceListProductionResponseRowsItemFieldNotes         = big.NewInt(1 << 9)
-	maintenanceListProductionResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 10)
+	maintenanceListProductionResponseRowsItemFieldID                = big.NewInt(1 << 0)
+	maintenanceListProductionResponseRowsItemFieldWorkCenterID      = big.NewInt(1 << 1)
+	maintenanceListProductionResponseRowsItemFieldType              = big.NewInt(1 << 2)
+	maintenanceListProductionResponseRowsItemFieldStatus            = big.NewInt(1 << 3)
+	maintenanceListProductionResponseRowsItemFieldPlannedDate       = big.NewInt(1 << 4)
+	maintenanceListProductionResponseRowsItemFieldCompletedDate     = big.NewInt(1 << 5)
+	maintenanceListProductionResponseRowsItemFieldDescription       = big.NewInt(1 << 6)
+	maintenanceListProductionResponseRowsItemFieldDowntimeHours     = big.NewInt(1 << 7)
+	maintenanceListProductionResponseRowsItemFieldCost              = big.NewInt(1 << 8)
+	maintenanceListProductionResponseRowsItemFieldPurchaseInvoiceID = big.NewInt(1 << 9)
+	maintenanceListProductionResponseRowsItemFieldNotes             = big.NewInt(1 << 10)
+	maintenanceListProductionResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 11)
 )
 
 type MaintenanceListProductionResponseRowsItem struct {
-	ID            string                                          `json:"id" url:"id"`
-	WorkCenterID  string                                          `json:"workCenterId" url:"workCenterId"`
-	Type          MaintenanceListProductionResponseRowsItemType   `json:"type" url:"type"`
-	Status        MaintenanceListProductionResponseRowsItemStatus `json:"status" url:"status"`
-	PlannedDate   time.Time                                       `json:"plannedDate" url:"plannedDate" format:"date"`
-	CompletedDate *time.Time                                      `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
-	Description   *string                                         `json:"description,omitempty" url:"description,omitempty"`
-	DowntimeHours *string                                         `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
-	Cost          *string                                         `json:"cost,omitempty" url:"cost,omitempty"`
-	Notes         *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt     time.Time                                       `json:"createdAt" url:"createdAt"`
+	ID                string                                          `json:"id" url:"id"`
+	WorkCenterID      string                                          `json:"workCenterId" url:"workCenterId"`
+	Type              MaintenanceListProductionResponseRowsItemType   `json:"type" url:"type"`
+	Status            MaintenanceListProductionResponseRowsItemStatus `json:"status" url:"status"`
+	PlannedDate       time.Time                                       `json:"plannedDate" url:"plannedDate" format:"date"`
+	CompletedDate     *time.Time                                      `json:"completedDate,omitempty" url:"completedDate,omitempty" format:"date"`
+	Description       *string                                         `json:"description,omitempty" url:"description,omitempty"`
+	DowntimeHours     *string                                         `json:"downtimeHours,omitempty" url:"downtimeHours,omitempty"`
+	Cost              *string                                         `json:"cost,omitempty" url:"cost,omitempty"`
+	PurchaseInvoiceID *string                                         `json:"purchaseInvoiceId,omitempty" url:"purchaseInvoiceId,omitempty"`
+	Notes             *string                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt         time.Time                                       `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4495,6 +4563,13 @@ func (m *MaintenanceListProductionResponseRowsItem) GetCost() *string {
 		return nil
 	}
 	return m.Cost
+}
+
+func (m *MaintenanceListProductionResponseRowsItem) GetPurchaseInvoiceID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.PurchaseInvoiceID
 }
 
 func (m *MaintenanceListProductionResponseRowsItem) GetNotes() *string {
@@ -4586,6 +4661,13 @@ func (m *MaintenanceListProductionResponseRowsItem) SetDowntimeHours(downtimeHou
 func (m *MaintenanceListProductionResponseRowsItem) SetCost(cost *string) {
 	m.Cost = cost
 	m.require(maintenanceListProductionResponseRowsItemFieldCost)
+}
+
+// SetPurchaseInvoiceID sets the PurchaseInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MaintenanceListProductionResponseRowsItem) SetPurchaseInvoiceID(purchaseInvoiceID *string) {
+	m.PurchaseInvoiceID = purchaseInvoiceID
+	m.require(maintenanceListProductionResponseRowsItemFieldPurchaseInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;

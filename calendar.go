@@ -725,12 +725,13 @@ var (
 	createCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
 	createCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 22)
 	createCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	createCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 24)
-	createCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 25)
-	createCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	createCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	createCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 28)
-	createCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 29)
+	createCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
+	createCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 25)
+	createCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
+	createCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	createCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	createCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
+	createCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type CreateCalendarResponseSubmission struct {
@@ -758,6 +759,7 @@ type CreateCalendarResponseSubmission struct {
 	NextCheckAt            *time.Time                                   `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                        `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                      `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                         `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                      `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                      `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                      `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -938,6 +940,13 @@ func (c *CreateCalendarResponseSubmission) GetDeliveryError() *string {
 		return nil
 	}
 	return c.DeliveryError
+}
+
+func (c *CreateCalendarResponseSubmission) GetConfirmationPending() bool {
+	if c == nil {
+		return false
+	}
+	return c.ConfirmationPending
 }
 
 func (c *CreateCalendarResponseSubmission) GetSentSha256() *string {
@@ -1164,6 +1173,13 @@ func (c *CreateCalendarResponseSubmission) SetDeliveryError(deliveryError *strin
 	c.require(createCalendarResponseSubmissionFieldDeliveryError)
 }
 
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmission) SetConfirmationPending(confirmationPending bool) {
+	c.ConfirmationPending = confirmationPending
+	c.require(createCalendarResponseSubmissionFieldConfirmationPending)
+}
+
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CreateCalendarResponseSubmission) SetSentSha256(sentSha256 *string) {
@@ -1355,12 +1371,13 @@ var (
 	createCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
 	createCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
 	createCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	createCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 24)
-	createCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 25)
-	createCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	createCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	createCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 28)
-	createCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 29)
+	createCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
+	createCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
+	createCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
+	createCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	createCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	createCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
+	createCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type CreateCalendarResponseSubmissionsItem struct {
@@ -1388,6 +1405,7 @@ type CreateCalendarResponseSubmissionsItem struct {
 	NextCheckAt            *time.Time                                        `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                             `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                           `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                              `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                           `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                           `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                           `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -1568,6 +1586,13 @@ func (c *CreateCalendarResponseSubmissionsItem) GetDeliveryError() *string {
 		return nil
 	}
 	return c.DeliveryError
+}
+
+func (c *CreateCalendarResponseSubmissionsItem) GetConfirmationPending() bool {
+	if c == nil {
+		return false
+	}
+	return c.ConfirmationPending
 }
 
 func (c *CreateCalendarResponseSubmissionsItem) GetSentSha256() *string {
@@ -1792,6 +1817,13 @@ func (c *CreateCalendarResponseSubmissionsItem) SetAttempts(attempts int64) {
 func (c *CreateCalendarResponseSubmissionsItem) SetDeliveryError(deliveryError *string) {
 	c.DeliveryError = deliveryError
 	c.require(createCalendarResponseSubmissionsItemFieldDeliveryError)
+}
+
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionsItem) SetConfirmationPending(confirmationPending bool) {
+	c.ConfirmationPending = confirmationPending
+	c.require(createCalendarResponseSubmissionsItemFieldConfirmationPending)
 }
 
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
@@ -2587,12 +2619,13 @@ var (
 	getCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
 	getCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 22)
 	getCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	getCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 24)
-	getCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 25)
-	getCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	getCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	getCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 28)
-	getCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 29)
+	getCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
+	getCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 25)
+	getCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
+	getCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	getCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	getCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
+	getCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type GetCalendarResponseSubmission struct {
@@ -2620,6 +2653,7 @@ type GetCalendarResponseSubmission struct {
 	NextCheckAt            *time.Time                                `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                     `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                   `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                      `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                   `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                   `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                   `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -2800,6 +2834,13 @@ func (g *GetCalendarResponseSubmission) GetDeliveryError() *string {
 		return nil
 	}
 	return g.DeliveryError
+}
+
+func (g *GetCalendarResponseSubmission) GetConfirmationPending() bool {
+	if g == nil {
+		return false
+	}
+	return g.ConfirmationPending
 }
 
 func (g *GetCalendarResponseSubmission) GetSentSha256() *string {
@@ -3026,6 +3067,13 @@ func (g *GetCalendarResponseSubmission) SetDeliveryError(deliveryError *string) 
 	g.require(getCalendarResponseSubmissionFieldDeliveryError)
 }
 
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmission) SetConfirmationPending(confirmationPending bool) {
+	g.ConfirmationPending = confirmationPending
+	g.require(getCalendarResponseSubmissionFieldConfirmationPending)
+}
+
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (g *GetCalendarResponseSubmission) SetSentSha256(sentSha256 *string) {
@@ -3217,12 +3265,13 @@ var (
 	getCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
 	getCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
 	getCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	getCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 24)
-	getCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 25)
-	getCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	getCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	getCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 28)
-	getCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 29)
+	getCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
+	getCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
+	getCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
+	getCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	getCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	getCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
+	getCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type GetCalendarResponseSubmissionsItem struct {
@@ -3250,6 +3299,7 @@ type GetCalendarResponseSubmissionsItem struct {
 	NextCheckAt            *time.Time                                     `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                          `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                        `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                           `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                        `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                        `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                        `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -3430,6 +3480,13 @@ func (g *GetCalendarResponseSubmissionsItem) GetDeliveryError() *string {
 		return nil
 	}
 	return g.DeliveryError
+}
+
+func (g *GetCalendarResponseSubmissionsItem) GetConfirmationPending() bool {
+	if g == nil {
+		return false
+	}
+	return g.ConfirmationPending
 }
 
 func (g *GetCalendarResponseSubmissionsItem) GetSentSha256() *string {
@@ -3654,6 +3711,13 @@ func (g *GetCalendarResponseSubmissionsItem) SetAttempts(attempts int64) {
 func (g *GetCalendarResponseSubmissionsItem) SetDeliveryError(deliveryError *string) {
 	g.DeliveryError = deliveryError
 	g.require(getCalendarResponseSubmissionsItemFieldDeliveryError)
+}
+
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionsItem) SetConfirmationPending(confirmationPending bool) {
+	g.ConfirmationPending = confirmationPending
+	g.require(getCalendarResponseSubmissionsItemFieldConfirmationPending)
 }
 
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
@@ -4285,12 +4349,13 @@ var (
 	listCalendarResponseRowsItemSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
 	listCalendarResponseRowsItemSubmissionFieldAttempts               = big.NewInt(1 << 22)
 	listCalendarResponseRowsItemSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	listCalendarResponseRowsItemSubmissionFieldSentSha256             = big.NewInt(1 << 24)
-	listCalendarResponseRowsItemSubmissionFieldCertificateFingerprint = big.NewInt(1 << 25)
-	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	listCalendarResponseRowsItemSubmissionFieldCreatedAt              = big.NewInt(1 << 28)
-	listCalendarResponseRowsItemSubmissionFieldUpdatedAt              = big.NewInt(1 << 29)
+	listCalendarResponseRowsItemSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
+	listCalendarResponseRowsItemSubmissionFieldSentSha256             = big.NewInt(1 << 25)
+	listCalendarResponseRowsItemSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
+	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	listCalendarResponseRowsItemSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
+	listCalendarResponseRowsItemSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type ListCalendarResponseRowsItemSubmission struct {
@@ -4318,6 +4383,7 @@ type ListCalendarResponseRowsItemSubmission struct {
 	NextCheckAt            *time.Time                                         `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                              `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                               `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -4498,6 +4564,13 @@ func (l *ListCalendarResponseRowsItemSubmission) GetDeliveryError() *string {
 		return nil
 	}
 	return l.DeliveryError
+}
+
+func (l *ListCalendarResponseRowsItemSubmission) GetConfirmationPending() bool {
+	if l == nil {
+		return false
+	}
+	return l.ConfirmationPending
 }
 
 func (l *ListCalendarResponseRowsItemSubmission) GetSentSha256() *string {
@@ -4724,6 +4797,13 @@ func (l *ListCalendarResponseRowsItemSubmission) SetDeliveryError(deliveryError 
 	l.require(listCalendarResponseRowsItemSubmissionFieldDeliveryError)
 }
 
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmission) SetConfirmationPending(confirmationPending bool) {
+	l.ConfirmationPending = confirmationPending
+	l.require(listCalendarResponseRowsItemSubmissionFieldConfirmationPending)
+}
+
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (l *ListCalendarResponseRowsItemSubmission) SetSentSha256(sentSha256 *string) {
@@ -4915,12 +4995,13 @@ var (
 	listCalendarResponseRowsItemSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
 	listCalendarResponseRowsItemSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
 	listCalendarResponseRowsItemSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	listCalendarResponseRowsItemSubmissionsItemFieldSentSha256             = big.NewInt(1 << 24)
-	listCalendarResponseRowsItemSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 25)
-	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	listCalendarResponseRowsItemSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 28)
-	listCalendarResponseRowsItemSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 29)
+	listCalendarResponseRowsItemSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
+	listCalendarResponseRowsItemSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
+	listCalendarResponseRowsItemSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
+	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	listCalendarResponseRowsItemSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
+	listCalendarResponseRowsItemSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type ListCalendarResponseRowsItemSubmissionsItem struct {
@@ -4948,6 +5029,7 @@ type ListCalendarResponseRowsItemSubmissionsItem struct {
 	NextCheckAt            *time.Time                                              `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                                   `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                                 `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                    `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                                 `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                                 `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                                 `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -5128,6 +5210,13 @@ func (l *ListCalendarResponseRowsItemSubmissionsItem) GetDeliveryError() *string
 		return nil
 	}
 	return l.DeliveryError
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItem) GetConfirmationPending() bool {
+	if l == nil {
+		return false
+	}
+	return l.ConfirmationPending
 }
 
 func (l *ListCalendarResponseRowsItemSubmissionsItem) GetSentSha256() *string {
@@ -5354,6 +5443,13 @@ func (l *ListCalendarResponseRowsItemSubmissionsItem) SetDeliveryError(deliveryE
 	l.require(listCalendarResponseRowsItemSubmissionsItemFieldDeliveryError)
 }
 
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionsItem) SetConfirmationPending(confirmationPending bool) {
+	l.ConfirmationPending = confirmationPending
+	l.require(listCalendarResponseRowsItemSubmissionsItemFieldConfirmationPending)
+}
+
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (l *ListCalendarResponseRowsItemSubmissionsItem) SetSentSha256(sentSha256 *string) {
@@ -5545,12 +5641,13 @@ var (
 	submitCalendarResponseFieldNextCheckAt            = big.NewInt(1 << 21)
 	submitCalendarResponseFieldAttempts               = big.NewInt(1 << 22)
 	submitCalendarResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submitCalendarResponseFieldSentSha256             = big.NewInt(1 << 24)
-	submitCalendarResponseFieldCertificateFingerprint = big.NewInt(1 << 25)
-	submitCalendarResponseFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	submitCalendarResponseFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	submitCalendarResponseFieldCreatedAt              = big.NewInt(1 << 28)
-	submitCalendarResponseFieldUpdatedAt              = big.NewInt(1 << 29)
+	submitCalendarResponseFieldConfirmationPending    = big.NewInt(1 << 24)
+	submitCalendarResponseFieldSentSha256             = big.NewInt(1 << 25)
+	submitCalendarResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
+	submitCalendarResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	submitCalendarResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	submitCalendarResponseFieldCreatedAt              = big.NewInt(1 << 29)
+	submitCalendarResponseFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type SubmitCalendarResponse struct {
@@ -5578,6 +5675,7 @@ type SubmitCalendarResponse struct {
 	NextCheckAt            *time.Time                         `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                              `json:"attempts" url:"attempts"`
 	DeliveryError          *string                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                               `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -5758,6 +5856,13 @@ func (s *SubmitCalendarResponse) GetDeliveryError() *string {
 		return nil
 	}
 	return s.DeliveryError
+}
+
+func (s *SubmitCalendarResponse) GetConfirmationPending() bool {
+	if s == nil {
+		return false
+	}
+	return s.ConfirmationPending
 }
 
 func (s *SubmitCalendarResponse) GetSentSha256() *string {
@@ -5982,6 +6087,13 @@ func (s *SubmitCalendarResponse) SetAttempts(attempts int64) {
 func (s *SubmitCalendarResponse) SetDeliveryError(deliveryError *string) {
 	s.DeliveryError = deliveryError
 	s.require(submitCalendarResponseFieldDeliveryError)
+}
+
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarResponse) SetConfirmationPending(confirmationPending bool) {
+	s.ConfirmationPending = confirmationPending
+	s.require(submitCalendarResponseFieldConfirmationPending)
 }
 
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
@@ -6529,12 +6641,13 @@ var (
 	updateCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
 	updateCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 22)
 	updateCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	updateCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 24)
-	updateCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 25)
-	updateCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	updateCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	updateCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 28)
-	updateCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 29)
+	updateCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
+	updateCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 25)
+	updateCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
+	updateCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	updateCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	updateCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
+	updateCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type UpdateCalendarResponseSubmission struct {
@@ -6562,6 +6675,7 @@ type UpdateCalendarResponseSubmission struct {
 	NextCheckAt            *time.Time                                   `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                        `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                      `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                         `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                      `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                      `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                      `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -6742,6 +6856,13 @@ func (u *UpdateCalendarResponseSubmission) GetDeliveryError() *string {
 		return nil
 	}
 	return u.DeliveryError
+}
+
+func (u *UpdateCalendarResponseSubmission) GetConfirmationPending() bool {
+	if u == nil {
+		return false
+	}
+	return u.ConfirmationPending
 }
 
 func (u *UpdateCalendarResponseSubmission) GetSentSha256() *string {
@@ -6968,6 +7089,13 @@ func (u *UpdateCalendarResponseSubmission) SetDeliveryError(deliveryError *strin
 	u.require(updateCalendarResponseSubmissionFieldDeliveryError)
 }
 
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmission) SetConfirmationPending(confirmationPending bool) {
+	u.ConfirmationPending = confirmationPending
+	u.require(updateCalendarResponseSubmissionFieldConfirmationPending)
+}
+
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (u *UpdateCalendarResponseSubmission) SetSentSha256(sentSha256 *string) {
@@ -7159,12 +7287,13 @@ var (
 	updateCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
 	updateCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
 	updateCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	updateCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 24)
-	updateCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 25)
-	updateCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 26)
-	updateCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 27)
-	updateCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 28)
-	updateCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 29)
+	updateCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
+	updateCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
+	updateCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
+	updateCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
+	updateCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
+	updateCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
+	updateCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
 )
 
 type UpdateCalendarResponseSubmissionsItem struct {
@@ -7192,6 +7321,7 @@ type UpdateCalendarResponseSubmissionsItem struct {
 	NextCheckAt            *time.Time                                        `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
 	Attempts               int64                                             `json:"attempts" url:"attempts"`
 	DeliveryError          *string                                           `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                              `json:"confirmationPending" url:"confirmationPending"`
 	SentSha256             *string                                           `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
 	CertificateFingerprint *string                                           `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
 	SubmittedByActorType   *string                                           `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
@@ -7372,6 +7502,13 @@ func (u *UpdateCalendarResponseSubmissionsItem) GetDeliveryError() *string {
 		return nil
 	}
 	return u.DeliveryError
+}
+
+func (u *UpdateCalendarResponseSubmissionsItem) GetConfirmationPending() bool {
+	if u == nil {
+		return false
+	}
+	return u.ConfirmationPending
 }
 
 func (u *UpdateCalendarResponseSubmissionsItem) GetSentSha256() *string {
@@ -7596,6 +7733,13 @@ func (u *UpdateCalendarResponseSubmissionsItem) SetAttempts(attempts int64) {
 func (u *UpdateCalendarResponseSubmissionsItem) SetDeliveryError(deliveryError *string) {
 	u.DeliveryError = deliveryError
 	u.require(updateCalendarResponseSubmissionsItemFieldDeliveryError)
+}
+
+// SetConfirmationPending sets the ConfirmationPending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionsItem) SetConfirmationPending(confirmationPending bool) {
+	u.ConfirmationPending = confirmationPending
+	u.require(updateCalendarResponseSubmissionsItemFieldConfirmationPending)
 }
 
 // SetSentSha256 sets the SentSha256 field and marks it as non-optional;

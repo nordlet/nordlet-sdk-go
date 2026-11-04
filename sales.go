@@ -5162,9 +5162,11 @@ var (
 	actsCreateSalesResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
 	actsCreateSalesResponseLinesItemFieldUnit             = big.NewInt(1 << 3)
 	actsCreateSalesResponseLinesItemFieldQuantity         = big.NewInt(1 << 4)
-	actsCreateSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 5)
-	actsCreateSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 6)
-	actsCreateSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 7)
+	actsCreateSalesResponseLinesItemFieldUnitFactor       = big.NewInt(1 << 5)
+	actsCreateSalesResponseLinesItemFieldBaseQuantity     = big.NewInt(1 << 6)
+	actsCreateSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 7)
+	actsCreateSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 8)
+	actsCreateSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 9)
 )
 
 type ActsCreateSalesResponseLinesItem struct {
@@ -5173,6 +5175,8 @@ type ActsCreateSalesResponseLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Unit             string  `json:"unit" url:"unit"`
 	Quantity         string  `json:"quantity" url:"quantity"`
+	UnitFactor       string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity     string  `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
 	SortOrder        int64   `json:"sortOrder" url:"sortOrder"`
@@ -5217,6 +5221,20 @@ func (a *ActsCreateSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return a.Quantity
+}
+
+func (a *ActsCreateSalesResponseLinesItem) GetUnitFactor() string {
+	if a == nil {
+		return ""
+	}
+	return a.UnitFactor
+}
+
+func (a *ActsCreateSalesResponseLinesItem) GetBaseQuantity() string {
+	if a == nil {
+		return ""
+	}
+	return a.BaseQuantity
 }
 
 func (a *ActsCreateSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -5287,6 +5305,20 @@ func (a *ActsCreateSalesResponseLinesItem) SetUnit(unit string) {
 func (a *ActsCreateSalesResponseLinesItem) SetQuantity(quantity string) {
 	a.Quantity = quantity
 	a.require(actsCreateSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsCreateSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	a.UnitFactor = unitFactor
+	a.require(actsCreateSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsCreateSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	a.BaseQuantity = baseQuantity
+	a.require(actsCreateSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -5745,9 +5777,11 @@ var (
 	actsGetSalesResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
 	actsGetSalesResponseLinesItemFieldUnit             = big.NewInt(1 << 3)
 	actsGetSalesResponseLinesItemFieldQuantity         = big.NewInt(1 << 4)
-	actsGetSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 5)
-	actsGetSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 6)
-	actsGetSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 7)
+	actsGetSalesResponseLinesItemFieldUnitFactor       = big.NewInt(1 << 5)
+	actsGetSalesResponseLinesItemFieldBaseQuantity     = big.NewInt(1 << 6)
+	actsGetSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 7)
+	actsGetSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 8)
+	actsGetSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 9)
 )
 
 type ActsGetSalesResponseLinesItem struct {
@@ -5756,6 +5790,8 @@ type ActsGetSalesResponseLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Unit             string  `json:"unit" url:"unit"`
 	Quantity         string  `json:"quantity" url:"quantity"`
+	UnitFactor       string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity     string  `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
 	SortOrder        int64   `json:"sortOrder" url:"sortOrder"`
@@ -5800,6 +5836,20 @@ func (a *ActsGetSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return a.Quantity
+}
+
+func (a *ActsGetSalesResponseLinesItem) GetUnitFactor() string {
+	if a == nil {
+		return ""
+	}
+	return a.UnitFactor
+}
+
+func (a *ActsGetSalesResponseLinesItem) GetBaseQuantity() string {
+	if a == nil {
+		return ""
+	}
+	return a.BaseQuantity
 }
 
 func (a *ActsGetSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -5870,6 +5920,20 @@ func (a *ActsGetSalesResponseLinesItem) SetUnit(unit string) {
 func (a *ActsGetSalesResponseLinesItem) SetQuantity(quantity string) {
 	a.Quantity = quantity
 	a.require(actsGetSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsGetSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	a.UnitFactor = unitFactor
+	a.require(actsGetSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsGetSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	a.BaseQuantity = baseQuantity
+	a.require(actsGetSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -6328,9 +6392,11 @@ var (
 	actsIssueSalesResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
 	actsIssueSalesResponseLinesItemFieldUnit             = big.NewInt(1 << 3)
 	actsIssueSalesResponseLinesItemFieldQuantity         = big.NewInt(1 << 4)
-	actsIssueSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 5)
-	actsIssueSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 6)
-	actsIssueSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 7)
+	actsIssueSalesResponseLinesItemFieldUnitFactor       = big.NewInt(1 << 5)
+	actsIssueSalesResponseLinesItemFieldBaseQuantity     = big.NewInt(1 << 6)
+	actsIssueSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 7)
+	actsIssueSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 8)
+	actsIssueSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 9)
 )
 
 type ActsIssueSalesResponseLinesItem struct {
@@ -6339,6 +6405,8 @@ type ActsIssueSalesResponseLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Unit             string  `json:"unit" url:"unit"`
 	Quantity         string  `json:"quantity" url:"quantity"`
+	UnitFactor       string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity     string  `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
 	SortOrder        int64   `json:"sortOrder" url:"sortOrder"`
@@ -6383,6 +6451,20 @@ func (a *ActsIssueSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return a.Quantity
+}
+
+func (a *ActsIssueSalesResponseLinesItem) GetUnitFactor() string {
+	if a == nil {
+		return ""
+	}
+	return a.UnitFactor
+}
+
+func (a *ActsIssueSalesResponseLinesItem) GetBaseQuantity() string {
+	if a == nil {
+		return ""
+	}
+	return a.BaseQuantity
 }
 
 func (a *ActsIssueSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -6453,6 +6535,20 @@ func (a *ActsIssueSalesResponseLinesItem) SetUnit(unit string) {
 func (a *ActsIssueSalesResponseLinesItem) SetQuantity(quantity string) {
 	a.Quantity = quantity
 	a.require(actsIssueSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsIssueSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	a.UnitFactor = unitFactor
+	a.require(actsIssueSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsIssueSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	a.BaseQuantity = baseQuantity
+	a.require(actsIssueSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -8286,9 +8382,11 @@ var (
 	actsUpdateSalesResponseLinesItemFieldDescription      = big.NewInt(1 << 2)
 	actsUpdateSalesResponseLinesItemFieldUnit             = big.NewInt(1 << 3)
 	actsUpdateSalesResponseLinesItemFieldQuantity         = big.NewInt(1 << 4)
-	actsUpdateSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 5)
-	actsUpdateSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 6)
-	actsUpdateSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 7)
+	actsUpdateSalesResponseLinesItemFieldUnitFactor       = big.NewInt(1 << 5)
+	actsUpdateSalesResponseLinesItemFieldBaseQuantity     = big.NewInt(1 << 6)
+	actsUpdateSalesResponseLinesItemFieldUnitPriceExclVat = big.NewInt(1 << 7)
+	actsUpdateSalesResponseLinesItemFieldLineNet          = big.NewInt(1 << 8)
+	actsUpdateSalesResponseLinesItemFieldSortOrder        = big.NewInt(1 << 9)
 )
 
 type ActsUpdateSalesResponseLinesItem struct {
@@ -8297,6 +8395,8 @@ type ActsUpdateSalesResponseLinesItem struct {
 	Description      string  `json:"description" url:"description"`
 	Unit             string  `json:"unit" url:"unit"`
 	Quantity         string  `json:"quantity" url:"quantity"`
+	UnitFactor       string  `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity     string  `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat *string `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	LineNet          *string `json:"lineNet,omitempty" url:"lineNet,omitempty"`
 	SortOrder        int64   `json:"sortOrder" url:"sortOrder"`
@@ -8341,6 +8441,20 @@ func (a *ActsUpdateSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return a.Quantity
+}
+
+func (a *ActsUpdateSalesResponseLinesItem) GetUnitFactor() string {
+	if a == nil {
+		return ""
+	}
+	return a.UnitFactor
+}
+
+func (a *ActsUpdateSalesResponseLinesItem) GetBaseQuantity() string {
+	if a == nil {
+		return ""
+	}
+	return a.BaseQuantity
 }
 
 func (a *ActsUpdateSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -8411,6 +8525,20 @@ func (a *ActsUpdateSalesResponseLinesItem) SetUnit(unit string) {
 func (a *ActsUpdateSalesResponseLinesItem) SetQuantity(quantity string) {
 	a.Quantity = quantity
 	a.require(actsUpdateSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsUpdateSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	a.UnitFactor = unitFactor
+	a.require(actsUpdateSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ActsUpdateSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	a.BaseQuantity = baseQuantity
+	a.require(actsUpdateSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -14230,24 +14358,26 @@ var (
 	invoicesApplyAdvanceSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
 	invoicesApplyAdvanceSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
 	invoicesApplyAdvanceSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
 )
 
 type InvoicesApplyAdvanceSalesResponseLinesItem struct {
@@ -14256,6 +14386,8 @@ type InvoicesApplyAdvanceSalesResponseLinesItem struct {
 	Description            string                                                                 `json:"description" url:"description"`
 	Unit                   string                                                                 `json:"unit" url:"unit"`
 	Quantity               string                                                                 `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                                 `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                                 `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat       *string                                                                `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat       *string                                                                `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                                 `json:"vatRatePercent" url:"vatRatePercent"`
@@ -14315,6 +14447,20 @@ func (i *InvoicesApplyAdvanceSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesApplyAdvanceSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -14490,6 +14636,20 @@ func (i *InvoicesApplyAdvanceSalesResponseLinesItem) SetUnit(unit string) {
 func (i *InvoicesApplyAdvanceSalesResponseLinesItem) SetQuantity(quantity string) {
 	i.Quantity = quantity
 	i.require(invoicesApplyAdvanceSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesApplyAdvanceSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesApplyAdvanceSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -18294,24 +18454,26 @@ var (
 	invoicesCreateSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
 	invoicesCreateSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
 	invoicesCreateSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
-	invoicesCreateSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
-	invoicesCreateSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
-	invoicesCreateSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
-	invoicesCreateSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	invoicesCreateSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
-	invoicesCreateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
-	invoicesCreateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
-	invoicesCreateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
-	invoicesCreateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
-	invoicesCreateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
-	invoicesCreateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
-	invoicesCreateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
-	invoicesCreateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
-	invoicesCreateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
+	invoicesCreateSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesCreateSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesCreateSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesCreateSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesCreateSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesCreateSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesCreateSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesCreateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
+	invoicesCreateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
+	invoicesCreateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
+	invoicesCreateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
+	invoicesCreateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
+	invoicesCreateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
+	invoicesCreateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
+	invoicesCreateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
+	invoicesCreateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
 )
 
 type InvoicesCreateSalesResponseLinesItem struct {
@@ -18320,6 +18482,8 @@ type InvoicesCreateSalesResponseLinesItem struct {
 	Description            string                                                           `json:"description" url:"description"`
 	Unit                   string                                                           `json:"unit" url:"unit"`
 	Quantity               string                                                           `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                           `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                           `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat       *string                                                          `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat       *string                                                          `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                           `json:"vatRatePercent" url:"vatRatePercent"`
@@ -18379,6 +18543,20 @@ func (i *InvoicesCreateSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesCreateSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesCreateSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesCreateSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -18554,6 +18732,20 @@ func (i *InvoicesCreateSalesResponseLinesItem) SetUnit(unit string) {
 func (i *InvoicesCreateSalesResponseLinesItem) SetQuantity(quantity string) {
 	i.Quantity = quantity
 	i.require(invoicesCreateSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesCreateSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesCreateSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -21939,24 +22131,26 @@ var (
 	invoicesGetSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
 	invoicesGetSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
 	invoicesGetSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
-	invoicesGetSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
-	invoicesGetSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
-	invoicesGetSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
-	invoicesGetSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	invoicesGetSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
-	invoicesGetSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
-	invoicesGetSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
-	invoicesGetSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
-	invoicesGetSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
-	invoicesGetSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
-	invoicesGetSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
-	invoicesGetSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
-	invoicesGetSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
-	invoicesGetSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
-	invoicesGetSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
-	invoicesGetSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
-	invoicesGetSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
-	invoicesGetSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
+	invoicesGetSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesGetSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesGetSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesGetSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesGetSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesGetSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesGetSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesGetSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
+	invoicesGetSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
+	invoicesGetSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
+	invoicesGetSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
+	invoicesGetSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
+	invoicesGetSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
+	invoicesGetSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
+	invoicesGetSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
+	invoicesGetSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
+	invoicesGetSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
+	invoicesGetSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
+	invoicesGetSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
+	invoicesGetSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
 )
 
 type InvoicesGetSalesResponseLinesItem struct {
@@ -21965,6 +22159,8 @@ type InvoicesGetSalesResponseLinesItem struct {
 	Description            string                                                        `json:"description" url:"description"`
 	Unit                   string                                                        `json:"unit" url:"unit"`
 	Quantity               string                                                        `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                        `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                        `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat       *string                                                       `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat       *string                                                       `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                        `json:"vatRatePercent" url:"vatRatePercent"`
@@ -22024,6 +22220,20 @@ func (i *InvoicesGetSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesGetSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesGetSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesGetSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -22199,6 +22409,20 @@ func (i *InvoicesGetSalesResponseLinesItem) SetUnit(unit string) {
 func (i *InvoicesGetSalesResponseLinesItem) SetQuantity(quantity string) {
 	i.Quantity = quantity
 	i.require(invoicesGetSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesGetSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesGetSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -24850,24 +25074,26 @@ var (
 	invoicesIssueSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
 	invoicesIssueSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
 	invoicesIssueSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
-	invoicesIssueSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
-	invoicesIssueSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
-	invoicesIssueSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
-	invoicesIssueSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	invoicesIssueSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
-	invoicesIssueSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
-	invoicesIssueSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
-	invoicesIssueSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
-	invoicesIssueSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
-	invoicesIssueSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
-	invoicesIssueSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
-	invoicesIssueSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
-	invoicesIssueSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
-	invoicesIssueSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
+	invoicesIssueSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesIssueSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesIssueSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesIssueSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesIssueSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesIssueSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesIssueSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesIssueSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
+	invoicesIssueSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
+	invoicesIssueSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
+	invoicesIssueSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
+	invoicesIssueSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
+	invoicesIssueSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
+	invoicesIssueSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
+	invoicesIssueSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
+	invoicesIssueSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
 )
 
 type InvoicesIssueSalesResponseLinesItem struct {
@@ -24876,6 +25102,8 @@ type InvoicesIssueSalesResponseLinesItem struct {
 	Description            string                                                          `json:"description" url:"description"`
 	Unit                   string                                                          `json:"unit" url:"unit"`
 	Quantity               string                                                          `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                          `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                          `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat       *string                                                         `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat       *string                                                         `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                          `json:"vatRatePercent" url:"vatRatePercent"`
@@ -24935,6 +25163,20 @@ func (i *InvoicesIssueSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesIssueSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesIssueSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesIssueSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -25110,6 +25352,20 @@ func (i *InvoicesIssueSalesResponseLinesItem) SetUnit(unit string) {
 func (i *InvoicesIssueSalesResponseLinesItem) SetQuantity(quantity string) {
 	i.Quantity = quantity
 	i.require(invoicesIssueSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesIssueSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesIssueSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -27239,6 +27495,7 @@ var (
 	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 62)
 	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
 	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesListSalesResponseRowsItemFieldAdvanceUnappliedAmount       = big.NewInt(0).Lsh(big.NewInt(1), 65)
 )
 
 type InvoicesListSalesResponseRowsItem struct {
@@ -27307,6 +27564,8 @@ type InvoicesListSalesResponseRowsItem struct {
 	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
 	PartnerName                  *string                                        `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	// Gross amount of an advance invoice not yet applied or credited; null on other documents
+	AdvanceUnappliedAmount *string `json:"advanceUnappliedAmount,omitempty" url:"advanceUnappliedAmount,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -27768,6 +28027,13 @@ func (i *InvoicesListSalesResponseRowsItem) GetPartnerName() *string {
 		return nil
 	}
 	return i.PartnerName
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetAdvanceUnappliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceUnappliedAmount
 }
 
 func (i *InvoicesListSalesResponseRowsItem) GetExtraProperties() map[string]interface{} {
@@ -28237,6 +28503,13 @@ func (i *InvoicesListSalesResponseRowsItem) SetUpdatedAt(updatedAt time.Time) {
 func (i *InvoicesListSalesResponseRowsItem) SetPartnerName(partnerName *string) {
 	i.PartnerName = partnerName
 	i.require(invoicesListSalesResponseRowsItemFieldPartnerName)
+}
+
+// SetAdvanceUnappliedAmount sets the AdvanceUnappliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetAdvanceUnappliedAmount(advanceUnappliedAmount *string) {
+	i.AdvanceUnappliedAmount = advanceUnappliedAmount
+	i.require(invoicesListSalesResponseRowsItemFieldAdvanceUnappliedAmount)
 }
 
 func (i *InvoicesListSalesResponseRowsItem) UnmarshalJSON(data []byte) error {
@@ -29634,24 +29907,26 @@ var (
 	invoicesLockSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
 	invoicesLockSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
 	invoicesLockSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
-	invoicesLockSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
-	invoicesLockSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
-	invoicesLockSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
-	invoicesLockSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	invoicesLockSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
-	invoicesLockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
-	invoicesLockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
-	invoicesLockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
-	invoicesLockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
-	invoicesLockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
-	invoicesLockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
-	invoicesLockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
-	invoicesLockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
-	invoicesLockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
-	invoicesLockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
-	invoicesLockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
-	invoicesLockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
-	invoicesLockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
+	invoicesLockSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesLockSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesLockSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesLockSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesLockSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesLockSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesLockSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesLockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
+	invoicesLockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
+	invoicesLockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
+	invoicesLockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
+	invoicesLockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
+	invoicesLockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
+	invoicesLockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
+	invoicesLockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
+	invoicesLockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
+	invoicesLockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
+	invoicesLockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
+	invoicesLockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
+	invoicesLockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
 )
 
 type InvoicesLockSalesResponseLinesItem struct {
@@ -29660,6 +29935,8 @@ type InvoicesLockSalesResponseLinesItem struct {
 	Description            string                                                         `json:"description" url:"description"`
 	Unit                   string                                                         `json:"unit" url:"unit"`
 	Quantity               string                                                         `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                         `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                         `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat       *string                                                        `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat       *string                                                        `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                         `json:"vatRatePercent" url:"vatRatePercent"`
@@ -29719,6 +29996,20 @@ func (i *InvoicesLockSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesLockSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesLockSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesLockSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -29894,6 +30185,20 @@ func (i *InvoicesLockSalesResponseLinesItem) SetUnit(unit string) {
 func (i *InvoicesLockSalesResponseLinesItem) SetQuantity(quantity string) {
 	i.Quantity = quantity
 	i.require(invoicesLockSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesLockSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesLockSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -33789,24 +34094,26 @@ var (
 	invoicesUnlockSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
 	invoicesUnlockSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
 	invoicesUnlockSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
-	invoicesUnlockSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
-	invoicesUnlockSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
-	invoicesUnlockSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
-	invoicesUnlockSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	invoicesUnlockSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
-	invoicesUnlockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
-	invoicesUnlockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
-	invoicesUnlockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
-	invoicesUnlockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
-	invoicesUnlockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
-	invoicesUnlockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
-	invoicesUnlockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
-	invoicesUnlockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
-	invoicesUnlockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
+	invoicesUnlockSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesUnlockSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesUnlockSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesUnlockSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesUnlockSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesUnlockSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesUnlockSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesUnlockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
+	invoicesUnlockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
+	invoicesUnlockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
+	invoicesUnlockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
+	invoicesUnlockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
+	invoicesUnlockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
+	invoicesUnlockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
+	invoicesUnlockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
+	invoicesUnlockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
 )
 
 type InvoicesUnlockSalesResponseLinesItem struct {
@@ -33815,6 +34122,8 @@ type InvoicesUnlockSalesResponseLinesItem struct {
 	Description            string                                                           `json:"description" url:"description"`
 	Unit                   string                                                           `json:"unit" url:"unit"`
 	Quantity               string                                                           `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                           `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                           `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat       *string                                                          `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat       *string                                                          `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                           `json:"vatRatePercent" url:"vatRatePercent"`
@@ -33874,6 +34183,20 @@ func (i *InvoicesUnlockSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesUnlockSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesUnlockSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesUnlockSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -34049,6 +34372,20 @@ func (i *InvoicesUnlockSalesResponseLinesItem) SetUnit(unit string) {
 func (i *InvoicesUnlockSalesResponseLinesItem) SetQuantity(quantity string) {
 	i.Quantity = quantity
 	i.require(invoicesUnlockSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesUnlockSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesUnlockSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -37508,24 +37845,26 @@ var (
 	invoicesUpdateSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
 	invoicesUpdateSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
 	invoicesUpdateSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
-	invoicesUpdateSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 5)
-	invoicesUpdateSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 6)
-	invoicesUpdateSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 7)
-	invoicesUpdateSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 8)
-	invoicesUpdateSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 9)
-	invoicesUpdateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 10)
-	invoicesUpdateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 11)
-	invoicesUpdateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 12)
-	invoicesUpdateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 13)
-	invoicesUpdateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 14)
-	invoicesUpdateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 15)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 16)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 17)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 18)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 19)
-	invoicesUpdateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 20)
-	invoicesUpdateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 21)
-	invoicesUpdateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 22)
+	invoicesUpdateSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesUpdateSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesUpdateSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesUpdateSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesUpdateSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesUpdateSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesUpdateSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesUpdateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
+	invoicesUpdateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
+	invoicesUpdateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
+	invoicesUpdateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
+	invoicesUpdateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
+	invoicesUpdateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
+	invoicesUpdateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
+	invoicesUpdateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
+	invoicesUpdateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
 )
 
 type InvoicesUpdateSalesResponseLinesItem struct {
@@ -37534,6 +37873,8 @@ type InvoicesUpdateSalesResponseLinesItem struct {
 	Description            string                                                           `json:"description" url:"description"`
 	Unit                   string                                                           `json:"unit" url:"unit"`
 	Quantity               string                                                           `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                           `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                           `json:"baseQuantity" url:"baseQuantity"`
 	UnitPriceExclVat       *string                                                          `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
 	UnitPriceInclVat       *string                                                          `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent         string                                                           `json:"vatRatePercent" url:"vatRatePercent"`
@@ -37593,6 +37934,20 @@ func (i *InvoicesUpdateSalesResponseLinesItem) GetQuantity() string {
 		return ""
 	}
 	return i.Quantity
+}
+
+func (i *InvoicesUpdateSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesUpdateSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
 }
 
 func (i *InvoicesUpdateSalesResponseLinesItem) GetUnitPriceExclVat() *string {
@@ -37768,6 +38123,20 @@ func (i *InvoicesUpdateSalesResponseLinesItem) SetUnit(unit string) {
 func (i *InvoicesUpdateSalesResponseLinesItem) SetQuantity(quantity string) {
 	i.Quantity = quantity
 	i.require(invoicesUpdateSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesUpdateSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesUpdateSalesResponseLinesItemFieldBaseQuantity)
 }
 
 // SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
@@ -39229,49 +39598,51 @@ func (i InvoicesUpdateSalesResponseVatScheme) Ptr() *InvoicesUpdateSalesResponse
 }
 
 var (
-	invoicesViewSalesResponseFieldType            = big.NewInt(1 << 0)
-	invoicesViewSalesResponseFieldStatus          = big.NewInt(1 << 1)
-	invoicesViewSalesResponseFieldPaymentStatus   = big.NewInt(1 << 2)
-	invoicesViewSalesResponseFieldNumber          = big.NewInt(1 << 3)
-	invoicesViewSalesResponseFieldIssueDate       = big.NewInt(1 << 4)
-	invoicesViewSalesResponseFieldDueDate         = big.NewInt(1 << 5)
-	invoicesViewSalesResponseFieldCurrency        = big.NewInt(1 << 6)
-	invoicesViewSalesResponseFieldNetTotal        = big.NewInt(1 << 7)
-	invoicesViewSalesResponseFieldVatTotal        = big.NewInt(1 << 8)
-	invoicesViewSalesResponseFieldSalesTaxPercent = big.NewInt(1 << 9)
-	invoicesViewSalesResponseFieldSalesTaxTotal   = big.NewInt(1 << 10)
-	invoicesViewSalesResponseFieldGrossTotal      = big.NewInt(1 << 11)
-	invoicesViewSalesResponseFieldPaidAmount      = big.NewInt(1 << 12)
-	invoicesViewSalesResponseFieldPaidOn          = big.NewInt(1 << 13)
-	invoicesViewSalesResponseFieldNotes           = big.NewInt(1 << 14)
-	invoicesViewSalesResponseFieldPayURL          = big.NewInt(1 << 15)
-	invoicesViewSalesResponseFieldSeller          = big.NewInt(1 << 16)
-	invoicesViewSalesResponseFieldBuyer           = big.NewInt(1 << 17)
-	invoicesViewSalesResponseFieldLines           = big.NewInt(1 << 18)
-	invoicesViewSalesResponseFieldToken           = big.NewInt(1 << 19)
+	invoicesViewSalesResponseFieldType                = big.NewInt(1 << 0)
+	invoicesViewSalesResponseFieldStatus              = big.NewInt(1 << 1)
+	invoicesViewSalesResponseFieldPaymentStatus       = big.NewInt(1 << 2)
+	invoicesViewSalesResponseFieldNumber              = big.NewInt(1 << 3)
+	invoicesViewSalesResponseFieldIssueDate           = big.NewInt(1 << 4)
+	invoicesViewSalesResponseFieldDueDate             = big.NewInt(1 << 5)
+	invoicesViewSalesResponseFieldCurrency            = big.NewInt(1 << 6)
+	invoicesViewSalesResponseFieldNetTotal            = big.NewInt(1 << 7)
+	invoicesViewSalesResponseFieldVatTotal            = big.NewInt(1 << 8)
+	invoicesViewSalesResponseFieldSalesTaxPercent     = big.NewInt(1 << 9)
+	invoicesViewSalesResponseFieldSalesTaxTotal       = big.NewInt(1 << 10)
+	invoicesViewSalesResponseFieldGrossTotal          = big.NewInt(1 << 11)
+	invoicesViewSalesResponseFieldPaidAmount          = big.NewInt(1 << 12)
+	invoicesViewSalesResponseFieldPaidOn              = big.NewInt(1 << 13)
+	invoicesViewSalesResponseFieldNotes               = big.NewInt(1 << 14)
+	invoicesViewSalesResponseFieldPayURL              = big.NewInt(1 << 15)
+	invoicesViewSalesResponseFieldCardPaymentReceived = big.NewInt(1 << 16)
+	invoicesViewSalesResponseFieldSeller              = big.NewInt(1 << 17)
+	invoicesViewSalesResponseFieldBuyer               = big.NewInt(1 << 18)
+	invoicesViewSalesResponseFieldLines               = big.NewInt(1 << 19)
+	invoicesViewSalesResponseFieldToken               = big.NewInt(1 << 20)
 )
 
 type InvoicesViewSalesResponse struct {
-	Type            InvoicesViewSalesResponseType          `json:"type" url:"type"`
-	Status          InvoicesViewSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus   InvoicesViewSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Number          *string                                `json:"number,omitempty" url:"number,omitempty"`
-	IssueDate       *time.Time                             `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate         *time.Time                             `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency        string                                 `json:"currency" url:"currency"`
-	NetTotal        string                                 `json:"netTotal" url:"netTotal"`
-	VatTotal        string                                 `json:"vatTotal" url:"vatTotal"`
-	SalesTaxPercent *string                                `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal   string                                 `json:"salesTaxTotal" url:"salesTaxTotal"`
-	GrossTotal      string                                 `json:"grossTotal" url:"grossTotal"`
-	PaidAmount      string                                 `json:"paidAmount" url:"paidAmount"`
-	PaidOn          *string                                `json:"paidOn,omitempty" url:"paidOn,omitempty"`
-	Notes           *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	PayURL          *string                                `json:"payUrl,omitempty" url:"payUrl,omitempty"`
-	Seller          *InvoicesViewSalesResponseSeller       `json:"seller" url:"seller"`
-	Buyer           *InvoicesViewSalesResponseBuyer        `json:"buyer" url:"buyer"`
-	Lines           []*InvoicesViewSalesResponseLinesItem  `json:"lines" url:"lines"`
-	Token           *string                                `json:"token,omitempty" url:"token,omitempty"`
+	Type                InvoicesViewSalesResponseType          `json:"type" url:"type"`
+	Status              InvoicesViewSalesResponseStatus        `json:"status" url:"status"`
+	PaymentStatus       InvoicesViewSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Number              *string                                `json:"number,omitempty" url:"number,omitempty"`
+	IssueDate           *time.Time                             `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate             *time.Time                             `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency            string                                 `json:"currency" url:"currency"`
+	NetTotal            string                                 `json:"netTotal" url:"netTotal"`
+	VatTotal            string                                 `json:"vatTotal" url:"vatTotal"`
+	SalesTaxPercent     *string                                `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal       string                                 `json:"salesTaxTotal" url:"salesTaxTotal"`
+	GrossTotal          string                                 `json:"grossTotal" url:"grossTotal"`
+	PaidAmount          string                                 `json:"paidAmount" url:"paidAmount"`
+	PaidOn              *string                                `json:"paidOn,omitempty" url:"paidOn,omitempty"`
+	Notes               *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	PayURL              *string                                `json:"payUrl,omitempty" url:"payUrl,omitempty"`
+	CardPaymentReceived bool                                   `json:"cardPaymentReceived" url:"cardPaymentReceived"`
+	Seller              *InvoicesViewSalesResponseSeller       `json:"seller" url:"seller"`
+	Buyer               *InvoicesViewSalesResponseBuyer        `json:"buyer" url:"buyer"`
+	Lines               []*InvoicesViewSalesResponseLinesItem  `json:"lines" url:"lines"`
+	Token               *string                                `json:"token,omitempty" url:"token,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -39390,6 +39761,13 @@ func (i *InvoicesViewSalesResponse) GetPayURL() *string {
 		return nil
 	}
 	return i.PayURL
+}
+
+func (i *InvoicesViewSalesResponse) GetCardPaymentReceived() bool {
+	if i == nil {
+		return false
+	}
+	return i.CardPaymentReceived
 }
 
 func (i *InvoicesViewSalesResponse) GetSeller() *InvoicesViewSalesResponseSeller {
@@ -39544,6 +39922,13 @@ func (i *InvoicesViewSalesResponse) SetNotes(notes *string) {
 func (i *InvoicesViewSalesResponse) SetPayURL(payURL *string) {
 	i.PayURL = payURL
 	i.require(invoicesViewSalesResponseFieldPayURL)
+}
+
+// SetCardPaymentReceived sets the CardPaymentReceived field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesViewSalesResponse) SetCardPaymentReceived(cardPaymentReceived bool) {
+	i.CardPaymentReceived = cardPaymentReceived
+	i.require(invoicesViewSalesResponseFieldCardPaymentReceived)
 }
 
 // SetSeller sets the Seller field and marks it as non-optional;
