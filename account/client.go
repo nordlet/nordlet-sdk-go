@@ -34,7 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Create a sign-in link for the e-mail address and send it; the link is valid for 15 minutes and is consumed with `account/login-link/consume`. When an unused link was requested for the same address within the last minute, the call answers `sent` without sending another. `locale` sets the language of the e-mail and of the link; `app` set to `invoice` makes the link open the invoice app instead of the Nordlet app; `acceptTerms`, `acceptDpa` and `referralCode` are stored with the link and used when the address has no account yet.
+// Create a sign-in link for the e-mail address and send it; the link is valid for 15 minutes and is consumed with `account/login-link/consume`. When an unused link was requested for the same address within the last minute, the call answers `sent` without sending another; after five links for the address within an hour it answers 429; otherwise the earlier unused sign-in links for the address stop working. `locale` sets the language of the e-mail and of the link; `app` set to `invoice` makes the link open the invoice app instead of the Nordlet app; `acceptTerms`, `acceptDpa` and `referralCode` are stored with the link and used when the address has no account yet.
 func (c *Client) LoginLinkRequest(
 	ctx context.Context,
 	request *nordlet.LoginLinkRequestAccountRequest,
@@ -51,7 +51,7 @@ func (c *Client) LoginLinkRequest(
 	return response.Body, nil
 }
 
-// Exchange a sign-in link token for a session; an unknown, used or expired token is refused with 401. When no account has the address, one is created (`isNewUser`), which is refused with 422 unless the link was requested with `acceptTerms` and `acceptDpa`; a `referralCode` on the link records who referred the new user. A link from `account/email/change-request` changes the signed-in user's address instead, refused with 409 when another account has it.
+// Exchange a sign-in link token for a session; an unknown, used or expired token is refused with 401. When no account has the address, one is created (`isNewUser`), which is refused with 422 unless the link was requested with `acceptTerms` and `acceptDpa`; a `referralCode` on the link records who referred the new user. The link `account/email/change-request` sends to the current address signs that user in and sends a confirmation link to the new address; that second link changes the address, deletes the user's other sessions and sends the previous address a link, valid for 24 hours, that changes the address back and deletes every session of the user. No link goes to the new address when another account has it, and the change and the change back are refused with 409 when another account has the address. When the user has two-factor authentication on, `twoFactorRequired` is true and the session can make no call other than `account/two-factor/verify` and `account/logout` until a code is entered.
 func (c *Client) LoginLinkConsume(
 	ctx context.Context,
 	request *nordlet.LoginLinkConsumeAccountRequest,
@@ -170,7 +170,7 @@ func (c *Client) MembersRemove(
 	return response.Body, nil
 }
 
-// Create an invitation to the active company for an e-mail address with the given role and send it by e-mail in `locale`; owners and admins may call it. The invitation is valid for 7 days and replaces an earlier pending one for the same address. Refused with 409 when the address already belongs to a member.
+// Create an invitation to the active company for an e-mail address with the given role and send it by e-mail in `locale`; owners and admins may call it. The invitation is valid for 7 days and replaces an earlier pending one for the same address. Refused with 409 when the address already belongs to a member and with 429 (`rate_limited`) after 50 invitations by the user, in all their companies, within 24 hours.
 func (c *Client) InvitesCreate(
 	ctx context.Context,
 	request *nordlet.InvitesCreateAccountRequest,
@@ -391,7 +391,7 @@ func (c *Client) CompaniesActivate(
 	return response.Body, nil
 }
 
-// Create an API key for the signed-in person and return the key itself once. Owners, admins and developers of the active company may call it. The key works in every company the person is a member of, with the rights of their role in each; every call names the company in the `x-nordlet-company` header. `scopes` defaults to the caller's scopes in the active company and may not exceed them (403); in each company the key's scopes are further limited to the person's role there. Without `expiresInDays` the key does not expire.
+// Create an API key for the signed-in person and return the key itself once. Owners, admins and developers of the active company may call it. The key works in every company the person is a member of, with the rights of their role in each; every call names the company in the `x-nordlet-company` header. `scopes` defaults to the caller's scopes in the active company and may not exceed them (403); in each company the key's scopes are further limited to the person's role there. `expiresInDays` defaults to 90. The list shows the key's last four characters as `lastFour`.
 func (c *Client) APIKeysCreate(
 	ctx context.Context,
 	request *nordlet.APIKeysCreateAccountRequest,
@@ -408,7 +408,7 @@ func (c *Client) APIKeysCreate(
 	return response.Body, nil
 }
 
-// List the signed-in person's API keys, including expired and revoked ones.
+// List the signed-in person's API keys, including expired and revoked ones. `lastFour` is the last four characters of the key (null for keys created before it was recorded); for an app connected through OAuth it is those of the current access token.
 func (c *Client) APIKeysList(
 	ctx context.Context,
 	request *nordlet.APIKeysListAccountRequest,
@@ -425,7 +425,7 @@ func (c *Client) APIKeysList(
 	return response.Body, nil
 }
 
-// Create a new key with the name and scopes of the signed-in person's key `id` and return it once; the old key keeps working for `overlapHours` and then expires, and its `replacedByKeyId` points to the new one. `expiresInDays` applies to the new key. Refused with 409 when the old key is revoked or belongs to an app connected through OAuth, which renews its own access.
+// Create a new key with the name and scopes of the signed-in person's key `id` and return it once; the old key keeps working for `overlapHours` and then expires, and its `replacedByKeyId` points to the new one. `expiresInDays` applies to the new key and defaults to 90. Refused with 409 when the old key is revoked or belongs to an app connected through OAuth, which renews its own access.
 func (c *Client) APIKeysRotate(
 	ctx context.Context,
 	request *nordlet.APIKeysRotateAccountRequest,
@@ -493,7 +493,7 @@ func (c *Client) ProfileUpdate(
 	return response.Body, nil
 }
 
-// Send a confirmation link to `newEmail`; the address changes when that link is consumed with `account/login-link/consume`. When an unused link was sent to the address within the last minute, the call answers `sent` without sending another. Refused with 422 when it is already the user's address and with 409 when another account has it.
+// Send a confirmation link for the change to `newEmail` to the user's current address. When it is consumed with `account/login-link/consume`, a second link goes to `newEmail`, and the address changes when that one is consumed. When an unused link for `newEmail` was created within the last minute, the call answers `sent` without sending another. Refused with 422 when it is already the user's address and with 429 (`rate_limited`) after five requests by the user within 24 hours. When another account has `newEmail`, the call answers the same, the confirmation link signs the user in and no link goes to `newEmail`.
 func (c *Client) EmailChangeRequest(
 	ctx context.Context,
 	request *nordlet.EmailChangeRequestAccountRequest,
@@ -510,7 +510,7 @@ func (c *Client) EmailChangeRequest(
 	return response.Body, nil
 }
 
-// List the signed-in user's sessions that have not expired; `current` marks the one the call was made with.
+// List the signed-in user's sessions that have not expired: a session ends 30 days after sign-in or after 7 days without a call. `current` marks the one the call was made with.
 func (c *Client) SessionsList(
 	ctx context.Context,
 	request *nordlet.SessionsListAccountRequest,
@@ -561,7 +561,7 @@ func (c *Client) SessionsRevokeOthers(
 	return response.Body, nil
 }
 
-// Return the user's profile, consent state, memberships, unexpired sessions, billing accounts (`billing` is the `app` site's, `billingAccounts` has one per site), credit transactions and the audit entries they made in their companies (the most recent 5000 of each of the last two).
+// Return the user's profile, consent state, memberships, unexpired sessions, sign-in events, API keys (without the keys), connected OAuth apps, referral points, billing accounts (`billing` is the `app` site's, `billingAccounts` has one per site), credit transactions and every audit entry they made in their companies.
 func (c *Client) Export(
 	ctx context.Context,
 	request *nordlet.ExportAccountRequest,
@@ -721,6 +721,108 @@ func (c *Client) OauthAuthorizeDeny(
 	opts ...option.RequestOption,
 ) (*nordlet.OauthAuthorizeDenyAccountResponse, error) {
 	response, err := c.WithRawResponse.OauthAuthorizeDeny(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Return the signed-in user's two-factor authentication state: `enabled`, `required` (true for platform administrators, who cannot use platform administration without it), the number of unused recovery codes and, while a setup started with `two-factor/setup` is not finished, the key to add to an authenticator app as `setup`.
+func (c *Client) TwoFactorGet(
+	ctx context.Context,
+	request *nordlet.TwoFactorGetAccountRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TwoFactorGetAccountResponse, error) {
+	response, err := c.WithRawResponse.TwoFactorGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Start setting up two-factor authentication: create a new key for an authenticator app (time-based codes, RFC 6238: SHA-1, 6 digits, 30 seconds) and return it with its `otpauth://` address. Nothing changes at sign-in until `two-factor/enable` is called with a code from the app. Refused with 409 when two-factor authentication is already on.
+func (c *Client) TwoFactorSetup(
+	ctx context.Context,
+	request *nordlet.TwoFactorSetupAccountRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TwoFactorSetupAccountResponse, error) {
+	response, err := c.WithRawResponse.TwoFactorSetup(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Turn on two-factor authentication with a current code from the authenticator app set up by `two-factor/setup`. Returns 10 recovery codes, shown only this once; each one works once in place of a code. The user's other sessions are deleted. From then on a session created by a sign-in link can make no call other than `two-factor/verify` and `account/logout` until a code is entered. A wrong code answers 422; after 5 wrong codes the session is deleted (401).
+func (c *Client) TwoFactorEnable(
+	ctx context.Context,
+	request *nordlet.TwoFactorEnableAccountRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TwoFactorEnableAccountResponse, error) {
+	response, err := c.WithRawResponse.TwoFactorEnable(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Finish signing in when `account/login-link/consume` answered `twoFactorRequired`: send a current code from the authenticator app or an unused recovery code. A wrong code answers 422; after 5 wrong codes the session is deleted (401) and the user signs in again with a new link.
+func (c *Client) TwoFactorVerify(
+	ctx context.Context,
+	request *nordlet.TwoFactorVerifyAccountRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TwoFactorVerifyAccountResponse, error) {
+	response, err := c.WithRawResponse.TwoFactorVerify(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Replace the recovery codes with 10 new ones, shown only this once, after a current code from the authenticator app. The earlier codes stop working.
+func (c *Client) TwoFactorRecoveryCodesRegenerate(
+	ctx context.Context,
+	request *nordlet.TwoFactorRecoveryCodesRegenerateAccountRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TwoFactorRecoveryCodesRegenerateAccountResponse, error) {
+	response, err := c.WithRawResponse.TwoFactorRecoveryCodesRegenerate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Turn off two-factor authentication after a current code from the authenticator app or an unused recovery code; the key and the recovery codes are deleted. Refused with 422 for a platform administrator, for whom it is required.
+func (c *Client) TwoFactorDisable(
+	ctx context.Context,
+	request *nordlet.TwoFactorDisableAccountRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TwoFactorDisableAccountResponse, error) {
+	response, err := c.WithRawResponse.TwoFactorDisable(
 		ctx,
 		request,
 		opts...,

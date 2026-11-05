@@ -1119,3 +1119,155 @@ func TestAccountOauthAuthorizeDenyWithWireMock(
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestAccountOauthAuthorizeDenyWithWireMock", "POST", "/v1/account/oauth/authorize/deny", nil, 1)
 }
+
+func TestAccountTwoFactorGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TwoFactorGetAccountRequest{}
+	_, invocationErr := client.Account.TwoFactorGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountTwoFactorGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountTwoFactorGetWithWireMock", "POST", "/v1/account/two-factor/get", nil, 1)
+}
+
+func TestAccountTwoFactorSetupWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TwoFactorSetupAccountRequest{}
+	_, invocationErr := client.Account.TwoFactorSetup(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountTwoFactorSetupWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountTwoFactorSetupWithWireMock", "POST", "/v1/account/two-factor/setup", nil, 1)
+}
+
+func TestAccountTwoFactorEnableWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TwoFactorEnableAccountRequest{
+		Code: "code",
+	}
+	_, invocationErr := client.Account.TwoFactorEnable(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountTwoFactorEnableWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountTwoFactorEnableWithWireMock", "POST", "/v1/account/two-factor/enable", nil, 1)
+}
+
+func TestAccountTwoFactorVerifyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TwoFactorVerifyAccountRequest{
+		Code: "code",
+	}
+	_, invocationErr := client.Account.TwoFactorVerify(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountTwoFactorVerifyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountTwoFactorVerifyWithWireMock", "POST", "/v1/account/two-factor/verify", nil, 1)
+}
+
+func TestAccountTwoFactorRecoveryCodesRegenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TwoFactorRecoveryCodesRegenerateAccountRequest{
+		Code: "code",
+	}
+	_, invocationErr := client.Account.TwoFactorRecoveryCodesRegenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountTwoFactorRecoveryCodesRegenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountTwoFactorRecoveryCodesRegenerateWithWireMock", "POST", "/v1/account/two-factor/recovery-codes/regenerate", nil, 1)
+}
+
+func TestAccountTwoFactorDisableWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TwoFactorDisableAccountRequest{
+		Code: "code",
+	}
+	_, invocationErr := client.Account.TwoFactorDisable(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountTwoFactorDisableWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountTwoFactorDisableWithWireMock", "POST", "/v1/account/two-factor/disable", nil, 1)
+}

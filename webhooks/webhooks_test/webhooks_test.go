@@ -130,6 +130,32 @@ func TestWebhooksSubscriptionsListWithWireMock(
 	VerifyRequestCount(t, "TestWebhooksSubscriptionsListWithWireMock", "POST", "/v1/webhooks/subscriptions/list", nil, 1)
 }
 
+func TestWebhooksSubscriptionsRotateSecretWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SubscriptionsRotateSecretWebhooksRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Webhooks.SubscriptionsRotateSecret(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestWebhooksSubscriptionsRotateSecretWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestWebhooksSubscriptionsRotateSecretWithWireMock", "POST", "/v1/webhooks/subscriptions/rotate-secret", nil, 1)
+}
+
 func TestWebhooksSubscriptionsUpdateWithWireMock(
 	t *testing.T,
 ) {

@@ -2551,6 +2551,216 @@ func (t *TableSettingsSetAccountRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	twoFactorDisableAccountRequestFieldCode = big.NewInt(1 << 0)
+)
+
+type TwoFactorDisableAccountRequest struct {
+	Code string `json:"code" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TwoFactorDisableAccountRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorDisableAccountRequest) SetCode(code string) {
+	t.Code = code
+	t.require(twoFactorDisableAccountRequestFieldCode)
+}
+
+func (t *TwoFactorDisableAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorDisableAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TwoFactorDisableAccountRequest(body)
+	return nil
+}
+
+func (t *TwoFactorDisableAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorDisableAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	twoFactorEnableAccountRequestFieldCode = big.NewInt(1 << 0)
+)
+
+type TwoFactorEnableAccountRequest struct {
+	Code string `json:"code" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TwoFactorEnableAccountRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorEnableAccountRequest) SetCode(code string) {
+	t.Code = code
+	t.require(twoFactorEnableAccountRequestFieldCode)
+}
+
+func (t *TwoFactorEnableAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorEnableAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TwoFactorEnableAccountRequest(body)
+	return nil
+}
+
+func (t *TwoFactorEnableAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorEnableAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type TwoFactorGetAccountRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TwoFactorGetAccountRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+var (
+	twoFactorRecoveryCodesRegenerateAccountRequestFieldCode = big.NewInt(1 << 0)
+)
+
+type TwoFactorRecoveryCodesRegenerateAccountRequest struct {
+	Code string `json:"code" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorRecoveryCodesRegenerateAccountRequest) SetCode(code string) {
+	t.Code = code
+	t.require(twoFactorRecoveryCodesRegenerateAccountRequestFieldCode)
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorRecoveryCodesRegenerateAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TwoFactorRecoveryCodesRegenerateAccountRequest(body)
+	return nil
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorRecoveryCodesRegenerateAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type TwoFactorSetupAccountRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TwoFactorSetupAccountRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+var (
+	twoFactorVerifyAccountRequestFieldCode = big.NewInt(1 << 0)
+)
+
+type TwoFactorVerifyAccountRequest struct {
+	Code string `json:"code" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TwoFactorVerifyAccountRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorVerifyAccountRequest) SetCode(code string) {
+	t.Code = code
+	t.require(twoFactorVerifyAccountRequestFieldCode)
+}
+
+func (t *TwoFactorVerifyAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorVerifyAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TwoFactorVerifyAccountRequest(body)
+	return nil
+}
+
+func (t *TwoFactorVerifyAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorVerifyAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	aPIKeysCreateAccountResponseFieldID        = big.NewInt(1 << 0)
 	aPIKeysCreateAccountResponseFieldName      = big.NewInt(1 << 1)
 	aPIKeysCreateAccountResponseFieldScopes    = big.NewInt(1 << 2)
@@ -2793,17 +3003,19 @@ func (a *APIKeysListAccountResponse) String() string {
 var (
 	aPIKeysListAccountResponseRowsItemFieldID              = big.NewInt(1 << 0)
 	aPIKeysListAccountResponseRowsItemFieldName            = big.NewInt(1 << 1)
-	aPIKeysListAccountResponseRowsItemFieldScopes          = big.NewInt(1 << 2)
-	aPIKeysListAccountResponseRowsItemFieldLastUsedAt      = big.NewInt(1 << 3)
-	aPIKeysListAccountResponseRowsItemFieldExpiresAt       = big.NewInt(1 << 4)
-	aPIKeysListAccountResponseRowsItemFieldReplacedByKeyID = big.NewInt(1 << 5)
-	aPIKeysListAccountResponseRowsItemFieldRevokedAt       = big.NewInt(1 << 6)
-	aPIKeysListAccountResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 7)
+	aPIKeysListAccountResponseRowsItemFieldLastFour        = big.NewInt(1 << 2)
+	aPIKeysListAccountResponseRowsItemFieldScopes          = big.NewInt(1 << 3)
+	aPIKeysListAccountResponseRowsItemFieldLastUsedAt      = big.NewInt(1 << 4)
+	aPIKeysListAccountResponseRowsItemFieldExpiresAt       = big.NewInt(1 << 5)
+	aPIKeysListAccountResponseRowsItemFieldReplacedByKeyID = big.NewInt(1 << 6)
+	aPIKeysListAccountResponseRowsItemFieldRevokedAt       = big.NewInt(1 << 7)
+	aPIKeysListAccountResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 8)
 )
 
 type APIKeysListAccountResponseRowsItem struct {
 	ID              string     `json:"id" url:"id"`
 	Name            string     `json:"name" url:"name"`
+	LastFour        *string    `json:"lastFour,omitempty" url:"lastFour,omitempty"`
 	Scopes          []string   `json:"scopes" url:"scopes"`
 	LastUsedAt      *time.Time `json:"lastUsedAt,omitempty" url:"lastUsedAt,omitempty"`
 	ExpiresAt       *time.Time `json:"expiresAt,omitempty" url:"expiresAt,omitempty"`
@@ -2830,6 +3042,13 @@ func (a *APIKeysListAccountResponseRowsItem) GetName() string {
 		return ""
 	}
 	return a.Name
+}
+
+func (a *APIKeysListAccountResponseRowsItem) GetLastFour() *string {
+	if a == nil {
+		return nil
+	}
+	return a.LastFour
 }
 
 func (a *APIKeysListAccountResponseRowsItem) GetScopes() []string {
@@ -2900,6 +3119,13 @@ func (a *APIKeysListAccountResponseRowsItem) SetID(id string) {
 func (a *APIKeysListAccountResponseRowsItem) SetName(name string) {
 	a.Name = name
 	a.require(aPIKeysListAccountResponseRowsItemFieldName)
+}
+
+// SetLastFour sets the LastFour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *APIKeysListAccountResponseRowsItem) SetLastFour(lastFour *string) {
+	a.LastFour = lastFour
+	a.require(aPIKeysListAccountResponseRowsItemFieldLastFour)
 }
 
 // SetScopes sets the Scopes field and marks it as non-optional;
@@ -7770,6 +7996,10 @@ var (
 	exportAccountResponseFieldBillingAccounts    = big.NewInt(1 << 6)
 	exportAccountResponseFieldCreditTransactions = big.NewInt(1 << 7)
 	exportAccountResponseFieldAuditEntries       = big.NewInt(1 << 8)
+	exportAccountResponseFieldAuthEvents         = big.NewInt(1 << 9)
+	exportAccountResponseFieldAPIKeys            = big.NewInt(1 << 10)
+	exportAccountResponseFieldOauthGrants        = big.NewInt(1 << 11)
+	exportAccountResponseFieldReferralPoints     = big.NewInt(1 << 12)
 )
 
 type ExportAccountResponse struct {
@@ -7782,6 +8012,10 @@ type ExportAccountResponse struct {
 	BillingAccounts    []*ExportAccountResponseBillingAccountsItem    `json:"billingAccounts" url:"billingAccounts"`
 	CreditTransactions []*ExportAccountResponseCreditTransactionsItem `json:"creditTransactions" url:"creditTransactions"`
 	AuditEntries       []*ExportAccountResponseAuditEntriesItem       `json:"auditEntries" url:"auditEntries"`
+	AuthEvents         []*ExportAccountResponseAuthEventsItem         `json:"authEvents" url:"authEvents"`
+	APIKeys            []*ExportAccountResponseAPIKeysItem            `json:"apiKeys" url:"apiKeys"`
+	OauthGrants        []*ExportAccountResponseOauthGrantsItem        `json:"oauthGrants" url:"oauthGrants"`
+	ReferralPoints     []*ExportAccountResponseReferralPointsItem     `json:"referralPoints" url:"referralPoints"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7851,6 +8085,34 @@ func (e *ExportAccountResponse) GetAuditEntries() []*ExportAccountResponseAuditE
 		return nil
 	}
 	return e.AuditEntries
+}
+
+func (e *ExportAccountResponse) GetAuthEvents() []*ExportAccountResponseAuthEventsItem {
+	if e == nil {
+		return nil
+	}
+	return e.AuthEvents
+}
+
+func (e *ExportAccountResponse) GetAPIKeys() []*ExportAccountResponseAPIKeysItem {
+	if e == nil {
+		return nil
+	}
+	return e.APIKeys
+}
+
+func (e *ExportAccountResponse) GetOauthGrants() []*ExportAccountResponseOauthGrantsItem {
+	if e == nil {
+		return nil
+	}
+	return e.OauthGrants
+}
+
+func (e *ExportAccountResponse) GetReferralPoints() []*ExportAccountResponseReferralPointsItem {
+	if e == nil {
+		return nil
+	}
+	return e.ReferralPoints
 }
 
 func (e *ExportAccountResponse) GetExtraProperties() map[string]interface{} {
@@ -7930,6 +8192,34 @@ func (e *ExportAccountResponse) SetAuditEntries(auditEntries []*ExportAccountRes
 	e.require(exportAccountResponseFieldAuditEntries)
 }
 
+// SetAuthEvents sets the AuthEvents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponse) SetAuthEvents(authEvents []*ExportAccountResponseAuthEventsItem) {
+	e.AuthEvents = authEvents
+	e.require(exportAccountResponseFieldAuthEvents)
+}
+
+// SetAPIKeys sets the APIKeys field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponse) SetAPIKeys(apiKeys []*ExportAccountResponseAPIKeysItem) {
+	e.APIKeys = apiKeys
+	e.require(exportAccountResponseFieldAPIKeys)
+}
+
+// SetOauthGrants sets the OauthGrants field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponse) SetOauthGrants(oauthGrants []*ExportAccountResponseOauthGrantsItem) {
+	e.OauthGrants = oauthGrants
+	e.require(exportAccountResponseFieldOauthGrants)
+}
+
+// SetReferralPoints sets the ReferralPoints field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponse) SetReferralPoints(referralPoints []*ExportAccountResponseReferralPointsItem) {
+	e.ReferralPoints = referralPoints
+	e.require(exportAccountResponseFieldReferralPoints)
+}
+
 func (e *ExportAccountResponse) UnmarshalJSON(data []byte) error {
 	type embed ExportAccountResponse
 	var unmarshaler = struct {
@@ -7966,6 +8256,222 @@ func (e *ExportAccountResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (e *ExportAccountResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	exportAccountResponseAPIKeysItemFieldID         = big.NewInt(1 << 0)
+	exportAccountResponseAPIKeysItemFieldName       = big.NewInt(1 << 1)
+	exportAccountResponseAPIKeysItemFieldLastFour   = big.NewInt(1 << 2)
+	exportAccountResponseAPIKeysItemFieldScopes     = big.NewInt(1 << 3)
+	exportAccountResponseAPIKeysItemFieldLastUsedAt = big.NewInt(1 << 4)
+	exportAccountResponseAPIKeysItemFieldExpiresAt  = big.NewInt(1 << 5)
+	exportAccountResponseAPIKeysItemFieldRevokedAt  = big.NewInt(1 << 6)
+	exportAccountResponseAPIKeysItemFieldCreatedAt  = big.NewInt(1 << 7)
+)
+
+type ExportAccountResponseAPIKeysItem struct {
+	ID         string     `json:"id" url:"id"`
+	Name       string     `json:"name" url:"name"`
+	LastFour   *string    `json:"lastFour,omitempty" url:"lastFour,omitempty"`
+	Scopes     []string   `json:"scopes" url:"scopes"`
+	LastUsedAt *time.Time `json:"lastUsedAt,omitempty" url:"lastUsedAt,omitempty"`
+	ExpiresAt  *time.Time `json:"expiresAt,omitempty" url:"expiresAt,omitempty"`
+	RevokedAt  *time.Time `json:"revokedAt,omitempty" url:"revokedAt,omitempty"`
+	CreatedAt  time.Time  `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ID
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetLastFour() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LastFour
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetScopes() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Scopes
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetLastUsedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.LastUsedAt
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetExpiresAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.ExpiresAt
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetRevokedAt() *time.Time {
+	if e == nil {
+		return nil
+	}
+	return e.RevokedAt
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *ExportAccountResponseAPIKeysItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExportAccountResponseAPIKeysItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetID(id string) {
+	e.ID = id
+	e.require(exportAccountResponseAPIKeysItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetName(name string) {
+	e.Name = name
+	e.require(exportAccountResponseAPIKeysItemFieldName)
+}
+
+// SetLastFour sets the LastFour field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetLastFour(lastFour *string) {
+	e.LastFour = lastFour
+	e.require(exportAccountResponseAPIKeysItemFieldLastFour)
+}
+
+// SetScopes sets the Scopes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetScopes(scopes []string) {
+	e.Scopes = scopes
+	e.require(exportAccountResponseAPIKeysItemFieldScopes)
+}
+
+// SetLastUsedAt sets the LastUsedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetLastUsedAt(lastUsedAt *time.Time) {
+	e.LastUsedAt = lastUsedAt
+	e.require(exportAccountResponseAPIKeysItemFieldLastUsedAt)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetExpiresAt(expiresAt *time.Time) {
+	e.ExpiresAt = expiresAt
+	e.require(exportAccountResponseAPIKeysItemFieldExpiresAt)
+}
+
+// SetRevokedAt sets the RevokedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetRevokedAt(revokedAt *time.Time) {
+	e.RevokedAt = revokedAt
+	e.require(exportAccountResponseAPIKeysItemFieldRevokedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAPIKeysItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(exportAccountResponseAPIKeysItemFieldCreatedAt)
+}
+
+func (e *ExportAccountResponseAPIKeysItem) UnmarshalJSON(data []byte) error {
+	type embed ExportAccountResponseAPIKeysItem
+	var unmarshaler = struct {
+		embed
+		LastUsedAt *internal.DateTime `json:"lastUsedAt,omitempty"`
+		ExpiresAt  *internal.DateTime `json:"expiresAt,omitempty"`
+		RevokedAt  *internal.DateTime `json:"revokedAt,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExportAccountResponseAPIKeysItem(unmarshaler.embed)
+	e.LastUsedAt = unmarshaler.LastUsedAt.TimePtr()
+	e.ExpiresAt = unmarshaler.ExpiresAt.TimePtr()
+	e.RevokedAt = unmarshaler.RevokedAt.TimePtr()
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExportAccountResponseAPIKeysItem) MarshalJSON() ([]byte, error) {
+	type embed ExportAccountResponseAPIKeysItem
+	var marshaler = struct {
+		embed
+		LastUsedAt *internal.DateTime `json:"lastUsedAt,omitempty"`
+		ExpiresAt  *internal.DateTime `json:"expiresAt,omitempty"`
+		RevokedAt  *internal.DateTime `json:"revokedAt,omitempty"`
+		CreatedAt  *internal.DateTime `json:"createdAt"`
+	}{
+		embed:      embed(*e),
+		LastUsedAt: internal.NewOptionalDateTime(e.LastUsedAt),
+		ExpiresAt:  internal.NewOptionalDateTime(e.ExpiresAt),
+		RevokedAt:  internal.NewOptionalDateTime(e.RevokedAt),
+		CreatedAt:  internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExportAccountResponseAPIKeysItem) String() string {
 	if e == nil {
 		return "<nil>"
 	}
@@ -8138,6 +8644,146 @@ func (e *ExportAccountResponseAuditEntriesItem) MarshalJSON() ([]byte, error) {
 }
 
 func (e *ExportAccountResponseAuditEntriesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	exportAccountResponseAuthEventsItemFieldAction    = big.NewInt(1 << 0)
+	exportAccountResponseAuthEventsItemFieldIPAddress = big.NewInt(1 << 1)
+	exportAccountResponseAuthEventsItemFieldUserAgent = big.NewInt(1 << 2)
+	exportAccountResponseAuthEventsItemFieldCreatedAt = big.NewInt(1 << 3)
+)
+
+type ExportAccountResponseAuthEventsItem struct {
+	Action    string    `json:"action" url:"action"`
+	IPAddress *string   `json:"ipAddress,omitempty" url:"ipAddress,omitempty"`
+	UserAgent *string   `json:"userAgent,omitempty" url:"userAgent,omitempty"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExportAccountResponseAuthEventsItem) GetAction() string {
+	if e == nil {
+		return ""
+	}
+	return e.Action
+}
+
+func (e *ExportAccountResponseAuthEventsItem) GetIPAddress() *string {
+	if e == nil {
+		return nil
+	}
+	return e.IPAddress
+}
+
+func (e *ExportAccountResponseAuthEventsItem) GetUserAgent() *string {
+	if e == nil {
+		return nil
+	}
+	return e.UserAgent
+}
+
+func (e *ExportAccountResponseAuthEventsItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *ExportAccountResponseAuthEventsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExportAccountResponseAuthEventsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetAction sets the Action field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAuthEventsItem) SetAction(action string) {
+	e.Action = action
+	e.require(exportAccountResponseAuthEventsItemFieldAction)
+}
+
+// SetIPAddress sets the IPAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAuthEventsItem) SetIPAddress(ipAddress *string) {
+	e.IPAddress = ipAddress
+	e.require(exportAccountResponseAuthEventsItemFieldIPAddress)
+}
+
+// SetUserAgent sets the UserAgent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAuthEventsItem) SetUserAgent(userAgent *string) {
+	e.UserAgent = userAgent
+	e.require(exportAccountResponseAuthEventsItemFieldUserAgent)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseAuthEventsItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(exportAccountResponseAuthEventsItemFieldCreatedAt)
+}
+
+func (e *ExportAccountResponseAuthEventsItem) UnmarshalJSON(data []byte) error {
+	type embed ExportAccountResponseAuthEventsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExportAccountResponseAuthEventsItem(unmarshaler.embed)
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExportAccountResponseAuthEventsItem) MarshalJSON() ([]byte, error) {
+	type embed ExportAccountResponseAuthEventsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExportAccountResponseAuthEventsItem) String() string {
 	if e == nil {
 		return "<nil>"
 	}
@@ -9045,6 +9691,270 @@ func (e *ExportAccountResponseMembershipsItem) String() string {
 }
 
 var (
+	exportAccountResponseOauthGrantsItemFieldAPIKeyID   = big.NewInt(1 << 0)
+	exportAccountResponseOauthGrantsItemFieldClientID   = big.NewInt(1 << 1)
+	exportAccountResponseOauthGrantsItemFieldClientName = big.NewInt(1 << 2)
+	exportAccountResponseOauthGrantsItemFieldCreatedAt  = big.NewInt(1 << 3)
+)
+
+type ExportAccountResponseOauthGrantsItem struct {
+	APIKeyID   string    `json:"apiKeyId" url:"apiKeyId"`
+	ClientID   string    `json:"clientId" url:"clientId"`
+	ClientName string    `json:"clientName" url:"clientName"`
+	CreatedAt  time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) GetAPIKeyID() string {
+	if e == nil {
+		return ""
+	}
+	return e.APIKeyID
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) GetClientID() string {
+	if e == nil {
+		return ""
+	}
+	return e.ClientID
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) GetClientName() string {
+	if e == nil {
+		return ""
+	}
+	return e.ClientName
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetAPIKeyID sets the APIKeyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseOauthGrantsItem) SetAPIKeyID(apiKeyID string) {
+	e.APIKeyID = apiKeyID
+	e.require(exportAccountResponseOauthGrantsItemFieldAPIKeyID)
+}
+
+// SetClientID sets the ClientID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseOauthGrantsItem) SetClientID(clientID string) {
+	e.ClientID = clientID
+	e.require(exportAccountResponseOauthGrantsItemFieldClientID)
+}
+
+// SetClientName sets the ClientName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseOauthGrantsItem) SetClientName(clientName string) {
+	e.ClientName = clientName
+	e.require(exportAccountResponseOauthGrantsItemFieldClientName)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseOauthGrantsItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(exportAccountResponseOauthGrantsItemFieldCreatedAt)
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) UnmarshalJSON(data []byte) error {
+	type embed ExportAccountResponseOauthGrantsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExportAccountResponseOauthGrantsItem(unmarshaler.embed)
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) MarshalJSON() ([]byte, error) {
+	type embed ExportAccountResponseOauthGrantsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExportAccountResponseOauthGrantsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	exportAccountResponseReferralPointsItemFieldPoints    = big.NewInt(1 << 0)
+	exportAccountResponseReferralPointsItemFieldReason    = big.NewInt(1 << 1)
+	exportAccountResponseReferralPointsItemFieldCreatedAt = big.NewInt(1 << 2)
+)
+
+type ExportAccountResponseReferralPointsItem struct {
+	Points    int64     `json:"points" url:"points"`
+	Reason    string    `json:"reason" url:"reason"`
+	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *ExportAccountResponseReferralPointsItem) GetPoints() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Points
+}
+
+func (e *ExportAccountResponseReferralPointsItem) GetReason() string {
+	if e == nil {
+		return ""
+	}
+	return e.Reason
+}
+
+func (e *ExportAccountResponseReferralPointsItem) GetCreatedAt() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.CreatedAt
+}
+
+func (e *ExportAccountResponseReferralPointsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *ExportAccountResponseReferralPointsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetPoints sets the Points field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseReferralPointsItem) SetPoints(points int64) {
+	e.Points = points
+	e.require(exportAccountResponseReferralPointsItemFieldPoints)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseReferralPointsItem) SetReason(reason string) {
+	e.Reason = reason
+	e.require(exportAccountResponseReferralPointsItemFieldReason)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExportAccountResponseReferralPointsItem) SetCreatedAt(createdAt time.Time) {
+	e.CreatedAt = createdAt
+	e.require(exportAccountResponseReferralPointsItemFieldCreatedAt)
+}
+
+func (e *ExportAccountResponseReferralPointsItem) UnmarshalJSON(data []byte) error {
+	type embed ExportAccountResponseReferralPointsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = ExportAccountResponseReferralPointsItem(unmarshaler.embed)
+	e.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *ExportAccountResponseReferralPointsItem) MarshalJSON() ([]byte, error) {
+	type embed ExportAccountResponseReferralPointsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*e),
+		CreatedAt: internal.NewDateTime(e.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *ExportAccountResponseReferralPointsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
 	exportAccountResponseSessionsItemFieldID         = big.NewInt(1 << 0)
 	exportAccountResponseSessionsItemFieldCompanyID  = big.NewInt(1 << 1)
 	exportAccountResponseSessionsItemFieldIPAddress  = big.NewInt(1 << 2)
@@ -9544,15 +10454,17 @@ func (i InvitesAcceptAccountRequestLocale) Ptr() *InvitesAcceptAccountRequestLoc
 }
 
 var (
-	invitesAcceptAccountResponseFieldToken     = big.NewInt(1 << 0)
-	invitesAcceptAccountResponseFieldExpiresAt = big.NewInt(1 << 1)
-	invitesAcceptAccountResponseFieldUser      = big.NewInt(1 << 2)
+	invitesAcceptAccountResponseFieldToken             = big.NewInt(1 << 0)
+	invitesAcceptAccountResponseFieldExpiresAt         = big.NewInt(1 << 1)
+	invitesAcceptAccountResponseFieldTwoFactorRequired = big.NewInt(1 << 2)
+	invitesAcceptAccountResponseFieldUser              = big.NewInt(1 << 3)
 )
 
 type InvitesAcceptAccountResponse struct {
-	Token     string                            `json:"token" url:"token"`
-	ExpiresAt time.Time                         `json:"expiresAt" url:"expiresAt"`
-	User      *InvitesAcceptAccountResponseUser `json:"user" url:"user"`
+	Token             string                            `json:"token" url:"token"`
+	ExpiresAt         time.Time                         `json:"expiresAt" url:"expiresAt"`
+	TwoFactorRequired bool                              `json:"twoFactorRequired" url:"twoFactorRequired"`
+	User              *InvitesAcceptAccountResponseUser `json:"user" url:"user"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9573,6 +10485,13 @@ func (i *InvitesAcceptAccountResponse) GetExpiresAt() time.Time {
 		return time.Time{}
 	}
 	return i.ExpiresAt
+}
+
+func (i *InvitesAcceptAccountResponse) GetTwoFactorRequired() bool {
+	if i == nil {
+		return false
+	}
+	return i.TwoFactorRequired
 }
 
 func (i *InvitesAcceptAccountResponse) GetUser() *InvitesAcceptAccountResponseUser {
@@ -9608,6 +10527,13 @@ func (i *InvitesAcceptAccountResponse) SetToken(token string) {
 func (i *InvitesAcceptAccountResponse) SetExpiresAt(expiresAt time.Time) {
 	i.ExpiresAt = expiresAt
 	i.require(invitesAcceptAccountResponseFieldExpiresAt)
+}
+
+// SetTwoFactorRequired sets the TwoFactorRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvitesAcceptAccountResponse) SetTwoFactorRequired(twoFactorRequired bool) {
+	i.TwoFactorRequired = twoFactorRequired
+	i.require(invitesAcceptAccountResponseFieldTwoFactorRequired)
 }
 
 // SetUser sets the User field and marks it as non-optional;
@@ -10831,17 +11757,19 @@ func (l LocaleSetAccountResponseScope) Ptr() *LocaleSetAccountResponseScope {
 }
 
 var (
-	loginLinkConsumeAccountResponseFieldToken     = big.NewInt(1 << 0)
-	loginLinkConsumeAccountResponseFieldExpiresAt = big.NewInt(1 << 1)
-	loginLinkConsumeAccountResponseFieldUser      = big.NewInt(1 << 2)
-	loginLinkConsumeAccountResponseFieldIsNewUser = big.NewInt(1 << 3)
+	loginLinkConsumeAccountResponseFieldToken             = big.NewInt(1 << 0)
+	loginLinkConsumeAccountResponseFieldExpiresAt         = big.NewInt(1 << 1)
+	loginLinkConsumeAccountResponseFieldTwoFactorRequired = big.NewInt(1 << 2)
+	loginLinkConsumeAccountResponseFieldUser              = big.NewInt(1 << 3)
+	loginLinkConsumeAccountResponseFieldIsNewUser         = big.NewInt(1 << 4)
 )
 
 type LoginLinkConsumeAccountResponse struct {
-	Token     string                               `json:"token" url:"token"`
-	ExpiresAt time.Time                            `json:"expiresAt" url:"expiresAt"`
-	User      *LoginLinkConsumeAccountResponseUser `json:"user" url:"user"`
-	IsNewUser bool                                 `json:"isNewUser" url:"isNewUser"`
+	Token             string                               `json:"token" url:"token"`
+	ExpiresAt         time.Time                            `json:"expiresAt" url:"expiresAt"`
+	TwoFactorRequired bool                                 `json:"twoFactorRequired" url:"twoFactorRequired"`
+	User              *LoginLinkConsumeAccountResponseUser `json:"user" url:"user"`
+	IsNewUser         bool                                 `json:"isNewUser" url:"isNewUser"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10862,6 +11790,13 @@ func (l *LoginLinkConsumeAccountResponse) GetExpiresAt() time.Time {
 		return time.Time{}
 	}
 	return l.ExpiresAt
+}
+
+func (l *LoginLinkConsumeAccountResponse) GetTwoFactorRequired() bool {
+	if l == nil {
+		return false
+	}
+	return l.TwoFactorRequired
 }
 
 func (l *LoginLinkConsumeAccountResponse) GetUser() *LoginLinkConsumeAccountResponseUser {
@@ -10904,6 +11839,13 @@ func (l *LoginLinkConsumeAccountResponse) SetToken(token string) {
 func (l *LoginLinkConsumeAccountResponse) SetExpiresAt(expiresAt time.Time) {
 	l.ExpiresAt = expiresAt
 	l.require(loginLinkConsumeAccountResponseFieldExpiresAt)
+}
+
+// SetTwoFactorRequired sets the TwoFactorRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LoginLinkConsumeAccountResponse) SetTwoFactorRequired(twoFactorRequired bool) {
+	l.TwoFactorRequired = twoFactorRequired
+	l.require(loginLinkConsumeAccountResponseFieldTwoFactorRequired)
 }
 
 // SetUser sets the User field and marks it as non-optional;
@@ -14905,6 +15847,674 @@ func (t *TableSettingsSetAccountResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TableSettingsSetAccountResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	twoFactorDisableAccountResponseFieldEnabled = big.NewInt(1 << 0)
+)
+
+type TwoFactorDisableAccountResponse struct {
+	Enabled bool `json:"enabled" url:"enabled"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TwoFactorDisableAccountResponse) GetEnabled() bool {
+	if t == nil {
+		return false
+	}
+	return t.Enabled
+}
+
+func (t *TwoFactorDisableAccountResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TwoFactorDisableAccountResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetEnabled sets the Enabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorDisableAccountResponse) SetEnabled(enabled bool) {
+	t.Enabled = enabled
+	t.require(twoFactorDisableAccountResponseFieldEnabled)
+}
+
+func (t *TwoFactorDisableAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorDisableAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TwoFactorDisableAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TwoFactorDisableAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorDisableAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TwoFactorDisableAccountResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	twoFactorEnableAccountResponseFieldRecoveryCodes = big.NewInt(1 << 0)
+)
+
+type TwoFactorEnableAccountResponse struct {
+	RecoveryCodes []string `json:"recoveryCodes" url:"recoveryCodes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TwoFactorEnableAccountResponse) GetRecoveryCodes() []string {
+	if t == nil {
+		return nil
+	}
+	return t.RecoveryCodes
+}
+
+func (t *TwoFactorEnableAccountResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TwoFactorEnableAccountResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetRecoveryCodes sets the RecoveryCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorEnableAccountResponse) SetRecoveryCodes(recoveryCodes []string) {
+	t.RecoveryCodes = recoveryCodes
+	t.require(twoFactorEnableAccountResponseFieldRecoveryCodes)
+}
+
+func (t *TwoFactorEnableAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorEnableAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TwoFactorEnableAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TwoFactorEnableAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorEnableAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TwoFactorEnableAccountResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	twoFactorGetAccountResponseFieldEnabled           = big.NewInt(1 << 0)
+	twoFactorGetAccountResponseFieldRequired          = big.NewInt(1 << 1)
+	twoFactorGetAccountResponseFieldRecoveryCodesLeft = big.NewInt(1 << 2)
+	twoFactorGetAccountResponseFieldSetup             = big.NewInt(1 << 3)
+)
+
+type TwoFactorGetAccountResponse struct {
+	Enabled           bool                              `json:"enabled" url:"enabled"`
+	Required          bool                              `json:"required" url:"required"`
+	RecoveryCodesLeft int64                             `json:"recoveryCodesLeft" url:"recoveryCodesLeft"`
+	Setup             *TwoFactorGetAccountResponseSetup `json:"setup,omitempty" url:"setup,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TwoFactorGetAccountResponse) GetEnabled() bool {
+	if t == nil {
+		return false
+	}
+	return t.Enabled
+}
+
+func (t *TwoFactorGetAccountResponse) GetRequired() bool {
+	if t == nil {
+		return false
+	}
+	return t.Required
+}
+
+func (t *TwoFactorGetAccountResponse) GetRecoveryCodesLeft() int64 {
+	if t == nil {
+		return 0
+	}
+	return t.RecoveryCodesLeft
+}
+
+func (t *TwoFactorGetAccountResponse) GetSetup() *TwoFactorGetAccountResponseSetup {
+	if t == nil {
+		return nil
+	}
+	return t.Setup
+}
+
+func (t *TwoFactorGetAccountResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TwoFactorGetAccountResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetEnabled sets the Enabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorGetAccountResponse) SetEnabled(enabled bool) {
+	t.Enabled = enabled
+	t.require(twoFactorGetAccountResponseFieldEnabled)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorGetAccountResponse) SetRequired(required bool) {
+	t.Required = required
+	t.require(twoFactorGetAccountResponseFieldRequired)
+}
+
+// SetRecoveryCodesLeft sets the RecoveryCodesLeft field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorGetAccountResponse) SetRecoveryCodesLeft(recoveryCodesLeft int64) {
+	t.RecoveryCodesLeft = recoveryCodesLeft
+	t.require(twoFactorGetAccountResponseFieldRecoveryCodesLeft)
+}
+
+// SetSetup sets the Setup field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorGetAccountResponse) SetSetup(setup *TwoFactorGetAccountResponseSetup) {
+	t.Setup = setup
+	t.require(twoFactorGetAccountResponseFieldSetup)
+}
+
+func (t *TwoFactorGetAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorGetAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TwoFactorGetAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TwoFactorGetAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorGetAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TwoFactorGetAccountResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	twoFactorGetAccountResponseSetupFieldSecret     = big.NewInt(1 << 0)
+	twoFactorGetAccountResponseSetupFieldOtpauthURL = big.NewInt(1 << 1)
+)
+
+type TwoFactorGetAccountResponseSetup struct {
+	Secret     string `json:"secret" url:"secret"`
+	OtpauthURL string `json:"otpauthUrl" url:"otpauthUrl"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TwoFactorGetAccountResponseSetup) GetSecret() string {
+	if t == nil {
+		return ""
+	}
+	return t.Secret
+}
+
+func (t *TwoFactorGetAccountResponseSetup) GetOtpauthURL() string {
+	if t == nil {
+		return ""
+	}
+	return t.OtpauthURL
+}
+
+func (t *TwoFactorGetAccountResponseSetup) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TwoFactorGetAccountResponseSetup) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetSecret sets the Secret field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorGetAccountResponseSetup) SetSecret(secret string) {
+	t.Secret = secret
+	t.require(twoFactorGetAccountResponseSetupFieldSecret)
+}
+
+// SetOtpauthURL sets the OtpauthURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorGetAccountResponseSetup) SetOtpauthURL(otpauthURL string) {
+	t.OtpauthURL = otpauthURL
+	t.require(twoFactorGetAccountResponseSetupFieldOtpauthURL)
+}
+
+func (t *TwoFactorGetAccountResponseSetup) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorGetAccountResponseSetup
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TwoFactorGetAccountResponseSetup(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TwoFactorGetAccountResponseSetup) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorGetAccountResponseSetup
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TwoFactorGetAccountResponseSetup) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	twoFactorRecoveryCodesRegenerateAccountResponseFieldRecoveryCodes = big.NewInt(1 << 0)
+)
+
+type TwoFactorRecoveryCodesRegenerateAccountResponse struct {
+	RecoveryCodes []string `json:"recoveryCodes" url:"recoveryCodes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountResponse) GetRecoveryCodes() []string {
+	if t == nil {
+		return nil
+	}
+	return t.RecoveryCodes
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetRecoveryCodes sets the RecoveryCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorRecoveryCodesRegenerateAccountResponse) SetRecoveryCodes(recoveryCodes []string) {
+	t.RecoveryCodes = recoveryCodes
+	t.require(twoFactorRecoveryCodesRegenerateAccountResponseFieldRecoveryCodes)
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorRecoveryCodesRegenerateAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TwoFactorRecoveryCodesRegenerateAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorRecoveryCodesRegenerateAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TwoFactorRecoveryCodesRegenerateAccountResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	twoFactorSetupAccountResponseFieldSecret     = big.NewInt(1 << 0)
+	twoFactorSetupAccountResponseFieldOtpauthURL = big.NewInt(1 << 1)
+)
+
+type TwoFactorSetupAccountResponse struct {
+	Secret     string `json:"secret" url:"secret"`
+	OtpauthURL string `json:"otpauthUrl" url:"otpauthUrl"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TwoFactorSetupAccountResponse) GetSecret() string {
+	if t == nil {
+		return ""
+	}
+	return t.Secret
+}
+
+func (t *TwoFactorSetupAccountResponse) GetOtpauthURL() string {
+	if t == nil {
+		return ""
+	}
+	return t.OtpauthURL
+}
+
+func (t *TwoFactorSetupAccountResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TwoFactorSetupAccountResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetSecret sets the Secret field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorSetupAccountResponse) SetSecret(secret string) {
+	t.Secret = secret
+	t.require(twoFactorSetupAccountResponseFieldSecret)
+}
+
+// SetOtpauthURL sets the OtpauthURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorSetupAccountResponse) SetOtpauthURL(otpauthURL string) {
+	t.OtpauthURL = otpauthURL
+	t.require(twoFactorSetupAccountResponseFieldOtpauthURL)
+}
+
+func (t *TwoFactorSetupAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorSetupAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TwoFactorSetupAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TwoFactorSetupAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorSetupAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TwoFactorSetupAccountResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	twoFactorVerifyAccountResponseFieldVerified = big.NewInt(1 << 0)
+)
+
+type TwoFactorVerifyAccountResponse struct {
+	Verified bool `json:"verified" url:"verified"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TwoFactorVerifyAccountResponse) GetVerified() bool {
+	if t == nil {
+		return false
+	}
+	return t.Verified
+}
+
+func (t *TwoFactorVerifyAccountResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TwoFactorVerifyAccountResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetVerified sets the Verified field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TwoFactorVerifyAccountResponse) SetVerified(verified bool) {
+	t.Verified = verified
+	t.require(twoFactorVerifyAccountResponseFieldVerified)
+}
+
+func (t *TwoFactorVerifyAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler TwoFactorVerifyAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TwoFactorVerifyAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TwoFactorVerifyAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed TwoFactorVerifyAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TwoFactorVerifyAccountResponse) String() string {
 	if t == nil {
 		return "<nil>"
 	}

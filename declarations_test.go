@@ -133035,6 +133035,13 @@ func TestEnumConfigsListDeclarationsResponseRowsItemFieldsItemKind(t *testing.T)
 		assert.Equal(t, ConfigsListDeclarationsResponseRowsItemFieldsItemKind("url"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_host", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewConfigsListDeclarationsResponseRowsItemFieldsItemKindFromString("host")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ConfigsListDeclarationsResponseRowsItemFieldsItemKind("host"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_certificate", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewConfigsListDeclarationsResponseRowsItemFieldsItemKindFromString("certificate")
@@ -133112,6 +133119,13 @@ func TestEnumConfigsUpdateDeclarationsResponseFieldsItemKind(t *testing.T) {
 		val, err := NewConfigsUpdateDeclarationsResponseFieldsItemKindFromString("url")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, ConfigsUpdateDeclarationsResponseFieldsItemKind("url"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_host", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewConfigsUpdateDeclarationsResponseFieldsItemKindFromString("host")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ConfigsUpdateDeclarationsResponseFieldsItemKind("host"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_certificate", func(t *testing.T) {

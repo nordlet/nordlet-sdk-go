@@ -333,6 +333,61 @@ func (s *SubscriptionsListWebhooksRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	subscriptionsRotateSecretWebhooksRequestFieldID     = big.NewInt(1 << 0)
+	subscriptionsRotateSecretWebhooksRequestFieldSecret = big.NewInt(1 << 1)
+)
+
+type SubscriptionsRotateSecretWebhooksRequest struct {
+	ID     string  `json:"id" url:"-"`
+	Secret *string `json:"secret,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SubscriptionsRotateSecretWebhooksRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksRequest) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsRotateSecretWebhooksRequestFieldID)
+}
+
+// SetSecret sets the Secret field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksRequest) SetSecret(secret *string) {
+	s.Secret = secret
+	s.require(subscriptionsRotateSecretWebhooksRequestFieldSecret)
+}
+
+func (s *SubscriptionsRotateSecretWebhooksRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubscriptionsRotateSecretWebhooksRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SubscriptionsRotateSecretWebhooksRequest(body)
+	return nil
+}
+
+func (s *SubscriptionsRotateSecretWebhooksRequest) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsRotateSecretWebhooksRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	subscriptionsUpdateWebhooksRequestFieldID       = big.NewInt(1 << 0)
 	subscriptionsUpdateWebhooksRequestFieldURL      = big.NewInt(1 << 1)
 	subscriptionsUpdateWebhooksRequestFieldEvents   = big.NewInt(1 << 2)
@@ -2705,6 +2760,295 @@ func NewSubscriptionsListWebhooksResponseRowsItemLastDeliveryStatusFromString(s 
 }
 
 func (s SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus) Ptr() *SubscriptionsListWebhooksResponseRowsItemLastDeliveryStatus {
+	return &s
+}
+
+var (
+	subscriptionsRotateSecretWebhooksResponseFieldID                      = big.NewInt(1 << 0)
+	subscriptionsRotateSecretWebhooksResponseFieldURL                     = big.NewInt(1 << 1)
+	subscriptionsRotateSecretWebhooksResponseFieldEvents                  = big.NewInt(1 << 2)
+	subscriptionsRotateSecretWebhooksResponseFieldIsActive                = big.NewInt(1 << 3)
+	subscriptionsRotateSecretWebhooksResponseFieldConsecutiveFailures     = big.NewInt(1 << 4)
+	subscriptionsRotateSecretWebhooksResponseFieldLastDeliveryStatus      = big.NewInt(1 << 5)
+	subscriptionsRotateSecretWebhooksResponseFieldLastDeliveryAt          = big.NewInt(1 << 6)
+	subscriptionsRotateSecretWebhooksResponseFieldPausedAt                = big.NewInt(1 << 7)
+	subscriptionsRotateSecretWebhooksResponseFieldCreatedAt               = big.NewInt(1 << 8)
+	subscriptionsRotateSecretWebhooksResponseFieldSecret                  = big.NewInt(1 << 9)
+	subscriptionsRotateSecretWebhooksResponseFieldPreviousSecretExpiresAt = big.NewInt(1 << 10)
+)
+
+type SubscriptionsRotateSecretWebhooksResponse struct {
+	ID                      string                                                       `json:"id" url:"id"`
+	URL                     string                                                       `json:"url" url:"url"`
+	Events                  []string                                                     `json:"events" url:"events"`
+	IsActive                bool                                                         `json:"isActive" url:"isActive"`
+	ConsecutiveFailures     int64                                                        `json:"consecutiveFailures" url:"consecutiveFailures"`
+	LastDeliveryStatus      *SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus `json:"lastDeliveryStatus,omitempty" url:"lastDeliveryStatus,omitempty"`
+	LastDeliveryAt          *time.Time                                                   `json:"lastDeliveryAt,omitempty" url:"lastDeliveryAt,omitempty"`
+	PausedAt                *time.Time                                                   `json:"pausedAt,omitempty" url:"pausedAt,omitempty"`
+	CreatedAt               time.Time                                                    `json:"createdAt" url:"createdAt"`
+	Secret                  string                                                       `json:"secret" url:"secret"`
+	PreviousSecretExpiresAt time.Time                                                    `json:"previousSecretExpiresAt" url:"previousSecretExpiresAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetURL() string {
+	if s == nil {
+		return ""
+	}
+	return s.URL
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetEvents() []string {
+	if s == nil {
+		return nil
+	}
+	return s.Events
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetIsActive() bool {
+	if s == nil {
+		return false
+	}
+	return s.IsActive
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetConsecutiveFailures() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ConsecutiveFailures
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetLastDeliveryStatus() *SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus {
+	if s == nil {
+		return nil
+	}
+	return s.LastDeliveryStatus
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetLastDeliveryAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.LastDeliveryAt
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetPausedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.PausedAt
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetCreatedAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.CreatedAt
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetSecret() string {
+	if s == nil {
+		return ""
+	}
+	return s.Secret
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetPreviousSecretExpiresAt() time.Time {
+	if s == nil {
+		return time.Time{}
+	}
+	return s.PreviousSecretExpiresAt
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetID(id string) {
+	s.ID = id
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldID)
+}
+
+// SetURL sets the URL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetURL(url string) {
+	s.URL = url
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldURL)
+}
+
+// SetEvents sets the Events field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetEvents(events []string) {
+	s.Events = events
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldEvents)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetIsActive(isActive bool) {
+	s.IsActive = isActive
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldIsActive)
+}
+
+// SetConsecutiveFailures sets the ConsecutiveFailures field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetConsecutiveFailures(consecutiveFailures int64) {
+	s.ConsecutiveFailures = consecutiveFailures
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldConsecutiveFailures)
+}
+
+// SetLastDeliveryStatus sets the LastDeliveryStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetLastDeliveryStatus(lastDeliveryStatus *SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus) {
+	s.LastDeliveryStatus = lastDeliveryStatus
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldLastDeliveryStatus)
+}
+
+// SetLastDeliveryAt sets the LastDeliveryAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetLastDeliveryAt(lastDeliveryAt *time.Time) {
+	s.LastDeliveryAt = lastDeliveryAt
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldLastDeliveryAt)
+}
+
+// SetPausedAt sets the PausedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetPausedAt(pausedAt *time.Time) {
+	s.PausedAt = pausedAt
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldPausedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetCreatedAt(createdAt time.Time) {
+	s.CreatedAt = createdAt
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldCreatedAt)
+}
+
+// SetSecret sets the Secret field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetSecret(secret string) {
+	s.Secret = secret
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldSecret)
+}
+
+// SetPreviousSecretExpiresAt sets the PreviousSecretExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionsRotateSecretWebhooksResponse) SetPreviousSecretExpiresAt(previousSecretExpiresAt time.Time) {
+	s.PreviousSecretExpiresAt = previousSecretExpiresAt
+	s.require(subscriptionsRotateSecretWebhooksResponseFieldPreviousSecretExpiresAt)
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) UnmarshalJSON(data []byte) error {
+	type embed SubscriptionsRotateSecretWebhooksResponse
+	var unmarshaler = struct {
+		embed
+		LastDeliveryAt          *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt                *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt               *internal.DateTime `json:"createdAt"`
+		PreviousSecretExpiresAt *internal.DateTime `json:"previousSecretExpiresAt"`
+	}{
+		embed: embed(*s),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*s = SubscriptionsRotateSecretWebhooksResponse(unmarshaler.embed)
+	s.LastDeliveryAt = unmarshaler.LastDeliveryAt.TimePtr()
+	s.PausedAt = unmarshaler.PausedAt.TimePtr()
+	s.CreatedAt = unmarshaler.CreatedAt.Time()
+	s.PreviousSecretExpiresAt = unmarshaler.PreviousSecretExpiresAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) MarshalJSON() ([]byte, error) {
+	type embed SubscriptionsRotateSecretWebhooksResponse
+	var marshaler = struct {
+		embed
+		LastDeliveryAt          *internal.DateTime `json:"lastDeliveryAt,omitempty"`
+		PausedAt                *internal.DateTime `json:"pausedAt,omitempty"`
+		CreatedAt               *internal.DateTime `json:"createdAt"`
+		PreviousSecretExpiresAt *internal.DateTime `json:"previousSecretExpiresAt"`
+	}{
+		embed:                   embed(*s),
+		LastDeliveryAt:          internal.NewOptionalDateTime(s.LastDeliveryAt),
+		PausedAt:                internal.NewOptionalDateTime(s.PausedAt),
+		CreatedAt:               internal.NewDateTime(s.CreatedAt),
+		PreviousSecretExpiresAt: internal.NewDateTime(s.PreviousSecretExpiresAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubscriptionsRotateSecretWebhooksResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus string
+
+const (
+	SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatusPending   SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus = "pending"
+	SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatusDelivered SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus = "delivered"
+	SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatusFailed    SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus = "failed"
+)
+
+func NewSubscriptionsRotateSecretWebhooksResponseLastDeliveryStatusFromString(s string) (SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus, error) {
+	switch s {
+	case "pending":
+		return SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatusPending, nil
+	case "delivered":
+		return SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatusDelivered, nil
+	case "failed":
+		return SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatusFailed, nil
+	}
+	var t SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus) Ptr() *SubscriptionsRotateSecretWebhooksResponseLastDeliveryStatus {
 	return &s
 }
 

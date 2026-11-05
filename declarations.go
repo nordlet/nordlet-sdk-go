@@ -11752,6 +11752,7 @@ const (
 	ConfigsListDeclarationsResponseRowsItemFieldsItemKindSecret      ConfigsListDeclarationsResponseRowsItemFieldsItemKind = "secret"
 	ConfigsListDeclarationsResponseRowsItemFieldsItemKindSelect      ConfigsListDeclarationsResponseRowsItemFieldsItemKind = "select"
 	ConfigsListDeclarationsResponseRowsItemFieldsItemKindURL         ConfigsListDeclarationsResponseRowsItemFieldsItemKind = "url"
+	ConfigsListDeclarationsResponseRowsItemFieldsItemKindHost        ConfigsListDeclarationsResponseRowsItemFieldsItemKind = "host"
 	ConfigsListDeclarationsResponseRowsItemFieldsItemKindCertificate ConfigsListDeclarationsResponseRowsItemFieldsItemKind = "certificate"
 )
 
@@ -11765,6 +11766,8 @@ func NewConfigsListDeclarationsResponseRowsItemFieldsItemKindFromString(s string
 		return ConfigsListDeclarationsResponseRowsItemFieldsItemKindSelect, nil
 	case "url":
 		return ConfigsListDeclarationsResponseRowsItemFieldsItemKindURL, nil
+	case "host":
+		return ConfigsListDeclarationsResponseRowsItemFieldsItemKindHost, nil
 	case "certificate":
 		return ConfigsListDeclarationsResponseRowsItemFieldsItemKindCertificate, nil
 	}
@@ -12249,6 +12252,7 @@ const (
 	ConfigsUpdateDeclarationsResponseFieldsItemKindSecret      ConfigsUpdateDeclarationsResponseFieldsItemKind = "secret"
 	ConfigsUpdateDeclarationsResponseFieldsItemKindSelect      ConfigsUpdateDeclarationsResponseFieldsItemKind = "select"
 	ConfigsUpdateDeclarationsResponseFieldsItemKindURL         ConfigsUpdateDeclarationsResponseFieldsItemKind = "url"
+	ConfigsUpdateDeclarationsResponseFieldsItemKindHost        ConfigsUpdateDeclarationsResponseFieldsItemKind = "host"
 	ConfigsUpdateDeclarationsResponseFieldsItemKindCertificate ConfigsUpdateDeclarationsResponseFieldsItemKind = "certificate"
 )
 
@@ -12262,6 +12266,8 @@ func NewConfigsUpdateDeclarationsResponseFieldsItemKindFromString(s string) (Con
 		return ConfigsUpdateDeclarationsResponseFieldsItemKindSelect, nil
 	case "url":
 		return ConfigsUpdateDeclarationsResponseFieldsItemKindURL, nil
+	case "host":
+		return ConfigsUpdateDeclarationsResponseFieldsItemKindHost, nil
 	case "certificate":
 		return ConfigsUpdateDeclarationsResponseFieldsItemKindCertificate, nil
 	}

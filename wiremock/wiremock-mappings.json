@@ -16625,6 +16625,37 @@
       }
     },
     {
+      "id": "c4f8dc98-b60c-4e58-a9fa-80d7c9bbafd9",
+      "name": "Webhooks subscriptions rotate secret - default",
+      "request": {
+        "urlPathTemplate": "/v1/webhooks/subscriptions/rotate-secret",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"url\": \"url\",\n  \"events\": [\n    \"events\"\n  ],\n  \"isActive\": true,\n  \"consecutiveFailures\": 1000000,\n  \"lastDeliveryStatus\": \"pending\",\n  \"lastDeliveryAt\": \"2026-07-01T09:30:00Z\",\n  \"pausedAt\": \"2026-07-01T09:30:00Z\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\",\n  \"secret\": \"secret\",\n  \"previousSecretExpiresAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "c4f8dc98-b60c-4e58-a9fa-80d7c9bbafd9",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "776a96f8-e25c-4557-adb4-4ed383c1eeb8",
       "name": "Webhooks subscriptions update - default",
       "request": {
@@ -20363,7 +20394,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"token\": \"token\",\n  \"expiresAt\": \"2026-07-01T09:30:00Z\",\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"plan\": \"plan\"\n  },\n  \"isNewUser\": true\n}",
+        "body": "{\n  \"token\": \"token\",\n  \"expiresAt\": \"2026-07-01T09:30:00Z\",\n  \"twoFactorRequired\": true,\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"plan\": \"plan\"\n  },\n  \"isNewUser\": true\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20704,7 +20735,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"token\": \"token\",\n  \"expiresAt\": \"2026-07-01T09:30:00Z\",\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"plan\": \"plan\"\n  }\n}",
+        "body": "{\n  \"token\": \"token\",\n  \"expiresAt\": \"2026-07-01T09:30:00Z\",\n  \"twoFactorRequired\": true,\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"plan\": \"plan\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -21014,7 +21045,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"scopes\": [\n        \"scopes\"\n      ],\n      \"lastUsedAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"replacedByKeyId\": \"replacedByKeyId\",\n      \"revokedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"lastFour\": \"lastFour\",\n      \"scopes\": [\n        \"scopes\"\n      ],\n      \"lastUsedAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"replacedByKeyId\": \"replacedByKeyId\",\n      \"revokedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -21293,7 +21324,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"generatedAt\": \"2026-07-01T09:30:00Z\",\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"memberships\": [\n    {\n      \"companyId\": \"companyId\",\n      \"companyName\": \"companyName\",\n      \"role\": \"role\",\n      \"since\": \"since\"\n    }\n  ],\n  \"sessions\": [\n    {\n      \"id\": \"id\",\n      \"companyId\": \"companyId\",\n      \"ipAddress\": \"ipAddress\",\n      \"userAgent\": \"userAgent\",\n      \"lastSeenAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"current\": true\n    }\n  ],\n  \"billing\": {\n    \"status\": \"status\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"firstTopUpAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"billingAccounts\": [\n    {\n      \"site\": \"app\",\n      \"status\": \"status\",\n      \"plan\": \"plan\",\n      \"balanceCents\": 1000000,\n      \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n      \"firstTopUpAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"creditTransactions\": [\n    {\n      \"id\": \"id\",\n      \"site\": \"app\",\n      \"type\": \"type\",\n      \"amountCents\": 1000000,\n      \"balanceAfterCents\": 1000000,\n      \"description\": \"description\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"auditEntries\": [\n    {\n      \"id\": 1000000,\n      \"companyId\": \"companyId\",\n      \"action\": \"action\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"generatedAt\": \"2026-07-01T09:30:00Z\",\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"createdAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"memberships\": [\n    {\n      \"companyId\": \"companyId\",\n      \"companyName\": \"companyName\",\n      \"role\": \"role\",\n      \"since\": \"since\"\n    }\n  ],\n  \"sessions\": [\n    {\n      \"id\": \"id\",\n      \"companyId\": \"companyId\",\n      \"ipAddress\": \"ipAddress\",\n      \"userAgent\": \"userAgent\",\n      \"lastSeenAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"current\": true\n    }\n  ],\n  \"billing\": {\n    \"status\": \"status\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"firstTopUpAt\": \"2026-07-01T09:30:00Z\"\n  },\n  \"billingAccounts\": [\n    {\n      \"site\": \"app\",\n      \"status\": \"status\",\n      \"plan\": \"plan\",\n      \"balanceCents\": 1000000,\n      \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n      \"firstTopUpAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"creditTransactions\": [\n    {\n      \"id\": \"id\",\n      \"site\": \"app\",\n      \"type\": \"type\",\n      \"amountCents\": 1000000,\n      \"balanceAfterCents\": 1000000,\n      \"description\": \"description\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"auditEntries\": [\n    {\n      \"id\": 1000000,\n      \"companyId\": \"companyId\",\n      \"action\": \"action\",\n      \"entity\": \"entity\",\n      \"entityId\": \"entityId\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"authEvents\": [\n    {\n      \"action\": \"action\",\n      \"ipAddress\": \"ipAddress\",\n      \"userAgent\": \"userAgent\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"apiKeys\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"lastFour\": \"lastFour\",\n      \"scopes\": [\n        \"scopes\"\n      ],\n      \"lastUsedAt\": \"2026-07-01T09:30:00Z\",\n      \"expiresAt\": \"2026-07-01T09:30:00Z\",\n      \"revokedAt\": \"2026-07-01T09:30:00Z\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"oauthGrants\": [\n    {\n      \"apiKeyId\": \"apiKeyId\",\n      \"clientId\": \"clientId\",\n      \"clientName\": \"clientName\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"referralPoints\": [\n    {\n      \"points\": 1000000,\n      \"reason\": \"reason\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -21588,9 +21619,195 @@
           }
         }
       }
+    },
+    {
+      "id": "497d9697-6435-4ede-8687-6717e2c084d0",
+      "name": "Account two factor get - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/two-factor/get",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"enabled\": true,\n  \"required\": true,\n  \"recoveryCodesLeft\": 1000000,\n  \"setup\": {\n    \"secret\": \"secret\",\n    \"otpauthUrl\": \"otpauthUrl\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "497d9697-6435-4ede-8687-6717e2c084d0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ae2eb7e3-c794-40bc-b5a8-e0e98f8f33f4",
+      "name": "Account two factor setup - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/two-factor/setup",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"secret\": \"secret\",\n  \"otpauthUrl\": \"otpauthUrl\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ae2eb7e3-c794-40bc-b5a8-e0e98f8f33f4",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "695fda19-02d9-46e7-b525-7aa3a00fa63d",
+      "name": "Account two factor enable - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/two-factor/enable",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"recoveryCodes\": [\n    \"recoveryCodes\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "695fda19-02d9-46e7-b525-7aa3a00fa63d",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "bea4a05d-bf1e-4a60-bec1-ad4646a69753",
+      "name": "Account two factor verify - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/two-factor/verify",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"verified\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "bea4a05d-bf1e-4a60-bec1-ad4646a69753",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "02ce3ce2-a893-48bf-95f7-237881b39a6b",
+      "name": "Account two factor recovery codes regenerate - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/two-factor/recovery-codes/regenerate",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"recoveryCodes\": [\n    \"recoveryCodes\"\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "02ce3ce2-a893-48bf-95f7-237881b39a6b",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "58e8152a-24f8-4a39-a7bb-3ffe0ca98303",
+      "name": "Account two factor disable - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/two-factor/disable",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"enabled\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "58e8152a-24f8-4a39-a7bb-3ffe0ca98303",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
     }
   ],
   "meta": {
-    "total": 696
+    "total": 703
   }
 }
