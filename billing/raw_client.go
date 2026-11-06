@@ -340,6 +340,50 @@ func (r *RawClient) TopupConfirm(
 	}, nil
 }
 
+func (r *RawClient) FreeSandboxStart(
+	ctx context.Context,
+	request *nordlet.FreeSandboxStartBillingRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.FreeSandboxStartBillingResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/billing/free-sandbox/start"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.FreeSandboxStartBillingResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.FreeSandboxStartBillingResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) FlatRateCreate(
 	ctx context.Context,
 	request *nordlet.FlatRateCreateBillingRequest,

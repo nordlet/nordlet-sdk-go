@@ -258,6 +258,30 @@ func TestBillingTopupConfirmWithWireMock(
 	VerifyRequestCount(t, "TestBillingTopupConfirmWithWireMock", "POST", "/v1/billing/topup/confirm", nil, 1)
 }
 
+func TestBillingFreeSandboxStartWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.FreeSandboxStartBillingRequest{}
+	_, invocationErr := client.Billing.FreeSandboxStart(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBillingFreeSandboxStartWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBillingFreeSandboxStartWithWireMock", "POST", "/v1/billing/free-sandbox/start", nil, 1)
+}
+
 func TestBillingFlatRateCreateWithWireMock(
 	t *testing.T,
 ) {

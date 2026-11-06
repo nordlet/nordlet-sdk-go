@@ -263,13 +263,15 @@ func (f *FlatRateConfirmBillingRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	flatRateCreateBillingRequestFieldLocale = big.NewInt(1 << 0)
-	flatRateCreateBillingRequestFieldPlan   = big.NewInt(1 << 1)
+	flatRateCreateBillingRequestFieldLocale           = big.NewInt(1 << 0)
+	flatRateCreateBillingRequestFieldPlan             = big.NewInt(1 << 1)
+	flatRateCreateBillingRequestFieldConvertCompanyID = big.NewInt(1 << 2)
 )
 
 type FlatRateCreateBillingRequest struct {
-	Locale *FlatRateCreateBillingRequestLocale `json:"locale,omitempty" url:"-"`
-	Plan   *FlatRateCreateBillingRequestPlan   `json:"plan,omitempty" url:"-"`
+	Locale           *FlatRateCreateBillingRequestLocale `json:"locale,omitempty" url:"-"`
+	Plan             *FlatRateCreateBillingRequestPlan   `json:"plan,omitempty" url:"-"`
+	ConvertCompanyID *string                             `json:"convertCompanyId,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -296,6 +298,13 @@ func (f *FlatRateCreateBillingRequest) SetPlan(plan *FlatRateCreateBillingReques
 	f.require(flatRateCreateBillingRequestFieldPlan)
 }
 
+// SetConvertCompanyID sets the ConvertCompanyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FlatRateCreateBillingRequest) SetConvertCompanyID(convertCompanyID *string) {
+	f.ConvertCompanyID = convertCompanyID
+	f.require(flatRateCreateBillingRequestFieldConvertCompanyID)
+}
+
 func (f *FlatRateCreateBillingRequest) UnmarshalJSON(data []byte) error {
 	type unmarshaler FlatRateCreateBillingRequest
 	var body unmarshaler
@@ -315,6 +324,19 @@ func (f *FlatRateCreateBillingRequest) MarshalJSON() ([]byte, error) {
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
 	return json.Marshal(explicitMarshaler)
+}
+
+type FreeSandboxStartBillingRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (f *FreeSandboxStartBillingRequest) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
 }
 
 var (
@@ -423,15 +445,17 @@ func (t *TopupConfirmBillingRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	topupCreateBillingRequestFieldAmountCents = big.NewInt(1 << 0)
-	topupCreateBillingRequestFieldLocale      = big.NewInt(1 << 1)
-	topupCreateBillingRequestFieldReturnTo    = big.NewInt(1 << 2)
+	topupCreateBillingRequestFieldAmountCents      = big.NewInt(1 << 0)
+	topupCreateBillingRequestFieldLocale           = big.NewInt(1 << 1)
+	topupCreateBillingRequestFieldReturnTo         = big.NewInt(1 << 2)
+	topupCreateBillingRequestFieldConvertCompanyID = big.NewInt(1 << 3)
 )
 
 type TopupCreateBillingRequest struct {
-	AmountCents int64                              `json:"amountCents" url:"-"`
-	Locale      *TopupCreateBillingRequestLocale   `json:"locale,omitempty" url:"-"`
-	ReturnTo    *TopupCreateBillingRequestReturnTo `json:"returnTo,omitempty" url:"-"`
+	AmountCents      int64                              `json:"amountCents" url:"-"`
+	Locale           *TopupCreateBillingRequestLocale   `json:"locale,omitempty" url:"-"`
+	ReturnTo         *TopupCreateBillingRequestReturnTo `json:"returnTo,omitempty" url:"-"`
+	ConvertCompanyID *string                            `json:"convertCompanyId,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -463,6 +487,13 @@ func (t *TopupCreateBillingRequest) SetLocale(locale *TopupCreateBillingRequestL
 func (t *TopupCreateBillingRequest) SetReturnTo(returnTo *TopupCreateBillingRequestReturnTo) {
 	t.ReturnTo = returnTo
 	t.require(topupCreateBillingRequestFieldReturnTo)
+}
+
+// SetConvertCompanyID sets the ConvertCompanyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TopupCreateBillingRequest) SetConvertCompanyID(convertCompanyID *string) {
+	t.ConvertCompanyID = convertCompanyID
+	t.require(topupCreateBillingRequestFieldConvertCompanyID)
 }
 
 func (t *TopupCreateBillingRequest) UnmarshalJSON(data []byte) error {
@@ -539,37 +570,40 @@ var (
 	accountGetBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	accountGetBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	accountGetBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	accountGetBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	accountGetBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	accountGetBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	accountGetBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	accountGetBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	accountGetBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	accountGetBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	accountGetBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	accountGetBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	accountGetBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	accountGetBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	accountGetBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	accountGetBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	accountGetBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	accountGetBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	accountGetBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	accountGetBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	accountGetBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	accountGetBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	accountGetBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	accountGetBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	accountGetBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	accountGetBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	accountGetBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	accountGetBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	accountGetBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	accountGetBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	accountGetBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	accountGetBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	accountGetBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	accountGetBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	accountGetBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	accountGetBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type AccountGetBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               AccountGetBillingResponseSite        `json:"site" url:"site"`
-	Plan               AccountGetBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        AccountGetBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             AccountGetBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                           `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                           `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                           `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                 `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                 `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                 `json:"hasSubscription" url:"hasSubscription"`
+	Site         AccountGetBillingResponseSite        `json:"site" url:"site"`
+	Plan         AccountGetBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  AccountGetBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       AccountGetBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                           `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                      `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                      `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -630,6 +664,13 @@ func (a *AccountGetBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return a.TrialEndsAt
+}
+
+func (a *AccountGetBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.FreeSandboxStartedAt
 }
 
 func (a *AccountGetBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -800,6 +841,13 @@ func (a *AccountGetBillingResponse) SetTrialEndsAt(trialEndsAt *time.Time) {
 	a.require(accountGetBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountGetBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	a.FreeSandboxStartedAt = freeSandboxStartedAt
+	a.require(accountGetBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (a *AccountGetBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -917,6 +965,7 @@ func (a *AccountGetBillingResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -929,6 +978,7 @@ func (a *AccountGetBillingResponse) UnmarshalJSON(data []byte) error {
 	}
 	*a = AccountGetBillingResponse(unmarshaler.embed)
 	a.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	a.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	a.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	a.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	a.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -947,6 +997,7 @@ func (a *AccountGetBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -954,6 +1005,7 @@ func (a *AccountGetBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*a),
 		TrialEndsAt:          internal.NewOptionalDateTime(a.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(a.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(a.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(a.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(a.SubscriptionCancelAt),
@@ -1681,37 +1733,40 @@ var (
 	accountSetAccountTypeBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	accountSetAccountTypeBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	accountSetAccountTypeBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	accountSetAccountTypeBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	accountSetAccountTypeBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	accountSetAccountTypeBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	accountSetAccountTypeBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	accountSetAccountTypeBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	accountSetAccountTypeBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	accountSetAccountTypeBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	accountSetAccountTypeBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	accountSetAccountTypeBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	accountSetAccountTypeBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	accountSetAccountTypeBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	accountSetAccountTypeBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	accountSetAccountTypeBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	accountSetAccountTypeBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	accountSetAccountTypeBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	accountSetAccountTypeBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	accountSetAccountTypeBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	accountSetAccountTypeBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	accountSetAccountTypeBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	accountSetAccountTypeBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	accountSetAccountTypeBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	accountSetAccountTypeBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	accountSetAccountTypeBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	accountSetAccountTypeBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	accountSetAccountTypeBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	accountSetAccountTypeBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	accountSetAccountTypeBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	accountSetAccountTypeBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	accountSetAccountTypeBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	accountSetAccountTypeBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	accountSetAccountTypeBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	accountSetAccountTypeBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	accountSetAccountTypeBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type AccountSetAccountTypeBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               AccountSetAccountTypeBillingResponseSite        `json:"site" url:"site"`
-	Plan               AccountSetAccountTypeBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        AccountSetAccountTypeBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             AccountSetAccountTypeBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                           `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                                      `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                                      `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                                      `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                            `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                            `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                            `json:"hasSubscription" url:"hasSubscription"`
+	Site         AccountSetAccountTypeBillingResponseSite        `json:"site" url:"site"`
+	Plan         AccountSetAccountTypeBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  AccountSetAccountTypeBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       AccountSetAccountTypeBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                           `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                                      `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                                 `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                                 `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -1772,6 +1827,13 @@ func (a *AccountSetAccountTypeBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return a.TrialEndsAt
+}
+
+func (a *AccountSetAccountTypeBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.FreeSandboxStartedAt
 }
 
 func (a *AccountSetAccountTypeBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -1942,6 +2004,13 @@ func (a *AccountSetAccountTypeBillingResponse) SetTrialEndsAt(trialEndsAt *time.
 	a.require(accountSetAccountTypeBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetAccountTypeBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	a.FreeSandboxStartedAt = freeSandboxStartedAt
+	a.require(accountSetAccountTypeBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (a *AccountSetAccountTypeBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -2059,6 +2128,7 @@ func (a *AccountSetAccountTypeBillingResponse) UnmarshalJSON(data []byte) error 
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -2071,6 +2141,7 @@ func (a *AccountSetAccountTypeBillingResponse) UnmarshalJSON(data []byte) error 
 	}
 	*a = AccountSetAccountTypeBillingResponse(unmarshaler.embed)
 	a.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	a.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	a.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	a.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	a.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -2089,6 +2160,7 @@ func (a *AccountSetAccountTypeBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -2096,6 +2168,7 @@ func (a *AccountSetAccountTypeBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*a),
 		TrialEndsAt:          internal.NewOptionalDateTime(a.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(a.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(a.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(a.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(a.SubscriptionCancelAt),
@@ -2801,37 +2874,40 @@ var (
 	accountSetAutoTopUpBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	accountSetAutoTopUpBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	accountSetAutoTopUpBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	accountSetAutoTopUpBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	accountSetAutoTopUpBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	accountSetAutoTopUpBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	accountSetAutoTopUpBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	accountSetAutoTopUpBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	accountSetAutoTopUpBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	accountSetAutoTopUpBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	accountSetAutoTopUpBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	accountSetAutoTopUpBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	accountSetAutoTopUpBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	accountSetAutoTopUpBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	accountSetAutoTopUpBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	accountSetAutoTopUpBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	accountSetAutoTopUpBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	accountSetAutoTopUpBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	accountSetAutoTopUpBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	accountSetAutoTopUpBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	accountSetAutoTopUpBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	accountSetAutoTopUpBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	accountSetAutoTopUpBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	accountSetAutoTopUpBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	accountSetAutoTopUpBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	accountSetAutoTopUpBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	accountSetAutoTopUpBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	accountSetAutoTopUpBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	accountSetAutoTopUpBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	accountSetAutoTopUpBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	accountSetAutoTopUpBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	accountSetAutoTopUpBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	accountSetAutoTopUpBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	accountSetAutoTopUpBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	accountSetAutoTopUpBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	accountSetAutoTopUpBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type AccountSetAutoTopUpBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               AccountSetAutoTopUpBillingResponseSite        `json:"site" url:"site"`
-	Plan               AccountSetAutoTopUpBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        AccountSetAutoTopUpBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             AccountSetAutoTopUpBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                         `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                                    `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                                    `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                                    `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                          `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                          `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                          `json:"hasSubscription" url:"hasSubscription"`
+	Site         AccountSetAutoTopUpBillingResponseSite        `json:"site" url:"site"`
+	Plan         AccountSetAutoTopUpBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  AccountSetAutoTopUpBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       AccountSetAutoTopUpBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                         `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                                    `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                               `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                               `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -2892,6 +2968,13 @@ func (a *AccountSetAutoTopUpBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return a.TrialEndsAt
+}
+
+func (a *AccountSetAutoTopUpBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.FreeSandboxStartedAt
 }
 
 func (a *AccountSetAutoTopUpBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -3062,6 +3145,13 @@ func (a *AccountSetAutoTopUpBillingResponse) SetTrialEndsAt(trialEndsAt *time.Ti
 	a.require(accountSetAutoTopUpBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetAutoTopUpBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	a.FreeSandboxStartedAt = freeSandboxStartedAt
+	a.require(accountSetAutoTopUpBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (a *AccountSetAutoTopUpBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -3179,6 +3269,7 @@ func (a *AccountSetAutoTopUpBillingResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -3191,6 +3282,7 @@ func (a *AccountSetAutoTopUpBillingResponse) UnmarshalJSON(data []byte) error {
 	}
 	*a = AccountSetAutoTopUpBillingResponse(unmarshaler.embed)
 	a.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	a.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	a.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	a.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	a.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -3209,6 +3301,7 @@ func (a *AccountSetAutoTopUpBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -3216,6 +3309,7 @@ func (a *AccountSetAutoTopUpBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*a),
 		TrialEndsAt:          internal.NewOptionalDateTime(a.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(a.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(a.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(a.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(a.SubscriptionCancelAt),
@@ -3921,37 +4015,40 @@ var (
 	accountSetOverdraftCapBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	accountSetOverdraftCapBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	accountSetOverdraftCapBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	accountSetOverdraftCapBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	accountSetOverdraftCapBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	accountSetOverdraftCapBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	accountSetOverdraftCapBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	accountSetOverdraftCapBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	accountSetOverdraftCapBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	accountSetOverdraftCapBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	accountSetOverdraftCapBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	accountSetOverdraftCapBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	accountSetOverdraftCapBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	accountSetOverdraftCapBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	accountSetOverdraftCapBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	accountSetOverdraftCapBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	accountSetOverdraftCapBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	accountSetOverdraftCapBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	accountSetOverdraftCapBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	accountSetOverdraftCapBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	accountSetOverdraftCapBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	accountSetOverdraftCapBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	accountSetOverdraftCapBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	accountSetOverdraftCapBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	accountSetOverdraftCapBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	accountSetOverdraftCapBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	accountSetOverdraftCapBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	accountSetOverdraftCapBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	accountSetOverdraftCapBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	accountSetOverdraftCapBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	accountSetOverdraftCapBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	accountSetOverdraftCapBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	accountSetOverdraftCapBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	accountSetOverdraftCapBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	accountSetOverdraftCapBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	accountSetOverdraftCapBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type AccountSetOverdraftCapBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               AccountSetOverdraftCapBillingResponseSite        `json:"site" url:"site"`
-	Plan               AccountSetOverdraftCapBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        AccountSetOverdraftCapBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             AccountSetOverdraftCapBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                            `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                                       `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                                       `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                                       `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                             `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                             `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                             `json:"hasSubscription" url:"hasSubscription"`
+	Site         AccountSetOverdraftCapBillingResponseSite        `json:"site" url:"site"`
+	Plan         AccountSetOverdraftCapBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  AccountSetOverdraftCapBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       AccountSetOverdraftCapBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                            `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                                       `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                                  `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                                  `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -4012,6 +4109,13 @@ func (a *AccountSetOverdraftCapBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return a.TrialEndsAt
+}
+
+func (a *AccountSetOverdraftCapBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.FreeSandboxStartedAt
 }
 
 func (a *AccountSetOverdraftCapBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -4182,6 +4286,13 @@ func (a *AccountSetOverdraftCapBillingResponse) SetTrialEndsAt(trialEndsAt *time
 	a.require(accountSetOverdraftCapBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetOverdraftCapBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	a.FreeSandboxStartedAt = freeSandboxStartedAt
+	a.require(accountSetOverdraftCapBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (a *AccountSetOverdraftCapBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -4299,6 +4410,7 @@ func (a *AccountSetOverdraftCapBillingResponse) UnmarshalJSON(data []byte) error
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -4311,6 +4423,7 @@ func (a *AccountSetOverdraftCapBillingResponse) UnmarshalJSON(data []byte) error
 	}
 	*a = AccountSetOverdraftCapBillingResponse(unmarshaler.embed)
 	a.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	a.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	a.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	a.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	a.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -4329,6 +4442,7 @@ func (a *AccountSetOverdraftCapBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -4336,6 +4450,7 @@ func (a *AccountSetOverdraftCapBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*a),
 		TrialEndsAt:          internal.NewOptionalDateTime(a.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(a.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(a.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(a.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(a.SubscriptionCancelAt),
@@ -5069,37 +5184,40 @@ var (
 	accountSetPlanBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	accountSetPlanBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	accountSetPlanBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	accountSetPlanBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	accountSetPlanBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	accountSetPlanBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	accountSetPlanBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	accountSetPlanBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	accountSetPlanBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	accountSetPlanBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	accountSetPlanBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	accountSetPlanBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	accountSetPlanBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	accountSetPlanBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	accountSetPlanBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	accountSetPlanBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	accountSetPlanBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	accountSetPlanBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	accountSetPlanBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	accountSetPlanBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	accountSetPlanBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	accountSetPlanBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	accountSetPlanBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	accountSetPlanBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	accountSetPlanBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	accountSetPlanBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	accountSetPlanBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	accountSetPlanBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	accountSetPlanBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	accountSetPlanBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	accountSetPlanBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	accountSetPlanBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	accountSetPlanBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	accountSetPlanBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	accountSetPlanBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	accountSetPlanBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type AccountSetPlanBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               AccountSetPlanBillingResponseSite        `json:"site" url:"site"`
-	Plan               AccountSetPlanBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        AccountSetPlanBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             AccountSetPlanBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                    `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                               `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                               `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                               `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                     `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                     `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                     `json:"hasSubscription" url:"hasSubscription"`
+	Site         AccountSetPlanBillingResponseSite        `json:"site" url:"site"`
+	Plan         AccountSetPlanBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  AccountSetPlanBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       AccountSetPlanBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                    `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                               `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                          `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                          `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -5160,6 +5278,13 @@ func (a *AccountSetPlanBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return a.TrialEndsAt
+}
+
+func (a *AccountSetPlanBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.FreeSandboxStartedAt
 }
 
 func (a *AccountSetPlanBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -5330,6 +5455,13 @@ func (a *AccountSetPlanBillingResponse) SetTrialEndsAt(trialEndsAt *time.Time) {
 	a.require(accountSetPlanBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountSetPlanBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	a.FreeSandboxStartedAt = freeSandboxStartedAt
+	a.require(accountSetPlanBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (a *AccountSetPlanBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -5447,6 +5579,7 @@ func (a *AccountSetPlanBillingResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -5459,6 +5592,7 @@ func (a *AccountSetPlanBillingResponse) UnmarshalJSON(data []byte) error {
 	}
 	*a = AccountSetPlanBillingResponse(unmarshaler.embed)
 	a.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	a.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	a.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	a.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	a.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -5477,6 +5611,7 @@ func (a *AccountSetPlanBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -5484,6 +5619,7 @@ func (a *AccountSetPlanBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*a),
 		TrialEndsAt:          internal.NewOptionalDateTime(a.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(a.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(a.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(a.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(a.SubscriptionCancelAt),
@@ -6189,37 +6325,40 @@ var (
 	flatRateConfirmBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	flatRateConfirmBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	flatRateConfirmBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	flatRateConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	flatRateConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	flatRateConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	flatRateConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	flatRateConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	flatRateConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	flatRateConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	flatRateConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	flatRateConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	flatRateConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	flatRateConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	flatRateConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	flatRateConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	flatRateConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	flatRateConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	flatRateConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	flatRateConfirmBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	flatRateConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	flatRateConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	flatRateConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	flatRateConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	flatRateConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	flatRateConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	flatRateConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	flatRateConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	flatRateConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	flatRateConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	flatRateConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	flatRateConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	flatRateConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	flatRateConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	flatRateConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	flatRateConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type FlatRateConfirmBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               FlatRateConfirmBillingResponseSite        `json:"site" url:"site"`
-	Plan               FlatRateConfirmBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        FlatRateConfirmBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             FlatRateConfirmBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                     `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                                `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                                `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                                `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                      `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                      `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                      `json:"hasSubscription" url:"hasSubscription"`
+	Site         FlatRateConfirmBillingResponseSite        `json:"site" url:"site"`
+	Plan         FlatRateConfirmBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  FlatRateConfirmBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       FlatRateConfirmBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                     `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                                `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                           `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                           `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -6280,6 +6419,13 @@ func (f *FlatRateConfirmBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return f.TrialEndsAt
+}
+
+func (f *FlatRateConfirmBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if f == nil {
+		return nil
+	}
+	return f.FreeSandboxStartedAt
 }
 
 func (f *FlatRateConfirmBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -6450,6 +6596,13 @@ func (f *FlatRateConfirmBillingResponse) SetTrialEndsAt(trialEndsAt *time.Time) 
 	f.require(flatRateConfirmBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FlatRateConfirmBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	f.FreeSandboxStartedAt = freeSandboxStartedAt
+	f.require(flatRateConfirmBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (f *FlatRateConfirmBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -6567,6 +6720,7 @@ func (f *FlatRateConfirmBillingResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -6579,6 +6733,7 @@ func (f *FlatRateConfirmBillingResponse) UnmarshalJSON(data []byte) error {
 	}
 	*f = FlatRateConfirmBillingResponse(unmarshaler.embed)
 	f.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	f.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	f.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	f.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	f.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -6597,6 +6752,7 @@ func (f *FlatRateConfirmBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -6604,6 +6760,7 @@ func (f *FlatRateConfirmBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*f),
 		TrialEndsAt:          internal.NewOptionalDateTime(f.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(f.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(f.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(f.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(f.SubscriptionCancelAt),
@@ -7545,6 +7702,1147 @@ func (f *FlatRateCreateBillingResponse) String() string {
 	return fmt.Sprintf("%#v", f)
 }
 
+var (
+	freeSandboxStartBillingResponseFieldSite                    = big.NewInt(1 << 0)
+	freeSandboxStartBillingResponseFieldPlan                    = big.NewInt(1 << 1)
+	freeSandboxStartBillingResponseFieldAccountType             = big.NewInt(1 << 2)
+	freeSandboxStartBillingResponseFieldStatus                  = big.NewInt(1 << 3)
+	freeSandboxStartBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
+	freeSandboxStartBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
+	freeSandboxStartBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	freeSandboxStartBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	freeSandboxStartBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	freeSandboxStartBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	freeSandboxStartBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	freeSandboxStartBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	freeSandboxStartBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	freeSandboxStartBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	freeSandboxStartBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	freeSandboxStartBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	freeSandboxStartBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	freeSandboxStartBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	freeSandboxStartBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	freeSandboxStartBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	freeSandboxStartBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	freeSandboxStartBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	freeSandboxStartBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
+)
+
+type FreeSandboxStartBillingResponse struct {
+	// The site whose plan this is, from the `x-nordlet-site` header
+	Site         FreeSandboxStartBillingResponseSite        `json:"site" url:"site"`
+	Plan         FreeSandboxStartBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  FreeSandboxStartBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       FreeSandboxStartBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                      `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                                 `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
+	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
+	SubscriptionCancelAt    *time.Time                                            `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
+	PaymentFailedAt         *time.Time                                            `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
+	PaymentFailedInvoiceURL *string                                               `json:"paymentFailedInvoiceUrl,omitempty" url:"paymentFailedInvoiceUrl,omitempty"`
+	MonthToDate             *FreeSandboxStartBillingResponseMonthToDate           `json:"monthToDate" url:"monthToDate"`
+	Plans                   map[string]*FreeSandboxStartBillingResponsePlansValue `json:"plans" url:"plans"`
+	APIRequestEur           string                                                `json:"apiRequestEur" url:"apiRequestEur"`
+	TopUp                   *FreeSandboxStartBillingResponseTopUp                 `json:"topUp" url:"topUp"`
+	AutoTopUp               *FreeSandboxStartBillingResponseAutoTopUp             `json:"autoTopUp" url:"autoTopUp"`
+	OverdraftCapCents       int64                                                 `json:"overdraftCapCents" url:"overdraftCapCents"`
+	OverdraftCapMaxCents    int64                                                 `json:"overdraftCapMaxCents" url:"overdraftCapMaxCents"`
+	TrialDays               int64                                                 `json:"trialDays" url:"trialDays"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FreeSandboxStartBillingResponse) GetSite() FreeSandboxStartBillingResponseSite {
+	if f == nil {
+		return ""
+	}
+	return f.Site
+}
+
+func (f *FreeSandboxStartBillingResponse) GetPlan() FreeSandboxStartBillingResponsePlan {
+	if f == nil {
+		return ""
+	}
+	return f.Plan
+}
+
+func (f *FreeSandboxStartBillingResponse) GetAccountType() FreeSandboxStartBillingResponseAccountType {
+	if f == nil {
+		return ""
+	}
+	return f.AccountType
+}
+
+func (f *FreeSandboxStartBillingResponse) GetStatus() FreeSandboxStartBillingResponseStatus {
+	if f == nil {
+		return ""
+	}
+	return f.Status
+}
+
+func (f *FreeSandboxStartBillingResponse) GetBalanceCents() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.BalanceCents
+}
+
+func (f *FreeSandboxStartBillingResponse) GetTrialEndsAt() *time.Time {
+	if f == nil {
+		return nil
+	}
+	return f.TrialEndsAt
+}
+
+func (f *FreeSandboxStartBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if f == nil {
+		return nil
+	}
+	return f.FreeSandboxStartedAt
+}
+
+func (f *FreeSandboxStartBillingResponse) GetFirstTopUpAt() *time.Time {
+	if f == nil {
+		return nil
+	}
+	return f.FirstTopUpAt
+}
+
+func (f *FreeSandboxStartBillingResponse) GetLastChargedDate() *time.Time {
+	if f == nil {
+		return nil
+	}
+	return f.LastChargedDate
+}
+
+func (f *FreeSandboxStartBillingResponse) GetPaymentsConfigured() bool {
+	if f == nil {
+		return false
+	}
+	return f.PaymentsConfigured
+}
+
+func (f *FreeSandboxStartBillingResponse) GetHasPaymentAccount() bool {
+	if f == nil {
+		return false
+	}
+	return f.HasPaymentAccount
+}
+
+func (f *FreeSandboxStartBillingResponse) GetHasSubscription() bool {
+	if f == nil {
+		return false
+	}
+	return f.HasSubscription
+}
+
+func (f *FreeSandboxStartBillingResponse) GetSubscriptionCancelAt() *time.Time {
+	if f == nil {
+		return nil
+	}
+	return f.SubscriptionCancelAt
+}
+
+func (f *FreeSandboxStartBillingResponse) GetPaymentFailedAt() *time.Time {
+	if f == nil {
+		return nil
+	}
+	return f.PaymentFailedAt
+}
+
+func (f *FreeSandboxStartBillingResponse) GetPaymentFailedInvoiceURL() *string {
+	if f == nil {
+		return nil
+	}
+	return f.PaymentFailedInvoiceURL
+}
+
+func (f *FreeSandboxStartBillingResponse) GetMonthToDate() *FreeSandboxStartBillingResponseMonthToDate {
+	if f == nil {
+		return nil
+	}
+	return f.MonthToDate
+}
+
+func (f *FreeSandboxStartBillingResponse) GetPlans() map[string]*FreeSandboxStartBillingResponsePlansValue {
+	if f == nil {
+		return nil
+	}
+	return f.Plans
+}
+
+func (f *FreeSandboxStartBillingResponse) GetAPIRequestEur() string {
+	if f == nil {
+		return ""
+	}
+	return f.APIRequestEur
+}
+
+func (f *FreeSandboxStartBillingResponse) GetTopUp() *FreeSandboxStartBillingResponseTopUp {
+	if f == nil {
+		return nil
+	}
+	return f.TopUp
+}
+
+func (f *FreeSandboxStartBillingResponse) GetAutoTopUp() *FreeSandboxStartBillingResponseAutoTopUp {
+	if f == nil {
+		return nil
+	}
+	return f.AutoTopUp
+}
+
+func (f *FreeSandboxStartBillingResponse) GetOverdraftCapCents() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.OverdraftCapCents
+}
+
+func (f *FreeSandboxStartBillingResponse) GetOverdraftCapMaxCents() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.OverdraftCapMaxCents
+}
+
+func (f *FreeSandboxStartBillingResponse) GetTrialDays() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.TrialDays
+}
+
+func (f *FreeSandboxStartBillingResponse) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FreeSandboxStartBillingResponse) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetSite sets the Site field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetSite(site FreeSandboxStartBillingResponseSite) {
+	f.Site = site
+	f.require(freeSandboxStartBillingResponseFieldSite)
+}
+
+// SetPlan sets the Plan field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetPlan(plan FreeSandboxStartBillingResponsePlan) {
+	f.Plan = plan
+	f.require(freeSandboxStartBillingResponseFieldPlan)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetAccountType(accountType FreeSandboxStartBillingResponseAccountType) {
+	f.AccountType = accountType
+	f.require(freeSandboxStartBillingResponseFieldAccountType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetStatus(status FreeSandboxStartBillingResponseStatus) {
+	f.Status = status
+	f.require(freeSandboxStartBillingResponseFieldStatus)
+}
+
+// SetBalanceCents sets the BalanceCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetBalanceCents(balanceCents int64) {
+	f.BalanceCents = balanceCents
+	f.require(freeSandboxStartBillingResponseFieldBalanceCents)
+}
+
+// SetTrialEndsAt sets the TrialEndsAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetTrialEndsAt(trialEndsAt *time.Time) {
+	f.TrialEndsAt = trialEndsAt
+	f.require(freeSandboxStartBillingResponseFieldTrialEndsAt)
+}
+
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	f.FreeSandboxStartedAt = freeSandboxStartedAt
+	f.require(freeSandboxStartBillingResponseFieldFreeSandboxStartedAt)
+}
+
+// SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
+	f.FirstTopUpAt = firstTopUpAt
+	f.require(freeSandboxStartBillingResponseFieldFirstTopUpAt)
+}
+
+// SetLastChargedDate sets the LastChargedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetLastChargedDate(lastChargedDate *time.Time) {
+	f.LastChargedDate = lastChargedDate
+	f.require(freeSandboxStartBillingResponseFieldLastChargedDate)
+}
+
+// SetPaymentsConfigured sets the PaymentsConfigured field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetPaymentsConfigured(paymentsConfigured bool) {
+	f.PaymentsConfigured = paymentsConfigured
+	f.require(freeSandboxStartBillingResponseFieldPaymentsConfigured)
+}
+
+// SetHasPaymentAccount sets the HasPaymentAccount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetHasPaymentAccount(hasPaymentAccount bool) {
+	f.HasPaymentAccount = hasPaymentAccount
+	f.require(freeSandboxStartBillingResponseFieldHasPaymentAccount)
+}
+
+// SetHasSubscription sets the HasSubscription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetHasSubscription(hasSubscription bool) {
+	f.HasSubscription = hasSubscription
+	f.require(freeSandboxStartBillingResponseFieldHasSubscription)
+}
+
+// SetSubscriptionCancelAt sets the SubscriptionCancelAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetSubscriptionCancelAt(subscriptionCancelAt *time.Time) {
+	f.SubscriptionCancelAt = subscriptionCancelAt
+	f.require(freeSandboxStartBillingResponseFieldSubscriptionCancelAt)
+}
+
+// SetPaymentFailedAt sets the PaymentFailedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetPaymentFailedAt(paymentFailedAt *time.Time) {
+	f.PaymentFailedAt = paymentFailedAt
+	f.require(freeSandboxStartBillingResponseFieldPaymentFailedAt)
+}
+
+// SetPaymentFailedInvoiceURL sets the PaymentFailedInvoiceURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetPaymentFailedInvoiceURL(paymentFailedInvoiceURL *string) {
+	f.PaymentFailedInvoiceURL = paymentFailedInvoiceURL
+	f.require(freeSandboxStartBillingResponseFieldPaymentFailedInvoiceURL)
+}
+
+// SetMonthToDate sets the MonthToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetMonthToDate(monthToDate *FreeSandboxStartBillingResponseMonthToDate) {
+	f.MonthToDate = monthToDate
+	f.require(freeSandboxStartBillingResponseFieldMonthToDate)
+}
+
+// SetPlans sets the Plans field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetPlans(plans map[string]*FreeSandboxStartBillingResponsePlansValue) {
+	f.Plans = plans
+	f.require(freeSandboxStartBillingResponseFieldPlans)
+}
+
+// SetAPIRequestEur sets the APIRequestEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetAPIRequestEur(apiRequestEur string) {
+	f.APIRequestEur = apiRequestEur
+	f.require(freeSandboxStartBillingResponseFieldAPIRequestEur)
+}
+
+// SetTopUp sets the TopUp field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetTopUp(topUp *FreeSandboxStartBillingResponseTopUp) {
+	f.TopUp = topUp
+	f.require(freeSandboxStartBillingResponseFieldTopUp)
+}
+
+// SetAutoTopUp sets the AutoTopUp field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetAutoTopUp(autoTopUp *FreeSandboxStartBillingResponseAutoTopUp) {
+	f.AutoTopUp = autoTopUp
+	f.require(freeSandboxStartBillingResponseFieldAutoTopUp)
+}
+
+// SetOverdraftCapCents sets the OverdraftCapCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetOverdraftCapCents(overdraftCapCents int64) {
+	f.OverdraftCapCents = overdraftCapCents
+	f.require(freeSandboxStartBillingResponseFieldOverdraftCapCents)
+}
+
+// SetOverdraftCapMaxCents sets the OverdraftCapMaxCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetOverdraftCapMaxCents(overdraftCapMaxCents int64) {
+	f.OverdraftCapMaxCents = overdraftCapMaxCents
+	f.require(freeSandboxStartBillingResponseFieldOverdraftCapMaxCents)
+}
+
+// SetTrialDays sets the TrialDays field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponse) SetTrialDays(trialDays int64) {
+	f.TrialDays = trialDays
+	f.require(freeSandboxStartBillingResponseFieldTrialDays)
+}
+
+func (f *FreeSandboxStartBillingResponse) UnmarshalJSON(data []byte) error {
+	type embed FreeSandboxStartBillingResponse
+	var unmarshaler = struct {
+		embed
+		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
+		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
+		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
+		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
+		PaymentFailedAt      *internal.DateTime `json:"paymentFailedAt,omitempty"`
+	}{
+		embed: embed(*f),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*f = FreeSandboxStartBillingResponse(unmarshaler.embed)
+	f.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	f.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
+	f.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
+	f.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
+	f.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
+	f.PaymentFailedAt = unmarshaler.PaymentFailedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FreeSandboxStartBillingResponse) MarshalJSON() ([]byte, error) {
+	type embed FreeSandboxStartBillingResponse
+	var marshaler = struct {
+		embed
+		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
+		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
+		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
+		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
+		PaymentFailedAt      *internal.DateTime `json:"paymentFailedAt,omitempty"`
+	}{
+		embed:                embed(*f),
+		TrialEndsAt:          internal.NewOptionalDateTime(f.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(f.FreeSandboxStartedAt),
+		FirstTopUpAt:         internal.NewOptionalDateTime(f.FirstTopUpAt),
+		LastChargedDate:      internal.NewOptionalDate(f.LastChargedDate),
+		SubscriptionCancelAt: internal.NewOptionalDateTime(f.SubscriptionCancelAt),
+		PaymentFailedAt:      internal.NewOptionalDateTime(f.PaymentFailedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FreeSandboxStartBillingResponse) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+type FreeSandboxStartBillingResponseAccountType string
+
+const (
+	FreeSandboxStartBillingResponseAccountTypeFlatRate   FreeSandboxStartBillingResponseAccountType = "flat_rate"
+	FreeSandboxStartBillingResponseAccountTypePerRequest FreeSandboxStartBillingResponseAccountType = "per_request"
+)
+
+func NewFreeSandboxStartBillingResponseAccountTypeFromString(s string) (FreeSandboxStartBillingResponseAccountType, error) {
+	switch s {
+	case "flat_rate":
+		return FreeSandboxStartBillingResponseAccountTypeFlatRate, nil
+	case "per_request":
+		return FreeSandboxStartBillingResponseAccountTypePerRequest, nil
+	}
+	var t FreeSandboxStartBillingResponseAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FreeSandboxStartBillingResponseAccountType) Ptr() *FreeSandboxStartBillingResponseAccountType {
+	return &f
+}
+
+var (
+	freeSandboxStartBillingResponseAutoTopUpFieldEnabled     = big.NewInt(1 << 0)
+	freeSandboxStartBillingResponseAutoTopUpFieldAmountCents = big.NewInt(1 << 1)
+	freeSandboxStartBillingResponseAutoTopUpFieldPending     = big.NewInt(1 << 2)
+)
+
+type FreeSandboxStartBillingResponseAutoTopUp struct {
+	Enabled     bool  `json:"enabled" url:"enabled"`
+	AmountCents int64 `json:"amountCents" url:"amountCents"`
+	Pending     bool  `json:"pending" url:"pending"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) GetEnabled() bool {
+	if f == nil {
+		return false
+	}
+	return f.Enabled
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) GetAmountCents() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.AmountCents
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) GetPending() bool {
+	if f == nil {
+		return false
+	}
+	return f.Pending
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetEnabled sets the Enabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseAutoTopUp) SetEnabled(enabled bool) {
+	f.Enabled = enabled
+	f.require(freeSandboxStartBillingResponseAutoTopUpFieldEnabled)
+}
+
+// SetAmountCents sets the AmountCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseAutoTopUp) SetAmountCents(amountCents int64) {
+	f.AmountCents = amountCents
+	f.require(freeSandboxStartBillingResponseAutoTopUpFieldAmountCents)
+}
+
+// SetPending sets the Pending field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseAutoTopUp) SetPending(pending bool) {
+	f.Pending = pending
+	f.require(freeSandboxStartBillingResponseAutoTopUpFieldPending)
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) UnmarshalJSON(data []byte) error {
+	type unmarshaler FreeSandboxStartBillingResponseAutoTopUp
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*f = FreeSandboxStartBillingResponseAutoTopUp(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) MarshalJSON() ([]byte, error) {
+	type embed FreeSandboxStartBillingResponseAutoTopUp
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FreeSandboxStartBillingResponseAutoTopUp) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+var (
+	freeSandboxStartBillingResponseMonthToDateFieldFrom                = big.NewInt(1 << 0)
+	freeSandboxStartBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
+	freeSandboxStartBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
+	freeSandboxStartBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
+	freeSandboxStartBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
+	freeSandboxStartBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
+	freeSandboxStartBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
+	freeSandboxStartBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
+	freeSandboxStartBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+)
+
+type FreeSandboxStartBillingResponseMonthToDate struct {
+	From                string  `json:"from" url:"from"`
+	To                  string  `json:"to" url:"to"`
+	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
+	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
+	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
+	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
+	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
+	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
+	EstimatedTodayCents int64   `json:"estimatedTodayCents" url:"estimatedTodayCents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetFrom() string {
+	if f == nil {
+		return ""
+	}
+	return f.From
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetTo() string {
+	if f == nil {
+		return ""
+	}
+	return f.To
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetAPIRequests() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.APIRequests
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetSaleInvoices() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.SaleInvoices
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetOcrPages() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.OcrPages
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetFileBytes() float64 {
+	if f == nil {
+		return 0
+	}
+	return f.FileBytes
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetDatabaseBytes() float64 {
+	if f == nil {
+		return 0
+	}
+	return f.DatabaseBytes
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetArchivedCompanies() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.ArchivedCompanies
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetEstimatedTodayCents() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.EstimatedTodayCents
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetFrom(from string) {
+	f.From = from
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetTo(to string) {
+	f.To = to
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldTo)
+}
+
+// SetAPIRequests sets the APIRequests field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetAPIRequests(apiRequests int64) {
+	f.APIRequests = apiRequests
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldAPIRequests)
+}
+
+// SetSaleInvoices sets the SaleInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
+	f.SaleInvoices = saleInvoices
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldSaleInvoices)
+}
+
+// SetOcrPages sets the OcrPages field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
+	f.OcrPages = ocrPages
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldOcrPages)
+}
+
+// SetFileBytes sets the FileBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetFileBytes(fileBytes float64) {
+	f.FileBytes = fileBytes
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldFileBytes)
+}
+
+// SetDatabaseBytes sets the DatabaseBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetDatabaseBytes(databaseBytes float64) {
+	f.DatabaseBytes = databaseBytes
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldDatabaseBytes)
+}
+
+// SetArchivedCompanies sets the ArchivedCompanies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetArchivedCompanies(archivedCompanies int64) {
+	f.ArchivedCompanies = archivedCompanies
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldArchivedCompanies)
+}
+
+// SetEstimatedTodayCents sets the EstimatedTodayCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseMonthToDate) SetEstimatedTodayCents(estimatedTodayCents int64) {
+	f.EstimatedTodayCents = estimatedTodayCents
+	f.require(freeSandboxStartBillingResponseMonthToDateFieldEstimatedTodayCents)
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) UnmarshalJSON(data []byte) error {
+	type unmarshaler FreeSandboxStartBillingResponseMonthToDate
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*f = FreeSandboxStartBillingResponseMonthToDate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) MarshalJSON() ([]byte, error) {
+	type embed FreeSandboxStartBillingResponseMonthToDate
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FreeSandboxStartBillingResponseMonthToDate) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+type FreeSandboxStartBillingResponsePlan string
+
+const (
+	FreeSandboxStartBillingResponsePlanStarter   FreeSandboxStartBillingResponsePlan = "starter"
+	FreeSandboxStartBillingResponsePlanBusiness  FreeSandboxStartBillingResponsePlan = "business"
+	FreeSandboxStartBillingResponsePlanScale     FreeSandboxStartBillingResponsePlan = "scale"
+	FreeSandboxStartBillingResponsePlanInvoicing FreeSandboxStartBillingResponsePlan = "invoicing"
+)
+
+func NewFreeSandboxStartBillingResponsePlanFromString(s string) (FreeSandboxStartBillingResponsePlan, error) {
+	switch s {
+	case "starter":
+		return FreeSandboxStartBillingResponsePlanStarter, nil
+	case "business":
+		return FreeSandboxStartBillingResponsePlanBusiness, nil
+	case "scale":
+		return FreeSandboxStartBillingResponsePlanScale, nil
+	case "invoicing":
+		return FreeSandboxStartBillingResponsePlanInvoicing, nil
+	}
+	var t FreeSandboxStartBillingResponsePlan
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FreeSandboxStartBillingResponsePlan) Ptr() *FreeSandboxStartBillingResponsePlan {
+	return &f
+}
+
+var (
+	freeSandboxStartBillingResponsePlansValueFieldMonthlyFeeEur         = big.NewInt(1 << 0)
+	freeSandboxStartBillingResponsePlansValueFieldIncludedInvoices      = big.NewInt(1 << 1)
+	freeSandboxStartBillingResponsePlansValueFieldInvoiceOverageEur     = big.NewInt(1 << 2)
+	freeSandboxStartBillingResponsePlansValueFieldIncludedDatabaseBytes = big.NewInt(1 << 3)
+	freeSandboxStartBillingResponsePlansValueFieldIncludedFileBytes     = big.NewInt(1 << 4)
+)
+
+type FreeSandboxStartBillingResponsePlansValue struct {
+	MonthlyFeeEur         string  `json:"monthlyFeeEur" url:"monthlyFeeEur"`
+	IncludedInvoices      int64   `json:"includedInvoices" url:"includedInvoices"`
+	InvoiceOverageEur     string  `json:"invoiceOverageEur" url:"invoiceOverageEur"`
+	IncludedDatabaseBytes float64 `json:"includedDatabaseBytes" url:"includedDatabaseBytes"`
+	IncludedFileBytes     float64 `json:"includedFileBytes" url:"includedFileBytes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) GetMonthlyFeeEur() string {
+	if f == nil {
+		return ""
+	}
+	return f.MonthlyFeeEur
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) GetIncludedInvoices() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.IncludedInvoices
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) GetInvoiceOverageEur() string {
+	if f == nil {
+		return ""
+	}
+	return f.InvoiceOverageEur
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) GetIncludedDatabaseBytes() float64 {
+	if f == nil {
+		return 0
+	}
+	return f.IncludedDatabaseBytes
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) GetIncludedFileBytes() float64 {
+	if f == nil {
+		return 0
+	}
+	return f.IncludedFileBytes
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetMonthlyFeeEur sets the MonthlyFeeEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponsePlansValue) SetMonthlyFeeEur(monthlyFeeEur string) {
+	f.MonthlyFeeEur = monthlyFeeEur
+	f.require(freeSandboxStartBillingResponsePlansValueFieldMonthlyFeeEur)
+}
+
+// SetIncludedInvoices sets the IncludedInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponsePlansValue) SetIncludedInvoices(includedInvoices int64) {
+	f.IncludedInvoices = includedInvoices
+	f.require(freeSandboxStartBillingResponsePlansValueFieldIncludedInvoices)
+}
+
+// SetInvoiceOverageEur sets the InvoiceOverageEur field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponsePlansValue) SetInvoiceOverageEur(invoiceOverageEur string) {
+	f.InvoiceOverageEur = invoiceOverageEur
+	f.require(freeSandboxStartBillingResponsePlansValueFieldInvoiceOverageEur)
+}
+
+// SetIncludedDatabaseBytes sets the IncludedDatabaseBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponsePlansValue) SetIncludedDatabaseBytes(includedDatabaseBytes float64) {
+	f.IncludedDatabaseBytes = includedDatabaseBytes
+	f.require(freeSandboxStartBillingResponsePlansValueFieldIncludedDatabaseBytes)
+}
+
+// SetIncludedFileBytes sets the IncludedFileBytes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponsePlansValue) SetIncludedFileBytes(includedFileBytes float64) {
+	f.IncludedFileBytes = includedFileBytes
+	f.require(freeSandboxStartBillingResponsePlansValueFieldIncludedFileBytes)
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) UnmarshalJSON(data []byte) error {
+	type unmarshaler FreeSandboxStartBillingResponsePlansValue
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*f = FreeSandboxStartBillingResponsePlansValue(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) MarshalJSON() ([]byte, error) {
+	type embed FreeSandboxStartBillingResponsePlansValue
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FreeSandboxStartBillingResponsePlansValue) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+// The site whose plan this is, from the `x-nordlet-site` header
+type FreeSandboxStartBillingResponseSite string
+
+const (
+	FreeSandboxStartBillingResponseSiteApp     FreeSandboxStartBillingResponseSite = "app"
+	FreeSandboxStartBillingResponseSiteInvoice FreeSandboxStartBillingResponseSite = "invoice"
+)
+
+func NewFreeSandboxStartBillingResponseSiteFromString(s string) (FreeSandboxStartBillingResponseSite, error) {
+	switch s {
+	case "app":
+		return FreeSandboxStartBillingResponseSiteApp, nil
+	case "invoice":
+		return FreeSandboxStartBillingResponseSiteInvoice, nil
+	}
+	var t FreeSandboxStartBillingResponseSite
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FreeSandboxStartBillingResponseSite) Ptr() *FreeSandboxStartBillingResponseSite {
+	return &f
+}
+
+type FreeSandboxStartBillingResponseStatus string
+
+const (
+	FreeSandboxStartBillingResponseStatusTrial     FreeSandboxStartBillingResponseStatus = "trial"
+	FreeSandboxStartBillingResponseStatusActive    FreeSandboxStartBillingResponseStatus = "active"
+	FreeSandboxStartBillingResponseStatusSuspended FreeSandboxStartBillingResponseStatus = "suspended"
+)
+
+func NewFreeSandboxStartBillingResponseStatusFromString(s string) (FreeSandboxStartBillingResponseStatus, error) {
+	switch s {
+	case "trial":
+		return FreeSandboxStartBillingResponseStatusTrial, nil
+	case "active":
+		return FreeSandboxStartBillingResponseStatusActive, nil
+	case "suspended":
+		return FreeSandboxStartBillingResponseStatusSuspended, nil
+	}
+	var t FreeSandboxStartBillingResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FreeSandboxStartBillingResponseStatus) Ptr() *FreeSandboxStartBillingResponseStatus {
+	return &f
+}
+
+var (
+	freeSandboxStartBillingResponseTopUpFieldMinCents = big.NewInt(1 << 0)
+	freeSandboxStartBillingResponseTopUpFieldMaxCents = big.NewInt(1 << 1)
+)
+
+type FreeSandboxStartBillingResponseTopUp struct {
+	MinCents int64 `json:"minCents" url:"minCents"`
+	MaxCents int64 `json:"maxCents" url:"maxCents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FreeSandboxStartBillingResponseTopUp) GetMinCents() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.MinCents
+}
+
+func (f *FreeSandboxStartBillingResponseTopUp) GetMaxCents() int64 {
+	if f == nil {
+		return 0
+	}
+	return f.MaxCents
+}
+
+func (f *FreeSandboxStartBillingResponseTopUp) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FreeSandboxStartBillingResponseTopUp) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetMinCents sets the MinCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseTopUp) SetMinCents(minCents int64) {
+	f.MinCents = minCents
+	f.require(freeSandboxStartBillingResponseTopUpFieldMinCents)
+}
+
+// SetMaxCents sets the MaxCents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FreeSandboxStartBillingResponseTopUp) SetMaxCents(maxCents int64) {
+	f.MaxCents = maxCents
+	f.require(freeSandboxStartBillingResponseTopUpFieldMaxCents)
+}
+
+func (f *FreeSandboxStartBillingResponseTopUp) UnmarshalJSON(data []byte) error {
+	type unmarshaler FreeSandboxStartBillingResponseTopUp
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*f = FreeSandboxStartBillingResponseTopUp(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FreeSandboxStartBillingResponseTopUp) MarshalJSON() ([]byte, error) {
+	type embed FreeSandboxStartBillingResponseTopUp
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FreeSandboxStartBillingResponseTopUp) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
 type PortalCreateBillingRequestLocale string
 
 const (
@@ -7751,37 +9049,40 @@ var (
 	subscriptionCancelBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	subscriptionCancelBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	subscriptionCancelBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	subscriptionCancelBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	subscriptionCancelBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	subscriptionCancelBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	subscriptionCancelBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	subscriptionCancelBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	subscriptionCancelBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	subscriptionCancelBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	subscriptionCancelBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	subscriptionCancelBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	subscriptionCancelBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	subscriptionCancelBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	subscriptionCancelBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	subscriptionCancelBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	subscriptionCancelBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	subscriptionCancelBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	subscriptionCancelBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	subscriptionCancelBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	subscriptionCancelBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	subscriptionCancelBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	subscriptionCancelBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	subscriptionCancelBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	subscriptionCancelBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	subscriptionCancelBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	subscriptionCancelBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	subscriptionCancelBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	subscriptionCancelBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	subscriptionCancelBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	subscriptionCancelBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	subscriptionCancelBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	subscriptionCancelBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	subscriptionCancelBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	subscriptionCancelBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	subscriptionCancelBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type SubscriptionCancelBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               SubscriptionCancelBillingResponseSite        `json:"site" url:"site"`
-	Plan               SubscriptionCancelBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        SubscriptionCancelBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             SubscriptionCancelBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                        `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                                   `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                                   `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                                   `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                         `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                         `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                         `json:"hasSubscription" url:"hasSubscription"`
+	Site         SubscriptionCancelBillingResponseSite        `json:"site" url:"site"`
+	Plan         SubscriptionCancelBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  SubscriptionCancelBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       SubscriptionCancelBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                        `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                                   `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                              `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                              `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -7842,6 +9143,13 @@ func (s *SubscriptionCancelBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return s.TrialEndsAt
+}
+
+func (s *SubscriptionCancelBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if s == nil {
+		return nil
+	}
+	return s.FreeSandboxStartedAt
 }
 
 func (s *SubscriptionCancelBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -8012,6 +9320,13 @@ func (s *SubscriptionCancelBillingResponse) SetTrialEndsAt(trialEndsAt *time.Tim
 	s.require(subscriptionCancelBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubscriptionCancelBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	s.FreeSandboxStartedAt = freeSandboxStartedAt
+	s.require(subscriptionCancelBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubscriptionCancelBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -8129,6 +9444,7 @@ func (s *SubscriptionCancelBillingResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -8141,6 +9457,7 @@ func (s *SubscriptionCancelBillingResponse) UnmarshalJSON(data []byte) error {
 	}
 	*s = SubscriptionCancelBillingResponse(unmarshaler.embed)
 	s.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	s.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	s.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	s.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	s.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -8159,6 +9476,7 @@ func (s *SubscriptionCancelBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -8166,6 +9484,7 @@ func (s *SubscriptionCancelBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*s),
 		TrialEndsAt:          internal.NewOptionalDateTime(s.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(s.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(s.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(s.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(s.SubscriptionCancelAt),
@@ -8871,37 +10190,40 @@ var (
 	topupConfirmBillingResponseFieldStatus                  = big.NewInt(1 << 3)
 	topupConfirmBillingResponseFieldBalanceCents            = big.NewInt(1 << 4)
 	topupConfirmBillingResponseFieldTrialEndsAt             = big.NewInt(1 << 5)
-	topupConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 6)
-	topupConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 7)
-	topupConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 8)
-	topupConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 9)
-	topupConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 10)
-	topupConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 11)
-	topupConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 12)
-	topupConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 13)
-	topupConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 14)
-	topupConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 15)
-	topupConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 16)
-	topupConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 17)
-	topupConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 18)
-	topupConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 19)
-	topupConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 20)
-	topupConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 21)
+	topupConfirmBillingResponseFieldFreeSandboxStartedAt    = big.NewInt(1 << 6)
+	topupConfirmBillingResponseFieldFirstTopUpAt            = big.NewInt(1 << 7)
+	topupConfirmBillingResponseFieldLastChargedDate         = big.NewInt(1 << 8)
+	topupConfirmBillingResponseFieldPaymentsConfigured      = big.NewInt(1 << 9)
+	topupConfirmBillingResponseFieldHasPaymentAccount       = big.NewInt(1 << 10)
+	topupConfirmBillingResponseFieldHasSubscription         = big.NewInt(1 << 11)
+	topupConfirmBillingResponseFieldSubscriptionCancelAt    = big.NewInt(1 << 12)
+	topupConfirmBillingResponseFieldPaymentFailedAt         = big.NewInt(1 << 13)
+	topupConfirmBillingResponseFieldPaymentFailedInvoiceURL = big.NewInt(1 << 14)
+	topupConfirmBillingResponseFieldMonthToDate             = big.NewInt(1 << 15)
+	topupConfirmBillingResponseFieldPlans                   = big.NewInt(1 << 16)
+	topupConfirmBillingResponseFieldAPIRequestEur           = big.NewInt(1 << 17)
+	topupConfirmBillingResponseFieldTopUp                   = big.NewInt(1 << 18)
+	topupConfirmBillingResponseFieldAutoTopUp               = big.NewInt(1 << 19)
+	topupConfirmBillingResponseFieldOverdraftCapCents       = big.NewInt(1 << 20)
+	topupConfirmBillingResponseFieldOverdraftCapMaxCents    = big.NewInt(1 << 21)
+	topupConfirmBillingResponseFieldTrialDays               = big.NewInt(1 << 22)
 )
 
 type TopupConfirmBillingResponse struct {
 	// The site whose plan this is, from the `x-nordlet-site` header
-	Site               TopupConfirmBillingResponseSite        `json:"site" url:"site"`
-	Plan               TopupConfirmBillingResponsePlan        `json:"plan" url:"plan"`
-	AccountType        TopupConfirmBillingResponseAccountType `json:"accountType" url:"accountType"`
-	Status             TopupConfirmBillingResponseStatus      `json:"status" url:"status"`
-	BalanceCents       int64                                  `json:"balanceCents" url:"balanceCents"`
-	TrialEndsAt        *time.Time                             `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	FirstTopUpAt       *time.Time                             `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
-	LastChargedDate    *time.Time                             `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
-	PaymentsConfigured bool                                   `json:"paymentsConfigured" url:"paymentsConfigured"`
-	HasPaymentAccount  bool                                   `json:"hasPaymentAccount" url:"hasPaymentAccount"`
-	HasSubscription    bool                                   `json:"hasSubscription" url:"hasSubscription"`
+	Site         TopupConfirmBillingResponseSite        `json:"site" url:"site"`
+	Plan         TopupConfirmBillingResponsePlan        `json:"plan" url:"plan"`
+	AccountType  TopupConfirmBillingResponseAccountType `json:"accountType" url:"accountType"`
+	Status       TopupConfirmBillingResponseStatus      `json:"status" url:"status"`
+	BalanceCents int64                                  `json:"balanceCents" url:"balanceCents"`
+	TrialEndsAt  *time.Time                             `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	// When the free sandbox plan was started; it ends at `trialEndsAt`
+	FreeSandboxStartedAt *time.Time `json:"freeSandboxStartedAt,omitempty" url:"freeSandboxStartedAt,omitempty"`
+	FirstTopUpAt         *time.Time `json:"firstTopUpAt,omitempty" url:"firstTopUpAt,omitempty"`
+	LastChargedDate      *time.Time `json:"lastChargedDate,omitempty" url:"lastChargedDate,omitempty" format:"date"`
+	PaymentsConfigured   bool       `json:"paymentsConfigured" url:"paymentsConfigured"`
+	HasPaymentAccount    bool       `json:"hasPaymentAccount" url:"hasPaymentAccount"`
+	HasSubscription      bool       `json:"hasSubscription" url:"hasSubscription"`
 	// When the Stripe subscription ends after `subscription/cancel`; null while it renews
 	SubscriptionCancelAt    *time.Time                                        `json:"subscriptionCancelAt,omitempty" url:"subscriptionCancelAt,omitempty"`
 	PaymentFailedAt         *time.Time                                        `json:"paymentFailedAt,omitempty" url:"paymentFailedAt,omitempty"`
@@ -8962,6 +10284,13 @@ func (t *TopupConfirmBillingResponse) GetTrialEndsAt() *time.Time {
 		return nil
 	}
 	return t.TrialEndsAt
+}
+
+func (t *TopupConfirmBillingResponse) GetFreeSandboxStartedAt() *time.Time {
+	if t == nil {
+		return nil
+	}
+	return t.FreeSandboxStartedAt
 }
 
 func (t *TopupConfirmBillingResponse) GetFirstTopUpAt() *time.Time {
@@ -9132,6 +10461,13 @@ func (t *TopupConfirmBillingResponse) SetTrialEndsAt(trialEndsAt *time.Time) {
 	t.require(topupConfirmBillingResponseFieldTrialEndsAt)
 }
 
+// SetFreeSandboxStartedAt sets the FreeSandboxStartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TopupConfirmBillingResponse) SetFreeSandboxStartedAt(freeSandboxStartedAt *time.Time) {
+	t.FreeSandboxStartedAt = freeSandboxStartedAt
+	t.require(topupConfirmBillingResponseFieldFreeSandboxStartedAt)
+}
+
 // SetFirstTopUpAt sets the FirstTopUpAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (t *TopupConfirmBillingResponse) SetFirstTopUpAt(firstTopUpAt *time.Time) {
@@ -9249,6 +10585,7 @@ func (t *TopupConfirmBillingResponse) UnmarshalJSON(data []byte) error {
 	var unmarshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -9261,6 +10598,7 @@ func (t *TopupConfirmBillingResponse) UnmarshalJSON(data []byte) error {
 	}
 	*t = TopupConfirmBillingResponse(unmarshaler.embed)
 	t.TrialEndsAt = unmarshaler.TrialEndsAt.TimePtr()
+	t.FreeSandboxStartedAt = unmarshaler.FreeSandboxStartedAt.TimePtr()
 	t.FirstTopUpAt = unmarshaler.FirstTopUpAt.TimePtr()
 	t.LastChargedDate = unmarshaler.LastChargedDate.TimePtr()
 	t.SubscriptionCancelAt = unmarshaler.SubscriptionCancelAt.TimePtr()
@@ -9279,6 +10617,7 @@ func (t *TopupConfirmBillingResponse) MarshalJSON() ([]byte, error) {
 	var marshaler = struct {
 		embed
 		TrialEndsAt          *internal.DateTime `json:"trialEndsAt,omitempty"`
+		FreeSandboxStartedAt *internal.DateTime `json:"freeSandboxStartedAt,omitempty"`
 		FirstTopUpAt         *internal.DateTime `json:"firstTopUpAt,omitempty"`
 		LastChargedDate      *internal.Date     `json:"lastChargedDate,omitempty"`
 		SubscriptionCancelAt *internal.DateTime `json:"subscriptionCancelAt,omitempty"`
@@ -9286,6 +10625,7 @@ func (t *TopupConfirmBillingResponse) MarshalJSON() ([]byte, error) {
 	}{
 		embed:                embed(*t),
 		TrialEndsAt:          internal.NewOptionalDateTime(t.TrialEndsAt),
+		FreeSandboxStartedAt: internal.NewOptionalDateTime(t.FreeSandboxStartedAt),
 		FirstTopUpAt:         internal.NewOptionalDateTime(t.FirstTopUpAt),
 		LastChargedDate:      internal.NewOptionalDate(t.LastChargedDate),
 		SubscriptionCancelAt: internal.NewOptionalDateTime(t.SubscriptionCancelAt),

@@ -912,6 +912,50 @@ func (r *RawClient) CompaniesDelete(
 	}, nil
 }
 
+func (r *RawClient) CompaniesConvertToLive(
+	ctx context.Context,
+	request *nordlet.CompaniesConvertToLiveAccountRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.CompaniesConvertToLiveAccountResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/account/companies/convert-to-live"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.CompaniesConvertToLiveAccountResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.CompaniesConvertToLiveAccountResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) CompaniesActivate(
 	ctx context.Context,
 	request *nordlet.CompaniesActivateAccountRequest,

@@ -587,6 +587,32 @@ func TestAccountCompaniesDeleteWithWireMock(
 	VerifyRequestCount(t, "TestAccountCompaniesDeleteWithWireMock", "POST", "/v1/account/companies/delete", nil, 1)
 }
 
+func TestAccountCompaniesConvertToLiveWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.CompaniesConvertToLiveAccountRequest{
+		CompanyID: "companyId",
+	}
+	_, invocationErr := client.Account.CompaniesConvertToLive(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountCompaniesConvertToLiveWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountCompaniesConvertToLiveWithWireMock", "POST", "/v1/account/companies/convert-to-live", nil, 1)
+}
+
 func TestAccountCompaniesActivateWithWireMock(
 	t *testing.T,
 ) {

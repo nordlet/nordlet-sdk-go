@@ -19960,7 +19960,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -19991,7 +19991,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20022,7 +20022,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20053,7 +20053,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20084,7 +20084,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20146,12 +20146,43 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "88bcb4ea-dc0d-4ae6-a5e6-bea37f875427",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "126ca8cf-dccc-42e0-b0e1-f395509c3d98",
+      "name": "Billing free sandbox start - default",
+      "request": {
+        "urlPathTemplate": "/v1/billing/free-sandbox/start",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "126ca8cf-dccc-42e0-b0e1-f395509c3d98",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -20208,7 +20239,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20239,7 +20270,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
+        "body": "{\n  \"site\": \"app\",\n  \"plan\": \"starter\",\n  \"accountType\": \"flat_rate\",\n  \"status\": \"trial\",\n  \"balanceCents\": 1000000,\n  \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n  \"freeSandboxStartedAt\": \"2026-07-01T09:30:00Z\",\n  \"firstTopUpAt\": \"2026-07-01T09:30:00Z\",\n  \"lastChargedDate\": \"2026-07-01\",\n  \"paymentsConfigured\": true,\n  \"hasPaymentAccount\": true,\n  \"hasSubscription\": true,\n  \"subscriptionCancelAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedAt\": \"2026-07-01T09:30:00Z\",\n  \"paymentFailedInvoiceUrl\": \"paymentFailedInvoiceUrl\",\n  \"monthToDate\": {\n    \"from\": \"from\",\n    \"to\": \"to\",\n    \"apiRequests\": 1000000,\n    \"saleInvoices\": 1000000,\n    \"ocrPages\": 1000000,\n    \"fileBytes\": 1.1,\n    \"databaseBytes\": 1.1,\n    \"archivedCompanies\": 1000000,\n    \"estimatedTodayCents\": 1000000\n  },\n  \"plans\": {\n    \"key\": {\n      \"monthlyFeeEur\": \"monthlyFeeEur\",\n      \"includedInvoices\": 1000000,\n      \"invoiceOverageEur\": \"invoiceOverageEur\",\n      \"includedDatabaseBytes\": 1.1,\n      \"includedFileBytes\": 1.1\n    }\n  },\n  \"apiRequestEur\": \"apiRequestEur\",\n  \"topUp\": {\n    \"minCents\": 1000000,\n    \"maxCents\": 1000000\n  },\n  \"autoTopUp\": {\n    \"enabled\": true,\n    \"amountCents\": 1000000,\n    \"pending\": true\n  },\n  \"overdraftCapCents\": 1000000,\n  \"overdraftCapMaxCents\": 1000000,\n  \"trialDays\": 1000000\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20456,7 +20487,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"isSuperAdmin\": true\n  },\n  \"locale\": \"locale\",\n  \"activeCompanyId\": \"activeCompanyId\",\n  \"timeZone\": \"timeZone\",\n  \"role\": \"role\",\n  \"billing\": {\n    \"status\": \"trial\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"overdraftAllowanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"payerUserId\": \"payerUserId\",\n    \"payerEmail\": \"payerEmail\",\n    \"isPayer\": true,\n    \"planChosen\": true,\n    \"flatRate\": true,\n    \"accountType\": \"flat_rate\"\n  },\n  \"referralPoints\": 1000000,\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"companies\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"role\": \"role\",\n      \"isSandbox\": true,\n      \"cashBasis\": true,\n      \"status\": \"active\",\n      \"deletedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
+        "body": "{\n  \"user\": {\n    \"id\": \"id\",\n    \"email\": \"email\",\n    \"name\": \"name\",\n    \"locale\": \"locale\",\n    \"plan\": \"plan\",\n    \"isSuperAdmin\": true\n  },\n  \"locale\": \"locale\",\n  \"activeCompanyId\": \"activeCompanyId\",\n  \"timeZone\": \"timeZone\",\n  \"role\": \"role\",\n  \"billing\": {\n    \"status\": \"trial\",\n    \"plan\": \"plan\",\n    \"balanceCents\": 1000000,\n    \"overdraftAllowanceCents\": 1000000,\n    \"trialEndsAt\": \"2026-07-01T09:30:00Z\",\n    \"payerUserId\": \"payerUserId\",\n    \"payerEmail\": \"payerEmail\",\n    \"isPayer\": true,\n    \"planChosen\": true,\n    \"freeSandbox\": true,\n    \"flatRate\": true,\n    \"accountType\": \"flat_rate\"\n  },\n  \"referralPoints\": 1000000,\n  \"consent\": {\n    \"termsVersion\": \"termsVersion\",\n    \"termsAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"dpaVersion\": \"dpaVersion\",\n    \"dpaAcceptedAt\": \"2026-07-01T09:30:00Z\",\n    \"currentTermsVersion\": \"currentTermsVersion\",\n    \"currentDpaVersion\": \"currentDpaVersion\",\n    \"required\": true\n  },\n  \"companies\": [\n    {\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"code\": \"code\",\n      \"vatCode\": \"vatCode\",\n      \"role\": \"role\",\n      \"isSandbox\": true,\n      \"cashBasis\": true,\n      \"status\": \"active\",\n      \"deletedAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -20958,6 +20989,37 @@
         }
       },
       "uuid": "5b39cae5-457a-4315-981e-2c546504f79e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "b33d5b56-959a-4281-a388-a0c6a85cc205",
+      "name": "Account companies convert to live - default",
+      "request": {
+        "urlPathTemplate": "/v1/account/companies/convert-to-live",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"id\": \"id\",\n  \"isSandbox\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "b33d5b56-959a-4281-a388-a0c6a85cc205",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -21808,6 +21870,6 @@
     }
   ],
   "meta": {
-    "total": 703
+    "total": 705
   }
 }

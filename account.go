@@ -290,6 +290,52 @@ func (c *CompaniesArchiveAccountRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	companiesConvertToLiveAccountRequestFieldCompanyID = big.NewInt(1 << 0)
+)
+
+type CompaniesConvertToLiveAccountRequest struct {
+	CompanyID string `json:"companyId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (c *CompaniesConvertToLiveAccountRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCompanyID sets the CompanyID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesConvertToLiveAccountRequest) SetCompanyID(companyID string) {
+	c.CompanyID = companyID
+	c.require(companiesConvertToLiveAccountRequestFieldCompanyID)
+}
+
+func (c *CompaniesConvertToLiveAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesConvertToLiveAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*c = CompaniesConvertToLiveAccountRequest(body)
+	return nil
+}
+
+func (c *CompaniesConvertToLiveAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed CompaniesConvertToLiveAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	companiesCreateAccountRequestFieldName                      = big.NewInt(1 << 0)
 	companiesCreateAccountRequestFieldCode                      = big.NewInt(1 << 1)
 	companiesCreateAccountRequestFieldVatCode                   = big.NewInt(1 << 2)
@@ -372,7 +418,7 @@ type CompaniesCreateAccountRequest struct {
 	CountryCode *CompaniesCreateAccountRequestCountryCode `json:"countryCode,omitempty" url:"-"`
 	// Currency the ledger is kept in; defaults to the national currency of countryCode (immutable after creation)
 	BaseCurrency *string `json:"baseCurrency,omitempty" url:"-"`
-	// Sandbox companies hold test data and are purged immediately on delete (immutable after creation)
+	// Sandbox companies hold test data and are purged immediately on delete; `companies/convert-to-live` turns one into a live company
 	IsSandbox *bool `json:"isSandbox,omitempty" url:"-"`
 	// The company determines its profit on a cash basis (receipts and payments, in Germany the Einnahmenüberschussrechnung of § 4 Abs. 3 EStG); it gets the cash-basis returns in its filing calendar (immutable after creation)
 	CashBasis *bool `json:"cashBasis,omitempty" url:"-"`
@@ -3694,6 +3740,106 @@ func (c *CompaniesArchiveAccountResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CompaniesArchiveAccountResponse) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesConvertToLiveAccountResponseFieldID        = big.NewInt(1 << 0)
+	companiesConvertToLiveAccountResponseFieldIsSandbox = big.NewInt(1 << 1)
+)
+
+type CompaniesConvertToLiveAccountResponse struct {
+	ID        string `json:"id" url:"id"`
+	IsSandbox bool   `json:"isSandbox" url:"isSandbox"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesConvertToLiveAccountResponse) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *CompaniesConvertToLiveAccountResponse) GetIsSandbox() bool {
+	if c == nil {
+		return false
+	}
+	return c.IsSandbox
+}
+
+func (c *CompaniesConvertToLiveAccountResponse) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesConvertToLiveAccountResponse) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesConvertToLiveAccountResponse) SetID(id string) {
+	c.ID = id
+	c.require(companiesConvertToLiveAccountResponseFieldID)
+}
+
+// SetIsSandbox sets the IsSandbox field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesConvertToLiveAccountResponse) SetIsSandbox(isSandbox bool) {
+	c.IsSandbox = isSandbox
+	c.require(companiesConvertToLiveAccountResponseFieldIsSandbox)
+}
+
+func (c *CompaniesConvertToLiveAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesConvertToLiveAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesConvertToLiveAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesConvertToLiveAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed CompaniesConvertToLiveAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesConvertToLiveAccountResponse) String() string {
 	if c == nil {
 		return "<nil>"
 	}
@@ -12568,22 +12714,25 @@ var (
 	meAccountResponseBillingFieldPayerEmail              = big.NewInt(1 << 6)
 	meAccountResponseBillingFieldIsPayer                 = big.NewInt(1 << 7)
 	meAccountResponseBillingFieldPlanChosen              = big.NewInt(1 << 8)
-	meAccountResponseBillingFieldFlatRate                = big.NewInt(1 << 9)
-	meAccountResponseBillingFieldAccountType             = big.NewInt(1 << 10)
+	meAccountResponseBillingFieldFreeSandbox             = big.NewInt(1 << 9)
+	meAccountResponseBillingFieldFlatRate                = big.NewInt(1 << 10)
+	meAccountResponseBillingFieldAccountType             = big.NewInt(1 << 11)
 )
 
 type MeAccountResponseBilling struct {
-	Status                  MeAccountResponseBillingStatus      `json:"status" url:"status"`
-	Plan                    string                              `json:"plan" url:"plan"`
-	BalanceCents            int64                               `json:"balanceCents" url:"balanceCents"`
-	OverdraftAllowanceCents int64                               `json:"overdraftAllowanceCents" url:"overdraftAllowanceCents"`
-	TrialEndsAt             *time.Time                          `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
-	PayerUserID             string                              `json:"payerUserId" url:"payerUserId"`
-	PayerEmail              string                              `json:"payerEmail" url:"payerEmail"`
-	IsPayer                 bool                                `json:"isPayer" url:"isPayer"`
-	PlanChosen              bool                                `json:"planChosen" url:"planChosen"`
-	FlatRate                bool                                `json:"flatRate" url:"flatRate"`
-	AccountType             MeAccountResponseBillingAccountType `json:"accountType" url:"accountType"`
+	Status                  MeAccountResponseBillingStatus `json:"status" url:"status"`
+	Plan                    string                         `json:"plan" url:"plan"`
+	BalanceCents            int64                          `json:"balanceCents" url:"balanceCents"`
+	OverdraftAllowanceCents int64                          `json:"overdraftAllowanceCents" url:"overdraftAllowanceCents"`
+	TrialEndsAt             *time.Time                     `json:"trialEndsAt,omitempty" url:"trialEndsAt,omitempty"`
+	PayerUserID             string                         `json:"payerUserId" url:"payerUserId"`
+	PayerEmail              string                         `json:"payerEmail" url:"payerEmail"`
+	IsPayer                 bool                           `json:"isPayer" url:"isPayer"`
+	PlanChosen              bool                           `json:"planChosen" url:"planChosen"`
+	// The payer has no paid plan and has started the free sandbox plan (running or ended)
+	FreeSandbox bool                                `json:"freeSandbox" url:"freeSandbox"`
+	FlatRate    bool                                `json:"flatRate" url:"flatRate"`
+	AccountType MeAccountResponseBillingAccountType `json:"accountType" url:"accountType"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12653,6 +12802,13 @@ func (m *MeAccountResponseBilling) GetPlanChosen() bool {
 		return false
 	}
 	return m.PlanChosen
+}
+
+func (m *MeAccountResponseBilling) GetFreeSandbox() bool {
+	if m == nil {
+		return false
+	}
+	return m.FreeSandbox
 }
 
 func (m *MeAccountResponseBilling) GetFlatRate() bool {
@@ -12744,6 +12900,13 @@ func (m *MeAccountResponseBilling) SetIsPayer(isPayer bool) {
 func (m *MeAccountResponseBilling) SetPlanChosen(planChosen bool) {
 	m.PlanChosen = planChosen
 	m.require(meAccountResponseBillingFieldPlanChosen)
+}
+
+// SetFreeSandbox sets the FreeSandbox field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseBilling) SetFreeSandbox(freeSandbox bool) {
+	m.FreeSandbox = freeSandbox
+	m.require(meAccountResponseBillingFieldFreeSandbox)
 }
 
 // SetFlatRate sets the FlatRate field and marks it as non-optional;
