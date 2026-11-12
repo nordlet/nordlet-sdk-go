@@ -16855,7 +16855,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"counterpartyName\": \"counterpartyName\",\n      \"counterpartyIban\": \"counterpartyIban\",\n      \"description\": \"description\",\n      \"externalId\": \"externalId\",\n      \"status\": \"new\",\n      \"matchedDocumentType\": \"matchedDocumentType\",\n      \"matchedDocumentId\": \"matchedDocumentId\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"ignoreReason\": \"ignoreReason\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+        "body": "{\n  \"rows\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"counterpartyName\": \"counterpartyName\",\n      \"counterpartyIban\": \"counterpartyIban\",\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"description\": \"description\",\n      \"externalId\": \"externalId\",\n      \"status\": \"new\",\n      \"matchedDocumentType\": \"matchedDocumentType\",\n      \"matchedDocumentId\": \"matchedDocumentId\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"ignoreReason\": \"ignoreReason\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"page\": 1000000,\n  \"pageSize\": 1000000,\n  \"total\": 1000000,\n  \"totals\": {\n    \"key\": \"value\"\n  },\n  \"totalsByCurrency\": {\n    \"key\": {\n      \"key\": \"value\"\n    }\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16886,7 +16886,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"partnerId\": \"partnerId\",\n  \"partnerName\": \"partnerName\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16917,7 +16917,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"partnerId\": \"partnerId\",\n  \"partnerName\": \"partnerName\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16948,7 +16948,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"partnerId\": \"partnerId\",\n  \"partnerName\": \"partnerName\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -16979,7 +16979,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"partnerId\": \"partnerId\",\n  \"partnerName\": \"partnerName\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -17010,7 +17010,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"partnerId\": \"partnerId\",\n  \"partnerName\": \"partnerName\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -17041,7 +17041,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"partnerId\": \"partnerId\",\n  \"partnerName\": \"partnerName\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -17072,7 +17072,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"bankAccountId\": \"bankAccountId\",\n  \"accountCode\": \"accountCode\",\n  \"currency\": \"currency\",\n  \"date\": \"2026-07-01\",\n  \"statementBalance\": \"statementBalance\",\n  \"statementBalanceSource\": \"request\",\n  \"statementClosingDate\": \"2026-07-01\",\n  \"ledgerBalance\": \"ledgerBalance\",\n  \"difference\": \"difference\",\n  \"unbookedCount\": 1000000,\n  \"unbookedTotal\": \"unbookedTotal\",\n  \"unbookedLines\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"counterpartyName\": \"counterpartyName\",\n      \"counterpartyIban\": \"counterpartyIban\",\n      \"description\": \"description\",\n      \"externalId\": \"externalId\",\n      \"status\": \"new\",\n      \"matchedDocumentType\": \"matchedDocumentType\",\n      \"matchedDocumentId\": \"matchedDocumentId\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"ignoreReason\": \"ignoreReason\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
+        "body": "{\n  \"bankAccountId\": \"bankAccountId\",\n  \"accountCode\": \"accountCode\",\n  \"currency\": \"currency\",\n  \"date\": \"2026-07-01\",\n  \"statementBalance\": \"statementBalance\",\n  \"statementBalanceSource\": \"request\",\n  \"statementClosingDate\": \"2026-07-01\",\n  \"ledgerBalance\": \"ledgerBalance\",\n  \"difference\": \"difference\",\n  \"unbookedCount\": 1000000,\n  \"unbookedTotal\": \"unbookedTotal\",\n  \"unbookedLines\": [\n    {\n      \"id\": \"id\",\n      \"bankAccountId\": \"bankAccountId\",\n      \"date\": \"2026-07-01\",\n      \"amount\": \"amount\",\n      \"currency\": \"currency\",\n      \"counterpartyName\": \"counterpartyName\",\n      \"counterpartyIban\": \"counterpartyIban\",\n      \"partnerId\": \"partnerId\",\n      \"partnerName\": \"partnerName\",\n      \"description\": \"description\",\n      \"externalId\": \"externalId\",\n      \"status\": \"new\",\n      \"matchedDocumentType\": \"matchedDocumentType\",\n      \"matchedDocumentId\": \"matchedDocumentId\",\n      \"journalTransactionId\": \"journalTransactionId\",\n      \"ignoreReason\": \"ignoreReason\",\n      \"createdAt\": \"2026-07-01T09:30:00Z\"\n    }\n  ],\n  \"warnings\": [\n    \"warnings\"\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -17103,7 +17103,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
+        "body": "{\n  \"id\": \"id\",\n  \"bankAccountId\": \"bankAccountId\",\n  \"date\": \"2026-07-01\",\n  \"amount\": \"amount\",\n  \"currency\": \"currency\",\n  \"counterpartyName\": \"counterpartyName\",\n  \"counterpartyIban\": \"counterpartyIban\",\n  \"partnerId\": \"partnerId\",\n  \"partnerName\": \"partnerName\",\n  \"description\": \"description\",\n  \"externalId\": \"externalId\",\n  \"status\": \"new\",\n  \"matchedDocumentType\": \"matchedDocumentType\",\n  \"matchedDocumentId\": \"matchedDocumentId\",\n  \"journalTransactionId\": \"journalTransactionId\",\n  \"ignoreReason\": \"ignoreReason\",\n  \"createdAt\": \"2026-07-01T09:30:00Z\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }

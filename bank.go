@@ -17875,14 +17875,16 @@ var (
 	reconciliationGetBankResponseUnbookedLinesItemFieldCurrency             = big.NewInt(1 << 4)
 	reconciliationGetBankResponseUnbookedLinesItemFieldCounterpartyName     = big.NewInt(1 << 5)
 	reconciliationGetBankResponseUnbookedLinesItemFieldCounterpartyIban     = big.NewInt(1 << 6)
-	reconciliationGetBankResponseUnbookedLinesItemFieldDescription          = big.NewInt(1 << 7)
-	reconciliationGetBankResponseUnbookedLinesItemFieldExternalID           = big.NewInt(1 << 8)
-	reconciliationGetBankResponseUnbookedLinesItemFieldStatus               = big.NewInt(1 << 9)
-	reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	reconciliationGetBankResponseUnbookedLinesItemFieldJournalTransactionID = big.NewInt(1 << 12)
-	reconciliationGetBankResponseUnbookedLinesItemFieldIgnoreReason         = big.NewInt(1 << 13)
-	reconciliationGetBankResponseUnbookedLinesItemFieldCreatedAt            = big.NewInt(1 << 14)
+	reconciliationGetBankResponseUnbookedLinesItemFieldPartnerID            = big.NewInt(1 << 7)
+	reconciliationGetBankResponseUnbookedLinesItemFieldPartnerName          = big.NewInt(1 << 8)
+	reconciliationGetBankResponseUnbookedLinesItemFieldDescription          = big.NewInt(1 << 9)
+	reconciliationGetBankResponseUnbookedLinesItemFieldExternalID           = big.NewInt(1 << 10)
+	reconciliationGetBankResponseUnbookedLinesItemFieldStatus               = big.NewInt(1 << 11)
+	reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	reconciliationGetBankResponseUnbookedLinesItemFieldJournalTransactionID = big.NewInt(1 << 14)
+	reconciliationGetBankResponseUnbookedLinesItemFieldIgnoreReason         = big.NewInt(1 << 15)
+	reconciliationGetBankResponseUnbookedLinesItemFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type ReconciliationGetBankResponseUnbookedLinesItem struct {
@@ -17893,6 +17895,8 @@ type ReconciliationGetBankResponseUnbookedLinesItem struct {
 	Currency             string                                               `json:"currency" url:"currency"`
 	CounterpartyName     *string                                              `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                                              `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                                              `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                                              `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                                              `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                                              `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               ReconciliationGetBankResponseUnbookedLinesItemStatus `json:"status" url:"status"`
@@ -17956,6 +17960,20 @@ func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetCounterpartyIban() *
 		return nil
 	}
 	return r.CounterpartyIban
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetPartnerID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PartnerID
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetPartnerName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.PartnerName
 }
 
 func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetDescription() *string {
@@ -18075,6 +18093,20 @@ func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetCounterpartyName(cou
 func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetCounterpartyIban(counterpartyIban *string) {
 	r.CounterpartyIban = counterpartyIban
 	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetPartnerID(partnerID *string) {
+	r.PartnerID = partnerID
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetPartnerName(partnerName *string) {
+	r.PartnerName = partnerName
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -26593,14 +26625,16 @@ var (
 	transactionsIgnoreBankResponseFieldCurrency             = big.NewInt(1 << 4)
 	transactionsIgnoreBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsIgnoreBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsIgnoreBankResponseFieldDescription          = big.NewInt(1 << 7)
-	transactionsIgnoreBankResponseFieldExternalID           = big.NewInt(1 << 8)
-	transactionsIgnoreBankResponseFieldStatus               = big.NewInt(1 << 9)
-	transactionsIgnoreBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsIgnoreBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsIgnoreBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsIgnoreBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsIgnoreBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsIgnoreBankResponseFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsIgnoreBankResponseFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsIgnoreBankResponseFieldDescription          = big.NewInt(1 << 9)
+	transactionsIgnoreBankResponseFieldExternalID           = big.NewInt(1 << 10)
+	transactionsIgnoreBankResponseFieldStatus               = big.NewInt(1 << 11)
+	transactionsIgnoreBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsIgnoreBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsIgnoreBankResponseFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsIgnoreBankResponseFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsIgnoreBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsIgnoreBankResponse struct {
@@ -26611,6 +26645,8 @@ type TransactionsIgnoreBankResponse struct {
 	Currency             string                               `json:"currency" url:"currency"`
 	CounterpartyName     *string                              `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                              `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                              `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                              `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                              `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                              `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsIgnoreBankResponseStatus `json:"status" url:"status"`
@@ -26674,6 +26710,20 @@ func (t *TransactionsIgnoreBankResponse) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsIgnoreBankResponse) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsIgnoreBankResponse) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsIgnoreBankResponse) GetDescription() *string {
@@ -26793,6 +26843,20 @@ func (t *TransactionsIgnoreBankResponse) SetCounterpartyName(counterpartyName *s
 func (t *TransactionsIgnoreBankResponse) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsIgnoreBankResponseFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsIgnoreBankResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsIgnoreBankResponseFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -27985,14 +28049,16 @@ var (
 	transactionsListBankResponseRowsItemFieldCurrency             = big.NewInt(1 << 4)
 	transactionsListBankResponseRowsItemFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsListBankResponseRowsItemFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsListBankResponseRowsItemFieldDescription          = big.NewInt(1 << 7)
-	transactionsListBankResponseRowsItemFieldExternalID           = big.NewInt(1 << 8)
-	transactionsListBankResponseRowsItemFieldStatus               = big.NewInt(1 << 9)
-	transactionsListBankResponseRowsItemFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsListBankResponseRowsItemFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsListBankResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsListBankResponseRowsItemFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsListBankResponseRowsItemFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsListBankResponseRowsItemFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsListBankResponseRowsItemFieldDescription          = big.NewInt(1 << 9)
+	transactionsListBankResponseRowsItemFieldExternalID           = big.NewInt(1 << 10)
+	transactionsListBankResponseRowsItemFieldStatus               = big.NewInt(1 << 11)
+	transactionsListBankResponseRowsItemFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsListBankResponseRowsItemFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsListBankResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsListBankResponseRowsItemFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsListBankResponseRowsItem struct {
@@ -28003,6 +28069,8 @@ type TransactionsListBankResponseRowsItem struct {
 	Currency             string                                     `json:"currency" url:"currency"`
 	CounterpartyName     *string                                    `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                                    `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                                    `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                                    `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                                    `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                                    `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsListBankResponseRowsItemStatus `json:"status" url:"status"`
@@ -28066,6 +28134,20 @@ func (t *TransactionsListBankResponseRowsItem) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsListBankResponseRowsItem) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsListBankResponseRowsItem) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsListBankResponseRowsItem) GetDescription() *string {
@@ -28185,6 +28267,20 @@ func (t *TransactionsListBankResponseRowsItem) SetCounterpartyName(counterpartyN
 func (t *TransactionsListBankResponseRowsItem) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsListBankResponseRowsItemFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsListBankResponseRowsItem) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsListBankResponseRowsItemFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsListBankResponseRowsItem) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsListBankResponseRowsItemFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -28480,14 +28576,16 @@ var (
 	transactionsMatchBankResponseFieldCurrency             = big.NewInt(1 << 4)
 	transactionsMatchBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsMatchBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsMatchBankResponseFieldDescription          = big.NewInt(1 << 7)
-	transactionsMatchBankResponseFieldExternalID           = big.NewInt(1 << 8)
-	transactionsMatchBankResponseFieldStatus               = big.NewInt(1 << 9)
-	transactionsMatchBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsMatchBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsMatchBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsMatchBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsMatchBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsMatchBankResponseFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsMatchBankResponseFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsMatchBankResponseFieldDescription          = big.NewInt(1 << 9)
+	transactionsMatchBankResponseFieldExternalID           = big.NewInt(1 << 10)
+	transactionsMatchBankResponseFieldStatus               = big.NewInt(1 << 11)
+	transactionsMatchBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsMatchBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsMatchBankResponseFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsMatchBankResponseFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsMatchBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsMatchBankResponse struct {
@@ -28498,6 +28596,8 @@ type TransactionsMatchBankResponse struct {
 	Currency             string                              `json:"currency" url:"currency"`
 	CounterpartyName     *string                             `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                             `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                             `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                             `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                             `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                             `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsMatchBankResponseStatus `json:"status" url:"status"`
@@ -28561,6 +28661,20 @@ func (t *TransactionsMatchBankResponse) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsMatchBankResponse) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsMatchBankResponse) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsMatchBankResponse) GetDescription() *string {
@@ -28680,6 +28794,20 @@ func (t *TransactionsMatchBankResponse) SetCounterpartyName(counterpartyName *st
 func (t *TransactionsMatchBankResponse) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsMatchBankResponseFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchBankResponse) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsMatchBankResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchBankResponse) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsMatchBankResponseFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -28966,14 +29094,16 @@ var (
 	transactionsMatchManyBankResponseFieldCurrency             = big.NewInt(1 << 4)
 	transactionsMatchManyBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsMatchManyBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsMatchManyBankResponseFieldDescription          = big.NewInt(1 << 7)
-	transactionsMatchManyBankResponseFieldExternalID           = big.NewInt(1 << 8)
-	transactionsMatchManyBankResponseFieldStatus               = big.NewInt(1 << 9)
-	transactionsMatchManyBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsMatchManyBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsMatchManyBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsMatchManyBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsMatchManyBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsMatchManyBankResponseFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsMatchManyBankResponseFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsMatchManyBankResponseFieldDescription          = big.NewInt(1 << 9)
+	transactionsMatchManyBankResponseFieldExternalID           = big.NewInt(1 << 10)
+	transactionsMatchManyBankResponseFieldStatus               = big.NewInt(1 << 11)
+	transactionsMatchManyBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsMatchManyBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsMatchManyBankResponseFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsMatchManyBankResponseFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsMatchManyBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsMatchManyBankResponse struct {
@@ -28984,6 +29114,8 @@ type TransactionsMatchManyBankResponse struct {
 	Currency             string                                  `json:"currency" url:"currency"`
 	CounterpartyName     *string                                 `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                                 `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                                 `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                                 `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                                 `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                                 `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsMatchManyBankResponseStatus `json:"status" url:"status"`
@@ -29047,6 +29179,20 @@ func (t *TransactionsMatchManyBankResponse) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsMatchManyBankResponse) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsMatchManyBankResponse) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsMatchManyBankResponse) GetDescription() *string {
@@ -29166,6 +29312,20 @@ func (t *TransactionsMatchManyBankResponse) SetCounterpartyName(counterpartyName
 func (t *TransactionsMatchManyBankResponse) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsMatchManyBankResponseFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchManyBankResponse) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsMatchManyBankResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchManyBankResponse) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsMatchManyBankResponseFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -29311,14 +29471,16 @@ var (
 	transactionsPostBankResponseFieldCurrency             = big.NewInt(1 << 4)
 	transactionsPostBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsPostBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsPostBankResponseFieldDescription          = big.NewInt(1 << 7)
-	transactionsPostBankResponseFieldExternalID           = big.NewInt(1 << 8)
-	transactionsPostBankResponseFieldStatus               = big.NewInt(1 << 9)
-	transactionsPostBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsPostBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsPostBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsPostBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsPostBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsPostBankResponseFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsPostBankResponseFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsPostBankResponseFieldDescription          = big.NewInt(1 << 9)
+	transactionsPostBankResponseFieldExternalID           = big.NewInt(1 << 10)
+	transactionsPostBankResponseFieldStatus               = big.NewInt(1 << 11)
+	transactionsPostBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsPostBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsPostBankResponseFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsPostBankResponseFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsPostBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsPostBankResponse struct {
@@ -29329,6 +29491,8 @@ type TransactionsPostBankResponse struct {
 	Currency             string                             `json:"currency" url:"currency"`
 	CounterpartyName     *string                            `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                            `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                            `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                            `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                            `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                            `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsPostBankResponseStatus `json:"status" url:"status"`
@@ -29392,6 +29556,20 @@ func (t *TransactionsPostBankResponse) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsPostBankResponse) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsPostBankResponse) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsPostBankResponse) GetDescription() *string {
@@ -29511,6 +29689,20 @@ func (t *TransactionsPostBankResponse) SetCounterpartyName(counterpartyName *str
 func (t *TransactionsPostBankResponse) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsPostBankResponseFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsPostBankResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsPostBankResponseFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -29681,14 +29873,16 @@ var (
 	transactionsRecordBankResponseFieldCurrency             = big.NewInt(1 << 4)
 	transactionsRecordBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsRecordBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsRecordBankResponseFieldDescription          = big.NewInt(1 << 7)
-	transactionsRecordBankResponseFieldExternalID           = big.NewInt(1 << 8)
-	transactionsRecordBankResponseFieldStatus               = big.NewInt(1 << 9)
-	transactionsRecordBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsRecordBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsRecordBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsRecordBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsRecordBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsRecordBankResponseFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsRecordBankResponseFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsRecordBankResponseFieldDescription          = big.NewInt(1 << 9)
+	transactionsRecordBankResponseFieldExternalID           = big.NewInt(1 << 10)
+	transactionsRecordBankResponseFieldStatus               = big.NewInt(1 << 11)
+	transactionsRecordBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsRecordBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsRecordBankResponseFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsRecordBankResponseFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsRecordBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsRecordBankResponse struct {
@@ -29699,6 +29893,8 @@ type TransactionsRecordBankResponse struct {
 	Currency             string                               `json:"currency" url:"currency"`
 	CounterpartyName     *string                              `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                              `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                              `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                              `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                              `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                              `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsRecordBankResponseStatus `json:"status" url:"status"`
@@ -29762,6 +29958,20 @@ func (t *TransactionsRecordBankResponse) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsRecordBankResponse) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsRecordBankResponse) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsRecordBankResponse) GetDescription() *string {
@@ -29881,6 +30091,20 @@ func (t *TransactionsRecordBankResponse) SetCounterpartyName(counterpartyName *s
 func (t *TransactionsRecordBankResponse) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsRecordBankResponseFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsRecordBankResponse) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsRecordBankResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsRecordBankResponse) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsRecordBankResponseFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -30347,14 +30571,16 @@ var (
 	transactionsUnignoreBankResponseFieldCurrency             = big.NewInt(1 << 4)
 	transactionsUnignoreBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsUnignoreBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsUnignoreBankResponseFieldDescription          = big.NewInt(1 << 7)
-	transactionsUnignoreBankResponseFieldExternalID           = big.NewInt(1 << 8)
-	transactionsUnignoreBankResponseFieldStatus               = big.NewInt(1 << 9)
-	transactionsUnignoreBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsUnignoreBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsUnignoreBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsUnignoreBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsUnignoreBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsUnignoreBankResponseFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsUnignoreBankResponseFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsUnignoreBankResponseFieldDescription          = big.NewInt(1 << 9)
+	transactionsUnignoreBankResponseFieldExternalID           = big.NewInt(1 << 10)
+	transactionsUnignoreBankResponseFieldStatus               = big.NewInt(1 << 11)
+	transactionsUnignoreBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsUnignoreBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsUnignoreBankResponseFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsUnignoreBankResponseFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsUnignoreBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsUnignoreBankResponse struct {
@@ -30365,6 +30591,8 @@ type TransactionsUnignoreBankResponse struct {
 	Currency             string                                 `json:"currency" url:"currency"`
 	CounterpartyName     *string                                `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                                `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                                `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                                `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                                `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                                `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsUnignoreBankResponseStatus `json:"status" url:"status"`
@@ -30428,6 +30656,20 @@ func (t *TransactionsUnignoreBankResponse) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsUnignoreBankResponse) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsUnignoreBankResponse) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsUnignoreBankResponse) GetDescription() *string {
@@ -30547,6 +30789,20 @@ func (t *TransactionsUnignoreBankResponse) SetCounterpartyName(counterpartyName 
 func (t *TransactionsUnignoreBankResponse) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsUnignoreBankResponseFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsUnignoreBankResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsUnignoreBankResponseFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
@@ -30692,14 +30948,16 @@ var (
 	transactionsUnmatchBankResponseFieldCurrency             = big.NewInt(1 << 4)
 	transactionsUnmatchBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
 	transactionsUnmatchBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
-	transactionsUnmatchBankResponseFieldDescription          = big.NewInt(1 << 7)
-	transactionsUnmatchBankResponseFieldExternalID           = big.NewInt(1 << 8)
-	transactionsUnmatchBankResponseFieldStatus               = big.NewInt(1 << 9)
-	transactionsUnmatchBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
-	transactionsUnmatchBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
-	transactionsUnmatchBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsUnmatchBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
-	transactionsUnmatchBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+	transactionsUnmatchBankResponseFieldPartnerID            = big.NewInt(1 << 7)
+	transactionsUnmatchBankResponseFieldPartnerName          = big.NewInt(1 << 8)
+	transactionsUnmatchBankResponseFieldDescription          = big.NewInt(1 << 9)
+	transactionsUnmatchBankResponseFieldExternalID           = big.NewInt(1 << 10)
+	transactionsUnmatchBankResponseFieldStatus               = big.NewInt(1 << 11)
+	transactionsUnmatchBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 12)
+	transactionsUnmatchBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 13)
+	transactionsUnmatchBankResponseFieldJournalTransactionID = big.NewInt(1 << 14)
+	transactionsUnmatchBankResponseFieldIgnoreReason         = big.NewInt(1 << 15)
+	transactionsUnmatchBankResponseFieldCreatedAt            = big.NewInt(1 << 16)
 )
 
 type TransactionsUnmatchBankResponse struct {
@@ -30710,6 +30968,8 @@ type TransactionsUnmatchBankResponse struct {
 	Currency             string                                `json:"currency" url:"currency"`
 	CounterpartyName     *string                               `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
 	CounterpartyIban     *string                               `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	PartnerID            *string                               `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	PartnerName          *string                               `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	Description          *string                               `json:"description,omitempty" url:"description,omitempty"`
 	ExternalID           *string                               `json:"externalId,omitempty" url:"externalId,omitempty"`
 	Status               TransactionsUnmatchBankResponseStatus `json:"status" url:"status"`
@@ -30773,6 +31033,20 @@ func (t *TransactionsUnmatchBankResponse) GetCounterpartyIban() *string {
 		return nil
 	}
 	return t.CounterpartyIban
+}
+
+func (t *TransactionsUnmatchBankResponse) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsUnmatchBankResponse) GetPartnerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerName
 }
 
 func (t *TransactionsUnmatchBankResponse) GetDescription() *string {
@@ -30892,6 +31166,20 @@ func (t *TransactionsUnmatchBankResponse) SetCounterpartyName(counterpartyName *
 func (t *TransactionsUnmatchBankResponse) SetCounterpartyIban(counterpartyIban *string) {
 	t.CounterpartyIban = counterpartyIban
 	t.require(transactionsUnmatchBankResponseFieldCounterpartyIban)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnmatchBankResponse) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsUnmatchBankResponseFieldPartnerID)
+}
+
+// SetPartnerName sets the PartnerName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnmatchBankResponse) SetPartnerName(partnerName *string) {
+	t.PartnerName = partnerName
+	t.require(transactionsUnmatchBankResponseFieldPartnerName)
 }
 
 // SetDescription sets the Description field and marks it as non-optional;
