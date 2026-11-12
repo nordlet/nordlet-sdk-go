@@ -17331,6 +17331,7 @@ var (
 	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
 	invoicesCreateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
 	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesCreateSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 67)
 )
 
 type InvoicesCreateSalesResponse struct {
@@ -17399,9 +17400,10 @@ type InvoicesCreateSalesResponse struct {
 	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
-	AdvanceAppliedAmount *string                                 `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
-	Lines                []*InvoicesCreateSalesResponseLinesItem `json:"lines" url:"lines"`
-	VatEvidence          *InvoicesCreateSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	AdvanceAppliedAmount *string                                    `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesCreateSalesResponseLinesItem    `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesCreateSalesResponseVatEvidence    `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	Warnings             []*InvoicesCreateSalesResponseWarningsItem `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -17877,6 +17879,13 @@ func (i *InvoicesCreateSalesResponse) GetVatEvidence() *InvoicesCreateSalesRespo
 		return nil
 	}
 	return i.VatEvidence
+}
+
+func (i *InvoicesCreateSalesResponse) GetWarnings() []*InvoicesCreateSalesResponseWarningsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
 }
 
 func (i *InvoicesCreateSalesResponse) GetExtraProperties() map[string]interface{} {
@@ -18360,6 +18369,13 @@ func (i *InvoicesCreateSalesResponse) SetLines(lines []*InvoicesCreateSalesRespo
 func (i *InvoicesCreateSalesResponse) SetVatEvidence(vatEvidence *InvoicesCreateSalesResponseVatEvidence) {
 	i.VatEvidence = vatEvidence
 	i.require(invoicesCreateSalesResponseFieldVatEvidence)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetWarnings(warnings []*InvoicesCreateSalesResponseWarningsItem) {
+	i.Warnings = warnings
+	i.require(invoicesCreateSalesResponseFieldWarnings)
 }
 
 func (i *InvoicesCreateSalesResponse) UnmarshalJSON(data []byte) error {
@@ -20204,6 +20220,106 @@ func NewInvoicesCreateSalesResponseVatSchemeFromString(s string) (InvoicesCreate
 
 func (i InvoicesCreateSalesResponseVatScheme) Ptr() *InvoicesCreateSalesResponseVatScheme {
 	return &i
+}
+
+var (
+	invoicesCreateSalesResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
+	invoicesCreateSalesResponseWarningsItemFieldMessage = big.NewInt(1 << 1)
+)
+
+type InvoicesCreateSalesResponseWarningsItem struct {
+	Code    string `json:"code" url:"code"`
+	Message string `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) GetCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.Code
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) GetMessage() string {
+	if i == nil {
+		return ""
+	}
+	return i.Message
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseWarningsItem) SetCode(code string) {
+	i.Code = code
+	i.require(invoicesCreateSalesResponseWarningsItemFieldCode)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseWarningsItem) SetMessage(message string) {
+	i.Message = message
+	i.require(invoicesCreateSalesResponseWarningsItemFieldMessage)
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesCreateSalesResponseWarningsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesCreateSalesResponseWarningsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesCreateSalesResponseWarningsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
@@ -23951,6 +24067,7 @@ var (
 	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
 	invoicesIssueSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
 	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesIssueSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 67)
 )
 
 type InvoicesIssueSalesResponse struct {
@@ -24019,9 +24136,10 @@ type InvoicesIssueSalesResponse struct {
 	CreatedAt                    time.Time                               `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                               `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
-	AdvanceAppliedAmount *string                                `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
-	Lines                []*InvoicesIssueSalesResponseLinesItem `json:"lines" url:"lines"`
-	VatEvidence          *InvoicesIssueSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	AdvanceAppliedAmount *string                                   `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesIssueSalesResponseLinesItem    `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesIssueSalesResponseVatEvidence    `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+	Warnings             []*InvoicesIssueSalesResponseWarningsItem `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -24497,6 +24615,13 @@ func (i *InvoicesIssueSalesResponse) GetVatEvidence() *InvoicesIssueSalesRespons
 		return nil
 	}
 	return i.VatEvidence
+}
+
+func (i *InvoicesIssueSalesResponse) GetWarnings() []*InvoicesIssueSalesResponseWarningsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
 }
 
 func (i *InvoicesIssueSalesResponse) GetExtraProperties() map[string]interface{} {
@@ -24980,6 +25105,13 @@ func (i *InvoicesIssueSalesResponse) SetLines(lines []*InvoicesIssueSalesRespons
 func (i *InvoicesIssueSalesResponse) SetVatEvidence(vatEvidence *InvoicesIssueSalesResponseVatEvidence) {
 	i.VatEvidence = vatEvidence
 	i.require(invoicesIssueSalesResponseFieldVatEvidence)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetWarnings(warnings []*InvoicesIssueSalesResponseWarningsItem) {
+	i.Warnings = warnings
+	i.require(invoicesIssueSalesResponseFieldWarnings)
 }
 
 func (i *InvoicesIssueSalesResponse) UnmarshalJSON(data []byte) error {
@@ -26824,6 +26956,106 @@ func NewInvoicesIssueSalesResponseVatSchemeFromString(s string) (InvoicesIssueSa
 
 func (i InvoicesIssueSalesResponseVatScheme) Ptr() *InvoicesIssueSalesResponseVatScheme {
 	return &i
+}
+
+var (
+	invoicesIssueSalesResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
+	invoicesIssueSalesResponseWarningsItemFieldMessage = big.NewInt(1 << 1)
+)
+
+type InvoicesIssueSalesResponseWarningsItem struct {
+	Code    string `json:"code" url:"code"`
+	Message string `json:"message" url:"message"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) GetCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.Code
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) GetMessage() string {
+	if i == nil {
+		return ""
+	}
+	return i.Message
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseWarningsItem) SetCode(code string) {
+	i.Code = code
+	i.require(invoicesIssueSalesResponseWarningsItemFieldCode)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseWarningsItem) SetMessage(message string) {
+	i.Message = message
+	i.require(invoicesIssueSalesResponseWarningsItemFieldMessage)
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesIssueSalesResponseWarningsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesIssueSalesResponseWarningsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesIssueSalesResponseWarningsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
@@ -39615,10 +39847,11 @@ var (
 	invoicesViewSalesResponseFieldNotes               = big.NewInt(1 << 14)
 	invoicesViewSalesResponseFieldPayURL              = big.NewInt(1 << 15)
 	invoicesViewSalesResponseFieldCardPaymentReceived = big.NewInt(1 << 16)
-	invoicesViewSalesResponseFieldSeller              = big.NewInt(1 << 17)
-	invoicesViewSalesResponseFieldBuyer               = big.NewInt(1 << 18)
-	invoicesViewSalesResponseFieldLines               = big.NewInt(1 << 19)
-	invoicesViewSalesResponseFieldToken               = big.NewInt(1 << 20)
+	invoicesViewSalesResponseFieldSentWith            = big.NewInt(1 << 17)
+	invoicesViewSalesResponseFieldSeller              = big.NewInt(1 << 18)
+	invoicesViewSalesResponseFieldBuyer               = big.NewInt(1 << 19)
+	invoicesViewSalesResponseFieldLines               = big.NewInt(1 << 20)
+	invoicesViewSalesResponseFieldToken               = big.NewInt(1 << 21)
 )
 
 type InvoicesViewSalesResponse struct {
@@ -39639,6 +39872,7 @@ type InvoicesViewSalesResponse struct {
 	Notes               *string                                `json:"notes,omitempty" url:"notes,omitempty"`
 	PayURL              *string                                `json:"payUrl,omitempty" url:"payUrl,omitempty"`
 	CardPaymentReceived bool                                   `json:"cardPaymentReceived" url:"cardPaymentReceived"`
+	SentWith            *string                                `json:"sentWith,omitempty" url:"sentWith,omitempty"`
 	Seller              *InvoicesViewSalesResponseSeller       `json:"seller" url:"seller"`
 	Buyer               *InvoicesViewSalesResponseBuyer        `json:"buyer" url:"buyer"`
 	Lines               []*InvoicesViewSalesResponseLinesItem  `json:"lines" url:"lines"`
@@ -39768,6 +40002,13 @@ func (i *InvoicesViewSalesResponse) GetCardPaymentReceived() bool {
 		return false
 	}
 	return i.CardPaymentReceived
+}
+
+func (i *InvoicesViewSalesResponse) GetSentWith() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SentWith
 }
 
 func (i *InvoicesViewSalesResponse) GetSeller() *InvoicesViewSalesResponseSeller {
@@ -39929,6 +40170,13 @@ func (i *InvoicesViewSalesResponse) SetPayURL(payURL *string) {
 func (i *InvoicesViewSalesResponse) SetCardPaymentReceived(cardPaymentReceived bool) {
 	i.CardPaymentReceived = cardPaymentReceived
 	i.require(invoicesViewSalesResponseFieldCardPaymentReceived)
+}
+
+// SetSentWith sets the SentWith field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesViewSalesResponse) SetSentWith(sentWith *string) {
+	i.SentWith = sentWith
+	i.require(invoicesViewSalesResponseFieldSentWith)
 }
 
 // SetSeller sets the Seller field and marks it as non-optional;

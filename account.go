@@ -197,6 +197,92 @@ func (a *APIKeysRotateAccountRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type BrandGetAccountRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (b *BrandGetAccountRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+var (
+	brandUpdateAccountRequestFieldName    = big.NewInt(1 << 0)
+	brandUpdateAccountRequestFieldLogoURL = big.NewInt(1 << 1)
+	brandUpdateAccountRequestFieldColor   = big.NewInt(1 << 2)
+	brandUpdateAccountRequestFieldFooter  = big.NewInt(1 << 3)
+)
+
+type BrandUpdateAccountRequest struct {
+	Name    *string `json:"name,omitempty" url:"-"`
+	LogoURL *string `json:"logoUrl,omitempty" url:"-"`
+	Color   *string `json:"color,omitempty" url:"-"`
+	Footer  *string `json:"footer,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (b *BrandUpdateAccountRequest) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountRequest) SetName(name *string) {
+	b.Name = name
+	b.require(brandUpdateAccountRequestFieldName)
+}
+
+// SetLogoURL sets the LogoURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountRequest) SetLogoURL(logoURL *string) {
+	b.LogoURL = logoURL
+	b.require(brandUpdateAccountRequestFieldLogoURL)
+}
+
+// SetColor sets the Color field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountRequest) SetColor(color *string) {
+	b.Color = color
+	b.require(brandUpdateAccountRequestFieldColor)
+}
+
+// SetFooter sets the Footer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountRequest) SetFooter(footer *string) {
+	b.Footer = footer
+	b.require(brandUpdateAccountRequestFieldFooter)
+}
+
+func (b *BrandUpdateAccountRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler BrandUpdateAccountRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*b = BrandUpdateAccountRequest(body)
+	return nil
+}
+
+func (b *BrandUpdateAccountRequest) MarshalJSON() ([]byte, error) {
+	type embed BrandUpdateAccountRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
 var (
 	companiesActivateAccountRequestFieldCompanyID = big.NewInt(1 << 0)
 )
@@ -3555,6 +3641,270 @@ func (a *APIKeysRotateAccountResponse) String() string {
 }
 
 var (
+	brandGetAccountResponseFieldName    = big.NewInt(1 << 0)
+	brandGetAccountResponseFieldLogoURL = big.NewInt(1 << 1)
+	brandGetAccountResponseFieldColor   = big.NewInt(1 << 2)
+	brandGetAccountResponseFieldFooter  = big.NewInt(1 << 3)
+)
+
+type BrandGetAccountResponse struct {
+	Name    *string `json:"name,omitempty" url:"name,omitempty"`
+	LogoURL *string `json:"logoUrl,omitempty" url:"logoUrl,omitempty"`
+	Color   *string `json:"color,omitempty" url:"color,omitempty"`
+	Footer  *string `json:"footer,omitempty" url:"footer,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BrandGetAccountResponse) GetName() *string {
+	if b == nil {
+		return nil
+	}
+	return b.Name
+}
+
+func (b *BrandGetAccountResponse) GetLogoURL() *string {
+	if b == nil {
+		return nil
+	}
+	return b.LogoURL
+}
+
+func (b *BrandGetAccountResponse) GetColor() *string {
+	if b == nil {
+		return nil
+	}
+	return b.Color
+}
+
+func (b *BrandGetAccountResponse) GetFooter() *string {
+	if b == nil {
+		return nil
+	}
+	return b.Footer
+}
+
+func (b *BrandGetAccountResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BrandGetAccountResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandGetAccountResponse) SetName(name *string) {
+	b.Name = name
+	b.require(brandGetAccountResponseFieldName)
+}
+
+// SetLogoURL sets the LogoURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandGetAccountResponse) SetLogoURL(logoURL *string) {
+	b.LogoURL = logoURL
+	b.require(brandGetAccountResponseFieldLogoURL)
+}
+
+// SetColor sets the Color field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandGetAccountResponse) SetColor(color *string) {
+	b.Color = color
+	b.require(brandGetAccountResponseFieldColor)
+}
+
+// SetFooter sets the Footer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandGetAccountResponse) SetFooter(footer *string) {
+	b.Footer = footer
+	b.require(brandGetAccountResponseFieldFooter)
+}
+
+func (b *BrandGetAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler BrandGetAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*b = BrandGetAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BrandGetAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed BrandGetAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BrandGetAccountResponse) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+var (
+	brandUpdateAccountResponseFieldName    = big.NewInt(1 << 0)
+	brandUpdateAccountResponseFieldLogoURL = big.NewInt(1 << 1)
+	brandUpdateAccountResponseFieldColor   = big.NewInt(1 << 2)
+	brandUpdateAccountResponseFieldFooter  = big.NewInt(1 << 3)
+)
+
+type BrandUpdateAccountResponse struct {
+	Name    *string `json:"name,omitempty" url:"name,omitempty"`
+	LogoURL *string `json:"logoUrl,omitempty" url:"logoUrl,omitempty"`
+	Color   *string `json:"color,omitempty" url:"color,omitempty"`
+	Footer  *string `json:"footer,omitempty" url:"footer,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (b *BrandUpdateAccountResponse) GetName() *string {
+	if b == nil {
+		return nil
+	}
+	return b.Name
+}
+
+func (b *BrandUpdateAccountResponse) GetLogoURL() *string {
+	if b == nil {
+		return nil
+	}
+	return b.LogoURL
+}
+
+func (b *BrandUpdateAccountResponse) GetColor() *string {
+	if b == nil {
+		return nil
+	}
+	return b.Color
+}
+
+func (b *BrandUpdateAccountResponse) GetFooter() *string {
+	if b == nil {
+		return nil
+	}
+	return b.Footer
+}
+
+func (b *BrandUpdateAccountResponse) GetExtraProperties() map[string]interface{} {
+	if b == nil {
+		return nil
+	}
+	return b.extraProperties
+}
+
+func (b *BrandUpdateAccountResponse) require(field *big.Int) {
+	if b.explicitFields == nil {
+		b.explicitFields = big.NewInt(0)
+	}
+	b.explicitFields.Or(b.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountResponse) SetName(name *string) {
+	b.Name = name
+	b.require(brandUpdateAccountResponseFieldName)
+}
+
+// SetLogoURL sets the LogoURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountResponse) SetLogoURL(logoURL *string) {
+	b.LogoURL = logoURL
+	b.require(brandUpdateAccountResponseFieldLogoURL)
+}
+
+// SetColor sets the Color field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountResponse) SetColor(color *string) {
+	b.Color = color
+	b.require(brandUpdateAccountResponseFieldColor)
+}
+
+// SetFooter sets the Footer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BrandUpdateAccountResponse) SetFooter(footer *string) {
+	b.Footer = footer
+	b.require(brandUpdateAccountResponseFieldFooter)
+}
+
+func (b *BrandUpdateAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler BrandUpdateAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*b = BrandUpdateAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *b)
+	if err != nil {
+		return err
+	}
+	b.extraProperties = extraProperties
+	b.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (b *BrandUpdateAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed BrandUpdateAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*b),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (b *BrandUpdateAccountResponse) String() string {
+	if b == nil {
+		return "<nil>"
+	}
+	if len(b.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(b.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(b); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", b)
+}
+
+var (
 	companiesActivateAccountResponseFieldID     = big.NewInt(1 << 0)
 	companiesActivateAccountResponseFieldStatus = big.NewInt(1 << 1)
 )
@@ -4920,23 +5270,33 @@ func (c CompaniesCreateAccountRequestVatPeriod) Ptr() *CompaniesCreateAccountReq
 }
 
 var (
-	companiesCreateAccountResponseFieldID        = big.NewInt(1 << 0)
-	companiesCreateAccountResponseFieldName      = big.NewInt(1 << 1)
-	companiesCreateAccountResponseFieldCode      = big.NewInt(1 << 2)
-	companiesCreateAccountResponseFieldVatCode   = big.NewInt(1 << 3)
-	companiesCreateAccountResponseFieldRole      = big.NewInt(1 << 4)
-	companiesCreateAccountResponseFieldIsSandbox = big.NewInt(1 << 5)
-	companiesCreateAccountResponseFieldCashBasis = big.NewInt(1 << 6)
+	companiesCreateAccountResponseFieldID                 = big.NewInt(1 << 0)
+	companiesCreateAccountResponseFieldName               = big.NewInt(1 << 1)
+	companiesCreateAccountResponseFieldCode               = big.NewInt(1 << 2)
+	companiesCreateAccountResponseFieldVatCode            = big.NewInt(1 << 3)
+	companiesCreateAccountResponseFieldRole               = big.NewInt(1 << 4)
+	companiesCreateAccountResponseFieldIsSandbox          = big.NewInt(1 << 5)
+	companiesCreateAccountResponseFieldCashBasis          = big.NewInt(1 << 6)
+	companiesCreateAccountResponseFieldCountryCode        = big.NewInt(1 << 7)
+	companiesCreateAccountResponseFieldBaseCurrency       = big.NewInt(1 << 8)
+	companiesCreateAccountResponseFieldIsVatPayer         = big.NewInt(1 << 9)
+	companiesCreateAccountResponseFieldVatPeriod          = big.NewInt(1 << 10)
+	companiesCreateAccountResponseFieldFiscalYearEndMonth = big.NewInt(1 << 11)
 )
 
 type CompaniesCreateAccountResponse struct {
-	ID        string  `json:"id" url:"id"`
-	Name      string  `json:"name" url:"name"`
-	Code      *string `json:"code,omitempty" url:"code,omitempty"`
-	VatCode   *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	Role      string  `json:"role" url:"role"`
-	IsSandbox bool    `json:"isSandbox" url:"isSandbox"`
-	CashBasis bool    `json:"cashBasis" url:"cashBasis"`
+	ID                 string                                   `json:"id" url:"id"`
+	Name               string                                   `json:"name" url:"name"`
+	Code               *string                                  `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string                                  `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Role               string                                   `json:"role" url:"role"`
+	IsSandbox          bool                                     `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool                                     `json:"cashBasis" url:"cashBasis"`
+	CountryCode        string                                   `json:"countryCode" url:"countryCode"`
+	BaseCurrency       string                                   `json:"baseCurrency" url:"baseCurrency"`
+	IsVatPayer         bool                                     `json:"isVatPayer" url:"isVatPayer"`
+	VatPeriod          *CompaniesCreateAccountResponseVatPeriod `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	FiscalYearEndMonth *int64                                   `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4992,6 +5352,41 @@ func (c *CompaniesCreateAccountResponse) GetCashBasis() bool {
 		return false
 	}
 	return c.CashBasis
+}
+
+func (c *CompaniesCreateAccountResponse) GetCountryCode() string {
+	if c == nil {
+		return ""
+	}
+	return c.CountryCode
+}
+
+func (c *CompaniesCreateAccountResponse) GetBaseCurrency() string {
+	if c == nil {
+		return ""
+	}
+	return c.BaseCurrency
+}
+
+func (c *CompaniesCreateAccountResponse) GetIsVatPayer() bool {
+	if c == nil {
+		return false
+	}
+	return c.IsVatPayer
+}
+
+func (c *CompaniesCreateAccountResponse) GetVatPeriod() *CompaniesCreateAccountResponseVatPeriod {
+	if c == nil {
+		return nil
+	}
+	return c.VatPeriod
+}
+
+func (c *CompaniesCreateAccountResponse) GetFiscalYearEndMonth() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearEndMonth
 }
 
 func (c *CompaniesCreateAccountResponse) GetExtraProperties() map[string]interface{} {
@@ -5057,6 +5452,41 @@ func (c *CompaniesCreateAccountResponse) SetCashBasis(cashBasis bool) {
 	c.require(companiesCreateAccountResponseFieldCashBasis)
 }
 
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountResponse) SetCountryCode(countryCode string) {
+	c.CountryCode = countryCode
+	c.require(companiesCreateAccountResponseFieldCountryCode)
+}
+
+// SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountResponse) SetBaseCurrency(baseCurrency string) {
+	c.BaseCurrency = baseCurrency
+	c.require(companiesCreateAccountResponseFieldBaseCurrency)
+}
+
+// SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountResponse) SetIsVatPayer(isVatPayer bool) {
+	c.IsVatPayer = isVatPayer
+	c.require(companiesCreateAccountResponseFieldIsVatPayer)
+}
+
+// SetVatPeriod sets the VatPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountResponse) SetVatPeriod(vatPeriod *CompaniesCreateAccountResponseVatPeriod) {
+	c.VatPeriod = vatPeriod
+	c.require(companiesCreateAccountResponseFieldVatPeriod)
+}
+
+// SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountResponse) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
+	c.FiscalYearEndMonth = fiscalYearEndMonth
+	c.require(companiesCreateAccountResponseFieldFiscalYearEndMonth)
+}
+
 func (c *CompaniesCreateAccountResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler CompaniesCreateAccountResponse
 	var value unmarshaler
@@ -5097,6 +5527,37 @@ func (c *CompaniesCreateAccountResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesCreateAccountResponseVatPeriod string
+
+const (
+	CompaniesCreateAccountResponseVatPeriodMonthly    CompaniesCreateAccountResponseVatPeriod = "monthly"
+	CompaniesCreateAccountResponseVatPeriodBimonthly  CompaniesCreateAccountResponseVatPeriod = "bimonthly"
+	CompaniesCreateAccountResponseVatPeriodQuarterly  CompaniesCreateAccountResponseVatPeriod = "quarterly"
+	CompaniesCreateAccountResponseVatPeriodSemiannual CompaniesCreateAccountResponseVatPeriod = "semiannual"
+	CompaniesCreateAccountResponseVatPeriodAnnual     CompaniesCreateAccountResponseVatPeriod = "annual"
+)
+
+func NewCompaniesCreateAccountResponseVatPeriodFromString(s string) (CompaniesCreateAccountResponseVatPeriod, error) {
+	switch s {
+	case "monthly":
+		return CompaniesCreateAccountResponseVatPeriodMonthly, nil
+	case "bimonthly":
+		return CompaniesCreateAccountResponseVatPeriodBimonthly, nil
+	case "quarterly":
+		return CompaniesCreateAccountResponseVatPeriodQuarterly, nil
+	case "semiannual":
+		return CompaniesCreateAccountResponseVatPeriodSemiannual, nil
+	case "annual":
+		return CompaniesCreateAccountResponseVatPeriodAnnual, nil
+	}
+	var t CompaniesCreateAccountResponseVatPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesCreateAccountResponseVatPeriod) Ptr() *CompaniesCreateAccountResponseVatPeriod {
+	return &c
 }
 
 var (
@@ -13021,27 +13482,37 @@ func (m MeAccountResponseBillingStatus) Ptr() *MeAccountResponseBillingStatus {
 }
 
 var (
-	meAccountResponseCompaniesItemFieldID        = big.NewInt(1 << 0)
-	meAccountResponseCompaniesItemFieldName      = big.NewInt(1 << 1)
-	meAccountResponseCompaniesItemFieldCode      = big.NewInt(1 << 2)
-	meAccountResponseCompaniesItemFieldVatCode   = big.NewInt(1 << 3)
-	meAccountResponseCompaniesItemFieldRole      = big.NewInt(1 << 4)
-	meAccountResponseCompaniesItemFieldIsSandbox = big.NewInt(1 << 5)
-	meAccountResponseCompaniesItemFieldCashBasis = big.NewInt(1 << 6)
-	meAccountResponseCompaniesItemFieldStatus    = big.NewInt(1 << 7)
-	meAccountResponseCompaniesItemFieldDeletedAt = big.NewInt(1 << 8)
+	meAccountResponseCompaniesItemFieldID                 = big.NewInt(1 << 0)
+	meAccountResponseCompaniesItemFieldName               = big.NewInt(1 << 1)
+	meAccountResponseCompaniesItemFieldCode               = big.NewInt(1 << 2)
+	meAccountResponseCompaniesItemFieldVatCode            = big.NewInt(1 << 3)
+	meAccountResponseCompaniesItemFieldRole               = big.NewInt(1 << 4)
+	meAccountResponseCompaniesItemFieldIsSandbox          = big.NewInt(1 << 5)
+	meAccountResponseCompaniesItemFieldCashBasis          = big.NewInt(1 << 6)
+	meAccountResponseCompaniesItemFieldCountryCode        = big.NewInt(1 << 7)
+	meAccountResponseCompaniesItemFieldBaseCurrency       = big.NewInt(1 << 8)
+	meAccountResponseCompaniesItemFieldIsVatPayer         = big.NewInt(1 << 9)
+	meAccountResponseCompaniesItemFieldVatPeriod          = big.NewInt(1 << 10)
+	meAccountResponseCompaniesItemFieldFiscalYearEndMonth = big.NewInt(1 << 11)
+	meAccountResponseCompaniesItemFieldStatus             = big.NewInt(1 << 12)
+	meAccountResponseCompaniesItemFieldDeletedAt          = big.NewInt(1 << 13)
 )
 
 type MeAccountResponseCompaniesItem struct {
-	ID        string                               `json:"id" url:"id"`
-	Name      string                               `json:"name" url:"name"`
-	Code      *string                              `json:"code,omitempty" url:"code,omitempty"`
-	VatCode   *string                              `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	Role      string                               `json:"role" url:"role"`
-	IsSandbox bool                                 `json:"isSandbox" url:"isSandbox"`
-	CashBasis bool                                 `json:"cashBasis" url:"cashBasis"`
-	Status    MeAccountResponseCompaniesItemStatus `json:"status" url:"status"`
-	DeletedAt *time.Time                           `json:"deletedAt,omitempty" url:"deletedAt,omitempty"`
+	ID                 string                                   `json:"id" url:"id"`
+	Name               string                                   `json:"name" url:"name"`
+	Code               *string                                  `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string                                  `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Role               string                                   `json:"role" url:"role"`
+	IsSandbox          bool                                     `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool                                     `json:"cashBasis" url:"cashBasis"`
+	CountryCode        string                                   `json:"countryCode" url:"countryCode"`
+	BaseCurrency       string                                   `json:"baseCurrency" url:"baseCurrency"`
+	IsVatPayer         bool                                     `json:"isVatPayer" url:"isVatPayer"`
+	VatPeriod          *MeAccountResponseCompaniesItemVatPeriod `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	FiscalYearEndMonth *int64                                   `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
+	Status             MeAccountResponseCompaniesItemStatus     `json:"status" url:"status"`
+	DeletedAt          *time.Time                               `json:"deletedAt,omitempty" url:"deletedAt,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13097,6 +13568,41 @@ func (m *MeAccountResponseCompaniesItem) GetCashBasis() bool {
 		return false
 	}
 	return m.CashBasis
+}
+
+func (m *MeAccountResponseCompaniesItem) GetCountryCode() string {
+	if m == nil {
+		return ""
+	}
+	return m.CountryCode
+}
+
+func (m *MeAccountResponseCompaniesItem) GetBaseCurrency() string {
+	if m == nil {
+		return ""
+	}
+	return m.BaseCurrency
+}
+
+func (m *MeAccountResponseCompaniesItem) GetIsVatPayer() bool {
+	if m == nil {
+		return false
+	}
+	return m.IsVatPayer
+}
+
+func (m *MeAccountResponseCompaniesItem) GetVatPeriod() *MeAccountResponseCompaniesItemVatPeriod {
+	if m == nil {
+		return nil
+	}
+	return m.VatPeriod
+}
+
+func (m *MeAccountResponseCompaniesItem) GetFiscalYearEndMonth() *int64 {
+	if m == nil {
+		return nil
+	}
+	return m.FiscalYearEndMonth
 }
 
 func (m *MeAccountResponseCompaniesItem) GetStatus() MeAccountResponseCompaniesItemStatus {
@@ -13174,6 +13680,41 @@ func (m *MeAccountResponseCompaniesItem) SetIsSandbox(isSandbox bool) {
 func (m *MeAccountResponseCompaniesItem) SetCashBasis(cashBasis bool) {
 	m.CashBasis = cashBasis
 	m.require(meAccountResponseCompaniesItemFieldCashBasis)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseCompaniesItem) SetCountryCode(countryCode string) {
+	m.CountryCode = countryCode
+	m.require(meAccountResponseCompaniesItemFieldCountryCode)
+}
+
+// SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseCompaniesItem) SetBaseCurrency(baseCurrency string) {
+	m.BaseCurrency = baseCurrency
+	m.require(meAccountResponseCompaniesItemFieldBaseCurrency)
+}
+
+// SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseCompaniesItem) SetIsVatPayer(isVatPayer bool) {
+	m.IsVatPayer = isVatPayer
+	m.require(meAccountResponseCompaniesItemFieldIsVatPayer)
+}
+
+// SetVatPeriod sets the VatPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseCompaniesItem) SetVatPeriod(vatPeriod *MeAccountResponseCompaniesItemVatPeriod) {
+	m.VatPeriod = vatPeriod
+	m.require(meAccountResponseCompaniesItemFieldVatPeriod)
+}
+
+// SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseCompaniesItem) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
+	m.FiscalYearEndMonth = fiscalYearEndMonth
+	m.require(meAccountResponseCompaniesItemFieldFiscalYearEndMonth)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;
@@ -13262,6 +13803,37 @@ func NewMeAccountResponseCompaniesItemStatusFromString(s string) (MeAccountRespo
 }
 
 func (m MeAccountResponseCompaniesItemStatus) Ptr() *MeAccountResponseCompaniesItemStatus {
+	return &m
+}
+
+type MeAccountResponseCompaniesItemVatPeriod string
+
+const (
+	MeAccountResponseCompaniesItemVatPeriodMonthly    MeAccountResponseCompaniesItemVatPeriod = "monthly"
+	MeAccountResponseCompaniesItemVatPeriodBimonthly  MeAccountResponseCompaniesItemVatPeriod = "bimonthly"
+	MeAccountResponseCompaniesItemVatPeriodQuarterly  MeAccountResponseCompaniesItemVatPeriod = "quarterly"
+	MeAccountResponseCompaniesItemVatPeriodSemiannual MeAccountResponseCompaniesItemVatPeriod = "semiannual"
+	MeAccountResponseCompaniesItemVatPeriodAnnual     MeAccountResponseCompaniesItemVatPeriod = "annual"
+)
+
+func NewMeAccountResponseCompaniesItemVatPeriodFromString(s string) (MeAccountResponseCompaniesItemVatPeriod, error) {
+	switch s {
+	case "monthly":
+		return MeAccountResponseCompaniesItemVatPeriodMonthly, nil
+	case "bimonthly":
+		return MeAccountResponseCompaniesItemVatPeriodBimonthly, nil
+	case "quarterly":
+		return MeAccountResponseCompaniesItemVatPeriodQuarterly, nil
+	case "semiannual":
+		return MeAccountResponseCompaniesItemVatPeriodSemiannual, nil
+	case "annual":
+		return MeAccountResponseCompaniesItemVatPeriodAnnual, nil
+	}
+	var t MeAccountResponseCompaniesItemVatPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MeAccountResponseCompaniesItemVatPeriod) Ptr() *MeAccountResponseCompaniesItemVatPeriod {
 	return &m
 }
 
@@ -13464,6 +14036,7 @@ var (
 	meAccountResponseUserFieldLocale       = big.NewInt(1 << 3)
 	meAccountResponseUserFieldPlan         = big.NewInt(1 << 4)
 	meAccountResponseUserFieldIsSuperAdmin = big.NewInt(1 << 5)
+	meAccountResponseUserFieldWhiteLabel   = big.NewInt(1 << 6)
 )
 
 type MeAccountResponseUser struct {
@@ -13473,6 +14046,7 @@ type MeAccountResponseUser struct {
 	Locale       string  `json:"locale" url:"locale"`
 	Plan         string  `json:"plan" url:"plan"`
 	IsSuperAdmin bool    `json:"isSuperAdmin" url:"isSuperAdmin"`
+	WhiteLabel   bool    `json:"whiteLabel" url:"whiteLabel"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13521,6 +14095,13 @@ func (m *MeAccountResponseUser) GetIsSuperAdmin() bool {
 		return false
 	}
 	return m.IsSuperAdmin
+}
+
+func (m *MeAccountResponseUser) GetWhiteLabel() bool {
+	if m == nil {
+		return false
+	}
+	return m.WhiteLabel
 }
 
 func (m *MeAccountResponseUser) GetExtraProperties() map[string]interface{} {
@@ -13577,6 +14158,13 @@ func (m *MeAccountResponseUser) SetPlan(plan string) {
 func (m *MeAccountResponseUser) SetIsSuperAdmin(isSuperAdmin bool) {
 	m.IsSuperAdmin = isSuperAdmin
 	m.require(meAccountResponseUserFieldIsSuperAdmin)
+}
+
+// SetWhiteLabel sets the WhiteLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MeAccountResponseUser) SetWhiteLabel(whiteLabel bool) {
+	m.WhiteLabel = whiteLabel
+	m.require(meAccountResponseUserFieldWhiteLabel)
 }
 
 func (m *MeAccountResponseUser) UnmarshalJSON(data []byte) error {

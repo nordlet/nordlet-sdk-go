@@ -450,9 +450,10 @@ var (
 	invoicesGetPublicResponseFieldNotes               = big.NewInt(1 << 14)
 	invoicesGetPublicResponseFieldPayURL              = big.NewInt(1 << 15)
 	invoicesGetPublicResponseFieldCardPaymentReceived = big.NewInt(1 << 16)
-	invoicesGetPublicResponseFieldSeller              = big.NewInt(1 << 17)
-	invoicesGetPublicResponseFieldBuyer               = big.NewInt(1 << 18)
-	invoicesGetPublicResponseFieldLines               = big.NewInt(1 << 19)
+	invoicesGetPublicResponseFieldSentWith            = big.NewInt(1 << 17)
+	invoicesGetPublicResponseFieldSeller              = big.NewInt(1 << 18)
+	invoicesGetPublicResponseFieldBuyer               = big.NewInt(1 << 19)
+	invoicesGetPublicResponseFieldLines               = big.NewInt(1 << 20)
 )
 
 type InvoicesGetPublicResponse struct {
@@ -473,6 +474,7 @@ type InvoicesGetPublicResponse struct {
 	Notes               *string                                `json:"notes,omitempty" url:"notes,omitempty"`
 	PayURL              *string                                `json:"payUrl,omitempty" url:"payUrl,omitempty"`
 	CardPaymentReceived bool                                   `json:"cardPaymentReceived" url:"cardPaymentReceived"`
+	SentWith            *string                                `json:"sentWith,omitempty" url:"sentWith,omitempty"`
 	Seller              *InvoicesGetPublicResponseSeller       `json:"seller" url:"seller"`
 	Buyer               *InvoicesGetPublicResponseBuyer        `json:"buyer" url:"buyer"`
 	Lines               []*InvoicesGetPublicResponseLinesItem  `json:"lines" url:"lines"`
@@ -601,6 +603,13 @@ func (i *InvoicesGetPublicResponse) GetCardPaymentReceived() bool {
 		return false
 	}
 	return i.CardPaymentReceived
+}
+
+func (i *InvoicesGetPublicResponse) GetSentWith() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SentWith
 }
 
 func (i *InvoicesGetPublicResponse) GetSeller() *InvoicesGetPublicResponseSeller {
@@ -755,6 +764,13 @@ func (i *InvoicesGetPublicResponse) SetPayURL(payURL *string) {
 func (i *InvoicesGetPublicResponse) SetCardPaymentReceived(cardPaymentReceived bool) {
 	i.CardPaymentReceived = cardPaymentReceived
 	i.require(invoicesGetPublicResponseFieldCardPaymentReceived)
+}
+
+// SetSentWith sets the SentWith field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPublicResponse) SetSentWith(sentWith *string) {
+	i.SentWith = sentWith
+	i.require(invoicesGetPublicResponseFieldSentWith)
 }
 
 // SetSeller sets the Seller field and marks it as non-optional;

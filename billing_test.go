@@ -2467,14 +2467,6 @@ func TestSettersAccountGetBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &AccountGetBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &AccountGetBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -2600,29 +2592,6 @@ func TestGettersAccountGetBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountGetBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountGetBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -2821,37 +2790,6 @@ func TestSettersMarkExplicitAccountGetBillingResponseMonthToDate(t *testing.T) {
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountGetBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -5226,14 +5164,6 @@ func TestSettersAccountSetAccountTypeBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &AccountSetAccountTypeBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &AccountSetAccountTypeBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -5359,29 +5289,6 @@ func TestGettersAccountSetAccountTypeBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetAccountTypeBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountSetAccountTypeBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -5580,37 +5487,6 @@ func TestSettersMarkExplicitAccountSetAccountTypeBillingResponseMonthToDate(t *t
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetAccountTypeBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7985,14 +7861,6 @@ func TestSettersAccountSetAutoTopUpBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &AccountSetAutoTopUpBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &AccountSetAutoTopUpBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -8118,29 +7986,6 @@ func TestGettersAccountSetAutoTopUpBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetAutoTopUpBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountSetAutoTopUpBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -8339,37 +8184,6 @@ func TestSettersMarkExplicitAccountSetAutoTopUpBillingResponseMonthToDate(t *tes
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetAutoTopUpBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -10744,14 +10558,6 @@ func TestSettersAccountSetOverdraftCapBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &AccountSetOverdraftCapBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &AccountSetOverdraftCapBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -10877,29 +10683,6 @@ func TestGettersAccountSetOverdraftCapBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetOverdraftCapBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountSetOverdraftCapBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -11098,37 +10881,6 @@ func TestSettersMarkExplicitAccountSetOverdraftCapBillingResponseMonthToDate(t *
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetOverdraftCapBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -13503,14 +13255,6 @@ func TestSettersAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &AccountSetPlanBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &AccountSetPlanBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -13636,29 +13380,6 @@ func TestGettersAccountSetPlanBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetPlanBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *AccountSetPlanBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -13857,37 +13578,6 @@ func TestSettersMarkExplicitAccountSetPlanBillingResponseMonthToDate(t *testing.
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &AccountSetPlanBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -16262,14 +15952,6 @@ func TestSettersFlatRateConfirmBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &FlatRateConfirmBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &FlatRateConfirmBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -16395,29 +16077,6 @@ func TestGettersFlatRateConfirmBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FlatRateConfirmBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *FlatRateConfirmBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -16616,37 +16275,6 @@ func TestSettersMarkExplicitFlatRateConfirmBillingResponseMonthToDate(t *testing
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FlatRateConfirmBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -19154,14 +18782,6 @@ func TestSettersFreeSandboxStartBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &FreeSandboxStartBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &FreeSandboxStartBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -19287,29 +18907,6 @@ func TestGettersFreeSandboxStartBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FreeSandboxStartBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *FreeSandboxStartBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -19508,37 +19105,6 @@ func TestSettersMarkExplicitFreeSandboxStartBillingResponseMonthToDate(t *testin
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &FreeSandboxStartBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -21984,14 +21550,6 @@ func TestSettersSubscriptionCancelBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &SubscriptionCancelBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &SubscriptionCancelBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -22117,29 +21675,6 @@ func TestGettersSubscriptionCancelBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SubscriptionCancelBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *SubscriptionCancelBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -22338,37 +21873,6 @@ func TestSettersMarkExplicitSubscriptionCancelBillingResponseMonthToDate(t *test
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &SubscriptionCancelBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -24743,14 +24247,6 @@ func TestSettersTopupConfirmBillingResponseMonthToDate(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetOcrPages", func(t *testing.T) {
-		obj := &TopupConfirmBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-		obj.SetOcrPages(fernTestValueOcrPages)
-		assert.Equal(t, fernTestValueOcrPages, obj.OcrPages)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
 	t.Run("SetFileBytes", func(t *testing.T) {
 		obj := &TopupConfirmBillingResponseMonthToDate{}
 		var fernTestValueFileBytes float64
@@ -24876,29 +24372,6 @@ func TestGettersTopupConfirmBillingResponseMonthToDate(t *testing.T) {
 			}
 		}()
 		_ = obj.GetSaleInvoices() // Should return zero value
-	})
-
-	t.Run("GetOcrPages", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &TopupConfirmBillingResponseMonthToDate{}
-		var expected int64
-		obj.OcrPages = expected
-
-		// Act & Assert
-		assert.Equal(t, expected, obj.GetOcrPages(), "getter should return the property value")
-	})
-
-	t.Run("GetOcrPages_NilReceiver", func(t *testing.T) {
-		t.Parallel()
-		var obj *TopupConfirmBillingResponseMonthToDate
-		// Should not panic - getters should handle nil receiver gracefully
-		defer func() {
-			if r := recover(); r != nil {
-				t.Errorf("Getter panicked on nil receiver: %v", r)
-			}
-		}()
-		_ = obj.GetOcrPages() // Should return zero value
 	})
 
 	t.Run("GetFileBytes", func(t *testing.T) {
@@ -25097,37 +24570,6 @@ func TestSettersMarkExplicitTopupConfirmBillingResponseMonthToDate(t *testing.T)
 
 		// Act
 		obj.SetSaleInvoices(fernTestValueSaleInvoices)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetOcrPages_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &TopupConfirmBillingResponseMonthToDate{}
-		var fernTestValueOcrPages int64
-
-		// Act
-		obj.SetOcrPages(fernTestValueOcrPages)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

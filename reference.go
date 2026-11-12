@@ -10691,6 +10691,28 @@ func (v VatResolveReferenceRequestServiceKind) Ptr() *VatResolveReferenceRequest
 	return &v
 }
 
+type VatResolveReferenceRequestSide string
+
+const (
+	VatResolveReferenceRequestSideSale     VatResolveReferenceRequestSide = "sale"
+	VatResolveReferenceRequestSidePurchase VatResolveReferenceRequestSide = "purchase"
+)
+
+func NewVatResolveReferenceRequestSideFromString(s string) (VatResolveReferenceRequestSide, error) {
+	switch s {
+	case "sale":
+		return VatResolveReferenceRequestSideSale, nil
+	case "purchase":
+		return VatResolveReferenceRequestSidePurchase, nil
+	}
+	var t VatResolveReferenceRequestSide
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VatResolveReferenceRequestSide) Ptr() *VatResolveReferenceRequestSide {
+	return &v
+}
+
 type VatResolveReferenceRequestSupplyType string
 
 const (
@@ -10725,6 +10747,7 @@ var (
 	vatResolveReferenceResponseFieldRates          = big.NewInt(1 << 5)
 	vatResolveReferenceResponseFieldLegalBasis     = big.NewInt(1 << 6)
 	vatResolveReferenceResponseFieldNotes          = big.NewInt(1 << 7)
+	vatResolveReferenceResponseFieldVatTypeCodes   = big.NewInt(1 << 8)
 )
 
 type VatResolveReferenceResponse struct {
@@ -10736,6 +10759,7 @@ type VatResolveReferenceResponse struct {
 	Rates          []*VatResolveReferenceResponseRatesItem `json:"rates" url:"rates"`
 	LegalBasis     string                                  `json:"legalBasis" url:"legalBasis"`
 	Notes          []string                                `json:"notes" url:"notes"`
+	VatTypeCodes   []string                                `json:"vatTypeCodes" url:"vatTypeCodes"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10798,6 +10822,13 @@ func (v *VatResolveReferenceResponse) GetNotes() []string {
 		return nil
 	}
 	return v.Notes
+}
+
+func (v *VatResolveReferenceResponse) GetVatTypeCodes() []string {
+	if v == nil {
+		return nil
+	}
+	return v.VatTypeCodes
 }
 
 func (v *VatResolveReferenceResponse) GetExtraProperties() map[string]interface{} {
@@ -10868,6 +10899,13 @@ func (v *VatResolveReferenceResponse) SetLegalBasis(legalBasis string) {
 func (v *VatResolveReferenceResponse) SetNotes(notes []string) {
 	v.Notes = notes
 	v.require(vatResolveReferenceResponseFieldNotes)
+}
+
+// SetVatTypeCodes sets the VatTypeCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceResponse) SetVatTypeCodes(vatTypeCodes []string) {
+	v.VatTypeCodes = vatTypeCodes
+	v.require(vatResolveReferenceResponseFieldVatTypeCodes)
 }
 
 func (v *VatResolveReferenceResponse) UnmarshalJSON(data []byte) error {
@@ -11300,18 +11338,19 @@ var (
 	vatResolveReferenceRequestFieldCustomerCountryCode             = big.NewInt(1 << 1)
 	vatResolveReferenceRequestFieldCustomerIsBusiness              = big.NewInt(1 << 2)
 	vatResolveReferenceRequestFieldSupplyType                      = big.NewInt(1 << 3)
-	vatResolveReferenceRequestFieldDate                            = big.NewInt(1 << 4)
-	vatResolveReferenceRequestFieldBelowDistanceSalesThreshold     = big.NewInt(1 << 5)
-	vatResolveReferenceRequestFieldFacilitatedByMarketplace        = big.NewInt(1 << 6)
-	vatResolveReferenceRequestFieldActingAsMarketplace             = big.NewInt(1 << 7)
-	vatResolveReferenceRequestFieldSellerEstablishedInEu           = big.NewInt(1 << 8)
-	vatResolveReferenceRequestFieldImportedConsignmentValueEur     = big.NewInt(1 << 9)
-	vatResolveReferenceRequestFieldServiceKind                     = big.NewInt(1 << 10)
-	vatResolveReferenceRequestFieldServiceCountryCode              = big.NewInt(1 << 11)
-	vatResolveReferenceRequestFieldUnderlyingSupplierGaveVatNumber = big.NewInt(1 << 12)
-	vatResolveReferenceRequestFieldUnderlyingSupplierChargesVat    = big.NewInt(1 << 13)
-	vatResolveReferenceRequestFieldGoodsKind                       = big.NewInt(1 << 14)
-	vatResolveReferenceRequestFieldGoodsLocationCountryCode        = big.NewInt(1 << 15)
+	vatResolveReferenceRequestFieldSide                            = big.NewInt(1 << 4)
+	vatResolveReferenceRequestFieldDate                            = big.NewInt(1 << 5)
+	vatResolveReferenceRequestFieldBelowDistanceSalesThreshold     = big.NewInt(1 << 6)
+	vatResolveReferenceRequestFieldFacilitatedByMarketplace        = big.NewInt(1 << 7)
+	vatResolveReferenceRequestFieldActingAsMarketplace             = big.NewInt(1 << 8)
+	vatResolveReferenceRequestFieldSellerEstablishedInEu           = big.NewInt(1 << 9)
+	vatResolveReferenceRequestFieldImportedConsignmentValueEur     = big.NewInt(1 << 10)
+	vatResolveReferenceRequestFieldServiceKind                     = big.NewInt(1 << 11)
+	vatResolveReferenceRequestFieldServiceCountryCode              = big.NewInt(1 << 12)
+	vatResolveReferenceRequestFieldUnderlyingSupplierGaveVatNumber = big.NewInt(1 << 13)
+	vatResolveReferenceRequestFieldUnderlyingSupplierChargesVat    = big.NewInt(1 << 14)
+	vatResolveReferenceRequestFieldGoodsKind                       = big.NewInt(1 << 15)
+	vatResolveReferenceRequestFieldGoodsLocationCountryCode        = big.NewInt(1 << 16)
 )
 
 type VatResolveReferenceRequest struct {
@@ -11319,6 +11358,7 @@ type VatResolveReferenceRequest struct {
 	CustomerCountryCode             *string                                `json:"customerCountryCode,omitempty" url:"-"`
 	CustomerIsBusiness              *bool                                  `json:"customerIsBusiness,omitempty" url:"-"`
 	SupplyType                      *VatResolveReferenceRequestSupplyType  `json:"supplyType,omitempty" url:"-"`
+	Side                            *VatResolveReferenceRequestSide        `json:"side,omitempty" url:"-"`
 	Date                            *time.Time                             `json:"date,omitempty" url:"-" format:"date"`
 	BelowDistanceSalesThreshold     *bool                                  `json:"belowDistanceSalesThreshold,omitempty" url:"-"`
 	FacilitatedByMarketplace        *bool                                  `json:"facilitatedByMarketplace,omitempty" url:"-"`
@@ -11369,6 +11409,13 @@ func (v *VatResolveReferenceRequest) SetCustomerIsBusiness(customerIsBusiness *b
 func (v *VatResolveReferenceRequest) SetSupplyType(supplyType *VatResolveReferenceRequestSupplyType) {
 	v.SupplyType = supplyType
 	v.require(vatResolveReferenceRequestFieldSupplyType)
+}
+
+// SetSide sets the Side field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatResolveReferenceRequest) SetSide(side *VatResolveReferenceRequestSide) {
+	v.Side = side
+	v.require(vatResolveReferenceRequestFieldSide)
 }
 
 // SetDate sets the Date field and marks it as non-optional;

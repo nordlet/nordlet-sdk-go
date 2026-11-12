@@ -566,6 +566,32 @@ func TestReportsFecWithWireMock(
 	VerifyRequestCount(t, "TestReportsFecWithWireMock", "POST", "/v1/reports/fec", nil, 1)
 }
 
+func TestReportsPeriodChecklistWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PeriodChecklistReportsRequest{
+		Period: "period",
+	}
+	_, invocationErr := client.Reports.PeriodChecklist(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReportsPeriodChecklistWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReportsPeriodChecklistWithWireMock", "POST", "/v1/reports/period-checklist", nil, 1)
+}
+
 func TestReportsEuPurchasesWithWireMock(
 	t *testing.T,
 ) {

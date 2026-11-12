@@ -792,6 +792,54 @@ func TestAccountProfileUpdateWithWireMock(
 	VerifyRequestCount(t, "TestAccountProfileUpdateWithWireMock", "POST", "/v1/account/profile/update", nil, 1)
 }
 
+func TestAccountBrandGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.BrandGetAccountRequest{}
+	_, invocationErr := client.Account.BrandGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountBrandGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountBrandGetWithWireMock", "POST", "/v1/account/brand/get", nil, 1)
+}
+
+func TestAccountBrandUpdateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.BrandUpdateAccountRequest{}
+	_, invocationErr := client.Account.BrandUpdate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountBrandUpdateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountBrandUpdateWithWireMock", "POST", "/v1/account/brand/update", nil, 1)
+}
+
 func TestAccountEmailChangeRequestWithWireMock(
 	t *testing.T,
 ) {

@@ -947,6 +947,72 @@ func (j *JournalTransactionsListLedgerRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	journalTransactionsReverseLedgerRequestFieldID     = big.NewInt(1 << 0)
+	journalTransactionsReverseLedgerRequestFieldReason = big.NewInt(1 << 1)
+	journalTransactionsReverseLedgerRequestFieldDate   = big.NewInt(1 << 2)
+)
+
+type JournalTransactionsReverseLedgerRequest struct {
+	ID     string     `json:"id" url:"-"`
+	Reason string     `json:"reason" url:"-"`
+	Date   *time.Time `json:"date,omitempty" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (j *JournalTransactionsReverseLedgerRequest) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerRequest) SetID(id string) {
+	j.ID = id
+	j.require(journalTransactionsReverseLedgerRequestFieldID)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerRequest) SetReason(reason string) {
+	j.Reason = reason
+	j.require(journalTransactionsReverseLedgerRequestFieldReason)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerRequest) SetDate(date *time.Time) {
+	j.Date = date
+	j.require(journalTransactionsReverseLedgerRequestFieldDate)
+}
+
+func (j *JournalTransactionsReverseLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTransactionsReverseLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*j = JournalTransactionsReverseLedgerRequest(body)
+	return nil
+}
+
+func (j *JournalTransactionsReverseLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed JournalTransactionsReverseLedgerRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date,omitempty"`
+	}{
+		embed: embed(*j),
+		Date:  internal.NewOptionalDate(j.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	ownersCreateLedgerRequestFieldName                         = big.NewInt(1 << 0)
 	ownersCreateLedgerRequestFieldCode                         = big.NewInt(1 << 1)
 	ownersCreateLedgerRequestFieldEquityAccountCode            = big.NewInt(1 << 2)
@@ -5990,29 +6056,31 @@ func (j JournalTransactionsCreateLedgerResponseStatus) Ptr() *JournalTransaction
 }
 
 var (
-	journalTransactionsGetLedgerResponseFieldID           = big.NewInt(1 << 0)
-	journalTransactionsGetLedgerResponseFieldDate         = big.NewInt(1 << 1)
-	journalTransactionsGetLedgerResponseFieldDescription  = big.NewInt(1 << 2)
-	journalTransactionsGetLedgerResponseFieldDocumentType = big.NewInt(1 << 3)
-	journalTransactionsGetLedgerResponseFieldDocumentID   = big.NewInt(1 << 4)
-	journalTransactionsGetLedgerResponseFieldPartnerID    = big.NewInt(1 << 5)
-	journalTransactionsGetLedgerResponseFieldStatus       = big.NewInt(1 << 6)
-	journalTransactionsGetLedgerResponseFieldCreatedAt    = big.NewInt(1 << 7)
-	journalTransactionsGetLedgerResponseFieldPostedAt     = big.NewInt(1 << 8)
-	journalTransactionsGetLedgerResponseFieldEntries      = big.NewInt(1 << 9)
+	journalTransactionsGetLedgerResponseFieldID                      = big.NewInt(1 << 0)
+	journalTransactionsGetLedgerResponseFieldDate                    = big.NewInt(1 << 1)
+	journalTransactionsGetLedgerResponseFieldDescription             = big.NewInt(1 << 2)
+	journalTransactionsGetLedgerResponseFieldDocumentType            = big.NewInt(1 << 3)
+	journalTransactionsGetLedgerResponseFieldDocumentID              = big.NewInt(1 << 4)
+	journalTransactionsGetLedgerResponseFieldPartnerID               = big.NewInt(1 << 5)
+	journalTransactionsGetLedgerResponseFieldStatus                  = big.NewInt(1 << 6)
+	journalTransactionsGetLedgerResponseFieldCreatedAt               = big.NewInt(1 << 7)
+	journalTransactionsGetLedgerResponseFieldPostedAt                = big.NewInt(1 << 8)
+	journalTransactionsGetLedgerResponseFieldReversedByTransactionID = big.NewInt(1 << 9)
+	journalTransactionsGetLedgerResponseFieldEntries                 = big.NewInt(1 << 10)
 )
 
 type JournalTransactionsGetLedgerResponse struct {
-	ID           string                                             `json:"id" url:"id"`
-	Date         time.Time                                          `json:"date" url:"date" format:"date"`
-	Description  *string                                            `json:"description,omitempty" url:"description,omitempty"`
-	DocumentType *string                                            `json:"documentType,omitempty" url:"documentType,omitempty"`
-	DocumentID   *string                                            `json:"documentId,omitempty" url:"documentId,omitempty"`
-	PartnerID    *string                                            `json:"partnerId,omitempty" url:"partnerId,omitempty"`
-	Status       JournalTransactionsGetLedgerResponseStatus         `json:"status" url:"status"`
-	CreatedAt    time.Time                                          `json:"createdAt" url:"createdAt"`
-	PostedAt     *time.Time                                         `json:"postedAt,omitempty" url:"postedAt,omitempty"`
-	Entries      []*JournalTransactionsGetLedgerResponseEntriesItem `json:"entries" url:"entries"`
+	ID                      string                                             `json:"id" url:"id"`
+	Date                    time.Time                                          `json:"date" url:"date" format:"date"`
+	Description             *string                                            `json:"description,omitempty" url:"description,omitempty"`
+	DocumentType            *string                                            `json:"documentType,omitempty" url:"documentType,omitempty"`
+	DocumentID              *string                                            `json:"documentId,omitempty" url:"documentId,omitempty"`
+	PartnerID               *string                                            `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Status                  JournalTransactionsGetLedgerResponseStatus         `json:"status" url:"status"`
+	CreatedAt               time.Time                                          `json:"createdAt" url:"createdAt"`
+	PostedAt                *time.Time                                         `json:"postedAt,omitempty" url:"postedAt,omitempty"`
+	ReversedByTransactionID *string                                            `json:"reversedByTransactionId,omitempty" url:"reversedByTransactionId,omitempty"`
+	Entries                 []*JournalTransactionsGetLedgerResponseEntriesItem `json:"entries" url:"entries"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6082,6 +6150,13 @@ func (j *JournalTransactionsGetLedgerResponse) GetPostedAt() *time.Time {
 		return nil
 	}
 	return j.PostedAt
+}
+
+func (j *JournalTransactionsGetLedgerResponse) GetReversedByTransactionID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.ReversedByTransactionID
 }
 
 func (j *JournalTransactionsGetLedgerResponse) GetEntries() []*JournalTransactionsGetLedgerResponseEntriesItem {
@@ -6166,6 +6241,13 @@ func (j *JournalTransactionsGetLedgerResponse) SetCreatedAt(createdAt time.Time)
 func (j *JournalTransactionsGetLedgerResponse) SetPostedAt(postedAt *time.Time) {
 	j.PostedAt = postedAt
 	j.require(journalTransactionsGetLedgerResponseFieldPostedAt)
+}
+
+// SetReversedByTransactionID sets the ReversedByTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsGetLedgerResponse) SetReversedByTransactionID(reversedByTransactionID *string) {
+	j.ReversedByTransactionID = reversedByTransactionID
+	j.require(journalTransactionsGetLedgerResponseFieldReversedByTransactionID)
 }
 
 // SetEntries sets the Entries field and marks it as non-optional;
@@ -7333,6 +7415,256 @@ func NewJournalTransactionsListLedgerResponseRowsItemStatusFromString(s string) 
 }
 
 func (j JournalTransactionsListLedgerResponseRowsItemStatus) Ptr() *JournalTransactionsListLedgerResponseRowsItemStatus {
+	return &j
+}
+
+var (
+	journalTransactionsReverseLedgerResponseFieldID           = big.NewInt(1 << 0)
+	journalTransactionsReverseLedgerResponseFieldDate         = big.NewInt(1 << 1)
+	journalTransactionsReverseLedgerResponseFieldDescription  = big.NewInt(1 << 2)
+	journalTransactionsReverseLedgerResponseFieldDocumentType = big.NewInt(1 << 3)
+	journalTransactionsReverseLedgerResponseFieldDocumentID   = big.NewInt(1 << 4)
+	journalTransactionsReverseLedgerResponseFieldPartnerID    = big.NewInt(1 << 5)
+	journalTransactionsReverseLedgerResponseFieldStatus       = big.NewInt(1 << 6)
+	journalTransactionsReverseLedgerResponseFieldCreatedAt    = big.NewInt(1 << 7)
+	journalTransactionsReverseLedgerResponseFieldPostedAt     = big.NewInt(1 << 8)
+)
+
+type JournalTransactionsReverseLedgerResponse struct {
+	ID           string                                         `json:"id" url:"id"`
+	Date         time.Time                                      `json:"date" url:"date" format:"date"`
+	Description  *string                                        `json:"description,omitempty" url:"description,omitempty"`
+	DocumentType *string                                        `json:"documentType,omitempty" url:"documentType,omitempty"`
+	DocumentID   *string                                        `json:"documentId,omitempty" url:"documentId,omitempty"`
+	PartnerID    *string                                        `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Status       JournalTransactionsReverseLedgerResponseStatus `json:"status" url:"status"`
+	CreatedAt    time.Time                                      `json:"createdAt" url:"createdAt"`
+	PostedAt     *time.Time                                     `json:"postedAt,omitempty" url:"postedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetID() string {
+	if j == nil {
+		return ""
+	}
+	return j.ID
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetDate() time.Time {
+	if j == nil {
+		return time.Time{}
+	}
+	return j.Date
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetDescription() *string {
+	if j == nil {
+		return nil
+	}
+	return j.Description
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetDocumentType() *string {
+	if j == nil {
+		return nil
+	}
+	return j.DocumentType
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetDocumentID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.DocumentID
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetPartnerID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerID
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetStatus() JournalTransactionsReverseLedgerResponseStatus {
+	if j == nil {
+		return ""
+	}
+	return j.Status
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetCreatedAt() time.Time {
+	if j == nil {
+		return time.Time{}
+	}
+	return j.CreatedAt
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetPostedAt() *time.Time {
+	if j == nil {
+		return nil
+	}
+	return j.PostedAt
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetID(id string) {
+	j.ID = id
+	j.require(journalTransactionsReverseLedgerResponseFieldID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetDate(date time.Time) {
+	j.Date = date
+	j.require(journalTransactionsReverseLedgerResponseFieldDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTransactionsReverseLedgerResponseFieldDescription)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetDocumentType(documentType *string) {
+	j.DocumentType = documentType
+	j.require(journalTransactionsReverseLedgerResponseFieldDocumentType)
+}
+
+// SetDocumentID sets the DocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetDocumentID(documentID *string) {
+	j.DocumentID = documentID
+	j.require(journalTransactionsReverseLedgerResponseFieldDocumentID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetPartnerID(partnerID *string) {
+	j.PartnerID = partnerID
+	j.require(journalTransactionsReverseLedgerResponseFieldPartnerID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetStatus(status JournalTransactionsReverseLedgerResponseStatus) {
+	j.Status = status
+	j.require(journalTransactionsReverseLedgerResponseFieldStatus)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetCreatedAt(createdAt time.Time) {
+	j.CreatedAt = createdAt
+	j.require(journalTransactionsReverseLedgerResponseFieldCreatedAt)
+}
+
+// SetPostedAt sets the PostedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsReverseLedgerResponse) SetPostedAt(postedAt *time.Time) {
+	j.PostedAt = postedAt
+	j.require(journalTransactionsReverseLedgerResponseFieldPostedAt)
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) UnmarshalJSON(data []byte) error {
+	type embed JournalTransactionsReverseLedgerResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		PostedAt  *internal.DateTime `json:"postedAt,omitempty"`
+	}{
+		embed: embed(*j),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*j = JournalTransactionsReverseLedgerResponse(unmarshaler.embed)
+	j.Date = unmarshaler.Date.Time()
+	j.CreatedAt = unmarshaler.CreatedAt.Time()
+	j.PostedAt = unmarshaler.PostedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed JournalTransactionsReverseLedgerResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		PostedAt  *internal.DateTime `json:"postedAt,omitempty"`
+	}{
+		embed:     embed(*j),
+		Date:      internal.NewDate(j.Date),
+		CreatedAt: internal.NewDateTime(j.CreatedAt),
+		PostedAt:  internal.NewOptionalDateTime(j.PostedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTransactionsReverseLedgerResponse) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+type JournalTransactionsReverseLedgerResponseStatus string
+
+const (
+	JournalTransactionsReverseLedgerResponseStatusDraft  JournalTransactionsReverseLedgerResponseStatus = "draft"
+	JournalTransactionsReverseLedgerResponseStatusPosted JournalTransactionsReverseLedgerResponseStatus = "posted"
+)
+
+func NewJournalTransactionsReverseLedgerResponseStatusFromString(s string) (JournalTransactionsReverseLedgerResponseStatus, error) {
+	switch s {
+	case "draft":
+		return JournalTransactionsReverseLedgerResponseStatusDraft, nil
+	case "posted":
+		return JournalTransactionsReverseLedgerResponseStatusPosted, nil
+	}
+	var t JournalTransactionsReverseLedgerResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (j JournalTransactionsReverseLedgerResponseStatus) Ptr() *JournalTransactionsReverseLedgerResponseStatus {
 	return &j
 }
 
@@ -10535,17 +10867,19 @@ func (p PeriodsListLedgerResponseRowsItemStatus) Ptr() *PeriodsListLedgerRespons
 }
 
 var (
-	periodsLockLedgerResponseFieldID     = big.NewInt(1 << 0)
-	periodsLockLedgerResponseFieldYear   = big.NewInt(1 << 1)
-	periodsLockLedgerResponseFieldMonth  = big.NewInt(1 << 2)
-	periodsLockLedgerResponseFieldStatus = big.NewInt(1 << 3)
+	periodsLockLedgerResponseFieldID       = big.NewInt(1 << 0)
+	periodsLockLedgerResponseFieldYear     = big.NewInt(1 << 1)
+	periodsLockLedgerResponseFieldMonth    = big.NewInt(1 << 2)
+	periodsLockLedgerResponseFieldStatus   = big.NewInt(1 << 3)
+	periodsLockLedgerResponseFieldWarnings = big.NewInt(1 << 4)
 )
 
 type PeriodsLockLedgerResponse struct {
-	ID     string                          `json:"id" url:"id"`
-	Year   int64                           `json:"year" url:"year"`
-	Month  int64                           `json:"month" url:"month"`
-	Status PeriodsLockLedgerResponseStatus `json:"status" url:"status"`
+	ID       string                                   `json:"id" url:"id"`
+	Year     int64                                    `json:"year" url:"year"`
+	Month    int64                                    `json:"month" url:"month"`
+	Status   PeriodsLockLedgerResponseStatus          `json:"status" url:"status"`
+	Warnings []*PeriodsLockLedgerResponseWarningsItem `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10580,6 +10914,13 @@ func (p *PeriodsLockLedgerResponse) GetStatus() PeriodsLockLedgerResponseStatus 
 		return ""
 	}
 	return p.Status
+}
+
+func (p *PeriodsLockLedgerResponse) GetWarnings() []*PeriodsLockLedgerResponseWarningsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Warnings
 }
 
 func (p *PeriodsLockLedgerResponse) GetExtraProperties() map[string]interface{} {
@@ -10622,6 +10963,13 @@ func (p *PeriodsLockLedgerResponse) SetMonth(month int64) {
 func (p *PeriodsLockLedgerResponse) SetStatus(status PeriodsLockLedgerResponseStatus) {
 	p.Status = status
 	p.require(periodsLockLedgerResponseFieldStatus)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodsLockLedgerResponse) SetWarnings(warnings []*PeriodsLockLedgerResponseWarningsItem) {
+	p.Warnings = warnings
+	p.require(periodsLockLedgerResponseFieldWarnings)
 }
 
 func (p *PeriodsLockLedgerResponse) UnmarshalJSON(data []byte) error {
@@ -10685,6 +11033,181 @@ func NewPeriodsLockLedgerResponseStatusFromString(s string) (PeriodsLockLedgerRe
 }
 
 func (p PeriodsLockLedgerResponseStatus) Ptr() *PeriodsLockLedgerResponseStatus {
+	return &p
+}
+
+var (
+	periodsLockLedgerResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
+	periodsLockLedgerResponseWarningsItemFieldCount   = big.NewInt(1 << 1)
+	periodsLockLedgerResponseWarningsItemFieldMessage = big.NewInt(1 << 2)
+	periodsLockLedgerResponseWarningsItemFieldIDs     = big.NewInt(1 << 3)
+)
+
+type PeriodsLockLedgerResponseWarningsItem struct {
+	Code    PeriodsLockLedgerResponseWarningsItemCode `json:"code" url:"code"`
+	Count   int64                                     `json:"count" url:"count"`
+	Message string                                    `json:"message" url:"message"`
+	IDs     []string                                  `json:"ids" url:"ids"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) GetCode() PeriodsLockLedgerResponseWarningsItemCode {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) GetCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Count
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) GetMessage() string {
+	if p == nil {
+		return ""
+	}
+	return p.Message
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) GetIDs() []string {
+	if p == nil {
+		return nil
+	}
+	return p.IDs
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodsLockLedgerResponseWarningsItem) SetCode(code PeriodsLockLedgerResponseWarningsItemCode) {
+	p.Code = code
+	p.require(periodsLockLedgerResponseWarningsItemFieldCode)
+}
+
+// SetCount sets the Count field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodsLockLedgerResponseWarningsItem) SetCount(count int64) {
+	p.Count = count
+	p.require(periodsLockLedgerResponseWarningsItemFieldCount)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodsLockLedgerResponseWarningsItem) SetMessage(message string) {
+	p.Message = message
+	p.require(periodsLockLedgerResponseWarningsItemFieldMessage)
+}
+
+// SetIDs sets the IDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodsLockLedgerResponseWarningsItem) SetIDs(ids []string) {
+	p.IDs = ids
+	p.require(periodsLockLedgerResponseWarningsItemFieldIDs)
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PeriodsLockLedgerResponseWarningsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PeriodsLockLedgerResponseWarningsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) MarshalJSON() ([]byte, error) {
+	type embed PeriodsLockLedgerResponseWarningsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PeriodsLockLedgerResponseWarningsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PeriodsLockLedgerResponseWarningsItemCode string
+
+const (
+	PeriodsLockLedgerResponseWarningsItemCodeDraftSaleDocuments            PeriodsLockLedgerResponseWarningsItemCode = "draft_sale_documents"
+	PeriodsLockLedgerResponseWarningsItemCodeDraftPurchaseDocuments        PeriodsLockLedgerResponseWarningsItemCode = "draft_purchase_documents"
+	PeriodsLockLedgerResponseWarningsItemCodeUnbookedBankLines             PeriodsLockLedgerResponseWarningsItemCode = "unbooked_bank_lines"
+	PeriodsLockLedgerResponseWarningsItemCodeDepreciationNotPosted         PeriodsLockLedgerResponseWarningsItemCode = "depreciation_not_posted"
+	PeriodsLockLedgerResponseWarningsItemCodeDeferralsNotPosted            PeriodsLockLedgerResponseWarningsItemCode = "deferrals_not_posted"
+	PeriodsLockLedgerResponseWarningsItemCodeRecurringInvoicesNotGenerated PeriodsLockLedgerResponseWarningsItemCode = "recurring_invoices_not_generated"
+	PeriodsLockLedgerResponseWarningsItemCodePayrollRunsNotApproved        PeriodsLockLedgerResponseWarningsItemCode = "payroll_runs_not_approved"
+	PeriodsLockLedgerResponseWarningsItemCodeOpenFxReceivables             PeriodsLockLedgerResponseWarningsItemCode = "open_fx_receivables"
+	PeriodsLockLedgerResponseWarningsItemCodeOpenFxPayables                PeriodsLockLedgerResponseWarningsItemCode = "open_fx_payables"
+)
+
+func NewPeriodsLockLedgerResponseWarningsItemCodeFromString(s string) (PeriodsLockLedgerResponseWarningsItemCode, error) {
+	switch s {
+	case "draft_sale_documents":
+		return PeriodsLockLedgerResponseWarningsItemCodeDraftSaleDocuments, nil
+	case "draft_purchase_documents":
+		return PeriodsLockLedgerResponseWarningsItemCodeDraftPurchaseDocuments, nil
+	case "unbooked_bank_lines":
+		return PeriodsLockLedgerResponseWarningsItemCodeUnbookedBankLines, nil
+	case "depreciation_not_posted":
+		return PeriodsLockLedgerResponseWarningsItemCodeDepreciationNotPosted, nil
+	case "deferrals_not_posted":
+		return PeriodsLockLedgerResponseWarningsItemCodeDeferralsNotPosted, nil
+	case "recurring_invoices_not_generated":
+		return PeriodsLockLedgerResponseWarningsItemCodeRecurringInvoicesNotGenerated, nil
+	case "payroll_runs_not_approved":
+		return PeriodsLockLedgerResponseWarningsItemCodePayrollRunsNotApproved, nil
+	case "open_fx_receivables":
+		return PeriodsLockLedgerResponseWarningsItemCodeOpenFxReceivables, nil
+	case "open_fx_payables":
+		return PeriodsLockLedgerResponseWarningsItemCodeOpenFxPayables, nil
+	}
+	var t PeriodsLockLedgerResponseWarningsItemCode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PeriodsLockLedgerResponseWarningsItemCode) Ptr() *PeriodsLockLedgerResponseWarningsItemCode {
 	return &p
 }
 

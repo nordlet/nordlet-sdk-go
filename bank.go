@@ -2269,6 +2269,72 @@ func (p *PaymentsExportBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	reconciliationGetBankRequestFieldBankAccountID    = big.NewInt(1 << 0)
+	reconciliationGetBankRequestFieldDate             = big.NewInt(1 << 1)
+	reconciliationGetBankRequestFieldStatementBalance = big.NewInt(1 << 2)
+)
+
+type ReconciliationGetBankRequest struct {
+	BankAccountID    string    `json:"bankAccountId" url:"-"`
+	Date             time.Time `json:"date" url:"-" format:"date"`
+	StatementBalance *string   `json:"statementBalance,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *ReconciliationGetBankRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankRequest) SetBankAccountID(bankAccountID string) {
+	r.BankAccountID = bankAccountID
+	r.require(reconciliationGetBankRequestFieldBankAccountID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankRequest) SetDate(date time.Time) {
+	r.Date = date
+	r.require(reconciliationGetBankRequestFieldDate)
+}
+
+// SetStatementBalance sets the StatementBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankRequest) SetStatementBalance(statementBalance *string) {
+	r.StatementBalance = statementBalance
+	r.require(reconciliationGetBankRequestFieldStatementBalance)
+}
+
+func (r *ReconciliationGetBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReconciliationGetBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = ReconciliationGetBankRequest(body)
+	return nil
+}
+
+func (r *ReconciliationGetBankRequest) MarshalJSON() ([]byte, error) {
+	type embed ReconciliationGetBankRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*r),
+		Date:  internal.NewDate(r.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	securitiesGetBankRequestFieldID = big.NewInt(1 << 0)
 )
 
@@ -3107,13 +3173,72 @@ func (s *StatementsImportBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	transactionsImportBankRequestFieldBankAccountID = big.NewInt(1 << 0)
-	transactionsImportBankRequestFieldTransactions  = big.NewInt(1 << 1)
+	transactionsIgnoreBankRequestFieldTransactionID = big.NewInt(1 << 0)
+	transactionsIgnoreBankRequestFieldReason        = big.NewInt(1 << 1)
+)
+
+type TransactionsIgnoreBankRequest struct {
+	TransactionID string `json:"transactionId" url:"-"`
+	Reason        string `json:"reason" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TransactionsIgnoreBankRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetTransactionID sets the TransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankRequest) SetTransactionID(transactionID string) {
+	t.TransactionID = transactionID
+	t.require(transactionsIgnoreBankRequestFieldTransactionID)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankRequest) SetReason(reason string) {
+	t.Reason = reason
+	t.require(transactionsIgnoreBankRequestFieldReason)
+}
+
+func (t *TransactionsIgnoreBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsIgnoreBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TransactionsIgnoreBankRequest(body)
+	return nil
+}
+
+func (t *TransactionsIgnoreBankRequest) MarshalJSON() ([]byte, error) {
+	type embed TransactionsIgnoreBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	transactionsImportBankRequestFieldBankAccountID  = big.NewInt(1 << 0)
+	transactionsImportBankRequestFieldTransactions   = big.NewInt(1 << 1)
+	transactionsImportBankRequestFieldOpeningBalance = big.NewInt(1 << 2)
+	transactionsImportBankRequestFieldClosingBalance = big.NewInt(1 << 3)
 )
 
 type TransactionsImportBankRequest struct {
-	BankAccountID string                                           `json:"bankAccountId" url:"-"`
-	Transactions  []*TransactionsImportBankRequestTransactionsItem `json:"transactions" url:"-"`
+	BankAccountID  string                                           `json:"bankAccountId" url:"-"`
+	Transactions   []*TransactionsImportBankRequestTransactionsItem `json:"transactions" url:"-"`
+	OpeningBalance *string                                          `json:"openingBalance,omitempty" url:"-"`
+	ClosingBalance *string                                          `json:"closingBalance,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3138,6 +3263,20 @@ func (t *TransactionsImportBankRequest) SetBankAccountID(bankAccountID string) {
 func (t *TransactionsImportBankRequest) SetTransactions(transactions []*TransactionsImportBankRequestTransactionsItem) {
 	t.Transactions = transactions
 	t.require(transactionsImportBankRequestFieldTransactions)
+}
+
+// SetOpeningBalance sets the OpeningBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsImportBankRequest) SetOpeningBalance(openingBalance *string) {
+	t.OpeningBalance = openingBalance
+	t.require(transactionsImportBankRequestFieldOpeningBalance)
+}
+
+// SetClosingBalance sets the ClosingBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsImportBankRequest) SetClosingBalance(closingBalance *string) {
+	t.ClosingBalance = closingBalance
+	t.require(transactionsImportBankRequestFieldClosingBalance)
 }
 
 func (t *TransactionsImportBankRequest) UnmarshalJSON(data []byte) error {
@@ -3249,6 +3388,7 @@ var (
 	transactionsMatchBankRequestFieldDocumentType  = big.NewInt(1 << 1)
 	transactionsMatchBankRequestFieldDocumentID    = big.NewInt(1 << 2)
 	transactionsMatchBankRequestFieldInvoiceAmount = big.NewInt(1 << 3)
+	transactionsMatchBankRequestFieldRemainder     = big.NewInt(1 << 4)
 )
 
 type TransactionsMatchBankRequest struct {
@@ -3256,6 +3396,7 @@ type TransactionsMatchBankRequest struct {
 	DocumentType  TransactionsMatchBankRequestDocumentType `json:"documentType" url:"-"`
 	DocumentID    string                                   `json:"documentId" url:"-"`
 	InvoiceAmount *string                                  `json:"invoiceAmount,omitempty" url:"-"`
+	Remainder     *TransactionsMatchBankRequestRemainder   `json:"remainder,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3294,6 +3435,13 @@ func (t *TransactionsMatchBankRequest) SetDocumentID(documentID string) {
 func (t *TransactionsMatchBankRequest) SetInvoiceAmount(invoiceAmount *string) {
 	t.InvoiceAmount = invoiceAmount
 	t.require(transactionsMatchBankRequestFieldInvoiceAmount)
+}
+
+// SetRemainder sets the Remainder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchBankRequest) SetRemainder(remainder *TransactionsMatchBankRequestRemainder) {
+	t.Remainder = remainder
+	t.require(transactionsMatchBankRequestFieldRemainder)
 }
 
 func (t *TransactionsMatchBankRequest) UnmarshalJSON(data []byte) error {
@@ -3363,6 +3511,115 @@ func (t *TransactionsMatchManyBankRequest) UnmarshalJSON(data []byte) error {
 
 func (t *TransactionsMatchManyBankRequest) MarshalJSON() ([]byte, error) {
 	type embed TransactionsMatchManyBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	transactionsPostBankRequestFieldTransactionID     = big.NewInt(1 << 0)
+	transactionsPostBankRequestFieldAccountCode       = big.NewInt(1 << 1)
+	transactionsPostBankRequestFieldTaxPaymentID      = big.NewInt(1 << 2)
+	transactionsPostBankRequestFieldPartnerID         = big.NewInt(1 << 3)
+	transactionsPostBankRequestFieldCostCenterID      = big.NewInt(1 << 4)
+	transactionsPostBankRequestFieldProjectID         = big.NewInt(1 << 5)
+	transactionsPostBankRequestFieldDescription       = big.NewInt(1 << 6)
+	transactionsPostBankRequestFieldVatClassifierCode = big.NewInt(1 << 7)
+)
+
+type TransactionsPostBankRequest struct {
+	TransactionID     string  `json:"transactionId" url:"-"`
+	AccountCode       string  `json:"accountCode" url:"-"`
+	TaxPaymentID      *string `json:"taxPaymentId,omitempty" url:"-"`
+	PartnerID         *string `json:"partnerId,omitempty" url:"-"`
+	CostCenterID      *string `json:"costCenterId,omitempty" url:"-"`
+	ProjectID         *string `json:"projectId,omitempty" url:"-"`
+	Description       *string `json:"description,omitempty" url:"-"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TransactionsPostBankRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetTransactionID sets the TransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetTransactionID(transactionID string) {
+	t.TransactionID = transactionID
+	t.require(transactionsPostBankRequestFieldTransactionID)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetAccountCode(accountCode string) {
+	t.AccountCode = accountCode
+	t.require(transactionsPostBankRequestFieldAccountCode)
+}
+
+// SetTaxPaymentID sets the TaxPaymentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetTaxPaymentID(taxPaymentID *string) {
+	t.TaxPaymentID = taxPaymentID
+	t.require(transactionsPostBankRequestFieldTaxPaymentID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsPostBankRequestFieldPartnerID)
+}
+
+// SetCostCenterID sets the CostCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetCostCenterID(costCenterID *string) {
+	t.CostCenterID = costCenterID
+	t.require(transactionsPostBankRequestFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetProjectID(projectID *string) {
+	t.ProjectID = projectID
+	t.require(transactionsPostBankRequestFieldProjectID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetDescription(description *string) {
+	t.Description = description
+	t.require(transactionsPostBankRequestFieldDescription)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetVatClassifierCode(vatClassifierCode *string) {
+	t.VatClassifierCode = vatClassifierCode
+	t.require(transactionsPostBankRequestFieldVatClassifierCode)
+}
+
+func (t *TransactionsPostBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsPostBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TransactionsPostBankRequest(body)
+	return nil
+}
+
+func (t *TransactionsPostBankRequest) MarshalJSON() ([]byte, error) {
+	type embed TransactionsPostBankRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -3511,6 +3768,52 @@ func (t *TransactionsSuggestMatchesBankRequest) UnmarshalJSON(data []byte) error
 
 func (t *TransactionsSuggestMatchesBankRequest) MarshalJSON() ([]byte, error) {
 	type embed TransactionsSuggestMatchesBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	transactionsUnignoreBankRequestFieldTransactionID = big.NewInt(1 << 0)
+)
+
+type TransactionsUnignoreBankRequest struct {
+	TransactionID string `json:"transactionId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TransactionsUnignoreBankRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetTransactionID sets the TransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankRequest) SetTransactionID(transactionID string) {
+	t.TransactionID = transactionID
+	t.require(transactionsUnignoreBankRequestFieldTransactionID)
+}
+
+func (t *TransactionsUnignoreBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsUnignoreBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TransactionsUnignoreBankRequest(body)
+	return nil
+}
+
+func (t *TransactionsUnignoreBankRequest) MarshalJSON() ([]byte, error) {
+	type embed TransactionsUnignoreBankRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -17255,6 +17558,661 @@ func (p *PaymentsExportBankResponse) String() string {
 }
 
 var (
+	reconciliationGetBankResponseFieldBankAccountID          = big.NewInt(1 << 0)
+	reconciliationGetBankResponseFieldAccountCode            = big.NewInt(1 << 1)
+	reconciliationGetBankResponseFieldCurrency               = big.NewInt(1 << 2)
+	reconciliationGetBankResponseFieldDate                   = big.NewInt(1 << 3)
+	reconciliationGetBankResponseFieldStatementBalance       = big.NewInt(1 << 4)
+	reconciliationGetBankResponseFieldStatementBalanceSource = big.NewInt(1 << 5)
+	reconciliationGetBankResponseFieldStatementClosingDate   = big.NewInt(1 << 6)
+	reconciliationGetBankResponseFieldLedgerBalance          = big.NewInt(1 << 7)
+	reconciliationGetBankResponseFieldDifference             = big.NewInt(1 << 8)
+	reconciliationGetBankResponseFieldUnbookedCount          = big.NewInt(1 << 9)
+	reconciliationGetBankResponseFieldUnbookedTotal          = big.NewInt(1 << 10)
+	reconciliationGetBankResponseFieldUnbookedLines          = big.NewInt(1 << 11)
+	reconciliationGetBankResponseFieldWarnings               = big.NewInt(1 << 12)
+)
+
+type ReconciliationGetBankResponse struct {
+	BankAccountID          string                                               `json:"bankAccountId" url:"bankAccountId"`
+	AccountCode            string                                               `json:"accountCode" url:"accountCode"`
+	Currency               string                                               `json:"currency" url:"currency"`
+	Date                   time.Time                                            `json:"date" url:"date" format:"date"`
+	StatementBalance       *string                                              `json:"statementBalance,omitempty" url:"statementBalance,omitempty"`
+	StatementBalanceSource *ReconciliationGetBankResponseStatementBalanceSource `json:"statementBalanceSource,omitempty" url:"statementBalanceSource,omitempty"`
+	StatementClosingDate   *time.Time                                           `json:"statementClosingDate,omitempty" url:"statementClosingDate,omitempty" format:"date"`
+	LedgerBalance          string                                               `json:"ledgerBalance" url:"ledgerBalance"`
+	Difference             *string                                              `json:"difference,omitempty" url:"difference,omitempty"`
+	UnbookedCount          int64                                                `json:"unbookedCount" url:"unbookedCount"`
+	UnbookedTotal          string                                               `json:"unbookedTotal" url:"unbookedTotal"`
+	UnbookedLines          []*ReconciliationGetBankResponseUnbookedLinesItem    `json:"unbookedLines" url:"unbookedLines"`
+	Warnings               []string                                             `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReconciliationGetBankResponse) GetBankAccountID() string {
+	if r == nil {
+		return ""
+	}
+	return r.BankAccountID
+}
+
+func (r *ReconciliationGetBankResponse) GetAccountCode() string {
+	if r == nil {
+		return ""
+	}
+	return r.AccountCode
+}
+
+func (r *ReconciliationGetBankResponse) GetCurrency() string {
+	if r == nil {
+		return ""
+	}
+	return r.Currency
+}
+
+func (r *ReconciliationGetBankResponse) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.Date
+}
+
+func (r *ReconciliationGetBankResponse) GetStatementBalance() *string {
+	if r == nil {
+		return nil
+	}
+	return r.StatementBalance
+}
+
+func (r *ReconciliationGetBankResponse) GetStatementBalanceSource() *ReconciliationGetBankResponseStatementBalanceSource {
+	if r == nil {
+		return nil
+	}
+	return r.StatementBalanceSource
+}
+
+func (r *ReconciliationGetBankResponse) GetStatementClosingDate() *time.Time {
+	if r == nil {
+		return nil
+	}
+	return r.StatementClosingDate
+}
+
+func (r *ReconciliationGetBankResponse) GetLedgerBalance() string {
+	if r == nil {
+		return ""
+	}
+	return r.LedgerBalance
+}
+
+func (r *ReconciliationGetBankResponse) GetDifference() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Difference
+}
+
+func (r *ReconciliationGetBankResponse) GetUnbookedCount() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.UnbookedCount
+}
+
+func (r *ReconciliationGetBankResponse) GetUnbookedTotal() string {
+	if r == nil {
+		return ""
+	}
+	return r.UnbookedTotal
+}
+
+func (r *ReconciliationGetBankResponse) GetUnbookedLines() []*ReconciliationGetBankResponseUnbookedLinesItem {
+	if r == nil {
+		return nil
+	}
+	return r.UnbookedLines
+}
+
+func (r *ReconciliationGetBankResponse) GetWarnings() []string {
+	if r == nil {
+		return nil
+	}
+	return r.Warnings
+}
+
+func (r *ReconciliationGetBankResponse) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReconciliationGetBankResponse) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetBankAccountID(bankAccountID string) {
+	r.BankAccountID = bankAccountID
+	r.require(reconciliationGetBankResponseFieldBankAccountID)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetAccountCode(accountCode string) {
+	r.AccountCode = accountCode
+	r.require(reconciliationGetBankResponseFieldAccountCode)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetCurrency(currency string) {
+	r.Currency = currency
+	r.require(reconciliationGetBankResponseFieldCurrency)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetDate(date time.Time) {
+	r.Date = date
+	r.require(reconciliationGetBankResponseFieldDate)
+}
+
+// SetStatementBalance sets the StatementBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetStatementBalance(statementBalance *string) {
+	r.StatementBalance = statementBalance
+	r.require(reconciliationGetBankResponseFieldStatementBalance)
+}
+
+// SetStatementBalanceSource sets the StatementBalanceSource field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetStatementBalanceSource(statementBalanceSource *ReconciliationGetBankResponseStatementBalanceSource) {
+	r.StatementBalanceSource = statementBalanceSource
+	r.require(reconciliationGetBankResponseFieldStatementBalanceSource)
+}
+
+// SetStatementClosingDate sets the StatementClosingDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetStatementClosingDate(statementClosingDate *time.Time) {
+	r.StatementClosingDate = statementClosingDate
+	r.require(reconciliationGetBankResponseFieldStatementClosingDate)
+}
+
+// SetLedgerBalance sets the LedgerBalance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetLedgerBalance(ledgerBalance string) {
+	r.LedgerBalance = ledgerBalance
+	r.require(reconciliationGetBankResponseFieldLedgerBalance)
+}
+
+// SetDifference sets the Difference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetDifference(difference *string) {
+	r.Difference = difference
+	r.require(reconciliationGetBankResponseFieldDifference)
+}
+
+// SetUnbookedCount sets the UnbookedCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetUnbookedCount(unbookedCount int64) {
+	r.UnbookedCount = unbookedCount
+	r.require(reconciliationGetBankResponseFieldUnbookedCount)
+}
+
+// SetUnbookedTotal sets the UnbookedTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetUnbookedTotal(unbookedTotal string) {
+	r.UnbookedTotal = unbookedTotal
+	r.require(reconciliationGetBankResponseFieldUnbookedTotal)
+}
+
+// SetUnbookedLines sets the UnbookedLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetUnbookedLines(unbookedLines []*ReconciliationGetBankResponseUnbookedLinesItem) {
+	r.UnbookedLines = unbookedLines
+	r.require(reconciliationGetBankResponseFieldUnbookedLines)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponse) SetWarnings(warnings []string) {
+	r.Warnings = warnings
+	r.require(reconciliationGetBankResponseFieldWarnings)
+}
+
+func (r *ReconciliationGetBankResponse) UnmarshalJSON(data []byte) error {
+	type embed ReconciliationGetBankResponse
+	var unmarshaler = struct {
+		embed
+		Date                 *internal.Date `json:"date"`
+		StatementClosingDate *internal.Date `json:"statementClosingDate,omitempty"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = ReconciliationGetBankResponse(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.StatementClosingDate = unmarshaler.StatementClosingDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReconciliationGetBankResponse) MarshalJSON() ([]byte, error) {
+	type embed ReconciliationGetBankResponse
+	var marshaler = struct {
+		embed
+		Date                 *internal.Date `json:"date"`
+		StatementClosingDate *internal.Date `json:"statementClosingDate,omitempty"`
+	}{
+		embed:                embed(*r),
+		Date:                 internal.NewDate(r.Date),
+		StatementClosingDate: internal.NewOptionalDate(r.StatementClosingDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReconciliationGetBankResponse) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type ReconciliationGetBankResponseStatementBalanceSource string
+
+const (
+	ReconciliationGetBankResponseStatementBalanceSourceRequest   ReconciliationGetBankResponseStatementBalanceSource = "request"
+	ReconciliationGetBankResponseStatementBalanceSourceStatement ReconciliationGetBankResponseStatementBalanceSource = "statement"
+)
+
+func NewReconciliationGetBankResponseStatementBalanceSourceFromString(s string) (ReconciliationGetBankResponseStatementBalanceSource, error) {
+	switch s {
+	case "request":
+		return ReconciliationGetBankResponseStatementBalanceSourceRequest, nil
+	case "statement":
+		return ReconciliationGetBankResponseStatementBalanceSourceStatement, nil
+	}
+	var t ReconciliationGetBankResponseStatementBalanceSource
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r ReconciliationGetBankResponseStatementBalanceSource) Ptr() *ReconciliationGetBankResponseStatementBalanceSource {
+	return &r
+}
+
+var (
+	reconciliationGetBankResponseUnbookedLinesItemFieldID                   = big.NewInt(1 << 0)
+	reconciliationGetBankResponseUnbookedLinesItemFieldBankAccountID        = big.NewInt(1 << 1)
+	reconciliationGetBankResponseUnbookedLinesItemFieldDate                 = big.NewInt(1 << 2)
+	reconciliationGetBankResponseUnbookedLinesItemFieldAmount               = big.NewInt(1 << 3)
+	reconciliationGetBankResponseUnbookedLinesItemFieldCurrency             = big.NewInt(1 << 4)
+	reconciliationGetBankResponseUnbookedLinesItemFieldCounterpartyName     = big.NewInt(1 << 5)
+	reconciliationGetBankResponseUnbookedLinesItemFieldCounterpartyIban     = big.NewInt(1 << 6)
+	reconciliationGetBankResponseUnbookedLinesItemFieldDescription          = big.NewInt(1 << 7)
+	reconciliationGetBankResponseUnbookedLinesItemFieldExternalID           = big.NewInt(1 << 8)
+	reconciliationGetBankResponseUnbookedLinesItemFieldStatus               = big.NewInt(1 << 9)
+	reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentType  = big.NewInt(1 << 10)
+	reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentID    = big.NewInt(1 << 11)
+	reconciliationGetBankResponseUnbookedLinesItemFieldJournalTransactionID = big.NewInt(1 << 12)
+	reconciliationGetBankResponseUnbookedLinesItemFieldIgnoreReason         = big.NewInt(1 << 13)
+	reconciliationGetBankResponseUnbookedLinesItemFieldCreatedAt            = big.NewInt(1 << 14)
+)
+
+type ReconciliationGetBankResponseUnbookedLinesItem struct {
+	ID                   string                                               `json:"id" url:"id"`
+	BankAccountID        string                                               `json:"bankAccountId" url:"bankAccountId"`
+	Date                 time.Time                                            `json:"date" url:"date" format:"date"`
+	Amount               string                                               `json:"amount" url:"amount"`
+	Currency             string                                               `json:"currency" url:"currency"`
+	CounterpartyName     *string                                              `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
+	CounterpartyIban     *string                                              `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	Description          *string                                              `json:"description,omitempty" url:"description,omitempty"`
+	ExternalID           *string                                              `json:"externalId,omitempty" url:"externalId,omitempty"`
+	Status               ReconciliationGetBankResponseUnbookedLinesItemStatus `json:"status" url:"status"`
+	MatchedDocumentType  *string                                              `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
+	MatchedDocumentID    *string                                              `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
+	JournalTransactionID *string                                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                                              `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
+	CreatedAt            time.Time                                            `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetBankAccountID() string {
+	if r == nil {
+		return ""
+	}
+	return r.BankAccountID
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetDate() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.Date
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetAmount() string {
+	if r == nil {
+		return ""
+	}
+	return r.Amount
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetCurrency() string {
+	if r == nil {
+		return ""
+	}
+	return r.Currency
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetCounterpartyName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.CounterpartyName
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetCounterpartyIban() *string {
+	if r == nil {
+		return nil
+	}
+	return r.CounterpartyIban
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetDescription() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Description
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetExternalID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ExternalID
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetStatus() ReconciliationGetBankResponseUnbookedLinesItemStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetMatchedDocumentType() *string {
+	if r == nil {
+		return nil
+	}
+	return r.MatchedDocumentType
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetMatchedDocumentID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.MatchedDocumentID
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetJournalTransactionID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.JournalTransactionID
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetIgnoreReason() *string {
+	if r == nil {
+		return nil
+	}
+	return r.IgnoreReason
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetCreatedAt() time.Time {
+	if r == nil {
+		return time.Time{}
+	}
+	return r.CreatedAt
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetID(id string) {
+	r.ID = id
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetBankAccountID(bankAccountID string) {
+	r.BankAccountID = bankAccountID
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldBankAccountID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetDate(date time.Time) {
+	r.Date = date
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetAmount(amount string) {
+	r.Amount = amount
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldAmount)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetCurrency(currency string) {
+	r.Currency = currency
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldCurrency)
+}
+
+// SetCounterpartyName sets the CounterpartyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetCounterpartyName(counterpartyName *string) {
+	r.CounterpartyName = counterpartyName
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldCounterpartyName)
+}
+
+// SetCounterpartyIban sets the CounterpartyIban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetCounterpartyIban(counterpartyIban *string) {
+	r.CounterpartyIban = counterpartyIban
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldCounterpartyIban)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetDescription(description *string) {
+	r.Description = description
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldDescription)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetExternalID(externalID *string) {
+	r.ExternalID = externalID
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldExternalID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetStatus(status ReconciliationGetBankResponseUnbookedLinesItemStatus) {
+	r.Status = status
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldStatus)
+}
+
+// SetMatchedDocumentType sets the MatchedDocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetMatchedDocumentType(matchedDocumentType *string) {
+	r.MatchedDocumentType = matchedDocumentType
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentType)
+}
+
+// SetMatchedDocumentID sets the MatchedDocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetMatchedDocumentID(matchedDocumentID *string) {
+	r.MatchedDocumentID = matchedDocumentID
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldMatchedDocumentID)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetJournalTransactionID(journalTransactionID *string) {
+	r.JournalTransactionID = journalTransactionID
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldJournalTransactionID)
+}
+
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetIgnoreReason(ignoreReason *string) {
+	r.IgnoreReason = ignoreReason
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldIgnoreReason)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) SetCreatedAt(createdAt time.Time) {
+	r.CreatedAt = createdAt
+	r.require(reconciliationGetBankResponseUnbookedLinesItemFieldCreatedAt)
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) UnmarshalJSON(data []byte) error {
+	type embed ReconciliationGetBankResponseUnbookedLinesItem
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*r),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*r = ReconciliationGetBankResponseUnbookedLinesItem(unmarshaler.embed)
+	r.Date = unmarshaler.Date.Time()
+	r.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) MarshalJSON() ([]byte, error) {
+	type embed ReconciliationGetBankResponseUnbookedLinesItem
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*r),
+		Date:      internal.NewDate(r.Date),
+		CreatedAt: internal.NewDateTime(r.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReconciliationGetBankResponseUnbookedLinesItem) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type ReconciliationGetBankResponseUnbookedLinesItemStatus string
+
+const (
+	ReconciliationGetBankResponseUnbookedLinesItemStatusNew     ReconciliationGetBankResponseUnbookedLinesItemStatus = "new"
+	ReconciliationGetBankResponseUnbookedLinesItemStatusMatched ReconciliationGetBankResponseUnbookedLinesItemStatus = "matched"
+	ReconciliationGetBankResponseUnbookedLinesItemStatusIgnored ReconciliationGetBankResponseUnbookedLinesItemStatus = "ignored"
+)
+
+func NewReconciliationGetBankResponseUnbookedLinesItemStatusFromString(s string) (ReconciliationGetBankResponseUnbookedLinesItemStatus, error) {
+	switch s {
+	case "new":
+		return ReconciliationGetBankResponseUnbookedLinesItemStatusNew, nil
+	case "matched":
+		return ReconciliationGetBankResponseUnbookedLinesItemStatusMatched, nil
+	case "ignored":
+		return ReconciliationGetBankResponseUnbookedLinesItemStatusIgnored, nil
+	}
+	var t ReconciliationGetBankResponseUnbookedLinesItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r ReconciliationGetBankResponseUnbookedLinesItemStatus) Ptr() *ReconciliationGetBankResponseUnbookedLinesItemStatus {
+	return &r
+}
+
+var (
 	securitiesGetBankResponseFieldID             = big.NewInt(1 << 0)
 	securitiesGetBankResponseFieldBankAccountID  = big.NewInt(1 << 1)
 	securitiesGetBankResponseFieldBroker         = big.NewInt(1 << 2)
@@ -25628,6 +26586,351 @@ func (s *StatementsImportBankResponseStatementsItem) String() string {
 }
 
 var (
+	transactionsIgnoreBankResponseFieldID                   = big.NewInt(1 << 0)
+	transactionsIgnoreBankResponseFieldBankAccountID        = big.NewInt(1 << 1)
+	transactionsIgnoreBankResponseFieldDate                 = big.NewInt(1 << 2)
+	transactionsIgnoreBankResponseFieldAmount               = big.NewInt(1 << 3)
+	transactionsIgnoreBankResponseFieldCurrency             = big.NewInt(1 << 4)
+	transactionsIgnoreBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
+	transactionsIgnoreBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
+	transactionsIgnoreBankResponseFieldDescription          = big.NewInt(1 << 7)
+	transactionsIgnoreBankResponseFieldExternalID           = big.NewInt(1 << 8)
+	transactionsIgnoreBankResponseFieldStatus               = big.NewInt(1 << 9)
+	transactionsIgnoreBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
+	transactionsIgnoreBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
+	transactionsIgnoreBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
+	transactionsIgnoreBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsIgnoreBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+)
+
+type TransactionsIgnoreBankResponse struct {
+	ID                   string                               `json:"id" url:"id"`
+	BankAccountID        string                               `json:"bankAccountId" url:"bankAccountId"`
+	Date                 time.Time                            `json:"date" url:"date" format:"date"`
+	Amount               string                               `json:"amount" url:"amount"`
+	Currency             string                               `json:"currency" url:"currency"`
+	CounterpartyName     *string                              `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
+	CounterpartyIban     *string                              `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	Description          *string                              `json:"description,omitempty" url:"description,omitempty"`
+	ExternalID           *string                              `json:"externalId,omitempty" url:"externalId,omitempty"`
+	Status               TransactionsIgnoreBankResponseStatus `json:"status" url:"status"`
+	MatchedDocumentType  *string                              `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
+	MatchedDocumentID    *string                              `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
+	JournalTransactionID *string                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                              `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
+	CreatedAt            time.Time                            `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsIgnoreBankResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TransactionsIgnoreBankResponse) GetBankAccountID() string {
+	if t == nil {
+		return ""
+	}
+	return t.BankAccountID
+}
+
+func (t *TransactionsIgnoreBankResponse) GetDate() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.Date
+}
+
+func (t *TransactionsIgnoreBankResponse) GetAmount() string {
+	if t == nil {
+		return ""
+	}
+	return t.Amount
+}
+
+func (t *TransactionsIgnoreBankResponse) GetCurrency() string {
+	if t == nil {
+		return ""
+	}
+	return t.Currency
+}
+
+func (t *TransactionsIgnoreBankResponse) GetCounterpartyName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CounterpartyName
+}
+
+func (t *TransactionsIgnoreBankResponse) GetCounterpartyIban() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CounterpartyIban
+}
+
+func (t *TransactionsIgnoreBankResponse) GetDescription() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Description
+}
+
+func (t *TransactionsIgnoreBankResponse) GetExternalID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ExternalID
+}
+
+func (t *TransactionsIgnoreBankResponse) GetStatus() TransactionsIgnoreBankResponseStatus {
+	if t == nil {
+		return ""
+	}
+	return t.Status
+}
+
+func (t *TransactionsIgnoreBankResponse) GetMatchedDocumentType() *string {
+	if t == nil {
+		return nil
+	}
+	return t.MatchedDocumentType
+}
+
+func (t *TransactionsIgnoreBankResponse) GetMatchedDocumentID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.MatchedDocumentID
+}
+
+func (t *TransactionsIgnoreBankResponse) GetJournalTransactionID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.JournalTransactionID
+}
+
+func (t *TransactionsIgnoreBankResponse) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
+}
+
+func (t *TransactionsIgnoreBankResponse) GetCreatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.CreatedAt
+}
+
+func (t *TransactionsIgnoreBankResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsIgnoreBankResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetID(id string) {
+	t.ID = id
+	t.require(transactionsIgnoreBankResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetBankAccountID(bankAccountID string) {
+	t.BankAccountID = bankAccountID
+	t.require(transactionsIgnoreBankResponseFieldBankAccountID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetDate(date time.Time) {
+	t.Date = date
+	t.require(transactionsIgnoreBankResponseFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetAmount(amount string) {
+	t.Amount = amount
+	t.require(transactionsIgnoreBankResponseFieldAmount)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetCurrency(currency string) {
+	t.Currency = currency
+	t.require(transactionsIgnoreBankResponseFieldCurrency)
+}
+
+// SetCounterpartyName sets the CounterpartyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetCounterpartyName(counterpartyName *string) {
+	t.CounterpartyName = counterpartyName
+	t.require(transactionsIgnoreBankResponseFieldCounterpartyName)
+}
+
+// SetCounterpartyIban sets the CounterpartyIban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetCounterpartyIban(counterpartyIban *string) {
+	t.CounterpartyIban = counterpartyIban
+	t.require(transactionsIgnoreBankResponseFieldCounterpartyIban)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetDescription(description *string) {
+	t.Description = description
+	t.require(transactionsIgnoreBankResponseFieldDescription)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetExternalID(externalID *string) {
+	t.ExternalID = externalID
+	t.require(transactionsIgnoreBankResponseFieldExternalID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetStatus(status TransactionsIgnoreBankResponseStatus) {
+	t.Status = status
+	t.require(transactionsIgnoreBankResponseFieldStatus)
+}
+
+// SetMatchedDocumentType sets the MatchedDocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetMatchedDocumentType(matchedDocumentType *string) {
+	t.MatchedDocumentType = matchedDocumentType
+	t.require(transactionsIgnoreBankResponseFieldMatchedDocumentType)
+}
+
+// SetMatchedDocumentID sets the MatchedDocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetMatchedDocumentID(matchedDocumentID *string) {
+	t.MatchedDocumentID = matchedDocumentID
+	t.require(transactionsIgnoreBankResponseFieldMatchedDocumentID)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetJournalTransactionID(journalTransactionID *string) {
+	t.JournalTransactionID = journalTransactionID
+	t.require(transactionsIgnoreBankResponseFieldJournalTransactionID)
+}
+
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsIgnoreBankResponseFieldIgnoreReason)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsIgnoreBankResponse) SetCreatedAt(createdAt time.Time) {
+	t.CreatedAt = createdAt
+	t.require(transactionsIgnoreBankResponseFieldCreatedAt)
+}
+
+func (t *TransactionsIgnoreBankResponse) UnmarshalJSON(data []byte) error {
+	type embed TransactionsIgnoreBankResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TransactionsIgnoreBankResponse(unmarshaler.embed)
+	t.Date = unmarshaler.Date.Time()
+	t.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsIgnoreBankResponse) MarshalJSON() ([]byte, error) {
+	type embed TransactionsIgnoreBankResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*t),
+		Date:      internal.NewDate(t.Date),
+		CreatedAt: internal.NewDateTime(t.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsIgnoreBankResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type TransactionsIgnoreBankResponseStatus string
+
+const (
+	TransactionsIgnoreBankResponseStatusNew     TransactionsIgnoreBankResponseStatus = "new"
+	TransactionsIgnoreBankResponseStatusMatched TransactionsIgnoreBankResponseStatus = "matched"
+	TransactionsIgnoreBankResponseStatusIgnored TransactionsIgnoreBankResponseStatus = "ignored"
+)
+
+func NewTransactionsIgnoreBankResponseStatusFromString(s string) (TransactionsIgnoreBankResponseStatus, error) {
+	switch s {
+	case "new":
+		return TransactionsIgnoreBankResponseStatusNew, nil
+	case "matched":
+		return TransactionsIgnoreBankResponseStatusMatched, nil
+	case "ignored":
+		return TransactionsIgnoreBankResponseStatusIgnored, nil
+	}
+	var t TransactionsIgnoreBankResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TransactionsIgnoreBankResponseStatus) Ptr() *TransactionsIgnoreBankResponseStatus {
+	return &t
+}
+
+var (
 	transactionsImportBankRequestTransactionsItemFieldDate             = big.NewInt(1 << 0)
 	transactionsImportBankRequestTransactionsItemFieldAmount           = big.NewInt(1 << 1)
 	transactionsImportBankRequestTransactionsItemFieldCurrency         = big.NewInt(1 << 2)
@@ -25816,13 +27119,15 @@ func (t *TransactionsImportBankRequestTransactionsItem) String() string {
 }
 
 var (
-	transactionsImportBankResponseFieldImported = big.NewInt(1 << 0)
-	transactionsImportBankResponseFieldSkipped  = big.NewInt(1 << 1)
+	transactionsImportBankResponseFieldImported   = big.NewInt(1 << 0)
+	transactionsImportBankResponseFieldSkipped    = big.NewInt(1 << 1)
+	transactionsImportBankResponseFieldDuplicates = big.NewInt(1 << 2)
 )
 
 type TransactionsImportBankResponse struct {
-	Imported int64 `json:"imported" url:"imported"`
-	Skipped  int64 `json:"skipped" url:"skipped"`
+	Imported   int64                                           `json:"imported" url:"imported"`
+	Skipped    int64                                           `json:"skipped" url:"skipped"`
+	Duplicates []*TransactionsImportBankResponseDuplicatesItem `json:"duplicates" url:"duplicates"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -25843,6 +27148,13 @@ func (t *TransactionsImportBankResponse) GetSkipped() int64 {
 		return 0
 	}
 	return t.Skipped
+}
+
+func (t *TransactionsImportBankResponse) GetDuplicates() []*TransactionsImportBankResponseDuplicatesItem {
+	if t == nil {
+		return nil
+	}
+	return t.Duplicates
 }
 
 func (t *TransactionsImportBankResponse) GetExtraProperties() map[string]interface{} {
@@ -25873,6 +27185,13 @@ func (t *TransactionsImportBankResponse) SetSkipped(skipped int64) {
 	t.require(transactionsImportBankResponseFieldSkipped)
 }
 
+// SetDuplicates sets the Duplicates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsImportBankResponse) SetDuplicates(duplicates []*TransactionsImportBankResponseDuplicatesItem) {
+	t.Duplicates = duplicates
+	t.require(transactionsImportBankResponseFieldDuplicates)
+}
+
 func (t *TransactionsImportBankResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler TransactionsImportBankResponse
 	var value unmarshaler
@@ -25901,6 +27220,146 @@ func (t *TransactionsImportBankResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionsImportBankResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	transactionsImportBankResponseDuplicatesItemFieldIndex                 = big.NewInt(1 << 0)
+	transactionsImportBankResponseDuplicatesItemFieldExistingTransactionID = big.NewInt(1 << 1)
+	transactionsImportBankResponseDuplicatesItemFieldDate                  = big.NewInt(1 << 2)
+	transactionsImportBankResponseDuplicatesItemFieldAmount                = big.NewInt(1 << 3)
+)
+
+type TransactionsImportBankResponseDuplicatesItem struct {
+	Index                 int64     `json:"index" url:"index"`
+	ExistingTransactionID string    `json:"existingTransactionId" url:"existingTransactionId"`
+	Date                  time.Time `json:"date" url:"date" format:"date"`
+	Amount                string    `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) GetIndex() int64 {
+	if t == nil {
+		return 0
+	}
+	return t.Index
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) GetExistingTransactionID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ExistingTransactionID
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) GetDate() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.Date
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) GetAmount() string {
+	if t == nil {
+		return ""
+	}
+	return t.Amount
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetIndex sets the Index field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsImportBankResponseDuplicatesItem) SetIndex(index int64) {
+	t.Index = index
+	t.require(transactionsImportBankResponseDuplicatesItemFieldIndex)
+}
+
+// SetExistingTransactionID sets the ExistingTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsImportBankResponseDuplicatesItem) SetExistingTransactionID(existingTransactionID string) {
+	t.ExistingTransactionID = existingTransactionID
+	t.require(transactionsImportBankResponseDuplicatesItemFieldExistingTransactionID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsImportBankResponseDuplicatesItem) SetDate(date time.Time) {
+	t.Date = date
+	t.require(transactionsImportBankResponseDuplicatesItemFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsImportBankResponseDuplicatesItem) SetAmount(amount string) {
+	t.Amount = amount
+	t.require(transactionsImportBankResponseDuplicatesItemFieldAmount)
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) UnmarshalJSON(data []byte) error {
+	type embed TransactionsImportBankResponseDuplicatesItem
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TransactionsImportBankResponseDuplicatesItem(unmarshaler.embed)
+	t.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) MarshalJSON() ([]byte, error) {
+	type embed TransactionsImportBankResponseDuplicatesItem
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*t),
+		Date:  internal.NewDate(t.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsImportBankResponseDuplicatesItem) String() string {
 	if t == nil {
 		return "<nil>"
 	}
@@ -26532,7 +27991,8 @@ var (
 	transactionsListBankResponseRowsItemFieldMatchedDocumentType  = big.NewInt(1 << 10)
 	transactionsListBankResponseRowsItemFieldMatchedDocumentID    = big.NewInt(1 << 11)
 	transactionsListBankResponseRowsItemFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 13)
+	transactionsListBankResponseRowsItemFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 14)
 )
 
 type TransactionsListBankResponseRowsItem struct {
@@ -26549,6 +28009,7 @@ type TransactionsListBankResponseRowsItem struct {
 	MatchedDocumentType  *string                                    `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
 	MatchedDocumentID    *string                                    `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
 	JournalTransactionID *string                                    `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                                    `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
 	CreatedAt            time.Time                                  `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -26647,6 +28108,13 @@ func (t *TransactionsListBankResponseRowsItem) GetJournalTransactionID() *string
 		return nil
 	}
 	return t.JournalTransactionID
+}
+
+func (t *TransactionsListBankResponseRowsItem) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
 }
 
 func (t *TransactionsListBankResponseRowsItem) GetCreatedAt() time.Time {
@@ -26761,6 +28229,13 @@ func (t *TransactionsListBankResponseRowsItem) SetJournalTransactionID(journalTr
 	t.require(transactionsListBankResponseRowsItemFieldJournalTransactionID)
 }
 
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsListBankResponseRowsItem) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsListBankResponseRowsItemFieldIgnoreReason)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (t *TransactionsListBankResponseRowsItem) SetCreatedAt(createdAt time.Time) {
@@ -26827,6 +28302,7 @@ type TransactionsListBankResponseRowsItemStatus string
 const (
 	TransactionsListBankResponseRowsItemStatusNew     TransactionsListBankResponseRowsItemStatus = "new"
 	TransactionsListBankResponseRowsItemStatusMatched TransactionsListBankResponseRowsItemStatus = "matched"
+	TransactionsListBankResponseRowsItemStatusIgnored TransactionsListBankResponseRowsItemStatus = "ignored"
 )
 
 func NewTransactionsListBankResponseRowsItemStatusFromString(s string) (TransactionsListBankResponseRowsItemStatus, error) {
@@ -26835,6 +28311,8 @@ func NewTransactionsListBankResponseRowsItemStatusFromString(s string) (Transact
 		return TransactionsListBankResponseRowsItemStatusNew, nil
 	case "matched":
 		return TransactionsListBankResponseRowsItemStatusMatched, nil
+	case "ignored":
+		return TransactionsListBankResponseRowsItemStatusIgnored, nil
 	}
 	var t TransactionsListBankResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -26870,6 +28348,131 @@ func (t TransactionsMatchBankRequestDocumentType) Ptr() *TransactionsMatchBankRe
 }
 
 var (
+	transactionsMatchBankRequestRemainderFieldTreatment   = big.NewInt(1 << 0)
+	transactionsMatchBankRequestRemainderFieldAccountCode = big.NewInt(1 << 1)
+)
+
+type TransactionsMatchBankRequestRemainder struct {
+	Treatment   TransactionsMatchBankRequestRemainderTreatment `json:"treatment" url:"treatment"`
+	AccountCode *string                                        `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsMatchBankRequestRemainder) GetTreatment() TransactionsMatchBankRequestRemainderTreatment {
+	if t == nil {
+		return ""
+	}
+	return t.Treatment
+}
+
+func (t *TransactionsMatchBankRequestRemainder) GetAccountCode() *string {
+	if t == nil {
+		return nil
+	}
+	return t.AccountCode
+}
+
+func (t *TransactionsMatchBankRequestRemainder) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsMatchBankRequestRemainder) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetTreatment sets the Treatment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchBankRequestRemainder) SetTreatment(treatment TransactionsMatchBankRequestRemainderTreatment) {
+	t.Treatment = treatment
+	t.require(transactionsMatchBankRequestRemainderFieldTreatment)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchBankRequestRemainder) SetAccountCode(accountCode *string) {
+	t.AccountCode = accountCode
+	t.require(transactionsMatchBankRequestRemainderFieldAccountCode)
+}
+
+func (t *TransactionsMatchBankRequestRemainder) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsMatchBankRequestRemainder
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TransactionsMatchBankRequestRemainder(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsMatchBankRequestRemainder) MarshalJSON() ([]byte, error) {
+	type embed TransactionsMatchBankRequestRemainder
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsMatchBankRequestRemainder) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type TransactionsMatchBankRequestRemainderTreatment string
+
+const (
+	TransactionsMatchBankRequestRemainderTreatmentAdvance   TransactionsMatchBankRequestRemainderTreatment = "advance"
+	TransactionsMatchBankRequestRemainderTreatmentLeaveOpen TransactionsMatchBankRequestRemainderTreatment = "leave_open"
+	TransactionsMatchBankRequestRemainderTreatmentWriteOff  TransactionsMatchBankRequestRemainderTreatment = "write_off"
+)
+
+func NewTransactionsMatchBankRequestRemainderTreatmentFromString(s string) (TransactionsMatchBankRequestRemainderTreatment, error) {
+	switch s {
+	case "advance":
+		return TransactionsMatchBankRequestRemainderTreatmentAdvance, nil
+	case "leave_open":
+		return TransactionsMatchBankRequestRemainderTreatmentLeaveOpen, nil
+	case "write_off":
+		return TransactionsMatchBankRequestRemainderTreatmentWriteOff, nil
+	}
+	var t TransactionsMatchBankRequestRemainderTreatment
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TransactionsMatchBankRequestRemainderTreatment) Ptr() *TransactionsMatchBankRequestRemainderTreatment {
+	return &t
+}
+
+var (
 	transactionsMatchBankResponseFieldID                   = big.NewInt(1 << 0)
 	transactionsMatchBankResponseFieldBankAccountID        = big.NewInt(1 << 1)
 	transactionsMatchBankResponseFieldDate                 = big.NewInt(1 << 2)
@@ -26883,7 +28486,8 @@ var (
 	transactionsMatchBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
 	transactionsMatchBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
 	transactionsMatchBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsMatchBankResponseFieldCreatedAt            = big.NewInt(1 << 13)
+	transactionsMatchBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsMatchBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
 )
 
 type TransactionsMatchBankResponse struct {
@@ -26900,6 +28504,7 @@ type TransactionsMatchBankResponse struct {
 	MatchedDocumentType  *string                             `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
 	MatchedDocumentID    *string                             `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
 	JournalTransactionID *string                             `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                             `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
 	CreatedAt            time.Time                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -26998,6 +28603,13 @@ func (t *TransactionsMatchBankResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return t.JournalTransactionID
+}
+
+func (t *TransactionsMatchBankResponse) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
 }
 
 func (t *TransactionsMatchBankResponse) GetCreatedAt() time.Time {
@@ -27112,6 +28724,13 @@ func (t *TransactionsMatchBankResponse) SetJournalTransactionID(journalTransacti
 	t.require(transactionsMatchBankResponseFieldJournalTransactionID)
 }
 
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchBankResponse) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsMatchBankResponseFieldIgnoreReason)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (t *TransactionsMatchBankResponse) SetCreatedAt(createdAt time.Time) {
@@ -27178,6 +28797,7 @@ type TransactionsMatchBankResponseStatus string
 const (
 	TransactionsMatchBankResponseStatusNew     TransactionsMatchBankResponseStatus = "new"
 	TransactionsMatchBankResponseStatusMatched TransactionsMatchBankResponseStatus = "matched"
+	TransactionsMatchBankResponseStatusIgnored TransactionsMatchBankResponseStatus = "ignored"
 )
 
 func NewTransactionsMatchBankResponseStatusFromString(s string) (TransactionsMatchBankResponseStatus, error) {
@@ -27186,6 +28806,8 @@ func NewTransactionsMatchBankResponseStatusFromString(s string) (TransactionsMat
 		return TransactionsMatchBankResponseStatusNew, nil
 	case "matched":
 		return TransactionsMatchBankResponseStatusMatched, nil
+	case "ignored":
+		return TransactionsMatchBankResponseStatusIgnored, nil
 	}
 	var t TransactionsMatchBankResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -27350,7 +28972,8 @@ var (
 	transactionsMatchManyBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
 	transactionsMatchManyBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
 	transactionsMatchManyBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsMatchManyBankResponseFieldCreatedAt            = big.NewInt(1 << 13)
+	transactionsMatchManyBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsMatchManyBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
 )
 
 type TransactionsMatchManyBankResponse struct {
@@ -27367,6 +28990,7 @@ type TransactionsMatchManyBankResponse struct {
 	MatchedDocumentType  *string                                 `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
 	MatchedDocumentID    *string                                 `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
 	JournalTransactionID *string                                 `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                                 `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
 	CreatedAt            time.Time                               `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -27465,6 +29089,13 @@ func (t *TransactionsMatchManyBankResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return t.JournalTransactionID
+}
+
+func (t *TransactionsMatchManyBankResponse) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
 }
 
 func (t *TransactionsMatchManyBankResponse) GetCreatedAt() time.Time {
@@ -27579,6 +29210,13 @@ func (t *TransactionsMatchManyBankResponse) SetJournalTransactionID(journalTrans
 	t.require(transactionsMatchManyBankResponseFieldJournalTransactionID)
 }
 
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsMatchManyBankResponse) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsMatchManyBankResponseFieldIgnoreReason)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (t *TransactionsMatchManyBankResponse) SetCreatedAt(createdAt time.Time) {
@@ -27645,6 +29283,7 @@ type TransactionsMatchManyBankResponseStatus string
 const (
 	TransactionsMatchManyBankResponseStatusNew     TransactionsMatchManyBankResponseStatus = "new"
 	TransactionsMatchManyBankResponseStatusMatched TransactionsMatchManyBankResponseStatus = "matched"
+	TransactionsMatchManyBankResponseStatusIgnored TransactionsMatchManyBankResponseStatus = "ignored"
 )
 
 func NewTransactionsMatchManyBankResponseStatusFromString(s string) (TransactionsMatchManyBankResponseStatus, error) {
@@ -27653,12 +29292,359 @@ func NewTransactionsMatchManyBankResponseStatusFromString(s string) (Transaction
 		return TransactionsMatchManyBankResponseStatusNew, nil
 	case "matched":
 		return TransactionsMatchManyBankResponseStatusMatched, nil
+	case "ignored":
+		return TransactionsMatchManyBankResponseStatusIgnored, nil
 	}
 	var t TransactionsMatchManyBankResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
 }
 
 func (t TransactionsMatchManyBankResponseStatus) Ptr() *TransactionsMatchManyBankResponseStatus {
+	return &t
+}
+
+var (
+	transactionsPostBankResponseFieldID                   = big.NewInt(1 << 0)
+	transactionsPostBankResponseFieldBankAccountID        = big.NewInt(1 << 1)
+	transactionsPostBankResponseFieldDate                 = big.NewInt(1 << 2)
+	transactionsPostBankResponseFieldAmount               = big.NewInt(1 << 3)
+	transactionsPostBankResponseFieldCurrency             = big.NewInt(1 << 4)
+	transactionsPostBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
+	transactionsPostBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
+	transactionsPostBankResponseFieldDescription          = big.NewInt(1 << 7)
+	transactionsPostBankResponseFieldExternalID           = big.NewInt(1 << 8)
+	transactionsPostBankResponseFieldStatus               = big.NewInt(1 << 9)
+	transactionsPostBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
+	transactionsPostBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
+	transactionsPostBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
+	transactionsPostBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsPostBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+)
+
+type TransactionsPostBankResponse struct {
+	ID                   string                             `json:"id" url:"id"`
+	BankAccountID        string                             `json:"bankAccountId" url:"bankAccountId"`
+	Date                 time.Time                          `json:"date" url:"date" format:"date"`
+	Amount               string                             `json:"amount" url:"amount"`
+	Currency             string                             `json:"currency" url:"currency"`
+	CounterpartyName     *string                            `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
+	CounterpartyIban     *string                            `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	Description          *string                            `json:"description,omitempty" url:"description,omitempty"`
+	ExternalID           *string                            `json:"externalId,omitempty" url:"externalId,omitempty"`
+	Status               TransactionsPostBankResponseStatus `json:"status" url:"status"`
+	MatchedDocumentType  *string                            `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
+	MatchedDocumentID    *string                            `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
+	JournalTransactionID *string                            `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                            `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
+	CreatedAt            time.Time                          `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsPostBankResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TransactionsPostBankResponse) GetBankAccountID() string {
+	if t == nil {
+		return ""
+	}
+	return t.BankAccountID
+}
+
+func (t *TransactionsPostBankResponse) GetDate() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.Date
+}
+
+func (t *TransactionsPostBankResponse) GetAmount() string {
+	if t == nil {
+		return ""
+	}
+	return t.Amount
+}
+
+func (t *TransactionsPostBankResponse) GetCurrency() string {
+	if t == nil {
+		return ""
+	}
+	return t.Currency
+}
+
+func (t *TransactionsPostBankResponse) GetCounterpartyName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CounterpartyName
+}
+
+func (t *TransactionsPostBankResponse) GetCounterpartyIban() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CounterpartyIban
+}
+
+func (t *TransactionsPostBankResponse) GetDescription() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Description
+}
+
+func (t *TransactionsPostBankResponse) GetExternalID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ExternalID
+}
+
+func (t *TransactionsPostBankResponse) GetStatus() TransactionsPostBankResponseStatus {
+	if t == nil {
+		return ""
+	}
+	return t.Status
+}
+
+func (t *TransactionsPostBankResponse) GetMatchedDocumentType() *string {
+	if t == nil {
+		return nil
+	}
+	return t.MatchedDocumentType
+}
+
+func (t *TransactionsPostBankResponse) GetMatchedDocumentID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.MatchedDocumentID
+}
+
+func (t *TransactionsPostBankResponse) GetJournalTransactionID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.JournalTransactionID
+}
+
+func (t *TransactionsPostBankResponse) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
+}
+
+func (t *TransactionsPostBankResponse) GetCreatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.CreatedAt
+}
+
+func (t *TransactionsPostBankResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsPostBankResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetID(id string) {
+	t.ID = id
+	t.require(transactionsPostBankResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetBankAccountID(bankAccountID string) {
+	t.BankAccountID = bankAccountID
+	t.require(transactionsPostBankResponseFieldBankAccountID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetDate(date time.Time) {
+	t.Date = date
+	t.require(transactionsPostBankResponseFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetAmount(amount string) {
+	t.Amount = amount
+	t.require(transactionsPostBankResponseFieldAmount)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetCurrency(currency string) {
+	t.Currency = currency
+	t.require(transactionsPostBankResponseFieldCurrency)
+}
+
+// SetCounterpartyName sets the CounterpartyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetCounterpartyName(counterpartyName *string) {
+	t.CounterpartyName = counterpartyName
+	t.require(transactionsPostBankResponseFieldCounterpartyName)
+}
+
+// SetCounterpartyIban sets the CounterpartyIban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetCounterpartyIban(counterpartyIban *string) {
+	t.CounterpartyIban = counterpartyIban
+	t.require(transactionsPostBankResponseFieldCounterpartyIban)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetDescription(description *string) {
+	t.Description = description
+	t.require(transactionsPostBankResponseFieldDescription)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetExternalID(externalID *string) {
+	t.ExternalID = externalID
+	t.require(transactionsPostBankResponseFieldExternalID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetStatus(status TransactionsPostBankResponseStatus) {
+	t.Status = status
+	t.require(transactionsPostBankResponseFieldStatus)
+}
+
+// SetMatchedDocumentType sets the MatchedDocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetMatchedDocumentType(matchedDocumentType *string) {
+	t.MatchedDocumentType = matchedDocumentType
+	t.require(transactionsPostBankResponseFieldMatchedDocumentType)
+}
+
+// SetMatchedDocumentID sets the MatchedDocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetMatchedDocumentID(matchedDocumentID *string) {
+	t.MatchedDocumentID = matchedDocumentID
+	t.require(transactionsPostBankResponseFieldMatchedDocumentID)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetJournalTransactionID(journalTransactionID *string) {
+	t.JournalTransactionID = journalTransactionID
+	t.require(transactionsPostBankResponseFieldJournalTransactionID)
+}
+
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsPostBankResponseFieldIgnoreReason)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankResponse) SetCreatedAt(createdAt time.Time) {
+	t.CreatedAt = createdAt
+	t.require(transactionsPostBankResponseFieldCreatedAt)
+}
+
+func (t *TransactionsPostBankResponse) UnmarshalJSON(data []byte) error {
+	type embed TransactionsPostBankResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TransactionsPostBankResponse(unmarshaler.embed)
+	t.Date = unmarshaler.Date.Time()
+	t.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsPostBankResponse) MarshalJSON() ([]byte, error) {
+	type embed TransactionsPostBankResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*t),
+		Date:      internal.NewDate(t.Date),
+		CreatedAt: internal.NewDateTime(t.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsPostBankResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type TransactionsPostBankResponseStatus string
+
+const (
+	TransactionsPostBankResponseStatusNew     TransactionsPostBankResponseStatus = "new"
+	TransactionsPostBankResponseStatusMatched TransactionsPostBankResponseStatus = "matched"
+	TransactionsPostBankResponseStatusIgnored TransactionsPostBankResponseStatus = "ignored"
+)
+
+func NewTransactionsPostBankResponseStatusFromString(s string) (TransactionsPostBankResponseStatus, error) {
+	switch s {
+	case "new":
+		return TransactionsPostBankResponseStatusNew, nil
+	case "matched":
+		return TransactionsPostBankResponseStatusMatched, nil
+	case "ignored":
+		return TransactionsPostBankResponseStatusIgnored, nil
+	}
+	var t TransactionsPostBankResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TransactionsPostBankResponseStatus) Ptr() *TransactionsPostBankResponseStatus {
 	return &t
 }
 
@@ -27701,7 +29687,8 @@ var (
 	transactionsRecordBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
 	transactionsRecordBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
 	transactionsRecordBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsRecordBankResponseFieldCreatedAt            = big.NewInt(1 << 13)
+	transactionsRecordBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsRecordBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
 )
 
 type TransactionsRecordBankResponse struct {
@@ -27718,6 +29705,7 @@ type TransactionsRecordBankResponse struct {
 	MatchedDocumentType  *string                              `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
 	MatchedDocumentID    *string                              `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
 	JournalTransactionID *string                              `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                              `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
 	CreatedAt            time.Time                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -27816,6 +29804,13 @@ func (t *TransactionsRecordBankResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return t.JournalTransactionID
+}
+
+func (t *TransactionsRecordBankResponse) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
 }
 
 func (t *TransactionsRecordBankResponse) GetCreatedAt() time.Time {
@@ -27930,6 +29925,13 @@ func (t *TransactionsRecordBankResponse) SetJournalTransactionID(journalTransact
 	t.require(transactionsRecordBankResponseFieldJournalTransactionID)
 }
 
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsRecordBankResponse) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsRecordBankResponseFieldIgnoreReason)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (t *TransactionsRecordBankResponse) SetCreatedAt(createdAt time.Time) {
@@ -27996,6 +29998,7 @@ type TransactionsRecordBankResponseStatus string
 const (
 	TransactionsRecordBankResponseStatusNew     TransactionsRecordBankResponseStatus = "new"
 	TransactionsRecordBankResponseStatusMatched TransactionsRecordBankResponseStatus = "matched"
+	TransactionsRecordBankResponseStatusIgnored TransactionsRecordBankResponseStatus = "ignored"
 )
 
 func NewTransactionsRecordBankResponseStatusFromString(s string) (TransactionsRecordBankResponseStatus, error) {
@@ -28004,6 +30007,8 @@ func NewTransactionsRecordBankResponseStatusFromString(s string) (TransactionsRe
 		return TransactionsRecordBankResponseStatusNew, nil
 	case "matched":
 		return TransactionsRecordBankResponseStatusMatched, nil
+	case "ignored":
+		return TransactionsRecordBankResponseStatusIgnored, nil
 	}
 	var t TransactionsRecordBankResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -28335,6 +30340,351 @@ func (t TransactionsSuggestMatchesBankResponseSuggestionsItemDocumentType) Ptr()
 }
 
 var (
+	transactionsUnignoreBankResponseFieldID                   = big.NewInt(1 << 0)
+	transactionsUnignoreBankResponseFieldBankAccountID        = big.NewInt(1 << 1)
+	transactionsUnignoreBankResponseFieldDate                 = big.NewInt(1 << 2)
+	transactionsUnignoreBankResponseFieldAmount               = big.NewInt(1 << 3)
+	transactionsUnignoreBankResponseFieldCurrency             = big.NewInt(1 << 4)
+	transactionsUnignoreBankResponseFieldCounterpartyName     = big.NewInt(1 << 5)
+	transactionsUnignoreBankResponseFieldCounterpartyIban     = big.NewInt(1 << 6)
+	transactionsUnignoreBankResponseFieldDescription          = big.NewInt(1 << 7)
+	transactionsUnignoreBankResponseFieldExternalID           = big.NewInt(1 << 8)
+	transactionsUnignoreBankResponseFieldStatus               = big.NewInt(1 << 9)
+	transactionsUnignoreBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
+	transactionsUnignoreBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
+	transactionsUnignoreBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
+	transactionsUnignoreBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsUnignoreBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
+)
+
+type TransactionsUnignoreBankResponse struct {
+	ID                   string                                 `json:"id" url:"id"`
+	BankAccountID        string                                 `json:"bankAccountId" url:"bankAccountId"`
+	Date                 time.Time                              `json:"date" url:"date" format:"date"`
+	Amount               string                                 `json:"amount" url:"amount"`
+	Currency             string                                 `json:"currency" url:"currency"`
+	CounterpartyName     *string                                `json:"counterpartyName,omitempty" url:"counterpartyName,omitempty"`
+	CounterpartyIban     *string                                `json:"counterpartyIban,omitempty" url:"counterpartyIban,omitempty"`
+	Description          *string                                `json:"description,omitempty" url:"description,omitempty"`
+	ExternalID           *string                                `json:"externalId,omitempty" url:"externalId,omitempty"`
+	Status               TransactionsUnignoreBankResponseStatus `json:"status" url:"status"`
+	MatchedDocumentType  *string                                `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
+	MatchedDocumentID    *string                                `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
+	JournalTransactionID *string                                `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                                `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
+	CreatedAt            time.Time                              `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsUnignoreBankResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TransactionsUnignoreBankResponse) GetBankAccountID() string {
+	if t == nil {
+		return ""
+	}
+	return t.BankAccountID
+}
+
+func (t *TransactionsUnignoreBankResponse) GetDate() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.Date
+}
+
+func (t *TransactionsUnignoreBankResponse) GetAmount() string {
+	if t == nil {
+		return ""
+	}
+	return t.Amount
+}
+
+func (t *TransactionsUnignoreBankResponse) GetCurrency() string {
+	if t == nil {
+		return ""
+	}
+	return t.Currency
+}
+
+func (t *TransactionsUnignoreBankResponse) GetCounterpartyName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CounterpartyName
+}
+
+func (t *TransactionsUnignoreBankResponse) GetCounterpartyIban() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CounterpartyIban
+}
+
+func (t *TransactionsUnignoreBankResponse) GetDescription() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Description
+}
+
+func (t *TransactionsUnignoreBankResponse) GetExternalID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ExternalID
+}
+
+func (t *TransactionsUnignoreBankResponse) GetStatus() TransactionsUnignoreBankResponseStatus {
+	if t == nil {
+		return ""
+	}
+	return t.Status
+}
+
+func (t *TransactionsUnignoreBankResponse) GetMatchedDocumentType() *string {
+	if t == nil {
+		return nil
+	}
+	return t.MatchedDocumentType
+}
+
+func (t *TransactionsUnignoreBankResponse) GetMatchedDocumentID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.MatchedDocumentID
+}
+
+func (t *TransactionsUnignoreBankResponse) GetJournalTransactionID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.JournalTransactionID
+}
+
+func (t *TransactionsUnignoreBankResponse) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
+}
+
+func (t *TransactionsUnignoreBankResponse) GetCreatedAt() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.CreatedAt
+}
+
+func (t *TransactionsUnignoreBankResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsUnignoreBankResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetID(id string) {
+	t.ID = id
+	t.require(transactionsUnignoreBankResponseFieldID)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetBankAccountID(bankAccountID string) {
+	t.BankAccountID = bankAccountID
+	t.require(transactionsUnignoreBankResponseFieldBankAccountID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetDate(date time.Time) {
+	t.Date = date
+	t.require(transactionsUnignoreBankResponseFieldDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetAmount(amount string) {
+	t.Amount = amount
+	t.require(transactionsUnignoreBankResponseFieldAmount)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetCurrency(currency string) {
+	t.Currency = currency
+	t.require(transactionsUnignoreBankResponseFieldCurrency)
+}
+
+// SetCounterpartyName sets the CounterpartyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetCounterpartyName(counterpartyName *string) {
+	t.CounterpartyName = counterpartyName
+	t.require(transactionsUnignoreBankResponseFieldCounterpartyName)
+}
+
+// SetCounterpartyIban sets the CounterpartyIban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetCounterpartyIban(counterpartyIban *string) {
+	t.CounterpartyIban = counterpartyIban
+	t.require(transactionsUnignoreBankResponseFieldCounterpartyIban)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetDescription(description *string) {
+	t.Description = description
+	t.require(transactionsUnignoreBankResponseFieldDescription)
+}
+
+// SetExternalID sets the ExternalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetExternalID(externalID *string) {
+	t.ExternalID = externalID
+	t.require(transactionsUnignoreBankResponseFieldExternalID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetStatus(status TransactionsUnignoreBankResponseStatus) {
+	t.Status = status
+	t.require(transactionsUnignoreBankResponseFieldStatus)
+}
+
+// SetMatchedDocumentType sets the MatchedDocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetMatchedDocumentType(matchedDocumentType *string) {
+	t.MatchedDocumentType = matchedDocumentType
+	t.require(transactionsUnignoreBankResponseFieldMatchedDocumentType)
+}
+
+// SetMatchedDocumentID sets the MatchedDocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetMatchedDocumentID(matchedDocumentID *string) {
+	t.MatchedDocumentID = matchedDocumentID
+	t.require(transactionsUnignoreBankResponseFieldMatchedDocumentID)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetJournalTransactionID(journalTransactionID *string) {
+	t.JournalTransactionID = journalTransactionID
+	t.require(transactionsUnignoreBankResponseFieldJournalTransactionID)
+}
+
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsUnignoreBankResponseFieldIgnoreReason)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnignoreBankResponse) SetCreatedAt(createdAt time.Time) {
+	t.CreatedAt = createdAt
+	t.require(transactionsUnignoreBankResponseFieldCreatedAt)
+}
+
+func (t *TransactionsUnignoreBankResponse) UnmarshalJSON(data []byte) error {
+	type embed TransactionsUnignoreBankResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TransactionsUnignoreBankResponse(unmarshaler.embed)
+	t.Date = unmarshaler.Date.Time()
+	t.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsUnignoreBankResponse) MarshalJSON() ([]byte, error) {
+	type embed TransactionsUnignoreBankResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*t),
+		Date:      internal.NewDate(t.Date),
+		CreatedAt: internal.NewDateTime(t.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsUnignoreBankResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type TransactionsUnignoreBankResponseStatus string
+
+const (
+	TransactionsUnignoreBankResponseStatusNew     TransactionsUnignoreBankResponseStatus = "new"
+	TransactionsUnignoreBankResponseStatusMatched TransactionsUnignoreBankResponseStatus = "matched"
+	TransactionsUnignoreBankResponseStatusIgnored TransactionsUnignoreBankResponseStatus = "ignored"
+)
+
+func NewTransactionsUnignoreBankResponseStatusFromString(s string) (TransactionsUnignoreBankResponseStatus, error) {
+	switch s {
+	case "new":
+		return TransactionsUnignoreBankResponseStatusNew, nil
+	case "matched":
+		return TransactionsUnignoreBankResponseStatusMatched, nil
+	case "ignored":
+		return TransactionsUnignoreBankResponseStatusIgnored, nil
+	}
+	var t TransactionsUnignoreBankResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TransactionsUnignoreBankResponseStatus) Ptr() *TransactionsUnignoreBankResponseStatus {
+	return &t
+}
+
+var (
 	transactionsUnmatchBankResponseFieldID                   = big.NewInt(1 << 0)
 	transactionsUnmatchBankResponseFieldBankAccountID        = big.NewInt(1 << 1)
 	transactionsUnmatchBankResponseFieldDate                 = big.NewInt(1 << 2)
@@ -28348,7 +30698,8 @@ var (
 	transactionsUnmatchBankResponseFieldMatchedDocumentType  = big.NewInt(1 << 10)
 	transactionsUnmatchBankResponseFieldMatchedDocumentID    = big.NewInt(1 << 11)
 	transactionsUnmatchBankResponseFieldJournalTransactionID = big.NewInt(1 << 12)
-	transactionsUnmatchBankResponseFieldCreatedAt            = big.NewInt(1 << 13)
+	transactionsUnmatchBankResponseFieldIgnoreReason         = big.NewInt(1 << 13)
+	transactionsUnmatchBankResponseFieldCreatedAt            = big.NewInt(1 << 14)
 )
 
 type TransactionsUnmatchBankResponse struct {
@@ -28365,6 +30716,7 @@ type TransactionsUnmatchBankResponse struct {
 	MatchedDocumentType  *string                               `json:"matchedDocumentType,omitempty" url:"matchedDocumentType,omitempty"`
 	MatchedDocumentID    *string                               `json:"matchedDocumentId,omitempty" url:"matchedDocumentId,omitempty"`
 	JournalTransactionID *string                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	IgnoreReason         *string                               `json:"ignoreReason,omitempty" url:"ignoreReason,omitempty"`
 	CreatedAt            time.Time                             `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -28463,6 +30815,13 @@ func (t *TransactionsUnmatchBankResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return t.JournalTransactionID
+}
+
+func (t *TransactionsUnmatchBankResponse) GetIgnoreReason() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IgnoreReason
 }
 
 func (t *TransactionsUnmatchBankResponse) GetCreatedAt() time.Time {
@@ -28577,6 +30936,13 @@ func (t *TransactionsUnmatchBankResponse) SetJournalTransactionID(journalTransac
 	t.require(transactionsUnmatchBankResponseFieldJournalTransactionID)
 }
 
+// SetIgnoreReason sets the IgnoreReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsUnmatchBankResponse) SetIgnoreReason(ignoreReason *string) {
+	t.IgnoreReason = ignoreReason
+	t.require(transactionsUnmatchBankResponseFieldIgnoreReason)
+}
+
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (t *TransactionsUnmatchBankResponse) SetCreatedAt(createdAt time.Time) {
@@ -28643,6 +31009,7 @@ type TransactionsUnmatchBankResponseStatus string
 const (
 	TransactionsUnmatchBankResponseStatusNew     TransactionsUnmatchBankResponseStatus = "new"
 	TransactionsUnmatchBankResponseStatusMatched TransactionsUnmatchBankResponseStatus = "matched"
+	TransactionsUnmatchBankResponseStatusIgnored TransactionsUnmatchBankResponseStatus = "ignored"
 )
 
 func NewTransactionsUnmatchBankResponseStatusFromString(s string) (TransactionsUnmatchBankResponseStatus, error) {
@@ -28651,6 +31018,8 @@ func NewTransactionsUnmatchBankResponseStatusFromString(s string) (TransactionsU
 		return TransactionsUnmatchBankResponseStatusNew, nil
 	case "matched":
 		return TransactionsUnmatchBankResponseStatusMatched, nil
+	case "ignored":
+		return TransactionsUnmatchBankResponseStatusIgnored, nil
 	}
 	var t TransactionsUnmatchBankResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

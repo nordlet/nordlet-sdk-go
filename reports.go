@@ -1159,6 +1159,52 @@ func (p *PartnerBalancesReportsRequest) require(field *big.Int) {
 }
 
 var (
+	periodChecklistReportsRequestFieldPeriod = big.NewInt(1 << 0)
+)
+
+type PeriodChecklistReportsRequest struct {
+	Period string `json:"period" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PeriodChecklistReportsRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsRequest) SetPeriod(period string) {
+	p.Period = period
+	p.require(periodChecklistReportsRequestFieldPeriod)
+}
+
+func (p *PeriodChecklistReportsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PeriodChecklistReportsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PeriodChecklistReportsRequest(body)
+	return nil
+}
+
+func (p *PeriodChecklistReportsRequest) MarshalJSON() ([]byte, error) {
+	type embed PeriodChecklistReportsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	posSalesReportsRequestFieldFromDate = big.NewInt(1 << 0)
 	posSalesReportsRequestFieldToDate   = big.NewInt(1 << 1)
 )
@@ -11003,6 +11049,325 @@ func (p *PartnerBalancesReportsResponseTotals) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	periodChecklistReportsResponseFieldPeriod   = big.NewInt(1 << 0)
+	periodChecklistReportsResponseFieldFromDate = big.NewInt(1 << 1)
+	periodChecklistReportsResponseFieldToDate   = big.NewInt(1 << 2)
+	periodChecklistReportsResponseFieldItems    = big.NewInt(1 << 3)
+)
+
+type PeriodChecklistReportsResponse struct {
+	Period   string                                     `json:"period" url:"period"`
+	FromDate time.Time                                  `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate   time.Time                                  `json:"toDate" url:"toDate" format:"date"`
+	Items    []*PeriodChecklistReportsResponseItemsItem `json:"items" url:"items"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PeriodChecklistReportsResponse) GetPeriod() string {
+	if p == nil {
+		return ""
+	}
+	return p.Period
+}
+
+func (p *PeriodChecklistReportsResponse) GetFromDate() time.Time {
+	if p == nil {
+		return time.Time{}
+	}
+	return p.FromDate
+}
+
+func (p *PeriodChecklistReportsResponse) GetToDate() time.Time {
+	if p == nil {
+		return time.Time{}
+	}
+	return p.ToDate
+}
+
+func (p *PeriodChecklistReportsResponse) GetItems() []*PeriodChecklistReportsResponseItemsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Items
+}
+
+func (p *PeriodChecklistReportsResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PeriodChecklistReportsResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponse) SetPeriod(period string) {
+	p.Period = period
+	p.require(periodChecklistReportsResponseFieldPeriod)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponse) SetFromDate(fromDate time.Time) {
+	p.FromDate = fromDate
+	p.require(periodChecklistReportsResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponse) SetToDate(toDate time.Time) {
+	p.ToDate = toDate
+	p.require(periodChecklistReportsResponseFieldToDate)
+}
+
+// SetItems sets the Items field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponse) SetItems(items []*PeriodChecklistReportsResponseItemsItem) {
+	p.Items = items
+	p.require(periodChecklistReportsResponseFieldItems)
+}
+
+func (p *PeriodChecklistReportsResponse) UnmarshalJSON(data []byte) error {
+	type embed PeriodChecklistReportsResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*p),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*p = PeriodChecklistReportsResponse(unmarshaler.embed)
+	p.FromDate = unmarshaler.FromDate.Time()
+	p.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PeriodChecklistReportsResponse) MarshalJSON() ([]byte, error) {
+	type embed PeriodChecklistReportsResponse
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*p),
+		FromDate: internal.NewDate(p.FromDate),
+		ToDate:   internal.NewDate(p.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PeriodChecklistReportsResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	periodChecklistReportsResponseItemsItemFieldCode    = big.NewInt(1 << 0)
+	periodChecklistReportsResponseItemsItemFieldCount   = big.NewInt(1 << 1)
+	periodChecklistReportsResponseItemsItemFieldMessage = big.NewInt(1 << 2)
+	periodChecklistReportsResponseItemsItemFieldIDs     = big.NewInt(1 << 3)
+)
+
+type PeriodChecklistReportsResponseItemsItem struct {
+	Code    PeriodChecklistReportsResponseItemsItemCode `json:"code" url:"code"`
+	Count   int64                                       `json:"count" url:"count"`
+	Message string                                      `json:"message" url:"message"`
+	IDs     []string                                    `json:"ids" url:"ids"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) GetCode() PeriodChecklistReportsResponseItemsItemCode {
+	if p == nil {
+		return ""
+	}
+	return p.Code
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) GetCount() int64 {
+	if p == nil {
+		return 0
+	}
+	return p.Count
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) GetMessage() string {
+	if p == nil {
+		return ""
+	}
+	return p.Message
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) GetIDs() []string {
+	if p == nil {
+		return nil
+	}
+	return p.IDs
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponseItemsItem) SetCode(code PeriodChecklistReportsResponseItemsItemCode) {
+	p.Code = code
+	p.require(periodChecklistReportsResponseItemsItemFieldCode)
+}
+
+// SetCount sets the Count field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponseItemsItem) SetCount(count int64) {
+	p.Count = count
+	p.require(periodChecklistReportsResponseItemsItemFieldCount)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponseItemsItem) SetMessage(message string) {
+	p.Message = message
+	p.require(periodChecklistReportsResponseItemsItemFieldMessage)
+}
+
+// SetIDs sets the IDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PeriodChecklistReportsResponseItemsItem) SetIDs(ids []string) {
+	p.IDs = ids
+	p.require(periodChecklistReportsResponseItemsItemFieldIDs)
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler PeriodChecklistReportsResponseItemsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PeriodChecklistReportsResponseItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) MarshalJSON() ([]byte, error) {
+	type embed PeriodChecklistReportsResponseItemsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PeriodChecklistReportsResponseItemsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type PeriodChecklistReportsResponseItemsItemCode string
+
+const (
+	PeriodChecklistReportsResponseItemsItemCodeDraftSaleDocuments            PeriodChecklistReportsResponseItemsItemCode = "draft_sale_documents"
+	PeriodChecklistReportsResponseItemsItemCodeDraftPurchaseDocuments        PeriodChecklistReportsResponseItemsItemCode = "draft_purchase_documents"
+	PeriodChecklistReportsResponseItemsItemCodeUnbookedBankLines             PeriodChecklistReportsResponseItemsItemCode = "unbooked_bank_lines"
+	PeriodChecklistReportsResponseItemsItemCodeDepreciationNotPosted         PeriodChecklistReportsResponseItemsItemCode = "depreciation_not_posted"
+	PeriodChecklistReportsResponseItemsItemCodeDeferralsNotPosted            PeriodChecklistReportsResponseItemsItemCode = "deferrals_not_posted"
+	PeriodChecklistReportsResponseItemsItemCodeRecurringInvoicesNotGenerated PeriodChecklistReportsResponseItemsItemCode = "recurring_invoices_not_generated"
+	PeriodChecklistReportsResponseItemsItemCodePayrollRunsNotApproved        PeriodChecklistReportsResponseItemsItemCode = "payroll_runs_not_approved"
+	PeriodChecklistReportsResponseItemsItemCodeOpenFxReceivables             PeriodChecklistReportsResponseItemsItemCode = "open_fx_receivables"
+	PeriodChecklistReportsResponseItemsItemCodeOpenFxPayables                PeriodChecklistReportsResponseItemsItemCode = "open_fx_payables"
+)
+
+func NewPeriodChecklistReportsResponseItemsItemCodeFromString(s string) (PeriodChecklistReportsResponseItemsItemCode, error) {
+	switch s {
+	case "draft_sale_documents":
+		return PeriodChecklistReportsResponseItemsItemCodeDraftSaleDocuments, nil
+	case "draft_purchase_documents":
+		return PeriodChecklistReportsResponseItemsItemCodeDraftPurchaseDocuments, nil
+	case "unbooked_bank_lines":
+		return PeriodChecklistReportsResponseItemsItemCodeUnbookedBankLines, nil
+	case "depreciation_not_posted":
+		return PeriodChecklistReportsResponseItemsItemCodeDepreciationNotPosted, nil
+	case "deferrals_not_posted":
+		return PeriodChecklistReportsResponseItemsItemCodeDeferralsNotPosted, nil
+	case "recurring_invoices_not_generated":
+		return PeriodChecklistReportsResponseItemsItemCodeRecurringInvoicesNotGenerated, nil
+	case "payroll_runs_not_approved":
+		return PeriodChecklistReportsResponseItemsItemCodePayrollRunsNotApproved, nil
+	case "open_fx_receivables":
+		return PeriodChecklistReportsResponseItemsItemCodeOpenFxReceivables, nil
+	case "open_fx_payables":
+		return PeriodChecklistReportsResponseItemsItemCodeOpenFxPayables, nil
+	}
+	var t PeriodChecklistReportsResponseItemsItemCode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PeriodChecklistReportsResponseItemsItemCode) Ptr() *PeriodChecklistReportsResponseItemsItemCode {
+	return &p
 }
 
 var (

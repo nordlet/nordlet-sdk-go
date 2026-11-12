@@ -11577,17 +11577,21 @@ func (c *ConfigsListDeclarationsResponseRowsItemEndpointsItem) String() string {
 
 var (
 	configsListDeclarationsResponseRowsItemFieldsItemFieldKey          = big.NewInt(1 << 0)
-	configsListDeclarationsResponseRowsItemFieldsItemFieldKind         = big.NewInt(1 << 1)
-	configsListDeclarationsResponseRowsItemFieldsItemFieldMultiline    = big.NewInt(1 << 2)
-	configsListDeclarationsResponseRowsItemFieldsItemFieldOptions      = big.NewInt(1 << 3)
-	configsListDeclarationsResponseRowsItemFieldsItemFieldCompanyField = big.NewInt(1 << 4)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldLabel        = big.NewInt(1 << 1)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldKind         = big.NewInt(1 << 2)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldMultiline    = big.NewInt(1 << 3)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldOptions      = big.NewInt(1 << 4)
+	configsListDeclarationsResponseRowsItemFieldsItemFieldCompanyField = big.NewInt(1 << 5)
 )
 
 type ConfigsListDeclarationsResponseRowsItemFieldsItem struct {
-	Key          string                                                         `json:"key" url:"key"`
-	Kind         ConfigsListDeclarationsResponseRowsItemFieldsItemKind          `json:"kind" url:"kind"`
-	Multiline    *bool                                                          `json:"multiline,omitempty" url:"multiline,omitempty"`
-	Options      []string                                                       `json:"options,omitempty" url:"options,omitempty"`
+	Key       string                                                `json:"key" url:"key"`
+	Label     *string                                               `json:"label,omitempty" url:"label,omitempty"`
+	Kind      ConfigsListDeclarationsResponseRowsItemFieldsItemKind `json:"kind" url:"kind"`
+	Multiline *bool                                                 `json:"multiline,omitempty" url:"multiline,omitempty"`
+	// The allowed values of a `select` field
+	Options []string `json:"options,omitempty" url:"options,omitempty"`
+	// The company profile field the value is taken from; change it with `account/companies/update`
 	CompanyField *ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField `json:"companyField,omitempty" url:"companyField,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -11602,6 +11606,13 @@ func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) GetKey() string {
 		return ""
 	}
 	return c.Key
+}
+
+func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) GetLabel() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Label
 }
 
 func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) GetKind() ConfigsListDeclarationsResponseRowsItemFieldsItemKind {
@@ -11651,6 +11662,13 @@ func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) require(field *big.I
 func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) SetKey(key string) {
 	c.Key = key
 	c.require(configsListDeclarationsResponseRowsItemFieldsItemFieldKey)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) SetLabel(label *string) {
+	c.Label = label
+	c.require(configsListDeclarationsResponseRowsItemFieldsItemFieldLabel)
 }
 
 // SetKind sets the Kind field and marks it as non-optional;
@@ -11723,6 +11741,7 @@ func (c *ConfigsListDeclarationsResponseRowsItemFieldsItem) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
+// The company profile field the value is taken from; change it with `account/companies/update`
 type ConfigsListDeclarationsResponseRowsItemFieldsItemCompanyField string
 
 const (
@@ -12077,17 +12096,21 @@ func (c *ConfigsUpdateDeclarationsResponseEndpointsItem) String() string {
 
 var (
 	configsUpdateDeclarationsResponseFieldsItemFieldKey          = big.NewInt(1 << 0)
-	configsUpdateDeclarationsResponseFieldsItemFieldKind         = big.NewInt(1 << 1)
-	configsUpdateDeclarationsResponseFieldsItemFieldMultiline    = big.NewInt(1 << 2)
-	configsUpdateDeclarationsResponseFieldsItemFieldOptions      = big.NewInt(1 << 3)
-	configsUpdateDeclarationsResponseFieldsItemFieldCompanyField = big.NewInt(1 << 4)
+	configsUpdateDeclarationsResponseFieldsItemFieldLabel        = big.NewInt(1 << 1)
+	configsUpdateDeclarationsResponseFieldsItemFieldKind         = big.NewInt(1 << 2)
+	configsUpdateDeclarationsResponseFieldsItemFieldMultiline    = big.NewInt(1 << 3)
+	configsUpdateDeclarationsResponseFieldsItemFieldOptions      = big.NewInt(1 << 4)
+	configsUpdateDeclarationsResponseFieldsItemFieldCompanyField = big.NewInt(1 << 5)
 )
 
 type ConfigsUpdateDeclarationsResponseFieldsItem struct {
-	Key          string                                                   `json:"key" url:"key"`
-	Kind         ConfigsUpdateDeclarationsResponseFieldsItemKind          `json:"kind" url:"kind"`
-	Multiline    *bool                                                    `json:"multiline,omitempty" url:"multiline,omitempty"`
-	Options      []string                                                 `json:"options,omitempty" url:"options,omitempty"`
+	Key       string                                          `json:"key" url:"key"`
+	Label     *string                                         `json:"label,omitempty" url:"label,omitempty"`
+	Kind      ConfigsUpdateDeclarationsResponseFieldsItemKind `json:"kind" url:"kind"`
+	Multiline *bool                                           `json:"multiline,omitempty" url:"multiline,omitempty"`
+	// The allowed values of a `select` field
+	Options []string `json:"options,omitempty" url:"options,omitempty"`
+	// The company profile field the value is taken from; change it with `account/companies/update`
 	CompanyField *ConfigsUpdateDeclarationsResponseFieldsItemCompanyField `json:"companyField,omitempty" url:"companyField,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -12102,6 +12125,13 @@ func (c *ConfigsUpdateDeclarationsResponseFieldsItem) GetKey() string {
 		return ""
 	}
 	return c.Key
+}
+
+func (c *ConfigsUpdateDeclarationsResponseFieldsItem) GetLabel() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Label
 }
 
 func (c *ConfigsUpdateDeclarationsResponseFieldsItem) GetKind() ConfigsUpdateDeclarationsResponseFieldsItemKind {
@@ -12151,6 +12181,13 @@ func (c *ConfigsUpdateDeclarationsResponseFieldsItem) require(field *big.Int) {
 func (c *ConfigsUpdateDeclarationsResponseFieldsItem) SetKey(key string) {
 	c.Key = key
 	c.require(configsUpdateDeclarationsResponseFieldsItemFieldKey)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ConfigsUpdateDeclarationsResponseFieldsItem) SetLabel(label *string) {
+	c.Label = label
+	c.require(configsUpdateDeclarationsResponseFieldsItemFieldLabel)
 }
 
 // SetKind sets the Kind field and marks it as non-optional;
@@ -12223,6 +12260,7 @@ func (c *ConfigsUpdateDeclarationsResponseFieldsItem) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
+// The company profile field the value is taken from; change it with `account/companies/update`
 type ConfigsUpdateDeclarationsResponseFieldsItemCompanyField string
 
 const (

@@ -325,6 +325,115 @@ func TestBankTransactionsUnmatchWithWireMock(
 	VerifyRequestCount(t, "TestBankTransactionsUnmatchWithWireMock", "POST", "/v1/bank/transactions/unmatch", nil, 1)
 }
 
+func TestBankTransactionsPostWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TransactionsPostBankRequest{
+		TransactionID: "transactionId",
+		AccountCode:   "accountCode",
+	}
+	_, invocationErr := client.Bank.TransactionsPost(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsPostWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankTransactionsPostWithWireMock", "POST", "/v1/bank/transactions/post", nil, 1)
+}
+
+func TestBankTransactionsIgnoreWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TransactionsIgnoreBankRequest{
+		TransactionID: "transactionId",
+		Reason:        "reason",
+	}
+	_, invocationErr := client.Bank.TransactionsIgnore(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsIgnoreWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankTransactionsIgnoreWithWireMock", "POST", "/v1/bank/transactions/ignore", nil, 1)
+}
+
+func TestBankTransactionsUnignoreWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TransactionsUnignoreBankRequest{
+		TransactionID: "transactionId",
+	}
+	_, invocationErr := client.Bank.TransactionsUnignore(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankTransactionsUnignoreWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankTransactionsUnignoreWithWireMock", "POST", "/v1/bank/transactions/unignore", nil, 1)
+}
+
+func TestBankReconciliationGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ReconciliationGetBankRequest{
+		BankAccountID: "bankAccountId",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Bank.ReconciliationGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankReconciliationGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankReconciliationGetWithWireMock", "POST", "/v1/bank/reconciliation/get", nil, 1)
+}
+
 func TestBankTransactionsRecordWithWireMock(
 	t *testing.T,
 ) {

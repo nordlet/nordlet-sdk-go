@@ -700,6 +700,33 @@ func TestLedgerJournalTransactionsCreateWithWireMock(
 	VerifyRequestCount(t, "TestLedgerJournalTransactionsCreateWithWireMock", "POST", "/v1/ledger/journal/transactions/create", nil, 1)
 }
 
+func TestLedgerJournalTransactionsReverseWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.JournalTransactionsReverseLedgerRequest{
+		ID:     "id",
+		Reason: "reason",
+	}
+	_, invocationErr := client.Ledger.JournalTransactionsReverse(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTransactionsReverseWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerJournalTransactionsReverseWithWireMock", "POST", "/v1/ledger/journal/transactions/reverse", nil, 1)
+}
+
 func TestLedgerStatementRowsSchemesWithWireMock(
 	t *testing.T,
 ) {

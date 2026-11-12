@@ -1173,11 +1173,10 @@ var (
 	accountGetBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	accountGetBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	accountGetBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	accountGetBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	accountGetBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	accountGetBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	accountGetBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	accountGetBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	accountGetBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	accountGetBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	accountGetBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	accountGetBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type AccountGetBillingResponseMonthToDate struct {
@@ -1185,7 +1184,6 @@ type AccountGetBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -1224,13 +1222,6 @@ func (a *AccountGetBillingResponseMonthToDate) GetSaleInvoices() int64 {
 		return 0
 	}
 	return a.SaleInvoices
-}
-
-func (a *AccountGetBillingResponseMonthToDate) GetOcrPages() int64 {
-	if a == nil {
-		return 0
-	}
-	return a.OcrPages
 }
 
 func (a *AccountGetBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -1301,13 +1292,6 @@ func (a *AccountGetBillingResponseMonthToDate) SetAPIRequests(apiRequests int64)
 func (a *AccountGetBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	a.SaleInvoices = saleInvoices
 	a.require(accountGetBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (a *AccountGetBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	a.OcrPages = ocrPages
-	a.require(accountGetBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -2336,11 +2320,10 @@ var (
 	accountSetAccountTypeBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	accountSetAccountTypeBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	accountSetAccountTypeBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	accountSetAccountTypeBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	accountSetAccountTypeBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	accountSetAccountTypeBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	accountSetAccountTypeBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	accountSetAccountTypeBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	accountSetAccountTypeBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	accountSetAccountTypeBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	accountSetAccountTypeBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	accountSetAccountTypeBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type AccountSetAccountTypeBillingResponseMonthToDate struct {
@@ -2348,7 +2331,6 @@ type AccountSetAccountTypeBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -2387,13 +2369,6 @@ func (a *AccountSetAccountTypeBillingResponseMonthToDate) GetSaleInvoices() int6
 		return 0
 	}
 	return a.SaleInvoices
-}
-
-func (a *AccountSetAccountTypeBillingResponseMonthToDate) GetOcrPages() int64 {
-	if a == nil {
-		return 0
-	}
-	return a.OcrPages
 }
 
 func (a *AccountSetAccountTypeBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -2464,13 +2439,6 @@ func (a *AccountSetAccountTypeBillingResponseMonthToDate) SetAPIRequests(apiRequ
 func (a *AccountSetAccountTypeBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	a.SaleInvoices = saleInvoices
 	a.require(accountSetAccountTypeBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (a *AccountSetAccountTypeBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	a.OcrPages = ocrPages
-	a.require(accountSetAccountTypeBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -3477,11 +3445,10 @@ var (
 	accountSetAutoTopUpBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	accountSetAutoTopUpBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	accountSetAutoTopUpBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	accountSetAutoTopUpBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	accountSetAutoTopUpBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	accountSetAutoTopUpBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	accountSetAutoTopUpBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	accountSetAutoTopUpBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	accountSetAutoTopUpBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	accountSetAutoTopUpBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	accountSetAutoTopUpBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	accountSetAutoTopUpBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type AccountSetAutoTopUpBillingResponseMonthToDate struct {
@@ -3489,7 +3456,6 @@ type AccountSetAutoTopUpBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -3528,13 +3494,6 @@ func (a *AccountSetAutoTopUpBillingResponseMonthToDate) GetSaleInvoices() int64 
 		return 0
 	}
 	return a.SaleInvoices
-}
-
-func (a *AccountSetAutoTopUpBillingResponseMonthToDate) GetOcrPages() int64 {
-	if a == nil {
-		return 0
-	}
-	return a.OcrPages
 }
 
 func (a *AccountSetAutoTopUpBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -3605,13 +3564,6 @@ func (a *AccountSetAutoTopUpBillingResponseMonthToDate) SetAPIRequests(apiReques
 func (a *AccountSetAutoTopUpBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	a.SaleInvoices = saleInvoices
 	a.require(accountSetAutoTopUpBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (a *AccountSetAutoTopUpBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	a.OcrPages = ocrPages
-	a.require(accountSetAutoTopUpBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -4618,11 +4570,10 @@ var (
 	accountSetOverdraftCapBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	accountSetOverdraftCapBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	accountSetOverdraftCapBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	accountSetOverdraftCapBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	accountSetOverdraftCapBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	accountSetOverdraftCapBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	accountSetOverdraftCapBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	accountSetOverdraftCapBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	accountSetOverdraftCapBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	accountSetOverdraftCapBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	accountSetOverdraftCapBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	accountSetOverdraftCapBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type AccountSetOverdraftCapBillingResponseMonthToDate struct {
@@ -4630,7 +4581,6 @@ type AccountSetOverdraftCapBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -4669,13 +4619,6 @@ func (a *AccountSetOverdraftCapBillingResponseMonthToDate) GetSaleInvoices() int
 		return 0
 	}
 	return a.SaleInvoices
-}
-
-func (a *AccountSetOverdraftCapBillingResponseMonthToDate) GetOcrPages() int64 {
-	if a == nil {
-		return 0
-	}
-	return a.OcrPages
 }
 
 func (a *AccountSetOverdraftCapBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -4746,13 +4689,6 @@ func (a *AccountSetOverdraftCapBillingResponseMonthToDate) SetAPIRequests(apiReq
 func (a *AccountSetOverdraftCapBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	a.SaleInvoices = saleInvoices
 	a.require(accountSetOverdraftCapBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (a *AccountSetOverdraftCapBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	a.OcrPages = ocrPages
-	a.require(accountSetOverdraftCapBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -5787,11 +5723,10 @@ var (
 	accountSetPlanBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	accountSetPlanBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	accountSetPlanBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	accountSetPlanBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	accountSetPlanBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	accountSetPlanBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	accountSetPlanBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	accountSetPlanBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	accountSetPlanBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	accountSetPlanBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	accountSetPlanBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	accountSetPlanBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type AccountSetPlanBillingResponseMonthToDate struct {
@@ -5799,7 +5734,6 @@ type AccountSetPlanBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -5838,13 +5772,6 @@ func (a *AccountSetPlanBillingResponseMonthToDate) GetSaleInvoices() int64 {
 		return 0
 	}
 	return a.SaleInvoices
-}
-
-func (a *AccountSetPlanBillingResponseMonthToDate) GetOcrPages() int64 {
-	if a == nil {
-		return 0
-	}
-	return a.OcrPages
 }
 
 func (a *AccountSetPlanBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -5915,13 +5842,6 @@ func (a *AccountSetPlanBillingResponseMonthToDate) SetAPIRequests(apiRequests in
 func (a *AccountSetPlanBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	a.SaleInvoices = saleInvoices
 	a.require(accountSetPlanBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (a *AccountSetPlanBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	a.OcrPages = ocrPages
-	a.require(accountSetPlanBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -6928,11 +6848,10 @@ var (
 	flatRateConfirmBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	flatRateConfirmBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	flatRateConfirmBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	flatRateConfirmBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	flatRateConfirmBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	flatRateConfirmBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	flatRateConfirmBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	flatRateConfirmBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	flatRateConfirmBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	flatRateConfirmBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	flatRateConfirmBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	flatRateConfirmBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type FlatRateConfirmBillingResponseMonthToDate struct {
@@ -6940,7 +6859,6 @@ type FlatRateConfirmBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -6979,13 +6897,6 @@ func (f *FlatRateConfirmBillingResponseMonthToDate) GetSaleInvoices() int64 {
 		return 0
 	}
 	return f.SaleInvoices
-}
-
-func (f *FlatRateConfirmBillingResponseMonthToDate) GetOcrPages() int64 {
-	if f == nil {
-		return 0
-	}
-	return f.OcrPages
 }
 
 func (f *FlatRateConfirmBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -7056,13 +6967,6 @@ func (f *FlatRateConfirmBillingResponseMonthToDate) SetAPIRequests(apiRequests i
 func (f *FlatRateConfirmBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	f.SaleInvoices = saleInvoices
 	f.require(flatRateConfirmBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FlatRateConfirmBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	f.OcrPages = ocrPages
-	f.require(flatRateConfirmBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -8312,11 +8216,10 @@ var (
 	freeSandboxStartBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	freeSandboxStartBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	freeSandboxStartBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	freeSandboxStartBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	freeSandboxStartBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	freeSandboxStartBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	freeSandboxStartBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	freeSandboxStartBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	freeSandboxStartBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	freeSandboxStartBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	freeSandboxStartBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	freeSandboxStartBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type FreeSandboxStartBillingResponseMonthToDate struct {
@@ -8324,7 +8227,6 @@ type FreeSandboxStartBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -8363,13 +8265,6 @@ func (f *FreeSandboxStartBillingResponseMonthToDate) GetSaleInvoices() int64 {
 		return 0
 	}
 	return f.SaleInvoices
-}
-
-func (f *FreeSandboxStartBillingResponseMonthToDate) GetOcrPages() int64 {
-	if f == nil {
-		return 0
-	}
-	return f.OcrPages
 }
 
 func (f *FreeSandboxStartBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -8440,13 +8335,6 @@ func (f *FreeSandboxStartBillingResponseMonthToDate) SetAPIRequests(apiRequests 
 func (f *FreeSandboxStartBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	f.SaleInvoices = saleInvoices
 	f.require(freeSandboxStartBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (f *FreeSandboxStartBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	f.OcrPages = ocrPages
-	f.require(freeSandboxStartBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -9652,11 +9540,10 @@ var (
 	subscriptionCancelBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	subscriptionCancelBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	subscriptionCancelBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	subscriptionCancelBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	subscriptionCancelBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	subscriptionCancelBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	subscriptionCancelBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	subscriptionCancelBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	subscriptionCancelBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	subscriptionCancelBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	subscriptionCancelBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	subscriptionCancelBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type SubscriptionCancelBillingResponseMonthToDate struct {
@@ -9664,7 +9551,6 @@ type SubscriptionCancelBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -9703,13 +9589,6 @@ func (s *SubscriptionCancelBillingResponseMonthToDate) GetSaleInvoices() int64 {
 		return 0
 	}
 	return s.SaleInvoices
-}
-
-func (s *SubscriptionCancelBillingResponseMonthToDate) GetOcrPages() int64 {
-	if s == nil {
-		return 0
-	}
-	return s.OcrPages
 }
 
 func (s *SubscriptionCancelBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -9780,13 +9659,6 @@ func (s *SubscriptionCancelBillingResponseMonthToDate) SetAPIRequests(apiRequest
 func (s *SubscriptionCancelBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	s.SaleInvoices = saleInvoices
 	s.require(subscriptionCancelBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (s *SubscriptionCancelBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	s.OcrPages = ocrPages
-	s.require(subscriptionCancelBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;
@@ -10793,11 +10665,10 @@ var (
 	topupConfirmBillingResponseMonthToDateFieldTo                  = big.NewInt(1 << 1)
 	topupConfirmBillingResponseMonthToDateFieldAPIRequests         = big.NewInt(1 << 2)
 	topupConfirmBillingResponseMonthToDateFieldSaleInvoices        = big.NewInt(1 << 3)
-	topupConfirmBillingResponseMonthToDateFieldOcrPages            = big.NewInt(1 << 4)
-	topupConfirmBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 5)
-	topupConfirmBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 6)
-	topupConfirmBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 7)
-	topupConfirmBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 8)
+	topupConfirmBillingResponseMonthToDateFieldFileBytes           = big.NewInt(1 << 4)
+	topupConfirmBillingResponseMonthToDateFieldDatabaseBytes       = big.NewInt(1 << 5)
+	topupConfirmBillingResponseMonthToDateFieldArchivedCompanies   = big.NewInt(1 << 6)
+	topupConfirmBillingResponseMonthToDateFieldEstimatedTodayCents = big.NewInt(1 << 7)
 )
 
 type TopupConfirmBillingResponseMonthToDate struct {
@@ -10805,7 +10676,6 @@ type TopupConfirmBillingResponseMonthToDate struct {
 	To                  string  `json:"to" url:"to"`
 	APIRequests         int64   `json:"apiRequests" url:"apiRequests"`
 	SaleInvoices        int64   `json:"saleInvoices" url:"saleInvoices"`
-	OcrPages            int64   `json:"ocrPages" url:"ocrPages"`
 	FileBytes           float64 `json:"fileBytes" url:"fileBytes"`
 	DatabaseBytes       float64 `json:"databaseBytes" url:"databaseBytes"`
 	ArchivedCompanies   int64   `json:"archivedCompanies" url:"archivedCompanies"`
@@ -10844,13 +10714,6 @@ func (t *TopupConfirmBillingResponseMonthToDate) GetSaleInvoices() int64 {
 		return 0
 	}
 	return t.SaleInvoices
-}
-
-func (t *TopupConfirmBillingResponseMonthToDate) GetOcrPages() int64 {
-	if t == nil {
-		return 0
-	}
-	return t.OcrPages
 }
 
 func (t *TopupConfirmBillingResponseMonthToDate) GetFileBytes() float64 {
@@ -10921,13 +10784,6 @@ func (t *TopupConfirmBillingResponseMonthToDate) SetAPIRequests(apiRequests int6
 func (t *TopupConfirmBillingResponseMonthToDate) SetSaleInvoices(saleInvoices int64) {
 	t.SaleInvoices = saleInvoices
 	t.require(topupConfirmBillingResponseMonthToDateFieldSaleInvoices)
-}
-
-// SetOcrPages sets the OcrPages field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TopupConfirmBillingResponseMonthToDate) SetOcrPages(ocrPages int64) {
-	t.OcrPages = ocrPages
-	t.require(topupConfirmBillingResponseMonthToDateFieldOcrPages)
 }
 
 // SetFileBytes sets the FileBytes field and marks it as non-optional;

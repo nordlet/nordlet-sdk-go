@@ -34,92 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Return the company's document capture settings: whether intake by e-mail is enabled, whether e-mailed documents are read on arrival, the company's intake e-mail address and whether a reading provider is configured. The intake token behind the address is created on the first call.
-func (c *Client) SettingsGet(
-	ctx context.Context,
-	request *nordlet.SettingsGetCaptureRequest,
-	opts ...option.RequestOption,
-) (*nordlet.SettingsGetCaptureResponse, error) {
-	response, err := c.WithRawResponse.SettingsGet(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Switch `intakeEnabled` (documents sent to the intake address are accepted) and `captureAutoExtract` (they are read on arrival) on or off; at least one field is required.
-func (c *Client) SettingsUpdate(
-	ctx context.Context,
-	request *nordlet.SettingsUpdateCaptureRequest,
-	opts ...option.RequestOption,
-) (*nordlet.SettingsUpdateCaptureResponse, error) {
-	response, err := c.WithRawResponse.SettingsUpdate(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Replace the company's intake token, so the previous intake e-mail address stops working and the settings come back with the new one.
-func (c *Client) SettingsRegenerateIntake(
-	ctx context.Context,
-	request *nordlet.SettingsRegenerateIntakeCaptureRequest,
-	opts ...option.RequestOption,
-) (*nordlet.SettingsRegenerateIntakeCaptureResponse, error) {
-	response, err := c.WithRawResponse.SettingsRegenerateIntake(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Endpoint for the inbound e-mail provider (Postmark field names or the generic `to`, `from`, `subject` and `attachments` form). It needs the `x-inbound-secret` header and finds the company by the `intake+<token>@` recipient address (404 when unknown, 403 when intake is disabled). Every PDF, image, Word or PowerPoint attachment up to 10 MB becomes a `pending` capture (`accepted`), anything else is `skipped`; when the company has automatic reading on, is not on trial and a reading provider is configured, each capture is read at once.
-func (c *Client) InboundEmail(
-	ctx context.Context,
-	request *nordlet.InboundEmailCaptureRequest,
-	opts ...option.RequestOption,
-) (*nordlet.InboundEmailCaptureResponse, error) {
-	response, err := c.WithRawResponse.InboundEmail(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Upload a supplier document (PDF, image, Word or PowerPoint, up to 10 MB; 422 for any other type) as a capture and read it at once. The result holds the extracted supplier, dates, totals and lines, the partner matched by VAT code, then partner code, then name, the raw text, and `status` `extracted` or `failed` with `error`. Needs a configured reading provider, is refused with 402 for a company on trial until its first top-up, and counts every page read as `ocr_page` usage. The draft is reviewed and saved with `capture/documents/confirm`.
-func (c *Client) DocumentsUpload(
-	ctx context.Context,
-	request *nordlet.DocumentsUploadCaptureRequest,
-	opts ...option.RequestOption,
-) (*nordlet.DocumentsUploadCaptureResponse, error) {
-	response, err := c.WithRawResponse.DocumentsUpload(
-		ctx,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Read a stored capture again and replace its draft (supplier, totals, lines, matched partner). A capture received over Peppol is parsed from its document again without a reading provider; any other needs the provider and, for a company on trial, the first top-up (402). Refused with 409 once the capture is linked to a purchase invoice.
+// Parse a capture received over Peppol from its stored document again and replace its draft (supplier, totals, lines, matched partner). Refused with 422 for a capture that was not received over Peppol and with 409 once the capture is linked to a purchase invoice.
 func (c *Client) DocumentsExtract(
 	ctx context.Context,
 	request *nordlet.DocumentsExtractCaptureRequest,
@@ -136,7 +51,7 @@ func (c *Client) DocumentsExtract(
 	return response.Body, nil
 }
 
-// Return one capture with its extraction and raw text.
+// Return one document received over Peppol (a capture) with its draft: supplier, dates, totals and lines.
 func (c *Client) DocumentsGet(
 	ctx context.Context,
 	request *nordlet.DocumentsGetCaptureRequest,
@@ -153,7 +68,7 @@ func (c *Client) DocumentsGet(
 	return response.Body, nil
 }
 
-// List captures without raw text. Filterable by `status`, `matchedPartnerId` and `purchaseInvoiceId`; sortable by `createdAt` and `updatedAt`.
+// List the documents received over Peppol (captures) with their drafts. Filterable by `status`, `matchedPartnerId` and `purchaseInvoiceId`; sortable by `createdAt` and `updatedAt`.
 func (c *Client) DocumentsList(
 	ctx context.Context,
 	request *nordlet.DocumentsListCaptureRequest,
