@@ -11718,6 +11718,8 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeyPosCashSurplus               PostingRulesUpdateLedgerRequestRulesItemKey = "pos.cashSurplus"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxGain                   PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxGain"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxLoss                   PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxLoss"
+	PostingRulesUpdateLedgerRequestRulesItemKeyBankPaymentDifferenceGain    PostingRulesUpdateLedgerRequestRulesItemKey = "bank.paymentDifferenceGain"
+	PostingRulesUpdateLedgerRequestRulesItemKeyBankPaymentDifferenceLoss    PostingRulesUpdateLedgerRequestRulesItemKey = "bank.paymentDifferenceLoss"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFees                     PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fees"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankCardPayments             PostingRulesUpdateLedgerRequestRulesItemKey = "bank.cardPayments"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankTopUps                   PostingRulesUpdateLedgerRequestRulesItemKey = "bank.topUps"
@@ -11781,6 +11783,10 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFxGain, nil
 	case "bank.fxLoss":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFxLoss, nil
+	case "bank.paymentDifferenceGain":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyBankPaymentDifferenceGain, nil
+	case "bank.paymentDifferenceLoss":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyBankPaymentDifferenceLoss, nil
 	case "bank.fees":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFees, nil
 	case "bank.cardPayments":

@@ -357,7 +357,7 @@ func (c *Client) ValidateVat(
 	return response.Body, nil
 }
 
-// Lists the VAT reviews opened by VIES checks of partners' VAT codes, with reason `invalid`, `name_mismatch` or `service_error`; filterable by `partnerId`, `status` and `reason`, sortable by `createdAt`.
+// Lists the VAT reviews opened by VIES checks of partners' VAT codes, with reason `invalid`, `name_mismatch` or `service_error`; filterable by `partnerId`, `status`, `reason` and `vatCode`, sortable by `createdAt`.
 func (c *Client) VatReviewsList(
 	ctx context.Context,
 	request *nordlet.VatReviewsListPartnersRequest,

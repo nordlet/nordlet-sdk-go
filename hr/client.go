@@ -408,7 +408,7 @@ func (c *Client) BusinessTripsGet(
 	return response.Body, nil
 }
 
-// Lists business trips; filterable by `employeeId`, `status` and `payrollRunId`, sortable by `startDate`.
+// Lists business trips; filterable by `employeeId`, `status`, `payrollRunId` and `purpose`, sortable by `startDate`.
 func (c *Client) BusinessTripsList(
 	ctx context.Context,
 	request *nordlet.BusinessTripsListHrRequest,

@@ -136,7 +136,7 @@ func (c *Client) ExpenseReportsGet(
 	return response.Body, nil
 }
 
-// Lists expense reports without their lines. Filterable by `employeeId` and `date`; sortable by `date` and `number`.
+// Lists expense reports without their lines. Filterable by `employeeId`, `date` and `number`; sortable by `date` and `number`.
 func (c *Client) ExpenseReportsList(
 	ctx context.Context,
 	request *nordlet.ExpenseReportsListCashRequest,
