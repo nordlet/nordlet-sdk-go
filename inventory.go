@@ -949,25 +949,27 @@ func (s *StockMovementsListInventoryRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	stockReceiveInventoryRequestFieldWarehouseID = big.NewInt(1 << 0)
-	stockReceiveInventoryRequestFieldItemID      = big.NewInt(1 << 1)
-	stockReceiveInventoryRequestFieldDate        = big.NewInt(1 << 2)
-	stockReceiveInventoryRequestFieldQuantity    = big.NewInt(1 << 3)
-	stockReceiveInventoryRequestFieldUnitCost    = big.NewInt(1 << 4)
-	stockReceiveInventoryRequestFieldLotNumber   = big.NewInt(1 << 5)
-	stockReceiveInventoryRequestFieldExpiryDate  = big.NewInt(1 << 6)
-	stockReceiveInventoryRequestFieldNotes       = big.NewInt(1 << 7)
+	stockReceiveInventoryRequestFieldWarehouseID        = big.NewInt(1 << 0)
+	stockReceiveInventoryRequestFieldItemID             = big.NewInt(1 << 1)
+	stockReceiveInventoryRequestFieldDate               = big.NewInt(1 << 2)
+	stockReceiveInventoryRequestFieldQuantity           = big.NewInt(1 << 3)
+	stockReceiveInventoryRequestFieldUnitCost           = big.NewInt(1 << 4)
+	stockReceiveInventoryRequestFieldCounterAccountCode = big.NewInt(1 << 5)
+	stockReceiveInventoryRequestFieldLotNumber          = big.NewInt(1 << 6)
+	stockReceiveInventoryRequestFieldExpiryDate         = big.NewInt(1 << 7)
+	stockReceiveInventoryRequestFieldNotes              = big.NewInt(1 << 8)
 )
 
 type StockReceiveInventoryRequest struct {
-	WarehouseID string     `json:"warehouseId" url:"-"`
-	ItemID      string     `json:"itemId" url:"-"`
-	Date        time.Time  `json:"date" url:"-" format:"date"`
-	Quantity    string     `json:"quantity" url:"-"`
-	UnitCost    string     `json:"unitCost" url:"-"`
-	LotNumber   *string    `json:"lotNumber,omitempty" url:"-"`
-	ExpiryDate  *time.Time `json:"expiryDate,omitempty" url:"-" format:"date"`
-	Notes       *string    `json:"notes,omitempty" url:"-"`
+	WarehouseID        string     `json:"warehouseId" url:"-"`
+	ItemID             string     `json:"itemId" url:"-"`
+	Date               time.Time  `json:"date" url:"-" format:"date"`
+	Quantity           string     `json:"quantity" url:"-"`
+	UnitCost           string     `json:"unitCost" url:"-"`
+	CounterAccountCode *string    `json:"counterAccountCode,omitempty" url:"-"`
+	LotNumber          *string    `json:"lotNumber,omitempty" url:"-"`
+	ExpiryDate         *time.Time `json:"expiryDate,omitempty" url:"-" format:"date"`
+	Notes              *string    `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1013,6 +1015,13 @@ func (s *StockReceiveInventoryRequest) SetQuantity(quantity string) {
 func (s *StockReceiveInventoryRequest) SetUnitCost(unitCost string) {
 	s.UnitCost = unitCost
 	s.require(stockReceiveInventoryRequestFieldUnitCost)
+}
+
+// SetCounterAccountCode sets the CounterAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StockReceiveInventoryRequest) SetCounterAccountCode(counterAccountCode *string) {
+	s.CounterAccountCode = counterAccountCode
+	s.require(stockReceiveInventoryRequestFieldCounterAccountCode)
 }
 
 // SetLotNumber sets the LotNumber field and marks it as non-optional;
@@ -7509,13 +7518,17 @@ func (s StockMovementsListInventoryResponseRowsItemDirection) Ptr() *StockMoveme
 }
 
 var (
-	stockReceiveInventoryResponseFieldMovementID = big.NewInt(1 << 0)
-	stockReceiveInventoryResponseFieldTotalCost  = big.NewInt(1 << 1)
+	stockReceiveInventoryResponseFieldMovementID           = big.NewInt(1 << 0)
+	stockReceiveInventoryResponseFieldTotalCost            = big.NewInt(1 << 1)
+	stockReceiveInventoryResponseFieldJournalTransactionID = big.NewInt(1 << 2)
+	stockReceiveInventoryResponseFieldWarnings             = big.NewInt(1 << 3)
 )
 
 type StockReceiveInventoryResponse struct {
-	MovementID string `json:"movementId" url:"movementId"`
-	TotalCost  string `json:"totalCost" url:"totalCost"`
+	MovementID           string                                       `json:"movementId" url:"movementId"`
+	TotalCost            string                                       `json:"totalCost" url:"totalCost"`
+	JournalTransactionID *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	Warnings             []*StockReceiveInventoryResponseWarningsItem `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7536,6 +7549,20 @@ func (s *StockReceiveInventoryResponse) GetTotalCost() string {
 		return ""
 	}
 	return s.TotalCost
+}
+
+func (s *StockReceiveInventoryResponse) GetJournalTransactionID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.JournalTransactionID
+}
+
+func (s *StockReceiveInventoryResponse) GetWarnings() []*StockReceiveInventoryResponseWarningsItem {
+	if s == nil {
+		return nil
+	}
+	return s.Warnings
 }
 
 func (s *StockReceiveInventoryResponse) GetExtraProperties() map[string]interface{} {
@@ -7566,6 +7593,20 @@ func (s *StockReceiveInventoryResponse) SetTotalCost(totalCost string) {
 	s.require(stockReceiveInventoryResponseFieldTotalCost)
 }
 
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StockReceiveInventoryResponse) SetJournalTransactionID(journalTransactionID *string) {
+	s.JournalTransactionID = journalTransactionID
+	s.require(stockReceiveInventoryResponseFieldJournalTransactionID)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StockReceiveInventoryResponse) SetWarnings(warnings []*StockReceiveInventoryResponseWarningsItem) {
+	s.Warnings = warnings
+	s.require(stockReceiveInventoryResponseFieldWarnings)
+}
+
 func (s *StockReceiveInventoryResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler StockReceiveInventoryResponse
 	var value unmarshaler
@@ -7594,6 +7635,122 @@ func (s *StockReceiveInventoryResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (s *StockReceiveInventoryResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	stockReceiveInventoryResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
+	stockReceiveInventoryResponseWarningsItemFieldMessage = big.NewInt(1 << 1)
+	stockReceiveInventoryResponseWarningsItemFieldFix     = big.NewInt(1 << 2)
+)
+
+type StockReceiveInventoryResponseWarningsItem struct {
+	Code    string `json:"code" url:"code"`
+	Message string `json:"message" url:"message"`
+	Fix     string `json:"fix" url:"fix"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) GetCode() string {
+	if s == nil {
+		return ""
+	}
+	return s.Code
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) GetMessage() string {
+	if s == nil {
+		return ""
+	}
+	return s.Message
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) GetFix() string {
+	if s == nil {
+		return ""
+	}
+	return s.Fix
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StockReceiveInventoryResponseWarningsItem) SetCode(code string) {
+	s.Code = code
+	s.require(stockReceiveInventoryResponseWarningsItemFieldCode)
+}
+
+// SetMessage sets the Message field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StockReceiveInventoryResponseWarningsItem) SetMessage(message string) {
+	s.Message = message
+	s.require(stockReceiveInventoryResponseWarningsItemFieldMessage)
+}
+
+// SetFix sets the Fix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StockReceiveInventoryResponseWarningsItem) SetFix(fix string) {
+	s.Fix = fix
+	s.require(stockReceiveInventoryResponseWarningsItemFieldFix)
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler StockReceiveInventoryResponseWarningsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = StockReceiveInventoryResponseWarningsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) MarshalJSON() ([]byte, error) {
+	type embed StockReceiveInventoryResponseWarningsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *StockReceiveInventoryResponseWarningsItem) String() string {
 	if s == nil {
 		return "<nil>"
 	}

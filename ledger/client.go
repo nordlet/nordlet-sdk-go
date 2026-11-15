@@ -34,7 +34,7 @@ func NewClient(options *core.RequestOptions) *Client {
 	}
 }
 
-// Lists the company's chart of accounts. Filterable by `code`, `name`, `type` and `isPostable`; sortable by `code` and `name`. A `name` filter with `contains` matches the stored name and the name shown in the language of the request (`displayName`).
+// Lists the company's chart of accounts. Filterable by `code`, `name`, `type` and `isPostable`; sortable by `code`, `name`, `type` and `isPostable`. A `name` filter with `contains` matches the stored name and the name shown in the language of the request (`displayName`).
 func (c *Client) AccountsList(
 	ctx context.Context,
 	request *nordlet.AccountsListLedgerRequest,
@@ -170,7 +170,7 @@ func (c *Client) PeriodsUnlock(
 	return response.Body, nil
 }
 
-// Lists journal transactions with the partner name. Filterable by `date`, `status`, `documentType`, `partnerId` and `documentId`; sortable by `date` and `createdAt`.
+// Lists journal transactions with the partner name. Filterable by `date`, `status`, `documentType`, `partnerId` and `documentId`; sortable by `date`, `createdAt`, `description`, `partnerName` (the name of the partner), `documentType` and `status`.
 func (c *Client) JournalTransactionsList(
 	ctx context.Context,
 	request *nordlet.JournalTransactionsListLedgerRequest,
@@ -391,7 +391,7 @@ func (c *Client) OwnersDelete(
 	return response.Body, nil
 }
 
-// Lists the company's owners. Filterable by `name` and `code`; sortable by `name` and `createdAt`.
+// Lists the company's owners. Filterable by `name` and `code`; sortable by `name`, `createdAt`, `code`, `sharesQuantity`, `sharesAmount`, `sharesType`, `sharesAcquisitionDate`, `partnerLiability` and `withholdingTaxPercent`.
 func (c *Client) OwnersList(
 	ctx context.Context,
 	request *nordlet.OwnersListLedgerRequest,
@@ -425,7 +425,7 @@ func (c *Client) JournalTransactionsGet(
 	return response.Body, nil
 }
 
-// Posts a manual journal transaction (`documentType` `manual`, status `posted`) in the company's base currency. Every `accountCode` must be a postable account of the chart, cost centers must exist and be active, projects must exist, and the debits must equal the credits. Answers 422 for an amount that is not whole cents (a third or fourth decimal other than zero; `10.5000` is accepted), for a `currency` other than the base currency and for an inactive cost center, and 409 when the accounting period of `date` is locked.
+// Posts a manual journal transaction (`documentType` `manual`, status `posted`) in the company's base currency. Every `accountCode` must be a postable account of the chart, cost centers must exist and be active, projects must exist, an entry `partnerId` must be a partner of the company (422), and the debits must equal the credits. An entry with a `partnerId` on the receivable or payable account (posting rules `sales.receivable`, `purchases.payables`) is counted by `reports/partner-balances` and `reports/debt-aging`. Answers 422 for an unknown or non-postable account, an unknown cost center or project, debits that differ from the credits, an amount that is not whole cents (a third or fourth decimal other than zero; `10.5000` is accepted), for a `currency` other than the base currency and for an inactive cost center, and 409 when the accounting period of `date` is locked.
 func (c *Client) JournalTransactionsCreate(
 	ctx context.Context,
 	request *nordlet.JournalTransactionsCreateLedgerRequest,
@@ -442,13 +442,81 @@ func (c *Client) JournalTransactionsCreate(
 	return response.Body, nil
 }
 
-// Posts a journal transaction (`documentType` `manual_reversal`, `documentId` the original) dated `date` (default the original date) whose entries mirror the original's (debits and credits swapped). Only a `manual` transaction is reversed here; a transaction posted by a document is reversed through that document. Answers 409 when the transaction is not manual, when it is already reversed and when the accounting period of `date` is locked, and 400 when `date` is before the original date.
+// Posts a journal transaction (`documentType` `manual_reversal`, `documentId` the original) dated `date` (default the original date) whose entries mirror the original's (debits and credits swapped). Only a `manual` transaction or a `tax_provision` (posted by `ledger/tax-provision/post`) is reversed here; a transaction posted by a document is reversed through that document. Answers 409 when the transaction is neither, when it is already reversed and when the accounting period of `date` is locked, and 400 when `date` is before the original date.
 func (c *Client) JournalTransactionsReverse(
 	ctx context.Context,
 	request *nordlet.JournalTransactionsReverseLedgerRequest,
 	opts ...option.RequestOption,
 ) (*nordlet.JournalTransactionsReverseLedgerResponse, error) {
 	response, err := c.WithRawResponse.JournalTransactionsReverse(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Revalues the open sale and purchase documents in a currency other than the base currency (open amount at `date`, payments up to `date` deducted) and the balances of the foreign-currency bank accounts at the stored exchange rate of `date` against the rate of each document or the booked base balance, and posts one journal transaction dated `date` (`documentType` `fx_revaluation`): the difference on each receivable or payable account with the partner on the entry, and the unrealised gain or loss on the `bank.fxUnrealisedGain` and `bank.fxUnrealisedLoss` posting rule accounts. A second transaction (`documentType` `fx_revaluation_reversal`) reverses it on the next calendar day. Nothing is posted and `runId` is null when nothing differs. The payment match keeps booking the realised difference against the rate of the document. Runs only on request, once per `date`: 409 when `date` is already revalued (reverse that run first) and when `date` or the next day is in a locked accounting period; 422 when a stored rate is missing.
+func (c *Client) FxRevaluationRun(
+	ctx context.Context,
+	request *nordlet.FxRevaluationRunLedgerRequest,
+	opts ...option.RequestOption,
+) (*nordlet.FxRevaluationRunLedgerResponse, error) {
+	response, err := c.WithRawResponse.FxRevaluationRun(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Cancels the run `id` of `ledger/fx-revaluation/run`: posts a mirror of the revaluation transaction on the run date (`documentType` `fx_revaluation_undo`) and a mirror of its next-day reversal on the reversal date (`documentType` `fx_revaluation_undo_reversal`), so the net effect is zero, and frees the date for a new run. Answers 404 for an unknown run, 409 when the run is already reversed or when the run date or the next day is in a locked accounting period.
+func (c *Client) FxRevaluationReverse(
+	ctx context.Context,
+	request *nordlet.FxRevaluationReverseLedgerRequest,
+	opts ...option.RequestOption,
+) (*nordlet.FxRevaluationReverseLedgerResponse, error) {
+	response, err := c.WithRawResponse.FxRevaluationReverse(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Posts a journal transaction (`documentType` `accrual`) dated `date` from `lines` (each line either a debit or a credit, whole cents, balanced; an optional `partnerId` is counted by the partner reports on the receivable and payable accounts) and a mirror transaction (`documentType` `accrual_reversal`, `documentId` the accrual) dated the first day of the next month. 422 for an unknown or non-postable account, an unknown partner, an unbalanced or one-sided line; 409 when the accounting period of `date` or of the reversal date is locked.
+func (c *Client) AccrualsCreate(
+	ctx context.Context,
+	request *nordlet.AccrualsCreateLedgerRequest,
+	opts ...option.RequestOption,
+) (*nordlet.AccrualsCreateLedgerResponse, error) {
+	response, err := c.WithRawResponse.AccrualsCreate(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Posts a journal transaction (`documentType` `tax_provision`, `documentId` the fiscal year) dated the last day of the fiscal year `fiscalYear`: debit the `tax.corporateExpense` posting rule account, credit `tax.corporatePayable`. `amount` defaults to the tax payable of the year's corporate tax return for Lithuanian (PLN204) and Romanian (D101) companies; for other countries it is required (422). 422 when the amount is zero or not whole cents; 409 when the accounting period is locked and when the year already has a provision that is not reversed (reverse it with `ledger/journal/transactions/reverse`).
+func (c *Client) TaxProvisionPost(
+	ctx context.Context,
+	request *nordlet.TaxProvisionPostLedgerRequest,
+	opts ...option.RequestOption,
+) (*nordlet.TaxProvisionPostLedgerResponse, error) {
+	response, err := c.WithRawResponse.TaxProvisionPost(
 		ctx,
 		request,
 		opts...,

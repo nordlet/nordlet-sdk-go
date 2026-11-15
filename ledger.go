@@ -275,6 +275,72 @@ func (a *AccountsUpdateLedgerRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	accrualsCreateLedgerRequestFieldDate   = big.NewInt(1 << 0)
+	accrualsCreateLedgerRequestFieldReason = big.NewInt(1 << 1)
+	accrualsCreateLedgerRequestFieldLines  = big.NewInt(1 << 2)
+)
+
+type AccrualsCreateLedgerRequest struct {
+	Date   time.Time                               `json:"date" url:"-" format:"date"`
+	Reason string                                  `json:"reason" url:"-"`
+	Lines  []*AccrualsCreateLedgerRequestLinesItem `json:"lines" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *AccrualsCreateLedgerRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequest) SetDate(date time.Time) {
+	a.Date = date
+	a.require(accrualsCreateLedgerRequestFieldDate)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequest) SetReason(reason string) {
+	a.Reason = reason
+	a.require(accrualsCreateLedgerRequestFieldReason)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequest) SetLines(lines []*AccrualsCreateLedgerRequestLinesItem) {
+	a.Lines = lines
+	a.require(accrualsCreateLedgerRequestFieldLines)
+}
+
+func (a *AccrualsCreateLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccrualsCreateLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = AccrualsCreateLedgerRequest(body)
+	return nil
+}
+
+func (a *AccrualsCreateLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed AccrualsCreateLedgerRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*a),
+		Date:  internal.NewDate(a.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	costCenterGroupsCreateLedgerRequestFieldCode = big.NewInt(1 << 0)
 	costCenterGroupsCreateLedgerRequestFieldName = big.NewInt(1 << 1)
 )
@@ -739,6 +805,109 @@ func (c *CostCentersUpdateLedgerRequest) MarshalJSON() ([]byte, error) {
 		embed: embed(*c),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	fxRevaluationReverseLedgerRequestFieldID     = big.NewInt(1 << 0)
+	fxRevaluationReverseLedgerRequestFieldReason = big.NewInt(1 << 1)
+)
+
+type FxRevaluationReverseLedgerRequest struct {
+	ID     string `json:"id" url:"-"`
+	Reason string `json:"reason" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (f *FxRevaluationReverseLedgerRequest) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationReverseLedgerRequest) SetID(id string) {
+	f.ID = id
+	f.require(fxRevaluationReverseLedgerRequestFieldID)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationReverseLedgerRequest) SetReason(reason string) {
+	f.Reason = reason
+	f.require(fxRevaluationReverseLedgerRequestFieldReason)
+}
+
+func (f *FxRevaluationReverseLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler FxRevaluationReverseLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*f = FxRevaluationReverseLedgerRequest(body)
+	return nil
+}
+
+func (f *FxRevaluationReverseLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed FxRevaluationReverseLedgerRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	fxRevaluationRunLedgerRequestFieldDate = big.NewInt(1 << 0)
+)
+
+type FxRevaluationRunLedgerRequest struct {
+	Date time.Time `json:"date" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (f *FxRevaluationRunLedgerRequest) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerRequest) SetDate(date time.Time) {
+	f.Date = date
+	f.require(fxRevaluationRunLedgerRequestFieldDate)
+}
+
+func (f *FxRevaluationRunLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler FxRevaluationRunLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*f = FxRevaluationRunLedgerRequest(body)
+	return nil
+}
+
+func (f *FxRevaluationRunLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed FxRevaluationRunLedgerRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*f),
+		Date:  internal.NewDate(f.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
@@ -1838,6 +2007,61 @@ func (s *StatementRowsSetLedgerRequest) MarshalJSON() ([]byte, error) {
 		embed: embed(*s),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	taxProvisionPostLedgerRequestFieldFiscalYear = big.NewInt(1 << 0)
+	taxProvisionPostLedgerRequestFieldAmount     = big.NewInt(1 << 1)
+)
+
+type TaxProvisionPostLedgerRequest struct {
+	FiscalYear int64   `json:"fiscalYear" url:"-"`
+	Amount     *string `json:"amount,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (t *TaxProvisionPostLedgerRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TaxProvisionPostLedgerRequest) SetFiscalYear(fiscalYear int64) {
+	t.FiscalYear = fiscalYear
+	t.require(taxProvisionPostLedgerRequestFieldFiscalYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TaxProvisionPostLedgerRequest) SetAmount(amount *string) {
+	t.Amount = amount
+	t.require(taxProvisionPostLedgerRequestFieldAmount)
+}
+
+func (t *TaxProvisionPostLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler TaxProvisionPostLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*t = TaxProvisionPostLedgerRequest(body)
+	return nil
+}
+
+func (t *TaxProvisionPostLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed TaxProvisionPostLedgerRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
@@ -3365,6 +3589,298 @@ func NewAccountsUpdateLedgerResponseTypeFromString(s string) (AccountsUpdateLedg
 
 func (a AccountsUpdateLedgerResponseType) Ptr() *AccountsUpdateLedgerResponseType {
 	return &a
+}
+
+var (
+	accrualsCreateLedgerRequestLinesItemFieldAccountCode = big.NewInt(1 << 0)
+	accrualsCreateLedgerRequestLinesItemFieldDebit       = big.NewInt(1 << 1)
+	accrualsCreateLedgerRequestLinesItemFieldCredit      = big.NewInt(1 << 2)
+	accrualsCreateLedgerRequestLinesItemFieldPartnerID   = big.NewInt(1 << 3)
+	accrualsCreateLedgerRequestLinesItemFieldDescription = big.NewInt(1 << 4)
+)
+
+type AccrualsCreateLedgerRequestLinesItem struct {
+	AccountCode string  `json:"accountCode" url:"accountCode"`
+	Debit       *string `json:"debit,omitempty" url:"debit,omitempty"`
+	Credit      *string `json:"credit,omitempty" url:"credit,omitempty"`
+	PartnerID   *string `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Description *string `json:"description,omitempty" url:"description,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) GetAccountCode() string {
+	if a == nil {
+		return ""
+	}
+	return a.AccountCode
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) GetDebit() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Debit
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) GetCredit() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Credit
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) GetPartnerID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PartnerID
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) GetDescription() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Description
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequestLinesItem) SetAccountCode(accountCode string) {
+	a.AccountCode = accountCode
+	a.require(accrualsCreateLedgerRequestLinesItemFieldAccountCode)
+}
+
+// SetDebit sets the Debit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequestLinesItem) SetDebit(debit *string) {
+	a.Debit = debit
+	a.require(accrualsCreateLedgerRequestLinesItemFieldDebit)
+}
+
+// SetCredit sets the Credit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequestLinesItem) SetCredit(credit *string) {
+	a.Credit = credit
+	a.require(accrualsCreateLedgerRequestLinesItemFieldCredit)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequestLinesItem) SetPartnerID(partnerID *string) {
+	a.PartnerID = partnerID
+	a.require(accrualsCreateLedgerRequestLinesItemFieldPartnerID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerRequestLinesItem) SetDescription(description *string) {
+	a.Description = description
+	a.require(accrualsCreateLedgerRequestLinesItemFieldDescription)
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccrualsCreateLedgerRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AccrualsCreateLedgerRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed AccrualsCreateLedgerRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AccrualsCreateLedgerRequestLinesItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	accrualsCreateLedgerResponseFieldID           = big.NewInt(1 << 0)
+	accrualsCreateLedgerResponseFieldReversalID   = big.NewInt(1 << 1)
+	accrualsCreateLedgerResponseFieldDate         = big.NewInt(1 << 2)
+	accrualsCreateLedgerResponseFieldReversalDate = big.NewInt(1 << 3)
+)
+
+type AccrualsCreateLedgerResponse struct {
+	ID           string    `json:"id" url:"id"`
+	ReversalID   string    `json:"reversalId" url:"reversalId"`
+	Date         time.Time `json:"date" url:"date" format:"date"`
+	ReversalDate time.Time `json:"reversalDate" url:"reversalDate" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AccrualsCreateLedgerResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AccrualsCreateLedgerResponse) GetReversalID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ReversalID
+}
+
+func (a *AccrualsCreateLedgerResponse) GetDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.Date
+}
+
+func (a *AccrualsCreateLedgerResponse) GetReversalDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.ReversalDate
+}
+
+func (a *AccrualsCreateLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AccrualsCreateLedgerResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerResponse) SetID(id string) {
+	a.ID = id
+	a.require(accrualsCreateLedgerResponseFieldID)
+}
+
+// SetReversalID sets the ReversalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerResponse) SetReversalID(reversalID string) {
+	a.ReversalID = reversalID
+	a.require(accrualsCreateLedgerResponseFieldReversalID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerResponse) SetDate(date time.Time) {
+	a.Date = date
+	a.require(accrualsCreateLedgerResponseFieldDate)
+}
+
+// SetReversalDate sets the ReversalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccrualsCreateLedgerResponse) SetReversalDate(reversalDate time.Time) {
+	a.ReversalDate = reversalDate
+	a.require(accrualsCreateLedgerResponseFieldReversalDate)
+}
+
+func (a *AccrualsCreateLedgerResponse) UnmarshalJSON(data []byte) error {
+	type embed AccrualsCreateLedgerResponse
+	var unmarshaler = struct {
+		embed
+		Date         *internal.Date `json:"date"`
+		ReversalDate *internal.Date `json:"reversalDate"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AccrualsCreateLedgerResponse(unmarshaler.embed)
+	a.Date = unmarshaler.Date.Time()
+	a.ReversalDate = unmarshaler.ReversalDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AccrualsCreateLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed AccrualsCreateLedgerResponse
+	var marshaler = struct {
+		embed
+		Date         *internal.Date `json:"date"`
+		ReversalDate *internal.Date `json:"reversalDate"`
+	}{
+		embed:        embed(*a),
+		Date:         internal.NewDate(a.Date),
+		ReversalDate: internal.NewDate(a.ReversalDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AccrualsCreateLedgerResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
 }
 
 var (
@@ -5642,18 +6158,502 @@ func (c *CostCentersUpdateLedgerResponse) String() string {
 }
 
 var (
+	fxRevaluationReverseLedgerResponseFieldID                        = big.NewInt(1 << 0)
+	fxRevaluationReverseLedgerResponseFieldUndoJournalTransactionIDs = big.NewInt(1 << 1)
+)
+
+type FxRevaluationReverseLedgerResponse struct {
+	ID                        string   `json:"id" url:"id"`
+	UndoJournalTransactionIDs []string `json:"undoJournalTransactionIds" url:"undoJournalTransactionIds"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FxRevaluationReverseLedgerResponse) GetID() string {
+	if f == nil {
+		return ""
+	}
+	return f.ID
+}
+
+func (f *FxRevaluationReverseLedgerResponse) GetUndoJournalTransactionIDs() []string {
+	if f == nil {
+		return nil
+	}
+	return f.UndoJournalTransactionIDs
+}
+
+func (f *FxRevaluationReverseLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FxRevaluationReverseLedgerResponse) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationReverseLedgerResponse) SetID(id string) {
+	f.ID = id
+	f.require(fxRevaluationReverseLedgerResponseFieldID)
+}
+
+// SetUndoJournalTransactionIDs sets the UndoJournalTransactionIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationReverseLedgerResponse) SetUndoJournalTransactionIDs(undoJournalTransactionIDs []string) {
+	f.UndoJournalTransactionIDs = undoJournalTransactionIDs
+	f.require(fxRevaluationReverseLedgerResponseFieldUndoJournalTransactionIDs)
+}
+
+func (f *FxRevaluationReverseLedgerResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler FxRevaluationReverseLedgerResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*f = FxRevaluationReverseLedgerResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FxRevaluationReverseLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed FxRevaluationReverseLedgerResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FxRevaluationReverseLedgerResponse) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+var (
+	fxRevaluationRunLedgerResponseFieldRunID                        = big.NewInt(1 << 0)
+	fxRevaluationRunLedgerResponseFieldDate                         = big.NewInt(1 << 1)
+	fxRevaluationRunLedgerResponseFieldReversalDate                 = big.NewInt(1 << 2)
+	fxRevaluationRunLedgerResponseFieldJournalTransactionID         = big.NewInt(1 << 3)
+	fxRevaluationRunLedgerResponseFieldReversalJournalTransactionID = big.NewInt(1 << 4)
+	fxRevaluationRunLedgerResponseFieldGain                         = big.NewInt(1 << 5)
+	fxRevaluationRunLedgerResponseFieldLoss                         = big.NewInt(1 << 6)
+	fxRevaluationRunLedgerResponseFieldLines                        = big.NewInt(1 << 7)
+)
+
+type FxRevaluationRunLedgerResponse struct {
+	RunID                        *string                                    `json:"runId,omitempty" url:"runId,omitempty"`
+	Date                         time.Time                                  `json:"date" url:"date" format:"date"`
+	ReversalDate                 time.Time                                  `json:"reversalDate" url:"reversalDate" format:"date"`
+	JournalTransactionID         *string                                    `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversalJournalTransactionID *string                                    `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	Gain                         string                                     `json:"gain" url:"gain"`
+	Loss                         string                                     `json:"loss" url:"loss"`
+	Lines                        []*FxRevaluationRunLedgerResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetRunID() *string {
+	if f == nil {
+		return nil
+	}
+	return f.RunID
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetDate() time.Time {
+	if f == nil {
+		return time.Time{}
+	}
+	return f.Date
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetReversalDate() time.Time {
+	if f == nil {
+		return time.Time{}
+	}
+	return f.ReversalDate
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetJournalTransactionID() *string {
+	if f == nil {
+		return nil
+	}
+	return f.JournalTransactionID
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetReversalJournalTransactionID() *string {
+	if f == nil {
+		return nil
+	}
+	return f.ReversalJournalTransactionID
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetGain() string {
+	if f == nil {
+		return ""
+	}
+	return f.Gain
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetLoss() string {
+	if f == nil {
+		return ""
+	}
+	return f.Loss
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetLines() []*FxRevaluationRunLedgerResponseLinesItem {
+	if f == nil {
+		return nil
+	}
+	return f.Lines
+}
+
+func (f *FxRevaluationRunLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FxRevaluationRunLedgerResponse) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetRunID(runID *string) {
+	f.RunID = runID
+	f.require(fxRevaluationRunLedgerResponseFieldRunID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetDate(date time.Time) {
+	f.Date = date
+	f.require(fxRevaluationRunLedgerResponseFieldDate)
+}
+
+// SetReversalDate sets the ReversalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetReversalDate(reversalDate time.Time) {
+	f.ReversalDate = reversalDate
+	f.require(fxRevaluationRunLedgerResponseFieldReversalDate)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetJournalTransactionID(journalTransactionID *string) {
+	f.JournalTransactionID = journalTransactionID
+	f.require(fxRevaluationRunLedgerResponseFieldJournalTransactionID)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	f.ReversalJournalTransactionID = reversalJournalTransactionID
+	f.require(fxRevaluationRunLedgerResponseFieldReversalJournalTransactionID)
+}
+
+// SetGain sets the Gain field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetGain(gain string) {
+	f.Gain = gain
+	f.require(fxRevaluationRunLedgerResponseFieldGain)
+}
+
+// SetLoss sets the Loss field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetLoss(loss string) {
+	f.Loss = loss
+	f.require(fxRevaluationRunLedgerResponseFieldLoss)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponse) SetLines(lines []*FxRevaluationRunLedgerResponseLinesItem) {
+	f.Lines = lines
+	f.require(fxRevaluationRunLedgerResponseFieldLines)
+}
+
+func (f *FxRevaluationRunLedgerResponse) UnmarshalJSON(data []byte) error {
+	type embed FxRevaluationRunLedgerResponse
+	var unmarshaler = struct {
+		embed
+		Date         *internal.Date `json:"date"`
+		ReversalDate *internal.Date `json:"reversalDate"`
+	}{
+		embed: embed(*f),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*f = FxRevaluationRunLedgerResponse(unmarshaler.embed)
+	f.Date = unmarshaler.Date.Time()
+	f.ReversalDate = unmarshaler.ReversalDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FxRevaluationRunLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed FxRevaluationRunLedgerResponse
+	var marshaler = struct {
+		embed
+		Date         *internal.Date `json:"date"`
+		ReversalDate *internal.Date `json:"reversalDate"`
+	}{
+		embed:        embed(*f),
+		Date:         internal.NewDate(f.Date),
+		ReversalDate: internal.NewDate(f.ReversalDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FxRevaluationRunLedgerResponse) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+var (
+	fxRevaluationRunLedgerResponseLinesItemFieldKind        = big.NewInt(1 << 0)
+	fxRevaluationRunLedgerResponseLinesItemFieldCurrency    = big.NewInt(1 << 1)
+	fxRevaluationRunLedgerResponseLinesItemFieldPartnerID   = big.NewInt(1 << 2)
+	fxRevaluationRunLedgerResponseLinesItemFieldAccountCode = big.NewInt(1 << 3)
+	fxRevaluationRunLedgerResponseLinesItemFieldAmount      = big.NewInt(1 << 4)
+)
+
+type FxRevaluationRunLedgerResponseLinesItem struct {
+	Kind        FxRevaluationRunLedgerResponseLinesItemKind `json:"kind" url:"kind"`
+	Currency    string                                      `json:"currency" url:"currency"`
+	PartnerID   *string                                     `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	AccountCode string                                      `json:"accountCode" url:"accountCode"`
+	// Unrealised gain (positive) or loss (negative) of the line
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) GetKind() FxRevaluationRunLedgerResponseLinesItemKind {
+	if f == nil {
+		return ""
+	}
+	return f.Kind
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) GetCurrency() string {
+	if f == nil {
+		return ""
+	}
+	return f.Currency
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) GetPartnerID() *string {
+	if f == nil {
+		return nil
+	}
+	return f.PartnerID
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) GetAccountCode() string {
+	if f == nil {
+		return ""
+	}
+	return f.AccountCode
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) GetAmount() string {
+	if f == nil {
+		return ""
+	}
+	return f.Amount
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponseLinesItem) SetKind(kind FxRevaluationRunLedgerResponseLinesItemKind) {
+	f.Kind = kind
+	f.require(fxRevaluationRunLedgerResponseLinesItemFieldKind)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponseLinesItem) SetCurrency(currency string) {
+	f.Currency = currency
+	f.require(fxRevaluationRunLedgerResponseLinesItemFieldCurrency)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponseLinesItem) SetPartnerID(partnerID *string) {
+	f.PartnerID = partnerID
+	f.require(fxRevaluationRunLedgerResponseLinesItemFieldPartnerID)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponseLinesItem) SetAccountCode(accountCode string) {
+	f.AccountCode = accountCode
+	f.require(fxRevaluationRunLedgerResponseLinesItemFieldAccountCode)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FxRevaluationRunLedgerResponseLinesItem) SetAmount(amount string) {
+	f.Amount = amount
+	f.require(fxRevaluationRunLedgerResponseLinesItemFieldAmount)
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler FxRevaluationRunLedgerResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*f = FxRevaluationRunLedgerResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed FxRevaluationRunLedgerResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FxRevaluationRunLedgerResponseLinesItem) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+type FxRevaluationRunLedgerResponseLinesItemKind string
+
+const (
+	FxRevaluationRunLedgerResponseLinesItemKindReceivable FxRevaluationRunLedgerResponseLinesItemKind = "receivable"
+	FxRevaluationRunLedgerResponseLinesItemKindPayable    FxRevaluationRunLedgerResponseLinesItemKind = "payable"
+	FxRevaluationRunLedgerResponseLinesItemKindBank       FxRevaluationRunLedgerResponseLinesItemKind = "bank"
+)
+
+func NewFxRevaluationRunLedgerResponseLinesItemKindFromString(s string) (FxRevaluationRunLedgerResponseLinesItemKind, error) {
+	switch s {
+	case "receivable":
+		return FxRevaluationRunLedgerResponseLinesItemKindReceivable, nil
+	case "payable":
+		return FxRevaluationRunLedgerResponseLinesItemKindPayable, nil
+	case "bank":
+		return FxRevaluationRunLedgerResponseLinesItemKindBank, nil
+	}
+	var t FxRevaluationRunLedgerResponseLinesItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FxRevaluationRunLedgerResponseLinesItemKind) Ptr() *FxRevaluationRunLedgerResponseLinesItemKind {
+	return &f
+}
+
+var (
 	journalTransactionsCreateLedgerRequestEntriesItemFieldAccountCode  = big.NewInt(1 << 0)
 	journalTransactionsCreateLedgerRequestEntriesItemFieldCostCenterID = big.NewInt(1 << 1)
 	journalTransactionsCreateLedgerRequestEntriesItemFieldProjectID    = big.NewInt(1 << 2)
-	journalTransactionsCreateLedgerRequestEntriesItemFieldDebit        = big.NewInt(1 << 3)
-	journalTransactionsCreateLedgerRequestEntriesItemFieldCredit       = big.NewInt(1 << 4)
-	journalTransactionsCreateLedgerRequestEntriesItemFieldDescription  = big.NewInt(1 << 5)
+	journalTransactionsCreateLedgerRequestEntriesItemFieldPartnerID    = big.NewInt(1 << 3)
+	journalTransactionsCreateLedgerRequestEntriesItemFieldDebit        = big.NewInt(1 << 4)
+	journalTransactionsCreateLedgerRequestEntriesItemFieldCredit       = big.NewInt(1 << 5)
+	journalTransactionsCreateLedgerRequestEntriesItemFieldDescription  = big.NewInt(1 << 6)
 )
 
 type JournalTransactionsCreateLedgerRequestEntriesItem struct {
 	AccountCode  string  `json:"accountCode" url:"accountCode"`
 	CostCenterID *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID    *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	PartnerID    *string `json:"partnerId,omitempty" url:"partnerId,omitempty"`
 	Debit        *string `json:"debit,omitempty" url:"debit,omitempty"`
 	Credit       *string `json:"credit,omitempty" url:"credit,omitempty"`
 	Description  *string `json:"description,omitempty" url:"description,omitempty"`
@@ -5684,6 +6684,13 @@ func (j *JournalTransactionsCreateLedgerRequestEntriesItem) GetProjectID() *stri
 		return nil
 	}
 	return j.ProjectID
+}
+
+func (j *JournalTransactionsCreateLedgerRequestEntriesItem) GetPartnerID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerID
 }
 
 func (j *JournalTransactionsCreateLedgerRequestEntriesItem) GetDebit() *string {
@@ -5740,6 +6747,13 @@ func (j *JournalTransactionsCreateLedgerRequestEntriesItem) SetCostCenterID(cost
 func (j *JournalTransactionsCreateLedgerRequestEntriesItem) SetProjectID(projectID *string) {
 	j.ProjectID = projectID
 	j.require(journalTransactionsCreateLedgerRequestEntriesItemFieldProjectID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsCreateLedgerRequestEntriesItem) SetPartnerID(partnerID *string) {
+	j.PartnerID = partnerID
+	j.require(journalTransactionsCreateLedgerRequestEntriesItemFieldPartnerID)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
@@ -6322,9 +7336,10 @@ var (
 	journalTransactionsGetLedgerResponseEntriesItemFieldAccountName  = big.NewInt(1 << 3)
 	journalTransactionsGetLedgerResponseEntriesItemFieldCostCenterID = big.NewInt(1 << 4)
 	journalTransactionsGetLedgerResponseEntriesItemFieldProjectID    = big.NewInt(1 << 5)
-	journalTransactionsGetLedgerResponseEntriesItemFieldDebit        = big.NewInt(1 << 6)
-	journalTransactionsGetLedgerResponseEntriesItemFieldCredit       = big.NewInt(1 << 7)
-	journalTransactionsGetLedgerResponseEntriesItemFieldDescription  = big.NewInt(1 << 8)
+	journalTransactionsGetLedgerResponseEntriesItemFieldPartnerID    = big.NewInt(1 << 6)
+	journalTransactionsGetLedgerResponseEntriesItemFieldDebit        = big.NewInt(1 << 7)
+	journalTransactionsGetLedgerResponseEntriesItemFieldCredit       = big.NewInt(1 << 8)
+	journalTransactionsGetLedgerResponseEntriesItemFieldDescription  = big.NewInt(1 << 9)
 )
 
 type JournalTransactionsGetLedgerResponseEntriesItem struct {
@@ -6334,6 +7349,7 @@ type JournalTransactionsGetLedgerResponseEntriesItem struct {
 	AccountName  string  `json:"accountName" url:"accountName"`
 	CostCenterID *string `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID    *string `json:"projectId,omitempty" url:"projectId,omitempty"`
+	PartnerID    *string `json:"partnerId,omitempty" url:"partnerId,omitempty"`
 	Debit        string  `json:"debit" url:"debit"`
 	Credit       string  `json:"credit" url:"credit"`
 	Description  *string `json:"description,omitempty" url:"description,omitempty"`
@@ -6385,6 +7401,13 @@ func (j *JournalTransactionsGetLedgerResponseEntriesItem) GetProjectID() *string
 		return nil
 	}
 	return j.ProjectID
+}
+
+func (j *JournalTransactionsGetLedgerResponseEntriesItem) GetPartnerID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerID
 }
 
 func (j *JournalTransactionsGetLedgerResponseEntriesItem) GetDebit() string {
@@ -6462,6 +7485,13 @@ func (j *JournalTransactionsGetLedgerResponseEntriesItem) SetCostCenterID(costCe
 func (j *JournalTransactionsGetLedgerResponseEntriesItem) SetProjectID(projectID *string) {
 	j.ProjectID = projectID
 	j.require(journalTransactionsGetLedgerResponseEntriesItemFieldProjectID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTransactionsGetLedgerResponseEntriesItem) SetPartnerID(partnerID *string) {
+	j.PartnerID = partnerID
+	j.require(journalTransactionsGetLedgerResponseEntriesItemFieldPartnerID)
 }
 
 // SetDebit sets the Debit field and marks it as non-optional;
@@ -11706,6 +12736,7 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeySalesVatPayable              PostingRulesUpdateLedgerRequestRulesItemKey = "sales.vatPayable"
 	PostingRulesUpdateLedgerRequestRulesItemKeySalesAdvancesReceived        PostingRulesUpdateLedgerRequestRulesItemKey = "sales.advancesReceived"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesPayables            PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.payables"
+	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesAdvancesPaid        PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.advancesPaid"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesVatReceivable       PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.vatReceivable"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesGoodsForResale      PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.goodsForResale"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesDefaultExpense      PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.defaultExpense"
@@ -11718,6 +12749,10 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeyPosCashSurplus               PostingRulesUpdateLedgerRequestRulesItemKey = "pos.cashSurplus"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxGain                   PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxGain"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxLoss                   PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxLoss"
+	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxUnrealisedGain         PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxUnrealisedGain"
+	PostingRulesUpdateLedgerRequestRulesItemKeyBankFxUnrealisedLoss         PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fxUnrealisedLoss"
+	PostingRulesUpdateLedgerRequestRulesItemKeyTaxCorporateExpense          PostingRulesUpdateLedgerRequestRulesItemKey = "tax.corporateExpense"
+	PostingRulesUpdateLedgerRequestRulesItemKeyTaxCorporatePayable          PostingRulesUpdateLedgerRequestRulesItemKey = "tax.corporatePayable"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankPaymentDifferenceGain    PostingRulesUpdateLedgerRequestRulesItemKey = "bank.paymentDifferenceGain"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankPaymentDifferenceLoss    PostingRulesUpdateLedgerRequestRulesItemKey = "bank.paymentDifferenceLoss"
 	PostingRulesUpdateLedgerRequestRulesItemKeyBankFees                     PostingRulesUpdateLedgerRequestRulesItemKey = "bank.fees"
@@ -11759,6 +12794,8 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeySalesAdvancesReceived, nil
 	case "purchases.payables":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesPayables, nil
+	case "purchases.advancesPaid":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesAdvancesPaid, nil
 	case "purchases.vatReceivable":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesVatReceivable, nil
 	case "purchases.goodsForResale":
@@ -11783,6 +12820,14 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFxGain, nil
 	case "bank.fxLoss":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFxLoss, nil
+	case "bank.fxUnrealisedGain":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFxUnrealisedGain, nil
+	case "bank.fxUnrealisedLoss":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyBankFxUnrealisedLoss, nil
+	case "tax.corporateExpense":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyTaxCorporateExpense, nil
+	case "tax.corporatePayable":
+		return PostingRulesUpdateLedgerRequestRulesItemKeyTaxCorporatePayable, nil
 	case "bank.paymentDifferenceGain":
 		return PostingRulesUpdateLedgerRequestRulesItemKeyBankPaymentDifferenceGain, nil
 	case "bank.paymentDifferenceLoss":
@@ -13360,4 +14405,144 @@ func (s *StatementRowsSetLedgerResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	taxProvisionPostLedgerResponseFieldID         = big.NewInt(1 << 0)
+	taxProvisionPostLedgerResponseFieldDate       = big.NewInt(1 << 1)
+	taxProvisionPostLedgerResponseFieldFiscalYear = big.NewInt(1 << 2)
+	taxProvisionPostLedgerResponseFieldAmount     = big.NewInt(1 << 3)
+)
+
+type TaxProvisionPostLedgerResponse struct {
+	ID         string    `json:"id" url:"id"`
+	Date       time.Time `json:"date" url:"date" format:"date"`
+	FiscalYear int64     `json:"fiscalYear" url:"fiscalYear"`
+	Amount     string    `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TaxProvisionPostLedgerResponse) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *TaxProvisionPostLedgerResponse) GetDate() time.Time {
+	if t == nil {
+		return time.Time{}
+	}
+	return t.Date
+}
+
+func (t *TaxProvisionPostLedgerResponse) GetFiscalYear() int64 {
+	if t == nil {
+		return 0
+	}
+	return t.FiscalYear
+}
+
+func (t *TaxProvisionPostLedgerResponse) GetAmount() string {
+	if t == nil {
+		return ""
+	}
+	return t.Amount
+}
+
+func (t *TaxProvisionPostLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TaxProvisionPostLedgerResponse) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TaxProvisionPostLedgerResponse) SetID(id string) {
+	t.ID = id
+	t.require(taxProvisionPostLedgerResponseFieldID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TaxProvisionPostLedgerResponse) SetDate(date time.Time) {
+	t.Date = date
+	t.require(taxProvisionPostLedgerResponseFieldDate)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TaxProvisionPostLedgerResponse) SetFiscalYear(fiscalYear int64) {
+	t.FiscalYear = fiscalYear
+	t.require(taxProvisionPostLedgerResponseFieldFiscalYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TaxProvisionPostLedgerResponse) SetAmount(amount string) {
+	t.Amount = amount
+	t.require(taxProvisionPostLedgerResponseFieldAmount)
+}
+
+func (t *TaxProvisionPostLedgerResponse) UnmarshalJSON(data []byte) error {
+	type embed TaxProvisionPostLedgerResponse
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*t),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*t = TaxProvisionPostLedgerResponse(unmarshaler.embed)
+	t.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TaxProvisionPostLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed TaxProvisionPostLedgerResponse
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*t),
+		Date:  internal.NewDate(t.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TaxProvisionPostLedgerResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
 }

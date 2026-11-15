@@ -68,7 +68,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// List the company's files. Filterable by `entity`, `entityId` and `fileName`; sortable by `createdAt`, `fileName` and `sizeBytes`.
+// List the company's files. Filterable by `entity`, `entityId` and `fileName`; sortable by `createdAt`, `fileName`, `sizeBytes`, `entity`, `entityId` and `mimeType`.
 func (c *Client) List(
 	ctx context.Context,
 	request *nordlet.ListFilesRequest,

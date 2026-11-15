@@ -1739,6 +1739,7 @@ var (
 	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 33)
 	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 34)
 	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
+	findOrCreatePartnersRequestFieldIban                  = big.NewInt(1 << 36)
 )
 
 type FindOrCreatePartnersRequest struct {
@@ -1780,6 +1781,7 @@ type FindOrCreatePartnersRequest struct {
 	IsGroupMember         *bool                                             `json:"isGroupMember,omitempty" url:"-"`
 	IsActive              *bool                                             `json:"isActive,omitempty" url:"-"`
 	LegalCountryClass     *FindOrCreatePartnersRequestLegalCountryClass     `json:"legalCountryClass,omitempty" url:"-"`
+	Iban                  *string                                           `json:"iban,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2042,6 +2044,13 @@ func (f *FindOrCreatePartnersRequest) SetIsActive(isActive *bool) {
 func (f *FindOrCreatePartnersRequest) SetLegalCountryClass(legalCountryClass *FindOrCreatePartnersRequestLegalCountryClass) {
 	f.LegalCountryClass = legalCountryClass
 	f.require(findOrCreatePartnersRequestFieldLegalCountryClass)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersRequest) SetIban(iban *string) {
+	f.Iban = iban
+	f.require(findOrCreatePartnersRequestFieldIban)
 }
 
 func (f *FindOrCreatePartnersRequest) UnmarshalJSON(data []byte) error {

@@ -85,7 +85,7 @@ func (c *Client) Get(
 	return response.Body, nil
 }
 
-// List projects. Filterable by `code`, `name`, `status` and `partnerId`; sortable by `code`, `name` and `createdAt`.
+// List projects. Filterable by `code`, `name`, `status` and `partnerId`; sortable by `code`, `name`, `status`, `createdAt`, and by the all-time figures of `projects/report`: `revenue`, `costs`, `profit`, `unbilledHours` and `unbilledAmount`.
 func (c *Client) List(
 	ctx context.Context,
 	request *nordlet.ListProjectsRequest,

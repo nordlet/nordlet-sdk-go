@@ -119,7 +119,7 @@ func (c *Client) WaybillsGet(
 	return response.Body, nil
 }
 
-// List waybills with the consignee's name. Filterable by `status`, `consigneePartnerId`, `documentDate`, `fullNumber` and `dispatchAt`; sortable by `createdAt`, `dispatchAt` and `fullNumber`.
+// List waybills with the consignee's name. Filterable by `status`, `consigneePartnerId`, `documentDate`, `fullNumber` and `dispatchAt`; sortable by `createdAt`, `dispatchAt`, `fullNumber`, `consigneeName` (the name of the consignee), `vehiclePlate`, `unloadAddress`, `status` and `valueEur`.
 func (c *Client) WaybillsList(
 	ctx context.Context,
 	request *nordlet.WaybillsListTransportRequest,

@@ -292,13 +292,17 @@ func (l *ListCalendarRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	submitCalendarRequestFieldKey   = big.NewInt(1 << 0)
-	submitCalendarRequestFieldAmend = big.NewInt(1 << 1)
+	submitCalendarRequestFieldKey          = big.NewInt(1 << 0)
+	submitCalendarRequestFieldAmend        = big.NewInt(1 << 1)
+	submitCalendarRequestFieldCorrection   = big.NewInt(1 << 2)
+	submitCalendarRequestFieldDocumentKeys = big.NewInt(1 << 3)
 )
 
 type SubmitCalendarRequest struct {
-	Key   string `json:"key" url:"-"`
-	Amend *bool  `json:"amend,omitempty" url:"-"`
+	Key          string                           `json:"key" url:"-"`
+	Amend        *bool                            `json:"amend,omitempty" url:"-"`
+	Correction   *SubmitCalendarRequestCorrection `json:"correction,omitempty" url:"-"`
+	DocumentKeys []string                         `json:"documentKeys,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -323,6 +327,20 @@ func (s *SubmitCalendarRequest) SetKey(key string) {
 func (s *SubmitCalendarRequest) SetAmend(amend *bool) {
 	s.Amend = amend
 	s.require(submitCalendarRequestFieldAmend)
+}
+
+// SetCorrection sets the Correction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequest) SetCorrection(correction *SubmitCalendarRequestCorrection) {
+	s.Correction = correction
+	s.require(submitCalendarRequestFieldCorrection)
+}
+
+// SetDocumentKeys sets the DocumentKeys field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequest) SetDocumentKeys(documentKeys []string) {
+	s.DocumentKeys = documentKeys
+	s.require(submitCalendarRequestFieldDocumentKeys)
 }
 
 func (s *SubmitCalendarRequest) UnmarshalJSON(data []byte) error {
@@ -361,8 +379,9 @@ var (
 	createCalendarResponseFieldSubmissions = big.NewInt(1 << 11)
 	createCalendarResponseFieldCanSubmit   = big.NewInt(1 << 12)
 	createCalendarResponseFieldCanAmend    = big.NewInt(1 << 13)
-	createCalendarResponseFieldCanDownload = big.NewInt(1 << 14)
-	createCalendarResponseFieldAutomated   = big.NewInt(1 << 15)
+	createCalendarResponseFieldCorrection  = big.NewInt(1 << 14)
+	createCalendarResponseFieldCanDownload = big.NewInt(1 << 15)
+	createCalendarResponseFieldAutomated   = big.NewInt(1 << 16)
 )
 
 type CreateCalendarResponse struct {
@@ -380,6 +399,7 @@ type CreateCalendarResponse struct {
 	Submissions []*CreateCalendarResponseSubmissionsItem `json:"submissions" url:"submissions"`
 	CanSubmit   bool                                     `json:"canSubmit" url:"canSubmit"`
 	CanAmend    bool                                     `json:"canAmend" url:"canAmend"`
+	Correction  *CreateCalendarResponseCorrection        `json:"correction,omitempty" url:"correction,omitempty"`
 	CanDownload bool                                     `json:"canDownload" url:"canDownload"`
 	Automated   bool                                     `json:"automated" url:"automated"`
 
@@ -486,6 +506,13 @@ func (c *CreateCalendarResponse) GetCanAmend() bool {
 		return false
 	}
 	return c.CanAmend
+}
+
+func (c *CreateCalendarResponse) GetCorrection() *CreateCalendarResponseCorrection {
+	if c == nil {
+		return nil
+	}
+	return c.Correction
 }
 
 func (c *CreateCalendarResponse) GetCanDownload() bool {
@@ -614,6 +641,13 @@ func (c *CreateCalendarResponse) SetCanAmend(canAmend bool) {
 	c.require(createCalendarResponseFieldCanAmend)
 }
 
+// SetCorrection sets the Correction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponse) SetCorrection(correction *CreateCalendarResponseCorrection) {
+	c.Correction = correction
+	c.require(createCalendarResponseFieldCorrection)
+}
+
 // SetCanDownload sets the CanDownload field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CreateCalendarResponse) SetCanDownload(canDownload bool) {
@@ -678,6 +712,294 @@ func (c *CreateCalendarResponse) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
+var (
+	createCalendarResponseCorrectionFieldRequired    = big.NewInt(1 << 0)
+	createCalendarResponseCorrectionFieldOptional    = big.NewInt(1 << 1)
+	createCalendarResponseCorrectionFieldReasonCodes = big.NewInt(1 << 2)
+	createCalendarResponseCorrectionFieldCarry       = big.NewInt(1 << 3)
+)
+
+type CreateCalendarResponseCorrection struct {
+	Required    []CreateCalendarResponseCorrectionRequiredItem     `json:"required" url:"required"`
+	Optional    []CreateCalendarResponseCorrectionOptionalItem     `json:"optional" url:"optional"`
+	ReasonCodes []*CreateCalendarResponseCorrectionReasonCodesItem `json:"reasonCodes" url:"reasonCodes"`
+	Carry       bool                                               `json:"carry" url:"carry"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CreateCalendarResponseCorrection) GetRequired() []CreateCalendarResponseCorrectionRequiredItem {
+	if c == nil {
+		return nil
+	}
+	return c.Required
+}
+
+func (c *CreateCalendarResponseCorrection) GetOptional() []CreateCalendarResponseCorrectionOptionalItem {
+	if c == nil {
+		return nil
+	}
+	return c.Optional
+}
+
+func (c *CreateCalendarResponseCorrection) GetReasonCodes() []*CreateCalendarResponseCorrectionReasonCodesItem {
+	if c == nil {
+		return nil
+	}
+	return c.ReasonCodes
+}
+
+func (c *CreateCalendarResponseCorrection) GetCarry() bool {
+	if c == nil {
+		return false
+	}
+	return c.Carry
+}
+
+func (c *CreateCalendarResponseCorrection) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CreateCalendarResponseCorrection) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseCorrection) SetRequired(required []CreateCalendarResponseCorrectionRequiredItem) {
+	c.Required = required
+	c.require(createCalendarResponseCorrectionFieldRequired)
+}
+
+// SetOptional sets the Optional field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseCorrection) SetOptional(optional []CreateCalendarResponseCorrectionOptionalItem) {
+	c.Optional = optional
+	c.require(createCalendarResponseCorrectionFieldOptional)
+}
+
+// SetReasonCodes sets the ReasonCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseCorrection) SetReasonCodes(reasonCodes []*CreateCalendarResponseCorrectionReasonCodesItem) {
+	c.ReasonCodes = reasonCodes
+	c.require(createCalendarResponseCorrectionFieldReasonCodes)
+}
+
+// SetCarry sets the Carry field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseCorrection) SetCarry(carry bool) {
+	c.Carry = carry
+	c.require(createCalendarResponseCorrectionFieldCarry)
+}
+
+func (c *CreateCalendarResponseCorrection) UnmarshalJSON(data []byte) error {
+	type unmarshaler CreateCalendarResponseCorrection
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CreateCalendarResponseCorrection(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CreateCalendarResponseCorrection) MarshalJSON() ([]byte, error) {
+	type embed CreateCalendarResponseCorrection
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CreateCalendarResponseCorrection) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type CreateCalendarResponseCorrectionOptionalItem string
+
+const (
+	CreateCalendarResponseCorrectionOptionalItemReason             CreateCalendarResponseCorrectionOptionalItem = "reason"
+	CreateCalendarResponseCorrectionOptionalItemReasonCode         CreateCalendarResponseCorrectionOptionalItem = "reasonCode"
+	CreateCalendarResponseCorrectionOptionalItemAuthorityReference CreateCalendarResponseCorrectionOptionalItem = "authorityReference"
+	CreateCalendarResponseCorrectionOptionalItemDiscoveredOn       CreateCalendarResponseCorrectionOptionalItem = "discoveredOn"
+)
+
+func NewCreateCalendarResponseCorrectionOptionalItemFromString(s string) (CreateCalendarResponseCorrectionOptionalItem, error) {
+	switch s {
+	case "reason":
+		return CreateCalendarResponseCorrectionOptionalItemReason, nil
+	case "reasonCode":
+		return CreateCalendarResponseCorrectionOptionalItemReasonCode, nil
+	case "authorityReference":
+		return CreateCalendarResponseCorrectionOptionalItemAuthorityReference, nil
+	case "discoveredOn":
+		return CreateCalendarResponseCorrectionOptionalItemDiscoveredOn, nil
+	}
+	var t CreateCalendarResponseCorrectionOptionalItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CreateCalendarResponseCorrectionOptionalItem) Ptr() *CreateCalendarResponseCorrectionOptionalItem {
+	return &c
+}
+
+var (
+	createCalendarResponseCorrectionReasonCodesItemFieldCode  = big.NewInt(1 << 0)
+	createCalendarResponseCorrectionReasonCodesItemFieldLabel = big.NewInt(1 << 1)
+)
+
+type CreateCalendarResponseCorrectionReasonCodesItem struct {
+	Code  string `json:"code" url:"code"`
+	Label string `json:"label" url:"label"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) GetCode() string {
+	if c == nil {
+		return ""
+	}
+	return c.Code
+}
+
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) GetLabel() string {
+	if c == nil {
+		return ""
+	}
+	return c.Label
+}
+
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) SetCode(code string) {
+	c.Code = code
+	c.require(createCalendarResponseCorrectionReasonCodesItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) SetLabel(label string) {
+	c.Label = label
+	c.require(createCalendarResponseCorrectionReasonCodesItemFieldLabel)
+}
+
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler CreateCalendarResponseCorrectionReasonCodesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CreateCalendarResponseCorrectionReasonCodesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) MarshalJSON() ([]byte, error) {
+	type embed CreateCalendarResponseCorrectionReasonCodesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CreateCalendarResponseCorrectionReasonCodesItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type CreateCalendarResponseCorrectionRequiredItem string
+
+const (
+	CreateCalendarResponseCorrectionRequiredItemReason             CreateCalendarResponseCorrectionRequiredItem = "reason"
+	CreateCalendarResponseCorrectionRequiredItemReasonCode         CreateCalendarResponseCorrectionRequiredItem = "reasonCode"
+	CreateCalendarResponseCorrectionRequiredItemAuthorityReference CreateCalendarResponseCorrectionRequiredItem = "authorityReference"
+	CreateCalendarResponseCorrectionRequiredItemDiscoveredOn       CreateCalendarResponseCorrectionRequiredItem = "discoveredOn"
+)
+
+func NewCreateCalendarResponseCorrectionRequiredItemFromString(s string) (CreateCalendarResponseCorrectionRequiredItem, error) {
+	switch s {
+	case "reason":
+		return CreateCalendarResponseCorrectionRequiredItemReason, nil
+	case "reasonCode":
+		return CreateCalendarResponseCorrectionRequiredItemReasonCode, nil
+	case "authorityReference":
+		return CreateCalendarResponseCorrectionRequiredItemAuthorityReference, nil
+	case "discoveredOn":
+		return CreateCalendarResponseCorrectionRequiredItemDiscoveredOn, nil
+	}
+	var t CreateCalendarResponseCorrectionRequiredItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CreateCalendarResponseCorrectionRequiredItem) Ptr() *CreateCalendarResponseCorrectionRequiredItem {
+	return &c
+}
+
 type CreateCalendarResponseKind string
 
 const (
@@ -715,57 +1037,61 @@ var (
 	createCalendarResponseSubmissionFieldPeriod                 = big.NewInt(1 << 11)
 	createCalendarResponseSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
 	createCalendarResponseSubmissionFieldAmendment              = big.NewInt(1 << 13)
-	createCalendarResponseSubmissionFieldOrigin                 = big.NewInt(1 << 14)
-	createCalendarResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 15)
-	createCalendarResponseSubmissionFieldEnvironment            = big.NewInt(1 << 16)
-	createCalendarResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 17)
-	createCalendarResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 18)
-	createCalendarResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 19)
-	createCalendarResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 20)
-	createCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
-	createCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 22)
-	createCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	createCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
-	createCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 25)
-	createCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
-	createCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	createCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	createCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
-	createCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
+	createCalendarResponseSubmissionFieldAuthorityRef           = big.NewInt(1 << 14)
+	createCalendarResponseSubmissionFieldCorrectionInput        = big.NewInt(1 << 15)
+	createCalendarResponseSubmissionFieldOrigin                 = big.NewInt(1 << 16)
+	createCalendarResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 17)
+	createCalendarResponseSubmissionFieldEnvironment            = big.NewInt(1 << 18)
+	createCalendarResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 19)
+	createCalendarResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 20)
+	createCalendarResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 21)
+	createCalendarResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 22)
+	createCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 23)
+	createCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 24)
+	createCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 25)
+	createCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 26)
+	createCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 27)
+	createCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 28)
+	createCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	createCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	createCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 31)
+	createCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type CreateCalendarResponseSubmission struct {
-	ID                     string                                       `json:"id" url:"id"`
-	Obligation             string                                       `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                        `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                       `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                      `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 CreateCalendarResponseSubmissionStatus       `json:"status" url:"status"`
-	FileName               string                                       `json:"fileName" url:"fileName"`
-	FileID                 *string                                      `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                      `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                      `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                      `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                      `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                      `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                        `json:"amendment" url:"amendment"`
-	Origin                 string                                       `json:"origin" url:"origin"`
-	TransportSystem        *string                                      `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *CreateCalendarResponseSubmissionEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                   `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                   `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                   `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                   `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                   `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                        `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                      `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                         `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                      `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                      `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                      `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                      `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                    `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                    `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                           `json:"id" url:"id"`
+	Obligation             string                                           `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                            `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                           `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                          `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 CreateCalendarResponseSubmissionStatus           `json:"status" url:"status"`
+	FileName               string                                           `json:"fileName" url:"fileName"`
+	FileID                 *string                                          `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                          `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                          `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                          `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                          `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                          `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                            `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                          `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *CreateCalendarResponseSubmissionCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                           `json:"origin" url:"origin"`
+	TransportSystem        *string                                          `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *CreateCalendarResponseSubmissionEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                       `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                       `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                       `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                       `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                       `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                            `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                          `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                             `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                          `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                          `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                          `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                          `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                        `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                        `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -870,6 +1196,20 @@ func (c *CreateCalendarResponseSubmission) GetAmendment() int64 {
 		return 0
 	}
 	return c.Amendment
+}
+
+func (c *CreateCalendarResponseSubmission) GetAuthorityRef() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AuthorityRef
+}
+
+func (c *CreateCalendarResponseSubmission) GetCorrectionInput() *CreateCalendarResponseSubmissionCorrectionInput {
+	if c == nil {
+		return nil
+	}
+	return c.CorrectionInput
 }
 
 func (c *CreateCalendarResponseSubmission) GetOrigin() string {
@@ -1103,6 +1443,20 @@ func (c *CreateCalendarResponseSubmission) SetAmendment(amendment int64) {
 	c.require(createCalendarResponseSubmissionFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmission) SetAuthorityRef(authorityRef *string) {
+	c.AuthorityRef = authorityRef
+	c.require(createCalendarResponseSubmissionFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmission) SetCorrectionInput(correctionInput *CreateCalendarResponseSubmissionCorrectionInput) {
+	c.CorrectionInput = correctionInput
+	c.require(createCalendarResponseSubmissionFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CreateCalendarResponseSubmission) SetOrigin(origin string) {
@@ -1296,6 +1650,138 @@ func (c *CreateCalendarResponseSubmission) String() string {
 	return fmt.Sprintf("%#v", c)
 }
 
+var (
+	createCalendarResponseSubmissionCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	createCalendarResponseSubmissionCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	createCalendarResponseSubmissionCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	createCalendarResponseSubmissionCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type CreateCalendarResponseSubmissionCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) GetReason() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Reason
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) GetReasonCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ReasonCode
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) GetAuthorityReference() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AuthorityReference
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) GetDiscoveredOn() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DiscoveredOn
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionCorrectionInput) SetReason(reason *string) {
+	c.Reason = reason
+	c.require(createCalendarResponseSubmissionCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionCorrectionInput) SetReasonCode(reasonCode *string) {
+	c.ReasonCode = reasonCode
+	c.require(createCalendarResponseSubmissionCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	c.AuthorityReference = authorityReference
+	c.require(createCalendarResponseSubmissionCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	c.DiscoveredOn = discoveredOn
+	c.require(createCalendarResponseSubmissionCorrectionInputFieldDiscoveredOn)
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler CreateCalendarResponseSubmissionCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CreateCalendarResponseSubmissionCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed CreateCalendarResponseSubmissionCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CreateCalendarResponseSubmissionCorrectionInput) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
 type CreateCalendarResponseSubmissionEnvironment string
 
 const (
@@ -1361,57 +1847,61 @@ var (
 	createCalendarResponseSubmissionsItemFieldPeriod                 = big.NewInt(1 << 11)
 	createCalendarResponseSubmissionsItemFieldDocumentKey            = big.NewInt(1 << 12)
 	createCalendarResponseSubmissionsItemFieldAmendment              = big.NewInt(1 << 13)
-	createCalendarResponseSubmissionsItemFieldOrigin                 = big.NewInt(1 << 14)
-	createCalendarResponseSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 15)
-	createCalendarResponseSubmissionsItemFieldEnvironment            = big.NewInt(1 << 16)
-	createCalendarResponseSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 17)
-	createCalendarResponseSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 18)
-	createCalendarResponseSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 19)
-	createCalendarResponseSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 20)
-	createCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
-	createCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
-	createCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	createCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
-	createCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
-	createCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
-	createCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	createCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	createCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
-	createCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
+	createCalendarResponseSubmissionsItemFieldAuthorityRef           = big.NewInt(1 << 14)
+	createCalendarResponseSubmissionsItemFieldCorrectionInput        = big.NewInt(1 << 15)
+	createCalendarResponseSubmissionsItemFieldOrigin                 = big.NewInt(1 << 16)
+	createCalendarResponseSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 17)
+	createCalendarResponseSubmissionsItemFieldEnvironment            = big.NewInt(1 << 18)
+	createCalendarResponseSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 19)
+	createCalendarResponseSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 20)
+	createCalendarResponseSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 21)
+	createCalendarResponseSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 22)
+	createCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 23)
+	createCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 24)
+	createCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 25)
+	createCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 26)
+	createCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 27)
+	createCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 28)
+	createCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	createCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	createCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 31)
+	createCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type CreateCalendarResponseSubmissionsItem struct {
-	ID                     string                                            `json:"id" url:"id"`
-	Obligation             string                                            `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                             `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                            `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                           `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 CreateCalendarResponseSubmissionsItemStatus       `json:"status" url:"status"`
-	FileName               string                                            `json:"fileName" url:"fileName"`
-	FileID                 *string                                           `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                           `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                           `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                           `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                           `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                           `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                             `json:"amendment" url:"amendment"`
-	Origin                 string                                            `json:"origin" url:"origin"`
-	TransportSystem        *string                                           `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *CreateCalendarResponseSubmissionsItemEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                        `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                        `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                        `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                        `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                        `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                             `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                           `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                              `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                           `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                           `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                           `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                           `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                         `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                         `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                                `json:"id" url:"id"`
+	Obligation             string                                                `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                 `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                                `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                               `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 CreateCalendarResponseSubmissionsItemStatus           `json:"status" url:"status"`
+	FileName               string                                                `json:"fileName" url:"fileName"`
+	FileID                 *string                                               `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                               `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                               `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                               `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                               `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                               `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                 `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                               `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *CreateCalendarResponseSubmissionsItemCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                                `json:"origin" url:"origin"`
+	TransportSystem        *string                                               `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *CreateCalendarResponseSubmissionsItemEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                            `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                            `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                            `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                            `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                            `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                 `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                               `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                  `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                               `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                               `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                               `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                               `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                             `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1516,6 +2006,20 @@ func (c *CreateCalendarResponseSubmissionsItem) GetAmendment() int64 {
 		return 0
 	}
 	return c.Amendment
+}
+
+func (c *CreateCalendarResponseSubmissionsItem) GetAuthorityRef() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AuthorityRef
+}
+
+func (c *CreateCalendarResponseSubmissionsItem) GetCorrectionInput() *CreateCalendarResponseSubmissionsItemCorrectionInput {
+	if c == nil {
+		return nil
+	}
+	return c.CorrectionInput
 }
 
 func (c *CreateCalendarResponseSubmissionsItem) GetOrigin() string {
@@ -1749,6 +2253,20 @@ func (c *CreateCalendarResponseSubmissionsItem) SetAmendment(amendment int64) {
 	c.require(createCalendarResponseSubmissionsItemFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionsItem) SetAuthorityRef(authorityRef *string) {
+	c.AuthorityRef = authorityRef
+	c.require(createCalendarResponseSubmissionsItemFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionsItem) SetCorrectionInput(correctionInput *CreateCalendarResponseSubmissionsItemCorrectionInput) {
+	c.CorrectionInput = correctionInput
+	c.require(createCalendarResponseSubmissionsItemFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CreateCalendarResponseSubmissionsItem) SetOrigin(origin string) {
@@ -1928,6 +2446,138 @@ func (c *CreateCalendarResponseSubmissionsItem) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreateCalendarResponseSubmissionsItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	createCalendarResponseSubmissionsItemCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	createCalendarResponseSubmissionsItemCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	createCalendarResponseSubmissionsItemCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	createCalendarResponseSubmissionsItemCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type CreateCalendarResponseSubmissionsItemCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) GetReason() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Reason
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) GetReasonCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ReasonCode
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) GetAuthorityReference() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AuthorityReference
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) GetDiscoveredOn() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DiscoveredOn
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) SetReason(reason *string) {
+	c.Reason = reason
+	c.require(createCalendarResponseSubmissionsItemCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) SetReasonCode(reasonCode *string) {
+	c.ReasonCode = reasonCode
+	c.require(createCalendarResponseSubmissionsItemCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	c.AuthorityReference = authorityReference
+	c.require(createCalendarResponseSubmissionsItemCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	c.DiscoveredOn = discoveredOn
+	c.require(createCalendarResponseSubmissionsItemCorrectionInputFieldDiscoveredOn)
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler CreateCalendarResponseSubmissionsItemCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CreateCalendarResponseSubmissionsItemCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed CreateCalendarResponseSubmissionsItemCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CreateCalendarResponseSubmissionsItemCorrectionInput) String() string {
 	if c == nil {
 		return "<nil>"
 	}
@@ -2255,8 +2905,9 @@ var (
 	getCalendarResponseFieldSubmissions = big.NewInt(1 << 11)
 	getCalendarResponseFieldCanSubmit   = big.NewInt(1 << 12)
 	getCalendarResponseFieldCanAmend    = big.NewInt(1 << 13)
-	getCalendarResponseFieldCanDownload = big.NewInt(1 << 14)
-	getCalendarResponseFieldAutomated   = big.NewInt(1 << 15)
+	getCalendarResponseFieldCorrection  = big.NewInt(1 << 14)
+	getCalendarResponseFieldCanDownload = big.NewInt(1 << 15)
+	getCalendarResponseFieldAutomated   = big.NewInt(1 << 16)
 )
 
 type GetCalendarResponse struct {
@@ -2274,6 +2925,7 @@ type GetCalendarResponse struct {
 	Submissions []*GetCalendarResponseSubmissionsItem `json:"submissions" url:"submissions"`
 	CanSubmit   bool                                  `json:"canSubmit" url:"canSubmit"`
 	CanAmend    bool                                  `json:"canAmend" url:"canAmend"`
+	Correction  *GetCalendarResponseCorrection        `json:"correction,omitempty" url:"correction,omitempty"`
 	CanDownload bool                                  `json:"canDownload" url:"canDownload"`
 	Automated   bool                                  `json:"automated" url:"automated"`
 
@@ -2380,6 +3032,13 @@ func (g *GetCalendarResponse) GetCanAmend() bool {
 		return false
 	}
 	return g.CanAmend
+}
+
+func (g *GetCalendarResponse) GetCorrection() *GetCalendarResponseCorrection {
+	if g == nil {
+		return nil
+	}
+	return g.Correction
 }
 
 func (g *GetCalendarResponse) GetCanDownload() bool {
@@ -2508,6 +3167,13 @@ func (g *GetCalendarResponse) SetCanAmend(canAmend bool) {
 	g.require(getCalendarResponseFieldCanAmend)
 }
 
+// SetCorrection sets the Correction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponse) SetCorrection(correction *GetCalendarResponseCorrection) {
+	g.Correction = correction
+	g.require(getCalendarResponseFieldCorrection)
+}
+
 // SetCanDownload sets the CanDownload field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (g *GetCalendarResponse) SetCanDownload(canDownload bool) {
@@ -2572,6 +3238,294 @@ func (g *GetCalendarResponse) String() string {
 	return fmt.Sprintf("%#v", g)
 }
 
+var (
+	getCalendarResponseCorrectionFieldRequired    = big.NewInt(1 << 0)
+	getCalendarResponseCorrectionFieldOptional    = big.NewInt(1 << 1)
+	getCalendarResponseCorrectionFieldReasonCodes = big.NewInt(1 << 2)
+	getCalendarResponseCorrectionFieldCarry       = big.NewInt(1 << 3)
+)
+
+type GetCalendarResponseCorrection struct {
+	Required    []GetCalendarResponseCorrectionRequiredItem     `json:"required" url:"required"`
+	Optional    []GetCalendarResponseCorrectionOptionalItem     `json:"optional" url:"optional"`
+	ReasonCodes []*GetCalendarResponseCorrectionReasonCodesItem `json:"reasonCodes" url:"reasonCodes"`
+	Carry       bool                                            `json:"carry" url:"carry"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GetCalendarResponseCorrection) GetRequired() []GetCalendarResponseCorrectionRequiredItem {
+	if g == nil {
+		return nil
+	}
+	return g.Required
+}
+
+func (g *GetCalendarResponseCorrection) GetOptional() []GetCalendarResponseCorrectionOptionalItem {
+	if g == nil {
+		return nil
+	}
+	return g.Optional
+}
+
+func (g *GetCalendarResponseCorrection) GetReasonCodes() []*GetCalendarResponseCorrectionReasonCodesItem {
+	if g == nil {
+		return nil
+	}
+	return g.ReasonCodes
+}
+
+func (g *GetCalendarResponseCorrection) GetCarry() bool {
+	if g == nil {
+		return false
+	}
+	return g.Carry
+}
+
+func (g *GetCalendarResponseCorrection) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GetCalendarResponseCorrection) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseCorrection) SetRequired(required []GetCalendarResponseCorrectionRequiredItem) {
+	g.Required = required
+	g.require(getCalendarResponseCorrectionFieldRequired)
+}
+
+// SetOptional sets the Optional field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseCorrection) SetOptional(optional []GetCalendarResponseCorrectionOptionalItem) {
+	g.Optional = optional
+	g.require(getCalendarResponseCorrectionFieldOptional)
+}
+
+// SetReasonCodes sets the ReasonCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseCorrection) SetReasonCodes(reasonCodes []*GetCalendarResponseCorrectionReasonCodesItem) {
+	g.ReasonCodes = reasonCodes
+	g.require(getCalendarResponseCorrectionFieldReasonCodes)
+}
+
+// SetCarry sets the Carry field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseCorrection) SetCarry(carry bool) {
+	g.Carry = carry
+	g.require(getCalendarResponseCorrectionFieldCarry)
+}
+
+func (g *GetCalendarResponseCorrection) UnmarshalJSON(data []byte) error {
+	type unmarshaler GetCalendarResponseCorrection
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GetCalendarResponseCorrection(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GetCalendarResponseCorrection) MarshalJSON() ([]byte, error) {
+	type embed GetCalendarResponseCorrection
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GetCalendarResponseCorrection) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GetCalendarResponseCorrectionOptionalItem string
+
+const (
+	GetCalendarResponseCorrectionOptionalItemReason             GetCalendarResponseCorrectionOptionalItem = "reason"
+	GetCalendarResponseCorrectionOptionalItemReasonCode         GetCalendarResponseCorrectionOptionalItem = "reasonCode"
+	GetCalendarResponseCorrectionOptionalItemAuthorityReference GetCalendarResponseCorrectionOptionalItem = "authorityReference"
+	GetCalendarResponseCorrectionOptionalItemDiscoveredOn       GetCalendarResponseCorrectionOptionalItem = "discoveredOn"
+)
+
+func NewGetCalendarResponseCorrectionOptionalItemFromString(s string) (GetCalendarResponseCorrectionOptionalItem, error) {
+	switch s {
+	case "reason":
+		return GetCalendarResponseCorrectionOptionalItemReason, nil
+	case "reasonCode":
+		return GetCalendarResponseCorrectionOptionalItemReasonCode, nil
+	case "authorityReference":
+		return GetCalendarResponseCorrectionOptionalItemAuthorityReference, nil
+	case "discoveredOn":
+		return GetCalendarResponseCorrectionOptionalItemDiscoveredOn, nil
+	}
+	var t GetCalendarResponseCorrectionOptionalItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GetCalendarResponseCorrectionOptionalItem) Ptr() *GetCalendarResponseCorrectionOptionalItem {
+	return &g
+}
+
+var (
+	getCalendarResponseCorrectionReasonCodesItemFieldCode  = big.NewInt(1 << 0)
+	getCalendarResponseCorrectionReasonCodesItemFieldLabel = big.NewInt(1 << 1)
+)
+
+type GetCalendarResponseCorrectionReasonCodesItem struct {
+	Code  string `json:"code" url:"code"`
+	Label string `json:"label" url:"label"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GetCalendarResponseCorrectionReasonCodesItem) GetCode() string {
+	if g == nil {
+		return ""
+	}
+	return g.Code
+}
+
+func (g *GetCalendarResponseCorrectionReasonCodesItem) GetLabel() string {
+	if g == nil {
+		return ""
+	}
+	return g.Label
+}
+
+func (g *GetCalendarResponseCorrectionReasonCodesItem) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GetCalendarResponseCorrectionReasonCodesItem) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseCorrectionReasonCodesItem) SetCode(code string) {
+	g.Code = code
+	g.require(getCalendarResponseCorrectionReasonCodesItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseCorrectionReasonCodesItem) SetLabel(label string) {
+	g.Label = label
+	g.require(getCalendarResponseCorrectionReasonCodesItemFieldLabel)
+}
+
+func (g *GetCalendarResponseCorrectionReasonCodesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler GetCalendarResponseCorrectionReasonCodesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GetCalendarResponseCorrectionReasonCodesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GetCalendarResponseCorrectionReasonCodesItem) MarshalJSON() ([]byte, error) {
+	type embed GetCalendarResponseCorrectionReasonCodesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GetCalendarResponseCorrectionReasonCodesItem) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GetCalendarResponseCorrectionRequiredItem string
+
+const (
+	GetCalendarResponseCorrectionRequiredItemReason             GetCalendarResponseCorrectionRequiredItem = "reason"
+	GetCalendarResponseCorrectionRequiredItemReasonCode         GetCalendarResponseCorrectionRequiredItem = "reasonCode"
+	GetCalendarResponseCorrectionRequiredItemAuthorityReference GetCalendarResponseCorrectionRequiredItem = "authorityReference"
+	GetCalendarResponseCorrectionRequiredItemDiscoveredOn       GetCalendarResponseCorrectionRequiredItem = "discoveredOn"
+)
+
+func NewGetCalendarResponseCorrectionRequiredItemFromString(s string) (GetCalendarResponseCorrectionRequiredItem, error) {
+	switch s {
+	case "reason":
+		return GetCalendarResponseCorrectionRequiredItemReason, nil
+	case "reasonCode":
+		return GetCalendarResponseCorrectionRequiredItemReasonCode, nil
+	case "authorityReference":
+		return GetCalendarResponseCorrectionRequiredItemAuthorityReference, nil
+	case "discoveredOn":
+		return GetCalendarResponseCorrectionRequiredItemDiscoveredOn, nil
+	}
+	var t GetCalendarResponseCorrectionRequiredItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GetCalendarResponseCorrectionRequiredItem) Ptr() *GetCalendarResponseCorrectionRequiredItem {
+	return &g
+}
+
 type GetCalendarResponseKind string
 
 const (
@@ -2609,57 +3563,61 @@ var (
 	getCalendarResponseSubmissionFieldPeriod                 = big.NewInt(1 << 11)
 	getCalendarResponseSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
 	getCalendarResponseSubmissionFieldAmendment              = big.NewInt(1 << 13)
-	getCalendarResponseSubmissionFieldOrigin                 = big.NewInt(1 << 14)
-	getCalendarResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 15)
-	getCalendarResponseSubmissionFieldEnvironment            = big.NewInt(1 << 16)
-	getCalendarResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 17)
-	getCalendarResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 18)
-	getCalendarResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 19)
-	getCalendarResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 20)
-	getCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
-	getCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 22)
-	getCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	getCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
-	getCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 25)
-	getCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
-	getCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	getCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	getCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
-	getCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
+	getCalendarResponseSubmissionFieldAuthorityRef           = big.NewInt(1 << 14)
+	getCalendarResponseSubmissionFieldCorrectionInput        = big.NewInt(1 << 15)
+	getCalendarResponseSubmissionFieldOrigin                 = big.NewInt(1 << 16)
+	getCalendarResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 17)
+	getCalendarResponseSubmissionFieldEnvironment            = big.NewInt(1 << 18)
+	getCalendarResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 19)
+	getCalendarResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 20)
+	getCalendarResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 21)
+	getCalendarResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 22)
+	getCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 23)
+	getCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 24)
+	getCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 25)
+	getCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 26)
+	getCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 27)
+	getCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 28)
+	getCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	getCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	getCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 31)
+	getCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type GetCalendarResponseSubmission struct {
-	ID                     string                                    `json:"id" url:"id"`
-	Obligation             string                                    `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                     `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                    `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                   `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 GetCalendarResponseSubmissionStatus       `json:"status" url:"status"`
-	FileName               string                                    `json:"fileName" url:"fileName"`
-	FileID                 *string                                   `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                   `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                   `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                   `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                   `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                   `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                     `json:"amendment" url:"amendment"`
-	Origin                 string                                    `json:"origin" url:"origin"`
-	TransportSystem        *string                                   `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *GetCalendarResponseSubmissionEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                     `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                   `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                      `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                   `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                   `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                   `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                   `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                 `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                 `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                        `json:"id" url:"id"`
+	Obligation             string                                        `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                         `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                        `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                       `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 GetCalendarResponseSubmissionStatus           `json:"status" url:"status"`
+	FileName               string                                        `json:"fileName" url:"fileName"`
+	FileID                 *string                                       `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                       `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                       `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                       `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                       `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                       `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                         `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                       `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *GetCalendarResponseSubmissionCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                        `json:"origin" url:"origin"`
+	TransportSystem        *string                                       `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *GetCalendarResponseSubmissionEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                    `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                    `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                    `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                    `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                    `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                         `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                       `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                          `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                       `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                       `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                       `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                       `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                     `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                     `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2764,6 +3722,20 @@ func (g *GetCalendarResponseSubmission) GetAmendment() int64 {
 		return 0
 	}
 	return g.Amendment
+}
+
+func (g *GetCalendarResponseSubmission) GetAuthorityRef() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AuthorityRef
+}
+
+func (g *GetCalendarResponseSubmission) GetCorrectionInput() *GetCalendarResponseSubmissionCorrectionInput {
+	if g == nil {
+		return nil
+	}
+	return g.CorrectionInput
 }
 
 func (g *GetCalendarResponseSubmission) GetOrigin() string {
@@ -2997,6 +3969,20 @@ func (g *GetCalendarResponseSubmission) SetAmendment(amendment int64) {
 	g.require(getCalendarResponseSubmissionFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmission) SetAuthorityRef(authorityRef *string) {
+	g.AuthorityRef = authorityRef
+	g.require(getCalendarResponseSubmissionFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmission) SetCorrectionInput(correctionInput *GetCalendarResponseSubmissionCorrectionInput) {
+	g.CorrectionInput = correctionInput
+	g.require(getCalendarResponseSubmissionFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (g *GetCalendarResponseSubmission) SetOrigin(origin string) {
@@ -3190,6 +4176,138 @@ func (g *GetCalendarResponseSubmission) String() string {
 	return fmt.Sprintf("%#v", g)
 }
 
+var (
+	getCalendarResponseSubmissionCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	getCalendarResponseSubmissionCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	getCalendarResponseSubmissionCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	getCalendarResponseSubmissionCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type GetCalendarResponseSubmissionCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) GetReason() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Reason
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) GetReasonCode() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ReasonCode
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) GetAuthorityReference() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AuthorityReference
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) GetDiscoveredOn() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DiscoveredOn
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionCorrectionInput) SetReason(reason *string) {
+	g.Reason = reason
+	g.require(getCalendarResponseSubmissionCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionCorrectionInput) SetReasonCode(reasonCode *string) {
+	g.ReasonCode = reasonCode
+	g.require(getCalendarResponseSubmissionCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	g.AuthorityReference = authorityReference
+	g.require(getCalendarResponseSubmissionCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	g.DiscoveredOn = discoveredOn
+	g.require(getCalendarResponseSubmissionCorrectionInputFieldDiscoveredOn)
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler GetCalendarResponseSubmissionCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GetCalendarResponseSubmissionCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed GetCalendarResponseSubmissionCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GetCalendarResponseSubmissionCorrectionInput) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
 type GetCalendarResponseSubmissionEnvironment string
 
 const (
@@ -3255,57 +4373,61 @@ var (
 	getCalendarResponseSubmissionsItemFieldPeriod                 = big.NewInt(1 << 11)
 	getCalendarResponseSubmissionsItemFieldDocumentKey            = big.NewInt(1 << 12)
 	getCalendarResponseSubmissionsItemFieldAmendment              = big.NewInt(1 << 13)
-	getCalendarResponseSubmissionsItemFieldOrigin                 = big.NewInt(1 << 14)
-	getCalendarResponseSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 15)
-	getCalendarResponseSubmissionsItemFieldEnvironment            = big.NewInt(1 << 16)
-	getCalendarResponseSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 17)
-	getCalendarResponseSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 18)
-	getCalendarResponseSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 19)
-	getCalendarResponseSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 20)
-	getCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
-	getCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
-	getCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	getCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
-	getCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
-	getCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
-	getCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	getCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	getCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
-	getCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
+	getCalendarResponseSubmissionsItemFieldAuthorityRef           = big.NewInt(1 << 14)
+	getCalendarResponseSubmissionsItemFieldCorrectionInput        = big.NewInt(1 << 15)
+	getCalendarResponseSubmissionsItemFieldOrigin                 = big.NewInt(1 << 16)
+	getCalendarResponseSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 17)
+	getCalendarResponseSubmissionsItemFieldEnvironment            = big.NewInt(1 << 18)
+	getCalendarResponseSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 19)
+	getCalendarResponseSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 20)
+	getCalendarResponseSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 21)
+	getCalendarResponseSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 22)
+	getCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 23)
+	getCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 24)
+	getCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 25)
+	getCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 26)
+	getCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 27)
+	getCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 28)
+	getCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	getCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	getCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 31)
+	getCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type GetCalendarResponseSubmissionsItem struct {
-	ID                     string                                         `json:"id" url:"id"`
-	Obligation             string                                         `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                          `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                         `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                        `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 GetCalendarResponseSubmissionsItemStatus       `json:"status" url:"status"`
-	FileName               string                                         `json:"fileName" url:"fileName"`
-	FileID                 *string                                        `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                        `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                        `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                        `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                        `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                        `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                          `json:"amendment" url:"amendment"`
-	Origin                 string                                         `json:"origin" url:"origin"`
-	TransportSystem        *string                                        `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *GetCalendarResponseSubmissionsItemEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                     `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                     `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                     `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                     `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                     `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                          `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                        `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                           `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                        `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                        `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                        `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                        `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                      `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                      `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                             `json:"id" url:"id"`
+	Obligation             string                                             `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                              `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                             `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                            `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 GetCalendarResponseSubmissionsItemStatus           `json:"status" url:"status"`
+	FileName               string                                             `json:"fileName" url:"fileName"`
+	FileID                 *string                                            `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                            `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                            `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                            `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                            `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                            `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                              `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                            `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *GetCalendarResponseSubmissionsItemCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                             `json:"origin" url:"origin"`
+	TransportSystem        *string                                            `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *GetCalendarResponseSubmissionsItemEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                         `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                         `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                         `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                         `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                         `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                              `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                               `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                            `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                          `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                          `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3410,6 +4532,20 @@ func (g *GetCalendarResponseSubmissionsItem) GetAmendment() int64 {
 		return 0
 	}
 	return g.Amendment
+}
+
+func (g *GetCalendarResponseSubmissionsItem) GetAuthorityRef() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AuthorityRef
+}
+
+func (g *GetCalendarResponseSubmissionsItem) GetCorrectionInput() *GetCalendarResponseSubmissionsItemCorrectionInput {
+	if g == nil {
+		return nil
+	}
+	return g.CorrectionInput
 }
 
 func (g *GetCalendarResponseSubmissionsItem) GetOrigin() string {
@@ -3643,6 +4779,20 @@ func (g *GetCalendarResponseSubmissionsItem) SetAmendment(amendment int64) {
 	g.require(getCalendarResponseSubmissionsItemFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionsItem) SetAuthorityRef(authorityRef *string) {
+	g.AuthorityRef = authorityRef
+	g.require(getCalendarResponseSubmissionsItemFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionsItem) SetCorrectionInput(correctionInput *GetCalendarResponseSubmissionsItemCorrectionInput) {
+	g.CorrectionInput = correctionInput
+	g.require(getCalendarResponseSubmissionsItemFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (g *GetCalendarResponseSubmissionsItem) SetOrigin(origin string) {
@@ -3836,6 +4986,138 @@ func (g *GetCalendarResponseSubmissionsItem) String() string {
 	return fmt.Sprintf("%#v", g)
 }
 
+var (
+	getCalendarResponseSubmissionsItemCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	getCalendarResponseSubmissionsItemCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	getCalendarResponseSubmissionsItemCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	getCalendarResponseSubmissionsItemCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type GetCalendarResponseSubmissionsItemCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) GetReason() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Reason
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) GetReasonCode() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ReasonCode
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) GetAuthorityReference() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AuthorityReference
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) GetDiscoveredOn() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DiscoveredOn
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) SetReason(reason *string) {
+	g.Reason = reason
+	g.require(getCalendarResponseSubmissionsItemCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) SetReasonCode(reasonCode *string) {
+	g.ReasonCode = reasonCode
+	g.require(getCalendarResponseSubmissionsItemCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	g.AuthorityReference = authorityReference
+	g.require(getCalendarResponseSubmissionsItemCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	g.DiscoveredOn = discoveredOn
+	g.require(getCalendarResponseSubmissionsItemCorrectionInputFieldDiscoveredOn)
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler GetCalendarResponseSubmissionsItemCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GetCalendarResponseSubmissionsItemCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed GetCalendarResponseSubmissionsItemCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GetCalendarResponseSubmissionsItemCorrectionInput) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
 type GetCalendarResponseSubmissionsItemEnvironment string
 
 const (
@@ -3985,8 +5267,9 @@ var (
 	listCalendarResponseRowsItemFieldSubmissions = big.NewInt(1 << 11)
 	listCalendarResponseRowsItemFieldCanSubmit   = big.NewInt(1 << 12)
 	listCalendarResponseRowsItemFieldCanAmend    = big.NewInt(1 << 13)
-	listCalendarResponseRowsItemFieldCanDownload = big.NewInt(1 << 14)
-	listCalendarResponseRowsItemFieldAutomated   = big.NewInt(1 << 15)
+	listCalendarResponseRowsItemFieldCorrection  = big.NewInt(1 << 14)
+	listCalendarResponseRowsItemFieldCanDownload = big.NewInt(1 << 15)
+	listCalendarResponseRowsItemFieldAutomated   = big.NewInt(1 << 16)
 )
 
 type ListCalendarResponseRowsItem struct {
@@ -4004,6 +5287,7 @@ type ListCalendarResponseRowsItem struct {
 	Submissions []*ListCalendarResponseRowsItemSubmissionsItem `json:"submissions" url:"submissions"`
 	CanSubmit   bool                                           `json:"canSubmit" url:"canSubmit"`
 	CanAmend    bool                                           `json:"canAmend" url:"canAmend"`
+	Correction  *ListCalendarResponseRowsItemCorrection        `json:"correction,omitempty" url:"correction,omitempty"`
 	CanDownload bool                                           `json:"canDownload" url:"canDownload"`
 	Automated   bool                                           `json:"automated" url:"automated"`
 
@@ -4110,6 +5394,13 @@ func (l *ListCalendarResponseRowsItem) GetCanAmend() bool {
 		return false
 	}
 	return l.CanAmend
+}
+
+func (l *ListCalendarResponseRowsItem) GetCorrection() *ListCalendarResponseRowsItemCorrection {
+	if l == nil {
+		return nil
+	}
+	return l.Correction
 }
 
 func (l *ListCalendarResponseRowsItem) GetCanDownload() bool {
@@ -4238,6 +5529,13 @@ func (l *ListCalendarResponseRowsItem) SetCanAmend(canAmend bool) {
 	l.require(listCalendarResponseRowsItemFieldCanAmend)
 }
 
+// SetCorrection sets the Correction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItem) SetCorrection(correction *ListCalendarResponseRowsItemCorrection) {
+	l.Correction = correction
+	l.require(listCalendarResponseRowsItemFieldCorrection)
+}
+
 // SetCanDownload sets the CanDownload field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (l *ListCalendarResponseRowsItem) SetCanDownload(canDownload bool) {
@@ -4302,6 +5600,294 @@ func (l *ListCalendarResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", l)
 }
 
+var (
+	listCalendarResponseRowsItemCorrectionFieldRequired    = big.NewInt(1 << 0)
+	listCalendarResponseRowsItemCorrectionFieldOptional    = big.NewInt(1 << 1)
+	listCalendarResponseRowsItemCorrectionFieldReasonCodes = big.NewInt(1 << 2)
+	listCalendarResponseRowsItemCorrectionFieldCarry       = big.NewInt(1 << 3)
+)
+
+type ListCalendarResponseRowsItemCorrection struct {
+	Required    []ListCalendarResponseRowsItemCorrectionRequiredItem     `json:"required" url:"required"`
+	Optional    []ListCalendarResponseRowsItemCorrectionOptionalItem     `json:"optional" url:"optional"`
+	ReasonCodes []*ListCalendarResponseRowsItemCorrectionReasonCodesItem `json:"reasonCodes" url:"reasonCodes"`
+	Carry       bool                                                     `json:"carry" url:"carry"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) GetRequired() []ListCalendarResponseRowsItemCorrectionRequiredItem {
+	if l == nil {
+		return nil
+	}
+	return l.Required
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) GetOptional() []ListCalendarResponseRowsItemCorrectionOptionalItem {
+	if l == nil {
+		return nil
+	}
+	return l.Optional
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) GetReasonCodes() []*ListCalendarResponseRowsItemCorrectionReasonCodesItem {
+	if l == nil {
+		return nil
+	}
+	return l.ReasonCodes
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) GetCarry() bool {
+	if l == nil {
+		return false
+	}
+	return l.Carry
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemCorrection) SetRequired(required []ListCalendarResponseRowsItemCorrectionRequiredItem) {
+	l.Required = required
+	l.require(listCalendarResponseRowsItemCorrectionFieldRequired)
+}
+
+// SetOptional sets the Optional field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemCorrection) SetOptional(optional []ListCalendarResponseRowsItemCorrectionOptionalItem) {
+	l.Optional = optional
+	l.require(listCalendarResponseRowsItemCorrectionFieldOptional)
+}
+
+// SetReasonCodes sets the ReasonCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemCorrection) SetReasonCodes(reasonCodes []*ListCalendarResponseRowsItemCorrectionReasonCodesItem) {
+	l.ReasonCodes = reasonCodes
+	l.require(listCalendarResponseRowsItemCorrectionFieldReasonCodes)
+}
+
+// SetCarry sets the Carry field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemCorrection) SetCarry(carry bool) {
+	l.Carry = carry
+	l.require(listCalendarResponseRowsItemCorrectionFieldCarry)
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListCalendarResponseRowsItemCorrection
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*l = ListCalendarResponseRowsItemCorrection(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) MarshalJSON() ([]byte, error) {
+	type embed ListCalendarResponseRowsItemCorrection
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *ListCalendarResponseRowsItemCorrection) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
+type ListCalendarResponseRowsItemCorrectionOptionalItem string
+
+const (
+	ListCalendarResponseRowsItemCorrectionOptionalItemReason             ListCalendarResponseRowsItemCorrectionOptionalItem = "reason"
+	ListCalendarResponseRowsItemCorrectionOptionalItemReasonCode         ListCalendarResponseRowsItemCorrectionOptionalItem = "reasonCode"
+	ListCalendarResponseRowsItemCorrectionOptionalItemAuthorityReference ListCalendarResponseRowsItemCorrectionOptionalItem = "authorityReference"
+	ListCalendarResponseRowsItemCorrectionOptionalItemDiscoveredOn       ListCalendarResponseRowsItemCorrectionOptionalItem = "discoveredOn"
+)
+
+func NewListCalendarResponseRowsItemCorrectionOptionalItemFromString(s string) (ListCalendarResponseRowsItemCorrectionOptionalItem, error) {
+	switch s {
+	case "reason":
+		return ListCalendarResponseRowsItemCorrectionOptionalItemReason, nil
+	case "reasonCode":
+		return ListCalendarResponseRowsItemCorrectionOptionalItemReasonCode, nil
+	case "authorityReference":
+		return ListCalendarResponseRowsItemCorrectionOptionalItemAuthorityReference, nil
+	case "discoveredOn":
+		return ListCalendarResponseRowsItemCorrectionOptionalItemDiscoveredOn, nil
+	}
+	var t ListCalendarResponseRowsItemCorrectionOptionalItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (l ListCalendarResponseRowsItemCorrectionOptionalItem) Ptr() *ListCalendarResponseRowsItemCorrectionOptionalItem {
+	return &l
+}
+
+var (
+	listCalendarResponseRowsItemCorrectionReasonCodesItemFieldCode  = big.NewInt(1 << 0)
+	listCalendarResponseRowsItemCorrectionReasonCodesItemFieldLabel = big.NewInt(1 << 1)
+)
+
+type ListCalendarResponseRowsItemCorrectionReasonCodesItem struct {
+	Code  string `json:"code" url:"code"`
+	Label string `json:"label" url:"label"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) GetCode() string {
+	if l == nil {
+		return ""
+	}
+	return l.Code
+}
+
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) GetLabel() string {
+	if l == nil {
+		return ""
+	}
+	return l.Label
+}
+
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) SetCode(code string) {
+	l.Code = code
+	l.require(listCalendarResponseRowsItemCorrectionReasonCodesItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) SetLabel(label string) {
+	l.Label = label
+	l.require(listCalendarResponseRowsItemCorrectionReasonCodesItemFieldLabel)
+}
+
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListCalendarResponseRowsItemCorrectionReasonCodesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*l = ListCalendarResponseRowsItemCorrectionReasonCodesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) MarshalJSON() ([]byte, error) {
+	type embed ListCalendarResponseRowsItemCorrectionReasonCodesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *ListCalendarResponseRowsItemCorrectionReasonCodesItem) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
+type ListCalendarResponseRowsItemCorrectionRequiredItem string
+
+const (
+	ListCalendarResponseRowsItemCorrectionRequiredItemReason             ListCalendarResponseRowsItemCorrectionRequiredItem = "reason"
+	ListCalendarResponseRowsItemCorrectionRequiredItemReasonCode         ListCalendarResponseRowsItemCorrectionRequiredItem = "reasonCode"
+	ListCalendarResponseRowsItemCorrectionRequiredItemAuthorityReference ListCalendarResponseRowsItemCorrectionRequiredItem = "authorityReference"
+	ListCalendarResponseRowsItemCorrectionRequiredItemDiscoveredOn       ListCalendarResponseRowsItemCorrectionRequiredItem = "discoveredOn"
+)
+
+func NewListCalendarResponseRowsItemCorrectionRequiredItemFromString(s string) (ListCalendarResponseRowsItemCorrectionRequiredItem, error) {
+	switch s {
+	case "reason":
+		return ListCalendarResponseRowsItemCorrectionRequiredItemReason, nil
+	case "reasonCode":
+		return ListCalendarResponseRowsItemCorrectionRequiredItemReasonCode, nil
+	case "authorityReference":
+		return ListCalendarResponseRowsItemCorrectionRequiredItemAuthorityReference, nil
+	case "discoveredOn":
+		return ListCalendarResponseRowsItemCorrectionRequiredItemDiscoveredOn, nil
+	}
+	var t ListCalendarResponseRowsItemCorrectionRequiredItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (l ListCalendarResponseRowsItemCorrectionRequiredItem) Ptr() *ListCalendarResponseRowsItemCorrectionRequiredItem {
+	return &l
+}
+
 type ListCalendarResponseRowsItemKind string
 
 const (
@@ -4339,57 +5925,61 @@ var (
 	listCalendarResponseRowsItemSubmissionFieldPeriod                 = big.NewInt(1 << 11)
 	listCalendarResponseRowsItemSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
 	listCalendarResponseRowsItemSubmissionFieldAmendment              = big.NewInt(1 << 13)
-	listCalendarResponseRowsItemSubmissionFieldOrigin                 = big.NewInt(1 << 14)
-	listCalendarResponseRowsItemSubmissionFieldTransportSystem        = big.NewInt(1 << 15)
-	listCalendarResponseRowsItemSubmissionFieldEnvironment            = big.NewInt(1 << 16)
-	listCalendarResponseRowsItemSubmissionFieldSubmittedAt            = big.NewInt(1 << 17)
-	listCalendarResponseRowsItemSubmissionFieldAcceptedAt             = big.NewInt(1 << 18)
-	listCalendarResponseRowsItemSubmissionFieldRejectedAt             = big.NewInt(1 << 19)
-	listCalendarResponseRowsItemSubmissionFieldCheckedAt              = big.NewInt(1 << 20)
-	listCalendarResponseRowsItemSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
-	listCalendarResponseRowsItemSubmissionFieldAttempts               = big.NewInt(1 << 22)
-	listCalendarResponseRowsItemSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	listCalendarResponseRowsItemSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
-	listCalendarResponseRowsItemSubmissionFieldSentSha256             = big.NewInt(1 << 25)
-	listCalendarResponseRowsItemSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
-	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	listCalendarResponseRowsItemSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
-	listCalendarResponseRowsItemSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
+	listCalendarResponseRowsItemSubmissionFieldAuthorityRef           = big.NewInt(1 << 14)
+	listCalendarResponseRowsItemSubmissionFieldCorrectionInput        = big.NewInt(1 << 15)
+	listCalendarResponseRowsItemSubmissionFieldOrigin                 = big.NewInt(1 << 16)
+	listCalendarResponseRowsItemSubmissionFieldTransportSystem        = big.NewInt(1 << 17)
+	listCalendarResponseRowsItemSubmissionFieldEnvironment            = big.NewInt(1 << 18)
+	listCalendarResponseRowsItemSubmissionFieldSubmittedAt            = big.NewInt(1 << 19)
+	listCalendarResponseRowsItemSubmissionFieldAcceptedAt             = big.NewInt(1 << 20)
+	listCalendarResponseRowsItemSubmissionFieldRejectedAt             = big.NewInt(1 << 21)
+	listCalendarResponseRowsItemSubmissionFieldCheckedAt              = big.NewInt(1 << 22)
+	listCalendarResponseRowsItemSubmissionFieldNextCheckAt            = big.NewInt(1 << 23)
+	listCalendarResponseRowsItemSubmissionFieldAttempts               = big.NewInt(1 << 24)
+	listCalendarResponseRowsItemSubmissionFieldDeliveryError          = big.NewInt(1 << 25)
+	listCalendarResponseRowsItemSubmissionFieldConfirmationPending    = big.NewInt(1 << 26)
+	listCalendarResponseRowsItemSubmissionFieldSentSha256             = big.NewInt(1 << 27)
+	listCalendarResponseRowsItemSubmissionFieldCertificateFingerprint = big.NewInt(1 << 28)
+	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	listCalendarResponseRowsItemSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	listCalendarResponseRowsItemSubmissionFieldCreatedAt              = big.NewInt(1 << 31)
+	listCalendarResponseRowsItemSubmissionFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type ListCalendarResponseRowsItemSubmission struct {
-	ID                     string                                             `json:"id" url:"id"`
-	Obligation             string                                             `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                              `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                             `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                            `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 ListCalendarResponseRowsItemSubmissionStatus       `json:"status" url:"status"`
-	FileName               string                                             `json:"fileName" url:"fileName"`
-	FileID                 *string                                            `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                            `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                            `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                            `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                            `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                            `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                              `json:"amendment" url:"amendment"`
-	Origin                 string                                             `json:"origin" url:"origin"`
-	TransportSystem        *string                                            `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *ListCalendarResponseRowsItemSubmissionEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                         `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                         `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                         `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                         `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                         `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                              `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                               `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                            `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                          `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                          `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                                 `json:"id" url:"id"`
+	Obligation             string                                                 `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                  `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                                 `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                                `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 ListCalendarResponseRowsItemSubmissionStatus           `json:"status" url:"status"`
+	FileName               string                                                 `json:"fileName" url:"fileName"`
+	FileID                 *string                                                `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                                `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                                `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                                `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                                `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                                `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                  `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                                `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *ListCalendarResponseRowsItemSubmissionCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                                 `json:"origin" url:"origin"`
+	TransportSystem        *string                                                `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *ListCalendarResponseRowsItemSubmissionEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                             `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                             `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                             `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                             `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                             `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                  `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                                `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                   `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                                `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                                `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                                `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                                `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                              `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                              `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4494,6 +6084,20 @@ func (l *ListCalendarResponseRowsItemSubmission) GetAmendment() int64 {
 		return 0
 	}
 	return l.Amendment
+}
+
+func (l *ListCalendarResponseRowsItemSubmission) GetAuthorityRef() *string {
+	if l == nil {
+		return nil
+	}
+	return l.AuthorityRef
+}
+
+func (l *ListCalendarResponseRowsItemSubmission) GetCorrectionInput() *ListCalendarResponseRowsItemSubmissionCorrectionInput {
+	if l == nil {
+		return nil
+	}
+	return l.CorrectionInput
 }
 
 func (l *ListCalendarResponseRowsItemSubmission) GetOrigin() string {
@@ -4727,6 +6331,20 @@ func (l *ListCalendarResponseRowsItemSubmission) SetAmendment(amendment int64) {
 	l.require(listCalendarResponseRowsItemSubmissionFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmission) SetAuthorityRef(authorityRef *string) {
+	l.AuthorityRef = authorityRef
+	l.require(listCalendarResponseRowsItemSubmissionFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmission) SetCorrectionInput(correctionInput *ListCalendarResponseRowsItemSubmissionCorrectionInput) {
+	l.CorrectionInput = correctionInput
+	l.require(listCalendarResponseRowsItemSubmissionFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (l *ListCalendarResponseRowsItemSubmission) SetOrigin(origin string) {
@@ -4920,6 +6538,138 @@ func (l *ListCalendarResponseRowsItemSubmission) String() string {
 	return fmt.Sprintf("%#v", l)
 }
 
+var (
+	listCalendarResponseRowsItemSubmissionCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	listCalendarResponseRowsItemSubmissionCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	listCalendarResponseRowsItemSubmissionCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	listCalendarResponseRowsItemSubmissionCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type ListCalendarResponseRowsItemSubmissionCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) GetReason() *string {
+	if l == nil {
+		return nil
+	}
+	return l.Reason
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) GetReasonCode() *string {
+	if l == nil {
+		return nil
+	}
+	return l.ReasonCode
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) GetAuthorityReference() *string {
+	if l == nil {
+		return nil
+	}
+	return l.AuthorityReference
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) GetDiscoveredOn() *string {
+	if l == nil {
+		return nil
+	}
+	return l.DiscoveredOn
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) SetReason(reason *string) {
+	l.Reason = reason
+	l.require(listCalendarResponseRowsItemSubmissionCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) SetReasonCode(reasonCode *string) {
+	l.ReasonCode = reasonCode
+	l.require(listCalendarResponseRowsItemSubmissionCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	l.AuthorityReference = authorityReference
+	l.require(listCalendarResponseRowsItemSubmissionCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	l.DiscoveredOn = discoveredOn
+	l.require(listCalendarResponseRowsItemSubmissionCorrectionInputFieldDiscoveredOn)
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListCalendarResponseRowsItemSubmissionCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*l = ListCalendarResponseRowsItemSubmissionCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed ListCalendarResponseRowsItemSubmissionCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionCorrectionInput) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
 type ListCalendarResponseRowsItemSubmissionEnvironment string
 
 const (
@@ -4985,57 +6735,61 @@ var (
 	listCalendarResponseRowsItemSubmissionsItemFieldPeriod                 = big.NewInt(1 << 11)
 	listCalendarResponseRowsItemSubmissionsItemFieldDocumentKey            = big.NewInt(1 << 12)
 	listCalendarResponseRowsItemSubmissionsItemFieldAmendment              = big.NewInt(1 << 13)
-	listCalendarResponseRowsItemSubmissionsItemFieldOrigin                 = big.NewInt(1 << 14)
-	listCalendarResponseRowsItemSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 15)
-	listCalendarResponseRowsItemSubmissionsItemFieldEnvironment            = big.NewInt(1 << 16)
-	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 17)
-	listCalendarResponseRowsItemSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 18)
-	listCalendarResponseRowsItemSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 19)
-	listCalendarResponseRowsItemSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 20)
-	listCalendarResponseRowsItemSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
-	listCalendarResponseRowsItemSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
-	listCalendarResponseRowsItemSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	listCalendarResponseRowsItemSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
-	listCalendarResponseRowsItemSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
-	listCalendarResponseRowsItemSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
-	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	listCalendarResponseRowsItemSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
-	listCalendarResponseRowsItemSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
+	listCalendarResponseRowsItemSubmissionsItemFieldAuthorityRef           = big.NewInt(1 << 14)
+	listCalendarResponseRowsItemSubmissionsItemFieldCorrectionInput        = big.NewInt(1 << 15)
+	listCalendarResponseRowsItemSubmissionsItemFieldOrigin                 = big.NewInt(1 << 16)
+	listCalendarResponseRowsItemSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 17)
+	listCalendarResponseRowsItemSubmissionsItemFieldEnvironment            = big.NewInt(1 << 18)
+	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 19)
+	listCalendarResponseRowsItemSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 20)
+	listCalendarResponseRowsItemSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 21)
+	listCalendarResponseRowsItemSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 22)
+	listCalendarResponseRowsItemSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 23)
+	listCalendarResponseRowsItemSubmissionsItemFieldAttempts               = big.NewInt(1 << 24)
+	listCalendarResponseRowsItemSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 25)
+	listCalendarResponseRowsItemSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 26)
+	listCalendarResponseRowsItemSubmissionsItemFieldSentSha256             = big.NewInt(1 << 27)
+	listCalendarResponseRowsItemSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 28)
+	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	listCalendarResponseRowsItemSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	listCalendarResponseRowsItemSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 31)
+	listCalendarResponseRowsItemSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type ListCalendarResponseRowsItemSubmissionsItem struct {
-	ID                     string                                                  `json:"id" url:"id"`
-	Obligation             string                                                  `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                                   `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                                  `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                                 `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 ListCalendarResponseRowsItemSubmissionsItemStatus       `json:"status" url:"status"`
-	FileName               string                                                  `json:"fileName" url:"fileName"`
-	FileID                 *string                                                 `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                                 `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                                 `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                                 `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                                 `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                                 `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                                   `json:"amendment" url:"amendment"`
-	Origin                 string                                                  `json:"origin" url:"origin"`
-	TransportSystem        *string                                                 `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *ListCalendarResponseRowsItemSubmissionsItemEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                              `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                              `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                              `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                              `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                              `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                                   `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                                 `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                                    `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                                 `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                                 `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                                 `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                                 `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                               `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                                      `json:"id" url:"id"`
+	Obligation             string                                                      `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                       `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                                      `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                                     `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 ListCalendarResponseRowsItemSubmissionsItemStatus           `json:"status" url:"status"`
+	FileName               string                                                      `json:"fileName" url:"fileName"`
+	FileID                 *string                                                     `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                                     `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                                     `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                                     `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                                     `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                                     `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                       `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                                     `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                                      `json:"origin" url:"origin"`
+	TransportSystem        *string                                                     `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *ListCalendarResponseRowsItemSubmissionsItemEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                                  `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                                  `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                                  `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                                  `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                                  `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                       `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                                     `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                        `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                                     `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                                     `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                                     `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                                     `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                                   `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5140,6 +6894,20 @@ func (l *ListCalendarResponseRowsItemSubmissionsItem) GetAmendment() int64 {
 		return 0
 	}
 	return l.Amendment
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItem) GetAuthorityRef() *string {
+	if l == nil {
+		return nil
+	}
+	return l.AuthorityRef
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItem) GetCorrectionInput() *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput {
+	if l == nil {
+		return nil
+	}
+	return l.CorrectionInput
 }
 
 func (l *ListCalendarResponseRowsItemSubmissionsItem) GetOrigin() string {
@@ -5373,6 +7141,20 @@ func (l *ListCalendarResponseRowsItemSubmissionsItem) SetAmendment(amendment int
 	l.require(listCalendarResponseRowsItemSubmissionsItemFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionsItem) SetAuthorityRef(authorityRef *string) {
+	l.AuthorityRef = authorityRef
+	l.require(listCalendarResponseRowsItemSubmissionsItemFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionsItem) SetCorrectionInput(correctionInput *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) {
+	l.CorrectionInput = correctionInput
+	l.require(listCalendarResponseRowsItemSubmissionsItemFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (l *ListCalendarResponseRowsItemSubmissionsItem) SetOrigin(origin string) {
@@ -5566,6 +7348,138 @@ func (l *ListCalendarResponseRowsItemSubmissionsItem) String() string {
 	return fmt.Sprintf("%#v", l)
 }
 
+var (
+	listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type ListCalendarResponseRowsItemSubmissionsItemCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) GetReason() *string {
+	if l == nil {
+		return nil
+	}
+	return l.Reason
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) GetReasonCode() *string {
+	if l == nil {
+		return nil
+	}
+	return l.ReasonCode
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) GetAuthorityReference() *string {
+	if l == nil {
+		return nil
+	}
+	return l.AuthorityReference
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) GetDiscoveredOn() *string {
+	if l == nil {
+		return nil
+	}
+	return l.DiscoveredOn
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) SetReason(reason *string) {
+	l.Reason = reason
+	l.require(listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) SetReasonCode(reasonCode *string) {
+	l.ReasonCode = reasonCode
+	l.require(listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	l.AuthorityReference = authorityReference
+	l.require(listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	l.DiscoveredOn = discoveredOn
+	l.require(listCalendarResponseRowsItemSubmissionsItemCorrectionInputFieldDiscoveredOn)
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*l = ListCalendarResponseRowsItemSubmissionsItemCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
 type ListCalendarResponseRowsItemSubmissionsItemEnvironment string
 
 const (
@@ -5617,6 +7531,138 @@ func (l ListCalendarResponseRowsItemSubmissionsItemStatus) Ptr() *ListCalendarRe
 }
 
 var (
+	submitCalendarRequestCorrectionFieldReason             = big.NewInt(1 << 0)
+	submitCalendarRequestCorrectionFieldReasonCode         = big.NewInt(1 << 1)
+	submitCalendarRequestCorrectionFieldAuthorityReference = big.NewInt(1 << 2)
+	submitCalendarRequestCorrectionFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type SubmitCalendarRequestCorrection struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmitCalendarRequestCorrection) GetReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Reason
+}
+
+func (s *SubmitCalendarRequestCorrection) GetReasonCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCode
+}
+
+func (s *SubmitCalendarRequestCorrection) GetAuthorityReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityReference
+}
+
+func (s *SubmitCalendarRequestCorrection) GetDiscoveredOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DiscoveredOn
+}
+
+func (s *SubmitCalendarRequestCorrection) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmitCalendarRequestCorrection) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestCorrection) SetReason(reason *string) {
+	s.Reason = reason
+	s.require(submitCalendarRequestCorrectionFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestCorrection) SetReasonCode(reasonCode *string) {
+	s.ReasonCode = reasonCode
+	s.require(submitCalendarRequestCorrectionFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestCorrection) SetAuthorityReference(authorityReference *string) {
+	s.AuthorityReference = authorityReference
+	s.require(submitCalendarRequestCorrectionFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestCorrection) SetDiscoveredOn(discoveredOn *string) {
+	s.DiscoveredOn = discoveredOn
+	s.require(submitCalendarRequestCorrectionFieldDiscoveredOn)
+}
+
+func (s *SubmitCalendarRequestCorrection) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmitCalendarRequestCorrection
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmitCalendarRequestCorrection(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmitCalendarRequestCorrection) MarshalJSON() ([]byte, error) {
+	type embed SubmitCalendarRequestCorrection
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmitCalendarRequestCorrection) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
 	submitCalendarResponseFieldID                     = big.NewInt(1 << 0)
 	submitCalendarResponseFieldObligation             = big.NewInt(1 << 1)
 	submitCalendarResponseFieldPeriodYear             = big.NewInt(1 << 2)
@@ -5631,57 +7677,61 @@ var (
 	submitCalendarResponseFieldPeriod                 = big.NewInt(1 << 11)
 	submitCalendarResponseFieldDocumentKey            = big.NewInt(1 << 12)
 	submitCalendarResponseFieldAmendment              = big.NewInt(1 << 13)
-	submitCalendarResponseFieldOrigin                 = big.NewInt(1 << 14)
-	submitCalendarResponseFieldTransportSystem        = big.NewInt(1 << 15)
-	submitCalendarResponseFieldEnvironment            = big.NewInt(1 << 16)
-	submitCalendarResponseFieldSubmittedAt            = big.NewInt(1 << 17)
-	submitCalendarResponseFieldAcceptedAt             = big.NewInt(1 << 18)
-	submitCalendarResponseFieldRejectedAt             = big.NewInt(1 << 19)
-	submitCalendarResponseFieldCheckedAt              = big.NewInt(1 << 20)
-	submitCalendarResponseFieldNextCheckAt            = big.NewInt(1 << 21)
-	submitCalendarResponseFieldAttempts               = big.NewInt(1 << 22)
-	submitCalendarResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submitCalendarResponseFieldConfirmationPending    = big.NewInt(1 << 24)
-	submitCalendarResponseFieldSentSha256             = big.NewInt(1 << 25)
-	submitCalendarResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
-	submitCalendarResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	submitCalendarResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	submitCalendarResponseFieldCreatedAt              = big.NewInt(1 << 29)
-	submitCalendarResponseFieldUpdatedAt              = big.NewInt(1 << 30)
+	submitCalendarResponseFieldAuthorityRef           = big.NewInt(1 << 14)
+	submitCalendarResponseFieldCorrectionInput        = big.NewInt(1 << 15)
+	submitCalendarResponseFieldOrigin                 = big.NewInt(1 << 16)
+	submitCalendarResponseFieldTransportSystem        = big.NewInt(1 << 17)
+	submitCalendarResponseFieldEnvironment            = big.NewInt(1 << 18)
+	submitCalendarResponseFieldSubmittedAt            = big.NewInt(1 << 19)
+	submitCalendarResponseFieldAcceptedAt             = big.NewInt(1 << 20)
+	submitCalendarResponseFieldRejectedAt             = big.NewInt(1 << 21)
+	submitCalendarResponseFieldCheckedAt              = big.NewInt(1 << 22)
+	submitCalendarResponseFieldNextCheckAt            = big.NewInt(1 << 23)
+	submitCalendarResponseFieldAttempts               = big.NewInt(1 << 24)
+	submitCalendarResponseFieldDeliveryError          = big.NewInt(1 << 25)
+	submitCalendarResponseFieldConfirmationPending    = big.NewInt(1 << 26)
+	submitCalendarResponseFieldSentSha256             = big.NewInt(1 << 27)
+	submitCalendarResponseFieldCertificateFingerprint = big.NewInt(1 << 28)
+	submitCalendarResponseFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	submitCalendarResponseFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	submitCalendarResponseFieldCreatedAt              = big.NewInt(1 << 31)
+	submitCalendarResponseFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type SubmitCalendarResponse struct {
-	ID                     string                             `json:"id" url:"id"`
-	Obligation             string                             `json:"obligation" url:"obligation"`
-	PeriodYear             int64                              `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                             `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                            `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 SubmitCalendarResponseStatus       `json:"status" url:"status"`
-	FileName               string                             `json:"fileName" url:"fileName"`
-	FileID                 *string                            `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                            `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                            `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                            `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                            `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                            `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                              `json:"amendment" url:"amendment"`
-	Origin                 string                             `json:"origin" url:"origin"`
-	TransportSystem        *string                            `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *SubmitCalendarResponseEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                         `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                         `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                         `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                         `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                         `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                              `json:"attempts" url:"attempts"`
-	DeliveryError          *string                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                               `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                            `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                          `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                          `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                 `json:"id" url:"id"`
+	Obligation             string                                 `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                  `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                 `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 SubmitCalendarResponseStatus           `json:"status" url:"status"`
+	FileName               string                                 `json:"fileName" url:"fileName"`
+	FileID                 *string                                `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                  `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *SubmitCalendarResponseCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                 `json:"origin" url:"origin"`
+	TransportSystem        *string                                `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *SubmitCalendarResponseEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                             `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                             `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                             `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                             `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                             `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                  `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                   `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                              `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                              `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5786,6 +7836,20 @@ func (s *SubmitCalendarResponse) GetAmendment() int64 {
 		return 0
 	}
 	return s.Amendment
+}
+
+func (s *SubmitCalendarResponse) GetAuthorityRef() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityRef
+}
+
+func (s *SubmitCalendarResponse) GetCorrectionInput() *SubmitCalendarResponseCorrectionInput {
+	if s == nil {
+		return nil
+	}
+	return s.CorrectionInput
 }
 
 func (s *SubmitCalendarResponse) GetOrigin() string {
@@ -6019,6 +8083,20 @@ func (s *SubmitCalendarResponse) SetAmendment(amendment int64) {
 	s.require(submitCalendarResponseFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarResponse) SetAuthorityRef(authorityRef *string) {
+	s.AuthorityRef = authorityRef
+	s.require(submitCalendarResponseFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarResponse) SetCorrectionInput(correctionInput *SubmitCalendarResponseCorrectionInput) {
+	s.CorrectionInput = correctionInput
+	s.require(submitCalendarResponseFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubmitCalendarResponse) SetOrigin(origin string) {
@@ -6212,6 +8290,138 @@ func (s *SubmitCalendarResponse) String() string {
 	return fmt.Sprintf("%#v", s)
 }
 
+var (
+	submitCalendarResponseCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	submitCalendarResponseCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	submitCalendarResponseCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	submitCalendarResponseCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type SubmitCalendarResponseCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) GetReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Reason
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) GetReasonCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCode
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) GetAuthorityReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityReference
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) GetDiscoveredOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DiscoveredOn
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarResponseCorrectionInput) SetReason(reason *string) {
+	s.Reason = reason
+	s.require(submitCalendarResponseCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarResponseCorrectionInput) SetReasonCode(reasonCode *string) {
+	s.ReasonCode = reasonCode
+	s.require(submitCalendarResponseCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarResponseCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	s.AuthorityReference = authorityReference
+	s.require(submitCalendarResponseCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarResponseCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	s.DiscoveredOn = discoveredOn
+	s.require(submitCalendarResponseCorrectionInputFieldDiscoveredOn)
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmitCalendarResponseCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmitCalendarResponseCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed SubmitCalendarResponseCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmitCalendarResponseCorrectionInput) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
 type SubmitCalendarResponseEnvironment string
 
 const (
@@ -6277,8 +8487,9 @@ var (
 	updateCalendarResponseFieldSubmissions = big.NewInt(1 << 11)
 	updateCalendarResponseFieldCanSubmit   = big.NewInt(1 << 12)
 	updateCalendarResponseFieldCanAmend    = big.NewInt(1 << 13)
-	updateCalendarResponseFieldCanDownload = big.NewInt(1 << 14)
-	updateCalendarResponseFieldAutomated   = big.NewInt(1 << 15)
+	updateCalendarResponseFieldCorrection  = big.NewInt(1 << 14)
+	updateCalendarResponseFieldCanDownload = big.NewInt(1 << 15)
+	updateCalendarResponseFieldAutomated   = big.NewInt(1 << 16)
 )
 
 type UpdateCalendarResponse struct {
@@ -6296,6 +8507,7 @@ type UpdateCalendarResponse struct {
 	Submissions []*UpdateCalendarResponseSubmissionsItem `json:"submissions" url:"submissions"`
 	CanSubmit   bool                                     `json:"canSubmit" url:"canSubmit"`
 	CanAmend    bool                                     `json:"canAmend" url:"canAmend"`
+	Correction  *UpdateCalendarResponseCorrection        `json:"correction,omitempty" url:"correction,omitempty"`
 	CanDownload bool                                     `json:"canDownload" url:"canDownload"`
 	Automated   bool                                     `json:"automated" url:"automated"`
 
@@ -6402,6 +8614,13 @@ func (u *UpdateCalendarResponse) GetCanAmend() bool {
 		return false
 	}
 	return u.CanAmend
+}
+
+func (u *UpdateCalendarResponse) GetCorrection() *UpdateCalendarResponseCorrection {
+	if u == nil {
+		return nil
+	}
+	return u.Correction
 }
 
 func (u *UpdateCalendarResponse) GetCanDownload() bool {
@@ -6530,6 +8749,13 @@ func (u *UpdateCalendarResponse) SetCanAmend(canAmend bool) {
 	u.require(updateCalendarResponseFieldCanAmend)
 }
 
+// SetCorrection sets the Correction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponse) SetCorrection(correction *UpdateCalendarResponseCorrection) {
+	u.Correction = correction
+	u.require(updateCalendarResponseFieldCorrection)
+}
+
 // SetCanDownload sets the CanDownload field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (u *UpdateCalendarResponse) SetCanDownload(canDownload bool) {
@@ -6594,6 +8820,294 @@ func (u *UpdateCalendarResponse) String() string {
 	return fmt.Sprintf("%#v", u)
 }
 
+var (
+	updateCalendarResponseCorrectionFieldRequired    = big.NewInt(1 << 0)
+	updateCalendarResponseCorrectionFieldOptional    = big.NewInt(1 << 1)
+	updateCalendarResponseCorrectionFieldReasonCodes = big.NewInt(1 << 2)
+	updateCalendarResponseCorrectionFieldCarry       = big.NewInt(1 << 3)
+)
+
+type UpdateCalendarResponseCorrection struct {
+	Required    []UpdateCalendarResponseCorrectionRequiredItem     `json:"required" url:"required"`
+	Optional    []UpdateCalendarResponseCorrectionOptionalItem     `json:"optional" url:"optional"`
+	ReasonCodes []*UpdateCalendarResponseCorrectionReasonCodesItem `json:"reasonCodes" url:"reasonCodes"`
+	Carry       bool                                               `json:"carry" url:"carry"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UpdateCalendarResponseCorrection) GetRequired() []UpdateCalendarResponseCorrectionRequiredItem {
+	if u == nil {
+		return nil
+	}
+	return u.Required
+}
+
+func (u *UpdateCalendarResponseCorrection) GetOptional() []UpdateCalendarResponseCorrectionOptionalItem {
+	if u == nil {
+		return nil
+	}
+	return u.Optional
+}
+
+func (u *UpdateCalendarResponseCorrection) GetReasonCodes() []*UpdateCalendarResponseCorrectionReasonCodesItem {
+	if u == nil {
+		return nil
+	}
+	return u.ReasonCodes
+}
+
+func (u *UpdateCalendarResponseCorrection) GetCarry() bool {
+	if u == nil {
+		return false
+	}
+	return u.Carry
+}
+
+func (u *UpdateCalendarResponseCorrection) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UpdateCalendarResponseCorrection) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseCorrection) SetRequired(required []UpdateCalendarResponseCorrectionRequiredItem) {
+	u.Required = required
+	u.require(updateCalendarResponseCorrectionFieldRequired)
+}
+
+// SetOptional sets the Optional field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseCorrection) SetOptional(optional []UpdateCalendarResponseCorrectionOptionalItem) {
+	u.Optional = optional
+	u.require(updateCalendarResponseCorrectionFieldOptional)
+}
+
+// SetReasonCodes sets the ReasonCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseCorrection) SetReasonCodes(reasonCodes []*UpdateCalendarResponseCorrectionReasonCodesItem) {
+	u.ReasonCodes = reasonCodes
+	u.require(updateCalendarResponseCorrectionFieldReasonCodes)
+}
+
+// SetCarry sets the Carry field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseCorrection) SetCarry(carry bool) {
+	u.Carry = carry
+	u.require(updateCalendarResponseCorrectionFieldCarry)
+}
+
+func (u *UpdateCalendarResponseCorrection) UnmarshalJSON(data []byte) error {
+	type unmarshaler UpdateCalendarResponseCorrection
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UpdateCalendarResponseCorrection(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UpdateCalendarResponseCorrection) MarshalJSON() ([]byte, error) {
+	type embed UpdateCalendarResponseCorrection
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UpdateCalendarResponseCorrection) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+type UpdateCalendarResponseCorrectionOptionalItem string
+
+const (
+	UpdateCalendarResponseCorrectionOptionalItemReason             UpdateCalendarResponseCorrectionOptionalItem = "reason"
+	UpdateCalendarResponseCorrectionOptionalItemReasonCode         UpdateCalendarResponseCorrectionOptionalItem = "reasonCode"
+	UpdateCalendarResponseCorrectionOptionalItemAuthorityReference UpdateCalendarResponseCorrectionOptionalItem = "authorityReference"
+	UpdateCalendarResponseCorrectionOptionalItemDiscoveredOn       UpdateCalendarResponseCorrectionOptionalItem = "discoveredOn"
+)
+
+func NewUpdateCalendarResponseCorrectionOptionalItemFromString(s string) (UpdateCalendarResponseCorrectionOptionalItem, error) {
+	switch s {
+	case "reason":
+		return UpdateCalendarResponseCorrectionOptionalItemReason, nil
+	case "reasonCode":
+		return UpdateCalendarResponseCorrectionOptionalItemReasonCode, nil
+	case "authorityReference":
+		return UpdateCalendarResponseCorrectionOptionalItemAuthorityReference, nil
+	case "discoveredOn":
+		return UpdateCalendarResponseCorrectionOptionalItemDiscoveredOn, nil
+	}
+	var t UpdateCalendarResponseCorrectionOptionalItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u UpdateCalendarResponseCorrectionOptionalItem) Ptr() *UpdateCalendarResponseCorrectionOptionalItem {
+	return &u
+}
+
+var (
+	updateCalendarResponseCorrectionReasonCodesItemFieldCode  = big.NewInt(1 << 0)
+	updateCalendarResponseCorrectionReasonCodesItemFieldLabel = big.NewInt(1 << 1)
+)
+
+type UpdateCalendarResponseCorrectionReasonCodesItem struct {
+	Code  string `json:"code" url:"code"`
+	Label string `json:"label" url:"label"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) GetCode() string {
+	if u == nil {
+		return ""
+	}
+	return u.Code
+}
+
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) GetLabel() string {
+	if u == nil {
+		return ""
+	}
+	return u.Label
+}
+
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) SetCode(code string) {
+	u.Code = code
+	u.require(updateCalendarResponseCorrectionReasonCodesItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) SetLabel(label string) {
+	u.Label = label
+	u.require(updateCalendarResponseCorrectionReasonCodesItemFieldLabel)
+}
+
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UpdateCalendarResponseCorrectionReasonCodesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UpdateCalendarResponseCorrectionReasonCodesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) MarshalJSON() ([]byte, error) {
+	type embed UpdateCalendarResponseCorrectionReasonCodesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UpdateCalendarResponseCorrectionReasonCodesItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+type UpdateCalendarResponseCorrectionRequiredItem string
+
+const (
+	UpdateCalendarResponseCorrectionRequiredItemReason             UpdateCalendarResponseCorrectionRequiredItem = "reason"
+	UpdateCalendarResponseCorrectionRequiredItemReasonCode         UpdateCalendarResponseCorrectionRequiredItem = "reasonCode"
+	UpdateCalendarResponseCorrectionRequiredItemAuthorityReference UpdateCalendarResponseCorrectionRequiredItem = "authorityReference"
+	UpdateCalendarResponseCorrectionRequiredItemDiscoveredOn       UpdateCalendarResponseCorrectionRequiredItem = "discoveredOn"
+)
+
+func NewUpdateCalendarResponseCorrectionRequiredItemFromString(s string) (UpdateCalendarResponseCorrectionRequiredItem, error) {
+	switch s {
+	case "reason":
+		return UpdateCalendarResponseCorrectionRequiredItemReason, nil
+	case "reasonCode":
+		return UpdateCalendarResponseCorrectionRequiredItemReasonCode, nil
+	case "authorityReference":
+		return UpdateCalendarResponseCorrectionRequiredItemAuthorityReference, nil
+	case "discoveredOn":
+		return UpdateCalendarResponseCorrectionRequiredItemDiscoveredOn, nil
+	}
+	var t UpdateCalendarResponseCorrectionRequiredItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u UpdateCalendarResponseCorrectionRequiredItem) Ptr() *UpdateCalendarResponseCorrectionRequiredItem {
+	return &u
+}
+
 type UpdateCalendarResponseKind string
 
 const (
@@ -6631,57 +9145,61 @@ var (
 	updateCalendarResponseSubmissionFieldPeriod                 = big.NewInt(1 << 11)
 	updateCalendarResponseSubmissionFieldDocumentKey            = big.NewInt(1 << 12)
 	updateCalendarResponseSubmissionFieldAmendment              = big.NewInt(1 << 13)
-	updateCalendarResponseSubmissionFieldOrigin                 = big.NewInt(1 << 14)
-	updateCalendarResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 15)
-	updateCalendarResponseSubmissionFieldEnvironment            = big.NewInt(1 << 16)
-	updateCalendarResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 17)
-	updateCalendarResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 18)
-	updateCalendarResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 19)
-	updateCalendarResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 20)
-	updateCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 21)
-	updateCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 22)
-	updateCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 23)
-	updateCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 24)
-	updateCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 25)
-	updateCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 26)
-	updateCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	updateCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	updateCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 29)
-	updateCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 30)
+	updateCalendarResponseSubmissionFieldAuthorityRef           = big.NewInt(1 << 14)
+	updateCalendarResponseSubmissionFieldCorrectionInput        = big.NewInt(1 << 15)
+	updateCalendarResponseSubmissionFieldOrigin                 = big.NewInt(1 << 16)
+	updateCalendarResponseSubmissionFieldTransportSystem        = big.NewInt(1 << 17)
+	updateCalendarResponseSubmissionFieldEnvironment            = big.NewInt(1 << 18)
+	updateCalendarResponseSubmissionFieldSubmittedAt            = big.NewInt(1 << 19)
+	updateCalendarResponseSubmissionFieldAcceptedAt             = big.NewInt(1 << 20)
+	updateCalendarResponseSubmissionFieldRejectedAt             = big.NewInt(1 << 21)
+	updateCalendarResponseSubmissionFieldCheckedAt              = big.NewInt(1 << 22)
+	updateCalendarResponseSubmissionFieldNextCheckAt            = big.NewInt(1 << 23)
+	updateCalendarResponseSubmissionFieldAttempts               = big.NewInt(1 << 24)
+	updateCalendarResponseSubmissionFieldDeliveryError          = big.NewInt(1 << 25)
+	updateCalendarResponseSubmissionFieldConfirmationPending    = big.NewInt(1 << 26)
+	updateCalendarResponseSubmissionFieldSentSha256             = big.NewInt(1 << 27)
+	updateCalendarResponseSubmissionFieldCertificateFingerprint = big.NewInt(1 << 28)
+	updateCalendarResponseSubmissionFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	updateCalendarResponseSubmissionFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	updateCalendarResponseSubmissionFieldCreatedAt              = big.NewInt(1 << 31)
+	updateCalendarResponseSubmissionFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type UpdateCalendarResponseSubmission struct {
-	ID                     string                                       `json:"id" url:"id"`
-	Obligation             string                                       `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                        `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                       `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                      `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 UpdateCalendarResponseSubmissionStatus       `json:"status" url:"status"`
-	FileName               string                                       `json:"fileName" url:"fileName"`
-	FileID                 *string                                      `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                      `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                      `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                      `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                      `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                      `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                        `json:"amendment" url:"amendment"`
-	Origin                 string                                       `json:"origin" url:"origin"`
-	TransportSystem        *string                                      `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *UpdateCalendarResponseSubmissionEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                   `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                   `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                   `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                   `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                   `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                        `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                      `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                         `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                      `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                      `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                      `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                      `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                    `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                    `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                           `json:"id" url:"id"`
+	Obligation             string                                           `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                            `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                           `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                          `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 UpdateCalendarResponseSubmissionStatus           `json:"status" url:"status"`
+	FileName               string                                           `json:"fileName" url:"fileName"`
+	FileID                 *string                                          `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                          `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                          `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                          `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                          `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                          `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                            `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                          `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *UpdateCalendarResponseSubmissionCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                           `json:"origin" url:"origin"`
+	TransportSystem        *string                                          `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *UpdateCalendarResponseSubmissionEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                       `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                       `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                       `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                       `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                       `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                            `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                          `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                             `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                          `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                          `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                          `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                          `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                        `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                        `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6786,6 +9304,20 @@ func (u *UpdateCalendarResponseSubmission) GetAmendment() int64 {
 		return 0
 	}
 	return u.Amendment
+}
+
+func (u *UpdateCalendarResponseSubmission) GetAuthorityRef() *string {
+	if u == nil {
+		return nil
+	}
+	return u.AuthorityRef
+}
+
+func (u *UpdateCalendarResponseSubmission) GetCorrectionInput() *UpdateCalendarResponseSubmissionCorrectionInput {
+	if u == nil {
+		return nil
+	}
+	return u.CorrectionInput
 }
 
 func (u *UpdateCalendarResponseSubmission) GetOrigin() string {
@@ -7019,6 +9551,20 @@ func (u *UpdateCalendarResponseSubmission) SetAmendment(amendment int64) {
 	u.require(updateCalendarResponseSubmissionFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmission) SetAuthorityRef(authorityRef *string) {
+	u.AuthorityRef = authorityRef
+	u.require(updateCalendarResponseSubmissionFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmission) SetCorrectionInput(correctionInput *UpdateCalendarResponseSubmissionCorrectionInput) {
+	u.CorrectionInput = correctionInput
+	u.require(updateCalendarResponseSubmissionFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (u *UpdateCalendarResponseSubmission) SetOrigin(origin string) {
@@ -7212,6 +9758,138 @@ func (u *UpdateCalendarResponseSubmission) String() string {
 	return fmt.Sprintf("%#v", u)
 }
 
+var (
+	updateCalendarResponseSubmissionCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	updateCalendarResponseSubmissionCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	updateCalendarResponseSubmissionCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	updateCalendarResponseSubmissionCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type UpdateCalendarResponseSubmissionCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) GetReason() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Reason
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) GetReasonCode() *string {
+	if u == nil {
+		return nil
+	}
+	return u.ReasonCode
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) GetAuthorityReference() *string {
+	if u == nil {
+		return nil
+	}
+	return u.AuthorityReference
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) GetDiscoveredOn() *string {
+	if u == nil {
+		return nil
+	}
+	return u.DiscoveredOn
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) SetReason(reason *string) {
+	u.Reason = reason
+	u.require(updateCalendarResponseSubmissionCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) SetReasonCode(reasonCode *string) {
+	u.ReasonCode = reasonCode
+	u.require(updateCalendarResponseSubmissionCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	u.AuthorityReference = authorityReference
+	u.require(updateCalendarResponseSubmissionCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	u.DiscoveredOn = discoveredOn
+	u.require(updateCalendarResponseSubmissionCorrectionInputFieldDiscoveredOn)
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler UpdateCalendarResponseSubmissionCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UpdateCalendarResponseSubmissionCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed UpdateCalendarResponseSubmissionCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UpdateCalendarResponseSubmissionCorrectionInput) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
 type UpdateCalendarResponseSubmissionEnvironment string
 
 const (
@@ -7277,57 +9955,61 @@ var (
 	updateCalendarResponseSubmissionsItemFieldPeriod                 = big.NewInt(1 << 11)
 	updateCalendarResponseSubmissionsItemFieldDocumentKey            = big.NewInt(1 << 12)
 	updateCalendarResponseSubmissionsItemFieldAmendment              = big.NewInt(1 << 13)
-	updateCalendarResponseSubmissionsItemFieldOrigin                 = big.NewInt(1 << 14)
-	updateCalendarResponseSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 15)
-	updateCalendarResponseSubmissionsItemFieldEnvironment            = big.NewInt(1 << 16)
-	updateCalendarResponseSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 17)
-	updateCalendarResponseSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 18)
-	updateCalendarResponseSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 19)
-	updateCalendarResponseSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 20)
-	updateCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 21)
-	updateCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 22)
-	updateCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	updateCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 24)
-	updateCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 25)
-	updateCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
-	updateCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	updateCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	updateCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 29)
-	updateCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 30)
+	updateCalendarResponseSubmissionsItemFieldAuthorityRef           = big.NewInt(1 << 14)
+	updateCalendarResponseSubmissionsItemFieldCorrectionInput        = big.NewInt(1 << 15)
+	updateCalendarResponseSubmissionsItemFieldOrigin                 = big.NewInt(1 << 16)
+	updateCalendarResponseSubmissionsItemFieldTransportSystem        = big.NewInt(1 << 17)
+	updateCalendarResponseSubmissionsItemFieldEnvironment            = big.NewInt(1 << 18)
+	updateCalendarResponseSubmissionsItemFieldSubmittedAt            = big.NewInt(1 << 19)
+	updateCalendarResponseSubmissionsItemFieldAcceptedAt             = big.NewInt(1 << 20)
+	updateCalendarResponseSubmissionsItemFieldRejectedAt             = big.NewInt(1 << 21)
+	updateCalendarResponseSubmissionsItemFieldCheckedAt              = big.NewInt(1 << 22)
+	updateCalendarResponseSubmissionsItemFieldNextCheckAt            = big.NewInt(1 << 23)
+	updateCalendarResponseSubmissionsItemFieldAttempts               = big.NewInt(1 << 24)
+	updateCalendarResponseSubmissionsItemFieldDeliveryError          = big.NewInt(1 << 25)
+	updateCalendarResponseSubmissionsItemFieldConfirmationPending    = big.NewInt(1 << 26)
+	updateCalendarResponseSubmissionsItemFieldSentSha256             = big.NewInt(1 << 27)
+	updateCalendarResponseSubmissionsItemFieldCertificateFingerprint = big.NewInt(1 << 28)
+	updateCalendarResponseSubmissionsItemFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	updateCalendarResponseSubmissionsItemFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	updateCalendarResponseSubmissionsItemFieldCreatedAt              = big.NewInt(1 << 31)
+	updateCalendarResponseSubmissionsItemFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type UpdateCalendarResponseSubmissionsItem struct {
-	ID                     string                                            `json:"id" url:"id"`
-	Obligation             string                                            `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                             `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                            `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                           `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 UpdateCalendarResponseSubmissionsItemStatus       `json:"status" url:"status"`
-	FileName               string                                            `json:"fileName" url:"fileName"`
-	FileID                 *string                                           `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                           `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                           `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                           `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                           `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                           `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                             `json:"amendment" url:"amendment"`
-	Origin                 string                                            `json:"origin" url:"origin"`
-	TransportSystem        *string                                           `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *UpdateCalendarResponseSubmissionsItemEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                        `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                        `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                        `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                        `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                        `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                             `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                           `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                              `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                           `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                           `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                           `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                           `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                         `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                         `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                                `json:"id" url:"id"`
+	Obligation             string                                                `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                 `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                                `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                               `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 UpdateCalendarResponseSubmissionsItemStatus           `json:"status" url:"status"`
+	FileName               string                                                `json:"fileName" url:"fileName"`
+	FileID                 *string                                               `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                               `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                               `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                               `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                               `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                               `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                 `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                               `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *UpdateCalendarResponseSubmissionsItemCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                                `json:"origin" url:"origin"`
+	TransportSystem        *string                                               `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *UpdateCalendarResponseSubmissionsItemEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                            `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                            `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                            `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                            `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                            `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                 `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                               `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                  `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                               `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                               `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                               `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                               `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                             `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7432,6 +10114,20 @@ func (u *UpdateCalendarResponseSubmissionsItem) GetAmendment() int64 {
 		return 0
 	}
 	return u.Amendment
+}
+
+func (u *UpdateCalendarResponseSubmissionsItem) GetAuthorityRef() *string {
+	if u == nil {
+		return nil
+	}
+	return u.AuthorityRef
+}
+
+func (u *UpdateCalendarResponseSubmissionsItem) GetCorrectionInput() *UpdateCalendarResponseSubmissionsItemCorrectionInput {
+	if u == nil {
+		return nil
+	}
+	return u.CorrectionInput
 }
 
 func (u *UpdateCalendarResponseSubmissionsItem) GetOrigin() string {
@@ -7665,6 +10361,20 @@ func (u *UpdateCalendarResponseSubmissionsItem) SetAmendment(amendment int64) {
 	u.require(updateCalendarResponseSubmissionsItemFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionsItem) SetAuthorityRef(authorityRef *string) {
+	u.AuthorityRef = authorityRef
+	u.require(updateCalendarResponseSubmissionsItemFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionsItem) SetCorrectionInput(correctionInput *UpdateCalendarResponseSubmissionsItemCorrectionInput) {
+	u.CorrectionInput = correctionInput
+	u.require(updateCalendarResponseSubmissionsItemFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (u *UpdateCalendarResponseSubmissionsItem) SetOrigin(origin string) {
@@ -7844,6 +10554,138 @@ func (u *UpdateCalendarResponseSubmissionsItem) MarshalJSON() ([]byte, error) {
 }
 
 func (u *UpdateCalendarResponseSubmissionsItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	updateCalendarResponseSubmissionsItemCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	updateCalendarResponseSubmissionsItemCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	updateCalendarResponseSubmissionsItemCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	updateCalendarResponseSubmissionsItemCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type UpdateCalendarResponseSubmissionsItemCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) GetReason() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Reason
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) GetReasonCode() *string {
+	if u == nil {
+		return nil
+	}
+	return u.ReasonCode
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) GetAuthorityReference() *string {
+	if u == nil {
+		return nil
+	}
+	return u.AuthorityReference
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) GetDiscoveredOn() *string {
+	if u == nil {
+		return nil
+	}
+	return u.DiscoveredOn
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) SetReason(reason *string) {
+	u.Reason = reason
+	u.require(updateCalendarResponseSubmissionsItemCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) SetReasonCode(reasonCode *string) {
+	u.ReasonCode = reasonCode
+	u.require(updateCalendarResponseSubmissionsItemCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	u.AuthorityReference = authorityReference
+	u.require(updateCalendarResponseSubmissionsItemCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	u.DiscoveredOn = discoveredOn
+	u.require(updateCalendarResponseSubmissionsItemCorrectionInputFieldDiscoveredOn)
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler UpdateCalendarResponseSubmissionsItemCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UpdateCalendarResponseSubmissionsItemCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed UpdateCalendarResponseSubmissionsItemCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UpdateCalendarResponseSubmissionsItemCorrectionInput) String() string {
 	if u == nil {
 		return "<nil>"
 	}

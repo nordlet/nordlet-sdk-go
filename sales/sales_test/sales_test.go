@@ -444,6 +444,33 @@ func TestSalesInvoicesIssueWithWireMock(
 	VerifyRequestCount(t, "TestSalesInvoicesIssueWithWireMock", "POST", "/v1/sales/invoices/issue", nil, 1)
 }
 
+func TestSalesInvoicesReverseWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesReverseSalesRequest{
+		ID:     "id",
+		Reason: "reason",
+	}
+	_, invocationErr := client.Sales.InvoicesReverse(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesReverseWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoicesReverseWithWireMock", "POST", "/v1/sales/invoices/reverse", nil, 1)
+}
+
 func TestSalesInvoicesLockWithWireMock(
 	t *testing.T,
 ) {

@@ -142,11 +142,12 @@ func (a *AssetsCreateAssetsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	assetsDisposeAssetsRequestFieldID       = big.NewInt(1 << 0)
-	assetsDisposeAssetsRequestFieldDate     = big.NewInt(1 << 1)
-	assetsDisposeAssetsRequestFieldReason   = big.NewInt(1 << 2)
-	assetsDisposeAssetsRequestFieldProceeds = big.NewInt(1 << 3)
-	assetsDisposeAssetsRequestFieldNotes    = big.NewInt(1 << 4)
+	assetsDisposeAssetsRequestFieldID            = big.NewInt(1 << 0)
+	assetsDisposeAssetsRequestFieldDate          = big.NewInt(1 << 1)
+	assetsDisposeAssetsRequestFieldReason        = big.NewInt(1 << 2)
+	assetsDisposeAssetsRequestFieldProceeds      = big.NewInt(1 << 3)
+	assetsDisposeAssetsRequestFieldSaleInvoiceID = big.NewInt(1 << 4)
+	assetsDisposeAssetsRequestFieldNotes         = big.NewInt(1 << 5)
 )
 
 type AssetsDisposeAssetsRequest struct {
@@ -155,7 +156,9 @@ type AssetsDisposeAssetsRequest struct {
 	Reason AssetsDisposeAssetsRequestReason `json:"reason" url:"-"`
 	// Sale price excluding VAT; 0 when scrapped or written off
 	Proceeds *string `json:"proceeds,omitempty" url:"-"`
-	Notes    *string `json:"notes,omitempty" url:"-"`
+	// The issued sales invoice that sold the asset
+	SaleInvoiceID *string `json:"saleInvoiceId,omitempty" url:"-"`
+	Notes         *string `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -194,6 +197,13 @@ func (a *AssetsDisposeAssetsRequest) SetReason(reason AssetsDisposeAssetsRequest
 func (a *AssetsDisposeAssetsRequest) SetProceeds(proceeds *string) {
 	a.Proceeds = proceeds
 	a.require(assetsDisposeAssetsRequestFieldProceeds)
+}
+
+// SetSaleInvoiceID sets the SaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsRequest) SetSaleInvoiceID(saleInvoiceID *string) {
+	a.SaleInvoiceID = saleInvoiceID
+	a.require(assetsDisposeAssetsRequestFieldSaleInvoiceID)
 }
 
 // SetNotes sets the Notes field and marks it as non-optional;
@@ -1142,7 +1152,8 @@ var (
 	assetsCreateAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
 	assetsCreateAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsCreateAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
-	assetsCreateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+	assetsCreateAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsCreateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
 )
 
 type AssetsCreateAssetsResponse struct {
@@ -1172,6 +1183,7 @@ type AssetsCreateAssetsResponse struct {
 	DisposalReason               *AssetsCreateAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
 	DisposalProceeds             *string                                             `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                             `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                             `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
 	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1361,6 +1373,13 @@ func (a *AssetsCreateAssetsResponse) GetDisposalJournalTransactionID() *string {
 		return nil
 	}
 	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsCreateAssetsResponse) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
 }
 
 func (a *AssetsCreateAssetsResponse) GetCreatedAt() time.Time {
@@ -1564,6 +1583,13 @@ func (a *AssetsCreateAssetsResponse) SetDisposalProceeds(disposalProceeds *strin
 func (a *AssetsCreateAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
 	a.DisposalJournalTransactionID = disposalJournalTransactionID
 	a.require(assetsCreateAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsCreateAssetsResponseFieldDisposalSaleInvoiceID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -1982,7 +2008,8 @@ var (
 	assetsDisposeAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
 	assetsDisposeAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsDisposeAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
-	assetsDisposeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+	assetsDisposeAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsDisposeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
 )
 
 type AssetsDisposeAssetsResponse struct {
@@ -2012,6 +2039,7 @@ type AssetsDisposeAssetsResponse struct {
 	DisposalReason               *AssetsDisposeAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
 	DisposalProceeds             *string                                              `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                              `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                              `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
 	CreatedAt                    time.Time                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2201,6 +2229,13 @@ func (a *AssetsDisposeAssetsResponse) GetDisposalJournalTransactionID() *string 
 		return nil
 	}
 	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsDisposeAssetsResponse) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
 }
 
 func (a *AssetsDisposeAssetsResponse) GetCreatedAt() time.Time {
@@ -2404,6 +2439,13 @@ func (a *AssetsDisposeAssetsResponse) SetDisposalProceeds(disposalProceeds *stri
 func (a *AssetsDisposeAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
 	a.DisposalJournalTransactionID = disposalJournalTransactionID
 	a.require(assetsDisposeAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsDisposeAssetsResponseFieldDisposalSaleInvoiceID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -2797,7 +2839,8 @@ var (
 	assetsGetAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
 	assetsGetAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsGetAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
-	assetsGetAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+	assetsGetAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsGetAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
 )
 
 type AssetsGetAssetsResponse struct {
@@ -2827,6 +2870,7 @@ type AssetsGetAssetsResponse struct {
 	DisposalReason               *AssetsGetAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
 	DisposalProceeds             *string                                          `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                          `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                          `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
 	CreatedAt                    time.Time                                        `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3016,6 +3060,13 @@ func (a *AssetsGetAssetsResponse) GetDisposalJournalTransactionID() *string {
 		return nil
 	}
 	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsGetAssetsResponse) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
 }
 
 func (a *AssetsGetAssetsResponse) GetCreatedAt() time.Time {
@@ -3219,6 +3270,13 @@ func (a *AssetsGetAssetsResponse) SetDisposalProceeds(disposalProceeds *string) 
 func (a *AssetsGetAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
 	a.DisposalJournalTransactionID = disposalJournalTransactionID
 	a.require(assetsGetAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsGetAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsGetAssetsResponseFieldDisposalSaleInvoiceID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3753,7 +3811,8 @@ var (
 	assetsInputVatAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
 	assetsInputVatAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsInputVatAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
-	assetsInputVatAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+	assetsInputVatAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsInputVatAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
 )
 
 type AssetsInputVatAssetsResponse struct {
@@ -3783,6 +3842,7 @@ type AssetsInputVatAssetsResponse struct {
 	DisposalReason               *AssetsInputVatAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
 	DisposalProceeds             *string                                               `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                               `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                               `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
 	CreatedAt                    time.Time                                             `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3972,6 +4032,13 @@ func (a *AssetsInputVatAssetsResponse) GetDisposalJournalTransactionID() *string
 		return nil
 	}
 	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsInputVatAssetsResponse) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
 }
 
 func (a *AssetsInputVatAssetsResponse) GetCreatedAt() time.Time {
@@ -4175,6 +4242,13 @@ func (a *AssetsInputVatAssetsResponse) SetDisposalProceeds(disposalProceeds *str
 func (a *AssetsInputVatAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
 	a.DisposalJournalTransactionID = disposalJournalTransactionID
 	a.require(assetsInputVatAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsInputVatAssetsResponseFieldDisposalSaleInvoiceID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -5171,7 +5245,8 @@ var (
 	assetsListAssetsResponseRowsItemFieldDisposalReason               = big.NewInt(1 << 23)
 	assetsListAssetsResponseRowsItemFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsListAssetsResponseRowsItemFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
-	assetsListAssetsResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 26)
+	assetsListAssetsResponseRowsItemFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsListAssetsResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 27)
 )
 
 type AssetsListAssetsResponseRowsItem struct {
@@ -5201,6 +5276,7 @@ type AssetsListAssetsResponseRowsItem struct {
 	DisposalReason               *AssetsListAssetsResponseRowsItemDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
 	DisposalProceeds             *string                                                   `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                                   `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                                   `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
 	CreatedAt                    time.Time                                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -5390,6 +5466,13 @@ func (a *AssetsListAssetsResponseRowsItem) GetDisposalJournalTransactionID() *st
 		return nil
 	}
 	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
 }
 
 func (a *AssetsListAssetsResponseRowsItem) GetCreatedAt() time.Time {
@@ -5593,6 +5676,13 @@ func (a *AssetsListAssetsResponseRowsItem) SetDisposalProceeds(disposalProceeds 
 func (a *AssetsListAssetsResponseRowsItem) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
 	a.DisposalJournalTransactionID = disposalJournalTransactionID
 	a.require(assetsListAssetsResponseRowsItemFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsListAssetsResponseRowsItem) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsListAssetsResponseRowsItemFieldDisposalSaleInvoiceID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -5986,7 +6076,8 @@ var (
 	assetsModernizeAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
 	assetsModernizeAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsModernizeAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
-	assetsModernizeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+	assetsModernizeAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsModernizeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
 )
 
 type AssetsModernizeAssetsResponse struct {
@@ -6016,6 +6107,7 @@ type AssetsModernizeAssetsResponse struct {
 	DisposalReason               *AssetsModernizeAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
 	DisposalProceeds             *string                                                `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                                `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                                `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
 	CreatedAt                    time.Time                                              `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -6205,6 +6297,13 @@ func (a *AssetsModernizeAssetsResponse) GetDisposalJournalTransactionID() *strin
 		return nil
 	}
 	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsModernizeAssetsResponse) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
 }
 
 func (a *AssetsModernizeAssetsResponse) GetCreatedAt() time.Time {
@@ -6408,6 +6507,13 @@ func (a *AssetsModernizeAssetsResponse) SetDisposalProceeds(disposalProceeds *st
 func (a *AssetsModernizeAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
 	a.DisposalJournalTransactionID = disposalJournalTransactionID
 	a.require(assetsModernizeAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsModernizeAssetsResponseFieldDisposalSaleInvoiceID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -6901,7 +7007,8 @@ var (
 	assetsUpdateAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
 	assetsUpdateAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsUpdateAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
-	assetsUpdateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 26)
+	assetsUpdateAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsUpdateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
 )
 
 type AssetsUpdateAssetsResponse struct {
@@ -6931,6 +7038,7 @@ type AssetsUpdateAssetsResponse struct {
 	DisposalReason               *AssetsUpdateAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
 	DisposalProceeds             *string                                             `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                             `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                             `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
 	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -7120,6 +7228,13 @@ func (a *AssetsUpdateAssetsResponse) GetDisposalJournalTransactionID() *string {
 		return nil
 	}
 	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsUpdateAssetsResponse) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
 }
 
 func (a *AssetsUpdateAssetsResponse) GetCreatedAt() time.Time {
@@ -7323,6 +7438,13 @@ func (a *AssetsUpdateAssetsResponse) SetDisposalProceeds(disposalProceeds *strin
 func (a *AssetsUpdateAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
 	a.DisposalJournalTransactionID = disposalJournalTransactionID
 	a.require(assetsUpdateAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsUpdateAssetsResponseFieldDisposalSaleInvoiceID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

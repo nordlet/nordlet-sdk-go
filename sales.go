@@ -2552,6 +2552,61 @@ func (i *InvoicesPeppolXMLSalesRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	invoicesReverseSalesRequestFieldID     = big.NewInt(1 << 0)
+	invoicesReverseSalesRequestFieldReason = big.NewInt(1 << 1)
+)
+
+type InvoicesReverseSalesRequest struct {
+	ID     string `json:"id" url:"-"`
+	Reason string `json:"reason" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoicesReverseSalesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesRequest) SetID(id string) {
+	i.ID = id
+	i.require(invoicesReverseSalesRequestFieldID)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesRequest) SetReason(reason string) {
+	i.Reason = reason
+	i.require(invoicesReverseSalesRequestFieldReason)
+}
+
+func (i *InvoicesReverseSalesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesReverseSalesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesRequest(body)
+	return nil
+}
+
+func (i *InvoicesReverseSalesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	invoicesSendSalesRequestFieldID     = big.NewInt(1 << 0)
 	invoicesSendSalesRequestFieldTo     = big.NewInt(1 << 1)
 	invoicesSendSalesRequestFieldLocale = big.NewInt(1 << 2)
@@ -13187,54 +13242,57 @@ var (
 	invoicesApplyAdvanceSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesApplyAdvanceSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesApplyAdvanceSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesApplyAdvanceSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesApplyAdvanceSalesResponseFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesApplyAdvanceSalesResponseFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesApplyAdvanceSalesResponseFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesApplyAdvanceSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesApplyAdvanceSalesResponseFieldNotes                        = big.NewInt(1 << 31)
-	invoicesApplyAdvanceSalesResponseFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesApplyAdvanceSalesResponseFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesApplyAdvanceSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesApplyAdvanceSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesApplyAdvanceSalesResponseFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesApplyAdvanceSalesResponseFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesApplyAdvanceSalesResponseFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesApplyAdvanceSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesApplyAdvanceSalesResponseFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesApplyAdvanceSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesApplyAdvanceSalesResponseFieldLocale                       = big.NewInt(1 << 42)
-	invoicesApplyAdvanceSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesApplyAdvanceSalesResponseFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesApplyAdvanceSalesResponseFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesApplyAdvanceSalesResponseFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesApplyAdvanceSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesApplyAdvanceSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesApplyAdvanceSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesApplyAdvanceSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesApplyAdvanceSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesApplyAdvanceSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesApplyAdvanceSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesApplyAdvanceSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesApplyAdvanceSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesApplyAdvanceSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesApplyAdvanceSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesApplyAdvanceSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesApplyAdvanceSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesApplyAdvanceSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesApplyAdvanceSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesApplyAdvanceSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesApplyAdvanceSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesApplyAdvanceSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesApplyAdvanceSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesApplyAdvanceSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesApplyAdvanceSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesApplyAdvanceSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesApplyAdvanceSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesApplyAdvanceSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesApplyAdvanceSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesApplyAdvanceSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesApplyAdvanceSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesApplyAdvanceSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesApplyAdvanceSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesApplyAdvanceSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesApplyAdvanceSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesApplyAdvanceSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesApplyAdvanceSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesApplyAdvanceSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesApplyAdvanceSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesApplyAdvanceSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
 )
 
 type InvoicesApplyAdvanceSalesResponse struct {
@@ -13257,6 +13315,9 @@ type InvoicesApplyAdvanceSalesResponse struct {
 	SalesTaxTotal                string                                         `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                         `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                     `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                        `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                        `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                                        `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -13445,6 +13506,27 @@ func (i *InvoicesApplyAdvanceSalesResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesApplyAdvanceSalesResponse) GetAppliedToInvoiceID() *string {
@@ -13930,6 +14012,27 @@ func (i *InvoicesApplyAdvanceSalesResponse) SetJournalTransactionID(journalTrans
 	i.require(invoicesApplyAdvanceSalesResponseFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesApplyAdvanceSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesApplyAdvanceSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesApplyAdvanceSalesResponseFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesApplyAdvanceSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -14272,6 +14375,7 @@ func (i *InvoicesApplyAdvanceSalesResponse) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -14289,6 +14393,7 @@ func (i *InvoicesApplyAdvanceSalesResponse) UnmarshalJSON(data []byte) error {
 	*i = InvoicesApplyAdvanceSalesResponse(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -14312,6 +14417,7 @@ func (i *InvoicesApplyAdvanceSalesResponse) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -14324,6 +14430,7 @@ func (i *InvoicesApplyAdvanceSalesResponse) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -14365,19 +14472,20 @@ var (
 	invoicesApplyAdvanceSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
 	invoicesApplyAdvanceSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
 	invoicesApplyAdvanceSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
-	invoicesApplyAdvanceSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesApplyAdvanceSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
 )
 
 type InvoicesApplyAdvanceSalesResponseLinesItem struct {
@@ -14393,6 +14501,7 @@ type InvoicesApplyAdvanceSalesResponseLinesItem struct {
 	VatRatePercent         string                                                                 `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                                `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis      *string                                                                `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                                `json:"assetId,omitempty" url:"assetId,omitempty"`
 	CostCenterID           *string                                                                `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                                `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                                 `json:"lineNet" url:"lineNet"`
@@ -14496,6 +14605,13 @@ func (i *InvoicesApplyAdvanceSalesResponseLinesItem) GetVatExemptionBasis() *str
 		return nil
 	}
 	return i.VatExemptionBasis
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesApplyAdvanceSalesResponseLinesItem) GetCostCenterID() *string {
@@ -14685,6 +14801,13 @@ func (i *InvoicesApplyAdvanceSalesResponseLinesItem) SetVatClassifierCode(vatCla
 func (i *InvoicesApplyAdvanceSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
 	i.VatExemptionBasis = vatExemptionBasis
 	i.require(invoicesApplyAdvanceSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesApplyAdvanceSalesResponseLinesItemFieldAssetID)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -15012,8 +15135,9 @@ func (i InvoicesApplyAdvanceSalesResponsePaymentStatus) Ptr() *InvoicesApplyAdva
 type InvoicesApplyAdvanceSalesResponseStatus string
 
 const (
-	InvoicesApplyAdvanceSalesResponseStatusDraft  InvoicesApplyAdvanceSalesResponseStatus = "draft"
-	InvoicesApplyAdvanceSalesResponseStatusIssued InvoicesApplyAdvanceSalesResponseStatus = "issued"
+	InvoicesApplyAdvanceSalesResponseStatusDraft    InvoicesApplyAdvanceSalesResponseStatus = "draft"
+	InvoicesApplyAdvanceSalesResponseStatusIssued   InvoicesApplyAdvanceSalesResponseStatus = "issued"
+	InvoicesApplyAdvanceSalesResponseStatusReversed InvoicesApplyAdvanceSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesApplyAdvanceSalesResponseStatusFromString(s string) (InvoicesApplyAdvanceSalesResponseStatus, error) {
@@ -15022,6 +15146,8 @@ func NewInvoicesApplyAdvanceSalesResponseStatusFromString(s string) (InvoicesApp
 		return InvoicesApplyAdvanceSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesApplyAdvanceSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesApplyAdvanceSalesResponseStatusReversed, nil
 	}
 	var t InvoicesApplyAdvanceSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -16438,26 +16564,29 @@ var (
 	invoicesCreateSalesRequestLinesItemFieldCostCenterID           = big.NewInt(1 << 8)
 	invoicesCreateSalesRequestLinesItemFieldProjectID              = big.NewInt(1 << 9)
 	invoicesCreateSalesRequestLinesItemFieldRecognition            = big.NewInt(1 << 10)
-	invoicesCreateSalesRequestLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesCreateSalesRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 12)
-	invoicesCreateSalesRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 13)
+	invoicesCreateSalesRequestLinesItemFieldAssetID                = big.NewInt(1 << 11)
+	invoicesCreateSalesRequestLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 12)
+	invoicesCreateSalesRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 13)
+	invoicesCreateSalesRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 14)
 )
 
 type InvoicesCreateSalesRequestLinesItem struct {
-	ItemID                 *string                                         `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description            *string                                         `json:"description,omitempty" url:"description,omitempty"`
-	Unit                   *string                                         `json:"unit,omitempty" url:"unit,omitempty"`
-	Quantity               *InvoicesCreateSalesRequestLinesItemQuantity    `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPriceExclVat       *string                                         `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat       *string                                         `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent         *string                                         `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	VatClassifierCode      *string                                         `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID           *string                                         `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID              *string                                         `json:"projectId,omitempty" url:"projectId,omitempty"`
-	Recognition            *InvoicesCreateSalesRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
-	VatExemptionBasis      *string                                         `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
-	StandaloneSellingPrice *string                                         `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
-	RefundEstimatePercent  *string                                         `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
+	ItemID            *string                                         `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string                                         `json:"description,omitempty" url:"description,omitempty"`
+	Unit              *string                                         `json:"unit,omitempty" url:"unit,omitempty"`
+	Quantity          *InvoicesCreateSalesRequestLinesItemQuantity    `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string                                         `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string                                         `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    *string                                         `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string                                         `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string                                         `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string                                         `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Recognition       *InvoicesCreateSalesRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
+	// A fixed asset sold on this line: the line net is booked to the assets.disposalProceeds posting rule account and `assets/assets/dispose` takes the proceeds from the issued invoice. Only on an invoice (422), only for an asset that is not disposed, and not with revenue recognition over time.
+	AssetID                *string `json:"assetId,omitempty" url:"assetId,omitempty"`
+	VatExemptionBasis      *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	StandaloneSellingPrice *string `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	RefundEstimatePercent  *string `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16541,6 +16670,13 @@ func (i *InvoicesCreateSalesRequestLinesItem) GetRecognition() *InvoicesCreateSa
 		return nil
 	}
 	return i.Recognition
+}
+
+func (i *InvoicesCreateSalesRequestLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesCreateSalesRequestLinesItem) GetVatExemptionBasis() *string {
@@ -16653,6 +16789,13 @@ func (i *InvoicesCreateSalesRequestLinesItem) SetProjectID(projectID *string) {
 func (i *InvoicesCreateSalesRequestLinesItem) SetRecognition(recognition *InvoicesCreateSalesRequestLinesItemRecognition) {
 	i.Recognition = recognition
 	i.require(invoicesCreateSalesRequestLinesItemFieldRecognition)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequestLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesCreateSalesRequestLinesItemFieldAssetID)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -17283,55 +17426,58 @@ var (
 	invoicesCreateSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesCreateSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesCreateSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesCreateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesCreateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesCreateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesCreateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesCreateSalesResponseFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesCreateSalesResponseFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesCreateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesCreateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesCreateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesCreateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesCreateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesCreateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesCreateSalesResponseFieldNotes                        = big.NewInt(1 << 31)
-	invoicesCreateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesCreateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesCreateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesCreateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesCreateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesCreateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesCreateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesCreateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesCreateSalesResponseFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesCreateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesCreateSalesResponseFieldLocale                       = big.NewInt(1 << 42)
-	invoicesCreateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesCreateSalesResponseFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesCreateSalesResponseFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesCreateSalesResponseFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesCreateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesCreateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesCreateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesCreateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesCreateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesCreateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesCreateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesCreateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesCreateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesCreateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesCreateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesCreateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesCreateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesCreateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesCreateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesCreateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesCreateSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesCreateSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesCreateSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesCreateSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesCreateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesCreateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesCreateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesCreateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesCreateSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesCreateSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesCreateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesCreateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesCreateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesCreateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesCreateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesCreateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesCreateSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesCreateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesCreateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesCreateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesCreateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesCreateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesCreateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesCreateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesCreateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesCreateSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesCreateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesCreateSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesCreateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesCreateSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesCreateSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesCreateSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesCreateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesCreateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesCreateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesCreateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesCreateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesCreateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesCreateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesCreateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesCreateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesCreateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesCreateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesCreateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesCreateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesCreateSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesCreateSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesCreateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesCreateSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 70)
 )
 
 type InvoicesCreateSalesResponse struct {
@@ -17354,6 +17500,9 @@ type InvoicesCreateSalesResponse struct {
 	SalesTaxTotal                string                                   `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                   `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                               `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                  `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                  `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                                  `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                                  `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -17543,6 +17692,27 @@ func (i *InvoicesCreateSalesResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesCreateSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesCreateSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesCreateSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesCreateSalesResponse) GetAppliedToInvoiceID() *string {
@@ -18035,6 +18205,27 @@ func (i *InvoicesCreateSalesResponse) SetJournalTransactionID(journalTransaction
 	i.require(invoicesCreateSalesResponseFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesCreateSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesCreateSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesCreateSalesResponseFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreateSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -18384,6 +18575,7 @@ func (i *InvoicesCreateSalesResponse) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -18401,6 +18593,7 @@ func (i *InvoicesCreateSalesResponse) UnmarshalJSON(data []byte) error {
 	*i = InvoicesCreateSalesResponse(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -18424,6 +18617,7 @@ func (i *InvoicesCreateSalesResponse) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -18436,6 +18630,7 @@ func (i *InvoicesCreateSalesResponse) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -18477,19 +18672,20 @@ var (
 	invoicesCreateSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
 	invoicesCreateSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
 	invoicesCreateSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesCreateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
-	invoicesCreateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
-	invoicesCreateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
-	invoicesCreateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
-	invoicesCreateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
-	invoicesCreateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
-	invoicesCreateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
-	invoicesCreateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
-	invoicesCreateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
-	invoicesCreateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
+	invoicesCreateSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesCreateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesCreateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesCreateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesCreateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesCreateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesCreateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesCreateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesCreateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesCreateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesCreateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
 )
 
 type InvoicesCreateSalesResponseLinesItem struct {
@@ -18505,6 +18701,7 @@ type InvoicesCreateSalesResponseLinesItem struct {
 	VatRatePercent         string                                                           `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                          `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis      *string                                                          `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                          `json:"assetId,omitempty" url:"assetId,omitempty"`
 	CostCenterID           *string                                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                           `json:"lineNet" url:"lineNet"`
@@ -18608,6 +18805,13 @@ func (i *InvoicesCreateSalesResponseLinesItem) GetVatExemptionBasis() *string {
 		return nil
 	}
 	return i.VatExemptionBasis
+}
+
+func (i *InvoicesCreateSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesCreateSalesResponseLinesItem) GetCostCenterID() *string {
@@ -18797,6 +19001,13 @@ func (i *InvoicesCreateSalesResponseLinesItem) SetVatClassifierCode(vatClassifie
 func (i *InvoicesCreateSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
 	i.VatExemptionBasis = vatExemptionBasis
 	i.require(invoicesCreateSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesCreateSalesResponseLinesItemFieldAssetID)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -19124,8 +19335,9 @@ func (i InvoicesCreateSalesResponsePaymentStatus) Ptr() *InvoicesCreateSalesResp
 type InvoicesCreateSalesResponseStatus string
 
 const (
-	InvoicesCreateSalesResponseStatusDraft  InvoicesCreateSalesResponseStatus = "draft"
-	InvoicesCreateSalesResponseStatusIssued InvoicesCreateSalesResponseStatus = "issued"
+	InvoicesCreateSalesResponseStatusDraft    InvoicesCreateSalesResponseStatus = "draft"
+	InvoicesCreateSalesResponseStatusIssued   InvoicesCreateSalesResponseStatus = "issued"
+	InvoicesCreateSalesResponseStatusReversed InvoicesCreateSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesCreateSalesResponseStatusFromString(s string) (InvoicesCreateSalesResponseStatus, error) {
@@ -19134,6 +19346,8 @@ func NewInvoicesCreateSalesResponseStatusFromString(s string) (InvoicesCreateSal
 		return InvoicesCreateSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesCreateSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesCreateSalesResponseStatusReversed, nil
 	}
 	var t InvoicesCreateSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -20225,11 +20439,13 @@ func (i InvoicesCreateSalesResponseVatScheme) Ptr() *InvoicesCreateSalesResponse
 var (
 	invoicesCreateSalesResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
 	invoicesCreateSalesResponseWarningsItemFieldMessage = big.NewInt(1 << 1)
+	invoicesCreateSalesResponseWarningsItemFieldFix     = big.NewInt(1 << 2)
 )
 
 type InvoicesCreateSalesResponseWarningsItem struct {
 	Code    string `json:"code" url:"code"`
 	Message string `json:"message" url:"message"`
+	Fix     string `json:"fix" url:"fix"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -20250,6 +20466,13 @@ func (i *InvoicesCreateSalesResponseWarningsItem) GetMessage() string {
 		return ""
 	}
 	return i.Message
+}
+
+func (i *InvoicesCreateSalesResponseWarningsItem) GetFix() string {
+	if i == nil {
+		return ""
+	}
+	return i.Fix
 }
 
 func (i *InvoicesCreateSalesResponseWarningsItem) GetExtraProperties() map[string]interface{} {
@@ -20278,6 +20501,13 @@ func (i *InvoicesCreateSalesResponseWarningsItem) SetCode(code string) {
 func (i *InvoicesCreateSalesResponseWarningsItem) SetMessage(message string) {
 	i.Message = message
 	i.require(invoicesCreateSalesResponseWarningsItemFieldMessage)
+}
+
+// SetFix sets the Fix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseWarningsItem) SetFix(fix string) {
+	i.Fix = fix
+	i.require(invoicesCreateSalesResponseWarningsItemFieldFix)
 }
 
 func (i *InvoicesCreateSalesResponseWarningsItem) UnmarshalJSON(data []byte) error {
@@ -21076,54 +21306,57 @@ var (
 	invoicesGetSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesGetSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesGetSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesGetSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesGetSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesGetSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesGetSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesGetSalesResponseFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesGetSalesResponseFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesGetSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesGetSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesGetSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesGetSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesGetSalesResponseFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesGetSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesGetSalesResponseFieldNotes                        = big.NewInt(1 << 31)
-	invoicesGetSalesResponseFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesGetSalesResponseFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesGetSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesGetSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesGetSalesResponseFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesGetSalesResponseFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesGetSalesResponseFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesGetSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesGetSalesResponseFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesGetSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesGetSalesResponseFieldLocale                       = big.NewInt(1 << 42)
-	invoicesGetSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesGetSalesResponseFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesGetSalesResponseFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesGetSalesResponseFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesGetSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesGetSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesGetSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesGetSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesGetSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesGetSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesGetSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesGetSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesGetSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesGetSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesGetSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesGetSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesGetSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesGetSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesGetSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesGetSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesGetSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesGetSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesGetSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesGetSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesGetSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesGetSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesGetSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesGetSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesGetSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesGetSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesGetSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesGetSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesGetSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesGetSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesGetSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesGetSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesGetSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesGetSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesGetSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesGetSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesGetSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesGetSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesGetSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesGetSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesGetSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesGetSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesGetSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesGetSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesGetSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesGetSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesGetSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesGetSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesGetSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesGetSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesGetSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesGetSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesGetSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesGetSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesGetSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesGetSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesGetSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesGetSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesGetSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesGetSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesGetSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesGetSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesGetSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesGetSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesGetSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
 )
 
 type InvoicesGetSalesResponse struct {
@@ -21146,6 +21379,9 @@ type InvoicesGetSalesResponse struct {
 	SalesTaxTotal                string                                `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                            `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                               `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                               `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                               `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                               `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                               `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -21334,6 +21570,27 @@ func (i *InvoicesGetSalesResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesGetSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesGetSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesGetSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesGetSalesResponse) GetAppliedToInvoiceID() *string {
@@ -21819,6 +22076,27 @@ func (i *InvoicesGetSalesResponse) SetJournalTransactionID(journalTransactionID 
 	i.require(invoicesGetSalesResponseFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesGetSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesGetSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesGetSalesResponseFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -22161,6 +22439,7 @@ func (i *InvoicesGetSalesResponse) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -22178,6 +22457,7 @@ func (i *InvoicesGetSalesResponse) UnmarshalJSON(data []byte) error {
 	*i = InvoicesGetSalesResponse(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -22201,6 +22481,7 @@ func (i *InvoicesGetSalesResponse) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -22213,6 +22494,7 @@ func (i *InvoicesGetSalesResponse) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -22254,19 +22536,20 @@ var (
 	invoicesGetSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
 	invoicesGetSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
 	invoicesGetSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesGetSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
-	invoicesGetSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
-	invoicesGetSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
-	invoicesGetSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
-	invoicesGetSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
-	invoicesGetSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
-	invoicesGetSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
-	invoicesGetSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
-	invoicesGetSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
-	invoicesGetSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
-	invoicesGetSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
-	invoicesGetSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
-	invoicesGetSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
+	invoicesGetSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesGetSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesGetSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesGetSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesGetSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesGetSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesGetSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesGetSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesGetSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesGetSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesGetSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesGetSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesGetSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesGetSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
 )
 
 type InvoicesGetSalesResponseLinesItem struct {
@@ -22282,6 +22565,7 @@ type InvoicesGetSalesResponseLinesItem struct {
 	VatRatePercent         string                                                        `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                       `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis      *string                                                       `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                       `json:"assetId,omitempty" url:"assetId,omitempty"`
 	CostCenterID           *string                                                       `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                       `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                        `json:"lineNet" url:"lineNet"`
@@ -22385,6 +22669,13 @@ func (i *InvoicesGetSalesResponseLinesItem) GetVatExemptionBasis() *string {
 		return nil
 	}
 	return i.VatExemptionBasis
+}
+
+func (i *InvoicesGetSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesGetSalesResponseLinesItem) GetCostCenterID() *string {
@@ -22574,6 +22865,13 @@ func (i *InvoicesGetSalesResponseLinesItem) SetVatClassifierCode(vatClassifierCo
 func (i *InvoicesGetSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
 	i.VatExemptionBasis = vatExemptionBasis
 	i.require(invoicesGetSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesGetSalesResponseLinesItemFieldAssetID)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -22901,8 +23199,9 @@ func (i InvoicesGetSalesResponsePaymentStatus) Ptr() *InvoicesGetSalesResponsePa
 type InvoicesGetSalesResponseStatus string
 
 const (
-	InvoicesGetSalesResponseStatusDraft  InvoicesGetSalesResponseStatus = "draft"
-	InvoicesGetSalesResponseStatusIssued InvoicesGetSalesResponseStatus = "issued"
+	InvoicesGetSalesResponseStatusDraft    InvoicesGetSalesResponseStatus = "draft"
+	InvoicesGetSalesResponseStatusIssued   InvoicesGetSalesResponseStatus = "issued"
+	InvoicesGetSalesResponseStatusReversed InvoicesGetSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesGetSalesResponseStatusFromString(s string) (InvoicesGetSalesResponseStatus, error) {
@@ -22911,6 +23210,8 @@ func NewInvoicesGetSalesResponseStatusFromString(s string) (InvoicesGetSalesResp
 		return InvoicesGetSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesGetSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesGetSalesResponseStatusReversed, nil
 	}
 	var t InvoicesGetSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -24019,55 +24320,58 @@ var (
 	invoicesIssueSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesIssueSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesIssueSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesIssueSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesIssueSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesIssueSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesIssueSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesIssueSalesResponseFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesIssueSalesResponseFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesIssueSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesIssueSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesIssueSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesIssueSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesIssueSalesResponseFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesIssueSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesIssueSalesResponseFieldNotes                        = big.NewInt(1 << 31)
-	invoicesIssueSalesResponseFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesIssueSalesResponseFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesIssueSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesIssueSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesIssueSalesResponseFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesIssueSalesResponseFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesIssueSalesResponseFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesIssueSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesIssueSalesResponseFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesIssueSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesIssueSalesResponseFieldLocale                       = big.NewInt(1 << 42)
-	invoicesIssueSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesIssueSalesResponseFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesIssueSalesResponseFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesIssueSalesResponseFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesIssueSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesIssueSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesIssueSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesIssueSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesIssueSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesIssueSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesIssueSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesIssueSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesIssueSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesIssueSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesIssueSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesIssueSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesIssueSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesIssueSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesIssueSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesIssueSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesIssueSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesIssueSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesIssueSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesIssueSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesIssueSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesIssueSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesIssueSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesIssueSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesIssueSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesIssueSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesIssueSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesIssueSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesIssueSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesIssueSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesIssueSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesIssueSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesIssueSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesIssueSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesIssueSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesIssueSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesIssueSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesIssueSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesIssueSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesIssueSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesIssueSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesIssueSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesIssueSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesIssueSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesIssueSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesIssueSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesIssueSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesIssueSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesIssueSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesIssueSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesIssueSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesIssueSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesIssueSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesIssueSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesIssueSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesIssueSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesIssueSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesIssueSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesIssueSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesIssueSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesIssueSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesIssueSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesIssueSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesIssueSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesIssueSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 70)
 )
 
 type InvoicesIssueSalesResponse struct {
@@ -24090,6 +24394,9 @@ type InvoicesIssueSalesResponse struct {
 	SalesTaxTotal                string                                  `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                  `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                 `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                              `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                 `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                 `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                                 `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                                 `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                                 `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -24279,6 +24586,27 @@ func (i *InvoicesIssueSalesResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesIssueSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesIssueSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesIssueSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesIssueSalesResponse) GetAppliedToInvoiceID() *string {
@@ -24771,6 +25099,27 @@ func (i *InvoicesIssueSalesResponse) SetJournalTransactionID(journalTransactionI
 	i.require(invoicesIssueSalesResponseFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesIssueSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesIssueSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesIssueSalesResponseFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesIssueSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -25120,6 +25469,7 @@ func (i *InvoicesIssueSalesResponse) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -25137,6 +25487,7 @@ func (i *InvoicesIssueSalesResponse) UnmarshalJSON(data []byte) error {
 	*i = InvoicesIssueSalesResponse(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -25160,6 +25511,7 @@ func (i *InvoicesIssueSalesResponse) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -25172,6 +25524,7 @@ func (i *InvoicesIssueSalesResponse) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -25213,19 +25566,20 @@ var (
 	invoicesIssueSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
 	invoicesIssueSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
 	invoicesIssueSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesIssueSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
-	invoicesIssueSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
-	invoicesIssueSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
-	invoicesIssueSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
-	invoicesIssueSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
-	invoicesIssueSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
-	invoicesIssueSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
-	invoicesIssueSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
-	invoicesIssueSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
-	invoicesIssueSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
+	invoicesIssueSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesIssueSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesIssueSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesIssueSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesIssueSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesIssueSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesIssueSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesIssueSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesIssueSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesIssueSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesIssueSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
 )
 
 type InvoicesIssueSalesResponseLinesItem struct {
@@ -25241,6 +25595,7 @@ type InvoicesIssueSalesResponseLinesItem struct {
 	VatRatePercent         string                                                          `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                         `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis      *string                                                         `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                         `json:"assetId,omitempty" url:"assetId,omitempty"`
 	CostCenterID           *string                                                         `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                         `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                          `json:"lineNet" url:"lineNet"`
@@ -25344,6 +25699,13 @@ func (i *InvoicesIssueSalesResponseLinesItem) GetVatExemptionBasis() *string {
 		return nil
 	}
 	return i.VatExemptionBasis
+}
+
+func (i *InvoicesIssueSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesIssueSalesResponseLinesItem) GetCostCenterID() *string {
@@ -25533,6 +25895,13 @@ func (i *InvoicesIssueSalesResponseLinesItem) SetVatClassifierCode(vatClassifier
 func (i *InvoicesIssueSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
 	i.VatExemptionBasis = vatExemptionBasis
 	i.require(invoicesIssueSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesIssueSalesResponseLinesItemFieldAssetID)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -25860,8 +26229,9 @@ func (i InvoicesIssueSalesResponsePaymentStatus) Ptr() *InvoicesIssueSalesRespon
 type InvoicesIssueSalesResponseStatus string
 
 const (
-	InvoicesIssueSalesResponseStatusDraft  InvoicesIssueSalesResponseStatus = "draft"
-	InvoicesIssueSalesResponseStatusIssued InvoicesIssueSalesResponseStatus = "issued"
+	InvoicesIssueSalesResponseStatusDraft    InvoicesIssueSalesResponseStatus = "draft"
+	InvoicesIssueSalesResponseStatusIssued   InvoicesIssueSalesResponseStatus = "issued"
+	InvoicesIssueSalesResponseStatusReversed InvoicesIssueSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesIssueSalesResponseStatusFromString(s string) (InvoicesIssueSalesResponseStatus, error) {
@@ -25870,6 +26240,8 @@ func NewInvoicesIssueSalesResponseStatusFromString(s string) (InvoicesIssueSales
 		return InvoicesIssueSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesIssueSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesIssueSalesResponseStatusReversed, nil
 	}
 	var t InvoicesIssueSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -26961,11 +27333,13 @@ func (i InvoicesIssueSalesResponseVatScheme) Ptr() *InvoicesIssueSalesResponseVa
 var (
 	invoicesIssueSalesResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
 	invoicesIssueSalesResponseWarningsItemFieldMessage = big.NewInt(1 << 1)
+	invoicesIssueSalesResponseWarningsItemFieldFix     = big.NewInt(1 << 2)
 )
 
 type InvoicesIssueSalesResponseWarningsItem struct {
 	Code    string `json:"code" url:"code"`
 	Message string `json:"message" url:"message"`
+	Fix     string `json:"fix" url:"fix"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -26986,6 +27360,13 @@ func (i *InvoicesIssueSalesResponseWarningsItem) GetMessage() string {
 		return ""
 	}
 	return i.Message
+}
+
+func (i *InvoicesIssueSalesResponseWarningsItem) GetFix() string {
+	if i == nil {
+		return ""
+	}
+	return i.Fix
 }
 
 func (i *InvoicesIssueSalesResponseWarningsItem) GetExtraProperties() map[string]interface{} {
@@ -27014,6 +27395,13 @@ func (i *InvoicesIssueSalesResponseWarningsItem) SetCode(code string) {
 func (i *InvoicesIssueSalesResponseWarningsItem) SetMessage(message string) {
 	i.Message = message
 	i.require(invoicesIssueSalesResponseWarningsItemFieldMessage)
+}
+
+// SetFix sets the Fix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseWarningsItem) SetFix(fix string) {
+	i.Fix = fix
+	i.require(invoicesIssueSalesResponseWarningsItemFieldFix)
 }
 
 func (i *InvoicesIssueSalesResponseWarningsItem) UnmarshalJSON(data []byte) error {
@@ -27681,53 +28069,56 @@ var (
 	invoicesListSalesResponseRowsItemFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesListSalesResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesListSalesResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesListSalesResponseRowsItemFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesListSalesResponseRowsItemFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesListSalesResponseRowsItemFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesListSalesResponseRowsItemFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesListSalesResponseRowsItemFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesListSalesResponseRowsItemFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesListSalesResponseRowsItemFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesListSalesResponseRowsItemFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesListSalesResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesListSalesResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesListSalesResponseRowsItemFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesListSalesResponseRowsItemFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesListSalesResponseRowsItemFieldNotes                        = big.NewInt(1 << 31)
-	invoicesListSalesResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesListSalesResponseRowsItemFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesListSalesResponseRowsItemFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesListSalesResponseRowsItemFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesListSalesResponseRowsItemFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesListSalesResponseRowsItemFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesListSalesResponseRowsItemFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesListSalesResponseRowsItemFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesListSalesResponseRowsItemFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesListSalesResponseRowsItemFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesListSalesResponseRowsItemFieldLocale                       = big.NewInt(1 << 42)
-	invoicesListSalesResponseRowsItemFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesListSalesResponseRowsItemFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesListSalesResponseRowsItemFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesListSalesResponseRowsItemFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesListSalesResponseRowsItemFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesListSalesResponseRowsItemFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesListSalesResponseRowsItemFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesListSalesResponseRowsItemFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesListSalesResponseRowsItemFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesListSalesResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesListSalesResponseRowsItemFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesListSalesResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesListSalesResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesListSalesResponseRowsItemFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesListSalesResponseRowsItemFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesListSalesResponseRowsItemFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesListSalesResponseRowsItemFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesListSalesResponseRowsItemFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesListSalesResponseRowsItemFieldAdvanceUnappliedAmount       = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesListSalesResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesListSalesResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesListSalesResponseRowsItemFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesListSalesResponseRowsItemFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesListSalesResponseRowsItemFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesListSalesResponseRowsItemFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesListSalesResponseRowsItemFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesListSalesResponseRowsItemFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesListSalesResponseRowsItemFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesListSalesResponseRowsItemFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesListSalesResponseRowsItemFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesListSalesResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesListSalesResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesListSalesResponseRowsItemFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesListSalesResponseRowsItemFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesListSalesResponseRowsItemFieldNotes                        = big.NewInt(1 << 34)
+	invoicesListSalesResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesListSalesResponseRowsItemFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesListSalesResponseRowsItemFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesListSalesResponseRowsItemFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesListSalesResponseRowsItemFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesListSalesResponseRowsItemFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesListSalesResponseRowsItemFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesListSalesResponseRowsItemFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesListSalesResponseRowsItemFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesListSalesResponseRowsItemFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesListSalesResponseRowsItemFieldLocale                       = big.NewInt(1 << 45)
+	invoicesListSalesResponseRowsItemFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesListSalesResponseRowsItemFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesListSalesResponseRowsItemFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesListSalesResponseRowsItemFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesListSalesResponseRowsItemFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesListSalesResponseRowsItemFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesListSalesResponseRowsItemFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesListSalesResponseRowsItemFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesListSalesResponseRowsItemFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesListSalesResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesListSalesResponseRowsItemFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesListSalesResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesListSalesResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesListSalesResponseRowsItemFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesListSalesResponseRowsItemFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesListSalesResponseRowsItemFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesListSalesResponseRowsItemFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesListSalesResponseRowsItemFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesListSalesResponseRowsItemFieldAdvanceUnappliedAmount       = big.NewInt(0).Lsh(big.NewInt(1), 68)
 )
 
 type InvoicesListSalesResponseRowsItem struct {
@@ -27750,6 +28141,9 @@ type InvoicesListSalesResponseRowsItem struct {
 	SalesTaxTotal                string                                         `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                         `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                     `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                        `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                        `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                                        `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -27937,6 +28331,27 @@ func (i *InvoicesListSalesResponseRowsItem) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesListSalesResponseRowsItem) GetAppliedToInvoiceID() *string {
@@ -28415,6 +28830,27 @@ func (i *InvoicesListSalesResponseRowsItem) SetJournalTransactionID(journalTrans
 	i.require(invoicesListSalesResponseRowsItemFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesListSalesResponseRowsItemFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesListSalesResponseRowsItemFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesListSalesResponseRowsItemFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesListSalesResponseRowsItem) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -28750,6 +29186,7 @@ func (i *InvoicesListSalesResponseRowsItem) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -28767,6 +29204,7 @@ func (i *InvoicesListSalesResponseRowsItem) UnmarshalJSON(data []byte) error {
 	*i = InvoicesListSalesResponseRowsItem(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -28790,6 +29228,7 @@ func (i *InvoicesListSalesResponseRowsItem) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -28802,6 +29241,7 @@ func (i *InvoicesListSalesResponseRowsItem) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -28858,8 +29298,9 @@ func (i InvoicesListSalesResponseRowsItemPaymentStatus) Ptr() *InvoicesListSales
 type InvoicesListSalesResponseRowsItemStatus string
 
 const (
-	InvoicesListSalesResponseRowsItemStatusDraft  InvoicesListSalesResponseRowsItemStatus = "draft"
-	InvoicesListSalesResponseRowsItemStatusIssued InvoicesListSalesResponseRowsItemStatus = "issued"
+	InvoicesListSalesResponseRowsItemStatusDraft    InvoicesListSalesResponseRowsItemStatus = "draft"
+	InvoicesListSalesResponseRowsItemStatusIssued   InvoicesListSalesResponseRowsItemStatus = "issued"
+	InvoicesListSalesResponseRowsItemStatusReversed InvoicesListSalesResponseRowsItemStatus = "reversed"
 )
 
 func NewInvoicesListSalesResponseRowsItemStatusFromString(s string) (InvoicesListSalesResponseRowsItemStatus, error) {
@@ -28868,6 +29309,8 @@ func NewInvoicesListSalesResponseRowsItemStatusFromString(s string) (InvoicesLis
 		return InvoicesListSalesResponseRowsItemStatusDraft, nil
 	case "issued":
 		return InvoicesListSalesResponseRowsItemStatusIssued, nil
+	case "reversed":
+		return InvoicesListSalesResponseRowsItemStatusReversed, nil
 	}
 	var t InvoicesListSalesResponseRowsItemStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -28968,54 +29411,57 @@ var (
 	invoicesLockSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesLockSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesLockSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesLockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesLockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesLockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesLockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesLockSalesResponseFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesLockSalesResponseFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesLockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesLockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesLockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesLockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesLockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesLockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesLockSalesResponseFieldNotes                        = big.NewInt(1 << 31)
-	invoicesLockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesLockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesLockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesLockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesLockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesLockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesLockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesLockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesLockSalesResponseFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesLockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesLockSalesResponseFieldLocale                       = big.NewInt(1 << 42)
-	invoicesLockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesLockSalesResponseFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesLockSalesResponseFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesLockSalesResponseFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesLockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesLockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesLockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesLockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesLockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesLockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesLockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesLockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesLockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesLockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesLockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesLockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesLockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesLockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesLockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesLockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesLockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesLockSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesLockSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesLockSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesLockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesLockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesLockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesLockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesLockSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesLockSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesLockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesLockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesLockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesLockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesLockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesLockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesLockSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesLockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesLockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesLockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesLockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesLockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesLockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesLockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesLockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesLockSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesLockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesLockSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesLockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesLockSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesLockSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesLockSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesLockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesLockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesLockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesLockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesLockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesLockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesLockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesLockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesLockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesLockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesLockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesLockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesLockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesLockSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesLockSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesLockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesLockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
 )
 
 type InvoicesLockSalesResponse struct {
@@ -29038,6 +29484,9 @@ type InvoicesLockSalesResponse struct {
 	SalesTaxTotal                string                                 `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                 `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                             `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                                `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                                `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                                `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -29226,6 +29675,27 @@ func (i *InvoicesLockSalesResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesLockSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesLockSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesLockSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesLockSalesResponse) GetAppliedToInvoiceID() *string {
@@ -29711,6 +30181,27 @@ func (i *InvoicesLockSalesResponse) SetJournalTransactionID(journalTransactionID
 	i.require(invoicesLockSalesResponseFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesLockSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesLockSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesLockSalesResponseFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesLockSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -30053,6 +30544,7 @@ func (i *InvoicesLockSalesResponse) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -30070,6 +30562,7 @@ func (i *InvoicesLockSalesResponse) UnmarshalJSON(data []byte) error {
 	*i = InvoicesLockSalesResponse(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -30093,6 +30586,7 @@ func (i *InvoicesLockSalesResponse) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -30105,6 +30599,7 @@ func (i *InvoicesLockSalesResponse) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -30146,19 +30641,20 @@ var (
 	invoicesLockSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
 	invoicesLockSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
 	invoicesLockSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesLockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
-	invoicesLockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
-	invoicesLockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
-	invoicesLockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
-	invoicesLockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
-	invoicesLockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
-	invoicesLockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
-	invoicesLockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
-	invoicesLockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
-	invoicesLockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
-	invoicesLockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
-	invoicesLockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
-	invoicesLockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
+	invoicesLockSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesLockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesLockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesLockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesLockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesLockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesLockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesLockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesLockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesLockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesLockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesLockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesLockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesLockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
 )
 
 type InvoicesLockSalesResponseLinesItem struct {
@@ -30174,6 +30670,7 @@ type InvoicesLockSalesResponseLinesItem struct {
 	VatRatePercent         string                                                         `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                        `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis      *string                                                        `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                        `json:"assetId,omitempty" url:"assetId,omitempty"`
 	CostCenterID           *string                                                        `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                        `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                         `json:"lineNet" url:"lineNet"`
@@ -30277,6 +30774,13 @@ func (i *InvoicesLockSalesResponseLinesItem) GetVatExemptionBasis() *string {
 		return nil
 	}
 	return i.VatExemptionBasis
+}
+
+func (i *InvoicesLockSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesLockSalesResponseLinesItem) GetCostCenterID() *string {
@@ -30466,6 +30970,13 @@ func (i *InvoicesLockSalesResponseLinesItem) SetVatClassifierCode(vatClassifierC
 func (i *InvoicesLockSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
 	i.VatExemptionBasis = vatExemptionBasis
 	i.require(invoicesLockSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesLockSalesResponseLinesItemFieldAssetID)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -30793,8 +31304,9 @@ func (i InvoicesLockSalesResponsePaymentStatus) Ptr() *InvoicesLockSalesResponse
 type InvoicesLockSalesResponseStatus string
 
 const (
-	InvoicesLockSalesResponseStatusDraft  InvoicesLockSalesResponseStatus = "draft"
-	InvoicesLockSalesResponseStatusIssued InvoicesLockSalesResponseStatus = "issued"
+	InvoicesLockSalesResponseStatusDraft    InvoicesLockSalesResponseStatus = "draft"
+	InvoicesLockSalesResponseStatusIssued   InvoicesLockSalesResponseStatus = "issued"
+	InvoicesLockSalesResponseStatusReversed InvoicesLockSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesLockSalesResponseStatusFromString(s string) (InvoicesLockSalesResponseStatus, error) {
@@ -30803,6 +31315,8 @@ func NewInvoicesLockSalesResponseStatusFromString(s string) (InvoicesLockSalesRe
 		return InvoicesLockSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesLockSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesLockSalesResponseStatusReversed, nil
 	}
 	var t InvoicesLockSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -32920,6 +33434,3020 @@ func (i *InvoicesPeppolXMLSalesResponse) String() string {
 	return fmt.Sprintf("%#v", i)
 }
 
+var (
+	invoicesReverseSalesResponseFieldID                           = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseFieldPartnerID                    = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseFieldType                         = big.NewInt(1 << 2)
+	invoicesReverseSalesResponseFieldStatus                       = big.NewInt(1 << 3)
+	invoicesReverseSalesResponseFieldPaymentStatus                = big.NewInt(1 << 4)
+	invoicesReverseSalesResponseFieldSeries                       = big.NewInt(1 << 5)
+	invoicesReverseSalesResponseFieldNumber                       = big.NewInt(1 << 6)
+	invoicesReverseSalesResponseFieldFullNumber                   = big.NewInt(1 << 7)
+	invoicesReverseSalesResponseFieldIssueDate                    = big.NewInt(1 << 8)
+	invoicesReverseSalesResponseFieldDueDate                      = big.NewInt(1 << 9)
+	invoicesReverseSalesResponseFieldCurrency                     = big.NewInt(1 << 10)
+	invoicesReverseSalesResponseFieldFxRate                       = big.NewInt(1 << 11)
+	invoicesReverseSalesResponseFieldNetTotal                     = big.NewInt(1 << 12)
+	invoicesReverseSalesResponseFieldVatTotal                     = big.NewInt(1 << 13)
+	invoicesReverseSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
+	invoicesReverseSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
+	invoicesReverseSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
+	invoicesReverseSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
+	invoicesReverseSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
+	invoicesReverseSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesReverseSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesReverseSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesReverseSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesReverseSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesReverseSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesReverseSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesReverseSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesReverseSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesReverseSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesReverseSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesReverseSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesReverseSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesReverseSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesReverseSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesReverseSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesReverseSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesReverseSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesReverseSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesReverseSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesReverseSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesReverseSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesReverseSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesReverseSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesReverseSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesReverseSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesReverseSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesReverseSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesReverseSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesReverseSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesReverseSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesReverseSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesReverseSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesReverseSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesReverseSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesReverseSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesReverseSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesReverseSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesReverseSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesReverseSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesReverseSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesReverseSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesReverseSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesReverseSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesReverseSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesReverseSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesReverseSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesReverseSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesReverseSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesReverseSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesReverseSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+)
+
+type InvoicesReverseSalesResponse struct {
+	ID                           string                                    `json:"id" url:"id"`
+	PartnerID                    string                                    `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesReverseSalesResponseType          `json:"type" url:"type"`
+	Status                       InvoicesReverseSalesResponseStatus        `json:"status" url:"status"`
+	PaymentStatus                InvoicesReverseSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                   `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                    `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                   `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                    `json:"currency" url:"currency"`
+	FxRate                       *string                                   `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                    `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                    `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                    `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                   `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                    `json:"salesTaxTotal" url:"salesTaxTotal"`
+	PaidAmount                   string                                    `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                   `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                   `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                   `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                   `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                   `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesReverseSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                   `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                   `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                   `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                   `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                   `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                      `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                   `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                   `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                   `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                    `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                   `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                   `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                   `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                   `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                   `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                   `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                   `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                   `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                   `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                      `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                      `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                   `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                   `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                   `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                   `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                   `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                   `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                   `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                   `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                   `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                 `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                 `json:"updatedAt" url:"updatedAt"`
+	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
+	AdvanceAppliedAmount *string                                  `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
+	Lines                []*InvoicesReverseSalesResponseLinesItem `json:"lines" url:"lines"`
+	VatEvidence          *InvoicesReverseSalesResponseVatEvidence `json:"vatEvidence,omitempty" url:"vatEvidence,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *InvoicesReverseSalesResponse) GetPartnerID() string {
+	if i == nil {
+		return ""
+	}
+	return i.PartnerID
+}
+
+func (i *InvoicesReverseSalesResponse) GetType() InvoicesReverseSalesResponseType {
+	if i == nil {
+		return ""
+	}
+	return i.Type
+}
+
+func (i *InvoicesReverseSalesResponse) GetStatus() InvoicesReverseSalesResponseStatus {
+	if i == nil {
+		return ""
+	}
+	return i.Status
+}
+
+func (i *InvoicesReverseSalesResponse) GetPaymentStatus() InvoicesReverseSalesResponsePaymentStatus {
+	if i == nil {
+		return ""
+	}
+	return i.PaymentStatus
+}
+
+func (i *InvoicesReverseSalesResponse) GetSeries() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Series
+}
+
+func (i *InvoicesReverseSalesResponse) GetNumber() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.Number
+}
+
+func (i *InvoicesReverseSalesResponse) GetFullNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.FullNumber
+}
+
+func (i *InvoicesReverseSalesResponse) GetIssueDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.IssueDate
+}
+
+func (i *InvoicesReverseSalesResponse) GetDueDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.DueDate
+}
+
+func (i *InvoicesReverseSalesResponse) GetCurrency() string {
+	if i == nil {
+		return ""
+	}
+	return i.Currency
+}
+
+func (i *InvoicesReverseSalesResponse) GetFxRate() *string {
+	if i == nil {
+		return nil
+	}
+	return i.FxRate
+}
+
+func (i *InvoicesReverseSalesResponse) GetNetTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.NetTotal
+}
+
+func (i *InvoicesReverseSalesResponse) GetVatTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.VatTotal
+}
+
+func (i *InvoicesReverseSalesResponse) GetGrossTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.GrossTotal
+}
+
+func (i *InvoicesReverseSalesResponse) GetSalesTaxPercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxPercent
+}
+
+func (i *InvoicesReverseSalesResponse) GetSalesTaxTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.SalesTaxTotal
+}
+
+func (i *InvoicesReverseSalesResponse) GetPaidAmount() string {
+	if i == nil {
+		return ""
+	}
+	return i.PaidAmount
+}
+
+func (i *InvoicesReverseSalesResponse) GetJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.JournalTransactionID
+}
+
+func (i *InvoicesReverseSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesReverseSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
+}
+
+func (i *InvoicesReverseSalesResponse) GetAppliedToInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AppliedToInvoiceID
+}
+
+func (i *InvoicesReverseSalesResponse) GetCreditedInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CreditedInvoiceID
+}
+
+func (i *InvoicesReverseSalesResponse) GetCreditedInvoiceReference() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CreditedInvoiceReference
+}
+
+func (i *InvoicesReverseSalesResponse) GetCreditedInvoiceDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.CreditedInvoiceDate
+}
+
+func (i *InvoicesReverseSalesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoicesReverseSalesResponse) GetVatScheme() *InvoicesReverseSalesResponseVatScheme {
+	if i == nil {
+		return nil
+	}
+	return i.VatScheme
+}
+
+func (i *InvoicesReverseSalesResponse) GetIntrastatTransportMode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatTransportMode
+}
+
+func (i *InvoicesReverseSalesResponse) GetIntrastatDeliveryTerms() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatDeliveryTerms
+}
+
+func (i *InvoicesReverseSalesResponse) GetIntrastatRegion() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatRegion
+}
+
+func (i *InvoicesReverseSalesResponse) GetIntrastatNatureOfTransaction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IntrastatNatureOfTransaction
+}
+
+func (i *InvoicesReverseSalesResponse) GetVatCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCountryCode
+}
+
+func (i *InvoicesReverseSalesResponse) GetDeemedSupplier() bool {
+	if i == nil {
+		return false
+	}
+	return i.DeemedSupplier
+}
+
+func (i *InvoicesReverseSalesResponse) GetNotes() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *InvoicesReverseSalesResponse) GetDocumentRef() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DocumentRef
+}
+
+func (i *InvoicesReverseSalesResponse) GetOperationTypeID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OperationTypeID
+}
+
+func (i *InvoicesReverseSalesResponse) GetDocumentSeriesID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DocumentSeriesID
+}
+
+func (i *InvoicesReverseSalesResponse) GetSeriesLabel() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SeriesLabel
+}
+
+func (i *InvoicesReverseSalesResponse) GetDiscountPercent() string {
+	if i == nil {
+		return ""
+	}
+	return i.DiscountPercent
+}
+
+func (i *InvoicesReverseSalesResponse) GetOrderNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.OrderNumber
+}
+
+func (i *InvoicesReverseSalesResponse) GetIssuedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByName
+}
+
+func (i *InvoicesReverseSalesResponse) GetIssuedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.IssuedByTitle
+}
+
+func (i *InvoicesReverseSalesResponse) GetReceivedByName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByName
+}
+
+func (i *InvoicesReverseSalesResponse) GetReceivedByTitle() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReceivedByTitle
+}
+
+func (i *InvoicesReverseSalesResponse) GetLocale() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Locale
+}
+
+func (i *InvoicesReverseSalesResponse) GetRecurringInvoiceID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RecurringInvoiceID
+}
+
+func (i *InvoicesReverseSalesResponse) GetLockedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.LockedAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetLockedBy() *string {
+	if i == nil {
+		return nil
+	}
+	return i.LockedBy
+}
+
+func (i *InvoicesReverseSalesResponse) GetPayToken() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PayToken
+}
+
+func (i *InvoicesReverseSalesResponse) GetPayLinkEnabled() bool {
+	if i == nil {
+		return false
+	}
+	return i.PayLinkEnabled
+}
+
+func (i *InvoicesReverseSalesResponse) GetDebtRemindersEnabled() bool {
+	if i == nil {
+		return false
+	}
+	return i.DebtRemindersEnabled
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceSystem() *string {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceSystem
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceTransport() *string {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceTransport
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceMessageID
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceNumber() *string {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceNumber
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceStatus
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceDetail
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceSentAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetEinvoiceCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.EinvoiceCheckedAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetPeppolMessageID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolMessageID
+}
+
+func (i *InvoicesReverseSalesResponse) GetPeppolStatus() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolStatus
+}
+
+func (i *InvoicesReverseSalesResponse) GetPeppolDetail() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolDetail
+}
+
+func (i *InvoicesReverseSalesResponse) GetPeppolSentAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolSentAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetPeppolCheckedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.PeppolCheckedAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetCreatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CreatedAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetUpdatedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.UpdatedAt
+}
+
+func (i *InvoicesReverseSalesResponse) GetAdvanceAppliedAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AdvanceAppliedAmount
+}
+
+func (i *InvoicesReverseSalesResponse) GetLines() []*InvoicesReverseSalesResponseLinesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Lines
+}
+
+func (i *InvoicesReverseSalesResponse) GetVatEvidence() *InvoicesReverseSalesResponseVatEvidence {
+	if i == nil {
+		return nil
+	}
+	return i.VatEvidence
+}
+
+func (i *InvoicesReverseSalesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetID(id string) {
+	i.ID = id
+	i.require(invoicesReverseSalesResponseFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPartnerID(partnerID string) {
+	i.PartnerID = partnerID
+	i.require(invoicesReverseSalesResponseFieldPartnerID)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetType(type_ InvoicesReverseSalesResponseType) {
+	i.Type = type_
+	i.require(invoicesReverseSalesResponseFieldType)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetStatus(status InvoicesReverseSalesResponseStatus) {
+	i.Status = status
+	i.require(invoicesReverseSalesResponseFieldStatus)
+}
+
+// SetPaymentStatus sets the PaymentStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPaymentStatus(paymentStatus InvoicesReverseSalesResponsePaymentStatus) {
+	i.PaymentStatus = paymentStatus
+	i.require(invoicesReverseSalesResponseFieldPaymentStatus)
+}
+
+// SetSeries sets the Series field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetSeries(series *string) {
+	i.Series = series
+	i.require(invoicesReverseSalesResponseFieldSeries)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetNumber(number *int64) {
+	i.Number = number
+	i.require(invoicesReverseSalesResponseFieldNumber)
+}
+
+// SetFullNumber sets the FullNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetFullNumber(fullNumber *string) {
+	i.FullNumber = fullNumber
+	i.require(invoicesReverseSalesResponseFieldFullNumber)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetIssueDate(issueDate *time.Time) {
+	i.IssueDate = issueDate
+	i.require(invoicesReverseSalesResponseFieldIssueDate)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetDueDate(dueDate *time.Time) {
+	i.DueDate = dueDate
+	i.require(invoicesReverseSalesResponseFieldDueDate)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetCurrency(currency string) {
+	i.Currency = currency
+	i.require(invoicesReverseSalesResponseFieldCurrency)
+}
+
+// SetFxRate sets the FxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetFxRate(fxRate *string) {
+	i.FxRate = fxRate
+	i.require(invoicesReverseSalesResponseFieldFxRate)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetNetTotal(netTotal string) {
+	i.NetTotal = netTotal
+	i.require(invoicesReverseSalesResponseFieldNetTotal)
+}
+
+// SetVatTotal sets the VatTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetVatTotal(vatTotal string) {
+	i.VatTotal = vatTotal
+	i.require(invoicesReverseSalesResponseFieldVatTotal)
+}
+
+// SetGrossTotal sets the GrossTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetGrossTotal(grossTotal string) {
+	i.GrossTotal = grossTotal
+	i.require(invoicesReverseSalesResponseFieldGrossTotal)
+}
+
+// SetSalesTaxPercent sets the SalesTaxPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetSalesTaxPercent(salesTaxPercent *string) {
+	i.SalesTaxPercent = salesTaxPercent
+	i.require(invoicesReverseSalesResponseFieldSalesTaxPercent)
+}
+
+// SetSalesTaxTotal sets the SalesTaxTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
+	i.SalesTaxTotal = salesTaxTotal
+	i.require(invoicesReverseSalesResponseFieldSalesTaxTotal)
+}
+
+// SetPaidAmount sets the PaidAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPaidAmount(paidAmount string) {
+	i.PaidAmount = paidAmount
+	i.require(invoicesReverseSalesResponseFieldPaidAmount)
+}
+
+// SetJournalTransactionID sets the JournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetJournalTransactionID(journalTransactionID *string) {
+	i.JournalTransactionID = journalTransactionID
+	i.require(invoicesReverseSalesResponseFieldJournalTransactionID)
+}
+
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesReverseSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesReverseSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesReverseSalesResponseFieldReversalReason)
+}
+
+// SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
+	i.AppliedToInvoiceID = appliedToInvoiceID
+	i.require(invoicesReverseSalesResponseFieldAppliedToInvoiceID)
+}
+
+// SetCreditedInvoiceID sets the CreditedInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetCreditedInvoiceID(creditedInvoiceID *string) {
+	i.CreditedInvoiceID = creditedInvoiceID
+	i.require(invoicesReverseSalesResponseFieldCreditedInvoiceID)
+}
+
+// SetCreditedInvoiceReference sets the CreditedInvoiceReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetCreditedInvoiceReference(creditedInvoiceReference *string) {
+	i.CreditedInvoiceReference = creditedInvoiceReference
+	i.require(invoicesReverseSalesResponseFieldCreditedInvoiceReference)
+}
+
+// SetCreditedInvoiceDate sets the CreditedInvoiceDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetCreditedInvoiceDate(creditedInvoiceDate *time.Time) {
+	i.CreditedInvoiceDate = creditedInvoiceDate
+	i.require(invoicesReverseSalesResponseFieldCreditedInvoiceDate)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesReverseSalesResponseFieldAgreementID)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetVatScheme(vatScheme *InvoicesReverseSalesResponseVatScheme) {
+	i.VatScheme = vatScheme
+	i.require(invoicesReverseSalesResponseFieldVatScheme)
+}
+
+// SetIntrastatTransportMode sets the IntrastatTransportMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetIntrastatTransportMode(intrastatTransportMode *string) {
+	i.IntrastatTransportMode = intrastatTransportMode
+	i.require(invoicesReverseSalesResponseFieldIntrastatTransportMode)
+}
+
+// SetIntrastatDeliveryTerms sets the IntrastatDeliveryTerms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetIntrastatDeliveryTerms(intrastatDeliveryTerms *string) {
+	i.IntrastatDeliveryTerms = intrastatDeliveryTerms
+	i.require(invoicesReverseSalesResponseFieldIntrastatDeliveryTerms)
+}
+
+// SetIntrastatRegion sets the IntrastatRegion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetIntrastatRegion(intrastatRegion *string) {
+	i.IntrastatRegion = intrastatRegion
+	i.require(invoicesReverseSalesResponseFieldIntrastatRegion)
+}
+
+// SetIntrastatNatureOfTransaction sets the IntrastatNatureOfTransaction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetIntrastatNatureOfTransaction(intrastatNatureOfTransaction *string) {
+	i.IntrastatNatureOfTransaction = intrastatNatureOfTransaction
+	i.require(invoicesReverseSalesResponseFieldIntrastatNatureOfTransaction)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoicesReverseSalesResponseFieldVatCountryCode)
+}
+
+// SetDeemedSupplier sets the DeemedSupplier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetDeemedSupplier(deemedSupplier bool) {
+	i.DeemedSupplier = deemedSupplier
+	i.require(invoicesReverseSalesResponseFieldDeemedSupplier)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetNotes(notes *string) {
+	i.Notes = notes
+	i.require(invoicesReverseSalesResponseFieldNotes)
+}
+
+// SetDocumentRef sets the DocumentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetDocumentRef(documentRef *string) {
+	i.DocumentRef = documentRef
+	i.require(invoicesReverseSalesResponseFieldDocumentRef)
+}
+
+// SetOperationTypeID sets the OperationTypeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetOperationTypeID(operationTypeID *string) {
+	i.OperationTypeID = operationTypeID
+	i.require(invoicesReverseSalesResponseFieldOperationTypeID)
+}
+
+// SetDocumentSeriesID sets the DocumentSeriesID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetDocumentSeriesID(documentSeriesID *string) {
+	i.DocumentSeriesID = documentSeriesID
+	i.require(invoicesReverseSalesResponseFieldDocumentSeriesID)
+}
+
+// SetSeriesLabel sets the SeriesLabel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetSeriesLabel(seriesLabel *string) {
+	i.SeriesLabel = seriesLabel
+	i.require(invoicesReverseSalesResponseFieldSeriesLabel)
+}
+
+// SetDiscountPercent sets the DiscountPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetDiscountPercent(discountPercent string) {
+	i.DiscountPercent = discountPercent
+	i.require(invoicesReverseSalesResponseFieldDiscountPercent)
+}
+
+// SetOrderNumber sets the OrderNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetOrderNumber(orderNumber *string) {
+	i.OrderNumber = orderNumber
+	i.require(invoicesReverseSalesResponseFieldOrderNumber)
+}
+
+// SetIssuedByName sets the IssuedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetIssuedByName(issuedByName *string) {
+	i.IssuedByName = issuedByName
+	i.require(invoicesReverseSalesResponseFieldIssuedByName)
+}
+
+// SetIssuedByTitle sets the IssuedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetIssuedByTitle(issuedByTitle *string) {
+	i.IssuedByTitle = issuedByTitle
+	i.require(invoicesReverseSalesResponseFieldIssuedByTitle)
+}
+
+// SetReceivedByName sets the ReceivedByName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetReceivedByName(receivedByName *string) {
+	i.ReceivedByName = receivedByName
+	i.require(invoicesReverseSalesResponseFieldReceivedByName)
+}
+
+// SetReceivedByTitle sets the ReceivedByTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetReceivedByTitle(receivedByTitle *string) {
+	i.ReceivedByTitle = receivedByTitle
+	i.require(invoicesReverseSalesResponseFieldReceivedByTitle)
+}
+
+// SetLocale sets the Locale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetLocale(locale *string) {
+	i.Locale = locale
+	i.require(invoicesReverseSalesResponseFieldLocale)
+}
+
+// SetRecurringInvoiceID sets the RecurringInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetRecurringInvoiceID(recurringInvoiceID *string) {
+	i.RecurringInvoiceID = recurringInvoiceID
+	i.require(invoicesReverseSalesResponseFieldRecurringInvoiceID)
+}
+
+// SetLockedAt sets the LockedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetLockedAt(lockedAt *time.Time) {
+	i.LockedAt = lockedAt
+	i.require(invoicesReverseSalesResponseFieldLockedAt)
+}
+
+// SetLockedBy sets the LockedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetLockedBy(lockedBy *string) {
+	i.LockedBy = lockedBy
+	i.require(invoicesReverseSalesResponseFieldLockedBy)
+}
+
+// SetPayToken sets the PayToken field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPayToken(payToken *string) {
+	i.PayToken = payToken
+	i.require(invoicesReverseSalesResponseFieldPayToken)
+}
+
+// SetPayLinkEnabled sets the PayLinkEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPayLinkEnabled(payLinkEnabled bool) {
+	i.PayLinkEnabled = payLinkEnabled
+	i.require(invoicesReverseSalesResponseFieldPayLinkEnabled)
+}
+
+// SetDebtRemindersEnabled sets the DebtRemindersEnabled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetDebtRemindersEnabled(debtRemindersEnabled bool) {
+	i.DebtRemindersEnabled = debtRemindersEnabled
+	i.require(invoicesReverseSalesResponseFieldDebtRemindersEnabled)
+}
+
+// SetEinvoiceSystem sets the EinvoiceSystem field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceSystem(einvoiceSystem *string) {
+	i.EinvoiceSystem = einvoiceSystem
+	i.require(invoicesReverseSalesResponseFieldEinvoiceSystem)
+}
+
+// SetEinvoiceTransport sets the EinvoiceTransport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceTransport(einvoiceTransport *string) {
+	i.EinvoiceTransport = einvoiceTransport
+	i.require(invoicesReverseSalesResponseFieldEinvoiceTransport)
+}
+
+// SetEinvoiceMessageID sets the EinvoiceMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceMessageID(einvoiceMessageID *string) {
+	i.EinvoiceMessageID = einvoiceMessageID
+	i.require(invoicesReverseSalesResponseFieldEinvoiceMessageID)
+}
+
+// SetEinvoiceNumber sets the EinvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceNumber(einvoiceNumber *string) {
+	i.EinvoiceNumber = einvoiceNumber
+	i.require(invoicesReverseSalesResponseFieldEinvoiceNumber)
+}
+
+// SetEinvoiceStatus sets the EinvoiceStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceStatus(einvoiceStatus *string) {
+	i.EinvoiceStatus = einvoiceStatus
+	i.require(invoicesReverseSalesResponseFieldEinvoiceStatus)
+}
+
+// SetEinvoiceDetail sets the EinvoiceDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceDetail(einvoiceDetail *string) {
+	i.EinvoiceDetail = einvoiceDetail
+	i.require(invoicesReverseSalesResponseFieldEinvoiceDetail)
+}
+
+// SetEinvoiceSentAt sets the EinvoiceSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceSentAt(einvoiceSentAt *time.Time) {
+	i.EinvoiceSentAt = einvoiceSentAt
+	i.require(invoicesReverseSalesResponseFieldEinvoiceSentAt)
+}
+
+// SetEinvoiceCheckedAt sets the EinvoiceCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetEinvoiceCheckedAt(einvoiceCheckedAt *time.Time) {
+	i.EinvoiceCheckedAt = einvoiceCheckedAt
+	i.require(invoicesReverseSalesResponseFieldEinvoiceCheckedAt)
+}
+
+// SetPeppolMessageID sets the PeppolMessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPeppolMessageID(peppolMessageID *string) {
+	i.PeppolMessageID = peppolMessageID
+	i.require(invoicesReverseSalesResponseFieldPeppolMessageID)
+}
+
+// SetPeppolStatus sets the PeppolStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPeppolStatus(peppolStatus *string) {
+	i.PeppolStatus = peppolStatus
+	i.require(invoicesReverseSalesResponseFieldPeppolStatus)
+}
+
+// SetPeppolDetail sets the PeppolDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPeppolDetail(peppolDetail *string) {
+	i.PeppolDetail = peppolDetail
+	i.require(invoicesReverseSalesResponseFieldPeppolDetail)
+}
+
+// SetPeppolSentAt sets the PeppolSentAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPeppolSentAt(peppolSentAt *time.Time) {
+	i.PeppolSentAt = peppolSentAt
+	i.require(invoicesReverseSalesResponseFieldPeppolSentAt)
+}
+
+// SetPeppolCheckedAt sets the PeppolCheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetPeppolCheckedAt(peppolCheckedAt *time.Time) {
+	i.PeppolCheckedAt = peppolCheckedAt
+	i.require(invoicesReverseSalesResponseFieldPeppolCheckedAt)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetCreatedAt(createdAt time.Time) {
+	i.CreatedAt = createdAt
+	i.require(invoicesReverseSalesResponseFieldCreatedAt)
+}
+
+// SetUpdatedAt sets the UpdatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetUpdatedAt(updatedAt time.Time) {
+	i.UpdatedAt = updatedAt
+	i.require(invoicesReverseSalesResponseFieldUpdatedAt)
+}
+
+// SetAdvanceAppliedAmount sets the AdvanceAppliedAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetAdvanceAppliedAmount(advanceAppliedAmount *string) {
+	i.AdvanceAppliedAmount = advanceAppliedAmount
+	i.require(invoicesReverseSalesResponseFieldAdvanceAppliedAmount)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetLines(lines []*InvoicesReverseSalesResponseLinesItem) {
+	i.Lines = lines
+	i.require(invoicesReverseSalesResponseFieldLines)
+}
+
+// SetVatEvidence sets the VatEvidence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetVatEvidence(vatEvidence *InvoicesReverseSalesResponseVatEvidence) {
+	i.VatEvidence = vatEvidence
+	i.require(invoicesReverseSalesResponseFieldVatEvidence)
+}
+
+func (i *InvoicesReverseSalesResponse) UnmarshalJSON(data []byte) error {
+	type embed InvoicesReverseSalesResponse
+	var unmarshaler = struct {
+		embed
+		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
+		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
+		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
+		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
+		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
+		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
+		CreatedAt           *internal.DateTime `json:"createdAt"`
+		UpdatedAt           *internal.DateTime `json:"updatedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponse(unmarshaler.embed)
+	i.IssueDate = unmarshaler.IssueDate.TimePtr()
+	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
+	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
+	i.LockedAt = unmarshaler.LockedAt.TimePtr()
+	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
+	i.EinvoiceCheckedAt = unmarshaler.EinvoiceCheckedAt.TimePtr()
+	i.PeppolSentAt = unmarshaler.PeppolSentAt.TimePtr()
+	i.PeppolCheckedAt = unmarshaler.PeppolCheckedAt.TimePtr()
+	i.CreatedAt = unmarshaler.CreatedAt.Time()
+	i.UpdatedAt = unmarshaler.UpdatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponse
+	var marshaler = struct {
+		embed
+		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
+		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
+		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
+		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
+		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
+		EinvoiceCheckedAt   *internal.DateTime `json:"einvoiceCheckedAt,omitempty"`
+		PeppolSentAt        *internal.DateTime `json:"peppolSentAt,omitempty"`
+		PeppolCheckedAt     *internal.DateTime `json:"peppolCheckedAt,omitempty"`
+		CreatedAt           *internal.DateTime `json:"createdAt"`
+		UpdatedAt           *internal.DateTime `json:"updatedAt"`
+	}{
+		embed:               embed(*i),
+		IssueDate:           internal.NewOptionalDate(i.IssueDate),
+		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
+		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
+		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
+		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
+		EinvoiceCheckedAt:   internal.NewOptionalDateTime(i.EinvoiceCheckedAt),
+		PeppolSentAt:        internal.NewOptionalDateTime(i.PeppolSentAt),
+		PeppolCheckedAt:     internal.NewOptionalDateTime(i.PeppolCheckedAt),
+		CreatedAt:           internal.NewDateTime(i.CreatedAt),
+		UpdatedAt:           internal.NewDateTime(i.UpdatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseLinesItemFieldID                     = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseLinesItemFieldItemID                 = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseLinesItemFieldDescription            = big.NewInt(1 << 2)
+	invoicesReverseSalesResponseLinesItemFieldUnit                   = big.NewInt(1 << 3)
+	invoicesReverseSalesResponseLinesItemFieldQuantity               = big.NewInt(1 << 4)
+	invoicesReverseSalesResponseLinesItemFieldUnitFactor             = big.NewInt(1 << 5)
+	invoicesReverseSalesResponseLinesItemFieldBaseQuantity           = big.NewInt(1 << 6)
+	invoicesReverseSalesResponseLinesItemFieldUnitPriceExclVat       = big.NewInt(1 << 7)
+	invoicesReverseSalesResponseLinesItemFieldUnitPriceInclVat       = big.NewInt(1 << 8)
+	invoicesReverseSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
+	invoicesReverseSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
+	invoicesReverseSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
+	invoicesReverseSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesReverseSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesReverseSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesReverseSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesReverseSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesReverseSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesReverseSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesReverseSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesReverseSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesReverseSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesReverseSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesReverseSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesReverseSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesReverseSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
+)
+
+type InvoicesReverseSalesResponseLinesItem struct {
+	ID                     string                                                            `json:"id" url:"id"`
+	ItemID                 *string                                                           `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description            string                                                            `json:"description" url:"description"`
+	Unit                   string                                                            `json:"unit" url:"unit"`
+	Quantity               string                                                            `json:"quantity" url:"quantity"`
+	UnitFactor             string                                                            `json:"unitFactor" url:"unitFactor"`
+	BaseQuantity           string                                                            `json:"baseQuantity" url:"baseQuantity"`
+	UnitPriceExclVat       *string                                                           `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat       *string                                                           `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent         string                                                            `json:"vatRatePercent" url:"vatRatePercent"`
+	VatClassifierCode      *string                                                           `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatExemptionBasis      *string                                                           `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                           `json:"assetId,omitempty" url:"assetId,omitempty"`
+	CostCenterID           *string                                                           `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID              *string                                                           `json:"projectId,omitempty" url:"projectId,omitempty"`
+	LineNet                string                                                            `json:"lineNet" url:"lineNet"`
+	LineVat                string                                                            `json:"lineVat" url:"lineVat"`
+	LineGross              string                                                            `json:"lineGross" url:"lineGross"`
+	SortOrder              int64                                                             `json:"sortOrder" url:"sortOrder"`
+	RecognitionMethod      InvoicesReverseSalesResponseLinesItemRecognitionMethod            `json:"recognitionMethod" url:"recognitionMethod"`
+	RecognitionStartDate   *time.Time                                                        `json:"recognitionStartDate,omitempty" url:"recognitionStartDate,omitempty" format:"date"`
+	RecognitionEndDate     *time.Time                                                        `json:"recognitionEndDate,omitempty" url:"recognitionEndDate,omitempty" format:"date"`
+	RecognitionMilestones  []*InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem `json:"recognitionMilestones,omitempty" url:"recognitionMilestones,omitempty"`
+	StandaloneSellingPrice *string                                                           `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	AllocatedNet           *string                                                           `json:"allocatedNet,omitempty" url:"allocatedNet,omitempty"`
+	RefundEstimatePercent  *string                                                           `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetDescription() string {
+	if i == nil {
+		return ""
+	}
+	return i.Description
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetUnit() string {
+	if i == nil {
+		return ""
+	}
+	return i.Unit
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.Quantity
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetUnitFactor() string {
+	if i == nil {
+		return ""
+	}
+	return i.UnitFactor
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetBaseQuantity() string {
+	if i == nil {
+		return ""
+	}
+	return i.BaseQuantity
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetUnitPriceExclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceExclVat
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetUnitPriceInclVat() *string {
+	if i == nil {
+		return nil
+	}
+	return i.UnitPriceInclVat
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetVatRatePercent() string {
+	if i == nil {
+		return ""
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetVatExemptionBasis() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatExemptionBasis
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetCostCenterID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CostCenterID
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetProjectID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ProjectID
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetLineNet() string {
+	if i == nil {
+		return ""
+	}
+	return i.LineNet
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetLineVat() string {
+	if i == nil {
+		return ""
+	}
+	return i.LineVat
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetLineGross() string {
+	if i == nil {
+		return ""
+	}
+	return i.LineGross
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetSortOrder() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.SortOrder
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetRecognitionMethod() InvoicesReverseSalesResponseLinesItemRecognitionMethod {
+	if i == nil {
+		return ""
+	}
+	return i.RecognitionMethod
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetRecognitionStartDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.RecognitionStartDate
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetRecognitionEndDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.RecognitionEndDate
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetRecognitionMilestones() []*InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem {
+	if i == nil {
+		return nil
+	}
+	return i.RecognitionMilestones
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetStandaloneSellingPrice() *string {
+	if i == nil {
+		return nil
+	}
+	return i.StandaloneSellingPrice
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetAllocatedNet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AllocatedNet
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetRefundEstimatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RefundEstimatePercent
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetID(id string) {
+	i.ID = id
+	i.require(invoicesReverseSalesResponseLinesItemFieldID)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoicesReverseSalesResponseLinesItemFieldItemID)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetDescription(description string) {
+	i.Description = description
+	i.require(invoicesReverseSalesResponseLinesItemFieldDescription)
+}
+
+// SetUnit sets the Unit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetUnit(unit string) {
+	i.Unit = unit
+	i.require(invoicesReverseSalesResponseLinesItemFieldUnit)
+}
+
+// SetQuantity sets the Quantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetQuantity(quantity string) {
+	i.Quantity = quantity
+	i.require(invoicesReverseSalesResponseLinesItemFieldQuantity)
+}
+
+// SetUnitFactor sets the UnitFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetUnitFactor(unitFactor string) {
+	i.UnitFactor = unitFactor
+	i.require(invoicesReverseSalesResponseLinesItemFieldUnitFactor)
+}
+
+// SetBaseQuantity sets the BaseQuantity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetBaseQuantity(baseQuantity string) {
+	i.BaseQuantity = baseQuantity
+	i.require(invoicesReverseSalesResponseLinesItemFieldBaseQuantity)
+}
+
+// SetUnitPriceExclVat sets the UnitPriceExclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetUnitPriceExclVat(unitPriceExclVat *string) {
+	i.UnitPriceExclVat = unitPriceExclVat
+	i.require(invoicesReverseSalesResponseLinesItemFieldUnitPriceExclVat)
+}
+
+// SetUnitPriceInclVat sets the UnitPriceInclVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetUnitPriceInclVat(unitPriceInclVat *string) {
+	i.UnitPriceInclVat = unitPriceInclVat
+	i.require(invoicesReverseSalesResponseLinesItemFieldUnitPriceInclVat)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetVatRatePercent(vatRatePercent string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoicesReverseSalesResponseLinesItemFieldVatRatePercent)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoicesReverseSalesResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
+	i.VatExemptionBasis = vatExemptionBasis
+	i.require(invoicesReverseSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesReverseSalesResponseLinesItemFieldAssetID)
+}
+
+// SetCostCenterID sets the CostCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetCostCenterID(costCenterID *string) {
+	i.CostCenterID = costCenterID
+	i.require(invoicesReverseSalesResponseLinesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetProjectID(projectID *string) {
+	i.ProjectID = projectID
+	i.require(invoicesReverseSalesResponseLinesItemFieldProjectID)
+}
+
+// SetLineNet sets the LineNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetLineNet(lineNet string) {
+	i.LineNet = lineNet
+	i.require(invoicesReverseSalesResponseLinesItemFieldLineNet)
+}
+
+// SetLineVat sets the LineVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetLineVat(lineVat string) {
+	i.LineVat = lineVat
+	i.require(invoicesReverseSalesResponseLinesItemFieldLineVat)
+}
+
+// SetLineGross sets the LineGross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetLineGross(lineGross string) {
+	i.LineGross = lineGross
+	i.require(invoicesReverseSalesResponseLinesItemFieldLineGross)
+}
+
+// SetSortOrder sets the SortOrder field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetSortOrder(sortOrder int64) {
+	i.SortOrder = sortOrder
+	i.require(invoicesReverseSalesResponseLinesItemFieldSortOrder)
+}
+
+// SetRecognitionMethod sets the RecognitionMethod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetRecognitionMethod(recognitionMethod InvoicesReverseSalesResponseLinesItemRecognitionMethod) {
+	i.RecognitionMethod = recognitionMethod
+	i.require(invoicesReverseSalesResponseLinesItemFieldRecognitionMethod)
+}
+
+// SetRecognitionStartDate sets the RecognitionStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetRecognitionStartDate(recognitionStartDate *time.Time) {
+	i.RecognitionStartDate = recognitionStartDate
+	i.require(invoicesReverseSalesResponseLinesItemFieldRecognitionStartDate)
+}
+
+// SetRecognitionEndDate sets the RecognitionEndDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetRecognitionEndDate(recognitionEndDate *time.Time) {
+	i.RecognitionEndDate = recognitionEndDate
+	i.require(invoicesReverseSalesResponseLinesItemFieldRecognitionEndDate)
+}
+
+// SetRecognitionMilestones sets the RecognitionMilestones field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetRecognitionMilestones(recognitionMilestones []*InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) {
+	i.RecognitionMilestones = recognitionMilestones
+	i.require(invoicesReverseSalesResponseLinesItemFieldRecognitionMilestones)
+}
+
+// SetStandaloneSellingPrice sets the StandaloneSellingPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetStandaloneSellingPrice(standaloneSellingPrice *string) {
+	i.StandaloneSellingPrice = standaloneSellingPrice
+	i.require(invoicesReverseSalesResponseLinesItemFieldStandaloneSellingPrice)
+}
+
+// SetAllocatedNet sets the AllocatedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetAllocatedNet(allocatedNet *string) {
+	i.AllocatedNet = allocatedNet
+	i.require(invoicesReverseSalesResponseLinesItemFieldAllocatedNet)
+}
+
+// SetRefundEstimatePercent sets the RefundEstimatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItem) SetRefundEstimatePercent(refundEstimatePercent *string) {
+	i.RefundEstimatePercent = refundEstimatePercent
+	i.require(invoicesReverseSalesResponseLinesItemFieldRefundEstimatePercent)
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type embed InvoicesReverseSalesResponseLinesItem
+	var unmarshaler = struct {
+		embed
+		RecognitionStartDate *internal.Date `json:"recognitionStartDate,omitempty"`
+		RecognitionEndDate   *internal.Date `json:"recognitionEndDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseLinesItem(unmarshaler.embed)
+	i.RecognitionStartDate = unmarshaler.RecognitionStartDate.TimePtr()
+	i.RecognitionEndDate = unmarshaler.RecognitionEndDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseLinesItem
+	var marshaler = struct {
+		embed
+		RecognitionStartDate *internal.Date `json:"recognitionStartDate,omitempty"`
+		RecognitionEndDate   *internal.Date `json:"recognitionEndDate,omitempty"`
+	}{
+		embed:                embed(*i),
+		RecognitionStartDate: internal.NewOptionalDate(i.RecognitionStartDate),
+		RecognitionEndDate:   internal.NewOptionalDate(i.RecognitionEndDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoicesReverseSalesResponseLinesItemRecognitionMethod string
+
+const (
+	InvoicesReverseSalesResponseLinesItemRecognitionMethodPointInTime     InvoicesReverseSalesResponseLinesItemRecognitionMethod = "point_in_time"
+	InvoicesReverseSalesResponseLinesItemRecognitionMethodRatable         InvoicesReverseSalesResponseLinesItemRecognitionMethod = "ratable"
+	InvoicesReverseSalesResponseLinesItemRecognitionMethodMilestone       InvoicesReverseSalesResponseLinesItemRecognitionMethod = "milestone"
+	InvoicesReverseSalesResponseLinesItemRecognitionMethodPercentComplete InvoicesReverseSalesResponseLinesItemRecognitionMethod = "percent_complete"
+)
+
+func NewInvoicesReverseSalesResponseLinesItemRecognitionMethodFromString(s string) (InvoicesReverseSalesResponseLinesItemRecognitionMethod, error) {
+	switch s {
+	case "point_in_time":
+		return InvoicesReverseSalesResponseLinesItemRecognitionMethodPointInTime, nil
+	case "ratable":
+		return InvoicesReverseSalesResponseLinesItemRecognitionMethodRatable, nil
+	case "milestone":
+		return InvoicesReverseSalesResponseLinesItemRecognitionMethodMilestone, nil
+	case "percent_complete":
+		return InvoicesReverseSalesResponseLinesItemRecognitionMethodPercentComplete, nil
+	}
+	var t InvoicesReverseSalesResponseLinesItemRecognitionMethod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesReverseSalesResponseLinesItemRecognitionMethod) Ptr() *InvoicesReverseSalesResponseLinesItemRecognitionMethod {
+	return &i
+}
+
+var (
+	invoicesReverseSalesResponseLinesItemRecognitionMilestonesItemFieldDescription  = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseLinesItemRecognitionMilestonesItemFieldExpectedDate = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseLinesItemRecognitionMilestonesItemFieldPercent      = big.NewInt(1 << 2)
+)
+
+type InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem struct {
+	Description  string     `json:"description" url:"description"`
+	ExpectedDate *time.Time `json:"expectedDate,omitempty" url:"expectedDate,omitempty" format:"date"`
+	Percent      string     `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) GetDescription() string {
+	if i == nil {
+		return ""
+	}
+	return i.Description
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) GetExpectedDate() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ExpectedDate
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) GetPercent() string {
+	if i == nil {
+		return ""
+	}
+	return i.Percent
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) SetDescription(description string) {
+	i.Description = description
+	i.require(invoicesReverseSalesResponseLinesItemRecognitionMilestonesItemFieldDescription)
+}
+
+// SetExpectedDate sets the ExpectedDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) SetExpectedDate(expectedDate *time.Time) {
+	i.ExpectedDate = expectedDate
+	i.require(invoicesReverseSalesResponseLinesItemRecognitionMilestonesItemFieldExpectedDate)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) SetPercent(percent string) {
+	i.Percent = percent
+	i.require(invoicesReverseSalesResponseLinesItemRecognitionMilestonesItemFieldPercent)
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) UnmarshalJSON(data []byte) error {
+	type embed InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem
+	var unmarshaler = struct {
+		embed
+		ExpectedDate *internal.Date `json:"expectedDate,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem(unmarshaler.embed)
+	i.ExpectedDate = unmarshaler.ExpectedDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem
+	var marshaler = struct {
+		embed
+		ExpectedDate *internal.Date `json:"expectedDate,omitempty"`
+	}{
+		embed:        embed(*i),
+		ExpectedDate: internal.NewOptionalDate(i.ExpectedDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseLinesItemRecognitionMilestonesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoicesReverseSalesResponsePaymentStatus string
+
+const (
+	InvoicesReverseSalesResponsePaymentStatusUnpaid  InvoicesReverseSalesResponsePaymentStatus = "unpaid"
+	InvoicesReverseSalesResponsePaymentStatusPartial InvoicesReverseSalesResponsePaymentStatus = "partial"
+	InvoicesReverseSalesResponsePaymentStatusPaid    InvoicesReverseSalesResponsePaymentStatus = "paid"
+)
+
+func NewInvoicesReverseSalesResponsePaymentStatusFromString(s string) (InvoicesReverseSalesResponsePaymentStatus, error) {
+	switch s {
+	case "unpaid":
+		return InvoicesReverseSalesResponsePaymentStatusUnpaid, nil
+	case "partial":
+		return InvoicesReverseSalesResponsePaymentStatusPartial, nil
+	case "paid":
+		return InvoicesReverseSalesResponsePaymentStatusPaid, nil
+	}
+	var t InvoicesReverseSalesResponsePaymentStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesReverseSalesResponsePaymentStatus) Ptr() *InvoicesReverseSalesResponsePaymentStatus {
+	return &i
+}
+
+type InvoicesReverseSalesResponseStatus string
+
+const (
+	InvoicesReverseSalesResponseStatusDraft    InvoicesReverseSalesResponseStatus = "draft"
+	InvoicesReverseSalesResponseStatusIssued   InvoicesReverseSalesResponseStatus = "issued"
+	InvoicesReverseSalesResponseStatusReversed InvoicesReverseSalesResponseStatus = "reversed"
+)
+
+func NewInvoicesReverseSalesResponseStatusFromString(s string) (InvoicesReverseSalesResponseStatus, error) {
+	switch s {
+	case "draft":
+		return InvoicesReverseSalesResponseStatusDraft, nil
+	case "issued":
+		return InvoicesReverseSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesReverseSalesResponseStatusReversed, nil
+	}
+	var t InvoicesReverseSalesResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesReverseSalesResponseStatus) Ptr() *InvoicesReverseSalesResponseStatus {
+	return &i
+}
+
+type InvoicesReverseSalesResponseType string
+
+const (
+	InvoicesReverseSalesResponseTypeInvoice    InvoicesReverseSalesResponseType = "invoice"
+	InvoicesReverseSalesResponseTypeCreditNote InvoicesReverseSalesResponseType = "credit_note"
+	InvoicesReverseSalesResponseTypeProforma   InvoicesReverseSalesResponseType = "proforma"
+	InvoicesReverseSalesResponseTypeAdvance    InvoicesReverseSalesResponseType = "advance"
+)
+
+func NewInvoicesReverseSalesResponseTypeFromString(s string) (InvoicesReverseSalesResponseType, error) {
+	switch s {
+	case "invoice":
+		return InvoicesReverseSalesResponseTypeInvoice, nil
+	case "credit_note":
+		return InvoicesReverseSalesResponseTypeCreditNote, nil
+	case "proforma":
+		return InvoicesReverseSalesResponseTypeProforma, nil
+	case "advance":
+		return InvoicesReverseSalesResponseTypeAdvance, nil
+	}
+	var t InvoicesReverseSalesResponseType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesReverseSalesResponseType) Ptr() *InvoicesReverseSalesResponseType {
+	return &i
+}
+
+var (
+	invoicesReverseSalesResponseVatEvidenceFieldCapturedAt = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseVatEvidenceFieldIssueDate  = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseVatEvidenceFieldScheme     = big.NewInt(1 << 2)
+	invoicesReverseSalesResponseVatEvidenceFieldPartner    = big.NewInt(1 << 3)
+	invoicesReverseSalesResponseVatEvidenceFieldVies       = big.NewInt(1 << 4)
+	invoicesReverseSalesResponseVatEvidenceFieldLocation   = big.NewInt(1 << 5)
+	invoicesReverseSalesResponseVatEvidenceFieldRateTable  = big.NewInt(1 << 6)
+	invoicesReverseSalesResponseVatEvidenceFieldRates      = big.NewInt(1 << 7)
+)
+
+type InvoicesReverseSalesResponseVatEvidence struct {
+	CapturedAt time.Time                                           `json:"capturedAt" url:"capturedAt"`
+	IssueDate  time.Time                                           `json:"issueDate" url:"issueDate" format:"date"`
+	Scheme     *InvoicesReverseSalesResponseVatEvidenceScheme      `json:"scheme" url:"scheme"`
+	Partner    *InvoicesReverseSalesResponseVatEvidencePartner     `json:"partner" url:"partner"`
+	Vies       *InvoicesReverseSalesResponseVatEvidenceVies        `json:"vies,omitempty" url:"vies,omitempty"`
+	Location   *InvoicesReverseSalesResponseVatEvidenceLocation    `json:"location" url:"location"`
+	RateTable  *InvoicesReverseSalesResponseVatEvidenceRateTable   `json:"rateTable,omitempty" url:"rateTable,omitempty"`
+	Rates      []*InvoicesReverseSalesResponseVatEvidenceRatesItem `json:"rates" url:"rates"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetCapturedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CapturedAt
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetIssueDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.IssueDate
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetScheme() *InvoicesReverseSalesResponseVatEvidenceScheme {
+	if i == nil {
+		return nil
+	}
+	return i.Scheme
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetPartner() *InvoicesReverseSalesResponseVatEvidencePartner {
+	if i == nil {
+		return nil
+	}
+	return i.Partner
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetVies() *InvoicesReverseSalesResponseVatEvidenceVies {
+	if i == nil {
+		return nil
+	}
+	return i.Vies
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetLocation() *InvoicesReverseSalesResponseVatEvidenceLocation {
+	if i == nil {
+		return nil
+	}
+	return i.Location
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetRateTable() *InvoicesReverseSalesResponseVatEvidenceRateTable {
+	if i == nil {
+		return nil
+	}
+	return i.RateTable
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetRates() []*InvoicesReverseSalesResponseVatEvidenceRatesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rates
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetCapturedAt sets the CapturedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetCapturedAt(capturedAt time.Time) {
+	i.CapturedAt = capturedAt
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldCapturedAt)
+}
+
+// SetIssueDate sets the IssueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetIssueDate(issueDate time.Time) {
+	i.IssueDate = issueDate
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldIssueDate)
+}
+
+// SetScheme sets the Scheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetScheme(scheme *InvoicesReverseSalesResponseVatEvidenceScheme) {
+	i.Scheme = scheme
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldScheme)
+}
+
+// SetPartner sets the Partner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetPartner(partner *InvoicesReverseSalesResponseVatEvidencePartner) {
+	i.Partner = partner
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldPartner)
+}
+
+// SetVies sets the Vies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetVies(vies *InvoicesReverseSalesResponseVatEvidenceVies) {
+	i.Vies = vies
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldVies)
+}
+
+// SetLocation sets the Location field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetLocation(location *InvoicesReverseSalesResponseVatEvidenceLocation) {
+	i.Location = location
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldLocation)
+}
+
+// SetRateTable sets the RateTable field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetRateTable(rateTable *InvoicesReverseSalesResponseVatEvidenceRateTable) {
+	i.RateTable = rateTable
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldRateTable)
+}
+
+// SetRates sets the Rates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidence) SetRates(rates []*InvoicesReverseSalesResponseVatEvidenceRatesItem) {
+	i.Rates = rates
+	i.require(invoicesReverseSalesResponseVatEvidenceFieldRates)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) UnmarshalJSON(data []byte) error {
+	type embed InvoicesReverseSalesResponseVatEvidence
+	var unmarshaler = struct {
+		embed
+		CapturedAt *internal.DateTime `json:"capturedAt"`
+		IssueDate  *internal.Date     `json:"issueDate"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseVatEvidence(unmarshaler.embed)
+	i.CapturedAt = unmarshaler.CapturedAt.Time()
+	i.IssueDate = unmarshaler.IssueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseVatEvidence
+	var marshaler = struct {
+		embed
+		CapturedAt *internal.DateTime `json:"capturedAt"`
+		IssueDate  *internal.Date     `json:"issueDate"`
+	}{
+		embed:      embed(*i),
+		CapturedAt: internal.NewDateTime(i.CapturedAt),
+		IssueDate:  internal.NewDate(i.IssueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidence) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseVatEvidenceLocationFieldBillingCountryCode = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseVatEvidenceLocationFieldSource             = big.NewInt(1 << 1)
+)
+
+type InvoicesReverseSalesResponseVatEvidenceLocation struct {
+	BillingCountryCode *string `json:"billingCountryCode,omitempty" url:"billingCountryCode,omitempty"`
+	Source             *string `json:"source,omitempty" url:"source,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) GetBillingCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.BillingCountryCode
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) GetSource() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Source
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetBillingCountryCode sets the BillingCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) SetBillingCountryCode(billingCountryCode *string) {
+	i.BillingCountryCode = billingCountryCode
+	i.require(invoicesReverseSalesResponseVatEvidenceLocationFieldBillingCountryCode)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) SetSource(source *string) {
+	i.Source = source
+	i.require(invoicesReverseSalesResponseVatEvidenceLocationFieldSource)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesReverseSalesResponseVatEvidenceLocation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseVatEvidenceLocation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseVatEvidenceLocation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceLocation) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseVatEvidencePartnerFieldID             = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseVatEvidencePartnerFieldVatCode        = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseVatEvidencePartnerFieldVatValid       = big.NewInt(1 << 2)
+	invoicesReverseSalesResponseVatEvidencePartnerFieldVatValidatedAt = big.NewInt(1 << 3)
+)
+
+type InvoicesReverseSalesResponseVatEvidencePartner struct {
+	ID             string     `json:"id" url:"id"`
+	VatCode        *string    `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	VatValid       *bool      `json:"vatValid,omitempty" url:"vatValid,omitempty"`
+	VatValidatedAt *time.Time `json:"vatValidatedAt,omitempty" url:"vatValidatedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) GetVatCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCode
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) GetVatValid() *bool {
+	if i == nil {
+		return nil
+	}
+	return i.VatValid
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) GetVatValidatedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.VatValidatedAt
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) SetID(id string) {
+	i.ID = id
+	i.require(invoicesReverseSalesResponseVatEvidencePartnerFieldID)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) SetVatCode(vatCode *string) {
+	i.VatCode = vatCode
+	i.require(invoicesReverseSalesResponseVatEvidencePartnerFieldVatCode)
+}
+
+// SetVatValid sets the VatValid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) SetVatValid(vatValid *bool) {
+	i.VatValid = vatValid
+	i.require(invoicesReverseSalesResponseVatEvidencePartnerFieldVatValid)
+}
+
+// SetVatValidatedAt sets the VatValidatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) SetVatValidatedAt(vatValidatedAt *time.Time) {
+	i.VatValidatedAt = vatValidatedAt
+	i.require(invoicesReverseSalesResponseVatEvidencePartnerFieldVatValidatedAt)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) UnmarshalJSON(data []byte) error {
+	type embed InvoicesReverseSalesResponseVatEvidencePartner
+	var unmarshaler = struct {
+		embed
+		VatValidatedAt *internal.DateTime `json:"vatValidatedAt,omitempty"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseVatEvidencePartner(unmarshaler.embed)
+	i.VatValidatedAt = unmarshaler.VatValidatedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseVatEvidencePartner
+	var marshaler = struct {
+		embed
+		VatValidatedAt *internal.DateTime `json:"vatValidatedAt,omitempty"`
+	}{
+		embed:          embed(*i),
+		VatValidatedAt: internal.NewOptionalDateTime(i.VatValidatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidencePartner) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseVatEvidenceRateTableFieldImportID    = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseVatEvidenceRateTableFieldSituationOn = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseVatEvidenceRateTableFieldTrigger     = big.NewInt(1 << 2)
+	invoicesReverseSalesResponseVatEvidenceRateTableFieldStartedAt   = big.NewInt(1 << 3)
+)
+
+type InvoicesReverseSalesResponseVatEvidenceRateTable struct {
+	ImportID    string    `json:"importId" url:"importId"`
+	SituationOn string    `json:"situationOn" url:"situationOn"`
+	Trigger     string    `json:"trigger" url:"trigger"`
+	StartedAt   time.Time `json:"startedAt" url:"startedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) GetImportID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ImportID
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) GetSituationOn() string {
+	if i == nil {
+		return ""
+	}
+	return i.SituationOn
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) GetTrigger() string {
+	if i == nil {
+		return ""
+	}
+	return i.Trigger
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) GetStartedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.StartedAt
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetImportID sets the ImportID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) SetImportID(importID string) {
+	i.ImportID = importID
+	i.require(invoicesReverseSalesResponseVatEvidenceRateTableFieldImportID)
+}
+
+// SetSituationOn sets the SituationOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) SetSituationOn(situationOn string) {
+	i.SituationOn = situationOn
+	i.require(invoicesReverseSalesResponseVatEvidenceRateTableFieldSituationOn)
+}
+
+// SetTrigger sets the Trigger field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) SetTrigger(trigger string) {
+	i.Trigger = trigger
+	i.require(invoicesReverseSalesResponseVatEvidenceRateTableFieldTrigger)
+}
+
+// SetStartedAt sets the StartedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) SetStartedAt(startedAt time.Time) {
+	i.StartedAt = startedAt
+	i.require(invoicesReverseSalesResponseVatEvidenceRateTableFieldStartedAt)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) UnmarshalJSON(data []byte) error {
+	type embed InvoicesReverseSalesResponseVatEvidenceRateTable
+	var unmarshaler = struct {
+		embed
+		StartedAt *internal.DateTime `json:"startedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseVatEvidenceRateTable(unmarshaler.embed)
+	i.StartedAt = unmarshaler.StartedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseVatEvidenceRateTable
+	var marshaler = struct {
+		embed
+		StartedAt *internal.DateTime `json:"startedAt"`
+	}{
+		embed:     embed(*i),
+		StartedAt: internal.NewDateTime(i.StartedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRateTable) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseVatEvidenceRatesItemFieldRatePercent = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseVatEvidenceRatesItemFieldCountry     = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseVatEvidenceRatesItemFieldCategory    = big.NewInt(1 << 2)
+)
+
+type InvoicesReverseSalesResponseVatEvidenceRatesItem struct {
+	RatePercent string  `json:"ratePercent" url:"ratePercent"`
+	Country     string  `json:"country" url:"country"`
+	Category    *string `json:"category,omitempty" url:"category,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) GetRatePercent() string {
+	if i == nil {
+		return ""
+	}
+	return i.RatePercent
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) GetCountry() string {
+	if i == nil {
+		return ""
+	}
+	return i.Country
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) GetCategory() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Category
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetRatePercent sets the RatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) SetRatePercent(ratePercent string) {
+	i.RatePercent = ratePercent
+	i.require(invoicesReverseSalesResponseVatEvidenceRatesItemFieldRatePercent)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) SetCountry(country string) {
+	i.Country = country
+	i.require(invoicesReverseSalesResponseVatEvidenceRatesItemFieldCountry)
+}
+
+// SetCategory sets the Category field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) SetCategory(category *string) {
+	i.Category = category
+	i.require(invoicesReverseSalesResponseVatEvidenceRatesItemFieldCategory)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesReverseSalesResponseVatEvidenceRatesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseVatEvidenceRatesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseVatEvidenceRatesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceRatesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseVatEvidenceSchemeFieldVatScheme      = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseVatEvidenceSchemeFieldVatCountryCode = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseVatEvidenceSchemeFieldDeemedSupplier = big.NewInt(1 << 2)
+)
+
+type InvoicesReverseSalesResponseVatEvidenceScheme struct {
+	VatScheme      *string `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	VatCountryCode *string `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier bool    `json:"deemedSupplier" url:"deemedSupplier"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) GetVatScheme() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatScheme
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) GetVatCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCountryCode
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) GetDeemedSupplier() bool {
+	if i == nil {
+		return false
+	}
+	return i.DeemedSupplier
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetVatScheme sets the VatScheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) SetVatScheme(vatScheme *string) {
+	i.VatScheme = vatScheme
+	i.require(invoicesReverseSalesResponseVatEvidenceSchemeFieldVatScheme)
+}
+
+// SetVatCountryCode sets the VatCountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) SetVatCountryCode(vatCountryCode *string) {
+	i.VatCountryCode = vatCountryCode
+	i.require(invoicesReverseSalesResponseVatEvidenceSchemeFieldVatCountryCode)
+}
+
+// SetDeemedSupplier sets the DeemedSupplier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) SetDeemedSupplier(deemedSupplier bool) {
+	i.DeemedSupplier = deemedSupplier
+	i.require(invoicesReverseSalesResponseVatEvidenceSchemeFieldDeemedSupplier)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesReverseSalesResponseVatEvidenceScheme
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseVatEvidenceScheme(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseVatEvidenceScheme
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceScheme) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseVatEvidenceViesFieldValid             = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseVatEvidenceViesFieldCountryCode       = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseVatEvidenceViesFieldVatNumber         = big.NewInt(1 << 2)
+	invoicesReverseSalesResponseVatEvidenceViesFieldName              = big.NewInt(1 << 3)
+	invoicesReverseSalesResponseVatEvidenceViesFieldAddress           = big.NewInt(1 << 4)
+	invoicesReverseSalesResponseVatEvidenceViesFieldRequestIdentifier = big.NewInt(1 << 5)
+	invoicesReverseSalesResponseVatEvidenceViesFieldCheckedAt         = big.NewInt(1 << 6)
+)
+
+type InvoicesReverseSalesResponseVatEvidenceVies struct {
+	Valid             bool      `json:"valid" url:"valid"`
+	CountryCode       string    `json:"countryCode" url:"countryCode"`
+	VatNumber         string    `json:"vatNumber" url:"vatNumber"`
+	Name              *string   `json:"name,omitempty" url:"name,omitempty"`
+	Address           *string   `json:"address,omitempty" url:"address,omitempty"`
+	RequestIdentifier *string   `json:"requestIdentifier,omitempty" url:"requestIdentifier,omitempty"`
+	CheckedAt         time.Time `json:"checkedAt" url:"checkedAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetValid() bool {
+	if i == nil {
+		return false
+	}
+	return i.Valid
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetCountryCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetVatNumber() string {
+	if i == nil {
+		return ""
+	}
+	return i.VatNumber
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetName() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Name
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetAddress() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Address
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetRequestIdentifier() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RequestIdentifier
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetCheckedAt() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.CheckedAt
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetValid sets the Valid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) SetValid(valid bool) {
+	i.Valid = valid
+	i.require(invoicesReverseSalesResponseVatEvidenceViesFieldValid)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) SetCountryCode(countryCode string) {
+	i.CountryCode = countryCode
+	i.require(invoicesReverseSalesResponseVatEvidenceViesFieldCountryCode)
+}
+
+// SetVatNumber sets the VatNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) SetVatNumber(vatNumber string) {
+	i.VatNumber = vatNumber
+	i.require(invoicesReverseSalesResponseVatEvidenceViesFieldVatNumber)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) SetName(name *string) {
+	i.Name = name
+	i.require(invoicesReverseSalesResponseVatEvidenceViesFieldName)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) SetAddress(address *string) {
+	i.Address = address
+	i.require(invoicesReverseSalesResponseVatEvidenceViesFieldAddress)
+}
+
+// SetRequestIdentifier sets the RequestIdentifier field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) SetRequestIdentifier(requestIdentifier *string) {
+	i.RequestIdentifier = requestIdentifier
+	i.require(invoicesReverseSalesResponseVatEvidenceViesFieldRequestIdentifier)
+}
+
+// SetCheckedAt sets the CheckedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) SetCheckedAt(checkedAt time.Time) {
+	i.CheckedAt = checkedAt
+	i.require(invoicesReverseSalesResponseVatEvidenceViesFieldCheckedAt)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) UnmarshalJSON(data []byte) error {
+	type embed InvoicesReverseSalesResponseVatEvidenceVies
+	var unmarshaler = struct {
+		embed
+		CheckedAt *internal.DateTime `json:"checkedAt"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseVatEvidenceVies(unmarshaler.embed)
+	i.CheckedAt = unmarshaler.CheckedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseVatEvidenceVies
+	var marshaler = struct {
+		embed
+		CheckedAt *internal.DateTime `json:"checkedAt"`
+	}{
+		embed:     embed(*i),
+		CheckedAt: internal.NewDateTime(i.CheckedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseVatEvidenceVies) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type InvoicesReverseSalesResponseVatScheme string
+
+const (
+	InvoicesReverseSalesResponseVatSchemeDomestic          InvoicesReverseSalesResponseVatScheme = "domestic"
+	InvoicesReverseSalesResponseVatSchemeIntraEuB2B        InvoicesReverseSalesResponseVatScheme = "intra_eu_b2b"
+	InvoicesReverseSalesResponseVatSchemeReverseCharge     InvoicesReverseSalesResponseVatScheme = "reverse_charge"
+	InvoicesReverseSalesResponseVatSchemeOssUnion          InvoicesReverseSalesResponseVatScheme = "oss_union"
+	InvoicesReverseSalesResponseVatSchemeIoss              InvoicesReverseSalesResponseVatScheme = "ioss"
+	InvoicesReverseSalesResponseVatSchemeMarketplaceDeemed InvoicesReverseSalesResponseVatScheme = "marketplace_deemed"
+	InvoicesReverseSalesResponseVatSchemeExport            InvoicesReverseSalesResponseVatScheme = "export"
+	InvoicesReverseSalesResponseVatSchemeOutOfScope        InvoicesReverseSalesResponseVatScheme = "out_of_scope"
+	InvoicesReverseSalesResponseVatSchemeSmeExempt         InvoicesReverseSalesResponseVatScheme = "sme_exempt"
+)
+
+func NewInvoicesReverseSalesResponseVatSchemeFromString(s string) (InvoicesReverseSalesResponseVatScheme, error) {
+	switch s {
+	case "domestic":
+		return InvoicesReverseSalesResponseVatSchemeDomestic, nil
+	case "intra_eu_b2b":
+		return InvoicesReverseSalesResponseVatSchemeIntraEuB2B, nil
+	case "reverse_charge":
+		return InvoicesReverseSalesResponseVatSchemeReverseCharge, nil
+	case "oss_union":
+		return InvoicesReverseSalesResponseVatSchemeOssUnion, nil
+	case "ioss":
+		return InvoicesReverseSalesResponseVatSchemeIoss, nil
+	case "marketplace_deemed":
+		return InvoicesReverseSalesResponseVatSchemeMarketplaceDeemed, nil
+	case "export":
+		return InvoicesReverseSalesResponseVatSchemeExport, nil
+	case "out_of_scope":
+		return InvoicesReverseSalesResponseVatSchemeOutOfScope, nil
+	case "sme_exempt":
+		return InvoicesReverseSalesResponseVatSchemeSmeExempt, nil
+	}
+	var t InvoicesReverseSalesResponseVatScheme
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i InvoicesReverseSalesResponseVatScheme) Ptr() *InvoicesReverseSalesResponseVatScheme {
+	return &i
+}
+
 type InvoicesSendSalesRequestLocale string
 
 const (
@@ -33155,54 +36683,57 @@ var (
 	invoicesUnlockSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesUnlockSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesUnlockSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesUnlockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesUnlockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesUnlockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesUnlockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesUnlockSalesResponseFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesUnlockSalesResponseFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesUnlockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesUnlockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesUnlockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesUnlockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesUnlockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesUnlockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesUnlockSalesResponseFieldNotes                        = big.NewInt(1 << 31)
-	invoicesUnlockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesUnlockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesUnlockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesUnlockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesUnlockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesUnlockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesUnlockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesUnlockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesUnlockSalesResponseFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesUnlockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesUnlockSalesResponseFieldLocale                       = big.NewInt(1 << 42)
-	invoicesUnlockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesUnlockSalesResponseFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesUnlockSalesResponseFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesUnlockSalesResponseFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesUnlockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesUnlockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesUnlockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesUnlockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesUnlockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesUnlockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesUnlockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesUnlockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesUnlockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesUnlockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesUnlockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesUnlockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesUnlockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesUnlockSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesUnlockSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesUnlockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesUnlockSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesUnlockSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesUnlockSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesUnlockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesUnlockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesUnlockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesUnlockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesUnlockSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesUnlockSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesUnlockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesUnlockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesUnlockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesUnlockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesUnlockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesUnlockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesUnlockSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesUnlockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesUnlockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesUnlockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesUnlockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesUnlockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesUnlockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesUnlockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesUnlockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesUnlockSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesUnlockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesUnlockSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesUnlockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesUnlockSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesUnlockSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesUnlockSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesUnlockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesUnlockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesUnlockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesUnlockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesUnlockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesUnlockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesUnlockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesUnlockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesUnlockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesUnlockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesUnlockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesUnlockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesUnlockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesUnlockSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesUnlockSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesUnlockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
 )
 
 type InvoicesUnlockSalesResponse struct {
@@ -33225,6 +36756,9 @@ type InvoicesUnlockSalesResponse struct {
 	SalesTaxTotal                string                                   `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                   `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                               `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                  `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                  `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                                  `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                                  `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -33413,6 +36947,27 @@ func (i *InvoicesUnlockSalesResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesUnlockSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesUnlockSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesUnlockSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesUnlockSalesResponse) GetAppliedToInvoiceID() *string {
@@ -33898,6 +37453,27 @@ func (i *InvoicesUnlockSalesResponse) SetJournalTransactionID(journalTransaction
 	i.require(invoicesUnlockSalesResponseFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesUnlockSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesUnlockSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesUnlockSalesResponseFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUnlockSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -34240,6 +37816,7 @@ func (i *InvoicesUnlockSalesResponse) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -34257,6 +37834,7 @@ func (i *InvoicesUnlockSalesResponse) UnmarshalJSON(data []byte) error {
 	*i = InvoicesUnlockSalesResponse(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -34280,6 +37858,7 @@ func (i *InvoicesUnlockSalesResponse) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -34292,6 +37871,7 @@ func (i *InvoicesUnlockSalesResponse) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -34333,19 +37913,20 @@ var (
 	invoicesUnlockSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
 	invoicesUnlockSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
 	invoicesUnlockSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesUnlockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
-	invoicesUnlockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
-	invoicesUnlockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
-	invoicesUnlockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
-	invoicesUnlockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
-	invoicesUnlockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
-	invoicesUnlockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
-	invoicesUnlockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
-	invoicesUnlockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
-	invoicesUnlockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
+	invoicesUnlockSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesUnlockSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesUnlockSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesUnlockSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesUnlockSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesUnlockSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesUnlockSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesUnlockSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesUnlockSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesUnlockSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesUnlockSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
 )
 
 type InvoicesUnlockSalesResponseLinesItem struct {
@@ -34361,6 +37942,7 @@ type InvoicesUnlockSalesResponseLinesItem struct {
 	VatRatePercent         string                                                           `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                          `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis      *string                                                          `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                          `json:"assetId,omitempty" url:"assetId,omitempty"`
 	CostCenterID           *string                                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                           `json:"lineNet" url:"lineNet"`
@@ -34464,6 +38046,13 @@ func (i *InvoicesUnlockSalesResponseLinesItem) GetVatExemptionBasis() *string {
 		return nil
 	}
 	return i.VatExemptionBasis
+}
+
+func (i *InvoicesUnlockSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesUnlockSalesResponseLinesItem) GetCostCenterID() *string {
@@ -34653,6 +38242,13 @@ func (i *InvoicesUnlockSalesResponseLinesItem) SetVatClassifierCode(vatClassifie
 func (i *InvoicesUnlockSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
 	i.VatExemptionBasis = vatExemptionBasis
 	i.require(invoicesUnlockSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesUnlockSalesResponseLinesItemFieldAssetID)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -34980,8 +38576,9 @@ func (i InvoicesUnlockSalesResponsePaymentStatus) Ptr() *InvoicesUnlockSalesResp
 type InvoicesUnlockSalesResponseStatus string
 
 const (
-	InvoicesUnlockSalesResponseStatusDraft  InvoicesUnlockSalesResponseStatus = "draft"
-	InvoicesUnlockSalesResponseStatusIssued InvoicesUnlockSalesResponseStatus = "issued"
+	InvoicesUnlockSalesResponseStatusDraft    InvoicesUnlockSalesResponseStatus = "draft"
+	InvoicesUnlockSalesResponseStatusIssued   InvoicesUnlockSalesResponseStatus = "issued"
+	InvoicesUnlockSalesResponseStatusReversed InvoicesUnlockSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesUnlockSalesResponseStatusFromString(s string) (InvoicesUnlockSalesResponseStatus, error) {
@@ -34990,6 +38587,8 @@ func NewInvoicesUnlockSalesResponseStatusFromString(s string) (InvoicesUnlockSal
 		return InvoicesUnlockSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesUnlockSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesUnlockSalesResponseStatusReversed, nil
 	}
 	var t InvoicesUnlockSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -36090,26 +39689,29 @@ var (
 	invoicesUpdateSalesRequestLinesItemFieldCostCenterID           = big.NewInt(1 << 8)
 	invoicesUpdateSalesRequestLinesItemFieldProjectID              = big.NewInt(1 << 9)
 	invoicesUpdateSalesRequestLinesItemFieldRecognition            = big.NewInt(1 << 10)
-	invoicesUpdateSalesRequestLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesUpdateSalesRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 12)
-	invoicesUpdateSalesRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 13)
+	invoicesUpdateSalesRequestLinesItemFieldAssetID                = big.NewInt(1 << 11)
+	invoicesUpdateSalesRequestLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 12)
+	invoicesUpdateSalesRequestLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 13)
+	invoicesUpdateSalesRequestLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 14)
 )
 
 type InvoicesUpdateSalesRequestLinesItem struct {
-	ItemID                 *string                                         `json:"itemId,omitempty" url:"itemId,omitempty"`
-	Description            *string                                         `json:"description,omitempty" url:"description,omitempty"`
-	Unit                   *string                                         `json:"unit,omitempty" url:"unit,omitempty"`
-	Quantity               *InvoicesUpdateSalesRequestLinesItemQuantity    `json:"quantity,omitempty" url:"quantity,omitempty"`
-	UnitPriceExclVat       *string                                         `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
-	UnitPriceInclVat       *string                                         `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
-	VatRatePercent         *string                                         `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
-	VatClassifierCode      *string                                         `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
-	CostCenterID           *string                                         `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
-	ProjectID              *string                                         `json:"projectId,omitempty" url:"projectId,omitempty"`
-	Recognition            *InvoicesUpdateSalesRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
-	VatExemptionBasis      *string                                         `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
-	StandaloneSellingPrice *string                                         `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
-	RefundEstimatePercent  *string                                         `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
+	ItemID            *string                                         `json:"itemId,omitempty" url:"itemId,omitempty"`
+	Description       *string                                         `json:"description,omitempty" url:"description,omitempty"`
+	Unit              *string                                         `json:"unit,omitempty" url:"unit,omitempty"`
+	Quantity          *InvoicesUpdateSalesRequestLinesItemQuantity    `json:"quantity,omitempty" url:"quantity,omitempty"`
+	UnitPriceExclVat  *string                                         `json:"unitPriceExclVat,omitempty" url:"unitPriceExclVat,omitempty"`
+	UnitPriceInclVat  *string                                         `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
+	VatRatePercent    *string                                         `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatClassifierCode *string                                         `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	CostCenterID      *string                                         `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID         *string                                         `json:"projectId,omitempty" url:"projectId,omitempty"`
+	Recognition       *InvoicesUpdateSalesRequestLinesItemRecognition `json:"recognition,omitempty" url:"recognition,omitempty"`
+	// A fixed asset sold on this line: the line net is booked to the assets.disposalProceeds posting rule account and `assets/assets/dispose` takes the proceeds from the issued invoice. Only on an invoice (422), only for an asset that is not disposed, and not with revenue recognition over time.
+	AssetID                *string `json:"assetId,omitempty" url:"assetId,omitempty"`
+	VatExemptionBasis      *string `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	StandaloneSellingPrice *string `json:"standaloneSellingPrice,omitempty" url:"standaloneSellingPrice,omitempty"`
+	RefundEstimatePercent  *string `json:"refundEstimatePercent,omitempty" url:"refundEstimatePercent,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -36193,6 +39795,13 @@ func (i *InvoicesUpdateSalesRequestLinesItem) GetRecognition() *InvoicesUpdateSa
 		return nil
 	}
 	return i.Recognition
+}
+
+func (i *InvoicesUpdateSalesRequestLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesUpdateSalesRequestLinesItem) GetVatExemptionBasis() *string {
@@ -36305,6 +39914,13 @@ func (i *InvoicesUpdateSalesRequestLinesItem) SetProjectID(projectID *string) {
 func (i *InvoicesUpdateSalesRequestLinesItem) SetRecognition(recognition *InvoicesUpdateSalesRequestLinesItemRecognition) {
 	i.Recognition = recognition
 	i.require(invoicesUpdateSalesRequestLinesItemFieldRecognition)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequestLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesUpdateSalesRequestLinesItemFieldAssetID)
 }
 
 // SetVatExemptionBasis sets the VatExemptionBasis field and marks it as non-optional;
@@ -36906,54 +40522,57 @@ var (
 	invoicesUpdateSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
 	invoicesUpdateSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
 	invoicesUpdateSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesUpdateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 19)
-	invoicesUpdateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 20)
-	invoicesUpdateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 21)
-	invoicesUpdateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 22)
-	invoicesUpdateSalesResponseFieldAgreementID                  = big.NewInt(1 << 23)
-	invoicesUpdateSalesResponseFieldVatScheme                    = big.NewInt(1 << 24)
-	invoicesUpdateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 25)
-	invoicesUpdateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 26)
-	invoicesUpdateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 27)
-	invoicesUpdateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 28)
-	invoicesUpdateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 29)
-	invoicesUpdateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 30)
-	invoicesUpdateSalesResponseFieldNotes                        = big.NewInt(1 << 31)
-	invoicesUpdateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 32)
-	invoicesUpdateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 33)
-	invoicesUpdateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 34)
-	invoicesUpdateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 35)
-	invoicesUpdateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 36)
-	invoicesUpdateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 37)
-	invoicesUpdateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 38)
-	invoicesUpdateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 39)
-	invoicesUpdateSalesResponseFieldReceivedByName               = big.NewInt(1 << 40)
-	invoicesUpdateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 41)
-	invoicesUpdateSalesResponseFieldLocale                       = big.NewInt(1 << 42)
-	invoicesUpdateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 43)
-	invoicesUpdateSalesResponseFieldLockedAt                     = big.NewInt(1 << 44)
-	invoicesUpdateSalesResponseFieldLockedBy                     = big.NewInt(1 << 45)
-	invoicesUpdateSalesResponseFieldPayToken                     = big.NewInt(1 << 46)
-	invoicesUpdateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 47)
-	invoicesUpdateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 48)
-	invoicesUpdateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 49)
-	invoicesUpdateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 50)
-	invoicesUpdateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 51)
-	invoicesUpdateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 52)
-	invoicesUpdateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 53)
-	invoicesUpdateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 54)
-	invoicesUpdateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 55)
-	invoicesUpdateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 56)
-	invoicesUpdateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 57)
-	invoicesUpdateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 58)
-	invoicesUpdateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 59)
-	invoicesUpdateSalesResponseFieldPeppolSentAt                 = big.NewInt(1 << 60)
-	invoicesUpdateSalesResponseFieldPeppolCheckedAt              = big.NewInt(1 << 61)
-	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(1 << 62)
-	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesUpdateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesUpdateSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
+	invoicesUpdateSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
+	invoicesUpdateSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
+	invoicesUpdateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
+	invoicesUpdateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
+	invoicesUpdateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
+	invoicesUpdateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
+	invoicesUpdateSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
+	invoicesUpdateSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
+	invoicesUpdateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
+	invoicesUpdateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
+	invoicesUpdateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
+	invoicesUpdateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
+	invoicesUpdateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
+	invoicesUpdateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
+	invoicesUpdateSalesResponseFieldNotes                        = big.NewInt(1 << 34)
+	invoicesUpdateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
+	invoicesUpdateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
+	invoicesUpdateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
+	invoicesUpdateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
+	invoicesUpdateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
+	invoicesUpdateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
+	invoicesUpdateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
+	invoicesUpdateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
+	invoicesUpdateSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
+	invoicesUpdateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
+	invoicesUpdateSalesResponseFieldLocale                       = big.NewInt(1 << 45)
+	invoicesUpdateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
+	invoicesUpdateSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
+	invoicesUpdateSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
+	invoicesUpdateSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
+	invoicesUpdateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
+	invoicesUpdateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
+	invoicesUpdateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
+	invoicesUpdateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
+	invoicesUpdateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
+	invoicesUpdateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
+	invoicesUpdateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
+	invoicesUpdateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
+	invoicesUpdateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
+	invoicesUpdateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
+	invoicesUpdateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
+	invoicesUpdateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
+	invoicesUpdateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
+	invoicesUpdateSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesUpdateSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesUpdateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
 )
 
 type InvoicesUpdateSalesResponse struct {
@@ -36976,6 +40595,9 @@ type InvoicesUpdateSalesResponse struct {
 	SalesTaxTotal                string                                   `json:"salesTaxTotal" url:"salesTaxTotal"`
 	PaidAmount                   string                                   `json:"paidAmount" url:"paidAmount"`
 	JournalTransactionID         *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                               `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                  `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                  `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
 	AppliedToInvoiceID           *string                                  `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
 	CreditedInvoiceID            *string                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
 	CreditedInvoiceReference     *string                                  `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
@@ -37164,6 +40786,27 @@ func (i *InvoicesUpdateSalesResponse) GetJournalTransactionID() *string {
 		return nil
 	}
 	return i.JournalTransactionID
+}
+
+func (i *InvoicesUpdateSalesResponse) GetReversedAt() *time.Time {
+	if i == nil {
+		return nil
+	}
+	return i.ReversedAt
+}
+
+func (i *InvoicesUpdateSalesResponse) GetReversalJournalTransactionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalJournalTransactionID
+}
+
+func (i *InvoicesUpdateSalesResponse) GetReversalReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ReversalReason
 }
 
 func (i *InvoicesUpdateSalesResponse) GetAppliedToInvoiceID() *string {
@@ -37649,6 +41292,27 @@ func (i *InvoicesUpdateSalesResponse) SetJournalTransactionID(journalTransaction
 	i.require(invoicesUpdateSalesResponseFieldJournalTransactionID)
 }
 
+// SetReversedAt sets the ReversedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetReversedAt(reversedAt *time.Time) {
+	i.ReversedAt = reversedAt
+	i.require(invoicesUpdateSalesResponseFieldReversedAt)
+}
+
+// SetReversalJournalTransactionID sets the ReversalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetReversalJournalTransactionID(reversalJournalTransactionID *string) {
+	i.ReversalJournalTransactionID = reversalJournalTransactionID
+	i.require(invoicesUpdateSalesResponseFieldReversalJournalTransactionID)
+}
+
+// SetReversalReason sets the ReversalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetReversalReason(reversalReason *string) {
+	i.ReversalReason = reversalReason
+	i.require(invoicesUpdateSalesResponseFieldReversalReason)
+}
+
 // SetAppliedToInvoiceID sets the AppliedToInvoiceID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdateSalesResponse) SetAppliedToInvoiceID(appliedToInvoiceID *string) {
@@ -37991,6 +41655,7 @@ func (i *InvoicesUpdateSalesResponse) UnmarshalJSON(data []byte) error {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -38008,6 +41673,7 @@ func (i *InvoicesUpdateSalesResponse) UnmarshalJSON(data []byte) error {
 	*i = InvoicesUpdateSalesResponse(unmarshaler.embed)
 	i.IssueDate = unmarshaler.IssueDate.TimePtr()
 	i.DueDate = unmarshaler.DueDate.TimePtr()
+	i.ReversedAt = unmarshaler.ReversedAt.TimePtr()
 	i.CreditedInvoiceDate = unmarshaler.CreditedInvoiceDate.TimePtr()
 	i.LockedAt = unmarshaler.LockedAt.TimePtr()
 	i.EinvoiceSentAt = unmarshaler.EinvoiceSentAt.TimePtr()
@@ -38031,6 +41697,7 @@ func (i *InvoicesUpdateSalesResponse) MarshalJSON() ([]byte, error) {
 		embed
 		IssueDate           *internal.Date     `json:"issueDate,omitempty"`
 		DueDate             *internal.Date     `json:"dueDate,omitempty"`
+		ReversedAt          *internal.DateTime `json:"reversedAt,omitempty"`
 		CreditedInvoiceDate *internal.Date     `json:"creditedInvoiceDate,omitempty"`
 		LockedAt            *internal.DateTime `json:"lockedAt,omitempty"`
 		EinvoiceSentAt      *internal.DateTime `json:"einvoiceSentAt,omitempty"`
@@ -38043,6 +41710,7 @@ func (i *InvoicesUpdateSalesResponse) MarshalJSON() ([]byte, error) {
 		embed:               embed(*i),
 		IssueDate:           internal.NewOptionalDate(i.IssueDate),
 		DueDate:             internal.NewOptionalDate(i.DueDate),
+		ReversedAt:          internal.NewOptionalDateTime(i.ReversedAt),
 		CreditedInvoiceDate: internal.NewOptionalDate(i.CreditedInvoiceDate),
 		LockedAt:            internal.NewOptionalDateTime(i.LockedAt),
 		EinvoiceSentAt:      internal.NewOptionalDateTime(i.EinvoiceSentAt),
@@ -38084,19 +41752,20 @@ var (
 	invoicesUpdateSalesResponseLinesItemFieldVatRatePercent         = big.NewInt(1 << 9)
 	invoicesUpdateSalesResponseLinesItemFieldVatClassifierCode      = big.NewInt(1 << 10)
 	invoicesUpdateSalesResponseLinesItemFieldVatExemptionBasis      = big.NewInt(1 << 11)
-	invoicesUpdateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 12)
-	invoicesUpdateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 13)
-	invoicesUpdateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 14)
-	invoicesUpdateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 15)
-	invoicesUpdateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 16)
-	invoicesUpdateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 17)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 18)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 19)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 20)
-	invoicesUpdateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 21)
-	invoicesUpdateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 22)
-	invoicesUpdateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 23)
-	invoicesUpdateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 24)
+	invoicesUpdateSalesResponseLinesItemFieldAssetID                = big.NewInt(1 << 12)
+	invoicesUpdateSalesResponseLinesItemFieldCostCenterID           = big.NewInt(1 << 13)
+	invoicesUpdateSalesResponseLinesItemFieldProjectID              = big.NewInt(1 << 14)
+	invoicesUpdateSalesResponseLinesItemFieldLineNet                = big.NewInt(1 << 15)
+	invoicesUpdateSalesResponseLinesItemFieldLineVat                = big.NewInt(1 << 16)
+	invoicesUpdateSalesResponseLinesItemFieldLineGross              = big.NewInt(1 << 17)
+	invoicesUpdateSalesResponseLinesItemFieldSortOrder              = big.NewInt(1 << 18)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionMethod      = big.NewInt(1 << 19)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionStartDate   = big.NewInt(1 << 20)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionEndDate     = big.NewInt(1 << 21)
+	invoicesUpdateSalesResponseLinesItemFieldRecognitionMilestones  = big.NewInt(1 << 22)
+	invoicesUpdateSalesResponseLinesItemFieldStandaloneSellingPrice = big.NewInt(1 << 23)
+	invoicesUpdateSalesResponseLinesItemFieldAllocatedNet           = big.NewInt(1 << 24)
+	invoicesUpdateSalesResponseLinesItemFieldRefundEstimatePercent  = big.NewInt(1 << 25)
 )
 
 type InvoicesUpdateSalesResponseLinesItem struct {
@@ -38112,6 +41781,7 @@ type InvoicesUpdateSalesResponseLinesItem struct {
 	VatRatePercent         string                                                           `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode      *string                                                          `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
 	VatExemptionBasis      *string                                                          `json:"vatExemptionBasis,omitempty" url:"vatExemptionBasis,omitempty"`
+	AssetID                *string                                                          `json:"assetId,omitempty" url:"assetId,omitempty"`
 	CostCenterID           *string                                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID              *string                                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
 	LineNet                string                                                           `json:"lineNet" url:"lineNet"`
@@ -38215,6 +41885,13 @@ func (i *InvoicesUpdateSalesResponseLinesItem) GetVatExemptionBasis() *string {
 		return nil
 	}
 	return i.VatExemptionBasis
+}
+
+func (i *InvoicesUpdateSalesResponseLinesItem) GetAssetID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AssetID
 }
 
 func (i *InvoicesUpdateSalesResponseLinesItem) GetCostCenterID() *string {
@@ -38404,6 +42081,13 @@ func (i *InvoicesUpdateSalesResponseLinesItem) SetVatClassifierCode(vatClassifie
 func (i *InvoicesUpdateSalesResponseLinesItem) SetVatExemptionBasis(vatExemptionBasis *string) {
 	i.VatExemptionBasis = vatExemptionBasis
 	i.require(invoicesUpdateSalesResponseLinesItemFieldVatExemptionBasis)
+}
+
+// SetAssetID sets the AssetID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseLinesItem) SetAssetID(assetID *string) {
+	i.AssetID = assetID
+	i.require(invoicesUpdateSalesResponseLinesItemFieldAssetID)
 }
 
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
@@ -38731,8 +42415,9 @@ func (i InvoicesUpdateSalesResponsePaymentStatus) Ptr() *InvoicesUpdateSalesResp
 type InvoicesUpdateSalesResponseStatus string
 
 const (
-	InvoicesUpdateSalesResponseStatusDraft  InvoicesUpdateSalesResponseStatus = "draft"
-	InvoicesUpdateSalesResponseStatusIssued InvoicesUpdateSalesResponseStatus = "issued"
+	InvoicesUpdateSalesResponseStatusDraft    InvoicesUpdateSalesResponseStatus = "draft"
+	InvoicesUpdateSalesResponseStatusIssued   InvoicesUpdateSalesResponseStatus = "issued"
+	InvoicesUpdateSalesResponseStatusReversed InvoicesUpdateSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesUpdateSalesResponseStatusFromString(s string) (InvoicesUpdateSalesResponseStatus, error) {
@@ -38741,6 +42426,8 @@ func NewInvoicesUpdateSalesResponseStatusFromString(s string) (InvoicesUpdateSal
 		return InvoicesUpdateSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesUpdateSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesUpdateSalesResponseStatusReversed, nil
 	}
 	var t InvoicesUpdateSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -41093,8 +44780,9 @@ func (i *InvoicesViewSalesResponseSellerAddress) String() string {
 type InvoicesViewSalesResponseStatus string
 
 const (
-	InvoicesViewSalesResponseStatusDraft  InvoicesViewSalesResponseStatus = "draft"
-	InvoicesViewSalesResponseStatusIssued InvoicesViewSalesResponseStatus = "issued"
+	InvoicesViewSalesResponseStatusDraft    InvoicesViewSalesResponseStatus = "draft"
+	InvoicesViewSalesResponseStatusIssued   InvoicesViewSalesResponseStatus = "issued"
+	InvoicesViewSalesResponseStatusReversed InvoicesViewSalesResponseStatus = "reversed"
 )
 
 func NewInvoicesViewSalesResponseStatusFromString(s string) (InvoicesViewSalesResponseStatus, error) {
@@ -41103,6 +44791,8 @@ func NewInvoicesViewSalesResponseStatusFromString(s string) (InvoicesViewSalesRe
 		return InvoicesViewSalesResponseStatusDraft, nil
 	case "issued":
 		return InvoicesViewSalesResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesViewSalesResponseStatusReversed, nil
 	}
 	var t InvoicesViewSalesResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

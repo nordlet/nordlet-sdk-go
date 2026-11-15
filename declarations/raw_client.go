@@ -1836,6 +1836,138 @@ func (r *RawClient) TaxPaymentsDelete(
 	}, nil
 }
 
+func (r *RawClient) VatProrataSet(
+	ctx context.Context,
+	request *nordlet.VatProrataSetDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.VatProrataSetDeclarationsResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/declarations/vat-prorata/set"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.VatProrataSetDeclarationsResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.VatProrataSetDeclarationsResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) VatProrataGet(
+	ctx context.Context,
+	request *nordlet.VatProrataGetDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.VatProrataGetDeclarationsResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/declarations/vat-prorata/get"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.VatProrataGetDeclarationsResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.VatProrataGetDeclarationsResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) VatProrataList(
+	ctx context.Context,
+	request *nordlet.VatProrataListDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.VatProrataListDeclarationsResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/declarations/vat-prorata/list"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.VatProrataListDeclarationsResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.VatProrataListDeclarationsResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
 func (r *RawClient) AnnualAccountsGet(
 	ctx context.Context,
 	request *nordlet.AnnualAccountsGetDeclarationsRequest,
@@ -4118,6 +4250,50 @@ func (r *RawClient) SubmissionsConfirm(
 		return nil, err
 	}
 	return &core.Response[*nordlet.SubmissionsConfirmDeclarationsResponse]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) SubmissionsCorrectionPreview(
+	ctx context.Context,
+	request *nordlet.SubmissionsCorrectionPreviewDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*core.Response[*nordlet.SubmissionsCorrectionPreviewDeclarationsResponse], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.nordlet.com",
+	)
+	endpointURL := baseURL + "/v1/declarations/submissions/correction-preview"
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response *nordlet.SubmissionsCorrectionPreviewDeclarationsResponse
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(nordlet.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[*nordlet.SubmissionsCorrectionPreviewDeclarationsResponse]{
 		StatusCode: raw.StatusCode,
 		Header:     raw.Header,
 		Body:       response,

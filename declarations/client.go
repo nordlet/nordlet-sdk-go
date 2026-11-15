@@ -731,6 +731,57 @@ func (c *Client) TaxPaymentsDelete(
 	return response.Body, nil
 }
 
+// Sets the provisional pro-rata percentage of the company for a fiscal year (the year in which it ends, by the company's fiscal year end month). Purchase lines on a VAT type marked pro-rata (`prorata`) deduct that share of their VAT, book the rest into the line's expense, and the VAT returns declare only the deductible part. Without a percentage for the year such a line deducts 100 % and `purchases/invoices/register` answers the warning `prorata_not_set`. Setting it again replaces the percentage for documents registered afterwards; documents already registered are not changed and the year-end adjustment is not built.
+func (c *Client) VatProrataSet(
+	ctx context.Context,
+	request *nordlet.VatProrataSetDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.VatProrataSetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.VatProrataSet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Answers the percentage set with `declarations/vat-prorata/set` for the fiscal year; 404 when none is set.
+func (c *Client) VatProrataGet(
+	ctx context.Context,
+	request *nordlet.VatProrataGetDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.VatProrataGetDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.VatProrataGet(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Lists the percentages set with `declarations/vat-prorata/set`, oldest fiscal year first.
+func (c *Client) VatProrataList(
+	ctx context.Context,
+	request *nordlet.VatProrataListDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.VatProrataListDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.VatProrataList(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Whether the general meeting adopted the annual accounts and on which date, the date the accounts were prepared, and which directors signed them. The annual accounts filed with the trade register are built from these facts.
 func (c *Client) AnnualAccountsGet(
 	ctx context.Context,
@@ -1615,6 +1666,23 @@ func (c *Client) SubmissionsConfirm(
 	return response.Body, nil
 }
 
+// Builds the file of a submitted or accepted submission again from the current data, the way it was built for that submission, and compares it with the file that was filed. `needed` is false when the two carry the same data: a correction would file the same return again. `changes` lists what differs, at most 500 entries (`changeCount` counts them all): for an XML file each element or attribute by its path below the root element (`field`), for another text file each line that is only in the filed file or only in the new one (`line`, its line number in that file); `filed` and `current` are the two values, null where the field or line is missing on that side. Dates and times of the moment a file was built (ISO date-times, and the dates of both builds written as YYYY-MM-DD, YYYYMMDD, DD.MM.YYYY or DDMMYYYY) are not counted as differences. A ZIP or PDF file is compared byte by byte and lists no `changes`. Answers 422 for a submission that is not submitted or accepted, whose deadline Nordlet cannot correct, or that has no stored file.
+func (c *Client) SubmissionsCorrectionPreview(
+	ctx context.Context,
+	request *nordlet.SubmissionsCorrectionPreviewDeclarationsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.SubmissionsCorrectionPreviewDeclarationsResponse, error) {
+	response, err := c.WithRawResponse.SubmissionsCorrectionPreview(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Builds the Lithuanian i.SAF register file of a month (`dataType` F both registers, S sale invoices only, P purchase invoices only), stores it and creates a submission in status `generated` for the obligation `lt-isaf`, the only obligation accepted. The XML alone comes from `declarations/lt/isaf/generate`; the submission is moved on with `declarations/submissions/mark`.
 func (c *Client) SubmissionsCreate(
 	ctx context.Context,
@@ -1649,7 +1717,7 @@ func (c *Client) SubmissionsMark(
 	return response.Body, nil
 }
 
-// Lists the declaration submissions of the company, newest first, filterable by `obligation`, `status`, `periodYear` and `periodMonth` and sortable by `createdAt` or `periodYear`.
+// Lists the declaration submissions of the company, newest first, filterable by `obligation`, `status`, `periodYear` and `periodMonth` and sortable by `createdAt`, `periodYear`, `obligation`, `period` (the year, then the month), `fileName`, `status` and `externalRef`. `canAmend` is true on the newest submitted or accepted send of a period (per document for a deadline filed as one document per person) whose filing can be corrected; `correction` names the fields `calendar/submit` with `amend: true` takes for it.
 func (c *Client) SubmissionsList(
 	ctx context.Context,
 	request *nordlet.SubmissionsListDeclarationsRequest,

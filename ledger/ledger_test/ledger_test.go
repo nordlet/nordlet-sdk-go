@@ -727,6 +727,121 @@ func TestLedgerJournalTransactionsReverseWithWireMock(
 	VerifyRequestCount(t, "TestLedgerJournalTransactionsReverseWithWireMock", "POST", "/v1/ledger/journal/transactions/reverse", nil, 1)
 }
 
+func TestLedgerFxRevaluationRunWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.FxRevaluationRunLedgerRequest{
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Ledger.FxRevaluationRun(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerFxRevaluationRunWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerFxRevaluationRunWithWireMock", "POST", "/v1/ledger/fx-revaluation/run", nil, 1)
+}
+
+func TestLedgerFxRevaluationReverseWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.FxRevaluationReverseLedgerRequest{
+		ID:     "id",
+		Reason: "reason",
+	}
+	_, invocationErr := client.Ledger.FxRevaluationReverse(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerFxRevaluationReverseWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerFxRevaluationReverseWithWireMock", "POST", "/v1/ledger/fx-revaluation/reverse", nil, 1)
+}
+
+func TestLedgerAccrualsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.AccrualsCreateLedgerRequest{
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Reason: "reason",
+		Lines: []*nordlet.AccrualsCreateLedgerRequestLinesItem{
+			&nordlet.AccrualsCreateLedgerRequestLinesItem{
+				AccountCode: "accountCode",
+			},
+		},
+	}
+	_, invocationErr := client.Ledger.AccrualsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerAccrualsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerAccrualsCreateWithWireMock", "POST", "/v1/ledger/accruals/create", nil, 1)
+}
+
+func TestLedgerTaxProvisionPostWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.TaxProvisionPostLedgerRequest{
+		FiscalYear: int64(1000000),
+	}
+	_, invocationErr := client.Ledger.TaxProvisionPost(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerTaxProvisionPostWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerTaxProvisionPostWithWireMock", "POST", "/v1/ledger/tax-provision/post", nil, 1)
+}
+
 func TestLedgerStatementRowsSchemesWithWireMock(
 	t *testing.T,
 ) {

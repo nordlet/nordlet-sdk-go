@@ -1680,8 +1680,9 @@ func (i *InvoicesGetPublicResponseSellerAddress) String() string {
 type InvoicesGetPublicResponseStatus string
 
 const (
-	InvoicesGetPublicResponseStatusDraft  InvoicesGetPublicResponseStatus = "draft"
-	InvoicesGetPublicResponseStatusIssued InvoicesGetPublicResponseStatus = "issued"
+	InvoicesGetPublicResponseStatusDraft    InvoicesGetPublicResponseStatus = "draft"
+	InvoicesGetPublicResponseStatusIssued   InvoicesGetPublicResponseStatus = "issued"
+	InvoicesGetPublicResponseStatusReversed InvoicesGetPublicResponseStatus = "reversed"
 )
 
 func NewInvoicesGetPublicResponseStatusFromString(s string) (InvoicesGetPublicResponseStatus, error) {
@@ -1690,6 +1691,8 @@ func NewInvoicesGetPublicResponseStatusFromString(s string) (InvoicesGetPublicRe
 		return InvoicesGetPublicResponseStatusDraft, nil
 	case "issued":
 		return InvoicesGetPublicResponseStatusIssued, nil
+	case "reversed":
+		return InvoicesGetPublicResponseStatusReversed, nil
 	}
 	var t InvoicesGetPublicResponseStatus
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

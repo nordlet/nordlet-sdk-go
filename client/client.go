@@ -40,6 +40,7 @@ import (
 	purchases "github.com/nordlet/nordlet-sdk-go/purchases"
 	reference "github.com/nordlet/nordlet-sdk-go/reference"
 	reports "github.com/nordlet/nordlet-sdk-go/reports"
+	review "github.com/nordlet/nordlet-sdk-go/review"
 	sales "github.com/nordlet/nordlet-sdk-go/sales"
 	transport "github.com/nordlet/nordlet-sdk-go/transport"
 	webhooks "github.com/nordlet/nordlet-sdk-go/webhooks"
@@ -61,6 +62,7 @@ type Client struct {
 	Officers        *officers.Client
 	PlatformSellers *platformsellers.Client
 	Migration       *migration.Client
+	Review          *review.Client
 	Assets          *assets.Client
 	Hr              *hr.Client
 	Fleet           *fleet.Client
@@ -107,6 +109,7 @@ func NewClient(opts ...option.RequestOption) *Client {
 		Officers:        officers.NewClient(options),
 		PlatformSellers: platformsellers.NewClient(options),
 		Migration:       migration.NewClient(options),
+		Review:          review.NewClient(options),
 		Assets:          assets.NewClient(options),
 		Hr:              hr.NewClient(options),
 		Fleet:           fleet.NewClient(options),

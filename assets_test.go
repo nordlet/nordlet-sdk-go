@@ -439,6 +439,14 @@ func TestSettersAssetsDisposeAssetsRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueSaleInvoiceID *string
+		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
+		assert.Equal(t, fernTestValueSaleInvoiceID, obj.SaleInvoiceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetNotes", func(t *testing.T) {
 		obj := &AssetsDisposeAssetsRequest{}
 		var fernTestValueNotes *string
@@ -551,6 +559,37 @@ func TestSettersMarkExplicitAssetsDisposeAssetsRequest(t *testing.T) {
 
 		// Act
 		obj.SetProceeds(fernTestValueProceeds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsRequest{}
+		var fernTestValueSaleInvoiceID *string
+
+		// Act
+		obj.SetSaleInvoiceID(fernTestValueSaleInvoiceID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2725,6 +2764,14 @@ func TestSettersAssetsCreateAssetsResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+		assert.Equal(t, fernTestValueDisposalSaleInvoiceID, obj.DisposalSaleInvoiceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
 		obj := &AssetsCreateAssetsResponse{}
 		var fernTestValueCreatedAt time.Time
@@ -3432,6 +3479,39 @@ func TestGettersAssetsCreateAssetsResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetDisposalSaleInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var expected *string
+		obj.DisposalSaleInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalSaleInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		obj.DisposalSaleInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalSaleInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsCreateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalSaleInvoiceID() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -4266,6 +4346,37 @@ func TestSettersMarkExplicitAssetsCreateAssetsResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsCreateAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+
+		// Act
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -4833,6 +4944,14 @@ func TestSettersAssetsDisposeAssetsResponse(t *testing.T) {
 		var fernTestValueDisposalJournalTransactionID *string
 		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
 		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+		assert.Equal(t, fernTestValueDisposalSaleInvoiceID, obj.DisposalSaleInvoiceID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -5543,6 +5662,39 @@ func TestGettersAssetsDisposeAssetsResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetDisposalSaleInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var expected *string
+		obj.DisposalSaleInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalSaleInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		obj.DisposalSaleInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalSaleInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsDisposeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalSaleInvoiceID() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -6377,6 +6529,37 @@ func TestSettersMarkExplicitAssetsDisposeAssetsResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsDisposeAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+
+		// Act
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -6944,6 +7127,14 @@ func TestSettersAssetsGetAssetsResponse(t *testing.T) {
 		var fernTestValueDisposalJournalTransactionID *string
 		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
 		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+		assert.Equal(t, fernTestValueDisposalSaleInvoiceID, obj.DisposalSaleInvoiceID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -7654,6 +7845,39 @@ func TestGettersAssetsGetAssetsResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetDisposalSaleInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var expected *string
+		obj.DisposalSaleInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalSaleInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		obj.DisposalSaleInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalSaleInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsGetAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalSaleInvoiceID() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -8488,6 +8712,37 @@ func TestSettersMarkExplicitAssetsGetAssetsResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsGetAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+
+		// Act
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -9253,6 +9508,14 @@ func TestSettersAssetsInputVatAssetsResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+		assert.Equal(t, fernTestValueDisposalSaleInvoiceID, obj.DisposalSaleInvoiceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
 		obj := &AssetsInputVatAssetsResponse{}
 		var fernTestValueCreatedAt time.Time
@@ -9960,6 +10223,39 @@ func TestGettersAssetsInputVatAssetsResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetDisposalSaleInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var expected *string
+		obj.DisposalSaleInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalSaleInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		obj.DisposalSaleInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalSaleInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsInputVatAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalSaleInvoiceID() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -10771,6 +11067,37 @@ func TestSettersMarkExplicitAssetsInputVatAssetsResponse(t *testing.T) {
 
 		// Act
 		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsInputVatAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+
+		// Act
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -12277,6 +12604,14 @@ func TestSettersAssetsListAssetsResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetDisposalSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalSaleInvoiceID *string
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+		assert.Equal(t, fernTestValueDisposalSaleInvoiceID, obj.DisposalSaleInvoiceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCreatedAt", func(t *testing.T) {
 		obj := &AssetsListAssetsResponseRowsItem{}
 		var fernTestValueCreatedAt time.Time
@@ -12984,6 +13319,39 @@ func TestGettersAssetsListAssetsResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetDisposalSaleInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var expected *string
+		obj.DisposalSaleInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalSaleInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		obj.DisposalSaleInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalSaleInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsListAssetsResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalSaleInvoiceID() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -13818,6 +14186,37 @@ func TestSettersMarkExplicitAssetsListAssetsResponseRowsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsListAssetsResponseRowsItem{}
+		var fernTestValueDisposalSaleInvoiceID *string
+
+		// Act
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -14385,6 +14784,14 @@ func TestSettersAssetsModernizeAssetsResponse(t *testing.T) {
 		var fernTestValueDisposalJournalTransactionID *string
 		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
 		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+		assert.Equal(t, fernTestValueDisposalSaleInvoiceID, obj.DisposalSaleInvoiceID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -15095,6 +15502,39 @@ func TestGettersAssetsModernizeAssetsResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetDisposalSaleInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var expected *string
+		obj.DisposalSaleInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalSaleInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		obj.DisposalSaleInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalSaleInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsModernizeAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalSaleInvoiceID() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -15929,6 +16369,37 @@ func TestSettersMarkExplicitAssetsModernizeAssetsResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetDisposalSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsModernizeAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+
+		// Act
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCreatedAt_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -16629,6 +17100,14 @@ func TestSettersAssetsUpdateAssetsResponse(t *testing.T) {
 		var fernTestValueDisposalJournalTransactionID *string
 		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
 		assert.Equal(t, fernTestValueDisposalJournalTransactionID, obj.DisposalJournalTransactionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisposalSaleInvoiceID", func(t *testing.T) {
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
+		assert.Equal(t, fernTestValueDisposalSaleInvoiceID, obj.DisposalSaleInvoiceID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -17339,6 +17818,39 @@ func TestGettersAssetsUpdateAssetsResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDisposalJournalTransactionID() // Should return zero value
+	})
+
+	t.Run("GetDisposalSaleInvoiceID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var expected *string
+		obj.DisposalSaleInvoiceID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDisposalSaleInvoiceID(), "getter should return the property value")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		obj.DisposalSaleInvoiceID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDisposalSaleInvoiceID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDisposalSaleInvoiceID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *AssetsUpdateAssetsResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDisposalSaleInvoiceID() // Should return zero value
 	})
 
 	t.Run("GetCreatedAt", func(t *testing.T) {
@@ -18150,6 +18662,37 @@ func TestSettersMarkExplicitAssetsUpdateAssetsResponse(t *testing.T) {
 
 		// Act
 		obj.SetDisposalJournalTransactionID(fernTestValueDisposalJournalTransactionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisposalSaleInvoiceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &AssetsUpdateAssetsResponse{}
+		var fernTestValueDisposalSaleInvoiceID *string
+
+		// Act
+		obj.SetDisposalSaleInvoiceID(fernTestValueDisposalSaleInvoiceID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

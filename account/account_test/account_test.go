@@ -511,6 +511,30 @@ func TestAccountCompaniesProfileWithWireMock(
 	VerifyRequestCount(t, "TestAccountCompaniesProfileWithWireMock", "POST", "/v1/account/companies/profile", nil, 1)
 }
 
+func TestAccountCompaniesContextWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.CompaniesContextAccountRequest{}
+	_, invocationErr := client.Account.CompaniesContext(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAccountCompaniesContextWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAccountCompaniesContextWithWireMock", "POST", "/v1/account/companies/context", nil, 1)
+}
+
 func TestAccountCompaniesUpdateWithWireMock(
 	t *testing.T,
 ) {

@@ -369,25 +369,29 @@ func (p *PaymentsExportPayrollRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	runsApprovePayrollRequestFieldID                        = big.NewInt(1 << 0)
-	runsApprovePayrollRequestFieldWageAccountCode           = big.NewInt(1 << 1)
-	runsApprovePayrollRequestFieldEmployerAccountCode       = big.NewInt(1 << 2)
-	runsApprovePayrollRequestFieldPayableAccountCode        = big.NewInt(1 << 3)
-	runsApprovePayrollRequestFieldGpmAccountCode            = big.NewInt(1 << 4)
-	runsApprovePayrollRequestFieldSodraAccountCode          = big.NewInt(1 << 5)
-	runsApprovePayrollRequestFieldEmployerSocialAccountCode = big.NewInt(1 << 6)
-	runsApprovePayrollRequestFieldDeductionAccountCode      = big.NewInt(1 << 7)
+	runsApprovePayrollRequestFieldID                             = big.NewInt(1 << 0)
+	runsApprovePayrollRequestFieldWageAccountCode                = big.NewInt(1 << 1)
+	runsApprovePayrollRequestFieldEmployerAccountCode            = big.NewInt(1 << 2)
+	runsApprovePayrollRequestFieldPayableAccountCode             = big.NewInt(1 << 3)
+	runsApprovePayrollRequestFieldIncomeTaxAccountCode           = big.NewInt(1 << 4)
+	runsApprovePayrollRequestFieldSocialContributionsAccountCode = big.NewInt(1 << 5)
+	runsApprovePayrollRequestFieldGpmAccountCode                 = big.NewInt(1 << 6)
+	runsApprovePayrollRequestFieldSodraAccountCode               = big.NewInt(1 << 7)
+	runsApprovePayrollRequestFieldEmployerSocialAccountCode      = big.NewInt(1 << 8)
+	runsApprovePayrollRequestFieldDeductionAccountCode           = big.NewInt(1 << 9)
 )
 
 type RunsApprovePayrollRequest struct {
-	ID                        string  `json:"id" url:"-"`
-	WageAccountCode           *string `json:"wageAccountCode,omitempty" url:"-"`
-	EmployerAccountCode       *string `json:"employerAccountCode,omitempty" url:"-"`
-	PayableAccountCode        *string `json:"payableAccountCode,omitempty" url:"-"`
-	GpmAccountCode            *string `json:"gpmAccountCode,omitempty" url:"-"`
-	SodraAccountCode          *string `json:"sodraAccountCode,omitempty" url:"-"`
-	EmployerSocialAccountCode *string `json:"employerSocialAccountCode,omitempty" url:"-"`
-	DeductionAccountCode      *string `json:"deductionAccountCode,omitempty" url:"-"`
+	ID                             string  `json:"id" url:"-"`
+	WageAccountCode                *string `json:"wageAccountCode,omitempty" url:"-"`
+	EmployerAccountCode            *string `json:"employerAccountCode,omitempty" url:"-"`
+	PayableAccountCode             *string `json:"payableAccountCode,omitempty" url:"-"`
+	IncomeTaxAccountCode           *string `json:"incomeTaxAccountCode,omitempty" url:"-"`
+	SocialContributionsAccountCode *string `json:"socialContributionsAccountCode,omitempty" url:"-"`
+	GpmAccountCode                 *string `json:"gpmAccountCode,omitempty" url:"-"`
+	SodraAccountCode               *string `json:"sodraAccountCode,omitempty" url:"-"`
+	EmployerSocialAccountCode      *string `json:"employerSocialAccountCode,omitempty" url:"-"`
+	DeductionAccountCode           *string `json:"deductionAccountCode,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -426,6 +430,20 @@ func (r *RunsApprovePayrollRequest) SetEmployerAccountCode(employerAccountCode *
 func (r *RunsApprovePayrollRequest) SetPayableAccountCode(payableAccountCode *string) {
 	r.PayableAccountCode = payableAccountCode
 	r.require(runsApprovePayrollRequestFieldPayableAccountCode)
+}
+
+// SetIncomeTaxAccountCode sets the IncomeTaxAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollRequest) SetIncomeTaxAccountCode(incomeTaxAccountCode *string) {
+	r.IncomeTaxAccountCode = incomeTaxAccountCode
+	r.require(runsApprovePayrollRequestFieldIncomeTaxAccountCode)
+}
+
+// SetSocialContributionsAccountCode sets the SocialContributionsAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollRequest) SetSocialContributionsAccountCode(socialContributionsAccountCode *string) {
+	r.SocialContributionsAccountCode = socialContributionsAccountCode
+	r.require(runsApprovePayrollRequestFieldSocialContributionsAccountCode)
 }
 
 // SetGpmAccountCode sets the GpmAccountCode field and marks it as non-optional;

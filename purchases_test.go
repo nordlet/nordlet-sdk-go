@@ -10821,6 +10821,14 @@ func TestSettersInvoicesCreatePurchasesResponseWarningsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetFix", func(t *testing.T) {
+		obj := &InvoicesCreatePurchasesResponseWarningsItem{}
+		var fernTestValueFix string
+		obj.SetFix(fernTestValueFix)
+		assert.Equal(t, fernTestValueFix, obj.Fix)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersInvoicesCreatePurchasesResponseWarningsItem(t *testing.T) {
@@ -10870,6 +10878,29 @@ func TestGettersInvoicesCreatePurchasesResponseWarningsItem(t *testing.T) {
 		_ = obj.GetMessage() // Should return zero value
 	})
 
+	t.Run("GetFix", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoicesCreatePurchasesResponseWarningsItem{}
+		var expected string
+		obj.Fix = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFix(), "getter should return the property value")
+	})
+
+	t.Run("GetFix_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoicesCreatePurchasesResponseWarningsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFix() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitInvoicesCreatePurchasesResponseWarningsItem(t *testing.T) {
@@ -10912,6 +10943,37 @@ func TestSettersMarkExplicitInvoicesCreatePurchasesResponseWarningsItem(t *testi
 
 		// Act
 		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoicesCreatePurchasesResponseWarningsItem{}
+		var fernTestValueFix string
+
+		// Act
+		obj.SetFix(fernTestValueFix)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -22153,6 +22215,14 @@ func TestSettersInvoicesRegisterPurchasesResponseWarningsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetFix", func(t *testing.T) {
+		obj := &InvoicesRegisterPurchasesResponseWarningsItem{}
+		var fernTestValueFix string
+		obj.SetFix(fernTestValueFix)
+		assert.Equal(t, fernTestValueFix, obj.Fix)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersInvoicesRegisterPurchasesResponseWarningsItem(t *testing.T) {
@@ -22202,6 +22272,29 @@ func TestGettersInvoicesRegisterPurchasesResponseWarningsItem(t *testing.T) {
 		_ = obj.GetMessage() // Should return zero value
 	})
 
+	t.Run("GetFix", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoicesRegisterPurchasesResponseWarningsItem{}
+		var expected string
+		obj.Fix = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFix(), "getter should return the property value")
+	})
+
+	t.Run("GetFix_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *InvoicesRegisterPurchasesResponseWarningsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFix() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitInvoicesRegisterPurchasesResponseWarningsItem(t *testing.T) {
@@ -22244,6 +22337,37 @@ func TestSettersMarkExplicitInvoicesRegisterPurchasesResponseWarningsItem(t *tes
 
 		// Act
 		obj.SetMessage(fernTestValueMessage)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &InvoicesRegisterPurchasesResponseWarningsItem{}
+		var fernTestValueFix string
+
+		// Act
+		obj.SetFix(fernTestValueFix)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

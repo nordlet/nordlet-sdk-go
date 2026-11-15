@@ -4341,11 +4341,13 @@ func (i InvoicesCreatePurchasesResponseType) Ptr() *InvoicesCreatePurchasesRespo
 var (
 	invoicesCreatePurchasesResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
 	invoicesCreatePurchasesResponseWarningsItemFieldMessage = big.NewInt(1 << 1)
+	invoicesCreatePurchasesResponseWarningsItemFieldFix     = big.NewInt(1 << 2)
 )
 
 type InvoicesCreatePurchasesResponseWarningsItem struct {
 	Code    string `json:"code" url:"code"`
 	Message string `json:"message" url:"message"`
+	Fix     string `json:"fix" url:"fix"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4366,6 +4368,13 @@ func (i *InvoicesCreatePurchasesResponseWarningsItem) GetMessage() string {
 		return ""
 	}
 	return i.Message
+}
+
+func (i *InvoicesCreatePurchasesResponseWarningsItem) GetFix() string {
+	if i == nil {
+		return ""
+	}
+	return i.Fix
 }
 
 func (i *InvoicesCreatePurchasesResponseWarningsItem) GetExtraProperties() map[string]interface{} {
@@ -4394,6 +4403,13 @@ func (i *InvoicesCreatePurchasesResponseWarningsItem) SetCode(code string) {
 func (i *InvoicesCreatePurchasesResponseWarningsItem) SetMessage(message string) {
 	i.Message = message
 	i.require(invoicesCreatePurchasesResponseWarningsItemFieldMessage)
+}
+
+// SetFix sets the Fix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseWarningsItem) SetFix(fix string) {
+	i.Fix = fix
+	i.require(invoicesCreatePurchasesResponseWarningsItemFieldFix)
 }
 
 func (i *InvoicesCreatePurchasesResponseWarningsItem) UnmarshalJSON(data []byte) error {
@@ -8408,11 +8424,13 @@ func (i InvoicesRegisterPurchasesResponseType) Ptr() *InvoicesRegisterPurchasesR
 var (
 	invoicesRegisterPurchasesResponseWarningsItemFieldCode    = big.NewInt(1 << 0)
 	invoicesRegisterPurchasesResponseWarningsItemFieldMessage = big.NewInt(1 << 1)
+	invoicesRegisterPurchasesResponseWarningsItemFieldFix     = big.NewInt(1 << 2)
 )
 
 type InvoicesRegisterPurchasesResponseWarningsItem struct {
 	Code    string `json:"code" url:"code"`
 	Message string `json:"message" url:"message"`
+	Fix     string `json:"fix" url:"fix"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8433,6 +8451,13 @@ func (i *InvoicesRegisterPurchasesResponseWarningsItem) GetMessage() string {
 		return ""
 	}
 	return i.Message
+}
+
+func (i *InvoicesRegisterPurchasesResponseWarningsItem) GetFix() string {
+	if i == nil {
+		return ""
+	}
+	return i.Fix
 }
 
 func (i *InvoicesRegisterPurchasesResponseWarningsItem) GetExtraProperties() map[string]interface{} {
@@ -8461,6 +8486,13 @@ func (i *InvoicesRegisterPurchasesResponseWarningsItem) SetCode(code string) {
 func (i *InvoicesRegisterPurchasesResponseWarningsItem) SetMessage(message string) {
 	i.Message = message
 	i.require(invoicesRegisterPurchasesResponseWarningsItemFieldMessage)
+}
+
+// SetFix sets the Fix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseWarningsItem) SetFix(fix string) {
+	i.Fix = fix
+	i.require(invoicesRegisterPurchasesResponseWarningsItemFieldFix)
 }
 
 func (i *InvoicesRegisterPurchasesResponseWarningsItem) UnmarshalJSON(data []byte) error {

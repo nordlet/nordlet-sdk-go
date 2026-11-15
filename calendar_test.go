@@ -447,6 +447,22 @@ func TestSettersSubmitCalendarRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCorrection", func(t *testing.T) {
+		obj := &SubmitCalendarRequest{}
+		var fernTestValueCorrection *SubmitCalendarRequestCorrection
+		obj.SetCorrection(fernTestValueCorrection)
+		assert.Equal(t, fernTestValueCorrection, obj.Correction)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDocumentKeys", func(t *testing.T) {
+		obj := &SubmitCalendarRequest{}
+		var fernTestValueDocumentKeys []string
+		obj.SetDocumentKeys(fernTestValueDocumentKeys)
+		assert.Equal(t, fernTestValueDocumentKeys, obj.DocumentKeys)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestSettersMarkExplicitSubmitCalendarRequest(t *testing.T) {
@@ -489,6 +505,68 @@ func TestSettersMarkExplicitSubmitCalendarRequest(t *testing.T) {
 
 		// Act
 		obj.SetAmend(fernTestValueAmend)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrection_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequest{}
+		var fernTestValueCorrection *SubmitCalendarRequestCorrection
+
+		// Act
+		obj.SetCorrection(fernTestValueCorrection)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDocumentKeys_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequest{}
+		var fernTestValueDocumentKeys []string
+
+		// Act
+		obj.SetDocumentKeys(fernTestValueDocumentKeys)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -624,6 +702,14 @@ func TestSettersCreateCalendarResponse(t *testing.T) {
 		var fernTestValueCanAmend bool
 		obj.SetCanAmend(fernTestValueCanAmend)
 		assert.Equal(t, fernTestValueCanAmend, obj.CanAmend)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrection", func(t *testing.T) {
+		obj := &CreateCalendarResponse{}
+		var fernTestValueCorrection *CreateCalendarResponseCorrection
+		obj.SetCorrection(fernTestValueCorrection)
+		assert.Equal(t, fernTestValueCorrection, obj.Correction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -1036,6 +1122,39 @@ func TestGettersCreateCalendarResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCanAmend() // Should return zero value
+	})
+
+	t.Run("GetCorrection", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		var expected *CreateCalendarResponseCorrection
+		obj.Correction = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrection(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrection_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		obj.Correction = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrection(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrection_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrection() // Should return zero value
 	})
 
 	t.Run("GetCanDownload", func(t *testing.T) {
@@ -1521,6 +1640,37 @@ func TestSettersMarkExplicitCreateCalendarResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCorrection_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponse{}
+		var fernTestValueCorrection *CreateCalendarResponseCorrection
+
+		// Act
+		obj.SetCorrection(fernTestValueCorrection)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -1560,6 +1710,426 @@ func TestSettersMarkExplicitCreateCalendarResponse(t *testing.T) {
 
 		// Act
 		obj.SetAutomated(fernTestValueAutomated)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersCreateCalendarResponseCorrection(t *testing.T) {
+	t.Run("SetRequired", func(t *testing.T) {
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueRequired []CreateCalendarResponseCorrectionRequiredItem
+		obj.SetRequired(fernTestValueRequired)
+		assert.Equal(t, fernTestValueRequired, obj.Required)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOptional", func(t *testing.T) {
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueOptional []CreateCalendarResponseCorrectionOptionalItem
+		obj.SetOptional(fernTestValueOptional)
+		assert.Equal(t, fernTestValueOptional, obj.Optional)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCodes", func(t *testing.T) {
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueReasonCodes []*CreateCalendarResponseCorrectionReasonCodesItem
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+		assert.Equal(t, fernTestValueReasonCodes, obj.ReasonCodes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCarry", func(t *testing.T) {
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueCarry bool
+		obj.SetCarry(fernTestValueCarry)
+		assert.Equal(t, fernTestValueCarry, obj.Carry)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersCreateCalendarResponseCorrection(t *testing.T) {
+	t.Run("GetRequired", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var expected []CreateCalendarResponseCorrectionRequiredItem
+		obj.Required = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRequired(), "getter should return the property value")
+	})
+
+	t.Run("GetRequired_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		obj.Required = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRequired(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRequired_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRequired() // Should return zero value
+	})
+
+	t.Run("GetOptional", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var expected []CreateCalendarResponseCorrectionOptionalItem
+		obj.Optional = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOptional(), "getter should return the property value")
+	})
+
+	t.Run("GetOptional_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		obj.Optional = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetOptional(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetOptional_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOptional() // Should return zero value
+	})
+
+	t.Run("GetReasonCodes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var expected []*CreateCalendarResponseCorrectionReasonCodesItem
+		obj.ReasonCodes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCodes(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCodes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		obj.ReasonCodes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCodes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCodes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCodes() // Should return zero value
+	})
+
+	t.Run("GetCarry", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var expected bool
+		obj.Carry = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCarry(), "getter should return the property value")
+	})
+
+	t.Run("GetCarry_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCarry() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitCreateCalendarResponseCorrection(t *testing.T) {
+	t.Run("SetRequired_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueRequired []CreateCalendarResponseCorrectionRequiredItem
+
+		// Act
+		obj.SetRequired(fernTestValueRequired)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOptional_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueOptional []CreateCalendarResponseCorrectionOptionalItem
+
+		// Act
+		obj.SetOptional(fernTestValueOptional)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCodes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueReasonCodes []*CreateCalendarResponseCorrectionReasonCodesItem
+
+		// Act
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCarry_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+		var fernTestValueCarry bool
+
+		// Act
+		obj.SetCarry(fernTestValueCarry)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersCreateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLabel", func(t *testing.T) {
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+		obj.SetLabel(fernTestValueLabel)
+		assert.Equal(t, fernTestValueLabel, obj.Label)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersCreateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		var expected string
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetLabel", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		var expected string
+		obj.Label = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLabel(), "getter should return the property value")
+	})
+
+	t.Run("GetLabel_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLabel() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitCreateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLabel_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+
+		// Act
+		obj.SetLabel(fernTestValueLabel)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1695,6 +2265,22 @@ func TestSettersCreateCalendarResponseSubmission(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueCorrectionInput *CreateCalendarResponseSubmissionCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -2237,6 +2823,72 @@ func TestGettersCreateCalendarResponseSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var expected *CreateCalendarResponseSubmissionCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -3187,6 +3839,68 @@ func TestSettersMarkExplicitCreateCalendarResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmission{}
+		var fernTestValueCorrectionInput *CreateCalendarResponseSubmissionCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -3716,6 +4430,303 @@ func TestSettersMarkExplicitCreateCalendarResponseSubmission(t *testing.T) {
 
 }
 
+func TestSettersCreateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersCreateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitCreateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
 		obj := &CreateCalendarResponseSubmissionsItem{}
@@ -3826,6 +4837,22 @@ func TestSettersCreateCalendarResponseSubmissionsItem(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCorrectionInput *CreateCalendarResponseSubmissionsItemCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -4368,6 +5395,72 @@ func TestGettersCreateCalendarResponseSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var expected *CreateCalendarResponseSubmissionsItemCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -5318,6 +6411,68 @@ func TestSettersMarkExplicitCreateCalendarResponseSubmissionsItem(t *testing.T) 
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItem{}
+		var fernTestValueCorrectionInput *CreateCalendarResponseSubmissionsItemCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -5822,6 +6977,303 @@ func TestSettersMarkExplicitCreateCalendarResponseSubmissionsItem(t *testing.T) 
 
 		// Act
 		obj.SetUpdatedAt(fernTestValueUpdatedAt)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersCreateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersCreateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitCreateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -6432,6 +7884,14 @@ func TestSettersGetCalendarResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCorrection", func(t *testing.T) {
+		obj := &GetCalendarResponse{}
+		var fernTestValueCorrection *GetCalendarResponseCorrection
+		obj.SetCorrection(fernTestValueCorrection)
+		assert.Equal(t, fernTestValueCorrection, obj.Correction)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCanDownload", func(t *testing.T) {
 		obj := &GetCalendarResponse{}
 		var fernTestValueCanDownload bool
@@ -6841,6 +8301,39 @@ func TestGettersGetCalendarResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCanAmend() // Should return zero value
+	})
+
+	t.Run("GetCorrection", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		var expected *GetCalendarResponseCorrection
+		obj.Correction = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrection(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrection_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		obj.Correction = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrection(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrection_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrection() // Should return zero value
 	})
 
 	t.Run("GetCanDownload", func(t *testing.T) {
@@ -7326,6 +8819,37 @@ func TestSettersMarkExplicitGetCalendarResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCorrection_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponse{}
+		var fernTestValueCorrection *GetCalendarResponseCorrection
+
+		// Act
+		obj.SetCorrection(fernTestValueCorrection)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -7365,6 +8889,426 @@ func TestSettersMarkExplicitGetCalendarResponse(t *testing.T) {
 
 		// Act
 		obj.SetAutomated(fernTestValueAutomated)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersGetCalendarResponseCorrection(t *testing.T) {
+	t.Run("SetRequired", func(t *testing.T) {
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueRequired []GetCalendarResponseCorrectionRequiredItem
+		obj.SetRequired(fernTestValueRequired)
+		assert.Equal(t, fernTestValueRequired, obj.Required)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOptional", func(t *testing.T) {
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueOptional []GetCalendarResponseCorrectionOptionalItem
+		obj.SetOptional(fernTestValueOptional)
+		assert.Equal(t, fernTestValueOptional, obj.Optional)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCodes", func(t *testing.T) {
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueReasonCodes []*GetCalendarResponseCorrectionReasonCodesItem
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+		assert.Equal(t, fernTestValueReasonCodes, obj.ReasonCodes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCarry", func(t *testing.T) {
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueCarry bool
+		obj.SetCarry(fernTestValueCarry)
+		assert.Equal(t, fernTestValueCarry, obj.Carry)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersGetCalendarResponseCorrection(t *testing.T) {
+	t.Run("GetRequired", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var expected []GetCalendarResponseCorrectionRequiredItem
+		obj.Required = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRequired(), "getter should return the property value")
+	})
+
+	t.Run("GetRequired_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		obj.Required = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRequired(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRequired_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRequired() // Should return zero value
+	})
+
+	t.Run("GetOptional", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var expected []GetCalendarResponseCorrectionOptionalItem
+		obj.Optional = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOptional(), "getter should return the property value")
+	})
+
+	t.Run("GetOptional_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		obj.Optional = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetOptional(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetOptional_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOptional() // Should return zero value
+	})
+
+	t.Run("GetReasonCodes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var expected []*GetCalendarResponseCorrectionReasonCodesItem
+		obj.ReasonCodes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCodes(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCodes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		obj.ReasonCodes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCodes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCodes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCodes() // Should return zero value
+	})
+
+	t.Run("GetCarry", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var expected bool
+		obj.Carry = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCarry(), "getter should return the property value")
+	})
+
+	t.Run("GetCarry_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCarry() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitGetCalendarResponseCorrection(t *testing.T) {
+	t.Run("SetRequired_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueRequired []GetCalendarResponseCorrectionRequiredItem
+
+		// Act
+		obj.SetRequired(fernTestValueRequired)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOptional_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueOptional []GetCalendarResponseCorrectionOptionalItem
+
+		// Act
+		obj.SetOptional(fernTestValueOptional)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCodes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueReasonCodes []*GetCalendarResponseCorrectionReasonCodesItem
+
+		// Act
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCarry_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+		var fernTestValueCarry bool
+
+		// Act
+		obj.SetCarry(fernTestValueCarry)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersGetCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLabel", func(t *testing.T) {
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+		obj.SetLabel(fernTestValueLabel)
+		assert.Equal(t, fernTestValueLabel, obj.Label)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersGetCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		var expected string
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetLabel", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		var expected string
+		obj.Label = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLabel(), "getter should return the property value")
+	})
+
+	t.Run("GetLabel_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLabel() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitGetCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLabel_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+
+		// Act
+		obj.SetLabel(fernTestValueLabel)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7500,6 +9444,22 @@ func TestSettersGetCalendarResponseSubmission(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueCorrectionInput *GetCalendarResponseSubmissionCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -8042,6 +10002,72 @@ func TestGettersGetCalendarResponseSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var expected *GetCalendarResponseSubmissionCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -8992,6 +11018,68 @@ func TestSettersMarkExplicitGetCalendarResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmission{}
+		var fernTestValueCorrectionInput *GetCalendarResponseSubmissionCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -9521,6 +11609,303 @@ func TestSettersMarkExplicitGetCalendarResponseSubmission(t *testing.T) {
 
 }
 
+func TestSettersGetCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersGetCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitGetCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
 		obj := &GetCalendarResponseSubmissionsItem{}
@@ -9631,6 +12016,22 @@ func TestSettersGetCalendarResponseSubmissionsItem(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCorrectionInput *GetCalendarResponseSubmissionsItemCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -10173,6 +12574,72 @@ func TestGettersGetCalendarResponseSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var expected *GetCalendarResponseSubmissionsItemCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -11123,6 +13590,68 @@ func TestSettersMarkExplicitGetCalendarResponseSubmissionsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItem{}
+		var fernTestValueCorrectionInput *GetCalendarResponseSubmissionsItemCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -11652,6 +14181,303 @@ func TestSettersMarkExplicitGetCalendarResponseSubmissionsItem(t *testing.T) {
 
 }
 
+func TestSettersGetCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersGetCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitGetCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersListCalendarResponse(t *testing.T) {
 	t.Run("SetRows", func(t *testing.T) {
 		obj := &ListCalendarResponse{}
@@ -11843,6 +14669,14 @@ func TestSettersListCalendarResponseRowsItem(t *testing.T) {
 		var fernTestValueCanAmend bool
 		obj.SetCanAmend(fernTestValueCanAmend)
 		assert.Equal(t, fernTestValueCanAmend, obj.CanAmend)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrection", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueCorrection *ListCalendarResponseRowsItemCorrection
+		obj.SetCorrection(fernTestValueCorrection)
+		assert.Equal(t, fernTestValueCorrection, obj.Correction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -12255,6 +15089,39 @@ func TestGettersListCalendarResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCanAmend() // Should return zero value
+	})
+
+	t.Run("GetCorrection", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		var expected *ListCalendarResponseRowsItemCorrection
+		obj.Correction = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrection(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrection_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		obj.Correction = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrection(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrection_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrection() // Should return zero value
 	})
 
 	t.Run("GetCanDownload", func(t *testing.T) {
@@ -12740,6 +15607,37 @@ func TestSettersMarkExplicitListCalendarResponseRowsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCorrection_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItem{}
+		var fernTestValueCorrection *ListCalendarResponseRowsItemCorrection
+
+		// Act
+		obj.SetCorrection(fernTestValueCorrection)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -12779,6 +15677,426 @@ func TestSettersMarkExplicitListCalendarResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetAutomated(fernTestValueAutomated)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersListCalendarResponseRowsItemCorrection(t *testing.T) {
+	t.Run("SetRequired", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueRequired []ListCalendarResponseRowsItemCorrectionRequiredItem
+		obj.SetRequired(fernTestValueRequired)
+		assert.Equal(t, fernTestValueRequired, obj.Required)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOptional", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueOptional []ListCalendarResponseRowsItemCorrectionOptionalItem
+		obj.SetOptional(fernTestValueOptional)
+		assert.Equal(t, fernTestValueOptional, obj.Optional)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCodes", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueReasonCodes []*ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+		assert.Equal(t, fernTestValueReasonCodes, obj.ReasonCodes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCarry", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueCarry bool
+		obj.SetCarry(fernTestValueCarry)
+		assert.Equal(t, fernTestValueCarry, obj.Carry)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersListCalendarResponseRowsItemCorrection(t *testing.T) {
+	t.Run("GetRequired", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var expected []ListCalendarResponseRowsItemCorrectionRequiredItem
+		obj.Required = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRequired(), "getter should return the property value")
+	})
+
+	t.Run("GetRequired_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		obj.Required = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRequired(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRequired_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRequired() // Should return zero value
+	})
+
+	t.Run("GetOptional", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var expected []ListCalendarResponseRowsItemCorrectionOptionalItem
+		obj.Optional = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOptional(), "getter should return the property value")
+	})
+
+	t.Run("GetOptional_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		obj.Optional = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetOptional(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetOptional_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOptional() // Should return zero value
+	})
+
+	t.Run("GetReasonCodes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var expected []*ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		obj.ReasonCodes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCodes(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCodes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		obj.ReasonCodes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCodes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCodes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCodes() // Should return zero value
+	})
+
+	t.Run("GetCarry", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var expected bool
+		obj.Carry = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCarry(), "getter should return the property value")
+	})
+
+	t.Run("GetCarry_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCarry() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitListCalendarResponseRowsItemCorrection(t *testing.T) {
+	t.Run("SetRequired_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueRequired []ListCalendarResponseRowsItemCorrectionRequiredItem
+
+		// Act
+		obj.SetRequired(fernTestValueRequired)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOptional_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueOptional []ListCalendarResponseRowsItemCorrectionOptionalItem
+
+		// Act
+		obj.SetOptional(fernTestValueOptional)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCodes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueReasonCodes []*ListCalendarResponseRowsItemCorrectionReasonCodesItem
+
+		// Act
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCarry_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		var fernTestValueCarry bool
+
+		// Act
+		obj.SetCarry(fernTestValueCarry)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersListCalendarResponseRowsItemCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLabel", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+		obj.SetLabel(fernTestValueLabel)
+		assert.Equal(t, fernTestValueLabel, obj.Label)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersListCalendarResponseRowsItemCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		var expected string
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetLabel", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		var expected string
+		obj.Label = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLabel(), "getter should return the property value")
+	})
+
+	t.Run("GetLabel_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLabel() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitListCalendarResponseRowsItemCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLabel_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+
+		// Act
+		obj.SetLabel(fernTestValueLabel)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -12914,6 +16232,22 @@ func TestSettersListCalendarResponseRowsItemSubmission(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueCorrectionInput *ListCalendarResponseRowsItemSubmissionCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -13456,6 +16790,72 @@ func TestGettersListCalendarResponseRowsItemSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var expected *ListCalendarResponseRowsItemSubmissionCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -14406,6 +17806,68 @@ func TestSettersMarkExplicitListCalendarResponseRowsItemSubmission(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmission{}
+		var fernTestValueCorrectionInput *ListCalendarResponseRowsItemSubmissionCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -14935,6 +18397,303 @@ func TestSettersMarkExplicitListCalendarResponseRowsItemSubmission(t *testing.T)
 
 }
 
+func TestSettersListCalendarResponseRowsItemSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersListCalendarResponseRowsItemSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitListCalendarResponseRowsItemSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
 		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
@@ -15045,6 +18804,22 @@ func TestSettersListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueCorrectionInput *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -15587,6 +19362,72 @@ func TestGettersListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var expected *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -16537,6 +20378,68 @@ func TestSettersMarkExplicitListCalendarResponseRowsItemSubmissionsItem(t *testi
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItem{}
+		var fernTestValueCorrectionInput *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -17066,6 +20969,600 @@ func TestSettersMarkExplicitListCalendarResponseRowsItemSubmissionsItem(t *testi
 
 }
 
+func TestSettersListCalendarResponseRowsItemSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersListCalendarResponseRowsItemSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitListCalendarResponseRowsItemSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersSubmitCalendarRequestCorrection(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSubmitCalendarRequestCorrection(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarRequestCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarRequestCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarRequestCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarRequestCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSubmitCalendarRequestCorrection(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersSubmitCalendarResponse(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
 		obj := &SubmitCalendarResponse{}
@@ -17176,6 +21673,22 @@ func TestSettersSubmitCalendarResponse(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCorrectionInput *SubmitCalendarResponseCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -17718,6 +22231,72 @@ func TestGettersSubmitCalendarResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var expected *SubmitCalendarResponseCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -18668,6 +23247,68 @@ func TestSettersMarkExplicitSubmitCalendarResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponse{}
+		var fernTestValueCorrectionInput *SubmitCalendarResponseCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -19197,6 +23838,303 @@ func TestSettersMarkExplicitSubmitCalendarResponse(t *testing.T) {
 
 }
 
+func TestSettersSubmitCalendarResponseCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersSubmitCalendarResponseCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponseCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponseCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponseCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponseCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitSubmitCalendarResponseCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersUpdateCalendarResponse(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
 		obj := &UpdateCalendarResponse{}
@@ -19307,6 +24245,14 @@ func TestSettersUpdateCalendarResponse(t *testing.T) {
 		var fernTestValueCanAmend bool
 		obj.SetCanAmend(fernTestValueCanAmend)
 		assert.Equal(t, fernTestValueCanAmend, obj.CanAmend)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrection", func(t *testing.T) {
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueCorrection *UpdateCalendarResponseCorrection
+		obj.SetCorrection(fernTestValueCorrection)
+		assert.Equal(t, fernTestValueCorrection, obj.Correction)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -19719,6 +24665,39 @@ func TestGettersUpdateCalendarResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCanAmend() // Should return zero value
+	})
+
+	t.Run("GetCorrection", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		var expected *UpdateCalendarResponseCorrection
+		obj.Correction = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrection(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrection_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		obj.Correction = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrection(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrection_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrection() // Should return zero value
 	})
 
 	t.Run("GetCanDownload", func(t *testing.T) {
@@ -20204,6 +25183,37 @@ func TestSettersMarkExplicitUpdateCalendarResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetCorrection_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponse{}
+		var fernTestValueCorrection *UpdateCalendarResponseCorrection
+
+		// Act
+		obj.SetCorrection(fernTestValueCorrection)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCanDownload_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -20243,6 +25253,426 @@ func TestSettersMarkExplicitUpdateCalendarResponse(t *testing.T) {
 
 		// Act
 		obj.SetAutomated(fernTestValueAutomated)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersUpdateCalendarResponseCorrection(t *testing.T) {
+	t.Run("SetRequired", func(t *testing.T) {
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueRequired []UpdateCalendarResponseCorrectionRequiredItem
+		obj.SetRequired(fernTestValueRequired)
+		assert.Equal(t, fernTestValueRequired, obj.Required)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOptional", func(t *testing.T) {
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueOptional []UpdateCalendarResponseCorrectionOptionalItem
+		obj.SetOptional(fernTestValueOptional)
+		assert.Equal(t, fernTestValueOptional, obj.Optional)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCodes", func(t *testing.T) {
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueReasonCodes []*UpdateCalendarResponseCorrectionReasonCodesItem
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+		assert.Equal(t, fernTestValueReasonCodes, obj.ReasonCodes)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCarry", func(t *testing.T) {
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueCarry bool
+		obj.SetCarry(fernTestValueCarry)
+		assert.Equal(t, fernTestValueCarry, obj.Carry)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersUpdateCalendarResponseCorrection(t *testing.T) {
+	t.Run("GetRequired", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var expected []UpdateCalendarResponseCorrectionRequiredItem
+		obj.Required = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRequired(), "getter should return the property value")
+	})
+
+	t.Run("GetRequired_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		obj.Required = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetRequired(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetRequired_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRequired() // Should return zero value
+	})
+
+	t.Run("GetOptional", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var expected []UpdateCalendarResponseCorrectionOptionalItem
+		obj.Optional = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOptional(), "getter should return the property value")
+	})
+
+	t.Run("GetOptional_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		obj.Optional = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetOptional(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetOptional_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOptional() // Should return zero value
+	})
+
+	t.Run("GetReasonCodes", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var expected []*UpdateCalendarResponseCorrectionReasonCodesItem
+		obj.ReasonCodes = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCodes(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCodes_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		obj.ReasonCodes = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCodes(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCodes_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCodes() // Should return zero value
+	})
+
+	t.Run("GetCarry", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var expected bool
+		obj.Carry = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCarry(), "getter should return the property value")
+	})
+
+	t.Run("GetCarry_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrection
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCarry() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitUpdateCalendarResponseCorrection(t *testing.T) {
+	t.Run("SetRequired_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueRequired []UpdateCalendarResponseCorrectionRequiredItem
+
+		// Act
+		obj.SetRequired(fernTestValueRequired)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOptional_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueOptional []UpdateCalendarResponseCorrectionOptionalItem
+
+		// Act
+		obj.SetOptional(fernTestValueOptional)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCodes_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueReasonCodes []*UpdateCalendarResponseCorrectionReasonCodesItem
+
+		// Act
+		obj.SetReasonCodes(fernTestValueReasonCodes)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCarry_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+		var fernTestValueCarry bool
+
+		// Act
+		obj.SetCarry(fernTestValueCarry)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersUpdateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode", func(t *testing.T) {
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+		obj.SetCode(fernTestValueCode)
+		assert.Equal(t, fernTestValueCode, obj.Code)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLabel", func(t *testing.T) {
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+		obj.SetLabel(fernTestValueLabel)
+		assert.Equal(t, fernTestValueLabel, obj.Label)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersUpdateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		var expected string
+		obj.Code = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCode() // Should return zero value
+	})
+
+	t.Run("GetLabel", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		var expected string
+		obj.Label = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetLabel(), "getter should return the property value")
+	})
+
+	t.Run("GetLabel_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrectionReasonCodesItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetLabel() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitUpdateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("SetCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueCode string
+
+		// Act
+		obj.SetCode(fernTestValueCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLabel_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		var fernTestValueLabel string
+
+		// Act
+		obj.SetLabel(fernTestValueLabel)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -20378,6 +25808,22 @@ func TestSettersUpdateCalendarResponseSubmission(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueCorrectionInput *UpdateCalendarResponseSubmissionCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -20920,6 +26366,72 @@ func TestGettersUpdateCalendarResponseSubmission(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var expected *UpdateCalendarResponseSubmissionCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmission
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -21870,6 +27382,68 @@ func TestSettersMarkExplicitUpdateCalendarResponseSubmission(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmission{}
+		var fernTestValueCorrectionInput *UpdateCalendarResponseSubmissionCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -22399,6 +27973,303 @@ func TestSettersMarkExplicitUpdateCalendarResponseSubmission(t *testing.T) {
 
 }
 
+func TestSettersUpdateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersUpdateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitUpdateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("SetID", func(t *testing.T) {
 		obj := &UpdateCalendarResponseSubmissionsItem{}
@@ -22509,6 +28380,22 @@ func TestSettersUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 		var fernTestValueAmendment int64
 		obj.SetAmendment(fernTestValueAmendment)
 		assert.Equal(t, fernTestValueAmendment, obj.Amendment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityRef", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+		assert.Equal(t, fernTestValueAuthorityRef, obj.AuthorityRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCorrectionInput", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCorrectionInput *UpdateCalendarResponseSubmissionsItemCorrectionInput
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+		assert.Equal(t, fernTestValueCorrectionInput, obj.CorrectionInput)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -23051,6 +28938,72 @@ func TestGettersUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetAmendment() // Should return zero value
+	})
+
+	t.Run("GetAuthorityRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *string
+		obj.AuthorityRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityRef(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.AuthorityRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityRef() // Should return zero value
+	})
+
+	t.Run("GetCorrectionInput", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var expected *UpdateCalendarResponseSubmissionsItemCorrectionInput
+		obj.CorrectionInput = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCorrectionInput(), "getter should return the property value")
+	})
+
+	t.Run("GetCorrectionInput_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		obj.CorrectionInput = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCorrectionInput(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCorrectionInput_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCorrectionInput() // Should return zero value
 	})
 
 	t.Run("GetOrigin", func(t *testing.T) {
@@ -24001,6 +29954,68 @@ func TestSettersMarkExplicitUpdateCalendarResponseSubmissionsItem(t *testing.T) 
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetAuthorityRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueAuthorityRef *string
+
+		// Act
+		obj.SetAuthorityRef(fernTestValueAuthorityRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCorrectionInput_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItem{}
+		var fernTestValueCorrectionInput *UpdateCalendarResponseSubmissionsItemCorrectionInput
+
+		// Act
+		obj.SetCorrectionInput(fernTestValueCorrectionInput)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetOrigin_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -24530,6 +30545,303 @@ func TestSettersMarkExplicitUpdateCalendarResponseSubmissionsItem(t *testing.T) 
 
 }
 
+func TestSettersUpdateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+		obj.SetReason(fernTestValueReason)
+		assert.Equal(t, fernTestValueReason, obj.Reason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetReasonCode", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+		obj.SetReasonCode(fernTestValueReasonCode)
+		assert.Equal(t, fernTestValueReasonCode, obj.ReasonCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAuthorityReference", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+		assert.Equal(t, fernTestValueAuthorityReference, obj.AuthorityReference)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDiscoveredOn", func(t *testing.T) {
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+		assert.Equal(t, fernTestValueDiscoveredOn, obj.DiscoveredOn)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersUpdateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetReason", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.Reason = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReason(), "getter should return the property value")
+	})
+
+	t.Run("GetReason_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.Reason = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReason(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReason_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReason() // Should return zero value
+	})
+
+	t.Run("GetReasonCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.ReasonCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetReasonCode(), "getter should return the property value")
+	})
+
+	t.Run("GetReasonCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.ReasonCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetReasonCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetReasonCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetReasonCode() // Should return zero value
+	})
+
+	t.Run("GetAuthorityReference", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.AuthorityReference = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAuthorityReference(), "getter should return the property value")
+	})
+
+	t.Run("GetAuthorityReference_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.AuthorityReference = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAuthorityReference(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAuthorityReference_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAuthorityReference() // Should return zero value
+	})
+
+	t.Run("GetDiscoveredOn", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var expected *string
+		obj.DiscoveredOn = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDiscoveredOn(), "getter should return the property value")
+	})
+
+	t.Run("GetDiscoveredOn_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		obj.DiscoveredOn = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDiscoveredOn(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDiscoveredOn_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItemCorrectionInput
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDiscoveredOn() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitUpdateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("SetReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReason *string
+
+		// Act
+		obj.SetReason(fernTestValueReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetReasonCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueReasonCode *string
+
+		// Act
+		obj.SetReasonCode(fernTestValueReasonCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAuthorityReference_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueAuthorityReference *string
+
+		// Act
+		obj.SetAuthorityReference(fernTestValueAuthorityReference)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDiscoveredOn_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		var fernTestValueDiscoveredOn *string
+
+		// Act
+		obj.SetDiscoveredOn(fernTestValueDiscoveredOn)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersUpdateCalendarRequest(t *testing.T) {
 	t.Run("SetKey", func(t *testing.T) {
 		obj := &UpdateCalendarRequest{}
@@ -24764,6 +31076,72 @@ func TestJSONMarshalingCreateCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingCreateCalendarResponseCorrection(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrection{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled CreateCalendarResponseCorrection
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseCorrection
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseCorrection
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingCreateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled CreateCalendarResponseCorrectionReasonCodesItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -24797,6 +31175,39 @@ func TestJSONMarshalingCreateCalendarResponseSubmission(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingCreateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled CreateCalendarResponseSubmissionCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseSubmissionCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseSubmissionCorrectionInput
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -24825,6 +31236,39 @@ func TestJSONMarshalingCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj CreateCalendarResponseSubmissionsItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingCreateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled CreateCalendarResponseSubmissionsItemCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseSubmissionsItemCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateCalendarResponseSubmissionsItemCorrectionInput
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -24929,6 +31373,72 @@ func TestJSONMarshalingGetCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingGetCalendarResponseCorrection(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrection{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled GetCalendarResponseCorrection
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseCorrection
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseCorrection
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingGetCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled GetCalendarResponseCorrectionReasonCodesItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -24962,6 +31472,39 @@ func TestJSONMarshalingGetCalendarResponseSubmission(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingGetCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled GetCalendarResponseSubmissionCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseSubmissionCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseSubmissionCorrectionInput
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -24990,6 +31533,39 @@ func TestJSONMarshalingGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj GetCalendarResponseSubmissionsItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingGetCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled GetCalendarResponseSubmissionsItemCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseSubmissionsItemCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj GetCalendarResponseSubmissionsItemCorrectionInput
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -25061,6 +31637,72 @@ func TestJSONMarshalingListCalendarResponseRowsItem(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingListCalendarResponseRowsItemCorrection(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrection{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled ListCalendarResponseRowsItemCorrection
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemCorrection
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemCorrection
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingListCalendarResponseRowsItemCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -25089,6 +31731,39 @@ func TestJSONMarshalingListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj ListCalendarResponseRowsItemSubmission
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingListCalendarResponseRowsItemSubmissionCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled ListCalendarResponseRowsItemSubmissionCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemSubmissionCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemSubmissionCorrectionInput
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -25127,6 +31802,72 @@ func TestJSONMarshalingListCalendarResponseRowsItemSubmissionsItem(t *testing.T)
 	})
 }
 
+func TestJSONMarshalingListCalendarResponseRowsItemSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSubmitCalendarRequestCorrection(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarRequestCorrection{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SubmitCalendarRequestCorrection
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SubmitCalendarRequestCorrection
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SubmitCalendarRequestCorrection
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingSubmitCalendarResponse(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -25155,6 +31896,39 @@ func TestJSONMarshalingSubmitCalendarResponse(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj SubmitCalendarResponse
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingSubmitCalendarResponseCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SubmitCalendarResponseCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled SubmitCalendarResponseCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj SubmitCalendarResponseCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj SubmitCalendarResponseCorrectionInput
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -25193,6 +31967,72 @@ func TestJSONMarshalingUpdateCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingUpdateCalendarResponseCorrection(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrection{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled UpdateCalendarResponseCorrection
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseCorrection
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseCorrection
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingUpdateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled UpdateCalendarResponseCorrectionReasonCodesItem
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseCorrectionReasonCodesItem
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -25221,6 +32061,39 @@ func TestJSONMarshalingUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
 		t.Parallel()
 		var obj UpdateCalendarResponseSubmission
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestJSONMarshalingUpdateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled UpdateCalendarResponseSubmissionCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmissionCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmissionCorrectionInput
 		err := json.Unmarshal([]byte(`{}`), &obj)
 		assert.NoError(t, err, "unmarshaling empty object should succeed")
 	})
@@ -25259,6 +32132,39 @@ func TestJSONMarshalingUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingUpdateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled UpdateCalendarResponseSubmissionsItemCorrectionInput
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmissionsItemCorrectionInput
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj UpdateCalendarResponseSubmissionsItemCorrectionInput
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestStringCreateCalendarResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -25270,6 +32176,38 @@ func TestStringCreateCalendarResponse(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *CreateCalendarResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringCreateCalendarResponseCorrection(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseCorrection{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrection
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringCreateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrectionReasonCodesItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -25291,6 +32229,22 @@ func TestStringCreateCalendarResponseSubmission(t *testing.T) {
 	})
 }
 
+func TestStringCreateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionCorrectionInput
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -25302,6 +32256,22 @@ func TestStringCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *CreateCalendarResponseSubmissionsItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringCreateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItemCorrectionInput
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -25355,6 +32325,38 @@ func TestStringGetCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestStringGetCalendarResponseCorrection(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseCorrection{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrection
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringGetCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrectionReasonCodesItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -25371,6 +32373,22 @@ func TestStringGetCalendarResponseSubmission(t *testing.T) {
 	})
 }
 
+func TestStringGetCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionCorrectionInput
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -25382,6 +32400,22 @@ func TestStringGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *GetCalendarResponseSubmissionsItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringGetCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItemCorrectionInput
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -25419,6 +32453,38 @@ func TestStringListCalendarResponseRowsItem(t *testing.T) {
 	})
 }
 
+func TestStringListCalendarResponseRowsItemCorrection(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrection
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringListCalendarResponseRowsItemCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -25430,6 +32496,22 @@ func TestStringListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *ListCalendarResponseRowsItemSubmission
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringListCalendarResponseRowsItemSubmissionCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionCorrectionInput
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -25451,6 +32533,38 @@ func TestStringListCalendarResponseRowsItemSubmissionsItem(t *testing.T) {
 	})
 }
 
+func TestStringListCalendarResponseRowsItemSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSubmitCalendarRequestCorrection(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubmitCalendarRequestCorrection{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarRequestCorrection
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringSubmitCalendarResponse(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -25462,6 +32576,22 @@ func TestStringSubmitCalendarResponse(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubmitCalendarResponse
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringSubmitCalendarResponseCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponseCorrectionInput
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -25483,6 +32613,38 @@ func TestStringUpdateCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestStringUpdateCalendarResponseCorrection(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseCorrection{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrection
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringUpdateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrectionReasonCodesItem
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
 func TestStringUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("StringMethod", func(t *testing.T) {
 		t.Parallel()
@@ -25494,6 +32656,22 @@ func TestStringUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *UpdateCalendarResponseSubmission
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringUpdateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionCorrectionInput
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -25512,6 +32690,108 @@ func TestStringUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 		var obj *UpdateCalendarResponseSubmissionsItem
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringUpdateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItemCorrectionInput
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestEnumCreateCalendarResponseCorrectionOptionalItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionOptionalItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionOptionalItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionOptionalItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionOptionalItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionOptionalItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionOptionalItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionOptionalItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateCalendarResponseCorrectionOptionalItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateCalendarResponseCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCreateCalendarResponseCorrectionRequiredItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionRequiredItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionRequiredItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionRequiredItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionRequiredItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionRequiredItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionRequiredItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateCalendarResponseCorrectionRequiredItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateCalendarResponseCorrectionRequiredItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateCalendarResponseCorrectionRequiredItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateCalendarResponseCorrectionRequiredItemFromString("reason")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
 	})
 }
 
@@ -25688,6 +32968,92 @@ func TestEnumCreateCalendarResponseSubmissionsItemStatus(t *testing.T) {
 	})
 }
 
+func TestEnumGetCalendarResponseCorrectionOptionalItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionOptionalItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionOptionalItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionOptionalItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionOptionalItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionOptionalItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionOptionalItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionOptionalItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewGetCalendarResponseCorrectionOptionalItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewGetCalendarResponseCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumGetCalendarResponseCorrectionRequiredItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionRequiredItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionRequiredItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionRequiredItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionRequiredItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionRequiredItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionRequiredItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewGetCalendarResponseCorrectionRequiredItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, GetCalendarResponseCorrectionRequiredItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewGetCalendarResponseCorrectionRequiredItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewGetCalendarResponseCorrectionRequiredItemFromString("reason")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumGetCalendarResponseKind(t *testing.T) {
 	t.Run("NewFromString_custom", func(t *testing.T) {
 		t.Parallel()
@@ -25854,6 +33220,92 @@ func TestEnumGetCalendarResponseSubmissionsItemStatus(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewGetCalendarResponseSubmissionsItemStatusFromString("generated")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumListCalendarResponseRowsItemCorrectionOptionalItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionOptionalItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionOptionalItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionOptionalItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionOptionalItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionOptionalItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionOptionalItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionOptionalItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewListCalendarResponseRowsItemCorrectionOptionalItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewListCalendarResponseRowsItemCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumListCalendarResponseRowsItemCorrectionRequiredItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionRequiredItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionRequiredItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionRequiredItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionRequiredItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionRequiredItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionRequiredItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListCalendarResponseRowsItemCorrectionRequiredItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListCalendarResponseRowsItemCorrectionRequiredItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewListCalendarResponseRowsItemCorrectionRequiredItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewListCalendarResponseRowsItemCorrectionRequiredItemFromString("reason")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -26106,6 +33558,92 @@ func TestEnumSubmitCalendarResponseStatus(t *testing.T) {
 	})
 }
 
+func TestEnumUpdateCalendarResponseCorrectionOptionalItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionOptionalItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionOptionalItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionOptionalItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionOptionalItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionOptionalItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionOptionalItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionOptionalItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUpdateCalendarResponseCorrectionOptionalItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUpdateCalendarResponseCorrectionOptionalItemFromString("reason")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumUpdateCalendarResponseCorrectionRequiredItem(t *testing.T) {
+	t.Run("NewFromString_reason", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionRequiredItemFromString("reason")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionRequiredItem("reason"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reasonCode", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionRequiredItemFromString("reasonCode")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionRequiredItem("reasonCode"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_authorityReference", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionRequiredItemFromString("authorityReference")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionRequiredItem("authorityReference"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_discoveredOn", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewUpdateCalendarResponseCorrectionRequiredItemFromString("discoveredOn")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, UpdateCalendarResponseCorrectionRequiredItem("discoveredOn"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewUpdateCalendarResponseCorrectionRequiredItemFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewUpdateCalendarResponseCorrectionRequiredItemFromString("reason")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumUpdateCalendarResponseKind(t *testing.T) {
 	t.Run("NewFromString_custom", func(t *testing.T) {
 		t.Parallel()
@@ -26302,6 +33840,52 @@ func TestExtraPropertiesCreateCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesCreateCalendarResponseCorrection(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseCorrection{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrection
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesCreateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseCorrectionReasonCodesItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseCorrectionReasonCodesItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesCreateCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26325,6 +33909,29 @@ func TestExtraPropertiesCreateCalendarResponseSubmission(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesCreateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseSubmissionCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionCorrectionInput
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26343,6 +33950,29 @@ func TestExtraPropertiesCreateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *CreateCalendarResponseSubmissionsItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesCreateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateCalendarResponseSubmissionsItemCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateCalendarResponseSubmissionsItemCorrectionInput
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -26417,6 +34047,52 @@ func TestExtraPropertiesGetCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesGetCalendarResponseCorrection(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseCorrection{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrection
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesGetCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseCorrectionReasonCodesItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseCorrectionReasonCodesItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesGetCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26440,6 +34116,29 @@ func TestExtraPropertiesGetCalendarResponseSubmission(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesGetCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseSubmissionCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionCorrectionInput
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26458,6 +34157,29 @@ func TestExtraPropertiesGetCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *GetCalendarResponseSubmissionsItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesGetCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &GetCalendarResponseSubmissionsItemCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetCalendarResponseSubmissionsItemCorrectionInput
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -26509,6 +34231,52 @@ func TestExtraPropertiesListCalendarResponseRowsItem(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesListCalendarResponseRowsItemCorrection(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemCorrection{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrection
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesListCalendarResponseRowsItemCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemCorrectionReasonCodesItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemCorrectionReasonCodesItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26527,6 +34295,29 @@ func TestExtraPropertiesListCalendarResponseRowsItemSubmission(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *ListCalendarResponseRowsItemSubmission
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesListCalendarResponseRowsItemSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemSubmissionCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionCorrectionInput
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -26555,6 +34346,52 @@ func TestExtraPropertiesListCalendarResponseRowsItemSubmissionsItem(t *testing.T
 	})
 }
 
+func TestExtraPropertiesListCalendarResponseRowsItemSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &ListCalendarResponseRowsItemSubmissionsItemCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListCalendarResponseRowsItemSubmissionsItemCorrectionInput
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSubmitCalendarRequestCorrection(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubmitCalendarRequestCorrection{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarRequestCorrection
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesSubmitCalendarResponse(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26573,6 +34410,29 @@ func TestExtraPropertiesSubmitCalendarResponse(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *SubmitCalendarResponse
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesSubmitCalendarResponseCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &SubmitCalendarResponseCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *SubmitCalendarResponseCorrectionInput
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})
@@ -26601,6 +34461,52 @@ func TestExtraPropertiesUpdateCalendarResponse(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesUpdateCalendarResponseCorrection(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseCorrection{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrection
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesUpdateCalendarResponseCorrectionReasonCodesItem(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseCorrectionReasonCodesItem{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseCorrectionReasonCodesItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesUpdateCalendarResponseSubmission(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26624,6 +34530,29 @@ func TestExtraPropertiesUpdateCalendarResponseSubmission(t *testing.T) {
 	})
 }
 
+func TestExtraPropertiesUpdateCalendarResponseSubmissionCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmissionCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionCorrectionInput
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
 func TestExtraPropertiesUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties", func(t *testing.T) {
 		t.Parallel()
@@ -26642,6 +34571,29 @@ func TestExtraPropertiesUpdateCalendarResponseSubmissionsItem(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *UpdateCalendarResponseSubmissionsItem
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesUpdateCalendarResponseSubmissionsItemCorrectionInput(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &UpdateCalendarResponseSubmissionsItemCorrectionInput{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateCalendarResponseSubmissionsItemCorrectionInput
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

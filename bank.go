@@ -28424,6 +28424,7 @@ const (
 	TransactionsMatchBankRequestDocumentTypeSaleInvoice     TransactionsMatchBankRequestDocumentType = "sale_invoice"
 	TransactionsMatchBankRequestDocumentTypePurchaseInvoice TransactionsMatchBankRequestDocumentType = "purchase_invoice"
 	TransactionsMatchBankRequestDocumentTypePayrollRun      TransactionsMatchBankRequestDocumentType = "payroll_run"
+	TransactionsMatchBankRequestDocumentTypeExpenseReport   TransactionsMatchBankRequestDocumentType = "expense_report"
 )
 
 func NewTransactionsMatchBankRequestDocumentTypeFromString(s string) (TransactionsMatchBankRequestDocumentType, error) {
@@ -28434,6 +28435,8 @@ func NewTransactionsMatchBankRequestDocumentTypeFromString(s string) (Transactio
 		return TransactionsMatchBankRequestDocumentTypePurchaseInvoice, nil
 	case "payroll_run":
 		return TransactionsMatchBankRequestDocumentTypePayrollRun, nil
+	case "expense_report":
+		return TransactionsMatchBankRequestDocumentTypeExpenseReport, nil
 	}
 	var t TransactionsMatchBankRequestDocumentType
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

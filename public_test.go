@@ -4743,6 +4743,13 @@ func TestEnumInvoicesGetPublicResponseStatus(t *testing.T) {
 		assert.Equal(t, InvoicesGetPublicResponseStatus("issued"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_reversed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesGetPublicResponseStatusFromString("reversed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesGetPublicResponseStatus("reversed"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewInvoicesGetPublicResponseStatusFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)

@@ -375,6 +375,19 @@ func (c *CompaniesArchiveAccountRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+type CompaniesContextAccountRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (c *CompaniesContextAccountRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
 var (
 	companiesConvertToLiveAccountRequestFieldCompanyID = big.NewInt(1 << 0)
 )
@@ -4090,6 +4103,2428 @@ func (c *CompaniesArchiveAccountResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CompaniesArchiveAccountResponse) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponseFieldPeriods      = big.NewInt(1 << 0)
+	companiesContextAccountResponseFieldPostingRules = big.NewInt(1 << 1)
+	companiesContextAccountResponseFieldBankAccounts = big.NewInt(1 << 2)
+	companiesContextAccountResponseFieldVatTypesUsed = big.NewInt(1 << 3)
+	companiesContextAccountResponseFieldFilings      = big.NewInt(1 << 4)
+	companiesContextAccountResponseFieldPayroll      = big.NewInt(1 << 5)
+	companiesContextAccountResponseFieldProfile      = big.NewInt(1 << 6)
+)
+
+type CompaniesContextAccountResponse struct {
+	Periods      *CompaniesContextAccountResponsePeriods            `json:"periods" url:"periods"`
+	PostingRules map[string]string                                  `json:"postingRules" url:"postingRules"`
+	BankAccounts []*CompaniesContextAccountResponseBankAccountsItem `json:"bankAccounts" url:"bankAccounts"`
+	VatTypesUsed []*CompaniesContextAccountResponseVatTypesUsedItem `json:"vatTypesUsed" url:"vatTypesUsed"`
+	Filings      []*CompaniesContextAccountResponseFilingsItem      `json:"filings" url:"filings"`
+	Payroll      *CompaniesContextAccountResponsePayroll            `json:"payroll" url:"payroll"`
+	Profile      *CompaniesContextAccountResponseProfile            `json:"profile" url:"profile"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponse) GetPeriods() *CompaniesContextAccountResponsePeriods {
+	if c == nil {
+		return nil
+	}
+	return c.Periods
+}
+
+func (c *CompaniesContextAccountResponse) GetPostingRules() map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.PostingRules
+}
+
+func (c *CompaniesContextAccountResponse) GetBankAccounts() []*CompaniesContextAccountResponseBankAccountsItem {
+	if c == nil {
+		return nil
+	}
+	return c.BankAccounts
+}
+
+func (c *CompaniesContextAccountResponse) GetVatTypesUsed() []*CompaniesContextAccountResponseVatTypesUsedItem {
+	if c == nil {
+		return nil
+	}
+	return c.VatTypesUsed
+}
+
+func (c *CompaniesContextAccountResponse) GetFilings() []*CompaniesContextAccountResponseFilingsItem {
+	if c == nil {
+		return nil
+	}
+	return c.Filings
+}
+
+func (c *CompaniesContextAccountResponse) GetPayroll() *CompaniesContextAccountResponsePayroll {
+	if c == nil {
+		return nil
+	}
+	return c.Payroll
+}
+
+func (c *CompaniesContextAccountResponse) GetProfile() *CompaniesContextAccountResponseProfile {
+	if c == nil {
+		return nil
+	}
+	return c.Profile
+}
+
+func (c *CompaniesContextAccountResponse) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponse) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetPeriods sets the Periods field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponse) SetPeriods(periods *CompaniesContextAccountResponsePeriods) {
+	c.Periods = periods
+	c.require(companiesContextAccountResponseFieldPeriods)
+}
+
+// SetPostingRules sets the PostingRules field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponse) SetPostingRules(postingRules map[string]string) {
+	c.PostingRules = postingRules
+	c.require(companiesContextAccountResponseFieldPostingRules)
+}
+
+// SetBankAccounts sets the BankAccounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponse) SetBankAccounts(bankAccounts []*CompaniesContextAccountResponseBankAccountsItem) {
+	c.BankAccounts = bankAccounts
+	c.require(companiesContextAccountResponseFieldBankAccounts)
+}
+
+// SetVatTypesUsed sets the VatTypesUsed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponse) SetVatTypesUsed(vatTypesUsed []*CompaniesContextAccountResponseVatTypesUsedItem) {
+	c.VatTypesUsed = vatTypesUsed
+	c.require(companiesContextAccountResponseFieldVatTypesUsed)
+}
+
+// SetFilings sets the Filings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponse) SetFilings(filings []*CompaniesContextAccountResponseFilingsItem) {
+	c.Filings = filings
+	c.require(companiesContextAccountResponseFieldFilings)
+}
+
+// SetPayroll sets the Payroll field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponse) SetPayroll(payroll *CompaniesContextAccountResponsePayroll) {
+	c.Payroll = payroll
+	c.require(companiesContextAccountResponseFieldPayroll)
+}
+
+// SetProfile sets the Profile field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponse) SetProfile(profile *CompaniesContextAccountResponseProfile) {
+	c.Profile = profile
+	c.require(companiesContextAccountResponseFieldProfile)
+}
+
+func (c *CompaniesContextAccountResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponse) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponse) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponseBankAccountsItemFieldID          = big.NewInt(1 << 0)
+	companiesContextAccountResponseBankAccountsItemFieldName        = big.NewInt(1 << 1)
+	companiesContextAccountResponseBankAccountsItemFieldType        = big.NewInt(1 << 2)
+	companiesContextAccountResponseBankAccountsItemFieldIban        = big.NewInt(1 << 3)
+	companiesContextAccountResponseBankAccountsItemFieldCurrency    = big.NewInt(1 << 4)
+	companiesContextAccountResponseBankAccountsItemFieldAccountCode = big.NewInt(1 << 5)
+	companiesContextAccountResponseBankAccountsItemFieldIsActive    = big.NewInt(1 << 6)
+)
+
+type CompaniesContextAccountResponseBankAccountsItem struct {
+	ID          string  `json:"id" url:"id"`
+	Name        string  `json:"name" url:"name"`
+	Type        string  `json:"type" url:"type"`
+	Iban        *string `json:"iban,omitempty" url:"iban,omitempty"`
+	Currency    string  `json:"currency" url:"currency"`
+	AccountCode string  `json:"accountCode" url:"accountCode"`
+	IsActive    bool    `json:"isActive" url:"isActive"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetName() string {
+	if c == nil {
+		return ""
+	}
+	return c.Name
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetType() string {
+	if c == nil {
+		return ""
+	}
+	return c.Type
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetIban() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Iban
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetCurrency() string {
+	if c == nil {
+		return ""
+	}
+	return c.Currency
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetAccountCode() string {
+	if c == nil {
+		return ""
+	}
+	return c.AccountCode
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetIsActive() bool {
+	if c == nil {
+		return false
+	}
+	return c.IsActive
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseBankAccountsItem) SetID(id string) {
+	c.ID = id
+	c.require(companiesContextAccountResponseBankAccountsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseBankAccountsItem) SetName(name string) {
+	c.Name = name
+	c.require(companiesContextAccountResponseBankAccountsItemFieldName)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseBankAccountsItem) SetType(type_ string) {
+	c.Type = type_
+	c.require(companiesContextAccountResponseBankAccountsItemFieldType)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseBankAccountsItem) SetIban(iban *string) {
+	c.Iban = iban
+	c.require(companiesContextAccountResponseBankAccountsItemFieldIban)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseBankAccountsItem) SetCurrency(currency string) {
+	c.Currency = currency
+	c.require(companiesContextAccountResponseBankAccountsItemFieldCurrency)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseBankAccountsItem) SetAccountCode(accountCode string) {
+	c.AccountCode = accountCode
+	c.require(companiesContextAccountResponseBankAccountsItemFieldAccountCode)
+}
+
+// SetIsActive sets the IsActive field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseBankAccountsItem) SetIsActive(isActive bool) {
+	c.IsActive = isActive
+	c.require(companiesContextAccountResponseBankAccountsItemFieldIsActive)
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponseBankAccountsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponseBankAccountsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponseBankAccountsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponseBankAccountsItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponseFilingsItemFieldKey             = big.NewInt(1 << 0)
+	companiesContextAccountResponseFilingsItemFieldRuleKey         = big.NewInt(1 << 1)
+	companiesContextAccountResponseFilingsItemFieldPeriod          = big.NewInt(1 << 2)
+	companiesContextAccountResponseFilingsItemFieldTitle           = big.NewInt(1 << 3)
+	companiesContextAccountResponseFilingsItemFieldDueDate         = big.NewInt(1 << 4)
+	companiesContextAccountResponseFilingsItemFieldSystem          = big.NewInt(1 << 5)
+	companiesContextAccountResponseFilingsItemFieldCanDownload     = big.NewInt(1 << 6)
+	companiesContextAccountResponseFilingsItemFieldCanSubmit       = big.NewInt(1 << 7)
+	companiesContextAccountResponseFilingsItemFieldMissingSettings = big.NewInt(1 << 8)
+)
+
+type CompaniesContextAccountResponseFilingsItem struct {
+	Key             string                                                     `json:"key" url:"key"`
+	RuleKey         string                                                     `json:"ruleKey" url:"ruleKey"`
+	Period          string                                                     `json:"period" url:"period"`
+	Title           string                                                     `json:"title" url:"title"`
+	DueDate         time.Time                                                  `json:"dueDate" url:"dueDate" format:"date"`
+	System          *string                                                    `json:"system,omitempty" url:"system,omitempty"`
+	CanDownload     bool                                                       `json:"canDownload" url:"canDownload"`
+	CanSubmit       bool                                                       `json:"canSubmit" url:"canSubmit"`
+	MissingSettings *CompaniesContextAccountResponseFilingsItemMissingSettings `json:"missingSettings,omitempty" url:"missingSettings,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetKey() string {
+	if c == nil {
+		return ""
+	}
+	return c.Key
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetRuleKey() string {
+	if c == nil {
+		return ""
+	}
+	return c.RuleKey
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetPeriod() string {
+	if c == nil {
+		return ""
+	}
+	return c.Period
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetTitle() string {
+	if c == nil {
+		return ""
+	}
+	return c.Title
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetDueDate() time.Time {
+	if c == nil {
+		return time.Time{}
+	}
+	return c.DueDate
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetSystem() *string {
+	if c == nil {
+		return nil
+	}
+	return c.System
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetCanDownload() bool {
+	if c == nil {
+		return false
+	}
+	return c.CanDownload
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetCanSubmit() bool {
+	if c == nil {
+		return false
+	}
+	return c.CanSubmit
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetMissingSettings() *CompaniesContextAccountResponseFilingsItemMissingSettings {
+	if c == nil {
+		return nil
+	}
+	return c.MissingSettings
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetKey(key string) {
+	c.Key = key
+	c.require(companiesContextAccountResponseFilingsItemFieldKey)
+}
+
+// SetRuleKey sets the RuleKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetRuleKey(ruleKey string) {
+	c.RuleKey = ruleKey
+	c.require(companiesContextAccountResponseFilingsItemFieldRuleKey)
+}
+
+// SetPeriod sets the Period field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetPeriod(period string) {
+	c.Period = period
+	c.require(companiesContextAccountResponseFilingsItemFieldPeriod)
+}
+
+// SetTitle sets the Title field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetTitle(title string) {
+	c.Title = title
+	c.require(companiesContextAccountResponseFilingsItemFieldTitle)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetDueDate(dueDate time.Time) {
+	c.DueDate = dueDate
+	c.require(companiesContextAccountResponseFilingsItemFieldDueDate)
+}
+
+// SetSystem sets the System field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetSystem(system *string) {
+	c.System = system
+	c.require(companiesContextAccountResponseFilingsItemFieldSystem)
+}
+
+// SetCanDownload sets the CanDownload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetCanDownload(canDownload bool) {
+	c.CanDownload = canDownload
+	c.require(companiesContextAccountResponseFilingsItemFieldCanDownload)
+}
+
+// SetCanSubmit sets the CanSubmit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetCanSubmit(canSubmit bool) {
+	c.CanSubmit = canSubmit
+	c.require(companiesContextAccountResponseFilingsItemFieldCanSubmit)
+}
+
+// SetMissingSettings sets the MissingSettings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItem) SetMissingSettings(missingSettings *CompaniesContextAccountResponseFilingsItemMissingSettings) {
+	c.MissingSettings = missingSettings
+	c.require(companiesContextAccountResponseFilingsItemFieldMissingSettings)
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) UnmarshalJSON(data []byte) error {
+	type embed CompaniesContextAccountResponseFilingsItem
+	var unmarshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed: embed(*c),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponseFilingsItem(unmarshaler.embed)
+	c.DueDate = unmarshaler.DueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponseFilingsItem
+	var marshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed:   embed(*c),
+		DueDate: internal.NewDate(c.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponseFilingsItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponseFilingsItemMissingSettingsFieldOperation = big.NewInt(1 << 0)
+	companiesContextAccountResponseFilingsItemMissingSettingsFieldSystem    = big.NewInt(1 << 1)
+	companiesContextAccountResponseFilingsItemMissingSettingsFieldKeys      = big.NewInt(1 << 2)
+	companiesContextAccountResponseFilingsItemMissingSettingsFieldCall      = big.NewInt(1 << 3)
+)
+
+type CompaniesContextAccountResponseFilingsItemMissingSettings struct {
+	Operation CompaniesContextAccountResponseFilingsItemMissingSettingsOperation `json:"operation" url:"operation"`
+	System    string                                                             `json:"system" url:"system"`
+	Keys      []string                                                           `json:"keys" url:"keys"`
+	Call      string                                                             `json:"call" url:"call"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) GetOperation() CompaniesContextAccountResponseFilingsItemMissingSettingsOperation {
+	if c == nil {
+		return ""
+	}
+	return c.Operation
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) GetSystem() string {
+	if c == nil {
+		return ""
+	}
+	return c.System
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) GetKeys() []string {
+	if c == nil {
+		return nil
+	}
+	return c.Keys
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) GetCall() string {
+	if c == nil {
+		return ""
+	}
+	return c.Call
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetOperation sets the Operation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) SetOperation(operation CompaniesContextAccountResponseFilingsItemMissingSettingsOperation) {
+	c.Operation = operation
+	c.require(companiesContextAccountResponseFilingsItemMissingSettingsFieldOperation)
+}
+
+// SetSystem sets the System field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) SetSystem(system string) {
+	c.System = system
+	c.require(companiesContextAccountResponseFilingsItemMissingSettingsFieldSystem)
+}
+
+// SetKeys sets the Keys field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) SetKeys(keys []string) {
+	c.Keys = keys
+	c.require(companiesContextAccountResponseFilingsItemMissingSettingsFieldKeys)
+}
+
+// SetCall sets the Call field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) SetCall(call string) {
+	c.Call = call
+	c.require(companiesContextAccountResponseFilingsItemMissingSettingsFieldCall)
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponseFilingsItemMissingSettings
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponseFilingsItemMissingSettings(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponseFilingsItemMissingSettings
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponseFilingsItemMissingSettings) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesContextAccountResponseFilingsItemMissingSettingsOperation string
+
+const (
+	CompaniesContextAccountResponseFilingsItemMissingSettingsOperationDeclarationsConfigsUpdate CompaniesContextAccountResponseFilingsItemMissingSettingsOperation = "declarations/configs/update"
+)
+
+func NewCompaniesContextAccountResponseFilingsItemMissingSettingsOperationFromString(s string) (CompaniesContextAccountResponseFilingsItemMissingSettingsOperation, error) {
+	switch s {
+	case "declarations/configs/update":
+		return CompaniesContextAccountResponseFilingsItemMissingSettingsOperationDeclarationsConfigsUpdate, nil
+	}
+	var t CompaniesContextAccountResponseFilingsItemMissingSettingsOperation
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesContextAccountResponseFilingsItemMissingSettingsOperation) Ptr() *CompaniesContextAccountResponseFilingsItemMissingSettingsOperation {
+	return &c
+}
+
+var (
+	companiesContextAccountResponsePayrollFieldCountry        = big.NewInt(1 << 0)
+	companiesContextAccountResponsePayrollFieldEngine         = big.NewInt(1 << 1)
+	companiesContextAccountResponsePayrollFieldEmployeeFields = big.NewInt(1 << 2)
+)
+
+type CompaniesContextAccountResponsePayroll struct {
+	Country        string                                                      `json:"country" url:"country"`
+	Engine         bool                                                        `json:"engine" url:"engine"`
+	EmployeeFields []*CompaniesContextAccountResponsePayrollEmployeeFieldsItem `json:"employeeFields" url:"employeeFields"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponsePayroll) GetCountry() string {
+	if c == nil {
+		return ""
+	}
+	return c.Country
+}
+
+func (c *CompaniesContextAccountResponsePayroll) GetEngine() bool {
+	if c == nil {
+		return false
+	}
+	return c.Engine
+}
+
+func (c *CompaniesContextAccountResponsePayroll) GetEmployeeFields() []*CompaniesContextAccountResponsePayrollEmployeeFieldsItem {
+	if c == nil {
+		return nil
+	}
+	return c.EmployeeFields
+}
+
+func (c *CompaniesContextAccountResponsePayroll) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponsePayroll) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePayroll) SetCountry(country string) {
+	c.Country = country
+	c.require(companiesContextAccountResponsePayrollFieldCountry)
+}
+
+// SetEngine sets the Engine field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePayroll) SetEngine(engine bool) {
+	c.Engine = engine
+	c.require(companiesContextAccountResponsePayrollFieldEngine)
+}
+
+// SetEmployeeFields sets the EmployeeFields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePayroll) SetEmployeeFields(employeeFields []*CompaniesContextAccountResponsePayrollEmployeeFieldsItem) {
+	c.EmployeeFields = employeeFields
+	c.require(companiesContextAccountResponsePayrollFieldEmployeeFields)
+}
+
+func (c *CompaniesContextAccountResponsePayroll) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponsePayroll
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponsePayroll(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponsePayroll) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponsePayroll
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponsePayroll) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponsePayrollEmployeeFieldsItemFieldKey       = big.NewInt(1 << 0)
+	companiesContextAccountResponsePayrollEmployeeFieldsItemFieldKind      = big.NewInt(1 << 1)
+	companiesContextAccountResponsePayrollEmployeeFieldsItemFieldOptions   = big.NewInt(1 << 2)
+	companiesContextAccountResponsePayrollEmployeeFieldsItemFieldMaxLength = big.NewInt(1 << 3)
+)
+
+type CompaniesContextAccountResponsePayrollEmployeeFieldsItem struct {
+	Key       string                                                       `json:"key" url:"key"`
+	Kind      CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind `json:"kind" url:"kind"`
+	Options   []string                                                     `json:"options,omitempty" url:"options,omitempty"`
+	MaxLength *int64                                                       `json:"maxLength,omitempty" url:"maxLength,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) GetKey() string {
+	if c == nil {
+		return ""
+	}
+	return c.Key
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) GetKind() CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind {
+	if c == nil {
+		return ""
+	}
+	return c.Kind
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) GetOptions() []string {
+	if c == nil {
+		return nil
+	}
+	return c.Options
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) GetMaxLength() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.MaxLength
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetKey sets the Key field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) SetKey(key string) {
+	c.Key = key
+	c.require(companiesContextAccountResponsePayrollEmployeeFieldsItemFieldKey)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) SetKind(kind CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind) {
+	c.Kind = kind
+	c.require(companiesContextAccountResponsePayrollEmployeeFieldsItemFieldKind)
+}
+
+// SetOptions sets the Options field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) SetOptions(options []string) {
+	c.Options = options
+	c.require(companiesContextAccountResponsePayrollEmployeeFieldsItemFieldOptions)
+}
+
+// SetMaxLength sets the MaxLength field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) SetMaxLength(maxLength *int64) {
+	c.MaxLength = maxLength
+	c.require(companiesContextAccountResponsePayrollEmployeeFieldsItemFieldMaxLength)
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponsePayrollEmployeeFieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponsePayrollEmployeeFieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponsePayrollEmployeeFieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponsePayrollEmployeeFieldsItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind string
+
+const (
+	CompaniesContextAccountResponsePayrollEmployeeFieldsItemKindText   CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind = "text"
+	CompaniesContextAccountResponsePayrollEmployeeFieldsItemKindSelect CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind = "select"
+	CompaniesContextAccountResponsePayrollEmployeeFieldsItemKindDate   CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind = "date"
+)
+
+func NewCompaniesContextAccountResponsePayrollEmployeeFieldsItemKindFromString(s string) (CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind, error) {
+	switch s {
+	case "text":
+		return CompaniesContextAccountResponsePayrollEmployeeFieldsItemKindText, nil
+	case "select":
+		return CompaniesContextAccountResponsePayrollEmployeeFieldsItemKindSelect, nil
+	case "date":
+		return CompaniesContextAccountResponsePayrollEmployeeFieldsItemKindDate, nil
+	}
+	var t CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind) Ptr() *CompaniesContextAccountResponsePayrollEmployeeFieldsItemKind {
+	return &c
+}
+
+var (
+	companiesContextAccountResponsePeriodsFieldOpen   = big.NewInt(1 << 0)
+	companiesContextAccountResponsePeriodsFieldLocked = big.NewInt(1 << 1)
+)
+
+type CompaniesContextAccountResponsePeriods struct {
+	Open   []*CompaniesContextAccountResponsePeriodsOpenItem   `json:"open" url:"open"`
+	Locked []*CompaniesContextAccountResponsePeriodsLockedItem `json:"locked" url:"locked"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponsePeriods) GetOpen() []*CompaniesContextAccountResponsePeriodsOpenItem {
+	if c == nil {
+		return nil
+	}
+	return c.Open
+}
+
+func (c *CompaniesContextAccountResponsePeriods) GetLocked() []*CompaniesContextAccountResponsePeriodsLockedItem {
+	if c == nil {
+		return nil
+	}
+	return c.Locked
+}
+
+func (c *CompaniesContextAccountResponsePeriods) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponsePeriods) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetOpen sets the Open field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePeriods) SetOpen(open []*CompaniesContextAccountResponsePeriodsOpenItem) {
+	c.Open = open
+	c.require(companiesContextAccountResponsePeriodsFieldOpen)
+}
+
+// SetLocked sets the Locked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePeriods) SetLocked(locked []*CompaniesContextAccountResponsePeriodsLockedItem) {
+	c.Locked = locked
+	c.require(companiesContextAccountResponsePeriodsFieldLocked)
+}
+
+func (c *CompaniesContextAccountResponsePeriods) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponsePeriods
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponsePeriods(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponsePeriods) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponsePeriods
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponsePeriods) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponsePeriodsLockedItemFieldYear  = big.NewInt(1 << 0)
+	companiesContextAccountResponsePeriodsLockedItemFieldMonth = big.NewInt(1 << 1)
+)
+
+type CompaniesContextAccountResponsePeriodsLockedItem struct {
+	Year  int64 `json:"year" url:"year"`
+	Month int64 `json:"month" url:"month"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) GetYear() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Year
+}
+
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) GetMonth() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Month
+}
+
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) SetYear(year int64) {
+	c.Year = year
+	c.require(companiesContextAccountResponsePeriodsLockedItemFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) SetMonth(month int64) {
+	c.Month = month
+	c.require(companiesContextAccountResponsePeriodsLockedItemFieldMonth)
+}
+
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponsePeriodsLockedItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponsePeriodsLockedItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponsePeriodsLockedItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponsePeriodsLockedItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponsePeriodsOpenItemFieldYear  = big.NewInt(1 << 0)
+	companiesContextAccountResponsePeriodsOpenItemFieldMonth = big.NewInt(1 << 1)
+)
+
+type CompaniesContextAccountResponsePeriodsOpenItem struct {
+	Year  int64 `json:"year" url:"year"`
+	Month int64 `json:"month" url:"month"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) GetYear() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Year
+}
+
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) GetMonth() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Month
+}
+
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) SetYear(year int64) {
+	c.Year = year
+	c.require(companiesContextAccountResponsePeriodsOpenItemFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) SetMonth(month int64) {
+	c.Month = month
+	c.require(companiesContextAccountResponsePeriodsOpenItemFieldMonth)
+}
+
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponsePeriodsOpenItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponsePeriodsOpenItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponsePeriodsOpenItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponsePeriodsOpenItem) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesContextAccountResponseProfileFieldID                        = big.NewInt(1 << 0)
+	companiesContextAccountResponseProfileFieldName                      = big.NewInt(1 << 1)
+	companiesContextAccountResponseProfileFieldCode                      = big.NewInt(1 << 2)
+	companiesContextAccountResponseProfileFieldVatCode                   = big.NewInt(1 << 3)
+	companiesContextAccountResponseProfileFieldSmeExemptionNumber        = big.NewInt(1 << 4)
+	companiesContextAccountResponseProfileFieldIsVatPayer                = big.NewInt(1 << 5)
+	companiesContextAccountResponseProfileFieldIsSandbox                 = big.NewInt(1 << 6)
+	companiesContextAccountResponseProfileFieldCashBasis                 = big.NewInt(1 << 7)
+	companiesContextAccountResponseProfileFieldCountryCode               = big.NewInt(1 << 8)
+	companiesContextAccountResponseProfileFieldChartTemplate             = big.NewInt(1 << 9)
+	companiesContextAccountResponseProfileFieldCountryChartTemplate      = big.NewInt(1 << 10)
+	companiesContextAccountResponseProfileFieldBaseCurrency              = big.NewInt(1 << 11)
+	companiesContextAccountResponseProfileFieldDefaultInvoiceCurrency    = big.NewInt(1 << 12)
+	companiesContextAccountResponseProfileFieldStatus                    = big.NewInt(1 << 13)
+	companiesContextAccountResponseProfileFieldAddress                   = big.NewInt(1 << 14)
+	companiesContextAccountResponseProfileFieldEmail                     = big.NewInt(1 << 15)
+	companiesContextAccountResponseProfileFieldPhone                     = big.NewInt(1 << 16)
+	companiesContextAccountResponseProfileFieldIban                      = big.NewInt(1 << 17)
+	companiesContextAccountResponseProfileFieldBankName                  = big.NewInt(1 << 18)
+	companiesContextAccountResponseProfileFieldBankBic                   = big.NewInt(1 << 19)
+	companiesContextAccountResponseProfileFieldBankCode                  = big.NewInt(1 << 20)
+	companiesContextAccountResponseProfileFieldBankBranchCode            = big.NewInt(1 << 21)
+	companiesContextAccountResponseProfileFieldBankAccountNumber         = big.NewInt(1 << 22)
+	companiesContextAccountResponseProfileFieldInvoicePrefix             = big.NewInt(1 << 23)
+	companiesContextAccountResponseProfileFieldNextInvoiceNumber         = big.NewInt(1 << 24)
+	companiesContextAccountResponseProfileFieldDefaultInvoiceLocale      = big.NewInt(1 << 25)
+	companiesContextAccountResponseProfileFieldDefaultInvoiceNote        = big.NewInt(1 << 26)
+	companiesContextAccountResponseProfileFieldPeppolID                  = big.NewInt(1 << 27)
+	companiesContextAccountResponseProfileFieldSepaCreditorID            = big.NewInt(1 << 28)
+	companiesContextAccountResponseProfileFieldLogoFileID                = big.NewInt(1 << 29)
+	companiesContextAccountResponseProfileFieldLegalForm                 = big.NewInt(1 << 30)
+	companiesContextAccountResponseProfileFieldRegistryName              = big.NewInt(1 << 31)
+	companiesContextAccountResponseProfileFieldIncorporatedOn            = big.NewInt(1 << 32)
+	companiesContextAccountResponseProfileFieldShareCapital              = big.NewInt(1 << 33)
+	companiesContextAccountResponseProfileFieldAccountsKeptBy            = big.NewInt(1 << 34)
+	companiesContextAccountResponseProfileFieldVatPeriod                 = big.NewInt(1 << 35)
+	companiesContextAccountResponseProfileFieldFiscalYearEndMonth        = big.NewInt(1 << 36)
+	companiesContextAccountResponseProfileFieldTimeZone                  = big.NewInt(1 << 37)
+	companiesContextAccountResponseProfileFieldFilingOptions             = big.NewInt(1 << 38)
+	companiesContextAccountResponseProfileFieldBookkeeperName            = big.NewInt(1 << 39)
+	companiesContextAccountResponseProfileFieldAuditorName               = big.NewInt(1 << 40)
+	companiesContextAccountResponseProfileFieldAuditorRegistrationNumber = big.NewInt(1 << 41)
+	companiesContextAccountResponseProfileFieldAuditRequired             = big.NewInt(1 << 42)
+)
+
+type CompaniesContextAccountResponseProfile struct {
+	ID                 string  `json:"id" url:"id"`
+	Name               string  `json:"name" url:"name"`
+	Code               *string `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
+	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
+	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool    `json:"cashBasis" url:"cashBasis"`
+	CountryCode        string  `json:"countryCode" url:"countryCode"`
+	// Chart of accounts template the company was seeded with
+	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
+	// Chart of accounts template of the company country
+	CountryChartTemplate   string                                         `json:"countryChartTemplate" url:"countryChartTemplate"`
+	BaseCurrency           string                                         `json:"baseCurrency" url:"baseCurrency"`
+	DefaultInvoiceCurrency string                                         `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
+	Status                 CompaniesContextAccountResponseProfileStatus   `json:"status" url:"status"`
+	Address                *CompaniesContextAccountResponseProfileAddress `json:"address,omitempty" url:"address,omitempty"`
+	Email                  *string                                        `json:"email,omitempty" url:"email,omitempty"`
+	Phone                  *string                                        `json:"phone,omitempty" url:"phone,omitempty"`
+	Iban                   *string                                        `json:"iban,omitempty" url:"iban,omitempty"`
+	BankName               *string                                        `json:"bankName,omitempty" url:"bankName,omitempty"`
+	BankBic                *string                                        `json:"bankBic,omitempty" url:"bankBic,omitempty"`
+	BankCode               *string                                        `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankBranchCode         *string                                        `json:"bankBranchCode,omitempty" url:"bankBranchCode,omitempty"`
+	BankAccountNumber      *string                                        `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
+	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
+	// Number the next invoice issued without a document series gets, before any country-specific format
+	NextInvoiceNumber         string                                                `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
+	DefaultInvoiceLocale      *string                                               `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
+	DefaultInvoiceNote        *string                                               `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
+	PeppolID                  *string                                               `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID            *string                                               `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
+	LogoFileID                *string                                               `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	LegalForm                 *string                                               `json:"legalForm,omitempty" url:"legalForm,omitempty"`
+	RegistryName              *string                                               `json:"registryName,omitempty" url:"registryName,omitempty"`
+	IncorporatedOn            *string                                               `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
+	ShareCapital              *string                                               `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
+	AccountsKeptBy            *CompaniesContextAccountResponseProfileAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
+	VatPeriod                 *CompaniesContextAccountResponseProfileVatPeriod      `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	FiscalYearEndMonth        *int64                                                `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
+	TimeZone                  string                                                `json:"timeZone" url:"timeZone"`
+	FilingOptions             map[string]*string                                    `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
+	BookkeeperName            *string                                               `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
+	AuditorName               *string                                               `json:"auditorName,omitempty" url:"auditorName,omitempty"`
+	AuditorRegistrationNumber *string                                               `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
+	AuditRequired             bool                                                  `json:"auditRequired" url:"auditRequired"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetName() string {
+	if c == nil {
+		return ""
+	}
+	return c.Name
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Code
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetVatCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.VatCode
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetSmeExemptionNumber() *string {
+	if c == nil {
+		return nil
+	}
+	return c.SmeExemptionNumber
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetIsVatPayer() bool {
+	if c == nil {
+		return false
+	}
+	return c.IsVatPayer
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetIsSandbox() bool {
+	if c == nil {
+		return false
+	}
+	return c.IsSandbox
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetCashBasis() bool {
+	if c == nil {
+		return false
+	}
+	return c.CashBasis
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetCountryCode() string {
+	if c == nil {
+		return ""
+	}
+	return c.CountryCode
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetChartTemplate() string {
+	if c == nil {
+		return ""
+	}
+	return c.ChartTemplate
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetCountryChartTemplate() string {
+	if c == nil {
+		return ""
+	}
+	return c.CountryChartTemplate
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetBaseCurrency() string {
+	if c == nil {
+		return ""
+	}
+	return c.BaseCurrency
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetDefaultInvoiceCurrency() string {
+	if c == nil {
+		return ""
+	}
+	return c.DefaultInvoiceCurrency
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetStatus() CompaniesContextAccountResponseProfileStatus {
+	if c == nil {
+		return ""
+	}
+	return c.Status
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetAddress() *CompaniesContextAccountResponseProfileAddress {
+	if c == nil {
+		return nil
+	}
+	return c.Address
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetEmail() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Email
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetPhone() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Phone
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetIban() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Iban
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetBankName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankName
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetBankBic() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankBic
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetBankCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankCode
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetBankBranchCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankBranchCode
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetBankAccountNumber() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BankAccountNumber
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetInvoicePrefix() string {
+	if c == nil {
+		return ""
+	}
+	return c.InvoicePrefix
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetNextInvoiceNumber() string {
+	if c == nil {
+		return ""
+	}
+	return c.NextInvoiceNumber
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetDefaultInvoiceLocale() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DefaultInvoiceLocale
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetDefaultInvoiceNote() *string {
+	if c == nil {
+		return nil
+	}
+	return c.DefaultInvoiceNote
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetPeppolID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PeppolID
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetSepaCreditorID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.SepaCreditorID
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetLogoFileID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.LogoFileID
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetLegalForm() *string {
+	if c == nil {
+		return nil
+	}
+	return c.LegalForm
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetRegistryName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.RegistryName
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetIncorporatedOn() *string {
+	if c == nil {
+		return nil
+	}
+	return c.IncorporatedOn
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetShareCapital() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ShareCapital
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetAccountsKeptBy() *CompaniesContextAccountResponseProfileAccountsKeptBy {
+	if c == nil {
+		return nil
+	}
+	return c.AccountsKeptBy
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetVatPeriod() *CompaniesContextAccountResponseProfileVatPeriod {
+	if c == nil {
+		return nil
+	}
+	return c.VatPeriod
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetFiscalYearEndMonth() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearEndMonth
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetTimeZone() string {
+	if c == nil {
+		return ""
+	}
+	return c.TimeZone
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetFilingOptions() map[string]*string {
+	if c == nil {
+		return nil
+	}
+	return c.FilingOptions
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetBookkeeperName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BookkeeperName
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetAuditorName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AuditorName
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetAuditorRegistrationNumber() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AuditorRegistrationNumber
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetAuditRequired() bool {
+	if c == nil {
+		return false
+	}
+	return c.AuditRequired
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponseProfile) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetID(id string) {
+	c.ID = id
+	c.require(companiesContextAccountResponseProfileFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetName(name string) {
+	c.Name = name
+	c.require(companiesContextAccountResponseProfileFieldName)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetCode(code *string) {
+	c.Code = code
+	c.require(companiesContextAccountResponseProfileFieldCode)
+}
+
+// SetVatCode sets the VatCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetVatCode(vatCode *string) {
+	c.VatCode = vatCode
+	c.require(companiesContextAccountResponseProfileFieldVatCode)
+}
+
+// SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetSmeExemptionNumber(smeExemptionNumber *string) {
+	c.SmeExemptionNumber = smeExemptionNumber
+	c.require(companiesContextAccountResponseProfileFieldSmeExemptionNumber)
+}
+
+// SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetIsVatPayer(isVatPayer bool) {
+	c.IsVatPayer = isVatPayer
+	c.require(companiesContextAccountResponseProfileFieldIsVatPayer)
+}
+
+// SetIsSandbox sets the IsSandbox field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetIsSandbox(isSandbox bool) {
+	c.IsSandbox = isSandbox
+	c.require(companiesContextAccountResponseProfileFieldIsSandbox)
+}
+
+// SetCashBasis sets the CashBasis field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetCashBasis(cashBasis bool) {
+	c.CashBasis = cashBasis
+	c.require(companiesContextAccountResponseProfileFieldCashBasis)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetCountryCode(countryCode string) {
+	c.CountryCode = countryCode
+	c.require(companiesContextAccountResponseProfileFieldCountryCode)
+}
+
+// SetChartTemplate sets the ChartTemplate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetChartTemplate(chartTemplate string) {
+	c.ChartTemplate = chartTemplate
+	c.require(companiesContextAccountResponseProfileFieldChartTemplate)
+}
+
+// SetCountryChartTemplate sets the CountryChartTemplate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetCountryChartTemplate(countryChartTemplate string) {
+	c.CountryChartTemplate = countryChartTemplate
+	c.require(companiesContextAccountResponseProfileFieldCountryChartTemplate)
+}
+
+// SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetBaseCurrency(baseCurrency string) {
+	c.BaseCurrency = baseCurrency
+	c.require(companiesContextAccountResponseProfileFieldBaseCurrency)
+}
+
+// SetDefaultInvoiceCurrency sets the DefaultInvoiceCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetDefaultInvoiceCurrency(defaultInvoiceCurrency string) {
+	c.DefaultInvoiceCurrency = defaultInvoiceCurrency
+	c.require(companiesContextAccountResponseProfileFieldDefaultInvoiceCurrency)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetStatus(status CompaniesContextAccountResponseProfileStatus) {
+	c.Status = status
+	c.require(companiesContextAccountResponseProfileFieldStatus)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetAddress(address *CompaniesContextAccountResponseProfileAddress) {
+	c.Address = address
+	c.require(companiesContextAccountResponseProfileFieldAddress)
+}
+
+// SetEmail sets the Email field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetEmail(email *string) {
+	c.Email = email
+	c.require(companiesContextAccountResponseProfileFieldEmail)
+}
+
+// SetPhone sets the Phone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetPhone(phone *string) {
+	c.Phone = phone
+	c.require(companiesContextAccountResponseProfileFieldPhone)
+}
+
+// SetIban sets the Iban field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetIban(iban *string) {
+	c.Iban = iban
+	c.require(companiesContextAccountResponseProfileFieldIban)
+}
+
+// SetBankName sets the BankName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetBankName(bankName *string) {
+	c.BankName = bankName
+	c.require(companiesContextAccountResponseProfileFieldBankName)
+}
+
+// SetBankBic sets the BankBic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetBankBic(bankBic *string) {
+	c.BankBic = bankBic
+	c.require(companiesContextAccountResponseProfileFieldBankBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetBankCode(bankCode *string) {
+	c.BankCode = bankCode
+	c.require(companiesContextAccountResponseProfileFieldBankCode)
+}
+
+// SetBankBranchCode sets the BankBranchCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetBankBranchCode(bankBranchCode *string) {
+	c.BankBranchCode = bankBranchCode
+	c.require(companiesContextAccountResponseProfileFieldBankBranchCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetBankAccountNumber(bankAccountNumber *string) {
+	c.BankAccountNumber = bankAccountNumber
+	c.require(companiesContextAccountResponseProfileFieldBankAccountNumber)
+}
+
+// SetInvoicePrefix sets the InvoicePrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetInvoicePrefix(invoicePrefix string) {
+	c.InvoicePrefix = invoicePrefix
+	c.require(companiesContextAccountResponseProfileFieldInvoicePrefix)
+}
+
+// SetNextInvoiceNumber sets the NextInvoiceNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetNextInvoiceNumber(nextInvoiceNumber string) {
+	c.NextInvoiceNumber = nextInvoiceNumber
+	c.require(companiesContextAccountResponseProfileFieldNextInvoiceNumber)
+}
+
+// SetDefaultInvoiceLocale sets the DefaultInvoiceLocale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetDefaultInvoiceLocale(defaultInvoiceLocale *string) {
+	c.DefaultInvoiceLocale = defaultInvoiceLocale
+	c.require(companiesContextAccountResponseProfileFieldDefaultInvoiceLocale)
+}
+
+// SetDefaultInvoiceNote sets the DefaultInvoiceNote field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetDefaultInvoiceNote(defaultInvoiceNote *string) {
+	c.DefaultInvoiceNote = defaultInvoiceNote
+	c.require(companiesContextAccountResponseProfileFieldDefaultInvoiceNote)
+}
+
+// SetPeppolID sets the PeppolID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetPeppolID(peppolID *string) {
+	c.PeppolID = peppolID
+	c.require(companiesContextAccountResponseProfileFieldPeppolID)
+}
+
+// SetSepaCreditorID sets the SepaCreditorID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetSepaCreditorID(sepaCreditorID *string) {
+	c.SepaCreditorID = sepaCreditorID
+	c.require(companiesContextAccountResponseProfileFieldSepaCreditorID)
+}
+
+// SetLogoFileID sets the LogoFileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetLogoFileID(logoFileID *string) {
+	c.LogoFileID = logoFileID
+	c.require(companiesContextAccountResponseProfileFieldLogoFileID)
+}
+
+// SetLegalForm sets the LegalForm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetLegalForm(legalForm *string) {
+	c.LegalForm = legalForm
+	c.require(companiesContextAccountResponseProfileFieldLegalForm)
+}
+
+// SetRegistryName sets the RegistryName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetRegistryName(registryName *string) {
+	c.RegistryName = registryName
+	c.require(companiesContextAccountResponseProfileFieldRegistryName)
+}
+
+// SetIncorporatedOn sets the IncorporatedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetIncorporatedOn(incorporatedOn *string) {
+	c.IncorporatedOn = incorporatedOn
+	c.require(companiesContextAccountResponseProfileFieldIncorporatedOn)
+}
+
+// SetShareCapital sets the ShareCapital field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetShareCapital(shareCapital *string) {
+	c.ShareCapital = shareCapital
+	c.require(companiesContextAccountResponseProfileFieldShareCapital)
+}
+
+// SetAccountsKeptBy sets the AccountsKeptBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetAccountsKeptBy(accountsKeptBy *CompaniesContextAccountResponseProfileAccountsKeptBy) {
+	c.AccountsKeptBy = accountsKeptBy
+	c.require(companiesContextAccountResponseProfileFieldAccountsKeptBy)
+}
+
+// SetVatPeriod sets the VatPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetVatPeriod(vatPeriod *CompaniesContextAccountResponseProfileVatPeriod) {
+	c.VatPeriod = vatPeriod
+	c.require(companiesContextAccountResponseProfileFieldVatPeriod)
+}
+
+// SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
+	c.FiscalYearEndMonth = fiscalYearEndMonth
+	c.require(companiesContextAccountResponseProfileFieldFiscalYearEndMonth)
+}
+
+// SetTimeZone sets the TimeZone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetTimeZone(timeZone string) {
+	c.TimeZone = timeZone
+	c.require(companiesContextAccountResponseProfileFieldTimeZone)
+}
+
+// SetFilingOptions sets the FilingOptions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetFilingOptions(filingOptions map[string]*string) {
+	c.FilingOptions = filingOptions
+	c.require(companiesContextAccountResponseProfileFieldFilingOptions)
+}
+
+// SetBookkeeperName sets the BookkeeperName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetBookkeeperName(bookkeeperName *string) {
+	c.BookkeeperName = bookkeeperName
+	c.require(companiesContextAccountResponseProfileFieldBookkeeperName)
+}
+
+// SetAuditorName sets the AuditorName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetAuditorName(auditorName *string) {
+	c.AuditorName = auditorName
+	c.require(companiesContextAccountResponseProfileFieldAuditorName)
+}
+
+// SetAuditorRegistrationNumber sets the AuditorRegistrationNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetAuditorRegistrationNumber(auditorRegistrationNumber *string) {
+	c.AuditorRegistrationNumber = auditorRegistrationNumber
+	c.require(companiesContextAccountResponseProfileFieldAuditorRegistrationNumber)
+}
+
+// SetAuditRequired sets the AuditRequired field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetAuditRequired(auditRequired bool) {
+	c.AuditRequired = auditRequired
+	c.require(companiesContextAccountResponseProfileFieldAuditRequired)
+}
+
+func (c *CompaniesContextAccountResponseProfile) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponseProfile
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponseProfile(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponseProfile) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponseProfile
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponseProfile) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesContextAccountResponseProfileAccountsKeptBy string
+
+const (
+	CompaniesContextAccountResponseProfileAccountsKeptByCompany  CompaniesContextAccountResponseProfileAccountsKeptBy = "company"
+	CompaniesContextAccountResponseProfileAccountsKeptByExternal CompaniesContextAccountResponseProfileAccountsKeptBy = "external"
+)
+
+func NewCompaniesContextAccountResponseProfileAccountsKeptByFromString(s string) (CompaniesContextAccountResponseProfileAccountsKeptBy, error) {
+	switch s {
+	case "company":
+		return CompaniesContextAccountResponseProfileAccountsKeptByCompany, nil
+	case "external":
+		return CompaniesContextAccountResponseProfileAccountsKeptByExternal, nil
+	}
+	var t CompaniesContextAccountResponseProfileAccountsKeptBy
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesContextAccountResponseProfileAccountsKeptBy) Ptr() *CompaniesContextAccountResponseProfileAccountsKeptBy {
+	return &c
+}
+
+var (
+	companiesContextAccountResponseProfileAddressFieldStreet      = big.NewInt(1 << 0)
+	companiesContextAccountResponseProfileAddressFieldCity        = big.NewInt(1 << 1)
+	companiesContextAccountResponseProfileAddressFieldPostalCode  = big.NewInt(1 << 2)
+	companiesContextAccountResponseProfileAddressFieldCountryCode = big.NewInt(1 << 3)
+)
+
+type CompaniesContextAccountResponseProfileAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) GetStreet() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Street
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) GetCity() *string {
+	if c == nil {
+		return nil
+	}
+	return c.City
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) GetPostalCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PostalCode
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) GetCountryCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.CountryCode
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfileAddress) SetStreet(street *string) {
+	c.Street = street
+	c.require(companiesContextAccountResponseProfileAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfileAddress) SetCity(city *string) {
+	c.City = city
+	c.require(companiesContextAccountResponseProfileAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfileAddress) SetPostalCode(postalCode *string) {
+	c.PostalCode = postalCode
+	c.require(companiesContextAccountResponseProfileAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfileAddress) SetCountryCode(countryCode *string) {
+	c.CountryCode = countryCode
+	c.require(companiesContextAccountResponseProfileAddressFieldCountryCode)
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponseProfileAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponseProfileAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponseProfileAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesContextAccountResponseProfileStatus string
+
+const (
+	CompaniesContextAccountResponseProfileStatusActive   CompaniesContextAccountResponseProfileStatus = "active"
+	CompaniesContextAccountResponseProfileStatusArchived CompaniesContextAccountResponseProfileStatus = "archived"
+	CompaniesContextAccountResponseProfileStatusDeleted  CompaniesContextAccountResponseProfileStatus = "deleted"
+)
+
+func NewCompaniesContextAccountResponseProfileStatusFromString(s string) (CompaniesContextAccountResponseProfileStatus, error) {
+	switch s {
+	case "active":
+		return CompaniesContextAccountResponseProfileStatusActive, nil
+	case "archived":
+		return CompaniesContextAccountResponseProfileStatusArchived, nil
+	case "deleted":
+		return CompaniesContextAccountResponseProfileStatusDeleted, nil
+	}
+	var t CompaniesContextAccountResponseProfileStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesContextAccountResponseProfileStatus) Ptr() *CompaniesContextAccountResponseProfileStatus {
+	return &c
+}
+
+type CompaniesContextAccountResponseProfileVatPeriod string
+
+const (
+	CompaniesContextAccountResponseProfileVatPeriodMonthly    CompaniesContextAccountResponseProfileVatPeriod = "monthly"
+	CompaniesContextAccountResponseProfileVatPeriodBimonthly  CompaniesContextAccountResponseProfileVatPeriod = "bimonthly"
+	CompaniesContextAccountResponseProfileVatPeriodQuarterly  CompaniesContextAccountResponseProfileVatPeriod = "quarterly"
+	CompaniesContextAccountResponseProfileVatPeriodSemiannual CompaniesContextAccountResponseProfileVatPeriod = "semiannual"
+	CompaniesContextAccountResponseProfileVatPeriodAnnual     CompaniesContextAccountResponseProfileVatPeriod = "annual"
+)
+
+func NewCompaniesContextAccountResponseProfileVatPeriodFromString(s string) (CompaniesContextAccountResponseProfileVatPeriod, error) {
+	switch s {
+	case "monthly":
+		return CompaniesContextAccountResponseProfileVatPeriodMonthly, nil
+	case "bimonthly":
+		return CompaniesContextAccountResponseProfileVatPeriodBimonthly, nil
+	case "quarterly":
+		return CompaniesContextAccountResponseProfileVatPeriodQuarterly, nil
+	case "semiannual":
+		return CompaniesContextAccountResponseProfileVatPeriodSemiannual, nil
+	case "annual":
+		return CompaniesContextAccountResponseProfileVatPeriodAnnual, nil
+	}
+	var t CompaniesContextAccountResponseProfileVatPeriod
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesContextAccountResponseProfileVatPeriod) Ptr() *CompaniesContextAccountResponseProfileVatPeriod {
+	return &c
+}
+
+var (
+	companiesContextAccountResponseVatTypesUsedItemFieldCode          = big.NewInt(1 << 0)
+	companiesContextAccountResponseVatTypesUsedItemFieldName          = big.NewInt(1 << 1)
+	companiesContextAccountResponseVatTypesUsedItemFieldRatePercent   = big.NewInt(1 << 2)
+	companiesContextAccountResponseVatTypesUsedItemFieldSaleLines     = big.NewInt(1 << 3)
+	companiesContextAccountResponseVatTypesUsedItemFieldPurchaseLines = big.NewInt(1 << 4)
+)
+
+type CompaniesContextAccountResponseVatTypesUsedItem struct {
+	Code          string  `json:"code" url:"code"`
+	Name          *string `json:"name,omitempty" url:"name,omitempty"`
+	RatePercent   *string `json:"ratePercent,omitempty" url:"ratePercent,omitempty"`
+	SaleLines     int64   `json:"saleLines" url:"saleLines"`
+	PurchaseLines int64   `json:"purchaseLines" url:"purchaseLines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) GetCode() string {
+	if c == nil {
+		return ""
+	}
+	return c.Code
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) GetName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Name
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) GetRatePercent() *string {
+	if c == nil {
+		return nil
+	}
+	return c.RatePercent
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) GetSaleLines() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.SaleLines
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) GetPurchaseLines() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.PurchaseLines
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) SetCode(code string) {
+	c.Code = code
+	c.require(companiesContextAccountResponseVatTypesUsedItemFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) SetName(name *string) {
+	c.Name = name
+	c.require(companiesContextAccountResponseVatTypesUsedItemFieldName)
+}
+
+// SetRatePercent sets the RatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) SetRatePercent(ratePercent *string) {
+	c.RatePercent = ratePercent
+	c.require(companiesContextAccountResponseVatTypesUsedItemFieldRatePercent)
+}
+
+// SetSaleLines sets the SaleLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) SetSaleLines(saleLines int64) {
+	c.SaleLines = saleLines
+	c.require(companiesContextAccountResponseVatTypesUsedItemFieldSaleLines)
+}
+
+// SetPurchaseLines sets the PurchaseLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) SetPurchaseLines(purchaseLines int64) {
+	c.PurchaseLines = purchaseLines
+	c.require(companiesContextAccountResponseVatTypesUsedItemFieldPurchaseLines)
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesContextAccountResponseVatTypesUsedItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesContextAccountResponseVatTypesUsedItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) MarshalJSON() ([]byte, error) {
+	type embed CompaniesContextAccountResponseVatTypesUsedItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesContextAccountResponseVatTypesUsedItem) String() string {
 	if c == nil {
 		return "<nil>"
 	}

@@ -4816,6 +4816,52 @@ func (s *SubmissionsConfirmDeclarationsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	submissionsCorrectionPreviewDeclarationsRequestFieldID = big.NewInt(1 << 0)
+)
+
+type SubmissionsCorrectionPreviewDeclarationsRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsRequest) SetID(id string) {
+	s.ID = id
+	s.require(submissionsCorrectionPreviewDeclarationsRequestFieldID)
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsCorrectionPreviewDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SubmissionsCorrectionPreviewDeclarationsRequest(body)
+	return nil
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsCorrectionPreviewDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	submissionsCreateDeclarationsRequestFieldObligation = big.NewInt(1 << 0)
 	submissionsCreateDeclarationsRequestFieldYear       = big.NewInt(1 << 1)
 	submissionsCreateDeclarationsRequestFieldMonth      = big.NewInt(1 << 2)
@@ -47010,57 +47056,61 @@ var (
 	submissionsConfirmDeclarationsResponseFieldPeriod                 = big.NewInt(1 << 11)
 	submissionsConfirmDeclarationsResponseFieldDocumentKey            = big.NewInt(1 << 12)
 	submissionsConfirmDeclarationsResponseFieldAmendment              = big.NewInt(1 << 13)
-	submissionsConfirmDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 14)
-	submissionsConfirmDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 15)
-	submissionsConfirmDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 16)
-	submissionsConfirmDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 17)
-	submissionsConfirmDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 18)
-	submissionsConfirmDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 19)
-	submissionsConfirmDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 20)
-	submissionsConfirmDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
-	submissionsConfirmDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
-	submissionsConfirmDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsConfirmDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
-	submissionsConfirmDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
-	submissionsConfirmDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
-	submissionsConfirmDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	submissionsConfirmDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	submissionsConfirmDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
-	submissionsConfirmDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
+	submissionsConfirmDeclarationsResponseFieldAuthorityRef           = big.NewInt(1 << 14)
+	submissionsConfirmDeclarationsResponseFieldCorrectionInput        = big.NewInt(1 << 15)
+	submissionsConfirmDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 16)
+	submissionsConfirmDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 17)
+	submissionsConfirmDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 18)
+	submissionsConfirmDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 19)
+	submissionsConfirmDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 20)
+	submissionsConfirmDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 21)
+	submissionsConfirmDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 22)
+	submissionsConfirmDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 23)
+	submissionsConfirmDeclarationsResponseFieldAttempts               = big.NewInt(1 << 24)
+	submissionsConfirmDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 25)
+	submissionsConfirmDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 26)
+	submissionsConfirmDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 27)
+	submissionsConfirmDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 28)
+	submissionsConfirmDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	submissionsConfirmDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	submissionsConfirmDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 31)
+	submissionsConfirmDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type SubmissionsConfirmDeclarationsResponse struct {
-	ID                     string                                             `json:"id" url:"id"`
-	Obligation             string                                             `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                              `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                             `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                            `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 SubmissionsConfirmDeclarationsResponseStatus       `json:"status" url:"status"`
-	FileName               string                                             `json:"fileName" url:"fileName"`
-	FileID                 *string                                            `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                            `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                            `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                            `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                            `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                            `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                              `json:"amendment" url:"amendment"`
-	Origin                 string                                             `json:"origin" url:"origin"`
-	TransportSystem        *string                                            `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *SubmissionsConfirmDeclarationsResponseEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                         `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                         `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                         `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                         `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                         `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                              `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                            `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                               `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                            `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                            `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                            `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                            `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                          `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                          `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                                 `json:"id" url:"id"`
+	Obligation             string                                                 `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                  `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                                 `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                                `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 SubmissionsConfirmDeclarationsResponseStatus           `json:"status" url:"status"`
+	FileName               string                                                 `json:"fileName" url:"fileName"`
+	FileID                 *string                                                `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                                `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                                `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                                `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                                `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                                `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                  `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                                `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *SubmissionsConfirmDeclarationsResponseCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                                 `json:"origin" url:"origin"`
+	TransportSystem        *string                                                `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *SubmissionsConfirmDeclarationsResponseEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                             `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                             `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                             `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                             `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                             `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                  `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                                `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                   `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                                `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                                `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                                `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                                `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                              `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                              `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -47165,6 +47215,20 @@ func (s *SubmissionsConfirmDeclarationsResponse) GetAmendment() int64 {
 		return 0
 	}
 	return s.Amendment
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetAuthorityRef() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityRef
+}
+
+func (s *SubmissionsConfirmDeclarationsResponse) GetCorrectionInput() *SubmissionsConfirmDeclarationsResponseCorrectionInput {
+	if s == nil {
+		return nil
+	}
+	return s.CorrectionInput
 }
 
 func (s *SubmissionsConfirmDeclarationsResponse) GetOrigin() string {
@@ -47398,6 +47462,20 @@ func (s *SubmissionsConfirmDeclarationsResponse) SetAmendment(amendment int64) {
 	s.require(submissionsConfirmDeclarationsResponseFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetAuthorityRef(authorityRef *string) {
+	s.AuthorityRef = authorityRef
+	s.require(submissionsConfirmDeclarationsResponseFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponse) SetCorrectionInput(correctionInput *SubmissionsConfirmDeclarationsResponseCorrectionInput) {
+	s.CorrectionInput = correctionInput
+	s.require(submissionsConfirmDeclarationsResponseFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubmissionsConfirmDeclarationsResponse) SetOrigin(origin string) {
@@ -47591,6 +47669,138 @@ func (s *SubmissionsConfirmDeclarationsResponse) String() string {
 	return fmt.Sprintf("%#v", s)
 }
 
+var (
+	submissionsConfirmDeclarationsResponseCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	submissionsConfirmDeclarationsResponseCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	submissionsConfirmDeclarationsResponseCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	submissionsConfirmDeclarationsResponseCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type SubmissionsConfirmDeclarationsResponseCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) GetReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Reason
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) GetReasonCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCode
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) GetAuthorityReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityReference
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) GetDiscoveredOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DiscoveredOn
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) SetReason(reason *string) {
+	s.Reason = reason
+	s.require(submissionsConfirmDeclarationsResponseCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) SetReasonCode(reasonCode *string) {
+	s.ReasonCode = reasonCode
+	s.require(submissionsConfirmDeclarationsResponseCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	s.AuthorityReference = authorityReference
+	s.require(submissionsConfirmDeclarationsResponseCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	s.DiscoveredOn = discoveredOn
+	s.require(submissionsConfirmDeclarationsResponseCorrectionInputFieldDiscoveredOn)
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsConfirmDeclarationsResponseCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsConfirmDeclarationsResponseCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsConfirmDeclarationsResponseCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsConfirmDeclarationsResponseCorrectionInput) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
 type SubmissionsConfirmDeclarationsResponseEnvironment string
 
 const (
@@ -47639,6 +47849,254 @@ func NewSubmissionsConfirmDeclarationsResponseStatusFromString(s string) (Submis
 
 func (s SubmissionsConfirmDeclarationsResponseStatus) Ptr() *SubmissionsConfirmDeclarationsResponseStatus {
 	return &s
+}
+
+var (
+	submissionsCorrectionPreviewDeclarationsResponseFieldNeeded      = big.NewInt(1 << 0)
+	submissionsCorrectionPreviewDeclarationsResponseFieldChangeCount = big.NewInt(1 << 1)
+	submissionsCorrectionPreviewDeclarationsResponseFieldChanges     = big.NewInt(1 << 2)
+)
+
+type SubmissionsCorrectionPreviewDeclarationsResponse struct {
+	Needed      bool                                                           `json:"needed" url:"needed"`
+	ChangeCount int64                                                          `json:"changeCount" url:"changeCount"`
+	Changes     []*SubmissionsCorrectionPreviewDeclarationsResponseChangesItem `json:"changes" url:"changes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) GetNeeded() bool {
+	if s == nil {
+		return false
+	}
+	return s.Needed
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) GetChangeCount() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ChangeCount
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) GetChanges() []*SubmissionsCorrectionPreviewDeclarationsResponseChangesItem {
+	if s == nil {
+		return nil
+	}
+	return s.Changes
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetNeeded sets the Needed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) SetNeeded(needed bool) {
+	s.Needed = needed
+	s.require(submissionsCorrectionPreviewDeclarationsResponseFieldNeeded)
+}
+
+// SetChangeCount sets the ChangeCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) SetChangeCount(changeCount int64) {
+	s.ChangeCount = changeCount
+	s.require(submissionsCorrectionPreviewDeclarationsResponseFieldChangeCount)
+}
+
+// SetChanges sets the Changes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) SetChanges(changes []*SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) {
+	s.Changes = changes
+	s.require(submissionsCorrectionPreviewDeclarationsResponseFieldChanges)
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsCorrectionPreviewDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsCorrectionPreviewDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsCorrectionPreviewDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldField   = big.NewInt(1 << 0)
+	submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldLine    = big.NewInt(1 << 1)
+	submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldFiled   = big.NewInt(1 << 2)
+	submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldCurrent = big.NewInt(1 << 3)
+)
+
+type SubmissionsCorrectionPreviewDeclarationsResponseChangesItem struct {
+	Field   *string `json:"field,omitempty" url:"field,omitempty"`
+	Line    *int64  `json:"line,omitempty" url:"line,omitempty"`
+	Filed   *string `json:"filed,omitempty" url:"filed,omitempty"`
+	Current *string `json:"current,omitempty" url:"current,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) GetField() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Field
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) GetLine() *int64 {
+	if s == nil {
+		return nil
+	}
+	return s.Line
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) GetFiled() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Filed
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) GetCurrent() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Current
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) SetField(field *string) {
+	s.Field = field
+	s.require(submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldField)
+}
+
+// SetLine sets the Line field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) SetLine(line *int64) {
+	s.Line = line
+	s.require(submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldLine)
+}
+
+// SetFiled sets the Filed field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) SetFiled(filed *string) {
+	s.Filed = filed
+	s.require(submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldFiled)
+}
+
+// SetCurrent sets the Current field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) SetCurrent(current *string) {
+	s.Current = current
+	s.require(submissionsCorrectionPreviewDeclarationsResponseChangesItemFieldCurrent)
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsCorrectionPreviewDeclarationsResponseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsCorrectionPreviewDeclarationsResponseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsCorrectionPreviewDeclarationsResponseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsCorrectionPreviewDeclarationsResponseChangesItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }
 
 type SubmissionsCreateDeclarationsRequestDataType string
@@ -47700,59 +48158,63 @@ var (
 	submissionsCreateDeclarationsResponseFieldPeriod                 = big.NewInt(1 << 11)
 	submissionsCreateDeclarationsResponseFieldDocumentKey            = big.NewInt(1 << 12)
 	submissionsCreateDeclarationsResponseFieldAmendment              = big.NewInt(1 << 13)
-	submissionsCreateDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 14)
-	submissionsCreateDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 15)
-	submissionsCreateDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 16)
-	submissionsCreateDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 17)
-	submissionsCreateDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 18)
-	submissionsCreateDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 19)
-	submissionsCreateDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 20)
-	submissionsCreateDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
-	submissionsCreateDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
-	submissionsCreateDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsCreateDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
-	submissionsCreateDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
-	submissionsCreateDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
-	submissionsCreateDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	submissionsCreateDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	submissionsCreateDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
-	submissionsCreateDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
-	submissionsCreateDeclarationsResponseFieldWarnings               = big.NewInt(1 << 31)
+	submissionsCreateDeclarationsResponseFieldAuthorityRef           = big.NewInt(1 << 14)
+	submissionsCreateDeclarationsResponseFieldCorrectionInput        = big.NewInt(1 << 15)
+	submissionsCreateDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 16)
+	submissionsCreateDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 17)
+	submissionsCreateDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 18)
+	submissionsCreateDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 19)
+	submissionsCreateDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 20)
+	submissionsCreateDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 21)
+	submissionsCreateDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 22)
+	submissionsCreateDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 23)
+	submissionsCreateDeclarationsResponseFieldAttempts               = big.NewInt(1 << 24)
+	submissionsCreateDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 25)
+	submissionsCreateDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 26)
+	submissionsCreateDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 27)
+	submissionsCreateDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 28)
+	submissionsCreateDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	submissionsCreateDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	submissionsCreateDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 31)
+	submissionsCreateDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 32)
+	submissionsCreateDeclarationsResponseFieldWarnings               = big.NewInt(1 << 33)
 )
 
 type SubmissionsCreateDeclarationsResponse struct {
-	ID                     string                                            `json:"id" url:"id"`
-	Obligation             string                                            `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                             `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                            `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                           `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 SubmissionsCreateDeclarationsResponseStatus       `json:"status" url:"status"`
-	FileName               string                                            `json:"fileName" url:"fileName"`
-	FileID                 *string                                           `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                           `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                           `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                           `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                           `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                           `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                             `json:"amendment" url:"amendment"`
-	Origin                 string                                            `json:"origin" url:"origin"`
-	TransportSystem        *string                                           `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *SubmissionsCreateDeclarationsResponseEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                        `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                        `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                        `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                        `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                        `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                             `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                           `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                              `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                           `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                           `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                           `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                           `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                         `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                         `json:"updatedAt" url:"updatedAt"`
-	Warnings               []string                                          `json:"warnings" url:"warnings"`
+	ID                     string                                                `json:"id" url:"id"`
+	Obligation             string                                                `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                 `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                                `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                               `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 SubmissionsCreateDeclarationsResponseStatus           `json:"status" url:"status"`
+	FileName               string                                                `json:"fileName" url:"fileName"`
+	FileID                 *string                                               `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                               `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                               `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                               `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                               `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                               `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                 `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                               `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *SubmissionsCreateDeclarationsResponseCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                                `json:"origin" url:"origin"`
+	TransportSystem        *string                                               `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *SubmissionsCreateDeclarationsResponseEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                            `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                            `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                            `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                            `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                            `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                 `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                               `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                  `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                               `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                               `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                               `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                               `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                             `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                             `json:"updatedAt" url:"updatedAt"`
+	Warnings               []string                                              `json:"warnings" url:"warnings"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -47857,6 +48319,20 @@ func (s *SubmissionsCreateDeclarationsResponse) GetAmendment() int64 {
 		return 0
 	}
 	return s.Amendment
+}
+
+func (s *SubmissionsCreateDeclarationsResponse) GetAuthorityRef() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityRef
+}
+
+func (s *SubmissionsCreateDeclarationsResponse) GetCorrectionInput() *SubmissionsCreateDeclarationsResponseCorrectionInput {
+	if s == nil {
+		return nil
+	}
+	return s.CorrectionInput
 }
 
 func (s *SubmissionsCreateDeclarationsResponse) GetOrigin() string {
@@ -48097,6 +48573,20 @@ func (s *SubmissionsCreateDeclarationsResponse) SetAmendment(amendment int64) {
 	s.require(submissionsCreateDeclarationsResponseFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCreateDeclarationsResponse) SetAuthorityRef(authorityRef *string) {
+	s.AuthorityRef = authorityRef
+	s.require(submissionsCreateDeclarationsResponseFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCreateDeclarationsResponse) SetCorrectionInput(correctionInput *SubmissionsCreateDeclarationsResponseCorrectionInput) {
+	s.CorrectionInput = correctionInput
+	s.require(submissionsCreateDeclarationsResponseFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubmissionsCreateDeclarationsResponse) SetOrigin(origin string) {
@@ -48283,6 +48773,138 @@ func (s *SubmissionsCreateDeclarationsResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (s *SubmissionsCreateDeclarationsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	submissionsCreateDeclarationsResponseCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	submissionsCreateDeclarationsResponseCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	submissionsCreateDeclarationsResponseCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	submissionsCreateDeclarationsResponseCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type SubmissionsCreateDeclarationsResponseCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) GetReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Reason
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) GetReasonCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCode
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) GetAuthorityReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityReference
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) GetDiscoveredOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DiscoveredOn
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) SetReason(reason *string) {
+	s.Reason = reason
+	s.require(submissionsCreateDeclarationsResponseCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) SetReasonCode(reasonCode *string) {
+	s.ReasonCode = reasonCode
+	s.require(submissionsCreateDeclarationsResponseCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	s.AuthorityReference = authorityReference
+	s.require(submissionsCreateDeclarationsResponseCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	s.DiscoveredOn = discoveredOn
+	s.require(submissionsCreateDeclarationsResponseCorrectionInputFieldDiscoveredOn)
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsCreateDeclarationsResponseCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsCreateDeclarationsResponseCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsCreateDeclarationsResponseCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsCreateDeclarationsResponseCorrectionInput) String() string {
 	if s == nil {
 		return "<nil>"
 	}
@@ -48965,57 +49587,65 @@ var (
 	submissionsListDeclarationsResponseRowsItemFieldPeriod                 = big.NewInt(1 << 11)
 	submissionsListDeclarationsResponseRowsItemFieldDocumentKey            = big.NewInt(1 << 12)
 	submissionsListDeclarationsResponseRowsItemFieldAmendment              = big.NewInt(1 << 13)
-	submissionsListDeclarationsResponseRowsItemFieldOrigin                 = big.NewInt(1 << 14)
-	submissionsListDeclarationsResponseRowsItemFieldTransportSystem        = big.NewInt(1 << 15)
-	submissionsListDeclarationsResponseRowsItemFieldEnvironment            = big.NewInt(1 << 16)
-	submissionsListDeclarationsResponseRowsItemFieldSubmittedAt            = big.NewInt(1 << 17)
-	submissionsListDeclarationsResponseRowsItemFieldAcceptedAt             = big.NewInt(1 << 18)
-	submissionsListDeclarationsResponseRowsItemFieldRejectedAt             = big.NewInt(1 << 19)
-	submissionsListDeclarationsResponseRowsItemFieldCheckedAt              = big.NewInt(1 << 20)
-	submissionsListDeclarationsResponseRowsItemFieldNextCheckAt            = big.NewInt(1 << 21)
-	submissionsListDeclarationsResponseRowsItemFieldAttempts               = big.NewInt(1 << 22)
-	submissionsListDeclarationsResponseRowsItemFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsListDeclarationsResponseRowsItemFieldConfirmationPending    = big.NewInt(1 << 24)
-	submissionsListDeclarationsResponseRowsItemFieldSentSha256             = big.NewInt(1 << 25)
-	submissionsListDeclarationsResponseRowsItemFieldCertificateFingerprint = big.NewInt(1 << 26)
-	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	submissionsListDeclarationsResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 29)
-	submissionsListDeclarationsResponseRowsItemFieldUpdatedAt              = big.NewInt(1 << 30)
+	submissionsListDeclarationsResponseRowsItemFieldAuthorityRef           = big.NewInt(1 << 14)
+	submissionsListDeclarationsResponseRowsItemFieldCorrectionInput        = big.NewInt(1 << 15)
+	submissionsListDeclarationsResponseRowsItemFieldOrigin                 = big.NewInt(1 << 16)
+	submissionsListDeclarationsResponseRowsItemFieldTransportSystem        = big.NewInt(1 << 17)
+	submissionsListDeclarationsResponseRowsItemFieldEnvironment            = big.NewInt(1 << 18)
+	submissionsListDeclarationsResponseRowsItemFieldSubmittedAt            = big.NewInt(1 << 19)
+	submissionsListDeclarationsResponseRowsItemFieldAcceptedAt             = big.NewInt(1 << 20)
+	submissionsListDeclarationsResponseRowsItemFieldRejectedAt             = big.NewInt(1 << 21)
+	submissionsListDeclarationsResponseRowsItemFieldCheckedAt              = big.NewInt(1 << 22)
+	submissionsListDeclarationsResponseRowsItemFieldNextCheckAt            = big.NewInt(1 << 23)
+	submissionsListDeclarationsResponseRowsItemFieldAttempts               = big.NewInt(1 << 24)
+	submissionsListDeclarationsResponseRowsItemFieldDeliveryError          = big.NewInt(1 << 25)
+	submissionsListDeclarationsResponseRowsItemFieldConfirmationPending    = big.NewInt(1 << 26)
+	submissionsListDeclarationsResponseRowsItemFieldSentSha256             = big.NewInt(1 << 27)
+	submissionsListDeclarationsResponseRowsItemFieldCertificateFingerprint = big.NewInt(1 << 28)
+	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	submissionsListDeclarationsResponseRowsItemFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	submissionsListDeclarationsResponseRowsItemFieldCreatedAt              = big.NewInt(1 << 31)
+	submissionsListDeclarationsResponseRowsItemFieldUpdatedAt              = big.NewInt(1 << 32)
+	submissionsListDeclarationsResponseRowsItemFieldCanAmend               = big.NewInt(1 << 33)
+	submissionsListDeclarationsResponseRowsItemFieldCorrection             = big.NewInt(1 << 34)
 )
 
 type SubmissionsListDeclarationsResponseRowsItem struct {
-	ID                     string                                                  `json:"id" url:"id"`
-	Obligation             string                                                  `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                                   `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                                  `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                                 `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 SubmissionsListDeclarationsResponseRowsItemStatus       `json:"status" url:"status"`
-	FileName               string                                                  `json:"fileName" url:"fileName"`
-	FileID                 *string                                                 `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                                 `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                                 `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                                 `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                                 `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                                 `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                                   `json:"amendment" url:"amendment"`
-	Origin                 string                                                  `json:"origin" url:"origin"`
-	TransportSystem        *string                                                 `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *SubmissionsListDeclarationsResponseRowsItemEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                              `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                              `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                              `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                              `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                              `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                                   `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                                 `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                                    `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                                 `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                                 `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                                 `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                                 `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                               `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                                      `json:"id" url:"id"`
+	Obligation             string                                                      `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                       `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                                      `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                                     `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 SubmissionsListDeclarationsResponseRowsItemStatus           `json:"status" url:"status"`
+	FileName               string                                                      `json:"fileName" url:"fileName"`
+	FileID                 *string                                                     `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                                     `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                                     `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                                     `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                                     `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                                     `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                       `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                                     `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *SubmissionsListDeclarationsResponseRowsItemCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                                      `json:"origin" url:"origin"`
+	TransportSystem        *string                                                     `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *SubmissionsListDeclarationsResponseRowsItemEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                                  `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                                  `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                                  `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                                  `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                                  `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                       `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                                     `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                        `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                                     `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                                     `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                                     `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                                     `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                                   `json:"updatedAt" url:"updatedAt"`
+	CanAmend               bool                                                        `json:"canAmend" url:"canAmend"`
+	Correction             *SubmissionsListDeclarationsResponseRowsItemCorrection      `json:"correction,omitempty" url:"correction,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -49120,6 +49750,20 @@ func (s *SubmissionsListDeclarationsResponseRowsItem) GetAmendment() int64 {
 		return 0
 	}
 	return s.Amendment
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItem) GetAuthorityRef() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityRef
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItem) GetCorrectionInput() *SubmissionsListDeclarationsResponseRowsItemCorrectionInput {
+	if s == nil {
+		return nil
+	}
+	return s.CorrectionInput
 }
 
 func (s *SubmissionsListDeclarationsResponseRowsItem) GetOrigin() string {
@@ -49241,6 +49885,20 @@ func (s *SubmissionsListDeclarationsResponseRowsItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+func (s *SubmissionsListDeclarationsResponseRowsItem) GetCanAmend() bool {
+	if s == nil {
+		return false
+	}
+	return s.CanAmend
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItem) GetCorrection() *SubmissionsListDeclarationsResponseRowsItemCorrection {
+	if s == nil {
+		return nil
+	}
+	return s.Correction
+}
+
 func (s *SubmissionsListDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
 	if s == nil {
 		return nil
@@ -49351,6 +50009,20 @@ func (s *SubmissionsListDeclarationsResponseRowsItem) SetDocumentKey(documentKey
 func (s *SubmissionsListDeclarationsResponseRowsItem) SetAmendment(amendment int64) {
 	s.Amendment = amendment
 	s.require(submissionsListDeclarationsResponseRowsItemFieldAmendment)
+}
+
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItem) SetAuthorityRef(authorityRef *string) {
+	s.AuthorityRef = authorityRef
+	s.require(submissionsListDeclarationsResponseRowsItemFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItem) SetCorrectionInput(correctionInput *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) {
+	s.CorrectionInput = correctionInput
+	s.require(submissionsListDeclarationsResponseRowsItemFieldCorrectionInput)
 }
 
 // SetOrigin sets the Origin field and marks it as non-optional;
@@ -49472,6 +50144,20 @@ func (s *SubmissionsListDeclarationsResponseRowsItem) SetUpdatedAt(updatedAt tim
 	s.require(submissionsListDeclarationsResponseRowsItemFieldUpdatedAt)
 }
 
+// SetCanAmend sets the CanAmend field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItem) SetCanAmend(canAmend bool) {
+	s.CanAmend = canAmend
+	s.require(submissionsListDeclarationsResponseRowsItemFieldCanAmend)
+}
+
+// SetCorrection sets the Correction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItem) SetCorrection(correction *SubmissionsListDeclarationsResponseRowsItemCorrection) {
+	s.Correction = correction
+	s.require(submissionsListDeclarationsResponseRowsItemFieldCorrection)
+}
+
 func (s *SubmissionsListDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
 	type embed SubmissionsListDeclarationsResponseRowsItem
 	var unmarshaler = struct {
@@ -49544,6 +50230,426 @@ func (s *SubmissionsListDeclarationsResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	submissionsListDeclarationsResponseRowsItemCorrectionFieldRequired    = big.NewInt(1 << 0)
+	submissionsListDeclarationsResponseRowsItemCorrectionFieldOptional    = big.NewInt(1 << 1)
+	submissionsListDeclarationsResponseRowsItemCorrectionFieldReasonCodes = big.NewInt(1 << 2)
+	submissionsListDeclarationsResponseRowsItemCorrectionFieldCarry       = big.NewInt(1 << 3)
+)
+
+type SubmissionsListDeclarationsResponseRowsItemCorrection struct {
+	Required    []SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem     `json:"required" url:"required"`
+	Optional    []SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem     `json:"optional" url:"optional"`
+	ReasonCodes []*SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem `json:"reasonCodes" url:"reasonCodes"`
+	Carry       bool                                                                    `json:"carry" url:"carry"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) GetRequired() []SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem {
+	if s == nil {
+		return nil
+	}
+	return s.Required
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) GetOptional() []SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem {
+	if s == nil {
+		return nil
+	}
+	return s.Optional
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) GetReasonCodes() []*SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCodes
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) GetCarry() bool {
+	if s == nil {
+		return false
+	}
+	return s.Carry
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetRequired sets the Required field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) SetRequired(required []SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem) {
+	s.Required = required
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionFieldRequired)
+}
+
+// SetOptional sets the Optional field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) SetOptional(optional []SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem) {
+	s.Optional = optional
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionFieldOptional)
+}
+
+// SetReasonCodes sets the ReasonCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) SetReasonCodes(reasonCodes []*SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) {
+	s.ReasonCodes = reasonCodes
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionFieldReasonCodes)
+}
+
+// SetCarry sets the Carry field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) SetCarry(carry bool) {
+	s.Carry = carry
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionFieldCarry)
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsListDeclarationsResponseRowsItemCorrection
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsListDeclarationsResponseRowsItemCorrection(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsListDeclarationsResponseRowsItemCorrection
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrection) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	submissionsListDeclarationsResponseRowsItemCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	submissionsListDeclarationsResponseRowsItemCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	submissionsListDeclarationsResponseRowsItemCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	submissionsListDeclarationsResponseRowsItemCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type SubmissionsListDeclarationsResponseRowsItemCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) GetReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Reason
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) GetReasonCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCode
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) GetAuthorityReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityReference
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) GetDiscoveredOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DiscoveredOn
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) SetReason(reason *string) {
+	s.Reason = reason
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) SetReasonCode(reasonCode *string) {
+	s.ReasonCode = reasonCode
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	s.AuthorityReference = authorityReference
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	s.DiscoveredOn = discoveredOn
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionInputFieldDiscoveredOn)
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsListDeclarationsResponseRowsItemCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsListDeclarationsResponseRowsItemCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsListDeclarationsResponseRowsItemCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionInput) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem string
+
+const (
+	SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemReason             SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem = "reason"
+	SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemReasonCode         SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem = "reasonCode"
+	SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemAuthorityReference SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem = "authorityReference"
+	SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemDiscoveredOn       SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem = "discoveredOn"
+)
+
+func NewSubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemFromString(s string) (SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem, error) {
+	switch s {
+	case "reason":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemReason, nil
+	case "reasonCode":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemReasonCode, nil
+	case "authorityReference":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemAuthorityReference, nil
+	case "discoveredOn":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItemDiscoveredOn, nil
+	}
+	var t SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem) Ptr() *SubmissionsListDeclarationsResponseRowsItemCorrectionOptionalItem {
+	return &s
+}
+
+var (
+	submissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItemFieldCode  = big.NewInt(1 << 0)
+	submissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItemFieldLabel = big.NewInt(1 << 1)
+)
+
+type SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem struct {
+	Code  string `json:"code" url:"code"`
+	Label string `json:"label" url:"label"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) GetCode() string {
+	if s == nil {
+		return ""
+	}
+	return s.Code
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) GetLabel() string {
+	if s == nil {
+		return ""
+	}
+	return s.Label
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) SetCode(code string) {
+	s.Code = code
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItemFieldCode)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) SetLabel(label string) {
+	s.Label = label
+	s.require(submissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItemFieldLabel)
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsListDeclarationsResponseRowsItemCorrectionReasonCodesItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem string
+
+const (
+	SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemReason             SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem = "reason"
+	SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemReasonCode         SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem = "reasonCode"
+	SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemAuthorityReference SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem = "authorityReference"
+	SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemDiscoveredOn       SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem = "discoveredOn"
+)
+
+func NewSubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemFromString(s string) (SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem, error) {
+	switch s {
+	case "reason":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemReason, nil
+	case "reasonCode":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemReasonCode, nil
+	case "authorityReference":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemAuthorityReference, nil
+	case "discoveredOn":
+		return SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItemDiscoveredOn, nil
+	}
+	var t SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem) Ptr() *SubmissionsListDeclarationsResponseRowsItemCorrectionRequiredItem {
+	return &s
 }
 
 type SubmissionsListDeclarationsResponseRowsItemEnvironment string
@@ -49636,57 +50742,61 @@ var (
 	submissionsMarkDeclarationsResponseFieldPeriod                 = big.NewInt(1 << 11)
 	submissionsMarkDeclarationsResponseFieldDocumentKey            = big.NewInt(1 << 12)
 	submissionsMarkDeclarationsResponseFieldAmendment              = big.NewInt(1 << 13)
-	submissionsMarkDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 14)
-	submissionsMarkDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 15)
-	submissionsMarkDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 16)
-	submissionsMarkDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 17)
-	submissionsMarkDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 18)
-	submissionsMarkDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 19)
-	submissionsMarkDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 20)
-	submissionsMarkDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
-	submissionsMarkDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
-	submissionsMarkDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsMarkDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
-	submissionsMarkDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
-	submissionsMarkDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
-	submissionsMarkDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	submissionsMarkDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	submissionsMarkDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
-	submissionsMarkDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
+	submissionsMarkDeclarationsResponseFieldAuthorityRef           = big.NewInt(1 << 14)
+	submissionsMarkDeclarationsResponseFieldCorrectionInput        = big.NewInt(1 << 15)
+	submissionsMarkDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 16)
+	submissionsMarkDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 17)
+	submissionsMarkDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 18)
+	submissionsMarkDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 19)
+	submissionsMarkDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 20)
+	submissionsMarkDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 21)
+	submissionsMarkDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 22)
+	submissionsMarkDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 23)
+	submissionsMarkDeclarationsResponseFieldAttempts               = big.NewInt(1 << 24)
+	submissionsMarkDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 25)
+	submissionsMarkDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 26)
+	submissionsMarkDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 27)
+	submissionsMarkDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 28)
+	submissionsMarkDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	submissionsMarkDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	submissionsMarkDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 31)
+	submissionsMarkDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type SubmissionsMarkDeclarationsResponse struct {
-	ID                     string                                          `json:"id" url:"id"`
-	Obligation             string                                          `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                           `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                          `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                         `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 SubmissionsMarkDeclarationsResponseStatus       `json:"status" url:"status"`
-	FileName               string                                          `json:"fileName" url:"fileName"`
-	FileID                 *string                                         `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                         `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                         `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                         `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                         `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                         `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                           `json:"amendment" url:"amendment"`
-	Origin                 string                                          `json:"origin" url:"origin"`
-	TransportSystem        *string                                         `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *SubmissionsMarkDeclarationsResponseEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                      `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                      `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                      `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                      `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                      `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                           `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                         `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                            `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                         `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                         `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                         `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                         `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                       `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                       `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                              `json:"id" url:"id"`
+	Obligation             string                                              `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                               `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                              `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                             `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 SubmissionsMarkDeclarationsResponseStatus           `json:"status" url:"status"`
+	FileName               string                                              `json:"fileName" url:"fileName"`
+	FileID                 *string                                             `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                             `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                             `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                             `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                             `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                             `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                               `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                             `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *SubmissionsMarkDeclarationsResponseCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                              `json:"origin" url:"origin"`
+	TransportSystem        *string                                             `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *SubmissionsMarkDeclarationsResponseEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                          `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                          `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                          `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                          `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                          `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                               `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                             `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                             `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                             `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                             `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                             `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                           `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                           `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -49791,6 +50901,20 @@ func (s *SubmissionsMarkDeclarationsResponse) GetAmendment() int64 {
 		return 0
 	}
 	return s.Amendment
+}
+
+func (s *SubmissionsMarkDeclarationsResponse) GetAuthorityRef() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityRef
+}
+
+func (s *SubmissionsMarkDeclarationsResponse) GetCorrectionInput() *SubmissionsMarkDeclarationsResponseCorrectionInput {
+	if s == nil {
+		return nil
+	}
+	return s.CorrectionInput
 }
 
 func (s *SubmissionsMarkDeclarationsResponse) GetOrigin() string {
@@ -50024,6 +51148,20 @@ func (s *SubmissionsMarkDeclarationsResponse) SetAmendment(amendment int64) {
 	s.require(submissionsMarkDeclarationsResponseFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsMarkDeclarationsResponse) SetAuthorityRef(authorityRef *string) {
+	s.AuthorityRef = authorityRef
+	s.require(submissionsMarkDeclarationsResponseFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsMarkDeclarationsResponse) SetCorrectionInput(correctionInput *SubmissionsMarkDeclarationsResponseCorrectionInput) {
+	s.CorrectionInput = correctionInput
+	s.require(submissionsMarkDeclarationsResponseFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubmissionsMarkDeclarationsResponse) SetOrigin(origin string) {
@@ -50217,6 +51355,138 @@ func (s *SubmissionsMarkDeclarationsResponse) String() string {
 	return fmt.Sprintf("%#v", s)
 }
 
+var (
+	submissionsMarkDeclarationsResponseCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	submissionsMarkDeclarationsResponseCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	submissionsMarkDeclarationsResponseCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	submissionsMarkDeclarationsResponseCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type SubmissionsMarkDeclarationsResponseCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) GetReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Reason
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) GetReasonCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCode
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) GetAuthorityReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityReference
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) GetDiscoveredOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DiscoveredOn
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) SetReason(reason *string) {
+	s.Reason = reason
+	s.require(submissionsMarkDeclarationsResponseCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) SetReasonCode(reasonCode *string) {
+	s.ReasonCode = reasonCode
+	s.require(submissionsMarkDeclarationsResponseCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	s.AuthorityReference = authorityReference
+	s.require(submissionsMarkDeclarationsResponseCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	s.DiscoveredOn = discoveredOn
+	s.require(submissionsMarkDeclarationsResponseCorrectionInputFieldDiscoveredOn)
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsMarkDeclarationsResponseCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsMarkDeclarationsResponseCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsMarkDeclarationsResponseCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsMarkDeclarationsResponseCorrectionInput) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
 type SubmissionsMarkDeclarationsResponseEnvironment string
 
 const (
@@ -50282,57 +51552,61 @@ var (
 	submissionsRetryDeclarationsResponseFieldPeriod                 = big.NewInt(1 << 11)
 	submissionsRetryDeclarationsResponseFieldDocumentKey            = big.NewInt(1 << 12)
 	submissionsRetryDeclarationsResponseFieldAmendment              = big.NewInt(1 << 13)
-	submissionsRetryDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 14)
-	submissionsRetryDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 15)
-	submissionsRetryDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 16)
-	submissionsRetryDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 17)
-	submissionsRetryDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 18)
-	submissionsRetryDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 19)
-	submissionsRetryDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 20)
-	submissionsRetryDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 21)
-	submissionsRetryDeclarationsResponseFieldAttempts               = big.NewInt(1 << 22)
-	submissionsRetryDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 23)
-	submissionsRetryDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 24)
-	submissionsRetryDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 25)
-	submissionsRetryDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 26)
-	submissionsRetryDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 27)
-	submissionsRetryDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 28)
-	submissionsRetryDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 29)
-	submissionsRetryDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 30)
+	submissionsRetryDeclarationsResponseFieldAuthorityRef           = big.NewInt(1 << 14)
+	submissionsRetryDeclarationsResponseFieldCorrectionInput        = big.NewInt(1 << 15)
+	submissionsRetryDeclarationsResponseFieldOrigin                 = big.NewInt(1 << 16)
+	submissionsRetryDeclarationsResponseFieldTransportSystem        = big.NewInt(1 << 17)
+	submissionsRetryDeclarationsResponseFieldEnvironment            = big.NewInt(1 << 18)
+	submissionsRetryDeclarationsResponseFieldSubmittedAt            = big.NewInt(1 << 19)
+	submissionsRetryDeclarationsResponseFieldAcceptedAt             = big.NewInt(1 << 20)
+	submissionsRetryDeclarationsResponseFieldRejectedAt             = big.NewInt(1 << 21)
+	submissionsRetryDeclarationsResponseFieldCheckedAt              = big.NewInt(1 << 22)
+	submissionsRetryDeclarationsResponseFieldNextCheckAt            = big.NewInt(1 << 23)
+	submissionsRetryDeclarationsResponseFieldAttempts               = big.NewInt(1 << 24)
+	submissionsRetryDeclarationsResponseFieldDeliveryError          = big.NewInt(1 << 25)
+	submissionsRetryDeclarationsResponseFieldConfirmationPending    = big.NewInt(1 << 26)
+	submissionsRetryDeclarationsResponseFieldSentSha256             = big.NewInt(1 << 27)
+	submissionsRetryDeclarationsResponseFieldCertificateFingerprint = big.NewInt(1 << 28)
+	submissionsRetryDeclarationsResponseFieldSubmittedByActorType   = big.NewInt(1 << 29)
+	submissionsRetryDeclarationsResponseFieldSubmittedByActorID     = big.NewInt(1 << 30)
+	submissionsRetryDeclarationsResponseFieldCreatedAt              = big.NewInt(1 << 31)
+	submissionsRetryDeclarationsResponseFieldUpdatedAt              = big.NewInt(1 << 32)
 )
 
 type SubmissionsRetryDeclarationsResponse struct {
-	ID                     string                                           `json:"id" url:"id"`
-	Obligation             string                                           `json:"obligation" url:"obligation"`
-	PeriodYear             int64                                            `json:"periodYear" url:"periodYear"`
-	PeriodMonth            *int64                                           `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
-	Variant                *string                                          `json:"variant,omitempty" url:"variant,omitempty"`
-	Status                 SubmissionsRetryDeclarationsResponseStatus       `json:"status" url:"status"`
-	FileName               string                                           `json:"fileName" url:"fileName"`
-	FileID                 *string                                          `json:"fileId,omitempty" url:"fileId,omitempty"`
-	ExternalRef            *string                                          `json:"externalRef,omitempty" url:"externalRef,omitempty"`
-	Message                *string                                          `json:"message,omitempty" url:"message,omitempty"`
-	RuleKey                *string                                          `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
-	Period                 *string                                          `json:"period,omitempty" url:"period,omitempty"`
-	DocumentKey            *string                                          `json:"documentKey,omitempty" url:"documentKey,omitempty"`
-	Amendment              int64                                            `json:"amendment" url:"amendment"`
-	Origin                 string                                           `json:"origin" url:"origin"`
-	TransportSystem        *string                                          `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
-	Environment            *SubmissionsRetryDeclarationsResponseEnvironment `json:"environment,omitempty" url:"environment,omitempty"`
-	SubmittedAt            *time.Time                                       `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
-	AcceptedAt             *time.Time                                       `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
-	RejectedAt             *time.Time                                       `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
-	CheckedAt              *time.Time                                       `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
-	NextCheckAt            *time.Time                                       `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
-	Attempts               int64                                            `json:"attempts" url:"attempts"`
-	DeliveryError          *string                                          `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
-	ConfirmationPending    bool                                             `json:"confirmationPending" url:"confirmationPending"`
-	SentSha256             *string                                          `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
-	CertificateFingerprint *string                                          `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
-	SubmittedByActorType   *string                                          `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
-	SubmittedByActorID     *string                                          `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
-	CreatedAt              time.Time                                        `json:"createdAt" url:"createdAt"`
-	UpdatedAt              time.Time                                        `json:"updatedAt" url:"updatedAt"`
+	ID                     string                                               `json:"id" url:"id"`
+	Obligation             string                                               `json:"obligation" url:"obligation"`
+	PeriodYear             int64                                                `json:"periodYear" url:"periodYear"`
+	PeriodMonth            *int64                                               `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	Variant                *string                                              `json:"variant,omitempty" url:"variant,omitempty"`
+	Status                 SubmissionsRetryDeclarationsResponseStatus           `json:"status" url:"status"`
+	FileName               string                                               `json:"fileName" url:"fileName"`
+	FileID                 *string                                              `json:"fileId,omitempty" url:"fileId,omitempty"`
+	ExternalRef            *string                                              `json:"externalRef,omitempty" url:"externalRef,omitempty"`
+	Message                *string                                              `json:"message,omitempty" url:"message,omitempty"`
+	RuleKey                *string                                              `json:"ruleKey,omitempty" url:"ruleKey,omitempty"`
+	Period                 *string                                              `json:"period,omitempty" url:"period,omitempty"`
+	DocumentKey            *string                                              `json:"documentKey,omitempty" url:"documentKey,omitempty"`
+	Amendment              int64                                                `json:"amendment" url:"amendment"`
+	AuthorityRef           *string                                              `json:"authorityRef,omitempty" url:"authorityRef,omitempty"`
+	CorrectionInput        *SubmissionsRetryDeclarationsResponseCorrectionInput `json:"correctionInput,omitempty" url:"correctionInput,omitempty"`
+	Origin                 string                                               `json:"origin" url:"origin"`
+	TransportSystem        *string                                              `json:"transportSystem,omitempty" url:"transportSystem,omitempty"`
+	Environment            *SubmissionsRetryDeclarationsResponseEnvironment     `json:"environment,omitempty" url:"environment,omitempty"`
+	SubmittedAt            *time.Time                                           `json:"submittedAt,omitempty" url:"submittedAt,omitempty"`
+	AcceptedAt             *time.Time                                           `json:"acceptedAt,omitempty" url:"acceptedAt,omitempty"`
+	RejectedAt             *time.Time                                           `json:"rejectedAt,omitempty" url:"rejectedAt,omitempty"`
+	CheckedAt              *time.Time                                           `json:"checkedAt,omitempty" url:"checkedAt,omitempty"`
+	NextCheckAt            *time.Time                                           `json:"nextCheckAt,omitempty" url:"nextCheckAt,omitempty"`
+	Attempts               int64                                                `json:"attempts" url:"attempts"`
+	DeliveryError          *string                                              `json:"deliveryError,omitempty" url:"deliveryError,omitempty"`
+	ConfirmationPending    bool                                                 `json:"confirmationPending" url:"confirmationPending"`
+	SentSha256             *string                                              `json:"sentSha256,omitempty" url:"sentSha256,omitempty"`
+	CertificateFingerprint *string                                              `json:"certificateFingerprint,omitempty" url:"certificateFingerprint,omitempty"`
+	SubmittedByActorType   *string                                              `json:"submittedByActorType,omitempty" url:"submittedByActorType,omitempty"`
+	SubmittedByActorID     *string                                              `json:"submittedByActorId,omitempty" url:"submittedByActorId,omitempty"`
+	CreatedAt              time.Time                                            `json:"createdAt" url:"createdAt"`
+	UpdatedAt              time.Time                                            `json:"updatedAt" url:"updatedAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -50437,6 +51711,20 @@ func (s *SubmissionsRetryDeclarationsResponse) GetAmendment() int64 {
 		return 0
 	}
 	return s.Amendment
+}
+
+func (s *SubmissionsRetryDeclarationsResponse) GetAuthorityRef() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityRef
+}
+
+func (s *SubmissionsRetryDeclarationsResponse) GetCorrectionInput() *SubmissionsRetryDeclarationsResponseCorrectionInput {
+	if s == nil {
+		return nil
+	}
+	return s.CorrectionInput
 }
 
 func (s *SubmissionsRetryDeclarationsResponse) GetOrigin() string {
@@ -50670,6 +51958,20 @@ func (s *SubmissionsRetryDeclarationsResponse) SetAmendment(amendment int64) {
 	s.require(submissionsRetryDeclarationsResponseFieldAmendment)
 }
 
+// SetAuthorityRef sets the AuthorityRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsRetryDeclarationsResponse) SetAuthorityRef(authorityRef *string) {
+	s.AuthorityRef = authorityRef
+	s.require(submissionsRetryDeclarationsResponseFieldAuthorityRef)
+}
+
+// SetCorrectionInput sets the CorrectionInput field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsRetryDeclarationsResponse) SetCorrectionInput(correctionInput *SubmissionsRetryDeclarationsResponseCorrectionInput) {
+	s.CorrectionInput = correctionInput
+	s.require(submissionsRetryDeclarationsResponseFieldCorrectionInput)
+}
+
 // SetOrigin sets the Origin field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (s *SubmissionsRetryDeclarationsResponse) SetOrigin(origin string) {
@@ -50849,6 +52151,138 @@ func (s *SubmissionsRetryDeclarationsResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (s *SubmissionsRetryDeclarationsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	submissionsRetryDeclarationsResponseCorrectionInputFieldReason             = big.NewInt(1 << 0)
+	submissionsRetryDeclarationsResponseCorrectionInputFieldReasonCode         = big.NewInt(1 << 1)
+	submissionsRetryDeclarationsResponseCorrectionInputFieldAuthorityReference = big.NewInt(1 << 2)
+	submissionsRetryDeclarationsResponseCorrectionInputFieldDiscoveredOn       = big.NewInt(1 << 3)
+)
+
+type SubmissionsRetryDeclarationsResponseCorrectionInput struct {
+	Reason             *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReasonCode         *string `json:"reasonCode,omitempty" url:"reasonCode,omitempty"`
+	AuthorityReference *string `json:"authorityReference,omitempty" url:"authorityReference,omitempty"`
+	DiscoveredOn       *string `json:"discoveredOn,omitempty" url:"discoveredOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) GetReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Reason
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) GetReasonCode() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonCode
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) GetAuthorityReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.AuthorityReference
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) GetDiscoveredOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.DiscoveredOn
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) SetReason(reason *string) {
+	s.Reason = reason
+	s.require(submissionsRetryDeclarationsResponseCorrectionInputFieldReason)
+}
+
+// SetReasonCode sets the ReasonCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) SetReasonCode(reasonCode *string) {
+	s.ReasonCode = reasonCode
+	s.require(submissionsRetryDeclarationsResponseCorrectionInputFieldReasonCode)
+}
+
+// SetAuthorityReference sets the AuthorityReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) SetAuthorityReference(authorityReference *string) {
+	s.AuthorityReference = authorityReference
+	s.require(submissionsRetryDeclarationsResponseCorrectionInputFieldAuthorityReference)
+}
+
+// SetDiscoveredOn sets the DiscoveredOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) SetDiscoveredOn(discoveredOn *string) {
+	s.DiscoveredOn = discoveredOn
+	s.require(submissionsRetryDeclarationsResponseCorrectionInputFieldDiscoveredOn)
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmissionsRetryDeclarationsResponseCorrectionInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmissionsRetryDeclarationsResponseCorrectionInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) MarshalJSON() ([]byte, error) {
+	type embed SubmissionsRetryDeclarationsResponseCorrectionInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmissionsRetryDeclarationsResponseCorrectionInput) String() string {
 	if s == nil {
 		return "<nil>"
 	}
@@ -52807,4 +54241,502 @@ func NewTaxPaymentsUpdateDeclarationsResponseKindFromString(s string) (TaxPaymen
 
 func (t TaxPaymentsUpdateDeclarationsResponseKind) Ptr() *TaxPaymentsUpdateDeclarationsResponseKind {
 	return &t
+}
+
+var (
+	vatProrataGetDeclarationsResponseFieldFiscalYear = big.NewInt(1 << 0)
+	vatProrataGetDeclarationsResponseFieldPercent    = big.NewInt(1 << 1)
+)
+
+type VatProrataGetDeclarationsResponse struct {
+	FiscalYear int64  `json:"fiscalYear" url:"fiscalYear"`
+	Percent    string `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatProrataGetDeclarationsResponse) GetFiscalYear() int64 {
+	if v == nil {
+		return 0
+	}
+	return v.FiscalYear
+}
+
+func (v *VatProrataGetDeclarationsResponse) GetPercent() string {
+	if v == nil {
+		return ""
+	}
+	return v.Percent
+}
+
+func (v *VatProrataGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatProrataGetDeclarationsResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataGetDeclarationsResponse) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataGetDeclarationsResponseFieldFiscalYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataGetDeclarationsResponse) SetPercent(percent string) {
+	v.Percent = percent
+	v.require(vatProrataGetDeclarationsResponseFieldPercent)
+}
+
+func (v *VatProrataGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataGetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatProrataGetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatProrataGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed VatProrataGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatProrataGetDeclarationsResponse) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatProrataListDeclarationsResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type VatProrataListDeclarationsResponse struct {
+	Rows []*VatProrataListDeclarationsResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatProrataListDeclarationsResponse) GetRows() []*VatProrataListDeclarationsResponseRowsItem {
+	if v == nil {
+		return nil
+	}
+	return v.Rows
+}
+
+func (v *VatProrataListDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatProrataListDeclarationsResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataListDeclarationsResponse) SetRows(rows []*VatProrataListDeclarationsResponseRowsItem) {
+	v.Rows = rows
+	v.require(vatProrataListDeclarationsResponseFieldRows)
+}
+
+func (v *VatProrataListDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataListDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatProrataListDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatProrataListDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed VatProrataListDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatProrataListDeclarationsResponse) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatProrataListDeclarationsResponseRowsItemFieldFiscalYear = big.NewInt(1 << 0)
+	vatProrataListDeclarationsResponseRowsItemFieldPercent    = big.NewInt(1 << 1)
+)
+
+type VatProrataListDeclarationsResponseRowsItem struct {
+	FiscalYear int64  `json:"fiscalYear" url:"fiscalYear"`
+	Percent    string `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatProrataListDeclarationsResponseRowsItem) GetFiscalYear() int64 {
+	if v == nil {
+		return 0
+	}
+	return v.FiscalYear
+}
+
+func (v *VatProrataListDeclarationsResponseRowsItem) GetPercent() string {
+	if v == nil {
+		return ""
+	}
+	return v.Percent
+}
+
+func (v *VatProrataListDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatProrataListDeclarationsResponseRowsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataListDeclarationsResponseRowsItem) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataListDeclarationsResponseRowsItemFieldFiscalYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataListDeclarationsResponseRowsItem) SetPercent(percent string) {
+	v.Percent = percent
+	v.require(vatProrataListDeclarationsResponseRowsItemFieldPercent)
+}
+
+func (v *VatProrataListDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataListDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatProrataListDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatProrataListDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed VatProrataListDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatProrataListDeclarationsResponseRowsItem) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatProrataSetDeclarationsResponseFieldFiscalYear = big.NewInt(1 << 0)
+	vatProrataSetDeclarationsResponseFieldPercent    = big.NewInt(1 << 1)
+)
+
+type VatProrataSetDeclarationsResponse struct {
+	FiscalYear int64  `json:"fiscalYear" url:"fiscalYear"`
+	Percent    string `json:"percent" url:"percent"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatProrataSetDeclarationsResponse) GetFiscalYear() int64 {
+	if v == nil {
+		return 0
+	}
+	return v.FiscalYear
+}
+
+func (v *VatProrataSetDeclarationsResponse) GetPercent() string {
+	if v == nil {
+		return ""
+	}
+	return v.Percent
+}
+
+func (v *VatProrataSetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatProrataSetDeclarationsResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataSetDeclarationsResponse) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataSetDeclarationsResponseFieldFiscalYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataSetDeclarationsResponse) SetPercent(percent string) {
+	v.Percent = percent
+	v.require(vatProrataSetDeclarationsResponseFieldPercent)
+}
+
+func (v *VatProrataSetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataSetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatProrataSetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatProrataSetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed VatProrataSetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatProrataSetDeclarationsResponse) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatProrataGetDeclarationsRequestFieldFiscalYear = big.NewInt(1 << 0)
+)
+
+type VatProrataGetDeclarationsRequest struct {
+	FiscalYear int64 `json:"fiscalYear" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VatProrataGetDeclarationsRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataGetDeclarationsRequest) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataGetDeclarationsRequestFieldFiscalYear)
+}
+
+func (v *VatProrataGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VatProrataGetDeclarationsRequest(body)
+	return nil
+}
+
+func (v *VatProrataGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed VatProrataGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type VatProrataListDeclarationsRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VatProrataListDeclarationsRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+var (
+	vatProrataSetDeclarationsRequestFieldFiscalYear = big.NewInt(1 << 0)
+	vatProrataSetDeclarationsRequestFieldPercent    = big.NewInt(1 << 1)
+)
+
+type VatProrataSetDeclarationsRequest struct {
+	FiscalYear int64  `json:"fiscalYear" url:"-"`
+	Percent    string `json:"percent" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VatProrataSetDeclarationsRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataSetDeclarationsRequest) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataSetDeclarationsRequestFieldFiscalYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataSetDeclarationsRequest) SetPercent(percent string) {
+	v.Percent = percent
+	v.require(vatProrataSetDeclarationsRequestFieldPercent)
+}
+
+func (v *VatProrataSetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataSetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VatProrataSetDeclarationsRequest(body)
+	return nil
+}
+
+func (v *VatProrataSetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed VatProrataSetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }

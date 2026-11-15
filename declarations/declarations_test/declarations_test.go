@@ -1191,6 +1191,83 @@ func TestDeclarationsTaxPaymentsDeleteWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsTaxPaymentsDeleteWithWireMock", "POST", "/v1/declarations/tax-payments/delete", nil, 1)
 }
 
+func TestDeclarationsVatProrataSetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.VatProrataSetDeclarationsRequest{
+		FiscalYear: int64(1000000),
+		Percent:    "percent",
+	}
+	_, invocationErr := client.Declarations.VatProrataSet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsVatProrataSetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsVatProrataSetWithWireMock", "POST", "/v1/declarations/vat-prorata/set", nil, 1)
+}
+
+func TestDeclarationsVatProrataGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.VatProrataGetDeclarationsRequest{
+		FiscalYear: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.VatProrataGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsVatProrataGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsVatProrataGetWithWireMock", "POST", "/v1/declarations/vat-prorata/get", nil, 1)
+}
+
+func TestDeclarationsVatProrataListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.VatProrataListDeclarationsRequest{}
+	_, invocationErr := client.Declarations.VatProrataList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsVatProrataListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsVatProrataListWithWireMock", "POST", "/v1/declarations/vat-prorata/list", nil, 1)
+}
+
 func TestDeclarationsAnnualAccountsGetWithWireMock(
 	t *testing.T,
 ) {
@@ -2596,6 +2673,32 @@ func TestDeclarationsSubmissionsConfirmWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestDeclarationsSubmissionsConfirmWithWireMock", "POST", "/v1/declarations/submissions/confirm", nil, 1)
+}
+
+func TestDeclarationsSubmissionsCorrectionPreviewWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SubmissionsCorrectionPreviewDeclarationsRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Declarations.SubmissionsCorrectionPreview(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsSubmissionsCorrectionPreviewWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsSubmissionsCorrectionPreviewWithWireMock", "POST", "/v1/declarations/submissions/correction-preview", nil, 1)
 }
 
 func TestDeclarationsSubmissionsCreateWithWireMock(

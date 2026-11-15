@@ -1410,6 +1410,7 @@ const (
 	SubscriptionsCreateWebhooksRequestEventsItemItemCreated                   SubscriptionsCreateWebhooksRequestEventsItem = "item.created"
 	SubscriptionsCreateWebhooksRequestEventsItemItemDeleted                   SubscriptionsCreateWebhooksRequestEventsItem = "item.deleted"
 	SubscriptionsCreateWebhooksRequestEventsItemItemUpdated                   SubscriptionsCreateWebhooksRequestEventsItem = "item.updated"
+	SubscriptionsCreateWebhooksRequestEventsItemJournalTransactionReversed    SubscriptionsCreateWebhooksRequestEventsItem = "journal_transaction.reversed"
 	SubscriptionsCreateWebhooksRequestEventsItemLeadConverted                 SubscriptionsCreateWebhooksRequestEventsItem = "lead.converted"
 	SubscriptionsCreateWebhooksRequestEventsItemLeadCreated                   SubscriptionsCreateWebhooksRequestEventsItem = "lead.created"
 	SubscriptionsCreateWebhooksRequestEventsItemPartnerInquiryCreated         SubscriptionsCreateWebhooksRequestEventsItem = "partner_inquiry.created"
@@ -1419,6 +1420,7 @@ const (
 	SubscriptionsCreateWebhooksRequestEventsItemPriceListUpdated              SubscriptionsCreateWebhooksRequestEventsItem = "price_list.updated"
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoicePaid           SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.paid"
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceRegistered     SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.registered"
+	SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceReversed       SubscriptionsCreateWebhooksRequestEventsItem = "purchase_invoice.reversed"
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.approved"
 	SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderReceived         SubscriptionsCreateWebhooksRequestEventsItem = "purchase_order.received"
 	SubscriptionsCreateWebhooksRequestEventsItemRecurringInvoiceGenerated     SubscriptionsCreateWebhooksRequestEventsItem = "recurring_invoice.generated"
@@ -1436,6 +1438,7 @@ const (
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolRejected     SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_rejected"
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent         SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceQuoteSent          SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.quote_sent"
+	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceReversed           SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.reversed"
 	SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent               SubscriptionsCreateWebhooksRequestEventsItem = "sale_invoice.sent"
 	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderCreated             SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.created"
 	SubscriptionsCreateWebhooksRequestEventsItemSalesOrderFulfilled           SubscriptionsCreateWebhooksRequestEventsItem = "sales_order.fulfilled"
@@ -1471,6 +1474,8 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemItemDeleted, nil
 	case "item.updated":
 		return SubscriptionsCreateWebhooksRequestEventsItemItemUpdated, nil
+	case "journal_transaction.reversed":
+		return SubscriptionsCreateWebhooksRequestEventsItemJournalTransactionReversed, nil
 	case "lead.converted":
 		return SubscriptionsCreateWebhooksRequestEventsItemLeadConverted, nil
 	case "lead.created":
@@ -1489,6 +1494,8 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoicePaid, nil
 	case "purchase_invoice.registered":
 		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceRegistered, nil
+	case "purchase_invoice.reversed":
+		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseInvoiceReversed, nil
 	case "purchase_order.approved":
 		return SubscriptionsCreateWebhooksRequestEventsItemPurchaseOrderApproved, nil
 	case "purchase_order.received":
@@ -1523,6 +1530,8 @@ func NewSubscriptionsCreateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
 	case "sale_invoice.quote_sent":
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceQuoteSent, nil
+	case "sale_invoice.reversed":
+		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceReversed, nil
 	case "sale_invoice.sent":
 		return SubscriptionsCreateWebhooksRequestEventsItemSaleInvoiceSent, nil
 	case "sales_order.created":
@@ -3066,6 +3075,7 @@ const (
 	SubscriptionsUpdateWebhooksRequestEventsItemItemCreated                   SubscriptionsUpdateWebhooksRequestEventsItem = "item.created"
 	SubscriptionsUpdateWebhooksRequestEventsItemItemDeleted                   SubscriptionsUpdateWebhooksRequestEventsItem = "item.deleted"
 	SubscriptionsUpdateWebhooksRequestEventsItemItemUpdated                   SubscriptionsUpdateWebhooksRequestEventsItem = "item.updated"
+	SubscriptionsUpdateWebhooksRequestEventsItemJournalTransactionReversed    SubscriptionsUpdateWebhooksRequestEventsItem = "journal_transaction.reversed"
 	SubscriptionsUpdateWebhooksRequestEventsItemLeadConverted                 SubscriptionsUpdateWebhooksRequestEventsItem = "lead.converted"
 	SubscriptionsUpdateWebhooksRequestEventsItemLeadCreated                   SubscriptionsUpdateWebhooksRequestEventsItem = "lead.created"
 	SubscriptionsUpdateWebhooksRequestEventsItemPartnerInquiryCreated         SubscriptionsUpdateWebhooksRequestEventsItem = "partner_inquiry.created"
@@ -3075,6 +3085,7 @@ const (
 	SubscriptionsUpdateWebhooksRequestEventsItemPriceListUpdated              SubscriptionsUpdateWebhooksRequestEventsItem = "price_list.updated"
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoicePaid           SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.paid"
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceRegistered     SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.registered"
+	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceReversed       SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_invoice.reversed"
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.approved"
 	SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderReceived         SubscriptionsUpdateWebhooksRequestEventsItem = "purchase_order.received"
 	SubscriptionsUpdateWebhooksRequestEventsItemRecurringInvoiceGenerated     SubscriptionsUpdateWebhooksRequestEventsItem = "recurring_invoice.generated"
@@ -3092,6 +3103,7 @@ const (
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolRejected     SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_rejected"
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent         SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.peppol_sent"
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceQuoteSent          SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.quote_sent"
+	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceReversed           SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.reversed"
 	SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent               SubscriptionsUpdateWebhooksRequestEventsItem = "sale_invoice.sent"
 	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderCreated             SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.created"
 	SubscriptionsUpdateWebhooksRequestEventsItemSalesOrderFulfilled           SubscriptionsUpdateWebhooksRequestEventsItem = "sales_order.fulfilled"
@@ -3127,6 +3139,8 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemItemDeleted, nil
 	case "item.updated":
 		return SubscriptionsUpdateWebhooksRequestEventsItemItemUpdated, nil
+	case "journal_transaction.reversed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemJournalTransactionReversed, nil
 	case "lead.converted":
 		return SubscriptionsUpdateWebhooksRequestEventsItemLeadConverted, nil
 	case "lead.created":
@@ -3145,6 +3159,8 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoicePaid, nil
 	case "purchase_invoice.registered":
 		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceRegistered, nil
+	case "purchase_invoice.reversed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseInvoiceReversed, nil
 	case "purchase_order.approved":
 		return SubscriptionsUpdateWebhooksRequestEventsItemPurchaseOrderApproved, nil
 	case "purchase_order.received":
@@ -3179,6 +3195,8 @@ func NewSubscriptionsUpdateWebhooksRequestEventsItemFromString(s string) (Subscr
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoicePeppolSent, nil
 	case "sale_invoice.quote_sent":
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceQuoteSent, nil
+	case "sale_invoice.reversed":
+		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceReversed, nil
 	case "sale_invoice.sent":
 		return SubscriptionsUpdateWebhooksRequestEventsItemSaleInvoiceSent, nil
 	case "sales_order.created":
