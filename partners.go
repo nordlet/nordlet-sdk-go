@@ -386,18 +386,28 @@ func (a *AnonymizePartnersRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	bankAccountsCreatePartnersRequestFieldIban      = big.NewInt(1 << 0)
-	bankAccountsCreatePartnersRequestFieldBankName  = big.NewInt(1 << 1)
-	bankAccountsCreatePartnersRequestFieldBic       = big.NewInt(1 << 2)
-	bankAccountsCreatePartnersRequestFieldCurrency  = big.NewInt(1 << 3)
-	bankAccountsCreatePartnersRequestFieldIsDefault = big.NewInt(1 << 4)
-	bankAccountsCreatePartnersRequestFieldPartnerID = big.NewInt(1 << 5)
+	bankAccountsCreatePartnersRequestFieldIban              = big.NewInt(1 << 0)
+	bankAccountsCreatePartnersRequestFieldBankCode          = big.NewInt(1 << 1)
+	bankAccountsCreatePartnersRequestFieldBankAccountNumber = big.NewInt(1 << 2)
+	bankAccountsCreatePartnersRequestFieldAccountType       = big.NewInt(1 << 3)
+	bankAccountsCreatePartnersRequestFieldBankName          = big.NewInt(1 << 4)
+	bankAccountsCreatePartnersRequestFieldBic               = big.NewInt(1 << 5)
+	bankAccountsCreatePartnersRequestFieldCurrency          = big.NewInt(1 << 6)
+	bankAccountsCreatePartnersRequestFieldIsDefault         = big.NewInt(1 << 7)
+	bankAccountsCreatePartnersRequestFieldPartnerID         = big.NewInt(1 << 8)
 )
 
 type BankAccountsCreatePartnersRequest struct {
-	Iban      string  `json:"iban" url:"-"`
-	BankName  *string `json:"bankName,omitempty" url:"-"`
-	Bic       *string `json:"bic,omitempty" url:"-"`
+	Iban *string `json:"iban,omitempty" url:"-"`
+	// Sort code, routing number or other national bank code, for an account without an IBAN
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Account number, for an account without an IBAN
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType *BankAccountsCreatePartnersRequestAccountType `json:"accountType,omitempty" url:"-"`
+	BankName    *string                                       `json:"bankName,omitempty" url:"-"`
+	Bic         *string                                       `json:"bic,omitempty" url:"-"`
+	// Defaults to the company's base currency
 	Currency  *string `json:"currency,omitempty" url:"-"`
 	IsDefault *bool   `json:"isDefault,omitempty" url:"-"`
 	PartnerID string  `json:"partnerId" url:"-"`
@@ -415,9 +425,30 @@ func (b *BankAccountsCreatePartnersRequest) require(field *big.Int) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (b *BankAccountsCreatePartnersRequest) SetIban(iban string) {
+func (b *BankAccountsCreatePartnersRequest) SetIban(iban *string) {
 	b.Iban = iban
 	b.require(bankAccountsCreatePartnersRequestFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsCreatePartnersRequest) SetBankCode(bankCode *string) {
+	b.BankCode = bankCode
+	b.require(bankAccountsCreatePartnersRequestFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsCreatePartnersRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	b.BankAccountNumber = bankAccountNumber
+	b.require(bankAccountsCreatePartnersRequestFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsCreatePartnersRequest) SetAccountType(accountType *BankAccountsCreatePartnersRequestAccountType) {
+	b.AccountType = accountType
+	b.require(bankAccountsCreatePartnersRequestFieldAccountType)
 }
 
 // SetBankName sets the BankName field and marks it as non-optional;
@@ -606,18 +637,28 @@ func (b *BankAccountsListPartnersRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	bankAccountsUpdatePartnersRequestFieldIban      = big.NewInt(1 << 0)
-	bankAccountsUpdatePartnersRequestFieldBankName  = big.NewInt(1 << 1)
-	bankAccountsUpdatePartnersRequestFieldBic       = big.NewInt(1 << 2)
-	bankAccountsUpdatePartnersRequestFieldCurrency  = big.NewInt(1 << 3)
-	bankAccountsUpdatePartnersRequestFieldIsDefault = big.NewInt(1 << 4)
-	bankAccountsUpdatePartnersRequestFieldID        = big.NewInt(1 << 5)
+	bankAccountsUpdatePartnersRequestFieldIban              = big.NewInt(1 << 0)
+	bankAccountsUpdatePartnersRequestFieldBankCode          = big.NewInt(1 << 1)
+	bankAccountsUpdatePartnersRequestFieldBankAccountNumber = big.NewInt(1 << 2)
+	bankAccountsUpdatePartnersRequestFieldAccountType       = big.NewInt(1 << 3)
+	bankAccountsUpdatePartnersRequestFieldBankName          = big.NewInt(1 << 4)
+	bankAccountsUpdatePartnersRequestFieldBic               = big.NewInt(1 << 5)
+	bankAccountsUpdatePartnersRequestFieldCurrency          = big.NewInt(1 << 6)
+	bankAccountsUpdatePartnersRequestFieldIsDefault         = big.NewInt(1 << 7)
+	bankAccountsUpdatePartnersRequestFieldID                = big.NewInt(1 << 8)
 )
 
 type BankAccountsUpdatePartnersRequest struct {
-	Iban      *string `json:"iban,omitempty" url:"-"`
-	BankName  *string `json:"bankName,omitempty" url:"-"`
-	Bic       *string `json:"bic,omitempty" url:"-"`
+	Iban *string `json:"iban,omitempty" url:"-"`
+	// Sort code, routing number or other national bank code, for an account without an IBAN
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Account number, for an account without an IBAN
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType *BankAccountsUpdatePartnersRequestAccountType `json:"accountType,omitempty" url:"-"`
+	BankName    *string                                       `json:"bankName,omitempty" url:"-"`
+	Bic         *string                                       `json:"bic,omitempty" url:"-"`
+	// Defaults to the company's base currency
 	Currency  *string `json:"currency,omitempty" url:"-"`
 	IsDefault *bool   `json:"isDefault,omitempty" url:"-"`
 	ID        string  `json:"id" url:"-"`
@@ -638,6 +679,27 @@ func (b *BankAccountsUpdatePartnersRequest) require(field *big.Int) {
 func (b *BankAccountsUpdatePartnersRequest) SetIban(iban *string) {
 	b.Iban = iban
 	b.require(bankAccountsUpdatePartnersRequestFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsUpdatePartnersRequest) SetBankCode(bankCode *string) {
+	b.BankCode = bankCode
+	b.require(bankAccountsUpdatePartnersRequestFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsUpdatePartnersRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	b.BankAccountNumber = bankAccountNumber
+	b.require(bankAccountsUpdatePartnersRequestFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsUpdatePartnersRequest) SetAccountType(accountType *BankAccountsUpdatePartnersRequestAccountType) {
+	b.AccountType = accountType
+	b.require(bankAccountsUpdatePartnersRequestFieldAccountType)
 }
 
 // SetBankName sets the BankName field and marks it as non-optional;
@@ -693,6 +755,52 @@ func (b *BankAccountsUpdatePartnersRequest) MarshalJSON() ([]byte, error) {
 		embed: embed(*b),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, b.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	companiesHouseGetPartnersRequestFieldCompanyNumber = big.NewInt(1 << 0)
+)
+
+type CompaniesHouseGetPartnersRequest struct {
+	CompanyNumber string `json:"companyNumber" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (c *CompaniesHouseGetPartnersRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCompanyNumber sets the CompanyNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersRequest) SetCompanyNumber(companyNumber string) {
+	c.CompanyNumber = companyNumber
+	c.require(companiesHouseGetPartnersRequestFieldCompanyNumber)
+}
+
+func (c *CompaniesHouseGetPartnersRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesHouseGetPartnersRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*c = CompaniesHouseGetPartnersRequest(body)
+	return nil
+}
+
+func (c *CompaniesHouseGetPartnersRequest) MarshalJSON() ([]byte, error) {
+	type embed CompaniesHouseGetPartnersRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
@@ -1017,33 +1125,34 @@ var (
 	createPartnersRequestFieldPhone                 = big.NewInt(1 << 6)
 	createPartnersRequestFieldSelfEmploymentCertNo  = big.NewInt(1 << 7)
 	createPartnersRequestFieldBirthDate             = big.NewInt(1 << 8)
-	createPartnersRequestFieldIsCustomer            = big.NewInt(1 << 9)
-	createPartnersRequestFieldIsSupplier            = big.NewInt(1 << 10)
-	createPartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 11)
-	createPartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 12)
-	createPartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 13)
-	createPartnersRequestFieldCreditLimit           = big.NewInt(1 << 14)
-	createPartnersRequestFieldPriceListID           = big.NewInt(1 << 15)
-	createPartnersRequestFieldGroupID               = big.NewInt(1 << 16)
-	createPartnersRequestFieldStatusID              = big.NewInt(1 << 17)
-	createPartnersRequestFieldAddress               = big.NewInt(1 << 18)
-	createPartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 19)
-	createPartnersRequestFieldNotes                 = big.NewInt(1 << 20)
-	createPartnersRequestFieldDocumentRef           = big.NewInt(1 << 21)
-	createPartnersRequestFieldShortName             = big.NewInt(1 << 22)
-	createPartnersRequestFieldWebsite               = big.NewInt(1 << 23)
-	createPartnersRequestFieldFax                   = big.NewInt(1 << 24)
-	createPartnersRequestFieldEoriCode              = big.NewInt(1 << 25)
-	createPartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
-	createPartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
-	createPartnersRequestFieldFirstCallDate         = big.NewInt(1 << 28)
-	createPartnersRequestFieldLastCallDate          = big.NewInt(1 << 29)
-	createPartnersRequestFieldNextCallDate          = big.NewInt(1 << 30)
-	createPartnersRequestFieldRating                = big.NewInt(1 << 31)
-	createPartnersRequestFieldIsEmployee            = big.NewInt(1 << 32)
-	createPartnersRequestFieldIsGroupMember         = big.NewInt(1 << 33)
-	createPartnersRequestFieldIsActive              = big.NewInt(1 << 34)
-	createPartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
+	createPartnersRequestFieldIsBusiness            = big.NewInt(1 << 9)
+	createPartnersRequestFieldIsCustomer            = big.NewInt(1 << 10)
+	createPartnersRequestFieldIsSupplier            = big.NewInt(1 << 11)
+	createPartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 12)
+	createPartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	createPartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 14)
+	createPartnersRequestFieldCreditLimit           = big.NewInt(1 << 15)
+	createPartnersRequestFieldPriceListID           = big.NewInt(1 << 16)
+	createPartnersRequestFieldGroupID               = big.NewInt(1 << 17)
+	createPartnersRequestFieldStatusID              = big.NewInt(1 << 18)
+	createPartnersRequestFieldAddress               = big.NewInt(1 << 19)
+	createPartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	createPartnersRequestFieldNotes                 = big.NewInt(1 << 21)
+	createPartnersRequestFieldDocumentRef           = big.NewInt(1 << 22)
+	createPartnersRequestFieldShortName             = big.NewInt(1 << 23)
+	createPartnersRequestFieldWebsite               = big.NewInt(1 << 24)
+	createPartnersRequestFieldFax                   = big.NewInt(1 << 25)
+	createPartnersRequestFieldEoriCode              = big.NewInt(1 << 26)
+	createPartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	createPartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 28)
+	createPartnersRequestFieldFirstCallDate         = big.NewInt(1 << 29)
+	createPartnersRequestFieldLastCallDate          = big.NewInt(1 << 30)
+	createPartnersRequestFieldNextCallDate          = big.NewInt(1 << 31)
+	createPartnersRequestFieldRating                = big.NewInt(1 << 32)
+	createPartnersRequestFieldIsEmployee            = big.NewInt(1 << 33)
+	createPartnersRequestFieldIsGroupMember         = big.NewInt(1 << 34)
+	createPartnersRequestFieldIsActive              = big.NewInt(1 << 35)
+	createPartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
 )
 
 type CreatePartnersRequest struct {
@@ -1056,9 +1165,11 @@ type CreatePartnersRequest struct {
 	Phone                *string                    `json:"phone,omitempty" url:"-"`
 	SelfEmploymentCertNo *string                    `json:"selfEmploymentCertNo,omitempty" url:"-"`
 	BirthDate            *time.Time                 `json:"birthDate,omitempty" url:"-" format:"date"`
-	IsCustomer           *bool                      `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier           *bool                      `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays      *int64                     `json:"paymentTermDays,omitempty" url:"-"`
+	// Whether the partner acts as a business for VAT; when not set, a partner with a VAT code is a business. Regulation (EU) 282/2011 art. 18 lets a customer without a VAT number be treated as a business on other proof
+	IsBusiness      *bool  `json:"isBusiness,omitempty" url:"-"`
+	IsCustomer      *bool  `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier      *bool  `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays *int64 `json:"paymentTermDays,omitempty" url:"-"`
 	// Currency a new invoice for this partner starts with when the invoice names none
 	InvoiceCurrency *CreatePartnersRequestInvoiceCurrency `json:"invoiceCurrency,omitempty" url:"-"`
 	// Language a new invoice for this partner starts with when the invoice names none
@@ -1158,6 +1269,13 @@ func (c *CreatePartnersRequest) SetSelfEmploymentCertNo(selfEmploymentCertNo *st
 func (c *CreatePartnersRequest) SetBirthDate(birthDate *time.Time) {
 	c.BirthDate = birthDate
 	c.require(createPartnersRequestFieldBirthDate)
+}
+
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersRequest) SetIsBusiness(isBusiness *bool) {
+	c.IsBusiness = isBusiness
+	c.require(createPartnersRequestFieldIsBusiness)
 }
 
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
@@ -1712,34 +1830,35 @@ var (
 	findOrCreatePartnersRequestFieldPhone                 = big.NewInt(1 << 6)
 	findOrCreatePartnersRequestFieldSelfEmploymentCertNo  = big.NewInt(1 << 7)
 	findOrCreatePartnersRequestFieldBirthDate             = big.NewInt(1 << 8)
-	findOrCreatePartnersRequestFieldIsCustomer            = big.NewInt(1 << 9)
-	findOrCreatePartnersRequestFieldIsSupplier            = big.NewInt(1 << 10)
-	findOrCreatePartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 11)
-	findOrCreatePartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 12)
-	findOrCreatePartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 13)
-	findOrCreatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 14)
-	findOrCreatePartnersRequestFieldPriceListID           = big.NewInt(1 << 15)
-	findOrCreatePartnersRequestFieldGroupID               = big.NewInt(1 << 16)
-	findOrCreatePartnersRequestFieldStatusID              = big.NewInt(1 << 17)
-	findOrCreatePartnersRequestFieldAddress               = big.NewInt(1 << 18)
-	findOrCreatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 19)
-	findOrCreatePartnersRequestFieldNotes                 = big.NewInt(1 << 20)
-	findOrCreatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 21)
-	findOrCreatePartnersRequestFieldShortName             = big.NewInt(1 << 22)
-	findOrCreatePartnersRequestFieldWebsite               = big.NewInt(1 << 23)
-	findOrCreatePartnersRequestFieldFax                   = big.NewInt(1 << 24)
-	findOrCreatePartnersRequestFieldEoriCode              = big.NewInt(1 << 25)
-	findOrCreatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 26)
-	findOrCreatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 27)
-	findOrCreatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 28)
-	findOrCreatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 29)
-	findOrCreatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 30)
-	findOrCreatePartnersRequestFieldRating                = big.NewInt(1 << 31)
-	findOrCreatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 32)
-	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 33)
-	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 34)
-	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 35)
-	findOrCreatePartnersRequestFieldIban                  = big.NewInt(1 << 36)
+	findOrCreatePartnersRequestFieldIsBusiness            = big.NewInt(1 << 9)
+	findOrCreatePartnersRequestFieldIsCustomer            = big.NewInt(1 << 10)
+	findOrCreatePartnersRequestFieldIsSupplier            = big.NewInt(1 << 11)
+	findOrCreatePartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 12)
+	findOrCreatePartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 13)
+	findOrCreatePartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 14)
+	findOrCreatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 15)
+	findOrCreatePartnersRequestFieldPriceListID           = big.NewInt(1 << 16)
+	findOrCreatePartnersRequestFieldGroupID               = big.NewInt(1 << 17)
+	findOrCreatePartnersRequestFieldStatusID              = big.NewInt(1 << 18)
+	findOrCreatePartnersRequestFieldAddress               = big.NewInt(1 << 19)
+	findOrCreatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 20)
+	findOrCreatePartnersRequestFieldNotes                 = big.NewInt(1 << 21)
+	findOrCreatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 22)
+	findOrCreatePartnersRequestFieldShortName             = big.NewInt(1 << 23)
+	findOrCreatePartnersRequestFieldWebsite               = big.NewInt(1 << 24)
+	findOrCreatePartnersRequestFieldFax                   = big.NewInt(1 << 25)
+	findOrCreatePartnersRequestFieldEoriCode              = big.NewInt(1 << 26)
+	findOrCreatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 27)
+	findOrCreatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 28)
+	findOrCreatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 29)
+	findOrCreatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 30)
+	findOrCreatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 31)
+	findOrCreatePartnersRequestFieldRating                = big.NewInt(1 << 32)
+	findOrCreatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 33)
+	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 34)
+	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 35)
+	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
+	findOrCreatePartnersRequestFieldIban                  = big.NewInt(1 << 37)
 )
 
 type FindOrCreatePartnersRequest struct {
@@ -1752,9 +1871,11 @@ type FindOrCreatePartnersRequest struct {
 	Phone                *string                          `json:"phone,omitempty" url:"-"`
 	SelfEmploymentCertNo *string                          `json:"selfEmploymentCertNo,omitempty" url:"-"`
 	BirthDate            *time.Time                       `json:"birthDate,omitempty" url:"-" format:"date"`
-	IsCustomer           *bool                            `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier           *bool                            `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays      *int64                           `json:"paymentTermDays,omitempty" url:"-"`
+	// Whether the partner acts as a business for VAT; when not set, a partner with a VAT code is a business. Regulation (EU) 282/2011 art. 18 lets a customer without a VAT number be treated as a business on other proof
+	IsBusiness      *bool  `json:"isBusiness,omitempty" url:"-"`
+	IsCustomer      *bool  `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier      *bool  `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays *int64 `json:"paymentTermDays,omitempty" url:"-"`
 	// Currency a new invoice for this partner starts with when the invoice names none
 	InvoiceCurrency *FindOrCreatePartnersRequestInvoiceCurrency `json:"invoiceCurrency,omitempty" url:"-"`
 	// Language a new invoice for this partner starts with when the invoice names none
@@ -1855,6 +1976,13 @@ func (f *FindOrCreatePartnersRequest) SetSelfEmploymentCertNo(selfEmploymentCert
 func (f *FindOrCreatePartnersRequest) SetBirthDate(birthDate *time.Time) {
 	f.BirthDate = birthDate
 	f.require(findOrCreatePartnersRequestFieldBirthDate)
+}
+
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersRequest) SetIsBusiness(isBusiness *bool) {
+	f.IsBusiness = isBusiness
+	f.require(findOrCreatePartnersRequestFieldIsBusiness)
 }
 
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
@@ -4499,26 +4627,56 @@ func (a *AnonymizePartnersResponse) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+// Checking or savings account; a US ACH file needs it
+type BankAccountsCreatePartnersRequestAccountType string
+
+const (
+	BankAccountsCreatePartnersRequestAccountTypeChecking BankAccountsCreatePartnersRequestAccountType = "checking"
+	BankAccountsCreatePartnersRequestAccountTypeSavings  BankAccountsCreatePartnersRequestAccountType = "savings"
+)
+
+func NewBankAccountsCreatePartnersRequestAccountTypeFromString(s string) (BankAccountsCreatePartnersRequestAccountType, error) {
+	switch s {
+	case "checking":
+		return BankAccountsCreatePartnersRequestAccountTypeChecking, nil
+	case "savings":
+		return BankAccountsCreatePartnersRequestAccountTypeSavings, nil
+	}
+	var t BankAccountsCreatePartnersRequestAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BankAccountsCreatePartnersRequestAccountType) Ptr() *BankAccountsCreatePartnersRequestAccountType {
+	return &b
+}
+
 var (
-	bankAccountsCreatePartnersResponseFieldID        = big.NewInt(1 << 0)
-	bankAccountsCreatePartnersResponseFieldPartnerID = big.NewInt(1 << 1)
-	bankAccountsCreatePartnersResponseFieldIban      = big.NewInt(1 << 2)
-	bankAccountsCreatePartnersResponseFieldBankName  = big.NewInt(1 << 3)
-	bankAccountsCreatePartnersResponseFieldBic       = big.NewInt(1 << 4)
-	bankAccountsCreatePartnersResponseFieldCurrency  = big.NewInt(1 << 5)
-	bankAccountsCreatePartnersResponseFieldIsDefault = big.NewInt(1 << 6)
-	bankAccountsCreatePartnersResponseFieldCreatedAt = big.NewInt(1 << 7)
+	bankAccountsCreatePartnersResponseFieldID                = big.NewInt(1 << 0)
+	bankAccountsCreatePartnersResponseFieldPartnerID         = big.NewInt(1 << 1)
+	bankAccountsCreatePartnersResponseFieldIban              = big.NewInt(1 << 2)
+	bankAccountsCreatePartnersResponseFieldBankCode          = big.NewInt(1 << 3)
+	bankAccountsCreatePartnersResponseFieldBankAccountNumber = big.NewInt(1 << 4)
+	bankAccountsCreatePartnersResponseFieldAccountType       = big.NewInt(1 << 5)
+	bankAccountsCreatePartnersResponseFieldBankName          = big.NewInt(1 << 6)
+	bankAccountsCreatePartnersResponseFieldBic               = big.NewInt(1 << 7)
+	bankAccountsCreatePartnersResponseFieldCurrency          = big.NewInt(1 << 8)
+	bankAccountsCreatePartnersResponseFieldIsDefault         = big.NewInt(1 << 9)
+	bankAccountsCreatePartnersResponseFieldCreatedAt         = big.NewInt(1 << 10)
 )
 
 type BankAccountsCreatePartnersResponse struct {
-	ID        string    `json:"id" url:"id"`
-	PartnerID string    `json:"partnerId" url:"partnerId"`
-	Iban      string    `json:"iban" url:"iban"`
-	BankName  *string   `json:"bankName,omitempty" url:"bankName,omitempty"`
-	Bic       *string   `json:"bic,omitempty" url:"bic,omitempty"`
-	Currency  string    `json:"currency" url:"currency"`
-	IsDefault bool      `json:"isDefault" url:"isDefault"`
-	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	ID                string  `json:"id" url:"id"`
+	PartnerID         string  `json:"partnerId" url:"partnerId"`
+	Iban              *string `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType *BankAccountsCreatePartnersResponseAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	BankName    *string                                        `json:"bankName,omitempty" url:"bankName,omitempty"`
+	Bic         *string                                        `json:"bic,omitempty" url:"bic,omitempty"`
+	Currency    string                                         `json:"currency" url:"currency"`
+	IsDefault   bool                                           `json:"isDefault" url:"isDefault"`
+	CreatedAt   time.Time                                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4541,11 +4699,32 @@ func (b *BankAccountsCreatePartnersResponse) GetPartnerID() string {
 	return b.PartnerID
 }
 
-func (b *BankAccountsCreatePartnersResponse) GetIban() string {
+func (b *BankAccountsCreatePartnersResponse) GetIban() *string {
 	if b == nil {
-		return ""
+		return nil
 	}
 	return b.Iban
+}
+
+func (b *BankAccountsCreatePartnersResponse) GetBankCode() *string {
+	if b == nil {
+		return nil
+	}
+	return b.BankCode
+}
+
+func (b *BankAccountsCreatePartnersResponse) GetBankAccountNumber() *string {
+	if b == nil {
+		return nil
+	}
+	return b.BankAccountNumber
+}
+
+func (b *BankAccountsCreatePartnersResponse) GetAccountType() *BankAccountsCreatePartnersResponseAccountType {
+	if b == nil {
+		return nil
+	}
+	return b.AccountType
 }
 
 func (b *BankAccountsCreatePartnersResponse) GetBankName() *string {
@@ -4613,9 +4792,30 @@ func (b *BankAccountsCreatePartnersResponse) SetPartnerID(partnerID string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (b *BankAccountsCreatePartnersResponse) SetIban(iban string) {
+func (b *BankAccountsCreatePartnersResponse) SetIban(iban *string) {
 	b.Iban = iban
 	b.require(bankAccountsCreatePartnersResponseFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsCreatePartnersResponse) SetBankCode(bankCode *string) {
+	b.BankCode = bankCode
+	b.require(bankAccountsCreatePartnersResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsCreatePartnersResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	b.BankAccountNumber = bankAccountNumber
+	b.require(bankAccountsCreatePartnersResponseFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsCreatePartnersResponse) SetAccountType(accountType *BankAccountsCreatePartnersResponseAccountType) {
+	b.AccountType = accountType
+	b.require(bankAccountsCreatePartnersResponseFieldAccountType)
 }
 
 // SetBankName sets the BankName field and marks it as non-optional;
@@ -4701,6 +4901,29 @@ func (b *BankAccountsCreatePartnersResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", b)
+}
+
+// Checking or savings account; a US ACH file needs it
+type BankAccountsCreatePartnersResponseAccountType string
+
+const (
+	BankAccountsCreatePartnersResponseAccountTypeChecking BankAccountsCreatePartnersResponseAccountType = "checking"
+	BankAccountsCreatePartnersResponseAccountTypeSavings  BankAccountsCreatePartnersResponseAccountType = "savings"
+)
+
+func NewBankAccountsCreatePartnersResponseAccountTypeFromString(s string) (BankAccountsCreatePartnersResponseAccountType, error) {
+	switch s {
+	case "checking":
+		return BankAccountsCreatePartnersResponseAccountTypeChecking, nil
+	case "savings":
+		return BankAccountsCreatePartnersResponseAccountTypeSavings, nil
+	}
+	var t BankAccountsCreatePartnersResponseAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BankAccountsCreatePartnersResponseAccountType) Ptr() *BankAccountsCreatePartnersResponseAccountType {
+	return &b
 }
 
 var (
@@ -5391,25 +5614,32 @@ func (b *BankAccountsListPartnersResponse) String() string {
 }
 
 var (
-	bankAccountsListPartnersResponseRowsItemFieldID        = big.NewInt(1 << 0)
-	bankAccountsListPartnersResponseRowsItemFieldPartnerID = big.NewInt(1 << 1)
-	bankAccountsListPartnersResponseRowsItemFieldIban      = big.NewInt(1 << 2)
-	bankAccountsListPartnersResponseRowsItemFieldBankName  = big.NewInt(1 << 3)
-	bankAccountsListPartnersResponseRowsItemFieldBic       = big.NewInt(1 << 4)
-	bankAccountsListPartnersResponseRowsItemFieldCurrency  = big.NewInt(1 << 5)
-	bankAccountsListPartnersResponseRowsItemFieldIsDefault = big.NewInt(1 << 6)
-	bankAccountsListPartnersResponseRowsItemFieldCreatedAt = big.NewInt(1 << 7)
+	bankAccountsListPartnersResponseRowsItemFieldID                = big.NewInt(1 << 0)
+	bankAccountsListPartnersResponseRowsItemFieldPartnerID         = big.NewInt(1 << 1)
+	bankAccountsListPartnersResponseRowsItemFieldIban              = big.NewInt(1 << 2)
+	bankAccountsListPartnersResponseRowsItemFieldBankCode          = big.NewInt(1 << 3)
+	bankAccountsListPartnersResponseRowsItemFieldBankAccountNumber = big.NewInt(1 << 4)
+	bankAccountsListPartnersResponseRowsItemFieldAccountType       = big.NewInt(1 << 5)
+	bankAccountsListPartnersResponseRowsItemFieldBankName          = big.NewInt(1 << 6)
+	bankAccountsListPartnersResponseRowsItemFieldBic               = big.NewInt(1 << 7)
+	bankAccountsListPartnersResponseRowsItemFieldCurrency          = big.NewInt(1 << 8)
+	bankAccountsListPartnersResponseRowsItemFieldIsDefault         = big.NewInt(1 << 9)
+	bankAccountsListPartnersResponseRowsItemFieldCreatedAt         = big.NewInt(1 << 10)
 )
 
 type BankAccountsListPartnersResponseRowsItem struct {
-	ID        string    `json:"id" url:"id"`
-	PartnerID string    `json:"partnerId" url:"partnerId"`
-	Iban      string    `json:"iban" url:"iban"`
-	BankName  *string   `json:"bankName,omitempty" url:"bankName,omitempty"`
-	Bic       *string   `json:"bic,omitempty" url:"bic,omitempty"`
-	Currency  string    `json:"currency" url:"currency"`
-	IsDefault bool      `json:"isDefault" url:"isDefault"`
-	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	ID                string  `json:"id" url:"id"`
+	PartnerID         string  `json:"partnerId" url:"partnerId"`
+	Iban              *string `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType *BankAccountsListPartnersResponseRowsItemAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	BankName    *string                                              `json:"bankName,omitempty" url:"bankName,omitempty"`
+	Bic         *string                                              `json:"bic,omitempty" url:"bic,omitempty"`
+	Currency    string                                               `json:"currency" url:"currency"`
+	IsDefault   bool                                                 `json:"isDefault" url:"isDefault"`
+	CreatedAt   time.Time                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5432,11 +5662,32 @@ func (b *BankAccountsListPartnersResponseRowsItem) GetPartnerID() string {
 	return b.PartnerID
 }
 
-func (b *BankAccountsListPartnersResponseRowsItem) GetIban() string {
+func (b *BankAccountsListPartnersResponseRowsItem) GetIban() *string {
 	if b == nil {
-		return ""
+		return nil
 	}
 	return b.Iban
+}
+
+func (b *BankAccountsListPartnersResponseRowsItem) GetBankCode() *string {
+	if b == nil {
+		return nil
+	}
+	return b.BankCode
+}
+
+func (b *BankAccountsListPartnersResponseRowsItem) GetBankAccountNumber() *string {
+	if b == nil {
+		return nil
+	}
+	return b.BankAccountNumber
+}
+
+func (b *BankAccountsListPartnersResponseRowsItem) GetAccountType() *BankAccountsListPartnersResponseRowsItemAccountType {
+	if b == nil {
+		return nil
+	}
+	return b.AccountType
 }
 
 func (b *BankAccountsListPartnersResponseRowsItem) GetBankName() *string {
@@ -5504,9 +5755,30 @@ func (b *BankAccountsListPartnersResponseRowsItem) SetPartnerID(partnerID string
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (b *BankAccountsListPartnersResponseRowsItem) SetIban(iban string) {
+func (b *BankAccountsListPartnersResponseRowsItem) SetIban(iban *string) {
 	b.Iban = iban
 	b.require(bankAccountsListPartnersResponseRowsItemFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsListPartnersResponseRowsItem) SetBankCode(bankCode *string) {
+	b.BankCode = bankCode
+	b.require(bankAccountsListPartnersResponseRowsItemFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsListPartnersResponseRowsItem) SetBankAccountNumber(bankAccountNumber *string) {
+	b.BankAccountNumber = bankAccountNumber
+	b.require(bankAccountsListPartnersResponseRowsItemFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsListPartnersResponseRowsItem) SetAccountType(accountType *BankAccountsListPartnersResponseRowsItemAccountType) {
+	b.AccountType = accountType
+	b.require(bankAccountsListPartnersResponseRowsItemFieldAccountType)
 }
 
 // SetBankName sets the BankName field and marks it as non-optional;
@@ -5594,26 +5866,79 @@ func (b *BankAccountsListPartnersResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", b)
 }
 
+// Checking or savings account; a US ACH file needs it
+type BankAccountsListPartnersResponseRowsItemAccountType string
+
+const (
+	BankAccountsListPartnersResponseRowsItemAccountTypeChecking BankAccountsListPartnersResponseRowsItemAccountType = "checking"
+	BankAccountsListPartnersResponseRowsItemAccountTypeSavings  BankAccountsListPartnersResponseRowsItemAccountType = "savings"
+)
+
+func NewBankAccountsListPartnersResponseRowsItemAccountTypeFromString(s string) (BankAccountsListPartnersResponseRowsItemAccountType, error) {
+	switch s {
+	case "checking":
+		return BankAccountsListPartnersResponseRowsItemAccountTypeChecking, nil
+	case "savings":
+		return BankAccountsListPartnersResponseRowsItemAccountTypeSavings, nil
+	}
+	var t BankAccountsListPartnersResponseRowsItemAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BankAccountsListPartnersResponseRowsItemAccountType) Ptr() *BankAccountsListPartnersResponseRowsItemAccountType {
+	return &b
+}
+
+// Checking or savings account; a US ACH file needs it
+type BankAccountsUpdatePartnersRequestAccountType string
+
+const (
+	BankAccountsUpdatePartnersRequestAccountTypeChecking BankAccountsUpdatePartnersRequestAccountType = "checking"
+	BankAccountsUpdatePartnersRequestAccountTypeSavings  BankAccountsUpdatePartnersRequestAccountType = "savings"
+)
+
+func NewBankAccountsUpdatePartnersRequestAccountTypeFromString(s string) (BankAccountsUpdatePartnersRequestAccountType, error) {
+	switch s {
+	case "checking":
+		return BankAccountsUpdatePartnersRequestAccountTypeChecking, nil
+	case "savings":
+		return BankAccountsUpdatePartnersRequestAccountTypeSavings, nil
+	}
+	var t BankAccountsUpdatePartnersRequestAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BankAccountsUpdatePartnersRequestAccountType) Ptr() *BankAccountsUpdatePartnersRequestAccountType {
+	return &b
+}
+
 var (
-	bankAccountsUpdatePartnersResponseFieldID        = big.NewInt(1 << 0)
-	bankAccountsUpdatePartnersResponseFieldPartnerID = big.NewInt(1 << 1)
-	bankAccountsUpdatePartnersResponseFieldIban      = big.NewInt(1 << 2)
-	bankAccountsUpdatePartnersResponseFieldBankName  = big.NewInt(1 << 3)
-	bankAccountsUpdatePartnersResponseFieldBic       = big.NewInt(1 << 4)
-	bankAccountsUpdatePartnersResponseFieldCurrency  = big.NewInt(1 << 5)
-	bankAccountsUpdatePartnersResponseFieldIsDefault = big.NewInt(1 << 6)
-	bankAccountsUpdatePartnersResponseFieldCreatedAt = big.NewInt(1 << 7)
+	bankAccountsUpdatePartnersResponseFieldID                = big.NewInt(1 << 0)
+	bankAccountsUpdatePartnersResponseFieldPartnerID         = big.NewInt(1 << 1)
+	bankAccountsUpdatePartnersResponseFieldIban              = big.NewInt(1 << 2)
+	bankAccountsUpdatePartnersResponseFieldBankCode          = big.NewInt(1 << 3)
+	bankAccountsUpdatePartnersResponseFieldBankAccountNumber = big.NewInt(1 << 4)
+	bankAccountsUpdatePartnersResponseFieldAccountType       = big.NewInt(1 << 5)
+	bankAccountsUpdatePartnersResponseFieldBankName          = big.NewInt(1 << 6)
+	bankAccountsUpdatePartnersResponseFieldBic               = big.NewInt(1 << 7)
+	bankAccountsUpdatePartnersResponseFieldCurrency          = big.NewInt(1 << 8)
+	bankAccountsUpdatePartnersResponseFieldIsDefault         = big.NewInt(1 << 9)
+	bankAccountsUpdatePartnersResponseFieldCreatedAt         = big.NewInt(1 << 10)
 )
 
 type BankAccountsUpdatePartnersResponse struct {
-	ID        string    `json:"id" url:"id"`
-	PartnerID string    `json:"partnerId" url:"partnerId"`
-	Iban      string    `json:"iban" url:"iban"`
-	BankName  *string   `json:"bankName,omitempty" url:"bankName,omitempty"`
-	Bic       *string   `json:"bic,omitempty" url:"bic,omitempty"`
-	Currency  string    `json:"currency" url:"currency"`
-	IsDefault bool      `json:"isDefault" url:"isDefault"`
-	CreatedAt time.Time `json:"createdAt" url:"createdAt"`
+	ID                string  `json:"id" url:"id"`
+	PartnerID         string  `json:"partnerId" url:"partnerId"`
+	Iban              *string `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType *BankAccountsUpdatePartnersResponseAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	BankName    *string                                        `json:"bankName,omitempty" url:"bankName,omitempty"`
+	Bic         *string                                        `json:"bic,omitempty" url:"bic,omitempty"`
+	Currency    string                                         `json:"currency" url:"currency"`
+	IsDefault   bool                                           `json:"isDefault" url:"isDefault"`
+	CreatedAt   time.Time                                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5636,11 +5961,32 @@ func (b *BankAccountsUpdatePartnersResponse) GetPartnerID() string {
 	return b.PartnerID
 }
 
-func (b *BankAccountsUpdatePartnersResponse) GetIban() string {
+func (b *BankAccountsUpdatePartnersResponse) GetIban() *string {
 	if b == nil {
-		return ""
+		return nil
 	}
 	return b.Iban
+}
+
+func (b *BankAccountsUpdatePartnersResponse) GetBankCode() *string {
+	if b == nil {
+		return nil
+	}
+	return b.BankCode
+}
+
+func (b *BankAccountsUpdatePartnersResponse) GetBankAccountNumber() *string {
+	if b == nil {
+		return nil
+	}
+	return b.BankAccountNumber
+}
+
+func (b *BankAccountsUpdatePartnersResponse) GetAccountType() *BankAccountsUpdatePartnersResponseAccountType {
+	if b == nil {
+		return nil
+	}
+	return b.AccountType
 }
 
 func (b *BankAccountsUpdatePartnersResponse) GetBankName() *string {
@@ -5708,9 +6054,30 @@ func (b *BankAccountsUpdatePartnersResponse) SetPartnerID(partnerID string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (b *BankAccountsUpdatePartnersResponse) SetIban(iban string) {
+func (b *BankAccountsUpdatePartnersResponse) SetIban(iban *string) {
 	b.Iban = iban
 	b.require(bankAccountsUpdatePartnersResponseFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsUpdatePartnersResponse) SetBankCode(bankCode *string) {
+	b.BankCode = bankCode
+	b.require(bankAccountsUpdatePartnersResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsUpdatePartnersResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	b.BankAccountNumber = bankAccountNumber
+	b.require(bankAccountsUpdatePartnersResponseFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (b *BankAccountsUpdatePartnersResponse) SetAccountType(accountType *BankAccountsUpdatePartnersResponseAccountType) {
+	b.AccountType = accountType
+	b.require(bankAccountsUpdatePartnersResponseFieldAccountType)
 }
 
 // SetBankName sets the BankName field and marks it as non-optional;
@@ -5796,6 +6163,572 @@ func (b *BankAccountsUpdatePartnersResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", b)
+}
+
+// Checking or savings account; a US ACH file needs it
+type BankAccountsUpdatePartnersResponseAccountType string
+
+const (
+	BankAccountsUpdatePartnersResponseAccountTypeChecking BankAccountsUpdatePartnersResponseAccountType = "checking"
+	BankAccountsUpdatePartnersResponseAccountTypeSavings  BankAccountsUpdatePartnersResponseAccountType = "savings"
+)
+
+func NewBankAccountsUpdatePartnersResponseAccountTypeFromString(s string) (BankAccountsUpdatePartnersResponseAccountType, error) {
+	switch s {
+	case "checking":
+		return BankAccountsUpdatePartnersResponseAccountTypeChecking, nil
+	case "savings":
+		return BankAccountsUpdatePartnersResponseAccountTypeSavings, nil
+	}
+	var t BankAccountsUpdatePartnersResponseAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (b BankAccountsUpdatePartnersResponseAccountType) Ptr() *BankAccountsUpdatePartnersResponseAccountType {
+	return &b
+}
+
+var (
+	companiesHouseGetPartnersResponseFieldCompanyNumber                = big.NewInt(1 << 0)
+	companiesHouseGetPartnersResponseFieldName                         = big.NewInt(1 << 1)
+	companiesHouseGetPartnersResponseFieldStatus                       = big.NewInt(1 << 2)
+	companiesHouseGetPartnersResponseFieldType                         = big.NewInt(1 << 3)
+	companiesHouseGetPartnersResponseFieldJurisdiction                 = big.NewInt(1 << 4)
+	companiesHouseGetPartnersResponseFieldIncorporatedOn               = big.NewInt(1 << 5)
+	companiesHouseGetPartnersResponseFieldCeasedOn                     = big.NewInt(1 << 6)
+	companiesHouseGetPartnersResponseFieldAddress                      = big.NewInt(1 << 7)
+	companiesHouseGetPartnersResponseFieldAccountingReferenceDate      = big.NewInt(1 << 8)
+	companiesHouseGetPartnersResponseFieldNextAccountsDue              = big.NewInt(1 << 9)
+	companiesHouseGetPartnersResponseFieldNextConfirmationStatementDue = big.NewInt(1 << 10)
+	companiesHouseGetPartnersResponseFieldSicCodes                     = big.NewInt(1 << 11)
+)
+
+type CompaniesHouseGetPartnersResponse struct {
+	CompanyNumber                string                                                    `json:"companyNumber" url:"companyNumber"`
+	Name                         string                                                    `json:"name" url:"name"`
+	Status                       *string                                                   `json:"status,omitempty" url:"status,omitempty"`
+	Type                         *string                                                   `json:"type,omitempty" url:"type,omitempty"`
+	Jurisdiction                 *string                                                   `json:"jurisdiction,omitempty" url:"jurisdiction,omitempty"`
+	IncorporatedOn               *string                                                   `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
+	CeasedOn                     *string                                                   `json:"ceasedOn,omitempty" url:"ceasedOn,omitempty"`
+	Address                      *CompaniesHouseGetPartnersResponseAddress                 `json:"address,omitempty" url:"address,omitempty"`
+	AccountingReferenceDate      *CompaniesHouseGetPartnersResponseAccountingReferenceDate `json:"accountingReferenceDate,omitempty" url:"accountingReferenceDate,omitempty"`
+	NextAccountsDue              *string                                                   `json:"nextAccountsDue,omitempty" url:"nextAccountsDue,omitempty"`
+	NextConfirmationStatementDue *string                                                   `json:"nextConfirmationStatementDue,omitempty" url:"nextConfirmationStatementDue,omitempty"`
+	SicCodes                     []string                                                  `json:"sicCodes" url:"sicCodes"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetCompanyNumber() string {
+	if c == nil {
+		return ""
+	}
+	return c.CompanyNumber
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetName() string {
+	if c == nil {
+		return ""
+	}
+	return c.Name
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetStatus() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Status
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetType() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Type
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetJurisdiction() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Jurisdiction
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetIncorporatedOn() *string {
+	if c == nil {
+		return nil
+	}
+	return c.IncorporatedOn
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetCeasedOn() *string {
+	if c == nil {
+		return nil
+	}
+	return c.CeasedOn
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetAddress() *CompaniesHouseGetPartnersResponseAddress {
+	if c == nil {
+		return nil
+	}
+	return c.Address
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetAccountingReferenceDate() *CompaniesHouseGetPartnersResponseAccountingReferenceDate {
+	if c == nil {
+		return nil
+	}
+	return c.AccountingReferenceDate
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetNextAccountsDue() *string {
+	if c == nil {
+		return nil
+	}
+	return c.NextAccountsDue
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetNextConfirmationStatementDue() *string {
+	if c == nil {
+		return nil
+	}
+	return c.NextConfirmationStatementDue
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetSicCodes() []string {
+	if c == nil {
+		return nil
+	}
+	return c.SicCodes
+}
+
+func (c *CompaniesHouseGetPartnersResponse) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesHouseGetPartnersResponse) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCompanyNumber sets the CompanyNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetCompanyNumber(companyNumber string) {
+	c.CompanyNumber = companyNumber
+	c.require(companiesHouseGetPartnersResponseFieldCompanyNumber)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetName(name string) {
+	c.Name = name
+	c.require(companiesHouseGetPartnersResponseFieldName)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetStatus(status *string) {
+	c.Status = status
+	c.require(companiesHouseGetPartnersResponseFieldStatus)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetType(type_ *string) {
+	c.Type = type_
+	c.require(companiesHouseGetPartnersResponseFieldType)
+}
+
+// SetJurisdiction sets the Jurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetJurisdiction(jurisdiction *string) {
+	c.Jurisdiction = jurisdiction
+	c.require(companiesHouseGetPartnersResponseFieldJurisdiction)
+}
+
+// SetIncorporatedOn sets the IncorporatedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetIncorporatedOn(incorporatedOn *string) {
+	c.IncorporatedOn = incorporatedOn
+	c.require(companiesHouseGetPartnersResponseFieldIncorporatedOn)
+}
+
+// SetCeasedOn sets the CeasedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetCeasedOn(ceasedOn *string) {
+	c.CeasedOn = ceasedOn
+	c.require(companiesHouseGetPartnersResponseFieldCeasedOn)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetAddress(address *CompaniesHouseGetPartnersResponseAddress) {
+	c.Address = address
+	c.require(companiesHouseGetPartnersResponseFieldAddress)
+}
+
+// SetAccountingReferenceDate sets the AccountingReferenceDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetAccountingReferenceDate(accountingReferenceDate *CompaniesHouseGetPartnersResponseAccountingReferenceDate) {
+	c.AccountingReferenceDate = accountingReferenceDate
+	c.require(companiesHouseGetPartnersResponseFieldAccountingReferenceDate)
+}
+
+// SetNextAccountsDue sets the NextAccountsDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetNextAccountsDue(nextAccountsDue *string) {
+	c.NextAccountsDue = nextAccountsDue
+	c.require(companiesHouseGetPartnersResponseFieldNextAccountsDue)
+}
+
+// SetNextConfirmationStatementDue sets the NextConfirmationStatementDue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetNextConfirmationStatementDue(nextConfirmationStatementDue *string) {
+	c.NextConfirmationStatementDue = nextConfirmationStatementDue
+	c.require(companiesHouseGetPartnersResponseFieldNextConfirmationStatementDue)
+}
+
+// SetSicCodes sets the SicCodes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponse) SetSicCodes(sicCodes []string) {
+	c.SicCodes = sicCodes
+	c.require(companiesHouseGetPartnersResponseFieldSicCodes)
+}
+
+func (c *CompaniesHouseGetPartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesHouseGetPartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesHouseGetPartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesHouseGetPartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed CompaniesHouseGetPartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesHouseGetPartnersResponse) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesHouseGetPartnersResponseAccountingReferenceDateFieldDay   = big.NewInt(1 << 0)
+	companiesHouseGetPartnersResponseAccountingReferenceDateFieldMonth = big.NewInt(1 << 1)
+)
+
+type CompaniesHouseGetPartnersResponseAccountingReferenceDate struct {
+	Day   int64 `json:"day" url:"day"`
+	Month int64 `json:"month" url:"month"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) GetDay() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Day
+}
+
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) GetMonth() int64 {
+	if c == nil {
+		return 0
+	}
+	return c.Month
+}
+
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetDay sets the Day field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) SetDay(day int64) {
+	c.Day = day
+	c.require(companiesHouseGetPartnersResponseAccountingReferenceDateFieldDay)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) SetMonth(month int64) {
+	c.Month = month
+	c.require(companiesHouseGetPartnersResponseAccountingReferenceDateFieldMonth)
+}
+
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesHouseGetPartnersResponseAccountingReferenceDate
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesHouseGetPartnersResponseAccountingReferenceDate(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) MarshalJSON() ([]byte, error) {
+	type embed CompaniesHouseGetPartnersResponseAccountingReferenceDate
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesHouseGetPartnersResponseAccountingReferenceDate) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	companiesHouseGetPartnersResponseAddressFieldStreet      = big.NewInt(1 << 0)
+	companiesHouseGetPartnersResponseAddressFieldCity        = big.NewInt(1 << 1)
+	companiesHouseGetPartnersResponseAddressFieldCounty      = big.NewInt(1 << 2)
+	companiesHouseGetPartnersResponseAddressFieldPostalCode  = big.NewInt(1 << 3)
+	companiesHouseGetPartnersResponseAddressFieldCountryCode = big.NewInt(1 << 4)
+	companiesHouseGetPartnersResponseAddressFieldSubdivision = big.NewInt(1 << 5)
+)
+
+type CompaniesHouseGetPartnersResponseAddress struct {
+	Street      *string                                             `json:"street,omitempty" url:"street,omitempty"`
+	City        *string                                             `json:"city,omitempty" url:"city,omitempty"`
+	County      *string                                             `json:"county,omitempty" url:"county,omitempty"`
+	PostalCode  *string                                             `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode CompaniesHouseGetPartnersResponseAddressCountryCode `json:"countryCode" url:"countryCode"`
+	Subdivision *string                                             `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) GetStreet() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Street
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) GetCity() *string {
+	if c == nil {
+		return nil
+	}
+	return c.City
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) GetCounty() *string {
+	if c == nil {
+		return nil
+	}
+	return c.County
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) GetPostalCode() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PostalCode
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) GetCountryCode() CompaniesHouseGetPartnersResponseAddressCountryCode {
+	if c == nil {
+		return ""
+	}
+	return c.CountryCode
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAddress) SetStreet(street *string) {
+	c.Street = street
+	c.require(companiesHouseGetPartnersResponseAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAddress) SetCity(city *string) {
+	c.City = city
+	c.require(companiesHouseGetPartnersResponseAddressFieldCity)
+}
+
+// SetCounty sets the County field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAddress) SetCounty(county *string) {
+	c.County = county
+	c.require(companiesHouseGetPartnersResponseAddressFieldCounty)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAddress) SetPostalCode(postalCode *string) {
+	c.PostalCode = postalCode
+	c.require(companiesHouseGetPartnersResponseAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAddress) SetCountryCode(countryCode CompaniesHouseGetPartnersResponseAddressCountryCode) {
+	c.CountryCode = countryCode
+	c.require(companiesHouseGetPartnersResponseAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesHouseGetPartnersResponseAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(companiesHouseGetPartnersResponseAddressFieldSubdivision)
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler CompaniesHouseGetPartnersResponseAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CompaniesHouseGetPartnersResponseAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) MarshalJSON() ([]byte, error) {
+	type embed CompaniesHouseGetPartnersResponseAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CompaniesHouseGetPartnersResponseAddress) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesHouseGetPartnersResponseAddressCountryCode string
+
+const (
+	CompaniesHouseGetPartnersResponseAddressCountryCodeGb CompaniesHouseGetPartnersResponseAddressCountryCode = "GB"
+)
+
+func NewCompaniesHouseGetPartnersResponseAddressCountryCodeFromString(s string) (CompaniesHouseGetPartnersResponseAddressCountryCode, error) {
+	switch s {
+	case "GB":
+		return CompaniesHouseGetPartnersResponseAddressCountryCodeGb, nil
+	}
+	var t CompaniesHouseGetPartnersResponseAddressCountryCode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesHouseGetPartnersResponseAddressCountryCode) Ptr() *CompaniesHouseGetPartnersResponseAddressCountryCode {
+	return &c
 }
 
 var (
@@ -7104,6 +8037,7 @@ var (
 	createPartnersRequestAddressFieldCounty       = big.NewInt(1 << 3)
 	createPartnersRequestAddressFieldPostalCode   = big.NewInt(1 << 4)
 	createPartnersRequestAddressFieldCountryCode  = big.NewInt(1 << 5)
+	createPartnersRequestAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type CreatePartnersRequestAddress struct {
@@ -7113,6 +8047,8 @@ type CreatePartnersRequestAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7161,6 +8097,13 @@ func (c *CreatePartnersRequestAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CreatePartnersRequestAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CreatePartnersRequestAddress) GetExtraProperties() map[string]interface{} {
@@ -7219,6 +8162,13 @@ func (c *CreatePartnersRequestAddress) SetCountryCode(countryCode *string) {
 	c.require(createPartnersRequestAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersRequestAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(createPartnersRequestAddressFieldSubdivision)
+}
+
 func (c *CreatePartnersRequestAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler CreatePartnersRequestAddress
 	var value unmarshaler
@@ -7268,6 +8218,7 @@ var (
 	createPartnersRequestCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	createPartnersRequestCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	createPartnersRequestCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	createPartnersRequestCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type CreatePartnersRequestCorrespondenceAddress struct {
@@ -7277,6 +8228,8 @@ type CreatePartnersRequestCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7325,6 +8278,13 @@ func (c *CreatePartnersRequestCorrespondenceAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CreatePartnersRequestCorrespondenceAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CreatePartnersRequestCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -7381,6 +8341,13 @@ func (c *CreatePartnersRequestCorrespondenceAddress) SetPostalCode(postalCode *s
 func (c *CreatePartnersRequestCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	c.CountryCode = countryCode
 	c.require(createPartnersRequestCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersRequestCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(createPartnersRequestCorrespondenceAddressFieldSubdivision)
 }
 
 func (c *CreatePartnersRequestCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -7871,37 +8838,38 @@ var (
 	createPartnersResponseFieldPhone                 = big.NewInt(1 << 7)
 	createPartnersResponseFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
 	createPartnersResponseFieldBirthDate             = big.NewInt(1 << 9)
-	createPartnersResponseFieldIsCustomer            = big.NewInt(1 << 10)
-	createPartnersResponseFieldIsSupplier            = big.NewInt(1 << 11)
-	createPartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
-	createPartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 13)
-	createPartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 14)
-	createPartnersResponseFieldCreditLimit           = big.NewInt(1 << 15)
-	createPartnersResponseFieldPriceListID           = big.NewInt(1 << 16)
-	createPartnersResponseFieldGroupID               = big.NewInt(1 << 17)
-	createPartnersResponseFieldStatusID              = big.NewInt(1 << 18)
-	createPartnersResponseFieldVatValid              = big.NewInt(1 << 19)
-	createPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 20)
-	createPartnersResponseFieldAddress               = big.NewInt(1 << 21)
-	createPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 22)
-	createPartnersResponseFieldNotes                 = big.NewInt(1 << 23)
-	createPartnersResponseFieldDocumentRef           = big.NewInt(1 << 24)
-	createPartnersResponseFieldShortName             = big.NewInt(1 << 25)
-	createPartnersResponseFieldWebsite               = big.NewInt(1 << 26)
-	createPartnersResponseFieldFax                   = big.NewInt(1 << 27)
-	createPartnersResponseFieldEoriCode              = big.NewInt(1 << 28)
-	createPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	createPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
-	createPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
-	createPartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
-	createPartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
-	createPartnersResponseFieldRating                = big.NewInt(1 << 34)
-	createPartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
-	createPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
-	createPartnersResponseFieldIsActive              = big.NewInt(1 << 37)
-	createPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
-	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
-	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
+	createPartnersResponseFieldIsBusiness            = big.NewInt(1 << 10)
+	createPartnersResponseFieldIsCustomer            = big.NewInt(1 << 11)
+	createPartnersResponseFieldIsSupplier            = big.NewInt(1 << 12)
+	createPartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 13)
+	createPartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 14)
+	createPartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 15)
+	createPartnersResponseFieldCreditLimit           = big.NewInt(1 << 16)
+	createPartnersResponseFieldPriceListID           = big.NewInt(1 << 17)
+	createPartnersResponseFieldGroupID               = big.NewInt(1 << 18)
+	createPartnersResponseFieldStatusID              = big.NewInt(1 << 19)
+	createPartnersResponseFieldVatValid              = big.NewInt(1 << 20)
+	createPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 21)
+	createPartnersResponseFieldAddress               = big.NewInt(1 << 22)
+	createPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 23)
+	createPartnersResponseFieldNotes                 = big.NewInt(1 << 24)
+	createPartnersResponseFieldDocumentRef           = big.NewInt(1 << 25)
+	createPartnersResponseFieldShortName             = big.NewInt(1 << 26)
+	createPartnersResponseFieldWebsite               = big.NewInt(1 << 27)
+	createPartnersResponseFieldFax                   = big.NewInt(1 << 28)
+	createPartnersResponseFieldEoriCode              = big.NewInt(1 << 29)
+	createPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 30)
+	createPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 31)
+	createPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 32)
+	createPartnersResponseFieldLastCallDate          = big.NewInt(1 << 33)
+	createPartnersResponseFieldNextCallDate          = big.NewInt(1 << 34)
+	createPartnersResponseFieldRating                = big.NewInt(1 << 35)
+	createPartnersResponseFieldIsEmployee            = big.NewInt(1 << 36)
+	createPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 37)
+	createPartnersResponseFieldIsActive              = big.NewInt(1 << 38)
+	createPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 39)
+	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 40)
+	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 41)
 )
 
 type CreatePartnersResponse struct {
@@ -7915,6 +8883,7 @@ type CreatePartnersResponse struct {
 	Phone                 *string                                      `json:"phone,omitempty" url:"phone,omitempty"`
 	SelfEmploymentCertNo  *string                                      `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
 	BirthDate             *time.Time                                   `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	IsBusiness            *bool                                        `json:"isBusiness,omitempty" url:"isBusiness,omitempty"`
 	IsCustomer            bool                                         `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                         `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                       `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
@@ -8022,6 +8991,13 @@ func (c *CreatePartnersResponse) GetBirthDate() *time.Time {
 		return nil
 	}
 	return c.BirthDate
+}
+
+func (c *CreatePartnersResponse) GetIsBusiness() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.IsBusiness
 }
 
 func (c *CreatePartnersResponse) GetIsCustomer() bool {
@@ -8325,6 +9301,13 @@ func (c *CreatePartnersResponse) SetBirthDate(birthDate *time.Time) {
 	c.require(createPartnersResponseFieldBirthDate)
 }
 
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersResponse) SetIsBusiness(isBusiness *bool) {
+	c.IsBusiness = isBusiness
+	c.require(createPartnersResponseFieldIsBusiness)
+}
+
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CreatePartnersResponse) SetIsCustomer(isCustomer bool) {
@@ -8623,6 +9606,7 @@ var (
 	createPartnersResponseAddressFieldCounty       = big.NewInt(1 << 3)
 	createPartnersResponseAddressFieldPostalCode   = big.NewInt(1 << 4)
 	createPartnersResponseAddressFieldCountryCode  = big.NewInt(1 << 5)
+	createPartnersResponseAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type CreatePartnersResponseAddress struct {
@@ -8632,6 +9616,8 @@ type CreatePartnersResponseAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8680,6 +9666,13 @@ func (c *CreatePartnersResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CreatePartnersResponseAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CreatePartnersResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -8738,6 +9731,13 @@ func (c *CreatePartnersResponseAddress) SetCountryCode(countryCode *string) {
 	c.require(createPartnersResponseAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersResponseAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(createPartnersResponseAddressFieldSubdivision)
+}
+
 func (c *CreatePartnersResponseAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler CreatePartnersResponseAddress
 	var value unmarshaler
@@ -8787,6 +9787,7 @@ var (
 	createPartnersResponseCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	createPartnersResponseCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	createPartnersResponseCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	createPartnersResponseCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type CreatePartnersResponseCorrespondenceAddress struct {
@@ -8796,6 +9797,8 @@ type CreatePartnersResponseCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8844,6 +9847,13 @@ func (c *CreatePartnersResponseCorrespondenceAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CreatePartnersResponseCorrespondenceAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CreatePartnersResponseCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -8900,6 +9910,13 @@ func (c *CreatePartnersResponseCorrespondenceAddress) SetPostalCode(postalCode *
 func (c *CreatePartnersResponseCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	c.CountryCode = countryCode
 	c.require(createPartnersResponseCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersResponseCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(createPartnersResponseCorrespondenceAddressFieldSubdivision)
 }
 
 func (c *CreatePartnersResponseCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -11660,6 +12677,7 @@ var (
 	findOrCreatePartnersRequestAddressFieldCounty       = big.NewInt(1 << 3)
 	findOrCreatePartnersRequestAddressFieldPostalCode   = big.NewInt(1 << 4)
 	findOrCreatePartnersRequestAddressFieldCountryCode  = big.NewInt(1 << 5)
+	findOrCreatePartnersRequestAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type FindOrCreatePartnersRequestAddress struct {
@@ -11669,6 +12687,8 @@ type FindOrCreatePartnersRequestAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11717,6 +12737,13 @@ func (f *FindOrCreatePartnersRequestAddress) GetCountryCode() *string {
 		return nil
 	}
 	return f.CountryCode
+}
+
+func (f *FindOrCreatePartnersRequestAddress) GetSubdivision() *string {
+	if f == nil {
+		return nil
+	}
+	return f.Subdivision
 }
 
 func (f *FindOrCreatePartnersRequestAddress) GetExtraProperties() map[string]interface{} {
@@ -11775,6 +12802,13 @@ func (f *FindOrCreatePartnersRequestAddress) SetCountryCode(countryCode *string)
 	f.require(findOrCreatePartnersRequestAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersRequestAddress) SetSubdivision(subdivision *string) {
+	f.Subdivision = subdivision
+	f.require(findOrCreatePartnersRequestAddressFieldSubdivision)
+}
+
 func (f *FindOrCreatePartnersRequestAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler FindOrCreatePartnersRequestAddress
 	var value unmarshaler
@@ -11824,6 +12858,7 @@ var (
 	findOrCreatePartnersRequestCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	findOrCreatePartnersRequestCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	findOrCreatePartnersRequestCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	findOrCreatePartnersRequestCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type FindOrCreatePartnersRequestCorrespondenceAddress struct {
@@ -11833,6 +12868,8 @@ type FindOrCreatePartnersRequestCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -11881,6 +12918,13 @@ func (f *FindOrCreatePartnersRequestCorrespondenceAddress) GetCountryCode() *str
 		return nil
 	}
 	return f.CountryCode
+}
+
+func (f *FindOrCreatePartnersRequestCorrespondenceAddress) GetSubdivision() *string {
+	if f == nil {
+		return nil
+	}
+	return f.Subdivision
 }
 
 func (f *FindOrCreatePartnersRequestCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -11937,6 +12981,13 @@ func (f *FindOrCreatePartnersRequestCorrespondenceAddress) SetPostalCode(postalC
 func (f *FindOrCreatePartnersRequestCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	f.CountryCode = countryCode
 	f.require(findOrCreatePartnersRequestCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersRequestCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	f.Subdivision = subdivision
+	f.require(findOrCreatePartnersRequestCorrespondenceAddressFieldSubdivision)
 }
 
 func (f *FindOrCreatePartnersRequestCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -12527,37 +13578,38 @@ var (
 	findOrCreatePartnersResponsePartnerFieldPhone                 = big.NewInt(1 << 7)
 	findOrCreatePartnersResponsePartnerFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
 	findOrCreatePartnersResponsePartnerFieldBirthDate             = big.NewInt(1 << 9)
-	findOrCreatePartnersResponsePartnerFieldIsCustomer            = big.NewInt(1 << 10)
-	findOrCreatePartnersResponsePartnerFieldIsSupplier            = big.NewInt(1 << 11)
-	findOrCreatePartnersResponsePartnerFieldPaymentTermDays       = big.NewInt(1 << 12)
-	findOrCreatePartnersResponsePartnerFieldInvoiceCurrency       = big.NewInt(1 << 13)
-	findOrCreatePartnersResponsePartnerFieldInvoiceLocale         = big.NewInt(1 << 14)
-	findOrCreatePartnersResponsePartnerFieldCreditLimit           = big.NewInt(1 << 15)
-	findOrCreatePartnersResponsePartnerFieldPriceListID           = big.NewInt(1 << 16)
-	findOrCreatePartnersResponsePartnerFieldGroupID               = big.NewInt(1 << 17)
-	findOrCreatePartnersResponsePartnerFieldStatusID              = big.NewInt(1 << 18)
-	findOrCreatePartnersResponsePartnerFieldVatValid              = big.NewInt(1 << 19)
-	findOrCreatePartnersResponsePartnerFieldVatValidatedAt        = big.NewInt(1 << 20)
-	findOrCreatePartnersResponsePartnerFieldAddress               = big.NewInt(1 << 21)
-	findOrCreatePartnersResponsePartnerFieldCorrespondenceAddress = big.NewInt(1 << 22)
-	findOrCreatePartnersResponsePartnerFieldNotes                 = big.NewInt(1 << 23)
-	findOrCreatePartnersResponsePartnerFieldDocumentRef           = big.NewInt(1 << 24)
-	findOrCreatePartnersResponsePartnerFieldShortName             = big.NewInt(1 << 25)
-	findOrCreatePartnersResponsePartnerFieldWebsite               = big.NewInt(1 << 26)
-	findOrCreatePartnersResponsePartnerFieldFax                   = big.NewInt(1 << 27)
-	findOrCreatePartnersResponsePartnerFieldEoriCode              = big.NewInt(1 << 28)
-	findOrCreatePartnersResponsePartnerFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	findOrCreatePartnersResponsePartnerFieldLateInterestPercent   = big.NewInt(1 << 30)
-	findOrCreatePartnersResponsePartnerFieldFirstCallDate         = big.NewInt(1 << 31)
-	findOrCreatePartnersResponsePartnerFieldLastCallDate          = big.NewInt(1 << 32)
-	findOrCreatePartnersResponsePartnerFieldNextCallDate          = big.NewInt(1 << 33)
-	findOrCreatePartnersResponsePartnerFieldRating                = big.NewInt(1 << 34)
-	findOrCreatePartnersResponsePartnerFieldIsEmployee            = big.NewInt(1 << 35)
-	findOrCreatePartnersResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 36)
-	findOrCreatePartnersResponsePartnerFieldIsActive              = big.NewInt(1 << 37)
-	findOrCreatePartnersResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 38)
-	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 39)
-	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 40)
+	findOrCreatePartnersResponsePartnerFieldIsBusiness            = big.NewInt(1 << 10)
+	findOrCreatePartnersResponsePartnerFieldIsCustomer            = big.NewInt(1 << 11)
+	findOrCreatePartnersResponsePartnerFieldIsSupplier            = big.NewInt(1 << 12)
+	findOrCreatePartnersResponsePartnerFieldPaymentTermDays       = big.NewInt(1 << 13)
+	findOrCreatePartnersResponsePartnerFieldInvoiceCurrency       = big.NewInt(1 << 14)
+	findOrCreatePartnersResponsePartnerFieldInvoiceLocale         = big.NewInt(1 << 15)
+	findOrCreatePartnersResponsePartnerFieldCreditLimit           = big.NewInt(1 << 16)
+	findOrCreatePartnersResponsePartnerFieldPriceListID           = big.NewInt(1 << 17)
+	findOrCreatePartnersResponsePartnerFieldGroupID               = big.NewInt(1 << 18)
+	findOrCreatePartnersResponsePartnerFieldStatusID              = big.NewInt(1 << 19)
+	findOrCreatePartnersResponsePartnerFieldVatValid              = big.NewInt(1 << 20)
+	findOrCreatePartnersResponsePartnerFieldVatValidatedAt        = big.NewInt(1 << 21)
+	findOrCreatePartnersResponsePartnerFieldAddress               = big.NewInt(1 << 22)
+	findOrCreatePartnersResponsePartnerFieldCorrespondenceAddress = big.NewInt(1 << 23)
+	findOrCreatePartnersResponsePartnerFieldNotes                 = big.NewInt(1 << 24)
+	findOrCreatePartnersResponsePartnerFieldDocumentRef           = big.NewInt(1 << 25)
+	findOrCreatePartnersResponsePartnerFieldShortName             = big.NewInt(1 << 26)
+	findOrCreatePartnersResponsePartnerFieldWebsite               = big.NewInt(1 << 27)
+	findOrCreatePartnersResponsePartnerFieldFax                   = big.NewInt(1 << 28)
+	findOrCreatePartnersResponsePartnerFieldEoriCode              = big.NewInt(1 << 29)
+	findOrCreatePartnersResponsePartnerFieldAutoDebtReminder      = big.NewInt(1 << 30)
+	findOrCreatePartnersResponsePartnerFieldLateInterestPercent   = big.NewInt(1 << 31)
+	findOrCreatePartnersResponsePartnerFieldFirstCallDate         = big.NewInt(1 << 32)
+	findOrCreatePartnersResponsePartnerFieldLastCallDate          = big.NewInt(1 << 33)
+	findOrCreatePartnersResponsePartnerFieldNextCallDate          = big.NewInt(1 << 34)
+	findOrCreatePartnersResponsePartnerFieldRating                = big.NewInt(1 << 35)
+	findOrCreatePartnersResponsePartnerFieldIsEmployee            = big.NewInt(1 << 36)
+	findOrCreatePartnersResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 37)
+	findOrCreatePartnersResponsePartnerFieldIsActive              = big.NewInt(1 << 38)
+	findOrCreatePartnersResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 39)
+	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 40)
+	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 41)
 )
 
 type FindOrCreatePartnersResponsePartner struct {
@@ -12571,6 +13623,7 @@ type FindOrCreatePartnersResponsePartner struct {
 	Phone                 *string                                                   `json:"phone,omitempty" url:"phone,omitempty"`
 	SelfEmploymentCertNo  *string                                                   `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
 	BirthDate             *time.Time                                                `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	IsBusiness            *bool                                                     `json:"isBusiness,omitempty" url:"isBusiness,omitempty"`
 	IsCustomer            bool                                                      `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                                      `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                                    `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
@@ -12678,6 +13731,13 @@ func (f *FindOrCreatePartnersResponsePartner) GetBirthDate() *time.Time {
 		return nil
 	}
 	return f.BirthDate
+}
+
+func (f *FindOrCreatePartnersResponsePartner) GetIsBusiness() *bool {
+	if f == nil {
+		return nil
+	}
+	return f.IsBusiness
 }
 
 func (f *FindOrCreatePartnersResponsePartner) GetIsCustomer() bool {
@@ -12981,6 +14041,13 @@ func (f *FindOrCreatePartnersResponsePartner) SetBirthDate(birthDate *time.Time)
 	f.require(findOrCreatePartnersResponsePartnerFieldBirthDate)
 }
 
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersResponsePartner) SetIsBusiness(isBusiness *bool) {
+	f.IsBusiness = isBusiness
+	f.require(findOrCreatePartnersResponsePartnerFieldIsBusiness)
+}
+
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (f *FindOrCreatePartnersResponsePartner) SetIsCustomer(isCustomer bool) {
@@ -13279,6 +14346,7 @@ var (
 	findOrCreatePartnersResponsePartnerAddressFieldCounty       = big.NewInt(1 << 3)
 	findOrCreatePartnersResponsePartnerAddressFieldPostalCode   = big.NewInt(1 << 4)
 	findOrCreatePartnersResponsePartnerAddressFieldCountryCode  = big.NewInt(1 << 5)
+	findOrCreatePartnersResponsePartnerAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type FindOrCreatePartnersResponsePartnerAddress struct {
@@ -13288,6 +14356,8 @@ type FindOrCreatePartnersResponsePartnerAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13336,6 +14406,13 @@ func (f *FindOrCreatePartnersResponsePartnerAddress) GetCountryCode() *string {
 		return nil
 	}
 	return f.CountryCode
+}
+
+func (f *FindOrCreatePartnersResponsePartnerAddress) GetSubdivision() *string {
+	if f == nil {
+		return nil
+	}
+	return f.Subdivision
 }
 
 func (f *FindOrCreatePartnersResponsePartnerAddress) GetExtraProperties() map[string]interface{} {
@@ -13394,6 +14471,13 @@ func (f *FindOrCreatePartnersResponsePartnerAddress) SetCountryCode(countryCode 
 	f.require(findOrCreatePartnersResponsePartnerAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersResponsePartnerAddress) SetSubdivision(subdivision *string) {
+	f.Subdivision = subdivision
+	f.require(findOrCreatePartnersResponsePartnerAddressFieldSubdivision)
+}
+
 func (f *FindOrCreatePartnersResponsePartnerAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler FindOrCreatePartnersResponsePartnerAddress
 	var value unmarshaler
@@ -13443,6 +14527,7 @@ var (
 	findOrCreatePartnersResponsePartnerCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	findOrCreatePartnersResponsePartnerCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	findOrCreatePartnersResponsePartnerCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	findOrCreatePartnersResponsePartnerCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type FindOrCreatePartnersResponsePartnerCorrespondenceAddress struct {
@@ -13452,6 +14537,8 @@ type FindOrCreatePartnersResponsePartnerCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13500,6 +14587,13 @@ func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) GetCountryCod
 		return nil
 	}
 	return f.CountryCode
+}
+
+func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) GetSubdivision() *string {
+	if f == nil {
+		return nil
+	}
+	return f.Subdivision
 }
 
 func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -13556,6 +14650,13 @@ func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) SetPostalCode
 func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	f.CountryCode = countryCode
 	f.require(findOrCreatePartnersResponsePartnerCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	f.Subdivision = subdivision
+	f.require(findOrCreatePartnersResponsePartnerCorrespondenceAddressFieldSubdivision)
 }
 
 func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -13658,37 +14759,38 @@ var (
 	getPartnersResponseFieldPhone                 = big.NewInt(1 << 7)
 	getPartnersResponseFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
 	getPartnersResponseFieldBirthDate             = big.NewInt(1 << 9)
-	getPartnersResponseFieldIsCustomer            = big.NewInt(1 << 10)
-	getPartnersResponseFieldIsSupplier            = big.NewInt(1 << 11)
-	getPartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
-	getPartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 13)
-	getPartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 14)
-	getPartnersResponseFieldCreditLimit           = big.NewInt(1 << 15)
-	getPartnersResponseFieldPriceListID           = big.NewInt(1 << 16)
-	getPartnersResponseFieldGroupID               = big.NewInt(1 << 17)
-	getPartnersResponseFieldStatusID              = big.NewInt(1 << 18)
-	getPartnersResponseFieldVatValid              = big.NewInt(1 << 19)
-	getPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 20)
-	getPartnersResponseFieldAddress               = big.NewInt(1 << 21)
-	getPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 22)
-	getPartnersResponseFieldNotes                 = big.NewInt(1 << 23)
-	getPartnersResponseFieldDocumentRef           = big.NewInt(1 << 24)
-	getPartnersResponseFieldShortName             = big.NewInt(1 << 25)
-	getPartnersResponseFieldWebsite               = big.NewInt(1 << 26)
-	getPartnersResponseFieldFax                   = big.NewInt(1 << 27)
-	getPartnersResponseFieldEoriCode              = big.NewInt(1 << 28)
-	getPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	getPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
-	getPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
-	getPartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
-	getPartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
-	getPartnersResponseFieldRating                = big.NewInt(1 << 34)
-	getPartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
-	getPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
-	getPartnersResponseFieldIsActive              = big.NewInt(1 << 37)
-	getPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
-	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
-	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
+	getPartnersResponseFieldIsBusiness            = big.NewInt(1 << 10)
+	getPartnersResponseFieldIsCustomer            = big.NewInt(1 << 11)
+	getPartnersResponseFieldIsSupplier            = big.NewInt(1 << 12)
+	getPartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 13)
+	getPartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 14)
+	getPartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 15)
+	getPartnersResponseFieldCreditLimit           = big.NewInt(1 << 16)
+	getPartnersResponseFieldPriceListID           = big.NewInt(1 << 17)
+	getPartnersResponseFieldGroupID               = big.NewInt(1 << 18)
+	getPartnersResponseFieldStatusID              = big.NewInt(1 << 19)
+	getPartnersResponseFieldVatValid              = big.NewInt(1 << 20)
+	getPartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 21)
+	getPartnersResponseFieldAddress               = big.NewInt(1 << 22)
+	getPartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 23)
+	getPartnersResponseFieldNotes                 = big.NewInt(1 << 24)
+	getPartnersResponseFieldDocumentRef           = big.NewInt(1 << 25)
+	getPartnersResponseFieldShortName             = big.NewInt(1 << 26)
+	getPartnersResponseFieldWebsite               = big.NewInt(1 << 27)
+	getPartnersResponseFieldFax                   = big.NewInt(1 << 28)
+	getPartnersResponseFieldEoriCode              = big.NewInt(1 << 29)
+	getPartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 30)
+	getPartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 31)
+	getPartnersResponseFieldFirstCallDate         = big.NewInt(1 << 32)
+	getPartnersResponseFieldLastCallDate          = big.NewInt(1 << 33)
+	getPartnersResponseFieldNextCallDate          = big.NewInt(1 << 34)
+	getPartnersResponseFieldRating                = big.NewInt(1 << 35)
+	getPartnersResponseFieldIsEmployee            = big.NewInt(1 << 36)
+	getPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 37)
+	getPartnersResponseFieldIsActive              = big.NewInt(1 << 38)
+	getPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 39)
+	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 40)
+	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 41)
 )
 
 type GetPartnersResponse struct {
@@ -13702,6 +14804,7 @@ type GetPartnersResponse struct {
 	Phone                 *string                                   `json:"phone,omitempty" url:"phone,omitempty"`
 	SelfEmploymentCertNo  *string                                   `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
 	BirthDate             *time.Time                                `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	IsBusiness            *bool                                     `json:"isBusiness,omitempty" url:"isBusiness,omitempty"`
 	IsCustomer            bool                                      `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                      `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                    `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
@@ -13809,6 +14912,13 @@ func (g *GetPartnersResponse) GetBirthDate() *time.Time {
 		return nil
 	}
 	return g.BirthDate
+}
+
+func (g *GetPartnersResponse) GetIsBusiness() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.IsBusiness
 }
 
 func (g *GetPartnersResponse) GetIsCustomer() bool {
@@ -14112,6 +15222,13 @@ func (g *GetPartnersResponse) SetBirthDate(birthDate *time.Time) {
 	g.require(getPartnersResponseFieldBirthDate)
 }
 
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPartnersResponse) SetIsBusiness(isBusiness *bool) {
+	g.IsBusiness = isBusiness
+	g.require(getPartnersResponseFieldIsBusiness)
+}
+
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (g *GetPartnersResponse) SetIsCustomer(isCustomer bool) {
@@ -14410,6 +15527,7 @@ var (
 	getPartnersResponseAddressFieldCounty       = big.NewInt(1 << 3)
 	getPartnersResponseAddressFieldPostalCode   = big.NewInt(1 << 4)
 	getPartnersResponseAddressFieldCountryCode  = big.NewInt(1 << 5)
+	getPartnersResponseAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type GetPartnersResponseAddress struct {
@@ -14419,6 +15537,8 @@ type GetPartnersResponseAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14467,6 +15587,13 @@ func (g *GetPartnersResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return g.CountryCode
+}
+
+func (g *GetPartnersResponseAddress) GetSubdivision() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Subdivision
 }
 
 func (g *GetPartnersResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -14525,6 +15652,13 @@ func (g *GetPartnersResponseAddress) SetCountryCode(countryCode *string) {
 	g.require(getPartnersResponseAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPartnersResponseAddress) SetSubdivision(subdivision *string) {
+	g.Subdivision = subdivision
+	g.require(getPartnersResponseAddressFieldSubdivision)
+}
+
 func (g *GetPartnersResponseAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler GetPartnersResponseAddress
 	var value unmarshaler
@@ -14574,6 +15708,7 @@ var (
 	getPartnersResponseCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	getPartnersResponseCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	getPartnersResponseCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	getPartnersResponseCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type GetPartnersResponseCorrespondenceAddress struct {
@@ -14583,6 +15718,8 @@ type GetPartnersResponseCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14631,6 +15768,13 @@ func (g *GetPartnersResponseCorrespondenceAddress) GetCountryCode() *string {
 		return nil
 	}
 	return g.CountryCode
+}
+
+func (g *GetPartnersResponseCorrespondenceAddress) GetSubdivision() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Subdivision
 }
 
 func (g *GetPartnersResponseCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -14687,6 +15831,13 @@ func (g *GetPartnersResponseCorrespondenceAddress) SetPostalCode(postalCode *str
 func (g *GetPartnersResponseCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	g.CountryCode = countryCode
 	g.require(getPartnersResponseCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPartnersResponseCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	g.Subdivision = subdivision
+	g.require(getPartnersResponseCorrespondenceAddressFieldSubdivision)
 }
 
 func (g *GetPartnersResponseCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -18004,37 +19155,38 @@ var (
 	listPartnersResponseRowsItemFieldPhone                 = big.NewInt(1 << 7)
 	listPartnersResponseRowsItemFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
 	listPartnersResponseRowsItemFieldBirthDate             = big.NewInt(1 << 9)
-	listPartnersResponseRowsItemFieldIsCustomer            = big.NewInt(1 << 10)
-	listPartnersResponseRowsItemFieldIsSupplier            = big.NewInt(1 << 11)
-	listPartnersResponseRowsItemFieldPaymentTermDays       = big.NewInt(1 << 12)
-	listPartnersResponseRowsItemFieldInvoiceCurrency       = big.NewInt(1 << 13)
-	listPartnersResponseRowsItemFieldInvoiceLocale         = big.NewInt(1 << 14)
-	listPartnersResponseRowsItemFieldCreditLimit           = big.NewInt(1 << 15)
-	listPartnersResponseRowsItemFieldPriceListID           = big.NewInt(1 << 16)
-	listPartnersResponseRowsItemFieldGroupID               = big.NewInt(1 << 17)
-	listPartnersResponseRowsItemFieldStatusID              = big.NewInt(1 << 18)
-	listPartnersResponseRowsItemFieldVatValid              = big.NewInt(1 << 19)
-	listPartnersResponseRowsItemFieldVatValidatedAt        = big.NewInt(1 << 20)
-	listPartnersResponseRowsItemFieldAddress               = big.NewInt(1 << 21)
-	listPartnersResponseRowsItemFieldCorrespondenceAddress = big.NewInt(1 << 22)
-	listPartnersResponseRowsItemFieldNotes                 = big.NewInt(1 << 23)
-	listPartnersResponseRowsItemFieldDocumentRef           = big.NewInt(1 << 24)
-	listPartnersResponseRowsItemFieldShortName             = big.NewInt(1 << 25)
-	listPartnersResponseRowsItemFieldWebsite               = big.NewInt(1 << 26)
-	listPartnersResponseRowsItemFieldFax                   = big.NewInt(1 << 27)
-	listPartnersResponseRowsItemFieldEoriCode              = big.NewInt(1 << 28)
-	listPartnersResponseRowsItemFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	listPartnersResponseRowsItemFieldLateInterestPercent   = big.NewInt(1 << 30)
-	listPartnersResponseRowsItemFieldFirstCallDate         = big.NewInt(1 << 31)
-	listPartnersResponseRowsItemFieldLastCallDate          = big.NewInt(1 << 32)
-	listPartnersResponseRowsItemFieldNextCallDate          = big.NewInt(1 << 33)
-	listPartnersResponseRowsItemFieldRating                = big.NewInt(1 << 34)
-	listPartnersResponseRowsItemFieldIsEmployee            = big.NewInt(1 << 35)
-	listPartnersResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 36)
-	listPartnersResponseRowsItemFieldIsActive              = big.NewInt(1 << 37)
-	listPartnersResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 38)
-	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 39)
-	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 40)
+	listPartnersResponseRowsItemFieldIsBusiness            = big.NewInt(1 << 10)
+	listPartnersResponseRowsItemFieldIsCustomer            = big.NewInt(1 << 11)
+	listPartnersResponseRowsItemFieldIsSupplier            = big.NewInt(1 << 12)
+	listPartnersResponseRowsItemFieldPaymentTermDays       = big.NewInt(1 << 13)
+	listPartnersResponseRowsItemFieldInvoiceCurrency       = big.NewInt(1 << 14)
+	listPartnersResponseRowsItemFieldInvoiceLocale         = big.NewInt(1 << 15)
+	listPartnersResponseRowsItemFieldCreditLimit           = big.NewInt(1 << 16)
+	listPartnersResponseRowsItemFieldPriceListID           = big.NewInt(1 << 17)
+	listPartnersResponseRowsItemFieldGroupID               = big.NewInt(1 << 18)
+	listPartnersResponseRowsItemFieldStatusID              = big.NewInt(1 << 19)
+	listPartnersResponseRowsItemFieldVatValid              = big.NewInt(1 << 20)
+	listPartnersResponseRowsItemFieldVatValidatedAt        = big.NewInt(1 << 21)
+	listPartnersResponseRowsItemFieldAddress               = big.NewInt(1 << 22)
+	listPartnersResponseRowsItemFieldCorrespondenceAddress = big.NewInt(1 << 23)
+	listPartnersResponseRowsItemFieldNotes                 = big.NewInt(1 << 24)
+	listPartnersResponseRowsItemFieldDocumentRef           = big.NewInt(1 << 25)
+	listPartnersResponseRowsItemFieldShortName             = big.NewInt(1 << 26)
+	listPartnersResponseRowsItemFieldWebsite               = big.NewInt(1 << 27)
+	listPartnersResponseRowsItemFieldFax                   = big.NewInt(1 << 28)
+	listPartnersResponseRowsItemFieldEoriCode              = big.NewInt(1 << 29)
+	listPartnersResponseRowsItemFieldAutoDebtReminder      = big.NewInt(1 << 30)
+	listPartnersResponseRowsItemFieldLateInterestPercent   = big.NewInt(1 << 31)
+	listPartnersResponseRowsItemFieldFirstCallDate         = big.NewInt(1 << 32)
+	listPartnersResponseRowsItemFieldLastCallDate          = big.NewInt(1 << 33)
+	listPartnersResponseRowsItemFieldNextCallDate          = big.NewInt(1 << 34)
+	listPartnersResponseRowsItemFieldRating                = big.NewInt(1 << 35)
+	listPartnersResponseRowsItemFieldIsEmployee            = big.NewInt(1 << 36)
+	listPartnersResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 37)
+	listPartnersResponseRowsItemFieldIsActive              = big.NewInt(1 << 38)
+	listPartnersResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 39)
+	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 40)
+	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 41)
 )
 
 type ListPartnersResponseRowsItem struct {
@@ -18048,6 +19200,7 @@ type ListPartnersResponseRowsItem struct {
 	Phone                 *string                                            `json:"phone,omitempty" url:"phone,omitempty"`
 	SelfEmploymentCertNo  *string                                            `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
 	BirthDate             *time.Time                                         `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	IsBusiness            *bool                                              `json:"isBusiness,omitempty" url:"isBusiness,omitempty"`
 	IsCustomer            bool                                               `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                               `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                             `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
@@ -18155,6 +19308,13 @@ func (l *ListPartnersResponseRowsItem) GetBirthDate() *time.Time {
 		return nil
 	}
 	return l.BirthDate
+}
+
+func (l *ListPartnersResponseRowsItem) GetIsBusiness() *bool {
+	if l == nil {
+		return nil
+	}
+	return l.IsBusiness
 }
 
 func (l *ListPartnersResponseRowsItem) GetIsCustomer() bool {
@@ -18458,6 +19618,13 @@ func (l *ListPartnersResponseRowsItem) SetBirthDate(birthDate *time.Time) {
 	l.require(listPartnersResponseRowsItemFieldBirthDate)
 }
 
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListPartnersResponseRowsItem) SetIsBusiness(isBusiness *bool) {
+	l.IsBusiness = isBusiness
+	l.require(listPartnersResponseRowsItemFieldIsBusiness)
+}
+
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (l *ListPartnersResponseRowsItem) SetIsCustomer(isCustomer bool) {
@@ -18756,6 +19923,7 @@ var (
 	listPartnersResponseRowsItemAddressFieldCounty       = big.NewInt(1 << 3)
 	listPartnersResponseRowsItemAddressFieldPostalCode   = big.NewInt(1 << 4)
 	listPartnersResponseRowsItemAddressFieldCountryCode  = big.NewInt(1 << 5)
+	listPartnersResponseRowsItemAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type ListPartnersResponseRowsItemAddress struct {
@@ -18765,6 +19933,8 @@ type ListPartnersResponseRowsItemAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18813,6 +19983,13 @@ func (l *ListPartnersResponseRowsItemAddress) GetCountryCode() *string {
 		return nil
 	}
 	return l.CountryCode
+}
+
+func (l *ListPartnersResponseRowsItemAddress) GetSubdivision() *string {
+	if l == nil {
+		return nil
+	}
+	return l.Subdivision
 }
 
 func (l *ListPartnersResponseRowsItemAddress) GetExtraProperties() map[string]interface{} {
@@ -18871,6 +20048,13 @@ func (l *ListPartnersResponseRowsItemAddress) SetCountryCode(countryCode *string
 	l.require(listPartnersResponseRowsItemAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListPartnersResponseRowsItemAddress) SetSubdivision(subdivision *string) {
+	l.Subdivision = subdivision
+	l.require(listPartnersResponseRowsItemAddressFieldSubdivision)
+}
+
 func (l *ListPartnersResponseRowsItemAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler ListPartnersResponseRowsItemAddress
 	var value unmarshaler
@@ -18920,6 +20104,7 @@ var (
 	listPartnersResponseRowsItemCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	listPartnersResponseRowsItemCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	listPartnersResponseRowsItemCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	listPartnersResponseRowsItemCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type ListPartnersResponseRowsItemCorrespondenceAddress struct {
@@ -18929,6 +20114,8 @@ type ListPartnersResponseRowsItemCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18977,6 +20164,13 @@ func (l *ListPartnersResponseRowsItemCorrespondenceAddress) GetCountryCode() *st
 		return nil
 	}
 	return l.CountryCode
+}
+
+func (l *ListPartnersResponseRowsItemCorrespondenceAddress) GetSubdivision() *string {
+	if l == nil {
+		return nil
+	}
+	return l.Subdivision
 }
 
 func (l *ListPartnersResponseRowsItemCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -19033,6 +20227,13 @@ func (l *ListPartnersResponseRowsItemCorrespondenceAddress) SetPostalCode(postal
 func (l *ListPartnersResponseRowsItemCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	l.CountryCode = countryCode
 	l.require(listPartnersResponseRowsItemCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListPartnersResponseRowsItemCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	l.Subdivision = subdivision
+	l.require(listPartnersResponseRowsItemCorrespondenceAddressFieldSubdivision)
 }
 
 func (l *ListPartnersResponseRowsItemCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -19999,6 +21200,7 @@ var (
 	updatePartnersRequestAddressFieldCounty       = big.NewInt(1 << 3)
 	updatePartnersRequestAddressFieldPostalCode   = big.NewInt(1 << 4)
 	updatePartnersRequestAddressFieldCountryCode  = big.NewInt(1 << 5)
+	updatePartnersRequestAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type UpdatePartnersRequestAddress struct {
@@ -20008,6 +21210,8 @@ type UpdatePartnersRequestAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -20056,6 +21260,13 @@ func (u *UpdatePartnersRequestAddress) GetCountryCode() *string {
 		return nil
 	}
 	return u.CountryCode
+}
+
+func (u *UpdatePartnersRequestAddress) GetSubdivision() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Subdivision
 }
 
 func (u *UpdatePartnersRequestAddress) GetExtraProperties() map[string]interface{} {
@@ -20114,6 +21325,13 @@ func (u *UpdatePartnersRequestAddress) SetCountryCode(countryCode *string) {
 	u.require(updatePartnersRequestAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersRequestAddress) SetSubdivision(subdivision *string) {
+	u.Subdivision = subdivision
+	u.require(updatePartnersRequestAddressFieldSubdivision)
+}
+
 func (u *UpdatePartnersRequestAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler UpdatePartnersRequestAddress
 	var value unmarshaler
@@ -20163,6 +21381,7 @@ var (
 	updatePartnersRequestCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	updatePartnersRequestCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	updatePartnersRequestCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	updatePartnersRequestCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type UpdatePartnersRequestCorrespondenceAddress struct {
@@ -20172,6 +21391,8 @@ type UpdatePartnersRequestCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -20220,6 +21441,13 @@ func (u *UpdatePartnersRequestCorrespondenceAddress) GetCountryCode() *string {
 		return nil
 	}
 	return u.CountryCode
+}
+
+func (u *UpdatePartnersRequestCorrespondenceAddress) GetSubdivision() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Subdivision
 }
 
 func (u *UpdatePartnersRequestCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -20276,6 +21504,13 @@ func (u *UpdatePartnersRequestCorrespondenceAddress) SetPostalCode(postalCode *s
 func (u *UpdatePartnersRequestCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	u.CountryCode = countryCode
 	u.require(updatePartnersRequestCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersRequestCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	u.Subdivision = subdivision
+	u.require(updatePartnersRequestCorrespondenceAddressFieldSubdivision)
 }
 
 func (u *UpdatePartnersRequestCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -20766,37 +22001,38 @@ var (
 	updatePartnersResponseFieldPhone                 = big.NewInt(1 << 7)
 	updatePartnersResponseFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
 	updatePartnersResponseFieldBirthDate             = big.NewInt(1 << 9)
-	updatePartnersResponseFieldIsCustomer            = big.NewInt(1 << 10)
-	updatePartnersResponseFieldIsSupplier            = big.NewInt(1 << 11)
-	updatePartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 12)
-	updatePartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 13)
-	updatePartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 14)
-	updatePartnersResponseFieldCreditLimit           = big.NewInt(1 << 15)
-	updatePartnersResponseFieldPriceListID           = big.NewInt(1 << 16)
-	updatePartnersResponseFieldGroupID               = big.NewInt(1 << 17)
-	updatePartnersResponseFieldStatusID              = big.NewInt(1 << 18)
-	updatePartnersResponseFieldVatValid              = big.NewInt(1 << 19)
-	updatePartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 20)
-	updatePartnersResponseFieldAddress               = big.NewInt(1 << 21)
-	updatePartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 22)
-	updatePartnersResponseFieldNotes                 = big.NewInt(1 << 23)
-	updatePartnersResponseFieldDocumentRef           = big.NewInt(1 << 24)
-	updatePartnersResponseFieldShortName             = big.NewInt(1 << 25)
-	updatePartnersResponseFieldWebsite               = big.NewInt(1 << 26)
-	updatePartnersResponseFieldFax                   = big.NewInt(1 << 27)
-	updatePartnersResponseFieldEoriCode              = big.NewInt(1 << 28)
-	updatePartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 29)
-	updatePartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 30)
-	updatePartnersResponseFieldFirstCallDate         = big.NewInt(1 << 31)
-	updatePartnersResponseFieldLastCallDate          = big.NewInt(1 << 32)
-	updatePartnersResponseFieldNextCallDate          = big.NewInt(1 << 33)
-	updatePartnersResponseFieldRating                = big.NewInt(1 << 34)
-	updatePartnersResponseFieldIsEmployee            = big.NewInt(1 << 35)
-	updatePartnersResponseFieldIsGroupMember         = big.NewInt(1 << 36)
-	updatePartnersResponseFieldIsActive              = big.NewInt(1 << 37)
-	updatePartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 38)
-	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 39)
-	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 40)
+	updatePartnersResponseFieldIsBusiness            = big.NewInt(1 << 10)
+	updatePartnersResponseFieldIsCustomer            = big.NewInt(1 << 11)
+	updatePartnersResponseFieldIsSupplier            = big.NewInt(1 << 12)
+	updatePartnersResponseFieldPaymentTermDays       = big.NewInt(1 << 13)
+	updatePartnersResponseFieldInvoiceCurrency       = big.NewInt(1 << 14)
+	updatePartnersResponseFieldInvoiceLocale         = big.NewInt(1 << 15)
+	updatePartnersResponseFieldCreditLimit           = big.NewInt(1 << 16)
+	updatePartnersResponseFieldPriceListID           = big.NewInt(1 << 17)
+	updatePartnersResponseFieldGroupID               = big.NewInt(1 << 18)
+	updatePartnersResponseFieldStatusID              = big.NewInt(1 << 19)
+	updatePartnersResponseFieldVatValid              = big.NewInt(1 << 20)
+	updatePartnersResponseFieldVatValidatedAt        = big.NewInt(1 << 21)
+	updatePartnersResponseFieldAddress               = big.NewInt(1 << 22)
+	updatePartnersResponseFieldCorrespondenceAddress = big.NewInt(1 << 23)
+	updatePartnersResponseFieldNotes                 = big.NewInt(1 << 24)
+	updatePartnersResponseFieldDocumentRef           = big.NewInt(1 << 25)
+	updatePartnersResponseFieldShortName             = big.NewInt(1 << 26)
+	updatePartnersResponseFieldWebsite               = big.NewInt(1 << 27)
+	updatePartnersResponseFieldFax                   = big.NewInt(1 << 28)
+	updatePartnersResponseFieldEoriCode              = big.NewInt(1 << 29)
+	updatePartnersResponseFieldAutoDebtReminder      = big.NewInt(1 << 30)
+	updatePartnersResponseFieldLateInterestPercent   = big.NewInt(1 << 31)
+	updatePartnersResponseFieldFirstCallDate         = big.NewInt(1 << 32)
+	updatePartnersResponseFieldLastCallDate          = big.NewInt(1 << 33)
+	updatePartnersResponseFieldNextCallDate          = big.NewInt(1 << 34)
+	updatePartnersResponseFieldRating                = big.NewInt(1 << 35)
+	updatePartnersResponseFieldIsEmployee            = big.NewInt(1 << 36)
+	updatePartnersResponseFieldIsGroupMember         = big.NewInt(1 << 37)
+	updatePartnersResponseFieldIsActive              = big.NewInt(1 << 38)
+	updatePartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 39)
+	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 40)
+	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 41)
 )
 
 type UpdatePartnersResponse struct {
@@ -20810,6 +22046,7 @@ type UpdatePartnersResponse struct {
 	Phone                 *string                                      `json:"phone,omitempty" url:"phone,omitempty"`
 	SelfEmploymentCertNo  *string                                      `json:"selfEmploymentCertNo,omitempty" url:"selfEmploymentCertNo,omitempty"`
 	BirthDate             *time.Time                                   `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	IsBusiness            *bool                                        `json:"isBusiness,omitempty" url:"isBusiness,omitempty"`
 	IsCustomer            bool                                         `json:"isCustomer" url:"isCustomer"`
 	IsSupplier            bool                                         `json:"isSupplier" url:"isSupplier"`
 	PaymentTermDays       *int64                                       `json:"paymentTermDays,omitempty" url:"paymentTermDays,omitempty"`
@@ -20917,6 +22154,13 @@ func (u *UpdatePartnersResponse) GetBirthDate() *time.Time {
 		return nil
 	}
 	return u.BirthDate
+}
+
+func (u *UpdatePartnersResponse) GetIsBusiness() *bool {
+	if u == nil {
+		return nil
+	}
+	return u.IsBusiness
 }
 
 func (u *UpdatePartnersResponse) GetIsCustomer() bool {
@@ -21220,6 +22464,13 @@ func (u *UpdatePartnersResponse) SetBirthDate(birthDate *time.Time) {
 	u.require(updatePartnersResponseFieldBirthDate)
 }
 
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersResponse) SetIsBusiness(isBusiness *bool) {
+	u.IsBusiness = isBusiness
+	u.require(updatePartnersResponseFieldIsBusiness)
+}
+
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (u *UpdatePartnersResponse) SetIsCustomer(isCustomer bool) {
@@ -21518,6 +22769,7 @@ var (
 	updatePartnersResponseAddressFieldCounty       = big.NewInt(1 << 3)
 	updatePartnersResponseAddressFieldPostalCode   = big.NewInt(1 << 4)
 	updatePartnersResponseAddressFieldCountryCode  = big.NewInt(1 << 5)
+	updatePartnersResponseAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type UpdatePartnersResponseAddress struct {
@@ -21527,6 +22779,8 @@ type UpdatePartnersResponseAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -21575,6 +22829,13 @@ func (u *UpdatePartnersResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return u.CountryCode
+}
+
+func (u *UpdatePartnersResponseAddress) GetSubdivision() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Subdivision
 }
 
 func (u *UpdatePartnersResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -21633,6 +22894,13 @@ func (u *UpdatePartnersResponseAddress) SetCountryCode(countryCode *string) {
 	u.require(updatePartnersResponseAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersResponseAddress) SetSubdivision(subdivision *string) {
+	u.Subdivision = subdivision
+	u.require(updatePartnersResponseAddressFieldSubdivision)
+}
+
 func (u *UpdatePartnersResponseAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler UpdatePartnersResponseAddress
 	var value unmarshaler
@@ -21682,6 +22950,7 @@ var (
 	updatePartnersResponseCorrespondenceAddressFieldCounty       = big.NewInt(1 << 3)
 	updatePartnersResponseCorrespondenceAddressFieldPostalCode   = big.NewInt(1 << 4)
 	updatePartnersResponseCorrespondenceAddressFieldCountryCode  = big.NewInt(1 << 5)
+	updatePartnersResponseCorrespondenceAddressFieldSubdivision  = big.NewInt(1 << 6)
 )
 
 type UpdatePartnersResponseCorrespondenceAddress struct {
@@ -21691,6 +22960,8 @@ type UpdatePartnersResponseCorrespondenceAddress struct {
 	County       *string `json:"county,omitempty" url:"county,omitempty"`
 	PostalCode   *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode  *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -21739,6 +23010,13 @@ func (u *UpdatePartnersResponseCorrespondenceAddress) GetCountryCode() *string {
 		return nil
 	}
 	return u.CountryCode
+}
+
+func (u *UpdatePartnersResponseCorrespondenceAddress) GetSubdivision() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Subdivision
 }
 
 func (u *UpdatePartnersResponseCorrespondenceAddress) GetExtraProperties() map[string]interface{} {
@@ -21795,6 +23073,13 @@ func (u *UpdatePartnersResponseCorrespondenceAddress) SetPostalCode(postalCode *
 func (u *UpdatePartnersResponseCorrespondenceAddress) SetCountryCode(countryCode *string) {
 	u.CountryCode = countryCode
 	u.require(updatePartnersResponseCorrespondenceAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersResponseCorrespondenceAddress) SetSubdivision(subdivision *string) {
+	u.Subdivision = subdivision
+	u.require(updatePartnersResponseCorrespondenceAddressFieldSubdivision)
 }
 
 func (u *UpdatePartnersResponseCorrespondenceAddress) UnmarshalJSON(data []byte) error {
@@ -23685,33 +24970,34 @@ var (
 	updatePartnersRequestFieldPhone                 = big.NewInt(1 << 7)
 	updatePartnersRequestFieldSelfEmploymentCertNo  = big.NewInt(1 << 8)
 	updatePartnersRequestFieldBirthDate             = big.NewInt(1 << 9)
-	updatePartnersRequestFieldIsCustomer            = big.NewInt(1 << 10)
-	updatePartnersRequestFieldIsSupplier            = big.NewInt(1 << 11)
-	updatePartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 12)
-	updatePartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 13)
-	updatePartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 14)
-	updatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 15)
-	updatePartnersRequestFieldPriceListID           = big.NewInt(1 << 16)
-	updatePartnersRequestFieldGroupID               = big.NewInt(1 << 17)
-	updatePartnersRequestFieldStatusID              = big.NewInt(1 << 18)
-	updatePartnersRequestFieldAddress               = big.NewInt(1 << 19)
-	updatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 20)
-	updatePartnersRequestFieldNotes                 = big.NewInt(1 << 21)
-	updatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 22)
-	updatePartnersRequestFieldShortName             = big.NewInt(1 << 23)
-	updatePartnersRequestFieldWebsite               = big.NewInt(1 << 24)
-	updatePartnersRequestFieldFax                   = big.NewInt(1 << 25)
-	updatePartnersRequestFieldEoriCode              = big.NewInt(1 << 26)
-	updatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 27)
-	updatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 28)
-	updatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 29)
-	updatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 30)
-	updatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 31)
-	updatePartnersRequestFieldRating                = big.NewInt(1 << 32)
-	updatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 33)
-	updatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 34)
-	updatePartnersRequestFieldIsActive              = big.NewInt(1 << 35)
-	updatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
+	updatePartnersRequestFieldIsBusiness            = big.NewInt(1 << 10)
+	updatePartnersRequestFieldIsCustomer            = big.NewInt(1 << 11)
+	updatePartnersRequestFieldIsSupplier            = big.NewInt(1 << 12)
+	updatePartnersRequestFieldPaymentTermDays       = big.NewInt(1 << 13)
+	updatePartnersRequestFieldInvoiceCurrency       = big.NewInt(1 << 14)
+	updatePartnersRequestFieldInvoiceLocale         = big.NewInt(1 << 15)
+	updatePartnersRequestFieldCreditLimit           = big.NewInt(1 << 16)
+	updatePartnersRequestFieldPriceListID           = big.NewInt(1 << 17)
+	updatePartnersRequestFieldGroupID               = big.NewInt(1 << 18)
+	updatePartnersRequestFieldStatusID              = big.NewInt(1 << 19)
+	updatePartnersRequestFieldAddress               = big.NewInt(1 << 20)
+	updatePartnersRequestFieldCorrespondenceAddress = big.NewInt(1 << 21)
+	updatePartnersRequestFieldNotes                 = big.NewInt(1 << 22)
+	updatePartnersRequestFieldDocumentRef           = big.NewInt(1 << 23)
+	updatePartnersRequestFieldShortName             = big.NewInt(1 << 24)
+	updatePartnersRequestFieldWebsite               = big.NewInt(1 << 25)
+	updatePartnersRequestFieldFax                   = big.NewInt(1 << 26)
+	updatePartnersRequestFieldEoriCode              = big.NewInt(1 << 27)
+	updatePartnersRequestFieldAutoDebtReminder      = big.NewInt(1 << 28)
+	updatePartnersRequestFieldLateInterestPercent   = big.NewInt(1 << 29)
+	updatePartnersRequestFieldFirstCallDate         = big.NewInt(1 << 30)
+	updatePartnersRequestFieldLastCallDate          = big.NewInt(1 << 31)
+	updatePartnersRequestFieldNextCallDate          = big.NewInt(1 << 32)
+	updatePartnersRequestFieldRating                = big.NewInt(1 << 33)
+	updatePartnersRequestFieldIsEmployee            = big.NewInt(1 << 34)
+	updatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 35)
+	updatePartnersRequestFieldIsActive              = big.NewInt(1 << 36)
+	updatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 37)
 )
 
 type UpdatePartnersRequest struct {
@@ -23725,9 +25011,11 @@ type UpdatePartnersRequest struct {
 	Phone                *string                    `json:"phone,omitempty" url:"-"`
 	SelfEmploymentCertNo *string                    `json:"selfEmploymentCertNo,omitempty" url:"-"`
 	BirthDate            *time.Time                 `json:"birthDate,omitempty" url:"-" format:"date"`
-	IsCustomer           *bool                      `json:"isCustomer,omitempty" url:"-"`
-	IsSupplier           *bool                      `json:"isSupplier,omitempty" url:"-"`
-	PaymentTermDays      *int64                     `json:"paymentTermDays,omitempty" url:"-"`
+	// Whether the partner acts as a business for VAT; when not set, a partner with a VAT code is a business. Regulation (EU) 282/2011 art. 18 lets a customer without a VAT number be treated as a business on other proof
+	IsBusiness      *bool  `json:"isBusiness,omitempty" url:"-"`
+	IsCustomer      *bool  `json:"isCustomer,omitempty" url:"-"`
+	IsSupplier      *bool  `json:"isSupplier,omitempty" url:"-"`
+	PaymentTermDays *int64 `json:"paymentTermDays,omitempty" url:"-"`
 	// Currency a new invoice for this partner starts with when the invoice names none
 	InvoiceCurrency *UpdatePartnersRequestInvoiceCurrency `json:"invoiceCurrency,omitempty" url:"-"`
 	// Language a new invoice for this partner starts with when the invoice names none
@@ -23834,6 +25122,13 @@ func (u *UpdatePartnersRequest) SetSelfEmploymentCertNo(selfEmploymentCertNo *st
 func (u *UpdatePartnersRequest) SetBirthDate(birthDate *time.Time) {
 	u.BirthDate = birthDate
 	u.require(updatePartnersRequestFieldBirthDate)
+}
+
+// SetIsBusiness sets the IsBusiness field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersRequest) SetIsBusiness(isBusiness *bool) {
+	u.IsBusiness = isBusiness
+	u.require(updatePartnersRequestFieldIsBusiness)
 }
 
 // SetIsCustomer sets the IsCustomer field and marks it as non-optional;

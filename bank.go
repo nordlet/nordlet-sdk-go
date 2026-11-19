@@ -11,21 +11,30 @@ import (
 )
 
 var (
-	accountsCreateBankRequestFieldName        = big.NewInt(1 << 0)
-	accountsCreateBankRequestFieldType        = big.NewInt(1 << 1)
-	accountsCreateBankRequestFieldIban        = big.NewInt(1 << 2)
-	accountsCreateBankRequestFieldCurrency    = big.NewInt(1 << 3)
-	accountsCreateBankRequestFieldAccountCode = big.NewInt(1 << 4)
-	accountsCreateBankRequestFieldDocumentRef = big.NewInt(1 << 5)
+	accountsCreateBankRequestFieldName                = big.NewInt(1 << 0)
+	accountsCreateBankRequestFieldType                = big.NewInt(1 << 1)
+	accountsCreateBankRequestFieldIban                = big.NewInt(1 << 2)
+	accountsCreateBankRequestFieldBankCode            = big.NewInt(1 << 3)
+	accountsCreateBankRequestFieldBankAccountNumber   = big.NewInt(1 << 4)
+	accountsCreateBankRequestFieldPaymentFileSettings = big.NewInt(1 << 5)
+	accountsCreateBankRequestFieldCurrency            = big.NewInt(1 << 6)
+	accountsCreateBankRequestFieldAccountCode         = big.NewInt(1 << 7)
+	accountsCreateBankRequestFieldDocumentRef         = big.NewInt(1 << 8)
 )
 
 type AccountsCreateBankRequest struct {
-	Name        string                         `json:"name" url:"-"`
-	Type        *AccountsCreateBankRequestType `json:"type,omitempty" url:"-"`
-	Iban        *string                        `json:"iban,omitempty" url:"-"`
-	Currency    *string                        `json:"currency,omitempty" url:"-"`
-	AccountCode *string                        `json:"accountCode,omitempty" url:"-"`
-	DocumentRef *string                        `json:"documentRef,omitempty" url:"-"`
+	Name string                         `json:"name" url:"-"`
+	Type *AccountsCreateBankRequestType `json:"type,omitempty" url:"-"`
+	Iban *string                        `json:"iban,omitempty" url:"-"`
+	// Sort code, routing number or other national bank code, for an account without an IBAN
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Account number, for an account without an IBAN
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// What the bank gave the company for payment files from this account: the Bacs service user number for a UK account, the ACH Immediate Origin and Company Identification for a US account
+	PaymentFileSettings *AccountsCreateBankRequestPaymentFileSettings `json:"paymentFileSettings,omitempty" url:"-"`
+	Currency            *string                                       `json:"currency,omitempty" url:"-"`
+	AccountCode         *string                                       `json:"accountCode,omitempty" url:"-"`
+	DocumentRef         *string                                       `json:"documentRef,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -57,6 +66,27 @@ func (a *AccountsCreateBankRequest) SetType(type_ *AccountsCreateBankRequestType
 func (a *AccountsCreateBankRequest) SetIban(iban *string) {
 	a.Iban = iban
 	a.require(accountsCreateBankRequestFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequest) SetBankCode(bankCode *string) {
+	a.BankCode = bankCode
+	a.require(accountsCreateBankRequestFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	a.BankAccountNumber = bankAccountNumber
+	a.require(accountsCreateBankRequestFieldBankAccountNumber)
+}
+
+// SetPaymentFileSettings sets the PaymentFileSettings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequest) SetPaymentFileSettings(paymentFileSettings *AccountsCreateBankRequestPaymentFileSettings) {
+	a.PaymentFileSettings = paymentFileSettings
+	a.require(accountsCreateBankRequestFieldPaymentFileSettings)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
@@ -185,21 +215,30 @@ func (a *AccountsListBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	accountsUpdateBankRequestFieldID          = big.NewInt(1 << 0)
-	accountsUpdateBankRequestFieldName        = big.NewInt(1 << 1)
-	accountsUpdateBankRequestFieldType        = big.NewInt(1 << 2)
-	accountsUpdateBankRequestFieldIban        = big.NewInt(1 << 3)
-	accountsUpdateBankRequestFieldAccountCode = big.NewInt(1 << 4)
-	accountsUpdateBankRequestFieldIsActive    = big.NewInt(1 << 5)
+	accountsUpdateBankRequestFieldID                  = big.NewInt(1 << 0)
+	accountsUpdateBankRequestFieldName                = big.NewInt(1 << 1)
+	accountsUpdateBankRequestFieldType                = big.NewInt(1 << 2)
+	accountsUpdateBankRequestFieldIban                = big.NewInt(1 << 3)
+	accountsUpdateBankRequestFieldBankCode            = big.NewInt(1 << 4)
+	accountsUpdateBankRequestFieldBankAccountNumber   = big.NewInt(1 << 5)
+	accountsUpdateBankRequestFieldPaymentFileSettings = big.NewInt(1 << 6)
+	accountsUpdateBankRequestFieldAccountCode         = big.NewInt(1 << 7)
+	accountsUpdateBankRequestFieldIsActive            = big.NewInt(1 << 8)
 )
 
 type AccountsUpdateBankRequest struct {
-	ID          string                         `json:"id" url:"-"`
-	Name        *string                        `json:"name,omitempty" url:"-"`
-	Type        *AccountsUpdateBankRequestType `json:"type,omitempty" url:"-"`
-	Iban        *string                        `json:"iban,omitempty" url:"-"`
-	AccountCode *string                        `json:"accountCode,omitempty" url:"-"`
-	IsActive    *bool                          `json:"isActive,omitempty" url:"-"`
+	ID   string                         `json:"id" url:"-"`
+	Name *string                        `json:"name,omitempty" url:"-"`
+	Type *AccountsUpdateBankRequestType `json:"type,omitempty" url:"-"`
+	Iban *string                        `json:"iban,omitempty" url:"-"`
+	// Sort code, routing number or other national bank code, for an account without an IBAN
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Account number, for an account without an IBAN
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// What the bank gave the company for payment files from this account: the Bacs service user number for a UK account, the ACH Immediate Origin and Company Identification for a US account
+	PaymentFileSettings *AccountsUpdateBankRequestPaymentFileSettings `json:"paymentFileSettings,omitempty" url:"-"`
+	AccountCode         *string                                       `json:"accountCode,omitempty" url:"-"`
+	IsActive            *bool                                         `json:"isActive,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -238,6 +277,27 @@ func (a *AccountsUpdateBankRequest) SetType(type_ *AccountsUpdateBankRequestType
 func (a *AccountsUpdateBankRequest) SetIban(iban *string) {
 	a.Iban = iban
 	a.require(accountsUpdateBankRequestFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequest) SetBankCode(bankCode *string) {
+	a.BankCode = bankCode
+	a.require(accountsUpdateBankRequestFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	a.BankAccountNumber = bankAccountNumber
+	a.require(accountsUpdateBankRequestFieldBankAccountNumber)
+}
+
+// SetPaymentFileSettings sets the PaymentFileSettings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequest) SetPaymentFileSettings(paymentFileSettings *AccountsUpdateBankRequestPaymentFileSettings) {
+	a.PaymentFileSettings = paymentFileSettings
+	a.require(accountsUpdateBankRequestFieldPaymentFileSettings)
 }
 
 // SetAccountCode sets the AccountCode field and marks it as non-optional;
@@ -1567,6 +1627,72 @@ func (i *ImportTemplatesUpdateBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	mandatesAuddisExportBankRequestFieldBankAccountID  = big.NewInt(1 << 0)
+	mandatesAuddisExportBankRequestFieldMandateIDs     = big.NewInt(1 << 1)
+	mandatesAuddisExportBankRequestFieldProcessingDate = big.NewInt(1 << 2)
+)
+
+type MandatesAuddisExportBankRequest struct {
+	BankAccountID  string     `json:"bankAccountId" url:"-"`
+	MandateIDs     []string   `json:"mandateIds,omitempty" url:"-"`
+	ProcessingDate *time.Time `json:"processingDate,omitempty" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (m *MandatesAuddisExportBankRequest) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetBankAccountID sets the BankAccountID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankRequest) SetBankAccountID(bankAccountID string) {
+	m.BankAccountID = bankAccountID
+	m.require(mandatesAuddisExportBankRequestFieldBankAccountID)
+}
+
+// SetMandateIDs sets the MandateIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankRequest) SetMandateIDs(mandateIDs []string) {
+	m.MandateIDs = mandateIDs
+	m.require(mandatesAuddisExportBankRequestFieldMandateIDs)
+}
+
+// SetProcessingDate sets the ProcessingDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankRequest) SetProcessingDate(processingDate *time.Time) {
+	m.ProcessingDate = processingDate
+	m.require(mandatesAuddisExportBankRequestFieldProcessingDate)
+}
+
+func (m *MandatesAuddisExportBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler MandatesAuddisExportBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*m = MandatesAuddisExportBankRequest(body)
+	return nil
+}
+
+func (m *MandatesAuddisExportBankRequest) MarshalJSON() ([]byte, error) {
+	type embed MandatesAuddisExportBankRequest
+	var marshaler = struct {
+		embed
+		ProcessingDate *internal.Date `json:"processingDate,omitempty"`
+	}{
+		embed:          embed(*m),
+		ProcessingDate: internal.NewOptionalDate(m.ProcessingDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	mandatesCancelBankRequestFieldID = big.NewInt(1 << 0)
 )
 
@@ -1613,21 +1739,30 @@ func (m *MandatesCancelBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	mandatesCreateBankRequestFieldPartnerID     = big.NewInt(1 << 0)
-	mandatesCreateBankRequestFieldIban          = big.NewInt(1 << 1)
-	mandatesCreateBankRequestFieldBic           = big.NewInt(1 << 2)
-	mandatesCreateBankRequestFieldScheme        = big.NewInt(1 << 3)
-	mandatesCreateBankRequestFieldSequenceType  = big.NewInt(1 << 4)
-	mandatesCreateBankRequestFieldSignatureDate = big.NewInt(1 << 5)
-	mandatesCreateBankRequestFieldReference     = big.NewInt(1 << 6)
-	mandatesCreateBankRequestFieldDebtorName    = big.NewInt(1 << 7)
-	mandatesCreateBankRequestFieldNotes         = big.NewInt(1 << 8)
+	mandatesCreateBankRequestFieldPartnerID         = big.NewInt(1 << 0)
+	mandatesCreateBankRequestFieldIban              = big.NewInt(1 << 1)
+	mandatesCreateBankRequestFieldBic               = big.NewInt(1 << 2)
+	mandatesCreateBankRequestFieldBankCode          = big.NewInt(1 << 3)
+	mandatesCreateBankRequestFieldBankAccountNumber = big.NewInt(1 << 4)
+	mandatesCreateBankRequestFieldAccountType       = big.NewInt(1 << 5)
+	mandatesCreateBankRequestFieldScheme            = big.NewInt(1 << 6)
+	mandatesCreateBankRequestFieldSequenceType      = big.NewInt(1 << 7)
+	mandatesCreateBankRequestFieldSignatureDate     = big.NewInt(1 << 8)
+	mandatesCreateBankRequestFieldReference         = big.NewInt(1 << 9)
+	mandatesCreateBankRequestFieldDebtorName        = big.NewInt(1 << 10)
+	mandatesCreateBankRequestFieldNotes             = big.NewInt(1 << 11)
 )
 
 type MandatesCreateBankRequest struct {
-	PartnerID     string                                 `json:"partnerId" url:"-"`
-	Iban          string                                 `json:"iban" url:"-"`
-	Bic           *string                                `json:"bic,omitempty" url:"-"`
+	PartnerID string  `json:"partnerId" url:"-"`
+	Iban      *string `json:"iban,omitempty" url:"-"`
+	Bic       *string `json:"bic,omitempty" url:"-"`
+	// Sort code (Bacs) or routing number (ACH), for a mandate without an IBAN
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Account number, for a mandate without an IBAN
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType   *MandatesCreateBankRequestAccountType  `json:"accountType,omitempty" url:"-"`
 	Scheme        *MandatesCreateBankRequestScheme       `json:"scheme,omitempty" url:"-"`
 	SequenceType  *MandatesCreateBankRequestSequenceType `json:"sequenceType,omitempty" url:"-"`
 	SignatureDate time.Time                              `json:"signatureDate" url:"-" format:"date"`
@@ -1655,7 +1790,7 @@ func (m *MandatesCreateBankRequest) SetPartnerID(partnerID string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesCreateBankRequest) SetIban(iban string) {
+func (m *MandatesCreateBankRequest) SetIban(iban *string) {
 	m.Iban = iban
 	m.require(mandatesCreateBankRequestFieldIban)
 }
@@ -1665,6 +1800,27 @@ func (m *MandatesCreateBankRequest) SetIban(iban string) {
 func (m *MandatesCreateBankRequest) SetBic(bic *string) {
 	m.Bic = bic
 	m.require(mandatesCreateBankRequestFieldBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankRequest) SetBankCode(bankCode *string) {
+	m.BankCode = bankCode
+	m.require(mandatesCreateBankRequestFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	m.BankAccountNumber = bankAccountNumber
+	m.require(mandatesCreateBankRequestFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankRequest) SetAccountType(accountType *MandatesCreateBankRequestAccountType) {
+	m.AccountType = accountType
+	m.require(mandatesCreateBankRequestFieldAccountType)
 }
 
 // SetScheme sets the Scheme field and marks it as non-optional;
@@ -3880,6 +4036,211 @@ func (t *TransactionsUnmatchBankRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(explicitMarshaler)
 }
 
+// What the bank gave the company for payment files from this account: the Bacs service user number for a UK account, the ACH Immediate Origin and Company Identification for a US account
+var (
+	accountsCreateBankRequestPaymentFileSettingsFieldServiceUserNumber        = big.NewInt(1 << 0)
+	accountsCreateBankRequestPaymentFileSettingsFieldServiceUserName          = big.NewInt(1 << 1)
+	accountsCreateBankRequestPaymentFileSettingsFieldOdfiRoutingNumber        = big.NewInt(1 << 2)
+	accountsCreateBankRequestPaymentFileSettingsFieldImmediateOrigin          = big.NewInt(1 << 3)
+	accountsCreateBankRequestPaymentFileSettingsFieldImmediateDestinationName = big.NewInt(1 << 4)
+	accountsCreateBankRequestPaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
+	accountsCreateBankRequestPaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
+	accountsCreateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+)
+
+type AccountsCreateBankRequestPaymentFileSettings struct {
+	// Bacs: the service user number (SUN) of the company for this account
+	ServiceUserNumber *string `json:"serviceUserNumber,omitempty" url:"serviceUserNumber,omitempty"`
+	// Bacs: the service user's short name; defaults to the company name
+	ServiceUserName *string `json:"serviceUserName,omitempty" url:"serviceUserName,omitempty"`
+	// Nacha: the routing number of the bank that receives the file; defaults to the account's bankCode
+	OdfiRoutingNumber *string `json:"odfiRoutingNumber,omitempty" url:"odfiRoutingNumber,omitempty"`
+	// Nacha: the Immediate Origin the bank gave the company
+	ImmediateOrigin *string `json:"immediateOrigin,omitempty" url:"immediateOrigin,omitempty"`
+	// Nacha: the name of the bank that receives the file
+	ImmediateDestinationName *string `json:"immediateDestinationName,omitempty" url:"immediateDestinationName,omitempty"`
+	// Nacha: the Company Identification the bank gave the company
+	CompanyIdentification *string `json:"companyIdentification,omitempty" url:"companyIdentification,omitempty"`
+	// Nacha: the company name shown to the receiver; defaults to the company name
+	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
+	// Nacha: the Company Discretionary Data the bank asks for
+	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetServiceUserNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserNumber
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetServiceUserName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserName
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetOdfiRoutingNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.OdfiRoutingNumber
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetImmediateOrigin() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateOrigin
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetImmediateDestinationName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateDestinationName
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetCompanyIdentification() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyIdentification
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetCompanyName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyName
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetCompanyDiscretionaryData() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetServiceUserNumber sets the ServiceUserNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetServiceUserNumber(serviceUserNumber *string) {
+	a.ServiceUserNumber = serviceUserNumber
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldServiceUserNumber)
+}
+
+// SetServiceUserName sets the ServiceUserName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetServiceUserName(serviceUserName *string) {
+	a.ServiceUserName = serviceUserName
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldServiceUserName)
+}
+
+// SetOdfiRoutingNumber sets the OdfiRoutingNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetOdfiRoutingNumber(odfiRoutingNumber *string) {
+	a.OdfiRoutingNumber = odfiRoutingNumber
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldOdfiRoutingNumber)
+}
+
+// SetImmediateOrigin sets the ImmediateOrigin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetImmediateOrigin(immediateOrigin *string) {
+	a.ImmediateOrigin = immediateOrigin
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldImmediateOrigin)
+}
+
+// SetImmediateDestinationName sets the ImmediateDestinationName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetImmediateDestinationName(immediateDestinationName *string) {
+	a.ImmediateDestinationName = immediateDestinationName
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldImmediateDestinationName)
+}
+
+// SetCompanyIdentification sets the CompanyIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetCompanyIdentification(companyIdentification *string) {
+	a.CompanyIdentification = companyIdentification
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldCompanyIdentification)
+}
+
+// SetCompanyName sets the CompanyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetCompanyName(companyName *string) {
+	a.CompanyName = companyName
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldCompanyName)
+}
+
+// SetCompanyDiscretionaryData sets the CompanyDiscretionaryData field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
+	a.CompanyDiscretionaryData = companyDiscretionaryData
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountsCreateBankRequestPaymentFileSettings
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AccountsCreateBankRequestPaymentFileSettings(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) MarshalJSON() ([]byte, error) {
+	type embed AccountsCreateBankRequestPaymentFileSettings
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
 type AccountsCreateBankRequestType string
 
 const (
@@ -3906,25 +4267,31 @@ func (a AccountsCreateBankRequestType) Ptr() *AccountsCreateBankRequestType {
 }
 
 var (
-	accountsCreateBankResponseFieldID          = big.NewInt(1 << 0)
-	accountsCreateBankResponseFieldName        = big.NewInt(1 << 1)
-	accountsCreateBankResponseFieldType        = big.NewInt(1 << 2)
-	accountsCreateBankResponseFieldIban        = big.NewInt(1 << 3)
-	accountsCreateBankResponseFieldCurrency    = big.NewInt(1 << 4)
-	accountsCreateBankResponseFieldAccountCode = big.NewInt(1 << 5)
-	accountsCreateBankResponseFieldIsActive    = big.NewInt(1 << 6)
-	accountsCreateBankResponseFieldCreatedAt   = big.NewInt(1 << 7)
+	accountsCreateBankResponseFieldID                  = big.NewInt(1 << 0)
+	accountsCreateBankResponseFieldName                = big.NewInt(1 << 1)
+	accountsCreateBankResponseFieldType                = big.NewInt(1 << 2)
+	accountsCreateBankResponseFieldIban                = big.NewInt(1 << 3)
+	accountsCreateBankResponseFieldBankCode            = big.NewInt(1 << 4)
+	accountsCreateBankResponseFieldBankAccountNumber   = big.NewInt(1 << 5)
+	accountsCreateBankResponseFieldPaymentFileSettings = big.NewInt(1 << 6)
+	accountsCreateBankResponseFieldCurrency            = big.NewInt(1 << 7)
+	accountsCreateBankResponseFieldAccountCode         = big.NewInt(1 << 8)
+	accountsCreateBankResponseFieldIsActive            = big.NewInt(1 << 9)
+	accountsCreateBankResponseFieldCreatedAt           = big.NewInt(1 << 10)
 )
 
 type AccountsCreateBankResponse struct {
-	ID          string                         `json:"id" url:"id"`
-	Name        string                         `json:"name" url:"name"`
-	Type        AccountsCreateBankResponseType `json:"type" url:"type"`
-	Iban        *string                        `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency    string                         `json:"currency" url:"currency"`
-	AccountCode string                         `json:"accountCode" url:"accountCode"`
-	IsActive    bool                           `json:"isActive" url:"isActive"`
-	CreatedAt   time.Time                      `json:"createdAt" url:"createdAt"`
+	ID                  string                                         `json:"id" url:"id"`
+	Name                string                                         `json:"name" url:"name"`
+	Type                AccountsCreateBankResponseType                 `json:"type" url:"type"`
+	Iban                *string                                        `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode            *string                                        `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber   *string                                        `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	PaymentFileSettings *AccountsCreateBankResponsePaymentFileSettings `json:"paymentFileSettings" url:"paymentFileSettings"`
+	Currency            string                                         `json:"currency" url:"currency"`
+	AccountCode         string                                         `json:"accountCode" url:"accountCode"`
+	IsActive            bool                                           `json:"isActive" url:"isActive"`
+	CreatedAt           time.Time                                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3959,6 +4326,27 @@ func (a *AccountsCreateBankResponse) GetIban() *string {
 		return nil
 	}
 	return a.Iban
+}
+
+func (a *AccountsCreateBankResponse) GetBankCode() *string {
+	if a == nil {
+		return nil
+	}
+	return a.BankCode
+}
+
+func (a *AccountsCreateBankResponse) GetBankAccountNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.BankAccountNumber
+}
+
+func (a *AccountsCreateBankResponse) GetPaymentFileSettings() *AccountsCreateBankResponsePaymentFileSettings {
+	if a == nil {
+		return nil
+	}
+	return a.PaymentFileSettings
 }
 
 func (a *AccountsCreateBankResponse) GetCurrency() string {
@@ -4031,6 +4419,27 @@ func (a *AccountsCreateBankResponse) SetIban(iban *string) {
 	a.require(accountsCreateBankResponseFieldIban)
 }
 
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponse) SetBankCode(bankCode *string) {
+	a.BankCode = bankCode
+	a.require(accountsCreateBankResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	a.BankAccountNumber = bankAccountNumber
+	a.require(accountsCreateBankResponseFieldBankAccountNumber)
+}
+
+// SetPaymentFileSettings sets the PaymentFileSettings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponse) SetPaymentFileSettings(paymentFileSettings *AccountsCreateBankResponsePaymentFileSettings) {
+	a.PaymentFileSettings = paymentFileSettings
+	a.require(accountsCreateBankResponseFieldPaymentFileSettings)
+}
+
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (a *AccountsCreateBankResponse) SetCurrency(currency string) {
@@ -4095,6 +4504,210 @@ func (a *AccountsCreateBankResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountsCreateBankResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	accountsCreateBankResponsePaymentFileSettingsFieldServiceUserNumber        = big.NewInt(1 << 0)
+	accountsCreateBankResponsePaymentFileSettingsFieldServiceUserName          = big.NewInt(1 << 1)
+	accountsCreateBankResponsePaymentFileSettingsFieldOdfiRoutingNumber        = big.NewInt(1 << 2)
+	accountsCreateBankResponsePaymentFileSettingsFieldImmediateOrigin          = big.NewInt(1 << 3)
+	accountsCreateBankResponsePaymentFileSettingsFieldImmediateDestinationName = big.NewInt(1 << 4)
+	accountsCreateBankResponsePaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
+	accountsCreateBankResponsePaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
+	accountsCreateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+)
+
+type AccountsCreateBankResponsePaymentFileSettings struct {
+	// Bacs: the service user number (SUN) of the company for this account
+	ServiceUserNumber *string `json:"serviceUserNumber,omitempty" url:"serviceUserNumber,omitempty"`
+	// Bacs: the service user's short name; defaults to the company name
+	ServiceUserName *string `json:"serviceUserName,omitempty" url:"serviceUserName,omitempty"`
+	// Nacha: the routing number of the bank that receives the file; defaults to the account's bankCode
+	OdfiRoutingNumber *string `json:"odfiRoutingNumber,omitempty" url:"odfiRoutingNumber,omitempty"`
+	// Nacha: the Immediate Origin the bank gave the company
+	ImmediateOrigin *string `json:"immediateOrigin,omitempty" url:"immediateOrigin,omitempty"`
+	// Nacha: the name of the bank that receives the file
+	ImmediateDestinationName *string `json:"immediateDestinationName,omitempty" url:"immediateDestinationName,omitempty"`
+	// Nacha: the Company Identification the bank gave the company
+	CompanyIdentification *string `json:"companyIdentification,omitempty" url:"companyIdentification,omitempty"`
+	// Nacha: the company name shown to the receiver; defaults to the company name
+	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
+	// Nacha: the Company Discretionary Data the bank asks for
+	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetServiceUserNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserNumber
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetServiceUserName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserName
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetOdfiRoutingNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.OdfiRoutingNumber
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetImmediateOrigin() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateOrigin
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetImmediateDestinationName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateDestinationName
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetCompanyIdentification() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyIdentification
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetCompanyName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyName
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetCompanyDiscretionaryData() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetServiceUserNumber sets the ServiceUserNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetServiceUserNumber(serviceUserNumber *string) {
+	a.ServiceUserNumber = serviceUserNumber
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldServiceUserNumber)
+}
+
+// SetServiceUserName sets the ServiceUserName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetServiceUserName(serviceUserName *string) {
+	a.ServiceUserName = serviceUserName
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldServiceUserName)
+}
+
+// SetOdfiRoutingNumber sets the OdfiRoutingNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetOdfiRoutingNumber(odfiRoutingNumber *string) {
+	a.OdfiRoutingNumber = odfiRoutingNumber
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldOdfiRoutingNumber)
+}
+
+// SetImmediateOrigin sets the ImmediateOrigin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetImmediateOrigin(immediateOrigin *string) {
+	a.ImmediateOrigin = immediateOrigin
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldImmediateOrigin)
+}
+
+// SetImmediateDestinationName sets the ImmediateDestinationName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetImmediateDestinationName(immediateDestinationName *string) {
+	a.ImmediateDestinationName = immediateDestinationName
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldImmediateDestinationName)
+}
+
+// SetCompanyIdentification sets the CompanyIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetCompanyIdentification(companyIdentification *string) {
+	a.CompanyIdentification = companyIdentification
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldCompanyIdentification)
+}
+
+// SetCompanyName sets the CompanyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetCompanyName(companyName *string) {
+	a.CompanyName = companyName
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldCompanyName)
+}
+
+// SetCompanyDiscretionaryData sets the CompanyDiscretionaryData field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
+	a.CompanyDiscretionaryData = companyDiscretionaryData
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountsCreateBankResponsePaymentFileSettings
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AccountsCreateBankResponsePaymentFileSettings(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) MarshalJSON() ([]byte, error) {
+	type embed AccountsCreateBankResponsePaymentFileSettings
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) String() string {
 	if a == nil {
 		return "<nil>"
 	}
@@ -4738,25 +5351,31 @@ func (a *AccountsListBankResponse) String() string {
 }
 
 var (
-	accountsListBankResponseRowsItemFieldID          = big.NewInt(1 << 0)
-	accountsListBankResponseRowsItemFieldName        = big.NewInt(1 << 1)
-	accountsListBankResponseRowsItemFieldType        = big.NewInt(1 << 2)
-	accountsListBankResponseRowsItemFieldIban        = big.NewInt(1 << 3)
-	accountsListBankResponseRowsItemFieldCurrency    = big.NewInt(1 << 4)
-	accountsListBankResponseRowsItemFieldAccountCode = big.NewInt(1 << 5)
-	accountsListBankResponseRowsItemFieldIsActive    = big.NewInt(1 << 6)
-	accountsListBankResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 7)
+	accountsListBankResponseRowsItemFieldID                  = big.NewInt(1 << 0)
+	accountsListBankResponseRowsItemFieldName                = big.NewInt(1 << 1)
+	accountsListBankResponseRowsItemFieldType                = big.NewInt(1 << 2)
+	accountsListBankResponseRowsItemFieldIban                = big.NewInt(1 << 3)
+	accountsListBankResponseRowsItemFieldBankCode            = big.NewInt(1 << 4)
+	accountsListBankResponseRowsItemFieldBankAccountNumber   = big.NewInt(1 << 5)
+	accountsListBankResponseRowsItemFieldPaymentFileSettings = big.NewInt(1 << 6)
+	accountsListBankResponseRowsItemFieldCurrency            = big.NewInt(1 << 7)
+	accountsListBankResponseRowsItemFieldAccountCode         = big.NewInt(1 << 8)
+	accountsListBankResponseRowsItemFieldIsActive            = big.NewInt(1 << 9)
+	accountsListBankResponseRowsItemFieldCreatedAt           = big.NewInt(1 << 10)
 )
 
 type AccountsListBankResponseRowsItem struct {
-	ID          string                               `json:"id" url:"id"`
-	Name        string                               `json:"name" url:"name"`
-	Type        AccountsListBankResponseRowsItemType `json:"type" url:"type"`
-	Iban        *string                              `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency    string                               `json:"currency" url:"currency"`
-	AccountCode string                               `json:"accountCode" url:"accountCode"`
-	IsActive    bool                                 `json:"isActive" url:"isActive"`
-	CreatedAt   time.Time                            `json:"createdAt" url:"createdAt"`
+	ID                  string                                               `json:"id" url:"id"`
+	Name                string                                               `json:"name" url:"name"`
+	Type                AccountsListBankResponseRowsItemType                 `json:"type" url:"type"`
+	Iban                *string                                              `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode            *string                                              `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber   *string                                              `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	PaymentFileSettings *AccountsListBankResponseRowsItemPaymentFileSettings `json:"paymentFileSettings" url:"paymentFileSettings"`
+	Currency            string                                               `json:"currency" url:"currency"`
+	AccountCode         string                                               `json:"accountCode" url:"accountCode"`
+	IsActive            bool                                                 `json:"isActive" url:"isActive"`
+	CreatedAt           time.Time                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4791,6 +5410,27 @@ func (a *AccountsListBankResponseRowsItem) GetIban() *string {
 		return nil
 	}
 	return a.Iban
+}
+
+func (a *AccountsListBankResponseRowsItem) GetBankCode() *string {
+	if a == nil {
+		return nil
+	}
+	return a.BankCode
+}
+
+func (a *AccountsListBankResponseRowsItem) GetBankAccountNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.BankAccountNumber
+}
+
+func (a *AccountsListBankResponseRowsItem) GetPaymentFileSettings() *AccountsListBankResponseRowsItemPaymentFileSettings {
+	if a == nil {
+		return nil
+	}
+	return a.PaymentFileSettings
 }
 
 func (a *AccountsListBankResponseRowsItem) GetCurrency() string {
@@ -4861,6 +5501,27 @@ func (a *AccountsListBankResponseRowsItem) SetType(type_ AccountsListBankRespons
 func (a *AccountsListBankResponseRowsItem) SetIban(iban *string) {
 	a.Iban = iban
 	a.require(accountsListBankResponseRowsItemFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItem) SetBankCode(bankCode *string) {
+	a.BankCode = bankCode
+	a.require(accountsListBankResponseRowsItemFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItem) SetBankAccountNumber(bankAccountNumber *string) {
+	a.BankAccountNumber = bankAccountNumber
+	a.require(accountsListBankResponseRowsItemFieldBankAccountNumber)
+}
+
+// SetPaymentFileSettings sets the PaymentFileSettings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItem) SetPaymentFileSettings(paymentFileSettings *AccountsListBankResponseRowsItemPaymentFileSettings) {
+	a.PaymentFileSettings = paymentFileSettings
+	a.require(accountsListBankResponseRowsItemFieldPaymentFileSettings)
 }
 
 // SetCurrency sets the Currency field and marks it as non-optional;
@@ -4941,6 +5602,210 @@ func (a *AccountsListBankResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", a)
 }
 
+var (
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldServiceUserNumber        = big.NewInt(1 << 0)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldServiceUserName          = big.NewInt(1 << 1)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldOdfiRoutingNumber        = big.NewInt(1 << 2)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldImmediateOrigin          = big.NewInt(1 << 3)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldImmediateDestinationName = big.NewInt(1 << 4)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+)
+
+type AccountsListBankResponseRowsItemPaymentFileSettings struct {
+	// Bacs: the service user number (SUN) of the company for this account
+	ServiceUserNumber *string `json:"serviceUserNumber,omitempty" url:"serviceUserNumber,omitempty"`
+	// Bacs: the service user's short name; defaults to the company name
+	ServiceUserName *string `json:"serviceUserName,omitempty" url:"serviceUserName,omitempty"`
+	// Nacha: the routing number of the bank that receives the file; defaults to the account's bankCode
+	OdfiRoutingNumber *string `json:"odfiRoutingNumber,omitempty" url:"odfiRoutingNumber,omitempty"`
+	// Nacha: the Immediate Origin the bank gave the company
+	ImmediateOrigin *string `json:"immediateOrigin,omitempty" url:"immediateOrigin,omitempty"`
+	// Nacha: the name of the bank that receives the file
+	ImmediateDestinationName *string `json:"immediateDestinationName,omitempty" url:"immediateDestinationName,omitempty"`
+	// Nacha: the Company Identification the bank gave the company
+	CompanyIdentification *string `json:"companyIdentification,omitempty" url:"companyIdentification,omitempty"`
+	// Nacha: the company name shown to the receiver; defaults to the company name
+	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
+	// Nacha: the Company Discretionary Data the bank asks for
+	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetServiceUserNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserNumber
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetServiceUserName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserName
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetOdfiRoutingNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.OdfiRoutingNumber
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetImmediateOrigin() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateOrigin
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetImmediateDestinationName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateDestinationName
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetCompanyIdentification() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyIdentification
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetCompanyName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyName
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetCompanyDiscretionaryData() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetServiceUserNumber sets the ServiceUserNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetServiceUserNumber(serviceUserNumber *string) {
+	a.ServiceUserNumber = serviceUserNumber
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldServiceUserNumber)
+}
+
+// SetServiceUserName sets the ServiceUserName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetServiceUserName(serviceUserName *string) {
+	a.ServiceUserName = serviceUserName
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldServiceUserName)
+}
+
+// SetOdfiRoutingNumber sets the OdfiRoutingNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetOdfiRoutingNumber(odfiRoutingNumber *string) {
+	a.OdfiRoutingNumber = odfiRoutingNumber
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldOdfiRoutingNumber)
+}
+
+// SetImmediateOrigin sets the ImmediateOrigin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetImmediateOrigin(immediateOrigin *string) {
+	a.ImmediateOrigin = immediateOrigin
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldImmediateOrigin)
+}
+
+// SetImmediateDestinationName sets the ImmediateDestinationName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetImmediateDestinationName(immediateDestinationName *string) {
+	a.ImmediateDestinationName = immediateDestinationName
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldImmediateDestinationName)
+}
+
+// SetCompanyIdentification sets the CompanyIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetCompanyIdentification(companyIdentification *string) {
+	a.CompanyIdentification = companyIdentification
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyIdentification)
+}
+
+// SetCompanyName sets the CompanyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetCompanyName(companyName *string) {
+	a.CompanyName = companyName
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyName)
+}
+
+// SetCompanyDiscretionaryData sets the CompanyDiscretionaryData field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
+	a.CompanyDiscretionaryData = companyDiscretionaryData
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountsListBankResponseRowsItemPaymentFileSettings
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AccountsListBankResponseRowsItemPaymentFileSettings(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) MarshalJSON() ([]byte, error) {
+	type embed AccountsListBankResponseRowsItemPaymentFileSettings
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
 type AccountsListBankResponseRowsItemType string
 
 const (
@@ -4964,6 +5829,211 @@ func NewAccountsListBankResponseRowsItemTypeFromString(s string) (AccountsListBa
 
 func (a AccountsListBankResponseRowsItemType) Ptr() *AccountsListBankResponseRowsItemType {
 	return &a
+}
+
+// What the bank gave the company for payment files from this account: the Bacs service user number for a UK account, the ACH Immediate Origin and Company Identification for a US account
+var (
+	accountsUpdateBankRequestPaymentFileSettingsFieldServiceUserNumber        = big.NewInt(1 << 0)
+	accountsUpdateBankRequestPaymentFileSettingsFieldServiceUserName          = big.NewInt(1 << 1)
+	accountsUpdateBankRequestPaymentFileSettingsFieldOdfiRoutingNumber        = big.NewInt(1 << 2)
+	accountsUpdateBankRequestPaymentFileSettingsFieldImmediateOrigin          = big.NewInt(1 << 3)
+	accountsUpdateBankRequestPaymentFileSettingsFieldImmediateDestinationName = big.NewInt(1 << 4)
+	accountsUpdateBankRequestPaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
+	accountsUpdateBankRequestPaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
+	accountsUpdateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+)
+
+type AccountsUpdateBankRequestPaymentFileSettings struct {
+	// Bacs: the service user number (SUN) of the company for this account
+	ServiceUserNumber *string `json:"serviceUserNumber,omitempty" url:"serviceUserNumber,omitempty"`
+	// Bacs: the service user's short name; defaults to the company name
+	ServiceUserName *string `json:"serviceUserName,omitempty" url:"serviceUserName,omitempty"`
+	// Nacha: the routing number of the bank that receives the file; defaults to the account's bankCode
+	OdfiRoutingNumber *string `json:"odfiRoutingNumber,omitempty" url:"odfiRoutingNumber,omitempty"`
+	// Nacha: the Immediate Origin the bank gave the company
+	ImmediateOrigin *string `json:"immediateOrigin,omitempty" url:"immediateOrigin,omitempty"`
+	// Nacha: the name of the bank that receives the file
+	ImmediateDestinationName *string `json:"immediateDestinationName,omitempty" url:"immediateDestinationName,omitempty"`
+	// Nacha: the Company Identification the bank gave the company
+	CompanyIdentification *string `json:"companyIdentification,omitempty" url:"companyIdentification,omitempty"`
+	// Nacha: the company name shown to the receiver; defaults to the company name
+	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
+	// Nacha: the Company Discretionary Data the bank asks for
+	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetServiceUserNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserNumber
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetServiceUserName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserName
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetOdfiRoutingNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.OdfiRoutingNumber
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetImmediateOrigin() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateOrigin
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetImmediateDestinationName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateDestinationName
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetCompanyIdentification() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyIdentification
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetCompanyName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyName
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetCompanyDiscretionaryData() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetServiceUserNumber sets the ServiceUserNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetServiceUserNumber(serviceUserNumber *string) {
+	a.ServiceUserNumber = serviceUserNumber
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldServiceUserNumber)
+}
+
+// SetServiceUserName sets the ServiceUserName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetServiceUserName(serviceUserName *string) {
+	a.ServiceUserName = serviceUserName
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldServiceUserName)
+}
+
+// SetOdfiRoutingNumber sets the OdfiRoutingNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetOdfiRoutingNumber(odfiRoutingNumber *string) {
+	a.OdfiRoutingNumber = odfiRoutingNumber
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldOdfiRoutingNumber)
+}
+
+// SetImmediateOrigin sets the ImmediateOrigin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetImmediateOrigin(immediateOrigin *string) {
+	a.ImmediateOrigin = immediateOrigin
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldImmediateOrigin)
+}
+
+// SetImmediateDestinationName sets the ImmediateDestinationName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetImmediateDestinationName(immediateDestinationName *string) {
+	a.ImmediateDestinationName = immediateDestinationName
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldImmediateDestinationName)
+}
+
+// SetCompanyIdentification sets the CompanyIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetCompanyIdentification(companyIdentification *string) {
+	a.CompanyIdentification = companyIdentification
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldCompanyIdentification)
+}
+
+// SetCompanyName sets the CompanyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetCompanyName(companyName *string) {
+	a.CompanyName = companyName
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldCompanyName)
+}
+
+// SetCompanyDiscretionaryData sets the CompanyDiscretionaryData field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
+	a.CompanyDiscretionaryData = companyDiscretionaryData
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountsUpdateBankRequestPaymentFileSettings
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AccountsUpdateBankRequestPaymentFileSettings(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) MarshalJSON() ([]byte, error) {
+	type embed AccountsUpdateBankRequestPaymentFileSettings
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
 }
 
 type AccountsUpdateBankRequestType string
@@ -4992,25 +6062,31 @@ func (a AccountsUpdateBankRequestType) Ptr() *AccountsUpdateBankRequestType {
 }
 
 var (
-	accountsUpdateBankResponseFieldID          = big.NewInt(1 << 0)
-	accountsUpdateBankResponseFieldName        = big.NewInt(1 << 1)
-	accountsUpdateBankResponseFieldType        = big.NewInt(1 << 2)
-	accountsUpdateBankResponseFieldIban        = big.NewInt(1 << 3)
-	accountsUpdateBankResponseFieldCurrency    = big.NewInt(1 << 4)
-	accountsUpdateBankResponseFieldAccountCode = big.NewInt(1 << 5)
-	accountsUpdateBankResponseFieldIsActive    = big.NewInt(1 << 6)
-	accountsUpdateBankResponseFieldCreatedAt   = big.NewInt(1 << 7)
+	accountsUpdateBankResponseFieldID                  = big.NewInt(1 << 0)
+	accountsUpdateBankResponseFieldName                = big.NewInt(1 << 1)
+	accountsUpdateBankResponseFieldType                = big.NewInt(1 << 2)
+	accountsUpdateBankResponseFieldIban                = big.NewInt(1 << 3)
+	accountsUpdateBankResponseFieldBankCode            = big.NewInt(1 << 4)
+	accountsUpdateBankResponseFieldBankAccountNumber   = big.NewInt(1 << 5)
+	accountsUpdateBankResponseFieldPaymentFileSettings = big.NewInt(1 << 6)
+	accountsUpdateBankResponseFieldCurrency            = big.NewInt(1 << 7)
+	accountsUpdateBankResponseFieldAccountCode         = big.NewInt(1 << 8)
+	accountsUpdateBankResponseFieldIsActive            = big.NewInt(1 << 9)
+	accountsUpdateBankResponseFieldCreatedAt           = big.NewInt(1 << 10)
 )
 
 type AccountsUpdateBankResponse struct {
-	ID          string                         `json:"id" url:"id"`
-	Name        string                         `json:"name" url:"name"`
-	Type        AccountsUpdateBankResponseType `json:"type" url:"type"`
-	Iban        *string                        `json:"iban,omitempty" url:"iban,omitempty"`
-	Currency    string                         `json:"currency" url:"currency"`
-	AccountCode string                         `json:"accountCode" url:"accountCode"`
-	IsActive    bool                           `json:"isActive" url:"isActive"`
-	CreatedAt   time.Time                      `json:"createdAt" url:"createdAt"`
+	ID                  string                                         `json:"id" url:"id"`
+	Name                string                                         `json:"name" url:"name"`
+	Type                AccountsUpdateBankResponseType                 `json:"type" url:"type"`
+	Iban                *string                                        `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode            *string                                        `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber   *string                                        `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	PaymentFileSettings *AccountsUpdateBankResponsePaymentFileSettings `json:"paymentFileSettings" url:"paymentFileSettings"`
+	Currency            string                                         `json:"currency" url:"currency"`
+	AccountCode         string                                         `json:"accountCode" url:"accountCode"`
+	IsActive            bool                                           `json:"isActive" url:"isActive"`
+	CreatedAt           time.Time                                      `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5045,6 +6121,27 @@ func (a *AccountsUpdateBankResponse) GetIban() *string {
 		return nil
 	}
 	return a.Iban
+}
+
+func (a *AccountsUpdateBankResponse) GetBankCode() *string {
+	if a == nil {
+		return nil
+	}
+	return a.BankCode
+}
+
+func (a *AccountsUpdateBankResponse) GetBankAccountNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.BankAccountNumber
+}
+
+func (a *AccountsUpdateBankResponse) GetPaymentFileSettings() *AccountsUpdateBankResponsePaymentFileSettings {
+	if a == nil {
+		return nil
+	}
+	return a.PaymentFileSettings
 }
 
 func (a *AccountsUpdateBankResponse) GetCurrency() string {
@@ -5117,6 +6214,27 @@ func (a *AccountsUpdateBankResponse) SetIban(iban *string) {
 	a.require(accountsUpdateBankResponseFieldIban)
 }
 
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponse) SetBankCode(bankCode *string) {
+	a.BankCode = bankCode
+	a.require(accountsUpdateBankResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	a.BankAccountNumber = bankAccountNumber
+	a.require(accountsUpdateBankResponseFieldBankAccountNumber)
+}
+
+// SetPaymentFileSettings sets the PaymentFileSettings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponse) SetPaymentFileSettings(paymentFileSettings *AccountsUpdateBankResponsePaymentFileSettings) {
+	a.PaymentFileSettings = paymentFileSettings
+	a.require(accountsUpdateBankResponseFieldPaymentFileSettings)
+}
+
 // SetCurrency sets the Currency field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (a *AccountsUpdateBankResponse) SetCurrency(currency string) {
@@ -5181,6 +6299,210 @@ func (a *AccountsUpdateBankResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountsUpdateBankResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	accountsUpdateBankResponsePaymentFileSettingsFieldServiceUserNumber        = big.NewInt(1 << 0)
+	accountsUpdateBankResponsePaymentFileSettingsFieldServiceUserName          = big.NewInt(1 << 1)
+	accountsUpdateBankResponsePaymentFileSettingsFieldOdfiRoutingNumber        = big.NewInt(1 << 2)
+	accountsUpdateBankResponsePaymentFileSettingsFieldImmediateOrigin          = big.NewInt(1 << 3)
+	accountsUpdateBankResponsePaymentFileSettingsFieldImmediateDestinationName = big.NewInt(1 << 4)
+	accountsUpdateBankResponsePaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
+	accountsUpdateBankResponsePaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
+	accountsUpdateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+)
+
+type AccountsUpdateBankResponsePaymentFileSettings struct {
+	// Bacs: the service user number (SUN) of the company for this account
+	ServiceUserNumber *string `json:"serviceUserNumber,omitempty" url:"serviceUserNumber,omitempty"`
+	// Bacs: the service user's short name; defaults to the company name
+	ServiceUserName *string `json:"serviceUserName,omitempty" url:"serviceUserName,omitempty"`
+	// Nacha: the routing number of the bank that receives the file; defaults to the account's bankCode
+	OdfiRoutingNumber *string `json:"odfiRoutingNumber,omitempty" url:"odfiRoutingNumber,omitempty"`
+	// Nacha: the Immediate Origin the bank gave the company
+	ImmediateOrigin *string `json:"immediateOrigin,omitempty" url:"immediateOrigin,omitempty"`
+	// Nacha: the name of the bank that receives the file
+	ImmediateDestinationName *string `json:"immediateDestinationName,omitempty" url:"immediateDestinationName,omitempty"`
+	// Nacha: the Company Identification the bank gave the company
+	CompanyIdentification *string `json:"companyIdentification,omitempty" url:"companyIdentification,omitempty"`
+	// Nacha: the company name shown to the receiver; defaults to the company name
+	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
+	// Nacha: the Company Discretionary Data the bank asks for
+	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetServiceUserNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserNumber
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetServiceUserName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ServiceUserName
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetOdfiRoutingNumber() *string {
+	if a == nil {
+		return nil
+	}
+	return a.OdfiRoutingNumber
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetImmediateOrigin() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateOrigin
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetImmediateDestinationName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ImmediateDestinationName
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetCompanyIdentification() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyIdentification
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetCompanyName() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyName
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetCompanyDiscretionaryData() *string {
+	if a == nil {
+		return nil
+	}
+	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetServiceUserNumber sets the ServiceUserNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetServiceUserNumber(serviceUserNumber *string) {
+	a.ServiceUserNumber = serviceUserNumber
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldServiceUserNumber)
+}
+
+// SetServiceUserName sets the ServiceUserName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetServiceUserName(serviceUserName *string) {
+	a.ServiceUserName = serviceUserName
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldServiceUserName)
+}
+
+// SetOdfiRoutingNumber sets the OdfiRoutingNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetOdfiRoutingNumber(odfiRoutingNumber *string) {
+	a.OdfiRoutingNumber = odfiRoutingNumber
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldOdfiRoutingNumber)
+}
+
+// SetImmediateOrigin sets the ImmediateOrigin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetImmediateOrigin(immediateOrigin *string) {
+	a.ImmediateOrigin = immediateOrigin
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldImmediateOrigin)
+}
+
+// SetImmediateDestinationName sets the ImmediateDestinationName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetImmediateDestinationName(immediateDestinationName *string) {
+	a.ImmediateDestinationName = immediateDestinationName
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldImmediateDestinationName)
+}
+
+// SetCompanyIdentification sets the CompanyIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetCompanyIdentification(companyIdentification *string) {
+	a.CompanyIdentification = companyIdentification
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldCompanyIdentification)
+}
+
+// SetCompanyName sets the CompanyName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetCompanyName(companyName *string) {
+	a.CompanyName = companyName
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldCompanyName)
+}
+
+// SetCompanyDiscretionaryData sets the CompanyDiscretionaryData field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
+	a.CompanyDiscretionaryData = companyDiscretionaryData
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) UnmarshalJSON(data []byte) error {
+	type unmarshaler AccountsUpdateBankResponsePaymentFileSettings
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AccountsUpdateBankResponsePaymentFileSettings(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) MarshalJSON() ([]byte, error) {
+	type embed AccountsUpdateBankResponsePaymentFileSettings
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) String() string {
 	if a == nil {
 		return "<nil>"
 	}
@@ -6116,25 +7438,38 @@ func (d *DirectDebitsCandidatesBankResponseRowsItem) String() string {
 }
 
 var (
-	directDebitsExportBankResponseFieldMessageID        = big.NewInt(1 << 0)
-	directDebitsExportBankResponseFieldFileName         = big.NewInt(1 << 1)
-	directDebitsExportBankResponseFieldTransactionCount = big.NewInt(1 << 2)
-	directDebitsExportBankResponseFieldControlSum       = big.NewInt(1 << 3)
-	directDebitsExportBankResponseFieldXML              = big.NewInt(1 << 4)
+	directDebitsExportBankResponseFieldFormat           = big.NewInt(1 << 0)
+	directDebitsExportBankResponseFieldMessageID        = big.NewInt(1 << 1)
+	directDebitsExportBankResponseFieldFileName         = big.NewInt(1 << 2)
+	directDebitsExportBankResponseFieldContentType      = big.NewInt(1 << 3)
+	directDebitsExportBankResponseFieldTransactionCount = big.NewInt(1 << 4)
+	directDebitsExportBankResponseFieldControlSum       = big.NewInt(1 << 5)
+	directDebitsExportBankResponseFieldContent          = big.NewInt(1 << 6)
+	directDebitsExportBankResponseFieldCollectionDate   = big.NewInt(1 << 7)
 )
 
 type DirectDebitsExportBankResponse struct {
-	MessageID        string `json:"messageId" url:"messageId"`
-	FileName         string `json:"fileName" url:"fileName"`
-	TransactionCount int64  `json:"transactionCount" url:"transactionCount"`
-	ControlSum       string `json:"controlSum" url:"controlSum"`
-	XML              string `json:"xml" url:"xml"`
+	Format           DirectDebitsExportBankResponseFormat `json:"format" url:"format"`
+	MessageID        string                               `json:"messageId" url:"messageId"`
+	FileName         string                               `json:"fileName" url:"fileName"`
+	ContentType      string                               `json:"contentType" url:"contentType"`
+	TransactionCount int64                                `json:"transactionCount" url:"transactionCount"`
+	ControlSum       string                               `json:"controlSum" url:"controlSum"`
+	Content          string                               `json:"content" url:"content"`
+	CollectionDate   time.Time                            `json:"collectionDate" url:"collectionDate" format:"date"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (d *DirectDebitsExportBankResponse) GetFormat() DirectDebitsExportBankResponseFormat {
+	if d == nil {
+		return ""
+	}
+	return d.Format
 }
 
 func (d *DirectDebitsExportBankResponse) GetMessageID() string {
@@ -6151,6 +7486,13 @@ func (d *DirectDebitsExportBankResponse) GetFileName() string {
 	return d.FileName
 }
 
+func (d *DirectDebitsExportBankResponse) GetContentType() string {
+	if d == nil {
+		return ""
+	}
+	return d.ContentType
+}
+
 func (d *DirectDebitsExportBankResponse) GetTransactionCount() int64 {
 	if d == nil {
 		return 0
@@ -6165,11 +7507,18 @@ func (d *DirectDebitsExportBankResponse) GetControlSum() string {
 	return d.ControlSum
 }
 
-func (d *DirectDebitsExportBankResponse) GetXML() string {
+func (d *DirectDebitsExportBankResponse) GetContent() string {
 	if d == nil {
 		return ""
 	}
-	return d.XML
+	return d.Content
+}
+
+func (d *DirectDebitsExportBankResponse) GetCollectionDate() time.Time {
+	if d == nil {
+		return time.Time{}
+	}
+	return d.CollectionDate
 }
 
 func (d *DirectDebitsExportBankResponse) GetExtraProperties() map[string]interface{} {
@@ -6186,6 +7535,13 @@ func (d *DirectDebitsExportBankResponse) require(field *big.Int) {
 	d.explicitFields.Or(d.explicitFields, field)
 }
 
+// SetFormat sets the Format field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsExportBankResponse) SetFormat(format DirectDebitsExportBankResponseFormat) {
+	d.Format = format
+	d.require(directDebitsExportBankResponseFieldFormat)
+}
+
 // SetMessageID sets the MessageID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DirectDebitsExportBankResponse) SetMessageID(messageID string) {
@@ -6198,6 +7554,13 @@ func (d *DirectDebitsExportBankResponse) SetMessageID(messageID string) {
 func (d *DirectDebitsExportBankResponse) SetFileName(fileName string) {
 	d.FileName = fileName
 	d.require(directDebitsExportBankResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsExportBankResponse) SetContentType(contentType string) {
+	d.ContentType = contentType
+	d.require(directDebitsExportBankResponseFieldContentType)
 }
 
 // SetTransactionCount sets the TransactionCount field and marks it as non-optional;
@@ -6214,20 +7577,33 @@ func (d *DirectDebitsExportBankResponse) SetControlSum(controlSum string) {
 	d.require(directDebitsExportBankResponseFieldControlSum)
 }
 
-// SetXML sets the XML field and marks it as non-optional;
+// SetContent sets the Content field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (d *DirectDebitsExportBankResponse) SetXML(xml string) {
-	d.XML = xml
-	d.require(directDebitsExportBankResponseFieldXML)
+func (d *DirectDebitsExportBankResponse) SetContent(content string) {
+	d.Content = content
+	d.require(directDebitsExportBankResponseFieldContent)
+}
+
+// SetCollectionDate sets the CollectionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DirectDebitsExportBankResponse) SetCollectionDate(collectionDate time.Time) {
+	d.CollectionDate = collectionDate
+	d.require(directDebitsExportBankResponseFieldCollectionDate)
 }
 
 func (d *DirectDebitsExportBankResponse) UnmarshalJSON(data []byte) error {
-	type unmarshaler DirectDebitsExportBankResponse
-	var value unmarshaler
-	if err := json.Unmarshal(data, &value); err != nil {
+	type embed DirectDebitsExportBankResponse
+	var unmarshaler = struct {
+		embed
+		CollectionDate *internal.Date `json:"collectionDate"`
+	}{
+		embed: embed(*d),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
 		return err
 	}
-	*d = DirectDebitsExportBankResponse(value)
+	*d = DirectDebitsExportBankResponse(unmarshaler.embed)
+	d.CollectionDate = unmarshaler.CollectionDate.Time()
 	extraProperties, err := internal.ExtractExtraProperties(data, *d)
 	if err != nil {
 		return err
@@ -6241,8 +7617,10 @@ func (d *DirectDebitsExportBankResponse) MarshalJSON() ([]byte, error) {
 	type embed DirectDebitsExportBankResponse
 	var marshaler = struct {
 		embed
+		CollectionDate *internal.Date `json:"collectionDate"`
 	}{
-		embed: embed(*d),
+		embed:          embed(*d),
+		CollectionDate: internal.NewDate(d.CollectionDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, d.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -6261,6 +7639,34 @@ func (d *DirectDebitsExportBankResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+type DirectDebitsExportBankResponseFormat string
+
+const (
+	DirectDebitsExportBankResponseFormatPain00100103   DirectDebitsExportBankResponseFormat = "pain.001.001.03"
+	DirectDebitsExportBankResponseFormatPain00800102   DirectDebitsExportBankResponseFormat = "pain.008.001.02"
+	DirectDebitsExportBankResponseFormatBacsStandard18 DirectDebitsExportBankResponseFormat = "bacs-standard-18"
+	DirectDebitsExportBankResponseFormatNacha          DirectDebitsExportBankResponseFormat = "nacha"
+)
+
+func NewDirectDebitsExportBankResponseFormatFromString(s string) (DirectDebitsExportBankResponseFormat, error) {
+	switch s {
+	case "pain.001.001.03":
+		return DirectDebitsExportBankResponseFormatPain00100103, nil
+	case "pain.008.001.02":
+		return DirectDebitsExportBankResponseFormatPain00800102, nil
+	case "bacs-standard-18":
+		return DirectDebitsExportBankResponseFormatBacsStandard18, nil
+	case "nacha":
+		return DirectDebitsExportBankResponseFormatNacha, nil
+	}
+	var t DirectDebitsExportBankResponseFormat
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (d DirectDebitsExportBankResponseFormat) Ptr() *DirectDebitsExportBankResponseFormat {
+	return &d
 }
 
 type FeedsAccountsConfigureBankRequestSyncSchedule string
@@ -13870,41 +15276,316 @@ func (i ImportTemplatesUpdateBankResponseType) Ptr() *ImportTemplatesUpdateBankR
 }
 
 var (
-	mandatesCancelBankResponseFieldID                 = big.NewInt(1 << 0)
-	mandatesCancelBankResponseFieldPartnerID          = big.NewInt(1 << 1)
-	mandatesCancelBankResponseFieldReference          = big.NewInt(1 << 2)
-	mandatesCancelBankResponseFieldScheme             = big.NewInt(1 << 3)
-	mandatesCancelBankResponseFieldSequenceType       = big.NewInt(1 << 4)
-	mandatesCancelBankResponseFieldStatus             = big.NewInt(1 << 5)
-	mandatesCancelBankResponseFieldDebtorName         = big.NewInt(1 << 6)
-	mandatesCancelBankResponseFieldIban               = big.NewInt(1 << 7)
-	mandatesCancelBankResponseFieldBic                = big.NewInt(1 << 8)
-	mandatesCancelBankResponseFieldSignatureDate      = big.NewInt(1 << 9)
-	mandatesCancelBankResponseFieldCollectionsCount   = big.NewInt(1 << 10)
-	mandatesCancelBankResponseFieldLastCollectionDate = big.NewInt(1 << 11)
-	mandatesCancelBankResponseFieldExpiresOn          = big.NewInt(1 << 12)
-	mandatesCancelBankResponseFieldCancelledAt        = big.NewInt(1 << 13)
-	mandatesCancelBankResponseFieldNotes              = big.NewInt(1 << 14)
-	mandatesCancelBankResponseFieldCreatedAt          = big.NewInt(1 << 15)
+	mandatesAuddisExportBankResponseFieldFormat           = big.NewInt(1 << 0)
+	mandatesAuddisExportBankResponseFieldMessageID        = big.NewInt(1 << 1)
+	mandatesAuddisExportBankResponseFieldFileName         = big.NewInt(1 << 2)
+	mandatesAuddisExportBankResponseFieldContentType      = big.NewInt(1 << 3)
+	mandatesAuddisExportBankResponseFieldTransactionCount = big.NewInt(1 << 4)
+	mandatesAuddisExportBankResponseFieldControlSum       = big.NewInt(1 << 5)
+	mandatesAuddisExportBankResponseFieldContent          = big.NewInt(1 << 6)
+	mandatesAuddisExportBankResponseFieldProcessingDate   = big.NewInt(1 << 7)
+	mandatesAuddisExportBankResponseFieldLodged           = big.NewInt(1 << 8)
+	mandatesAuddisExportBankResponseFieldCancelled        = big.NewInt(1 << 9)
+)
+
+type MandatesAuddisExportBankResponse struct {
+	Format           MandatesAuddisExportBankResponseFormat `json:"format" url:"format"`
+	MessageID        string                                 `json:"messageId" url:"messageId"`
+	FileName         string                                 `json:"fileName" url:"fileName"`
+	ContentType      string                                 `json:"contentType" url:"contentType"`
+	TransactionCount int64                                  `json:"transactionCount" url:"transactionCount"`
+	ControlSum       string                                 `json:"controlSum" url:"controlSum"`
+	Content          string                                 `json:"content" url:"content"`
+	ProcessingDate   time.Time                              `json:"processingDate" url:"processingDate" format:"date"`
+	Lodged           []string                               `json:"lodged" url:"lodged"`
+	Cancelled        []string                               `json:"cancelled" url:"cancelled"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (m *MandatesAuddisExportBankResponse) GetFormat() MandatesAuddisExportBankResponseFormat {
+	if m == nil {
+		return ""
+	}
+	return m.Format
+}
+
+func (m *MandatesAuddisExportBankResponse) GetMessageID() string {
+	if m == nil {
+		return ""
+	}
+	return m.MessageID
+}
+
+func (m *MandatesAuddisExportBankResponse) GetFileName() string {
+	if m == nil {
+		return ""
+	}
+	return m.FileName
+}
+
+func (m *MandatesAuddisExportBankResponse) GetContentType() string {
+	if m == nil {
+		return ""
+	}
+	return m.ContentType
+}
+
+func (m *MandatesAuddisExportBankResponse) GetTransactionCount() int64 {
+	if m == nil {
+		return 0
+	}
+	return m.TransactionCount
+}
+
+func (m *MandatesAuddisExportBankResponse) GetControlSum() string {
+	if m == nil {
+		return ""
+	}
+	return m.ControlSum
+}
+
+func (m *MandatesAuddisExportBankResponse) GetContent() string {
+	if m == nil {
+		return ""
+	}
+	return m.Content
+}
+
+func (m *MandatesAuddisExportBankResponse) GetProcessingDate() time.Time {
+	if m == nil {
+		return time.Time{}
+	}
+	return m.ProcessingDate
+}
+
+func (m *MandatesAuddisExportBankResponse) GetLodged() []string {
+	if m == nil {
+		return nil
+	}
+	return m.Lodged
+}
+
+func (m *MandatesAuddisExportBankResponse) GetCancelled() []string {
+	if m == nil {
+		return nil
+	}
+	return m.Cancelled
+}
+
+func (m *MandatesAuddisExportBankResponse) GetExtraProperties() map[string]interface{} {
+	if m == nil {
+		return nil
+	}
+	return m.extraProperties
+}
+
+func (m *MandatesAuddisExportBankResponse) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetFormat sets the Format field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetFormat(format MandatesAuddisExportBankResponseFormat) {
+	m.Format = format
+	m.require(mandatesAuddisExportBankResponseFieldFormat)
+}
+
+// SetMessageID sets the MessageID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetMessageID(messageID string) {
+	m.MessageID = messageID
+	m.require(mandatesAuddisExportBankResponseFieldMessageID)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetFileName(fileName string) {
+	m.FileName = fileName
+	m.require(mandatesAuddisExportBankResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetContentType(contentType string) {
+	m.ContentType = contentType
+	m.require(mandatesAuddisExportBankResponseFieldContentType)
+}
+
+// SetTransactionCount sets the TransactionCount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetTransactionCount(transactionCount int64) {
+	m.TransactionCount = transactionCount
+	m.require(mandatesAuddisExportBankResponseFieldTransactionCount)
+}
+
+// SetControlSum sets the ControlSum field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetControlSum(controlSum string) {
+	m.ControlSum = controlSum
+	m.require(mandatesAuddisExportBankResponseFieldControlSum)
+}
+
+// SetContent sets the Content field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetContent(content string) {
+	m.Content = content
+	m.require(mandatesAuddisExportBankResponseFieldContent)
+}
+
+// SetProcessingDate sets the ProcessingDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetProcessingDate(processingDate time.Time) {
+	m.ProcessingDate = processingDate
+	m.require(mandatesAuddisExportBankResponseFieldProcessingDate)
+}
+
+// SetLodged sets the Lodged field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetLodged(lodged []string) {
+	m.Lodged = lodged
+	m.require(mandatesAuddisExportBankResponseFieldLodged)
+}
+
+// SetCancelled sets the Cancelled field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesAuddisExportBankResponse) SetCancelled(cancelled []string) {
+	m.Cancelled = cancelled
+	m.require(mandatesAuddisExportBankResponseFieldCancelled)
+}
+
+func (m *MandatesAuddisExportBankResponse) UnmarshalJSON(data []byte) error {
+	type embed MandatesAuddisExportBankResponse
+	var unmarshaler = struct {
+		embed
+		ProcessingDate *internal.Date `json:"processingDate"`
+	}{
+		embed: embed(*m),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*m = MandatesAuddisExportBankResponse(unmarshaler.embed)
+	m.ProcessingDate = unmarshaler.ProcessingDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
+	if err != nil {
+		return err
+	}
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (m *MandatesAuddisExportBankResponse) MarshalJSON() ([]byte, error) {
+	type embed MandatesAuddisExportBankResponse
+	var marshaler = struct {
+		embed
+		ProcessingDate *internal.Date `json:"processingDate"`
+	}{
+		embed:          embed(*m),
+		ProcessingDate: internal.NewDate(m.ProcessingDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (m *MandatesAuddisExportBankResponse) String() string {
+	if m == nil {
+		return "<nil>"
+	}
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(m); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", m)
+}
+
+type MandatesAuddisExportBankResponseFormat string
+
+const (
+	MandatesAuddisExportBankResponseFormatPain00100103   MandatesAuddisExportBankResponseFormat = "pain.001.001.03"
+	MandatesAuddisExportBankResponseFormatPain00800102   MandatesAuddisExportBankResponseFormat = "pain.008.001.02"
+	MandatesAuddisExportBankResponseFormatBacsStandard18 MandatesAuddisExportBankResponseFormat = "bacs-standard-18"
+	MandatesAuddisExportBankResponseFormatNacha          MandatesAuddisExportBankResponseFormat = "nacha"
+)
+
+func NewMandatesAuddisExportBankResponseFormatFromString(s string) (MandatesAuddisExportBankResponseFormat, error) {
+	switch s {
+	case "pain.001.001.03":
+		return MandatesAuddisExportBankResponseFormatPain00100103, nil
+	case "pain.008.001.02":
+		return MandatesAuddisExportBankResponseFormatPain00800102, nil
+	case "bacs-standard-18":
+		return MandatesAuddisExportBankResponseFormatBacsStandard18, nil
+	case "nacha":
+		return MandatesAuddisExportBankResponseFormatNacha, nil
+	}
+	var t MandatesAuddisExportBankResponseFormat
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MandatesAuddisExportBankResponseFormat) Ptr() *MandatesAuddisExportBankResponseFormat {
+	return &m
+}
+
+var (
+	mandatesCancelBankResponseFieldID                   = big.NewInt(1 << 0)
+	mandatesCancelBankResponseFieldPartnerID            = big.NewInt(1 << 1)
+	mandatesCancelBankResponseFieldReference            = big.NewInt(1 << 2)
+	mandatesCancelBankResponseFieldScheme               = big.NewInt(1 << 3)
+	mandatesCancelBankResponseFieldSequenceType         = big.NewInt(1 << 4)
+	mandatesCancelBankResponseFieldStatus               = big.NewInt(1 << 5)
+	mandatesCancelBankResponseFieldDebtorName           = big.NewInt(1 << 6)
+	mandatesCancelBankResponseFieldIban                 = big.NewInt(1 << 7)
+	mandatesCancelBankResponseFieldBic                  = big.NewInt(1 << 8)
+	mandatesCancelBankResponseFieldBankCode             = big.NewInt(1 << 9)
+	mandatesCancelBankResponseFieldBankAccountNumber    = big.NewInt(1 << 10)
+	mandatesCancelBankResponseFieldAccountType          = big.NewInt(1 << 11)
+	mandatesCancelBankResponseFieldSignatureDate        = big.NewInt(1 << 12)
+	mandatesCancelBankResponseFieldCollectionsCount     = big.NewInt(1 << 13)
+	mandatesCancelBankResponseFieldLastCollectionDate   = big.NewInt(1 << 14)
+	mandatesCancelBankResponseFieldExpiresOn            = big.NewInt(1 << 15)
+	mandatesCancelBankResponseFieldLodgedOn             = big.NewInt(1 << 16)
+	mandatesCancelBankResponseFieldCancellationLodgedOn = big.NewInt(1 << 17)
+	mandatesCancelBankResponseFieldCancelledAt          = big.NewInt(1 << 18)
+	mandatesCancelBankResponseFieldNotes                = big.NewInt(1 << 19)
+	mandatesCancelBankResponseFieldCreatedAt            = big.NewInt(1 << 20)
 )
 
 type MandatesCancelBankResponse struct {
-	ID                 string                                 `json:"id" url:"id"`
-	PartnerID          string                                 `json:"partnerId" url:"partnerId"`
-	Reference          string                                 `json:"reference" url:"reference"`
-	Scheme             MandatesCancelBankResponseScheme       `json:"scheme" url:"scheme"`
-	SequenceType       MandatesCancelBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
-	Status             MandatesCancelBankResponseStatus       `json:"status" url:"status"`
-	DebtorName         string                                 `json:"debtorName" url:"debtorName"`
-	Iban               string                                 `json:"iban" url:"iban"`
-	Bic                *string                                `json:"bic,omitempty" url:"bic,omitempty"`
-	SignatureDate      time.Time                              `json:"signatureDate" url:"signatureDate" format:"date"`
-	CollectionsCount   int64                                  `json:"collectionsCount" url:"collectionsCount"`
-	LastCollectionDate *time.Time                             `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
-	ExpiresOn          string                                 `json:"expiresOn" url:"expiresOn"`
-	CancelledAt        *time.Time                             `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
-	Notes              *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt          time.Time                              `json:"createdAt" url:"createdAt"`
+	ID                string                                 `json:"id" url:"id"`
+	PartnerID         string                                 `json:"partnerId" url:"partnerId"`
+	Reference         string                                 `json:"reference" url:"reference"`
+	Scheme            MandatesCancelBankResponseScheme       `json:"scheme" url:"scheme"`
+	SequenceType      MandatesCancelBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
+	Status            MandatesCancelBankResponseStatus       `json:"status" url:"status"`
+	DebtorName        string                                 `json:"debtorName" url:"debtorName"`
+	Iban              *string                                `json:"iban,omitempty" url:"iban,omitempty"`
+	Bic               *string                                `json:"bic,omitempty" url:"bic,omitempty"`
+	BankCode          *string                                `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                                `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType          *MandatesCancelBankResponseAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	SignatureDate        time.Time                              `json:"signatureDate" url:"signatureDate" format:"date"`
+	CollectionsCount     int64                                  `json:"collectionsCount" url:"collectionsCount"`
+	LastCollectionDate   *time.Time                             `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
+	ExpiresOn            *string                                `json:"expiresOn,omitempty" url:"expiresOn,omitempty"`
+	LodgedOn             *string                                `json:"lodgedOn,omitempty" url:"lodgedOn,omitempty"`
+	CancellationLodgedOn *string                                `json:"cancellationLodgedOn,omitempty" url:"cancellationLodgedOn,omitempty"`
+	CancelledAt          *time.Time                             `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
+	Notes                *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                              `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13962,9 +15643,9 @@ func (m *MandatesCancelBankResponse) GetDebtorName() string {
 	return m.DebtorName
 }
 
-func (m *MandatesCancelBankResponse) GetIban() string {
+func (m *MandatesCancelBankResponse) GetIban() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.Iban
 }
@@ -13974,6 +15655,27 @@ func (m *MandatesCancelBankResponse) GetBic() *string {
 		return nil
 	}
 	return m.Bic
+}
+
+func (m *MandatesCancelBankResponse) GetBankCode() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankCode
+}
+
+func (m *MandatesCancelBankResponse) GetBankAccountNumber() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankAccountNumber
+}
+
+func (m *MandatesCancelBankResponse) GetAccountType() *MandatesCancelBankResponseAccountType {
+	if m == nil {
+		return nil
+	}
+	return m.AccountType
 }
 
 func (m *MandatesCancelBankResponse) GetSignatureDate() time.Time {
@@ -13997,11 +15699,25 @@ func (m *MandatesCancelBankResponse) GetLastCollectionDate() *time.Time {
 	return m.LastCollectionDate
 }
 
-func (m *MandatesCancelBankResponse) GetExpiresOn() string {
+func (m *MandatesCancelBankResponse) GetExpiresOn() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.ExpiresOn
+}
+
+func (m *MandatesCancelBankResponse) GetLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LodgedOn
+}
+
+func (m *MandatesCancelBankResponse) GetCancellationLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.CancellationLodgedOn
 }
 
 func (m *MandatesCancelBankResponse) GetCancelledAt() *time.Time {
@@ -14090,7 +15806,7 @@ func (m *MandatesCancelBankResponse) SetDebtorName(debtorName string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesCancelBankResponse) SetIban(iban string) {
+func (m *MandatesCancelBankResponse) SetIban(iban *string) {
 	m.Iban = iban
 	m.require(mandatesCancelBankResponseFieldIban)
 }
@@ -14100,6 +15816,27 @@ func (m *MandatesCancelBankResponse) SetIban(iban string) {
 func (m *MandatesCancelBankResponse) SetBic(bic *string) {
 	m.Bic = bic
 	m.require(mandatesCancelBankResponseFieldBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCancelBankResponse) SetBankCode(bankCode *string) {
+	m.BankCode = bankCode
+	m.require(mandatesCancelBankResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCancelBankResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	m.BankAccountNumber = bankAccountNumber
+	m.require(mandatesCancelBankResponseFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCancelBankResponse) SetAccountType(accountType *MandatesCancelBankResponseAccountType) {
+	m.AccountType = accountType
+	m.require(mandatesCancelBankResponseFieldAccountType)
 }
 
 // SetSignatureDate sets the SignatureDate field and marks it as non-optional;
@@ -14125,9 +15862,23 @@ func (m *MandatesCancelBankResponse) SetLastCollectionDate(lastCollectionDate *t
 
 // SetExpiresOn sets the ExpiresOn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesCancelBankResponse) SetExpiresOn(expiresOn string) {
+func (m *MandatesCancelBankResponse) SetExpiresOn(expiresOn *string) {
 	m.ExpiresOn = expiresOn
 	m.require(mandatesCancelBankResponseFieldExpiresOn)
+}
+
+// SetLodgedOn sets the LodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCancelBankResponse) SetLodgedOn(lodgedOn *string) {
+	m.LodgedOn = lodgedOn
+	m.require(mandatesCancelBankResponseFieldLodgedOn)
+}
+
+// SetCancellationLodgedOn sets the CancellationLodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCancelBankResponse) SetCancellationLodgedOn(cancellationLodgedOn *string) {
+	m.CancellationLodgedOn = cancellationLodgedOn
+	m.require(mandatesCancelBankResponseFieldCancellationLodgedOn)
 }
 
 // SetCancelledAt sets the CancelledAt field and marks it as non-optional;
@@ -14213,11 +15964,37 @@ func (m *MandatesCancelBankResponse) String() string {
 	return fmt.Sprintf("%#v", m)
 }
 
+// Checking or savings account; a US ACH file needs it
+type MandatesCancelBankResponseAccountType string
+
+const (
+	MandatesCancelBankResponseAccountTypeChecking MandatesCancelBankResponseAccountType = "checking"
+	MandatesCancelBankResponseAccountTypeSavings  MandatesCancelBankResponseAccountType = "savings"
+)
+
+func NewMandatesCancelBankResponseAccountTypeFromString(s string) (MandatesCancelBankResponseAccountType, error) {
+	switch s {
+	case "checking":
+		return MandatesCancelBankResponseAccountTypeChecking, nil
+	case "savings":
+		return MandatesCancelBankResponseAccountTypeSavings, nil
+	}
+	var t MandatesCancelBankResponseAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MandatesCancelBankResponseAccountType) Ptr() *MandatesCancelBankResponseAccountType {
+	return &m
+}
+
 type MandatesCancelBankResponseScheme string
 
 const (
 	MandatesCancelBankResponseSchemeCore MandatesCancelBankResponseScheme = "CORE"
 	MandatesCancelBankResponseSchemeB2B  MandatesCancelBankResponseScheme = "B2B"
+	MandatesCancelBankResponseSchemeBacs MandatesCancelBankResponseScheme = "BACS"
+	MandatesCancelBankResponseSchemePpd  MandatesCancelBankResponseScheme = "PPD"
+	MandatesCancelBankResponseSchemeCcd  MandatesCancelBankResponseScheme = "CCD"
 )
 
 func NewMandatesCancelBankResponseSchemeFromString(s string) (MandatesCancelBankResponseScheme, error) {
@@ -14226,6 +16003,12 @@ func NewMandatesCancelBankResponseSchemeFromString(s string) (MandatesCancelBank
 		return MandatesCancelBankResponseSchemeCore, nil
 	case "B2B":
 		return MandatesCancelBankResponseSchemeB2B, nil
+	case "BACS":
+		return MandatesCancelBankResponseSchemeBacs, nil
+	case "PPD":
+		return MandatesCancelBankResponseSchemePpd, nil
+	case "CCD":
+		return MandatesCancelBankResponseSchemeCcd, nil
 	}
 	var t MandatesCancelBankResponseScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -14282,11 +16065,37 @@ func (m MandatesCancelBankResponseStatus) Ptr() *MandatesCancelBankResponseStatu
 	return &m
 }
 
+// Checking or savings account; a US ACH file needs it
+type MandatesCreateBankRequestAccountType string
+
+const (
+	MandatesCreateBankRequestAccountTypeChecking MandatesCreateBankRequestAccountType = "checking"
+	MandatesCreateBankRequestAccountTypeSavings  MandatesCreateBankRequestAccountType = "savings"
+)
+
+func NewMandatesCreateBankRequestAccountTypeFromString(s string) (MandatesCreateBankRequestAccountType, error) {
+	switch s {
+	case "checking":
+		return MandatesCreateBankRequestAccountTypeChecking, nil
+	case "savings":
+		return MandatesCreateBankRequestAccountTypeSavings, nil
+	}
+	var t MandatesCreateBankRequestAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MandatesCreateBankRequestAccountType) Ptr() *MandatesCreateBankRequestAccountType {
+	return &m
+}
+
 type MandatesCreateBankRequestScheme string
 
 const (
 	MandatesCreateBankRequestSchemeCore MandatesCreateBankRequestScheme = "CORE"
 	MandatesCreateBankRequestSchemeB2B  MandatesCreateBankRequestScheme = "B2B"
+	MandatesCreateBankRequestSchemeBacs MandatesCreateBankRequestScheme = "BACS"
+	MandatesCreateBankRequestSchemePpd  MandatesCreateBankRequestScheme = "PPD"
+	MandatesCreateBankRequestSchemeCcd  MandatesCreateBankRequestScheme = "CCD"
 )
 
 func NewMandatesCreateBankRequestSchemeFromString(s string) (MandatesCreateBankRequestScheme, error) {
@@ -14295,6 +16104,12 @@ func NewMandatesCreateBankRequestSchemeFromString(s string) (MandatesCreateBankR
 		return MandatesCreateBankRequestSchemeCore, nil
 	case "B2B":
 		return MandatesCreateBankRequestSchemeB2B, nil
+	case "BACS":
+		return MandatesCreateBankRequestSchemeBacs, nil
+	case "PPD":
+		return MandatesCreateBankRequestSchemePpd, nil
+	case "CCD":
+		return MandatesCreateBankRequestSchemeCcd, nil
 	}
 	var t MandatesCreateBankRequestScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -14327,41 +16142,52 @@ func (m MandatesCreateBankRequestSequenceType) Ptr() *MandatesCreateBankRequestS
 }
 
 var (
-	mandatesCreateBankResponseFieldID                 = big.NewInt(1 << 0)
-	mandatesCreateBankResponseFieldPartnerID          = big.NewInt(1 << 1)
-	mandatesCreateBankResponseFieldReference          = big.NewInt(1 << 2)
-	mandatesCreateBankResponseFieldScheme             = big.NewInt(1 << 3)
-	mandatesCreateBankResponseFieldSequenceType       = big.NewInt(1 << 4)
-	mandatesCreateBankResponseFieldStatus             = big.NewInt(1 << 5)
-	mandatesCreateBankResponseFieldDebtorName         = big.NewInt(1 << 6)
-	mandatesCreateBankResponseFieldIban               = big.NewInt(1 << 7)
-	mandatesCreateBankResponseFieldBic                = big.NewInt(1 << 8)
-	mandatesCreateBankResponseFieldSignatureDate      = big.NewInt(1 << 9)
-	mandatesCreateBankResponseFieldCollectionsCount   = big.NewInt(1 << 10)
-	mandatesCreateBankResponseFieldLastCollectionDate = big.NewInt(1 << 11)
-	mandatesCreateBankResponseFieldExpiresOn          = big.NewInt(1 << 12)
-	mandatesCreateBankResponseFieldCancelledAt        = big.NewInt(1 << 13)
-	mandatesCreateBankResponseFieldNotes              = big.NewInt(1 << 14)
-	mandatesCreateBankResponseFieldCreatedAt          = big.NewInt(1 << 15)
+	mandatesCreateBankResponseFieldID                   = big.NewInt(1 << 0)
+	mandatesCreateBankResponseFieldPartnerID            = big.NewInt(1 << 1)
+	mandatesCreateBankResponseFieldReference            = big.NewInt(1 << 2)
+	mandatesCreateBankResponseFieldScheme               = big.NewInt(1 << 3)
+	mandatesCreateBankResponseFieldSequenceType         = big.NewInt(1 << 4)
+	mandatesCreateBankResponseFieldStatus               = big.NewInt(1 << 5)
+	mandatesCreateBankResponseFieldDebtorName           = big.NewInt(1 << 6)
+	mandatesCreateBankResponseFieldIban                 = big.NewInt(1 << 7)
+	mandatesCreateBankResponseFieldBic                  = big.NewInt(1 << 8)
+	mandatesCreateBankResponseFieldBankCode             = big.NewInt(1 << 9)
+	mandatesCreateBankResponseFieldBankAccountNumber    = big.NewInt(1 << 10)
+	mandatesCreateBankResponseFieldAccountType          = big.NewInt(1 << 11)
+	mandatesCreateBankResponseFieldSignatureDate        = big.NewInt(1 << 12)
+	mandatesCreateBankResponseFieldCollectionsCount     = big.NewInt(1 << 13)
+	mandatesCreateBankResponseFieldLastCollectionDate   = big.NewInt(1 << 14)
+	mandatesCreateBankResponseFieldExpiresOn            = big.NewInt(1 << 15)
+	mandatesCreateBankResponseFieldLodgedOn             = big.NewInt(1 << 16)
+	mandatesCreateBankResponseFieldCancellationLodgedOn = big.NewInt(1 << 17)
+	mandatesCreateBankResponseFieldCancelledAt          = big.NewInt(1 << 18)
+	mandatesCreateBankResponseFieldNotes                = big.NewInt(1 << 19)
+	mandatesCreateBankResponseFieldCreatedAt            = big.NewInt(1 << 20)
 )
 
 type MandatesCreateBankResponse struct {
-	ID                 string                                 `json:"id" url:"id"`
-	PartnerID          string                                 `json:"partnerId" url:"partnerId"`
-	Reference          string                                 `json:"reference" url:"reference"`
-	Scheme             MandatesCreateBankResponseScheme       `json:"scheme" url:"scheme"`
-	SequenceType       MandatesCreateBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
-	Status             MandatesCreateBankResponseStatus       `json:"status" url:"status"`
-	DebtorName         string                                 `json:"debtorName" url:"debtorName"`
-	Iban               string                                 `json:"iban" url:"iban"`
-	Bic                *string                                `json:"bic,omitempty" url:"bic,omitempty"`
-	SignatureDate      time.Time                              `json:"signatureDate" url:"signatureDate" format:"date"`
-	CollectionsCount   int64                                  `json:"collectionsCount" url:"collectionsCount"`
-	LastCollectionDate *time.Time                             `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
-	ExpiresOn          string                                 `json:"expiresOn" url:"expiresOn"`
-	CancelledAt        *time.Time                             `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
-	Notes              *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt          time.Time                              `json:"createdAt" url:"createdAt"`
+	ID                string                                 `json:"id" url:"id"`
+	PartnerID         string                                 `json:"partnerId" url:"partnerId"`
+	Reference         string                                 `json:"reference" url:"reference"`
+	Scheme            MandatesCreateBankResponseScheme       `json:"scheme" url:"scheme"`
+	SequenceType      MandatesCreateBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
+	Status            MandatesCreateBankResponseStatus       `json:"status" url:"status"`
+	DebtorName        string                                 `json:"debtorName" url:"debtorName"`
+	Iban              *string                                `json:"iban,omitempty" url:"iban,omitempty"`
+	Bic               *string                                `json:"bic,omitempty" url:"bic,omitempty"`
+	BankCode          *string                                `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                                `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType          *MandatesCreateBankResponseAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	SignatureDate        time.Time                              `json:"signatureDate" url:"signatureDate" format:"date"`
+	CollectionsCount     int64                                  `json:"collectionsCount" url:"collectionsCount"`
+	LastCollectionDate   *time.Time                             `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
+	ExpiresOn            *string                                `json:"expiresOn,omitempty" url:"expiresOn,omitempty"`
+	LodgedOn             *string                                `json:"lodgedOn,omitempty" url:"lodgedOn,omitempty"`
+	CancellationLodgedOn *string                                `json:"cancellationLodgedOn,omitempty" url:"cancellationLodgedOn,omitempty"`
+	CancelledAt          *time.Time                             `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
+	Notes                *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                              `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14419,9 +16245,9 @@ func (m *MandatesCreateBankResponse) GetDebtorName() string {
 	return m.DebtorName
 }
 
-func (m *MandatesCreateBankResponse) GetIban() string {
+func (m *MandatesCreateBankResponse) GetIban() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.Iban
 }
@@ -14431,6 +16257,27 @@ func (m *MandatesCreateBankResponse) GetBic() *string {
 		return nil
 	}
 	return m.Bic
+}
+
+func (m *MandatesCreateBankResponse) GetBankCode() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankCode
+}
+
+func (m *MandatesCreateBankResponse) GetBankAccountNumber() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankAccountNumber
+}
+
+func (m *MandatesCreateBankResponse) GetAccountType() *MandatesCreateBankResponseAccountType {
+	if m == nil {
+		return nil
+	}
+	return m.AccountType
 }
 
 func (m *MandatesCreateBankResponse) GetSignatureDate() time.Time {
@@ -14454,11 +16301,25 @@ func (m *MandatesCreateBankResponse) GetLastCollectionDate() *time.Time {
 	return m.LastCollectionDate
 }
 
-func (m *MandatesCreateBankResponse) GetExpiresOn() string {
+func (m *MandatesCreateBankResponse) GetExpiresOn() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.ExpiresOn
+}
+
+func (m *MandatesCreateBankResponse) GetLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LodgedOn
+}
+
+func (m *MandatesCreateBankResponse) GetCancellationLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.CancellationLodgedOn
 }
 
 func (m *MandatesCreateBankResponse) GetCancelledAt() *time.Time {
@@ -14547,7 +16408,7 @@ func (m *MandatesCreateBankResponse) SetDebtorName(debtorName string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesCreateBankResponse) SetIban(iban string) {
+func (m *MandatesCreateBankResponse) SetIban(iban *string) {
 	m.Iban = iban
 	m.require(mandatesCreateBankResponseFieldIban)
 }
@@ -14557,6 +16418,27 @@ func (m *MandatesCreateBankResponse) SetIban(iban string) {
 func (m *MandatesCreateBankResponse) SetBic(bic *string) {
 	m.Bic = bic
 	m.require(mandatesCreateBankResponseFieldBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankResponse) SetBankCode(bankCode *string) {
+	m.BankCode = bankCode
+	m.require(mandatesCreateBankResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	m.BankAccountNumber = bankAccountNumber
+	m.require(mandatesCreateBankResponseFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankResponse) SetAccountType(accountType *MandatesCreateBankResponseAccountType) {
+	m.AccountType = accountType
+	m.require(mandatesCreateBankResponseFieldAccountType)
 }
 
 // SetSignatureDate sets the SignatureDate field and marks it as non-optional;
@@ -14582,9 +16464,23 @@ func (m *MandatesCreateBankResponse) SetLastCollectionDate(lastCollectionDate *t
 
 // SetExpiresOn sets the ExpiresOn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesCreateBankResponse) SetExpiresOn(expiresOn string) {
+func (m *MandatesCreateBankResponse) SetExpiresOn(expiresOn *string) {
 	m.ExpiresOn = expiresOn
 	m.require(mandatesCreateBankResponseFieldExpiresOn)
+}
+
+// SetLodgedOn sets the LodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankResponse) SetLodgedOn(lodgedOn *string) {
+	m.LodgedOn = lodgedOn
+	m.require(mandatesCreateBankResponseFieldLodgedOn)
+}
+
+// SetCancellationLodgedOn sets the CancellationLodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesCreateBankResponse) SetCancellationLodgedOn(cancellationLodgedOn *string) {
+	m.CancellationLodgedOn = cancellationLodgedOn
+	m.require(mandatesCreateBankResponseFieldCancellationLodgedOn)
 }
 
 // SetCancelledAt sets the CancelledAt field and marks it as non-optional;
@@ -14670,11 +16566,37 @@ func (m *MandatesCreateBankResponse) String() string {
 	return fmt.Sprintf("%#v", m)
 }
 
+// Checking or savings account; a US ACH file needs it
+type MandatesCreateBankResponseAccountType string
+
+const (
+	MandatesCreateBankResponseAccountTypeChecking MandatesCreateBankResponseAccountType = "checking"
+	MandatesCreateBankResponseAccountTypeSavings  MandatesCreateBankResponseAccountType = "savings"
+)
+
+func NewMandatesCreateBankResponseAccountTypeFromString(s string) (MandatesCreateBankResponseAccountType, error) {
+	switch s {
+	case "checking":
+		return MandatesCreateBankResponseAccountTypeChecking, nil
+	case "savings":
+		return MandatesCreateBankResponseAccountTypeSavings, nil
+	}
+	var t MandatesCreateBankResponseAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MandatesCreateBankResponseAccountType) Ptr() *MandatesCreateBankResponseAccountType {
+	return &m
+}
+
 type MandatesCreateBankResponseScheme string
 
 const (
 	MandatesCreateBankResponseSchemeCore MandatesCreateBankResponseScheme = "CORE"
 	MandatesCreateBankResponseSchemeB2B  MandatesCreateBankResponseScheme = "B2B"
+	MandatesCreateBankResponseSchemeBacs MandatesCreateBankResponseScheme = "BACS"
+	MandatesCreateBankResponseSchemePpd  MandatesCreateBankResponseScheme = "PPD"
+	MandatesCreateBankResponseSchemeCcd  MandatesCreateBankResponseScheme = "CCD"
 )
 
 func NewMandatesCreateBankResponseSchemeFromString(s string) (MandatesCreateBankResponseScheme, error) {
@@ -14683,6 +16605,12 @@ func NewMandatesCreateBankResponseSchemeFromString(s string) (MandatesCreateBank
 		return MandatesCreateBankResponseSchemeCore, nil
 	case "B2B":
 		return MandatesCreateBankResponseSchemeB2B, nil
+	case "BACS":
+		return MandatesCreateBankResponseSchemeBacs, nil
+	case "PPD":
+		return MandatesCreateBankResponseSchemePpd, nil
+	case "CCD":
+		return MandatesCreateBankResponseSchemeCcd, nil
 	}
 	var t MandatesCreateBankResponseScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -14740,41 +16668,52 @@ func (m MandatesCreateBankResponseStatus) Ptr() *MandatesCreateBankResponseStatu
 }
 
 var (
-	mandatesGetBankResponseFieldID                 = big.NewInt(1 << 0)
-	mandatesGetBankResponseFieldPartnerID          = big.NewInt(1 << 1)
-	mandatesGetBankResponseFieldReference          = big.NewInt(1 << 2)
-	mandatesGetBankResponseFieldScheme             = big.NewInt(1 << 3)
-	mandatesGetBankResponseFieldSequenceType       = big.NewInt(1 << 4)
-	mandatesGetBankResponseFieldStatus             = big.NewInt(1 << 5)
-	mandatesGetBankResponseFieldDebtorName         = big.NewInt(1 << 6)
-	mandatesGetBankResponseFieldIban               = big.NewInt(1 << 7)
-	mandatesGetBankResponseFieldBic                = big.NewInt(1 << 8)
-	mandatesGetBankResponseFieldSignatureDate      = big.NewInt(1 << 9)
-	mandatesGetBankResponseFieldCollectionsCount   = big.NewInt(1 << 10)
-	mandatesGetBankResponseFieldLastCollectionDate = big.NewInt(1 << 11)
-	mandatesGetBankResponseFieldExpiresOn          = big.NewInt(1 << 12)
-	mandatesGetBankResponseFieldCancelledAt        = big.NewInt(1 << 13)
-	mandatesGetBankResponseFieldNotes              = big.NewInt(1 << 14)
-	mandatesGetBankResponseFieldCreatedAt          = big.NewInt(1 << 15)
+	mandatesGetBankResponseFieldID                   = big.NewInt(1 << 0)
+	mandatesGetBankResponseFieldPartnerID            = big.NewInt(1 << 1)
+	mandatesGetBankResponseFieldReference            = big.NewInt(1 << 2)
+	mandatesGetBankResponseFieldScheme               = big.NewInt(1 << 3)
+	mandatesGetBankResponseFieldSequenceType         = big.NewInt(1 << 4)
+	mandatesGetBankResponseFieldStatus               = big.NewInt(1 << 5)
+	mandatesGetBankResponseFieldDebtorName           = big.NewInt(1 << 6)
+	mandatesGetBankResponseFieldIban                 = big.NewInt(1 << 7)
+	mandatesGetBankResponseFieldBic                  = big.NewInt(1 << 8)
+	mandatesGetBankResponseFieldBankCode             = big.NewInt(1 << 9)
+	mandatesGetBankResponseFieldBankAccountNumber    = big.NewInt(1 << 10)
+	mandatesGetBankResponseFieldAccountType          = big.NewInt(1 << 11)
+	mandatesGetBankResponseFieldSignatureDate        = big.NewInt(1 << 12)
+	mandatesGetBankResponseFieldCollectionsCount     = big.NewInt(1 << 13)
+	mandatesGetBankResponseFieldLastCollectionDate   = big.NewInt(1 << 14)
+	mandatesGetBankResponseFieldExpiresOn            = big.NewInt(1 << 15)
+	mandatesGetBankResponseFieldLodgedOn             = big.NewInt(1 << 16)
+	mandatesGetBankResponseFieldCancellationLodgedOn = big.NewInt(1 << 17)
+	mandatesGetBankResponseFieldCancelledAt          = big.NewInt(1 << 18)
+	mandatesGetBankResponseFieldNotes                = big.NewInt(1 << 19)
+	mandatesGetBankResponseFieldCreatedAt            = big.NewInt(1 << 20)
 )
 
 type MandatesGetBankResponse struct {
-	ID                 string                              `json:"id" url:"id"`
-	PartnerID          string                              `json:"partnerId" url:"partnerId"`
-	Reference          string                              `json:"reference" url:"reference"`
-	Scheme             MandatesGetBankResponseScheme       `json:"scheme" url:"scheme"`
-	SequenceType       MandatesGetBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
-	Status             MandatesGetBankResponseStatus       `json:"status" url:"status"`
-	DebtorName         string                              `json:"debtorName" url:"debtorName"`
-	Iban               string                              `json:"iban" url:"iban"`
-	Bic                *string                             `json:"bic,omitempty" url:"bic,omitempty"`
-	SignatureDate      time.Time                           `json:"signatureDate" url:"signatureDate" format:"date"`
-	CollectionsCount   int64                               `json:"collectionsCount" url:"collectionsCount"`
-	LastCollectionDate *time.Time                          `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
-	ExpiresOn          string                              `json:"expiresOn" url:"expiresOn"`
-	CancelledAt        *time.Time                          `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
-	Notes              *string                             `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt          time.Time                           `json:"createdAt" url:"createdAt"`
+	ID                string                              `json:"id" url:"id"`
+	PartnerID         string                              `json:"partnerId" url:"partnerId"`
+	Reference         string                              `json:"reference" url:"reference"`
+	Scheme            MandatesGetBankResponseScheme       `json:"scheme" url:"scheme"`
+	SequenceType      MandatesGetBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
+	Status            MandatesGetBankResponseStatus       `json:"status" url:"status"`
+	DebtorName        string                              `json:"debtorName" url:"debtorName"`
+	Iban              *string                             `json:"iban,omitempty" url:"iban,omitempty"`
+	Bic               *string                             `json:"bic,omitempty" url:"bic,omitempty"`
+	BankCode          *string                             `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                             `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType          *MandatesGetBankResponseAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	SignatureDate        time.Time                           `json:"signatureDate" url:"signatureDate" format:"date"`
+	CollectionsCount     int64                               `json:"collectionsCount" url:"collectionsCount"`
+	LastCollectionDate   *time.Time                          `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
+	ExpiresOn            *string                             `json:"expiresOn,omitempty" url:"expiresOn,omitempty"`
+	LodgedOn             *string                             `json:"lodgedOn,omitempty" url:"lodgedOn,omitempty"`
+	CancellationLodgedOn *string                             `json:"cancellationLodgedOn,omitempty" url:"cancellationLodgedOn,omitempty"`
+	CancelledAt          *time.Time                          `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
+	Notes                *string                             `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -14832,9 +16771,9 @@ func (m *MandatesGetBankResponse) GetDebtorName() string {
 	return m.DebtorName
 }
 
-func (m *MandatesGetBankResponse) GetIban() string {
+func (m *MandatesGetBankResponse) GetIban() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.Iban
 }
@@ -14844,6 +16783,27 @@ func (m *MandatesGetBankResponse) GetBic() *string {
 		return nil
 	}
 	return m.Bic
+}
+
+func (m *MandatesGetBankResponse) GetBankCode() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankCode
+}
+
+func (m *MandatesGetBankResponse) GetBankAccountNumber() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankAccountNumber
+}
+
+func (m *MandatesGetBankResponse) GetAccountType() *MandatesGetBankResponseAccountType {
+	if m == nil {
+		return nil
+	}
+	return m.AccountType
 }
 
 func (m *MandatesGetBankResponse) GetSignatureDate() time.Time {
@@ -14867,11 +16827,25 @@ func (m *MandatesGetBankResponse) GetLastCollectionDate() *time.Time {
 	return m.LastCollectionDate
 }
 
-func (m *MandatesGetBankResponse) GetExpiresOn() string {
+func (m *MandatesGetBankResponse) GetExpiresOn() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.ExpiresOn
+}
+
+func (m *MandatesGetBankResponse) GetLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LodgedOn
+}
+
+func (m *MandatesGetBankResponse) GetCancellationLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.CancellationLodgedOn
 }
 
 func (m *MandatesGetBankResponse) GetCancelledAt() *time.Time {
@@ -14960,7 +16934,7 @@ func (m *MandatesGetBankResponse) SetDebtorName(debtorName string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesGetBankResponse) SetIban(iban string) {
+func (m *MandatesGetBankResponse) SetIban(iban *string) {
 	m.Iban = iban
 	m.require(mandatesGetBankResponseFieldIban)
 }
@@ -14970,6 +16944,27 @@ func (m *MandatesGetBankResponse) SetIban(iban string) {
 func (m *MandatesGetBankResponse) SetBic(bic *string) {
 	m.Bic = bic
 	m.require(mandatesGetBankResponseFieldBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesGetBankResponse) SetBankCode(bankCode *string) {
+	m.BankCode = bankCode
+	m.require(mandatesGetBankResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesGetBankResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	m.BankAccountNumber = bankAccountNumber
+	m.require(mandatesGetBankResponseFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesGetBankResponse) SetAccountType(accountType *MandatesGetBankResponseAccountType) {
+	m.AccountType = accountType
+	m.require(mandatesGetBankResponseFieldAccountType)
 }
 
 // SetSignatureDate sets the SignatureDate field and marks it as non-optional;
@@ -14995,9 +16990,23 @@ func (m *MandatesGetBankResponse) SetLastCollectionDate(lastCollectionDate *time
 
 // SetExpiresOn sets the ExpiresOn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesGetBankResponse) SetExpiresOn(expiresOn string) {
+func (m *MandatesGetBankResponse) SetExpiresOn(expiresOn *string) {
 	m.ExpiresOn = expiresOn
 	m.require(mandatesGetBankResponseFieldExpiresOn)
+}
+
+// SetLodgedOn sets the LodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesGetBankResponse) SetLodgedOn(lodgedOn *string) {
+	m.LodgedOn = lodgedOn
+	m.require(mandatesGetBankResponseFieldLodgedOn)
+}
+
+// SetCancellationLodgedOn sets the CancellationLodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesGetBankResponse) SetCancellationLodgedOn(cancellationLodgedOn *string) {
+	m.CancellationLodgedOn = cancellationLodgedOn
+	m.require(mandatesGetBankResponseFieldCancellationLodgedOn)
 }
 
 // SetCancelledAt sets the CancelledAt field and marks it as non-optional;
@@ -15083,11 +17092,37 @@ func (m *MandatesGetBankResponse) String() string {
 	return fmt.Sprintf("%#v", m)
 }
 
+// Checking or savings account; a US ACH file needs it
+type MandatesGetBankResponseAccountType string
+
+const (
+	MandatesGetBankResponseAccountTypeChecking MandatesGetBankResponseAccountType = "checking"
+	MandatesGetBankResponseAccountTypeSavings  MandatesGetBankResponseAccountType = "savings"
+)
+
+func NewMandatesGetBankResponseAccountTypeFromString(s string) (MandatesGetBankResponseAccountType, error) {
+	switch s {
+	case "checking":
+		return MandatesGetBankResponseAccountTypeChecking, nil
+	case "savings":
+		return MandatesGetBankResponseAccountTypeSavings, nil
+	}
+	var t MandatesGetBankResponseAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MandatesGetBankResponseAccountType) Ptr() *MandatesGetBankResponseAccountType {
+	return &m
+}
+
 type MandatesGetBankResponseScheme string
 
 const (
 	MandatesGetBankResponseSchemeCore MandatesGetBankResponseScheme = "CORE"
 	MandatesGetBankResponseSchemeB2B  MandatesGetBankResponseScheme = "B2B"
+	MandatesGetBankResponseSchemeBacs MandatesGetBankResponseScheme = "BACS"
+	MandatesGetBankResponseSchemePpd  MandatesGetBankResponseScheme = "PPD"
+	MandatesGetBankResponseSchemeCcd  MandatesGetBankResponseScheme = "CCD"
 )
 
 func NewMandatesGetBankResponseSchemeFromString(s string) (MandatesGetBankResponseScheme, error) {
@@ -15096,6 +17131,12 @@ func NewMandatesGetBankResponseSchemeFromString(s string) (MandatesGetBankRespon
 		return MandatesGetBankResponseSchemeCore, nil
 	case "B2B":
 		return MandatesGetBankResponseSchemeB2B, nil
+	case "BACS":
+		return MandatesGetBankResponseSchemeBacs, nil
+	case "PPD":
+		return MandatesGetBankResponseSchemePpd, nil
+	case "CCD":
+		return MandatesGetBankResponseSchemeCcd, nil
 	}
 	var t MandatesGetBankResponseScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -15756,41 +17797,52 @@ func (m *MandatesListBankResponse) String() string {
 }
 
 var (
-	mandatesListBankResponseRowsItemFieldID                 = big.NewInt(1 << 0)
-	mandatesListBankResponseRowsItemFieldPartnerID          = big.NewInt(1 << 1)
-	mandatesListBankResponseRowsItemFieldReference          = big.NewInt(1 << 2)
-	mandatesListBankResponseRowsItemFieldScheme             = big.NewInt(1 << 3)
-	mandatesListBankResponseRowsItemFieldSequenceType       = big.NewInt(1 << 4)
-	mandatesListBankResponseRowsItemFieldStatus             = big.NewInt(1 << 5)
-	mandatesListBankResponseRowsItemFieldDebtorName         = big.NewInt(1 << 6)
-	mandatesListBankResponseRowsItemFieldIban               = big.NewInt(1 << 7)
-	mandatesListBankResponseRowsItemFieldBic                = big.NewInt(1 << 8)
-	mandatesListBankResponseRowsItemFieldSignatureDate      = big.NewInt(1 << 9)
-	mandatesListBankResponseRowsItemFieldCollectionsCount   = big.NewInt(1 << 10)
-	mandatesListBankResponseRowsItemFieldLastCollectionDate = big.NewInt(1 << 11)
-	mandatesListBankResponseRowsItemFieldExpiresOn          = big.NewInt(1 << 12)
-	mandatesListBankResponseRowsItemFieldCancelledAt        = big.NewInt(1 << 13)
-	mandatesListBankResponseRowsItemFieldNotes              = big.NewInt(1 << 14)
-	mandatesListBankResponseRowsItemFieldCreatedAt          = big.NewInt(1 << 15)
+	mandatesListBankResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	mandatesListBankResponseRowsItemFieldPartnerID            = big.NewInt(1 << 1)
+	mandatesListBankResponseRowsItemFieldReference            = big.NewInt(1 << 2)
+	mandatesListBankResponseRowsItemFieldScheme               = big.NewInt(1 << 3)
+	mandatesListBankResponseRowsItemFieldSequenceType         = big.NewInt(1 << 4)
+	mandatesListBankResponseRowsItemFieldStatus               = big.NewInt(1 << 5)
+	mandatesListBankResponseRowsItemFieldDebtorName           = big.NewInt(1 << 6)
+	mandatesListBankResponseRowsItemFieldIban                 = big.NewInt(1 << 7)
+	mandatesListBankResponseRowsItemFieldBic                  = big.NewInt(1 << 8)
+	mandatesListBankResponseRowsItemFieldBankCode             = big.NewInt(1 << 9)
+	mandatesListBankResponseRowsItemFieldBankAccountNumber    = big.NewInt(1 << 10)
+	mandatesListBankResponseRowsItemFieldAccountType          = big.NewInt(1 << 11)
+	mandatesListBankResponseRowsItemFieldSignatureDate        = big.NewInt(1 << 12)
+	mandatesListBankResponseRowsItemFieldCollectionsCount     = big.NewInt(1 << 13)
+	mandatesListBankResponseRowsItemFieldLastCollectionDate   = big.NewInt(1 << 14)
+	mandatesListBankResponseRowsItemFieldExpiresOn            = big.NewInt(1 << 15)
+	mandatesListBankResponseRowsItemFieldLodgedOn             = big.NewInt(1 << 16)
+	mandatesListBankResponseRowsItemFieldCancellationLodgedOn = big.NewInt(1 << 17)
+	mandatesListBankResponseRowsItemFieldCancelledAt          = big.NewInt(1 << 18)
+	mandatesListBankResponseRowsItemFieldNotes                = big.NewInt(1 << 19)
+	mandatesListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 20)
 )
 
 type MandatesListBankResponseRowsItem struct {
-	ID                 string                                       `json:"id" url:"id"`
-	PartnerID          string                                       `json:"partnerId" url:"partnerId"`
-	Reference          string                                       `json:"reference" url:"reference"`
-	Scheme             MandatesListBankResponseRowsItemScheme       `json:"scheme" url:"scheme"`
-	SequenceType       MandatesListBankResponseRowsItemSequenceType `json:"sequenceType" url:"sequenceType"`
-	Status             MandatesListBankResponseRowsItemStatus       `json:"status" url:"status"`
-	DebtorName         string                                       `json:"debtorName" url:"debtorName"`
-	Iban               string                                       `json:"iban" url:"iban"`
-	Bic                *string                                      `json:"bic,omitempty" url:"bic,omitempty"`
-	SignatureDate      time.Time                                    `json:"signatureDate" url:"signatureDate" format:"date"`
-	CollectionsCount   int64                                        `json:"collectionsCount" url:"collectionsCount"`
-	LastCollectionDate *time.Time                                   `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
-	ExpiresOn          string                                       `json:"expiresOn" url:"expiresOn"`
-	CancelledAt        *time.Time                                   `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
-	Notes              *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt          time.Time                                    `json:"createdAt" url:"createdAt"`
+	ID                string                                       `json:"id" url:"id"`
+	PartnerID         string                                       `json:"partnerId" url:"partnerId"`
+	Reference         string                                       `json:"reference" url:"reference"`
+	Scheme            MandatesListBankResponseRowsItemScheme       `json:"scheme" url:"scheme"`
+	SequenceType      MandatesListBankResponseRowsItemSequenceType `json:"sequenceType" url:"sequenceType"`
+	Status            MandatesListBankResponseRowsItemStatus       `json:"status" url:"status"`
+	DebtorName        string                                       `json:"debtorName" url:"debtorName"`
+	Iban              *string                                      `json:"iban,omitempty" url:"iban,omitempty"`
+	Bic               *string                                      `json:"bic,omitempty" url:"bic,omitempty"`
+	BankCode          *string                                      `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                                      `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType          *MandatesListBankResponseRowsItemAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	SignatureDate        time.Time                                    `json:"signatureDate" url:"signatureDate" format:"date"`
+	CollectionsCount     int64                                        `json:"collectionsCount" url:"collectionsCount"`
+	LastCollectionDate   *time.Time                                   `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
+	ExpiresOn            *string                                      `json:"expiresOn,omitempty" url:"expiresOn,omitempty"`
+	LodgedOn             *string                                      `json:"lodgedOn,omitempty" url:"lodgedOn,omitempty"`
+	CancellationLodgedOn *string                                      `json:"cancellationLodgedOn,omitempty" url:"cancellationLodgedOn,omitempty"`
+	CancelledAt          *time.Time                                   `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
+	Notes                *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                                    `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -15848,9 +17900,9 @@ func (m *MandatesListBankResponseRowsItem) GetDebtorName() string {
 	return m.DebtorName
 }
 
-func (m *MandatesListBankResponseRowsItem) GetIban() string {
+func (m *MandatesListBankResponseRowsItem) GetIban() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.Iban
 }
@@ -15860,6 +17912,27 @@ func (m *MandatesListBankResponseRowsItem) GetBic() *string {
 		return nil
 	}
 	return m.Bic
+}
+
+func (m *MandatesListBankResponseRowsItem) GetBankCode() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankCode
+}
+
+func (m *MandatesListBankResponseRowsItem) GetBankAccountNumber() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankAccountNumber
+}
+
+func (m *MandatesListBankResponseRowsItem) GetAccountType() *MandatesListBankResponseRowsItemAccountType {
+	if m == nil {
+		return nil
+	}
+	return m.AccountType
 }
 
 func (m *MandatesListBankResponseRowsItem) GetSignatureDate() time.Time {
@@ -15883,11 +17956,25 @@ func (m *MandatesListBankResponseRowsItem) GetLastCollectionDate() *time.Time {
 	return m.LastCollectionDate
 }
 
-func (m *MandatesListBankResponseRowsItem) GetExpiresOn() string {
+func (m *MandatesListBankResponseRowsItem) GetExpiresOn() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.ExpiresOn
+}
+
+func (m *MandatesListBankResponseRowsItem) GetLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LodgedOn
+}
+
+func (m *MandatesListBankResponseRowsItem) GetCancellationLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.CancellationLodgedOn
 }
 
 func (m *MandatesListBankResponseRowsItem) GetCancelledAt() *time.Time {
@@ -15976,7 +18063,7 @@ func (m *MandatesListBankResponseRowsItem) SetDebtorName(debtorName string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesListBankResponseRowsItem) SetIban(iban string) {
+func (m *MandatesListBankResponseRowsItem) SetIban(iban *string) {
 	m.Iban = iban
 	m.require(mandatesListBankResponseRowsItemFieldIban)
 }
@@ -15986,6 +18073,27 @@ func (m *MandatesListBankResponseRowsItem) SetIban(iban string) {
 func (m *MandatesListBankResponseRowsItem) SetBic(bic *string) {
 	m.Bic = bic
 	m.require(mandatesListBankResponseRowsItemFieldBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesListBankResponseRowsItem) SetBankCode(bankCode *string) {
+	m.BankCode = bankCode
+	m.require(mandatesListBankResponseRowsItemFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesListBankResponseRowsItem) SetBankAccountNumber(bankAccountNumber *string) {
+	m.BankAccountNumber = bankAccountNumber
+	m.require(mandatesListBankResponseRowsItemFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesListBankResponseRowsItem) SetAccountType(accountType *MandatesListBankResponseRowsItemAccountType) {
+	m.AccountType = accountType
+	m.require(mandatesListBankResponseRowsItemFieldAccountType)
 }
 
 // SetSignatureDate sets the SignatureDate field and marks it as non-optional;
@@ -16011,9 +18119,23 @@ func (m *MandatesListBankResponseRowsItem) SetLastCollectionDate(lastCollectionD
 
 // SetExpiresOn sets the ExpiresOn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesListBankResponseRowsItem) SetExpiresOn(expiresOn string) {
+func (m *MandatesListBankResponseRowsItem) SetExpiresOn(expiresOn *string) {
 	m.ExpiresOn = expiresOn
 	m.require(mandatesListBankResponseRowsItemFieldExpiresOn)
+}
+
+// SetLodgedOn sets the LodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesListBankResponseRowsItem) SetLodgedOn(lodgedOn *string) {
+	m.LodgedOn = lodgedOn
+	m.require(mandatesListBankResponseRowsItemFieldLodgedOn)
+}
+
+// SetCancellationLodgedOn sets the CancellationLodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesListBankResponseRowsItem) SetCancellationLodgedOn(cancellationLodgedOn *string) {
+	m.CancellationLodgedOn = cancellationLodgedOn
+	m.require(mandatesListBankResponseRowsItemFieldCancellationLodgedOn)
 }
 
 // SetCancelledAt sets the CancelledAt field and marks it as non-optional;
@@ -16099,11 +18221,37 @@ func (m *MandatesListBankResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", m)
 }
 
+// Checking or savings account; a US ACH file needs it
+type MandatesListBankResponseRowsItemAccountType string
+
+const (
+	MandatesListBankResponseRowsItemAccountTypeChecking MandatesListBankResponseRowsItemAccountType = "checking"
+	MandatesListBankResponseRowsItemAccountTypeSavings  MandatesListBankResponseRowsItemAccountType = "savings"
+)
+
+func NewMandatesListBankResponseRowsItemAccountTypeFromString(s string) (MandatesListBankResponseRowsItemAccountType, error) {
+	switch s {
+	case "checking":
+		return MandatesListBankResponseRowsItemAccountTypeChecking, nil
+	case "savings":
+		return MandatesListBankResponseRowsItemAccountTypeSavings, nil
+	}
+	var t MandatesListBankResponseRowsItemAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MandatesListBankResponseRowsItemAccountType) Ptr() *MandatesListBankResponseRowsItemAccountType {
+	return &m
+}
+
 type MandatesListBankResponseRowsItemScheme string
 
 const (
 	MandatesListBankResponseRowsItemSchemeCore MandatesListBankResponseRowsItemScheme = "CORE"
 	MandatesListBankResponseRowsItemSchemeB2B  MandatesListBankResponseRowsItemScheme = "B2B"
+	MandatesListBankResponseRowsItemSchemeBacs MandatesListBankResponseRowsItemScheme = "BACS"
+	MandatesListBankResponseRowsItemSchemePpd  MandatesListBankResponseRowsItemScheme = "PPD"
+	MandatesListBankResponseRowsItemSchemeCcd  MandatesListBankResponseRowsItemScheme = "CCD"
 )
 
 func NewMandatesListBankResponseRowsItemSchemeFromString(s string) (MandatesListBankResponseRowsItemScheme, error) {
@@ -16112,6 +18260,12 @@ func NewMandatesListBankResponseRowsItemSchemeFromString(s string) (MandatesList
 		return MandatesListBankResponseRowsItemSchemeCore, nil
 	case "B2B":
 		return MandatesListBankResponseRowsItemSchemeB2B, nil
+	case "BACS":
+		return MandatesListBankResponseRowsItemSchemeBacs, nil
+	case "PPD":
+		return MandatesListBankResponseRowsItemSchemePpd, nil
+	case "CCD":
+		return MandatesListBankResponseRowsItemSchemeCcd, nil
 	}
 	var t MandatesListBankResponseRowsItemScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -16169,41 +18323,52 @@ func (m MandatesListBankResponseRowsItemStatus) Ptr() *MandatesListBankResponseR
 }
 
 var (
-	mandatesUpdateBankResponseFieldID                 = big.NewInt(1 << 0)
-	mandatesUpdateBankResponseFieldPartnerID          = big.NewInt(1 << 1)
-	mandatesUpdateBankResponseFieldReference          = big.NewInt(1 << 2)
-	mandatesUpdateBankResponseFieldScheme             = big.NewInt(1 << 3)
-	mandatesUpdateBankResponseFieldSequenceType       = big.NewInt(1 << 4)
-	mandatesUpdateBankResponseFieldStatus             = big.NewInt(1 << 5)
-	mandatesUpdateBankResponseFieldDebtorName         = big.NewInt(1 << 6)
-	mandatesUpdateBankResponseFieldIban               = big.NewInt(1 << 7)
-	mandatesUpdateBankResponseFieldBic                = big.NewInt(1 << 8)
-	mandatesUpdateBankResponseFieldSignatureDate      = big.NewInt(1 << 9)
-	mandatesUpdateBankResponseFieldCollectionsCount   = big.NewInt(1 << 10)
-	mandatesUpdateBankResponseFieldLastCollectionDate = big.NewInt(1 << 11)
-	mandatesUpdateBankResponseFieldExpiresOn          = big.NewInt(1 << 12)
-	mandatesUpdateBankResponseFieldCancelledAt        = big.NewInt(1 << 13)
-	mandatesUpdateBankResponseFieldNotes              = big.NewInt(1 << 14)
-	mandatesUpdateBankResponseFieldCreatedAt          = big.NewInt(1 << 15)
+	mandatesUpdateBankResponseFieldID                   = big.NewInt(1 << 0)
+	mandatesUpdateBankResponseFieldPartnerID            = big.NewInt(1 << 1)
+	mandatesUpdateBankResponseFieldReference            = big.NewInt(1 << 2)
+	mandatesUpdateBankResponseFieldScheme               = big.NewInt(1 << 3)
+	mandatesUpdateBankResponseFieldSequenceType         = big.NewInt(1 << 4)
+	mandatesUpdateBankResponseFieldStatus               = big.NewInt(1 << 5)
+	mandatesUpdateBankResponseFieldDebtorName           = big.NewInt(1 << 6)
+	mandatesUpdateBankResponseFieldIban                 = big.NewInt(1 << 7)
+	mandatesUpdateBankResponseFieldBic                  = big.NewInt(1 << 8)
+	mandatesUpdateBankResponseFieldBankCode             = big.NewInt(1 << 9)
+	mandatesUpdateBankResponseFieldBankAccountNumber    = big.NewInt(1 << 10)
+	mandatesUpdateBankResponseFieldAccountType          = big.NewInt(1 << 11)
+	mandatesUpdateBankResponseFieldSignatureDate        = big.NewInt(1 << 12)
+	mandatesUpdateBankResponseFieldCollectionsCount     = big.NewInt(1 << 13)
+	mandatesUpdateBankResponseFieldLastCollectionDate   = big.NewInt(1 << 14)
+	mandatesUpdateBankResponseFieldExpiresOn            = big.NewInt(1 << 15)
+	mandatesUpdateBankResponseFieldLodgedOn             = big.NewInt(1 << 16)
+	mandatesUpdateBankResponseFieldCancellationLodgedOn = big.NewInt(1 << 17)
+	mandatesUpdateBankResponseFieldCancelledAt          = big.NewInt(1 << 18)
+	mandatesUpdateBankResponseFieldNotes                = big.NewInt(1 << 19)
+	mandatesUpdateBankResponseFieldCreatedAt            = big.NewInt(1 << 20)
 )
 
 type MandatesUpdateBankResponse struct {
-	ID                 string                                 `json:"id" url:"id"`
-	PartnerID          string                                 `json:"partnerId" url:"partnerId"`
-	Reference          string                                 `json:"reference" url:"reference"`
-	Scheme             MandatesUpdateBankResponseScheme       `json:"scheme" url:"scheme"`
-	SequenceType       MandatesUpdateBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
-	Status             MandatesUpdateBankResponseStatus       `json:"status" url:"status"`
-	DebtorName         string                                 `json:"debtorName" url:"debtorName"`
-	Iban               string                                 `json:"iban" url:"iban"`
-	Bic                *string                                `json:"bic,omitempty" url:"bic,omitempty"`
-	SignatureDate      time.Time                              `json:"signatureDate" url:"signatureDate" format:"date"`
-	CollectionsCount   int64                                  `json:"collectionsCount" url:"collectionsCount"`
-	LastCollectionDate *time.Time                             `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
-	ExpiresOn          string                                 `json:"expiresOn" url:"expiresOn"`
-	CancelledAt        *time.Time                             `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
-	Notes              *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	CreatedAt          time.Time                              `json:"createdAt" url:"createdAt"`
+	ID                string                                 `json:"id" url:"id"`
+	PartnerID         string                                 `json:"partnerId" url:"partnerId"`
+	Reference         string                                 `json:"reference" url:"reference"`
+	Scheme            MandatesUpdateBankResponseScheme       `json:"scheme" url:"scheme"`
+	SequenceType      MandatesUpdateBankResponseSequenceType `json:"sequenceType" url:"sequenceType"`
+	Status            MandatesUpdateBankResponseStatus       `json:"status" url:"status"`
+	DebtorName        string                                 `json:"debtorName" url:"debtorName"`
+	Iban              *string                                `json:"iban,omitempty" url:"iban,omitempty"`
+	Bic               *string                                `json:"bic,omitempty" url:"bic,omitempty"`
+	BankCode          *string                                `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                                `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	AccountType          *MandatesUpdateBankResponseAccountType `json:"accountType,omitempty" url:"accountType,omitempty"`
+	SignatureDate        time.Time                              `json:"signatureDate" url:"signatureDate" format:"date"`
+	CollectionsCount     int64                                  `json:"collectionsCount" url:"collectionsCount"`
+	LastCollectionDate   *time.Time                             `json:"lastCollectionDate,omitempty" url:"lastCollectionDate,omitempty" format:"date"`
+	ExpiresOn            *string                                `json:"expiresOn,omitempty" url:"expiresOn,omitempty"`
+	LodgedOn             *string                                `json:"lodgedOn,omitempty" url:"lodgedOn,omitempty"`
+	CancellationLodgedOn *string                                `json:"cancellationLodgedOn,omitempty" url:"cancellationLodgedOn,omitempty"`
+	CancelledAt          *time.Time                             `json:"cancelledAt,omitempty" url:"cancelledAt,omitempty"`
+	Notes                *string                                `json:"notes,omitempty" url:"notes,omitempty"`
+	CreatedAt            time.Time                              `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -16261,9 +18426,9 @@ func (m *MandatesUpdateBankResponse) GetDebtorName() string {
 	return m.DebtorName
 }
 
-func (m *MandatesUpdateBankResponse) GetIban() string {
+func (m *MandatesUpdateBankResponse) GetIban() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.Iban
 }
@@ -16273,6 +18438,27 @@ func (m *MandatesUpdateBankResponse) GetBic() *string {
 		return nil
 	}
 	return m.Bic
+}
+
+func (m *MandatesUpdateBankResponse) GetBankCode() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankCode
+}
+
+func (m *MandatesUpdateBankResponse) GetBankAccountNumber() *string {
+	if m == nil {
+		return nil
+	}
+	return m.BankAccountNumber
+}
+
+func (m *MandatesUpdateBankResponse) GetAccountType() *MandatesUpdateBankResponseAccountType {
+	if m == nil {
+		return nil
+	}
+	return m.AccountType
 }
 
 func (m *MandatesUpdateBankResponse) GetSignatureDate() time.Time {
@@ -16296,11 +18482,25 @@ func (m *MandatesUpdateBankResponse) GetLastCollectionDate() *time.Time {
 	return m.LastCollectionDate
 }
 
-func (m *MandatesUpdateBankResponse) GetExpiresOn() string {
+func (m *MandatesUpdateBankResponse) GetExpiresOn() *string {
 	if m == nil {
-		return ""
+		return nil
 	}
 	return m.ExpiresOn
+}
+
+func (m *MandatesUpdateBankResponse) GetLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LodgedOn
+}
+
+func (m *MandatesUpdateBankResponse) GetCancellationLodgedOn() *string {
+	if m == nil {
+		return nil
+	}
+	return m.CancellationLodgedOn
 }
 
 func (m *MandatesUpdateBankResponse) GetCancelledAt() *time.Time {
@@ -16389,7 +18589,7 @@ func (m *MandatesUpdateBankResponse) SetDebtorName(debtorName string) {
 
 // SetIban sets the Iban field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesUpdateBankResponse) SetIban(iban string) {
+func (m *MandatesUpdateBankResponse) SetIban(iban *string) {
 	m.Iban = iban
 	m.require(mandatesUpdateBankResponseFieldIban)
 }
@@ -16399,6 +18599,27 @@ func (m *MandatesUpdateBankResponse) SetIban(iban string) {
 func (m *MandatesUpdateBankResponse) SetBic(bic *string) {
 	m.Bic = bic
 	m.require(mandatesUpdateBankResponseFieldBic)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesUpdateBankResponse) SetBankCode(bankCode *string) {
+	m.BankCode = bankCode
+	m.require(mandatesUpdateBankResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesUpdateBankResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	m.BankAccountNumber = bankAccountNumber
+	m.require(mandatesUpdateBankResponseFieldBankAccountNumber)
+}
+
+// SetAccountType sets the AccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesUpdateBankResponse) SetAccountType(accountType *MandatesUpdateBankResponseAccountType) {
+	m.AccountType = accountType
+	m.require(mandatesUpdateBankResponseFieldAccountType)
 }
 
 // SetSignatureDate sets the SignatureDate field and marks it as non-optional;
@@ -16424,9 +18645,23 @@ func (m *MandatesUpdateBankResponse) SetLastCollectionDate(lastCollectionDate *t
 
 // SetExpiresOn sets the ExpiresOn field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (m *MandatesUpdateBankResponse) SetExpiresOn(expiresOn string) {
+func (m *MandatesUpdateBankResponse) SetExpiresOn(expiresOn *string) {
 	m.ExpiresOn = expiresOn
 	m.require(mandatesUpdateBankResponseFieldExpiresOn)
+}
+
+// SetLodgedOn sets the LodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesUpdateBankResponse) SetLodgedOn(lodgedOn *string) {
+	m.LodgedOn = lodgedOn
+	m.require(mandatesUpdateBankResponseFieldLodgedOn)
+}
+
+// SetCancellationLodgedOn sets the CancellationLodgedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MandatesUpdateBankResponse) SetCancellationLodgedOn(cancellationLodgedOn *string) {
+	m.CancellationLodgedOn = cancellationLodgedOn
+	m.require(mandatesUpdateBankResponseFieldCancellationLodgedOn)
 }
 
 // SetCancelledAt sets the CancelledAt field and marks it as non-optional;
@@ -16512,11 +18747,37 @@ func (m *MandatesUpdateBankResponse) String() string {
 	return fmt.Sprintf("%#v", m)
 }
 
+// Checking or savings account; a US ACH file needs it
+type MandatesUpdateBankResponseAccountType string
+
+const (
+	MandatesUpdateBankResponseAccountTypeChecking MandatesUpdateBankResponseAccountType = "checking"
+	MandatesUpdateBankResponseAccountTypeSavings  MandatesUpdateBankResponseAccountType = "savings"
+)
+
+func NewMandatesUpdateBankResponseAccountTypeFromString(s string) (MandatesUpdateBankResponseAccountType, error) {
+	switch s {
+	case "checking":
+		return MandatesUpdateBankResponseAccountTypeChecking, nil
+	case "savings":
+		return MandatesUpdateBankResponseAccountTypeSavings, nil
+	}
+	var t MandatesUpdateBankResponseAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (m MandatesUpdateBankResponseAccountType) Ptr() *MandatesUpdateBankResponseAccountType {
+	return &m
+}
+
 type MandatesUpdateBankResponseScheme string
 
 const (
 	MandatesUpdateBankResponseSchemeCore MandatesUpdateBankResponseScheme = "CORE"
 	MandatesUpdateBankResponseSchemeB2B  MandatesUpdateBankResponseScheme = "B2B"
+	MandatesUpdateBankResponseSchemeBacs MandatesUpdateBankResponseScheme = "BACS"
+	MandatesUpdateBankResponseSchemePpd  MandatesUpdateBankResponseScheme = "PPD"
+	MandatesUpdateBankResponseSchemeCcd  MandatesUpdateBankResponseScheme = "CCD"
 )
 
 func NewMandatesUpdateBankResponseSchemeFromString(s string) (MandatesUpdateBankResponseScheme, error) {
@@ -16525,6 +18786,12 @@ func NewMandatesUpdateBankResponseSchemeFromString(s string) (MandatesUpdateBank
 		return MandatesUpdateBankResponseSchemeCore, nil
 	case "B2B":
 		return MandatesUpdateBankResponseSchemeB2B, nil
+	case "BACS":
+		return MandatesUpdateBankResponseSchemeBacs, nil
+	case "PPD":
+		return MandatesUpdateBankResponseSchemePpd, nil
+	case "CCD":
+		return MandatesUpdateBankResponseSchemeCcd, nil
 	}
 	var t MandatesUpdateBankResponseScheme
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -17410,25 +19677,36 @@ func (m *MatchRulesUpdateBankResponse) String() string {
 }
 
 var (
-	paymentsExportBankResponseFieldMessageID        = big.NewInt(1 << 0)
-	paymentsExportBankResponseFieldFileName         = big.NewInt(1 << 1)
-	paymentsExportBankResponseFieldTransactionCount = big.NewInt(1 << 2)
-	paymentsExportBankResponseFieldControlSum       = big.NewInt(1 << 3)
-	paymentsExportBankResponseFieldXML              = big.NewInt(1 << 4)
+	paymentsExportBankResponseFieldFormat           = big.NewInt(1 << 0)
+	paymentsExportBankResponseFieldMessageID        = big.NewInt(1 << 1)
+	paymentsExportBankResponseFieldFileName         = big.NewInt(1 << 2)
+	paymentsExportBankResponseFieldContentType      = big.NewInt(1 << 3)
+	paymentsExportBankResponseFieldTransactionCount = big.NewInt(1 << 4)
+	paymentsExportBankResponseFieldControlSum       = big.NewInt(1 << 5)
+	paymentsExportBankResponseFieldContent          = big.NewInt(1 << 6)
 )
 
 type PaymentsExportBankResponse struct {
-	MessageID        string `json:"messageId" url:"messageId"`
-	FileName         string `json:"fileName" url:"fileName"`
-	TransactionCount int64  `json:"transactionCount" url:"transactionCount"`
-	ControlSum       string `json:"controlSum" url:"controlSum"`
-	XML              string `json:"xml" url:"xml"`
+	Format           PaymentsExportBankResponseFormat `json:"format" url:"format"`
+	MessageID        string                           `json:"messageId" url:"messageId"`
+	FileName         string                           `json:"fileName" url:"fileName"`
+	ContentType      string                           `json:"contentType" url:"contentType"`
+	TransactionCount int64                            `json:"transactionCount" url:"transactionCount"`
+	ControlSum       string                           `json:"controlSum" url:"controlSum"`
+	Content          string                           `json:"content" url:"content"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (p *PaymentsExportBankResponse) GetFormat() PaymentsExportBankResponseFormat {
+	if p == nil {
+		return ""
+	}
+	return p.Format
 }
 
 func (p *PaymentsExportBankResponse) GetMessageID() string {
@@ -17445,6 +19723,13 @@ func (p *PaymentsExportBankResponse) GetFileName() string {
 	return p.FileName
 }
 
+func (p *PaymentsExportBankResponse) GetContentType() string {
+	if p == nil {
+		return ""
+	}
+	return p.ContentType
+}
+
 func (p *PaymentsExportBankResponse) GetTransactionCount() int64 {
 	if p == nil {
 		return 0
@@ -17459,11 +19744,11 @@ func (p *PaymentsExportBankResponse) GetControlSum() string {
 	return p.ControlSum
 }
 
-func (p *PaymentsExportBankResponse) GetXML() string {
+func (p *PaymentsExportBankResponse) GetContent() string {
 	if p == nil {
 		return ""
 	}
-	return p.XML
+	return p.Content
 }
 
 func (p *PaymentsExportBankResponse) GetExtraProperties() map[string]interface{} {
@@ -17480,6 +19765,13 @@ func (p *PaymentsExportBankResponse) require(field *big.Int) {
 	p.explicitFields.Or(p.explicitFields, field)
 }
 
+// SetFormat sets the Format field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentsExportBankResponse) SetFormat(format PaymentsExportBankResponseFormat) {
+	p.Format = format
+	p.require(paymentsExportBankResponseFieldFormat)
+}
+
 // SetMessageID sets the MessageID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PaymentsExportBankResponse) SetMessageID(messageID string) {
@@ -17492,6 +19784,13 @@ func (p *PaymentsExportBankResponse) SetMessageID(messageID string) {
 func (p *PaymentsExportBankResponse) SetFileName(fileName string) {
 	p.FileName = fileName
 	p.require(paymentsExportBankResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentsExportBankResponse) SetContentType(contentType string) {
+	p.ContentType = contentType
+	p.require(paymentsExportBankResponseFieldContentType)
 }
 
 // SetTransactionCount sets the TransactionCount field and marks it as non-optional;
@@ -17508,11 +19807,11 @@ func (p *PaymentsExportBankResponse) SetControlSum(controlSum string) {
 	p.require(paymentsExportBankResponseFieldControlSum)
 }
 
-// SetXML sets the XML field and marks it as non-optional;
+// SetContent sets the Content field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PaymentsExportBankResponse) SetXML(xml string) {
-	p.XML = xml
-	p.require(paymentsExportBankResponseFieldXML)
+func (p *PaymentsExportBankResponse) SetContent(content string) {
+	p.Content = content
+	p.require(paymentsExportBankResponseFieldContent)
 }
 
 func (p *PaymentsExportBankResponse) UnmarshalJSON(data []byte) error {
@@ -17555,6 +19854,34 @@ func (p *PaymentsExportBankResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", p)
+}
+
+type PaymentsExportBankResponseFormat string
+
+const (
+	PaymentsExportBankResponseFormatPain00100103   PaymentsExportBankResponseFormat = "pain.001.001.03"
+	PaymentsExportBankResponseFormatPain00800102   PaymentsExportBankResponseFormat = "pain.008.001.02"
+	PaymentsExportBankResponseFormatBacsStandard18 PaymentsExportBankResponseFormat = "bacs-standard-18"
+	PaymentsExportBankResponseFormatNacha          PaymentsExportBankResponseFormat = "nacha"
+)
+
+func NewPaymentsExportBankResponseFormatFromString(s string) (PaymentsExportBankResponseFormat, error) {
+	switch s {
+	case "pain.001.001.03":
+		return PaymentsExportBankResponseFormatPain00100103, nil
+	case "pain.008.001.02":
+		return PaymentsExportBankResponseFormatPain00800102, nil
+	case "bacs-standard-18":
+		return PaymentsExportBankResponseFormatBacsStandard18, nil
+	case "nacha":
+		return PaymentsExportBankResponseFormatNacha, nil
+	}
+	var t PaymentsExportBankResponseFormat
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PaymentsExportBankResponseFormat) Ptr() *PaymentsExportBankResponseFormat {
+	return &p
 }
 
 var (

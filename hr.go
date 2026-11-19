@@ -329,24 +329,26 @@ var (
 	contractsCreateHrRequestFieldEndDate      = big.NewInt(1 << 8)
 	contractsCreateHrRequestFieldBaseSalary   = big.NewInt(1 << 9)
 	contractsCreateHrRequestFieldSalaryType   = big.NewInt(1 << 10)
-	contractsCreateHrRequestFieldWorkHours    = big.NewInt(1 << 11)
-	contractsCreateHrRequestFieldNotes        = big.NewInt(1 << 12)
+	contractsCreateHrRequestFieldPayFrequency = big.NewInt(1 << 11)
+	contractsCreateHrRequestFieldWorkHours    = big.NewInt(1 << 12)
+	contractsCreateHrRequestFieldNotes        = big.NewInt(1 << 13)
 )
 
 type ContractsCreateHrRequest struct {
-	EmployeeID   string                              `json:"employeeId" url:"-"`
-	PositionID   *string                             `json:"positionId,omitempty" url:"-"`
-	DepartmentID *string                             `json:"departmentId,omitempty" url:"-"`
-	ScheduleID   *string                             `json:"scheduleId,omitempty" url:"-"`
-	AgreementID  *string                             `json:"agreementId,omitempty" url:"-"`
-	ContractNo   *string                             `json:"contractNo,omitempty" url:"-"`
-	Type         *ContractsCreateHrRequestType       `json:"type,omitempty" url:"-"`
-	StartDate    time.Time                           `json:"startDate" url:"-" format:"date"`
-	EndDate      *time.Time                          `json:"endDate,omitempty" url:"-" format:"date"`
-	BaseSalary   string                              `json:"baseSalary" url:"-"`
-	SalaryType   *ContractsCreateHrRequestSalaryType `json:"salaryType,omitempty" url:"-"`
-	WorkHours    *string                             `json:"workHours,omitempty" url:"-"`
-	Notes        *string                             `json:"notes,omitempty" url:"-"`
+	EmployeeID   string                                `json:"employeeId" url:"-"`
+	PositionID   *string                               `json:"positionId,omitempty" url:"-"`
+	DepartmentID *string                               `json:"departmentId,omitempty" url:"-"`
+	ScheduleID   *string                               `json:"scheduleId,omitempty" url:"-"`
+	AgreementID  *string                               `json:"agreementId,omitempty" url:"-"`
+	ContractNo   *string                               `json:"contractNo,omitempty" url:"-"`
+	Type         *ContractsCreateHrRequestType         `json:"type,omitempty" url:"-"`
+	StartDate    time.Time                             `json:"startDate" url:"-" format:"date"`
+	EndDate      *time.Time                            `json:"endDate,omitempty" url:"-" format:"date"`
+	BaseSalary   string                                `json:"baseSalary" url:"-"`
+	SalaryType   *ContractsCreateHrRequestSalaryType   `json:"salaryType,omitempty" url:"-"`
+	PayFrequency *ContractsCreateHrRequestPayFrequency `json:"payFrequency,omitempty" url:"-"`
+	WorkHours    *string                               `json:"workHours,omitempty" url:"-"`
+	Notes        *string                               `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -434,6 +436,13 @@ func (c *ContractsCreateHrRequest) SetBaseSalary(baseSalary string) {
 func (c *ContractsCreateHrRequest) SetSalaryType(salaryType *ContractsCreateHrRequestSalaryType) {
 	c.SalaryType = salaryType
 	c.require(contractsCreateHrRequestFieldSalaryType)
+}
+
+// SetPayFrequency sets the PayFrequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrRequest) SetPayFrequency(payFrequency *ContractsCreateHrRequestPayFrequency) {
+	c.PayFrequency = payFrequency
+	c.require(contractsCreateHrRequestFieldPayFrequency)
 }
 
 // SetWorkHours sets the WorkHours field and marks it as non-optional;
@@ -726,27 +735,36 @@ var (
 	employeesCreateHrRequestFieldPhone                = big.NewInt(1 << 6)
 	employeesCreateHrRequestFieldAddress              = big.NewInt(1 << 7)
 	employeesCreateHrRequestFieldIban                 = big.NewInt(1 << 8)
-	employeesCreateHrRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
-	employeesCreateHrRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
-	employeesCreateHrRequestFieldHireDate             = big.NewInt(1 << 11)
-	employeesCreateHrRequestFieldApplyAllowance       = big.NewInt(1 << 12)
-	employeesCreateHrRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
-	employeesCreateHrRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
-	employeesCreateHrRequestFieldPayrollOptions       = big.NewInt(1 << 15)
-	employeesCreateHrRequestFieldNotes                = big.NewInt(1 << 16)
-	employeesCreateHrRequestFieldAttributes           = big.NewInt(1 << 17)
+	employeesCreateHrRequestFieldBankCode             = big.NewInt(1 << 9)
+	employeesCreateHrRequestFieldBankAccountNumber    = big.NewInt(1 << 10)
+	employeesCreateHrRequestFieldBankAccountType      = big.NewInt(1 << 11)
+	employeesCreateHrRequestFieldSocialInsuranceNo    = big.NewInt(1 << 12)
+	employeesCreateHrRequestFieldSocialInsuranceStart = big.NewInt(1 << 13)
+	employeesCreateHrRequestFieldHireDate             = big.NewInt(1 << 14)
+	employeesCreateHrRequestFieldApplyAllowance       = big.NewInt(1 << 15)
+	employeesCreateHrRequestFieldAllowanceOverride    = big.NewInt(1 << 16)
+	employeesCreateHrRequestFieldPensionAccumulation  = big.NewInt(1 << 17)
+	employeesCreateHrRequestFieldPayrollOptions       = big.NewInt(1 << 18)
+	employeesCreateHrRequestFieldNotes                = big.NewInt(1 << 19)
+	employeesCreateHrRequestFieldAttributes           = big.NewInt(1 << 20)
 )
 
 type EmployeesCreateHrRequest struct {
-	Code                 *string                                   `json:"code,omitempty" url:"-"`
-	FirstName            string                                    `json:"firstName" url:"-"`
-	LastName             string                                    `json:"lastName" url:"-"`
-	PersonalCode         *string                                   `json:"personalCode,omitempty" url:"-"`
-	BirthDate            *time.Time                                `json:"birthDate,omitempty" url:"-" format:"date"`
-	Email                *string                                   `json:"email,omitempty" url:"-"`
-	Phone                *string                                   `json:"phone,omitempty" url:"-"`
-	Address              *EmployeesCreateHrRequestAddress          `json:"address,omitempty" url:"-"`
-	Iban                 *string                                   `json:"iban,omitempty" url:"-"`
+	Code         *string                          `json:"code,omitempty" url:"-"`
+	FirstName    string                           `json:"firstName" url:"-"`
+	LastName     string                           `json:"lastName" url:"-"`
+	PersonalCode *string                          `json:"personalCode,omitempty" url:"-"`
+	BirthDate    *time.Time                       `json:"birthDate,omitempty" url:"-" format:"date"`
+	Email        *string                          `json:"email,omitempty" url:"-"`
+	Phone        *string                          `json:"phone,omitempty" url:"-"`
+	Address      *EmployeesCreateHrRequestAddress `json:"address,omitempty" url:"-"`
+	Iban         *string                          `json:"iban,omitempty" url:"-"`
+	// Sort code, routing number or other national bank code, for an account without an IBAN
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Account number, for an account without an IBAN
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// Checking or savings account; a US ACH file needs it
+	BankAccountType      *EmployeesCreateHrRequestBankAccountType  `json:"bankAccountType,omitempty" url:"-"`
 	SocialInsuranceNo    *string                                   `json:"socialInsuranceNo,omitempty" url:"-"`
 	SocialInsuranceStart *time.Time                                `json:"socialInsuranceStart,omitempty" url:"-" format:"date"`
 	HireDate             *time.Time                                `json:"hireDate,omitempty" url:"-" format:"date"`
@@ -829,6 +847,27 @@ func (e *EmployeesCreateHrRequest) SetAddress(address *EmployeesCreateHrRequestA
 func (e *EmployeesCreateHrRequest) SetIban(iban *string) {
 	e.Iban = iban
 	e.require(employeesCreateHrRequestFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrRequest) SetBankCode(bankCode *string) {
+	e.BankCode = bankCode
+	e.require(employeesCreateHrRequestFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	e.BankAccountNumber = bankAccountNumber
+	e.require(employeesCreateHrRequestFieldBankAccountNumber)
+}
+
+// SetBankAccountType sets the BankAccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrRequest) SetBankAccountType(bankAccountType *EmployeesCreateHrRequestBankAccountType) {
+	e.BankAccountType = bankAccountType
+	e.require(employeesCreateHrRequestFieldBankAccountType)
 }
 
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
@@ -1474,30 +1513,39 @@ var (
 	employeesUpdateHrRequestFieldPhone                = big.NewInt(1 << 6)
 	employeesUpdateHrRequestFieldAddress              = big.NewInt(1 << 7)
 	employeesUpdateHrRequestFieldIban                 = big.NewInt(1 << 8)
-	employeesUpdateHrRequestFieldSocialInsuranceNo    = big.NewInt(1 << 9)
-	employeesUpdateHrRequestFieldSocialInsuranceStart = big.NewInt(1 << 10)
-	employeesUpdateHrRequestFieldHireDate             = big.NewInt(1 << 11)
-	employeesUpdateHrRequestFieldApplyAllowance       = big.NewInt(1 << 12)
-	employeesUpdateHrRequestFieldAllowanceOverride    = big.NewInt(1 << 13)
-	employeesUpdateHrRequestFieldPensionAccumulation  = big.NewInt(1 << 14)
-	employeesUpdateHrRequestFieldPayrollOptions       = big.NewInt(1 << 15)
-	employeesUpdateHrRequestFieldNotes                = big.NewInt(1 << 16)
-	employeesUpdateHrRequestFieldAttributes           = big.NewInt(1 << 17)
-	employeesUpdateHrRequestFieldID                   = big.NewInt(1 << 18)
-	employeesUpdateHrRequestFieldTerminationDate      = big.NewInt(1 << 19)
-	employeesUpdateHrRequestFieldStatus               = big.NewInt(1 << 20)
+	employeesUpdateHrRequestFieldBankCode             = big.NewInt(1 << 9)
+	employeesUpdateHrRequestFieldBankAccountNumber    = big.NewInt(1 << 10)
+	employeesUpdateHrRequestFieldBankAccountType      = big.NewInt(1 << 11)
+	employeesUpdateHrRequestFieldSocialInsuranceNo    = big.NewInt(1 << 12)
+	employeesUpdateHrRequestFieldSocialInsuranceStart = big.NewInt(1 << 13)
+	employeesUpdateHrRequestFieldHireDate             = big.NewInt(1 << 14)
+	employeesUpdateHrRequestFieldApplyAllowance       = big.NewInt(1 << 15)
+	employeesUpdateHrRequestFieldAllowanceOverride    = big.NewInt(1 << 16)
+	employeesUpdateHrRequestFieldPensionAccumulation  = big.NewInt(1 << 17)
+	employeesUpdateHrRequestFieldPayrollOptions       = big.NewInt(1 << 18)
+	employeesUpdateHrRequestFieldNotes                = big.NewInt(1 << 19)
+	employeesUpdateHrRequestFieldAttributes           = big.NewInt(1 << 20)
+	employeesUpdateHrRequestFieldID                   = big.NewInt(1 << 21)
+	employeesUpdateHrRequestFieldTerminationDate      = big.NewInt(1 << 22)
+	employeesUpdateHrRequestFieldStatus               = big.NewInt(1 << 23)
 )
 
 type EmployeesUpdateHrRequest struct {
-	Code                 *string                                   `json:"code,omitempty" url:"-"`
-	FirstName            *string                                   `json:"firstName,omitempty" url:"-"`
-	LastName             *string                                   `json:"lastName,omitempty" url:"-"`
-	PersonalCode         *string                                   `json:"personalCode,omitempty" url:"-"`
-	BirthDate            *time.Time                                `json:"birthDate,omitempty" url:"-" format:"date"`
-	Email                *string                                   `json:"email,omitempty" url:"-"`
-	Phone                *string                                   `json:"phone,omitempty" url:"-"`
-	Address              *EmployeesUpdateHrRequestAddress          `json:"address,omitempty" url:"-"`
-	Iban                 *string                                   `json:"iban,omitempty" url:"-"`
+	Code         *string                          `json:"code,omitempty" url:"-"`
+	FirstName    *string                          `json:"firstName,omitempty" url:"-"`
+	LastName     *string                          `json:"lastName,omitempty" url:"-"`
+	PersonalCode *string                          `json:"personalCode,omitempty" url:"-"`
+	BirthDate    *time.Time                       `json:"birthDate,omitempty" url:"-" format:"date"`
+	Email        *string                          `json:"email,omitempty" url:"-"`
+	Phone        *string                          `json:"phone,omitempty" url:"-"`
+	Address      *EmployeesUpdateHrRequestAddress `json:"address,omitempty" url:"-"`
+	Iban         *string                          `json:"iban,omitempty" url:"-"`
+	// Sort code, routing number or other national bank code, for an account without an IBAN
+	BankCode *string `json:"bankCode,omitempty" url:"-"`
+	// Account number, for an account without an IBAN
+	BankAccountNumber *string `json:"bankAccountNumber,omitempty" url:"-"`
+	// Checking or savings account; a US ACH file needs it
+	BankAccountType      *EmployeesUpdateHrRequestBankAccountType  `json:"bankAccountType,omitempty" url:"-"`
 	SocialInsuranceNo    *string                                   `json:"socialInsuranceNo,omitempty" url:"-"`
 	SocialInsuranceStart *time.Time                                `json:"socialInsuranceStart,omitempty" url:"-" format:"date"`
 	HireDate             *time.Time                                `json:"hireDate,omitempty" url:"-" format:"date"`
@@ -1583,6 +1631,27 @@ func (e *EmployeesUpdateHrRequest) SetAddress(address *EmployeesUpdateHrRequestA
 func (e *EmployeesUpdateHrRequest) SetIban(iban *string) {
 	e.Iban = iban
 	e.require(employeesUpdateHrRequestFieldIban)
+}
+
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequest) SetBankCode(bankCode *string) {
+	e.BankCode = bankCode
+	e.require(employeesUpdateHrRequestFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequest) SetBankAccountNumber(bankAccountNumber *string) {
+	e.BankAccountNumber = bankAccountNumber
+	e.require(employeesUpdateHrRequestFieldBankAccountNumber)
+}
+
+// SetBankAccountType sets the BankAccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequest) SetBankAccountType(bankAccountType *EmployeesUpdateHrRequestBankAccountType) {
+	e.BankAccountType = bankAccountType
+	e.require(employeesUpdateHrRequestFieldBankAccountType)
 }
 
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
@@ -4689,6 +4758,37 @@ func (b BusinessTripsListHrResponseRowsItemStatus) Ptr() *BusinessTripsListHrRes
 	return &b
 }
 
+type ContractsCreateHrRequestPayFrequency string
+
+const (
+	ContractsCreateHrRequestPayFrequencyMonthly     ContractsCreateHrRequestPayFrequency = "monthly"
+	ContractsCreateHrRequestPayFrequencySemimonthly ContractsCreateHrRequestPayFrequency = "semimonthly"
+	ContractsCreateHrRequestPayFrequencyFourWeekly  ContractsCreateHrRequestPayFrequency = "four_weekly"
+	ContractsCreateHrRequestPayFrequencyBiweekly    ContractsCreateHrRequestPayFrequency = "biweekly"
+	ContractsCreateHrRequestPayFrequencyWeekly      ContractsCreateHrRequestPayFrequency = "weekly"
+)
+
+func NewContractsCreateHrRequestPayFrequencyFromString(s string) (ContractsCreateHrRequestPayFrequency, error) {
+	switch s {
+	case "monthly":
+		return ContractsCreateHrRequestPayFrequencyMonthly, nil
+	case "semimonthly":
+		return ContractsCreateHrRequestPayFrequencySemimonthly, nil
+	case "four_weekly":
+		return ContractsCreateHrRequestPayFrequencyFourWeekly, nil
+	case "biweekly":
+		return ContractsCreateHrRequestPayFrequencyBiweekly, nil
+	case "weekly":
+		return ContractsCreateHrRequestPayFrequencyWeekly, nil
+	}
+	var t ContractsCreateHrRequestPayFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsCreateHrRequestPayFrequency) Ptr() *ContractsCreateHrRequestPayFrequency {
+	return &c
+}
+
 type ContractsCreateHrRequestSalaryType string
 
 const (
@@ -4756,11 +4856,12 @@ var (
 	contractsCreateHrResponseFieldEndReason     = big.NewInt(1 << 10)
 	contractsCreateHrResponseFieldBaseSalary    = big.NewInt(1 << 11)
 	contractsCreateHrResponseFieldSalaryType    = big.NewInt(1 << 12)
-	contractsCreateHrResponseFieldWorkHours     = big.NewInt(1 << 13)
-	contractsCreateHrResponseFieldWorkHoursUnit = big.NewInt(1 << 14)
-	contractsCreateHrResponseFieldStatus        = big.NewInt(1 << 15)
-	contractsCreateHrResponseFieldNotes         = big.NewInt(1 << 16)
-	contractsCreateHrResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	contractsCreateHrResponseFieldPayFrequency  = big.NewInt(1 << 13)
+	contractsCreateHrResponseFieldWorkHours     = big.NewInt(1 << 14)
+	contractsCreateHrResponseFieldWorkHoursUnit = big.NewInt(1 << 15)
+	contractsCreateHrResponseFieldStatus        = big.NewInt(1 << 16)
+	contractsCreateHrResponseFieldNotes         = big.NewInt(1 << 17)
+	contractsCreateHrResponseFieldCreatedAt     = big.NewInt(1 << 18)
 )
 
 type ContractsCreateHrResponse struct {
@@ -4777,6 +4878,7 @@ type ContractsCreateHrResponse struct {
 	EndReason     *string                                `json:"endReason,omitempty" url:"endReason,omitempty"`
 	BaseSalary    string                                 `json:"baseSalary" url:"baseSalary"`
 	SalaryType    ContractsCreateHrResponseSalaryType    `json:"salaryType" url:"salaryType"`
+	PayFrequency  ContractsCreateHrResponsePayFrequency  `json:"payFrequency" url:"payFrequency"`
 	WorkHours     string                                 `json:"workHours" url:"workHours"`
 	WorkHoursUnit ContractsCreateHrResponseWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
 	Status        ContractsCreateHrResponseStatus        `json:"status" url:"status"`
@@ -4879,6 +4981,13 @@ func (c *ContractsCreateHrResponse) GetSalaryType() ContractsCreateHrResponseSal
 		return ""
 	}
 	return c.SalaryType
+}
+
+func (c *ContractsCreateHrResponse) GetPayFrequency() ContractsCreateHrResponsePayFrequency {
+	if c == nil {
+		return ""
+	}
+	return c.PayFrequency
 }
 
 func (c *ContractsCreateHrResponse) GetWorkHours() string {
@@ -5021,6 +5130,13 @@ func (c *ContractsCreateHrResponse) SetSalaryType(salaryType ContractsCreateHrRe
 	c.require(contractsCreateHrResponseFieldSalaryType)
 }
 
+// SetPayFrequency sets the PayFrequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsCreateHrResponse) SetPayFrequency(payFrequency ContractsCreateHrResponsePayFrequency) {
+	c.PayFrequency = payFrequency
+	c.require(contractsCreateHrResponseFieldPayFrequency)
+}
+
 // SetWorkHours sets the WorkHours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *ContractsCreateHrResponse) SetWorkHours(workHours string) {
@@ -5112,6 +5228,37 @@ func (c *ContractsCreateHrResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type ContractsCreateHrResponsePayFrequency string
+
+const (
+	ContractsCreateHrResponsePayFrequencyMonthly     ContractsCreateHrResponsePayFrequency = "monthly"
+	ContractsCreateHrResponsePayFrequencySemimonthly ContractsCreateHrResponsePayFrequency = "semimonthly"
+	ContractsCreateHrResponsePayFrequencyFourWeekly  ContractsCreateHrResponsePayFrequency = "four_weekly"
+	ContractsCreateHrResponsePayFrequencyBiweekly    ContractsCreateHrResponsePayFrequency = "biweekly"
+	ContractsCreateHrResponsePayFrequencyWeekly      ContractsCreateHrResponsePayFrequency = "weekly"
+)
+
+func NewContractsCreateHrResponsePayFrequencyFromString(s string) (ContractsCreateHrResponsePayFrequency, error) {
+	switch s {
+	case "monthly":
+		return ContractsCreateHrResponsePayFrequencyMonthly, nil
+	case "semimonthly":
+		return ContractsCreateHrResponsePayFrequencySemimonthly, nil
+	case "four_weekly":
+		return ContractsCreateHrResponsePayFrequencyFourWeekly, nil
+	case "biweekly":
+		return ContractsCreateHrResponsePayFrequencyBiweekly, nil
+	case "weekly":
+		return ContractsCreateHrResponsePayFrequencyWeekly, nil
+	}
+	var t ContractsCreateHrResponsePayFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsCreateHrResponsePayFrequency) Ptr() *ContractsCreateHrResponsePayFrequency {
+	return &c
 }
 
 type ContractsCreateHrResponseSalaryType string
@@ -5225,11 +5372,12 @@ var (
 	contractsEndHrResponseFieldEndReason     = big.NewInt(1 << 10)
 	contractsEndHrResponseFieldBaseSalary    = big.NewInt(1 << 11)
 	contractsEndHrResponseFieldSalaryType    = big.NewInt(1 << 12)
-	contractsEndHrResponseFieldWorkHours     = big.NewInt(1 << 13)
-	contractsEndHrResponseFieldWorkHoursUnit = big.NewInt(1 << 14)
-	contractsEndHrResponseFieldStatus        = big.NewInt(1 << 15)
-	contractsEndHrResponseFieldNotes         = big.NewInt(1 << 16)
-	contractsEndHrResponseFieldCreatedAt     = big.NewInt(1 << 17)
+	contractsEndHrResponseFieldPayFrequency  = big.NewInt(1 << 13)
+	contractsEndHrResponseFieldWorkHours     = big.NewInt(1 << 14)
+	contractsEndHrResponseFieldWorkHoursUnit = big.NewInt(1 << 15)
+	contractsEndHrResponseFieldStatus        = big.NewInt(1 << 16)
+	contractsEndHrResponseFieldNotes         = big.NewInt(1 << 17)
+	contractsEndHrResponseFieldCreatedAt     = big.NewInt(1 << 18)
 )
 
 type ContractsEndHrResponse struct {
@@ -5246,6 +5394,7 @@ type ContractsEndHrResponse struct {
 	EndReason     *string                             `json:"endReason,omitempty" url:"endReason,omitempty"`
 	BaseSalary    string                              `json:"baseSalary" url:"baseSalary"`
 	SalaryType    ContractsEndHrResponseSalaryType    `json:"salaryType" url:"salaryType"`
+	PayFrequency  ContractsEndHrResponsePayFrequency  `json:"payFrequency" url:"payFrequency"`
 	WorkHours     string                              `json:"workHours" url:"workHours"`
 	WorkHoursUnit ContractsEndHrResponseWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
 	Status        ContractsEndHrResponseStatus        `json:"status" url:"status"`
@@ -5348,6 +5497,13 @@ func (c *ContractsEndHrResponse) GetSalaryType() ContractsEndHrResponseSalaryTyp
 		return ""
 	}
 	return c.SalaryType
+}
+
+func (c *ContractsEndHrResponse) GetPayFrequency() ContractsEndHrResponsePayFrequency {
+	if c == nil {
+		return ""
+	}
+	return c.PayFrequency
 }
 
 func (c *ContractsEndHrResponse) GetWorkHours() string {
@@ -5490,6 +5646,13 @@ func (c *ContractsEndHrResponse) SetSalaryType(salaryType ContractsEndHrResponse
 	c.require(contractsEndHrResponseFieldSalaryType)
 }
 
+// SetPayFrequency sets the PayFrequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsEndHrResponse) SetPayFrequency(payFrequency ContractsEndHrResponsePayFrequency) {
+	c.PayFrequency = payFrequency
+	c.require(contractsEndHrResponseFieldPayFrequency)
+}
+
 // SetWorkHours sets the WorkHours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *ContractsEndHrResponse) SetWorkHours(workHours string) {
@@ -5581,6 +5744,37 @@ func (c *ContractsEndHrResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type ContractsEndHrResponsePayFrequency string
+
+const (
+	ContractsEndHrResponsePayFrequencyMonthly     ContractsEndHrResponsePayFrequency = "monthly"
+	ContractsEndHrResponsePayFrequencySemimonthly ContractsEndHrResponsePayFrequency = "semimonthly"
+	ContractsEndHrResponsePayFrequencyFourWeekly  ContractsEndHrResponsePayFrequency = "four_weekly"
+	ContractsEndHrResponsePayFrequencyBiweekly    ContractsEndHrResponsePayFrequency = "biweekly"
+	ContractsEndHrResponsePayFrequencyWeekly      ContractsEndHrResponsePayFrequency = "weekly"
+)
+
+func NewContractsEndHrResponsePayFrequencyFromString(s string) (ContractsEndHrResponsePayFrequency, error) {
+	switch s {
+	case "monthly":
+		return ContractsEndHrResponsePayFrequencyMonthly, nil
+	case "semimonthly":
+		return ContractsEndHrResponsePayFrequencySemimonthly, nil
+	case "four_weekly":
+		return ContractsEndHrResponsePayFrequencyFourWeekly, nil
+	case "biweekly":
+		return ContractsEndHrResponsePayFrequencyBiweekly, nil
+	case "weekly":
+		return ContractsEndHrResponsePayFrequencyWeekly, nil
+	}
+	var t ContractsEndHrResponsePayFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsEndHrResponsePayFrequency) Ptr() *ContractsEndHrResponsePayFrequency {
+	return &c
 }
 
 type ContractsEndHrResponseSalaryType string
@@ -6297,11 +6491,12 @@ var (
 	contractsListHrResponseRowsItemFieldEndReason     = big.NewInt(1 << 10)
 	contractsListHrResponseRowsItemFieldBaseSalary    = big.NewInt(1 << 11)
 	contractsListHrResponseRowsItemFieldSalaryType    = big.NewInt(1 << 12)
-	contractsListHrResponseRowsItemFieldWorkHours     = big.NewInt(1 << 13)
-	contractsListHrResponseRowsItemFieldWorkHoursUnit = big.NewInt(1 << 14)
-	contractsListHrResponseRowsItemFieldStatus        = big.NewInt(1 << 15)
-	contractsListHrResponseRowsItemFieldNotes         = big.NewInt(1 << 16)
-	contractsListHrResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 17)
+	contractsListHrResponseRowsItemFieldPayFrequency  = big.NewInt(1 << 13)
+	contractsListHrResponseRowsItemFieldWorkHours     = big.NewInt(1 << 14)
+	contractsListHrResponseRowsItemFieldWorkHoursUnit = big.NewInt(1 << 15)
+	contractsListHrResponseRowsItemFieldStatus        = big.NewInt(1 << 16)
+	contractsListHrResponseRowsItemFieldNotes         = big.NewInt(1 << 17)
+	contractsListHrResponseRowsItemFieldCreatedAt     = big.NewInt(1 << 18)
 )
 
 type ContractsListHrResponseRowsItem struct {
@@ -6318,6 +6513,7 @@ type ContractsListHrResponseRowsItem struct {
 	EndReason     *string                                      `json:"endReason,omitempty" url:"endReason,omitempty"`
 	BaseSalary    string                                       `json:"baseSalary" url:"baseSalary"`
 	SalaryType    ContractsListHrResponseRowsItemSalaryType    `json:"salaryType" url:"salaryType"`
+	PayFrequency  ContractsListHrResponseRowsItemPayFrequency  `json:"payFrequency" url:"payFrequency"`
 	WorkHours     string                                       `json:"workHours" url:"workHours"`
 	WorkHoursUnit ContractsListHrResponseRowsItemWorkHoursUnit `json:"workHoursUnit" url:"workHoursUnit"`
 	Status        ContractsListHrResponseRowsItemStatus        `json:"status" url:"status"`
@@ -6420,6 +6616,13 @@ func (c *ContractsListHrResponseRowsItem) GetSalaryType() ContractsListHrRespons
 		return ""
 	}
 	return c.SalaryType
+}
+
+func (c *ContractsListHrResponseRowsItem) GetPayFrequency() ContractsListHrResponseRowsItemPayFrequency {
+	if c == nil {
+		return ""
+	}
+	return c.PayFrequency
 }
 
 func (c *ContractsListHrResponseRowsItem) GetWorkHours() string {
@@ -6562,6 +6765,13 @@ func (c *ContractsListHrResponseRowsItem) SetSalaryType(salaryType ContractsList
 	c.require(contractsListHrResponseRowsItemFieldSalaryType)
 }
 
+// SetPayFrequency sets the PayFrequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ContractsListHrResponseRowsItem) SetPayFrequency(payFrequency ContractsListHrResponseRowsItemPayFrequency) {
+	c.PayFrequency = payFrequency
+	c.require(contractsListHrResponseRowsItemFieldPayFrequency)
+}
+
 // SetWorkHours sets the WorkHours field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *ContractsListHrResponseRowsItem) SetWorkHours(workHours string) {
@@ -6653,6 +6863,37 @@ func (c *ContractsListHrResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type ContractsListHrResponseRowsItemPayFrequency string
+
+const (
+	ContractsListHrResponseRowsItemPayFrequencyMonthly     ContractsListHrResponseRowsItemPayFrequency = "monthly"
+	ContractsListHrResponseRowsItemPayFrequencySemimonthly ContractsListHrResponseRowsItemPayFrequency = "semimonthly"
+	ContractsListHrResponseRowsItemPayFrequencyFourWeekly  ContractsListHrResponseRowsItemPayFrequency = "four_weekly"
+	ContractsListHrResponseRowsItemPayFrequencyBiweekly    ContractsListHrResponseRowsItemPayFrequency = "biweekly"
+	ContractsListHrResponseRowsItemPayFrequencyWeekly      ContractsListHrResponseRowsItemPayFrequency = "weekly"
+)
+
+func NewContractsListHrResponseRowsItemPayFrequencyFromString(s string) (ContractsListHrResponseRowsItemPayFrequency, error) {
+	switch s {
+	case "monthly":
+		return ContractsListHrResponseRowsItemPayFrequencyMonthly, nil
+	case "semimonthly":
+		return ContractsListHrResponseRowsItemPayFrequencySemimonthly, nil
+	case "four_weekly":
+		return ContractsListHrResponseRowsItemPayFrequencyFourWeekly, nil
+	case "biweekly":
+		return ContractsListHrResponseRowsItemPayFrequencyBiweekly, nil
+	case "weekly":
+		return ContractsListHrResponseRowsItemPayFrequencyWeekly, nil
+	}
+	var t ContractsListHrResponseRowsItemPayFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c ContractsListHrResponseRowsItemPayFrequency) Ptr() *ContractsListHrResponseRowsItemPayFrequency {
+	return &c
 }
 
 type ContractsListHrResponseRowsItemSalaryType string
@@ -6763,31 +7004,38 @@ var (
 	employeesAnonymizeHrResponseFieldPhone                = big.NewInt(1 << 7)
 	employeesAnonymizeHrResponseFieldAddress              = big.NewInt(1 << 8)
 	employeesAnonymizeHrResponseFieldIban                 = big.NewInt(1 << 9)
-	employeesAnonymizeHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	employeesAnonymizeHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	employeesAnonymizeHrResponseFieldHireDate             = big.NewInt(1 << 12)
-	employeesAnonymizeHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	employeesAnonymizeHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	employeesAnonymizeHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	employeesAnonymizeHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	employeesAnonymizeHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	employeesAnonymizeHrResponseFieldStatus               = big.NewInt(1 << 18)
-	employeesAnonymizeHrResponseFieldNotes                = big.NewInt(1 << 19)
-	employeesAnonymizeHrResponseFieldAttributes           = big.NewInt(1 << 20)
-	employeesAnonymizeHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
+	employeesAnonymizeHrResponseFieldBankCode             = big.NewInt(1 << 10)
+	employeesAnonymizeHrResponseFieldBankAccountNumber    = big.NewInt(1 << 11)
+	employeesAnonymizeHrResponseFieldBankAccountType      = big.NewInt(1 << 12)
+	employeesAnonymizeHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 13)
+	employeesAnonymizeHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 14)
+	employeesAnonymizeHrResponseFieldHireDate             = big.NewInt(1 << 15)
+	employeesAnonymizeHrResponseFieldTerminationDate      = big.NewInt(1 << 16)
+	employeesAnonymizeHrResponseFieldApplyAllowance       = big.NewInt(1 << 17)
+	employeesAnonymizeHrResponseFieldAllowanceOverride    = big.NewInt(1 << 18)
+	employeesAnonymizeHrResponseFieldPensionAccumulation  = big.NewInt(1 << 19)
+	employeesAnonymizeHrResponseFieldPayrollOptions       = big.NewInt(1 << 20)
+	employeesAnonymizeHrResponseFieldStatus               = big.NewInt(1 << 21)
+	employeesAnonymizeHrResponseFieldNotes                = big.NewInt(1 << 22)
+	employeesAnonymizeHrResponseFieldAttributes           = big.NewInt(1 << 23)
+	employeesAnonymizeHrResponseFieldCreatedAt            = big.NewInt(1 << 24)
 )
 
 type EmployeesAnonymizeHrResponse struct {
-	ID                   string                                        `json:"id" url:"id"`
-	Code                 *string                                       `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                        `json:"firstName" url:"firstName"`
-	LastName             string                                        `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                       `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *time.Time                                    `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
-	Email                *string                                       `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                       `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *EmployeesAnonymizeHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                       `json:"iban,omitempty" url:"iban,omitempty"`
+	ID                string                               `json:"id" url:"id"`
+	Code              *string                              `json:"code,omitempty" url:"code,omitempty"`
+	FirstName         string                               `json:"firstName" url:"firstName"`
+	LastName          string                               `json:"lastName" url:"lastName"`
+	PersonalCode      *string                              `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate         *time.Time                           `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email             *string                              `json:"email,omitempty" url:"email,omitempty"`
+	Phone             *string                              `json:"phone,omitempty" url:"phone,omitempty"`
+	Address           *EmployeesAnonymizeHrResponseAddress `json:"address,omitempty" url:"address,omitempty"`
+	Iban              *string                              `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string                              `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                              `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	BankAccountType      *EmployeesAnonymizeHrResponseBankAccountType  `json:"bankAccountType,omitempty" url:"bankAccountType,omitempty"`
 	SocialInsuranceNo    *string                                       `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
 	SocialInsuranceStart *string                                       `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *time.Time                                    `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
@@ -6876,6 +7124,27 @@ func (e *EmployeesAnonymizeHrResponse) GetIban() *string {
 		return nil
 	}
 	return e.Iban
+}
+
+func (e *EmployeesAnonymizeHrResponse) GetBankCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankCode
+}
+
+func (e *EmployeesAnonymizeHrResponse) GetBankAccountNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountNumber
+}
+
+func (e *EmployeesAnonymizeHrResponse) GetBankAccountType() *EmployeesAnonymizeHrResponseBankAccountType {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountType
 }
 
 func (e *EmployeesAnonymizeHrResponse) GetSocialInsuranceNo() *string {
@@ -7046,6 +7315,27 @@ func (e *EmployeesAnonymizeHrResponse) SetIban(iban *string) {
 	e.require(employeesAnonymizeHrResponseFieldIban)
 }
 
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesAnonymizeHrResponse) SetBankCode(bankCode *string) {
+	e.BankCode = bankCode
+	e.require(employeesAnonymizeHrResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesAnonymizeHrResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	e.BankAccountNumber = bankAccountNumber
+	e.require(employeesAnonymizeHrResponseFieldBankAccountNumber)
+}
+
+// SetBankAccountType sets the BankAccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesAnonymizeHrResponse) SetBankAccountType(bankAccountType *EmployeesAnonymizeHrResponseBankAccountType) {
+	e.BankAccountType = bankAccountType
+	e.require(employeesAnonymizeHrResponseFieldBankAccountType)
+}
+
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (e *EmployeesAnonymizeHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
@@ -7197,6 +7487,7 @@ var (
 	employeesAnonymizeHrResponseAddressFieldCity        = big.NewInt(1 << 1)
 	employeesAnonymizeHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
 	employeesAnonymizeHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesAnonymizeHrResponseAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type EmployeesAnonymizeHrResponseAddress struct {
@@ -7204,6 +7495,8 @@ type EmployeesAnonymizeHrResponseAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7238,6 +7531,13 @@ func (e *EmployeesAnonymizeHrResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return e.CountryCode
+}
+
+func (e *EmployeesAnonymizeHrResponseAddress) GetSubdivision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Subdivision
 }
 
 func (e *EmployeesAnonymizeHrResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -7280,6 +7580,13 @@ func (e *EmployeesAnonymizeHrResponseAddress) SetPostalCode(postalCode *string) 
 func (e *EmployeesAnonymizeHrResponseAddress) SetCountryCode(countryCode *string) {
 	e.CountryCode = countryCode
 	e.require(employeesAnonymizeHrResponseAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesAnonymizeHrResponseAddress) SetSubdivision(subdivision *string) {
+	e.Subdivision = subdivision
+	e.require(employeesAnonymizeHrResponseAddressFieldSubdivision)
 }
 
 func (e *EmployeesAnonymizeHrResponseAddress) UnmarshalJSON(data []byte) error {
@@ -7422,6 +7729,29 @@ func (e *EmployeesAnonymizeHrResponseAttributesItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", e)
+}
+
+// Checking or savings account; a US ACH file needs it
+type EmployeesAnonymizeHrResponseBankAccountType string
+
+const (
+	EmployeesAnonymizeHrResponseBankAccountTypeChecking EmployeesAnonymizeHrResponseBankAccountType = "checking"
+	EmployeesAnonymizeHrResponseBankAccountTypeSavings  EmployeesAnonymizeHrResponseBankAccountType = "savings"
+)
+
+func NewEmployeesAnonymizeHrResponseBankAccountTypeFromString(s string) (EmployeesAnonymizeHrResponseBankAccountType, error) {
+	switch s {
+	case "checking":
+		return EmployeesAnonymizeHrResponseBankAccountTypeChecking, nil
+	case "savings":
+		return EmployeesAnonymizeHrResponseBankAccountTypeSavings, nil
+	}
+	var t EmployeesAnonymizeHrResponseBankAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesAnonymizeHrResponseBankAccountType) Ptr() *EmployeesAnonymizeHrResponseBankAccountType {
+	return &e
 }
 
 type EmployeesAnonymizeHrResponseStatus string
@@ -7691,6 +8021,7 @@ var (
 	employeesCreateHrRequestAddressFieldCity        = big.NewInt(1 << 1)
 	employeesCreateHrRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
 	employeesCreateHrRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesCreateHrRequestAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type EmployeesCreateHrRequestAddress struct {
@@ -7698,6 +8029,8 @@ type EmployeesCreateHrRequestAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -7732,6 +8065,13 @@ func (e *EmployeesCreateHrRequestAddress) GetCountryCode() *string {
 		return nil
 	}
 	return e.CountryCode
+}
+
+func (e *EmployeesCreateHrRequestAddress) GetSubdivision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Subdivision
 }
 
 func (e *EmployeesCreateHrRequestAddress) GetExtraProperties() map[string]interface{} {
@@ -7774,6 +8114,13 @@ func (e *EmployeesCreateHrRequestAddress) SetPostalCode(postalCode *string) {
 func (e *EmployeesCreateHrRequestAddress) SetCountryCode(countryCode *string) {
 	e.CountryCode = countryCode
 	e.require(employeesCreateHrRequestAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrRequestAddress) SetSubdivision(subdivision *string) {
+	e.Subdivision = subdivision
+	e.require(employeesCreateHrRequestAddressFieldSubdivision)
 }
 
 func (e *EmployeesCreateHrRequestAddress) UnmarshalJSON(data []byte) error {
@@ -7918,6 +8265,29 @@ func (e *EmployeesCreateHrRequestAttributesItem) String() string {
 	return fmt.Sprintf("%#v", e)
 }
 
+// Checking or savings account; a US ACH file needs it
+type EmployeesCreateHrRequestBankAccountType string
+
+const (
+	EmployeesCreateHrRequestBankAccountTypeChecking EmployeesCreateHrRequestBankAccountType = "checking"
+	EmployeesCreateHrRequestBankAccountTypeSavings  EmployeesCreateHrRequestBankAccountType = "savings"
+)
+
+func NewEmployeesCreateHrRequestBankAccountTypeFromString(s string) (EmployeesCreateHrRequestBankAccountType, error) {
+	switch s {
+	case "checking":
+		return EmployeesCreateHrRequestBankAccountTypeChecking, nil
+	case "savings":
+		return EmployeesCreateHrRequestBankAccountTypeSavings, nil
+	}
+	var t EmployeesCreateHrRequestBankAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesCreateHrRequestBankAccountType) Ptr() *EmployeesCreateHrRequestBankAccountType {
+	return &e
+}
+
 var (
 	employeesCreateHrResponseFieldID                   = big.NewInt(1 << 0)
 	employeesCreateHrResponseFieldCode                 = big.NewInt(1 << 1)
@@ -7929,31 +8299,38 @@ var (
 	employeesCreateHrResponseFieldPhone                = big.NewInt(1 << 7)
 	employeesCreateHrResponseFieldAddress              = big.NewInt(1 << 8)
 	employeesCreateHrResponseFieldIban                 = big.NewInt(1 << 9)
-	employeesCreateHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	employeesCreateHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	employeesCreateHrResponseFieldHireDate             = big.NewInt(1 << 12)
-	employeesCreateHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	employeesCreateHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	employeesCreateHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	employeesCreateHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	employeesCreateHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	employeesCreateHrResponseFieldStatus               = big.NewInt(1 << 18)
-	employeesCreateHrResponseFieldNotes                = big.NewInt(1 << 19)
-	employeesCreateHrResponseFieldAttributes           = big.NewInt(1 << 20)
-	employeesCreateHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
+	employeesCreateHrResponseFieldBankCode             = big.NewInt(1 << 10)
+	employeesCreateHrResponseFieldBankAccountNumber    = big.NewInt(1 << 11)
+	employeesCreateHrResponseFieldBankAccountType      = big.NewInt(1 << 12)
+	employeesCreateHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 13)
+	employeesCreateHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 14)
+	employeesCreateHrResponseFieldHireDate             = big.NewInt(1 << 15)
+	employeesCreateHrResponseFieldTerminationDate      = big.NewInt(1 << 16)
+	employeesCreateHrResponseFieldApplyAllowance       = big.NewInt(1 << 17)
+	employeesCreateHrResponseFieldAllowanceOverride    = big.NewInt(1 << 18)
+	employeesCreateHrResponseFieldPensionAccumulation  = big.NewInt(1 << 19)
+	employeesCreateHrResponseFieldPayrollOptions       = big.NewInt(1 << 20)
+	employeesCreateHrResponseFieldStatus               = big.NewInt(1 << 21)
+	employeesCreateHrResponseFieldNotes                = big.NewInt(1 << 22)
+	employeesCreateHrResponseFieldAttributes           = big.NewInt(1 << 23)
+	employeesCreateHrResponseFieldCreatedAt            = big.NewInt(1 << 24)
 )
 
 type EmployeesCreateHrResponse struct {
-	ID                   string                                     `json:"id" url:"id"`
-	Code                 *string                                    `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                     `json:"firstName" url:"firstName"`
-	LastName             string                                     `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                    `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *time.Time                                 `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
-	Email                *string                                    `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                    `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *EmployeesCreateHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                    `json:"iban,omitempty" url:"iban,omitempty"`
+	ID                string                            `json:"id" url:"id"`
+	Code              *string                           `json:"code,omitempty" url:"code,omitempty"`
+	FirstName         string                            `json:"firstName" url:"firstName"`
+	LastName          string                            `json:"lastName" url:"lastName"`
+	PersonalCode      *string                           `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate         *time.Time                        `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email             *string                           `json:"email,omitempty" url:"email,omitempty"`
+	Phone             *string                           `json:"phone,omitempty" url:"phone,omitempty"`
+	Address           *EmployeesCreateHrResponseAddress `json:"address,omitempty" url:"address,omitempty"`
+	Iban              *string                           `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string                           `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                           `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	BankAccountType      *EmployeesCreateHrResponseBankAccountType  `json:"bankAccountType,omitempty" url:"bankAccountType,omitempty"`
 	SocialInsuranceNo    *string                                    `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
 	SocialInsuranceStart *string                                    `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *time.Time                                 `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
@@ -8042,6 +8419,27 @@ func (e *EmployeesCreateHrResponse) GetIban() *string {
 		return nil
 	}
 	return e.Iban
+}
+
+func (e *EmployeesCreateHrResponse) GetBankCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankCode
+}
+
+func (e *EmployeesCreateHrResponse) GetBankAccountNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountNumber
+}
+
+func (e *EmployeesCreateHrResponse) GetBankAccountType() *EmployeesCreateHrResponseBankAccountType {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountType
 }
 
 func (e *EmployeesCreateHrResponse) GetSocialInsuranceNo() *string {
@@ -8212,6 +8610,27 @@ func (e *EmployeesCreateHrResponse) SetIban(iban *string) {
 	e.require(employeesCreateHrResponseFieldIban)
 }
 
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetBankCode(bankCode *string) {
+	e.BankCode = bankCode
+	e.require(employeesCreateHrResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	e.BankAccountNumber = bankAccountNumber
+	e.require(employeesCreateHrResponseFieldBankAccountNumber)
+}
+
+// SetBankAccountType sets the BankAccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponse) SetBankAccountType(bankAccountType *EmployeesCreateHrResponseBankAccountType) {
+	e.BankAccountType = bankAccountType
+	e.require(employeesCreateHrResponseFieldBankAccountType)
+}
+
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (e *EmployeesCreateHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
@@ -8363,6 +8782,7 @@ var (
 	employeesCreateHrResponseAddressFieldCity        = big.NewInt(1 << 1)
 	employeesCreateHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
 	employeesCreateHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesCreateHrResponseAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type EmployeesCreateHrResponseAddress struct {
@@ -8370,6 +8790,8 @@ type EmployeesCreateHrResponseAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8404,6 +8826,13 @@ func (e *EmployeesCreateHrResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return e.CountryCode
+}
+
+func (e *EmployeesCreateHrResponseAddress) GetSubdivision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Subdivision
 }
 
 func (e *EmployeesCreateHrResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -8446,6 +8875,13 @@ func (e *EmployeesCreateHrResponseAddress) SetPostalCode(postalCode *string) {
 func (e *EmployeesCreateHrResponseAddress) SetCountryCode(countryCode *string) {
 	e.CountryCode = countryCode
 	e.require(employeesCreateHrResponseAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesCreateHrResponseAddress) SetSubdivision(subdivision *string) {
+	e.Subdivision = subdivision
+	e.require(employeesCreateHrResponseAddressFieldSubdivision)
 }
 
 func (e *EmployeesCreateHrResponseAddress) UnmarshalJSON(data []byte) error {
@@ -8588,6 +9024,29 @@ func (e *EmployeesCreateHrResponseAttributesItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", e)
+}
+
+// Checking or savings account; a US ACH file needs it
+type EmployeesCreateHrResponseBankAccountType string
+
+const (
+	EmployeesCreateHrResponseBankAccountTypeChecking EmployeesCreateHrResponseBankAccountType = "checking"
+	EmployeesCreateHrResponseBankAccountTypeSavings  EmployeesCreateHrResponseBankAccountType = "savings"
+)
+
+func NewEmployeesCreateHrResponseBankAccountTypeFromString(s string) (EmployeesCreateHrResponseBankAccountType, error) {
+	switch s {
+	case "checking":
+		return EmployeesCreateHrResponseBankAccountTypeChecking, nil
+	case "savings":
+		return EmployeesCreateHrResponseBankAccountTypeSavings, nil
+	}
+	var t EmployeesCreateHrResponseBankAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesCreateHrResponseBankAccountType) Ptr() *EmployeesCreateHrResponseBankAccountType {
+	return &e
 }
 
 type EmployeesCreateHrResponseStatus string
@@ -8964,31 +9423,38 @@ var (
 	employeesGetHrResponseFieldPhone                = big.NewInt(1 << 7)
 	employeesGetHrResponseFieldAddress              = big.NewInt(1 << 8)
 	employeesGetHrResponseFieldIban                 = big.NewInt(1 << 9)
-	employeesGetHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	employeesGetHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	employeesGetHrResponseFieldHireDate             = big.NewInt(1 << 12)
-	employeesGetHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	employeesGetHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	employeesGetHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	employeesGetHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	employeesGetHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	employeesGetHrResponseFieldStatus               = big.NewInt(1 << 18)
-	employeesGetHrResponseFieldNotes                = big.NewInt(1 << 19)
-	employeesGetHrResponseFieldAttributes           = big.NewInt(1 << 20)
-	employeesGetHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
+	employeesGetHrResponseFieldBankCode             = big.NewInt(1 << 10)
+	employeesGetHrResponseFieldBankAccountNumber    = big.NewInt(1 << 11)
+	employeesGetHrResponseFieldBankAccountType      = big.NewInt(1 << 12)
+	employeesGetHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 13)
+	employeesGetHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 14)
+	employeesGetHrResponseFieldHireDate             = big.NewInt(1 << 15)
+	employeesGetHrResponseFieldTerminationDate      = big.NewInt(1 << 16)
+	employeesGetHrResponseFieldApplyAllowance       = big.NewInt(1 << 17)
+	employeesGetHrResponseFieldAllowanceOverride    = big.NewInt(1 << 18)
+	employeesGetHrResponseFieldPensionAccumulation  = big.NewInt(1 << 19)
+	employeesGetHrResponseFieldPayrollOptions       = big.NewInt(1 << 20)
+	employeesGetHrResponseFieldStatus               = big.NewInt(1 << 21)
+	employeesGetHrResponseFieldNotes                = big.NewInt(1 << 22)
+	employeesGetHrResponseFieldAttributes           = big.NewInt(1 << 23)
+	employeesGetHrResponseFieldCreatedAt            = big.NewInt(1 << 24)
 )
 
 type EmployeesGetHrResponse struct {
-	ID                   string                                  `json:"id" url:"id"`
-	Code                 *string                                 `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                  `json:"firstName" url:"firstName"`
-	LastName             string                                  `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                 `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *time.Time                              `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
-	Email                *string                                 `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                 `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *EmployeesGetHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                 `json:"iban,omitempty" url:"iban,omitempty"`
+	ID                string                         `json:"id" url:"id"`
+	Code              *string                        `json:"code,omitempty" url:"code,omitempty"`
+	FirstName         string                         `json:"firstName" url:"firstName"`
+	LastName          string                         `json:"lastName" url:"lastName"`
+	PersonalCode      *string                        `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate         *time.Time                     `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email             *string                        `json:"email,omitempty" url:"email,omitempty"`
+	Phone             *string                        `json:"phone,omitempty" url:"phone,omitempty"`
+	Address           *EmployeesGetHrResponseAddress `json:"address,omitempty" url:"address,omitempty"`
+	Iban              *string                        `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string                        `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                        `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	BankAccountType      *EmployeesGetHrResponseBankAccountType  `json:"bankAccountType,omitempty" url:"bankAccountType,omitempty"`
 	SocialInsuranceNo    *string                                 `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
 	SocialInsuranceStart *string                                 `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *time.Time                              `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
@@ -9077,6 +9543,27 @@ func (e *EmployeesGetHrResponse) GetIban() *string {
 		return nil
 	}
 	return e.Iban
+}
+
+func (e *EmployeesGetHrResponse) GetBankCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankCode
+}
+
+func (e *EmployeesGetHrResponse) GetBankAccountNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountNumber
+}
+
+func (e *EmployeesGetHrResponse) GetBankAccountType() *EmployeesGetHrResponseBankAccountType {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountType
 }
 
 func (e *EmployeesGetHrResponse) GetSocialInsuranceNo() *string {
@@ -9247,6 +9734,27 @@ func (e *EmployeesGetHrResponse) SetIban(iban *string) {
 	e.require(employeesGetHrResponseFieldIban)
 }
 
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetBankCode(bankCode *string) {
+	e.BankCode = bankCode
+	e.require(employeesGetHrResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	e.BankAccountNumber = bankAccountNumber
+	e.require(employeesGetHrResponseFieldBankAccountNumber)
+}
+
+// SetBankAccountType sets the BankAccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponse) SetBankAccountType(bankAccountType *EmployeesGetHrResponseBankAccountType) {
+	e.BankAccountType = bankAccountType
+	e.require(employeesGetHrResponseFieldBankAccountType)
+}
+
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (e *EmployeesGetHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
@@ -9398,6 +9906,7 @@ var (
 	employeesGetHrResponseAddressFieldCity        = big.NewInt(1 << 1)
 	employeesGetHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
 	employeesGetHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesGetHrResponseAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type EmployeesGetHrResponseAddress struct {
@@ -9405,6 +9914,8 @@ type EmployeesGetHrResponseAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9439,6 +9950,13 @@ func (e *EmployeesGetHrResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return e.CountryCode
+}
+
+func (e *EmployeesGetHrResponseAddress) GetSubdivision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Subdivision
 }
 
 func (e *EmployeesGetHrResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -9481,6 +9999,13 @@ func (e *EmployeesGetHrResponseAddress) SetPostalCode(postalCode *string) {
 func (e *EmployeesGetHrResponseAddress) SetCountryCode(countryCode *string) {
 	e.CountryCode = countryCode
 	e.require(employeesGetHrResponseAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesGetHrResponseAddress) SetSubdivision(subdivision *string) {
+	e.Subdivision = subdivision
+	e.require(employeesGetHrResponseAddressFieldSubdivision)
 }
 
 func (e *EmployeesGetHrResponseAddress) UnmarshalJSON(data []byte) error {
@@ -9623,6 +10148,29 @@ func (e *EmployeesGetHrResponseAttributesItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", e)
+}
+
+// Checking or savings account; a US ACH file needs it
+type EmployeesGetHrResponseBankAccountType string
+
+const (
+	EmployeesGetHrResponseBankAccountTypeChecking EmployeesGetHrResponseBankAccountType = "checking"
+	EmployeesGetHrResponseBankAccountTypeSavings  EmployeesGetHrResponseBankAccountType = "savings"
+)
+
+func NewEmployeesGetHrResponseBankAccountTypeFromString(s string) (EmployeesGetHrResponseBankAccountType, error) {
+	switch s {
+	case "checking":
+		return EmployeesGetHrResponseBankAccountTypeChecking, nil
+	case "savings":
+		return EmployeesGetHrResponseBankAccountTypeSavings, nil
+	}
+	var t EmployeesGetHrResponseBankAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesGetHrResponseBankAccountType) Ptr() *EmployeesGetHrResponseBankAccountType {
+	return &e
 }
 
 type EmployeesGetHrResponseStatus string
@@ -10261,31 +10809,38 @@ var (
 	employeesListHrResponseRowsItemFieldPhone                = big.NewInt(1 << 7)
 	employeesListHrResponseRowsItemFieldAddress              = big.NewInt(1 << 8)
 	employeesListHrResponseRowsItemFieldIban                 = big.NewInt(1 << 9)
-	employeesListHrResponseRowsItemFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	employeesListHrResponseRowsItemFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	employeesListHrResponseRowsItemFieldHireDate             = big.NewInt(1 << 12)
-	employeesListHrResponseRowsItemFieldTerminationDate      = big.NewInt(1 << 13)
-	employeesListHrResponseRowsItemFieldApplyAllowance       = big.NewInt(1 << 14)
-	employeesListHrResponseRowsItemFieldAllowanceOverride    = big.NewInt(1 << 15)
-	employeesListHrResponseRowsItemFieldPensionAccumulation  = big.NewInt(1 << 16)
-	employeesListHrResponseRowsItemFieldPayrollOptions       = big.NewInt(1 << 17)
-	employeesListHrResponseRowsItemFieldStatus               = big.NewInt(1 << 18)
-	employeesListHrResponseRowsItemFieldNotes                = big.NewInt(1 << 19)
-	employeesListHrResponseRowsItemFieldAttributes           = big.NewInt(1 << 20)
-	employeesListHrResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 21)
+	employeesListHrResponseRowsItemFieldBankCode             = big.NewInt(1 << 10)
+	employeesListHrResponseRowsItemFieldBankAccountNumber    = big.NewInt(1 << 11)
+	employeesListHrResponseRowsItemFieldBankAccountType      = big.NewInt(1 << 12)
+	employeesListHrResponseRowsItemFieldSocialInsuranceNo    = big.NewInt(1 << 13)
+	employeesListHrResponseRowsItemFieldSocialInsuranceStart = big.NewInt(1 << 14)
+	employeesListHrResponseRowsItemFieldHireDate             = big.NewInt(1 << 15)
+	employeesListHrResponseRowsItemFieldTerminationDate      = big.NewInt(1 << 16)
+	employeesListHrResponseRowsItemFieldApplyAllowance       = big.NewInt(1 << 17)
+	employeesListHrResponseRowsItemFieldAllowanceOverride    = big.NewInt(1 << 18)
+	employeesListHrResponseRowsItemFieldPensionAccumulation  = big.NewInt(1 << 19)
+	employeesListHrResponseRowsItemFieldPayrollOptions       = big.NewInt(1 << 20)
+	employeesListHrResponseRowsItemFieldStatus               = big.NewInt(1 << 21)
+	employeesListHrResponseRowsItemFieldNotes                = big.NewInt(1 << 22)
+	employeesListHrResponseRowsItemFieldAttributes           = big.NewInt(1 << 23)
+	employeesListHrResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 24)
 )
 
 type EmployeesListHrResponseRowsItem struct {
-	ID                   string                                           `json:"id" url:"id"`
-	Code                 *string                                          `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                           `json:"firstName" url:"firstName"`
-	LastName             string                                           `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                          `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *time.Time                                       `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
-	Email                *string                                          `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                          `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *EmployeesListHrResponseRowsItemAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                          `json:"iban,omitempty" url:"iban,omitempty"`
+	ID                string                                  `json:"id" url:"id"`
+	Code              *string                                 `json:"code,omitempty" url:"code,omitempty"`
+	FirstName         string                                  `json:"firstName" url:"firstName"`
+	LastName          string                                  `json:"lastName" url:"lastName"`
+	PersonalCode      *string                                 `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate         *time.Time                              `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email             *string                                 `json:"email,omitempty" url:"email,omitempty"`
+	Phone             *string                                 `json:"phone,omitempty" url:"phone,omitempty"`
+	Address           *EmployeesListHrResponseRowsItemAddress `json:"address,omitempty" url:"address,omitempty"`
+	Iban              *string                                 `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string                                 `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                                 `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	BankAccountType      *EmployeesListHrResponseRowsItemBankAccountType  `json:"bankAccountType,omitempty" url:"bankAccountType,omitempty"`
 	SocialInsuranceNo    *string                                          `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
 	SocialInsuranceStart *string                                          `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *time.Time                                       `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
@@ -10374,6 +10929,27 @@ func (e *EmployeesListHrResponseRowsItem) GetIban() *string {
 		return nil
 	}
 	return e.Iban
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetBankCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankCode
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetBankAccountNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountNumber
+}
+
+func (e *EmployeesListHrResponseRowsItem) GetBankAccountType() *EmployeesListHrResponseRowsItemBankAccountType {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountType
 }
 
 func (e *EmployeesListHrResponseRowsItem) GetSocialInsuranceNo() *string {
@@ -10544,6 +11120,27 @@ func (e *EmployeesListHrResponseRowsItem) SetIban(iban *string) {
 	e.require(employeesListHrResponseRowsItemFieldIban)
 }
 
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetBankCode(bankCode *string) {
+	e.BankCode = bankCode
+	e.require(employeesListHrResponseRowsItemFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetBankAccountNumber(bankAccountNumber *string) {
+	e.BankAccountNumber = bankAccountNumber
+	e.require(employeesListHrResponseRowsItemFieldBankAccountNumber)
+}
+
+// SetBankAccountType sets the BankAccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItem) SetBankAccountType(bankAccountType *EmployeesListHrResponseRowsItemBankAccountType) {
+	e.BankAccountType = bankAccountType
+	e.require(employeesListHrResponseRowsItemFieldBankAccountType)
+}
+
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (e *EmployeesListHrResponseRowsItem) SetSocialInsuranceNo(socialInsuranceNo *string) {
@@ -10695,6 +11292,7 @@ var (
 	employeesListHrResponseRowsItemAddressFieldCity        = big.NewInt(1 << 1)
 	employeesListHrResponseRowsItemAddressFieldPostalCode  = big.NewInt(1 << 2)
 	employeesListHrResponseRowsItemAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesListHrResponseRowsItemAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type EmployeesListHrResponseRowsItemAddress struct {
@@ -10702,6 +11300,8 @@ type EmployeesListHrResponseRowsItemAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10736,6 +11336,13 @@ func (e *EmployeesListHrResponseRowsItemAddress) GetCountryCode() *string {
 		return nil
 	}
 	return e.CountryCode
+}
+
+func (e *EmployeesListHrResponseRowsItemAddress) GetSubdivision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Subdivision
 }
 
 func (e *EmployeesListHrResponseRowsItemAddress) GetExtraProperties() map[string]interface{} {
@@ -10778,6 +11385,13 @@ func (e *EmployeesListHrResponseRowsItemAddress) SetPostalCode(postalCode *strin
 func (e *EmployeesListHrResponseRowsItemAddress) SetCountryCode(countryCode *string) {
 	e.CountryCode = countryCode
 	e.require(employeesListHrResponseRowsItemAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesListHrResponseRowsItemAddress) SetSubdivision(subdivision *string) {
+	e.Subdivision = subdivision
+	e.require(employeesListHrResponseRowsItemAddressFieldSubdivision)
 }
 
 func (e *EmployeesListHrResponseRowsItemAddress) UnmarshalJSON(data []byte) error {
@@ -10920,6 +11534,29 @@ func (e *EmployeesListHrResponseRowsItemAttributesItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", e)
+}
+
+// Checking or savings account; a US ACH file needs it
+type EmployeesListHrResponseRowsItemBankAccountType string
+
+const (
+	EmployeesListHrResponseRowsItemBankAccountTypeChecking EmployeesListHrResponseRowsItemBankAccountType = "checking"
+	EmployeesListHrResponseRowsItemBankAccountTypeSavings  EmployeesListHrResponseRowsItemBankAccountType = "savings"
+)
+
+func NewEmployeesListHrResponseRowsItemBankAccountTypeFromString(s string) (EmployeesListHrResponseRowsItemBankAccountType, error) {
+	switch s {
+	case "checking":
+		return EmployeesListHrResponseRowsItemBankAccountTypeChecking, nil
+	case "savings":
+		return EmployeesListHrResponseRowsItemBankAccountTypeSavings, nil
+	}
+	var t EmployeesListHrResponseRowsItemBankAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesListHrResponseRowsItemBankAccountType) Ptr() *EmployeesListHrResponseRowsItemBankAccountType {
+	return &e
 }
 
 type EmployeesListHrResponseRowsItemStatus string
@@ -12496,6 +13133,7 @@ var (
 	employeesUpdateHrRequestAddressFieldCity        = big.NewInt(1 << 1)
 	employeesUpdateHrRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
 	employeesUpdateHrRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesUpdateHrRequestAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type EmployeesUpdateHrRequestAddress struct {
@@ -12503,6 +13141,8 @@ type EmployeesUpdateHrRequestAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -12537,6 +13177,13 @@ func (e *EmployeesUpdateHrRequestAddress) GetCountryCode() *string {
 		return nil
 	}
 	return e.CountryCode
+}
+
+func (e *EmployeesUpdateHrRequestAddress) GetSubdivision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Subdivision
 }
 
 func (e *EmployeesUpdateHrRequestAddress) GetExtraProperties() map[string]interface{} {
@@ -12579,6 +13226,13 @@ func (e *EmployeesUpdateHrRequestAddress) SetPostalCode(postalCode *string) {
 func (e *EmployeesUpdateHrRequestAddress) SetCountryCode(countryCode *string) {
 	e.CountryCode = countryCode
 	e.require(employeesUpdateHrRequestAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrRequestAddress) SetSubdivision(subdivision *string) {
+	e.Subdivision = subdivision
+	e.require(employeesUpdateHrRequestAddressFieldSubdivision)
 }
 
 func (e *EmployeesUpdateHrRequestAddress) UnmarshalJSON(data []byte) error {
@@ -12723,6 +13377,29 @@ func (e *EmployeesUpdateHrRequestAttributesItem) String() string {
 	return fmt.Sprintf("%#v", e)
 }
 
+// Checking or savings account; a US ACH file needs it
+type EmployeesUpdateHrRequestBankAccountType string
+
+const (
+	EmployeesUpdateHrRequestBankAccountTypeChecking EmployeesUpdateHrRequestBankAccountType = "checking"
+	EmployeesUpdateHrRequestBankAccountTypeSavings  EmployeesUpdateHrRequestBankAccountType = "savings"
+)
+
+func NewEmployeesUpdateHrRequestBankAccountTypeFromString(s string) (EmployeesUpdateHrRequestBankAccountType, error) {
+	switch s {
+	case "checking":
+		return EmployeesUpdateHrRequestBankAccountTypeChecking, nil
+	case "savings":
+		return EmployeesUpdateHrRequestBankAccountTypeSavings, nil
+	}
+	var t EmployeesUpdateHrRequestBankAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesUpdateHrRequestBankAccountType) Ptr() *EmployeesUpdateHrRequestBankAccountType {
+	return &e
+}
+
 type EmployeesUpdateHrRequestStatus string
 
 const (
@@ -12756,31 +13433,38 @@ var (
 	employeesUpdateHrResponseFieldPhone                = big.NewInt(1 << 7)
 	employeesUpdateHrResponseFieldAddress              = big.NewInt(1 << 8)
 	employeesUpdateHrResponseFieldIban                 = big.NewInt(1 << 9)
-	employeesUpdateHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 10)
-	employeesUpdateHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 11)
-	employeesUpdateHrResponseFieldHireDate             = big.NewInt(1 << 12)
-	employeesUpdateHrResponseFieldTerminationDate      = big.NewInt(1 << 13)
-	employeesUpdateHrResponseFieldApplyAllowance       = big.NewInt(1 << 14)
-	employeesUpdateHrResponseFieldAllowanceOverride    = big.NewInt(1 << 15)
-	employeesUpdateHrResponseFieldPensionAccumulation  = big.NewInt(1 << 16)
-	employeesUpdateHrResponseFieldPayrollOptions       = big.NewInt(1 << 17)
-	employeesUpdateHrResponseFieldStatus               = big.NewInt(1 << 18)
-	employeesUpdateHrResponseFieldNotes                = big.NewInt(1 << 19)
-	employeesUpdateHrResponseFieldAttributes           = big.NewInt(1 << 20)
-	employeesUpdateHrResponseFieldCreatedAt            = big.NewInt(1 << 21)
+	employeesUpdateHrResponseFieldBankCode             = big.NewInt(1 << 10)
+	employeesUpdateHrResponseFieldBankAccountNumber    = big.NewInt(1 << 11)
+	employeesUpdateHrResponseFieldBankAccountType      = big.NewInt(1 << 12)
+	employeesUpdateHrResponseFieldSocialInsuranceNo    = big.NewInt(1 << 13)
+	employeesUpdateHrResponseFieldSocialInsuranceStart = big.NewInt(1 << 14)
+	employeesUpdateHrResponseFieldHireDate             = big.NewInt(1 << 15)
+	employeesUpdateHrResponseFieldTerminationDate      = big.NewInt(1 << 16)
+	employeesUpdateHrResponseFieldApplyAllowance       = big.NewInt(1 << 17)
+	employeesUpdateHrResponseFieldAllowanceOverride    = big.NewInt(1 << 18)
+	employeesUpdateHrResponseFieldPensionAccumulation  = big.NewInt(1 << 19)
+	employeesUpdateHrResponseFieldPayrollOptions       = big.NewInt(1 << 20)
+	employeesUpdateHrResponseFieldStatus               = big.NewInt(1 << 21)
+	employeesUpdateHrResponseFieldNotes                = big.NewInt(1 << 22)
+	employeesUpdateHrResponseFieldAttributes           = big.NewInt(1 << 23)
+	employeesUpdateHrResponseFieldCreatedAt            = big.NewInt(1 << 24)
 )
 
 type EmployeesUpdateHrResponse struct {
-	ID                   string                                     `json:"id" url:"id"`
-	Code                 *string                                    `json:"code,omitempty" url:"code,omitempty"`
-	FirstName            string                                     `json:"firstName" url:"firstName"`
-	LastName             string                                     `json:"lastName" url:"lastName"`
-	PersonalCode         *string                                    `json:"personalCode,omitempty" url:"personalCode,omitempty"`
-	BirthDate            *time.Time                                 `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
-	Email                *string                                    `json:"email,omitempty" url:"email,omitempty"`
-	Phone                *string                                    `json:"phone,omitempty" url:"phone,omitempty"`
-	Address              *EmployeesUpdateHrResponseAddress          `json:"address,omitempty" url:"address,omitempty"`
-	Iban                 *string                                    `json:"iban,omitempty" url:"iban,omitempty"`
+	ID                string                            `json:"id" url:"id"`
+	Code              *string                           `json:"code,omitempty" url:"code,omitempty"`
+	FirstName         string                            `json:"firstName" url:"firstName"`
+	LastName          string                            `json:"lastName" url:"lastName"`
+	PersonalCode      *string                           `json:"personalCode,omitempty" url:"personalCode,omitempty"`
+	BirthDate         *time.Time                        `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Email             *string                           `json:"email,omitempty" url:"email,omitempty"`
+	Phone             *string                           `json:"phone,omitempty" url:"phone,omitempty"`
+	Address           *EmployeesUpdateHrResponseAddress `json:"address,omitempty" url:"address,omitempty"`
+	Iban              *string                           `json:"iban,omitempty" url:"iban,omitempty"`
+	BankCode          *string                           `json:"bankCode,omitempty" url:"bankCode,omitempty"`
+	BankAccountNumber *string                           `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
+	// Checking or savings account; a US ACH file needs it
+	BankAccountType      *EmployeesUpdateHrResponseBankAccountType  `json:"bankAccountType,omitempty" url:"bankAccountType,omitempty"`
 	SocialInsuranceNo    *string                                    `json:"socialInsuranceNo,omitempty" url:"socialInsuranceNo,omitempty"`
 	SocialInsuranceStart *string                                    `json:"socialInsuranceStart,omitempty" url:"socialInsuranceStart,omitempty"`
 	HireDate             *time.Time                                 `json:"hireDate,omitempty" url:"hireDate,omitempty" format:"date"`
@@ -12869,6 +13553,27 @@ func (e *EmployeesUpdateHrResponse) GetIban() *string {
 		return nil
 	}
 	return e.Iban
+}
+
+func (e *EmployeesUpdateHrResponse) GetBankCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankCode
+}
+
+func (e *EmployeesUpdateHrResponse) GetBankAccountNumber() *string {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountNumber
+}
+
+func (e *EmployeesUpdateHrResponse) GetBankAccountType() *EmployeesUpdateHrResponseBankAccountType {
+	if e == nil {
+		return nil
+	}
+	return e.BankAccountType
 }
 
 func (e *EmployeesUpdateHrResponse) GetSocialInsuranceNo() *string {
@@ -13039,6 +13744,27 @@ func (e *EmployeesUpdateHrResponse) SetIban(iban *string) {
 	e.require(employeesUpdateHrResponseFieldIban)
 }
 
+// SetBankCode sets the BankCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetBankCode(bankCode *string) {
+	e.BankCode = bankCode
+	e.require(employeesUpdateHrResponseFieldBankCode)
+}
+
+// SetBankAccountNumber sets the BankAccountNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetBankAccountNumber(bankAccountNumber *string) {
+	e.BankAccountNumber = bankAccountNumber
+	e.require(employeesUpdateHrResponseFieldBankAccountNumber)
+}
+
+// SetBankAccountType sets the BankAccountType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponse) SetBankAccountType(bankAccountType *EmployeesUpdateHrResponseBankAccountType) {
+	e.BankAccountType = bankAccountType
+	e.require(employeesUpdateHrResponseFieldBankAccountType)
+}
+
 // SetSocialInsuranceNo sets the SocialInsuranceNo field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (e *EmployeesUpdateHrResponse) SetSocialInsuranceNo(socialInsuranceNo *string) {
@@ -13190,6 +13916,7 @@ var (
 	employeesUpdateHrResponseAddressFieldCity        = big.NewInt(1 << 1)
 	employeesUpdateHrResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
 	employeesUpdateHrResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	employeesUpdateHrResponseAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type EmployeesUpdateHrResponseAddress struct {
@@ -13197,6 +13924,8 @@ type EmployeesUpdateHrResponseAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13231,6 +13960,13 @@ func (e *EmployeesUpdateHrResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return e.CountryCode
+}
+
+func (e *EmployeesUpdateHrResponseAddress) GetSubdivision() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Subdivision
 }
 
 func (e *EmployeesUpdateHrResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -13273,6 +14009,13 @@ func (e *EmployeesUpdateHrResponseAddress) SetPostalCode(postalCode *string) {
 func (e *EmployeesUpdateHrResponseAddress) SetCountryCode(countryCode *string) {
 	e.CountryCode = countryCode
 	e.require(employeesUpdateHrResponseAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EmployeesUpdateHrResponseAddress) SetSubdivision(subdivision *string) {
+	e.Subdivision = subdivision
+	e.require(employeesUpdateHrResponseAddressFieldSubdivision)
 }
 
 func (e *EmployeesUpdateHrResponseAddress) UnmarshalJSON(data []byte) error {
@@ -13415,6 +14158,29 @@ func (e *EmployeesUpdateHrResponseAttributesItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", e)
+}
+
+// Checking or savings account; a US ACH file needs it
+type EmployeesUpdateHrResponseBankAccountType string
+
+const (
+	EmployeesUpdateHrResponseBankAccountTypeChecking EmployeesUpdateHrResponseBankAccountType = "checking"
+	EmployeesUpdateHrResponseBankAccountTypeSavings  EmployeesUpdateHrResponseBankAccountType = "savings"
+)
+
+func NewEmployeesUpdateHrResponseBankAccountTypeFromString(s string) (EmployeesUpdateHrResponseBankAccountType, error) {
+	switch s {
+	case "checking":
+		return EmployeesUpdateHrResponseBankAccountTypeChecking, nil
+	case "savings":
+		return EmployeesUpdateHrResponseBankAccountTypeSavings, nil
+	}
+	var t EmployeesUpdateHrResponseBankAccountType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EmployeesUpdateHrResponseBankAccountType) Ptr() *EmployeesUpdateHrResponseBankAccountType {
+	return &e
 }
 
 type EmployeesUpdateHrResponseStatus string

@@ -9504,6 +9504,14 @@ func TestSettersMarkExplicitExchangeRatesListReferenceResponse(t *testing.T) {
 }
 
 func TestSettersExchangeRatesListReferenceResponseRowsItem(t *testing.T) {
+	t.Run("SetBaseCurrency", func(t *testing.T) {
+		obj := &ExchangeRatesListReferenceResponseRowsItem{}
+		var fernTestValueBaseCurrency string
+		obj.SetBaseCurrency(fernTestValueBaseCurrency)
+		assert.Equal(t, fernTestValueBaseCurrency, obj.BaseCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetCurrencyCode", func(t *testing.T) {
 		obj := &ExchangeRatesListReferenceResponseRowsItem{}
 		var fernTestValueCurrencyCode string
@@ -9531,6 +9539,29 @@ func TestSettersExchangeRatesListReferenceResponseRowsItem(t *testing.T) {
 }
 
 func TestGettersExchangeRatesListReferenceResponseRowsItem(t *testing.T) {
+	t.Run("GetBaseCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ExchangeRatesListReferenceResponseRowsItem{}
+		var expected string
+		obj.BaseCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBaseCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetBaseCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ExchangeRatesListReferenceResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBaseCurrency() // Should return zero value
+	})
+
 	t.Run("GetCurrencyCode", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -9603,6 +9634,37 @@ func TestGettersExchangeRatesListReferenceResponseRowsItem(t *testing.T) {
 }
 
 func TestSettersMarkExplicitExchangeRatesListReferenceResponseRowsItem(t *testing.T) {
+	t.Run("SetBaseCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ExchangeRatesListReferenceResponseRowsItem{}
+		var fernTestValueBaseCurrency string
+
+		// Act
+		obj.SetBaseCurrency(fernTestValueBaseCurrency)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetCurrencyCode_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -11081,6 +11143,14 @@ func TestSettersExchangeRatesSyncReferenceResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetBaseCurrency", func(t *testing.T) {
+		obj := &ExchangeRatesSyncReferenceResponse{}
+		var fernTestValueBaseCurrency string
+		obj.SetBaseCurrency(fernTestValueBaseCurrency)
+		assert.Equal(t, fernTestValueBaseCurrency, obj.BaseCurrency)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetImported", func(t *testing.T) {
 		obj := &ExchangeRatesSyncReferenceResponse{}
 		var fernTestValueImported int64
@@ -11113,6 +11183,29 @@ func TestGettersExchangeRatesSyncReferenceResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetDate() // Should return zero value
+	})
+
+	t.Run("GetBaseCurrency", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ExchangeRatesSyncReferenceResponse{}
+		var expected string
+		obj.BaseCurrency = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetBaseCurrency(), "getter should return the property value")
+	})
+
+	t.Run("GetBaseCurrency_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ExchangeRatesSyncReferenceResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetBaseCurrency() // Should return zero value
 	})
 
 	t.Run("GetImported", func(t *testing.T) {
@@ -11149,6 +11242,37 @@ func TestSettersMarkExplicitExchangeRatesSyncReferenceResponse(t *testing.T) {
 
 		// Act
 		obj.SetDate(fernTestValueDate)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetBaseCurrency_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ExchangeRatesSyncReferenceResponse{}
+		var fernTestValueBaseCurrency string
+
+		// Act
+		obj.SetBaseCurrency(fernTestValueBaseCurrency)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -23216,6 +23340,13 @@ func TestEnumVatClassifiersListReferenceResponseRowsItemScheme(t *testing.T) {
 		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatClassifiersListReferenceResponseRowsItemScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewVatClassifiersListReferenceResponseRowsItemSchemeFromString("ioss")
@@ -23494,6 +23625,13 @@ func TestEnumVatResolveReferenceResponseScheme(t *testing.T) {
 		val, err := NewVatResolveReferenceResponseSchemeFromString("oss_union")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, VatResolveReferenceResponseScheme("oss_union"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewVatResolveReferenceResponseSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, VatResolveReferenceResponseScheme("oss_non_union"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ioss", func(t *testing.T) {

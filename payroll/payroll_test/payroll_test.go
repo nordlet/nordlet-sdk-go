@@ -203,6 +203,30 @@ func TestPayrollPaymentTypesListWithWireMock(
 	VerifyRequestCount(t, "TestPayrollPaymentTypesListWithWireMock", "POST", "/v1/payroll/payment-types/list", nil, 1)
 }
 
+func TestPayrollFrequenciesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.FrequenciesListPayrollRequest{}
+	_, invocationErr := client.Payroll.FrequenciesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPayrollFrequenciesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPayrollFrequenciesListWithWireMock", "POST", "/v1/payroll/frequencies/list", nil, 1)
+}
+
 func TestPayrollCalcWithWireMock(
 	t *testing.T,
 ) {
@@ -243,10 +267,7 @@ func TestPayrollRunsCreateWithWireMock(
 		option.WithBaseURL(WireMockBaseURL),
 		option.WithToken("test-token"),
 	)
-	request := &nordlet.RunsCreatePayrollRequest{
-		Year:  int64(1000000),
-		Month: int64(1000000),
-	}
+	request := &nordlet.RunsCreatePayrollRequest{}
 	_, invocationErr := client.Payroll.RunsCreate(
 		context.TODO(),
 		request,

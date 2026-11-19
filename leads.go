@@ -102,16 +102,17 @@ var (
 )
 
 type CreateLeadsRequest struct {
-	Name           string                             `json:"name" url:"-"`
-	ContactName    *string                            `json:"contactName,omitempty" url:"-"`
-	Email          *string                            `json:"email,omitempty" url:"-"`
-	Phone          *string                            `json:"phone,omitempty" url:"-"`
-	Website        *string                            `json:"website,omitempty" url:"-"`
-	CountryCode    *string                            `json:"countryCode,omitempty" url:"-"`
-	SourceID       *string                            `json:"sourceId,omitempty" url:"-"`
-	TypeID         *string                            `json:"typeId,omitempty" url:"-"`
-	Status         *CreateLeadsRequestStatus          `json:"status,omitempty" url:"-"`
-	EstimatedValue *string                            `json:"estimatedValue,omitempty" url:"-"`
+	Name           string                    `json:"name" url:"-"`
+	ContactName    *string                   `json:"contactName,omitempty" url:"-"`
+	Email          *string                   `json:"email,omitempty" url:"-"`
+	Phone          *string                   `json:"phone,omitempty" url:"-"`
+	Website        *string                   `json:"website,omitempty" url:"-"`
+	CountryCode    *string                   `json:"countryCode,omitempty" url:"-"`
+	SourceID       *string                   `json:"sourceId,omitempty" url:"-"`
+	TypeID         *string                   `json:"typeId,omitempty" url:"-"`
+	Status         *CreateLeadsRequestStatus `json:"status,omitempty" url:"-"`
+	EstimatedValue *string                   `json:"estimatedValue,omitempty" url:"-"`
+	// Defaults to the company's base currency
 	Currency       *string                            `json:"currency,omitempty" url:"-"`
 	Description    *string                            `json:"description,omitempty" url:"-"`
 	AssignedUserID *string                            `json:"assignedUserId,omitempty" url:"-"`
@@ -6528,17 +6529,18 @@ var (
 )
 
 type UpdateLeadsRequest struct {
-	ID             string                             `json:"id" url:"-"`
-	Name           *string                            `json:"name,omitempty" url:"-"`
-	ContactName    *string                            `json:"contactName,omitempty" url:"-"`
-	Email          *string                            `json:"email,omitempty" url:"-"`
-	Phone          *string                            `json:"phone,omitempty" url:"-"`
-	Website        *string                            `json:"website,omitempty" url:"-"`
-	CountryCode    *string                            `json:"countryCode,omitempty" url:"-"`
-	SourceID       *string                            `json:"sourceId,omitempty" url:"-"`
-	TypeID         *string                            `json:"typeId,omitempty" url:"-"`
-	Status         *UpdateLeadsRequestStatus          `json:"status,omitempty" url:"-"`
-	EstimatedValue *string                            `json:"estimatedValue,omitempty" url:"-"`
+	ID             string                    `json:"id" url:"-"`
+	Name           *string                   `json:"name,omitempty" url:"-"`
+	ContactName    *string                   `json:"contactName,omitempty" url:"-"`
+	Email          *string                   `json:"email,omitempty" url:"-"`
+	Phone          *string                   `json:"phone,omitempty" url:"-"`
+	Website        *string                   `json:"website,omitempty" url:"-"`
+	CountryCode    *string                   `json:"countryCode,omitempty" url:"-"`
+	SourceID       *string                   `json:"sourceId,omitempty" url:"-"`
+	TypeID         *string                   `json:"typeId,omitempty" url:"-"`
+	Status         *UpdateLeadsRequestStatus `json:"status,omitempty" url:"-"`
+	EstimatedValue *string                   `json:"estimatedValue,omitempty" url:"-"`
+	// Defaults to the company's base currency
 	Currency       *string                            `json:"currency,omitempty" url:"-"`
 	Description    *string                            `json:"description,omitempty" url:"-"`
 	AssignedUserID *string                            `json:"assignedUserId,omitempty" url:"-"`

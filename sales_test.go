@@ -150215,6 +150215,13 @@ func TestEnumInvoiceTemplatesCreateSalesRequestVatScheme(t *testing.T) {
 		assert.Equal(t, InvoiceTemplatesCreateSalesRequestVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoiceTemplatesCreateSalesRequestVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoiceTemplatesCreateSalesRequestVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoiceTemplatesCreateSalesRequestVatSchemeFromString("ioss")
@@ -150639,6 +150646,13 @@ func TestEnumInvoiceTemplatesUpdateSalesRequestVatScheme(t *testing.T) {
 		assert.Equal(t, InvoiceTemplatesUpdateSalesRequestVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoiceTemplatesUpdateSalesRequestVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoiceTemplatesUpdateSalesRequestVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoiceTemplatesUpdateSalesRequestVatSchemeFromString("ioss")
@@ -150938,6 +150952,13 @@ func TestEnumInvoicesApplyAdvanceSalesResponseVatScheme(t *testing.T) {
 		val, err := NewInvoicesApplyAdvanceSalesResponseVatSchemeFromString("oss_union")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesApplyAdvanceSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesApplyAdvanceSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesApplyAdvanceSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ioss", func(t *testing.T) {
@@ -151350,6 +151371,13 @@ func TestEnumInvoicesCreateSalesRequestVatScheme(t *testing.T) {
 		assert.Equal(t, InvoicesCreateSalesRequestVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesCreateSalesRequestVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesCreateSalesRequestVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoicesCreateSalesRequestVatSchemeFromString("ioss")
@@ -151584,6 +151612,13 @@ func TestEnumInvoicesCreateSalesResponseVatScheme(t *testing.T) {
 		val, err := NewInvoicesCreateSalesResponseVatSchemeFromString("oss_union")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesCreateSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesCreateSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesCreateSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ioss", func(t *testing.T) {
@@ -151952,6 +151987,13 @@ func TestEnumInvoicesGetSalesResponseVatScheme(t *testing.T) {
 		assert.Equal(t, InvoicesGetSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesGetSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesGetSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoicesGetSalesResponseVatSchemeFromString("ioss")
@@ -152186,6 +152228,13 @@ func TestEnumInvoicesIssueSalesResponseVatScheme(t *testing.T) {
 		val, err := NewInvoicesIssueSalesResponseVatSchemeFromString("oss_union")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesIssueSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesIssueSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesIssueSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ioss", func(t *testing.T) {
@@ -152467,6 +152516,13 @@ func TestEnumInvoicesListSalesResponseRowsItemVatScheme(t *testing.T) {
 		assert.Equal(t, InvoicesListSalesResponseRowsItemVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesListSalesResponseRowsItemVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesListSalesResponseRowsItemVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoicesListSalesResponseRowsItemVatSchemeFromString("ioss")
@@ -152701,6 +152757,13 @@ func TestEnumInvoicesLockSalesResponseVatScheme(t *testing.T) {
 		val, err := NewInvoicesLockSalesResponseVatSchemeFromString("oss_union")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesLockSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesLockSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesLockSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ioss", func(t *testing.T) {
@@ -153300,6 +153363,13 @@ func TestEnumInvoicesReverseSalesResponseVatScheme(t *testing.T) {
 		assert.Equal(t, InvoicesReverseSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesReverseSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesReverseSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoicesReverseSalesResponseVatSchemeFromString("ioss")
@@ -153782,6 +153852,13 @@ func TestEnumInvoicesUnlockSalesResponseVatScheme(t *testing.T) {
 		assert.Equal(t, InvoicesUnlockSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesUnlockSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesUnlockSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoicesUnlockSalesResponseVatSchemeFromString("ioss")
@@ -154149,6 +154226,13 @@ func TestEnumInvoicesUpdateSalesRequestVatScheme(t *testing.T) {
 		assert.Equal(t, InvoicesUpdateSalesRequestVatScheme("oss_union"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesUpdateSalesRequestVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesUpdateSalesRequestVatScheme("oss_non_union"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_ioss", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewInvoicesUpdateSalesRequestVatSchemeFromString("ioss")
@@ -154383,6 +154467,13 @@ func TestEnumInvoicesUpdateSalesResponseVatScheme(t *testing.T) {
 		val, err := NewInvoicesUpdateSalesResponseVatSchemeFromString("oss_union")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, InvoicesUpdateSalesResponseVatScheme("oss_union"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_oss_non_union", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewInvoicesUpdateSalesResponseVatSchemeFromString("oss_non_union")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, InvoicesUpdateSalesResponseVatScheme("oss_non_union"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_ioss", func(t *testing.T) {

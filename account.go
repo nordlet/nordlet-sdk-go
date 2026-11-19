@@ -439,57 +439,72 @@ var (
 	companiesCreateAccountRequestFieldCode                      = big.NewInt(1 << 1)
 	companiesCreateAccountRequestFieldVatCode                   = big.NewInt(1 << 2)
 	companiesCreateAccountRequestFieldSmeExemptionNumber        = big.NewInt(1 << 3)
-	companiesCreateAccountRequestFieldIsVatPayer                = big.NewInt(1 << 4)
-	companiesCreateAccountRequestFieldVatPeriod                 = big.NewInt(1 << 5)
-	companiesCreateAccountRequestFieldFiscalYearEndMonth        = big.NewInt(1 << 6)
-	companiesCreateAccountRequestFieldTimeZone                  = big.NewInt(1 << 7)
-	companiesCreateAccountRequestFieldFilingOptions             = big.NewInt(1 << 8)
-	companiesCreateAccountRequestFieldAddress                   = big.NewInt(1 << 9)
-	companiesCreateAccountRequestFieldEmail                     = big.NewInt(1 << 10)
-	companiesCreateAccountRequestFieldPhone                     = big.NewInt(1 << 11)
-	companiesCreateAccountRequestFieldIban                      = big.NewInt(1 << 12)
-	companiesCreateAccountRequestFieldBankName                  = big.NewInt(1 << 13)
-	companiesCreateAccountRequestFieldBankBic                   = big.NewInt(1 << 14)
-	companiesCreateAccountRequestFieldBankCode                  = big.NewInt(1 << 15)
-	companiesCreateAccountRequestFieldBankBranchCode            = big.NewInt(1 << 16)
-	companiesCreateAccountRequestFieldBankAccountNumber         = big.NewInt(1 << 17)
-	companiesCreateAccountRequestFieldInvoicePrefix             = big.NewInt(1 << 18)
-	companiesCreateAccountRequestFieldDefaultInvoiceLocale      = big.NewInt(1 << 19)
-	companiesCreateAccountRequestFieldDefaultInvoiceNote        = big.NewInt(1 << 20)
-	companiesCreateAccountRequestFieldPeppolID                  = big.NewInt(1 << 21)
-	companiesCreateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 22)
-	companiesCreateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 23)
-	companiesCreateAccountRequestFieldLegalForm                 = big.NewInt(1 << 24)
-	companiesCreateAccountRequestFieldRegistryName              = big.NewInt(1 << 25)
-	companiesCreateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 26)
-	companiesCreateAccountRequestFieldShareCapital              = big.NewInt(1 << 27)
-	companiesCreateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 28)
-	companiesCreateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 29)
-	companiesCreateAccountRequestFieldAuditorName               = big.NewInt(1 << 30)
-	companiesCreateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 31)
-	companiesCreateAccountRequestFieldAuditRequired             = big.NewInt(1 << 32)
-	companiesCreateAccountRequestFieldCountryCode               = big.NewInt(1 << 33)
-	companiesCreateAccountRequestFieldBaseCurrency              = big.NewInt(1 << 34)
-	companiesCreateAccountRequestFieldIsSandbox                 = big.NewInt(1 << 35)
-	companiesCreateAccountRequestFieldCashBasis                 = big.NewInt(1 << 36)
+	companiesCreateAccountRequestFieldIdentifiers               = big.NewInt(1 << 4)
+	companiesCreateAccountRequestFieldIsVatPayer                = big.NewInt(1 << 5)
+	companiesCreateAccountRequestFieldVatPeriod                 = big.NewInt(1 << 6)
+	companiesCreateAccountRequestFieldVatPeriodEndMonth         = big.NewInt(1 << 7)
+	companiesCreateAccountRequestFieldFiscalYearEndMonth        = big.NewInt(1 << 8)
+	companiesCreateAccountRequestFieldFiscalYearEndDay          = big.NewInt(1 << 9)
+	companiesCreateAccountRequestFieldFiscalYearWeekday         = big.NewInt(1 << 10)
+	companiesCreateAccountRequestFieldFiscalYearWeekRule        = big.NewInt(1 << 11)
+	companiesCreateAccountRequestFieldTimeZone                  = big.NewInt(1 << 12)
+	companiesCreateAccountRequestFieldFilingOptions             = big.NewInt(1 << 13)
+	companiesCreateAccountRequestFieldAddress                   = big.NewInt(1 << 14)
+	companiesCreateAccountRequestFieldEmail                     = big.NewInt(1 << 15)
+	companiesCreateAccountRequestFieldPhone                     = big.NewInt(1 << 16)
+	companiesCreateAccountRequestFieldIban                      = big.NewInt(1 << 17)
+	companiesCreateAccountRequestFieldBankName                  = big.NewInt(1 << 18)
+	companiesCreateAccountRequestFieldBankBic                   = big.NewInt(1 << 19)
+	companiesCreateAccountRequestFieldBankCode                  = big.NewInt(1 << 20)
+	companiesCreateAccountRequestFieldBankBranchCode            = big.NewInt(1 << 21)
+	companiesCreateAccountRequestFieldBankAccountNumber         = big.NewInt(1 << 22)
+	companiesCreateAccountRequestFieldInvoicePrefix             = big.NewInt(1 << 23)
+	companiesCreateAccountRequestFieldDefaultInvoiceLocale      = big.NewInt(1 << 24)
+	companiesCreateAccountRequestFieldDefaultInvoiceNote        = big.NewInt(1 << 25)
+	companiesCreateAccountRequestFieldPeppolID                  = big.NewInt(1 << 26)
+	companiesCreateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 27)
+	companiesCreateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 28)
+	companiesCreateAccountRequestFieldLegalForm                 = big.NewInt(1 << 29)
+	companiesCreateAccountRequestFieldRegistryName              = big.NewInt(1 << 30)
+	companiesCreateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 31)
+	companiesCreateAccountRequestFieldShareCapital              = big.NewInt(1 << 32)
+	companiesCreateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 33)
+	companiesCreateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 34)
+	companiesCreateAccountRequestFieldAuditorName               = big.NewInt(1 << 35)
+	companiesCreateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 36)
+	companiesCreateAccountRequestFieldAuditRequired             = big.NewInt(1 << 37)
+	companiesCreateAccountRequestFieldCountryCode               = big.NewInt(1 << 38)
+	companiesCreateAccountRequestFieldBaseCurrency              = big.NewInt(1 << 39)
+	companiesCreateAccountRequestFieldIsSandbox                 = big.NewInt(1 << 40)
+	companiesCreateAccountRequestFieldCashBasis                 = big.NewInt(1 << 41)
 )
 
 type CompaniesCreateAccountRequest struct {
-	Name               string                                  `json:"name" url:"-"`
-	Code               *string                                 `json:"code,omitempty" url:"-"`
-	VatCode            *string                                 `json:"vatCode,omitempty" url:"-"`
-	SmeExemptionNumber *string                                 `json:"smeExemptionNumber,omitempty" url:"-"`
-	IsVatPayer         *bool                                   `json:"isVatPayer,omitempty" url:"-"`
-	VatPeriod          *CompaniesCreateAccountRequestVatPeriod `json:"vatPeriod,omitempty" url:"-"`
-	FiscalYearEndMonth *int64                                  `json:"fiscalYearEndMonth,omitempty" url:"-"`
-	TimeZone           *string                                 `json:"timeZone,omitempty" url:"-"`
-	FilingOptions      map[string]string                       `json:"filingOptions,omitempty" url:"-"`
-	Address            *CompaniesCreateAccountRequestAddress   `json:"address,omitempty" url:"-"`
-	Email              *string                                 `json:"email,omitempty" url:"-"`
-	Phone              *string                                 `json:"phone,omitempty" url:"-"`
-	Iban               *string                                 `json:"iban,omitempty" url:"-"`
-	BankName           *string                                 `json:"bankName,omitempty" url:"-"`
-	BankBic            *string                                 `json:"bankBic,omitempty" url:"-"`
+	Name               string  `json:"name" url:"-"`
+	Code               *string `json:"code,omitempty" url:"-"`
+	VatCode            *string `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"-"`
+	// Registration numbers of the company other than `code` and `vatCode`, by key: `utr` (GB, Corporation Tax Unique Taxpayer Reference (UTR), 10 digits); `taxOfficeNumber` (GB, PAYE tax office number, 3 digits); `taxOfficeReference` (GB, PAYE tax office reference, 1 to 10 letters, digits or punctuation, not starting with a space); `accountsOfficeReference` (GB, Accounts Office reference, 13 characters: 3 digits, P, a letter, 7 digits and a digit or X); `ein` (US, Employer Identification Number (EIN), 9 digits whose first two are a prefix the IRS assigns); `deBusinessLicense` (US, Delaware business license number); `deWithholdingAccount` (US, Delaware withholding account number, 9 digits, the federal EIN); `deUnemploymentAccount` (US, Delaware unemployment insurance account number); `deUnemploymentRate` (US, Delaware unemployment insurance tax rate (%), a percentage from 0 to 100 with at most 4 decimals); `deEntityFileNumber` (US, Delaware Division of Corporations file number (formed in Delaware)); `deForeignEntityFileNumber` (US, Delaware Division of Corporations file number (formed in another state))
+	Identifiers map[string]string                       `json:"identifiers,omitempty" url:"-"`
+	IsVatPayer  *bool                                   `json:"isVatPayer,omitempty" url:"-"`
+	VatPeriod   *CompaniesCreateAccountRequestVatPeriod `json:"vatPeriod,omitempty" url:"-"`
+	// A month in which a VAT period ends, for VAT periods that do not follow the calendar quarters
+	VatPeriodEndMonth  *int64 `json:"vatPeriodEndMonth,omitempty" url:"-"`
+	FiscalYearEndMonth *int64 `json:"fiscalYearEndMonth,omitempty" url:"-"`
+	// Day of `fiscalYearEndMonth` the fiscal year ends on; the last day of the month when omitted
+	FiscalYearEndDay *int64 `json:"fiscalYearEndDay,omitempty" url:"-"`
+	// For a 52-53-week fiscal year: the weekday it always ends on, 0 Sunday to 6 Saturday
+	FiscalYearWeekday *int64 `json:"fiscalYearWeekday,omitempty" url:"-"`
+	// With `fiscalYearWeekday`: `last` ends the year on the last such weekday of `fiscalYearEndMonth`, `nearest` on the one nearest the last day of that month
+	FiscalYearWeekRule *CompaniesCreateAccountRequestFiscalYearWeekRule `json:"fiscalYearWeekRule,omitempty" url:"-"`
+	TimeZone           *string                                          `json:"timeZone,omitempty" url:"-"`
+	FilingOptions      map[string]string                                `json:"filingOptions,omitempty" url:"-"`
+	Address            *CompaniesCreateAccountRequestAddress            `json:"address,omitempty" url:"-"`
+	Email              *string                                          `json:"email,omitempty" url:"-"`
+	Phone              *string                                          `json:"phone,omitempty" url:"-"`
+	Iban               *string                                          `json:"iban,omitempty" url:"-"`
+	BankName           *string                                          `json:"bankName,omitempty" url:"-"`
+	BankBic            *string                                          `json:"bankBic,omitempty" url:"-"`
 	// Sort code, routing number, BSB, IFSC or institution number
 	BankCode *string `json:"bankCode,omitempty" url:"-"`
 	// Transit number (Canada)
@@ -561,6 +576,13 @@ func (c *CompaniesCreateAccountRequest) SetSmeExemptionNumber(smeExemptionNumber
 	c.require(companiesCreateAccountRequestFieldSmeExemptionNumber)
 }
 
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetIdentifiers(identifiers map[string]string) {
+	c.Identifiers = identifiers
+	c.require(companiesCreateAccountRequestFieldIdentifiers)
+}
+
 // SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesCreateAccountRequest) SetIsVatPayer(isVatPayer *bool) {
@@ -575,11 +597,39 @@ func (c *CompaniesCreateAccountRequest) SetVatPeriod(vatPeriod *CompaniesCreateA
 	c.require(companiesCreateAccountRequestFieldVatPeriod)
 }
 
+// SetVatPeriodEndMonth sets the VatPeriodEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetVatPeriodEndMonth(vatPeriodEndMonth *int64) {
+	c.VatPeriodEndMonth = vatPeriodEndMonth
+	c.require(companiesCreateAccountRequestFieldVatPeriodEndMonth)
+}
+
 // SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesCreateAccountRequest) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
 	c.FiscalYearEndMonth = fiscalYearEndMonth
 	c.require(companiesCreateAccountRequestFieldFiscalYearEndMonth)
+}
+
+// SetFiscalYearEndDay sets the FiscalYearEndDay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetFiscalYearEndDay(fiscalYearEndDay *int64) {
+	c.FiscalYearEndDay = fiscalYearEndDay
+	c.require(companiesCreateAccountRequestFieldFiscalYearEndDay)
+}
+
+// SetFiscalYearWeekday sets the FiscalYearWeekday field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetFiscalYearWeekday(fiscalYearWeekday *int64) {
+	c.FiscalYearWeekday = fiscalYearWeekday
+	c.require(companiesCreateAccountRequestFieldFiscalYearWeekday)
+}
+
+// SetFiscalYearWeekRule sets the FiscalYearWeekRule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequest) SetFiscalYearWeekRule(fiscalYearWeekRule *CompaniesCreateAccountRequestFiscalYearWeekRule) {
+	c.FiscalYearWeekRule = fiscalYearWeekRule
+	c.require(companiesCreateAccountRequestFieldFiscalYearWeekRule)
 }
 
 // SetTimeZone sets the TimeZone field and marks it as non-optional;
@@ -925,54 +975,69 @@ var (
 	companiesUpdateAccountRequestFieldCode                      = big.NewInt(1 << 1)
 	companiesUpdateAccountRequestFieldVatCode                   = big.NewInt(1 << 2)
 	companiesUpdateAccountRequestFieldSmeExemptionNumber        = big.NewInt(1 << 3)
-	companiesUpdateAccountRequestFieldIsVatPayer                = big.NewInt(1 << 4)
-	companiesUpdateAccountRequestFieldVatPeriod                 = big.NewInt(1 << 5)
-	companiesUpdateAccountRequestFieldFiscalYearEndMonth        = big.NewInt(1 << 6)
-	companiesUpdateAccountRequestFieldTimeZone                  = big.NewInt(1 << 7)
-	companiesUpdateAccountRequestFieldFilingOptions             = big.NewInt(1 << 8)
-	companiesUpdateAccountRequestFieldAddress                   = big.NewInt(1 << 9)
-	companiesUpdateAccountRequestFieldEmail                     = big.NewInt(1 << 10)
-	companiesUpdateAccountRequestFieldPhone                     = big.NewInt(1 << 11)
-	companiesUpdateAccountRequestFieldIban                      = big.NewInt(1 << 12)
-	companiesUpdateAccountRequestFieldBankName                  = big.NewInt(1 << 13)
-	companiesUpdateAccountRequestFieldBankBic                   = big.NewInt(1 << 14)
-	companiesUpdateAccountRequestFieldBankCode                  = big.NewInt(1 << 15)
-	companiesUpdateAccountRequestFieldBankBranchCode            = big.NewInt(1 << 16)
-	companiesUpdateAccountRequestFieldBankAccountNumber         = big.NewInt(1 << 17)
-	companiesUpdateAccountRequestFieldInvoicePrefix             = big.NewInt(1 << 18)
-	companiesUpdateAccountRequestFieldDefaultInvoiceLocale      = big.NewInt(1 << 19)
-	companiesUpdateAccountRequestFieldDefaultInvoiceNote        = big.NewInt(1 << 20)
-	companiesUpdateAccountRequestFieldPeppolID                  = big.NewInt(1 << 21)
-	companiesUpdateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 22)
-	companiesUpdateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 23)
-	companiesUpdateAccountRequestFieldLegalForm                 = big.NewInt(1 << 24)
-	companiesUpdateAccountRequestFieldRegistryName              = big.NewInt(1 << 25)
-	companiesUpdateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 26)
-	companiesUpdateAccountRequestFieldShareCapital              = big.NewInt(1 << 27)
-	companiesUpdateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 28)
-	companiesUpdateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 29)
-	companiesUpdateAccountRequestFieldAuditorName               = big.NewInt(1 << 30)
-	companiesUpdateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 31)
-	companiesUpdateAccountRequestFieldAuditRequired             = big.NewInt(1 << 32)
-	companiesUpdateAccountRequestFieldLogo                      = big.NewInt(1 << 33)
+	companiesUpdateAccountRequestFieldIdentifiers               = big.NewInt(1 << 4)
+	companiesUpdateAccountRequestFieldIsVatPayer                = big.NewInt(1 << 5)
+	companiesUpdateAccountRequestFieldVatPeriod                 = big.NewInt(1 << 6)
+	companiesUpdateAccountRequestFieldVatPeriodEndMonth         = big.NewInt(1 << 7)
+	companiesUpdateAccountRequestFieldFiscalYearEndMonth        = big.NewInt(1 << 8)
+	companiesUpdateAccountRequestFieldFiscalYearEndDay          = big.NewInt(1 << 9)
+	companiesUpdateAccountRequestFieldFiscalYearWeekday         = big.NewInt(1 << 10)
+	companiesUpdateAccountRequestFieldFiscalYearWeekRule        = big.NewInt(1 << 11)
+	companiesUpdateAccountRequestFieldTimeZone                  = big.NewInt(1 << 12)
+	companiesUpdateAccountRequestFieldFilingOptions             = big.NewInt(1 << 13)
+	companiesUpdateAccountRequestFieldAddress                   = big.NewInt(1 << 14)
+	companiesUpdateAccountRequestFieldEmail                     = big.NewInt(1 << 15)
+	companiesUpdateAccountRequestFieldPhone                     = big.NewInt(1 << 16)
+	companiesUpdateAccountRequestFieldIban                      = big.NewInt(1 << 17)
+	companiesUpdateAccountRequestFieldBankName                  = big.NewInt(1 << 18)
+	companiesUpdateAccountRequestFieldBankBic                   = big.NewInt(1 << 19)
+	companiesUpdateAccountRequestFieldBankCode                  = big.NewInt(1 << 20)
+	companiesUpdateAccountRequestFieldBankBranchCode            = big.NewInt(1 << 21)
+	companiesUpdateAccountRequestFieldBankAccountNumber         = big.NewInt(1 << 22)
+	companiesUpdateAccountRequestFieldInvoicePrefix             = big.NewInt(1 << 23)
+	companiesUpdateAccountRequestFieldDefaultInvoiceLocale      = big.NewInt(1 << 24)
+	companiesUpdateAccountRequestFieldDefaultInvoiceNote        = big.NewInt(1 << 25)
+	companiesUpdateAccountRequestFieldPeppolID                  = big.NewInt(1 << 26)
+	companiesUpdateAccountRequestFieldSepaCreditorID            = big.NewInt(1 << 27)
+	companiesUpdateAccountRequestFieldDefaultInvoiceCurrency    = big.NewInt(1 << 28)
+	companiesUpdateAccountRequestFieldLegalForm                 = big.NewInt(1 << 29)
+	companiesUpdateAccountRequestFieldRegistryName              = big.NewInt(1 << 30)
+	companiesUpdateAccountRequestFieldIncorporatedOn            = big.NewInt(1 << 31)
+	companiesUpdateAccountRequestFieldShareCapital              = big.NewInt(1 << 32)
+	companiesUpdateAccountRequestFieldAccountsKeptBy            = big.NewInt(1 << 33)
+	companiesUpdateAccountRequestFieldBookkeeperName            = big.NewInt(1 << 34)
+	companiesUpdateAccountRequestFieldAuditorName               = big.NewInt(1 << 35)
+	companiesUpdateAccountRequestFieldAuditorRegistrationNumber = big.NewInt(1 << 36)
+	companiesUpdateAccountRequestFieldAuditRequired             = big.NewInt(1 << 37)
+	companiesUpdateAccountRequestFieldLogo                      = big.NewInt(1 << 38)
 )
 
 type CompaniesUpdateAccountRequest struct {
-	Name               *string                                 `json:"name,omitempty" url:"-"`
-	Code               *string                                 `json:"code,omitempty" url:"-"`
-	VatCode            *string                                 `json:"vatCode,omitempty" url:"-"`
-	SmeExemptionNumber *string                                 `json:"smeExemptionNumber,omitempty" url:"-"`
-	IsVatPayer         *bool                                   `json:"isVatPayer,omitempty" url:"-"`
-	VatPeriod          *CompaniesUpdateAccountRequestVatPeriod `json:"vatPeriod,omitempty" url:"-"`
-	FiscalYearEndMonth *int64                                  `json:"fiscalYearEndMonth,omitempty" url:"-"`
-	TimeZone           *string                                 `json:"timeZone,omitempty" url:"-"`
-	FilingOptions      map[string]*string                      `json:"filingOptions,omitempty" url:"-"`
-	Address            *CompaniesUpdateAccountRequestAddress   `json:"address,omitempty" url:"-"`
-	Email              *string                                 `json:"email,omitempty" url:"-"`
-	Phone              *string                                 `json:"phone,omitempty" url:"-"`
-	Iban               *string                                 `json:"iban,omitempty" url:"-"`
-	BankName           *string                                 `json:"bankName,omitempty" url:"-"`
-	BankBic            *string                                 `json:"bankBic,omitempty" url:"-"`
+	Name               *string `json:"name,omitempty" url:"-"`
+	Code               *string `json:"code,omitempty" url:"-"`
+	VatCode            *string `json:"vatCode,omitempty" url:"-"`
+	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"-"`
+	// Registration numbers of the company other than `code` and `vatCode`, by key: `utr` (GB, Corporation Tax Unique Taxpayer Reference (UTR), 10 digits); `taxOfficeNumber` (GB, PAYE tax office number, 3 digits); `taxOfficeReference` (GB, PAYE tax office reference, 1 to 10 letters, digits or punctuation, not starting with a space); `accountsOfficeReference` (GB, Accounts Office reference, 13 characters: 3 digits, P, a letter, 7 digits and a digit or X); `ein` (US, Employer Identification Number (EIN), 9 digits whose first two are a prefix the IRS assigns); `deBusinessLicense` (US, Delaware business license number); `deWithholdingAccount` (US, Delaware withholding account number, 9 digits, the federal EIN); `deUnemploymentAccount` (US, Delaware unemployment insurance account number); `deUnemploymentRate` (US, Delaware unemployment insurance tax rate (%), a percentage from 0 to 100 with at most 4 decimals); `deEntityFileNumber` (US, Delaware Division of Corporations file number (formed in Delaware)); `deForeignEntityFileNumber` (US, Delaware Division of Corporations file number (formed in another state))
+	Identifiers map[string]*string                      `json:"identifiers,omitempty" url:"-"`
+	IsVatPayer  *bool                                   `json:"isVatPayer,omitempty" url:"-"`
+	VatPeriod   *CompaniesUpdateAccountRequestVatPeriod `json:"vatPeriod,omitempty" url:"-"`
+	// A month in which a VAT period ends, for VAT periods that do not follow the calendar quarters
+	VatPeriodEndMonth  *int64 `json:"vatPeriodEndMonth,omitempty" url:"-"`
+	FiscalYearEndMonth *int64 `json:"fiscalYearEndMonth,omitempty" url:"-"`
+	// Day of `fiscalYearEndMonth` the fiscal year ends on; the last day of the month when omitted
+	FiscalYearEndDay *int64 `json:"fiscalYearEndDay,omitempty" url:"-"`
+	// For a 52-53-week fiscal year: the weekday it always ends on, 0 Sunday to 6 Saturday
+	FiscalYearWeekday *int64 `json:"fiscalYearWeekday,omitempty" url:"-"`
+	// With `fiscalYearWeekday`: `last` ends the year on the last such weekday of `fiscalYearEndMonth`, `nearest` on the one nearest the last day of that month
+	FiscalYearWeekRule *CompaniesUpdateAccountRequestFiscalYearWeekRule `json:"fiscalYearWeekRule,omitempty" url:"-"`
+	TimeZone           *string                                          `json:"timeZone,omitempty" url:"-"`
+	FilingOptions      map[string]*string                               `json:"filingOptions,omitempty" url:"-"`
+	Address            *CompaniesUpdateAccountRequestAddress            `json:"address,omitempty" url:"-"`
+	Email              *string                                          `json:"email,omitempty" url:"-"`
+	Phone              *string                                          `json:"phone,omitempty" url:"-"`
+	Iban               *string                                          `json:"iban,omitempty" url:"-"`
+	BankName           *string                                          `json:"bankName,omitempty" url:"-"`
+	BankBic            *string                                          `json:"bankBic,omitempty" url:"-"`
 	// Sort code, routing number, BSB, IFSC or institution number
 	BankCode *string `json:"bankCode,omitempty" url:"-"`
 	// Transit number (Canada)
@@ -1037,6 +1102,13 @@ func (c *CompaniesUpdateAccountRequest) SetSmeExemptionNumber(smeExemptionNumber
 	c.require(companiesUpdateAccountRequestFieldSmeExemptionNumber)
 }
 
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetIdentifiers(identifiers map[string]*string) {
+	c.Identifiers = identifiers
+	c.require(companiesUpdateAccountRequestFieldIdentifiers)
+}
+
 // SetIsVatPayer sets the IsVatPayer field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesUpdateAccountRequest) SetIsVatPayer(isVatPayer *bool) {
@@ -1051,11 +1123,39 @@ func (c *CompaniesUpdateAccountRequest) SetVatPeriod(vatPeriod *CompaniesUpdateA
 	c.require(companiesUpdateAccountRequestFieldVatPeriod)
 }
 
+// SetVatPeriodEndMonth sets the VatPeriodEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetVatPeriodEndMonth(vatPeriodEndMonth *int64) {
+	c.VatPeriodEndMonth = vatPeriodEndMonth
+	c.require(companiesUpdateAccountRequestFieldVatPeriodEndMonth)
+}
+
 // SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesUpdateAccountRequest) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
 	c.FiscalYearEndMonth = fiscalYearEndMonth
 	c.require(companiesUpdateAccountRequestFieldFiscalYearEndMonth)
+}
+
+// SetFiscalYearEndDay sets the FiscalYearEndDay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetFiscalYearEndDay(fiscalYearEndDay *int64) {
+	c.FiscalYearEndDay = fiscalYearEndDay
+	c.require(companiesUpdateAccountRequestFieldFiscalYearEndDay)
+}
+
+// SetFiscalYearWeekday sets the FiscalYearWeekday field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetFiscalYearWeekday(fiscalYearWeekday *int64) {
+	c.FiscalYearWeekday = fiscalYearWeekday
+	c.require(companiesUpdateAccountRequestFieldFiscalYearWeekday)
+}
+
+// SetFiscalYearWeekRule sets the FiscalYearWeekRule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequest) SetFiscalYearWeekRule(fiscalYearWeekRule *CompaniesUpdateAccountRequestFiscalYearWeekRule) {
+	c.FiscalYearWeekRule = fiscalYearWeekRule
+	c.require(companiesUpdateAccountRequestFieldFiscalYearWeekRule)
 }
 
 // SetTimeZone sets the TimeZone field and marks it as non-optional;
@@ -5426,61 +5526,67 @@ var (
 	companiesContextAccountResponseProfileFieldName                      = big.NewInt(1 << 1)
 	companiesContextAccountResponseProfileFieldCode                      = big.NewInt(1 << 2)
 	companiesContextAccountResponseProfileFieldVatCode                   = big.NewInt(1 << 3)
-	companiesContextAccountResponseProfileFieldSmeExemptionNumber        = big.NewInt(1 << 4)
-	companiesContextAccountResponseProfileFieldIsVatPayer                = big.NewInt(1 << 5)
-	companiesContextAccountResponseProfileFieldIsSandbox                 = big.NewInt(1 << 6)
-	companiesContextAccountResponseProfileFieldCashBasis                 = big.NewInt(1 << 7)
-	companiesContextAccountResponseProfileFieldCountryCode               = big.NewInt(1 << 8)
-	companiesContextAccountResponseProfileFieldChartTemplate             = big.NewInt(1 << 9)
-	companiesContextAccountResponseProfileFieldCountryChartTemplate      = big.NewInt(1 << 10)
-	companiesContextAccountResponseProfileFieldBaseCurrency              = big.NewInt(1 << 11)
-	companiesContextAccountResponseProfileFieldDefaultInvoiceCurrency    = big.NewInt(1 << 12)
-	companiesContextAccountResponseProfileFieldStatus                    = big.NewInt(1 << 13)
-	companiesContextAccountResponseProfileFieldAddress                   = big.NewInt(1 << 14)
-	companiesContextAccountResponseProfileFieldEmail                     = big.NewInt(1 << 15)
-	companiesContextAccountResponseProfileFieldPhone                     = big.NewInt(1 << 16)
-	companiesContextAccountResponseProfileFieldIban                      = big.NewInt(1 << 17)
-	companiesContextAccountResponseProfileFieldBankName                  = big.NewInt(1 << 18)
-	companiesContextAccountResponseProfileFieldBankBic                   = big.NewInt(1 << 19)
-	companiesContextAccountResponseProfileFieldBankCode                  = big.NewInt(1 << 20)
-	companiesContextAccountResponseProfileFieldBankBranchCode            = big.NewInt(1 << 21)
-	companiesContextAccountResponseProfileFieldBankAccountNumber         = big.NewInt(1 << 22)
-	companiesContextAccountResponseProfileFieldInvoicePrefix             = big.NewInt(1 << 23)
-	companiesContextAccountResponseProfileFieldNextInvoiceNumber         = big.NewInt(1 << 24)
-	companiesContextAccountResponseProfileFieldDefaultInvoiceLocale      = big.NewInt(1 << 25)
-	companiesContextAccountResponseProfileFieldDefaultInvoiceNote        = big.NewInt(1 << 26)
-	companiesContextAccountResponseProfileFieldPeppolID                  = big.NewInt(1 << 27)
-	companiesContextAccountResponseProfileFieldSepaCreditorID            = big.NewInt(1 << 28)
-	companiesContextAccountResponseProfileFieldLogoFileID                = big.NewInt(1 << 29)
-	companiesContextAccountResponseProfileFieldLegalForm                 = big.NewInt(1 << 30)
-	companiesContextAccountResponseProfileFieldRegistryName              = big.NewInt(1 << 31)
-	companiesContextAccountResponseProfileFieldIncorporatedOn            = big.NewInt(1 << 32)
-	companiesContextAccountResponseProfileFieldShareCapital              = big.NewInt(1 << 33)
-	companiesContextAccountResponseProfileFieldAccountsKeptBy            = big.NewInt(1 << 34)
-	companiesContextAccountResponseProfileFieldVatPeriod                 = big.NewInt(1 << 35)
-	companiesContextAccountResponseProfileFieldFiscalYearEndMonth        = big.NewInt(1 << 36)
-	companiesContextAccountResponseProfileFieldTimeZone                  = big.NewInt(1 << 37)
-	companiesContextAccountResponseProfileFieldFilingOptions             = big.NewInt(1 << 38)
-	companiesContextAccountResponseProfileFieldBookkeeperName            = big.NewInt(1 << 39)
-	companiesContextAccountResponseProfileFieldAuditorName               = big.NewInt(1 << 40)
-	companiesContextAccountResponseProfileFieldAuditorRegistrationNumber = big.NewInt(1 << 41)
-	companiesContextAccountResponseProfileFieldAuditRequired             = big.NewInt(1 << 42)
+	companiesContextAccountResponseProfileFieldIdentifiers               = big.NewInt(1 << 4)
+	companiesContextAccountResponseProfileFieldSmeExemptionNumber        = big.NewInt(1 << 5)
+	companiesContextAccountResponseProfileFieldIsVatPayer                = big.NewInt(1 << 6)
+	companiesContextAccountResponseProfileFieldIsSandbox                 = big.NewInt(1 << 7)
+	companiesContextAccountResponseProfileFieldCashBasis                 = big.NewInt(1 << 8)
+	companiesContextAccountResponseProfileFieldCountryCode               = big.NewInt(1 << 9)
+	companiesContextAccountResponseProfileFieldChartTemplate             = big.NewInt(1 << 10)
+	companiesContextAccountResponseProfileFieldCountryChartTemplate      = big.NewInt(1 << 11)
+	companiesContextAccountResponseProfileFieldBaseCurrency              = big.NewInt(1 << 12)
+	companiesContextAccountResponseProfileFieldDefaultInvoiceCurrency    = big.NewInt(1 << 13)
+	companiesContextAccountResponseProfileFieldStatus                    = big.NewInt(1 << 14)
+	companiesContextAccountResponseProfileFieldAddress                   = big.NewInt(1 << 15)
+	companiesContextAccountResponseProfileFieldEmail                     = big.NewInt(1 << 16)
+	companiesContextAccountResponseProfileFieldPhone                     = big.NewInt(1 << 17)
+	companiesContextAccountResponseProfileFieldIban                      = big.NewInt(1 << 18)
+	companiesContextAccountResponseProfileFieldBankName                  = big.NewInt(1 << 19)
+	companiesContextAccountResponseProfileFieldBankBic                   = big.NewInt(1 << 20)
+	companiesContextAccountResponseProfileFieldBankCode                  = big.NewInt(1 << 21)
+	companiesContextAccountResponseProfileFieldBankBranchCode            = big.NewInt(1 << 22)
+	companiesContextAccountResponseProfileFieldBankAccountNumber         = big.NewInt(1 << 23)
+	companiesContextAccountResponseProfileFieldInvoicePrefix             = big.NewInt(1 << 24)
+	companiesContextAccountResponseProfileFieldNextInvoiceNumber         = big.NewInt(1 << 25)
+	companiesContextAccountResponseProfileFieldDefaultInvoiceLocale      = big.NewInt(1 << 26)
+	companiesContextAccountResponseProfileFieldDefaultInvoiceNote        = big.NewInt(1 << 27)
+	companiesContextAccountResponseProfileFieldPeppolID                  = big.NewInt(1 << 28)
+	companiesContextAccountResponseProfileFieldSepaCreditorID            = big.NewInt(1 << 29)
+	companiesContextAccountResponseProfileFieldLogoFileID                = big.NewInt(1 << 30)
+	companiesContextAccountResponseProfileFieldLegalForm                 = big.NewInt(1 << 31)
+	companiesContextAccountResponseProfileFieldRegistryName              = big.NewInt(1 << 32)
+	companiesContextAccountResponseProfileFieldIncorporatedOn            = big.NewInt(1 << 33)
+	companiesContextAccountResponseProfileFieldShareCapital              = big.NewInt(1 << 34)
+	companiesContextAccountResponseProfileFieldAccountsKeptBy            = big.NewInt(1 << 35)
+	companiesContextAccountResponseProfileFieldVatPeriod                 = big.NewInt(1 << 36)
+	companiesContextAccountResponseProfileFieldVatPeriodEndMonth         = big.NewInt(1 << 37)
+	companiesContextAccountResponseProfileFieldFiscalYearEndMonth        = big.NewInt(1 << 38)
+	companiesContextAccountResponseProfileFieldFiscalYearEndDay          = big.NewInt(1 << 39)
+	companiesContextAccountResponseProfileFieldFiscalYearWeekday         = big.NewInt(1 << 40)
+	companiesContextAccountResponseProfileFieldFiscalYearWeekRule        = big.NewInt(1 << 41)
+	companiesContextAccountResponseProfileFieldTimeZone                  = big.NewInt(1 << 42)
+	companiesContextAccountResponseProfileFieldFilingOptions             = big.NewInt(1 << 43)
+	companiesContextAccountResponseProfileFieldBookkeeperName            = big.NewInt(1 << 44)
+	companiesContextAccountResponseProfileFieldAuditorName               = big.NewInt(1 << 45)
+	companiesContextAccountResponseProfileFieldAuditorRegistrationNumber = big.NewInt(1 << 46)
+	companiesContextAccountResponseProfileFieldAuditRequired             = big.NewInt(1 << 47)
 )
 
 type CompaniesContextAccountResponseProfile struct {
-	ID                 string  `json:"id" url:"id"`
-	Name               string  `json:"name" url:"name"`
-	Code               *string `json:"code,omitempty" url:"code,omitempty"`
-	VatCode            *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
-	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
-	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
-	CashBasis          bool    `json:"cashBasis" url:"cashBasis"`
-	CountryCode        string  `json:"countryCode" url:"countryCode"`
+	ID                 string            `json:"id" url:"id"`
+	Name               string            `json:"name" url:"name"`
+	Code               *string           `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string           `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Identifiers        map[string]string `json:"identifiers" url:"identifiers"`
+	SmeExemptionNumber *string           `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
+	IsVatPayer         bool              `json:"isVatPayer" url:"isVatPayer"`
+	IsSandbox          bool              `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool              `json:"cashBasis" url:"cashBasis"`
+	CountryCode        string            `json:"countryCode" url:"countryCode"`
 	// Chart of accounts template the company was seeded with
 	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
-	// Chart of accounts template of the company country
-	CountryChartTemplate   string                                         `json:"countryChartTemplate" url:"countryChartTemplate"`
+	// Chart of accounts template of the company country; null when Nordlet has no chart for it
+	CountryChartTemplate   *string                                        `json:"countryChartTemplate,omitempty" url:"countryChartTemplate,omitempty"`
 	BaseCurrency           string                                         `json:"baseCurrency" url:"baseCurrency"`
 	DefaultInvoiceCurrency string                                         `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
 	Status                 CompaniesContextAccountResponseProfileStatus   `json:"status" url:"status"`
@@ -5496,25 +5602,29 @@ type CompaniesContextAccountResponseProfile struct {
 	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
 	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
 	// Number the next invoice issued without a document series gets, before any country-specific format
-	NextInvoiceNumber         string                                                `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
-	DefaultInvoiceLocale      *string                                               `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
-	DefaultInvoiceNote        *string                                               `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
-	PeppolID                  *string                                               `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	SepaCreditorID            *string                                               `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
-	LogoFileID                *string                                               `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
-	LegalForm                 *string                                               `json:"legalForm,omitempty" url:"legalForm,omitempty"`
-	RegistryName              *string                                               `json:"registryName,omitempty" url:"registryName,omitempty"`
-	IncorporatedOn            *string                                               `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
-	ShareCapital              *string                                               `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
-	AccountsKeptBy            *CompaniesContextAccountResponseProfileAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
-	VatPeriod                 *CompaniesContextAccountResponseProfileVatPeriod      `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
-	FiscalYearEndMonth        *int64                                                `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
-	TimeZone                  string                                                `json:"timeZone" url:"timeZone"`
-	FilingOptions             map[string]*string                                    `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
-	BookkeeperName            *string                                               `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
-	AuditorName               *string                                               `json:"auditorName,omitempty" url:"auditorName,omitempty"`
-	AuditorRegistrationNumber *string                                               `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
-	AuditRequired             bool                                                  `json:"auditRequired" url:"auditRequired"`
+	NextInvoiceNumber         string                                                    `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
+	DefaultInvoiceLocale      *string                                                   `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
+	DefaultInvoiceNote        *string                                                   `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
+	PeppolID                  *string                                                   `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID            *string                                                   `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
+	LogoFileID                *string                                                   `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	LegalForm                 *string                                                   `json:"legalForm,omitempty" url:"legalForm,omitempty"`
+	RegistryName              *string                                                   `json:"registryName,omitempty" url:"registryName,omitempty"`
+	IncorporatedOn            *string                                                   `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
+	ShareCapital              *string                                                   `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
+	AccountsKeptBy            *CompaniesContextAccountResponseProfileAccountsKeptBy     `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
+	VatPeriod                 *CompaniesContextAccountResponseProfileVatPeriod          `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	VatPeriodEndMonth         *int64                                                    `json:"vatPeriodEndMonth,omitempty" url:"vatPeriodEndMonth,omitempty"`
+	FiscalYearEndMonth        *int64                                                    `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
+	FiscalYearEndDay          *int64                                                    `json:"fiscalYearEndDay,omitempty" url:"fiscalYearEndDay,omitempty"`
+	FiscalYearWeekday         *int64                                                    `json:"fiscalYearWeekday,omitempty" url:"fiscalYearWeekday,omitempty"`
+	FiscalYearWeekRule        *CompaniesContextAccountResponseProfileFiscalYearWeekRule `json:"fiscalYearWeekRule,omitempty" url:"fiscalYearWeekRule,omitempty"`
+	TimeZone                  string                                                    `json:"timeZone" url:"timeZone"`
+	FilingOptions             map[string]*string                                        `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
+	BookkeeperName            *string                                                   `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
+	AuditorName               *string                                                   `json:"auditorName,omitempty" url:"auditorName,omitempty"`
+	AuditorRegistrationNumber *string                                                   `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
+	AuditRequired             bool                                                      `json:"auditRequired" url:"auditRequired"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5549,6 +5659,13 @@ func (c *CompaniesContextAccountResponseProfile) GetVatCode() *string {
 		return nil
 	}
 	return c.VatCode
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetIdentifiers() map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.Identifiers
 }
 
 func (c *CompaniesContextAccountResponseProfile) GetSmeExemptionNumber() *string {
@@ -5593,9 +5710,9 @@ func (c *CompaniesContextAccountResponseProfile) GetChartTemplate() string {
 	return c.ChartTemplate
 }
 
-func (c *CompaniesContextAccountResponseProfile) GetCountryChartTemplate() string {
+func (c *CompaniesContextAccountResponseProfile) GetCountryChartTemplate() *string {
 	if c == nil {
-		return ""
+		return nil
 	}
 	return c.CountryChartTemplate
 }
@@ -5775,11 +5892,39 @@ func (c *CompaniesContextAccountResponseProfile) GetVatPeriod() *CompaniesContex
 	return c.VatPeriod
 }
 
+func (c *CompaniesContextAccountResponseProfile) GetVatPeriodEndMonth() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.VatPeriodEndMonth
+}
+
 func (c *CompaniesContextAccountResponseProfile) GetFiscalYearEndMonth() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.FiscalYearEndMonth
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetFiscalYearEndDay() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearEndDay
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetFiscalYearWeekday() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearWeekday
+}
+
+func (c *CompaniesContextAccountResponseProfile) GetFiscalYearWeekRule() *CompaniesContextAccountResponseProfileFiscalYearWeekRule {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearWeekRule
 }
 
 func (c *CompaniesContextAccountResponseProfile) GetTimeZone() string {
@@ -5866,6 +6011,13 @@ func (c *CompaniesContextAccountResponseProfile) SetVatCode(vatCode *string) {
 	c.require(companiesContextAccountResponseProfileFieldVatCode)
 }
 
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetIdentifiers(identifiers map[string]string) {
+	c.Identifiers = identifiers
+	c.require(companiesContextAccountResponseProfileFieldIdentifiers)
+}
+
 // SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesContextAccountResponseProfile) SetSmeExemptionNumber(smeExemptionNumber *string) {
@@ -5910,7 +6062,7 @@ func (c *CompaniesContextAccountResponseProfile) SetChartTemplate(chartTemplate 
 
 // SetCountryChartTemplate sets the CountryChartTemplate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CompaniesContextAccountResponseProfile) SetCountryChartTemplate(countryChartTemplate string) {
+func (c *CompaniesContextAccountResponseProfile) SetCountryChartTemplate(countryChartTemplate *string) {
 	c.CountryChartTemplate = countryChartTemplate
 	c.require(companiesContextAccountResponseProfileFieldCountryChartTemplate)
 }
@@ -6090,11 +6242,39 @@ func (c *CompaniesContextAccountResponseProfile) SetVatPeriod(vatPeriod *Compani
 	c.require(companiesContextAccountResponseProfileFieldVatPeriod)
 }
 
+// SetVatPeriodEndMonth sets the VatPeriodEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetVatPeriodEndMonth(vatPeriodEndMonth *int64) {
+	c.VatPeriodEndMonth = vatPeriodEndMonth
+	c.require(companiesContextAccountResponseProfileFieldVatPeriodEndMonth)
+}
+
 // SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesContextAccountResponseProfile) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
 	c.FiscalYearEndMonth = fiscalYearEndMonth
 	c.require(companiesContextAccountResponseProfileFieldFiscalYearEndMonth)
+}
+
+// SetFiscalYearEndDay sets the FiscalYearEndDay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetFiscalYearEndDay(fiscalYearEndDay *int64) {
+	c.FiscalYearEndDay = fiscalYearEndDay
+	c.require(companiesContextAccountResponseProfileFieldFiscalYearEndDay)
+}
+
+// SetFiscalYearWeekday sets the FiscalYearWeekday field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetFiscalYearWeekday(fiscalYearWeekday *int64) {
+	c.FiscalYearWeekday = fiscalYearWeekday
+	c.require(companiesContextAccountResponseProfileFieldFiscalYearWeekday)
+}
+
+// SetFiscalYearWeekRule sets the FiscalYearWeekRule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfile) SetFiscalYearWeekRule(fiscalYearWeekRule *CompaniesContextAccountResponseProfileFiscalYearWeekRule) {
+	c.FiscalYearWeekRule = fiscalYearWeekRule
+	c.require(companiesContextAccountResponseProfileFieldFiscalYearWeekRule)
 }
 
 // SetTimeZone sets the TimeZone field and marks it as non-optional;
@@ -6208,6 +6388,7 @@ var (
 	companiesContextAccountResponseProfileAddressFieldCity        = big.NewInt(1 << 1)
 	companiesContextAccountResponseProfileAddressFieldPostalCode  = big.NewInt(1 << 2)
 	companiesContextAccountResponseProfileAddressFieldCountryCode = big.NewInt(1 << 3)
+	companiesContextAccountResponseProfileAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type CompaniesContextAccountResponseProfileAddress struct {
@@ -6215,6 +6396,8 @@ type CompaniesContextAccountResponseProfileAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6249,6 +6432,13 @@ func (c *CompaniesContextAccountResponseProfileAddress) GetCountryCode() *string
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CompaniesContextAccountResponseProfileAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CompaniesContextAccountResponseProfileAddress) GetExtraProperties() map[string]interface{} {
@@ -6293,6 +6483,13 @@ func (c *CompaniesContextAccountResponseProfileAddress) SetCountryCode(countryCo
 	c.require(companiesContextAccountResponseProfileAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesContextAccountResponseProfileAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(companiesContextAccountResponseProfileAddressFieldSubdivision)
+}
+
 func (c *CompaniesContextAccountResponseProfileAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler CompaniesContextAccountResponseProfileAddress
 	var value unmarshaler
@@ -6333,6 +6530,28 @@ func (c *CompaniesContextAccountResponseProfileAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesContextAccountResponseProfileFiscalYearWeekRule string
+
+const (
+	CompaniesContextAccountResponseProfileFiscalYearWeekRuleLast    CompaniesContextAccountResponseProfileFiscalYearWeekRule = "last"
+	CompaniesContextAccountResponseProfileFiscalYearWeekRuleNearest CompaniesContextAccountResponseProfileFiscalYearWeekRule = "nearest"
+)
+
+func NewCompaniesContextAccountResponseProfileFiscalYearWeekRuleFromString(s string) (CompaniesContextAccountResponseProfileFiscalYearWeekRule, error) {
+	switch s {
+	case "last":
+		return CompaniesContextAccountResponseProfileFiscalYearWeekRuleLast, nil
+	case "nearest":
+		return CompaniesContextAccountResponseProfileFiscalYearWeekRuleNearest, nil
+	}
+	var t CompaniesContextAccountResponseProfileFiscalYearWeekRule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesContextAccountResponseProfileFiscalYearWeekRule) Ptr() *CompaniesContextAccountResponseProfileFiscalYearWeekRule {
+	return &c
 }
 
 type CompaniesContextAccountResponseProfileStatus string
@@ -6666,6 +6885,7 @@ var (
 	companiesCreateAccountRequestAddressFieldCity        = big.NewInt(1 << 1)
 	companiesCreateAccountRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
 	companiesCreateAccountRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	companiesCreateAccountRequestAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type CompaniesCreateAccountRequestAddress struct {
@@ -6673,6 +6893,8 @@ type CompaniesCreateAccountRequestAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6707,6 +6929,13 @@ func (c *CompaniesCreateAccountRequestAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CompaniesCreateAccountRequestAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CompaniesCreateAccountRequestAddress) GetExtraProperties() map[string]interface{} {
@@ -6749,6 +6978,13 @@ func (c *CompaniesCreateAccountRequestAddress) SetPostalCode(postalCode *string)
 func (c *CompaniesCreateAccountRequestAddress) SetCountryCode(countryCode *string) {
 	c.CountryCode = countryCode
 	c.require(companiesCreateAccountRequestAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesCreateAccountRequestAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(companiesCreateAccountRequestAddressFieldSubdivision)
 }
 
 func (c *CompaniesCreateAccountRequestAddress) UnmarshalJSON(data []byte) error {
@@ -6797,757 +7033,106 @@ func (c *CompaniesCreateAccountRequestAddress) String() string {
 type CompaniesCreateAccountRequestCountryCode string
 
 const (
-	CompaniesCreateAccountRequestCountryCodeAd CompaniesCreateAccountRequestCountryCode = "AD"
-	CompaniesCreateAccountRequestCountryCodeAe CompaniesCreateAccountRequestCountryCode = "AE"
-	CompaniesCreateAccountRequestCountryCodeAf CompaniesCreateAccountRequestCountryCode = "AF"
-	CompaniesCreateAccountRequestCountryCodeAg CompaniesCreateAccountRequestCountryCode = "AG"
-	CompaniesCreateAccountRequestCountryCodeAi CompaniesCreateAccountRequestCountryCode = "AI"
-	CompaniesCreateAccountRequestCountryCodeAl CompaniesCreateAccountRequestCountryCode = "AL"
-	CompaniesCreateAccountRequestCountryCodeAm CompaniesCreateAccountRequestCountryCode = "AM"
-	CompaniesCreateAccountRequestCountryCodeAo CompaniesCreateAccountRequestCountryCode = "AO"
-	CompaniesCreateAccountRequestCountryCodeAq CompaniesCreateAccountRequestCountryCode = "AQ"
-	CompaniesCreateAccountRequestCountryCodeAr CompaniesCreateAccountRequestCountryCode = "AR"
-	CompaniesCreateAccountRequestCountryCodeAs CompaniesCreateAccountRequestCountryCode = "AS"
 	CompaniesCreateAccountRequestCountryCodeAt CompaniesCreateAccountRequestCountryCode = "AT"
-	CompaniesCreateAccountRequestCountryCodeAu CompaniesCreateAccountRequestCountryCode = "AU"
-	CompaniesCreateAccountRequestCountryCodeAw CompaniesCreateAccountRequestCountryCode = "AW"
-	CompaniesCreateAccountRequestCountryCodeAx CompaniesCreateAccountRequestCountryCode = "AX"
-	CompaniesCreateAccountRequestCountryCodeAz CompaniesCreateAccountRequestCountryCode = "AZ"
-	CompaniesCreateAccountRequestCountryCodeBa CompaniesCreateAccountRequestCountryCode = "BA"
-	CompaniesCreateAccountRequestCountryCodeBb CompaniesCreateAccountRequestCountryCode = "BB"
-	CompaniesCreateAccountRequestCountryCodeBd CompaniesCreateAccountRequestCountryCode = "BD"
 	CompaniesCreateAccountRequestCountryCodeBe CompaniesCreateAccountRequestCountryCode = "BE"
-	CompaniesCreateAccountRequestCountryCodeBf CompaniesCreateAccountRequestCountryCode = "BF"
 	CompaniesCreateAccountRequestCountryCodeBg CompaniesCreateAccountRequestCountryCode = "BG"
-	CompaniesCreateAccountRequestCountryCodeBh CompaniesCreateAccountRequestCountryCode = "BH"
-	CompaniesCreateAccountRequestCountryCodeBi CompaniesCreateAccountRequestCountryCode = "BI"
-	CompaniesCreateAccountRequestCountryCodeBj CompaniesCreateAccountRequestCountryCode = "BJ"
-	CompaniesCreateAccountRequestCountryCodeBl CompaniesCreateAccountRequestCountryCode = "BL"
-	CompaniesCreateAccountRequestCountryCodeBm CompaniesCreateAccountRequestCountryCode = "BM"
-	CompaniesCreateAccountRequestCountryCodeBn CompaniesCreateAccountRequestCountryCode = "BN"
-	CompaniesCreateAccountRequestCountryCodeBo CompaniesCreateAccountRequestCountryCode = "BO"
-	CompaniesCreateAccountRequestCountryCodeBq CompaniesCreateAccountRequestCountryCode = "BQ"
-	CompaniesCreateAccountRequestCountryCodeBr CompaniesCreateAccountRequestCountryCode = "BR"
-	CompaniesCreateAccountRequestCountryCodeBs CompaniesCreateAccountRequestCountryCode = "BS"
-	CompaniesCreateAccountRequestCountryCodeBt CompaniesCreateAccountRequestCountryCode = "BT"
-	CompaniesCreateAccountRequestCountryCodeBv CompaniesCreateAccountRequestCountryCode = "BV"
-	CompaniesCreateAccountRequestCountryCodeBw CompaniesCreateAccountRequestCountryCode = "BW"
-	CompaniesCreateAccountRequestCountryCodeBy CompaniesCreateAccountRequestCountryCode = "BY"
-	CompaniesCreateAccountRequestCountryCodeBz CompaniesCreateAccountRequestCountryCode = "BZ"
-	CompaniesCreateAccountRequestCountryCodeCa CompaniesCreateAccountRequestCountryCode = "CA"
-	CompaniesCreateAccountRequestCountryCodeCc CompaniesCreateAccountRequestCountryCode = "CC"
-	CompaniesCreateAccountRequestCountryCodeCd CompaniesCreateAccountRequestCountryCode = "CD"
-	CompaniesCreateAccountRequestCountryCodeCf CompaniesCreateAccountRequestCountryCode = "CF"
-	CompaniesCreateAccountRequestCountryCodeCg CompaniesCreateAccountRequestCountryCode = "CG"
-	CompaniesCreateAccountRequestCountryCodeCh CompaniesCreateAccountRequestCountryCode = "CH"
-	CompaniesCreateAccountRequestCountryCodeCi CompaniesCreateAccountRequestCountryCode = "CI"
-	CompaniesCreateAccountRequestCountryCodeCk CompaniesCreateAccountRequestCountryCode = "CK"
-	CompaniesCreateAccountRequestCountryCodeCl CompaniesCreateAccountRequestCountryCode = "CL"
-	CompaniesCreateAccountRequestCountryCodeCm CompaniesCreateAccountRequestCountryCode = "CM"
-	CompaniesCreateAccountRequestCountryCodeCn CompaniesCreateAccountRequestCountryCode = "CN"
-	CompaniesCreateAccountRequestCountryCodeCo CompaniesCreateAccountRequestCountryCode = "CO"
-	CompaniesCreateAccountRequestCountryCodeCr CompaniesCreateAccountRequestCountryCode = "CR"
-	CompaniesCreateAccountRequestCountryCodeCu CompaniesCreateAccountRequestCountryCode = "CU"
-	CompaniesCreateAccountRequestCountryCodeCv CompaniesCreateAccountRequestCountryCode = "CV"
-	CompaniesCreateAccountRequestCountryCodeCw CompaniesCreateAccountRequestCountryCode = "CW"
-	CompaniesCreateAccountRequestCountryCodeCx CompaniesCreateAccountRequestCountryCode = "CX"
 	CompaniesCreateAccountRequestCountryCodeCy CompaniesCreateAccountRequestCountryCode = "CY"
 	CompaniesCreateAccountRequestCountryCodeCz CompaniesCreateAccountRequestCountryCode = "CZ"
 	CompaniesCreateAccountRequestCountryCodeDe CompaniesCreateAccountRequestCountryCode = "DE"
-	CompaniesCreateAccountRequestCountryCodeDj CompaniesCreateAccountRequestCountryCode = "DJ"
 	CompaniesCreateAccountRequestCountryCodeDk CompaniesCreateAccountRequestCountryCode = "DK"
-	CompaniesCreateAccountRequestCountryCodeDm CompaniesCreateAccountRequestCountryCode = "DM"
-	CompaniesCreateAccountRequestCountryCodeDo CompaniesCreateAccountRequestCountryCode = "DO"
-	CompaniesCreateAccountRequestCountryCodeDz CompaniesCreateAccountRequestCountryCode = "DZ"
-	CompaniesCreateAccountRequestCountryCodeEc CompaniesCreateAccountRequestCountryCode = "EC"
 	CompaniesCreateAccountRequestCountryCodeEe CompaniesCreateAccountRequestCountryCode = "EE"
-	CompaniesCreateAccountRequestCountryCodeEg CompaniesCreateAccountRequestCountryCode = "EG"
-	CompaniesCreateAccountRequestCountryCodeEh CompaniesCreateAccountRequestCountryCode = "EH"
-	CompaniesCreateAccountRequestCountryCodeEr CompaniesCreateAccountRequestCountryCode = "ER"
 	CompaniesCreateAccountRequestCountryCodeEs CompaniesCreateAccountRequestCountryCode = "ES"
-	CompaniesCreateAccountRequestCountryCodeEt CompaniesCreateAccountRequestCountryCode = "ET"
 	CompaniesCreateAccountRequestCountryCodeFi CompaniesCreateAccountRequestCountryCode = "FI"
-	CompaniesCreateAccountRequestCountryCodeFj CompaniesCreateAccountRequestCountryCode = "FJ"
-	CompaniesCreateAccountRequestCountryCodeFk CompaniesCreateAccountRequestCountryCode = "FK"
-	CompaniesCreateAccountRequestCountryCodeFm CompaniesCreateAccountRequestCountryCode = "FM"
-	CompaniesCreateAccountRequestCountryCodeFo CompaniesCreateAccountRequestCountryCode = "FO"
 	CompaniesCreateAccountRequestCountryCodeFr CompaniesCreateAccountRequestCountryCode = "FR"
-	CompaniesCreateAccountRequestCountryCodeGa CompaniesCreateAccountRequestCountryCode = "GA"
-	CompaniesCreateAccountRequestCountryCodeGb CompaniesCreateAccountRequestCountryCode = "GB"
-	CompaniesCreateAccountRequestCountryCodeGd CompaniesCreateAccountRequestCountryCode = "GD"
-	CompaniesCreateAccountRequestCountryCodeGe CompaniesCreateAccountRequestCountryCode = "GE"
-	CompaniesCreateAccountRequestCountryCodeGf CompaniesCreateAccountRequestCountryCode = "GF"
-	CompaniesCreateAccountRequestCountryCodeGg CompaniesCreateAccountRequestCountryCode = "GG"
-	CompaniesCreateAccountRequestCountryCodeGh CompaniesCreateAccountRequestCountryCode = "GH"
-	CompaniesCreateAccountRequestCountryCodeGi CompaniesCreateAccountRequestCountryCode = "GI"
-	CompaniesCreateAccountRequestCountryCodeGl CompaniesCreateAccountRequestCountryCode = "GL"
-	CompaniesCreateAccountRequestCountryCodeGm CompaniesCreateAccountRequestCountryCode = "GM"
-	CompaniesCreateAccountRequestCountryCodeGn CompaniesCreateAccountRequestCountryCode = "GN"
-	CompaniesCreateAccountRequestCountryCodeGp CompaniesCreateAccountRequestCountryCode = "GP"
-	CompaniesCreateAccountRequestCountryCodeGq CompaniesCreateAccountRequestCountryCode = "GQ"
 	CompaniesCreateAccountRequestCountryCodeGr CompaniesCreateAccountRequestCountryCode = "GR"
-	CompaniesCreateAccountRequestCountryCodeGs CompaniesCreateAccountRequestCountryCode = "GS"
-	CompaniesCreateAccountRequestCountryCodeGt CompaniesCreateAccountRequestCountryCode = "GT"
-	CompaniesCreateAccountRequestCountryCodeGu CompaniesCreateAccountRequestCountryCode = "GU"
-	CompaniesCreateAccountRequestCountryCodeGw CompaniesCreateAccountRequestCountryCode = "GW"
-	CompaniesCreateAccountRequestCountryCodeGy CompaniesCreateAccountRequestCountryCode = "GY"
-	CompaniesCreateAccountRequestCountryCodeHk CompaniesCreateAccountRequestCountryCode = "HK"
-	CompaniesCreateAccountRequestCountryCodeHm CompaniesCreateAccountRequestCountryCode = "HM"
-	CompaniesCreateAccountRequestCountryCodeHn CompaniesCreateAccountRequestCountryCode = "HN"
 	CompaniesCreateAccountRequestCountryCodeHr CompaniesCreateAccountRequestCountryCode = "HR"
-	CompaniesCreateAccountRequestCountryCodeHt CompaniesCreateAccountRequestCountryCode = "HT"
 	CompaniesCreateAccountRequestCountryCodeHu CompaniesCreateAccountRequestCountryCode = "HU"
-	CompaniesCreateAccountRequestCountryCodeID CompaniesCreateAccountRequestCountryCode = "ID"
 	CompaniesCreateAccountRequestCountryCodeIe CompaniesCreateAccountRequestCountryCode = "IE"
-	CompaniesCreateAccountRequestCountryCodeIl CompaniesCreateAccountRequestCountryCode = "IL"
-	CompaniesCreateAccountRequestCountryCodeIm CompaniesCreateAccountRequestCountryCode = "IM"
-	CompaniesCreateAccountRequestCountryCodeIn CompaniesCreateAccountRequestCountryCode = "IN"
-	CompaniesCreateAccountRequestCountryCodeIo CompaniesCreateAccountRequestCountryCode = "IO"
-	CompaniesCreateAccountRequestCountryCodeIq CompaniesCreateAccountRequestCountryCode = "IQ"
-	CompaniesCreateAccountRequestCountryCodeIr CompaniesCreateAccountRequestCountryCode = "IR"
-	CompaniesCreateAccountRequestCountryCodeIs CompaniesCreateAccountRequestCountryCode = "IS"
 	CompaniesCreateAccountRequestCountryCodeIt CompaniesCreateAccountRequestCountryCode = "IT"
-	CompaniesCreateAccountRequestCountryCodeJe CompaniesCreateAccountRequestCountryCode = "JE"
-	CompaniesCreateAccountRequestCountryCodeJm CompaniesCreateAccountRequestCountryCode = "JM"
-	CompaniesCreateAccountRequestCountryCodeJo CompaniesCreateAccountRequestCountryCode = "JO"
-	CompaniesCreateAccountRequestCountryCodeJp CompaniesCreateAccountRequestCountryCode = "JP"
-	CompaniesCreateAccountRequestCountryCodeKe CompaniesCreateAccountRequestCountryCode = "KE"
-	CompaniesCreateAccountRequestCountryCodeKg CompaniesCreateAccountRequestCountryCode = "KG"
-	CompaniesCreateAccountRequestCountryCodeKh CompaniesCreateAccountRequestCountryCode = "KH"
-	CompaniesCreateAccountRequestCountryCodeKi CompaniesCreateAccountRequestCountryCode = "KI"
-	CompaniesCreateAccountRequestCountryCodeKm CompaniesCreateAccountRequestCountryCode = "KM"
-	CompaniesCreateAccountRequestCountryCodeKn CompaniesCreateAccountRequestCountryCode = "KN"
-	CompaniesCreateAccountRequestCountryCodeKp CompaniesCreateAccountRequestCountryCode = "KP"
-	CompaniesCreateAccountRequestCountryCodeKr CompaniesCreateAccountRequestCountryCode = "KR"
-	CompaniesCreateAccountRequestCountryCodeKw CompaniesCreateAccountRequestCountryCode = "KW"
-	CompaniesCreateAccountRequestCountryCodeKy CompaniesCreateAccountRequestCountryCode = "KY"
-	CompaniesCreateAccountRequestCountryCodeKz CompaniesCreateAccountRequestCountryCode = "KZ"
-	CompaniesCreateAccountRequestCountryCodeLa CompaniesCreateAccountRequestCountryCode = "LA"
-	CompaniesCreateAccountRequestCountryCodeLb CompaniesCreateAccountRequestCountryCode = "LB"
-	CompaniesCreateAccountRequestCountryCodeLc CompaniesCreateAccountRequestCountryCode = "LC"
-	CompaniesCreateAccountRequestCountryCodeLi CompaniesCreateAccountRequestCountryCode = "LI"
-	CompaniesCreateAccountRequestCountryCodeLk CompaniesCreateAccountRequestCountryCode = "LK"
-	CompaniesCreateAccountRequestCountryCodeLr CompaniesCreateAccountRequestCountryCode = "LR"
-	CompaniesCreateAccountRequestCountryCodeLs CompaniesCreateAccountRequestCountryCode = "LS"
 	CompaniesCreateAccountRequestCountryCodeLt CompaniesCreateAccountRequestCountryCode = "LT"
 	CompaniesCreateAccountRequestCountryCodeLu CompaniesCreateAccountRequestCountryCode = "LU"
 	CompaniesCreateAccountRequestCountryCodeLv CompaniesCreateAccountRequestCountryCode = "LV"
-	CompaniesCreateAccountRequestCountryCodeLy CompaniesCreateAccountRequestCountryCode = "LY"
-	CompaniesCreateAccountRequestCountryCodeMa CompaniesCreateAccountRequestCountryCode = "MA"
-	CompaniesCreateAccountRequestCountryCodeMc CompaniesCreateAccountRequestCountryCode = "MC"
-	CompaniesCreateAccountRequestCountryCodeMd CompaniesCreateAccountRequestCountryCode = "MD"
-	CompaniesCreateAccountRequestCountryCodeMe CompaniesCreateAccountRequestCountryCode = "ME"
-	CompaniesCreateAccountRequestCountryCodeMf CompaniesCreateAccountRequestCountryCode = "MF"
-	CompaniesCreateAccountRequestCountryCodeMg CompaniesCreateAccountRequestCountryCode = "MG"
-	CompaniesCreateAccountRequestCountryCodeMh CompaniesCreateAccountRequestCountryCode = "MH"
-	CompaniesCreateAccountRequestCountryCodeMk CompaniesCreateAccountRequestCountryCode = "MK"
-	CompaniesCreateAccountRequestCountryCodeMl CompaniesCreateAccountRequestCountryCode = "ML"
-	CompaniesCreateAccountRequestCountryCodeMm CompaniesCreateAccountRequestCountryCode = "MM"
-	CompaniesCreateAccountRequestCountryCodeMn CompaniesCreateAccountRequestCountryCode = "MN"
-	CompaniesCreateAccountRequestCountryCodeMo CompaniesCreateAccountRequestCountryCode = "MO"
-	CompaniesCreateAccountRequestCountryCodeMp CompaniesCreateAccountRequestCountryCode = "MP"
-	CompaniesCreateAccountRequestCountryCodeMq CompaniesCreateAccountRequestCountryCode = "MQ"
-	CompaniesCreateAccountRequestCountryCodeMr CompaniesCreateAccountRequestCountryCode = "MR"
-	CompaniesCreateAccountRequestCountryCodeMs CompaniesCreateAccountRequestCountryCode = "MS"
 	CompaniesCreateAccountRequestCountryCodeMt CompaniesCreateAccountRequestCountryCode = "MT"
-	CompaniesCreateAccountRequestCountryCodeMu CompaniesCreateAccountRequestCountryCode = "MU"
-	CompaniesCreateAccountRequestCountryCodeMv CompaniesCreateAccountRequestCountryCode = "MV"
-	CompaniesCreateAccountRequestCountryCodeMw CompaniesCreateAccountRequestCountryCode = "MW"
-	CompaniesCreateAccountRequestCountryCodeMx CompaniesCreateAccountRequestCountryCode = "MX"
-	CompaniesCreateAccountRequestCountryCodeMy CompaniesCreateAccountRequestCountryCode = "MY"
-	CompaniesCreateAccountRequestCountryCodeMz CompaniesCreateAccountRequestCountryCode = "MZ"
-	CompaniesCreateAccountRequestCountryCodeNa CompaniesCreateAccountRequestCountryCode = "NA"
-	CompaniesCreateAccountRequestCountryCodeNc CompaniesCreateAccountRequestCountryCode = "NC"
-	CompaniesCreateAccountRequestCountryCodeNe CompaniesCreateAccountRequestCountryCode = "NE"
-	CompaniesCreateAccountRequestCountryCodeNf CompaniesCreateAccountRequestCountryCode = "NF"
-	CompaniesCreateAccountRequestCountryCodeNg CompaniesCreateAccountRequestCountryCode = "NG"
-	CompaniesCreateAccountRequestCountryCodeNi CompaniesCreateAccountRequestCountryCode = "NI"
 	CompaniesCreateAccountRequestCountryCodeNl CompaniesCreateAccountRequestCountryCode = "NL"
-	CompaniesCreateAccountRequestCountryCodeNo CompaniesCreateAccountRequestCountryCode = "NO"
-	CompaniesCreateAccountRequestCountryCodeNp CompaniesCreateAccountRequestCountryCode = "NP"
-	CompaniesCreateAccountRequestCountryCodeNr CompaniesCreateAccountRequestCountryCode = "NR"
-	CompaniesCreateAccountRequestCountryCodeNu CompaniesCreateAccountRequestCountryCode = "NU"
-	CompaniesCreateAccountRequestCountryCodeNz CompaniesCreateAccountRequestCountryCode = "NZ"
-	CompaniesCreateAccountRequestCountryCodeOm CompaniesCreateAccountRequestCountryCode = "OM"
-	CompaniesCreateAccountRequestCountryCodePa CompaniesCreateAccountRequestCountryCode = "PA"
-	CompaniesCreateAccountRequestCountryCodePe CompaniesCreateAccountRequestCountryCode = "PE"
-	CompaniesCreateAccountRequestCountryCodePf CompaniesCreateAccountRequestCountryCode = "PF"
-	CompaniesCreateAccountRequestCountryCodePg CompaniesCreateAccountRequestCountryCode = "PG"
-	CompaniesCreateAccountRequestCountryCodePh CompaniesCreateAccountRequestCountryCode = "PH"
-	CompaniesCreateAccountRequestCountryCodePk CompaniesCreateAccountRequestCountryCode = "PK"
 	CompaniesCreateAccountRequestCountryCodePl CompaniesCreateAccountRequestCountryCode = "PL"
-	CompaniesCreateAccountRequestCountryCodePm CompaniesCreateAccountRequestCountryCode = "PM"
-	CompaniesCreateAccountRequestCountryCodePn CompaniesCreateAccountRequestCountryCode = "PN"
-	CompaniesCreateAccountRequestCountryCodePr CompaniesCreateAccountRequestCountryCode = "PR"
-	CompaniesCreateAccountRequestCountryCodePs CompaniesCreateAccountRequestCountryCode = "PS"
 	CompaniesCreateAccountRequestCountryCodePt CompaniesCreateAccountRequestCountryCode = "PT"
-	CompaniesCreateAccountRequestCountryCodePw CompaniesCreateAccountRequestCountryCode = "PW"
-	CompaniesCreateAccountRequestCountryCodePy CompaniesCreateAccountRequestCountryCode = "PY"
-	CompaniesCreateAccountRequestCountryCodeQa CompaniesCreateAccountRequestCountryCode = "QA"
-	CompaniesCreateAccountRequestCountryCodeRe CompaniesCreateAccountRequestCountryCode = "RE"
 	CompaniesCreateAccountRequestCountryCodeRo CompaniesCreateAccountRequestCountryCode = "RO"
-	CompaniesCreateAccountRequestCountryCodeRs CompaniesCreateAccountRequestCountryCode = "RS"
-	CompaniesCreateAccountRequestCountryCodeRu CompaniesCreateAccountRequestCountryCode = "RU"
-	CompaniesCreateAccountRequestCountryCodeRw CompaniesCreateAccountRequestCountryCode = "RW"
-	CompaniesCreateAccountRequestCountryCodeSa CompaniesCreateAccountRequestCountryCode = "SA"
-	CompaniesCreateAccountRequestCountryCodeSb CompaniesCreateAccountRequestCountryCode = "SB"
-	CompaniesCreateAccountRequestCountryCodeSc CompaniesCreateAccountRequestCountryCode = "SC"
-	CompaniesCreateAccountRequestCountryCodeSd CompaniesCreateAccountRequestCountryCode = "SD"
 	CompaniesCreateAccountRequestCountryCodeSe CompaniesCreateAccountRequestCountryCode = "SE"
-	CompaniesCreateAccountRequestCountryCodeSg CompaniesCreateAccountRequestCountryCode = "SG"
-	CompaniesCreateAccountRequestCountryCodeSh CompaniesCreateAccountRequestCountryCode = "SH"
 	CompaniesCreateAccountRequestCountryCodeSi CompaniesCreateAccountRequestCountryCode = "SI"
-	CompaniesCreateAccountRequestCountryCodeSj CompaniesCreateAccountRequestCountryCode = "SJ"
 	CompaniesCreateAccountRequestCountryCodeSk CompaniesCreateAccountRequestCountryCode = "SK"
-	CompaniesCreateAccountRequestCountryCodeSl CompaniesCreateAccountRequestCountryCode = "SL"
-	CompaniesCreateAccountRequestCountryCodeSm CompaniesCreateAccountRequestCountryCode = "SM"
-	CompaniesCreateAccountRequestCountryCodeSn CompaniesCreateAccountRequestCountryCode = "SN"
-	CompaniesCreateAccountRequestCountryCodeSo CompaniesCreateAccountRequestCountryCode = "SO"
-	CompaniesCreateAccountRequestCountryCodeSr CompaniesCreateAccountRequestCountryCode = "SR"
-	CompaniesCreateAccountRequestCountryCodeSs CompaniesCreateAccountRequestCountryCode = "SS"
-	CompaniesCreateAccountRequestCountryCodeSt CompaniesCreateAccountRequestCountryCode = "ST"
-	CompaniesCreateAccountRequestCountryCodeSv CompaniesCreateAccountRequestCountryCode = "SV"
-	CompaniesCreateAccountRequestCountryCodeSx CompaniesCreateAccountRequestCountryCode = "SX"
-	CompaniesCreateAccountRequestCountryCodeSy CompaniesCreateAccountRequestCountryCode = "SY"
-	CompaniesCreateAccountRequestCountryCodeSz CompaniesCreateAccountRequestCountryCode = "SZ"
-	CompaniesCreateAccountRequestCountryCodeTc CompaniesCreateAccountRequestCountryCode = "TC"
-	CompaniesCreateAccountRequestCountryCodeTd CompaniesCreateAccountRequestCountryCode = "TD"
-	CompaniesCreateAccountRequestCountryCodeTf CompaniesCreateAccountRequestCountryCode = "TF"
-	CompaniesCreateAccountRequestCountryCodeTg CompaniesCreateAccountRequestCountryCode = "TG"
-	CompaniesCreateAccountRequestCountryCodeTh CompaniesCreateAccountRequestCountryCode = "TH"
-	CompaniesCreateAccountRequestCountryCodeTj CompaniesCreateAccountRequestCountryCode = "TJ"
-	CompaniesCreateAccountRequestCountryCodeTk CompaniesCreateAccountRequestCountryCode = "TK"
-	CompaniesCreateAccountRequestCountryCodeTl CompaniesCreateAccountRequestCountryCode = "TL"
-	CompaniesCreateAccountRequestCountryCodeTm CompaniesCreateAccountRequestCountryCode = "TM"
-	CompaniesCreateAccountRequestCountryCodeTn CompaniesCreateAccountRequestCountryCode = "TN"
-	CompaniesCreateAccountRequestCountryCodeTo CompaniesCreateAccountRequestCountryCode = "TO"
-	CompaniesCreateAccountRequestCountryCodeTr CompaniesCreateAccountRequestCountryCode = "TR"
-	CompaniesCreateAccountRequestCountryCodeTt CompaniesCreateAccountRequestCountryCode = "TT"
-	CompaniesCreateAccountRequestCountryCodeTv CompaniesCreateAccountRequestCountryCode = "TV"
-	CompaniesCreateAccountRequestCountryCodeTw CompaniesCreateAccountRequestCountryCode = "TW"
-	CompaniesCreateAccountRequestCountryCodeTz CompaniesCreateAccountRequestCountryCode = "TZ"
-	CompaniesCreateAccountRequestCountryCodeUa CompaniesCreateAccountRequestCountryCode = "UA"
-	CompaniesCreateAccountRequestCountryCodeUg CompaniesCreateAccountRequestCountryCode = "UG"
-	CompaniesCreateAccountRequestCountryCodeUm CompaniesCreateAccountRequestCountryCode = "UM"
+	CompaniesCreateAccountRequestCountryCodeIs CompaniesCreateAccountRequestCountryCode = "IS"
+	CompaniesCreateAccountRequestCountryCodeLi CompaniesCreateAccountRequestCountryCode = "LI"
+	CompaniesCreateAccountRequestCountryCodeNo CompaniesCreateAccountRequestCountryCode = "NO"
+	CompaniesCreateAccountRequestCountryCodeGb CompaniesCreateAccountRequestCountryCode = "GB"
 	CompaniesCreateAccountRequestCountryCodeUs CompaniesCreateAccountRequestCountryCode = "US"
-	CompaniesCreateAccountRequestCountryCodeUy CompaniesCreateAccountRequestCountryCode = "UY"
-	CompaniesCreateAccountRequestCountryCodeUz CompaniesCreateAccountRequestCountryCode = "UZ"
-	CompaniesCreateAccountRequestCountryCodeVa CompaniesCreateAccountRequestCountryCode = "VA"
-	CompaniesCreateAccountRequestCountryCodeVc CompaniesCreateAccountRequestCountryCode = "VC"
-	CompaniesCreateAccountRequestCountryCodeVe CompaniesCreateAccountRequestCountryCode = "VE"
-	CompaniesCreateAccountRequestCountryCodeVg CompaniesCreateAccountRequestCountryCode = "VG"
-	CompaniesCreateAccountRequestCountryCodeVi CompaniesCreateAccountRequestCountryCode = "VI"
-	CompaniesCreateAccountRequestCountryCodeVn CompaniesCreateAccountRequestCountryCode = "VN"
-	CompaniesCreateAccountRequestCountryCodeVu CompaniesCreateAccountRequestCountryCode = "VU"
-	CompaniesCreateAccountRequestCountryCodeWf CompaniesCreateAccountRequestCountryCode = "WF"
-	CompaniesCreateAccountRequestCountryCodeWs CompaniesCreateAccountRequestCountryCode = "WS"
-	CompaniesCreateAccountRequestCountryCodeYe CompaniesCreateAccountRequestCountryCode = "YE"
-	CompaniesCreateAccountRequestCountryCodeYt CompaniesCreateAccountRequestCountryCode = "YT"
-	CompaniesCreateAccountRequestCountryCodeZa CompaniesCreateAccountRequestCountryCode = "ZA"
-	CompaniesCreateAccountRequestCountryCodeZm CompaniesCreateAccountRequestCountryCode = "ZM"
-	CompaniesCreateAccountRequestCountryCodeZw CompaniesCreateAccountRequestCountryCode = "ZW"
 )
 
 func NewCompaniesCreateAccountRequestCountryCodeFromString(s string) (CompaniesCreateAccountRequestCountryCode, error) {
 	switch s {
-	case "AD":
-		return CompaniesCreateAccountRequestCountryCodeAd, nil
-	case "AE":
-		return CompaniesCreateAccountRequestCountryCodeAe, nil
-	case "AF":
-		return CompaniesCreateAccountRequestCountryCodeAf, nil
-	case "AG":
-		return CompaniesCreateAccountRequestCountryCodeAg, nil
-	case "AI":
-		return CompaniesCreateAccountRequestCountryCodeAi, nil
-	case "AL":
-		return CompaniesCreateAccountRequestCountryCodeAl, nil
-	case "AM":
-		return CompaniesCreateAccountRequestCountryCodeAm, nil
-	case "AO":
-		return CompaniesCreateAccountRequestCountryCodeAo, nil
-	case "AQ":
-		return CompaniesCreateAccountRequestCountryCodeAq, nil
-	case "AR":
-		return CompaniesCreateAccountRequestCountryCodeAr, nil
-	case "AS":
-		return CompaniesCreateAccountRequestCountryCodeAs, nil
 	case "AT":
 		return CompaniesCreateAccountRequestCountryCodeAt, nil
-	case "AU":
-		return CompaniesCreateAccountRequestCountryCodeAu, nil
-	case "AW":
-		return CompaniesCreateAccountRequestCountryCodeAw, nil
-	case "AX":
-		return CompaniesCreateAccountRequestCountryCodeAx, nil
-	case "AZ":
-		return CompaniesCreateAccountRequestCountryCodeAz, nil
-	case "BA":
-		return CompaniesCreateAccountRequestCountryCodeBa, nil
-	case "BB":
-		return CompaniesCreateAccountRequestCountryCodeBb, nil
-	case "BD":
-		return CompaniesCreateAccountRequestCountryCodeBd, nil
 	case "BE":
 		return CompaniesCreateAccountRequestCountryCodeBe, nil
-	case "BF":
-		return CompaniesCreateAccountRequestCountryCodeBf, nil
 	case "BG":
 		return CompaniesCreateAccountRequestCountryCodeBg, nil
-	case "BH":
-		return CompaniesCreateAccountRequestCountryCodeBh, nil
-	case "BI":
-		return CompaniesCreateAccountRequestCountryCodeBi, nil
-	case "BJ":
-		return CompaniesCreateAccountRequestCountryCodeBj, nil
-	case "BL":
-		return CompaniesCreateAccountRequestCountryCodeBl, nil
-	case "BM":
-		return CompaniesCreateAccountRequestCountryCodeBm, nil
-	case "BN":
-		return CompaniesCreateAccountRequestCountryCodeBn, nil
-	case "BO":
-		return CompaniesCreateAccountRequestCountryCodeBo, nil
-	case "BQ":
-		return CompaniesCreateAccountRequestCountryCodeBq, nil
-	case "BR":
-		return CompaniesCreateAccountRequestCountryCodeBr, nil
-	case "BS":
-		return CompaniesCreateAccountRequestCountryCodeBs, nil
-	case "BT":
-		return CompaniesCreateAccountRequestCountryCodeBt, nil
-	case "BV":
-		return CompaniesCreateAccountRequestCountryCodeBv, nil
-	case "BW":
-		return CompaniesCreateAccountRequestCountryCodeBw, nil
-	case "BY":
-		return CompaniesCreateAccountRequestCountryCodeBy, nil
-	case "BZ":
-		return CompaniesCreateAccountRequestCountryCodeBz, nil
-	case "CA":
-		return CompaniesCreateAccountRequestCountryCodeCa, nil
-	case "CC":
-		return CompaniesCreateAccountRequestCountryCodeCc, nil
-	case "CD":
-		return CompaniesCreateAccountRequestCountryCodeCd, nil
-	case "CF":
-		return CompaniesCreateAccountRequestCountryCodeCf, nil
-	case "CG":
-		return CompaniesCreateAccountRequestCountryCodeCg, nil
-	case "CH":
-		return CompaniesCreateAccountRequestCountryCodeCh, nil
-	case "CI":
-		return CompaniesCreateAccountRequestCountryCodeCi, nil
-	case "CK":
-		return CompaniesCreateAccountRequestCountryCodeCk, nil
-	case "CL":
-		return CompaniesCreateAccountRequestCountryCodeCl, nil
-	case "CM":
-		return CompaniesCreateAccountRequestCountryCodeCm, nil
-	case "CN":
-		return CompaniesCreateAccountRequestCountryCodeCn, nil
-	case "CO":
-		return CompaniesCreateAccountRequestCountryCodeCo, nil
-	case "CR":
-		return CompaniesCreateAccountRequestCountryCodeCr, nil
-	case "CU":
-		return CompaniesCreateAccountRequestCountryCodeCu, nil
-	case "CV":
-		return CompaniesCreateAccountRequestCountryCodeCv, nil
-	case "CW":
-		return CompaniesCreateAccountRequestCountryCodeCw, nil
-	case "CX":
-		return CompaniesCreateAccountRequestCountryCodeCx, nil
 	case "CY":
 		return CompaniesCreateAccountRequestCountryCodeCy, nil
 	case "CZ":
 		return CompaniesCreateAccountRequestCountryCodeCz, nil
 	case "DE":
 		return CompaniesCreateAccountRequestCountryCodeDe, nil
-	case "DJ":
-		return CompaniesCreateAccountRequestCountryCodeDj, nil
 	case "DK":
 		return CompaniesCreateAccountRequestCountryCodeDk, nil
-	case "DM":
-		return CompaniesCreateAccountRequestCountryCodeDm, nil
-	case "DO":
-		return CompaniesCreateAccountRequestCountryCodeDo, nil
-	case "DZ":
-		return CompaniesCreateAccountRequestCountryCodeDz, nil
-	case "EC":
-		return CompaniesCreateAccountRequestCountryCodeEc, nil
 	case "EE":
 		return CompaniesCreateAccountRequestCountryCodeEe, nil
-	case "EG":
-		return CompaniesCreateAccountRequestCountryCodeEg, nil
-	case "EH":
-		return CompaniesCreateAccountRequestCountryCodeEh, nil
-	case "ER":
-		return CompaniesCreateAccountRequestCountryCodeEr, nil
 	case "ES":
 		return CompaniesCreateAccountRequestCountryCodeEs, nil
-	case "ET":
-		return CompaniesCreateAccountRequestCountryCodeEt, nil
 	case "FI":
 		return CompaniesCreateAccountRequestCountryCodeFi, nil
-	case "FJ":
-		return CompaniesCreateAccountRequestCountryCodeFj, nil
-	case "FK":
-		return CompaniesCreateAccountRequestCountryCodeFk, nil
-	case "FM":
-		return CompaniesCreateAccountRequestCountryCodeFm, nil
-	case "FO":
-		return CompaniesCreateAccountRequestCountryCodeFo, nil
 	case "FR":
 		return CompaniesCreateAccountRequestCountryCodeFr, nil
-	case "GA":
-		return CompaniesCreateAccountRequestCountryCodeGa, nil
-	case "GB":
-		return CompaniesCreateAccountRequestCountryCodeGb, nil
-	case "GD":
-		return CompaniesCreateAccountRequestCountryCodeGd, nil
-	case "GE":
-		return CompaniesCreateAccountRequestCountryCodeGe, nil
-	case "GF":
-		return CompaniesCreateAccountRequestCountryCodeGf, nil
-	case "GG":
-		return CompaniesCreateAccountRequestCountryCodeGg, nil
-	case "GH":
-		return CompaniesCreateAccountRequestCountryCodeGh, nil
-	case "GI":
-		return CompaniesCreateAccountRequestCountryCodeGi, nil
-	case "GL":
-		return CompaniesCreateAccountRequestCountryCodeGl, nil
-	case "GM":
-		return CompaniesCreateAccountRequestCountryCodeGm, nil
-	case "GN":
-		return CompaniesCreateAccountRequestCountryCodeGn, nil
-	case "GP":
-		return CompaniesCreateAccountRequestCountryCodeGp, nil
-	case "GQ":
-		return CompaniesCreateAccountRequestCountryCodeGq, nil
 	case "GR":
 		return CompaniesCreateAccountRequestCountryCodeGr, nil
-	case "GS":
-		return CompaniesCreateAccountRequestCountryCodeGs, nil
-	case "GT":
-		return CompaniesCreateAccountRequestCountryCodeGt, nil
-	case "GU":
-		return CompaniesCreateAccountRequestCountryCodeGu, nil
-	case "GW":
-		return CompaniesCreateAccountRequestCountryCodeGw, nil
-	case "GY":
-		return CompaniesCreateAccountRequestCountryCodeGy, nil
-	case "HK":
-		return CompaniesCreateAccountRequestCountryCodeHk, nil
-	case "HM":
-		return CompaniesCreateAccountRequestCountryCodeHm, nil
-	case "HN":
-		return CompaniesCreateAccountRequestCountryCodeHn, nil
 	case "HR":
 		return CompaniesCreateAccountRequestCountryCodeHr, nil
-	case "HT":
-		return CompaniesCreateAccountRequestCountryCodeHt, nil
 	case "HU":
 		return CompaniesCreateAccountRequestCountryCodeHu, nil
-	case "ID":
-		return CompaniesCreateAccountRequestCountryCodeID, nil
 	case "IE":
 		return CompaniesCreateAccountRequestCountryCodeIe, nil
-	case "IL":
-		return CompaniesCreateAccountRequestCountryCodeIl, nil
-	case "IM":
-		return CompaniesCreateAccountRequestCountryCodeIm, nil
-	case "IN":
-		return CompaniesCreateAccountRequestCountryCodeIn, nil
-	case "IO":
-		return CompaniesCreateAccountRequestCountryCodeIo, nil
-	case "IQ":
-		return CompaniesCreateAccountRequestCountryCodeIq, nil
-	case "IR":
-		return CompaniesCreateAccountRequestCountryCodeIr, nil
-	case "IS":
-		return CompaniesCreateAccountRequestCountryCodeIs, nil
 	case "IT":
 		return CompaniesCreateAccountRequestCountryCodeIt, nil
-	case "JE":
-		return CompaniesCreateAccountRequestCountryCodeJe, nil
-	case "JM":
-		return CompaniesCreateAccountRequestCountryCodeJm, nil
-	case "JO":
-		return CompaniesCreateAccountRequestCountryCodeJo, nil
-	case "JP":
-		return CompaniesCreateAccountRequestCountryCodeJp, nil
-	case "KE":
-		return CompaniesCreateAccountRequestCountryCodeKe, nil
-	case "KG":
-		return CompaniesCreateAccountRequestCountryCodeKg, nil
-	case "KH":
-		return CompaniesCreateAccountRequestCountryCodeKh, nil
-	case "KI":
-		return CompaniesCreateAccountRequestCountryCodeKi, nil
-	case "KM":
-		return CompaniesCreateAccountRequestCountryCodeKm, nil
-	case "KN":
-		return CompaniesCreateAccountRequestCountryCodeKn, nil
-	case "KP":
-		return CompaniesCreateAccountRequestCountryCodeKp, nil
-	case "KR":
-		return CompaniesCreateAccountRequestCountryCodeKr, nil
-	case "KW":
-		return CompaniesCreateAccountRequestCountryCodeKw, nil
-	case "KY":
-		return CompaniesCreateAccountRequestCountryCodeKy, nil
-	case "KZ":
-		return CompaniesCreateAccountRequestCountryCodeKz, nil
-	case "LA":
-		return CompaniesCreateAccountRequestCountryCodeLa, nil
-	case "LB":
-		return CompaniesCreateAccountRequestCountryCodeLb, nil
-	case "LC":
-		return CompaniesCreateAccountRequestCountryCodeLc, nil
-	case "LI":
-		return CompaniesCreateAccountRequestCountryCodeLi, nil
-	case "LK":
-		return CompaniesCreateAccountRequestCountryCodeLk, nil
-	case "LR":
-		return CompaniesCreateAccountRequestCountryCodeLr, nil
-	case "LS":
-		return CompaniesCreateAccountRequestCountryCodeLs, nil
 	case "LT":
 		return CompaniesCreateAccountRequestCountryCodeLt, nil
 	case "LU":
 		return CompaniesCreateAccountRequestCountryCodeLu, nil
 	case "LV":
 		return CompaniesCreateAccountRequestCountryCodeLv, nil
-	case "LY":
-		return CompaniesCreateAccountRequestCountryCodeLy, nil
-	case "MA":
-		return CompaniesCreateAccountRequestCountryCodeMa, nil
-	case "MC":
-		return CompaniesCreateAccountRequestCountryCodeMc, nil
-	case "MD":
-		return CompaniesCreateAccountRequestCountryCodeMd, nil
-	case "ME":
-		return CompaniesCreateAccountRequestCountryCodeMe, nil
-	case "MF":
-		return CompaniesCreateAccountRequestCountryCodeMf, nil
-	case "MG":
-		return CompaniesCreateAccountRequestCountryCodeMg, nil
-	case "MH":
-		return CompaniesCreateAccountRequestCountryCodeMh, nil
-	case "MK":
-		return CompaniesCreateAccountRequestCountryCodeMk, nil
-	case "ML":
-		return CompaniesCreateAccountRequestCountryCodeMl, nil
-	case "MM":
-		return CompaniesCreateAccountRequestCountryCodeMm, nil
-	case "MN":
-		return CompaniesCreateAccountRequestCountryCodeMn, nil
-	case "MO":
-		return CompaniesCreateAccountRequestCountryCodeMo, nil
-	case "MP":
-		return CompaniesCreateAccountRequestCountryCodeMp, nil
-	case "MQ":
-		return CompaniesCreateAccountRequestCountryCodeMq, nil
-	case "MR":
-		return CompaniesCreateAccountRequestCountryCodeMr, nil
-	case "MS":
-		return CompaniesCreateAccountRequestCountryCodeMs, nil
 	case "MT":
 		return CompaniesCreateAccountRequestCountryCodeMt, nil
-	case "MU":
-		return CompaniesCreateAccountRequestCountryCodeMu, nil
-	case "MV":
-		return CompaniesCreateAccountRequestCountryCodeMv, nil
-	case "MW":
-		return CompaniesCreateAccountRequestCountryCodeMw, nil
-	case "MX":
-		return CompaniesCreateAccountRequestCountryCodeMx, nil
-	case "MY":
-		return CompaniesCreateAccountRequestCountryCodeMy, nil
-	case "MZ":
-		return CompaniesCreateAccountRequestCountryCodeMz, nil
-	case "NA":
-		return CompaniesCreateAccountRequestCountryCodeNa, nil
-	case "NC":
-		return CompaniesCreateAccountRequestCountryCodeNc, nil
-	case "NE":
-		return CompaniesCreateAccountRequestCountryCodeNe, nil
-	case "NF":
-		return CompaniesCreateAccountRequestCountryCodeNf, nil
-	case "NG":
-		return CompaniesCreateAccountRequestCountryCodeNg, nil
-	case "NI":
-		return CompaniesCreateAccountRequestCountryCodeNi, nil
 	case "NL":
 		return CompaniesCreateAccountRequestCountryCodeNl, nil
-	case "NO":
-		return CompaniesCreateAccountRequestCountryCodeNo, nil
-	case "NP":
-		return CompaniesCreateAccountRequestCountryCodeNp, nil
-	case "NR":
-		return CompaniesCreateAccountRequestCountryCodeNr, nil
-	case "NU":
-		return CompaniesCreateAccountRequestCountryCodeNu, nil
-	case "NZ":
-		return CompaniesCreateAccountRequestCountryCodeNz, nil
-	case "OM":
-		return CompaniesCreateAccountRequestCountryCodeOm, nil
-	case "PA":
-		return CompaniesCreateAccountRequestCountryCodePa, nil
-	case "PE":
-		return CompaniesCreateAccountRequestCountryCodePe, nil
-	case "PF":
-		return CompaniesCreateAccountRequestCountryCodePf, nil
-	case "PG":
-		return CompaniesCreateAccountRequestCountryCodePg, nil
-	case "PH":
-		return CompaniesCreateAccountRequestCountryCodePh, nil
-	case "PK":
-		return CompaniesCreateAccountRequestCountryCodePk, nil
 	case "PL":
 		return CompaniesCreateAccountRequestCountryCodePl, nil
-	case "PM":
-		return CompaniesCreateAccountRequestCountryCodePm, nil
-	case "PN":
-		return CompaniesCreateAccountRequestCountryCodePn, nil
-	case "PR":
-		return CompaniesCreateAccountRequestCountryCodePr, nil
-	case "PS":
-		return CompaniesCreateAccountRequestCountryCodePs, nil
 	case "PT":
 		return CompaniesCreateAccountRequestCountryCodePt, nil
-	case "PW":
-		return CompaniesCreateAccountRequestCountryCodePw, nil
-	case "PY":
-		return CompaniesCreateAccountRequestCountryCodePy, nil
-	case "QA":
-		return CompaniesCreateAccountRequestCountryCodeQa, nil
-	case "RE":
-		return CompaniesCreateAccountRequestCountryCodeRe, nil
 	case "RO":
 		return CompaniesCreateAccountRequestCountryCodeRo, nil
-	case "RS":
-		return CompaniesCreateAccountRequestCountryCodeRs, nil
-	case "RU":
-		return CompaniesCreateAccountRequestCountryCodeRu, nil
-	case "RW":
-		return CompaniesCreateAccountRequestCountryCodeRw, nil
-	case "SA":
-		return CompaniesCreateAccountRequestCountryCodeSa, nil
-	case "SB":
-		return CompaniesCreateAccountRequestCountryCodeSb, nil
-	case "SC":
-		return CompaniesCreateAccountRequestCountryCodeSc, nil
-	case "SD":
-		return CompaniesCreateAccountRequestCountryCodeSd, nil
 	case "SE":
 		return CompaniesCreateAccountRequestCountryCodeSe, nil
-	case "SG":
-		return CompaniesCreateAccountRequestCountryCodeSg, nil
-	case "SH":
-		return CompaniesCreateAccountRequestCountryCodeSh, nil
 	case "SI":
 		return CompaniesCreateAccountRequestCountryCodeSi, nil
-	case "SJ":
-		return CompaniesCreateAccountRequestCountryCodeSj, nil
 	case "SK":
 		return CompaniesCreateAccountRequestCountryCodeSk, nil
-	case "SL":
-		return CompaniesCreateAccountRequestCountryCodeSl, nil
-	case "SM":
-		return CompaniesCreateAccountRequestCountryCodeSm, nil
-	case "SN":
-		return CompaniesCreateAccountRequestCountryCodeSn, nil
-	case "SO":
-		return CompaniesCreateAccountRequestCountryCodeSo, nil
-	case "SR":
-		return CompaniesCreateAccountRequestCountryCodeSr, nil
-	case "SS":
-		return CompaniesCreateAccountRequestCountryCodeSs, nil
-	case "ST":
-		return CompaniesCreateAccountRequestCountryCodeSt, nil
-	case "SV":
-		return CompaniesCreateAccountRequestCountryCodeSv, nil
-	case "SX":
-		return CompaniesCreateAccountRequestCountryCodeSx, nil
-	case "SY":
-		return CompaniesCreateAccountRequestCountryCodeSy, nil
-	case "SZ":
-		return CompaniesCreateAccountRequestCountryCodeSz, nil
-	case "TC":
-		return CompaniesCreateAccountRequestCountryCodeTc, nil
-	case "TD":
-		return CompaniesCreateAccountRequestCountryCodeTd, nil
-	case "TF":
-		return CompaniesCreateAccountRequestCountryCodeTf, nil
-	case "TG":
-		return CompaniesCreateAccountRequestCountryCodeTg, nil
-	case "TH":
-		return CompaniesCreateAccountRequestCountryCodeTh, nil
-	case "TJ":
-		return CompaniesCreateAccountRequestCountryCodeTj, nil
-	case "TK":
-		return CompaniesCreateAccountRequestCountryCodeTk, nil
-	case "TL":
-		return CompaniesCreateAccountRequestCountryCodeTl, nil
-	case "TM":
-		return CompaniesCreateAccountRequestCountryCodeTm, nil
-	case "TN":
-		return CompaniesCreateAccountRequestCountryCodeTn, nil
-	case "TO":
-		return CompaniesCreateAccountRequestCountryCodeTo, nil
-	case "TR":
-		return CompaniesCreateAccountRequestCountryCodeTr, nil
-	case "TT":
-		return CompaniesCreateAccountRequestCountryCodeTt, nil
-	case "TV":
-		return CompaniesCreateAccountRequestCountryCodeTv, nil
-	case "TW":
-		return CompaniesCreateAccountRequestCountryCodeTw, nil
-	case "TZ":
-		return CompaniesCreateAccountRequestCountryCodeTz, nil
-	case "UA":
-		return CompaniesCreateAccountRequestCountryCodeUa, nil
-	case "UG":
-		return CompaniesCreateAccountRequestCountryCodeUg, nil
-	case "UM":
-		return CompaniesCreateAccountRequestCountryCodeUm, nil
+	case "IS":
+		return CompaniesCreateAccountRequestCountryCodeIs, nil
+	case "LI":
+		return CompaniesCreateAccountRequestCountryCodeLi, nil
+	case "NO":
+		return CompaniesCreateAccountRequestCountryCodeNo, nil
+	case "GB":
+		return CompaniesCreateAccountRequestCountryCodeGb, nil
 	case "US":
 		return CompaniesCreateAccountRequestCountryCodeUs, nil
-	case "UY":
-		return CompaniesCreateAccountRequestCountryCodeUy, nil
-	case "UZ":
-		return CompaniesCreateAccountRequestCountryCodeUz, nil
-	case "VA":
-		return CompaniesCreateAccountRequestCountryCodeVa, nil
-	case "VC":
-		return CompaniesCreateAccountRequestCountryCodeVc, nil
-	case "VE":
-		return CompaniesCreateAccountRequestCountryCodeVe, nil
-	case "VG":
-		return CompaniesCreateAccountRequestCountryCodeVg, nil
-	case "VI":
-		return CompaniesCreateAccountRequestCountryCodeVi, nil
-	case "VN":
-		return CompaniesCreateAccountRequestCountryCodeVn, nil
-	case "VU":
-		return CompaniesCreateAccountRequestCountryCodeVu, nil
-	case "WF":
-		return CompaniesCreateAccountRequestCountryCodeWf, nil
-	case "WS":
-		return CompaniesCreateAccountRequestCountryCodeWs, nil
-	case "YE":
-		return CompaniesCreateAccountRequestCountryCodeYe, nil
-	case "YT":
-		return CompaniesCreateAccountRequestCountryCodeYt, nil
-	case "ZA":
-		return CompaniesCreateAccountRequestCountryCodeZa, nil
-	case "ZM":
-		return CompaniesCreateAccountRequestCountryCodeZm, nil
-	case "ZW":
-		return CompaniesCreateAccountRequestCountryCodeZw, nil
 	}
 	var t CompaniesCreateAccountRequestCountryCode
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -7670,6 +7255,29 @@ func NewCompaniesCreateAccountRequestDefaultInvoiceLocaleFromString(s string) (C
 }
 
 func (c CompaniesCreateAccountRequestDefaultInvoiceLocale) Ptr() *CompaniesCreateAccountRequestDefaultInvoiceLocale {
+	return &c
+}
+
+// With `fiscalYearWeekday`: `last` ends the year on the last such weekday of `fiscalYearEndMonth`, `nearest` on the one nearest the last day of that month
+type CompaniesCreateAccountRequestFiscalYearWeekRule string
+
+const (
+	CompaniesCreateAccountRequestFiscalYearWeekRuleLast    CompaniesCreateAccountRequestFiscalYearWeekRule = "last"
+	CompaniesCreateAccountRequestFiscalYearWeekRuleNearest CompaniesCreateAccountRequestFiscalYearWeekRule = "nearest"
+)
+
+func NewCompaniesCreateAccountRequestFiscalYearWeekRuleFromString(s string) (CompaniesCreateAccountRequestFiscalYearWeekRule, error) {
+	switch s {
+	case "last":
+		return CompaniesCreateAccountRequestFiscalYearWeekRuleLast, nil
+	case "nearest":
+		return CompaniesCreateAccountRequestFiscalYearWeekRuleNearest, nil
+	}
+	var t CompaniesCreateAccountRequestFiscalYearWeekRule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesCreateAccountRequestFiscalYearWeekRule) Ptr() *CompaniesCreateAccountRequestFiscalYearWeekRule {
 	return &c
 }
 
@@ -8116,61 +7724,67 @@ var (
 	companiesProfileAccountResponseFieldName                      = big.NewInt(1 << 1)
 	companiesProfileAccountResponseFieldCode                      = big.NewInt(1 << 2)
 	companiesProfileAccountResponseFieldVatCode                   = big.NewInt(1 << 3)
-	companiesProfileAccountResponseFieldSmeExemptionNumber        = big.NewInt(1 << 4)
-	companiesProfileAccountResponseFieldIsVatPayer                = big.NewInt(1 << 5)
-	companiesProfileAccountResponseFieldIsSandbox                 = big.NewInt(1 << 6)
-	companiesProfileAccountResponseFieldCashBasis                 = big.NewInt(1 << 7)
-	companiesProfileAccountResponseFieldCountryCode               = big.NewInt(1 << 8)
-	companiesProfileAccountResponseFieldChartTemplate             = big.NewInt(1 << 9)
-	companiesProfileAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 10)
-	companiesProfileAccountResponseFieldBaseCurrency              = big.NewInt(1 << 11)
-	companiesProfileAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 12)
-	companiesProfileAccountResponseFieldStatus                    = big.NewInt(1 << 13)
-	companiesProfileAccountResponseFieldAddress                   = big.NewInt(1 << 14)
-	companiesProfileAccountResponseFieldEmail                     = big.NewInt(1 << 15)
-	companiesProfileAccountResponseFieldPhone                     = big.NewInt(1 << 16)
-	companiesProfileAccountResponseFieldIban                      = big.NewInt(1 << 17)
-	companiesProfileAccountResponseFieldBankName                  = big.NewInt(1 << 18)
-	companiesProfileAccountResponseFieldBankBic                   = big.NewInt(1 << 19)
-	companiesProfileAccountResponseFieldBankCode                  = big.NewInt(1 << 20)
-	companiesProfileAccountResponseFieldBankBranchCode            = big.NewInt(1 << 21)
-	companiesProfileAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 22)
-	companiesProfileAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 23)
-	companiesProfileAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 24)
-	companiesProfileAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 25)
-	companiesProfileAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 26)
-	companiesProfileAccountResponseFieldPeppolID                  = big.NewInt(1 << 27)
-	companiesProfileAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 28)
-	companiesProfileAccountResponseFieldLogoFileID                = big.NewInt(1 << 29)
-	companiesProfileAccountResponseFieldLegalForm                 = big.NewInt(1 << 30)
-	companiesProfileAccountResponseFieldRegistryName              = big.NewInt(1 << 31)
-	companiesProfileAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 32)
-	companiesProfileAccountResponseFieldShareCapital              = big.NewInt(1 << 33)
-	companiesProfileAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 34)
-	companiesProfileAccountResponseFieldVatPeriod                 = big.NewInt(1 << 35)
-	companiesProfileAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 36)
-	companiesProfileAccountResponseFieldTimeZone                  = big.NewInt(1 << 37)
-	companiesProfileAccountResponseFieldFilingOptions             = big.NewInt(1 << 38)
-	companiesProfileAccountResponseFieldBookkeeperName            = big.NewInt(1 << 39)
-	companiesProfileAccountResponseFieldAuditorName               = big.NewInt(1 << 40)
-	companiesProfileAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 41)
-	companiesProfileAccountResponseFieldAuditRequired             = big.NewInt(1 << 42)
+	companiesProfileAccountResponseFieldIdentifiers               = big.NewInt(1 << 4)
+	companiesProfileAccountResponseFieldSmeExemptionNumber        = big.NewInt(1 << 5)
+	companiesProfileAccountResponseFieldIsVatPayer                = big.NewInt(1 << 6)
+	companiesProfileAccountResponseFieldIsSandbox                 = big.NewInt(1 << 7)
+	companiesProfileAccountResponseFieldCashBasis                 = big.NewInt(1 << 8)
+	companiesProfileAccountResponseFieldCountryCode               = big.NewInt(1 << 9)
+	companiesProfileAccountResponseFieldChartTemplate             = big.NewInt(1 << 10)
+	companiesProfileAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 11)
+	companiesProfileAccountResponseFieldBaseCurrency              = big.NewInt(1 << 12)
+	companiesProfileAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 13)
+	companiesProfileAccountResponseFieldStatus                    = big.NewInt(1 << 14)
+	companiesProfileAccountResponseFieldAddress                   = big.NewInt(1 << 15)
+	companiesProfileAccountResponseFieldEmail                     = big.NewInt(1 << 16)
+	companiesProfileAccountResponseFieldPhone                     = big.NewInt(1 << 17)
+	companiesProfileAccountResponseFieldIban                      = big.NewInt(1 << 18)
+	companiesProfileAccountResponseFieldBankName                  = big.NewInt(1 << 19)
+	companiesProfileAccountResponseFieldBankBic                   = big.NewInt(1 << 20)
+	companiesProfileAccountResponseFieldBankCode                  = big.NewInt(1 << 21)
+	companiesProfileAccountResponseFieldBankBranchCode            = big.NewInt(1 << 22)
+	companiesProfileAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 23)
+	companiesProfileAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 24)
+	companiesProfileAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 25)
+	companiesProfileAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 26)
+	companiesProfileAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 27)
+	companiesProfileAccountResponseFieldPeppolID                  = big.NewInt(1 << 28)
+	companiesProfileAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 29)
+	companiesProfileAccountResponseFieldLogoFileID                = big.NewInt(1 << 30)
+	companiesProfileAccountResponseFieldLegalForm                 = big.NewInt(1 << 31)
+	companiesProfileAccountResponseFieldRegistryName              = big.NewInt(1 << 32)
+	companiesProfileAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 33)
+	companiesProfileAccountResponseFieldShareCapital              = big.NewInt(1 << 34)
+	companiesProfileAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 35)
+	companiesProfileAccountResponseFieldVatPeriod                 = big.NewInt(1 << 36)
+	companiesProfileAccountResponseFieldVatPeriodEndMonth         = big.NewInt(1 << 37)
+	companiesProfileAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 38)
+	companiesProfileAccountResponseFieldFiscalYearEndDay          = big.NewInt(1 << 39)
+	companiesProfileAccountResponseFieldFiscalYearWeekday         = big.NewInt(1 << 40)
+	companiesProfileAccountResponseFieldFiscalYearWeekRule        = big.NewInt(1 << 41)
+	companiesProfileAccountResponseFieldTimeZone                  = big.NewInt(1 << 42)
+	companiesProfileAccountResponseFieldFilingOptions             = big.NewInt(1 << 43)
+	companiesProfileAccountResponseFieldBookkeeperName            = big.NewInt(1 << 44)
+	companiesProfileAccountResponseFieldAuditorName               = big.NewInt(1 << 45)
+	companiesProfileAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 46)
+	companiesProfileAccountResponseFieldAuditRequired             = big.NewInt(1 << 47)
 )
 
 type CompaniesProfileAccountResponse struct {
-	ID                 string  `json:"id" url:"id"`
-	Name               string  `json:"name" url:"name"`
-	Code               *string `json:"code,omitempty" url:"code,omitempty"`
-	VatCode            *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
-	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
-	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
-	CashBasis          bool    `json:"cashBasis" url:"cashBasis"`
-	CountryCode        string  `json:"countryCode" url:"countryCode"`
+	ID                 string            `json:"id" url:"id"`
+	Name               string            `json:"name" url:"name"`
+	Code               *string           `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string           `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Identifiers        map[string]string `json:"identifiers" url:"identifiers"`
+	SmeExemptionNumber *string           `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
+	IsVatPayer         bool              `json:"isVatPayer" url:"isVatPayer"`
+	IsSandbox          bool              `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool              `json:"cashBasis" url:"cashBasis"`
+	CountryCode        string            `json:"countryCode" url:"countryCode"`
 	// Chart of accounts template the company was seeded with
 	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
-	// Chart of accounts template of the company country
-	CountryChartTemplate   string                                  `json:"countryChartTemplate" url:"countryChartTemplate"`
+	// Chart of accounts template of the company country; null when Nordlet has no chart for it
+	CountryChartTemplate   *string                                 `json:"countryChartTemplate,omitempty" url:"countryChartTemplate,omitempty"`
 	BaseCurrency           string                                  `json:"baseCurrency" url:"baseCurrency"`
 	DefaultInvoiceCurrency string                                  `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
 	Status                 CompaniesProfileAccountResponseStatus   `json:"status" url:"status"`
@@ -8186,25 +7800,29 @@ type CompaniesProfileAccountResponse struct {
 	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
 	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
 	// Number the next invoice issued without a document series gets, before any country-specific format
-	NextInvoiceNumber         string                                         `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
-	DefaultInvoiceLocale      *string                                        `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
-	DefaultInvoiceNote        *string                                        `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
-	PeppolID                  *string                                        `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	SepaCreditorID            *string                                        `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
-	LogoFileID                *string                                        `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
-	LegalForm                 *string                                        `json:"legalForm,omitempty" url:"legalForm,omitempty"`
-	RegistryName              *string                                        `json:"registryName,omitempty" url:"registryName,omitempty"`
-	IncorporatedOn            *string                                        `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
-	ShareCapital              *string                                        `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
-	AccountsKeptBy            *CompaniesProfileAccountResponseAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
-	VatPeriod                 *CompaniesProfileAccountResponseVatPeriod      `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
-	FiscalYearEndMonth        *int64                                         `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
-	TimeZone                  string                                         `json:"timeZone" url:"timeZone"`
-	FilingOptions             map[string]*string                             `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
-	BookkeeperName            *string                                        `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
-	AuditorName               *string                                        `json:"auditorName,omitempty" url:"auditorName,omitempty"`
-	AuditorRegistrationNumber *string                                        `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
-	AuditRequired             bool                                           `json:"auditRequired" url:"auditRequired"`
+	NextInvoiceNumber         string                                             `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
+	DefaultInvoiceLocale      *string                                            `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
+	DefaultInvoiceNote        *string                                            `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
+	PeppolID                  *string                                            `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID            *string                                            `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
+	LogoFileID                *string                                            `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	LegalForm                 *string                                            `json:"legalForm,omitempty" url:"legalForm,omitempty"`
+	RegistryName              *string                                            `json:"registryName,omitempty" url:"registryName,omitempty"`
+	IncorporatedOn            *string                                            `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
+	ShareCapital              *string                                            `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
+	AccountsKeptBy            *CompaniesProfileAccountResponseAccountsKeptBy     `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
+	VatPeriod                 *CompaniesProfileAccountResponseVatPeriod          `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	VatPeriodEndMonth         *int64                                             `json:"vatPeriodEndMonth,omitempty" url:"vatPeriodEndMonth,omitempty"`
+	FiscalYearEndMonth        *int64                                             `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
+	FiscalYearEndDay          *int64                                             `json:"fiscalYearEndDay,omitempty" url:"fiscalYearEndDay,omitempty"`
+	FiscalYearWeekday         *int64                                             `json:"fiscalYearWeekday,omitempty" url:"fiscalYearWeekday,omitempty"`
+	FiscalYearWeekRule        *CompaniesProfileAccountResponseFiscalYearWeekRule `json:"fiscalYearWeekRule,omitempty" url:"fiscalYearWeekRule,omitempty"`
+	TimeZone                  string                                             `json:"timeZone" url:"timeZone"`
+	FilingOptions             map[string]*string                                 `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
+	BookkeeperName            *string                                            `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
+	AuditorName               *string                                            `json:"auditorName,omitempty" url:"auditorName,omitempty"`
+	AuditorRegistrationNumber *string                                            `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
+	AuditRequired             bool                                               `json:"auditRequired" url:"auditRequired"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8239,6 +7857,13 @@ func (c *CompaniesProfileAccountResponse) GetVatCode() *string {
 		return nil
 	}
 	return c.VatCode
+}
+
+func (c *CompaniesProfileAccountResponse) GetIdentifiers() map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.Identifiers
 }
 
 func (c *CompaniesProfileAccountResponse) GetSmeExemptionNumber() *string {
@@ -8283,9 +7908,9 @@ func (c *CompaniesProfileAccountResponse) GetChartTemplate() string {
 	return c.ChartTemplate
 }
 
-func (c *CompaniesProfileAccountResponse) GetCountryChartTemplate() string {
+func (c *CompaniesProfileAccountResponse) GetCountryChartTemplate() *string {
 	if c == nil {
-		return ""
+		return nil
 	}
 	return c.CountryChartTemplate
 }
@@ -8465,11 +8090,39 @@ func (c *CompaniesProfileAccountResponse) GetVatPeriod() *CompaniesProfileAccoun
 	return c.VatPeriod
 }
 
+func (c *CompaniesProfileAccountResponse) GetVatPeriodEndMonth() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.VatPeriodEndMonth
+}
+
 func (c *CompaniesProfileAccountResponse) GetFiscalYearEndMonth() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.FiscalYearEndMonth
+}
+
+func (c *CompaniesProfileAccountResponse) GetFiscalYearEndDay() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearEndDay
+}
+
+func (c *CompaniesProfileAccountResponse) GetFiscalYearWeekday() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearWeekday
+}
+
+func (c *CompaniesProfileAccountResponse) GetFiscalYearWeekRule() *CompaniesProfileAccountResponseFiscalYearWeekRule {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearWeekRule
 }
 
 func (c *CompaniesProfileAccountResponse) GetTimeZone() string {
@@ -8556,6 +8209,13 @@ func (c *CompaniesProfileAccountResponse) SetVatCode(vatCode *string) {
 	c.require(companiesProfileAccountResponseFieldVatCode)
 }
 
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetIdentifiers(identifiers map[string]string) {
+	c.Identifiers = identifiers
+	c.require(companiesProfileAccountResponseFieldIdentifiers)
+}
+
 // SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesProfileAccountResponse) SetSmeExemptionNumber(smeExemptionNumber *string) {
@@ -8600,7 +8260,7 @@ func (c *CompaniesProfileAccountResponse) SetChartTemplate(chartTemplate string)
 
 // SetCountryChartTemplate sets the CountryChartTemplate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CompaniesProfileAccountResponse) SetCountryChartTemplate(countryChartTemplate string) {
+func (c *CompaniesProfileAccountResponse) SetCountryChartTemplate(countryChartTemplate *string) {
 	c.CountryChartTemplate = countryChartTemplate
 	c.require(companiesProfileAccountResponseFieldCountryChartTemplate)
 }
@@ -8780,11 +8440,39 @@ func (c *CompaniesProfileAccountResponse) SetVatPeriod(vatPeriod *CompaniesProfi
 	c.require(companiesProfileAccountResponseFieldVatPeriod)
 }
 
+// SetVatPeriodEndMonth sets the VatPeriodEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetVatPeriodEndMonth(vatPeriodEndMonth *int64) {
+	c.VatPeriodEndMonth = vatPeriodEndMonth
+	c.require(companiesProfileAccountResponseFieldVatPeriodEndMonth)
+}
+
 // SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesProfileAccountResponse) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
 	c.FiscalYearEndMonth = fiscalYearEndMonth
 	c.require(companiesProfileAccountResponseFieldFiscalYearEndMonth)
+}
+
+// SetFiscalYearEndDay sets the FiscalYearEndDay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetFiscalYearEndDay(fiscalYearEndDay *int64) {
+	c.FiscalYearEndDay = fiscalYearEndDay
+	c.require(companiesProfileAccountResponseFieldFiscalYearEndDay)
+}
+
+// SetFiscalYearWeekday sets the FiscalYearWeekday field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetFiscalYearWeekday(fiscalYearWeekday *int64) {
+	c.FiscalYearWeekday = fiscalYearWeekday
+	c.require(companiesProfileAccountResponseFieldFiscalYearWeekday)
+}
+
+// SetFiscalYearWeekRule sets the FiscalYearWeekRule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponse) SetFiscalYearWeekRule(fiscalYearWeekRule *CompaniesProfileAccountResponseFiscalYearWeekRule) {
+	c.FiscalYearWeekRule = fiscalYearWeekRule
+	c.require(companiesProfileAccountResponseFieldFiscalYearWeekRule)
 }
 
 // SetTimeZone sets the TimeZone field and marks it as non-optional;
@@ -8898,6 +8586,7 @@ var (
 	companiesProfileAccountResponseAddressFieldCity        = big.NewInt(1 << 1)
 	companiesProfileAccountResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
 	companiesProfileAccountResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	companiesProfileAccountResponseAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type CompaniesProfileAccountResponseAddress struct {
@@ -8905,6 +8594,8 @@ type CompaniesProfileAccountResponseAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -8939,6 +8630,13 @@ func (c *CompaniesProfileAccountResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CompaniesProfileAccountResponseAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CompaniesProfileAccountResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -8983,6 +8681,13 @@ func (c *CompaniesProfileAccountResponseAddress) SetCountryCode(countryCode *str
 	c.require(companiesProfileAccountResponseAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesProfileAccountResponseAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(companiesProfileAccountResponseAddressFieldSubdivision)
+}
+
 func (c *CompaniesProfileAccountResponseAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler CompaniesProfileAccountResponseAddress
 	var value unmarshaler
@@ -9023,6 +8728,28 @@ func (c *CompaniesProfileAccountResponseAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesProfileAccountResponseFiscalYearWeekRule string
+
+const (
+	CompaniesProfileAccountResponseFiscalYearWeekRuleLast    CompaniesProfileAccountResponseFiscalYearWeekRule = "last"
+	CompaniesProfileAccountResponseFiscalYearWeekRuleNearest CompaniesProfileAccountResponseFiscalYearWeekRule = "nearest"
+)
+
+func NewCompaniesProfileAccountResponseFiscalYearWeekRuleFromString(s string) (CompaniesProfileAccountResponseFiscalYearWeekRule, error) {
+	switch s {
+	case "last":
+		return CompaniesProfileAccountResponseFiscalYearWeekRuleLast, nil
+	case "nearest":
+		return CompaniesProfileAccountResponseFiscalYearWeekRuleNearest, nil
+	}
+	var t CompaniesProfileAccountResponseFiscalYearWeekRule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesProfileAccountResponseFiscalYearWeekRule) Ptr() *CompaniesProfileAccountResponseFiscalYearWeekRule {
+	return &c
 }
 
 type CompaniesProfileAccountResponseStatus string
@@ -9192,6 +8919,7 @@ var (
 	companiesUpdateAccountRequestAddressFieldCity        = big.NewInt(1 << 1)
 	companiesUpdateAccountRequestAddressFieldPostalCode  = big.NewInt(1 << 2)
 	companiesUpdateAccountRequestAddressFieldCountryCode = big.NewInt(1 << 3)
+	companiesUpdateAccountRequestAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type CompaniesUpdateAccountRequestAddress struct {
@@ -9199,6 +8927,8 @@ type CompaniesUpdateAccountRequestAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9233,6 +8963,13 @@ func (c *CompaniesUpdateAccountRequestAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CompaniesUpdateAccountRequestAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CompaniesUpdateAccountRequestAddress) GetExtraProperties() map[string]interface{} {
@@ -9275,6 +9012,13 @@ func (c *CompaniesUpdateAccountRequestAddress) SetPostalCode(postalCode *string)
 func (c *CompaniesUpdateAccountRequestAddress) SetCountryCode(countryCode *string) {
 	c.CountryCode = countryCode
 	c.require(companiesUpdateAccountRequestAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountRequestAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(companiesUpdateAccountRequestAddressFieldSubdivision)
 }
 
 func (c *CompaniesUpdateAccountRequestAddress) UnmarshalJSON(data []byte) error {
@@ -9435,6 +9179,29 @@ func (c CompaniesUpdateAccountRequestDefaultInvoiceLocale) Ptr() *CompaniesUpdat
 	return &c
 }
 
+// With `fiscalYearWeekday`: `last` ends the year on the last such weekday of `fiscalYearEndMonth`, `nearest` on the one nearest the last day of that month
+type CompaniesUpdateAccountRequestFiscalYearWeekRule string
+
+const (
+	CompaniesUpdateAccountRequestFiscalYearWeekRuleLast    CompaniesUpdateAccountRequestFiscalYearWeekRule = "last"
+	CompaniesUpdateAccountRequestFiscalYearWeekRuleNearest CompaniesUpdateAccountRequestFiscalYearWeekRule = "nearest"
+)
+
+func NewCompaniesUpdateAccountRequestFiscalYearWeekRuleFromString(s string) (CompaniesUpdateAccountRequestFiscalYearWeekRule, error) {
+	switch s {
+	case "last":
+		return CompaniesUpdateAccountRequestFiscalYearWeekRuleLast, nil
+	case "nearest":
+		return CompaniesUpdateAccountRequestFiscalYearWeekRuleNearest, nil
+	}
+	var t CompaniesUpdateAccountRequestFiscalYearWeekRule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesUpdateAccountRequestFiscalYearWeekRule) Ptr() *CompaniesUpdateAccountRequestFiscalYearWeekRule {
+	return &c
+}
+
 var (
 	companiesUpdateAccountRequestLogoFieldFileName = big.NewInt(1 << 0)
 	companiesUpdateAccountRequestLogoFieldMimeType = big.NewInt(1 << 1)
@@ -9588,61 +9355,67 @@ var (
 	companiesUpdateAccountResponseFieldName                      = big.NewInt(1 << 1)
 	companiesUpdateAccountResponseFieldCode                      = big.NewInt(1 << 2)
 	companiesUpdateAccountResponseFieldVatCode                   = big.NewInt(1 << 3)
-	companiesUpdateAccountResponseFieldSmeExemptionNumber        = big.NewInt(1 << 4)
-	companiesUpdateAccountResponseFieldIsVatPayer                = big.NewInt(1 << 5)
-	companiesUpdateAccountResponseFieldIsSandbox                 = big.NewInt(1 << 6)
-	companiesUpdateAccountResponseFieldCashBasis                 = big.NewInt(1 << 7)
-	companiesUpdateAccountResponseFieldCountryCode               = big.NewInt(1 << 8)
-	companiesUpdateAccountResponseFieldChartTemplate             = big.NewInt(1 << 9)
-	companiesUpdateAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 10)
-	companiesUpdateAccountResponseFieldBaseCurrency              = big.NewInt(1 << 11)
-	companiesUpdateAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 12)
-	companiesUpdateAccountResponseFieldStatus                    = big.NewInt(1 << 13)
-	companiesUpdateAccountResponseFieldAddress                   = big.NewInt(1 << 14)
-	companiesUpdateAccountResponseFieldEmail                     = big.NewInt(1 << 15)
-	companiesUpdateAccountResponseFieldPhone                     = big.NewInt(1 << 16)
-	companiesUpdateAccountResponseFieldIban                      = big.NewInt(1 << 17)
-	companiesUpdateAccountResponseFieldBankName                  = big.NewInt(1 << 18)
-	companiesUpdateAccountResponseFieldBankBic                   = big.NewInt(1 << 19)
-	companiesUpdateAccountResponseFieldBankCode                  = big.NewInt(1 << 20)
-	companiesUpdateAccountResponseFieldBankBranchCode            = big.NewInt(1 << 21)
-	companiesUpdateAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 22)
-	companiesUpdateAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 23)
-	companiesUpdateAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 24)
-	companiesUpdateAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 25)
-	companiesUpdateAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 26)
-	companiesUpdateAccountResponseFieldPeppolID                  = big.NewInt(1 << 27)
-	companiesUpdateAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 28)
-	companiesUpdateAccountResponseFieldLogoFileID                = big.NewInt(1 << 29)
-	companiesUpdateAccountResponseFieldLegalForm                 = big.NewInt(1 << 30)
-	companiesUpdateAccountResponseFieldRegistryName              = big.NewInt(1 << 31)
-	companiesUpdateAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 32)
-	companiesUpdateAccountResponseFieldShareCapital              = big.NewInt(1 << 33)
-	companiesUpdateAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 34)
-	companiesUpdateAccountResponseFieldVatPeriod                 = big.NewInt(1 << 35)
-	companiesUpdateAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 36)
-	companiesUpdateAccountResponseFieldTimeZone                  = big.NewInt(1 << 37)
-	companiesUpdateAccountResponseFieldFilingOptions             = big.NewInt(1 << 38)
-	companiesUpdateAccountResponseFieldBookkeeperName            = big.NewInt(1 << 39)
-	companiesUpdateAccountResponseFieldAuditorName               = big.NewInt(1 << 40)
-	companiesUpdateAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 41)
-	companiesUpdateAccountResponseFieldAuditRequired             = big.NewInt(1 << 42)
+	companiesUpdateAccountResponseFieldIdentifiers               = big.NewInt(1 << 4)
+	companiesUpdateAccountResponseFieldSmeExemptionNumber        = big.NewInt(1 << 5)
+	companiesUpdateAccountResponseFieldIsVatPayer                = big.NewInt(1 << 6)
+	companiesUpdateAccountResponseFieldIsSandbox                 = big.NewInt(1 << 7)
+	companiesUpdateAccountResponseFieldCashBasis                 = big.NewInt(1 << 8)
+	companiesUpdateAccountResponseFieldCountryCode               = big.NewInt(1 << 9)
+	companiesUpdateAccountResponseFieldChartTemplate             = big.NewInt(1 << 10)
+	companiesUpdateAccountResponseFieldCountryChartTemplate      = big.NewInt(1 << 11)
+	companiesUpdateAccountResponseFieldBaseCurrency              = big.NewInt(1 << 12)
+	companiesUpdateAccountResponseFieldDefaultInvoiceCurrency    = big.NewInt(1 << 13)
+	companiesUpdateAccountResponseFieldStatus                    = big.NewInt(1 << 14)
+	companiesUpdateAccountResponseFieldAddress                   = big.NewInt(1 << 15)
+	companiesUpdateAccountResponseFieldEmail                     = big.NewInt(1 << 16)
+	companiesUpdateAccountResponseFieldPhone                     = big.NewInt(1 << 17)
+	companiesUpdateAccountResponseFieldIban                      = big.NewInt(1 << 18)
+	companiesUpdateAccountResponseFieldBankName                  = big.NewInt(1 << 19)
+	companiesUpdateAccountResponseFieldBankBic                   = big.NewInt(1 << 20)
+	companiesUpdateAccountResponseFieldBankCode                  = big.NewInt(1 << 21)
+	companiesUpdateAccountResponseFieldBankBranchCode            = big.NewInt(1 << 22)
+	companiesUpdateAccountResponseFieldBankAccountNumber         = big.NewInt(1 << 23)
+	companiesUpdateAccountResponseFieldInvoicePrefix             = big.NewInt(1 << 24)
+	companiesUpdateAccountResponseFieldNextInvoiceNumber         = big.NewInt(1 << 25)
+	companiesUpdateAccountResponseFieldDefaultInvoiceLocale      = big.NewInt(1 << 26)
+	companiesUpdateAccountResponseFieldDefaultInvoiceNote        = big.NewInt(1 << 27)
+	companiesUpdateAccountResponseFieldPeppolID                  = big.NewInt(1 << 28)
+	companiesUpdateAccountResponseFieldSepaCreditorID            = big.NewInt(1 << 29)
+	companiesUpdateAccountResponseFieldLogoFileID                = big.NewInt(1 << 30)
+	companiesUpdateAccountResponseFieldLegalForm                 = big.NewInt(1 << 31)
+	companiesUpdateAccountResponseFieldRegistryName              = big.NewInt(1 << 32)
+	companiesUpdateAccountResponseFieldIncorporatedOn            = big.NewInt(1 << 33)
+	companiesUpdateAccountResponseFieldShareCapital              = big.NewInt(1 << 34)
+	companiesUpdateAccountResponseFieldAccountsKeptBy            = big.NewInt(1 << 35)
+	companiesUpdateAccountResponseFieldVatPeriod                 = big.NewInt(1 << 36)
+	companiesUpdateAccountResponseFieldVatPeriodEndMonth         = big.NewInt(1 << 37)
+	companiesUpdateAccountResponseFieldFiscalYearEndMonth        = big.NewInt(1 << 38)
+	companiesUpdateAccountResponseFieldFiscalYearEndDay          = big.NewInt(1 << 39)
+	companiesUpdateAccountResponseFieldFiscalYearWeekday         = big.NewInt(1 << 40)
+	companiesUpdateAccountResponseFieldFiscalYearWeekRule        = big.NewInt(1 << 41)
+	companiesUpdateAccountResponseFieldTimeZone                  = big.NewInt(1 << 42)
+	companiesUpdateAccountResponseFieldFilingOptions             = big.NewInt(1 << 43)
+	companiesUpdateAccountResponseFieldBookkeeperName            = big.NewInt(1 << 44)
+	companiesUpdateAccountResponseFieldAuditorName               = big.NewInt(1 << 45)
+	companiesUpdateAccountResponseFieldAuditorRegistrationNumber = big.NewInt(1 << 46)
+	companiesUpdateAccountResponseFieldAuditRequired             = big.NewInt(1 << 47)
 )
 
 type CompaniesUpdateAccountResponse struct {
-	ID                 string  `json:"id" url:"id"`
-	Name               string  `json:"name" url:"name"`
-	Code               *string `json:"code,omitempty" url:"code,omitempty"`
-	VatCode            *string `json:"vatCode,omitempty" url:"vatCode,omitempty"`
-	SmeExemptionNumber *string `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
-	IsVatPayer         bool    `json:"isVatPayer" url:"isVatPayer"`
-	IsSandbox          bool    `json:"isSandbox" url:"isSandbox"`
-	CashBasis          bool    `json:"cashBasis" url:"cashBasis"`
-	CountryCode        string  `json:"countryCode" url:"countryCode"`
+	ID                 string            `json:"id" url:"id"`
+	Name               string            `json:"name" url:"name"`
+	Code               *string           `json:"code,omitempty" url:"code,omitempty"`
+	VatCode            *string           `json:"vatCode,omitempty" url:"vatCode,omitempty"`
+	Identifiers        map[string]string `json:"identifiers" url:"identifiers"`
+	SmeExemptionNumber *string           `json:"smeExemptionNumber,omitempty" url:"smeExemptionNumber,omitempty"`
+	IsVatPayer         bool              `json:"isVatPayer" url:"isVatPayer"`
+	IsSandbox          bool              `json:"isSandbox" url:"isSandbox"`
+	CashBasis          bool              `json:"cashBasis" url:"cashBasis"`
+	CountryCode        string            `json:"countryCode" url:"countryCode"`
 	// Chart of accounts template the company was seeded with
 	ChartTemplate string `json:"chartTemplate" url:"chartTemplate"`
-	// Chart of accounts template of the company country
-	CountryChartTemplate   string                                 `json:"countryChartTemplate" url:"countryChartTemplate"`
+	// Chart of accounts template of the company country; null when Nordlet has no chart for it
+	CountryChartTemplate   *string                                `json:"countryChartTemplate,omitempty" url:"countryChartTemplate,omitempty"`
 	BaseCurrency           string                                 `json:"baseCurrency" url:"baseCurrency"`
 	DefaultInvoiceCurrency string                                 `json:"defaultInvoiceCurrency" url:"defaultInvoiceCurrency"`
 	Status                 CompaniesUpdateAccountResponseStatus   `json:"status" url:"status"`
@@ -9658,25 +9431,29 @@ type CompaniesUpdateAccountResponse struct {
 	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
 	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
 	// Number the next invoice issued without a document series gets, before any country-specific format
-	NextInvoiceNumber         string                                        `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
-	DefaultInvoiceLocale      *string                                       `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
-	DefaultInvoiceNote        *string                                       `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
-	PeppolID                  *string                                       `json:"peppolId,omitempty" url:"peppolId,omitempty"`
-	SepaCreditorID            *string                                       `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
-	LogoFileID                *string                                       `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
-	LegalForm                 *string                                       `json:"legalForm,omitempty" url:"legalForm,omitempty"`
-	RegistryName              *string                                       `json:"registryName,omitempty" url:"registryName,omitempty"`
-	IncorporatedOn            *string                                       `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
-	ShareCapital              *string                                       `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
-	AccountsKeptBy            *CompaniesUpdateAccountResponseAccountsKeptBy `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
-	VatPeriod                 *CompaniesUpdateAccountResponseVatPeriod      `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
-	FiscalYearEndMonth        *int64                                        `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
-	TimeZone                  string                                        `json:"timeZone" url:"timeZone"`
-	FilingOptions             map[string]*string                            `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
-	BookkeeperName            *string                                       `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
-	AuditorName               *string                                       `json:"auditorName,omitempty" url:"auditorName,omitempty"`
-	AuditorRegistrationNumber *string                                       `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
-	AuditRequired             bool                                          `json:"auditRequired" url:"auditRequired"`
+	NextInvoiceNumber         string                                            `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
+	DefaultInvoiceLocale      *string                                           `json:"defaultInvoiceLocale,omitempty" url:"defaultInvoiceLocale,omitempty"`
+	DefaultInvoiceNote        *string                                           `json:"defaultInvoiceNote,omitempty" url:"defaultInvoiceNote,omitempty"`
+	PeppolID                  *string                                           `json:"peppolId,omitempty" url:"peppolId,omitempty"`
+	SepaCreditorID            *string                                           `json:"sepaCreditorId,omitempty" url:"sepaCreditorId,omitempty"`
+	LogoFileID                *string                                           `json:"logoFileId,omitempty" url:"logoFileId,omitempty"`
+	LegalForm                 *string                                           `json:"legalForm,omitempty" url:"legalForm,omitempty"`
+	RegistryName              *string                                           `json:"registryName,omitempty" url:"registryName,omitempty"`
+	IncorporatedOn            *string                                           `json:"incorporatedOn,omitempty" url:"incorporatedOn,omitempty"`
+	ShareCapital              *string                                           `json:"shareCapital,omitempty" url:"shareCapital,omitempty"`
+	AccountsKeptBy            *CompaniesUpdateAccountResponseAccountsKeptBy     `json:"accountsKeptBy,omitempty" url:"accountsKeptBy,omitempty"`
+	VatPeriod                 *CompaniesUpdateAccountResponseVatPeriod          `json:"vatPeriod,omitempty" url:"vatPeriod,omitempty"`
+	VatPeriodEndMonth         *int64                                            `json:"vatPeriodEndMonth,omitempty" url:"vatPeriodEndMonth,omitempty"`
+	FiscalYearEndMonth        *int64                                            `json:"fiscalYearEndMonth,omitempty" url:"fiscalYearEndMonth,omitempty"`
+	FiscalYearEndDay          *int64                                            `json:"fiscalYearEndDay,omitempty" url:"fiscalYearEndDay,omitempty"`
+	FiscalYearWeekday         *int64                                            `json:"fiscalYearWeekday,omitempty" url:"fiscalYearWeekday,omitempty"`
+	FiscalYearWeekRule        *CompaniesUpdateAccountResponseFiscalYearWeekRule `json:"fiscalYearWeekRule,omitempty" url:"fiscalYearWeekRule,omitempty"`
+	TimeZone                  string                                            `json:"timeZone" url:"timeZone"`
+	FilingOptions             map[string]*string                                `json:"filingOptions,omitempty" url:"filingOptions,omitempty"`
+	BookkeeperName            *string                                           `json:"bookkeeperName,omitempty" url:"bookkeeperName,omitempty"`
+	AuditorName               *string                                           `json:"auditorName,omitempty" url:"auditorName,omitempty"`
+	AuditorRegistrationNumber *string                                           `json:"auditorRegistrationNumber,omitempty" url:"auditorRegistrationNumber,omitempty"`
+	AuditRequired             bool                                              `json:"auditRequired" url:"auditRequired"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9711,6 +9488,13 @@ func (c *CompaniesUpdateAccountResponse) GetVatCode() *string {
 		return nil
 	}
 	return c.VatCode
+}
+
+func (c *CompaniesUpdateAccountResponse) GetIdentifiers() map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.Identifiers
 }
 
 func (c *CompaniesUpdateAccountResponse) GetSmeExemptionNumber() *string {
@@ -9755,9 +9539,9 @@ func (c *CompaniesUpdateAccountResponse) GetChartTemplate() string {
 	return c.ChartTemplate
 }
 
-func (c *CompaniesUpdateAccountResponse) GetCountryChartTemplate() string {
+func (c *CompaniesUpdateAccountResponse) GetCountryChartTemplate() *string {
 	if c == nil {
-		return ""
+		return nil
 	}
 	return c.CountryChartTemplate
 }
@@ -9937,11 +9721,39 @@ func (c *CompaniesUpdateAccountResponse) GetVatPeriod() *CompaniesUpdateAccountR
 	return c.VatPeriod
 }
 
+func (c *CompaniesUpdateAccountResponse) GetVatPeriodEndMonth() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.VatPeriodEndMonth
+}
+
 func (c *CompaniesUpdateAccountResponse) GetFiscalYearEndMonth() *int64 {
 	if c == nil {
 		return nil
 	}
 	return c.FiscalYearEndMonth
+}
+
+func (c *CompaniesUpdateAccountResponse) GetFiscalYearEndDay() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearEndDay
+}
+
+func (c *CompaniesUpdateAccountResponse) GetFiscalYearWeekday() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearWeekday
+}
+
+func (c *CompaniesUpdateAccountResponse) GetFiscalYearWeekRule() *CompaniesUpdateAccountResponseFiscalYearWeekRule {
+	if c == nil {
+		return nil
+	}
+	return c.FiscalYearWeekRule
 }
 
 func (c *CompaniesUpdateAccountResponse) GetTimeZone() string {
@@ -10028,6 +9840,13 @@ func (c *CompaniesUpdateAccountResponse) SetVatCode(vatCode *string) {
 	c.require(companiesUpdateAccountResponseFieldVatCode)
 }
 
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetIdentifiers(identifiers map[string]string) {
+	c.Identifiers = identifiers
+	c.require(companiesUpdateAccountResponseFieldIdentifiers)
+}
+
 // SetSmeExemptionNumber sets the SmeExemptionNumber field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesUpdateAccountResponse) SetSmeExemptionNumber(smeExemptionNumber *string) {
@@ -10072,7 +9891,7 @@ func (c *CompaniesUpdateAccountResponse) SetChartTemplate(chartTemplate string) 
 
 // SetCountryChartTemplate sets the CountryChartTemplate field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (c *CompaniesUpdateAccountResponse) SetCountryChartTemplate(countryChartTemplate string) {
+func (c *CompaniesUpdateAccountResponse) SetCountryChartTemplate(countryChartTemplate *string) {
 	c.CountryChartTemplate = countryChartTemplate
 	c.require(companiesUpdateAccountResponseFieldCountryChartTemplate)
 }
@@ -10252,11 +10071,39 @@ func (c *CompaniesUpdateAccountResponse) SetVatPeriod(vatPeriod *CompaniesUpdate
 	c.require(companiesUpdateAccountResponseFieldVatPeriod)
 }
 
+// SetVatPeriodEndMonth sets the VatPeriodEndMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetVatPeriodEndMonth(vatPeriodEndMonth *int64) {
+	c.VatPeriodEndMonth = vatPeriodEndMonth
+	c.require(companiesUpdateAccountResponseFieldVatPeriodEndMonth)
+}
+
 // SetFiscalYearEndMonth sets the FiscalYearEndMonth field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (c *CompaniesUpdateAccountResponse) SetFiscalYearEndMonth(fiscalYearEndMonth *int64) {
 	c.FiscalYearEndMonth = fiscalYearEndMonth
 	c.require(companiesUpdateAccountResponseFieldFiscalYearEndMonth)
+}
+
+// SetFiscalYearEndDay sets the FiscalYearEndDay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetFiscalYearEndDay(fiscalYearEndDay *int64) {
+	c.FiscalYearEndDay = fiscalYearEndDay
+	c.require(companiesUpdateAccountResponseFieldFiscalYearEndDay)
+}
+
+// SetFiscalYearWeekday sets the FiscalYearWeekday field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetFiscalYearWeekday(fiscalYearWeekday *int64) {
+	c.FiscalYearWeekday = fiscalYearWeekday
+	c.require(companiesUpdateAccountResponseFieldFiscalYearWeekday)
+}
+
+// SetFiscalYearWeekRule sets the FiscalYearWeekRule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponse) SetFiscalYearWeekRule(fiscalYearWeekRule *CompaniesUpdateAccountResponseFiscalYearWeekRule) {
+	c.FiscalYearWeekRule = fiscalYearWeekRule
+	c.require(companiesUpdateAccountResponseFieldFiscalYearWeekRule)
 }
 
 // SetTimeZone sets the TimeZone field and marks it as non-optional;
@@ -10370,6 +10217,7 @@ var (
 	companiesUpdateAccountResponseAddressFieldCity        = big.NewInt(1 << 1)
 	companiesUpdateAccountResponseAddressFieldPostalCode  = big.NewInt(1 << 2)
 	companiesUpdateAccountResponseAddressFieldCountryCode = big.NewInt(1 << 3)
+	companiesUpdateAccountResponseAddressFieldSubdivision = big.NewInt(1 << 4)
 )
 
 type CompaniesUpdateAccountResponseAddress struct {
@@ -10377,6 +10225,8 @@ type CompaniesUpdateAccountResponseAddress struct {
 	City        *string `json:"city,omitempty" url:"city,omitempty"`
 	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
 	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -10411,6 +10261,13 @@ func (c *CompaniesUpdateAccountResponseAddress) GetCountryCode() *string {
 		return nil
 	}
 	return c.CountryCode
+}
+
+func (c *CompaniesUpdateAccountResponseAddress) GetSubdivision() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Subdivision
 }
 
 func (c *CompaniesUpdateAccountResponseAddress) GetExtraProperties() map[string]interface{} {
@@ -10455,6 +10312,13 @@ func (c *CompaniesUpdateAccountResponseAddress) SetCountryCode(countryCode *stri
 	c.require(companiesUpdateAccountResponseAddressFieldCountryCode)
 }
 
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CompaniesUpdateAccountResponseAddress) SetSubdivision(subdivision *string) {
+	c.Subdivision = subdivision
+	c.require(companiesUpdateAccountResponseAddressFieldSubdivision)
+}
+
 func (c *CompaniesUpdateAccountResponseAddress) UnmarshalJSON(data []byte) error {
 	type unmarshaler CompaniesUpdateAccountResponseAddress
 	var value unmarshaler
@@ -10495,6 +10359,28 @@ func (c *CompaniesUpdateAccountResponseAddress) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", c)
+}
+
+type CompaniesUpdateAccountResponseFiscalYearWeekRule string
+
+const (
+	CompaniesUpdateAccountResponseFiscalYearWeekRuleLast    CompaniesUpdateAccountResponseFiscalYearWeekRule = "last"
+	CompaniesUpdateAccountResponseFiscalYearWeekRuleNearest CompaniesUpdateAccountResponseFiscalYearWeekRule = "nearest"
+)
+
+func NewCompaniesUpdateAccountResponseFiscalYearWeekRuleFromString(s string) (CompaniesUpdateAccountResponseFiscalYearWeekRule, error) {
+	switch s {
+	case "last":
+		return CompaniesUpdateAccountResponseFiscalYearWeekRuleLast, nil
+	case "nearest":
+		return CompaniesUpdateAccountResponseFiscalYearWeekRuleNearest, nil
+	}
+	var t CompaniesUpdateAccountResponseFiscalYearWeekRule
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (c CompaniesUpdateAccountResponseFiscalYearWeekRule) Ptr() *CompaniesUpdateAccountResponseFiscalYearWeekRule {
+	return &c
 }
 
 type CompaniesUpdateAccountResponseStatus string

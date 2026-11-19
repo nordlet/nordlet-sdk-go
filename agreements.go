@@ -91,11 +91,12 @@ type AgreementsCreateAgreementsRequest struct {
 	AutoRenew     *bool                                           `json:"autoRenew,omitempty" url:"-"`
 	Value         *string                                         `json:"value,omitempty" url:"-"`
 	BillingPeriod *AgreementsCreateAgreementsRequestBillingPeriod `json:"billingPeriod,omitempty" url:"-"`
-	Currency      *string                                         `json:"currency,omitempty" url:"-"`
-	Status        *AgreementsCreateAgreementsRequestStatus        `json:"status,omitempty" url:"-"`
-	Notes         *string                                         `json:"notes,omitempty" url:"-"`
-	DocumentRef   *string                                         `json:"documentRef,omitempty" url:"-"`
-	Items         []*AgreementsCreateAgreementsRequestItemsItem   `json:"items,omitempty" url:"-"`
+	// Defaults to the company's base currency
+	Currency    *string                                       `json:"currency,omitempty" url:"-"`
+	Status      *AgreementsCreateAgreementsRequestStatus      `json:"status,omitempty" url:"-"`
+	Notes       *string                                       `json:"notes,omitempty" url:"-"`
+	DocumentRef *string                                       `json:"documentRef,omitempty" url:"-"`
+	Items       []*AgreementsCreateAgreementsRequestItemsItem `json:"items,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -640,8 +641,9 @@ type InsurancePoliciesCreateAgreementsRequest struct {
 	FromDate         time.Time `json:"fromDate" url:"-" format:"date"`
 	ToDate           time.Time `json:"toDate" url:"-" format:"date"`
 	Premium          *string   `json:"premium,omitempty" url:"-"`
-	Currency         *string   `json:"currency,omitempty" url:"-"`
-	Notes            *string   `json:"notes,omitempty" url:"-"`
+	// Defaults to the company's base currency
+	Currency *string `json:"currency,omitempty" url:"-"`
+	Notes    *string `json:"notes,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`

@@ -764,7 +764,6 @@ func TestBankMandatesCreateWithWireMock(
 	)
 	request := &nordlet.MandatesCreateBankRequest{
 		PartnerID: "partnerId",
-		Iban:      "iban",
 		SignatureDate: nordlet.MustParseDate(
 			"2026-07-01",
 		),
@@ -934,6 +933,32 @@ func TestBankDirectDebitsExportWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestBankDirectDebitsExportWithWireMock", "POST", "/v1/bank/direct-debits/export", nil, 1)
+}
+
+func TestBankMandatesAuddisExportWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.MandatesAuddisExportBankRequest{
+		BankAccountID: "bankAccountId",
+	}
+	_, invocationErr := client.Bank.MandatesAuddisExport(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankMandatesAuddisExportWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankMandatesAuddisExportWithWireMock", "POST", "/v1/bank/mandates/auddis-export", nil, 1)
 }
 
 func TestBankTransactionsSuggestMatchesWithWireMock(

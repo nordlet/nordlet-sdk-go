@@ -296,6 +296,7 @@ var (
 	submitCalendarRequestFieldAmend        = big.NewInt(1 << 1)
 	submitCalendarRequestFieldCorrection   = big.NewInt(1 << 2)
 	submitCalendarRequestFieldDocumentKeys = big.NewInt(1 << 3)
+	submitCalendarRequestFieldDevice       = big.NewInt(1 << 4)
 )
 
 type SubmitCalendarRequest struct {
@@ -303,6 +304,8 @@ type SubmitCalendarRequest struct {
 	Amend        *bool                            `json:"amend,omitempty" url:"-"`
 	Correction   *SubmitCalendarRequestCorrection `json:"correction,omitempty" url:"-"`
 	DocumentKeys []string                         `json:"documentKeys,omitempty" url:"-"`
+	// Facts of the browser the user files from, which HMRC requires with every VAT (MTD) API call: `navigator.userAgent`, a UUID the browser keeps for the device, every screen (width, height, scaling factor, colour depth in bits), the window size in pixels and the time zone as `UTC±hh:mm`.
+	Device *SubmitCalendarRequestDevice `json:"device,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -341,6 +344,13 @@ func (s *SubmitCalendarRequest) SetCorrection(correction *SubmitCalendarRequestC
 func (s *SubmitCalendarRequest) SetDocumentKeys(documentKeys []string) {
 	s.DocumentKeys = documentKeys
 	s.require(submitCalendarRequestFieldDocumentKeys)
+}
+
+// SetDevice sets the Device field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequest) SetDevice(device *SubmitCalendarRequestDevice) {
+	s.Device = device
+	s.require(submitCalendarRequestFieldDevice)
 }
 
 func (s *SubmitCalendarRequest) UnmarshalJSON(data []byte) error {
@@ -7648,6 +7658,387 @@ func (s *SubmitCalendarRequestCorrection) MarshalJSON() ([]byte, error) {
 }
 
 func (s *SubmitCalendarRequestCorrection) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+// Facts of the browser the user files from, which HMRC requires with every VAT (MTD) API call: `navigator.userAgent`, a UUID the browser keeps for the device, every screen (width, height, scaling factor, colour depth in bits), the window size in pixels and the time zone as `UTC±hh:mm`.
+var (
+	submitCalendarRequestDeviceFieldUserAgent  = big.NewInt(1 << 0)
+	submitCalendarRequestDeviceFieldDeviceID   = big.NewInt(1 << 1)
+	submitCalendarRequestDeviceFieldScreens    = big.NewInt(1 << 2)
+	submitCalendarRequestDeviceFieldWindowSize = big.NewInt(1 << 3)
+	submitCalendarRequestDeviceFieldTimezone   = big.NewInt(1 << 4)
+)
+
+type SubmitCalendarRequestDevice struct {
+	UserAgent  string                                    `json:"userAgent" url:"userAgent"`
+	DeviceID   string                                    `json:"deviceId" url:"deviceId"`
+	Screens    []*SubmitCalendarRequestDeviceScreensItem `json:"screens" url:"screens"`
+	WindowSize *SubmitCalendarRequestDeviceWindowSize    `json:"windowSize" url:"windowSize"`
+	Timezone   string                                    `json:"timezone" url:"timezone"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmitCalendarRequestDevice) GetUserAgent() string {
+	if s == nil {
+		return ""
+	}
+	return s.UserAgent
+}
+
+func (s *SubmitCalendarRequestDevice) GetDeviceID() string {
+	if s == nil {
+		return ""
+	}
+	return s.DeviceID
+}
+
+func (s *SubmitCalendarRequestDevice) GetScreens() []*SubmitCalendarRequestDeviceScreensItem {
+	if s == nil {
+		return nil
+	}
+	return s.Screens
+}
+
+func (s *SubmitCalendarRequestDevice) GetWindowSize() *SubmitCalendarRequestDeviceWindowSize {
+	if s == nil {
+		return nil
+	}
+	return s.WindowSize
+}
+
+func (s *SubmitCalendarRequestDevice) GetTimezone() string {
+	if s == nil {
+		return ""
+	}
+	return s.Timezone
+}
+
+func (s *SubmitCalendarRequestDevice) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmitCalendarRequestDevice) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetUserAgent sets the UserAgent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDevice) SetUserAgent(userAgent string) {
+	s.UserAgent = userAgent
+	s.require(submitCalendarRequestDeviceFieldUserAgent)
+}
+
+// SetDeviceID sets the DeviceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDevice) SetDeviceID(deviceID string) {
+	s.DeviceID = deviceID
+	s.require(submitCalendarRequestDeviceFieldDeviceID)
+}
+
+// SetScreens sets the Screens field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDevice) SetScreens(screens []*SubmitCalendarRequestDeviceScreensItem) {
+	s.Screens = screens
+	s.require(submitCalendarRequestDeviceFieldScreens)
+}
+
+// SetWindowSize sets the WindowSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDevice) SetWindowSize(windowSize *SubmitCalendarRequestDeviceWindowSize) {
+	s.WindowSize = windowSize
+	s.require(submitCalendarRequestDeviceFieldWindowSize)
+}
+
+// SetTimezone sets the Timezone field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDevice) SetTimezone(timezone string) {
+	s.Timezone = timezone
+	s.require(submitCalendarRequestDeviceFieldTimezone)
+}
+
+func (s *SubmitCalendarRequestDevice) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmitCalendarRequestDevice
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmitCalendarRequestDevice(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmitCalendarRequestDevice) MarshalJSON() ([]byte, error) {
+	type embed SubmitCalendarRequestDevice
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmitCalendarRequestDevice) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	submitCalendarRequestDeviceScreensItemFieldWidth         = big.NewInt(1 << 0)
+	submitCalendarRequestDeviceScreensItemFieldHeight        = big.NewInt(1 << 1)
+	submitCalendarRequestDeviceScreensItemFieldScalingFactor = big.NewInt(1 << 2)
+	submitCalendarRequestDeviceScreensItemFieldColourDepth   = big.NewInt(1 << 3)
+)
+
+type SubmitCalendarRequestDeviceScreensItem struct {
+	Width         int64   `json:"width" url:"width"`
+	Height        int64   `json:"height" url:"height"`
+	ScalingFactor float64 `json:"scalingFactor" url:"scalingFactor"`
+	ColourDepth   int64   `json:"colourDepth" url:"colourDepth"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) GetWidth() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Width
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) GetHeight() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Height
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) GetScalingFactor() float64 {
+	if s == nil {
+		return 0
+	}
+	return s.ScalingFactor
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) GetColourDepth() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.ColourDepth
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetWidth sets the Width field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDeviceScreensItem) SetWidth(width int64) {
+	s.Width = width
+	s.require(submitCalendarRequestDeviceScreensItemFieldWidth)
+}
+
+// SetHeight sets the Height field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDeviceScreensItem) SetHeight(height int64) {
+	s.Height = height
+	s.require(submitCalendarRequestDeviceScreensItemFieldHeight)
+}
+
+// SetScalingFactor sets the ScalingFactor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDeviceScreensItem) SetScalingFactor(scalingFactor float64) {
+	s.ScalingFactor = scalingFactor
+	s.require(submitCalendarRequestDeviceScreensItemFieldScalingFactor)
+}
+
+// SetColourDepth sets the ColourDepth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDeviceScreensItem) SetColourDepth(colourDepth int64) {
+	s.ColourDepth = colourDepth
+	s.require(submitCalendarRequestDeviceScreensItemFieldColourDepth)
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmitCalendarRequestDeviceScreensItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmitCalendarRequestDeviceScreensItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) MarshalJSON() ([]byte, error) {
+	type embed SubmitCalendarRequestDeviceScreensItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmitCalendarRequestDeviceScreensItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	submitCalendarRequestDeviceWindowSizeFieldWidth  = big.NewInt(1 << 0)
+	submitCalendarRequestDeviceWindowSizeFieldHeight = big.NewInt(1 << 1)
+)
+
+type SubmitCalendarRequestDeviceWindowSize struct {
+	Width  int64 `json:"width" url:"width"`
+	Height int64 `json:"height" url:"height"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SubmitCalendarRequestDeviceWindowSize) GetWidth() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Width
+}
+
+func (s *SubmitCalendarRequestDeviceWindowSize) GetHeight() int64 {
+	if s == nil {
+		return 0
+	}
+	return s.Height
+}
+
+func (s *SubmitCalendarRequestDeviceWindowSize) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SubmitCalendarRequestDeviceWindowSize) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetWidth sets the Width field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDeviceWindowSize) SetWidth(width int64) {
+	s.Width = width
+	s.require(submitCalendarRequestDeviceWindowSizeFieldWidth)
+}
+
+// SetHeight sets the Height field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitCalendarRequestDeviceWindowSize) SetHeight(height int64) {
+	s.Height = height
+	s.require(submitCalendarRequestDeviceWindowSizeFieldHeight)
+}
+
+func (s *SubmitCalendarRequestDeviceWindowSize) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmitCalendarRequestDeviceWindowSize
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SubmitCalendarRequestDeviceWindowSize(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SubmitCalendarRequestDeviceWindowSize) MarshalJSON() ([]byte, error) {
+	type embed SubmitCalendarRequestDeviceWindowSize
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SubmitCalendarRequestDeviceWindowSize) String() string {
 	if s == nil {
 		return "<nil>"
 	}

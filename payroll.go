@@ -198,6 +198,19 @@ func (d *DepartmentsListPayrollRequest) require(field *big.Int) {
 	d.explicitFields.Or(d.explicitFields, field)
 }
 
+type FrequenciesListPayrollRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (f *FrequenciesListPayrollRequest) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
 var (
 	linesAttendancePayrollRequestFieldID                    = big.NewInt(1 << 0)
 	linesAttendancePayrollRequestFieldDaysWorked            = big.NewInt(1 << 1)
@@ -375,10 +388,8 @@ var (
 	runsApprovePayrollRequestFieldPayableAccountCode             = big.NewInt(1 << 3)
 	runsApprovePayrollRequestFieldIncomeTaxAccountCode           = big.NewInt(1 << 4)
 	runsApprovePayrollRequestFieldSocialContributionsAccountCode = big.NewInt(1 << 5)
-	runsApprovePayrollRequestFieldGpmAccountCode                 = big.NewInt(1 << 6)
-	runsApprovePayrollRequestFieldSodraAccountCode               = big.NewInt(1 << 7)
-	runsApprovePayrollRequestFieldEmployerSocialAccountCode      = big.NewInt(1 << 8)
-	runsApprovePayrollRequestFieldDeductionAccountCode           = big.NewInt(1 << 9)
+	runsApprovePayrollRequestFieldEmployerSocialAccountCode      = big.NewInt(1 << 6)
+	runsApprovePayrollRequestFieldDeductionAccountCode           = big.NewInt(1 << 7)
 )
 
 type RunsApprovePayrollRequest struct {
@@ -388,8 +399,6 @@ type RunsApprovePayrollRequest struct {
 	PayableAccountCode             *string `json:"payableAccountCode,omitempty" url:"-"`
 	IncomeTaxAccountCode           *string `json:"incomeTaxAccountCode,omitempty" url:"-"`
 	SocialContributionsAccountCode *string `json:"socialContributionsAccountCode,omitempty" url:"-"`
-	GpmAccountCode                 *string `json:"gpmAccountCode,omitempty" url:"-"`
-	SodraAccountCode               *string `json:"sodraAccountCode,omitempty" url:"-"`
 	EmployerSocialAccountCode      *string `json:"employerSocialAccountCode,omitempty" url:"-"`
 	DeductionAccountCode           *string `json:"deductionAccountCode,omitempty" url:"-"`
 
@@ -444,20 +453,6 @@ func (r *RunsApprovePayrollRequest) SetIncomeTaxAccountCode(incomeTaxAccountCode
 func (r *RunsApprovePayrollRequest) SetSocialContributionsAccountCode(socialContributionsAccountCode *string) {
 	r.SocialContributionsAccountCode = socialContributionsAccountCode
 	r.require(runsApprovePayrollRequestFieldSocialContributionsAccountCode)
-}
-
-// SetGpmAccountCode sets the GpmAccountCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (r *RunsApprovePayrollRequest) SetGpmAccountCode(gpmAccountCode *string) {
-	r.GpmAccountCode = gpmAccountCode
-	r.require(runsApprovePayrollRequestFieldGpmAccountCode)
-}
-
-// SetSodraAccountCode sets the SodraAccountCode field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (r *RunsApprovePayrollRequest) SetSodraAccountCode(sodraAccountCode *string) {
-	r.SodraAccountCode = sodraAccountCode
-	r.require(runsApprovePayrollRequestFieldSodraAccountCode)
 }
 
 // SetEmployerSocialAccountCode sets the EmployerSocialAccountCode field and marks it as non-optional;
@@ -542,18 +537,22 @@ func (r *RunsCancelPayrollRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	runsCreatePayrollRequestFieldYear           = big.NewInt(1 << 0)
-	runsCreatePayrollRequestFieldMonth          = big.NewInt(1 << 1)
-	runsCreatePayrollRequestFieldIncludeNatura  = big.NewInt(1 << 2)
-	runsCreatePayrollRequestFieldGrossOverrides = big.NewInt(1 << 3)
-	runsCreatePayrollRequestFieldLines          = big.NewInt(1 << 4)
-	runsCreatePayrollRequestFieldNotes          = big.NewInt(1 << 5)
-	runsCreatePayrollRequestFieldPayDate        = big.NewInt(1 << 6)
+	runsCreatePayrollRequestFieldFrequency      = big.NewInt(1 << 0)
+	runsCreatePayrollRequestFieldYear           = big.NewInt(1 << 1)
+	runsCreatePayrollRequestFieldMonth          = big.NewInt(1 << 2)
+	runsCreatePayrollRequestFieldPeriodStart    = big.NewInt(1 << 3)
+	runsCreatePayrollRequestFieldIncludeNatura  = big.NewInt(1 << 4)
+	runsCreatePayrollRequestFieldGrossOverrides = big.NewInt(1 << 5)
+	runsCreatePayrollRequestFieldLines          = big.NewInt(1 << 6)
+	runsCreatePayrollRequestFieldNotes          = big.NewInt(1 << 7)
+	runsCreatePayrollRequestFieldPayDate        = big.NewInt(1 << 8)
 )
 
 type RunsCreatePayrollRequest struct {
-	Year           int64                                         `json:"year" url:"-"`
-	Month          int64                                         `json:"month" url:"-"`
+	Frequency      *RunsCreatePayrollRequestFrequency            `json:"frequency,omitempty" url:"-"`
+	Year           *int64                                        `json:"year,omitempty" url:"-"`
+	Month          *int64                                        `json:"month,omitempty" url:"-"`
+	PeriodStart    *time.Time                                    `json:"periodStart,omitempty" url:"-" format:"date"`
 	IncludeNatura  *bool                                         `json:"includeNatura,omitempty" url:"-"`
 	GrossOverrides []*RunsCreatePayrollRequestGrossOverridesItem `json:"grossOverrides,omitempty" url:"-"`
 	Lines          []*RunsCreatePayrollRequestLinesItem          `json:"lines,omitempty" url:"-"`
@@ -571,18 +570,32 @@ func (r *RunsCreatePayrollRequest) require(field *big.Int) {
 	r.explicitFields.Or(r.explicitFields, field)
 }
 
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollRequest) SetFrequency(frequency *RunsCreatePayrollRequestFrequency) {
+	r.Frequency = frequency
+	r.require(runsCreatePayrollRequestFieldFrequency)
+}
+
 // SetYear sets the Year field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (r *RunsCreatePayrollRequest) SetYear(year int64) {
+func (r *RunsCreatePayrollRequest) SetYear(year *int64) {
 	r.Year = year
 	r.require(runsCreatePayrollRequestFieldYear)
 }
 
 // SetMonth sets the Month field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (r *RunsCreatePayrollRequest) SetMonth(month int64) {
+func (r *RunsCreatePayrollRequest) SetMonth(month *int64) {
 	r.Month = month
 	r.require(runsCreatePayrollRequestFieldMonth)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollRequest) SetPeriodStart(periodStart *time.Time) {
+	r.PeriodStart = periodStart
+	r.require(runsCreatePayrollRequestFieldPeriodStart)
 }
 
 // SetIncludeNatura sets the IncludeNatura field and marks it as non-optional;
@@ -634,10 +647,12 @@ func (r *RunsCreatePayrollRequest) MarshalJSON() ([]byte, error) {
 	type embed RunsCreatePayrollRequest
 	var marshaler = struct {
 		embed
-		PayDate *internal.Date `json:"payDate,omitempty"`
+		PeriodStart *internal.Date `json:"periodStart,omitempty"`
+		PayDate     *internal.Date `json:"payDate,omitempty"`
 	}{
-		embed:   embed(*r),
-		PayDate: internal.NewOptionalDate(r.PayDate),
+		embed:       embed(*r),
+		PeriodStart: internal.NewOptionalDate(r.PeriodStart),
+		PayDate:     internal.NewOptionalDate(r.PayDate),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -1709,6 +1724,137 @@ func (d *DepartmentsListPayrollResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", d)
+}
+
+var (
+	frequenciesListPayrollResponseFieldCountryCode = big.NewInt(1 << 0)
+	frequenciesListPayrollResponseFieldFrequencies = big.NewInt(1 << 1)
+)
+
+type FrequenciesListPayrollResponse struct {
+	CountryCode string                                          `json:"countryCode" url:"countryCode"`
+	Frequencies []FrequenciesListPayrollResponseFrequenciesItem `json:"frequencies" url:"frequencies"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (f *FrequenciesListPayrollResponse) GetCountryCode() string {
+	if f == nil {
+		return ""
+	}
+	return f.CountryCode
+}
+
+func (f *FrequenciesListPayrollResponse) GetFrequencies() []FrequenciesListPayrollResponseFrequenciesItem {
+	if f == nil {
+		return nil
+	}
+	return f.Frequencies
+}
+
+func (f *FrequenciesListPayrollResponse) GetExtraProperties() map[string]interface{} {
+	if f == nil {
+		return nil
+	}
+	return f.extraProperties
+}
+
+func (f *FrequenciesListPayrollResponse) require(field *big.Int) {
+	if f.explicitFields == nil {
+		f.explicitFields = big.NewInt(0)
+	}
+	f.explicitFields.Or(f.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FrequenciesListPayrollResponse) SetCountryCode(countryCode string) {
+	f.CountryCode = countryCode
+	f.require(frequenciesListPayrollResponseFieldCountryCode)
+}
+
+// SetFrequencies sets the Frequencies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FrequenciesListPayrollResponse) SetFrequencies(frequencies []FrequenciesListPayrollResponseFrequenciesItem) {
+	f.Frequencies = frequencies
+	f.require(frequenciesListPayrollResponseFieldFrequencies)
+}
+
+func (f *FrequenciesListPayrollResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler FrequenciesListPayrollResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*f = FrequenciesListPayrollResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *f)
+	if err != nil {
+		return err
+	}
+	f.extraProperties = extraProperties
+	f.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (f *FrequenciesListPayrollResponse) MarshalJSON() ([]byte, error) {
+	type embed FrequenciesListPayrollResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*f),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, f.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (f *FrequenciesListPayrollResponse) String() string {
+	if f == nil {
+		return "<nil>"
+	}
+	if len(f.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(f.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(f); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", f)
+}
+
+type FrequenciesListPayrollResponseFrequenciesItem string
+
+const (
+	FrequenciesListPayrollResponseFrequenciesItemMonthly     FrequenciesListPayrollResponseFrequenciesItem = "monthly"
+	FrequenciesListPayrollResponseFrequenciesItemSemimonthly FrequenciesListPayrollResponseFrequenciesItem = "semimonthly"
+	FrequenciesListPayrollResponseFrequenciesItemFourWeekly  FrequenciesListPayrollResponseFrequenciesItem = "four_weekly"
+	FrequenciesListPayrollResponseFrequenciesItemBiweekly    FrequenciesListPayrollResponseFrequenciesItem = "biweekly"
+	FrequenciesListPayrollResponseFrequenciesItemWeekly      FrequenciesListPayrollResponseFrequenciesItem = "weekly"
+)
+
+func NewFrequenciesListPayrollResponseFrequenciesItemFromString(s string) (FrequenciesListPayrollResponseFrequenciesItem, error) {
+	switch s {
+	case "monthly":
+		return FrequenciesListPayrollResponseFrequenciesItemMonthly, nil
+	case "semimonthly":
+		return FrequenciesListPayrollResponseFrequenciesItemSemimonthly, nil
+	case "four_weekly":
+		return FrequenciesListPayrollResponseFrequenciesItemFourWeekly, nil
+	case "biweekly":
+		return FrequenciesListPayrollResponseFrequenciesItemBiweekly, nil
+	case "weekly":
+		return FrequenciesListPayrollResponseFrequenciesItemWeekly, nil
+	}
+	var t FrequenciesListPayrollResponseFrequenciesItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (f FrequenciesListPayrollResponseFrequenciesItem) Ptr() *FrequenciesListPayrollResponseFrequenciesItem {
+	return &f
 }
 
 var (
@@ -2874,25 +3020,36 @@ func (p PaymentsExportPayrollRequestLocale) Ptr() *PaymentsExportPayrollRequestL
 }
 
 var (
-	paymentsExportPayrollResponseFieldMessageID        = big.NewInt(1 << 0)
-	paymentsExportPayrollResponseFieldFileName         = big.NewInt(1 << 1)
-	paymentsExportPayrollResponseFieldTransactionCount = big.NewInt(1 << 2)
-	paymentsExportPayrollResponseFieldControlSum       = big.NewInt(1 << 3)
-	paymentsExportPayrollResponseFieldXML              = big.NewInt(1 << 4)
+	paymentsExportPayrollResponseFieldFormat           = big.NewInt(1 << 0)
+	paymentsExportPayrollResponseFieldMessageID        = big.NewInt(1 << 1)
+	paymentsExportPayrollResponseFieldFileName         = big.NewInt(1 << 2)
+	paymentsExportPayrollResponseFieldContentType      = big.NewInt(1 << 3)
+	paymentsExportPayrollResponseFieldTransactionCount = big.NewInt(1 << 4)
+	paymentsExportPayrollResponseFieldControlSum       = big.NewInt(1 << 5)
+	paymentsExportPayrollResponseFieldContent          = big.NewInt(1 << 6)
 )
 
 type PaymentsExportPayrollResponse struct {
-	MessageID        string `json:"messageId" url:"messageId"`
-	FileName         string `json:"fileName" url:"fileName"`
-	TransactionCount int64  `json:"transactionCount" url:"transactionCount"`
-	ControlSum       string `json:"controlSum" url:"controlSum"`
-	XML              string `json:"xml" url:"xml"`
+	Format           PaymentsExportPayrollResponseFormat `json:"format" url:"format"`
+	MessageID        string                              `json:"messageId" url:"messageId"`
+	FileName         string                              `json:"fileName" url:"fileName"`
+	ContentType      string                              `json:"contentType" url:"contentType"`
+	TransactionCount int64                               `json:"transactionCount" url:"transactionCount"`
+	ControlSum       string                              `json:"controlSum" url:"controlSum"`
+	Content          string                              `json:"content" url:"content"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (p *PaymentsExportPayrollResponse) GetFormat() PaymentsExportPayrollResponseFormat {
+	if p == nil {
+		return ""
+	}
+	return p.Format
 }
 
 func (p *PaymentsExportPayrollResponse) GetMessageID() string {
@@ -2909,6 +3066,13 @@ func (p *PaymentsExportPayrollResponse) GetFileName() string {
 	return p.FileName
 }
 
+func (p *PaymentsExportPayrollResponse) GetContentType() string {
+	if p == nil {
+		return ""
+	}
+	return p.ContentType
+}
+
 func (p *PaymentsExportPayrollResponse) GetTransactionCount() int64 {
 	if p == nil {
 		return 0
@@ -2923,11 +3087,11 @@ func (p *PaymentsExportPayrollResponse) GetControlSum() string {
 	return p.ControlSum
 }
 
-func (p *PaymentsExportPayrollResponse) GetXML() string {
+func (p *PaymentsExportPayrollResponse) GetContent() string {
 	if p == nil {
 		return ""
 	}
-	return p.XML
+	return p.Content
 }
 
 func (p *PaymentsExportPayrollResponse) GetExtraProperties() map[string]interface{} {
@@ -2944,6 +3108,13 @@ func (p *PaymentsExportPayrollResponse) require(field *big.Int) {
 	p.explicitFields.Or(p.explicitFields, field)
 }
 
+// SetFormat sets the Format field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentsExportPayrollResponse) SetFormat(format PaymentsExportPayrollResponseFormat) {
+	p.Format = format
+	p.require(paymentsExportPayrollResponseFieldFormat)
+}
+
 // SetMessageID sets the MessageID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (p *PaymentsExportPayrollResponse) SetMessageID(messageID string) {
@@ -2956,6 +3127,13 @@ func (p *PaymentsExportPayrollResponse) SetMessageID(messageID string) {
 func (p *PaymentsExportPayrollResponse) SetFileName(fileName string) {
 	p.FileName = fileName
 	p.require(paymentsExportPayrollResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PaymentsExportPayrollResponse) SetContentType(contentType string) {
+	p.ContentType = contentType
+	p.require(paymentsExportPayrollResponseFieldContentType)
 }
 
 // SetTransactionCount sets the TransactionCount field and marks it as non-optional;
@@ -2972,11 +3150,11 @@ func (p *PaymentsExportPayrollResponse) SetControlSum(controlSum string) {
 	p.require(paymentsExportPayrollResponseFieldControlSum)
 }
 
-// SetXML sets the XML field and marks it as non-optional;
+// SetContent sets the Content field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (p *PaymentsExportPayrollResponse) SetXML(xml string) {
-	p.XML = xml
-	p.require(paymentsExportPayrollResponseFieldXML)
+func (p *PaymentsExportPayrollResponse) SetContent(content string) {
+	p.Content = content
+	p.require(paymentsExportPayrollResponseFieldContent)
 }
 
 func (p *PaymentsExportPayrollResponse) UnmarshalJSON(data []byte) error {
@@ -3021,35 +3199,73 @@ func (p *PaymentsExportPayrollResponse) String() string {
 	return fmt.Sprintf("%#v", p)
 }
 
+type PaymentsExportPayrollResponseFormat string
+
+const (
+	PaymentsExportPayrollResponseFormatPain00100103   PaymentsExportPayrollResponseFormat = "pain.001.001.03"
+	PaymentsExportPayrollResponseFormatPain00800102   PaymentsExportPayrollResponseFormat = "pain.008.001.02"
+	PaymentsExportPayrollResponseFormatBacsStandard18 PaymentsExportPayrollResponseFormat = "bacs-standard-18"
+	PaymentsExportPayrollResponseFormatNacha          PaymentsExportPayrollResponseFormat = "nacha"
+)
+
+func NewPaymentsExportPayrollResponseFormatFromString(s string) (PaymentsExportPayrollResponseFormat, error) {
+	switch s {
+	case "pain.001.001.03":
+		return PaymentsExportPayrollResponseFormatPain00100103, nil
+	case "pain.008.001.02":
+		return PaymentsExportPayrollResponseFormatPain00800102, nil
+	case "bacs-standard-18":
+		return PaymentsExportPayrollResponseFormatBacsStandard18, nil
+	case "nacha":
+		return PaymentsExportPayrollResponseFormatNacha, nil
+	}
+	var t PaymentsExportPayrollResponseFormat
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p PaymentsExportPayrollResponseFormat) Ptr() *PaymentsExportPayrollResponseFormat {
+	return &p
+}
+
 var (
 	runsApprovePayrollResponseFieldID                           = big.NewInt(1 << 0)
 	runsApprovePayrollResponseFieldYear                         = big.NewInt(1 << 1)
 	runsApprovePayrollResponseFieldMonth                        = big.NewInt(1 << 2)
-	runsApprovePayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
-	runsApprovePayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
-	runsApprovePayrollResponseFieldStatus                       = big.NewInt(1 << 5)
-	runsApprovePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
-	runsApprovePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
-	runsApprovePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
-	runsApprovePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
-	runsApprovePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
-	runsApprovePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
-	runsApprovePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsApprovePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
-	runsApprovePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
-	runsApprovePayrollResponseFieldNotes                        = big.NewInt(1 << 15)
-	runsApprovePayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
-	runsApprovePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
-	runsApprovePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
-	runsApprovePayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	runsApprovePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	runsApprovePayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
+	runsApprovePayrollResponseFieldFrequency                    = big.NewInt(1 << 3)
+	runsApprovePayrollResponseFieldPeriodStart                  = big.NewInt(1 << 4)
+	runsApprovePayrollResponseFieldPeriodEnd                    = big.NewInt(1 << 5)
+	runsApprovePayrollResponseFieldTaxYear                      = big.NewInt(1 << 6)
+	runsApprovePayrollResponseFieldTaxPeriod                    = big.NewInt(1 << 7)
+	runsApprovePayrollResponseFieldCountryCode                  = big.NewInt(1 << 8)
+	runsApprovePayrollResponseFieldPayDate                      = big.NewInt(1 << 9)
+	runsApprovePayrollResponseFieldStatus                       = big.NewInt(1 << 10)
+	runsApprovePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 11)
+	runsApprovePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 12)
+	runsApprovePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 13)
+	runsApprovePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 14)
+	runsApprovePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 15)
+	runsApprovePayrollResponseFieldComponentTotals              = big.NewInt(1 << 16)
+	runsApprovePayrollResponseFieldNetTotal                     = big.NewInt(1 << 17)
+	runsApprovePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 18)
+	runsApprovePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 19)
+	runsApprovePayrollResponseFieldNotes                        = big.NewInt(1 << 20)
+	runsApprovePayrollResponseFieldWarnings                     = big.NewInt(1 << 21)
+	runsApprovePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 22)
+	runsApprovePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 23)
+	runsApprovePayrollResponseFieldReversedAt                   = big.NewInt(1 << 24)
+	runsApprovePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 25)
+	runsApprovePayrollResponseFieldReversalReason               = big.NewInt(1 << 26)
 )
 
 type RunsApprovePayrollResponse struct {
 	ID                           string                                           `json:"id" url:"id"`
 	Year                         int64                                            `json:"year" url:"year"`
 	Month                        int64                                            `json:"month" url:"month"`
+	Frequency                    RunsApprovePayrollResponseFrequency              `json:"frequency" url:"frequency"`
+	PeriodStart                  string                                           `json:"periodStart" url:"periodStart"`
+	PeriodEnd                    string                                           `json:"periodEnd" url:"periodEnd"`
+	TaxYear                      int64                                            `json:"taxYear" url:"taxYear"`
+	TaxPeriod                    *int64                                           `json:"taxPeriod,omitempty" url:"taxPeriod,omitempty"`
 	CountryCode                  string                                           `json:"countryCode" url:"countryCode"`
 	PayDate                      *time.Time                                       `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                       RunsApprovePayrollResponseStatus                 `json:"status" url:"status"`
@@ -3096,6 +3312,41 @@ func (r *RunsApprovePayrollResponse) GetMonth() int64 {
 		return 0
 	}
 	return r.Month
+}
+
+func (r *RunsApprovePayrollResponse) GetFrequency() RunsApprovePayrollResponseFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RunsApprovePayrollResponse) GetPeriodStart() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodStart
+}
+
+func (r *RunsApprovePayrollResponse) GetPeriodEnd() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodEnd
+}
+
+func (r *RunsApprovePayrollResponse) GetTaxYear() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.TaxYear
+}
+
+func (r *RunsApprovePayrollResponse) GetTaxPeriod() *int64 {
+	if r == nil {
+		return nil
+	}
+	return r.TaxPeriod
 }
 
 func (r *RunsApprovePayrollResponse) GetCountryCode() string {
@@ -3264,6 +3515,41 @@ func (r *RunsApprovePayrollResponse) SetYear(year int64) {
 func (r *RunsApprovePayrollResponse) SetMonth(month int64) {
 	r.Month = month
 	r.require(runsApprovePayrollResponseFieldMonth)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetFrequency(frequency RunsApprovePayrollResponseFrequency) {
+	r.Frequency = frequency
+	r.require(runsApprovePayrollResponseFieldFrequency)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetPeriodStart(periodStart string) {
+	r.PeriodStart = periodStart
+	r.require(runsApprovePayrollResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetPeriodEnd(periodEnd string) {
+	r.PeriodEnd = periodEnd
+	r.require(runsApprovePayrollResponseFieldPeriodEnd)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetTaxYear(taxYear int64) {
+	r.TaxYear = taxYear
+	r.require(runsApprovePayrollResponseFieldTaxYear)
+}
+
+// SetTaxPeriod sets the TaxPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsApprovePayrollResponse) SetTaxPeriod(taxPeriod *int64) {
+	r.TaxPeriod = taxPeriod
+	r.require(runsApprovePayrollResponseFieldTaxPeriod)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -3656,6 +3942,37 @@ func (r RunsApprovePayrollResponseComponentTotalsItemKind) Ptr() *RunsApprovePay
 	return &r
 }
 
+type RunsApprovePayrollResponseFrequency string
+
+const (
+	RunsApprovePayrollResponseFrequencyMonthly     RunsApprovePayrollResponseFrequency = "monthly"
+	RunsApprovePayrollResponseFrequencySemimonthly RunsApprovePayrollResponseFrequency = "semimonthly"
+	RunsApprovePayrollResponseFrequencyFourWeekly  RunsApprovePayrollResponseFrequency = "four_weekly"
+	RunsApprovePayrollResponseFrequencyBiweekly    RunsApprovePayrollResponseFrequency = "biweekly"
+	RunsApprovePayrollResponseFrequencyWeekly      RunsApprovePayrollResponseFrequency = "weekly"
+)
+
+func NewRunsApprovePayrollResponseFrequencyFromString(s string) (RunsApprovePayrollResponseFrequency, error) {
+	switch s {
+	case "monthly":
+		return RunsApprovePayrollResponseFrequencyMonthly, nil
+	case "semimonthly":
+		return RunsApprovePayrollResponseFrequencySemimonthly, nil
+	case "four_weekly":
+		return RunsApprovePayrollResponseFrequencyFourWeekly, nil
+	case "biweekly":
+		return RunsApprovePayrollResponseFrequencyBiweekly, nil
+	case "weekly":
+		return RunsApprovePayrollResponseFrequencyWeekly, nil
+	}
+	var t RunsApprovePayrollResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsApprovePayrollResponseFrequency) Ptr() *RunsApprovePayrollResponseFrequency {
+	return &r
+}
+
 type RunsApprovePayrollResponseStatus string
 
 const (
@@ -3763,6 +4080,37 @@ func (r *RunsCancelPayrollResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", r)
+}
+
+type RunsCreatePayrollRequestFrequency string
+
+const (
+	RunsCreatePayrollRequestFrequencyMonthly     RunsCreatePayrollRequestFrequency = "monthly"
+	RunsCreatePayrollRequestFrequencySemimonthly RunsCreatePayrollRequestFrequency = "semimonthly"
+	RunsCreatePayrollRequestFrequencyFourWeekly  RunsCreatePayrollRequestFrequency = "four_weekly"
+	RunsCreatePayrollRequestFrequencyBiweekly    RunsCreatePayrollRequestFrequency = "biweekly"
+	RunsCreatePayrollRequestFrequencyWeekly      RunsCreatePayrollRequestFrequency = "weekly"
+)
+
+func NewRunsCreatePayrollRequestFrequencyFromString(s string) (RunsCreatePayrollRequestFrequency, error) {
+	switch s {
+	case "monthly":
+		return RunsCreatePayrollRequestFrequencyMonthly, nil
+	case "semimonthly":
+		return RunsCreatePayrollRequestFrequencySemimonthly, nil
+	case "four_weekly":
+		return RunsCreatePayrollRequestFrequencyFourWeekly, nil
+	case "biweekly":
+		return RunsCreatePayrollRequestFrequencyBiweekly, nil
+	case "weekly":
+		return RunsCreatePayrollRequestFrequencyWeekly, nil
+	}
+	var t RunsCreatePayrollRequestFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsCreatePayrollRequestFrequency) Ptr() *RunsCreatePayrollRequestFrequency {
+	return &r
 }
 
 var (
@@ -4249,32 +4597,42 @@ var (
 	runsCreatePayrollResponseFieldID                           = big.NewInt(1 << 0)
 	runsCreatePayrollResponseFieldYear                         = big.NewInt(1 << 1)
 	runsCreatePayrollResponseFieldMonth                        = big.NewInt(1 << 2)
-	runsCreatePayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
-	runsCreatePayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
-	runsCreatePayrollResponseFieldStatus                       = big.NewInt(1 << 5)
-	runsCreatePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
-	runsCreatePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
-	runsCreatePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
-	runsCreatePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
-	runsCreatePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
-	runsCreatePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
-	runsCreatePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsCreatePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
-	runsCreatePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
-	runsCreatePayrollResponseFieldNotes                        = big.NewInt(1 << 15)
-	runsCreatePayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
-	runsCreatePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
-	runsCreatePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
-	runsCreatePayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	runsCreatePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	runsCreatePayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
-	runsCreatePayrollResponseFieldLines                        = big.NewInt(1 << 22)
+	runsCreatePayrollResponseFieldFrequency                    = big.NewInt(1 << 3)
+	runsCreatePayrollResponseFieldPeriodStart                  = big.NewInt(1 << 4)
+	runsCreatePayrollResponseFieldPeriodEnd                    = big.NewInt(1 << 5)
+	runsCreatePayrollResponseFieldTaxYear                      = big.NewInt(1 << 6)
+	runsCreatePayrollResponseFieldTaxPeriod                    = big.NewInt(1 << 7)
+	runsCreatePayrollResponseFieldCountryCode                  = big.NewInt(1 << 8)
+	runsCreatePayrollResponseFieldPayDate                      = big.NewInt(1 << 9)
+	runsCreatePayrollResponseFieldStatus                       = big.NewInt(1 << 10)
+	runsCreatePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 11)
+	runsCreatePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 12)
+	runsCreatePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 13)
+	runsCreatePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 14)
+	runsCreatePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 15)
+	runsCreatePayrollResponseFieldComponentTotals              = big.NewInt(1 << 16)
+	runsCreatePayrollResponseFieldNetTotal                     = big.NewInt(1 << 17)
+	runsCreatePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 18)
+	runsCreatePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 19)
+	runsCreatePayrollResponseFieldNotes                        = big.NewInt(1 << 20)
+	runsCreatePayrollResponseFieldWarnings                     = big.NewInt(1 << 21)
+	runsCreatePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 22)
+	runsCreatePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 23)
+	runsCreatePayrollResponseFieldReversedAt                   = big.NewInt(1 << 24)
+	runsCreatePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 25)
+	runsCreatePayrollResponseFieldReversalReason               = big.NewInt(1 << 26)
+	runsCreatePayrollResponseFieldLines                        = big.NewInt(1 << 27)
 )
 
 type RunsCreatePayrollResponse struct {
 	ID                           string                                          `json:"id" url:"id"`
 	Year                         int64                                           `json:"year" url:"year"`
 	Month                        int64                                           `json:"month" url:"month"`
+	Frequency                    RunsCreatePayrollResponseFrequency              `json:"frequency" url:"frequency"`
+	PeriodStart                  string                                          `json:"periodStart" url:"periodStart"`
+	PeriodEnd                    string                                          `json:"periodEnd" url:"periodEnd"`
+	TaxYear                      int64                                           `json:"taxYear" url:"taxYear"`
+	TaxPeriod                    *int64                                          `json:"taxPeriod,omitempty" url:"taxPeriod,omitempty"`
 	CountryCode                  string                                          `json:"countryCode" url:"countryCode"`
 	PayDate                      *time.Time                                      `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                       RunsCreatePayrollResponseStatus                 `json:"status" url:"status"`
@@ -4322,6 +4680,41 @@ func (r *RunsCreatePayrollResponse) GetMonth() int64 {
 		return 0
 	}
 	return r.Month
+}
+
+func (r *RunsCreatePayrollResponse) GetFrequency() RunsCreatePayrollResponseFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RunsCreatePayrollResponse) GetPeriodStart() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodStart
+}
+
+func (r *RunsCreatePayrollResponse) GetPeriodEnd() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodEnd
+}
+
+func (r *RunsCreatePayrollResponse) GetTaxYear() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.TaxYear
+}
+
+func (r *RunsCreatePayrollResponse) GetTaxPeriod() *int64 {
+	if r == nil {
+		return nil
+	}
+	return r.TaxPeriod
 }
 
 func (r *RunsCreatePayrollResponse) GetCountryCode() string {
@@ -4497,6 +4890,41 @@ func (r *RunsCreatePayrollResponse) SetYear(year int64) {
 func (r *RunsCreatePayrollResponse) SetMonth(month int64) {
 	r.Month = month
 	r.require(runsCreatePayrollResponseFieldMonth)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetFrequency(frequency RunsCreatePayrollResponseFrequency) {
+	r.Frequency = frequency
+	r.require(runsCreatePayrollResponseFieldFrequency)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetPeriodStart(periodStart string) {
+	r.PeriodStart = periodStart
+	r.require(runsCreatePayrollResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetPeriodEnd(periodEnd string) {
+	r.PeriodEnd = periodEnd
+	r.require(runsCreatePayrollResponseFieldPeriodEnd)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetTaxYear(taxYear int64) {
+	r.TaxYear = taxYear
+	r.require(runsCreatePayrollResponseFieldTaxYear)
+}
+
+// SetTaxPeriod sets the TaxPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsCreatePayrollResponse) SetTaxPeriod(taxPeriod *int64) {
+	r.TaxPeriod = taxPeriod
+	r.require(runsCreatePayrollResponseFieldTaxPeriod)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -4893,6 +5321,37 @@ func NewRunsCreatePayrollResponseComponentTotalsItemKindFromString(s string) (Ru
 }
 
 func (r RunsCreatePayrollResponseComponentTotalsItemKind) Ptr() *RunsCreatePayrollResponseComponentTotalsItemKind {
+	return &r
+}
+
+type RunsCreatePayrollResponseFrequency string
+
+const (
+	RunsCreatePayrollResponseFrequencyMonthly     RunsCreatePayrollResponseFrequency = "monthly"
+	RunsCreatePayrollResponseFrequencySemimonthly RunsCreatePayrollResponseFrequency = "semimonthly"
+	RunsCreatePayrollResponseFrequencyFourWeekly  RunsCreatePayrollResponseFrequency = "four_weekly"
+	RunsCreatePayrollResponseFrequencyBiweekly    RunsCreatePayrollResponseFrequency = "biweekly"
+	RunsCreatePayrollResponseFrequencyWeekly      RunsCreatePayrollResponseFrequency = "weekly"
+)
+
+func NewRunsCreatePayrollResponseFrequencyFromString(s string) (RunsCreatePayrollResponseFrequency, error) {
+	switch s {
+	case "monthly":
+		return RunsCreatePayrollResponseFrequencyMonthly, nil
+	case "semimonthly":
+		return RunsCreatePayrollResponseFrequencySemimonthly, nil
+	case "four_weekly":
+		return RunsCreatePayrollResponseFrequencyFourWeekly, nil
+	case "biweekly":
+		return RunsCreatePayrollResponseFrequencyBiweekly, nil
+	case "weekly":
+		return RunsCreatePayrollResponseFrequencyWeekly, nil
+	}
+	var t RunsCreatePayrollResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsCreatePayrollResponseFrequency) Ptr() *RunsCreatePayrollResponseFrequency {
 	return &r
 }
 
@@ -5740,32 +6199,42 @@ var (
 	runsGetPayrollResponseFieldID                           = big.NewInt(1 << 0)
 	runsGetPayrollResponseFieldYear                         = big.NewInt(1 << 1)
 	runsGetPayrollResponseFieldMonth                        = big.NewInt(1 << 2)
-	runsGetPayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
-	runsGetPayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
-	runsGetPayrollResponseFieldStatus                       = big.NewInt(1 << 5)
-	runsGetPayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
-	runsGetPayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
-	runsGetPayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
-	runsGetPayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
-	runsGetPayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
-	runsGetPayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
-	runsGetPayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsGetPayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
-	runsGetPayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
-	runsGetPayrollResponseFieldNotes                        = big.NewInt(1 << 15)
-	runsGetPayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
-	runsGetPayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
-	runsGetPayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
-	runsGetPayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	runsGetPayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	runsGetPayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
-	runsGetPayrollResponseFieldLines                        = big.NewInt(1 << 22)
+	runsGetPayrollResponseFieldFrequency                    = big.NewInt(1 << 3)
+	runsGetPayrollResponseFieldPeriodStart                  = big.NewInt(1 << 4)
+	runsGetPayrollResponseFieldPeriodEnd                    = big.NewInt(1 << 5)
+	runsGetPayrollResponseFieldTaxYear                      = big.NewInt(1 << 6)
+	runsGetPayrollResponseFieldTaxPeriod                    = big.NewInt(1 << 7)
+	runsGetPayrollResponseFieldCountryCode                  = big.NewInt(1 << 8)
+	runsGetPayrollResponseFieldPayDate                      = big.NewInt(1 << 9)
+	runsGetPayrollResponseFieldStatus                       = big.NewInt(1 << 10)
+	runsGetPayrollResponseFieldGrossTotal                   = big.NewInt(1 << 11)
+	runsGetPayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 12)
+	runsGetPayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 13)
+	runsGetPayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 14)
+	runsGetPayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 15)
+	runsGetPayrollResponseFieldComponentTotals              = big.NewInt(1 << 16)
+	runsGetPayrollResponseFieldNetTotal                     = big.NewInt(1 << 17)
+	runsGetPayrollResponseFieldPaidAmount                   = big.NewInt(1 << 18)
+	runsGetPayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 19)
+	runsGetPayrollResponseFieldNotes                        = big.NewInt(1 << 20)
+	runsGetPayrollResponseFieldWarnings                     = big.NewInt(1 << 21)
+	runsGetPayrollResponseFieldCreatedAt                    = big.NewInt(1 << 22)
+	runsGetPayrollResponseFieldApprovedAt                   = big.NewInt(1 << 23)
+	runsGetPayrollResponseFieldReversedAt                   = big.NewInt(1 << 24)
+	runsGetPayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 25)
+	runsGetPayrollResponseFieldReversalReason               = big.NewInt(1 << 26)
+	runsGetPayrollResponseFieldLines                        = big.NewInt(1 << 27)
 )
 
 type RunsGetPayrollResponse struct {
 	ID                           string                                       `json:"id" url:"id"`
 	Year                         int64                                        `json:"year" url:"year"`
 	Month                        int64                                        `json:"month" url:"month"`
+	Frequency                    RunsGetPayrollResponseFrequency              `json:"frequency" url:"frequency"`
+	PeriodStart                  string                                       `json:"periodStart" url:"periodStart"`
+	PeriodEnd                    string                                       `json:"periodEnd" url:"periodEnd"`
+	TaxYear                      int64                                        `json:"taxYear" url:"taxYear"`
+	TaxPeriod                    *int64                                       `json:"taxPeriod,omitempty" url:"taxPeriod,omitempty"`
 	CountryCode                  string                                       `json:"countryCode" url:"countryCode"`
 	PayDate                      *time.Time                                   `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                       RunsGetPayrollResponseStatus                 `json:"status" url:"status"`
@@ -5813,6 +6282,41 @@ func (r *RunsGetPayrollResponse) GetMonth() int64 {
 		return 0
 	}
 	return r.Month
+}
+
+func (r *RunsGetPayrollResponse) GetFrequency() RunsGetPayrollResponseFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RunsGetPayrollResponse) GetPeriodStart() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodStart
+}
+
+func (r *RunsGetPayrollResponse) GetPeriodEnd() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodEnd
+}
+
+func (r *RunsGetPayrollResponse) GetTaxYear() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.TaxYear
+}
+
+func (r *RunsGetPayrollResponse) GetTaxPeriod() *int64 {
+	if r == nil {
+		return nil
+	}
+	return r.TaxPeriod
 }
 
 func (r *RunsGetPayrollResponse) GetCountryCode() string {
@@ -5988,6 +6492,41 @@ func (r *RunsGetPayrollResponse) SetYear(year int64) {
 func (r *RunsGetPayrollResponse) SetMonth(month int64) {
 	r.Month = month
 	r.require(runsGetPayrollResponseFieldMonth)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetFrequency(frequency RunsGetPayrollResponseFrequency) {
+	r.Frequency = frequency
+	r.require(runsGetPayrollResponseFieldFrequency)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetPeriodStart(periodStart string) {
+	r.PeriodStart = periodStart
+	r.require(runsGetPayrollResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetPeriodEnd(periodEnd string) {
+	r.PeriodEnd = periodEnd
+	r.require(runsGetPayrollResponseFieldPeriodEnd)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetTaxYear(taxYear int64) {
+	r.TaxYear = taxYear
+	r.require(runsGetPayrollResponseFieldTaxYear)
+}
+
+// SetTaxPeriod sets the TaxPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsGetPayrollResponse) SetTaxPeriod(taxPeriod *int64) {
+	r.TaxPeriod = taxPeriod
+	r.require(runsGetPayrollResponseFieldTaxPeriod)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -6384,6 +6923,37 @@ func NewRunsGetPayrollResponseComponentTotalsItemKindFromString(s string) (RunsG
 }
 
 func (r RunsGetPayrollResponseComponentTotalsItemKind) Ptr() *RunsGetPayrollResponseComponentTotalsItemKind {
+	return &r
+}
+
+type RunsGetPayrollResponseFrequency string
+
+const (
+	RunsGetPayrollResponseFrequencyMonthly     RunsGetPayrollResponseFrequency = "monthly"
+	RunsGetPayrollResponseFrequencySemimonthly RunsGetPayrollResponseFrequency = "semimonthly"
+	RunsGetPayrollResponseFrequencyFourWeekly  RunsGetPayrollResponseFrequency = "four_weekly"
+	RunsGetPayrollResponseFrequencyBiweekly    RunsGetPayrollResponseFrequency = "biweekly"
+	RunsGetPayrollResponseFrequencyWeekly      RunsGetPayrollResponseFrequency = "weekly"
+)
+
+func NewRunsGetPayrollResponseFrequencyFromString(s string) (RunsGetPayrollResponseFrequency, error) {
+	switch s {
+	case "monthly":
+		return RunsGetPayrollResponseFrequencyMonthly, nil
+	case "semimonthly":
+		return RunsGetPayrollResponseFrequencySemimonthly, nil
+	case "four_weekly":
+		return RunsGetPayrollResponseFrequencyFourWeekly, nil
+	case "biweekly":
+		return RunsGetPayrollResponseFrequencyBiweekly, nil
+	case "weekly":
+		return RunsGetPayrollResponseFrequencyWeekly, nil
+	}
+	var t RunsGetPayrollResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsGetPayrollResponseFrequency) Ptr() *RunsGetPayrollResponseFrequency {
 	return &r
 }
 
@@ -7834,31 +8404,41 @@ var (
 	runsListPayrollResponseRowsItemFieldID                           = big.NewInt(1 << 0)
 	runsListPayrollResponseRowsItemFieldYear                         = big.NewInt(1 << 1)
 	runsListPayrollResponseRowsItemFieldMonth                        = big.NewInt(1 << 2)
-	runsListPayrollResponseRowsItemFieldCountryCode                  = big.NewInt(1 << 3)
-	runsListPayrollResponseRowsItemFieldPayDate                      = big.NewInt(1 << 4)
-	runsListPayrollResponseRowsItemFieldStatus                       = big.NewInt(1 << 5)
-	runsListPayrollResponseRowsItemFieldGrossTotal                   = big.NewInt(1 << 6)
-	runsListPayrollResponseRowsItemFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
-	runsListPayrollResponseRowsItemFieldIncomeTaxTotal               = big.NewInt(1 << 8)
-	runsListPayrollResponseRowsItemFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
-	runsListPayrollResponseRowsItemFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
-	runsListPayrollResponseRowsItemFieldComponentTotals              = big.NewInt(1 << 11)
-	runsListPayrollResponseRowsItemFieldNetTotal                     = big.NewInt(1 << 12)
-	runsListPayrollResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 13)
-	runsListPayrollResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 14)
-	runsListPayrollResponseRowsItemFieldNotes                        = big.NewInt(1 << 15)
-	runsListPayrollResponseRowsItemFieldWarnings                     = big.NewInt(1 << 16)
-	runsListPayrollResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 17)
-	runsListPayrollResponseRowsItemFieldApprovedAt                   = big.NewInt(1 << 18)
-	runsListPayrollResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 19)
-	runsListPayrollResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	runsListPayrollResponseRowsItemFieldReversalReason               = big.NewInt(1 << 21)
+	runsListPayrollResponseRowsItemFieldFrequency                    = big.NewInt(1 << 3)
+	runsListPayrollResponseRowsItemFieldPeriodStart                  = big.NewInt(1 << 4)
+	runsListPayrollResponseRowsItemFieldPeriodEnd                    = big.NewInt(1 << 5)
+	runsListPayrollResponseRowsItemFieldTaxYear                      = big.NewInt(1 << 6)
+	runsListPayrollResponseRowsItemFieldTaxPeriod                    = big.NewInt(1 << 7)
+	runsListPayrollResponseRowsItemFieldCountryCode                  = big.NewInt(1 << 8)
+	runsListPayrollResponseRowsItemFieldPayDate                      = big.NewInt(1 << 9)
+	runsListPayrollResponseRowsItemFieldStatus                       = big.NewInt(1 << 10)
+	runsListPayrollResponseRowsItemFieldGrossTotal                   = big.NewInt(1 << 11)
+	runsListPayrollResponseRowsItemFieldTaxAllowanceTotal            = big.NewInt(1 << 12)
+	runsListPayrollResponseRowsItemFieldIncomeTaxTotal               = big.NewInt(1 << 13)
+	runsListPayrollResponseRowsItemFieldEmployeeContributionsTotal   = big.NewInt(1 << 14)
+	runsListPayrollResponseRowsItemFieldEmployerContributionsTotal   = big.NewInt(1 << 15)
+	runsListPayrollResponseRowsItemFieldComponentTotals              = big.NewInt(1 << 16)
+	runsListPayrollResponseRowsItemFieldNetTotal                     = big.NewInt(1 << 17)
+	runsListPayrollResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 18)
+	runsListPayrollResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 19)
+	runsListPayrollResponseRowsItemFieldNotes                        = big.NewInt(1 << 20)
+	runsListPayrollResponseRowsItemFieldWarnings                     = big.NewInt(1 << 21)
+	runsListPayrollResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 22)
+	runsListPayrollResponseRowsItemFieldApprovedAt                   = big.NewInt(1 << 23)
+	runsListPayrollResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 24)
+	runsListPayrollResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 25)
+	runsListPayrollResponseRowsItemFieldReversalReason               = big.NewInt(1 << 26)
 )
 
 type RunsListPayrollResponseRowsItem struct {
 	ID                           string                                                `json:"id" url:"id"`
 	Year                         int64                                                 `json:"year" url:"year"`
 	Month                        int64                                                 `json:"month" url:"month"`
+	Frequency                    RunsListPayrollResponseRowsItemFrequency              `json:"frequency" url:"frequency"`
+	PeriodStart                  string                                                `json:"periodStart" url:"periodStart"`
+	PeriodEnd                    string                                                `json:"periodEnd" url:"periodEnd"`
+	TaxYear                      int64                                                 `json:"taxYear" url:"taxYear"`
+	TaxPeriod                    *int64                                                `json:"taxPeriod,omitempty" url:"taxPeriod,omitempty"`
 	CountryCode                  string                                                `json:"countryCode" url:"countryCode"`
 	PayDate                      *time.Time                                            `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                       RunsListPayrollResponseRowsItemStatus                 `json:"status" url:"status"`
@@ -7905,6 +8485,41 @@ func (r *RunsListPayrollResponseRowsItem) GetMonth() int64 {
 		return 0
 	}
 	return r.Month
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetFrequency() RunsListPayrollResponseRowsItemFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetPeriodStart() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodStart
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetPeriodEnd() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodEnd
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetTaxYear() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.TaxYear
+}
+
+func (r *RunsListPayrollResponseRowsItem) GetTaxPeriod() *int64 {
+	if r == nil {
+		return nil
+	}
+	return r.TaxPeriod
 }
 
 func (r *RunsListPayrollResponseRowsItem) GetCountryCode() string {
@@ -8073,6 +8688,41 @@ func (r *RunsListPayrollResponseRowsItem) SetYear(year int64) {
 func (r *RunsListPayrollResponseRowsItem) SetMonth(month int64) {
 	r.Month = month
 	r.require(runsListPayrollResponseRowsItemFieldMonth)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetFrequency(frequency RunsListPayrollResponseRowsItemFrequency) {
+	r.Frequency = frequency
+	r.require(runsListPayrollResponseRowsItemFieldFrequency)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetPeriodStart(periodStart string) {
+	r.PeriodStart = periodStart
+	r.require(runsListPayrollResponseRowsItemFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetPeriodEnd(periodEnd string) {
+	r.PeriodEnd = periodEnd
+	r.require(runsListPayrollResponseRowsItemFieldPeriodEnd)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetTaxYear(taxYear int64) {
+	r.TaxYear = taxYear
+	r.require(runsListPayrollResponseRowsItemFieldTaxYear)
+}
+
+// SetTaxPeriod sets the TaxPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsListPayrollResponseRowsItem) SetTaxPeriod(taxPeriod *int64) {
+	r.TaxPeriod = taxPeriod
+	r.require(runsListPayrollResponseRowsItemFieldTaxPeriod)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -8465,6 +9115,37 @@ func (r RunsListPayrollResponseRowsItemComponentTotalsItemKind) Ptr() *RunsListP
 	return &r
 }
 
+type RunsListPayrollResponseRowsItemFrequency string
+
+const (
+	RunsListPayrollResponseRowsItemFrequencyMonthly     RunsListPayrollResponseRowsItemFrequency = "monthly"
+	RunsListPayrollResponseRowsItemFrequencySemimonthly RunsListPayrollResponseRowsItemFrequency = "semimonthly"
+	RunsListPayrollResponseRowsItemFrequencyFourWeekly  RunsListPayrollResponseRowsItemFrequency = "four_weekly"
+	RunsListPayrollResponseRowsItemFrequencyBiweekly    RunsListPayrollResponseRowsItemFrequency = "biweekly"
+	RunsListPayrollResponseRowsItemFrequencyWeekly      RunsListPayrollResponseRowsItemFrequency = "weekly"
+)
+
+func NewRunsListPayrollResponseRowsItemFrequencyFromString(s string) (RunsListPayrollResponseRowsItemFrequency, error) {
+	switch s {
+	case "monthly":
+		return RunsListPayrollResponseRowsItemFrequencyMonthly, nil
+	case "semimonthly":
+		return RunsListPayrollResponseRowsItemFrequencySemimonthly, nil
+	case "four_weekly":
+		return RunsListPayrollResponseRowsItemFrequencyFourWeekly, nil
+	case "biweekly":
+		return RunsListPayrollResponseRowsItemFrequencyBiweekly, nil
+	case "weekly":
+		return RunsListPayrollResponseRowsItemFrequencyWeekly, nil
+	}
+	var t RunsListPayrollResponseRowsItemFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsListPayrollResponseRowsItemFrequency) Ptr() *RunsListPayrollResponseRowsItemFrequency {
+	return &r
+}
+
 type RunsListPayrollResponseRowsItemStatus string
 
 const (
@@ -8494,31 +9175,41 @@ var (
 	runsReversePayrollResponseFieldID                           = big.NewInt(1 << 0)
 	runsReversePayrollResponseFieldYear                         = big.NewInt(1 << 1)
 	runsReversePayrollResponseFieldMonth                        = big.NewInt(1 << 2)
-	runsReversePayrollResponseFieldCountryCode                  = big.NewInt(1 << 3)
-	runsReversePayrollResponseFieldPayDate                      = big.NewInt(1 << 4)
-	runsReversePayrollResponseFieldStatus                       = big.NewInt(1 << 5)
-	runsReversePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 6)
-	runsReversePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 7)
-	runsReversePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 8)
-	runsReversePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 9)
-	runsReversePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 10)
-	runsReversePayrollResponseFieldComponentTotals              = big.NewInt(1 << 11)
-	runsReversePayrollResponseFieldNetTotal                     = big.NewInt(1 << 12)
-	runsReversePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 13)
-	runsReversePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 14)
-	runsReversePayrollResponseFieldNotes                        = big.NewInt(1 << 15)
-	runsReversePayrollResponseFieldWarnings                     = big.NewInt(1 << 16)
-	runsReversePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 17)
-	runsReversePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 18)
-	runsReversePayrollResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	runsReversePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	runsReversePayrollResponseFieldReversalReason               = big.NewInt(1 << 21)
+	runsReversePayrollResponseFieldFrequency                    = big.NewInt(1 << 3)
+	runsReversePayrollResponseFieldPeriodStart                  = big.NewInt(1 << 4)
+	runsReversePayrollResponseFieldPeriodEnd                    = big.NewInt(1 << 5)
+	runsReversePayrollResponseFieldTaxYear                      = big.NewInt(1 << 6)
+	runsReversePayrollResponseFieldTaxPeriod                    = big.NewInt(1 << 7)
+	runsReversePayrollResponseFieldCountryCode                  = big.NewInt(1 << 8)
+	runsReversePayrollResponseFieldPayDate                      = big.NewInt(1 << 9)
+	runsReversePayrollResponseFieldStatus                       = big.NewInt(1 << 10)
+	runsReversePayrollResponseFieldGrossTotal                   = big.NewInt(1 << 11)
+	runsReversePayrollResponseFieldTaxAllowanceTotal            = big.NewInt(1 << 12)
+	runsReversePayrollResponseFieldIncomeTaxTotal               = big.NewInt(1 << 13)
+	runsReversePayrollResponseFieldEmployeeContributionsTotal   = big.NewInt(1 << 14)
+	runsReversePayrollResponseFieldEmployerContributionsTotal   = big.NewInt(1 << 15)
+	runsReversePayrollResponseFieldComponentTotals              = big.NewInt(1 << 16)
+	runsReversePayrollResponseFieldNetTotal                     = big.NewInt(1 << 17)
+	runsReversePayrollResponseFieldPaidAmount                   = big.NewInt(1 << 18)
+	runsReversePayrollResponseFieldJournalTransactionID         = big.NewInt(1 << 19)
+	runsReversePayrollResponseFieldNotes                        = big.NewInt(1 << 20)
+	runsReversePayrollResponseFieldWarnings                     = big.NewInt(1 << 21)
+	runsReversePayrollResponseFieldCreatedAt                    = big.NewInt(1 << 22)
+	runsReversePayrollResponseFieldApprovedAt                   = big.NewInt(1 << 23)
+	runsReversePayrollResponseFieldReversedAt                   = big.NewInt(1 << 24)
+	runsReversePayrollResponseFieldReversalJournalTransactionID = big.NewInt(1 << 25)
+	runsReversePayrollResponseFieldReversalReason               = big.NewInt(1 << 26)
 )
 
 type RunsReversePayrollResponse struct {
 	ID                           string                                           `json:"id" url:"id"`
 	Year                         int64                                            `json:"year" url:"year"`
 	Month                        int64                                            `json:"month" url:"month"`
+	Frequency                    RunsReversePayrollResponseFrequency              `json:"frequency" url:"frequency"`
+	PeriodStart                  string                                           `json:"periodStart" url:"periodStart"`
+	PeriodEnd                    string                                           `json:"periodEnd" url:"periodEnd"`
+	TaxYear                      int64                                            `json:"taxYear" url:"taxYear"`
+	TaxPeriod                    *int64                                           `json:"taxPeriod,omitempty" url:"taxPeriod,omitempty"`
 	CountryCode                  string                                           `json:"countryCode" url:"countryCode"`
 	PayDate                      *time.Time                                       `json:"payDate,omitempty" url:"payDate,omitempty" format:"date"`
 	Status                       RunsReversePayrollResponseStatus                 `json:"status" url:"status"`
@@ -8565,6 +9256,41 @@ func (r *RunsReversePayrollResponse) GetMonth() int64 {
 		return 0
 	}
 	return r.Month
+}
+
+func (r *RunsReversePayrollResponse) GetFrequency() RunsReversePayrollResponseFrequency {
+	if r == nil {
+		return ""
+	}
+	return r.Frequency
+}
+
+func (r *RunsReversePayrollResponse) GetPeriodStart() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodStart
+}
+
+func (r *RunsReversePayrollResponse) GetPeriodEnd() string {
+	if r == nil {
+		return ""
+	}
+	return r.PeriodEnd
+}
+
+func (r *RunsReversePayrollResponse) GetTaxYear() int64 {
+	if r == nil {
+		return 0
+	}
+	return r.TaxYear
+}
+
+func (r *RunsReversePayrollResponse) GetTaxPeriod() *int64 {
+	if r == nil {
+		return nil
+	}
+	return r.TaxPeriod
 }
 
 func (r *RunsReversePayrollResponse) GetCountryCode() string {
@@ -8733,6 +9459,41 @@ func (r *RunsReversePayrollResponse) SetYear(year int64) {
 func (r *RunsReversePayrollResponse) SetMonth(month int64) {
 	r.Month = month
 	r.require(runsReversePayrollResponseFieldMonth)
+}
+
+// SetFrequency sets the Frequency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetFrequency(frequency RunsReversePayrollResponseFrequency) {
+	r.Frequency = frequency
+	r.require(runsReversePayrollResponseFieldFrequency)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetPeriodStart(periodStart string) {
+	r.PeriodStart = periodStart
+	r.require(runsReversePayrollResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetPeriodEnd(periodEnd string) {
+	r.PeriodEnd = periodEnd
+	r.require(runsReversePayrollResponseFieldPeriodEnd)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetTaxYear(taxYear int64) {
+	r.TaxYear = taxYear
+	r.require(runsReversePayrollResponseFieldTaxYear)
+}
+
+// SetTaxPeriod sets the TaxPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunsReversePayrollResponse) SetTaxPeriod(taxPeriod *int64) {
+	r.TaxPeriod = taxPeriod
+	r.require(runsReversePayrollResponseFieldTaxPeriod)
 }
 
 // SetCountryCode sets the CountryCode field and marks it as non-optional;
@@ -9122,6 +9883,37 @@ func NewRunsReversePayrollResponseComponentTotalsItemKindFromString(s string) (R
 }
 
 func (r RunsReversePayrollResponseComponentTotalsItemKind) Ptr() *RunsReversePayrollResponseComponentTotalsItemKind {
+	return &r
+}
+
+type RunsReversePayrollResponseFrequency string
+
+const (
+	RunsReversePayrollResponseFrequencyMonthly     RunsReversePayrollResponseFrequency = "monthly"
+	RunsReversePayrollResponseFrequencySemimonthly RunsReversePayrollResponseFrequency = "semimonthly"
+	RunsReversePayrollResponseFrequencyFourWeekly  RunsReversePayrollResponseFrequency = "four_weekly"
+	RunsReversePayrollResponseFrequencyBiweekly    RunsReversePayrollResponseFrequency = "biweekly"
+	RunsReversePayrollResponseFrequencyWeekly      RunsReversePayrollResponseFrequency = "weekly"
+)
+
+func NewRunsReversePayrollResponseFrequencyFromString(s string) (RunsReversePayrollResponseFrequency, error) {
+	switch s {
+	case "monthly":
+		return RunsReversePayrollResponseFrequencyMonthly, nil
+	case "semimonthly":
+		return RunsReversePayrollResponseFrequencySemimonthly, nil
+	case "four_weekly":
+		return RunsReversePayrollResponseFrequencyFourWeekly, nil
+	case "biweekly":
+		return RunsReversePayrollResponseFrequencyBiweekly, nil
+	case "weekly":
+		return RunsReversePayrollResponseFrequencyWeekly, nil
+	}
+	var t RunsReversePayrollResponseFrequency
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r RunsReversePayrollResponseFrequency) Ptr() *RunsReversePayrollResponseFrequency {
 	return &r
 }
 

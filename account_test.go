@@ -631,6 +631,14 @@ func TestSettersCompaniesCreateAccountRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetIdentifiers", func(t *testing.T) {
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueIdentifiers map[string]string
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+		assert.Equal(t, fernTestValueIdentifiers, obj.Identifiers)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsVatPayer", func(t *testing.T) {
 		obj := &CompaniesCreateAccountRequest{}
 		var fernTestValueIsVatPayer *bool
@@ -647,11 +655,43 @@ func TestSettersCompaniesCreateAccountRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatPeriodEndMonth", func(t *testing.T) {
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueVatPeriodEndMonth *int64
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+		assert.Equal(t, fernTestValueVatPeriodEndMonth, obj.VatPeriodEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetFiscalYearEndMonth", func(t *testing.T) {
 		obj := &CompaniesCreateAccountRequest{}
 		var fernTestValueFiscalYearEndMonth *int64
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
 		assert.Equal(t, fernTestValueFiscalYearEndMonth, obj.FiscalYearEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearEndDay", func(t *testing.T) {
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueFiscalYearEndDay *int64
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+		assert.Equal(t, fernTestValueFiscalYearEndDay, obj.FiscalYearEndDay)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekday", func(t *testing.T) {
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueFiscalYearWeekday *int64
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+		assert.Equal(t, fernTestValueFiscalYearWeekday, obj.FiscalYearWeekday)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekRule", func(t *testing.T) {
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueFiscalYearWeekRule *CompaniesCreateAccountRequestFiscalYearWeekRule
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
+		assert.Equal(t, fernTestValueFiscalYearWeekRule, obj.FiscalYearWeekRule)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -1022,6 +1062,37 @@ func TestSettersMarkExplicitCompaniesCreateAccountRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetIdentifiers_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueIdentifiers map[string]string
+
+		// Act
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetIsVatPayer_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -1084,6 +1155,37 @@ func TestSettersMarkExplicitCompaniesCreateAccountRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetVatPeriodEndMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueVatPeriodEndMonth *int64
+
+		// Act
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetFiscalYearEndMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -1092,6 +1194,99 @@ func TestSettersMarkExplicitCompaniesCreateAccountRequest(t *testing.T) {
 
 		// Act
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearEndDay_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueFiscalYearEndDay *int64
+
+		// Act
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekday_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueFiscalYearWeekday *int64
+
+		// Act
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekRule_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequest{}
+		var fernTestValueFiscalYearWeekRule *CompaniesCreateAccountRequestFiscalYearWeekRule
+
+		// Act
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2170,6 +2365,14 @@ func TestSettersCompaniesUpdateAccountRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetIdentifiers", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueIdentifiers map[string]*string
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+		assert.Equal(t, fernTestValueIdentifiers, obj.Identifiers)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsVatPayer", func(t *testing.T) {
 		obj := &CompaniesUpdateAccountRequest{}
 		var fernTestValueIsVatPayer *bool
@@ -2186,11 +2389,43 @@ func TestSettersCompaniesUpdateAccountRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatPeriodEndMonth", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueVatPeriodEndMonth *int64
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+		assert.Equal(t, fernTestValueVatPeriodEndMonth, obj.VatPeriodEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetFiscalYearEndMonth", func(t *testing.T) {
 		obj := &CompaniesUpdateAccountRequest{}
 		var fernTestValueFiscalYearEndMonth *int64
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
 		assert.Equal(t, fernTestValueFiscalYearEndMonth, obj.FiscalYearEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearEndDay", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueFiscalYearEndDay *int64
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+		assert.Equal(t, fernTestValueFiscalYearEndDay, obj.FiscalYearEndDay)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekday", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueFiscalYearWeekday *int64
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+		assert.Equal(t, fernTestValueFiscalYearWeekday, obj.FiscalYearWeekday)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekRule", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueFiscalYearWeekRule *CompaniesUpdateAccountRequestFiscalYearWeekRule
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
+		assert.Equal(t, fernTestValueFiscalYearWeekRule, obj.FiscalYearWeekRule)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -2537,6 +2772,37 @@ func TestSettersMarkExplicitCompaniesUpdateAccountRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetIdentifiers_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueIdentifiers map[string]*string
+
+		// Act
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetIsVatPayer_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -2599,6 +2865,37 @@ func TestSettersMarkExplicitCompaniesUpdateAccountRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetVatPeriodEndMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueVatPeriodEndMonth *int64
+
+		// Act
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetFiscalYearEndMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -2607,6 +2904,99 @@ func TestSettersMarkExplicitCompaniesUpdateAccountRequest(t *testing.T) {
 
 		// Act
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearEndDay_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueFiscalYearEndDay *int64
+
+		// Act
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekday_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueFiscalYearWeekday *int64
+
+		// Act
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekRule_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequest{}
+		var fernTestValueFiscalYearWeekRule *CompaniesUpdateAccountRequestFiscalYearWeekRule
+
+		// Act
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -11271,6 +11661,14 @@ func TestSettersCompaniesContextAccountResponseProfile(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetIdentifiers", func(t *testing.T) {
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueIdentifiers map[string]string
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+		assert.Equal(t, fernTestValueIdentifiers, obj.Identifiers)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSmeExemptionNumber", func(t *testing.T) {
 		obj := &CompaniesContextAccountResponseProfile{}
 		var fernTestValueSmeExemptionNumber *string
@@ -11321,7 +11719,7 @@ func TestSettersCompaniesContextAccountResponseProfile(t *testing.T) {
 
 	t.Run("SetCountryChartTemplate", func(t *testing.T) {
 		obj := &CompaniesContextAccountResponseProfile{}
-		var fernTestValueCountryChartTemplate string
+		var fernTestValueCountryChartTemplate *string
 		obj.SetCountryChartTemplate(fernTestValueCountryChartTemplate)
 		assert.Equal(t, fernTestValueCountryChartTemplate, obj.CountryChartTemplate)
 		assert.NotNil(t, obj.explicitFields)
@@ -11527,11 +11925,43 @@ func TestSettersCompaniesContextAccountResponseProfile(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatPeriodEndMonth", func(t *testing.T) {
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueVatPeriodEndMonth *int64
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+		assert.Equal(t, fernTestValueVatPeriodEndMonth, obj.VatPeriodEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetFiscalYearEndMonth", func(t *testing.T) {
 		obj := &CompaniesContextAccountResponseProfile{}
 		var fernTestValueFiscalYearEndMonth *int64
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
 		assert.Equal(t, fernTestValueFiscalYearEndMonth, obj.FiscalYearEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearEndDay", func(t *testing.T) {
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueFiscalYearEndDay *int64
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+		assert.Equal(t, fernTestValueFiscalYearEndDay, obj.FiscalYearEndDay)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekday", func(t *testing.T) {
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueFiscalYearWeekday *int64
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+		assert.Equal(t, fernTestValueFiscalYearWeekday, obj.FiscalYearWeekday)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekRule", func(t *testing.T) {
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueFiscalYearWeekRule *CompaniesContextAccountResponseProfileFiscalYearWeekRule
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
+		assert.Equal(t, fernTestValueFiscalYearWeekRule, obj.FiscalYearWeekRule)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -11698,6 +12128,39 @@ func TestGettersCompaniesContextAccountResponseProfile(t *testing.T) {
 		_ = obj.GetVatCode() // Should return zero value
 	})
 
+	t.Run("GetIdentifiers", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var expected map[string]string
+		obj.Identifiers = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIdentifiers(), "getter should return the property value")
+	})
+
+	t.Run("GetIdentifiers_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		obj.Identifiers = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIdentifiers(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIdentifiers_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesContextAccountResponseProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIdentifiers() // Should return zero value
+	})
+
 	t.Run("GetSmeExemptionNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -11850,11 +12313,21 @@ func TestGettersCompaniesContextAccountResponseProfile(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CompaniesContextAccountResponseProfile{}
-		var expected string
+		var expected *string
 		obj.CountryChartTemplate = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetCountryChartTemplate(), "getter should return the property value")
+	})
+
+	t.Run("GetCountryChartTemplate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		obj.CountryChartTemplate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCountryChartTemplate(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetCountryChartTemplate_NilReceiver", func(t *testing.T) {
@@ -12644,6 +13117,39 @@ func TestGettersCompaniesContextAccountResponseProfile(t *testing.T) {
 		_ = obj.GetVatPeriod() // Should return zero value
 	})
 
+	t.Run("GetVatPeriodEndMonth", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var expected *int64
+		obj.VatPeriodEndMonth = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatPeriodEndMonth(), "getter should return the property value")
+	})
+
+	t.Run("GetVatPeriodEndMonth_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		obj.VatPeriodEndMonth = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatPeriodEndMonth(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatPeriodEndMonth_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesContextAccountResponseProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatPeriodEndMonth() // Should return zero value
+	})
+
 	t.Run("GetFiscalYearEndMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -12675,6 +13181,105 @@ func TestGettersCompaniesContextAccountResponseProfile(t *testing.T) {
 			}
 		}()
 		_ = obj.GetFiscalYearEndMonth() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearEndDay", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var expected *int64
+		obj.FiscalYearEndDay = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearEndDay(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearEndDay_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		obj.FiscalYearEndDay = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearEndDay(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearEndDay_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesContextAccountResponseProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearEndDay() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearWeekday", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var expected *int64
+		obj.FiscalYearWeekday = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearWeekday(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearWeekday_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		obj.FiscalYearWeekday = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearWeekday(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearWeekday_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesContextAccountResponseProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearWeekday() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearWeekRule", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var expected *CompaniesContextAccountResponseProfileFiscalYearWeekRule
+		obj.FiscalYearWeekRule = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearWeekRule(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearWeekRule_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		obj.FiscalYearWeekRule = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearWeekRule(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearWeekRule_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesContextAccountResponseProfile
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearWeekRule() // Should return zero value
 	})
 
 	t.Run("GetTimeZone", func(t *testing.T) {
@@ -12982,6 +13587,37 @@ func TestSettersMarkExplicitCompaniesContextAccountResponseProfile(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetIdentifiers_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueIdentifiers map[string]string
+
+		// Act
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSmeExemptionNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -13172,7 +13808,7 @@ func TestSettersMarkExplicitCompaniesContextAccountResponseProfile(t *testing.T)
 		t.Parallel()
 		// Arrange
 		obj := &CompaniesContextAccountResponseProfile{}
-		var fernTestValueCountryChartTemplate string
+		var fernTestValueCountryChartTemplate *string
 
 		// Act
 		obj.SetCountryChartTemplate(fernTestValueCountryChartTemplate)
@@ -13974,6 +14610,37 @@ func TestSettersMarkExplicitCompaniesContextAccountResponseProfile(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetVatPeriodEndMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueVatPeriodEndMonth *int64
+
+		// Act
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetFiscalYearEndMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -13982,6 +14649,99 @@ func TestSettersMarkExplicitCompaniesContextAccountResponseProfile(t *testing.T)
 
 		// Act
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearEndDay_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueFiscalYearEndDay *int64
+
+		// Act
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekday_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueFiscalYearWeekday *int64
+
+		// Act
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekRule_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfile{}
+		var fernTestValueFiscalYearWeekRule *CompaniesContextAccountResponseProfileFiscalYearWeekRule
+
+		// Act
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -14226,6 +14986,14 @@ func TestSettersCompaniesContextAccountResponseProfileAddress(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubdivision", func(t *testing.T) {
+		obj := &CompaniesContextAccountResponseProfileAddress{}
+		var fernTestValueSubdivision *string
+		obj.SetSubdivision(fernTestValueSubdivision)
+		assert.Equal(t, fernTestValueSubdivision, obj.Subdivision)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersCompaniesContextAccountResponseProfileAddress(t *testing.T) {
@@ -14361,6 +15129,39 @@ func TestGettersCompaniesContextAccountResponseProfileAddress(t *testing.T) {
 		_ = obj.GetCountryCode() // Should return zero value
 	})
 
+	t.Run("GetSubdivision", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfileAddress{}
+		var expected *string
+		obj.Subdivision = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubdivision(), "getter should return the property value")
+	})
+
+	t.Run("GetSubdivision_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfileAddress{}
+		obj.Subdivision = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubdivision(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubdivision_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesContextAccountResponseProfileAddress
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubdivision() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitCompaniesContextAccountResponseProfileAddress(t *testing.T) {
@@ -14465,6 +15266,37 @@ func TestSettersMarkExplicitCompaniesContextAccountResponseProfileAddress(t *tes
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubdivision_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesContextAccountResponseProfileAddress{}
+		var fernTestValueSubdivision *string
+
+		// Act
+		obj.SetSubdivision(fernTestValueSubdivision)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -14995,6 +15827,14 @@ func TestSettersCompaniesCreateAccountRequestAddress(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubdivision", func(t *testing.T) {
+		obj := &CompaniesCreateAccountRequestAddress{}
+		var fernTestValueSubdivision *string
+		obj.SetSubdivision(fernTestValueSubdivision)
+		assert.Equal(t, fernTestValueSubdivision, obj.Subdivision)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersCompaniesCreateAccountRequestAddress(t *testing.T) {
@@ -15130,6 +15970,39 @@ func TestGettersCompaniesCreateAccountRequestAddress(t *testing.T) {
 		_ = obj.GetCountryCode() // Should return zero value
 	})
 
+	t.Run("GetSubdivision", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequestAddress{}
+		var expected *string
+		obj.Subdivision = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubdivision(), "getter should return the property value")
+	})
+
+	t.Run("GetSubdivision_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequestAddress{}
+		obj.Subdivision = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubdivision(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubdivision_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesCreateAccountRequestAddress
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubdivision() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitCompaniesCreateAccountRequestAddress(t *testing.T) {
@@ -15234,6 +16107,37 @@ func TestSettersMarkExplicitCompaniesCreateAccountRequestAddress(t *testing.T) {
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubdivision_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesCreateAccountRequestAddress{}
+		var fernTestValueSubdivision *string
+
+		// Act
+		obj.SetSubdivision(fernTestValueSubdivision)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -16280,6 +17184,14 @@ func TestSettersCompaniesProfileAccountResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetIdentifiers", func(t *testing.T) {
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueIdentifiers map[string]string
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+		assert.Equal(t, fernTestValueIdentifiers, obj.Identifiers)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSmeExemptionNumber", func(t *testing.T) {
 		obj := &CompaniesProfileAccountResponse{}
 		var fernTestValueSmeExemptionNumber *string
@@ -16330,7 +17242,7 @@ func TestSettersCompaniesProfileAccountResponse(t *testing.T) {
 
 	t.Run("SetCountryChartTemplate", func(t *testing.T) {
 		obj := &CompaniesProfileAccountResponse{}
-		var fernTestValueCountryChartTemplate string
+		var fernTestValueCountryChartTemplate *string
 		obj.SetCountryChartTemplate(fernTestValueCountryChartTemplate)
 		assert.Equal(t, fernTestValueCountryChartTemplate, obj.CountryChartTemplate)
 		assert.NotNil(t, obj.explicitFields)
@@ -16536,11 +17448,43 @@ func TestSettersCompaniesProfileAccountResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatPeriodEndMonth", func(t *testing.T) {
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueVatPeriodEndMonth *int64
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+		assert.Equal(t, fernTestValueVatPeriodEndMonth, obj.VatPeriodEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetFiscalYearEndMonth", func(t *testing.T) {
 		obj := &CompaniesProfileAccountResponse{}
 		var fernTestValueFiscalYearEndMonth *int64
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
 		assert.Equal(t, fernTestValueFiscalYearEndMonth, obj.FiscalYearEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearEndDay", func(t *testing.T) {
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueFiscalYearEndDay *int64
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+		assert.Equal(t, fernTestValueFiscalYearEndDay, obj.FiscalYearEndDay)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekday", func(t *testing.T) {
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueFiscalYearWeekday *int64
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+		assert.Equal(t, fernTestValueFiscalYearWeekday, obj.FiscalYearWeekday)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekRule", func(t *testing.T) {
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueFiscalYearWeekRule *CompaniesProfileAccountResponseFiscalYearWeekRule
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
+		assert.Equal(t, fernTestValueFiscalYearWeekRule, obj.FiscalYearWeekRule)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -16707,6 +17651,39 @@ func TestGettersCompaniesProfileAccountResponse(t *testing.T) {
 		_ = obj.GetVatCode() // Should return zero value
 	})
 
+	t.Run("GetIdentifiers", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var expected map[string]string
+		obj.Identifiers = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIdentifiers(), "getter should return the property value")
+	})
+
+	t.Run("GetIdentifiers_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		obj.Identifiers = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIdentifiers(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIdentifiers_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesProfileAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIdentifiers() // Should return zero value
+	})
+
 	t.Run("GetSmeExemptionNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -16859,11 +17836,21 @@ func TestGettersCompaniesProfileAccountResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CompaniesProfileAccountResponse{}
-		var expected string
+		var expected *string
 		obj.CountryChartTemplate = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetCountryChartTemplate(), "getter should return the property value")
+	})
+
+	t.Run("GetCountryChartTemplate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		obj.CountryChartTemplate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCountryChartTemplate(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetCountryChartTemplate_NilReceiver", func(t *testing.T) {
@@ -17653,6 +18640,39 @@ func TestGettersCompaniesProfileAccountResponse(t *testing.T) {
 		_ = obj.GetVatPeriod() // Should return zero value
 	})
 
+	t.Run("GetVatPeriodEndMonth", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var expected *int64
+		obj.VatPeriodEndMonth = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatPeriodEndMonth(), "getter should return the property value")
+	})
+
+	t.Run("GetVatPeriodEndMonth_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		obj.VatPeriodEndMonth = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatPeriodEndMonth(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatPeriodEndMonth_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesProfileAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatPeriodEndMonth() // Should return zero value
+	})
+
 	t.Run("GetFiscalYearEndMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -17684,6 +18704,105 @@ func TestGettersCompaniesProfileAccountResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetFiscalYearEndMonth() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearEndDay", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var expected *int64
+		obj.FiscalYearEndDay = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearEndDay(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearEndDay_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		obj.FiscalYearEndDay = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearEndDay(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearEndDay_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesProfileAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearEndDay() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearWeekday", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var expected *int64
+		obj.FiscalYearWeekday = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearWeekday(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearWeekday_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		obj.FiscalYearWeekday = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearWeekday(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearWeekday_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesProfileAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearWeekday() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearWeekRule", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var expected *CompaniesProfileAccountResponseFiscalYearWeekRule
+		obj.FiscalYearWeekRule = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearWeekRule(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearWeekRule_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		obj.FiscalYearWeekRule = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearWeekRule(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearWeekRule_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesProfileAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearWeekRule() // Should return zero value
 	})
 
 	t.Run("GetTimeZone", func(t *testing.T) {
@@ -17991,6 +19110,37 @@ func TestSettersMarkExplicitCompaniesProfileAccountResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetIdentifiers_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueIdentifiers map[string]string
+
+		// Act
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSmeExemptionNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -18181,7 +19331,7 @@ func TestSettersMarkExplicitCompaniesProfileAccountResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CompaniesProfileAccountResponse{}
-		var fernTestValueCountryChartTemplate string
+		var fernTestValueCountryChartTemplate *string
 
 		// Act
 		obj.SetCountryChartTemplate(fernTestValueCountryChartTemplate)
@@ -18983,6 +20133,37 @@ func TestSettersMarkExplicitCompaniesProfileAccountResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetVatPeriodEndMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueVatPeriodEndMonth *int64
+
+		// Act
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetFiscalYearEndMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -18991,6 +20172,99 @@ func TestSettersMarkExplicitCompaniesProfileAccountResponse(t *testing.T) {
 
 		// Act
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearEndDay_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueFiscalYearEndDay *int64
+
+		// Act
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekday_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueFiscalYearWeekday *int64
+
+		// Act
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekRule_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponse{}
+		var fernTestValueFiscalYearWeekRule *CompaniesProfileAccountResponseFiscalYearWeekRule
+
+		// Act
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -19235,6 +20509,14 @@ func TestSettersCompaniesProfileAccountResponseAddress(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubdivision", func(t *testing.T) {
+		obj := &CompaniesProfileAccountResponseAddress{}
+		var fernTestValueSubdivision *string
+		obj.SetSubdivision(fernTestValueSubdivision)
+		assert.Equal(t, fernTestValueSubdivision, obj.Subdivision)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersCompaniesProfileAccountResponseAddress(t *testing.T) {
@@ -19370,6 +20652,39 @@ func TestGettersCompaniesProfileAccountResponseAddress(t *testing.T) {
 		_ = obj.GetCountryCode() // Should return zero value
 	})
 
+	t.Run("GetSubdivision", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponseAddress{}
+		var expected *string
+		obj.Subdivision = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubdivision(), "getter should return the property value")
+	})
+
+	t.Run("GetSubdivision_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponseAddress{}
+		obj.Subdivision = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubdivision(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubdivision_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesProfileAccountResponseAddress
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubdivision() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitCompaniesProfileAccountResponseAddress(t *testing.T) {
@@ -19497,6 +20812,37 @@ func TestSettersMarkExplicitCompaniesProfileAccountResponseAddress(t *testing.T)
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSubdivision_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesProfileAccountResponseAddress{}
+		var fernTestValueSubdivision *string
+
+		// Act
+		obj.SetSubdivision(fernTestValueSubdivision)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 }
 
 func TestSettersCompaniesSelectAccountResponse(t *testing.T) {
@@ -19600,6 +20946,14 @@ func TestSettersCompaniesUpdateAccountRequestAddress(t *testing.T) {
 		var fernTestValueCountryCode *string
 		obj.SetCountryCode(fernTestValueCountryCode)
 		assert.Equal(t, fernTestValueCountryCode, obj.CountryCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSubdivision", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountRequestAddress{}
+		var fernTestValueSubdivision *string
+		obj.SetSubdivision(fernTestValueSubdivision)
+		assert.Equal(t, fernTestValueSubdivision, obj.Subdivision)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -19738,6 +21092,39 @@ func TestGettersCompaniesUpdateAccountRequestAddress(t *testing.T) {
 		_ = obj.GetCountryCode() // Should return zero value
 	})
 
+	t.Run("GetSubdivision", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequestAddress{}
+		var expected *string
+		obj.Subdivision = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubdivision(), "getter should return the property value")
+	})
+
+	t.Run("GetSubdivision_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequestAddress{}
+		obj.Subdivision = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubdivision(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubdivision_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesUpdateAccountRequestAddress
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubdivision() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitCompaniesUpdateAccountRequestAddress(t *testing.T) {
@@ -19842,6 +21229,37 @@ func TestSettersMarkExplicitCompaniesUpdateAccountRequestAddress(t *testing.T) {
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubdivision_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountRequestAddress{}
+		var fernTestValueSubdivision *string
+
+		// Act
+		obj.SetSubdivision(fernTestValueSubdivision)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -20095,6 +21513,14 @@ func TestSettersCompaniesUpdateAccountResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetIdentifiers", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueIdentifiers map[string]string
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+		assert.Equal(t, fernTestValueIdentifiers, obj.Identifiers)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetSmeExemptionNumber", func(t *testing.T) {
 		obj := &CompaniesUpdateAccountResponse{}
 		var fernTestValueSmeExemptionNumber *string
@@ -20145,7 +21571,7 @@ func TestSettersCompaniesUpdateAccountResponse(t *testing.T) {
 
 	t.Run("SetCountryChartTemplate", func(t *testing.T) {
 		obj := &CompaniesUpdateAccountResponse{}
-		var fernTestValueCountryChartTemplate string
+		var fernTestValueCountryChartTemplate *string
 		obj.SetCountryChartTemplate(fernTestValueCountryChartTemplate)
 		assert.Equal(t, fernTestValueCountryChartTemplate, obj.CountryChartTemplate)
 		assert.NotNil(t, obj.explicitFields)
@@ -20351,11 +21777,43 @@ func TestSettersCompaniesUpdateAccountResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetVatPeriodEndMonth", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueVatPeriodEndMonth *int64
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+		assert.Equal(t, fernTestValueVatPeriodEndMonth, obj.VatPeriodEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetFiscalYearEndMonth", func(t *testing.T) {
 		obj := &CompaniesUpdateAccountResponse{}
 		var fernTestValueFiscalYearEndMonth *int64
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
 		assert.Equal(t, fernTestValueFiscalYearEndMonth, obj.FiscalYearEndMonth)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearEndDay", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueFiscalYearEndDay *int64
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+		assert.Equal(t, fernTestValueFiscalYearEndDay, obj.FiscalYearEndDay)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekday", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueFiscalYearWeekday *int64
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+		assert.Equal(t, fernTestValueFiscalYearWeekday, obj.FiscalYearWeekday)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetFiscalYearWeekRule", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueFiscalYearWeekRule *CompaniesUpdateAccountResponseFiscalYearWeekRule
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
+		assert.Equal(t, fernTestValueFiscalYearWeekRule, obj.FiscalYearWeekRule)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -20522,6 +21980,39 @@ func TestGettersCompaniesUpdateAccountResponse(t *testing.T) {
 		_ = obj.GetVatCode() // Should return zero value
 	})
 
+	t.Run("GetIdentifiers", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var expected map[string]string
+		obj.Identifiers = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetIdentifiers(), "getter should return the property value")
+	})
+
+	t.Run("GetIdentifiers_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		obj.Identifiers = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetIdentifiers(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetIdentifiers_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesUpdateAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetIdentifiers() // Should return zero value
+	})
+
 	t.Run("GetSmeExemptionNumber", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -20674,11 +22165,21 @@ func TestGettersCompaniesUpdateAccountResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CompaniesUpdateAccountResponse{}
-		var expected string
+		var expected *string
 		obj.CountryChartTemplate = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetCountryChartTemplate(), "getter should return the property value")
+	})
+
+	t.Run("GetCountryChartTemplate_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		obj.CountryChartTemplate = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCountryChartTemplate(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetCountryChartTemplate_NilReceiver", func(t *testing.T) {
@@ -21468,6 +22969,39 @@ func TestGettersCompaniesUpdateAccountResponse(t *testing.T) {
 		_ = obj.GetVatPeriod() // Should return zero value
 	})
 
+	t.Run("GetVatPeriodEndMonth", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var expected *int64
+		obj.VatPeriodEndMonth = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetVatPeriodEndMonth(), "getter should return the property value")
+	})
+
+	t.Run("GetVatPeriodEndMonth_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		obj.VatPeriodEndMonth = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetVatPeriodEndMonth(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetVatPeriodEndMonth_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesUpdateAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetVatPeriodEndMonth() // Should return zero value
+	})
+
 	t.Run("GetFiscalYearEndMonth", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -21499,6 +23033,105 @@ func TestGettersCompaniesUpdateAccountResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetFiscalYearEndMonth() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearEndDay", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var expected *int64
+		obj.FiscalYearEndDay = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearEndDay(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearEndDay_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		obj.FiscalYearEndDay = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearEndDay(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearEndDay_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesUpdateAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearEndDay() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearWeekday", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var expected *int64
+		obj.FiscalYearWeekday = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearWeekday(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearWeekday_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		obj.FiscalYearWeekday = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearWeekday(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearWeekday_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesUpdateAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearWeekday() // Should return zero value
+	})
+
+	t.Run("GetFiscalYearWeekRule", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var expected *CompaniesUpdateAccountResponseFiscalYearWeekRule
+		obj.FiscalYearWeekRule = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetFiscalYearWeekRule(), "getter should return the property value")
+	})
+
+	t.Run("GetFiscalYearWeekRule_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		obj.FiscalYearWeekRule = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetFiscalYearWeekRule(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetFiscalYearWeekRule_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesUpdateAccountResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetFiscalYearWeekRule() // Should return zero value
 	})
 
 	t.Run("GetTimeZone", func(t *testing.T) {
@@ -21806,6 +23439,37 @@ func TestSettersMarkExplicitCompaniesUpdateAccountResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetIdentifiers_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueIdentifiers map[string]string
+
+		// Act
+		obj.SetIdentifiers(fernTestValueIdentifiers)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetSmeExemptionNumber_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -21996,7 +23660,7 @@ func TestSettersMarkExplicitCompaniesUpdateAccountResponse(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &CompaniesUpdateAccountResponse{}
-		var fernTestValueCountryChartTemplate string
+		var fernTestValueCountryChartTemplate *string
 
 		// Act
 		obj.SetCountryChartTemplate(fernTestValueCountryChartTemplate)
@@ -22798,6 +24462,37 @@ func TestSettersMarkExplicitCompaniesUpdateAccountResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetVatPeriodEndMonth_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueVatPeriodEndMonth *int64
+
+		// Act
+		obj.SetVatPeriodEndMonth(fernTestValueVatPeriodEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetFiscalYearEndMonth_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -22806,6 +24501,99 @@ func TestSettersMarkExplicitCompaniesUpdateAccountResponse(t *testing.T) {
 
 		// Act
 		obj.SetFiscalYearEndMonth(fernTestValueFiscalYearEndMonth)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearEndDay_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueFiscalYearEndDay *int64
+
+		// Act
+		obj.SetFiscalYearEndDay(fernTestValueFiscalYearEndDay)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekday_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueFiscalYearWeekday *int64
+
+		// Act
+		obj.SetFiscalYearWeekday(fernTestValueFiscalYearWeekday)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetFiscalYearWeekRule_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponse{}
+		var fernTestValueFiscalYearWeekRule *CompaniesUpdateAccountResponseFiscalYearWeekRule
+
+		// Act
+		obj.SetFiscalYearWeekRule(fernTestValueFiscalYearWeekRule)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -23050,6 +24838,14 @@ func TestSettersCompaniesUpdateAccountResponseAddress(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSubdivision", func(t *testing.T) {
+		obj := &CompaniesUpdateAccountResponseAddress{}
+		var fernTestValueSubdivision *string
+		obj.SetSubdivision(fernTestValueSubdivision)
+		assert.Equal(t, fernTestValueSubdivision, obj.Subdivision)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 }
 
 func TestGettersCompaniesUpdateAccountResponseAddress(t *testing.T) {
@@ -23185,6 +24981,39 @@ func TestGettersCompaniesUpdateAccountResponseAddress(t *testing.T) {
 		_ = obj.GetCountryCode() // Should return zero value
 	})
 
+	t.Run("GetSubdivision", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponseAddress{}
+		var expected *string
+		obj.Subdivision = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSubdivision(), "getter should return the property value")
+	})
+
+	t.Run("GetSubdivision_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponseAddress{}
+		obj.Subdivision = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSubdivision(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSubdivision_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CompaniesUpdateAccountResponseAddress
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSubdivision() // Should return zero value
+	})
+
 }
 
 func TestSettersMarkExplicitCompaniesUpdateAccountResponseAddress(t *testing.T) {
@@ -23289,6 +25118,37 @@ func TestSettersMarkExplicitCompaniesUpdateAccountResponseAddress(t *testing.T) 
 
 		// Act
 		obj.SetCountryCode(fernTestValueCountryCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSubdivision_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CompaniesUpdateAccountResponseAddress{}
+		var fernTestValueSubdivision *string
+
+		// Act
+		obj.SetSubdivision(fernTestValueSubdivision)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -44631,6 +46491,35 @@ func TestEnumCompaniesContextAccountResponseProfileAccountsKeptBy(t *testing.T) 
 	})
 }
 
+func TestEnumCompaniesContextAccountResponseProfileFiscalYearWeekRule(t *testing.T) {
+	t.Run("NewFromString_last", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesContextAccountResponseProfileFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesContextAccountResponseProfileFiscalYearWeekRule("last"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nearest", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesContextAccountResponseProfileFiscalYearWeekRuleFromString("nearest")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesContextAccountResponseProfileFiscalYearWeekRule("nearest"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCompaniesContextAccountResponseProfileFiscalYearWeekRuleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCompaniesContextAccountResponseProfileFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumCompaniesContextAccountResponseProfileStatus(t *testing.T) {
 	t.Run("NewFromString_active", func(t *testing.T) {
 		t.Parallel()
@@ -44747,137 +46636,11 @@ func TestEnumCompaniesCreateAccountRequestAccountsKeptBy(t *testing.T) {
 }
 
 func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
-	t.Run("NewFromString_AD", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AD")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AD"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AL", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AL")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AL"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AQ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AQ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AQ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AS"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_AT", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AT")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AT"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AU", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AU")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AU"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AX", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AX")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AX"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_AZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("AZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BB", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BB")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BB"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BD", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BD")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BD"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_BE", func(t *testing.T) {
@@ -44887,242 +46650,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BE"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_BF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BF"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_BG", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BG")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BJ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BJ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BJ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BL", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BL")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BL"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BQ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BQ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BQ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BS"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BT", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BT")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BT"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BV", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BV")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BV"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_BZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("BZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("BZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CC"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CD", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CD")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CD"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CK", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CK")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CK"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CL", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CL")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CL"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CU", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CU")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CU"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CV", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CV")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CV"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_CX", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("CX")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("CX"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_CY", func(t *testing.T) {
@@ -45146,46 +46678,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("DE"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_DJ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("DJ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("DJ"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_DK", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("DK")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("DK"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_DM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("DM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("DM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_DO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("DO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("DO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_DZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("DZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("DZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_EC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("EC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("EC"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_EE", func(t *testing.T) {
@@ -45195,39 +46692,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("EE"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_EG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("EG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("EG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_EH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("EH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("EH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ER", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ER")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ER"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_ES", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ES")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ES"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ET", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ET")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ET"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_FI", func(t *testing.T) {
@@ -45237,130 +46706,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("FI"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_FJ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("FJ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("FJ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_FK", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("FK")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("FK"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_FM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("FM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("FM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_FO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("FO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("FO"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_FR", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("FR")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("FR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GB", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GB")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GB"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GD", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GD")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GD"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GL", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GL")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GL"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GP", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GP")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GP"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GQ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GQ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GQ"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_GR", func(t *testing.T) {
@@ -45370,74 +46720,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GR"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_GS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GS"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GT", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GT")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GT"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GU", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GU")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GU"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_GY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_HK", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("HK")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("HK"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_HM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("HM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("HM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_HN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("HN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("HN"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_HR", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("HR")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("HR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_HT", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("HT")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("HT"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_HU", func(t *testing.T) {
@@ -45447,13 +46734,6 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("HU"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_ID", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ID")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ID"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_IE", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IE")
@@ -45461,214 +46741,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IE"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_IL", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IL")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IL"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_IM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_IN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_IO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_IQ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IQ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IQ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_IR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_IS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IS"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_IT", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IT")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IT"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_JE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("JE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("JE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_JM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("JM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("JM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_JO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("JO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("JO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_JP", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("JP")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("JP"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KP", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KP")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KP"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_KZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("KZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("KZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_LA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_LB", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LB")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LB"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_LC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LC"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_LI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_LK", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LK")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LK"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_LR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_LS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LS"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_LT", func(t *testing.T) {
@@ -45692,214 +46769,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LV"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_LY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MC"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MD", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MD")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MD"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ME", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ME")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ME"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MK", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MK")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MK"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ML", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ML")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ML"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MP", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MP")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MP"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MQ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MQ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MQ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MS"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_MT", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MT")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MT"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MU", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MU")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MU"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MV", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MV")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MV"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MX", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MX")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MX"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_MZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("MZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("MZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NC"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NI"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_NL", func(t *testing.T) {
@@ -45909,123 +46783,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NL"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_NO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NP", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NP")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NP"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NU", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NU")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NU"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_NZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_OM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("OM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("OM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PK", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PK")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PK"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_PL", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PL")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PL"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PS"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_PT", func(t *testing.T) {
@@ -46035,88 +46797,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PT"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_PW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_PY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("PY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("PY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_QA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("QA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("QA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_RE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("RE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("RE"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_RO", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("RO")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("RO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_RS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("RS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("RS"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_RU", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("RU")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("RU"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_RW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("RW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("RW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SB", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SB")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SB"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SC"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SD", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SD")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SD"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_SE", func(t *testing.T) {
@@ -46126,32 +46811,11 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SE"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_SG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SH"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_SI", func(t *testing.T) {
 		t.Parallel()
 		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SI")
 		assert.NoError(t, err, "valid enum value should not return error")
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SJ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SJ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SJ"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_SK", func(t *testing.T) {
@@ -46161,214 +46825,32 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SK"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_SL", func(t *testing.T) {
+	t.Run("NewFromString_IS", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SL")
+		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("IS")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SL"), val, "enum value should match expected wire value")
+		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("IS"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_SM", func(t *testing.T) {
+	t.Run("NewFromString_LI", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SM")
+		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("LI")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SM"), val, "enum value should match expected wire value")
+		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("LI"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_SN", func(t *testing.T) {
+	t.Run("NewFromString_NO", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SN")
+		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("NO")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SN"), val, "enum value should match expected wire value")
+		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("NO"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_SO", func(t *testing.T) {
+	t.Run("NewFromString_GB", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SO")
+		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("GB")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SS"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ST", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ST")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ST"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SV", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SV")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SV"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SX", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SX")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SX"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_SZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("SZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("SZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TC"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TD", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TD")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TD"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TH", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TH")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TH"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TJ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TJ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TJ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TK", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TK")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TK"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TL", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TL")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TL"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TO", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TO")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TO"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TR", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TR")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TR"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TT", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TT")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TT"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TV", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TV")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TV"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TW"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_TZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("TZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("TZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_UA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("UA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("UA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_UG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("UG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("UG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_UM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("UM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("UM"), val, "enum value should match expected wire value")
+		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("GB"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_US", func(t *testing.T) {
@@ -46378,125 +46860,13 @@ func TestEnumCompaniesCreateAccountRequestCountryCode(t *testing.T) {
 		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("US"), val, "enum value should match expected wire value")
 	})
 
-	t.Run("NewFromString_UY", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("UY")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("UY"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_UZ", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("UZ")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("UZ"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_VA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("VA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("VA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_VC", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("VC")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("VC"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_VE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("VE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("VE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_VG", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("VG")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("VG"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_VI", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("VI")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("VI"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_VN", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("VN")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("VN"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_VU", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("VU")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("VU"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_WF", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("WF")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("WF"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_WS", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("WS")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("WS"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_YE", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("YE")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("YE"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_YT", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("YT")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("YT"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ZA", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ZA")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ZA"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ZM", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ZM")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ZM"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_ZW", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("ZW")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CompaniesCreateAccountRequestCountryCode("ZW"), val, "enum value should match expected wire value")
-	})
-
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewCompaniesCreateAccountRequestCountryCodeFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AD")
+		val, err := NewCompaniesCreateAccountRequestCountryCodeFromString("AT")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -46750,6 +47120,35 @@ func TestEnumCompaniesCreateAccountRequestDefaultInvoiceLocale(t *testing.T) {
 	})
 }
 
+func TestEnumCompaniesCreateAccountRequestFiscalYearWeekRule(t *testing.T) {
+	t.Run("NewFromString_last", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesCreateAccountRequestFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesCreateAccountRequestFiscalYearWeekRule("last"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nearest", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesCreateAccountRequestFiscalYearWeekRuleFromString("nearest")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesCreateAccountRequestFiscalYearWeekRule("nearest"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCompaniesCreateAccountRequestFiscalYearWeekRuleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCompaniesCreateAccountRequestFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumCompaniesCreateAccountRequestVatPeriod(t *testing.T) {
 	t.Run("NewFromString_monthly", func(t *testing.T) {
 		t.Parallel()
@@ -46872,6 +47271,35 @@ func TestEnumCompaniesProfileAccountResponseAccountsKeptBy(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewCompaniesProfileAccountResponseAccountsKeptByFromString("company")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCompaniesProfileAccountResponseFiscalYearWeekRule(t *testing.T) {
+	t.Run("NewFromString_last", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesProfileAccountResponseFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesProfileAccountResponseFiscalYearWeekRule("last"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nearest", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesProfileAccountResponseFiscalYearWeekRuleFromString("nearest")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesProfileAccountResponseFiscalYearWeekRule("nearest"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCompaniesProfileAccountResponseFiscalYearWeekRuleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCompaniesProfileAccountResponseFiscalYearWeekRuleFromString("last")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -47240,6 +47668,35 @@ func TestEnumCompaniesUpdateAccountRequestDefaultInvoiceLocale(t *testing.T) {
 	})
 }
 
+func TestEnumCompaniesUpdateAccountRequestFiscalYearWeekRule(t *testing.T) {
+	t.Run("NewFromString_last", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesUpdateAccountRequestFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesUpdateAccountRequestFiscalYearWeekRule("last"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nearest", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesUpdateAccountRequestFiscalYearWeekRuleFromString("nearest")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesUpdateAccountRequestFiscalYearWeekRule("nearest"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCompaniesUpdateAccountRequestFiscalYearWeekRuleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCompaniesUpdateAccountRequestFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
 func TestEnumCompaniesUpdateAccountRequestVatPeriod(t *testing.T) {
 	t.Run("NewFromString_monthly", func(t *testing.T) {
 		t.Parallel()
@@ -47312,6 +47769,35 @@ func TestEnumCompaniesUpdateAccountResponseAccountsKeptBy(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewCompaniesUpdateAccountResponseAccountsKeptByFromString("company")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCompaniesUpdateAccountResponseFiscalYearWeekRule(t *testing.T) {
+	t.Run("NewFromString_last", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesUpdateAccountResponseFiscalYearWeekRuleFromString("last")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesUpdateAccountResponseFiscalYearWeekRule("last"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_nearest", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCompaniesUpdateAccountResponseFiscalYearWeekRuleFromString("nearest")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CompaniesUpdateAccountResponseFiscalYearWeekRule("nearest"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCompaniesUpdateAccountResponseFiscalYearWeekRuleFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCompaniesUpdateAccountResponseFiscalYearWeekRuleFromString("last")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

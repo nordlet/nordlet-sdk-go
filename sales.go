@@ -9113,6 +9113,7 @@ const (
 	InvoiceTemplatesCreateSalesRequestVatSchemeIntraEuB2B        InvoiceTemplatesCreateSalesRequestVatScheme = "intra_eu_b2b"
 	InvoiceTemplatesCreateSalesRequestVatSchemeReverseCharge     InvoiceTemplatesCreateSalesRequestVatScheme = "reverse_charge"
 	InvoiceTemplatesCreateSalesRequestVatSchemeOssUnion          InvoiceTemplatesCreateSalesRequestVatScheme = "oss_union"
+	InvoiceTemplatesCreateSalesRequestVatSchemeOssNonUnion       InvoiceTemplatesCreateSalesRequestVatScheme = "oss_non_union"
 	InvoiceTemplatesCreateSalesRequestVatSchemeIoss              InvoiceTemplatesCreateSalesRequestVatScheme = "ioss"
 	InvoiceTemplatesCreateSalesRequestVatSchemeMarketplaceDeemed InvoiceTemplatesCreateSalesRequestVatScheme = "marketplace_deemed"
 	InvoiceTemplatesCreateSalesRequestVatSchemeExport            InvoiceTemplatesCreateSalesRequestVatScheme = "export"
@@ -9130,6 +9131,8 @@ func NewInvoiceTemplatesCreateSalesRequestVatSchemeFromString(s string) (Invoice
 		return InvoiceTemplatesCreateSalesRequestVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoiceTemplatesCreateSalesRequestVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoiceTemplatesCreateSalesRequestVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoiceTemplatesCreateSalesRequestVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -12415,6 +12418,7 @@ const (
 	InvoiceTemplatesUpdateSalesRequestVatSchemeIntraEuB2B        InvoiceTemplatesUpdateSalesRequestVatScheme = "intra_eu_b2b"
 	InvoiceTemplatesUpdateSalesRequestVatSchemeReverseCharge     InvoiceTemplatesUpdateSalesRequestVatScheme = "reverse_charge"
 	InvoiceTemplatesUpdateSalesRequestVatSchemeOssUnion          InvoiceTemplatesUpdateSalesRequestVatScheme = "oss_union"
+	InvoiceTemplatesUpdateSalesRequestVatSchemeOssNonUnion       InvoiceTemplatesUpdateSalesRequestVatScheme = "oss_non_union"
 	InvoiceTemplatesUpdateSalesRequestVatSchemeIoss              InvoiceTemplatesUpdateSalesRequestVatScheme = "ioss"
 	InvoiceTemplatesUpdateSalesRequestVatSchemeMarketplaceDeemed InvoiceTemplatesUpdateSalesRequestVatScheme = "marketplace_deemed"
 	InvoiceTemplatesUpdateSalesRequestVatSchemeExport            InvoiceTemplatesUpdateSalesRequestVatScheme = "export"
@@ -12432,6 +12436,8 @@ func NewInvoiceTemplatesUpdateSalesRequestVatSchemeFromString(s string) (Invoice
 		return InvoiceTemplatesUpdateSalesRequestVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoiceTemplatesUpdateSalesRequestVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoiceTemplatesUpdateSalesRequestVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoiceTemplatesUpdateSalesRequestVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -16200,6 +16206,7 @@ const (
 	InvoicesApplyAdvanceSalesResponseVatSchemeIntraEuB2B        InvoicesApplyAdvanceSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesApplyAdvanceSalesResponseVatSchemeReverseCharge     InvoicesApplyAdvanceSalesResponseVatScheme = "reverse_charge"
 	InvoicesApplyAdvanceSalesResponseVatSchemeOssUnion          InvoicesApplyAdvanceSalesResponseVatScheme = "oss_union"
+	InvoicesApplyAdvanceSalesResponseVatSchemeOssNonUnion       InvoicesApplyAdvanceSalesResponseVatScheme = "oss_non_union"
 	InvoicesApplyAdvanceSalesResponseVatSchemeIoss              InvoicesApplyAdvanceSalesResponseVatScheme = "ioss"
 	InvoicesApplyAdvanceSalesResponseVatSchemeMarketplaceDeemed InvoicesApplyAdvanceSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesApplyAdvanceSalesResponseVatSchemeExport            InvoicesApplyAdvanceSalesResponseVatScheme = "export"
@@ -16217,6 +16224,8 @@ func NewInvoicesApplyAdvanceSalesResponseVatSchemeFromString(s string) (Invoices
 		return InvoicesApplyAdvanceSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesApplyAdvanceSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesApplyAdvanceSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesApplyAdvanceSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -17370,6 +17379,7 @@ const (
 	InvoicesCreateSalesRequestVatSchemeIntraEuB2B        InvoicesCreateSalesRequestVatScheme = "intra_eu_b2b"
 	InvoicesCreateSalesRequestVatSchemeReverseCharge     InvoicesCreateSalesRequestVatScheme = "reverse_charge"
 	InvoicesCreateSalesRequestVatSchemeOssUnion          InvoicesCreateSalesRequestVatScheme = "oss_union"
+	InvoicesCreateSalesRequestVatSchemeOssNonUnion       InvoicesCreateSalesRequestVatScheme = "oss_non_union"
 	InvoicesCreateSalesRequestVatSchemeIoss              InvoicesCreateSalesRequestVatScheme = "ioss"
 	InvoicesCreateSalesRequestVatSchemeMarketplaceDeemed InvoicesCreateSalesRequestVatScheme = "marketplace_deemed"
 	InvoicesCreateSalesRequestVatSchemeExport            InvoicesCreateSalesRequestVatScheme = "export"
@@ -17387,6 +17397,8 @@ func NewInvoicesCreateSalesRequestVatSchemeFromString(s string) (InvoicesCreateS
 		return InvoicesCreateSalesRequestVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesCreateSalesRequestVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesCreateSalesRequestVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesCreateSalesRequestVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -20400,6 +20412,7 @@ const (
 	InvoicesCreateSalesResponseVatSchemeIntraEuB2B        InvoicesCreateSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesCreateSalesResponseVatSchemeReverseCharge     InvoicesCreateSalesResponseVatScheme = "reverse_charge"
 	InvoicesCreateSalesResponseVatSchemeOssUnion          InvoicesCreateSalesResponseVatScheme = "oss_union"
+	InvoicesCreateSalesResponseVatSchemeOssNonUnion       InvoicesCreateSalesResponseVatScheme = "oss_non_union"
 	InvoicesCreateSalesResponseVatSchemeIoss              InvoicesCreateSalesResponseVatScheme = "ioss"
 	InvoicesCreateSalesResponseVatSchemeMarketplaceDeemed InvoicesCreateSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesCreateSalesResponseVatSchemeExport            InvoicesCreateSalesResponseVatScheme = "export"
@@ -20417,6 +20430,8 @@ func NewInvoicesCreateSalesResponseVatSchemeFromString(s string) (InvoicesCreate
 		return InvoicesCreateSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesCreateSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesCreateSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesCreateSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -24264,6 +24279,7 @@ const (
 	InvoicesGetSalesResponseVatSchemeIntraEuB2B        InvoicesGetSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesGetSalesResponseVatSchemeReverseCharge     InvoicesGetSalesResponseVatScheme = "reverse_charge"
 	InvoicesGetSalesResponseVatSchemeOssUnion          InvoicesGetSalesResponseVatScheme = "oss_union"
+	InvoicesGetSalesResponseVatSchemeOssNonUnion       InvoicesGetSalesResponseVatScheme = "oss_non_union"
 	InvoicesGetSalesResponseVatSchemeIoss              InvoicesGetSalesResponseVatScheme = "ioss"
 	InvoicesGetSalesResponseVatSchemeMarketplaceDeemed InvoicesGetSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesGetSalesResponseVatSchemeExport            InvoicesGetSalesResponseVatScheme = "export"
@@ -24281,6 +24297,8 @@ func NewInvoicesGetSalesResponseVatSchemeFromString(s string) (InvoicesGetSalesR
 		return InvoicesGetSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesGetSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesGetSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesGetSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -27294,6 +27312,7 @@ const (
 	InvoicesIssueSalesResponseVatSchemeIntraEuB2B        InvoicesIssueSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesIssueSalesResponseVatSchemeReverseCharge     InvoicesIssueSalesResponseVatScheme = "reverse_charge"
 	InvoicesIssueSalesResponseVatSchemeOssUnion          InvoicesIssueSalesResponseVatScheme = "oss_union"
+	InvoicesIssueSalesResponseVatSchemeOssNonUnion       InvoicesIssueSalesResponseVatScheme = "oss_non_union"
 	InvoicesIssueSalesResponseVatSchemeIoss              InvoicesIssueSalesResponseVatScheme = "ioss"
 	InvoicesIssueSalesResponseVatSchemeMarketplaceDeemed InvoicesIssueSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesIssueSalesResponseVatSchemeExport            InvoicesIssueSalesResponseVatScheme = "export"
@@ -27311,6 +27330,8 @@ func NewInvoicesIssueSalesResponseVatSchemeFromString(s string) (InvoicesIssueSa
 		return InvoicesIssueSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesIssueSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesIssueSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesIssueSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -29355,6 +29376,7 @@ const (
 	InvoicesListSalesResponseRowsItemVatSchemeIntraEuB2B        InvoicesListSalesResponseRowsItemVatScheme = "intra_eu_b2b"
 	InvoicesListSalesResponseRowsItemVatSchemeReverseCharge     InvoicesListSalesResponseRowsItemVatScheme = "reverse_charge"
 	InvoicesListSalesResponseRowsItemVatSchemeOssUnion          InvoicesListSalesResponseRowsItemVatScheme = "oss_union"
+	InvoicesListSalesResponseRowsItemVatSchemeOssNonUnion       InvoicesListSalesResponseRowsItemVatScheme = "oss_non_union"
 	InvoicesListSalesResponseRowsItemVatSchemeIoss              InvoicesListSalesResponseRowsItemVatScheme = "ioss"
 	InvoicesListSalesResponseRowsItemVatSchemeMarketplaceDeemed InvoicesListSalesResponseRowsItemVatScheme = "marketplace_deemed"
 	InvoicesListSalesResponseRowsItemVatSchemeExport            InvoicesListSalesResponseRowsItemVatScheme = "export"
@@ -29372,6 +29394,8 @@ func NewInvoicesListSalesResponseRowsItemVatSchemeFromString(s string) (Invoices
 		return InvoicesListSalesResponseRowsItemVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesListSalesResponseRowsItemVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesListSalesResponseRowsItemVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesListSalesResponseRowsItemVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -32369,6 +32393,7 @@ const (
 	InvoicesLockSalesResponseVatSchemeIntraEuB2B        InvoicesLockSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesLockSalesResponseVatSchemeReverseCharge     InvoicesLockSalesResponseVatScheme = "reverse_charge"
 	InvoicesLockSalesResponseVatSchemeOssUnion          InvoicesLockSalesResponseVatScheme = "oss_union"
+	InvoicesLockSalesResponseVatSchemeOssNonUnion       InvoicesLockSalesResponseVatScheme = "oss_non_union"
 	InvoicesLockSalesResponseVatSchemeIoss              InvoicesLockSalesResponseVatScheme = "ioss"
 	InvoicesLockSalesResponseVatSchemeMarketplaceDeemed InvoicesLockSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesLockSalesResponseVatSchemeExport            InvoicesLockSalesResponseVatScheme = "export"
@@ -32386,6 +32411,8 @@ func NewInvoicesLockSalesResponseVatSchemeFromString(s string) (InvoicesLockSale
 		return InvoicesLockSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesLockSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesLockSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesLockSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -36412,6 +36439,7 @@ const (
 	InvoicesReverseSalesResponseVatSchemeIntraEuB2B        InvoicesReverseSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesReverseSalesResponseVatSchemeReverseCharge     InvoicesReverseSalesResponseVatScheme = "reverse_charge"
 	InvoicesReverseSalesResponseVatSchemeOssUnion          InvoicesReverseSalesResponseVatScheme = "oss_union"
+	InvoicesReverseSalesResponseVatSchemeOssNonUnion       InvoicesReverseSalesResponseVatScheme = "oss_non_union"
 	InvoicesReverseSalesResponseVatSchemeIoss              InvoicesReverseSalesResponseVatScheme = "ioss"
 	InvoicesReverseSalesResponseVatSchemeMarketplaceDeemed InvoicesReverseSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesReverseSalesResponseVatSchemeExport            InvoicesReverseSalesResponseVatScheme = "export"
@@ -36429,6 +36457,8 @@ func NewInvoicesReverseSalesResponseVatSchemeFromString(s string) (InvoicesRever
 		return InvoicesReverseSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesReverseSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesReverseSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesReverseSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -39641,6 +39671,7 @@ const (
 	InvoicesUnlockSalesResponseVatSchemeIntraEuB2B        InvoicesUnlockSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesUnlockSalesResponseVatSchemeReverseCharge     InvoicesUnlockSalesResponseVatScheme = "reverse_charge"
 	InvoicesUnlockSalesResponseVatSchemeOssUnion          InvoicesUnlockSalesResponseVatScheme = "oss_union"
+	InvoicesUnlockSalesResponseVatSchemeOssNonUnion       InvoicesUnlockSalesResponseVatScheme = "oss_non_union"
 	InvoicesUnlockSalesResponseVatSchemeIoss              InvoicesUnlockSalesResponseVatScheme = "ioss"
 	InvoicesUnlockSalesResponseVatSchemeMarketplaceDeemed InvoicesUnlockSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesUnlockSalesResponseVatSchemeExport            InvoicesUnlockSalesResponseVatScheme = "export"
@@ -39658,6 +39689,8 @@ func NewInvoicesUnlockSalesResponseVatSchemeFromString(s string) (InvoicesUnlock
 		return InvoicesUnlockSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesUnlockSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesUnlockSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesUnlockSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -40466,6 +40499,7 @@ const (
 	InvoicesUpdateSalesRequestVatSchemeIntraEuB2B        InvoicesUpdateSalesRequestVatScheme = "intra_eu_b2b"
 	InvoicesUpdateSalesRequestVatSchemeReverseCharge     InvoicesUpdateSalesRequestVatScheme = "reverse_charge"
 	InvoicesUpdateSalesRequestVatSchemeOssUnion          InvoicesUpdateSalesRequestVatScheme = "oss_union"
+	InvoicesUpdateSalesRequestVatSchemeOssNonUnion       InvoicesUpdateSalesRequestVatScheme = "oss_non_union"
 	InvoicesUpdateSalesRequestVatSchemeIoss              InvoicesUpdateSalesRequestVatScheme = "ioss"
 	InvoicesUpdateSalesRequestVatSchemeMarketplaceDeemed InvoicesUpdateSalesRequestVatScheme = "marketplace_deemed"
 	InvoicesUpdateSalesRequestVatSchemeExport            InvoicesUpdateSalesRequestVatScheme = "export"
@@ -40483,6 +40517,8 @@ func NewInvoicesUpdateSalesRequestVatSchemeFromString(s string) (InvoicesUpdateS
 		return InvoicesUpdateSalesRequestVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesUpdateSalesRequestVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesUpdateSalesRequestVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesUpdateSalesRequestVatSchemeIoss, nil
 	case "marketplace_deemed":
@@ -43480,6 +43516,7 @@ const (
 	InvoicesUpdateSalesResponseVatSchemeIntraEuB2B        InvoicesUpdateSalesResponseVatScheme = "intra_eu_b2b"
 	InvoicesUpdateSalesResponseVatSchemeReverseCharge     InvoicesUpdateSalesResponseVatScheme = "reverse_charge"
 	InvoicesUpdateSalesResponseVatSchemeOssUnion          InvoicesUpdateSalesResponseVatScheme = "oss_union"
+	InvoicesUpdateSalesResponseVatSchemeOssNonUnion       InvoicesUpdateSalesResponseVatScheme = "oss_non_union"
 	InvoicesUpdateSalesResponseVatSchemeIoss              InvoicesUpdateSalesResponseVatScheme = "ioss"
 	InvoicesUpdateSalesResponseVatSchemeMarketplaceDeemed InvoicesUpdateSalesResponseVatScheme = "marketplace_deemed"
 	InvoicesUpdateSalesResponseVatSchemeExport            InvoicesUpdateSalesResponseVatScheme = "export"
@@ -43497,6 +43534,8 @@ func NewInvoicesUpdateSalesResponseVatSchemeFromString(s string) (InvoicesUpdate
 		return InvoicesUpdateSalesResponseVatSchemeReverseCharge, nil
 	case "oss_union":
 		return InvoicesUpdateSalesResponseVatSchemeOssUnion, nil
+	case "oss_non_union":
+		return InvoicesUpdateSalesResponseVatSchemeOssNonUnion, nil
 	case "ioss":
 		return InvoicesUpdateSalesResponseVatSchemeIoss, nil
 	case "marketplace_deemed":

@@ -294,7 +294,6 @@ func TestPartnersBankAccountsCreateWithWireMock(
 		option.WithToken("test-token"),
 	)
 	request := &nordlet.BankAccountsCreatePartnersRequest{
-		Iban:      "iban",
 		PartnerID: "partnerId",
 	}
 	_, invocationErr := client.Partners.BankAccountsCreate(
@@ -553,6 +552,32 @@ func TestPartnersValidateVatWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestPartnersValidateVatWithWireMock", "POST", "/v1/partners/validate-vat", nil, 1)
+}
+
+func TestPartnersCompaniesHouseGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.CompaniesHouseGetPartnersRequest{
+		CompanyNumber: "companyNumber",
+	}
+	_, invocationErr := client.Partners.CompaniesHouseGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersCompaniesHouseGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersCompaniesHouseGetWithWireMock", "POST", "/v1/partners/companies-house/get", nil, 1)
 }
 
 func TestPartnersVatReviewsListWithWireMock(

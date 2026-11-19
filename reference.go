@@ -5616,12 +5616,14 @@ func (e *ExchangeRatesListReferenceResponse) String() string {
 }
 
 var (
-	exchangeRatesListReferenceResponseRowsItemFieldCurrencyCode = big.NewInt(1 << 0)
-	exchangeRatesListReferenceResponseRowsItemFieldDate         = big.NewInt(1 << 1)
-	exchangeRatesListReferenceResponseRowsItemFieldRate         = big.NewInt(1 << 2)
+	exchangeRatesListReferenceResponseRowsItemFieldBaseCurrency = big.NewInt(1 << 0)
+	exchangeRatesListReferenceResponseRowsItemFieldCurrencyCode = big.NewInt(1 << 1)
+	exchangeRatesListReferenceResponseRowsItemFieldDate         = big.NewInt(1 << 2)
+	exchangeRatesListReferenceResponseRowsItemFieldRate         = big.NewInt(1 << 3)
 )
 
 type ExchangeRatesListReferenceResponseRowsItem struct {
+	BaseCurrency string    `json:"baseCurrency" url:"baseCurrency"`
 	CurrencyCode string    `json:"currencyCode" url:"currencyCode"`
 	Date         time.Time `json:"date" url:"date" format:"date"`
 	Rate         string    `json:"rate" url:"rate"`
@@ -5631,6 +5633,13 @@ type ExchangeRatesListReferenceResponseRowsItem struct {
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (e *ExchangeRatesListReferenceResponseRowsItem) GetBaseCurrency() string {
+	if e == nil {
+		return ""
+	}
+	return e.BaseCurrency
 }
 
 func (e *ExchangeRatesListReferenceResponseRowsItem) GetCurrencyCode() string {
@@ -5666,6 +5675,13 @@ func (e *ExchangeRatesListReferenceResponseRowsItem) require(field *big.Int) {
 		e.explicitFields = big.NewInt(0)
 	}
 	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExchangeRatesListReferenceResponseRowsItem) SetBaseCurrency(baseCurrency string) {
+	e.BaseCurrency = baseCurrency
+	e.require(exchangeRatesListReferenceResponseRowsItemFieldBaseCurrency)
 }
 
 // SetCurrencyCode sets the CurrencyCode field and marks it as non-optional;
@@ -6675,13 +6691,15 @@ func (e *ExchangeRatesSetReferenceResponse) String() string {
 }
 
 var (
-	exchangeRatesSyncReferenceResponseFieldDate     = big.NewInt(1 << 0)
-	exchangeRatesSyncReferenceResponseFieldImported = big.NewInt(1 << 1)
+	exchangeRatesSyncReferenceResponseFieldDate         = big.NewInt(1 << 0)
+	exchangeRatesSyncReferenceResponseFieldBaseCurrency = big.NewInt(1 << 1)
+	exchangeRatesSyncReferenceResponseFieldImported     = big.NewInt(1 << 2)
 )
 
 type ExchangeRatesSyncReferenceResponse struct {
-	Date     time.Time `json:"date" url:"date" format:"date"`
-	Imported int64     `json:"imported" url:"imported"`
+	Date         time.Time `json:"date" url:"date" format:"date"`
+	BaseCurrency string    `json:"baseCurrency" url:"baseCurrency"`
+	Imported     int64     `json:"imported" url:"imported"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6695,6 +6713,13 @@ func (e *ExchangeRatesSyncReferenceResponse) GetDate() time.Time {
 		return time.Time{}
 	}
 	return e.Date
+}
+
+func (e *ExchangeRatesSyncReferenceResponse) GetBaseCurrency() string {
+	if e == nil {
+		return ""
+	}
+	return e.BaseCurrency
 }
 
 func (e *ExchangeRatesSyncReferenceResponse) GetImported() int64 {
@@ -6723,6 +6748,13 @@ func (e *ExchangeRatesSyncReferenceResponse) require(field *big.Int) {
 func (e *ExchangeRatesSyncReferenceResponse) SetDate(date time.Time) {
 	e.Date = date
 	e.require(exchangeRatesSyncReferenceResponseFieldDate)
+}
+
+// SetBaseCurrency sets the BaseCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExchangeRatesSyncReferenceResponse) SetBaseCurrency(baseCurrency string) {
+	e.BaseCurrency = baseCurrency
+	e.require(exchangeRatesSyncReferenceResponseFieldBaseCurrency)
 }
 
 // SetImported sets the Imported field and marks it as non-optional;
@@ -10370,6 +10402,7 @@ const (
 	VatClassifiersListReferenceResponseRowsItemSchemeIntraEuB2B        VatClassifiersListReferenceResponseRowsItemScheme = "intra_eu_b2b"
 	VatClassifiersListReferenceResponseRowsItemSchemeReverseCharge     VatClassifiersListReferenceResponseRowsItemScheme = "reverse_charge"
 	VatClassifiersListReferenceResponseRowsItemSchemeOssUnion          VatClassifiersListReferenceResponseRowsItemScheme = "oss_union"
+	VatClassifiersListReferenceResponseRowsItemSchemeOssNonUnion       VatClassifiersListReferenceResponseRowsItemScheme = "oss_non_union"
 	VatClassifiersListReferenceResponseRowsItemSchemeIoss              VatClassifiersListReferenceResponseRowsItemScheme = "ioss"
 	VatClassifiersListReferenceResponseRowsItemSchemeMarketplaceDeemed VatClassifiersListReferenceResponseRowsItemScheme = "marketplace_deemed"
 	VatClassifiersListReferenceResponseRowsItemSchemeExport            VatClassifiersListReferenceResponseRowsItemScheme = "export"
@@ -10387,6 +10420,8 @@ func NewVatClassifiersListReferenceResponseRowsItemSchemeFromString(s string) (V
 		return VatClassifiersListReferenceResponseRowsItemSchemeReverseCharge, nil
 	case "oss_union":
 		return VatClassifiersListReferenceResponseRowsItemSchemeOssUnion, nil
+	case "oss_non_union":
+		return VatClassifiersListReferenceResponseRowsItemSchemeOssNonUnion, nil
 	case "ioss":
 		return VatClassifiersListReferenceResponseRowsItemSchemeIoss, nil
 	case "marketplace_deemed":
@@ -11085,6 +11120,7 @@ const (
 	VatResolveReferenceResponseSchemeIntraEuB2B        VatResolveReferenceResponseScheme = "intra_eu_b2b"
 	VatResolveReferenceResponseSchemeReverseCharge     VatResolveReferenceResponseScheme = "reverse_charge"
 	VatResolveReferenceResponseSchemeOssUnion          VatResolveReferenceResponseScheme = "oss_union"
+	VatResolveReferenceResponseSchemeOssNonUnion       VatResolveReferenceResponseScheme = "oss_non_union"
 	VatResolveReferenceResponseSchemeIoss              VatResolveReferenceResponseScheme = "ioss"
 	VatResolveReferenceResponseSchemeMarketplaceDeemed VatResolveReferenceResponseScheme = "marketplace_deemed"
 	VatResolveReferenceResponseSchemeExport            VatResolveReferenceResponseScheme = "export"
@@ -11102,6 +11138,8 @@ func NewVatResolveReferenceResponseSchemeFromString(s string) (VatResolveReferen
 		return VatResolveReferenceResponseSchemeReverseCharge, nil
 	case "oss_union":
 		return VatResolveReferenceResponseSchemeOssUnion, nil
+	case "oss_non_union":
+		return VatResolveReferenceResponseSchemeOssNonUnion, nil
 	case "ioss":
 		return VatResolveReferenceResponseSchemeIoss, nil
 	case "marketplace_deemed":
