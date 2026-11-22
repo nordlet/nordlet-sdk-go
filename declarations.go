@@ -2420,6 +2420,318 @@ func (g *GbHmrcConnectDeclarationsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	gbP11DItemsCreateDeclarationsRequestFieldEmployeeID = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestFieldTaxYear    = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestFieldItem       = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsCreateDeclarationsRequest struct {
+	EmployeeID string                                    `json:"employeeId" url:"-"`
+	TaxYear    int64                                     `json:"taxYear" url:"-"`
+	Item       *GbP11DItemsCreateDeclarationsRequestItem `json:"item" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequest) SetEmployeeID(employeeID string) {
+	g.EmployeeID = employeeID
+	g.require(gbP11DItemsCreateDeclarationsRequestFieldEmployeeID)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequest) SetTaxYear(taxYear int64) {
+	g.TaxYear = taxYear
+	g.require(gbP11DItemsCreateDeclarationsRequestFieldTaxYear)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequest) SetItem(item *GbP11DItemsCreateDeclarationsRequestItem) {
+	g.Item = item
+	g.require(gbP11DItemsCreateDeclarationsRequestFieldItem)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequest(body)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	gbP11DItemsDeleteDeclarationsRequestFieldID = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsDeleteDeclarationsRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (g *GbP11DItemsDeleteDeclarationsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsDeleteDeclarationsRequest) SetID(id string) {
+	g.ID = id
+	g.require(gbP11DItemsDeleteDeclarationsRequestFieldID)
+}
+
+func (g *GbP11DItemsDeleteDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsDeleteDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*g = GbP11DItemsDeleteDeclarationsRequest(body)
+	return nil
+}
+
+func (g *GbP11DItemsDeleteDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsDeleteDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	gbP11DItemsListDeclarationsRequestFieldTaxYear    = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsRequestFieldEmployeeID = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsRequest struct {
+	TaxYear    int64   `json:"taxYear" url:"-"`
+	EmployeeID *string `json:"employeeId,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (g *GbP11DItemsListDeclarationsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsRequest) SetTaxYear(taxYear int64) {
+	g.TaxYear = taxYear
+	g.require(gbP11DItemsListDeclarationsRequestFieldTaxYear)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsRequest) SetEmployeeID(employeeID *string) {
+	g.EmployeeID = employeeID
+	g.require(gbP11DItemsListDeclarationsRequestFieldEmployeeID)
+}
+
+func (g *GbP11DItemsListDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsRequest(body)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	gbP45GetDeclarationsRequestFieldEmployeeID = big.NewInt(1 << 0)
+)
+
+type GbP45GetDeclarationsRequest struct {
+	EmployeeID string `json:"employeeId" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (g *GbP45GetDeclarationsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsRequest) SetEmployeeID(employeeID string) {
+	g.EmployeeID = employeeID
+	g.require(gbP45GetDeclarationsRequestFieldEmployeeID)
+}
+
+func (g *GbP45GetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP45GetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*g = GbP45GetDeclarationsRequest(body)
+	return nil
+}
+
+func (g *GbP45GetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed GbP45GetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	gbReturnFactsGetDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type GbReturnFactsGetDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (g *GbReturnFactsGetDeclarationsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsRequest) SetYear(year int64) {
+	g.Year = year
+	g.require(gbReturnFactsGetDeclarationsRequestFieldYear)
+}
+
+func (g *GbReturnFactsGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*g = GbReturnFactsGetDeclarationsRequest(body)
+	return nil
+}
+
+func (g *GbReturnFactsGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	gbReturnFactsSetDeclarationsRequestFieldYear  = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsRequestFieldFacts = big.NewInt(1 << 1)
+)
+
+type GbReturnFactsSetDeclarationsRequest struct {
+	Year  int64                                     `json:"year" url:"-"`
+	Facts *GbReturnFactsSetDeclarationsRequestFacts `json:"facts" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (g *GbReturnFactsSetDeclarationsRequest) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequest) SetYear(year int64) {
+	g.Year = year
+	g.require(gbReturnFactsSetDeclarationsRequestFieldYear)
+}
+
+// SetFacts sets the Facts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequest) SetFacts(facts *GbReturnFactsSetDeclarationsRequestFacts) {
+	g.Facts = facts
+	g.require(gbReturnFactsSetDeclarationsRequestFieldFacts)
+}
+
+func (g *GbReturnFactsSetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsRequest(body)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	gbVatLiabilitiesListDeclarationsRequestFieldDevice = big.NewInt(1 << 0)
 	gbVatLiabilitiesListDeclarationsRequestFieldFrom   = big.NewInt(1 << 1)
 	gbVatLiabilitiesListDeclarationsRequestFieldTo     = big.NewInt(1 << 2)
@@ -29480,6 +29792,13888 @@ func (g *GbHmrcConnectDeclarationsResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GbHmrcConnectDeclarationsResponse) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItem struct {
+	Type                            string
+	AssetTransferred                *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred
+	Payment                         *GbP11DItemsCreateDeclarationsRequestItemPayment
+	TaxOnNotionalPayments           *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments
+	VouchersOrCreditCards           *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards
+	LivingAccommodation             *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation
+	MileageAllowance                *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance
+	Car                             *GbP11DItemsCreateDeclarationsRequestItemCar
+	Vans                            *GbP11DItemsCreateDeclarationsRequestItemVans
+	Loan                            *GbP11DItemsCreateDeclarationsRequestItemLoan
+	Medical                         *GbP11DItemsCreateDeclarationsRequestItemMedical
+	Relocation                      *GbP11DItemsCreateDeclarationsRequestItemRelocation
+	Services                        *GbP11DItemsCreateDeclarationsRequestItemServices
+	AssetAvailable                  *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable
+	OtherClass1A                    *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A
+	OtherNonClass1A                 *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A
+	TaxPaidNotDeducted              *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted
+	ExpensesTravelAndSubsistence    *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence
+	ExpensesEntertainment           *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment
+	ExpensesHomeTelephone           *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone
+	ExpensesNonQualifyingRelocation *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation
+	ExpensesOther                   *GbP11DItemsCreateDeclarationsRequestItemExpensesOther
+
+	rawJSON json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetType() string {
+	if g == nil {
+		return ""
+	}
+	return g.Type
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetAssetTransferred() *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred {
+	if g == nil {
+		return nil
+	}
+	return g.AssetTransferred
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetPayment() *GbP11DItemsCreateDeclarationsRequestItemPayment {
+	if g == nil {
+		return nil
+	}
+	return g.Payment
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetTaxOnNotionalPayments() *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments {
+	if g == nil {
+		return nil
+	}
+	return g.TaxOnNotionalPayments
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetVouchersOrCreditCards() *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards {
+	if g == nil {
+		return nil
+	}
+	return g.VouchersOrCreditCards
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetLivingAccommodation() *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation {
+	if g == nil {
+		return nil
+	}
+	return g.LivingAccommodation
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetMileageAllowance() *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance {
+	if g == nil {
+		return nil
+	}
+	return g.MileageAllowance
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetCar() *GbP11DItemsCreateDeclarationsRequestItemCar {
+	if g == nil {
+		return nil
+	}
+	return g.Car
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetVans() *GbP11DItemsCreateDeclarationsRequestItemVans {
+	if g == nil {
+		return nil
+	}
+	return g.Vans
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetLoan() *GbP11DItemsCreateDeclarationsRequestItemLoan {
+	if g == nil {
+		return nil
+	}
+	return g.Loan
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetMedical() *GbP11DItemsCreateDeclarationsRequestItemMedical {
+	if g == nil {
+		return nil
+	}
+	return g.Medical
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetRelocation() *GbP11DItemsCreateDeclarationsRequestItemRelocation {
+	if g == nil {
+		return nil
+	}
+	return g.Relocation
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetServices() *GbP11DItemsCreateDeclarationsRequestItemServices {
+	if g == nil {
+		return nil
+	}
+	return g.Services
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetAssetAvailable() *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable {
+	if g == nil {
+		return nil
+	}
+	return g.AssetAvailable
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetOtherClass1A() *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A {
+	if g == nil {
+		return nil
+	}
+	return g.OtherClass1A
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetOtherNonClass1A() *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A {
+	if g == nil {
+		return nil
+	}
+	return g.OtherNonClass1A
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetTaxPaidNotDeducted() *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted {
+	if g == nil {
+		return nil
+	}
+	return g.TaxPaidNotDeducted
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetExpensesTravelAndSubsistence() *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesTravelAndSubsistence
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetExpensesEntertainment() *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesEntertainment
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetExpensesHomeTelephone() *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesHomeTelephone
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetExpensesNonQualifyingRelocation() *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesNonQualifyingRelocation
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) GetExpensesOther() *GbP11DItemsCreateDeclarationsRequestItemExpensesOther {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesOther
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) UnmarshalJSON(data []byte) error {
+	var unmarshaler struct {
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	g.Type = unmarshaler.Type
+	if unmarshaler.Type == "" {
+		return fmt.Errorf("%T did not include discriminant type", g)
+	}
+	switch unmarshaler.Type {
+	case "asset-transferred":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemAssetTransferred)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.AssetTransferred = value
+	case "payment":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemPayment)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Payment = value
+	case "tax-on-notional-payments":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.TaxOnNotionalPayments = value
+	case "vouchers-or-credit-cards":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.VouchersOrCreditCards = value
+	case "living-accommodation":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.LivingAccommodation = value
+	case "mileage-allowance":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemMileageAllowance)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.MileageAllowance = value
+	case "car":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemCar)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Car = value
+	case "vans":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemVans)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Vans = value
+	case "loan":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemLoan)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Loan = value
+	case "medical":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemMedical)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Medical = value
+	case "relocation":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemRelocation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Relocation = value
+	case "services":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemServices)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Services = value
+	case "asset-available":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemAssetAvailable)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.AssetAvailable = value
+	case "other-class-1a":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemOtherClass1A)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.OtherClass1A = value
+	case "other-non-class-1a":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.OtherNonClass1A = value
+	case "tax-paid-not-deducted":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.TaxPaidNotDeducted = value
+	case "expenses-travel-and-subsistence":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesTravelAndSubsistence = value
+	case "expenses-entertainment":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesEntertainment = value
+	case "expenses-home-telephone":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesHomeTelephone = value
+	case "expenses-non-qualifying-relocation":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesNonQualifyingRelocation = value
+	case "expenses-other":
+		value := new(GbP11DItemsCreateDeclarationsRequestItemExpensesOther)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesOther = value
+	}
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g GbP11DItemsCreateDeclarationsRequestItem) MarshalJSON() ([]byte, error) {
+	if err := g.validate(); err != nil {
+		return nil, err
+	}
+	if g.AssetTransferred != nil {
+		return internal.MarshalJSONWithExtraProperty(g.AssetTransferred, "type", "asset-transferred")
+	}
+	if g.Payment != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Payment, "type", "payment")
+	}
+	if g.TaxOnNotionalPayments != nil {
+		return internal.MarshalJSONWithExtraProperty(g.TaxOnNotionalPayments, "type", "tax-on-notional-payments")
+	}
+	if g.VouchersOrCreditCards != nil {
+		return internal.MarshalJSONWithExtraProperty(g.VouchersOrCreditCards, "type", "vouchers-or-credit-cards")
+	}
+	if g.LivingAccommodation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.LivingAccommodation, "type", "living-accommodation")
+	}
+	if g.MileageAllowance != nil {
+		return internal.MarshalJSONWithExtraProperty(g.MileageAllowance, "type", "mileage-allowance")
+	}
+	if g.Car != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Car, "type", "car")
+	}
+	if g.Vans != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Vans, "type", "vans")
+	}
+	if g.Loan != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Loan, "type", "loan")
+	}
+	if g.Medical != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Medical, "type", "medical")
+	}
+	if g.Relocation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Relocation, "type", "relocation")
+	}
+	if g.Services != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Services, "type", "services")
+	}
+	if g.AssetAvailable != nil {
+		return internal.MarshalJSONWithExtraProperty(g.AssetAvailable, "type", "asset-available")
+	}
+	if g.OtherClass1A != nil {
+		return internal.MarshalJSONWithExtraProperty(g.OtherClass1A, "type", "other-class-1a")
+	}
+	if g.OtherNonClass1A != nil {
+		return internal.MarshalJSONWithExtraProperty(g.OtherNonClass1A, "type", "other-non-class-1a")
+	}
+	if g.TaxPaidNotDeducted != nil {
+		return internal.MarshalJSONWithExtraProperty(g.TaxPaidNotDeducted, "type", "tax-paid-not-deducted")
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesTravelAndSubsistence, "type", "expenses-travel-and-subsistence")
+	}
+	if g.ExpensesEntertainment != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesEntertainment, "type", "expenses-entertainment")
+	}
+	if g.ExpensesHomeTelephone != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesHomeTelephone, "type", "expenses-home-telephone")
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesNonQualifyingRelocation, "type", "expenses-non-qualifying-relocation")
+	}
+	if g.ExpensesOther != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesOther, "type", "expenses-other")
+	}
+	if len(g.rawJSON) > 0 {
+		return g.rawJSON, nil
+	}
+	return nil, fmt.Errorf("type %T does not define a non-empty union type", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItemVisitor interface {
+	VisitAssetTransferred(*GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) error
+	VisitPayment(*GbP11DItemsCreateDeclarationsRequestItemPayment) error
+	VisitTaxOnNotionalPayments(*GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) error
+	VisitVouchersOrCreditCards(*GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) error
+	VisitLivingAccommodation(*GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) error
+	VisitMileageAllowance(*GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) error
+	VisitCar(*GbP11DItemsCreateDeclarationsRequestItemCar) error
+	VisitVans(*GbP11DItemsCreateDeclarationsRequestItemVans) error
+	VisitLoan(*GbP11DItemsCreateDeclarationsRequestItemLoan) error
+	VisitMedical(*GbP11DItemsCreateDeclarationsRequestItemMedical) error
+	VisitRelocation(*GbP11DItemsCreateDeclarationsRequestItemRelocation) error
+	VisitServices(*GbP11DItemsCreateDeclarationsRequestItemServices) error
+	VisitAssetAvailable(*GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) error
+	VisitOtherClass1A(*GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) error
+	VisitOtherNonClass1A(*GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) error
+	VisitTaxPaidNotDeducted(*GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) error
+	VisitExpensesTravelAndSubsistence(*GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) error
+	VisitExpensesEntertainment(*GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) error
+	VisitExpensesHomeTelephone(*GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) error
+	VisitExpensesNonQualifyingRelocation(*GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) error
+	VisitExpensesOther(*GbP11DItemsCreateDeclarationsRequestItemExpensesOther) error
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) Accept(visitor GbP11DItemsCreateDeclarationsRequestItemVisitor) error {
+	if g.AssetTransferred != nil {
+		return visitor.VisitAssetTransferred(g.AssetTransferred)
+	}
+	if g.Payment != nil {
+		return visitor.VisitPayment(g.Payment)
+	}
+	if g.TaxOnNotionalPayments != nil {
+		return visitor.VisitTaxOnNotionalPayments(g.TaxOnNotionalPayments)
+	}
+	if g.VouchersOrCreditCards != nil {
+		return visitor.VisitVouchersOrCreditCards(g.VouchersOrCreditCards)
+	}
+	if g.LivingAccommodation != nil {
+		return visitor.VisitLivingAccommodation(g.LivingAccommodation)
+	}
+	if g.MileageAllowance != nil {
+		return visitor.VisitMileageAllowance(g.MileageAllowance)
+	}
+	if g.Car != nil {
+		return visitor.VisitCar(g.Car)
+	}
+	if g.Vans != nil {
+		return visitor.VisitVans(g.Vans)
+	}
+	if g.Loan != nil {
+		return visitor.VisitLoan(g.Loan)
+	}
+	if g.Medical != nil {
+		return visitor.VisitMedical(g.Medical)
+	}
+	if g.Relocation != nil {
+		return visitor.VisitRelocation(g.Relocation)
+	}
+	if g.Services != nil {
+		return visitor.VisitServices(g.Services)
+	}
+	if g.AssetAvailable != nil {
+		return visitor.VisitAssetAvailable(g.AssetAvailable)
+	}
+	if g.OtherClass1A != nil {
+		return visitor.VisitOtherClass1A(g.OtherClass1A)
+	}
+	if g.OtherNonClass1A != nil {
+		return visitor.VisitOtherNonClass1A(g.OtherNonClass1A)
+	}
+	if g.TaxPaidNotDeducted != nil {
+		return visitor.VisitTaxPaidNotDeducted(g.TaxPaidNotDeducted)
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		return visitor.VisitExpensesTravelAndSubsistence(g.ExpensesTravelAndSubsistence)
+	}
+	if g.ExpensesEntertainment != nil {
+		return visitor.VisitExpensesEntertainment(g.ExpensesEntertainment)
+	}
+	if g.ExpensesHomeTelephone != nil {
+		return visitor.VisitExpensesHomeTelephone(g.ExpensesHomeTelephone)
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		return visitor.VisitExpensesNonQualifyingRelocation(g.ExpensesNonQualifyingRelocation)
+	}
+	if g.ExpensesOther != nil {
+		return visitor.VisitExpensesOther(g.ExpensesOther)
+	}
+	return fmt.Errorf("type %T does not define a non-empty union type", g)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItem) validate() error {
+	if g == nil {
+		return fmt.Errorf("type %T is nil", g)
+	}
+	var fields []string
+	if g.AssetTransferred != nil {
+		fields = append(fields, "asset-transferred")
+	}
+	if g.Payment != nil {
+		fields = append(fields, "payment")
+	}
+	if g.TaxOnNotionalPayments != nil {
+		fields = append(fields, "tax-on-notional-payments")
+	}
+	if g.VouchersOrCreditCards != nil {
+		fields = append(fields, "vouchers-or-credit-cards")
+	}
+	if g.LivingAccommodation != nil {
+		fields = append(fields, "living-accommodation")
+	}
+	if g.MileageAllowance != nil {
+		fields = append(fields, "mileage-allowance")
+	}
+	if g.Car != nil {
+		fields = append(fields, "car")
+	}
+	if g.Vans != nil {
+		fields = append(fields, "vans")
+	}
+	if g.Loan != nil {
+		fields = append(fields, "loan")
+	}
+	if g.Medical != nil {
+		fields = append(fields, "medical")
+	}
+	if g.Relocation != nil {
+		fields = append(fields, "relocation")
+	}
+	if g.Services != nil {
+		fields = append(fields, "services")
+	}
+	if g.AssetAvailable != nil {
+		fields = append(fields, "asset-available")
+	}
+	if g.OtherClass1A != nil {
+		fields = append(fields, "other-class-1a")
+	}
+	if g.OtherNonClass1A != nil {
+		fields = append(fields, "other-non-class-1a")
+	}
+	if g.TaxPaidNotDeducted != nil {
+		fields = append(fields, "tax-paid-not-deducted")
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		fields = append(fields, "expenses-travel-and-subsistence")
+	}
+	if g.ExpensesEntertainment != nil {
+		fields = append(fields, "expenses-entertainment")
+	}
+	if g.ExpensesHomeTelephone != nil {
+		fields = append(fields, "expenses-home-telephone")
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		fields = append(fields, "expenses-non-qualifying-relocation")
+	}
+	if g.ExpensesOther != nil {
+		fields = append(fields, "expenses-other")
+	}
+	if len(fields) == 0 {
+		if g.Type != "" {
+			if len(g.rawJSON) > 0 {
+				return nil
+			}
+			return fmt.Errorf("type %T defines a discriminant set to %q but the field is not set", g, g.Type)
+		}
+		return fmt.Errorf("type %T is empty", g)
+	}
+	if len(fields) > 1 {
+		return fmt.Errorf("type %T defines values for %s, but only one value is allowed", g, fields)
+	}
+	if g.Type != "" {
+		field := fields[0]
+		if g.Type != field {
+			return fmt.Errorf(
+				"type %T defines a discriminant set to %q, but it does not match the %T field; either remove or update the discriminant to match",
+				g,
+				g.Type,
+				g,
+			)
+		}
+	}
+	return nil
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldAsset            = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldAnnualValue      = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemAssetAvailable struct {
+	Asset            GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset `json:"asset" url:"asset"`
+	OtherDescription *string                                                     `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	AnnualValue      string                                                      `json:"annualValue" url:"annualValue"`
+	MadeGood         string                                                      `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) GetAsset() GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset {
+	if g == nil {
+		return ""
+	}
+	return g.Asset
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) GetAnnualValue() string {
+	if g == nil {
+		return ""
+	}
+	return g.AnnualValue
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAsset sets the Asset field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) SetAsset(asset GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset) {
+	g.Asset = asset
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldAsset)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldOtherDescription)
+}
+
+// SetAnnualValue sets the AnnualValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) SetAnnualValue(annualValue string) {
+	g.AnnualValue = annualValue
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldAnnualValue)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetAvailableFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemAssetAvailable
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemAssetAvailable(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemAssetAvailable
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetAvailable) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset string
+
+const (
+	GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetHolidayAccommodation   GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset = "holiday accommodation"
+	GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetTimeshareAccommodation GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset = "timeshare accommodation"
+	GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetAircraft               GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset = "aircraft"
+	GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetBoat                   GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset = "boat"
+	GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetCorporateHospitality   GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset = "corporate hospitality"
+	GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetMultiple               GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset = "multiple"
+	GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetOther                  GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset = "other"
+)
+
+func NewGbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetFromString(s string) (GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset, error) {
+	switch s {
+	case "holiday accommodation":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetHolidayAccommodation, nil
+	case "timeshare accommodation":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetTimeshareAccommodation, nil
+	case "aircraft":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetAircraft, nil
+	case "boat":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetBoat, nil
+	case "corporate hospitality":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetCorporateHospitality, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetMultiple, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAssetOther, nil
+	}
+	var t GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset) Ptr() *GbP11DItemsCreateDeclarationsRequestItemAssetAvailableAsset {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldAsset            = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemAssetTransferred struct {
+	Asset            GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset `json:"asset" url:"asset"`
+	OtherDescription *string                                                       `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                        `json:"cost" url:"cost"`
+	MadeGood         string                                                        `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) GetAsset() GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset {
+	if g == nil {
+		return ""
+	}
+	return g.Asset
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAsset sets the Asset field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) SetAsset(asset GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset) {
+	g.Asset = asset
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldAsset)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemAssetTransferredFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemAssetTransferred
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemAssetTransferred(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemAssetTransferred
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemAssetTransferred) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset string
+
+const (
+	GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetCars           GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset = "cars"
+	GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetProperty       GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset = "property"
+	GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetPreciousMetals GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset = "precious metals"
+	GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetOther          GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset = "other"
+	GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetMultiple       GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset = "multiple"
+)
+
+func NewGbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetFromString(s string) (GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset, error) {
+	switch s {
+	case "cars":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetCars, nil
+	case "property":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetProperty, nil
+	case "precious metals":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetPreciousMetals, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetOther, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAssetMultiple, nil
+	}
+	var t GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset) Ptr() *GbP11DItemsCreateDeclarationsRequestItemAssetTransferredAsset {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldMake                = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldRegistered          = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldAvailableFrom       = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldAvailableTo         = big.NewInt(1 << 3)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldEngineSize          = big.NewInt(1 << 4)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldFuel                = big.NewInt(1 << 5)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldCo2                 = big.NewInt(1 << 6)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldZeroEmissionMileage = big.NewInt(1 << 7)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldNoApprovedCo2       = big.NewInt(1 << 8)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldListPrice           = big.NewInt(1 << 9)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldAccessories         = big.NewInt(1 << 10)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldCapitalContribution = big.NewInt(1 << 11)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldPrivateUsePayment   = big.NewInt(1 << 12)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldFuelWithdrawn       = big.NewInt(1 << 13)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldFuelReinstated      = big.NewInt(1 << 14)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldAmount              = big.NewInt(1 << 15)
+	gbP11DItemsCreateDeclarationsRequestItemCarFieldFuelAmount          = big.NewInt(1 << 16)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemCar struct {
+	Make                string                                           `json:"make" url:"make"`
+	Registered          time.Time                                        `json:"registered" url:"registered" format:"date"`
+	AvailableFrom       *time.Time                                       `json:"availableFrom,omitempty" url:"availableFrom,omitempty" format:"date"`
+	AvailableTo         *time.Time                                       `json:"availableTo,omitempty" url:"availableTo,omitempty" format:"date"`
+	EngineSize          *int64                                           `json:"engineSize,omitempty" url:"engineSize,omitempty"`
+	Fuel                *GbP11DItemsCreateDeclarationsRequestItemCarFuel `json:"fuel,omitempty" url:"fuel,omitempty"`
+	Co2                 *int64                                           `json:"co2,omitempty" url:"co2,omitempty"`
+	ZeroEmissionMileage *int64                                           `json:"zeroEmissionMileage,omitempty" url:"zeroEmissionMileage,omitempty"`
+	NoApprovedCo2       *bool                                            `json:"noApprovedCo2,omitempty" url:"noApprovedCo2,omitempty"`
+	ListPrice           string                                           `json:"listPrice" url:"listPrice"`
+	Accessories         string                                           `json:"accessories" url:"accessories"`
+	CapitalContribution string                                           `json:"capitalContribution" url:"capitalContribution"`
+	PrivateUsePayment   string                                           `json:"privateUsePayment" url:"privateUsePayment"`
+	FuelWithdrawn       *time.Time                                       `json:"fuelWithdrawn,omitempty" url:"fuelWithdrawn,omitempty" format:"date"`
+	FuelReinstated      *bool                                            `json:"fuelReinstated,omitempty" url:"fuelReinstated,omitempty"`
+	Amount              string                                           `json:"amount" url:"amount"`
+	FuelAmount          *string                                          `json:"fuelAmount,omitempty" url:"fuelAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetMake() string {
+	if g == nil {
+		return ""
+	}
+	return g.Make
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetRegistered() time.Time {
+	if g == nil {
+		return time.Time{}
+	}
+	return g.Registered
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetAvailableFrom() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.AvailableFrom
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetAvailableTo() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.AvailableTo
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetEngineSize() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.EngineSize
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetFuel() *GbP11DItemsCreateDeclarationsRequestItemCarFuel {
+	if g == nil {
+		return nil
+	}
+	return g.Fuel
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetCo2() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.Co2
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetZeroEmissionMileage() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.ZeroEmissionMileage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetNoApprovedCo2() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.NoApprovedCo2
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetListPrice() string {
+	if g == nil {
+		return ""
+	}
+	return g.ListPrice
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetAccessories() string {
+	if g == nil {
+		return ""
+	}
+	return g.Accessories
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetCapitalContribution() string {
+	if g == nil {
+		return ""
+	}
+	return g.CapitalContribution
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetPrivateUsePayment() string {
+	if g == nil {
+		return ""
+	}
+	return g.PrivateUsePayment
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetFuelWithdrawn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.FuelWithdrawn
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetFuelReinstated() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.FuelReinstated
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetFuelAmount() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FuelAmount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetMake sets the Make field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetMake(make_ string) {
+	g.Make = make_
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldMake)
+}
+
+// SetRegistered sets the Registered field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetRegistered(registered time.Time) {
+	g.Registered = registered
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldRegistered)
+}
+
+// SetAvailableFrom sets the AvailableFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetAvailableFrom(availableFrom *time.Time) {
+	g.AvailableFrom = availableFrom
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldAvailableFrom)
+}
+
+// SetAvailableTo sets the AvailableTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetAvailableTo(availableTo *time.Time) {
+	g.AvailableTo = availableTo
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldAvailableTo)
+}
+
+// SetEngineSize sets the EngineSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetEngineSize(engineSize *int64) {
+	g.EngineSize = engineSize
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldEngineSize)
+}
+
+// SetFuel sets the Fuel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetFuel(fuel *GbP11DItemsCreateDeclarationsRequestItemCarFuel) {
+	g.Fuel = fuel
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldFuel)
+}
+
+// SetCo2 sets the Co2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetCo2(co2 *int64) {
+	g.Co2 = co2
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldCo2)
+}
+
+// SetZeroEmissionMileage sets the ZeroEmissionMileage field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetZeroEmissionMileage(zeroEmissionMileage *int64) {
+	g.ZeroEmissionMileage = zeroEmissionMileage
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldZeroEmissionMileage)
+}
+
+// SetNoApprovedCo2 sets the NoApprovedCo2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetNoApprovedCo2(noApprovedCo2 *bool) {
+	g.NoApprovedCo2 = noApprovedCo2
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldNoApprovedCo2)
+}
+
+// SetListPrice sets the ListPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetListPrice(listPrice string) {
+	g.ListPrice = listPrice
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldListPrice)
+}
+
+// SetAccessories sets the Accessories field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetAccessories(accessories string) {
+	g.Accessories = accessories
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldAccessories)
+}
+
+// SetCapitalContribution sets the CapitalContribution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetCapitalContribution(capitalContribution string) {
+	g.CapitalContribution = capitalContribution
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldCapitalContribution)
+}
+
+// SetPrivateUsePayment sets the PrivateUsePayment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetPrivateUsePayment(privateUsePayment string) {
+	g.PrivateUsePayment = privateUsePayment
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldPrivateUsePayment)
+}
+
+// SetFuelWithdrawn sets the FuelWithdrawn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetFuelWithdrawn(fuelWithdrawn *time.Time) {
+	g.FuelWithdrawn = fuelWithdrawn
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldFuelWithdrawn)
+}
+
+// SetFuelReinstated sets the FuelReinstated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetFuelReinstated(fuelReinstated *bool) {
+	g.FuelReinstated = fuelReinstated
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldFuelReinstated)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldAmount)
+}
+
+// SetFuelAmount sets the FuelAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) SetFuelAmount(fuelAmount *string) {
+	g.FuelAmount = fuelAmount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemCarFieldFuelAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) UnmarshalJSON(data []byte) error {
+	type embed GbP11DItemsCreateDeclarationsRequestItemCar
+	var unmarshaler = struct {
+		embed
+		Registered    *internal.Date `json:"registered"`
+		AvailableFrom *internal.Date `json:"availableFrom,omitempty"`
+		AvailableTo   *internal.Date `json:"availableTo,omitempty"`
+		FuelWithdrawn *internal.Date `json:"fuelWithdrawn,omitempty"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemCar(unmarshaler.embed)
+	g.Registered = unmarshaler.Registered.Time()
+	g.AvailableFrom = unmarshaler.AvailableFrom.TimePtr()
+	g.AvailableTo = unmarshaler.AvailableTo.TimePtr()
+	g.FuelWithdrawn = unmarshaler.FuelWithdrawn.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemCar
+	var marshaler = struct {
+		embed
+		Registered    *internal.Date `json:"registered"`
+		AvailableFrom *internal.Date `json:"availableFrom,omitempty"`
+		AvailableTo   *internal.Date `json:"availableTo,omitempty"`
+		FuelWithdrawn *internal.Date `json:"fuelWithdrawn,omitempty"`
+	}{
+		embed:         embed(*g),
+		Registered:    internal.NewDate(g.Registered),
+		AvailableFrom: internal.NewOptionalDate(g.AvailableFrom),
+		AvailableTo:   internal.NewOptionalDate(g.AvailableTo),
+		FuelWithdrawn: internal.NewOptionalDate(g.FuelWithdrawn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemCar) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItemCarFuel string
+
+const (
+	GbP11DItemsCreateDeclarationsRequestItemCarFuelF GbP11DItemsCreateDeclarationsRequestItemCarFuel = "F"
+	GbP11DItemsCreateDeclarationsRequestItemCarFuelD GbP11DItemsCreateDeclarationsRequestItemCarFuel = "D"
+	GbP11DItemsCreateDeclarationsRequestItemCarFuelA GbP11DItemsCreateDeclarationsRequestItemCarFuel = "A"
+)
+
+func NewGbP11DItemsCreateDeclarationsRequestItemCarFuelFromString(s string) (GbP11DItemsCreateDeclarationsRequestItemCarFuel, error) {
+	switch s {
+	case "F":
+		return GbP11DItemsCreateDeclarationsRequestItemCarFuelF, nil
+	case "D":
+		return GbP11DItemsCreateDeclarationsRequestItemCarFuelD, nil
+	case "A":
+		return GbP11DItemsCreateDeclarationsRequestItemCarFuelA, nil
+	}
+	var t GbP11DItemsCreateDeclarationsRequestItemCarFuel
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsRequestItemCarFuel) Ptr() *GbP11DItemsCreateDeclarationsRequestItemCarFuel {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemExpensesEntertainmentFieldTradingOrganisation = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemExpensesEntertainmentFieldCost                = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemExpensesEntertainmentFieldMadeGood            = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment struct {
+	TradingOrganisation bool   `json:"tradingOrganisation" url:"tradingOrganisation"`
+	Cost                string `json:"cost" url:"cost"`
+	MadeGood            string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) GetTradingOrganisation() bool {
+	if g == nil {
+		return false
+	}
+	return g.TradingOrganisation
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetTradingOrganisation sets the TradingOrganisation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) SetTradingOrganisation(tradingOrganisation bool) {
+	g.TradingOrganisation = tradingOrganisation
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesEntertainmentFieldTradingOrganisation)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesEntertainmentFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesEntertainmentFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesEntertainment) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephoneFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephoneFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephoneFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephoneFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesHomeTelephone) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocationFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocationFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocationFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocationFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesNonQualifyingRelocation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemExpensesOtherFieldDescription = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemExpensesOtherFieldCost        = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemExpensesOtherFieldMadeGood    = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemExpensesOther struct {
+	Description string `json:"description" url:"description"`
+	Cost        string `json:"cost" url:"cost"`
+	MadeGood    string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) GetDescription() string {
+	if g == nil {
+		return ""
+	}
+	return g.Description
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) SetDescription(description string) {
+	g.Description = description
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesOtherFieldDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesOtherFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesOtherFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemExpensesOther
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemExpensesOther(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemExpensesOther
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesOther) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistenceFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistenceFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistenceFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistenceFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemExpensesTravelAndSubsistence) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemLivingAccommodationFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLivingAccommodationFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLivingAccommodation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldJointBorrowers     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldOutstandingStart   = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldOutstandingEnd     = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldMaximumOutstanding = big.NewInt(1 << 3)
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldInterestPaid       = big.NewInt(1 << 4)
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldMadeOn             = big.NewInt(1 << 5)
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldDischargedOn       = big.NewInt(1 << 6)
+	gbP11DItemsCreateDeclarationsRequestItemLoanFieldAmount             = big.NewInt(1 << 7)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemLoan struct {
+	JointBorrowers     int64      `json:"jointBorrowers" url:"jointBorrowers"`
+	OutstandingStart   string     `json:"outstandingStart" url:"outstandingStart"`
+	OutstandingEnd     string     `json:"outstandingEnd" url:"outstandingEnd"`
+	MaximumOutstanding string     `json:"maximumOutstanding" url:"maximumOutstanding"`
+	InterestPaid       string     `json:"interestPaid" url:"interestPaid"`
+	MadeOn             *time.Time `json:"madeOn,omitempty" url:"madeOn,omitempty" format:"date"`
+	DischargedOn       *time.Time `json:"dischargedOn,omitempty" url:"dischargedOn,omitempty" format:"date"`
+	Amount             string     `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetJointBorrowers() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.JointBorrowers
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetOutstandingStart() string {
+	if g == nil {
+		return ""
+	}
+	return g.OutstandingStart
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetOutstandingEnd() string {
+	if g == nil {
+		return ""
+	}
+	return g.OutstandingEnd
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetMaximumOutstanding() string {
+	if g == nil {
+		return ""
+	}
+	return g.MaximumOutstanding
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetInterestPaid() string {
+	if g == nil {
+		return ""
+	}
+	return g.InterestPaid
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetMadeOn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.MadeOn
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetDischargedOn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.DischargedOn
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetJointBorrowers sets the JointBorrowers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetJointBorrowers(jointBorrowers int64) {
+	g.JointBorrowers = jointBorrowers
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldJointBorrowers)
+}
+
+// SetOutstandingStart sets the OutstandingStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetOutstandingStart(outstandingStart string) {
+	g.OutstandingStart = outstandingStart
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldOutstandingStart)
+}
+
+// SetOutstandingEnd sets the OutstandingEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetOutstandingEnd(outstandingEnd string) {
+	g.OutstandingEnd = outstandingEnd
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldOutstandingEnd)
+}
+
+// SetMaximumOutstanding sets the MaximumOutstanding field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetMaximumOutstanding(maximumOutstanding string) {
+	g.MaximumOutstanding = maximumOutstanding
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldMaximumOutstanding)
+}
+
+// SetInterestPaid sets the InterestPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetInterestPaid(interestPaid string) {
+	g.InterestPaid = interestPaid
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldInterestPaid)
+}
+
+// SetMadeOn sets the MadeOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetMadeOn(madeOn *time.Time) {
+	g.MadeOn = madeOn
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldMadeOn)
+}
+
+// SetDischargedOn sets the DischargedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetDischargedOn(dischargedOn *time.Time) {
+	g.DischargedOn = dischargedOn
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldDischargedOn)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemLoanFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) UnmarshalJSON(data []byte) error {
+	type embed GbP11DItemsCreateDeclarationsRequestItemLoan
+	var unmarshaler = struct {
+		embed
+		MadeOn       *internal.Date `json:"madeOn,omitempty"`
+		DischargedOn *internal.Date `json:"dischargedOn,omitempty"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemLoan(unmarshaler.embed)
+	g.MadeOn = unmarshaler.MadeOn.TimePtr()
+	g.DischargedOn = unmarshaler.DischargedOn.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemLoan
+	var marshaler = struct {
+		embed
+		MadeOn       *internal.Date `json:"madeOn,omitempty"`
+		DischargedOn *internal.Date `json:"dischargedOn,omitempty"`
+	}{
+		embed:        embed(*g),
+		MadeOn:       internal.NewOptionalDate(g.MadeOn),
+		DischargedOn: internal.NewOptionalDate(g.DischargedOn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemLoan) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemMedicalFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemMedicalFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemMedical struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemMedicalFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemMedicalFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemMedical
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemMedical(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemMedical
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMedical) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemMileageAllowanceFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemMileageAllowance struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemMileageAllowanceFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemMileageAllowance
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemMileageAllowance(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemMileageAllowance
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemMileageAllowance) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldItem             = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemOtherClass1A struct {
+	Item             GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem `json:"item" url:"item"`
+	OtherDescription *string                                                  `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                   `json:"cost" url:"cost"`
+	MadeGood         string                                                   `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) GetItem() GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem {
+	if g == nil {
+		return ""
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) SetItem(item GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem) {
+	g.Item = item
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldItem)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherClass1AFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemOtherClass1A
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemOtherClass1A(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemOtherClass1A
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherClass1A) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem string
+
+const (
+	GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemSubscriptionsAndFees       GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem = "subscriptions and fees"
+	GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemEducationalAssistanceCl1A  GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem = "educational assistance CL1A"
+	GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemNonQualifyingRelocationBen GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem = "non-qualifying relocation ben"
+	GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemStopLossCharges            GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem = "stop loss charges"
+	GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemOther                      GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem = "other"
+	GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemMultiple                   GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem = "multiple"
+)
+
+func NewGbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemFromString(s string) (GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem, error) {
+	switch s {
+	case "subscriptions and fees":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemSubscriptionsAndFees, nil
+	case "educational assistance CL1A":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemEducationalAssistanceCl1A, nil
+	case "non-qualifying relocation ben":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemNonQualifyingRelocationBen, nil
+	case "stop loss charges":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemStopLossCharges, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemOther, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItemMultiple, nil
+	}
+	var t GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem) Ptr() *GbP11DItemsCreateDeclarationsRequestItemOtherClass1AItem {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldItem             = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A struct {
+	Item             GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem `json:"item" url:"item"`
+	OtherDescription *string                                                     `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                      `json:"cost" url:"cost"`
+	MadeGood         string                                                      `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) GetItem() GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem {
+	if g == nil {
+		return ""
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) SetItem(item GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem) {
+	g.Item = item
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldItem)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1A) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem string
+
+const (
+	GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemSubsAndProfessionalFees GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem = "subs and professional fees"
+	GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemNurseryPlaces           GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem = "nursery places"
+	GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemEducationalAssistance   GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem = "educational assistance"
+	GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemLoansWrittenOrWaived    GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem = "loans written or waived"
+	GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemMultiple                GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem = "multiple"
+	GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemOther                   GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem = "other"
+)
+
+func NewGbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemFromString(s string) (GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem, error) {
+	switch s {
+	case "subs and professional fees":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemSubsAndProfessionalFees, nil
+	case "nursery places":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemNurseryPlaces, nil
+	case "educational assistance":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemEducationalAssistance, nil
+	case "loans written or waived":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemLoansWrittenOrWaived, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemMultiple, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItemOther, nil
+	}
+	var t GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem) Ptr() *GbP11DItemsCreateDeclarationsRequestItemOtherNonClass1AItem {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemPaymentFieldPayment          = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemPaymentFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsRequestItemPaymentFieldAmount           = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemPayment struct {
+	Payment          GbP11DItemsCreateDeclarationsRequestItemPaymentPayment `json:"payment" url:"payment"`
+	OtherDescription *string                                                `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Amount           string                                                 `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) GetPayment() GbP11DItemsCreateDeclarationsRequestItemPaymentPayment {
+	if g == nil {
+		return ""
+	}
+	return g.Payment
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetPayment sets the Payment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) SetPayment(payment GbP11DItemsCreateDeclarationsRequestItemPaymentPayment) {
+	g.Payment = payment
+	g.require(gbP11DItemsCreateDeclarationsRequestItemPaymentFieldPayment)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsRequestItemPaymentFieldOtherDescription)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemPaymentFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemPayment
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemPayment(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemPayment
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemPayment) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsRequestItemPaymentPayment string
+
+const (
+	GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentDomesticBills      GbP11DItemsCreateDeclarationsRequestItemPaymentPayment = "domestic bills"
+	GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentAccountancyFees    GbP11DItemsCreateDeclarationsRequestItemPaymentPayment = "accountancy fees"
+	GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentPrivateEducation   GbP11DItemsCreateDeclarationsRequestItemPaymentPayment = "private education"
+	GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentPrivateCarExpenses GbP11DItemsCreateDeclarationsRequestItemPaymentPayment = "private car expenses"
+	GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentSeasonTickets      GbP11DItemsCreateDeclarationsRequestItemPaymentPayment = "season tickets"
+	GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentOther              GbP11DItemsCreateDeclarationsRequestItemPaymentPayment = "other"
+	GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentMultiple           GbP11DItemsCreateDeclarationsRequestItemPaymentPayment = "multiple"
+)
+
+func NewGbP11DItemsCreateDeclarationsRequestItemPaymentPaymentFromString(s string) (GbP11DItemsCreateDeclarationsRequestItemPaymentPayment, error) {
+	switch s {
+	case "domestic bills":
+		return GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentDomesticBills, nil
+	case "accountancy fees":
+		return GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentAccountancyFees, nil
+	case "private education":
+		return GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentPrivateEducation, nil
+	case "private car expenses":
+		return GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentPrivateCarExpenses, nil
+	case "season tickets":
+		return GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentSeasonTickets, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentOther, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsRequestItemPaymentPaymentMultiple, nil
+	}
+	var t GbP11DItemsCreateDeclarationsRequestItemPaymentPayment
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsRequestItemPaymentPayment) Ptr() *GbP11DItemsCreateDeclarationsRequestItemPaymentPayment {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemRelocationFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemRelocation struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemRelocation) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemRelocation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemRelocation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemRelocation) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemRelocationFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemRelocation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemRelocation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemRelocation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemRelocation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemRelocation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemRelocation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemServicesFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemServicesFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemServices struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsRequestItemServicesFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemServicesFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemServices
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemServices(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemServices
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemServices) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPaymentsFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPaymentsFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxOnNotionalPayments) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeductedFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeductedFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemTaxPaidNotDeducted) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemVansFieldAmount     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemVansFieldFuelAmount = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemVans struct {
+	Amount     string  `json:"amount" url:"amount"`
+	FuelAmount *string `json:"fuelAmount,omitempty" url:"fuelAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) GetFuelAmount() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FuelAmount
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemVansFieldAmount)
+}
+
+// SetFuelAmount sets the FuelAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) SetFuelAmount(fuelAmount *string) {
+	g.FuelAmount = fuelAmount
+	g.require(gbP11DItemsCreateDeclarationsRequestItemVansFieldFuelAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemVans
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemVans(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemVans
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVans) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCardsFieldGross    = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCardsFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards struct {
+	Gross    string `json:"gross" url:"gross"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) GetGross() string {
+	if g == nil {
+		return ""
+	}
+	return g.Gross
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetGross sets the Gross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) SetGross(gross string) {
+	g.Gross = gross
+	g.require(gbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCardsFieldGross)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCardsFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsRequestItemVouchersOrCreditCards) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseFieldID             = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseFieldEmployeeID     = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseFieldTaxYear        = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsResponseFieldSection        = big.NewInt(1 << 3)
+	gbP11DItemsCreateDeclarationsResponseFieldClass1A        = big.NewInt(1 << 4)
+	gbP11DItemsCreateDeclarationsResponseFieldCashEquivalent = big.NewInt(1 << 5)
+	gbP11DItemsCreateDeclarationsResponseFieldItem           = big.NewInt(1 << 6)
+)
+
+type GbP11DItemsCreateDeclarationsResponse struct {
+	ID             string                                     `json:"id" url:"id"`
+	EmployeeID     string                                     `json:"employeeId" url:"employeeId"`
+	TaxYear        float64                                    `json:"taxYear" url:"taxYear"`
+	Section        string                                     `json:"section" url:"section"`
+	Class1A        bool                                       `json:"class1A" url:"class1A"`
+	CashEquivalent string                                     `json:"cashEquivalent" url:"cashEquivalent"`
+	Item           *GbP11DItemsCreateDeclarationsResponseItem `json:"item" url:"item"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetID() string {
+	if g == nil {
+		return ""
+	}
+	return g.ID
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetEmployeeID() string {
+	if g == nil {
+		return ""
+	}
+	return g.EmployeeID
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetTaxYear() float64 {
+	if g == nil {
+		return 0
+	}
+	return g.TaxYear
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetSection() string {
+	if g == nil {
+		return ""
+	}
+	return g.Section
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetClass1A() bool {
+	if g == nil {
+		return false
+	}
+	return g.Class1A
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetCashEquivalent() string {
+	if g == nil {
+		return ""
+	}
+	return g.CashEquivalent
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetItem() *GbP11DItemsCreateDeclarationsResponseItem {
+	if g == nil {
+		return nil
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponse) SetID(id string) {
+	g.ID = id
+	g.require(gbP11DItemsCreateDeclarationsResponseFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponse) SetEmployeeID(employeeID string) {
+	g.EmployeeID = employeeID
+	g.require(gbP11DItemsCreateDeclarationsResponseFieldEmployeeID)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponse) SetTaxYear(taxYear float64) {
+	g.TaxYear = taxYear
+	g.require(gbP11DItemsCreateDeclarationsResponseFieldTaxYear)
+}
+
+// SetSection sets the Section field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponse) SetSection(section string) {
+	g.Section = section
+	g.require(gbP11DItemsCreateDeclarationsResponseFieldSection)
+}
+
+// SetClass1A sets the Class1A field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponse) SetClass1A(class1A bool) {
+	g.Class1A = class1A
+	g.require(gbP11DItemsCreateDeclarationsResponseFieldClass1A)
+}
+
+// SetCashEquivalent sets the CashEquivalent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponse) SetCashEquivalent(cashEquivalent string) {
+	g.CashEquivalent = cashEquivalent
+	g.require(gbP11DItemsCreateDeclarationsResponseFieldCashEquivalent)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponse) SetItem(item *GbP11DItemsCreateDeclarationsResponseItem) {
+	g.Item = item
+	g.require(gbP11DItemsCreateDeclarationsResponseFieldItem)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponse) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItem struct {
+	Type                            string
+	AssetTransferred                *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred
+	Payment                         *GbP11DItemsCreateDeclarationsResponseItemPayment
+	TaxOnNotionalPayments           *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments
+	VouchersOrCreditCards           *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards
+	LivingAccommodation             *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation
+	MileageAllowance                *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance
+	Car                             *GbP11DItemsCreateDeclarationsResponseItemCar
+	Vans                            *GbP11DItemsCreateDeclarationsResponseItemVans
+	Loan                            *GbP11DItemsCreateDeclarationsResponseItemLoan
+	Medical                         *GbP11DItemsCreateDeclarationsResponseItemMedical
+	Relocation                      *GbP11DItemsCreateDeclarationsResponseItemRelocation
+	Services                        *GbP11DItemsCreateDeclarationsResponseItemServices
+	AssetAvailable                  *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable
+	OtherClass1A                    *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A
+	OtherNonClass1A                 *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A
+	TaxPaidNotDeducted              *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted
+	ExpensesTravelAndSubsistence    *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence
+	ExpensesEntertainment           *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment
+	ExpensesHomeTelephone           *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone
+	ExpensesNonQualifyingRelocation *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation
+	ExpensesOther                   *GbP11DItemsCreateDeclarationsResponseItemExpensesOther
+
+	rawJSON json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetType() string {
+	if g == nil {
+		return ""
+	}
+	return g.Type
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetAssetTransferred() *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred {
+	if g == nil {
+		return nil
+	}
+	return g.AssetTransferred
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetPayment() *GbP11DItemsCreateDeclarationsResponseItemPayment {
+	if g == nil {
+		return nil
+	}
+	return g.Payment
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetTaxOnNotionalPayments() *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments {
+	if g == nil {
+		return nil
+	}
+	return g.TaxOnNotionalPayments
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetVouchersOrCreditCards() *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards {
+	if g == nil {
+		return nil
+	}
+	return g.VouchersOrCreditCards
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetLivingAccommodation() *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation {
+	if g == nil {
+		return nil
+	}
+	return g.LivingAccommodation
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetMileageAllowance() *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance {
+	if g == nil {
+		return nil
+	}
+	return g.MileageAllowance
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetCar() *GbP11DItemsCreateDeclarationsResponseItemCar {
+	if g == nil {
+		return nil
+	}
+	return g.Car
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetVans() *GbP11DItemsCreateDeclarationsResponseItemVans {
+	if g == nil {
+		return nil
+	}
+	return g.Vans
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetLoan() *GbP11DItemsCreateDeclarationsResponseItemLoan {
+	if g == nil {
+		return nil
+	}
+	return g.Loan
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetMedical() *GbP11DItemsCreateDeclarationsResponseItemMedical {
+	if g == nil {
+		return nil
+	}
+	return g.Medical
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetRelocation() *GbP11DItemsCreateDeclarationsResponseItemRelocation {
+	if g == nil {
+		return nil
+	}
+	return g.Relocation
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetServices() *GbP11DItemsCreateDeclarationsResponseItemServices {
+	if g == nil {
+		return nil
+	}
+	return g.Services
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetAssetAvailable() *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable {
+	if g == nil {
+		return nil
+	}
+	return g.AssetAvailable
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetOtherClass1A() *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A {
+	if g == nil {
+		return nil
+	}
+	return g.OtherClass1A
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetOtherNonClass1A() *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A {
+	if g == nil {
+		return nil
+	}
+	return g.OtherNonClass1A
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetTaxPaidNotDeducted() *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted {
+	if g == nil {
+		return nil
+	}
+	return g.TaxPaidNotDeducted
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetExpensesTravelAndSubsistence() *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesTravelAndSubsistence
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetExpensesEntertainment() *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesEntertainment
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetExpensesHomeTelephone() *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesHomeTelephone
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetExpensesNonQualifyingRelocation() *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesNonQualifyingRelocation
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) GetExpensesOther() *GbP11DItemsCreateDeclarationsResponseItemExpensesOther {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesOther
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) UnmarshalJSON(data []byte) error {
+	var unmarshaler struct {
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	g.Type = unmarshaler.Type
+	if unmarshaler.Type == "" {
+		return fmt.Errorf("%T did not include discriminant type", g)
+	}
+	switch unmarshaler.Type {
+	case "asset-transferred":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemAssetTransferred)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.AssetTransferred = value
+	case "payment":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemPayment)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Payment = value
+	case "tax-on-notional-payments":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.TaxOnNotionalPayments = value
+	case "vouchers-or-credit-cards":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.VouchersOrCreditCards = value
+	case "living-accommodation":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.LivingAccommodation = value
+	case "mileage-allowance":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemMileageAllowance)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.MileageAllowance = value
+	case "car":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemCar)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Car = value
+	case "vans":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemVans)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Vans = value
+	case "loan":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemLoan)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Loan = value
+	case "medical":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemMedical)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Medical = value
+	case "relocation":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemRelocation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Relocation = value
+	case "services":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemServices)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Services = value
+	case "asset-available":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemAssetAvailable)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.AssetAvailable = value
+	case "other-class-1a":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemOtherClass1A)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.OtherClass1A = value
+	case "other-non-class-1a":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.OtherNonClass1A = value
+	case "tax-paid-not-deducted":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.TaxPaidNotDeducted = value
+	case "expenses-travel-and-subsistence":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesTravelAndSubsistence = value
+	case "expenses-entertainment":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesEntertainment = value
+	case "expenses-home-telephone":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesHomeTelephone = value
+	case "expenses-non-qualifying-relocation":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesNonQualifyingRelocation = value
+	case "expenses-other":
+		value := new(GbP11DItemsCreateDeclarationsResponseItemExpensesOther)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesOther = value
+	}
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g GbP11DItemsCreateDeclarationsResponseItem) MarshalJSON() ([]byte, error) {
+	if err := g.validate(); err != nil {
+		return nil, err
+	}
+	if g.AssetTransferred != nil {
+		return internal.MarshalJSONWithExtraProperty(g.AssetTransferred, "type", "asset-transferred")
+	}
+	if g.Payment != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Payment, "type", "payment")
+	}
+	if g.TaxOnNotionalPayments != nil {
+		return internal.MarshalJSONWithExtraProperty(g.TaxOnNotionalPayments, "type", "tax-on-notional-payments")
+	}
+	if g.VouchersOrCreditCards != nil {
+		return internal.MarshalJSONWithExtraProperty(g.VouchersOrCreditCards, "type", "vouchers-or-credit-cards")
+	}
+	if g.LivingAccommodation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.LivingAccommodation, "type", "living-accommodation")
+	}
+	if g.MileageAllowance != nil {
+		return internal.MarshalJSONWithExtraProperty(g.MileageAllowance, "type", "mileage-allowance")
+	}
+	if g.Car != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Car, "type", "car")
+	}
+	if g.Vans != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Vans, "type", "vans")
+	}
+	if g.Loan != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Loan, "type", "loan")
+	}
+	if g.Medical != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Medical, "type", "medical")
+	}
+	if g.Relocation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Relocation, "type", "relocation")
+	}
+	if g.Services != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Services, "type", "services")
+	}
+	if g.AssetAvailable != nil {
+		return internal.MarshalJSONWithExtraProperty(g.AssetAvailable, "type", "asset-available")
+	}
+	if g.OtherClass1A != nil {
+		return internal.MarshalJSONWithExtraProperty(g.OtherClass1A, "type", "other-class-1a")
+	}
+	if g.OtherNonClass1A != nil {
+		return internal.MarshalJSONWithExtraProperty(g.OtherNonClass1A, "type", "other-non-class-1a")
+	}
+	if g.TaxPaidNotDeducted != nil {
+		return internal.MarshalJSONWithExtraProperty(g.TaxPaidNotDeducted, "type", "tax-paid-not-deducted")
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesTravelAndSubsistence, "type", "expenses-travel-and-subsistence")
+	}
+	if g.ExpensesEntertainment != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesEntertainment, "type", "expenses-entertainment")
+	}
+	if g.ExpensesHomeTelephone != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesHomeTelephone, "type", "expenses-home-telephone")
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesNonQualifyingRelocation, "type", "expenses-non-qualifying-relocation")
+	}
+	if g.ExpensesOther != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesOther, "type", "expenses-other")
+	}
+	if len(g.rawJSON) > 0 {
+		return g.rawJSON, nil
+	}
+	return nil, fmt.Errorf("type %T does not define a non-empty union type", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItemVisitor interface {
+	VisitAssetTransferred(*GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) error
+	VisitPayment(*GbP11DItemsCreateDeclarationsResponseItemPayment) error
+	VisitTaxOnNotionalPayments(*GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) error
+	VisitVouchersOrCreditCards(*GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) error
+	VisitLivingAccommodation(*GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) error
+	VisitMileageAllowance(*GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) error
+	VisitCar(*GbP11DItemsCreateDeclarationsResponseItemCar) error
+	VisitVans(*GbP11DItemsCreateDeclarationsResponseItemVans) error
+	VisitLoan(*GbP11DItemsCreateDeclarationsResponseItemLoan) error
+	VisitMedical(*GbP11DItemsCreateDeclarationsResponseItemMedical) error
+	VisitRelocation(*GbP11DItemsCreateDeclarationsResponseItemRelocation) error
+	VisitServices(*GbP11DItemsCreateDeclarationsResponseItemServices) error
+	VisitAssetAvailable(*GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) error
+	VisitOtherClass1A(*GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) error
+	VisitOtherNonClass1A(*GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) error
+	VisitTaxPaidNotDeducted(*GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) error
+	VisitExpensesTravelAndSubsistence(*GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) error
+	VisitExpensesEntertainment(*GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) error
+	VisitExpensesHomeTelephone(*GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) error
+	VisitExpensesNonQualifyingRelocation(*GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) error
+	VisitExpensesOther(*GbP11DItemsCreateDeclarationsResponseItemExpensesOther) error
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) Accept(visitor GbP11DItemsCreateDeclarationsResponseItemVisitor) error {
+	if g.AssetTransferred != nil {
+		return visitor.VisitAssetTransferred(g.AssetTransferred)
+	}
+	if g.Payment != nil {
+		return visitor.VisitPayment(g.Payment)
+	}
+	if g.TaxOnNotionalPayments != nil {
+		return visitor.VisitTaxOnNotionalPayments(g.TaxOnNotionalPayments)
+	}
+	if g.VouchersOrCreditCards != nil {
+		return visitor.VisitVouchersOrCreditCards(g.VouchersOrCreditCards)
+	}
+	if g.LivingAccommodation != nil {
+		return visitor.VisitLivingAccommodation(g.LivingAccommodation)
+	}
+	if g.MileageAllowance != nil {
+		return visitor.VisitMileageAllowance(g.MileageAllowance)
+	}
+	if g.Car != nil {
+		return visitor.VisitCar(g.Car)
+	}
+	if g.Vans != nil {
+		return visitor.VisitVans(g.Vans)
+	}
+	if g.Loan != nil {
+		return visitor.VisitLoan(g.Loan)
+	}
+	if g.Medical != nil {
+		return visitor.VisitMedical(g.Medical)
+	}
+	if g.Relocation != nil {
+		return visitor.VisitRelocation(g.Relocation)
+	}
+	if g.Services != nil {
+		return visitor.VisitServices(g.Services)
+	}
+	if g.AssetAvailable != nil {
+		return visitor.VisitAssetAvailable(g.AssetAvailable)
+	}
+	if g.OtherClass1A != nil {
+		return visitor.VisitOtherClass1A(g.OtherClass1A)
+	}
+	if g.OtherNonClass1A != nil {
+		return visitor.VisitOtherNonClass1A(g.OtherNonClass1A)
+	}
+	if g.TaxPaidNotDeducted != nil {
+		return visitor.VisitTaxPaidNotDeducted(g.TaxPaidNotDeducted)
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		return visitor.VisitExpensesTravelAndSubsistence(g.ExpensesTravelAndSubsistence)
+	}
+	if g.ExpensesEntertainment != nil {
+		return visitor.VisitExpensesEntertainment(g.ExpensesEntertainment)
+	}
+	if g.ExpensesHomeTelephone != nil {
+		return visitor.VisitExpensesHomeTelephone(g.ExpensesHomeTelephone)
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		return visitor.VisitExpensesNonQualifyingRelocation(g.ExpensesNonQualifyingRelocation)
+	}
+	if g.ExpensesOther != nil {
+		return visitor.VisitExpensesOther(g.ExpensesOther)
+	}
+	return fmt.Errorf("type %T does not define a non-empty union type", g)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItem) validate() error {
+	if g == nil {
+		return fmt.Errorf("type %T is nil", g)
+	}
+	var fields []string
+	if g.AssetTransferred != nil {
+		fields = append(fields, "asset-transferred")
+	}
+	if g.Payment != nil {
+		fields = append(fields, "payment")
+	}
+	if g.TaxOnNotionalPayments != nil {
+		fields = append(fields, "tax-on-notional-payments")
+	}
+	if g.VouchersOrCreditCards != nil {
+		fields = append(fields, "vouchers-or-credit-cards")
+	}
+	if g.LivingAccommodation != nil {
+		fields = append(fields, "living-accommodation")
+	}
+	if g.MileageAllowance != nil {
+		fields = append(fields, "mileage-allowance")
+	}
+	if g.Car != nil {
+		fields = append(fields, "car")
+	}
+	if g.Vans != nil {
+		fields = append(fields, "vans")
+	}
+	if g.Loan != nil {
+		fields = append(fields, "loan")
+	}
+	if g.Medical != nil {
+		fields = append(fields, "medical")
+	}
+	if g.Relocation != nil {
+		fields = append(fields, "relocation")
+	}
+	if g.Services != nil {
+		fields = append(fields, "services")
+	}
+	if g.AssetAvailable != nil {
+		fields = append(fields, "asset-available")
+	}
+	if g.OtherClass1A != nil {
+		fields = append(fields, "other-class-1a")
+	}
+	if g.OtherNonClass1A != nil {
+		fields = append(fields, "other-non-class-1a")
+	}
+	if g.TaxPaidNotDeducted != nil {
+		fields = append(fields, "tax-paid-not-deducted")
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		fields = append(fields, "expenses-travel-and-subsistence")
+	}
+	if g.ExpensesEntertainment != nil {
+		fields = append(fields, "expenses-entertainment")
+	}
+	if g.ExpensesHomeTelephone != nil {
+		fields = append(fields, "expenses-home-telephone")
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		fields = append(fields, "expenses-non-qualifying-relocation")
+	}
+	if g.ExpensesOther != nil {
+		fields = append(fields, "expenses-other")
+	}
+	if len(fields) == 0 {
+		if g.Type != "" {
+			if len(g.rawJSON) > 0 {
+				return nil
+			}
+			return fmt.Errorf("type %T defines a discriminant set to %q but the field is not set", g, g.Type)
+		}
+		return fmt.Errorf("type %T is empty", g)
+	}
+	if len(fields) > 1 {
+		return fmt.Errorf("type %T defines values for %s, but only one value is allowed", g, fields)
+	}
+	if g.Type != "" {
+		field := fields[0]
+		if g.Type != field {
+			return fmt.Errorf(
+				"type %T defines a discriminant set to %q, but it does not match the %T field; either remove or update the discriminant to match",
+				g,
+				g.Type,
+				g,
+			)
+		}
+	}
+	return nil
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldAsset            = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldAnnualValue      = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemAssetAvailable struct {
+	Asset            GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset `json:"asset" url:"asset"`
+	OtherDescription *string                                                      `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	AnnualValue      string                                                       `json:"annualValue" url:"annualValue"`
+	MadeGood         string                                                       `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) GetAsset() GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset {
+	if g == nil {
+		return ""
+	}
+	return g.Asset
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) GetAnnualValue() string {
+	if g == nil {
+		return ""
+	}
+	return g.AnnualValue
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAsset sets the Asset field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) SetAsset(asset GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset) {
+	g.Asset = asset
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldAsset)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldOtherDescription)
+}
+
+// SetAnnualValue sets the AnnualValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) SetAnnualValue(annualValue string) {
+	g.AnnualValue = annualValue
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldAnnualValue)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetAvailableFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemAssetAvailable
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemAssetAvailable(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemAssetAvailable
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetAvailable) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset string
+
+const (
+	GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetHolidayAccommodation   GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset = "holiday accommodation"
+	GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetTimeshareAccommodation GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset = "timeshare accommodation"
+	GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetAircraft               GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset = "aircraft"
+	GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetBoat                   GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset = "boat"
+	GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetCorporateHospitality   GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset = "corporate hospitality"
+	GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetMultiple               GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset = "multiple"
+	GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetOther                  GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset = "other"
+)
+
+func NewGbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetFromString(s string) (GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset, error) {
+	switch s {
+	case "holiday accommodation":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetHolidayAccommodation, nil
+	case "timeshare accommodation":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetTimeshareAccommodation, nil
+	case "aircraft":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetAircraft, nil
+	case "boat":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetBoat, nil
+	case "corporate hospitality":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetCorporateHospitality, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetMultiple, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAssetOther, nil
+	}
+	var t GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset) Ptr() *GbP11DItemsCreateDeclarationsResponseItemAssetAvailableAsset {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldAsset            = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemAssetTransferred struct {
+	Asset            GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset `json:"asset" url:"asset"`
+	OtherDescription *string                                                        `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                         `json:"cost" url:"cost"`
+	MadeGood         string                                                         `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) GetAsset() GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset {
+	if g == nil {
+		return ""
+	}
+	return g.Asset
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAsset sets the Asset field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) SetAsset(asset GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset) {
+	g.Asset = asset
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldAsset)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemAssetTransferredFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemAssetTransferred
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemAssetTransferred(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemAssetTransferred
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemAssetTransferred) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset string
+
+const (
+	GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetCars           GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset = "cars"
+	GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetProperty       GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset = "property"
+	GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetPreciousMetals GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset = "precious metals"
+	GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetOther          GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset = "other"
+	GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetMultiple       GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset = "multiple"
+)
+
+func NewGbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetFromString(s string) (GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset, error) {
+	switch s {
+	case "cars":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetCars, nil
+	case "property":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetProperty, nil
+	case "precious metals":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetPreciousMetals, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetOther, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAssetMultiple, nil
+	}
+	var t GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset) Ptr() *GbP11DItemsCreateDeclarationsResponseItemAssetTransferredAsset {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldMake                = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldRegistered          = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldAvailableFrom       = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldAvailableTo         = big.NewInt(1 << 3)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldEngineSize          = big.NewInt(1 << 4)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldFuel                = big.NewInt(1 << 5)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldCo2                 = big.NewInt(1 << 6)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldZeroEmissionMileage = big.NewInt(1 << 7)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldNoApprovedCo2       = big.NewInt(1 << 8)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldListPrice           = big.NewInt(1 << 9)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldAccessories         = big.NewInt(1 << 10)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldCapitalContribution = big.NewInt(1 << 11)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldPrivateUsePayment   = big.NewInt(1 << 12)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldFuelWithdrawn       = big.NewInt(1 << 13)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldFuelReinstated      = big.NewInt(1 << 14)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldAmount              = big.NewInt(1 << 15)
+	gbP11DItemsCreateDeclarationsResponseItemCarFieldFuelAmount          = big.NewInt(1 << 16)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemCar struct {
+	Make                string                                            `json:"make" url:"make"`
+	Registered          time.Time                                         `json:"registered" url:"registered" format:"date"`
+	AvailableFrom       *time.Time                                        `json:"availableFrom,omitempty" url:"availableFrom,omitempty" format:"date"`
+	AvailableTo         *time.Time                                        `json:"availableTo,omitempty" url:"availableTo,omitempty" format:"date"`
+	EngineSize          *int64                                            `json:"engineSize,omitempty" url:"engineSize,omitempty"`
+	Fuel                *GbP11DItemsCreateDeclarationsResponseItemCarFuel `json:"fuel,omitempty" url:"fuel,omitempty"`
+	Co2                 *int64                                            `json:"co2,omitempty" url:"co2,omitempty"`
+	ZeroEmissionMileage *int64                                            `json:"zeroEmissionMileage,omitempty" url:"zeroEmissionMileage,omitempty"`
+	NoApprovedCo2       *bool                                             `json:"noApprovedCo2,omitempty" url:"noApprovedCo2,omitempty"`
+	ListPrice           string                                            `json:"listPrice" url:"listPrice"`
+	Accessories         string                                            `json:"accessories" url:"accessories"`
+	CapitalContribution string                                            `json:"capitalContribution" url:"capitalContribution"`
+	PrivateUsePayment   string                                            `json:"privateUsePayment" url:"privateUsePayment"`
+	FuelWithdrawn       *time.Time                                        `json:"fuelWithdrawn,omitempty" url:"fuelWithdrawn,omitempty" format:"date"`
+	FuelReinstated      *bool                                             `json:"fuelReinstated,omitempty" url:"fuelReinstated,omitempty"`
+	Amount              string                                            `json:"amount" url:"amount"`
+	FuelAmount          *string                                           `json:"fuelAmount,omitempty" url:"fuelAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetMake() string {
+	if g == nil {
+		return ""
+	}
+	return g.Make
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetRegistered() time.Time {
+	if g == nil {
+		return time.Time{}
+	}
+	return g.Registered
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetAvailableFrom() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.AvailableFrom
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetAvailableTo() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.AvailableTo
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetEngineSize() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.EngineSize
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetFuel() *GbP11DItemsCreateDeclarationsResponseItemCarFuel {
+	if g == nil {
+		return nil
+	}
+	return g.Fuel
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetCo2() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.Co2
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetZeroEmissionMileage() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.ZeroEmissionMileage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetNoApprovedCo2() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.NoApprovedCo2
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetListPrice() string {
+	if g == nil {
+		return ""
+	}
+	return g.ListPrice
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetAccessories() string {
+	if g == nil {
+		return ""
+	}
+	return g.Accessories
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetCapitalContribution() string {
+	if g == nil {
+		return ""
+	}
+	return g.CapitalContribution
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetPrivateUsePayment() string {
+	if g == nil {
+		return ""
+	}
+	return g.PrivateUsePayment
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetFuelWithdrawn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.FuelWithdrawn
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetFuelReinstated() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.FuelReinstated
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetFuelAmount() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FuelAmount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetMake sets the Make field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetMake(make_ string) {
+	g.Make = make_
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldMake)
+}
+
+// SetRegistered sets the Registered field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetRegistered(registered time.Time) {
+	g.Registered = registered
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldRegistered)
+}
+
+// SetAvailableFrom sets the AvailableFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetAvailableFrom(availableFrom *time.Time) {
+	g.AvailableFrom = availableFrom
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldAvailableFrom)
+}
+
+// SetAvailableTo sets the AvailableTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetAvailableTo(availableTo *time.Time) {
+	g.AvailableTo = availableTo
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldAvailableTo)
+}
+
+// SetEngineSize sets the EngineSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetEngineSize(engineSize *int64) {
+	g.EngineSize = engineSize
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldEngineSize)
+}
+
+// SetFuel sets the Fuel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetFuel(fuel *GbP11DItemsCreateDeclarationsResponseItemCarFuel) {
+	g.Fuel = fuel
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldFuel)
+}
+
+// SetCo2 sets the Co2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetCo2(co2 *int64) {
+	g.Co2 = co2
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldCo2)
+}
+
+// SetZeroEmissionMileage sets the ZeroEmissionMileage field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetZeroEmissionMileage(zeroEmissionMileage *int64) {
+	g.ZeroEmissionMileage = zeroEmissionMileage
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldZeroEmissionMileage)
+}
+
+// SetNoApprovedCo2 sets the NoApprovedCo2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetNoApprovedCo2(noApprovedCo2 *bool) {
+	g.NoApprovedCo2 = noApprovedCo2
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldNoApprovedCo2)
+}
+
+// SetListPrice sets the ListPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetListPrice(listPrice string) {
+	g.ListPrice = listPrice
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldListPrice)
+}
+
+// SetAccessories sets the Accessories field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetAccessories(accessories string) {
+	g.Accessories = accessories
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldAccessories)
+}
+
+// SetCapitalContribution sets the CapitalContribution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetCapitalContribution(capitalContribution string) {
+	g.CapitalContribution = capitalContribution
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldCapitalContribution)
+}
+
+// SetPrivateUsePayment sets the PrivateUsePayment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetPrivateUsePayment(privateUsePayment string) {
+	g.PrivateUsePayment = privateUsePayment
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldPrivateUsePayment)
+}
+
+// SetFuelWithdrawn sets the FuelWithdrawn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetFuelWithdrawn(fuelWithdrawn *time.Time) {
+	g.FuelWithdrawn = fuelWithdrawn
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldFuelWithdrawn)
+}
+
+// SetFuelReinstated sets the FuelReinstated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetFuelReinstated(fuelReinstated *bool) {
+	g.FuelReinstated = fuelReinstated
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldFuelReinstated)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldAmount)
+}
+
+// SetFuelAmount sets the FuelAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) SetFuelAmount(fuelAmount *string) {
+	g.FuelAmount = fuelAmount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemCarFieldFuelAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) UnmarshalJSON(data []byte) error {
+	type embed GbP11DItemsCreateDeclarationsResponseItemCar
+	var unmarshaler = struct {
+		embed
+		Registered    *internal.Date `json:"registered"`
+		AvailableFrom *internal.Date `json:"availableFrom,omitempty"`
+		AvailableTo   *internal.Date `json:"availableTo,omitempty"`
+		FuelWithdrawn *internal.Date `json:"fuelWithdrawn,omitempty"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemCar(unmarshaler.embed)
+	g.Registered = unmarshaler.Registered.Time()
+	g.AvailableFrom = unmarshaler.AvailableFrom.TimePtr()
+	g.AvailableTo = unmarshaler.AvailableTo.TimePtr()
+	g.FuelWithdrawn = unmarshaler.FuelWithdrawn.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemCar
+	var marshaler = struct {
+		embed
+		Registered    *internal.Date `json:"registered"`
+		AvailableFrom *internal.Date `json:"availableFrom,omitempty"`
+		AvailableTo   *internal.Date `json:"availableTo,omitempty"`
+		FuelWithdrawn *internal.Date `json:"fuelWithdrawn,omitempty"`
+	}{
+		embed:         embed(*g),
+		Registered:    internal.NewDate(g.Registered),
+		AvailableFrom: internal.NewOptionalDate(g.AvailableFrom),
+		AvailableTo:   internal.NewOptionalDate(g.AvailableTo),
+		FuelWithdrawn: internal.NewOptionalDate(g.FuelWithdrawn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemCar) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItemCarFuel string
+
+const (
+	GbP11DItemsCreateDeclarationsResponseItemCarFuelF GbP11DItemsCreateDeclarationsResponseItemCarFuel = "F"
+	GbP11DItemsCreateDeclarationsResponseItemCarFuelD GbP11DItemsCreateDeclarationsResponseItemCarFuel = "D"
+	GbP11DItemsCreateDeclarationsResponseItemCarFuelA GbP11DItemsCreateDeclarationsResponseItemCarFuel = "A"
+)
+
+func NewGbP11DItemsCreateDeclarationsResponseItemCarFuelFromString(s string) (GbP11DItemsCreateDeclarationsResponseItemCarFuel, error) {
+	switch s {
+	case "F":
+		return GbP11DItemsCreateDeclarationsResponseItemCarFuelF, nil
+	case "D":
+		return GbP11DItemsCreateDeclarationsResponseItemCarFuelD, nil
+	case "A":
+		return GbP11DItemsCreateDeclarationsResponseItemCarFuelA, nil
+	}
+	var t GbP11DItemsCreateDeclarationsResponseItemCarFuel
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsResponseItemCarFuel) Ptr() *GbP11DItemsCreateDeclarationsResponseItemCarFuel {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemExpensesEntertainmentFieldTradingOrganisation = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemExpensesEntertainmentFieldCost                = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemExpensesEntertainmentFieldMadeGood            = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment struct {
+	TradingOrganisation bool   `json:"tradingOrganisation" url:"tradingOrganisation"`
+	Cost                string `json:"cost" url:"cost"`
+	MadeGood            string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) GetTradingOrganisation() bool {
+	if g == nil {
+		return false
+	}
+	return g.TradingOrganisation
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetTradingOrganisation sets the TradingOrganisation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) SetTradingOrganisation(tradingOrganisation bool) {
+	g.TradingOrganisation = tradingOrganisation
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesEntertainmentFieldTradingOrganisation)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesEntertainmentFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesEntertainmentFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesEntertainment) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephoneFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephoneFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephoneFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephoneFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesHomeTelephone) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocationFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocationFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocationFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocationFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesNonQualifyingRelocation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemExpensesOtherFieldDescription = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemExpensesOtherFieldCost        = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemExpensesOtherFieldMadeGood    = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemExpensesOther struct {
+	Description string `json:"description" url:"description"`
+	Cost        string `json:"cost" url:"cost"`
+	MadeGood    string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) GetDescription() string {
+	if g == nil {
+		return ""
+	}
+	return g.Description
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) SetDescription(description string) {
+	g.Description = description
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesOtherFieldDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesOtherFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesOtherFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemExpensesOther
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemExpensesOther(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemExpensesOther
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesOther) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistenceFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistenceFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistenceFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistenceFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemExpensesTravelAndSubsistence) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemLivingAccommodationFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLivingAccommodationFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLivingAccommodation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldJointBorrowers     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldOutstandingStart   = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldOutstandingEnd     = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldMaximumOutstanding = big.NewInt(1 << 3)
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldInterestPaid       = big.NewInt(1 << 4)
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldMadeOn             = big.NewInt(1 << 5)
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldDischargedOn       = big.NewInt(1 << 6)
+	gbP11DItemsCreateDeclarationsResponseItemLoanFieldAmount             = big.NewInt(1 << 7)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemLoan struct {
+	JointBorrowers     int64      `json:"jointBorrowers" url:"jointBorrowers"`
+	OutstandingStart   string     `json:"outstandingStart" url:"outstandingStart"`
+	OutstandingEnd     string     `json:"outstandingEnd" url:"outstandingEnd"`
+	MaximumOutstanding string     `json:"maximumOutstanding" url:"maximumOutstanding"`
+	InterestPaid       string     `json:"interestPaid" url:"interestPaid"`
+	MadeOn             *time.Time `json:"madeOn,omitempty" url:"madeOn,omitempty" format:"date"`
+	DischargedOn       *time.Time `json:"dischargedOn,omitempty" url:"dischargedOn,omitempty" format:"date"`
+	Amount             string     `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetJointBorrowers() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.JointBorrowers
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetOutstandingStart() string {
+	if g == nil {
+		return ""
+	}
+	return g.OutstandingStart
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetOutstandingEnd() string {
+	if g == nil {
+		return ""
+	}
+	return g.OutstandingEnd
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetMaximumOutstanding() string {
+	if g == nil {
+		return ""
+	}
+	return g.MaximumOutstanding
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetInterestPaid() string {
+	if g == nil {
+		return ""
+	}
+	return g.InterestPaid
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetMadeOn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.MadeOn
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetDischargedOn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.DischargedOn
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetJointBorrowers sets the JointBorrowers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetJointBorrowers(jointBorrowers int64) {
+	g.JointBorrowers = jointBorrowers
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldJointBorrowers)
+}
+
+// SetOutstandingStart sets the OutstandingStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetOutstandingStart(outstandingStart string) {
+	g.OutstandingStart = outstandingStart
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldOutstandingStart)
+}
+
+// SetOutstandingEnd sets the OutstandingEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetOutstandingEnd(outstandingEnd string) {
+	g.OutstandingEnd = outstandingEnd
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldOutstandingEnd)
+}
+
+// SetMaximumOutstanding sets the MaximumOutstanding field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetMaximumOutstanding(maximumOutstanding string) {
+	g.MaximumOutstanding = maximumOutstanding
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldMaximumOutstanding)
+}
+
+// SetInterestPaid sets the InterestPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetInterestPaid(interestPaid string) {
+	g.InterestPaid = interestPaid
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldInterestPaid)
+}
+
+// SetMadeOn sets the MadeOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetMadeOn(madeOn *time.Time) {
+	g.MadeOn = madeOn
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldMadeOn)
+}
+
+// SetDischargedOn sets the DischargedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetDischargedOn(dischargedOn *time.Time) {
+	g.DischargedOn = dischargedOn
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldDischargedOn)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemLoanFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) UnmarshalJSON(data []byte) error {
+	type embed GbP11DItemsCreateDeclarationsResponseItemLoan
+	var unmarshaler = struct {
+		embed
+		MadeOn       *internal.Date `json:"madeOn,omitempty"`
+		DischargedOn *internal.Date `json:"dischargedOn,omitempty"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemLoan(unmarshaler.embed)
+	g.MadeOn = unmarshaler.MadeOn.TimePtr()
+	g.DischargedOn = unmarshaler.DischargedOn.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemLoan
+	var marshaler = struct {
+		embed
+		MadeOn       *internal.Date `json:"madeOn,omitempty"`
+		DischargedOn *internal.Date `json:"dischargedOn,omitempty"`
+	}{
+		embed:        embed(*g),
+		MadeOn:       internal.NewOptionalDate(g.MadeOn),
+		DischargedOn: internal.NewOptionalDate(g.DischargedOn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemLoan) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemMedicalFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemMedicalFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemMedical struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemMedicalFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemMedicalFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemMedical
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemMedical(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemMedical
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMedical) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemMileageAllowanceFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemMileageAllowance struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemMileageAllowanceFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemMileageAllowance
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemMileageAllowance(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemMileageAllowance
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemMileageAllowance) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldItem             = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemOtherClass1A struct {
+	Item             GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem `json:"item" url:"item"`
+	OtherDescription *string                                                   `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                    `json:"cost" url:"cost"`
+	MadeGood         string                                                    `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) GetItem() GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem {
+	if g == nil {
+		return ""
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) SetItem(item GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem) {
+	g.Item = item
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldItem)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherClass1AFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemOtherClass1A
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemOtherClass1A(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemOtherClass1A
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherClass1A) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem string
+
+const (
+	GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemSubscriptionsAndFees       GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem = "subscriptions and fees"
+	GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemEducationalAssistanceCl1A  GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem = "educational assistance CL1A"
+	GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemNonQualifyingRelocationBen GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem = "non-qualifying relocation ben"
+	GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemStopLossCharges            GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem = "stop loss charges"
+	GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemOther                      GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem = "other"
+	GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemMultiple                   GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem = "multiple"
+)
+
+func NewGbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemFromString(s string) (GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem, error) {
+	switch s {
+	case "subscriptions and fees":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemSubscriptionsAndFees, nil
+	case "educational assistance CL1A":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemEducationalAssistanceCl1A, nil
+	case "non-qualifying relocation ben":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemNonQualifyingRelocationBen, nil
+	case "stop loss charges":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemStopLossCharges, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemOther, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItemMultiple, nil
+	}
+	var t GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem) Ptr() *GbP11DItemsCreateDeclarationsResponseItemOtherClass1AItem {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldItem             = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A struct {
+	Item             GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem `json:"item" url:"item"`
+	OtherDescription *string                                                      `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                       `json:"cost" url:"cost"`
+	MadeGood         string                                                       `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) GetItem() GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem {
+	if g == nil {
+		return ""
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) SetItem(item GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem) {
+	g.Item = item
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldItem)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1A) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem string
+
+const (
+	GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemSubsAndProfessionalFees GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem = "subs and professional fees"
+	GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemNurseryPlaces           GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem = "nursery places"
+	GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemEducationalAssistance   GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem = "educational assistance"
+	GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemLoansWrittenOrWaived    GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem = "loans written or waived"
+	GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemMultiple                GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem = "multiple"
+	GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemOther                   GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem = "other"
+)
+
+func NewGbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemFromString(s string) (GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem, error) {
+	switch s {
+	case "subs and professional fees":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemSubsAndProfessionalFees, nil
+	case "nursery places":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemNurseryPlaces, nil
+	case "educational assistance":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemEducationalAssistance, nil
+	case "loans written or waived":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemLoansWrittenOrWaived, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemMultiple, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItemOther, nil
+	}
+	var t GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem) Ptr() *GbP11DItemsCreateDeclarationsResponseItemOtherNonClass1AItem {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemPaymentFieldPayment          = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemPaymentFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsCreateDeclarationsResponseItemPaymentFieldAmount           = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemPayment struct {
+	Payment          GbP11DItemsCreateDeclarationsResponseItemPaymentPayment `json:"payment" url:"payment"`
+	OtherDescription *string                                                 `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Amount           string                                                  `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) GetPayment() GbP11DItemsCreateDeclarationsResponseItemPaymentPayment {
+	if g == nil {
+		return ""
+	}
+	return g.Payment
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetPayment sets the Payment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) SetPayment(payment GbP11DItemsCreateDeclarationsResponseItemPaymentPayment) {
+	g.Payment = payment
+	g.require(gbP11DItemsCreateDeclarationsResponseItemPaymentFieldPayment)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsCreateDeclarationsResponseItemPaymentFieldOtherDescription)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemPaymentFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemPayment
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemPayment(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemPayment
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemPayment) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsCreateDeclarationsResponseItemPaymentPayment string
+
+const (
+	GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentDomesticBills      GbP11DItemsCreateDeclarationsResponseItemPaymentPayment = "domestic bills"
+	GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentAccountancyFees    GbP11DItemsCreateDeclarationsResponseItemPaymentPayment = "accountancy fees"
+	GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentPrivateEducation   GbP11DItemsCreateDeclarationsResponseItemPaymentPayment = "private education"
+	GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentPrivateCarExpenses GbP11DItemsCreateDeclarationsResponseItemPaymentPayment = "private car expenses"
+	GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentSeasonTickets      GbP11DItemsCreateDeclarationsResponseItemPaymentPayment = "season tickets"
+	GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentOther              GbP11DItemsCreateDeclarationsResponseItemPaymentPayment = "other"
+	GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentMultiple           GbP11DItemsCreateDeclarationsResponseItemPaymentPayment = "multiple"
+)
+
+func NewGbP11DItemsCreateDeclarationsResponseItemPaymentPaymentFromString(s string) (GbP11DItemsCreateDeclarationsResponseItemPaymentPayment, error) {
+	switch s {
+	case "domestic bills":
+		return GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentDomesticBills, nil
+	case "accountancy fees":
+		return GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentAccountancyFees, nil
+	case "private education":
+		return GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentPrivateEducation, nil
+	case "private car expenses":
+		return GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentPrivateCarExpenses, nil
+	case "season tickets":
+		return GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentSeasonTickets, nil
+	case "other":
+		return GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentOther, nil
+	case "multiple":
+		return GbP11DItemsCreateDeclarationsResponseItemPaymentPaymentMultiple, nil
+	}
+	var t GbP11DItemsCreateDeclarationsResponseItemPaymentPayment
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsCreateDeclarationsResponseItemPaymentPayment) Ptr() *GbP11DItemsCreateDeclarationsResponseItemPaymentPayment {
+	return &g
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemRelocationFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemRelocation struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemRelocation) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemRelocation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemRelocation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemRelocation) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemRelocationFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemRelocation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemRelocation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemRelocation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemRelocation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemRelocation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemRelocation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemServicesFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemServicesFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemServices struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsCreateDeclarationsResponseItemServicesFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemServicesFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemServices
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemServices(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemServices
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemServices) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPaymentsFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPaymentsFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxOnNotionalPayments) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeductedFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeductedFieldAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemTaxPaidNotDeducted) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemVansFieldAmount     = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemVansFieldFuelAmount = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemVans struct {
+	Amount     string  `json:"amount" url:"amount"`
+	FuelAmount *string `json:"fuelAmount,omitempty" url:"fuelAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) GetFuelAmount() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FuelAmount
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemVansFieldAmount)
+}
+
+// SetFuelAmount sets the FuelAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) SetFuelAmount(fuelAmount *string) {
+	g.FuelAmount = fuelAmount
+	g.require(gbP11DItemsCreateDeclarationsResponseItemVansFieldFuelAmount)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemVans
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemVans(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemVans
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVans) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCardsFieldGross    = big.NewInt(1 << 0)
+	gbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCardsFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards struct {
+	Gross    string `json:"gross" url:"gross"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) GetGross() string {
+	if g == nil {
+		return ""
+	}
+	return g.Gross
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetGross sets the Gross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) SetGross(gross string) {
+	g.Gross = gross
+	g.require(gbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCardsFieldGross)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCardsFieldMadeGood)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsCreateDeclarationsResponseItemVouchersOrCreditCards) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsDeleteDeclarationsResponseFieldOk = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsDeleteDeclarationsResponse struct {
+	Ok bool `json:"ok" url:"ok"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsDeleteDeclarationsResponse) GetOk() bool {
+	if g == nil {
+		return false
+	}
+	return g.Ok
+}
+
+func (g *GbP11DItemsDeleteDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsDeleteDeclarationsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetOk sets the Ok field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsDeleteDeclarationsResponse) SetOk(ok bool) {
+	g.Ok = ok
+	g.require(gbP11DItemsDeleteDeclarationsResponseFieldOk)
+}
+
+func (g *GbP11DItemsDeleteDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsDeleteDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsDeleteDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsDeleteDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsDeleteDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsDeleteDeclarationsResponse) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseFieldItems = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsListDeclarationsResponse struct {
+	Items []*GbP11DItemsListDeclarationsResponseItemsItem `json:"items" url:"items"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponse) GetItems() []*GbP11DItemsListDeclarationsResponseItemsItem {
+	if g == nil {
+		return nil
+	}
+	return g.Items
+}
+
+func (g *GbP11DItemsListDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetItems sets the Items field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponse) SetItems(items []*GbP11DItemsListDeclarationsResponseItemsItem) {
+	g.Items = items
+	g.require(gbP11DItemsListDeclarationsResponseFieldItems)
+}
+
+func (g *GbP11DItemsListDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponse) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemFieldID             = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemFieldEmployeeID     = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemFieldTaxYear        = big.NewInt(1 << 2)
+	gbP11DItemsListDeclarationsResponseItemsItemFieldSection        = big.NewInt(1 << 3)
+	gbP11DItemsListDeclarationsResponseItemsItemFieldClass1A        = big.NewInt(1 << 4)
+	gbP11DItemsListDeclarationsResponseItemsItemFieldCashEquivalent = big.NewInt(1 << 5)
+	gbP11DItemsListDeclarationsResponseItemsItemFieldItem           = big.NewInt(1 << 6)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItem struct {
+	ID             string                                            `json:"id" url:"id"`
+	EmployeeID     string                                            `json:"employeeId" url:"employeeId"`
+	TaxYear        float64                                           `json:"taxYear" url:"taxYear"`
+	Section        string                                            `json:"section" url:"section"`
+	Class1A        bool                                              `json:"class1A" url:"class1A"`
+	CashEquivalent string                                            `json:"cashEquivalent" url:"cashEquivalent"`
+	Item           *GbP11DItemsListDeclarationsResponseItemsItemItem `json:"item" url:"item"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetID() string {
+	if g == nil {
+		return ""
+	}
+	return g.ID
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetEmployeeID() string {
+	if g == nil {
+		return ""
+	}
+	return g.EmployeeID
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetTaxYear() float64 {
+	if g == nil {
+		return 0
+	}
+	return g.TaxYear
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetSection() string {
+	if g == nil {
+		return ""
+	}
+	return g.Section
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetClass1A() bool {
+	if g == nil {
+		return false
+	}
+	return g.Class1A
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetCashEquivalent() string {
+	if g == nil {
+		return ""
+	}
+	return g.CashEquivalent
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetItem() *GbP11DItemsListDeclarationsResponseItemsItemItem {
+	if g == nil {
+		return nil
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) SetID(id string) {
+	g.ID = id
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemFieldID)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) SetEmployeeID(employeeID string) {
+	g.EmployeeID = employeeID
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemFieldEmployeeID)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) SetTaxYear(taxYear float64) {
+	g.TaxYear = taxYear
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemFieldTaxYear)
+}
+
+// SetSection sets the Section field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) SetSection(section string) {
+	g.Section = section
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemFieldSection)
+}
+
+// SetClass1A sets the Class1A field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) SetClass1A(class1A bool) {
+	g.Class1A = class1A
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemFieldClass1A)
+}
+
+// SetCashEquivalent sets the CashEquivalent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) SetCashEquivalent(cashEquivalent string) {
+	g.CashEquivalent = cashEquivalent
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemFieldCashEquivalent)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) SetItem(item *GbP11DItemsListDeclarationsResponseItemsItemItem) {
+	g.Item = item
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemFieldItem)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItem) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItem struct {
+	Type                            string
+	AssetTransferred                *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred
+	Payment                         *GbP11DItemsListDeclarationsResponseItemsItemItemPayment
+	TaxOnNotionalPayments           *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments
+	VouchersOrCreditCards           *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards
+	LivingAccommodation             *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation
+	MileageAllowance                *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance
+	Car                             *GbP11DItemsListDeclarationsResponseItemsItemItemCar
+	Vans                            *GbP11DItemsListDeclarationsResponseItemsItemItemVans
+	Loan                            *GbP11DItemsListDeclarationsResponseItemsItemItemLoan
+	Medical                         *GbP11DItemsListDeclarationsResponseItemsItemItemMedical
+	Relocation                      *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation
+	Services                        *GbP11DItemsListDeclarationsResponseItemsItemItemServices
+	AssetAvailable                  *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable
+	OtherClass1A                    *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A
+	OtherNonClass1A                 *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A
+	TaxPaidNotDeducted              *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted
+	ExpensesTravelAndSubsistence    *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence
+	ExpensesEntertainment           *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment
+	ExpensesHomeTelephone           *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone
+	ExpensesNonQualifyingRelocation *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation
+	ExpensesOther                   *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther
+
+	rawJSON json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetType() string {
+	if g == nil {
+		return ""
+	}
+	return g.Type
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetAssetTransferred() *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred {
+	if g == nil {
+		return nil
+	}
+	return g.AssetTransferred
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetPayment() *GbP11DItemsListDeclarationsResponseItemsItemItemPayment {
+	if g == nil {
+		return nil
+	}
+	return g.Payment
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetTaxOnNotionalPayments() *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments {
+	if g == nil {
+		return nil
+	}
+	return g.TaxOnNotionalPayments
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetVouchersOrCreditCards() *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards {
+	if g == nil {
+		return nil
+	}
+	return g.VouchersOrCreditCards
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetLivingAccommodation() *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation {
+	if g == nil {
+		return nil
+	}
+	return g.LivingAccommodation
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetMileageAllowance() *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance {
+	if g == nil {
+		return nil
+	}
+	return g.MileageAllowance
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetCar() *GbP11DItemsListDeclarationsResponseItemsItemItemCar {
+	if g == nil {
+		return nil
+	}
+	return g.Car
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetVans() *GbP11DItemsListDeclarationsResponseItemsItemItemVans {
+	if g == nil {
+		return nil
+	}
+	return g.Vans
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetLoan() *GbP11DItemsListDeclarationsResponseItemsItemItemLoan {
+	if g == nil {
+		return nil
+	}
+	return g.Loan
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetMedical() *GbP11DItemsListDeclarationsResponseItemsItemItemMedical {
+	if g == nil {
+		return nil
+	}
+	return g.Medical
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetRelocation() *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation {
+	if g == nil {
+		return nil
+	}
+	return g.Relocation
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetServices() *GbP11DItemsListDeclarationsResponseItemsItemItemServices {
+	if g == nil {
+		return nil
+	}
+	return g.Services
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetAssetAvailable() *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable {
+	if g == nil {
+		return nil
+	}
+	return g.AssetAvailable
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetOtherClass1A() *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A {
+	if g == nil {
+		return nil
+	}
+	return g.OtherClass1A
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetOtherNonClass1A() *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A {
+	if g == nil {
+		return nil
+	}
+	return g.OtherNonClass1A
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetTaxPaidNotDeducted() *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted {
+	if g == nil {
+		return nil
+	}
+	return g.TaxPaidNotDeducted
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetExpensesTravelAndSubsistence() *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesTravelAndSubsistence
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetExpensesEntertainment() *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesEntertainment
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetExpensesHomeTelephone() *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesHomeTelephone
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetExpensesNonQualifyingRelocation() *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesNonQualifyingRelocation
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) GetExpensesOther() *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther {
+	if g == nil {
+		return nil
+	}
+	return g.ExpensesOther
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) UnmarshalJSON(data []byte) error {
+	var unmarshaler struct {
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	g.Type = unmarshaler.Type
+	if unmarshaler.Type == "" {
+		return fmt.Errorf("%T did not include discriminant type", g)
+	}
+	switch unmarshaler.Type {
+	case "asset-transferred":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.AssetTransferred = value
+	case "payment":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemPayment)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Payment = value
+	case "tax-on-notional-payments":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.TaxOnNotionalPayments = value
+	case "vouchers-or-credit-cards":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.VouchersOrCreditCards = value
+	case "living-accommodation":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.LivingAccommodation = value
+	case "mileage-allowance":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.MileageAllowance = value
+	case "car":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemCar)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Car = value
+	case "vans":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemVans)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Vans = value
+	case "loan":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemLoan)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Loan = value
+	case "medical":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemMedical)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Medical = value
+	case "relocation":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemRelocation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Relocation = value
+	case "services":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemServices)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.Services = value
+	case "asset-available":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.AssetAvailable = value
+	case "other-class-1a":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.OtherClass1A = value
+	case "other-non-class-1a":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.OtherNonClass1A = value
+	case "tax-paid-not-deducted":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.TaxPaidNotDeducted = value
+	case "expenses-travel-and-subsistence":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesTravelAndSubsistence = value
+	case "expenses-entertainment":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesEntertainment = value
+	case "expenses-home-telephone":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesHomeTelephone = value
+	case "expenses-non-qualifying-relocation":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesNonQualifyingRelocation = value
+	case "expenses-other":
+		value := new(GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther)
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		g.ExpensesOther = value
+	}
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g GbP11DItemsListDeclarationsResponseItemsItemItem) MarshalJSON() ([]byte, error) {
+	if err := g.validate(); err != nil {
+		return nil, err
+	}
+	if g.AssetTransferred != nil {
+		return internal.MarshalJSONWithExtraProperty(g.AssetTransferred, "type", "asset-transferred")
+	}
+	if g.Payment != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Payment, "type", "payment")
+	}
+	if g.TaxOnNotionalPayments != nil {
+		return internal.MarshalJSONWithExtraProperty(g.TaxOnNotionalPayments, "type", "tax-on-notional-payments")
+	}
+	if g.VouchersOrCreditCards != nil {
+		return internal.MarshalJSONWithExtraProperty(g.VouchersOrCreditCards, "type", "vouchers-or-credit-cards")
+	}
+	if g.LivingAccommodation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.LivingAccommodation, "type", "living-accommodation")
+	}
+	if g.MileageAllowance != nil {
+		return internal.MarshalJSONWithExtraProperty(g.MileageAllowance, "type", "mileage-allowance")
+	}
+	if g.Car != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Car, "type", "car")
+	}
+	if g.Vans != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Vans, "type", "vans")
+	}
+	if g.Loan != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Loan, "type", "loan")
+	}
+	if g.Medical != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Medical, "type", "medical")
+	}
+	if g.Relocation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Relocation, "type", "relocation")
+	}
+	if g.Services != nil {
+		return internal.MarshalJSONWithExtraProperty(g.Services, "type", "services")
+	}
+	if g.AssetAvailable != nil {
+		return internal.MarshalJSONWithExtraProperty(g.AssetAvailable, "type", "asset-available")
+	}
+	if g.OtherClass1A != nil {
+		return internal.MarshalJSONWithExtraProperty(g.OtherClass1A, "type", "other-class-1a")
+	}
+	if g.OtherNonClass1A != nil {
+		return internal.MarshalJSONWithExtraProperty(g.OtherNonClass1A, "type", "other-non-class-1a")
+	}
+	if g.TaxPaidNotDeducted != nil {
+		return internal.MarshalJSONWithExtraProperty(g.TaxPaidNotDeducted, "type", "tax-paid-not-deducted")
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesTravelAndSubsistence, "type", "expenses-travel-and-subsistence")
+	}
+	if g.ExpensesEntertainment != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesEntertainment, "type", "expenses-entertainment")
+	}
+	if g.ExpensesHomeTelephone != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesHomeTelephone, "type", "expenses-home-telephone")
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesNonQualifyingRelocation, "type", "expenses-non-qualifying-relocation")
+	}
+	if g.ExpensesOther != nil {
+		return internal.MarshalJSONWithExtraProperty(g.ExpensesOther, "type", "expenses-other")
+	}
+	if len(g.rawJSON) > 0 {
+		return g.rawJSON, nil
+	}
+	return nil, fmt.Errorf("type %T does not define a non-empty union type", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemVisitor interface {
+	VisitAssetTransferred(*GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) error
+	VisitPayment(*GbP11DItemsListDeclarationsResponseItemsItemItemPayment) error
+	VisitTaxOnNotionalPayments(*GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) error
+	VisitVouchersOrCreditCards(*GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) error
+	VisitLivingAccommodation(*GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) error
+	VisitMileageAllowance(*GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) error
+	VisitCar(*GbP11DItemsListDeclarationsResponseItemsItemItemCar) error
+	VisitVans(*GbP11DItemsListDeclarationsResponseItemsItemItemVans) error
+	VisitLoan(*GbP11DItemsListDeclarationsResponseItemsItemItemLoan) error
+	VisitMedical(*GbP11DItemsListDeclarationsResponseItemsItemItemMedical) error
+	VisitRelocation(*GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) error
+	VisitServices(*GbP11DItemsListDeclarationsResponseItemsItemItemServices) error
+	VisitAssetAvailable(*GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) error
+	VisitOtherClass1A(*GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) error
+	VisitOtherNonClass1A(*GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) error
+	VisitTaxPaidNotDeducted(*GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) error
+	VisitExpensesTravelAndSubsistence(*GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) error
+	VisitExpensesEntertainment(*GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) error
+	VisitExpensesHomeTelephone(*GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) error
+	VisitExpensesNonQualifyingRelocation(*GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) error
+	VisitExpensesOther(*GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) error
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) Accept(visitor GbP11DItemsListDeclarationsResponseItemsItemItemVisitor) error {
+	if g.AssetTransferred != nil {
+		return visitor.VisitAssetTransferred(g.AssetTransferred)
+	}
+	if g.Payment != nil {
+		return visitor.VisitPayment(g.Payment)
+	}
+	if g.TaxOnNotionalPayments != nil {
+		return visitor.VisitTaxOnNotionalPayments(g.TaxOnNotionalPayments)
+	}
+	if g.VouchersOrCreditCards != nil {
+		return visitor.VisitVouchersOrCreditCards(g.VouchersOrCreditCards)
+	}
+	if g.LivingAccommodation != nil {
+		return visitor.VisitLivingAccommodation(g.LivingAccommodation)
+	}
+	if g.MileageAllowance != nil {
+		return visitor.VisitMileageAllowance(g.MileageAllowance)
+	}
+	if g.Car != nil {
+		return visitor.VisitCar(g.Car)
+	}
+	if g.Vans != nil {
+		return visitor.VisitVans(g.Vans)
+	}
+	if g.Loan != nil {
+		return visitor.VisitLoan(g.Loan)
+	}
+	if g.Medical != nil {
+		return visitor.VisitMedical(g.Medical)
+	}
+	if g.Relocation != nil {
+		return visitor.VisitRelocation(g.Relocation)
+	}
+	if g.Services != nil {
+		return visitor.VisitServices(g.Services)
+	}
+	if g.AssetAvailable != nil {
+		return visitor.VisitAssetAvailable(g.AssetAvailable)
+	}
+	if g.OtherClass1A != nil {
+		return visitor.VisitOtherClass1A(g.OtherClass1A)
+	}
+	if g.OtherNonClass1A != nil {
+		return visitor.VisitOtherNonClass1A(g.OtherNonClass1A)
+	}
+	if g.TaxPaidNotDeducted != nil {
+		return visitor.VisitTaxPaidNotDeducted(g.TaxPaidNotDeducted)
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		return visitor.VisitExpensesTravelAndSubsistence(g.ExpensesTravelAndSubsistence)
+	}
+	if g.ExpensesEntertainment != nil {
+		return visitor.VisitExpensesEntertainment(g.ExpensesEntertainment)
+	}
+	if g.ExpensesHomeTelephone != nil {
+		return visitor.VisitExpensesHomeTelephone(g.ExpensesHomeTelephone)
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		return visitor.VisitExpensesNonQualifyingRelocation(g.ExpensesNonQualifyingRelocation)
+	}
+	if g.ExpensesOther != nil {
+		return visitor.VisitExpensesOther(g.ExpensesOther)
+	}
+	return fmt.Errorf("type %T does not define a non-empty union type", g)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItem) validate() error {
+	if g == nil {
+		return fmt.Errorf("type %T is nil", g)
+	}
+	var fields []string
+	if g.AssetTransferred != nil {
+		fields = append(fields, "asset-transferred")
+	}
+	if g.Payment != nil {
+		fields = append(fields, "payment")
+	}
+	if g.TaxOnNotionalPayments != nil {
+		fields = append(fields, "tax-on-notional-payments")
+	}
+	if g.VouchersOrCreditCards != nil {
+		fields = append(fields, "vouchers-or-credit-cards")
+	}
+	if g.LivingAccommodation != nil {
+		fields = append(fields, "living-accommodation")
+	}
+	if g.MileageAllowance != nil {
+		fields = append(fields, "mileage-allowance")
+	}
+	if g.Car != nil {
+		fields = append(fields, "car")
+	}
+	if g.Vans != nil {
+		fields = append(fields, "vans")
+	}
+	if g.Loan != nil {
+		fields = append(fields, "loan")
+	}
+	if g.Medical != nil {
+		fields = append(fields, "medical")
+	}
+	if g.Relocation != nil {
+		fields = append(fields, "relocation")
+	}
+	if g.Services != nil {
+		fields = append(fields, "services")
+	}
+	if g.AssetAvailable != nil {
+		fields = append(fields, "asset-available")
+	}
+	if g.OtherClass1A != nil {
+		fields = append(fields, "other-class-1a")
+	}
+	if g.OtherNonClass1A != nil {
+		fields = append(fields, "other-non-class-1a")
+	}
+	if g.TaxPaidNotDeducted != nil {
+		fields = append(fields, "tax-paid-not-deducted")
+	}
+	if g.ExpensesTravelAndSubsistence != nil {
+		fields = append(fields, "expenses-travel-and-subsistence")
+	}
+	if g.ExpensesEntertainment != nil {
+		fields = append(fields, "expenses-entertainment")
+	}
+	if g.ExpensesHomeTelephone != nil {
+		fields = append(fields, "expenses-home-telephone")
+	}
+	if g.ExpensesNonQualifyingRelocation != nil {
+		fields = append(fields, "expenses-non-qualifying-relocation")
+	}
+	if g.ExpensesOther != nil {
+		fields = append(fields, "expenses-other")
+	}
+	if len(fields) == 0 {
+		if g.Type != "" {
+			if len(g.rawJSON) > 0 {
+				return nil
+			}
+			return fmt.Errorf("type %T defines a discriminant set to %q but the field is not set", g, g.Type)
+		}
+		return fmt.Errorf("type %T is empty", g)
+	}
+	if len(fields) > 1 {
+		return fmt.Errorf("type %T defines values for %s, but only one value is allowed", g, fields)
+	}
+	if g.Type != "" {
+		field := fields[0]
+		if g.Type != field {
+			return fmt.Errorf(
+				"type %T defines a discriminant set to %q, but it does not match the %T field; either remove or update the discriminant to match",
+				g,
+				g.Type,
+				g,
+			)
+		}
+	}
+	return nil
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldAsset            = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldAnnualValue      = big.NewInt(1 << 2)
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable struct {
+	Asset            GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset `json:"asset" url:"asset"`
+	OtherDescription *string                                                             `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	AnnualValue      string                                                              `json:"annualValue" url:"annualValue"`
+	MadeGood         string                                                              `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) GetAsset() GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset {
+	if g == nil {
+		return ""
+	}
+	return g.Asset
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) GetAnnualValue() string {
+	if g == nil {
+		return ""
+	}
+	return g.AnnualValue
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAsset sets the Asset field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) SetAsset(asset GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset) {
+	g.Asset = asset
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldAsset)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldOtherDescription)
+}
+
+// SetAnnualValue sets the AnnualValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) SetAnnualValue(annualValue string) {
+	g.AnnualValue = annualValue
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldAnnualValue)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailable) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset string
+
+const (
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetHolidayAccommodation   GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset = "holiday accommodation"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetTimeshareAccommodation GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset = "timeshare accommodation"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetAircraft               GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset = "aircraft"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetBoat                   GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset = "boat"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetCorporateHospitality   GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset = "corporate hospitality"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetMultiple               GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset = "multiple"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetOther                  GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset = "other"
+)
+
+func NewGbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetFromString(s string) (GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset, error) {
+	switch s {
+	case "holiday accommodation":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetHolidayAccommodation, nil
+	case "timeshare accommodation":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetTimeshareAccommodation, nil
+	case "aircraft":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetAircraft, nil
+	case "boat":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetBoat, nil
+	case "corporate hospitality":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetCorporateHospitality, nil
+	case "multiple":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetMultiple, nil
+	case "other":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAssetOther, nil
+	}
+	var t GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset) Ptr() *GbP11DItemsListDeclarationsResponseItemsItemItemAssetAvailableAsset {
+	return &g
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldAsset            = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred struct {
+	Asset            GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset `json:"asset" url:"asset"`
+	OtherDescription *string                                                               `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                                `json:"cost" url:"cost"`
+	MadeGood         string                                                                `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) GetAsset() GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset {
+	if g == nil {
+		return ""
+	}
+	return g.Asset
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAsset sets the Asset field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) SetAsset(asset GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset) {
+	g.Asset = asset
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldAsset)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferred) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset string
+
+const (
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetCars           GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset = "cars"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetProperty       GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset = "property"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetPreciousMetals GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset = "precious metals"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetOther          GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset = "other"
+	GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetMultiple       GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset = "multiple"
+)
+
+func NewGbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetFromString(s string) (GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset, error) {
+	switch s {
+	case "cars":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetCars, nil
+	case "property":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetProperty, nil
+	case "precious metals":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetPreciousMetals, nil
+	case "other":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetOther, nil
+	case "multiple":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAssetMultiple, nil
+	}
+	var t GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset) Ptr() *GbP11DItemsListDeclarationsResponseItemsItemItemAssetTransferredAsset {
+	return &g
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldMake                = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldRegistered          = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAvailableFrom       = big.NewInt(1 << 2)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAvailableTo         = big.NewInt(1 << 3)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldEngineSize          = big.NewInt(1 << 4)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuel                = big.NewInt(1 << 5)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldCo2                 = big.NewInt(1 << 6)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldZeroEmissionMileage = big.NewInt(1 << 7)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldNoApprovedCo2       = big.NewInt(1 << 8)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldListPrice           = big.NewInt(1 << 9)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAccessories         = big.NewInt(1 << 10)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldCapitalContribution = big.NewInt(1 << 11)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldPrivateUsePayment   = big.NewInt(1 << 12)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuelWithdrawn       = big.NewInt(1 << 13)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuelReinstated      = big.NewInt(1 << 14)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAmount              = big.NewInt(1 << 15)
+	gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuelAmount          = big.NewInt(1 << 16)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemCar struct {
+	Make                string                                                   `json:"make" url:"make"`
+	Registered          time.Time                                                `json:"registered" url:"registered" format:"date"`
+	AvailableFrom       *time.Time                                               `json:"availableFrom,omitempty" url:"availableFrom,omitempty" format:"date"`
+	AvailableTo         *time.Time                                               `json:"availableTo,omitempty" url:"availableTo,omitempty" format:"date"`
+	EngineSize          *int64                                                   `json:"engineSize,omitempty" url:"engineSize,omitempty"`
+	Fuel                *GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel `json:"fuel,omitempty" url:"fuel,omitempty"`
+	Co2                 *int64                                                   `json:"co2,omitempty" url:"co2,omitempty"`
+	ZeroEmissionMileage *int64                                                   `json:"zeroEmissionMileage,omitempty" url:"zeroEmissionMileage,omitempty"`
+	NoApprovedCo2       *bool                                                    `json:"noApprovedCo2,omitempty" url:"noApprovedCo2,omitempty"`
+	ListPrice           string                                                   `json:"listPrice" url:"listPrice"`
+	Accessories         string                                                   `json:"accessories" url:"accessories"`
+	CapitalContribution string                                                   `json:"capitalContribution" url:"capitalContribution"`
+	PrivateUsePayment   string                                                   `json:"privateUsePayment" url:"privateUsePayment"`
+	FuelWithdrawn       *time.Time                                               `json:"fuelWithdrawn,omitempty" url:"fuelWithdrawn,omitempty" format:"date"`
+	FuelReinstated      *bool                                                    `json:"fuelReinstated,omitempty" url:"fuelReinstated,omitempty"`
+	Amount              string                                                   `json:"amount" url:"amount"`
+	FuelAmount          *string                                                  `json:"fuelAmount,omitempty" url:"fuelAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetMake() string {
+	if g == nil {
+		return ""
+	}
+	return g.Make
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetRegistered() time.Time {
+	if g == nil {
+		return time.Time{}
+	}
+	return g.Registered
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetAvailableFrom() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.AvailableFrom
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetAvailableTo() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.AvailableTo
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetEngineSize() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.EngineSize
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetFuel() *GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel {
+	if g == nil {
+		return nil
+	}
+	return g.Fuel
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetCo2() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.Co2
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetZeroEmissionMileage() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.ZeroEmissionMileage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetNoApprovedCo2() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.NoApprovedCo2
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetListPrice() string {
+	if g == nil {
+		return ""
+	}
+	return g.ListPrice
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetAccessories() string {
+	if g == nil {
+		return ""
+	}
+	return g.Accessories
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetCapitalContribution() string {
+	if g == nil {
+		return ""
+	}
+	return g.CapitalContribution
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetPrivateUsePayment() string {
+	if g == nil {
+		return ""
+	}
+	return g.PrivateUsePayment
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetFuelWithdrawn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.FuelWithdrawn
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetFuelReinstated() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.FuelReinstated
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetFuelAmount() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FuelAmount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetMake sets the Make field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetMake(make_ string) {
+	g.Make = make_
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldMake)
+}
+
+// SetRegistered sets the Registered field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetRegistered(registered time.Time) {
+	g.Registered = registered
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldRegistered)
+}
+
+// SetAvailableFrom sets the AvailableFrom field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetAvailableFrom(availableFrom *time.Time) {
+	g.AvailableFrom = availableFrom
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAvailableFrom)
+}
+
+// SetAvailableTo sets the AvailableTo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetAvailableTo(availableTo *time.Time) {
+	g.AvailableTo = availableTo
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAvailableTo)
+}
+
+// SetEngineSize sets the EngineSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetEngineSize(engineSize *int64) {
+	g.EngineSize = engineSize
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldEngineSize)
+}
+
+// SetFuel sets the Fuel field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetFuel(fuel *GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel) {
+	g.Fuel = fuel
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuel)
+}
+
+// SetCo2 sets the Co2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetCo2(co2 *int64) {
+	g.Co2 = co2
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldCo2)
+}
+
+// SetZeroEmissionMileage sets the ZeroEmissionMileage field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetZeroEmissionMileage(zeroEmissionMileage *int64) {
+	g.ZeroEmissionMileage = zeroEmissionMileage
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldZeroEmissionMileage)
+}
+
+// SetNoApprovedCo2 sets the NoApprovedCo2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetNoApprovedCo2(noApprovedCo2 *bool) {
+	g.NoApprovedCo2 = noApprovedCo2
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldNoApprovedCo2)
+}
+
+// SetListPrice sets the ListPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetListPrice(listPrice string) {
+	g.ListPrice = listPrice
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldListPrice)
+}
+
+// SetAccessories sets the Accessories field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetAccessories(accessories string) {
+	g.Accessories = accessories
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAccessories)
+}
+
+// SetCapitalContribution sets the CapitalContribution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetCapitalContribution(capitalContribution string) {
+	g.CapitalContribution = capitalContribution
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldCapitalContribution)
+}
+
+// SetPrivateUsePayment sets the PrivateUsePayment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetPrivateUsePayment(privateUsePayment string) {
+	g.PrivateUsePayment = privateUsePayment
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldPrivateUsePayment)
+}
+
+// SetFuelWithdrawn sets the FuelWithdrawn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetFuelWithdrawn(fuelWithdrawn *time.Time) {
+	g.FuelWithdrawn = fuelWithdrawn
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuelWithdrawn)
+}
+
+// SetFuelReinstated sets the FuelReinstated field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetFuelReinstated(fuelReinstated *bool) {
+	g.FuelReinstated = fuelReinstated
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuelReinstated)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldAmount)
+}
+
+// SetFuelAmount sets the FuelAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) SetFuelAmount(fuelAmount *string) {
+	g.FuelAmount = fuelAmount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemCarFieldFuelAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) UnmarshalJSON(data []byte) error {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemCar
+	var unmarshaler = struct {
+		embed
+		Registered    *internal.Date `json:"registered"`
+		AvailableFrom *internal.Date `json:"availableFrom,omitempty"`
+		AvailableTo   *internal.Date `json:"availableTo,omitempty"`
+		FuelWithdrawn *internal.Date `json:"fuelWithdrawn,omitempty"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemCar(unmarshaler.embed)
+	g.Registered = unmarshaler.Registered.Time()
+	g.AvailableFrom = unmarshaler.AvailableFrom.TimePtr()
+	g.AvailableTo = unmarshaler.AvailableTo.TimePtr()
+	g.FuelWithdrawn = unmarshaler.FuelWithdrawn.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemCar
+	var marshaler = struct {
+		embed
+		Registered    *internal.Date `json:"registered"`
+		AvailableFrom *internal.Date `json:"availableFrom,omitempty"`
+		AvailableTo   *internal.Date `json:"availableTo,omitempty"`
+		FuelWithdrawn *internal.Date `json:"fuelWithdrawn,omitempty"`
+	}{
+		embed:         embed(*g),
+		Registered:    internal.NewDate(g.Registered),
+		AvailableFrom: internal.NewOptionalDate(g.AvailableFrom),
+		AvailableTo:   internal.NewOptionalDate(g.AvailableTo),
+		FuelWithdrawn: internal.NewOptionalDate(g.FuelWithdrawn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemCar) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel string
+
+const (
+	GbP11DItemsListDeclarationsResponseItemsItemItemCarFuelF GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel = "F"
+	GbP11DItemsListDeclarationsResponseItemsItemItemCarFuelD GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel = "D"
+	GbP11DItemsListDeclarationsResponseItemsItemItemCarFuelA GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel = "A"
+)
+
+func NewGbP11DItemsListDeclarationsResponseItemsItemItemCarFuelFromString(s string) (GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel, error) {
+	switch s {
+	case "F":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemCarFuelF, nil
+	case "D":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemCarFuelD, nil
+	case "A":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemCarFuelA, nil
+	}
+	var t GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel) Ptr() *GbP11DItemsListDeclarationsResponseItemsItemItemCarFuel {
+	return &g
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainmentFieldTradingOrganisation = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainmentFieldCost                = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainmentFieldMadeGood            = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment struct {
+	TradingOrganisation bool   `json:"tradingOrganisation" url:"tradingOrganisation"`
+	Cost                string `json:"cost" url:"cost"`
+	MadeGood            string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) GetTradingOrganisation() bool {
+	if g == nil {
+		return false
+	}
+	return g.TradingOrganisation
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetTradingOrganisation sets the TradingOrganisation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) SetTradingOrganisation(tradingOrganisation bool) {
+	g.TradingOrganisation = tradingOrganisation
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainmentFieldTradingOrganisation)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainmentFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainmentFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesEntertainment) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephoneFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephoneFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephoneFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephoneFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesHomeTelephone) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocationFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocationFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocationFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocationFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesNonQualifyingRelocation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesOtherFieldDescription = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesOtherFieldCost        = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesOtherFieldMadeGood    = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther struct {
+	Description string `json:"description" url:"description"`
+	Cost        string `json:"cost" url:"cost"`
+	MadeGood    string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) GetDescription() string {
+	if g == nil {
+		return ""
+	}
+	return g.Description
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) SetDescription(description string) {
+	g.Description = description
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesOtherFieldDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesOtherFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesOtherFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesOther) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistenceFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistenceFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistenceFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistenceFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemExpensesTravelAndSubsistence) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodationFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodationFieldAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLivingAccommodation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldJointBorrowers     = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldOutstandingStart   = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldOutstandingEnd     = big.NewInt(1 << 2)
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldMaximumOutstanding = big.NewInt(1 << 3)
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldInterestPaid       = big.NewInt(1 << 4)
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldMadeOn             = big.NewInt(1 << 5)
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldDischargedOn       = big.NewInt(1 << 6)
+	gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldAmount             = big.NewInt(1 << 7)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemLoan struct {
+	JointBorrowers     int64      `json:"jointBorrowers" url:"jointBorrowers"`
+	OutstandingStart   string     `json:"outstandingStart" url:"outstandingStart"`
+	OutstandingEnd     string     `json:"outstandingEnd" url:"outstandingEnd"`
+	MaximumOutstanding string     `json:"maximumOutstanding" url:"maximumOutstanding"`
+	InterestPaid       string     `json:"interestPaid" url:"interestPaid"`
+	MadeOn             *time.Time `json:"madeOn,omitempty" url:"madeOn,omitempty" format:"date"`
+	DischargedOn       *time.Time `json:"dischargedOn,omitempty" url:"dischargedOn,omitempty" format:"date"`
+	Amount             string     `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetJointBorrowers() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.JointBorrowers
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetOutstandingStart() string {
+	if g == nil {
+		return ""
+	}
+	return g.OutstandingStart
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetOutstandingEnd() string {
+	if g == nil {
+		return ""
+	}
+	return g.OutstandingEnd
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetMaximumOutstanding() string {
+	if g == nil {
+		return ""
+	}
+	return g.MaximumOutstanding
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetInterestPaid() string {
+	if g == nil {
+		return ""
+	}
+	return g.InterestPaid
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetMadeOn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.MadeOn
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetDischargedOn() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.DischargedOn
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetJointBorrowers sets the JointBorrowers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetJointBorrowers(jointBorrowers int64) {
+	g.JointBorrowers = jointBorrowers
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldJointBorrowers)
+}
+
+// SetOutstandingStart sets the OutstandingStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetOutstandingStart(outstandingStart string) {
+	g.OutstandingStart = outstandingStart
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldOutstandingStart)
+}
+
+// SetOutstandingEnd sets the OutstandingEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetOutstandingEnd(outstandingEnd string) {
+	g.OutstandingEnd = outstandingEnd
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldOutstandingEnd)
+}
+
+// SetMaximumOutstanding sets the MaximumOutstanding field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetMaximumOutstanding(maximumOutstanding string) {
+	g.MaximumOutstanding = maximumOutstanding
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldMaximumOutstanding)
+}
+
+// SetInterestPaid sets the InterestPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetInterestPaid(interestPaid string) {
+	g.InterestPaid = interestPaid
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldInterestPaid)
+}
+
+// SetMadeOn sets the MadeOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetMadeOn(madeOn *time.Time) {
+	g.MadeOn = madeOn
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldMadeOn)
+}
+
+// SetDischargedOn sets the DischargedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetDischargedOn(dischargedOn *time.Time) {
+	g.DischargedOn = dischargedOn
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldDischargedOn)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemLoanFieldAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) UnmarshalJSON(data []byte) error {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemLoan
+	var unmarshaler = struct {
+		embed
+		MadeOn       *internal.Date `json:"madeOn,omitempty"`
+		DischargedOn *internal.Date `json:"dischargedOn,omitempty"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemLoan(unmarshaler.embed)
+	g.MadeOn = unmarshaler.MadeOn.TimePtr()
+	g.DischargedOn = unmarshaler.DischargedOn.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemLoan
+	var marshaler = struct {
+		embed
+		MadeOn       *internal.Date `json:"madeOn,omitempty"`
+		DischargedOn *internal.Date `json:"dischargedOn,omitempty"`
+	}{
+		embed:        embed(*g),
+		MadeOn:       internal.NewOptionalDate(g.MadeOn),
+		DischargedOn: internal.NewOptionalDate(g.DischargedOn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemLoan) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemMedicalFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemMedicalFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemMedical struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemMedicalFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemMedicalFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemMedical
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemMedical(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemMedical
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMedical) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowanceFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowanceFieldAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemMileageAllowance) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldItem             = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A struct {
+	Item             GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem `json:"item" url:"item"`
+	OtherDescription *string                                                          `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                           `json:"cost" url:"cost"`
+	MadeGood         string                                                           `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) GetItem() GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem {
+	if g == nil {
+		return ""
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) SetItem(item GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem) {
+	g.Item = item
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldItem)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1A) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem string
+
+const (
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemSubscriptionsAndFees       GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem = "subscriptions and fees"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemEducationalAssistanceCl1A  GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem = "educational assistance CL1A"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemNonQualifyingRelocationBen GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem = "non-qualifying relocation ben"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemStopLossCharges            GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem = "stop loss charges"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemOther                      GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem = "other"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemMultiple                   GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem = "multiple"
+)
+
+func NewGbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemFromString(s string) (GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem, error) {
+	switch s {
+	case "subscriptions and fees":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemSubscriptionsAndFees, nil
+	case "educational assistance CL1A":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemEducationalAssistanceCl1A, nil
+	case "non-qualifying relocation ben":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemNonQualifyingRelocationBen, nil
+	case "stop loss charges":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemStopLossCharges, nil
+	case "other":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemOther, nil
+	case "multiple":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItemMultiple, nil
+	}
+	var t GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem) Ptr() *GbP11DItemsListDeclarationsResponseItemsItemItemOtherClass1AItem {
+	return &g
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldItem             = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldCost             = big.NewInt(1 << 2)
+	gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldMadeGood         = big.NewInt(1 << 3)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A struct {
+	Item             GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem `json:"item" url:"item"`
+	OtherDescription *string                                                             `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Cost             string                                                              `json:"cost" url:"cost"`
+	MadeGood         string                                                              `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) GetItem() GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem {
+	if g == nil {
+		return ""
+	}
+	return g.Item
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetItem sets the Item field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) SetItem(item GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem) {
+	g.Item = item
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldItem)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldOtherDescription)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1A) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem string
+
+const (
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemSubsAndProfessionalFees GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem = "subs and professional fees"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemNurseryPlaces           GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem = "nursery places"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemEducationalAssistance   GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem = "educational assistance"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemLoansWrittenOrWaived    GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem = "loans written or waived"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemMultiple                GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem = "multiple"
+	GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemOther                   GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem = "other"
+)
+
+func NewGbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemFromString(s string) (GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem, error) {
+	switch s {
+	case "subs and professional fees":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemSubsAndProfessionalFees, nil
+	case "nursery places":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemNurseryPlaces, nil
+	case "educational assistance":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemEducationalAssistance, nil
+	case "loans written or waived":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemLoansWrittenOrWaived, nil
+	case "multiple":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemMultiple, nil
+	case "other":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItemOther, nil
+	}
+	var t GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem) Ptr() *GbP11DItemsListDeclarationsResponseItemsItemItemOtherNonClass1AItem {
+	return &g
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemPaymentFieldPayment          = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemPaymentFieldOtherDescription = big.NewInt(1 << 1)
+	gbP11DItemsListDeclarationsResponseItemsItemItemPaymentFieldAmount           = big.NewInt(1 << 2)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemPayment struct {
+	Payment          GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment `json:"payment" url:"payment"`
+	OtherDescription *string                                                        `json:"otherDescription,omitempty" url:"otherDescription,omitempty"`
+	Amount           string                                                         `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) GetPayment() GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment {
+	if g == nil {
+		return ""
+	}
+	return g.Payment
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) GetOtherDescription() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherDescription
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetPayment sets the Payment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) SetPayment(payment GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment) {
+	g.Payment = payment
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemPaymentFieldPayment)
+}
+
+// SetOtherDescription sets the OtherDescription field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) SetOtherDescription(otherDescription *string) {
+	g.OtherDescription = otherDescription
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemPaymentFieldOtherDescription)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemPaymentFieldAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemPayment
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemPayment(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemPayment
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemPayment) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment string
+
+const (
+	GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentDomesticBills      GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment = "domestic bills"
+	GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentAccountancyFees    GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment = "accountancy fees"
+	GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentPrivateEducation   GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment = "private education"
+	GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentPrivateCarExpenses GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment = "private car expenses"
+	GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentSeasonTickets      GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment = "season tickets"
+	GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentOther              GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment = "other"
+	GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentMultiple           GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment = "multiple"
+)
+
+func NewGbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentFromString(s string) (GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment, error) {
+	switch s {
+	case "domestic bills":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentDomesticBills, nil
+	case "accountancy fees":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentAccountancyFees, nil
+	case "private education":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentPrivateEducation, nil
+	case "private car expenses":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentPrivateCarExpenses, nil
+	case "season tickets":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentSeasonTickets, nil
+	case "other":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentOther, nil
+	case "multiple":
+		return GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPaymentMultiple, nil
+	}
+	var t GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment) Ptr() *GbP11DItemsListDeclarationsResponseItemsItemItemPaymentPayment {
+	return &g
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemRelocationFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemRelocation struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemRelocationFieldAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemRelocation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemRelocation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemRelocation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemRelocation) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemServicesFieldCost     = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemServicesFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemServices struct {
+	Cost     string `json:"cost" url:"cost"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) GetCost() string {
+	if g == nil {
+		return ""
+	}
+	return g.Cost
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCost sets the Cost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) SetCost(cost string) {
+	g.Cost = cost
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemServicesFieldCost)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemServicesFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemServices
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemServices(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemServices
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemServices) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPaymentsFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPaymentsFieldAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxOnNotionalPayments) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeductedFieldAmount = big.NewInt(1 << 0)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted struct {
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeductedFieldAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemTaxPaidNotDeducted) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemVansFieldAmount     = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemVansFieldFuelAmount = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemVans struct {
+	Amount     string  `json:"amount" url:"amount"`
+	FuelAmount *string `json:"fuelAmount,omitempty" url:"fuelAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) GetAmount() string {
+	if g == nil {
+		return ""
+	}
+	return g.Amount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) GetFuelAmount() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FuelAmount
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) SetAmount(amount string) {
+	g.Amount = amount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemVansFieldAmount)
+}
+
+// SetFuelAmount sets the FuelAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) SetFuelAmount(fuelAmount *string) {
+	g.FuelAmount = fuelAmount
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemVansFieldFuelAmount)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemVans
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemVans(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemVans
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVans) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCardsFieldGross    = big.NewInt(1 << 0)
+	gbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCardsFieldMadeGood = big.NewInt(1 << 1)
+)
+
+type GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards struct {
+	Gross    string `json:"gross" url:"gross"`
+	MadeGood string `json:"madeGood" url:"madeGood"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) GetGross() string {
+	if g == nil {
+		return ""
+	}
+	return g.Gross
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) GetMadeGood() string {
+	if g == nil {
+		return ""
+	}
+	return g.MadeGood
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetGross sets the Gross field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) SetGross(gross string) {
+	g.Gross = gross
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCardsFieldGross)
+}
+
+// SetMadeGood sets the MadeGood field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) SetMadeGood(madeGood string) {
+	g.MadeGood = madeGood
+	g.require(gbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCardsFieldMadeGood)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) MarshalJSON() ([]byte, error) {
+	type embed GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP11DItemsListDeclarationsResponseItemsItemItemVouchersOrCreditCards) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP45GetDeclarationsResponseFieldTaxYear                         = big.NewInt(1 << 0)
+	gbP45GetDeclarationsResponseFieldCompletedOn                     = big.NewInt(1 << 1)
+	gbP45GetDeclarationsResponseFieldEmployer                        = big.NewInt(1 << 2)
+	gbP45GetDeclarationsResponseFieldEmployee                        = big.NewInt(1 << 3)
+	gbP45GetDeclarationsResponseFieldStudentLoanDeductionsToContinue = big.NewInt(1 << 4)
+	gbP45GetDeclarationsResponseFieldTaxCode                         = big.NewInt(1 << 5)
+	gbP45GetDeclarationsResponseFieldWeek1Month1                     = big.NewInt(1 << 6)
+	gbP45GetDeclarationsResponseFieldLastEntries                     = big.NewInt(1 << 7)
+	gbP45GetDeclarationsResponseFieldThisEmployment                  = big.NewInt(1 << 8)
+	gbP45GetDeclarationsResponseFieldWarnings                        = big.NewInt(1 << 9)
+	gbP45GetDeclarationsResponseFieldSource                          = big.NewInt(1 << 10)
+)
+
+type GbP45GetDeclarationsResponse struct {
+	TaxYear                         float64                                     `json:"taxYear" url:"taxYear"`
+	CompletedOn                     string                                      `json:"completedOn" url:"completedOn"`
+	Employer                        *GbP45GetDeclarationsResponseEmployer       `json:"employer" url:"employer"`
+	Employee                        *GbP45GetDeclarationsResponseEmployee       `json:"employee" url:"employee"`
+	StudentLoanDeductionsToContinue bool                                        `json:"studentLoanDeductionsToContinue" url:"studentLoanDeductionsToContinue"`
+	TaxCode                         string                                      `json:"taxCode" url:"taxCode"`
+	Week1Month1                     bool                                        `json:"week1Month1" url:"week1Month1"`
+	LastEntries                     *GbP45GetDeclarationsResponseLastEntries    `json:"lastEntries,omitempty" url:"lastEntries,omitempty"`
+	ThisEmployment                  *GbP45GetDeclarationsResponseThisEmployment `json:"thisEmployment,omitempty" url:"thisEmployment,omitempty"`
+	Warnings                        []string                                    `json:"warnings" url:"warnings"`
+	Source                          string                                      `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP45GetDeclarationsResponse) GetTaxYear() float64 {
+	if g == nil {
+		return 0
+	}
+	return g.TaxYear
+}
+
+func (g *GbP45GetDeclarationsResponse) GetCompletedOn() string {
+	if g == nil {
+		return ""
+	}
+	return g.CompletedOn
+}
+
+func (g *GbP45GetDeclarationsResponse) GetEmployer() *GbP45GetDeclarationsResponseEmployer {
+	if g == nil {
+		return nil
+	}
+	return g.Employer
+}
+
+func (g *GbP45GetDeclarationsResponse) GetEmployee() *GbP45GetDeclarationsResponseEmployee {
+	if g == nil {
+		return nil
+	}
+	return g.Employee
+}
+
+func (g *GbP45GetDeclarationsResponse) GetStudentLoanDeductionsToContinue() bool {
+	if g == nil {
+		return false
+	}
+	return g.StudentLoanDeductionsToContinue
+}
+
+func (g *GbP45GetDeclarationsResponse) GetTaxCode() string {
+	if g == nil {
+		return ""
+	}
+	return g.TaxCode
+}
+
+func (g *GbP45GetDeclarationsResponse) GetWeek1Month1() bool {
+	if g == nil {
+		return false
+	}
+	return g.Week1Month1
+}
+
+func (g *GbP45GetDeclarationsResponse) GetLastEntries() *GbP45GetDeclarationsResponseLastEntries {
+	if g == nil {
+		return nil
+	}
+	return g.LastEntries
+}
+
+func (g *GbP45GetDeclarationsResponse) GetThisEmployment() *GbP45GetDeclarationsResponseThisEmployment {
+	if g == nil {
+		return nil
+	}
+	return g.ThisEmployment
+}
+
+func (g *GbP45GetDeclarationsResponse) GetWarnings() []string {
+	if g == nil {
+		return nil
+	}
+	return g.Warnings
+}
+
+func (g *GbP45GetDeclarationsResponse) GetSource() string {
+	if g == nil {
+		return ""
+	}
+	return g.Source
+}
+
+func (g *GbP45GetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP45GetDeclarationsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetTaxYear sets the TaxYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetTaxYear(taxYear float64) {
+	g.TaxYear = taxYear
+	g.require(gbP45GetDeclarationsResponseFieldTaxYear)
+}
+
+// SetCompletedOn sets the CompletedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetCompletedOn(completedOn string) {
+	g.CompletedOn = completedOn
+	g.require(gbP45GetDeclarationsResponseFieldCompletedOn)
+}
+
+// SetEmployer sets the Employer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetEmployer(employer *GbP45GetDeclarationsResponseEmployer) {
+	g.Employer = employer
+	g.require(gbP45GetDeclarationsResponseFieldEmployer)
+}
+
+// SetEmployee sets the Employee field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetEmployee(employee *GbP45GetDeclarationsResponseEmployee) {
+	g.Employee = employee
+	g.require(gbP45GetDeclarationsResponseFieldEmployee)
+}
+
+// SetStudentLoanDeductionsToContinue sets the StudentLoanDeductionsToContinue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetStudentLoanDeductionsToContinue(studentLoanDeductionsToContinue bool) {
+	g.StudentLoanDeductionsToContinue = studentLoanDeductionsToContinue
+	g.require(gbP45GetDeclarationsResponseFieldStudentLoanDeductionsToContinue)
+}
+
+// SetTaxCode sets the TaxCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetTaxCode(taxCode string) {
+	g.TaxCode = taxCode
+	g.require(gbP45GetDeclarationsResponseFieldTaxCode)
+}
+
+// SetWeek1Month1 sets the Week1Month1 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetWeek1Month1(week1Month1 bool) {
+	g.Week1Month1 = week1Month1
+	g.require(gbP45GetDeclarationsResponseFieldWeek1Month1)
+}
+
+// SetLastEntries sets the LastEntries field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetLastEntries(lastEntries *GbP45GetDeclarationsResponseLastEntries) {
+	g.LastEntries = lastEntries
+	g.require(gbP45GetDeclarationsResponseFieldLastEntries)
+}
+
+// SetThisEmployment sets the ThisEmployment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetThisEmployment(thisEmployment *GbP45GetDeclarationsResponseThisEmployment) {
+	g.ThisEmployment = thisEmployment
+	g.require(gbP45GetDeclarationsResponseFieldThisEmployment)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetWarnings(warnings []string) {
+	g.Warnings = warnings
+	g.require(gbP45GetDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponse) SetSource(source string) {
+	g.Source = source
+	g.require(gbP45GetDeclarationsResponseFieldSource)
+}
+
+func (g *GbP45GetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP45GetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP45GetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP45GetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed GbP45GetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP45GetDeclarationsResponse) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP45GetDeclarationsResponseEmployeeFieldNino          = big.NewInt(1 << 0)
+	gbP45GetDeclarationsResponseEmployeeFieldSurname       = big.NewInt(1 << 1)
+	gbP45GetDeclarationsResponseEmployeeFieldFirstNames    = big.NewInt(1 << 2)
+	gbP45GetDeclarationsResponseEmployeeFieldLeavingDate   = big.NewInt(1 << 3)
+	gbP45GetDeclarationsResponseEmployeeFieldPayrollNumber = big.NewInt(1 << 4)
+	gbP45GetDeclarationsResponseEmployeeFieldGender        = big.NewInt(1 << 5)
+	gbP45GetDeclarationsResponseEmployeeFieldDateOfBirth   = big.NewInt(1 << 6)
+	gbP45GetDeclarationsResponseEmployeeFieldAddress       = big.NewInt(1 << 7)
+	gbP45GetDeclarationsResponseEmployeeFieldPostcode      = big.NewInt(1 << 8)
+)
+
+type GbP45GetDeclarationsResponseEmployee struct {
+	Nino          *string                                     `json:"nino,omitempty" url:"nino,omitempty"`
+	Surname       string                                      `json:"surname" url:"surname"`
+	FirstNames    string                                      `json:"firstNames" url:"firstNames"`
+	LeavingDate   time.Time                                   `json:"leavingDate" url:"leavingDate" format:"date"`
+	PayrollNumber *string                                     `json:"payrollNumber,omitempty" url:"payrollNumber,omitempty"`
+	Gender        *GbP45GetDeclarationsResponseEmployeeGender `json:"gender,omitempty" url:"gender,omitempty"`
+	DateOfBirth   *string                                     `json:"dateOfBirth,omitempty" url:"dateOfBirth,omitempty"`
+	Address       []string                                    `json:"address" url:"address"`
+	Postcode      *string                                     `json:"postcode,omitempty" url:"postcode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetNino() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Nino
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetSurname() string {
+	if g == nil {
+		return ""
+	}
+	return g.Surname
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetFirstNames() string {
+	if g == nil {
+		return ""
+	}
+	return g.FirstNames
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetLeavingDate() time.Time {
+	if g == nil {
+		return time.Time{}
+	}
+	return g.LeavingDate
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetPayrollNumber() *string {
+	if g == nil {
+		return nil
+	}
+	return g.PayrollNumber
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetGender() *GbP45GetDeclarationsResponseEmployeeGender {
+	if g == nil {
+		return nil
+	}
+	return g.Gender
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetDateOfBirth() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DateOfBirth
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetAddress() []string {
+	if g == nil {
+		return nil
+	}
+	return g.Address
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetPostcode() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Postcode
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetNino sets the Nino field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetNino(nino *string) {
+	g.Nino = nino
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldNino)
+}
+
+// SetSurname sets the Surname field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetSurname(surname string) {
+	g.Surname = surname
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldSurname)
+}
+
+// SetFirstNames sets the FirstNames field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetFirstNames(firstNames string) {
+	g.FirstNames = firstNames
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldFirstNames)
+}
+
+// SetLeavingDate sets the LeavingDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetLeavingDate(leavingDate time.Time) {
+	g.LeavingDate = leavingDate
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldLeavingDate)
+}
+
+// SetPayrollNumber sets the PayrollNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetPayrollNumber(payrollNumber *string) {
+	g.PayrollNumber = payrollNumber
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldPayrollNumber)
+}
+
+// SetGender sets the Gender field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetGender(gender *GbP45GetDeclarationsResponseEmployeeGender) {
+	g.Gender = gender
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldGender)
+}
+
+// SetDateOfBirth sets the DateOfBirth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetDateOfBirth(dateOfBirth *string) {
+	g.DateOfBirth = dateOfBirth
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldDateOfBirth)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetAddress(address []string) {
+	g.Address = address
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldAddress)
+}
+
+// SetPostcode sets the Postcode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployee) SetPostcode(postcode *string) {
+	g.Postcode = postcode
+	g.require(gbP45GetDeclarationsResponseEmployeeFieldPostcode)
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) UnmarshalJSON(data []byte) error {
+	type embed GbP45GetDeclarationsResponseEmployee
+	var unmarshaler = struct {
+		embed
+		LeavingDate *internal.Date `json:"leavingDate"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP45GetDeclarationsResponseEmployee(unmarshaler.embed)
+	g.LeavingDate = unmarshaler.LeavingDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) MarshalJSON() ([]byte, error) {
+	type embed GbP45GetDeclarationsResponseEmployee
+	var marshaler = struct {
+		embed
+		LeavingDate *internal.Date `json:"leavingDate"`
+	}{
+		embed:       embed(*g),
+		LeavingDate: internal.NewDate(g.LeavingDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP45GetDeclarationsResponseEmployee) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+type GbP45GetDeclarationsResponseEmployeeGender string
+
+const (
+	GbP45GetDeclarationsResponseEmployeeGenderM GbP45GetDeclarationsResponseEmployeeGender = "M"
+	GbP45GetDeclarationsResponseEmployeeGenderF GbP45GetDeclarationsResponseEmployeeGender = "F"
+)
+
+func NewGbP45GetDeclarationsResponseEmployeeGenderFromString(s string) (GbP45GetDeclarationsResponseEmployeeGender, error) {
+	switch s {
+	case "M":
+		return GbP45GetDeclarationsResponseEmployeeGenderM, nil
+	case "F":
+		return GbP45GetDeclarationsResponseEmployeeGenderF, nil
+	}
+	var t GbP45GetDeclarationsResponseEmployeeGender
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (g GbP45GetDeclarationsResponseEmployeeGender) Ptr() *GbP45GetDeclarationsResponseEmployeeGender {
+	return &g
+}
+
+var (
+	gbP45GetDeclarationsResponseEmployerFieldOfficeNumber = big.NewInt(1 << 0)
+	gbP45GetDeclarationsResponseEmployerFieldReference    = big.NewInt(1 << 1)
+	gbP45GetDeclarationsResponseEmployerFieldName         = big.NewInt(1 << 2)
+	gbP45GetDeclarationsResponseEmployerFieldAddress      = big.NewInt(1 << 3)
+	gbP45GetDeclarationsResponseEmployerFieldPostcode     = big.NewInt(1 << 4)
+)
+
+type GbP45GetDeclarationsResponseEmployer struct {
+	OfficeNumber string   `json:"officeNumber" url:"officeNumber"`
+	Reference    string   `json:"reference" url:"reference"`
+	Name         string   `json:"name" url:"name"`
+	Address      []string `json:"address" url:"address"`
+	Postcode     *string  `json:"postcode,omitempty" url:"postcode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) GetOfficeNumber() string {
+	if g == nil {
+		return ""
+	}
+	return g.OfficeNumber
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) GetReference() string {
+	if g == nil {
+		return ""
+	}
+	return g.Reference
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) GetName() string {
+	if g == nil {
+		return ""
+	}
+	return g.Name
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) GetAddress() []string {
+	if g == nil {
+		return nil
+	}
+	return g.Address
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) GetPostcode() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Postcode
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetOfficeNumber sets the OfficeNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployer) SetOfficeNumber(officeNumber string) {
+	g.OfficeNumber = officeNumber
+	g.require(gbP45GetDeclarationsResponseEmployerFieldOfficeNumber)
+}
+
+// SetReference sets the Reference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployer) SetReference(reference string) {
+	g.Reference = reference
+	g.require(gbP45GetDeclarationsResponseEmployerFieldReference)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployer) SetName(name string) {
+	g.Name = name
+	g.require(gbP45GetDeclarationsResponseEmployerFieldName)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployer) SetAddress(address []string) {
+	g.Address = address
+	g.require(gbP45GetDeclarationsResponseEmployerFieldAddress)
+}
+
+// SetPostcode sets the Postcode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseEmployer) SetPostcode(postcode *string) {
+	g.Postcode = postcode
+	g.require(gbP45GetDeclarationsResponseEmployerFieldPostcode)
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP45GetDeclarationsResponseEmployer
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP45GetDeclarationsResponseEmployer(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) MarshalJSON() ([]byte, error) {
+	type embed GbP45GetDeclarationsResponseEmployer
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP45GetDeclarationsResponseEmployer) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP45GetDeclarationsResponseLastEntriesFieldWeekNumber     = big.NewInt(1 << 0)
+	gbP45GetDeclarationsResponseLastEntriesFieldMonthNumber    = big.NewInt(1 << 1)
+	gbP45GetDeclarationsResponseLastEntriesFieldTotalPayToDate = big.NewInt(1 << 2)
+	gbP45GetDeclarationsResponseLastEntriesFieldTotalTaxToDate = big.NewInt(1 << 3)
+)
+
+type GbP45GetDeclarationsResponseLastEntries struct {
+	WeekNumber     *float64  `json:"weekNumber,omitempty" url:"weekNumber,omitempty"`
+	MonthNumber    *float64  `json:"monthNumber,omitempty" url:"monthNumber,omitempty"`
+	TotalPayToDate time.Time `json:"totalPayToDate" url:"totalPayToDate" format:"date"`
+	TotalTaxToDate time.Time `json:"totalTaxToDate" url:"totalTaxToDate" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) GetWeekNumber() *float64 {
+	if g == nil {
+		return nil
+	}
+	return g.WeekNumber
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) GetMonthNumber() *float64 {
+	if g == nil {
+		return nil
+	}
+	return g.MonthNumber
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) GetTotalPayToDate() time.Time {
+	if g == nil {
+		return time.Time{}
+	}
+	return g.TotalPayToDate
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) GetTotalTaxToDate() time.Time {
+	if g == nil {
+		return time.Time{}
+	}
+	return g.TotalTaxToDate
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetWeekNumber sets the WeekNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseLastEntries) SetWeekNumber(weekNumber *float64) {
+	g.WeekNumber = weekNumber
+	g.require(gbP45GetDeclarationsResponseLastEntriesFieldWeekNumber)
+}
+
+// SetMonthNumber sets the MonthNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseLastEntries) SetMonthNumber(monthNumber *float64) {
+	g.MonthNumber = monthNumber
+	g.require(gbP45GetDeclarationsResponseLastEntriesFieldMonthNumber)
+}
+
+// SetTotalPayToDate sets the TotalPayToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseLastEntries) SetTotalPayToDate(totalPayToDate time.Time) {
+	g.TotalPayToDate = totalPayToDate
+	g.require(gbP45GetDeclarationsResponseLastEntriesFieldTotalPayToDate)
+}
+
+// SetTotalTaxToDate sets the TotalTaxToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseLastEntries) SetTotalTaxToDate(totalTaxToDate time.Time) {
+	g.TotalTaxToDate = totalTaxToDate
+	g.require(gbP45GetDeclarationsResponseLastEntriesFieldTotalTaxToDate)
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) UnmarshalJSON(data []byte) error {
+	type embed GbP45GetDeclarationsResponseLastEntries
+	var unmarshaler = struct {
+		embed
+		TotalPayToDate *internal.Date `json:"totalPayToDate"`
+		TotalTaxToDate *internal.Date `json:"totalTaxToDate"`
+	}{
+		embed: embed(*g),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*g = GbP45GetDeclarationsResponseLastEntries(unmarshaler.embed)
+	g.TotalPayToDate = unmarshaler.TotalPayToDate.Time()
+	g.TotalTaxToDate = unmarshaler.TotalTaxToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) MarshalJSON() ([]byte, error) {
+	type embed GbP45GetDeclarationsResponseLastEntries
+	var marshaler = struct {
+		embed
+		TotalPayToDate *internal.Date `json:"totalPayToDate"`
+		TotalTaxToDate *internal.Date `json:"totalTaxToDate"`
+	}{
+		embed:          embed(*g),
+		TotalPayToDate: internal.NewDate(g.TotalPayToDate),
+		TotalTaxToDate: internal.NewDate(g.TotalTaxToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP45GetDeclarationsResponseLastEntries) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbP45GetDeclarationsResponseThisEmploymentFieldTotalPay = big.NewInt(1 << 0)
+	gbP45GetDeclarationsResponseThisEmploymentFieldTotalTax = big.NewInt(1 << 1)
+)
+
+type GbP45GetDeclarationsResponseThisEmployment struct {
+	TotalPay string `json:"totalPay" url:"totalPay"`
+	TotalTax string `json:"totalTax" url:"totalTax"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbP45GetDeclarationsResponseThisEmployment) GetTotalPay() string {
+	if g == nil {
+		return ""
+	}
+	return g.TotalPay
+}
+
+func (g *GbP45GetDeclarationsResponseThisEmployment) GetTotalTax() string {
+	if g == nil {
+		return ""
+	}
+	return g.TotalTax
+}
+
+func (g *GbP45GetDeclarationsResponseThisEmployment) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbP45GetDeclarationsResponseThisEmployment) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetTotalPay sets the TotalPay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseThisEmployment) SetTotalPay(totalPay string) {
+	g.TotalPay = totalPay
+	g.require(gbP45GetDeclarationsResponseThisEmploymentFieldTotalPay)
+}
+
+// SetTotalTax sets the TotalTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbP45GetDeclarationsResponseThisEmployment) SetTotalTax(totalTax string) {
+	g.TotalTax = totalTax
+	g.require(gbP45GetDeclarationsResponseThisEmploymentFieldTotalTax)
+}
+
+func (g *GbP45GetDeclarationsResponseThisEmployment) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbP45GetDeclarationsResponseThisEmployment
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbP45GetDeclarationsResponseThisEmployment(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbP45GetDeclarationsResponseThisEmployment) MarshalJSON() ([]byte, error) {
+	type embed GbP45GetDeclarationsResponseThisEmployment
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbP45GetDeclarationsResponseThisEmployment) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsGetDeclarationsResponseFieldYear  = big.NewInt(1 << 0)
+	gbReturnFactsGetDeclarationsResponseFieldFacts = big.NewInt(1 << 1)
+)
+
+type GbReturnFactsGetDeclarationsResponse struct {
+	Year  int64                                      `json:"year" url:"year"`
+	Facts *GbReturnFactsGetDeclarationsResponseFacts `json:"facts" url:"facts"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsGetDeclarationsResponse) GetYear() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.Year
+}
+
+func (g *GbReturnFactsGetDeclarationsResponse) GetFacts() *GbReturnFactsGetDeclarationsResponseFacts {
+	if g == nil {
+		return nil
+	}
+	return g.Facts
+}
+
+func (g *GbReturnFactsGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsGetDeclarationsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponse) SetYear(year int64) {
+	g.Year = year
+	g.require(gbReturnFactsGetDeclarationsResponseFieldYear)
+}
+
+// SetFacts sets the Facts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponse) SetFacts(facts *GbReturnFactsGetDeclarationsResponseFacts) {
+	g.Facts = facts
+	g.require(gbReturnFactsGetDeclarationsResponseFieldFacts)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsGetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsGetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponse) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsGetDeclarationsResponseFactsFieldCompanyType                 = big.NewInt(1 << 0)
+	gbReturnFactsGetDeclarationsResponseFactsFieldAssociatedCompanies         = big.NewInt(1 << 1)
+	gbReturnFactsGetDeclarationsResponseFactsFieldPartnerInFirm               = big.NewInt(1 << 2)
+	gbReturnFactsGetDeclarationsResponseFactsFieldSmallCompaniesRegime        = big.NewInt(1 << 3)
+	gbReturnFactsGetDeclarationsResponseFactsFieldAuditExemptionSection477    = big.NewInt(1 << 4)
+	gbReturnFactsGetDeclarationsResponseFactsFieldDepreciation                = big.NewInt(1 << 5)
+	gbReturnFactsGetDeclarationsResponseFactsFieldAmortisation                = big.NewInt(1 << 6)
+	gbReturnFactsGetDeclarationsResponseFactsFieldLossOrProfitOnSale          = big.NewInt(1 << 7)
+	gbReturnFactsGetDeclarationsResponseFactsFieldEntertaining                = big.NewInt(1 << 8)
+	gbReturnFactsGetDeclarationsResponseFactsFieldOtherAdditions              = big.NewInt(1 << 9)
+	gbReturnFactsGetDeclarationsResponseFactsFieldNonTradingLoanCredits       = big.NewInt(1 << 10)
+	gbReturnFactsGetDeclarationsResponseFactsFieldNonTradingLoanDebits        = big.NewInt(1 << 11)
+	gbReturnFactsGetDeclarationsResponseFactsFieldNonTaxableIncome            = big.NewInt(1 << 12)
+	gbReturnFactsGetDeclarationsResponseFactsFieldExemptDistributions         = big.NewInt(1 << 13)
+	gbReturnFactsGetDeclarationsResponseFactsFieldCapitalAllowances           = big.NewInt(1 << 14)
+	gbReturnFactsGetDeclarationsResponseFactsFieldBalancingCharges            = big.NewInt(1 << 15)
+	gbReturnFactsGetDeclarationsResponseFactsFieldTradingLossesBroughtForward = big.NewInt(1 << 16)
+	gbReturnFactsGetDeclarationsResponseFactsFieldGrossChargeableGains        = big.NewInt(1 << 17)
+	gbReturnFactsGetDeclarationsResponseFactsFieldAllowableLosses             = big.NewInt(1 << 18)
+	gbReturnFactsGetDeclarationsResponseFactsFieldQualifyingDonations         = big.NewInt(1 << 19)
+	gbReturnFactsGetDeclarationsResponseFactsFieldTaxAlreadyPaid              = big.NewInt(1 << 20)
+	gbReturnFactsGetDeclarationsResponseFactsFieldDeclarantName               = big.NewInt(1 << 21)
+	gbReturnFactsGetDeclarationsResponseFactsFieldDeclarantStatus             = big.NewInt(1 << 22)
+	gbReturnFactsGetDeclarationsResponseFactsFieldSeniorStatutoryAuditor      = big.NewInt(1 << 23)
+)
+
+type GbReturnFactsGetDeclarationsResponseFacts struct {
+	CompanyType                 *int64                                                      `json:"companyType,omitempty" url:"companyType,omitempty"`
+	AssociatedCompanies         *int64                                                      `json:"associatedCompanies,omitempty" url:"associatedCompanies,omitempty"`
+	PartnerInFirm               *bool                                                       `json:"partnerInFirm,omitempty" url:"partnerInFirm,omitempty"`
+	SmallCompaniesRegime        *bool                                                       `json:"smallCompaniesRegime,omitempty" url:"smallCompaniesRegime,omitempty"`
+	AuditExemptionSection477    *bool                                                       `json:"auditExemptionSection477,omitempty" url:"auditExemptionSection477,omitempty"`
+	Depreciation                *string                                                     `json:"depreciation,omitempty" url:"depreciation,omitempty"`
+	Amortisation                *string                                                     `json:"amortisation,omitempty" url:"amortisation,omitempty"`
+	LossOrProfitOnSale          *string                                                     `json:"lossOrProfitOnSale,omitempty" url:"lossOrProfitOnSale,omitempty"`
+	Entertaining                *string                                                     `json:"entertaining,omitempty" url:"entertaining,omitempty"`
+	OtherAdditions              *string                                                     `json:"otherAdditions,omitempty" url:"otherAdditions,omitempty"`
+	NonTradingLoanCredits       *string                                                     `json:"nonTradingLoanCredits,omitempty" url:"nonTradingLoanCredits,omitempty"`
+	NonTradingLoanDebits        *string                                                     `json:"nonTradingLoanDebits,omitempty" url:"nonTradingLoanDebits,omitempty"`
+	NonTaxableIncome            *string                                                     `json:"nonTaxableIncome,omitempty" url:"nonTaxableIncome,omitempty"`
+	ExemptDistributions         *string                                                     `json:"exemptDistributions,omitempty" url:"exemptDistributions,omitempty"`
+	CapitalAllowances           *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances `json:"capitalAllowances,omitempty" url:"capitalAllowances,omitempty"`
+	BalancingCharges            *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges  `json:"balancingCharges,omitempty" url:"balancingCharges,omitempty"`
+	TradingLossesBroughtForward *string                                                     `json:"tradingLossesBroughtForward,omitempty" url:"tradingLossesBroughtForward,omitempty"`
+	GrossChargeableGains        *string                                                     `json:"grossChargeableGains,omitempty" url:"grossChargeableGains,omitempty"`
+	AllowableLosses             *string                                                     `json:"allowableLosses,omitempty" url:"allowableLosses,omitempty"`
+	QualifyingDonations         *string                                                     `json:"qualifyingDonations,omitempty" url:"qualifyingDonations,omitempty"`
+	TaxAlreadyPaid              *string                                                     `json:"taxAlreadyPaid,omitempty" url:"taxAlreadyPaid,omitempty"`
+	DeclarantName               *string                                                     `json:"declarantName,omitempty" url:"declarantName,omitempty"`
+	DeclarantStatus             *string                                                     `json:"declarantStatus,omitempty" url:"declarantStatus,omitempty"`
+	SeniorStatutoryAuditor      *string                                                     `json:"seniorStatutoryAuditor,omitempty" url:"seniorStatutoryAuditor,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetCompanyType() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.CompanyType
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetAssociatedCompanies() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.AssociatedCompanies
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetPartnerInFirm() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.PartnerInFirm
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetSmallCompaniesRegime() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.SmallCompaniesRegime
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetAuditExemptionSection477() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.AuditExemptionSection477
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetDepreciation() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Depreciation
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetAmortisation() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Amortisation
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetLossOrProfitOnSale() *string {
+	if g == nil {
+		return nil
+	}
+	return g.LossOrProfitOnSale
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetEntertaining() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Entertaining
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetOtherAdditions() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherAdditions
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetNonTradingLoanCredits() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTradingLoanCredits
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetNonTradingLoanDebits() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTradingLoanDebits
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetNonTaxableIncome() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTaxableIncome
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetExemptDistributions() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ExemptDistributions
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetCapitalAllowances() *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances {
+	if g == nil {
+		return nil
+	}
+	return g.CapitalAllowances
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetBalancingCharges() *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges {
+	if g == nil {
+		return nil
+	}
+	return g.BalancingCharges
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetTradingLossesBroughtForward() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TradingLossesBroughtForward
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetGrossChargeableGains() *string {
+	if g == nil {
+		return nil
+	}
+	return g.GrossChargeableGains
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetAllowableLosses() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AllowableLosses
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetQualifyingDonations() *string {
+	if g == nil {
+		return nil
+	}
+	return g.QualifyingDonations
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetTaxAlreadyPaid() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TaxAlreadyPaid
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetDeclarantName() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DeclarantName
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetDeclarantStatus() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DeclarantStatus
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetSeniorStatutoryAuditor() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SeniorStatutoryAuditor
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCompanyType sets the CompanyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetCompanyType(companyType *int64) {
+	g.CompanyType = companyType
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldCompanyType)
+}
+
+// SetAssociatedCompanies sets the AssociatedCompanies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetAssociatedCompanies(associatedCompanies *int64) {
+	g.AssociatedCompanies = associatedCompanies
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldAssociatedCompanies)
+}
+
+// SetPartnerInFirm sets the PartnerInFirm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetPartnerInFirm(partnerInFirm *bool) {
+	g.PartnerInFirm = partnerInFirm
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldPartnerInFirm)
+}
+
+// SetSmallCompaniesRegime sets the SmallCompaniesRegime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetSmallCompaniesRegime(smallCompaniesRegime *bool) {
+	g.SmallCompaniesRegime = smallCompaniesRegime
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldSmallCompaniesRegime)
+}
+
+// SetAuditExemptionSection477 sets the AuditExemptionSection477 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetAuditExemptionSection477(auditExemptionSection477 *bool) {
+	g.AuditExemptionSection477 = auditExemptionSection477
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldAuditExemptionSection477)
+}
+
+// SetDepreciation sets the Depreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetDepreciation(depreciation *string) {
+	g.Depreciation = depreciation
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldDepreciation)
+}
+
+// SetAmortisation sets the Amortisation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetAmortisation(amortisation *string) {
+	g.Amortisation = amortisation
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldAmortisation)
+}
+
+// SetLossOrProfitOnSale sets the LossOrProfitOnSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetLossOrProfitOnSale(lossOrProfitOnSale *string) {
+	g.LossOrProfitOnSale = lossOrProfitOnSale
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldLossOrProfitOnSale)
+}
+
+// SetEntertaining sets the Entertaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetEntertaining(entertaining *string) {
+	g.Entertaining = entertaining
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldEntertaining)
+}
+
+// SetOtherAdditions sets the OtherAdditions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetOtherAdditions(otherAdditions *string) {
+	g.OtherAdditions = otherAdditions
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldOtherAdditions)
+}
+
+// SetNonTradingLoanCredits sets the NonTradingLoanCredits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetNonTradingLoanCredits(nonTradingLoanCredits *string) {
+	g.NonTradingLoanCredits = nonTradingLoanCredits
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldNonTradingLoanCredits)
+}
+
+// SetNonTradingLoanDebits sets the NonTradingLoanDebits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetNonTradingLoanDebits(nonTradingLoanDebits *string) {
+	g.NonTradingLoanDebits = nonTradingLoanDebits
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldNonTradingLoanDebits)
+}
+
+// SetNonTaxableIncome sets the NonTaxableIncome field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetNonTaxableIncome(nonTaxableIncome *string) {
+	g.NonTaxableIncome = nonTaxableIncome
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldNonTaxableIncome)
+}
+
+// SetExemptDistributions sets the ExemptDistributions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetExemptDistributions(exemptDistributions *string) {
+	g.ExemptDistributions = exemptDistributions
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldExemptDistributions)
+}
+
+// SetCapitalAllowances sets the CapitalAllowances field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetCapitalAllowances(capitalAllowances *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) {
+	g.CapitalAllowances = capitalAllowances
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldCapitalAllowances)
+}
+
+// SetBalancingCharges sets the BalancingCharges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetBalancingCharges(balancingCharges *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) {
+	g.BalancingCharges = balancingCharges
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldBalancingCharges)
+}
+
+// SetTradingLossesBroughtForward sets the TradingLossesBroughtForward field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetTradingLossesBroughtForward(tradingLossesBroughtForward *string) {
+	g.TradingLossesBroughtForward = tradingLossesBroughtForward
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldTradingLossesBroughtForward)
+}
+
+// SetGrossChargeableGains sets the GrossChargeableGains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetGrossChargeableGains(grossChargeableGains *string) {
+	g.GrossChargeableGains = grossChargeableGains
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldGrossChargeableGains)
+}
+
+// SetAllowableLosses sets the AllowableLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetAllowableLosses(allowableLosses *string) {
+	g.AllowableLosses = allowableLosses
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldAllowableLosses)
+}
+
+// SetQualifyingDonations sets the QualifyingDonations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetQualifyingDonations(qualifyingDonations *string) {
+	g.QualifyingDonations = qualifyingDonations
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldQualifyingDonations)
+}
+
+// SetTaxAlreadyPaid sets the TaxAlreadyPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetTaxAlreadyPaid(taxAlreadyPaid *string) {
+	g.TaxAlreadyPaid = taxAlreadyPaid
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldTaxAlreadyPaid)
+}
+
+// SetDeclarantName sets the DeclarantName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetDeclarantName(declarantName *string) {
+	g.DeclarantName = declarantName
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldDeclarantName)
+}
+
+// SetDeclarantStatus sets the DeclarantStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetDeclarantStatus(declarantStatus *string) {
+	g.DeclarantStatus = declarantStatus
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldDeclarantStatus)
+}
+
+// SetSeniorStatutoryAuditor sets the SeniorStatutoryAuditor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFacts) SetSeniorStatutoryAuditor(seniorStatutoryAuditor *string) {
+	g.SeniorStatutoryAuditor = seniorStatutoryAuditor
+	g.require(gbReturnFactsGetDeclarationsResponseFactsFieldSeniorStatutoryAuditor)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsGetDeclarationsResponseFacts
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsGetDeclarationsResponseFacts(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsGetDeclarationsResponseFacts
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFacts) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldFullExpensing   = big.NewInt(1 << 0)
+	gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldSpecialRatePool = big.NewInt(1 << 1)
+	gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldMainPool        = big.NewInt(1 << 2)
+	gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldOther           = big.NewInt(1 << 3)
+)
+
+type GbReturnFactsGetDeclarationsResponseFactsBalancingCharges struct {
+	FullExpensing   *string `json:"fullExpensing,omitempty" url:"fullExpensing,omitempty"`
+	SpecialRatePool *string `json:"specialRatePool,omitempty" url:"specialRatePool,omitempty"`
+	MainPool        *string `json:"mainPool,omitempty" url:"mainPool,omitempty"`
+	Other           *string `json:"other,omitempty" url:"other,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) GetFullExpensing() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FullExpensing
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) GetSpecialRatePool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SpecialRatePool
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) GetMainPool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.MainPool
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) GetOther() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Other
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetFullExpensing sets the FullExpensing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) SetFullExpensing(fullExpensing *string) {
+	g.FullExpensing = fullExpensing
+	g.require(gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldFullExpensing)
+}
+
+// SetSpecialRatePool sets the SpecialRatePool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) SetSpecialRatePool(specialRatePool *string) {
+	g.SpecialRatePool = specialRatePool
+	g.require(gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldSpecialRatePool)
+}
+
+// SetMainPool sets the MainPool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) SetMainPool(mainPool *string) {
+	g.MainPool = mainPool
+	g.require(gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldMainPool)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) SetOther(other *string) {
+	g.Other = other
+	g.require(gbReturnFactsGetDeclarationsResponseFactsBalancingChargesFieldOther)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsGetDeclarationsResponseFactsBalancingCharges
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsGetDeclarationsResponseFactsBalancingCharges(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsGetDeclarationsResponseFactsBalancingCharges
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsBalancingCharges) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldFullExpensing             = big.NewInt(1 << 0)
+	gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldAnnualInvestmentAllowance = big.NewInt(1 << 1)
+	gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldSpecialRatePool           = big.NewInt(1 << 2)
+	gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldMainPool                  = big.NewInt(1 << 3)
+	gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldStructuresAndBuildings    = big.NewInt(1 << 4)
+	gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldOther                     = big.NewInt(1 << 5)
+)
+
+type GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances struct {
+	FullExpensing             *string `json:"fullExpensing,omitempty" url:"fullExpensing,omitempty"`
+	AnnualInvestmentAllowance *string `json:"annualInvestmentAllowance,omitempty" url:"annualInvestmentAllowance,omitempty"`
+	SpecialRatePool           *string `json:"specialRatePool,omitempty" url:"specialRatePool,omitempty"`
+	MainPool                  *string `json:"mainPool,omitempty" url:"mainPool,omitempty"`
+	StructuresAndBuildings    *string `json:"structuresAndBuildings,omitempty" url:"structuresAndBuildings,omitempty"`
+	Other                     *string `json:"other,omitempty" url:"other,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) GetFullExpensing() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FullExpensing
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) GetAnnualInvestmentAllowance() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AnnualInvestmentAllowance
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) GetSpecialRatePool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SpecialRatePool
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) GetMainPool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.MainPool
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) GetStructuresAndBuildings() *string {
+	if g == nil {
+		return nil
+	}
+	return g.StructuresAndBuildings
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) GetOther() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Other
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetFullExpensing sets the FullExpensing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) SetFullExpensing(fullExpensing *string) {
+	g.FullExpensing = fullExpensing
+	g.require(gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldFullExpensing)
+}
+
+// SetAnnualInvestmentAllowance sets the AnnualInvestmentAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) SetAnnualInvestmentAllowance(annualInvestmentAllowance *string) {
+	g.AnnualInvestmentAllowance = annualInvestmentAllowance
+	g.require(gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldAnnualInvestmentAllowance)
+}
+
+// SetSpecialRatePool sets the SpecialRatePool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) SetSpecialRatePool(specialRatePool *string) {
+	g.SpecialRatePool = specialRatePool
+	g.require(gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldSpecialRatePool)
+}
+
+// SetMainPool sets the MainPool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) SetMainPool(mainPool *string) {
+	g.MainPool = mainPool
+	g.require(gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldMainPool)
+}
+
+// SetStructuresAndBuildings sets the StructuresAndBuildings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) SetStructuresAndBuildings(structuresAndBuildings *string) {
+	g.StructuresAndBuildings = structuresAndBuildings
+	g.require(gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldStructuresAndBuildings)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) SetOther(other *string) {
+	g.Other = other
+	g.require(gbReturnFactsGetDeclarationsResponseFactsCapitalAllowancesFieldOther)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsGetDeclarationsResponseFactsCapitalAllowances) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsSetDeclarationsRequestFactsFieldCompanyType                 = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsRequestFactsFieldAssociatedCompanies         = big.NewInt(1 << 1)
+	gbReturnFactsSetDeclarationsRequestFactsFieldPartnerInFirm               = big.NewInt(1 << 2)
+	gbReturnFactsSetDeclarationsRequestFactsFieldSmallCompaniesRegime        = big.NewInt(1 << 3)
+	gbReturnFactsSetDeclarationsRequestFactsFieldAuditExemptionSection477    = big.NewInt(1 << 4)
+	gbReturnFactsSetDeclarationsRequestFactsFieldDepreciation                = big.NewInt(1 << 5)
+	gbReturnFactsSetDeclarationsRequestFactsFieldAmortisation                = big.NewInt(1 << 6)
+	gbReturnFactsSetDeclarationsRequestFactsFieldLossOrProfitOnSale          = big.NewInt(1 << 7)
+	gbReturnFactsSetDeclarationsRequestFactsFieldEntertaining                = big.NewInt(1 << 8)
+	gbReturnFactsSetDeclarationsRequestFactsFieldOtherAdditions              = big.NewInt(1 << 9)
+	gbReturnFactsSetDeclarationsRequestFactsFieldNonTradingLoanCredits       = big.NewInt(1 << 10)
+	gbReturnFactsSetDeclarationsRequestFactsFieldNonTradingLoanDebits        = big.NewInt(1 << 11)
+	gbReturnFactsSetDeclarationsRequestFactsFieldNonTaxableIncome            = big.NewInt(1 << 12)
+	gbReturnFactsSetDeclarationsRequestFactsFieldExemptDistributions         = big.NewInt(1 << 13)
+	gbReturnFactsSetDeclarationsRequestFactsFieldCapitalAllowances           = big.NewInt(1 << 14)
+	gbReturnFactsSetDeclarationsRequestFactsFieldBalancingCharges            = big.NewInt(1 << 15)
+	gbReturnFactsSetDeclarationsRequestFactsFieldTradingLossesBroughtForward = big.NewInt(1 << 16)
+	gbReturnFactsSetDeclarationsRequestFactsFieldGrossChargeableGains        = big.NewInt(1 << 17)
+	gbReturnFactsSetDeclarationsRequestFactsFieldAllowableLosses             = big.NewInt(1 << 18)
+	gbReturnFactsSetDeclarationsRequestFactsFieldQualifyingDonations         = big.NewInt(1 << 19)
+	gbReturnFactsSetDeclarationsRequestFactsFieldTaxAlreadyPaid              = big.NewInt(1 << 20)
+	gbReturnFactsSetDeclarationsRequestFactsFieldDeclarantName               = big.NewInt(1 << 21)
+	gbReturnFactsSetDeclarationsRequestFactsFieldDeclarantStatus             = big.NewInt(1 << 22)
+	gbReturnFactsSetDeclarationsRequestFactsFieldSeniorStatutoryAuditor      = big.NewInt(1 << 23)
+)
+
+type GbReturnFactsSetDeclarationsRequestFacts struct {
+	CompanyType                 *int64                                                     `json:"companyType,omitempty" url:"companyType,omitempty"`
+	AssociatedCompanies         *int64                                                     `json:"associatedCompanies,omitempty" url:"associatedCompanies,omitempty"`
+	PartnerInFirm               *bool                                                      `json:"partnerInFirm,omitempty" url:"partnerInFirm,omitempty"`
+	SmallCompaniesRegime        *bool                                                      `json:"smallCompaniesRegime,omitempty" url:"smallCompaniesRegime,omitempty"`
+	AuditExemptionSection477    *bool                                                      `json:"auditExemptionSection477,omitempty" url:"auditExemptionSection477,omitempty"`
+	Depreciation                *string                                                    `json:"depreciation,omitempty" url:"depreciation,omitempty"`
+	Amortisation                *string                                                    `json:"amortisation,omitempty" url:"amortisation,omitempty"`
+	LossOrProfitOnSale          *string                                                    `json:"lossOrProfitOnSale,omitempty" url:"lossOrProfitOnSale,omitempty"`
+	Entertaining                *string                                                    `json:"entertaining,omitempty" url:"entertaining,omitempty"`
+	OtherAdditions              *string                                                    `json:"otherAdditions,omitempty" url:"otherAdditions,omitempty"`
+	NonTradingLoanCredits       *string                                                    `json:"nonTradingLoanCredits,omitempty" url:"nonTradingLoanCredits,omitempty"`
+	NonTradingLoanDebits        *string                                                    `json:"nonTradingLoanDebits,omitempty" url:"nonTradingLoanDebits,omitempty"`
+	NonTaxableIncome            *string                                                    `json:"nonTaxableIncome,omitempty" url:"nonTaxableIncome,omitempty"`
+	ExemptDistributions         *string                                                    `json:"exemptDistributions,omitempty" url:"exemptDistributions,omitempty"`
+	CapitalAllowances           *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances `json:"capitalAllowances,omitempty" url:"capitalAllowances,omitempty"`
+	BalancingCharges            *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges  `json:"balancingCharges,omitempty" url:"balancingCharges,omitempty"`
+	TradingLossesBroughtForward *string                                                    `json:"tradingLossesBroughtForward,omitempty" url:"tradingLossesBroughtForward,omitempty"`
+	GrossChargeableGains        *string                                                    `json:"grossChargeableGains,omitempty" url:"grossChargeableGains,omitempty"`
+	AllowableLosses             *string                                                    `json:"allowableLosses,omitempty" url:"allowableLosses,omitempty"`
+	QualifyingDonations         *string                                                    `json:"qualifyingDonations,omitempty" url:"qualifyingDonations,omitempty"`
+	TaxAlreadyPaid              *string                                                    `json:"taxAlreadyPaid,omitempty" url:"taxAlreadyPaid,omitempty"`
+	DeclarantName               *string                                                    `json:"declarantName,omitempty" url:"declarantName,omitempty"`
+	DeclarantStatus             *string                                                    `json:"declarantStatus,omitempty" url:"declarantStatus,omitempty"`
+	SeniorStatutoryAuditor      *string                                                    `json:"seniorStatutoryAuditor,omitempty" url:"seniorStatutoryAuditor,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetCompanyType() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.CompanyType
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetAssociatedCompanies() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.AssociatedCompanies
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetPartnerInFirm() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.PartnerInFirm
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetSmallCompaniesRegime() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.SmallCompaniesRegime
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetAuditExemptionSection477() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.AuditExemptionSection477
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetDepreciation() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Depreciation
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetAmortisation() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Amortisation
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetLossOrProfitOnSale() *string {
+	if g == nil {
+		return nil
+	}
+	return g.LossOrProfitOnSale
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetEntertaining() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Entertaining
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetOtherAdditions() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherAdditions
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetNonTradingLoanCredits() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTradingLoanCredits
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetNonTradingLoanDebits() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTradingLoanDebits
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetNonTaxableIncome() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTaxableIncome
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetExemptDistributions() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ExemptDistributions
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetCapitalAllowances() *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances {
+	if g == nil {
+		return nil
+	}
+	return g.CapitalAllowances
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetBalancingCharges() *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges {
+	if g == nil {
+		return nil
+	}
+	return g.BalancingCharges
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetTradingLossesBroughtForward() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TradingLossesBroughtForward
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetGrossChargeableGains() *string {
+	if g == nil {
+		return nil
+	}
+	return g.GrossChargeableGains
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetAllowableLosses() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AllowableLosses
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetQualifyingDonations() *string {
+	if g == nil {
+		return nil
+	}
+	return g.QualifyingDonations
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetTaxAlreadyPaid() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TaxAlreadyPaid
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetDeclarantName() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DeclarantName
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetDeclarantStatus() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DeclarantStatus
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetSeniorStatutoryAuditor() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SeniorStatutoryAuditor
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCompanyType sets the CompanyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetCompanyType(companyType *int64) {
+	g.CompanyType = companyType
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldCompanyType)
+}
+
+// SetAssociatedCompanies sets the AssociatedCompanies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetAssociatedCompanies(associatedCompanies *int64) {
+	g.AssociatedCompanies = associatedCompanies
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldAssociatedCompanies)
+}
+
+// SetPartnerInFirm sets the PartnerInFirm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetPartnerInFirm(partnerInFirm *bool) {
+	g.PartnerInFirm = partnerInFirm
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldPartnerInFirm)
+}
+
+// SetSmallCompaniesRegime sets the SmallCompaniesRegime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetSmallCompaniesRegime(smallCompaniesRegime *bool) {
+	g.SmallCompaniesRegime = smallCompaniesRegime
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldSmallCompaniesRegime)
+}
+
+// SetAuditExemptionSection477 sets the AuditExemptionSection477 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetAuditExemptionSection477(auditExemptionSection477 *bool) {
+	g.AuditExemptionSection477 = auditExemptionSection477
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldAuditExemptionSection477)
+}
+
+// SetDepreciation sets the Depreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetDepreciation(depreciation *string) {
+	g.Depreciation = depreciation
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldDepreciation)
+}
+
+// SetAmortisation sets the Amortisation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetAmortisation(amortisation *string) {
+	g.Amortisation = amortisation
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldAmortisation)
+}
+
+// SetLossOrProfitOnSale sets the LossOrProfitOnSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetLossOrProfitOnSale(lossOrProfitOnSale *string) {
+	g.LossOrProfitOnSale = lossOrProfitOnSale
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldLossOrProfitOnSale)
+}
+
+// SetEntertaining sets the Entertaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetEntertaining(entertaining *string) {
+	g.Entertaining = entertaining
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldEntertaining)
+}
+
+// SetOtherAdditions sets the OtherAdditions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetOtherAdditions(otherAdditions *string) {
+	g.OtherAdditions = otherAdditions
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldOtherAdditions)
+}
+
+// SetNonTradingLoanCredits sets the NonTradingLoanCredits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetNonTradingLoanCredits(nonTradingLoanCredits *string) {
+	g.NonTradingLoanCredits = nonTradingLoanCredits
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldNonTradingLoanCredits)
+}
+
+// SetNonTradingLoanDebits sets the NonTradingLoanDebits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetNonTradingLoanDebits(nonTradingLoanDebits *string) {
+	g.NonTradingLoanDebits = nonTradingLoanDebits
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldNonTradingLoanDebits)
+}
+
+// SetNonTaxableIncome sets the NonTaxableIncome field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetNonTaxableIncome(nonTaxableIncome *string) {
+	g.NonTaxableIncome = nonTaxableIncome
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldNonTaxableIncome)
+}
+
+// SetExemptDistributions sets the ExemptDistributions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetExemptDistributions(exemptDistributions *string) {
+	g.ExemptDistributions = exemptDistributions
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldExemptDistributions)
+}
+
+// SetCapitalAllowances sets the CapitalAllowances field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetCapitalAllowances(capitalAllowances *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) {
+	g.CapitalAllowances = capitalAllowances
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldCapitalAllowances)
+}
+
+// SetBalancingCharges sets the BalancingCharges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetBalancingCharges(balancingCharges *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) {
+	g.BalancingCharges = balancingCharges
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldBalancingCharges)
+}
+
+// SetTradingLossesBroughtForward sets the TradingLossesBroughtForward field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetTradingLossesBroughtForward(tradingLossesBroughtForward *string) {
+	g.TradingLossesBroughtForward = tradingLossesBroughtForward
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldTradingLossesBroughtForward)
+}
+
+// SetGrossChargeableGains sets the GrossChargeableGains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetGrossChargeableGains(grossChargeableGains *string) {
+	g.GrossChargeableGains = grossChargeableGains
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldGrossChargeableGains)
+}
+
+// SetAllowableLosses sets the AllowableLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetAllowableLosses(allowableLosses *string) {
+	g.AllowableLosses = allowableLosses
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldAllowableLosses)
+}
+
+// SetQualifyingDonations sets the QualifyingDonations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetQualifyingDonations(qualifyingDonations *string) {
+	g.QualifyingDonations = qualifyingDonations
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldQualifyingDonations)
+}
+
+// SetTaxAlreadyPaid sets the TaxAlreadyPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetTaxAlreadyPaid(taxAlreadyPaid *string) {
+	g.TaxAlreadyPaid = taxAlreadyPaid
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldTaxAlreadyPaid)
+}
+
+// SetDeclarantName sets the DeclarantName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetDeclarantName(declarantName *string) {
+	g.DeclarantName = declarantName
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldDeclarantName)
+}
+
+// SetDeclarantStatus sets the DeclarantStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetDeclarantStatus(declarantStatus *string) {
+	g.DeclarantStatus = declarantStatus
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldDeclarantStatus)
+}
+
+// SetSeniorStatutoryAuditor sets the SeniorStatutoryAuditor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFacts) SetSeniorStatutoryAuditor(seniorStatutoryAuditor *string) {
+	g.SeniorStatutoryAuditor = seniorStatutoryAuditor
+	g.require(gbReturnFactsSetDeclarationsRequestFactsFieldSeniorStatutoryAuditor)
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsRequestFacts
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsRequestFacts(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsRequestFacts
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFacts) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldFullExpensing   = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldSpecialRatePool = big.NewInt(1 << 1)
+	gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldMainPool        = big.NewInt(1 << 2)
+	gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldOther           = big.NewInt(1 << 3)
+)
+
+type GbReturnFactsSetDeclarationsRequestFactsBalancingCharges struct {
+	FullExpensing   *string `json:"fullExpensing,omitempty" url:"fullExpensing,omitempty"`
+	SpecialRatePool *string `json:"specialRatePool,omitempty" url:"specialRatePool,omitempty"`
+	MainPool        *string `json:"mainPool,omitempty" url:"mainPool,omitempty"`
+	Other           *string `json:"other,omitempty" url:"other,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) GetFullExpensing() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FullExpensing
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) GetSpecialRatePool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SpecialRatePool
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) GetMainPool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.MainPool
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) GetOther() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Other
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetFullExpensing sets the FullExpensing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) SetFullExpensing(fullExpensing *string) {
+	g.FullExpensing = fullExpensing
+	g.require(gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldFullExpensing)
+}
+
+// SetSpecialRatePool sets the SpecialRatePool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) SetSpecialRatePool(specialRatePool *string) {
+	g.SpecialRatePool = specialRatePool
+	g.require(gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldSpecialRatePool)
+}
+
+// SetMainPool sets the MainPool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) SetMainPool(mainPool *string) {
+	g.MainPool = mainPool
+	g.require(gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldMainPool)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) SetOther(other *string) {
+	g.Other = other
+	g.require(gbReturnFactsSetDeclarationsRequestFactsBalancingChargesFieldOther)
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsRequestFactsBalancingCharges
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsRequestFactsBalancingCharges(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsRequestFactsBalancingCharges
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsBalancingCharges) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldFullExpensing             = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldAnnualInvestmentAllowance = big.NewInt(1 << 1)
+	gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldSpecialRatePool           = big.NewInt(1 << 2)
+	gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldMainPool                  = big.NewInt(1 << 3)
+	gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldStructuresAndBuildings    = big.NewInt(1 << 4)
+	gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldOther                     = big.NewInt(1 << 5)
+)
+
+type GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances struct {
+	FullExpensing             *string `json:"fullExpensing,omitempty" url:"fullExpensing,omitempty"`
+	AnnualInvestmentAllowance *string `json:"annualInvestmentAllowance,omitempty" url:"annualInvestmentAllowance,omitempty"`
+	SpecialRatePool           *string `json:"specialRatePool,omitempty" url:"specialRatePool,omitempty"`
+	MainPool                  *string `json:"mainPool,omitempty" url:"mainPool,omitempty"`
+	StructuresAndBuildings    *string `json:"structuresAndBuildings,omitempty" url:"structuresAndBuildings,omitempty"`
+	Other                     *string `json:"other,omitempty" url:"other,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) GetFullExpensing() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FullExpensing
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) GetAnnualInvestmentAllowance() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AnnualInvestmentAllowance
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) GetSpecialRatePool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SpecialRatePool
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) GetMainPool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.MainPool
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) GetStructuresAndBuildings() *string {
+	if g == nil {
+		return nil
+	}
+	return g.StructuresAndBuildings
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) GetOther() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Other
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetFullExpensing sets the FullExpensing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) SetFullExpensing(fullExpensing *string) {
+	g.FullExpensing = fullExpensing
+	g.require(gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldFullExpensing)
+}
+
+// SetAnnualInvestmentAllowance sets the AnnualInvestmentAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) SetAnnualInvestmentAllowance(annualInvestmentAllowance *string) {
+	g.AnnualInvestmentAllowance = annualInvestmentAllowance
+	g.require(gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldAnnualInvestmentAllowance)
+}
+
+// SetSpecialRatePool sets the SpecialRatePool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) SetSpecialRatePool(specialRatePool *string) {
+	g.SpecialRatePool = specialRatePool
+	g.require(gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldSpecialRatePool)
+}
+
+// SetMainPool sets the MainPool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) SetMainPool(mainPool *string) {
+	g.MainPool = mainPool
+	g.require(gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldMainPool)
+}
+
+// SetStructuresAndBuildings sets the StructuresAndBuildings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) SetStructuresAndBuildings(structuresAndBuildings *string) {
+	g.StructuresAndBuildings = structuresAndBuildings
+	g.require(gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldStructuresAndBuildings)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) SetOther(other *string) {
+	g.Other = other
+	g.require(gbReturnFactsSetDeclarationsRequestFactsCapitalAllowancesFieldOther)
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsSetDeclarationsRequestFactsCapitalAllowances) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsSetDeclarationsResponseFieldYear  = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsResponseFieldFacts = big.NewInt(1 << 1)
+)
+
+type GbReturnFactsSetDeclarationsResponse struct {
+	Year  int64                                      `json:"year" url:"year"`
+	Facts *GbReturnFactsSetDeclarationsResponseFacts `json:"facts" url:"facts"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsSetDeclarationsResponse) GetYear() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.Year
+}
+
+func (g *GbReturnFactsSetDeclarationsResponse) GetFacts() *GbReturnFactsSetDeclarationsResponseFacts {
+	if g == nil {
+		return nil
+	}
+	return g.Facts
+}
+
+func (g *GbReturnFactsSetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsSetDeclarationsResponse) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponse) SetYear(year int64) {
+	g.Year = year
+	g.require(gbReturnFactsSetDeclarationsResponseFieldYear)
+}
+
+// SetFacts sets the Facts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponse) SetFacts(facts *GbReturnFactsSetDeclarationsResponseFacts) {
+	g.Facts = facts
+	g.require(gbReturnFactsSetDeclarationsResponseFieldFacts)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponse) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsSetDeclarationsResponseFactsFieldCompanyType                 = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsResponseFactsFieldAssociatedCompanies         = big.NewInt(1 << 1)
+	gbReturnFactsSetDeclarationsResponseFactsFieldPartnerInFirm               = big.NewInt(1 << 2)
+	gbReturnFactsSetDeclarationsResponseFactsFieldSmallCompaniesRegime        = big.NewInt(1 << 3)
+	gbReturnFactsSetDeclarationsResponseFactsFieldAuditExemptionSection477    = big.NewInt(1 << 4)
+	gbReturnFactsSetDeclarationsResponseFactsFieldDepreciation                = big.NewInt(1 << 5)
+	gbReturnFactsSetDeclarationsResponseFactsFieldAmortisation                = big.NewInt(1 << 6)
+	gbReturnFactsSetDeclarationsResponseFactsFieldLossOrProfitOnSale          = big.NewInt(1 << 7)
+	gbReturnFactsSetDeclarationsResponseFactsFieldEntertaining                = big.NewInt(1 << 8)
+	gbReturnFactsSetDeclarationsResponseFactsFieldOtherAdditions              = big.NewInt(1 << 9)
+	gbReturnFactsSetDeclarationsResponseFactsFieldNonTradingLoanCredits       = big.NewInt(1 << 10)
+	gbReturnFactsSetDeclarationsResponseFactsFieldNonTradingLoanDebits        = big.NewInt(1 << 11)
+	gbReturnFactsSetDeclarationsResponseFactsFieldNonTaxableIncome            = big.NewInt(1 << 12)
+	gbReturnFactsSetDeclarationsResponseFactsFieldExemptDistributions         = big.NewInt(1 << 13)
+	gbReturnFactsSetDeclarationsResponseFactsFieldCapitalAllowances           = big.NewInt(1 << 14)
+	gbReturnFactsSetDeclarationsResponseFactsFieldBalancingCharges            = big.NewInt(1 << 15)
+	gbReturnFactsSetDeclarationsResponseFactsFieldTradingLossesBroughtForward = big.NewInt(1 << 16)
+	gbReturnFactsSetDeclarationsResponseFactsFieldGrossChargeableGains        = big.NewInt(1 << 17)
+	gbReturnFactsSetDeclarationsResponseFactsFieldAllowableLosses             = big.NewInt(1 << 18)
+	gbReturnFactsSetDeclarationsResponseFactsFieldQualifyingDonations         = big.NewInt(1 << 19)
+	gbReturnFactsSetDeclarationsResponseFactsFieldTaxAlreadyPaid              = big.NewInt(1 << 20)
+	gbReturnFactsSetDeclarationsResponseFactsFieldDeclarantName               = big.NewInt(1 << 21)
+	gbReturnFactsSetDeclarationsResponseFactsFieldDeclarantStatus             = big.NewInt(1 << 22)
+	gbReturnFactsSetDeclarationsResponseFactsFieldSeniorStatutoryAuditor      = big.NewInt(1 << 23)
+)
+
+type GbReturnFactsSetDeclarationsResponseFacts struct {
+	CompanyType                 *int64                                                      `json:"companyType,omitempty" url:"companyType,omitempty"`
+	AssociatedCompanies         *int64                                                      `json:"associatedCompanies,omitempty" url:"associatedCompanies,omitempty"`
+	PartnerInFirm               *bool                                                       `json:"partnerInFirm,omitempty" url:"partnerInFirm,omitempty"`
+	SmallCompaniesRegime        *bool                                                       `json:"smallCompaniesRegime,omitempty" url:"smallCompaniesRegime,omitempty"`
+	AuditExemptionSection477    *bool                                                       `json:"auditExemptionSection477,omitempty" url:"auditExemptionSection477,omitempty"`
+	Depreciation                *string                                                     `json:"depreciation,omitempty" url:"depreciation,omitempty"`
+	Amortisation                *string                                                     `json:"amortisation,omitempty" url:"amortisation,omitempty"`
+	LossOrProfitOnSale          *string                                                     `json:"lossOrProfitOnSale,omitempty" url:"lossOrProfitOnSale,omitempty"`
+	Entertaining                *string                                                     `json:"entertaining,omitempty" url:"entertaining,omitempty"`
+	OtherAdditions              *string                                                     `json:"otherAdditions,omitempty" url:"otherAdditions,omitempty"`
+	NonTradingLoanCredits       *string                                                     `json:"nonTradingLoanCredits,omitempty" url:"nonTradingLoanCredits,omitempty"`
+	NonTradingLoanDebits        *string                                                     `json:"nonTradingLoanDebits,omitempty" url:"nonTradingLoanDebits,omitempty"`
+	NonTaxableIncome            *string                                                     `json:"nonTaxableIncome,omitempty" url:"nonTaxableIncome,omitempty"`
+	ExemptDistributions         *string                                                     `json:"exemptDistributions,omitempty" url:"exemptDistributions,omitempty"`
+	CapitalAllowances           *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances `json:"capitalAllowances,omitempty" url:"capitalAllowances,omitempty"`
+	BalancingCharges            *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges  `json:"balancingCharges,omitempty" url:"balancingCharges,omitempty"`
+	TradingLossesBroughtForward *string                                                     `json:"tradingLossesBroughtForward,omitempty" url:"tradingLossesBroughtForward,omitempty"`
+	GrossChargeableGains        *string                                                     `json:"grossChargeableGains,omitempty" url:"grossChargeableGains,omitempty"`
+	AllowableLosses             *string                                                     `json:"allowableLosses,omitempty" url:"allowableLosses,omitempty"`
+	QualifyingDonations         *string                                                     `json:"qualifyingDonations,omitempty" url:"qualifyingDonations,omitempty"`
+	TaxAlreadyPaid              *string                                                     `json:"taxAlreadyPaid,omitempty" url:"taxAlreadyPaid,omitempty"`
+	DeclarantName               *string                                                     `json:"declarantName,omitempty" url:"declarantName,omitempty"`
+	DeclarantStatus             *string                                                     `json:"declarantStatus,omitempty" url:"declarantStatus,omitempty"`
+	SeniorStatutoryAuditor      *string                                                     `json:"seniorStatutoryAuditor,omitempty" url:"seniorStatutoryAuditor,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetCompanyType() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.CompanyType
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetAssociatedCompanies() *int64 {
+	if g == nil {
+		return nil
+	}
+	return g.AssociatedCompanies
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetPartnerInFirm() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.PartnerInFirm
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetSmallCompaniesRegime() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.SmallCompaniesRegime
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetAuditExemptionSection477() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.AuditExemptionSection477
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetDepreciation() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Depreciation
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetAmortisation() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Amortisation
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetLossOrProfitOnSale() *string {
+	if g == nil {
+		return nil
+	}
+	return g.LossOrProfitOnSale
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetEntertaining() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Entertaining
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetOtherAdditions() *string {
+	if g == nil {
+		return nil
+	}
+	return g.OtherAdditions
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetNonTradingLoanCredits() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTradingLoanCredits
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetNonTradingLoanDebits() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTradingLoanDebits
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetNonTaxableIncome() *string {
+	if g == nil {
+		return nil
+	}
+	return g.NonTaxableIncome
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetExemptDistributions() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ExemptDistributions
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetCapitalAllowances() *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances {
+	if g == nil {
+		return nil
+	}
+	return g.CapitalAllowances
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetBalancingCharges() *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges {
+	if g == nil {
+		return nil
+	}
+	return g.BalancingCharges
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetTradingLossesBroughtForward() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TradingLossesBroughtForward
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetGrossChargeableGains() *string {
+	if g == nil {
+		return nil
+	}
+	return g.GrossChargeableGains
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetAllowableLosses() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AllowableLosses
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetQualifyingDonations() *string {
+	if g == nil {
+		return nil
+	}
+	return g.QualifyingDonations
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetTaxAlreadyPaid() *string {
+	if g == nil {
+		return nil
+	}
+	return g.TaxAlreadyPaid
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetDeclarantName() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DeclarantName
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetDeclarantStatus() *string {
+	if g == nil {
+		return nil
+	}
+	return g.DeclarantStatus
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetSeniorStatutoryAuditor() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SeniorStatutoryAuditor
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetCompanyType sets the CompanyType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetCompanyType(companyType *int64) {
+	g.CompanyType = companyType
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldCompanyType)
+}
+
+// SetAssociatedCompanies sets the AssociatedCompanies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetAssociatedCompanies(associatedCompanies *int64) {
+	g.AssociatedCompanies = associatedCompanies
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldAssociatedCompanies)
+}
+
+// SetPartnerInFirm sets the PartnerInFirm field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetPartnerInFirm(partnerInFirm *bool) {
+	g.PartnerInFirm = partnerInFirm
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldPartnerInFirm)
+}
+
+// SetSmallCompaniesRegime sets the SmallCompaniesRegime field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetSmallCompaniesRegime(smallCompaniesRegime *bool) {
+	g.SmallCompaniesRegime = smallCompaniesRegime
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldSmallCompaniesRegime)
+}
+
+// SetAuditExemptionSection477 sets the AuditExemptionSection477 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetAuditExemptionSection477(auditExemptionSection477 *bool) {
+	g.AuditExemptionSection477 = auditExemptionSection477
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldAuditExemptionSection477)
+}
+
+// SetDepreciation sets the Depreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetDepreciation(depreciation *string) {
+	g.Depreciation = depreciation
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldDepreciation)
+}
+
+// SetAmortisation sets the Amortisation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetAmortisation(amortisation *string) {
+	g.Amortisation = amortisation
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldAmortisation)
+}
+
+// SetLossOrProfitOnSale sets the LossOrProfitOnSale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetLossOrProfitOnSale(lossOrProfitOnSale *string) {
+	g.LossOrProfitOnSale = lossOrProfitOnSale
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldLossOrProfitOnSale)
+}
+
+// SetEntertaining sets the Entertaining field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetEntertaining(entertaining *string) {
+	g.Entertaining = entertaining
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldEntertaining)
+}
+
+// SetOtherAdditions sets the OtherAdditions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetOtherAdditions(otherAdditions *string) {
+	g.OtherAdditions = otherAdditions
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldOtherAdditions)
+}
+
+// SetNonTradingLoanCredits sets the NonTradingLoanCredits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetNonTradingLoanCredits(nonTradingLoanCredits *string) {
+	g.NonTradingLoanCredits = nonTradingLoanCredits
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldNonTradingLoanCredits)
+}
+
+// SetNonTradingLoanDebits sets the NonTradingLoanDebits field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetNonTradingLoanDebits(nonTradingLoanDebits *string) {
+	g.NonTradingLoanDebits = nonTradingLoanDebits
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldNonTradingLoanDebits)
+}
+
+// SetNonTaxableIncome sets the NonTaxableIncome field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetNonTaxableIncome(nonTaxableIncome *string) {
+	g.NonTaxableIncome = nonTaxableIncome
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldNonTaxableIncome)
+}
+
+// SetExemptDistributions sets the ExemptDistributions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetExemptDistributions(exemptDistributions *string) {
+	g.ExemptDistributions = exemptDistributions
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldExemptDistributions)
+}
+
+// SetCapitalAllowances sets the CapitalAllowances field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetCapitalAllowances(capitalAllowances *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) {
+	g.CapitalAllowances = capitalAllowances
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldCapitalAllowances)
+}
+
+// SetBalancingCharges sets the BalancingCharges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetBalancingCharges(balancingCharges *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) {
+	g.BalancingCharges = balancingCharges
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldBalancingCharges)
+}
+
+// SetTradingLossesBroughtForward sets the TradingLossesBroughtForward field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetTradingLossesBroughtForward(tradingLossesBroughtForward *string) {
+	g.TradingLossesBroughtForward = tradingLossesBroughtForward
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldTradingLossesBroughtForward)
+}
+
+// SetGrossChargeableGains sets the GrossChargeableGains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetGrossChargeableGains(grossChargeableGains *string) {
+	g.GrossChargeableGains = grossChargeableGains
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldGrossChargeableGains)
+}
+
+// SetAllowableLosses sets the AllowableLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetAllowableLosses(allowableLosses *string) {
+	g.AllowableLosses = allowableLosses
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldAllowableLosses)
+}
+
+// SetQualifyingDonations sets the QualifyingDonations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetQualifyingDonations(qualifyingDonations *string) {
+	g.QualifyingDonations = qualifyingDonations
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldQualifyingDonations)
+}
+
+// SetTaxAlreadyPaid sets the TaxAlreadyPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetTaxAlreadyPaid(taxAlreadyPaid *string) {
+	g.TaxAlreadyPaid = taxAlreadyPaid
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldTaxAlreadyPaid)
+}
+
+// SetDeclarantName sets the DeclarantName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetDeclarantName(declarantName *string) {
+	g.DeclarantName = declarantName
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldDeclarantName)
+}
+
+// SetDeclarantStatus sets the DeclarantStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetDeclarantStatus(declarantStatus *string) {
+	g.DeclarantStatus = declarantStatus
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldDeclarantStatus)
+}
+
+// SetSeniorStatutoryAuditor sets the SeniorStatutoryAuditor field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFacts) SetSeniorStatutoryAuditor(seniorStatutoryAuditor *string) {
+	g.SeniorStatutoryAuditor = seniorStatutoryAuditor
+	g.require(gbReturnFactsSetDeclarationsResponseFactsFieldSeniorStatutoryAuditor)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsResponseFacts
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsResponseFacts(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsResponseFacts
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFacts) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldFullExpensing   = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldSpecialRatePool = big.NewInt(1 << 1)
+	gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldMainPool        = big.NewInt(1 << 2)
+	gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldOther           = big.NewInt(1 << 3)
+)
+
+type GbReturnFactsSetDeclarationsResponseFactsBalancingCharges struct {
+	FullExpensing   *string `json:"fullExpensing,omitempty" url:"fullExpensing,omitempty"`
+	SpecialRatePool *string `json:"specialRatePool,omitempty" url:"specialRatePool,omitempty"`
+	MainPool        *string `json:"mainPool,omitempty" url:"mainPool,omitempty"`
+	Other           *string `json:"other,omitempty" url:"other,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) GetFullExpensing() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FullExpensing
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) GetSpecialRatePool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SpecialRatePool
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) GetMainPool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.MainPool
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) GetOther() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Other
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetFullExpensing sets the FullExpensing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) SetFullExpensing(fullExpensing *string) {
+	g.FullExpensing = fullExpensing
+	g.require(gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldFullExpensing)
+}
+
+// SetSpecialRatePool sets the SpecialRatePool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) SetSpecialRatePool(specialRatePool *string) {
+	g.SpecialRatePool = specialRatePool
+	g.require(gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldSpecialRatePool)
+}
+
+// SetMainPool sets the MainPool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) SetMainPool(mainPool *string) {
+	g.MainPool = mainPool
+	g.require(gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldMainPool)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) SetOther(other *string) {
+	g.Other = other
+	g.require(gbReturnFactsSetDeclarationsResponseFactsBalancingChargesFieldOther)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsResponseFactsBalancingCharges
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsResponseFactsBalancingCharges(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsResponseFactsBalancingCharges
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsBalancingCharges) String() string {
+	if g == nil {
+		return "<nil>"
+	}
+	if len(g.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(g.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(g); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", g)
+}
+
+var (
+	gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldFullExpensing             = big.NewInt(1 << 0)
+	gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldAnnualInvestmentAllowance = big.NewInt(1 << 1)
+	gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldSpecialRatePool           = big.NewInt(1 << 2)
+	gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldMainPool                  = big.NewInt(1 << 3)
+	gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldStructuresAndBuildings    = big.NewInt(1 << 4)
+	gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldOther                     = big.NewInt(1 << 5)
+)
+
+type GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances struct {
+	FullExpensing             *string `json:"fullExpensing,omitempty" url:"fullExpensing,omitempty"`
+	AnnualInvestmentAllowance *string `json:"annualInvestmentAllowance,omitempty" url:"annualInvestmentAllowance,omitempty"`
+	SpecialRatePool           *string `json:"specialRatePool,omitempty" url:"specialRatePool,omitempty"`
+	MainPool                  *string `json:"mainPool,omitempty" url:"mainPool,omitempty"`
+	StructuresAndBuildings    *string `json:"structuresAndBuildings,omitempty" url:"structuresAndBuildings,omitempty"`
+	Other                     *string `json:"other,omitempty" url:"other,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) GetFullExpensing() *string {
+	if g == nil {
+		return nil
+	}
+	return g.FullExpensing
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) GetAnnualInvestmentAllowance() *string {
+	if g == nil {
+		return nil
+	}
+	return g.AnnualInvestmentAllowance
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) GetSpecialRatePool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.SpecialRatePool
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) GetMainPool() *string {
+	if g == nil {
+		return nil
+	}
+	return g.MainPool
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) GetStructuresAndBuildings() *string {
+	if g == nil {
+		return nil
+	}
+	return g.StructuresAndBuildings
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) GetOther() *string {
+	if g == nil {
+		return nil
+	}
+	return g.Other
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) GetExtraProperties() map[string]interface{} {
+	if g == nil {
+		return nil
+	}
+	return g.extraProperties
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) require(field *big.Int) {
+	if g.explicitFields == nil {
+		g.explicitFields = big.NewInt(0)
+	}
+	g.explicitFields.Or(g.explicitFields, field)
+}
+
+// SetFullExpensing sets the FullExpensing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) SetFullExpensing(fullExpensing *string) {
+	g.FullExpensing = fullExpensing
+	g.require(gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldFullExpensing)
+}
+
+// SetAnnualInvestmentAllowance sets the AnnualInvestmentAllowance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) SetAnnualInvestmentAllowance(annualInvestmentAllowance *string) {
+	g.AnnualInvestmentAllowance = annualInvestmentAllowance
+	g.require(gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldAnnualInvestmentAllowance)
+}
+
+// SetSpecialRatePool sets the SpecialRatePool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) SetSpecialRatePool(specialRatePool *string) {
+	g.SpecialRatePool = specialRatePool
+	g.require(gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldSpecialRatePool)
+}
+
+// SetMainPool sets the MainPool field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) SetMainPool(mainPool *string) {
+	g.MainPool = mainPool
+	g.require(gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldMainPool)
+}
+
+// SetStructuresAndBuildings sets the StructuresAndBuildings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) SetStructuresAndBuildings(structuresAndBuildings *string) {
+	g.StructuresAndBuildings = structuresAndBuildings
+	g.require(gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldStructuresAndBuildings)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) SetOther(other *string) {
+	g.Other = other
+	g.require(gbReturnFactsSetDeclarationsResponseFactsCapitalAllowancesFieldOther)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) UnmarshalJSON(data []byte) error {
+	type unmarshaler GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*g = GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *g)
+	if err != nil {
+		return err
+	}
+	g.extraProperties = extraProperties
+	g.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) MarshalJSON() ([]byte, error) {
+	type embed GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*g),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, g.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (g *GbReturnFactsSetDeclarationsResponseFactsCapitalAllowances) String() string {
 	if g == nil {
 		return "<nil>"
 	}
@@ -58310,6 +72504,488 @@ func (t TaxPaymentsUpdateDeclarationsResponseKind) Ptr() *TaxPaymentsUpdateDecla
 }
 
 var (
+	us1099NecListDeclarationsResponseFieldYear      = big.NewInt(1 << 0)
+	us1099NecListDeclarationsResponseFieldThreshold = big.NewInt(1 << 1)
+	us1099NecListDeclarationsResponseFieldForms     = big.NewInt(1 << 2)
+	us1099NecListDeclarationsResponseFieldExcluded  = big.NewInt(1 << 3)
+	us1099NecListDeclarationsResponseFieldWarnings  = big.NewInt(1 << 4)
+)
+
+type Us1099NecListDeclarationsResponse struct {
+	Year      float64                                          `json:"year" url:"year"`
+	Threshold string                                           `json:"threshold" url:"threshold"`
+	Forms     []*Us1099NecListDeclarationsResponseFormsItem    `json:"forms" url:"forms"`
+	Excluded  []*Us1099NecListDeclarationsResponseExcludedItem `json:"excluded" url:"excluded"`
+	Warnings  []string                                         `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *Us1099NecListDeclarationsResponse) GetYear() float64 {
+	if u == nil {
+		return 0
+	}
+	return u.Year
+}
+
+func (u *Us1099NecListDeclarationsResponse) GetThreshold() string {
+	if u == nil {
+		return ""
+	}
+	return u.Threshold
+}
+
+func (u *Us1099NecListDeclarationsResponse) GetForms() []*Us1099NecListDeclarationsResponseFormsItem {
+	if u == nil {
+		return nil
+	}
+	return u.Forms
+}
+
+func (u *Us1099NecListDeclarationsResponse) GetExcluded() []*Us1099NecListDeclarationsResponseExcludedItem {
+	if u == nil {
+		return nil
+	}
+	return u.Excluded
+}
+
+func (u *Us1099NecListDeclarationsResponse) GetWarnings() []string {
+	if u == nil {
+		return nil
+	}
+	return u.Warnings
+}
+
+func (u *Us1099NecListDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *Us1099NecListDeclarationsResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponse) SetYear(year float64) {
+	u.Year = year
+	u.require(us1099NecListDeclarationsResponseFieldYear)
+}
+
+// SetThreshold sets the Threshold field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponse) SetThreshold(threshold string) {
+	u.Threshold = threshold
+	u.require(us1099NecListDeclarationsResponseFieldThreshold)
+}
+
+// SetForms sets the Forms field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponse) SetForms(forms []*Us1099NecListDeclarationsResponseFormsItem) {
+	u.Forms = forms
+	u.require(us1099NecListDeclarationsResponseFieldForms)
+}
+
+// SetExcluded sets the Excluded field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponse) SetExcluded(excluded []*Us1099NecListDeclarationsResponseExcludedItem) {
+	u.Excluded = excluded
+	u.require(us1099NecListDeclarationsResponseFieldExcluded)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponse) SetWarnings(warnings []string) {
+	u.Warnings = warnings
+	u.require(us1099NecListDeclarationsResponseFieldWarnings)
+}
+
+func (u *Us1099NecListDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler Us1099NecListDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = Us1099NecListDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *Us1099NecListDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed Us1099NecListDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *Us1099NecListDeclarationsResponse) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	us1099NecListDeclarationsResponseExcludedItemFieldPartnerID = big.NewInt(1 << 0)
+	us1099NecListDeclarationsResponseExcludedItemFieldName      = big.NewInt(1 << 1)
+	us1099NecListDeclarationsResponseExcludedItemFieldPaid      = big.NewInt(1 << 2)
+	us1099NecListDeclarationsResponseExcludedItemFieldReason    = big.NewInt(1 << 3)
+)
+
+type Us1099NecListDeclarationsResponseExcludedItem struct {
+	PartnerID string `json:"partnerId" url:"partnerId"`
+	Name      string `json:"name" url:"name"`
+	Paid      string `json:"paid" url:"paid"`
+	Reason    string `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) GetPartnerID() string {
+	if u == nil {
+		return ""
+	}
+	return u.PartnerID
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) GetName() string {
+	if u == nil {
+		return ""
+	}
+	return u.Name
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) GetPaid() string {
+	if u == nil {
+		return ""
+	}
+	return u.Paid
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) GetReason() string {
+	if u == nil {
+		return ""
+	}
+	return u.Reason
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseExcludedItem) SetPartnerID(partnerID string) {
+	u.PartnerID = partnerID
+	u.require(us1099NecListDeclarationsResponseExcludedItemFieldPartnerID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseExcludedItem) SetName(name string) {
+	u.Name = name
+	u.require(us1099NecListDeclarationsResponseExcludedItemFieldName)
+}
+
+// SetPaid sets the Paid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseExcludedItem) SetPaid(paid string) {
+	u.Paid = paid
+	u.require(us1099NecListDeclarationsResponseExcludedItemFieldPaid)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseExcludedItem) SetReason(reason string) {
+	u.Reason = reason
+	u.require(us1099NecListDeclarationsResponseExcludedItemFieldReason)
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler Us1099NecListDeclarationsResponseExcludedItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = Us1099NecListDeclarationsResponseExcludedItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) MarshalJSON() ([]byte, error) {
+	type embed Us1099NecListDeclarationsResponseExcludedItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *Us1099NecListDeclarationsResponseExcludedItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	us1099NecListDeclarationsResponseFormsItemFieldPartnerID         = big.NewInt(1 << 0)
+	us1099NecListDeclarationsResponseFormsItemFieldName              = big.NewInt(1 << 1)
+	us1099NecListDeclarationsResponseFormsItemFieldNameType          = big.NewInt(1 << 2)
+	us1099NecListDeclarationsResponseFormsItemFieldTinType           = big.NewInt(1 << 3)
+	us1099NecListDeclarationsResponseFormsItemFieldTin               = big.NewInt(1 << 4)
+	us1099NecListDeclarationsResponseFormsItemFieldTaxClassification = big.NewInt(1 << 5)
+	us1099NecListDeclarationsResponseFormsItemFieldBox1              = big.NewInt(1 << 6)
+)
+
+type Us1099NecListDeclarationsResponseFormsItem struct {
+	PartnerID         string                                             `json:"partnerId" url:"partnerId"`
+	Name              string                                             `json:"name" url:"name"`
+	NameType          Us1099NecListDeclarationsResponseFormsItemNameType `json:"nameType" url:"nameType"`
+	TinType           *string                                            `json:"tinType,omitempty" url:"tinType,omitempty"`
+	Tin               *string                                            `json:"tin,omitempty" url:"tin,omitempty"`
+	TaxClassification *string                                            `json:"taxClassification,omitempty" url:"taxClassification,omitempty"`
+	Box1              string                                             `json:"box1" url:"box1"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetPartnerID() string {
+	if u == nil {
+		return ""
+	}
+	return u.PartnerID
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetName() string {
+	if u == nil {
+		return ""
+	}
+	return u.Name
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetNameType() Us1099NecListDeclarationsResponseFormsItemNameType {
+	if u == nil {
+		return ""
+	}
+	return u.NameType
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetTinType() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TinType
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetTin() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Tin
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetTaxClassification() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TaxClassification
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetBox1() string {
+	if u == nil {
+		return ""
+	}
+	return u.Box1
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseFormsItem) SetPartnerID(partnerID string) {
+	u.PartnerID = partnerID
+	u.require(us1099NecListDeclarationsResponseFormsItemFieldPartnerID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseFormsItem) SetName(name string) {
+	u.Name = name
+	u.require(us1099NecListDeclarationsResponseFormsItemFieldName)
+}
+
+// SetNameType sets the NameType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseFormsItem) SetNameType(nameType Us1099NecListDeclarationsResponseFormsItemNameType) {
+	u.NameType = nameType
+	u.require(us1099NecListDeclarationsResponseFormsItemFieldNameType)
+}
+
+// SetTinType sets the TinType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseFormsItem) SetTinType(tinType *string) {
+	u.TinType = tinType
+	u.require(us1099NecListDeclarationsResponseFormsItemFieldTinType)
+}
+
+// SetTin sets the Tin field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseFormsItem) SetTin(tin *string) {
+	u.Tin = tin
+	u.require(us1099NecListDeclarationsResponseFormsItemFieldTin)
+}
+
+// SetTaxClassification sets the TaxClassification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseFormsItem) SetTaxClassification(taxClassification *string) {
+	u.TaxClassification = taxClassification
+	u.require(us1099NecListDeclarationsResponseFormsItemFieldTaxClassification)
+}
+
+// SetBox1 sets the Box1 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsResponseFormsItem) SetBox1(box1 string) {
+	u.Box1 = box1
+	u.require(us1099NecListDeclarationsResponseFormsItemFieldBox1)
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler Us1099NecListDeclarationsResponseFormsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = Us1099NecListDeclarationsResponseFormsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) MarshalJSON() ([]byte, error) {
+	type embed Us1099NecListDeclarationsResponseFormsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *Us1099NecListDeclarationsResponseFormsItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+type Us1099NecListDeclarationsResponseFormsItemNameType string
+
+const (
+	Us1099NecListDeclarationsResponseFormsItemNameTypeB Us1099NecListDeclarationsResponseFormsItemNameType = "B"
+	Us1099NecListDeclarationsResponseFormsItemNameTypeI Us1099NecListDeclarationsResponseFormsItemNameType = "I"
+)
+
+func NewUs1099NecListDeclarationsResponseFormsItemNameTypeFromString(s string) (Us1099NecListDeclarationsResponseFormsItemNameType, error) {
+	switch s {
+	case "B":
+		return Us1099NecListDeclarationsResponseFormsItemNameTypeB, nil
+	case "I":
+		return Us1099NecListDeclarationsResponseFormsItemNameTypeI, nil
+	}
+	var t Us1099NecListDeclarationsResponseFormsItemNameType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u Us1099NecListDeclarationsResponseFormsItemNameType) Ptr() *Us1099NecListDeclarationsResponseFormsItemNameType {
+	return &u
+}
+
+var (
 	us940GetDeclarationsResponseFieldYear   = big.NewInt(1 << 0)
 	us940GetDeclarationsResponseFieldLine1A = big.NewInt(1 << 1)
 	us940GetDeclarationsResponseFieldLine1B = big.NewInt(1 << 2)
@@ -60258,6 +74934,10 @@ var (
 	usDeUnemploymentGetDeclarationsResponseFieldTaxableWages  = big.NewInt(1 << 4)
 	usDeUnemploymentGetDeclarationsResponseFieldContributions = big.NewInt(1 << 5)
 	usDeUnemploymentGetDeclarationsResponseFieldEmployees     = big.NewInt(1 << 6)
+	usDeUnemploymentGetDeclarationsResponseFieldUc8           = big.NewInt(1 << 7)
+	usDeUnemploymentGetDeclarationsResponseFieldUc8A          = big.NewInt(1 << 8)
+	usDeUnemploymentGetDeclarationsResponseFieldWarnings      = big.NewInt(1 << 9)
+	usDeUnemploymentGetDeclarationsResponseFieldSource        = big.NewInt(1 << 10)
 )
 
 type UsDeUnemploymentGetDeclarationsResponse struct {
@@ -60268,6 +74948,10 @@ type UsDeUnemploymentGetDeclarationsResponse struct {
 	TaxableWages  string                                                  `json:"taxableWages" url:"taxableWages"`
 	Contributions string                                                  `json:"contributions" url:"contributions"`
 	Employees     []*UsDeUnemploymentGetDeclarationsResponseEmployeesItem `json:"employees" url:"employees"`
+	Uc8           *UsDeUnemploymentGetDeclarationsResponseUc8             `json:"uc8" url:"uc8"`
+	Uc8A          *UsDeUnemploymentGetDeclarationsResponseUc8A            `json:"uc8a" url:"uc8a"`
+	Warnings      []string                                                `json:"warnings" url:"warnings"`
+	Source        string                                                  `json:"source" url:"source"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -60323,6 +75007,34 @@ func (u *UsDeUnemploymentGetDeclarationsResponse) GetEmployees() []*UsDeUnemploy
 		return nil
 	}
 	return u.Employees
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponse) GetUc8() *UsDeUnemploymentGetDeclarationsResponseUc8 {
+	if u == nil {
+		return nil
+	}
+	return u.Uc8
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponse) GetUc8A() *UsDeUnemploymentGetDeclarationsResponseUc8A {
+	if u == nil {
+		return nil
+	}
+	return u.Uc8A
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponse) GetWarnings() []string {
+	if u == nil {
+		return nil
+	}
+	return u.Warnings
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponse) GetSource() string {
+	if u == nil {
+		return ""
+	}
+	return u.Source
 }
 
 func (u *UsDeUnemploymentGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
@@ -60386,6 +75098,34 @@ func (u *UsDeUnemploymentGetDeclarationsResponse) SetContributions(contributions
 func (u *UsDeUnemploymentGetDeclarationsResponse) SetEmployees(employees []*UsDeUnemploymentGetDeclarationsResponseEmployeesItem) {
 	u.Employees = employees
 	u.require(usDeUnemploymentGetDeclarationsResponseFieldEmployees)
+}
+
+// SetUc8 sets the Uc8 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponse) SetUc8(uc8 *UsDeUnemploymentGetDeclarationsResponseUc8) {
+	u.Uc8 = uc8
+	u.require(usDeUnemploymentGetDeclarationsResponseFieldUc8)
+}
+
+// SetUc8A sets the Uc8A field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponse) SetUc8A(uc8A *UsDeUnemploymentGetDeclarationsResponseUc8A) {
+	u.Uc8A = uc8A
+	u.require(usDeUnemploymentGetDeclarationsResponseFieldUc8A)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponse) SetWarnings(warnings []string) {
+	u.Warnings = warnings
+	u.require(usDeUnemploymentGetDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponse) SetSource(source string) {
+	u.Source = source
+	u.require(usDeUnemploymentGetDeclarationsResponseFieldSource)
 }
 
 func (u *UsDeUnemploymentGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
@@ -60579,19 +75319,693 @@ func (u *UsDeUnemploymentGetDeclarationsResponseEmployeesItem) String() string {
 }
 
 var (
+	usDeUnemploymentGetDeclarationsResponseUc8FieldReportingPeriod = big.NewInt(1 << 0)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldAccountNo       = big.NewInt(1 << 1)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldFederalIDNumber = big.NewInt(1 << 2)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldTaxRate         = big.NewInt(1 << 3)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine1           = big.NewInt(1 << 4)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine2           = big.NewInt(1 << 5)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine3           = big.NewInt(1 << 6)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine4           = big.NewInt(1 << 7)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine5           = big.NewInt(1 << 8)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine6           = big.NewInt(1 << 9)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine7           = big.NewInt(1 << 10)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine8           = big.NewInt(1 << 11)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine9           = big.NewInt(1 << 12)
+	usDeUnemploymentGetDeclarationsResponseUc8FieldLine10          = big.NewInt(1 << 13)
+)
+
+type UsDeUnemploymentGetDeclarationsResponseUc8 struct {
+	ReportingPeriod string    `json:"reportingPeriod" url:"reportingPeriod"`
+	AccountNo       *string   `json:"accountNo,omitempty" url:"accountNo,omitempty"`
+	FederalIDNumber *string   `json:"federalIdNumber,omitempty" url:"federalIdNumber,omitempty"`
+	TaxRate         *string   `json:"taxRate,omitempty" url:"taxRate,omitempty"`
+	Line1           []float64 `json:"line1" url:"line1"`
+	Line2           string    `json:"line2" url:"line2"`
+	Line3           string    `json:"line3" url:"line3"`
+	Line4           string    `json:"line4" url:"line4"`
+	Line5           string    `json:"line5" url:"line5"`
+	Line6           *string   `json:"line6,omitempty" url:"line6,omitempty"`
+	Line7           string    `json:"line7" url:"line7"`
+	Line8           *string   `json:"line8,omitempty" url:"line8,omitempty"`
+	Line9           *string   `json:"line9,omitempty" url:"line9,omitempty"`
+	Line10          string    `json:"line10" url:"line10"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetReportingPeriod() string {
+	if u == nil {
+		return ""
+	}
+	return u.ReportingPeriod
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetAccountNo() *string {
+	if u == nil {
+		return nil
+	}
+	return u.AccountNo
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetFederalIDNumber() *string {
+	if u == nil {
+		return nil
+	}
+	return u.FederalIDNumber
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetTaxRate() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TaxRate
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine1() []float64 {
+	if u == nil {
+		return nil
+	}
+	return u.Line1
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine2() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line2
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine3() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line3
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine4() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line4
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine5() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line5
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine6() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Line6
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine7() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line7
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine8() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Line8
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine9() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Line9
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetLine10() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line10
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetReportingPeriod sets the ReportingPeriod field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetReportingPeriod(reportingPeriod string) {
+	u.ReportingPeriod = reportingPeriod
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldReportingPeriod)
+}
+
+// SetAccountNo sets the AccountNo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetAccountNo(accountNo *string) {
+	u.AccountNo = accountNo
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldAccountNo)
+}
+
+// SetFederalIDNumber sets the FederalIDNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetFederalIDNumber(federalIDNumber *string) {
+	u.FederalIDNumber = federalIDNumber
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldFederalIDNumber)
+}
+
+// SetTaxRate sets the TaxRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetTaxRate(taxRate *string) {
+	u.TaxRate = taxRate
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldTaxRate)
+}
+
+// SetLine1 sets the Line1 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine1(line1 []float64) {
+	u.Line1 = line1
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine1)
+}
+
+// SetLine2 sets the Line2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine2(line2 string) {
+	u.Line2 = line2
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine2)
+}
+
+// SetLine3 sets the Line3 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine3(line3 string) {
+	u.Line3 = line3
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine3)
+}
+
+// SetLine4 sets the Line4 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine4(line4 string) {
+	u.Line4 = line4
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine4)
+}
+
+// SetLine5 sets the Line5 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine5(line5 string) {
+	u.Line5 = line5
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine5)
+}
+
+// SetLine6 sets the Line6 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine6(line6 *string) {
+	u.Line6 = line6
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine6)
+}
+
+// SetLine7 sets the Line7 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine7(line7 string) {
+	u.Line7 = line7
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine7)
+}
+
+// SetLine8 sets the Line8 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine8(line8 *string) {
+	u.Line8 = line8
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine8)
+}
+
+// SetLine9 sets the Line9 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine9(line9 *string) {
+	u.Line9 = line9
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine9)
+}
+
+// SetLine10 sets the Line10 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) SetLine10(line10 string) {
+	u.Line10 = line10
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8FieldLine10)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeUnemploymentGetDeclarationsResponseUc8
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsDeUnemploymentGetDeclarationsResponseUc8(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) MarshalJSON() ([]byte, error) {
+	type embed UsDeUnemploymentGetDeclarationsResponseUc8
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usDeUnemploymentGetDeclarationsResponseUc8AFieldPages  = big.NewInt(1 << 0)
+	usDeUnemploymentGetDeclarationsResponseUc8AFieldLine32 = big.NewInt(1 << 1)
+	usDeUnemploymentGetDeclarationsResponseUc8AFieldLine33 = big.NewInt(1 << 2)
+)
+
+type UsDeUnemploymentGetDeclarationsResponseUc8A struct {
+	Pages  []*UsDeUnemploymentGetDeclarationsResponseUc8APagesItem `json:"pages" url:"pages"`
+	Line32 string                                                  `json:"line32" url:"line32"`
+	Line33 string                                                  `json:"line33" url:"line33"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) GetPages() []*UsDeUnemploymentGetDeclarationsResponseUc8APagesItem {
+	if u == nil {
+		return nil
+	}
+	return u.Pages
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) GetLine32() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line32
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) GetLine33() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line33
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetPages sets the Pages field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) SetPages(pages []*UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) {
+	u.Pages = pages
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8AFieldPages)
+}
+
+// SetLine32 sets the Line32 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) SetLine32(line32 string) {
+	u.Line32 = line32
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8AFieldLine32)
+}
+
+// SetLine33 sets the Line33 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) SetLine33(line33 string) {
+	u.Line33 = line33
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8AFieldLine33)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeUnemploymentGetDeclarationsResponseUc8A
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsDeUnemploymentGetDeclarationsResponseUc8A(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) MarshalJSON() ([]byte, error) {
+	type embed UsDeUnemploymentGetDeclarationsResponseUc8A
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8A) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemFieldRows   = big.NewInt(1 << 0)
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemFieldLine31 = big.NewInt(1 << 1)
+)
+
+type UsDeUnemploymentGetDeclarationsResponseUc8APagesItem struct {
+	Rows   []*UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem `json:"rows" url:"rows"`
+	Line31 string                                                          `json:"line31" url:"line31"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) GetRows() []*UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem {
+	if u == nil {
+		return nil
+	}
+	return u.Rows
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) GetLine31() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line31
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) SetRows(rows []*UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) {
+	u.Rows = rows
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemFieldRows)
+}
+
+// SetLine31 sets the Line31 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) SetLine31(line31 string) {
+	u.Line31 = line31
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemFieldLine31)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeUnemploymentGetDeclarationsResponseUc8APagesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsDeUnemploymentGetDeclarationsResponseUc8APagesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) MarshalJSON() ([]byte, error) {
+	type embed UsDeUnemploymentGetDeclarationsResponseUc8APagesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldLine                 = big.NewInt(1 << 0)
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldSocialSecurityNumber = big.NewInt(1 << 1)
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldFirstInitial         = big.NewInt(1 << 2)
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldMiddleInitial        = big.NewInt(1 << 3)
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldLastName             = big.NewInt(1 << 4)
+	usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldGrossCoveredWages    = big.NewInt(1 << 5)
+)
+
+type UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem struct {
+	Line                 float64 `json:"line" url:"line"`
+	SocialSecurityNumber *string `json:"socialSecurityNumber,omitempty" url:"socialSecurityNumber,omitempty"`
+	FirstInitial         string  `json:"firstInitial" url:"firstInitial"`
+	MiddleInitial        *string `json:"middleInitial,omitempty" url:"middleInitial,omitempty"`
+	LastName             string  `json:"lastName" url:"lastName"`
+	GrossCoveredWages    string  `json:"grossCoveredWages" url:"grossCoveredWages"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) GetLine() float64 {
+	if u == nil {
+		return 0
+	}
+	return u.Line
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) GetSocialSecurityNumber() *string {
+	if u == nil {
+		return nil
+	}
+	return u.SocialSecurityNumber
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) GetFirstInitial() string {
+	if u == nil {
+		return ""
+	}
+	return u.FirstInitial
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) GetMiddleInitial() *string {
+	if u == nil {
+		return nil
+	}
+	return u.MiddleInitial
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) GetLastName() string {
+	if u == nil {
+		return ""
+	}
+	return u.LastName
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) GetGrossCoveredWages() string {
+	if u == nil {
+		return ""
+	}
+	return u.GrossCoveredWages
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetLine sets the Line field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) SetLine(line float64) {
+	u.Line = line
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldLine)
+}
+
+// SetSocialSecurityNumber sets the SocialSecurityNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) SetSocialSecurityNumber(socialSecurityNumber *string) {
+	u.SocialSecurityNumber = socialSecurityNumber
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldSocialSecurityNumber)
+}
+
+// SetFirstInitial sets the FirstInitial field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) SetFirstInitial(firstInitial string) {
+	u.FirstInitial = firstInitial
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldFirstInitial)
+}
+
+// SetMiddleInitial sets the MiddleInitial field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) SetMiddleInitial(middleInitial *string) {
+	u.MiddleInitial = middleInitial
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldMiddleInitial)
+}
+
+// SetLastName sets the LastName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) SetLastName(lastName string) {
+	u.LastName = lastName
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldLastName)
+}
+
+// SetGrossCoveredWages sets the GrossCoveredWages field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) SetGrossCoveredWages(grossCoveredWages string) {
+	u.GrossCoveredWages = grossCoveredWages
+	u.require(usDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItemFieldGrossCoveredWages)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) MarshalJSON() ([]byte, error) {
+	type embed UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsDeUnemploymentGetDeclarationsResponseUc8APagesItemRowsItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
 	usDeWithholdingGetDeclarationsResponseFieldFrom        = big.NewInt(1 << 0)
 	usDeWithholdingGetDeclarationsResponseFieldTo          = big.NewInt(1 << 1)
 	usDeWithholdingGetDeclarationsResponseFieldEmployees   = big.NewInt(1 << 2)
 	usDeWithholdingGetDeclarationsResponseFieldWages       = big.NewInt(1 << 3)
 	usDeWithholdingGetDeclarationsResponseFieldTaxWithheld = big.NewInt(1 << 4)
+	usDeWithholdingGetDeclarationsResponseFieldWthTax      = big.NewInt(1 << 5)
 )
 
 type UsDeWithholdingGetDeclarationsResponse struct {
-	From        string  `json:"from" url:"from"`
-	To          string  `json:"to" url:"to"`
-	Employees   float64 `json:"employees" url:"employees"`
-	Wages       string  `json:"wages" url:"wages"`
-	TaxWithheld string  `json:"taxWithheld" url:"taxWithheld"`
+	From        string                                        `json:"from" url:"from"`
+	To          string                                        `json:"to" url:"to"`
+	Employees   float64                                       `json:"employees" url:"employees"`
+	Wages       string                                        `json:"wages" url:"wages"`
+	TaxWithheld string                                        `json:"taxWithheld" url:"taxWithheld"`
+	WthTax      *UsDeWithholdingGetDeclarationsResponseWthTax `json:"wthTax" url:"wthTax"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -60633,6 +76047,13 @@ func (u *UsDeWithholdingGetDeclarationsResponse) GetTaxWithheld() string {
 		return ""
 	}
 	return u.TaxWithheld
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponse) GetWthTax() *UsDeWithholdingGetDeclarationsResponseWthTax {
+	if u == nil {
+		return nil
+	}
+	return u.WthTax
 }
 
 func (u *UsDeWithholdingGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
@@ -60684,6 +76105,13 @@ func (u *UsDeWithholdingGetDeclarationsResponse) SetTaxWithheld(taxWithheld stri
 	u.require(usDeWithholdingGetDeclarationsResponseFieldTaxWithheld)
 }
 
+// SetWthTax sets the WthTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingGetDeclarationsResponse) SetWthTax(wthTax *UsDeWithholdingGetDeclarationsResponseWthTax) {
+	u.WthTax = wthTax
+	u.require(usDeWithholdingGetDeclarationsResponseFieldWthTax)
+}
+
 func (u *UsDeWithholdingGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
 	type unmarshaler UsDeWithholdingGetDeclarationsResponse
 	var value unmarshaler
@@ -60712,6 +76140,3061 @@ func (u *UsDeWithholdingGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (u *UsDeWithholdingGetDeclarationsResponse) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usDeWithholdingGetDeclarationsResponseWthTaxFieldTaxpayerID         = big.NewInt(1 << 0)
+	usDeWithholdingGetDeclarationsResponseWthTaxFieldTaxPeriodBeginning = big.NewInt(1 << 1)
+	usDeWithholdingGetDeclarationsResponseWthTaxFieldTaxPeriodEnding    = big.NewInt(1 << 2)
+	usDeWithholdingGetDeclarationsResponseWthTaxFieldLine1              = big.NewInt(1 << 3)
+	usDeWithholdingGetDeclarationsResponseWthTaxFieldLine2              = big.NewInt(1 << 4)
+)
+
+type UsDeWithholdingGetDeclarationsResponseWthTax struct {
+	TaxpayerID         *string `json:"taxpayerId,omitempty" url:"taxpayerId,omitempty"`
+	TaxPeriodBeginning string  `json:"taxPeriodBeginning" url:"taxPeriodBeginning"`
+	TaxPeriodEnding    string  `json:"taxPeriodEnding" url:"taxPeriodEnding"`
+	Line1              string  `json:"line1" url:"line1"`
+	Line2              string  `json:"line2" url:"line2"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) GetTaxpayerID() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TaxpayerID
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) GetTaxPeriodBeginning() string {
+	if u == nil {
+		return ""
+	}
+	return u.TaxPeriodBeginning
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) GetTaxPeriodEnding() string {
+	if u == nil {
+		return ""
+	}
+	return u.TaxPeriodEnding
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) GetLine1() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line1
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) GetLine2() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line2
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetTaxpayerID sets the TaxpayerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) SetTaxpayerID(taxpayerID *string) {
+	u.TaxpayerID = taxpayerID
+	u.require(usDeWithholdingGetDeclarationsResponseWthTaxFieldTaxpayerID)
+}
+
+// SetTaxPeriodBeginning sets the TaxPeriodBeginning field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) SetTaxPeriodBeginning(taxPeriodBeginning string) {
+	u.TaxPeriodBeginning = taxPeriodBeginning
+	u.require(usDeWithholdingGetDeclarationsResponseWthTaxFieldTaxPeriodBeginning)
+}
+
+// SetTaxPeriodEnding sets the TaxPeriodEnding field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) SetTaxPeriodEnding(taxPeriodEnding string) {
+	u.TaxPeriodEnding = taxPeriodEnding
+	u.require(usDeWithholdingGetDeclarationsResponseWthTaxFieldTaxPeriodEnding)
+}
+
+// SetLine1 sets the Line1 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) SetLine1(line1 string) {
+	u.Line1 = line1
+	u.require(usDeWithholdingGetDeclarationsResponseWthTaxFieldLine1)
+}
+
+// SetLine2 sets the Line2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) SetLine2(line2 string) {
+	u.Line2 = line2
+	u.require(usDeWithholdingGetDeclarationsResponseWthTaxFieldLine2)
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeWithholdingGetDeclarationsResponseWthTax
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsDeWithholdingGetDeclarationsResponseWthTax(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) MarshalJSON() ([]byte, error) {
+	type embed UsDeWithholdingGetDeclarationsResponseWthTax
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsDeWithholdingGetDeclarationsResponseWthTax) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldYear              = big.NewInt(1 << 0)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldTaxpayerID        = big.NewInt(1 << 1)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldTaxPeriodStarting = big.NewInt(1 << 2)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldTaxPeriodEnding   = big.NewInt(1 << 3)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldLine1             = big.NewInt(1 << 4)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldLine2             = big.NewInt(1 << 5)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldLine3             = big.NewInt(1 << 6)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldLine4             = big.NewInt(1 << 7)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldLine5A            = big.NewInt(1 << 8)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldLine5B            = big.NewInt(1 << 9)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldLine6             = big.NewInt(1 << 10)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldWorksheet         = big.NewInt(1 << 11)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldTotalTaxPaid      = big.NewInt(1 << 12)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldTotalTaxWithheld  = big.NewInt(1 << 13)
+	usDeWithholdingReconciliationGetDeclarationsResponseFieldSource            = big.NewInt(1 << 14)
+)
+
+type UsDeWithholdingReconciliationGetDeclarationsResponse struct {
+	Year              float64                                                              `json:"year" url:"year"`
+	TaxpayerID        *string                                                              `json:"taxpayerId,omitempty" url:"taxpayerId,omitempty"`
+	TaxPeriodStarting string                                                               `json:"taxPeriodStarting" url:"taxPeriodStarting"`
+	TaxPeriodEnding   string                                                               `json:"taxPeriodEnding" url:"taxPeriodEnding"`
+	Line1             string                                                               `json:"line1" url:"line1"`
+	Line2             float64                                                              `json:"line2" url:"line2"`
+	Line3             string                                                               `json:"line3" url:"line3"`
+	Line4             *string                                                              `json:"line4,omitempty" url:"line4,omitempty"`
+	Line5A            *string                                                              `json:"line5a,omitempty" url:"line5a,omitempty"`
+	Line5B            *string                                                              `json:"line5b,omitempty" url:"line5b,omitempty"`
+	Line6             *string                                                              `json:"line6,omitempty" url:"line6,omitempty"`
+	Worksheet         []*UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem `json:"worksheet" url:"worksheet"`
+	TotalTaxPaid      *string                                                              `json:"totalTaxPaid,omitempty" url:"totalTaxPaid,omitempty"`
+	TotalTaxWithheld  string                                                               `json:"totalTaxWithheld" url:"totalTaxWithheld"`
+	Source            string                                                               `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetYear() float64 {
+	if u == nil {
+		return 0
+	}
+	return u.Year
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetTaxpayerID() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TaxpayerID
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetTaxPeriodStarting() string {
+	if u == nil {
+		return ""
+	}
+	return u.TaxPeriodStarting
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetTaxPeriodEnding() string {
+	if u == nil {
+		return ""
+	}
+	return u.TaxPeriodEnding
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetLine1() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line1
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetLine2() float64 {
+	if u == nil {
+		return 0
+	}
+	return u.Line2
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetLine3() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line3
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetLine4() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Line4
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetLine5A() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Line5A
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetLine5B() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Line5B
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetLine6() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Line6
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetWorksheet() []*UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem {
+	if u == nil {
+		return nil
+	}
+	return u.Worksheet
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetTotalTaxPaid() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TotalTaxPaid
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetTotalTaxWithheld() string {
+	if u == nil {
+		return ""
+	}
+	return u.TotalTaxWithheld
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetSource() string {
+	if u == nil {
+		return ""
+	}
+	return u.Source
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetYear(year float64) {
+	u.Year = year
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldYear)
+}
+
+// SetTaxpayerID sets the TaxpayerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetTaxpayerID(taxpayerID *string) {
+	u.TaxpayerID = taxpayerID
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldTaxpayerID)
+}
+
+// SetTaxPeriodStarting sets the TaxPeriodStarting field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetTaxPeriodStarting(taxPeriodStarting string) {
+	u.TaxPeriodStarting = taxPeriodStarting
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldTaxPeriodStarting)
+}
+
+// SetTaxPeriodEnding sets the TaxPeriodEnding field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetTaxPeriodEnding(taxPeriodEnding string) {
+	u.TaxPeriodEnding = taxPeriodEnding
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldTaxPeriodEnding)
+}
+
+// SetLine1 sets the Line1 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetLine1(line1 string) {
+	u.Line1 = line1
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldLine1)
+}
+
+// SetLine2 sets the Line2 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetLine2(line2 float64) {
+	u.Line2 = line2
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldLine2)
+}
+
+// SetLine3 sets the Line3 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetLine3(line3 string) {
+	u.Line3 = line3
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldLine3)
+}
+
+// SetLine4 sets the Line4 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetLine4(line4 *string) {
+	u.Line4 = line4
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldLine4)
+}
+
+// SetLine5A sets the Line5A field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetLine5A(line5A *string) {
+	u.Line5A = line5A
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldLine5A)
+}
+
+// SetLine5B sets the Line5B field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetLine5B(line5B *string) {
+	u.Line5B = line5B
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldLine5B)
+}
+
+// SetLine6 sets the Line6 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetLine6(line6 *string) {
+	u.Line6 = line6
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldLine6)
+}
+
+// SetWorksheet sets the Worksheet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetWorksheet(worksheet []*UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) {
+	u.Worksheet = worksheet
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldWorksheet)
+}
+
+// SetTotalTaxPaid sets the TotalTaxPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetTotalTaxPaid(totalTaxPaid *string) {
+	u.TotalTaxPaid = totalTaxPaid
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldTotalTaxPaid)
+}
+
+// SetTotalTaxWithheld sets the TotalTaxWithheld field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetTotalTaxWithheld(totalTaxWithheld string) {
+	u.TotalTaxWithheld = totalTaxWithheld
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldTotalTaxWithheld)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) SetSource(source string) {
+	u.Source = source
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseFieldSource)
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeWithholdingReconciliationGetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsDeWithholdingReconciliationGetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed UsDeWithholdingReconciliationGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponse) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usDeWithholdingReconciliationGetDeclarationsResponseWorksheetItemFieldMonth       = big.NewInt(1 << 0)
+	usDeWithholdingReconciliationGetDeclarationsResponseWorksheetItemFieldTaxPaid     = big.NewInt(1 << 1)
+	usDeWithholdingReconciliationGetDeclarationsResponseWorksheetItemFieldTaxWithheld = big.NewInt(1 << 2)
+)
+
+type UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem struct {
+	Month       float64 `json:"month" url:"month"`
+	TaxPaid     *string `json:"taxPaid,omitempty" url:"taxPaid,omitempty"`
+	TaxWithheld string  `json:"taxWithheld" url:"taxWithheld"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) GetMonth() float64 {
+	if u == nil {
+		return 0
+	}
+	return u.Month
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) GetTaxPaid() *string {
+	if u == nil {
+		return nil
+	}
+	return u.TaxPaid
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) GetTaxWithheld() string {
+	if u == nil {
+		return ""
+	}
+	return u.TaxWithheld
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) SetMonth(month float64) {
+	u.Month = month
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseWorksheetItemFieldMonth)
+}
+
+// SetTaxPaid sets the TaxPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) SetTaxPaid(taxPaid *string) {
+	u.TaxPaid = taxPaid
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseWorksheetItemFieldTaxPaid)
+}
+
+// SetTaxWithheld sets the TaxWithheld field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) SetTaxWithheld(taxWithheld string) {
+	u.TaxWithheld = taxWithheld
+	u.require(usDeWithholdingReconciliationGetDeclarationsResponseWorksheetItemFieldTaxWithheld)
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) MarshalJSON() ([]byte, error) {
+	type embed UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsResponseWorksheetItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseFieldFrom      = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseFieldTo        = big.NewInt(1 << 1)
+	usFlsaRecordsListDeclarationsResponseFieldEmployees = big.NewInt(1 << 2)
+	usFlsaRecordsListDeclarationsResponseFieldWarnings  = big.NewInt(1 << 3)
+	usFlsaRecordsListDeclarationsResponseFieldSource    = big.NewInt(1 << 4)
+)
+
+type UsFlsaRecordsListDeclarationsResponse struct {
+	From      string                                                `json:"from" url:"from"`
+	To        string                                                `json:"to" url:"to"`
+	Employees []*UsFlsaRecordsListDeclarationsResponseEmployeesItem `json:"employees" url:"employees"`
+	Warnings  []string                                              `json:"warnings" url:"warnings"`
+	Source    string                                                `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) GetFrom() string {
+	if u == nil {
+		return ""
+	}
+	return u.From
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) GetTo() string {
+	if u == nil {
+		return ""
+	}
+	return u.To
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) GetEmployees() []*UsFlsaRecordsListDeclarationsResponseEmployeesItem {
+	if u == nil {
+		return nil
+	}
+	return u.Employees
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) GetWarnings() []string {
+	if u == nil {
+		return nil
+	}
+	return u.Warnings
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) GetSource() string {
+	if u == nil {
+		return ""
+	}
+	return u.Source
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponse) SetFrom(from string) {
+	u.From = from
+	u.require(usFlsaRecordsListDeclarationsResponseFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponse) SetTo(to string) {
+	u.To = to
+	u.require(usFlsaRecordsListDeclarationsResponseFieldTo)
+}
+
+// SetEmployees sets the Employees field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponse) SetEmployees(employees []*UsFlsaRecordsListDeclarationsResponseEmployeesItem) {
+	u.Employees = employees
+	u.require(usFlsaRecordsListDeclarationsResponseFieldEmployees)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponse) SetWarnings(warnings []string) {
+	u.Warnings = warnings
+	u.require(usFlsaRecordsListDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponse) SetSource(source string) {
+	u.Source = source
+	u.require(usFlsaRecordsListDeclarationsResponseFieldSource)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponse) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldEmployeeID    = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldCode          = big.NewInt(1 << 1)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldFirstName     = big.NewInt(1 << 2)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldLastName      = big.NewInt(1 << 3)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldAddress       = big.NewInt(1 << 4)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldBirthDate     = big.NewInt(1 << 5)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldSex           = big.NewInt(1 << 6)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldOccupation    = big.NewInt(1 << 7)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldWorkweekStart = big.NewInt(1 << 8)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldExempt        = big.NewInt(1 << 9)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldWorkweeks     = big.NewInt(1 << 10)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemFieldPayPeriods    = big.NewInt(1 << 11)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItem struct {
+	EmployeeID    string                                                              `json:"employeeId" url:"employeeId"`
+	Code          *string                                                             `json:"code,omitempty" url:"code,omitempty"`
+	FirstName     string                                                              `json:"firstName" url:"firstName"`
+	LastName      string                                                              `json:"lastName" url:"lastName"`
+	Address       *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress          `json:"address" url:"address"`
+	BirthDate     *time.Time                                                          `json:"birthDate,omitempty" url:"birthDate,omitempty" format:"date"`
+	Sex           *UsFlsaRecordsListDeclarationsResponseEmployeesItemSex              `json:"sex,omitempty" url:"sex,omitempty"`
+	Occupation    *string                                                             `json:"occupation,omitempty" url:"occupation,omitempty"`
+	WorkweekStart *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart    `json:"workweekStart" url:"workweekStart"`
+	Exempt        bool                                                                `json:"exempt" url:"exempt"`
+	Workweeks     []*UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem  `json:"workweeks" url:"workweeks"`
+	PayPeriods    []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem `json:"payPeriods" url:"payPeriods"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetEmployeeID() string {
+	if u == nil {
+		return ""
+	}
+	return u.EmployeeID
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetCode() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Code
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetFirstName() string {
+	if u == nil {
+		return ""
+	}
+	return u.FirstName
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetLastName() string {
+	if u == nil {
+		return ""
+	}
+	return u.LastName
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetAddress() *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress {
+	if u == nil {
+		return nil
+	}
+	return u.Address
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetBirthDate() *time.Time {
+	if u == nil {
+		return nil
+	}
+	return u.BirthDate
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetSex() *UsFlsaRecordsListDeclarationsResponseEmployeesItemSex {
+	if u == nil {
+		return nil
+	}
+	return u.Sex
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetOccupation() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Occupation
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetWorkweekStart() *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart {
+	if u == nil {
+		return nil
+	}
+	return u.WorkweekStart
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetExempt() bool {
+	if u == nil {
+		return false
+	}
+	return u.Exempt
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetWorkweeks() []*UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem {
+	if u == nil {
+		return nil
+	}
+	return u.Workweeks
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetPayPeriods() []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem {
+	if u == nil {
+		return nil
+	}
+	return u.PayPeriods
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetEmployeeID(employeeID string) {
+	u.EmployeeID = employeeID
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldEmployeeID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetCode(code *string) {
+	u.Code = code
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldCode)
+}
+
+// SetFirstName sets the FirstName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetFirstName(firstName string) {
+	u.FirstName = firstName
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldFirstName)
+}
+
+// SetLastName sets the LastName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetLastName(lastName string) {
+	u.LastName = lastName
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldLastName)
+}
+
+// SetAddress sets the Address field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetAddress(address *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) {
+	u.Address = address
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldAddress)
+}
+
+// SetBirthDate sets the BirthDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetBirthDate(birthDate *time.Time) {
+	u.BirthDate = birthDate
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldBirthDate)
+}
+
+// SetSex sets the Sex field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetSex(sex *UsFlsaRecordsListDeclarationsResponseEmployeesItemSex) {
+	u.Sex = sex
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldSex)
+}
+
+// SetOccupation sets the Occupation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetOccupation(occupation *string) {
+	u.Occupation = occupation
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldOccupation)
+}
+
+// SetWorkweekStart sets the WorkweekStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetWorkweekStart(workweekStart *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) {
+	u.WorkweekStart = workweekStart
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldWorkweekStart)
+}
+
+// SetExempt sets the Exempt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetExempt(exempt bool) {
+	u.Exempt = exempt
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldExempt)
+}
+
+// SetWorkweeks sets the Workweeks field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetWorkweeks(workweeks []*UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) {
+	u.Workweeks = workweeks
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldWorkweeks)
+}
+
+// SetPayPeriods sets the PayPeriods field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) SetPayPeriods(payPeriods []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) {
+	u.PayPeriods = payPeriods
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemFieldPayPeriods)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) UnmarshalJSON(data []byte) error {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItem
+	var unmarshaler = struct {
+		embed
+		BirthDate *internal.Date `json:"birthDate,omitempty"`
+	}{
+		embed: embed(*u),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItem(unmarshaler.embed)
+	u.BirthDate = unmarshaler.BirthDate.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItem
+	var marshaler = struct {
+		embed
+		BirthDate *internal.Date `json:"birthDate,omitempty"`
+	}{
+		embed:     embed(*u),
+		BirthDate: internal.NewOptionalDate(u.BirthDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldStreet      = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldCity        = big.NewInt(1 << 1)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldSubdivision = big.NewInt(1 << 2)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldPostalCode  = big.NewInt(1 << 3)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) GetStreet() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Street
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) GetCity() *string {
+	if u == nil {
+		return nil
+	}
+	return u.City
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) GetSubdivision() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Subdivision
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) GetPostalCode() *string {
+	if u == nil {
+		return nil
+	}
+	return u.PostalCode
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) SetStreet(street *string) {
+	u.Street = street
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) SetCity(city *string) {
+	u.City = city
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldCity)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) SetSubdivision(subdivision *string) {
+	u.Subdivision = subdivision
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldSubdivision)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) SetPostalCode(postalCode *string) {
+	u.PostalCode = postalCode
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemAddressFieldPostalCode)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemAddress) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldRunID                = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldPeriodStart          = big.NewInt(1 << 1)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldPeriodEnd            = big.NewInt(1 << 2)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldPayDate              = big.NewInt(1 << 3)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldBasisOfPay           = big.NewInt(1 << 4)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldHoursWorked          = big.NewInt(1 << 5)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldRegularPay           = big.NewInt(1 << 6)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldOvertimePay          = big.NewInt(1 << 7)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldOvertimeHours        = big.NewInt(1 << 8)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldStraightTimeEarnings = big.NewInt(1 << 9)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldOvertimePremium      = big.NewInt(1 << 10)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldAdditions            = big.NewInt(1 << 11)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldDeductions           = big.NewInt(1 << 12)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldTotalWages           = big.NewInt(1 << 13)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem struct {
+	RunID                string                                                                            `json:"runId" url:"runId"`
+	PeriodStart          string                                                                            `json:"periodStart" url:"periodStart"`
+	PeriodEnd            string                                                                            `json:"periodEnd" url:"periodEnd"`
+	PayDate              time.Time                                                                         `json:"payDate" url:"payDate" format:"date"`
+	BasisOfPay           *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay       `json:"basisOfPay,omitempty" url:"basisOfPay,omitempty"`
+	HoursWorked          *string                                                                           `json:"hoursWorked,omitempty" url:"hoursWorked,omitempty"`
+	RegularPay           string                                                                            `json:"regularPay" url:"regularPay"`
+	OvertimePay          string                                                                            `json:"overtimePay" url:"overtimePay"`
+	OvertimeHours        string                                                                            `json:"overtimeHours" url:"overtimeHours"`
+	StraightTimeEarnings *string                                                                           `json:"straightTimeEarnings,omitempty" url:"straightTimeEarnings,omitempty"`
+	OvertimePremium      *string                                                                           `json:"overtimePremium,omitempty" url:"overtimePremium,omitempty"`
+	Additions            []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem  `json:"additions" url:"additions"`
+	Deductions           []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem `json:"deductions" url:"deductions"`
+	TotalWages           string                                                                            `json:"totalWages" url:"totalWages"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetRunID() string {
+	if u == nil {
+		return ""
+	}
+	return u.RunID
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetPeriodStart() string {
+	if u == nil {
+		return ""
+	}
+	return u.PeriodStart
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetPeriodEnd() string {
+	if u == nil {
+		return ""
+	}
+	return u.PeriodEnd
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetPayDate() time.Time {
+	if u == nil {
+		return time.Time{}
+	}
+	return u.PayDate
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetBasisOfPay() *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay {
+	if u == nil {
+		return nil
+	}
+	return u.BasisOfPay
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetHoursWorked() *string {
+	if u == nil {
+		return nil
+	}
+	return u.HoursWorked
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetRegularPay() string {
+	if u == nil {
+		return ""
+	}
+	return u.RegularPay
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetOvertimePay() string {
+	if u == nil {
+		return ""
+	}
+	return u.OvertimePay
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetOvertimeHours() string {
+	if u == nil {
+		return ""
+	}
+	return u.OvertimeHours
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetStraightTimeEarnings() *string {
+	if u == nil {
+		return nil
+	}
+	return u.StraightTimeEarnings
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetOvertimePremium() *string {
+	if u == nil {
+		return nil
+	}
+	return u.OvertimePremium
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetAdditions() []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem {
+	if u == nil {
+		return nil
+	}
+	return u.Additions
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetDeductions() []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem {
+	if u == nil {
+		return nil
+	}
+	return u.Deductions
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetTotalWages() string {
+	if u == nil {
+		return ""
+	}
+	return u.TotalWages
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetRunID(runID string) {
+	u.RunID = runID
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldRunID)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetPeriodStart(periodStart string) {
+	u.PeriodStart = periodStart
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetPeriodEnd(periodEnd string) {
+	u.PeriodEnd = periodEnd
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldPeriodEnd)
+}
+
+// SetPayDate sets the PayDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetPayDate(payDate time.Time) {
+	u.PayDate = payDate
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldPayDate)
+}
+
+// SetBasisOfPay sets the BasisOfPay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetBasisOfPay(basisOfPay *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) {
+	u.BasisOfPay = basisOfPay
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldBasisOfPay)
+}
+
+// SetHoursWorked sets the HoursWorked field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetHoursWorked(hoursWorked *string) {
+	u.HoursWorked = hoursWorked
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldHoursWorked)
+}
+
+// SetRegularPay sets the RegularPay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetRegularPay(regularPay string) {
+	u.RegularPay = regularPay
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldRegularPay)
+}
+
+// SetOvertimePay sets the OvertimePay field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetOvertimePay(overtimePay string) {
+	u.OvertimePay = overtimePay
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldOvertimePay)
+}
+
+// SetOvertimeHours sets the OvertimeHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetOvertimeHours(overtimeHours string) {
+	u.OvertimeHours = overtimeHours
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldOvertimeHours)
+}
+
+// SetStraightTimeEarnings sets the StraightTimeEarnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetStraightTimeEarnings(straightTimeEarnings *string) {
+	u.StraightTimeEarnings = straightTimeEarnings
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldStraightTimeEarnings)
+}
+
+// SetOvertimePremium sets the OvertimePremium field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetOvertimePremium(overtimePremium *string) {
+	u.OvertimePremium = overtimePremium
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldOvertimePremium)
+}
+
+// SetAdditions sets the Additions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetAdditions(additions []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) {
+	u.Additions = additions
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldAdditions)
+}
+
+// SetDeductions sets the Deductions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetDeductions(deductions []*UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) {
+	u.Deductions = deductions
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldDeductions)
+}
+
+// SetTotalWages sets the TotalWages field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) SetTotalWages(totalWages string) {
+	u.TotalWages = totalWages
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemFieldTotalWages)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) UnmarshalJSON(data []byte) error {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem
+	var unmarshaler = struct {
+		embed
+		PayDate *internal.Date `json:"payDate"`
+	}{
+		embed: embed(*u),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem(unmarshaler.embed)
+	u.PayDate = unmarshaler.PayDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem
+	var marshaler = struct {
+		embed
+		PayDate *internal.Date `json:"payDate"`
+	}{
+		embed:   embed(*u),
+		PayDate: internal.NewDate(u.PayDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldName        = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldPaymentType = big.NewInt(1 << 1)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldAmount      = big.NewInt(1 << 2)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldHours       = big.NewInt(1 << 3)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem struct {
+	Name        string  `json:"name" url:"name"`
+	PaymentType *string `json:"paymentType,omitempty" url:"paymentType,omitempty"`
+	Amount      string  `json:"amount" url:"amount"`
+	Hours       *string `json:"hours,omitempty" url:"hours,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) GetName() string {
+	if u == nil {
+		return ""
+	}
+	return u.Name
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) GetPaymentType() *string {
+	if u == nil {
+		return nil
+	}
+	return u.PaymentType
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) GetAmount() string {
+	if u == nil {
+		return ""
+	}
+	return u.Amount
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) GetHours() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Hours
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) SetName(name string) {
+	u.Name = name
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldName)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) SetPaymentType(paymentType *string) {
+	u.PaymentType = paymentType
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldPaymentType)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) SetAmount(amount string) {
+	u.Amount = amount
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldAmount)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) SetHours(hours *string) {
+	u.Hours = hours
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItemFieldHours)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemAdditionsItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPayFieldSalaryType = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPayFieldRate       = big.NewInt(1 << 1)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay struct {
+	SalaryType string `json:"salaryType" url:"salaryType"`
+	Rate       string `json:"rate" url:"rate"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) GetSalaryType() string {
+	if u == nil {
+		return ""
+	}
+	return u.SalaryType
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) GetRate() string {
+	if u == nil {
+		return ""
+	}
+	return u.Rate
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetSalaryType sets the SalaryType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) SetSalaryType(salaryType string) {
+	u.SalaryType = salaryType
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPayFieldSalaryType)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) SetRate(rate string) {
+	u.Rate = rate
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPayFieldRate)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemBasisOfPay) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItemFieldName   = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItemFieldAmount = big.NewInt(1 << 1)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem struct {
+	Name   string `json:"name" url:"name"`
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) GetName() string {
+	if u == nil {
+		return ""
+	}
+	return u.Name
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) GetAmount() string {
+	if u == nil {
+		return ""
+	}
+	return u.Amount
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) SetName(name string) {
+	u.Name = name
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItemFieldName)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) SetAmount(amount string) {
+	u.Amount = amount
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItemFieldAmount)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemPayPeriodsItemDeductionsItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemSex string
+
+const (
+	UsFlsaRecordsListDeclarationsResponseEmployeesItemSexM UsFlsaRecordsListDeclarationsResponseEmployeesItemSex = "M"
+	UsFlsaRecordsListDeclarationsResponseEmployeesItemSexF UsFlsaRecordsListDeclarationsResponseEmployeesItemSex = "F"
+)
+
+func NewUsFlsaRecordsListDeclarationsResponseEmployeesItemSexFromString(s string) (UsFlsaRecordsListDeclarationsResponseEmployeesItemSex, error) {
+	switch s {
+	case "M":
+		return UsFlsaRecordsListDeclarationsResponseEmployeesItemSexM, nil
+	case "F":
+		return UsFlsaRecordsListDeclarationsResponseEmployeesItemSexF, nil
+	}
+	var t UsFlsaRecordsListDeclarationsResponseEmployeesItemSex
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u UsFlsaRecordsListDeclarationsResponseEmployeesItemSex) Ptr() *UsFlsaRecordsListDeclarationsResponseEmployeesItemSex {
+	return &u
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStartFieldDay  = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStartFieldTime = big.NewInt(1 << 1)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart struct {
+	Day  string  `json:"day" url:"day"`
+	Time *string `json:"time,omitempty" url:"time,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) GetDay() string {
+	if u == nil {
+		return ""
+	}
+	return u.Day
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) GetTime() *string {
+	if u == nil {
+		return nil
+	}
+	return u.Time
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetDay sets the Day field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) SetDay(day string) {
+	u.Day = day
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStartFieldDay)
+}
+
+// SetTime sets the Time field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) SetTime(time *string) {
+	u.Time = time
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStartFieldTime)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweekStart) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldStart                = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldEnd                  = big.NewInt(1 << 1)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldHours                = big.NewInt(1 << 2)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldOvertimeHours        = big.NewInt(1 << 3)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldDays                 = big.NewInt(1 << 4)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldRegularRate          = big.NewInt(1 << 5)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldStraightTimeEarnings = big.NewInt(1 << 6)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem struct {
+	Start                string                                                                     `json:"start" url:"start"`
+	End                  string                                                                     `json:"end" url:"end"`
+	Hours                string                                                                     `json:"hours" url:"hours"`
+	OvertimeHours        string                                                                     `json:"overtimeHours" url:"overtimeHours"`
+	Days                 []*UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem `json:"days" url:"days"`
+	RegularRate          *string                                                                    `json:"regularRate,omitempty" url:"regularRate,omitempty"`
+	StraightTimeEarnings *string                                                                    `json:"straightTimeEarnings,omitempty" url:"straightTimeEarnings,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetStart() string {
+	if u == nil {
+		return ""
+	}
+	return u.Start
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetEnd() string {
+	if u == nil {
+		return ""
+	}
+	return u.End
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetHours() string {
+	if u == nil {
+		return ""
+	}
+	return u.Hours
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetOvertimeHours() string {
+	if u == nil {
+		return ""
+	}
+	return u.OvertimeHours
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetDays() []*UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem {
+	if u == nil {
+		return nil
+	}
+	return u.Days
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetRegularRate() *string {
+	if u == nil {
+		return nil
+	}
+	return u.RegularRate
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetStraightTimeEarnings() *string {
+	if u == nil {
+		return nil
+	}
+	return u.StraightTimeEarnings
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetStart sets the Start field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) SetStart(start string) {
+	u.Start = start
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldStart)
+}
+
+// SetEnd sets the End field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) SetEnd(end string) {
+	u.End = end
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldEnd)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) SetHours(hours string) {
+	u.Hours = hours
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldHours)
+}
+
+// SetOvertimeHours sets the OvertimeHours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) SetOvertimeHours(overtimeHours string) {
+	u.OvertimeHours = overtimeHours
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldOvertimeHours)
+}
+
+// SetDays sets the Days field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) SetDays(days []*UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) {
+	u.Days = days
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldDays)
+}
+
+// SetRegularRate sets the RegularRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) SetRegularRate(regularRate *string) {
+	u.RegularRate = regularRate
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldRegularRate)
+}
+
+// SetStraightTimeEarnings sets the StraightTimeEarnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) SetStraightTimeEarnings(straightTimeEarnings *string) {
+	u.StraightTimeEarnings = straightTimeEarnings
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemFieldStraightTimeEarnings)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItemFieldDate  = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItemFieldHours = big.NewInt(1 << 1)
+)
+
+type UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem struct {
+	Date  time.Time `json:"date" url:"date" format:"date"`
+	Hours string    `json:"hours" url:"hours"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) GetDate() time.Time {
+	if u == nil {
+		return time.Time{}
+	}
+	return u.Date
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) GetHours() string {
+	if u == nil {
+		return ""
+	}
+	return u.Hours
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) SetDate(date time.Time) {
+	u.Date = date
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItemFieldDate)
+}
+
+// SetHours sets the Hours field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) SetHours(hours string) {
+	u.Hours = hours
+	u.require(usFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItemFieldHours)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) UnmarshalJSON(data []byte) error {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*u),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem(unmarshaler.embed)
+	u.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*u),
+		Date:  internal.NewDate(u.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsFlsaRecordsListDeclarationsResponseEmployeesItemWorkweeksItemDaysItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usIncomeTaxReturnGetDeclarationsResponseFieldForm       = big.NewInt(1 << 0)
+	usIncomeTaxReturnGetDeclarationsResponseFieldScheme     = big.NewInt(1 << 1)
+	usIncomeTaxReturnGetDeclarationsResponseFieldFromDate   = big.NewInt(1 << 2)
+	usIncomeTaxReturnGetDeclarationsResponseFieldToDate     = big.NewInt(1 << 3)
+	usIncomeTaxReturnGetDeclarationsResponseFieldPage1      = big.NewInt(1 << 4)
+	usIncomeTaxReturnGetDeclarationsResponseFieldScheduleL  = big.NewInt(1 << 5)
+	usIncomeTaxReturnGetDeclarationsResponseFieldOtherLines = big.NewInt(1 << 6)
+	usIncomeTaxReturnGetDeclarationsResponseFieldWarnings   = big.NewInt(1 << 7)
+)
+
+type UsIncomeTaxReturnGetDeclarationsResponse struct {
+	Form       UsIncomeTaxReturnGetDeclarationsResponseForm              `json:"form" url:"form"`
+	Scheme     string                                                    `json:"scheme" url:"scheme"`
+	FromDate   time.Time                                                 `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate     time.Time                                                 `json:"toDate" url:"toDate" format:"date"`
+	Page1      []*UsIncomeTaxReturnGetDeclarationsResponsePage1Item      `json:"page1" url:"page1"`
+	ScheduleL  []*UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem  `json:"scheduleL" url:"scheduleL"`
+	OtherLines []*UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem `json:"otherLines" url:"otherLines"`
+	Warnings   []string                                                  `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetForm() UsIncomeTaxReturnGetDeclarationsResponseForm {
+	if u == nil {
+		return ""
+	}
+	return u.Form
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetScheme() string {
+	if u == nil {
+		return ""
+	}
+	return u.Scheme
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetFromDate() time.Time {
+	if u == nil {
+		return time.Time{}
+	}
+	return u.FromDate
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetToDate() time.Time {
+	if u == nil {
+		return time.Time{}
+	}
+	return u.ToDate
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetPage1() []*UsIncomeTaxReturnGetDeclarationsResponsePage1Item {
+	if u == nil {
+		return nil
+	}
+	return u.Page1
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetScheduleL() []*UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem {
+	if u == nil {
+		return nil
+	}
+	return u.ScheduleL
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetOtherLines() []*UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem {
+	if u == nil {
+		return nil
+	}
+	return u.OtherLines
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetWarnings() []string {
+	if u == nil {
+		return nil
+	}
+	return u.Warnings
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetForm sets the Form field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetForm(form UsIncomeTaxReturnGetDeclarationsResponseForm) {
+	u.Form = form
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldForm)
+}
+
+// SetScheme sets the Scheme field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetScheme(scheme string) {
+	u.Scheme = scheme
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldScheme)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetFromDate(fromDate time.Time) {
+	u.FromDate = fromDate
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetToDate(toDate time.Time) {
+	u.ToDate = toDate
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldToDate)
+}
+
+// SetPage1 sets the Page1 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetPage1(page1 []*UsIncomeTaxReturnGetDeclarationsResponsePage1Item) {
+	u.Page1 = page1
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldPage1)
+}
+
+// SetScheduleL sets the ScheduleL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetScheduleL(scheduleL []*UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) {
+	u.ScheduleL = scheduleL
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldScheduleL)
+}
+
+// SetOtherLines sets the OtherLines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetOtherLines(otherLines []*UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) {
+	u.OtherLines = otherLines
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldOtherLines)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) SetWarnings(warnings []string) {
+	u.Warnings = warnings
+	u.require(usIncomeTaxReturnGetDeclarationsResponseFieldWarnings)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed UsIncomeTaxReturnGetDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*u),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*u = UsIncomeTaxReturnGetDeclarationsResponse(unmarshaler.embed)
+	u.FromDate = unmarshaler.FromDate.Time()
+	u.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed UsIncomeTaxReturnGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*u),
+		FromDate: internal.NewDate(u.FromDate),
+		ToDate:   internal.NewDate(u.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponse) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+type UsIncomeTaxReturnGetDeclarationsResponseForm string
+
+const (
+	UsIncomeTaxReturnGetDeclarationsResponseFormOneThousandSixtyFive         UsIncomeTaxReturnGetDeclarationsResponseForm = "1065"
+	UsIncomeTaxReturnGetDeclarationsResponseFormOneThousandOneHundredTwenty  UsIncomeTaxReturnGetDeclarationsResponseForm = "1120"
+	UsIncomeTaxReturnGetDeclarationsResponseFormOneThousandOneHundredTwentyS UsIncomeTaxReturnGetDeclarationsResponseForm = "1120-S"
+)
+
+func NewUsIncomeTaxReturnGetDeclarationsResponseFormFromString(s string) (UsIncomeTaxReturnGetDeclarationsResponseForm, error) {
+	switch s {
+	case "1065":
+		return UsIncomeTaxReturnGetDeclarationsResponseFormOneThousandSixtyFive, nil
+	case "1120":
+		return UsIncomeTaxReturnGetDeclarationsResponseFormOneThousandOneHundredTwenty, nil
+	case "1120-S":
+		return UsIncomeTaxReturnGetDeclarationsResponseFormOneThousandOneHundredTwentyS, nil
+	}
+	var t UsIncomeTaxReturnGetDeclarationsResponseForm
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (u UsIncomeTaxReturnGetDeclarationsResponseForm) Ptr() *UsIncomeTaxReturnGetDeclarationsResponseForm {
+	return &u
+}
+
+var (
+	usIncomeTaxReturnGetDeclarationsResponseOtherLinesItemFieldLine   = big.NewInt(1 << 0)
+	usIncomeTaxReturnGetDeclarationsResponseOtherLinesItemFieldLabel  = big.NewInt(1 << 1)
+	usIncomeTaxReturnGetDeclarationsResponseOtherLinesItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem struct {
+	Line   string `json:"line" url:"line"`
+	Label  string `json:"label" url:"label"`
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) GetLine() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) GetLabel() string {
+	if u == nil {
+		return ""
+	}
+	return u.Label
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) GetAmount() string {
+	if u == nil {
+		return ""
+	}
+	return u.Amount
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetLine sets the Line field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) SetLine(line string) {
+	u.Line = line
+	u.require(usIncomeTaxReturnGetDeclarationsResponseOtherLinesItemFieldLine)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) SetLabel(label string) {
+	u.Label = label
+	u.require(usIncomeTaxReturnGetDeclarationsResponseOtherLinesItemFieldLabel)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) SetAmount(amount string) {
+	u.Amount = amount
+	u.require(usIncomeTaxReturnGetDeclarationsResponseOtherLinesItemFieldAmount)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) MarshalJSON() ([]byte, error) {
+	type embed UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseOtherLinesItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usIncomeTaxReturnGetDeclarationsResponsePage1ItemFieldLine   = big.NewInt(1 << 0)
+	usIncomeTaxReturnGetDeclarationsResponsePage1ItemFieldLabel  = big.NewInt(1 << 1)
+	usIncomeTaxReturnGetDeclarationsResponsePage1ItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type UsIncomeTaxReturnGetDeclarationsResponsePage1Item struct {
+	Line   string `json:"line" url:"line"`
+	Label  string `json:"label" url:"label"`
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) GetLine() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) GetLabel() string {
+	if u == nil {
+		return ""
+	}
+	return u.Label
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) GetAmount() string {
+	if u == nil {
+		return ""
+	}
+	return u.Amount
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetLine sets the Line field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) SetLine(line string) {
+	u.Line = line
+	u.require(usIncomeTaxReturnGetDeclarationsResponsePage1ItemFieldLine)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) SetLabel(label string) {
+	u.Label = label
+	u.require(usIncomeTaxReturnGetDeclarationsResponsePage1ItemFieldLabel)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) SetAmount(amount string) {
+	u.Amount = amount
+	u.require(usIncomeTaxReturnGetDeclarationsResponsePage1ItemFieldAmount)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsIncomeTaxReturnGetDeclarationsResponsePage1Item
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsIncomeTaxReturnGetDeclarationsResponsePage1Item(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) MarshalJSON() ([]byte, error) {
+	type embed UsIncomeTaxReturnGetDeclarationsResponsePage1Item
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponsePage1Item) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldLine      = big.NewInt(1 << 0)
+	usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldLabel     = big.NewInt(1 << 1)
+	usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldBeginning = big.NewInt(1 << 2)
+	usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldEnd       = big.NewInt(1 << 3)
+)
+
+type UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem struct {
+	Line      string `json:"line" url:"line"`
+	Label     string `json:"label" url:"label"`
+	Beginning string `json:"beginning" url:"beginning"`
+	End       string `json:"end" url:"end"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) GetLine() string {
+	if u == nil {
+		return ""
+	}
+	return u.Line
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) GetLabel() string {
+	if u == nil {
+		return ""
+	}
+	return u.Label
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) GetBeginning() string {
+	if u == nil {
+		return ""
+	}
+	return u.Beginning
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) GetEnd() string {
+	if u == nil {
+		return ""
+	}
+	return u.End
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetLine sets the Line field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) SetLine(line string) {
+	u.Line = line
+	u.require(usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldLine)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) SetLabel(label string) {
+	u.Label = label
+	u.require(usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldLabel)
+}
+
+// SetBeginning sets the Beginning field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) SetBeginning(beginning string) {
+	u.Beginning = beginning
+	u.require(usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldBeginning)
+}
+
+// SetEnd sets the End field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) SetEnd(end string) {
+	u.End = end
+	u.require(usIncomeTaxReturnGetDeclarationsResponseScheduleLItemFieldEnd)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) MarshalJSON() ([]byte, error) {
+	type embed UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsResponseScheduleLItem) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usSalesTaxGetDeclarationsResponseFieldFrom          = big.NewInt(1 << 0)
+	usSalesTaxGetDeclarationsResponseFieldTo            = big.NewInt(1 << 1)
+	usSalesTaxGetDeclarationsResponseFieldJurisdictions = big.NewInt(1 << 2)
+	usSalesTaxGetDeclarationsResponseFieldSalesTax      = big.NewInt(1 << 3)
+	usSalesTaxGetDeclarationsResponseFieldWarnings      = big.NewInt(1 << 4)
+)
+
+type UsSalesTaxGetDeclarationsResponse struct {
+	From          string                                                `json:"from" url:"from"`
+	To            string                                                `json:"to" url:"to"`
+	Jurisdictions []*UsSalesTaxGetDeclarationsResponseJurisdictionsItem `json:"jurisdictions" url:"jurisdictions"`
+	SalesTax      string                                                `json:"salesTax" url:"salesTax"`
+	Warnings      []string                                              `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) GetFrom() string {
+	if u == nil {
+		return ""
+	}
+	return u.From
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) GetTo() string {
+	if u == nil {
+		return ""
+	}
+	return u.To
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) GetJurisdictions() []*UsSalesTaxGetDeclarationsResponseJurisdictionsItem {
+	if u == nil {
+		return nil
+	}
+	return u.Jurisdictions
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) GetSalesTax() string {
+	if u == nil {
+		return ""
+	}
+	return u.SalesTax
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) GetWarnings() []string {
+	if u == nil {
+		return nil
+	}
+	return u.Warnings
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponse) SetFrom(from string) {
+	u.From = from
+	u.require(usSalesTaxGetDeclarationsResponseFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponse) SetTo(to string) {
+	u.To = to
+	u.require(usSalesTaxGetDeclarationsResponseFieldTo)
+}
+
+// SetJurisdictions sets the Jurisdictions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponse) SetJurisdictions(jurisdictions []*UsSalesTaxGetDeclarationsResponseJurisdictionsItem) {
+	u.Jurisdictions = jurisdictions
+	u.require(usSalesTaxGetDeclarationsResponseFieldJurisdictions)
+}
+
+// SetSalesTax sets the SalesTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponse) SetSalesTax(salesTax string) {
+	u.SalesTax = salesTax
+	u.require(usSalesTaxGetDeclarationsResponseFieldSalesTax)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponse) SetWarnings(warnings []string) {
+	u.Warnings = warnings
+	u.require(usSalesTaxGetDeclarationsResponseFieldWarnings)
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsSalesTaxGetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsSalesTaxGetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed UsSalesTaxGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsSalesTaxGetDeclarationsResponse) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
+	usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldJurisdiction = big.NewInt(1 << 0)
+	usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldDocuments    = big.NewInt(1 << 1)
+	usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldTaxableSales = big.NewInt(1 << 2)
+	usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldExemptSales  = big.NewInt(1 << 3)
+	usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldSalesTax     = big.NewInt(1 << 4)
+)
+
+type UsSalesTaxGetDeclarationsResponseJurisdictionsItem struct {
+	Jurisdiction string  `json:"jurisdiction" url:"jurisdiction"`
+	Documents    float64 `json:"documents" url:"documents"`
+	TaxableSales string  `json:"taxableSales" url:"taxableSales"`
+	ExemptSales  string  `json:"exemptSales" url:"exemptSales"`
+	SalesTax     string  `json:"salesTax" url:"salesTax"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) GetJurisdiction() string {
+	if u == nil {
+		return ""
+	}
+	return u.Jurisdiction
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) GetDocuments() float64 {
+	if u == nil {
+		return 0
+	}
+	return u.Documents
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) GetTaxableSales() string {
+	if u == nil {
+		return ""
+	}
+	return u.TaxableSales
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) GetExemptSales() string {
+	if u == nil {
+		return ""
+	}
+	return u.ExemptSales
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) GetSalesTax() string {
+	if u == nil {
+		return ""
+	}
+	return u.SalesTax
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetJurisdiction sets the Jurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) SetJurisdiction(jurisdiction string) {
+	u.Jurisdiction = jurisdiction
+	u.require(usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldJurisdiction)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) SetDocuments(documents float64) {
+	u.Documents = documents
+	u.require(usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldDocuments)
+}
+
+// SetTaxableSales sets the TaxableSales field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) SetTaxableSales(taxableSales string) {
+	u.TaxableSales = taxableSales
+	u.require(usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldTaxableSales)
+}
+
+// SetExemptSales sets the ExemptSales field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) SetExemptSales(exemptSales string) {
+	u.ExemptSales = exemptSales
+	u.require(usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldExemptSales)
+}
+
+// SetSalesTax sets the SalesTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) SetSalesTax(salesTax string) {
+	u.SalesTax = salesTax
+	u.require(usSalesTaxGetDeclarationsResponseJurisdictionsItemFieldSalesTax)
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsSalesTaxGetDeclarationsResponseJurisdictionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UsSalesTaxGetDeclarationsResponseJurisdictionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) MarshalJSON() ([]byte, error) {
+	type embed UsSalesTaxGetDeclarationsResponseJurisdictionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UsSalesTaxGetDeclarationsResponseJurisdictionsItem) String() string {
 	if u == nil {
 		return "<nil>"
 	}
@@ -63047,6 +81530,52 @@ func (v *VatProrataSetDeclarationsResponse) String() string {
 }
 
 var (
+	us1099NecListDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type Us1099NecListDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *Us1099NecListDeclarationsRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *Us1099NecListDeclarationsRequest) SetYear(year int64) {
+	u.Year = year
+	u.require(us1099NecListDeclarationsRequestFieldYear)
+}
+
+func (u *Us1099NecListDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler Us1099NecListDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = Us1099NecListDeclarationsRequest(body)
+	return nil
+}
+
+func (u *Us1099NecListDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed Us1099NecListDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	us940GetDeclarationsRequestFieldYear = big.NewInt(1 << 0)
 )
 
@@ -63294,13 +81823,19 @@ func (u *UsDeGrossReceiptsGetDeclarationsRequest) MarshalJSON() ([]byte, error) 
 }
 
 var (
-	usDeUnemploymentGetDeclarationsRequestFieldYear    = big.NewInt(1 << 0)
-	usDeUnemploymentGetDeclarationsRequestFieldQuarter = big.NewInt(1 << 1)
+	usDeUnemploymentGetDeclarationsRequestFieldYear           = big.NewInt(1 << 0)
+	usDeUnemploymentGetDeclarationsRequestFieldQuarter        = big.NewInt(1 << 1)
+	usDeUnemploymentGetDeclarationsRequestFieldApprovedCredit = big.NewInt(1 << 2)
+	usDeUnemploymentGetDeclarationsRequestFieldInterest       = big.NewInt(1 << 3)
+	usDeUnemploymentGetDeclarationsRequestFieldPenalty        = big.NewInt(1 << 4)
 )
 
 type UsDeUnemploymentGetDeclarationsRequest struct {
-	Year    int64 `json:"year" url:"-"`
-	Quarter int64 `json:"quarter" url:"-"`
+	Year           int64   `json:"year" url:"-"`
+	Quarter        int64   `json:"quarter" url:"-"`
+	ApprovedCredit *string `json:"approvedCredit,omitempty" url:"-"`
+	Interest       *string `json:"interest,omitempty" url:"-"`
+	Penalty        *string `json:"penalty,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -63325,6 +81860,27 @@ func (u *UsDeUnemploymentGetDeclarationsRequest) SetYear(year int64) {
 func (u *UsDeUnemploymentGetDeclarationsRequest) SetQuarter(quarter int64) {
 	u.Quarter = quarter
 	u.require(usDeUnemploymentGetDeclarationsRequestFieldQuarter)
+}
+
+// SetApprovedCredit sets the ApprovedCredit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsRequest) SetApprovedCredit(approvedCredit *string) {
+	u.ApprovedCredit = approvedCredit
+	u.require(usDeUnemploymentGetDeclarationsRequestFieldApprovedCredit)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsRequest) SetInterest(interest *string) {
+	u.Interest = interest
+	u.require(usDeUnemploymentGetDeclarationsRequestFieldInterest)
+}
+
+// SetPenalty sets the Penalty field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeUnemploymentGetDeclarationsRequest) SetPenalty(penalty *string) {
+	u.Penalty = penalty
+	u.require(usDeUnemploymentGetDeclarationsRequestFieldPenalty)
 }
 
 func (u *UsDeUnemploymentGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
@@ -63389,6 +81945,234 @@ func (u *UsDeWithholdingGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
 		embed
 	}{
 		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	usDeWithholdingReconciliationGetDeclarationsRequestFieldYear    = big.NewInt(1 << 0)
+	usDeWithholdingReconciliationGetDeclarationsRequestFieldTaxPaid = big.NewInt(1 << 1)
+)
+
+type UsDeWithholdingReconciliationGetDeclarationsRequest struct {
+	Year    int64    `json:"year" url:"-"`
+	TaxPaid []string `json:"taxPaid,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsRequest) SetYear(year int64) {
+	u.Year = year
+	u.require(usDeWithholdingReconciliationGetDeclarationsRequestFieldYear)
+}
+
+// SetTaxPaid sets the TaxPaid field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsDeWithholdingReconciliationGetDeclarationsRequest) SetTaxPaid(taxPaid []string) {
+	u.TaxPaid = taxPaid
+	u.require(usDeWithholdingReconciliationGetDeclarationsRequestFieldTaxPaid)
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsDeWithholdingReconciliationGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = UsDeWithholdingReconciliationGetDeclarationsRequest(body)
+	return nil
+}
+
+func (u *UsDeWithholdingReconciliationGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed UsDeWithholdingReconciliationGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	usFlsaRecordsListDeclarationsRequestFieldFrom       = big.NewInt(1 << 0)
+	usFlsaRecordsListDeclarationsRequestFieldTo         = big.NewInt(1 << 1)
+	usFlsaRecordsListDeclarationsRequestFieldEmployeeID = big.NewInt(1 << 2)
+)
+
+type UsFlsaRecordsListDeclarationsRequest struct {
+	From       time.Time `json:"from" url:"-" format:"date"`
+	To         time.Time `json:"to" url:"-" format:"date"`
+	EmployeeID *string   `json:"employeeId,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *UsFlsaRecordsListDeclarationsRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsRequest) SetFrom(from time.Time) {
+	u.From = from
+	u.require(usFlsaRecordsListDeclarationsRequestFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsRequest) SetTo(to time.Time) {
+	u.To = to
+	u.require(usFlsaRecordsListDeclarationsRequestFieldTo)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsFlsaRecordsListDeclarationsRequest) SetEmployeeID(employeeID *string) {
+	u.EmployeeID = employeeID
+	u.require(usFlsaRecordsListDeclarationsRequestFieldEmployeeID)
+}
+
+func (u *UsFlsaRecordsListDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsFlsaRecordsListDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = UsFlsaRecordsListDeclarationsRequest(body)
+	return nil
+}
+
+func (u *UsFlsaRecordsListDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed UsFlsaRecordsListDeclarationsRequest
+	var marshaler = struct {
+		embed
+		From *internal.Date `json:"from"`
+		To   *internal.Date `json:"to"`
+	}{
+		embed: embed(*u),
+		From:  internal.NewDate(u.From),
+		To:    internal.NewDate(u.To),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	usIncomeTaxReturnGetDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type UsIncomeTaxReturnGetDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsIncomeTaxReturnGetDeclarationsRequest) SetYear(year int64) {
+	u.Year = year
+	u.require(usIncomeTaxReturnGetDeclarationsRequestFieldYear)
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsIncomeTaxReturnGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = UsIncomeTaxReturnGetDeclarationsRequest(body)
+	return nil
+}
+
+func (u *UsIncomeTaxReturnGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed UsIncomeTaxReturnGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	usSalesTaxGetDeclarationsRequestFieldFrom = big.NewInt(1 << 0)
+	usSalesTaxGetDeclarationsRequestFieldTo   = big.NewInt(1 << 1)
+)
+
+type UsSalesTaxGetDeclarationsRequest struct {
+	From time.Time `json:"from" url:"-" format:"date"`
+	To   time.Time `json:"to" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *UsSalesTaxGetDeclarationsRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetFrom sets the From field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsRequest) SetFrom(from time.Time) {
+	u.From = from
+	u.require(usSalesTaxGetDeclarationsRequestFieldFrom)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UsSalesTaxGetDeclarationsRequest) SetTo(to time.Time) {
+	u.To = to
+	u.require(usSalesTaxGetDeclarationsRequestFieldTo)
+}
+
+func (u *UsSalesTaxGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler UsSalesTaxGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = UsSalesTaxGetDeclarationsRequest(body)
+	return nil
+}
+
+func (u *UsSalesTaxGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed UsSalesTaxGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+		From *internal.Date `json:"from"`
+		To   *internal.Date `json:"to"`
+	}{
+		embed: embed(*u),
+		From:  internal.NewDate(u.From),
+		To:    internal.NewDate(u.To),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
 	return json.Marshal(explicitMarshaler)

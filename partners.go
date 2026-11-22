@@ -1153,6 +1153,7 @@ var (
 	createPartnersRequestFieldIsGroupMember         = big.NewInt(1 << 34)
 	createPartnersRequestFieldIsActive              = big.NewInt(1 << 35)
 	createPartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
+	createPartnersRequestFieldIdentifiers           = big.NewInt(1 << 37)
 )
 
 type CreatePartnersRequest struct {
@@ -1196,6 +1197,8 @@ type CreatePartnersRequest struct {
 	IsGroupMember         *bool                                       `json:"isGroupMember,omitempty" url:"-"`
 	IsActive              *bool                                       `json:"isActive,omitempty" url:"-"`
 	LegalCountryClass     *CreatePartnersRequestLegalCountryClass     `json:"legalCountryClass,omitempty" url:"-"`
+	// Tax data of the partner by key, checked against the company's country: `tin` (US, Taxpayer identification number (TIN) from Form W-9, 9 digits); `tinType` (US, Type of the taxpayer identification number, SSN, EIN, ITIN or ATIN); `taxClassification` (US, Federal tax classification (Form W-9, line 3a), individual, c-corporation, s-corporation, partnership, trust-estate, llc-c, llc-s, llc-p, other); `nonemployeeCompensation` (US, Paid for services as nonemployee compensation (Form 1099-NEC, box 1), yes or no)
+	Identifiers map[string]string `json:"identifiers,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1465,6 +1468,13 @@ func (c *CreatePartnersRequest) SetIsActive(isActive *bool) {
 func (c *CreatePartnersRequest) SetLegalCountryClass(legalCountryClass *CreatePartnersRequestLegalCountryClass) {
 	c.LegalCountryClass = legalCountryClass
 	c.require(createPartnersRequestFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersRequest) SetIdentifiers(identifiers map[string]string) {
+	c.Identifiers = identifiers
+	c.require(createPartnersRequestFieldIdentifiers)
 }
 
 func (c *CreatePartnersRequest) UnmarshalJSON(data []byte) error {
@@ -1858,7 +1868,8 @@ var (
 	findOrCreatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 34)
 	findOrCreatePartnersRequestFieldIsActive              = big.NewInt(1 << 35)
 	findOrCreatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 36)
-	findOrCreatePartnersRequestFieldIban                  = big.NewInt(1 << 37)
+	findOrCreatePartnersRequestFieldIdentifiers           = big.NewInt(1 << 37)
+	findOrCreatePartnersRequestFieldIban                  = big.NewInt(1 << 38)
 )
 
 type FindOrCreatePartnersRequest struct {
@@ -1902,7 +1913,9 @@ type FindOrCreatePartnersRequest struct {
 	IsGroupMember         *bool                                             `json:"isGroupMember,omitempty" url:"-"`
 	IsActive              *bool                                             `json:"isActive,omitempty" url:"-"`
 	LegalCountryClass     *FindOrCreatePartnersRequestLegalCountryClass     `json:"legalCountryClass,omitempty" url:"-"`
-	Iban                  *string                                           `json:"iban,omitempty" url:"-"`
+	// Tax data of the partner by key, checked against the company's country: `tin` (US, Taxpayer identification number (TIN) from Form W-9, 9 digits); `tinType` (US, Type of the taxpayer identification number, SSN, EIN, ITIN or ATIN); `taxClassification` (US, Federal tax classification (Form W-9, line 3a), individual, c-corporation, s-corporation, partnership, trust-estate, llc-c, llc-s, llc-p, other); `nonemployeeCompensation` (US, Paid for services as nonemployee compensation (Form 1099-NEC, box 1), yes or no)
+	Identifiers map[string]string `json:"identifiers,omitempty" url:"-"`
+	Iban        *string           `json:"iban,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2172,6 +2185,13 @@ func (f *FindOrCreatePartnersRequest) SetIsActive(isActive *bool) {
 func (f *FindOrCreatePartnersRequest) SetLegalCountryClass(legalCountryClass *FindOrCreatePartnersRequestLegalCountryClass) {
 	f.LegalCountryClass = legalCountryClass
 	f.require(findOrCreatePartnersRequestFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersRequest) SetIdentifiers(identifiers map[string]string) {
+	f.Identifiers = identifiers
+	f.require(findOrCreatePartnersRequestFieldIdentifiers)
 }
 
 // SetIban sets the Iban field and marks it as non-optional;
@@ -2925,6 +2945,276 @@ func (m *MergePartnersRequest) MarshalJSON() ([]byte, error) {
 		embed: embed(*m),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	salesTaxExemptionsCancelPartnersRequestFieldID          = big.NewInt(1 << 0)
+	salesTaxExemptionsCancelPartnersRequestFieldCancelledOn = big.NewInt(1 << 1)
+)
+
+type SalesTaxExemptionsCancelPartnersRequest struct {
+	ID          string    `json:"id" url:"-"`
+	CancelledOn time.Time `json:"cancelledOn" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SalesTaxExemptionsCancelPartnersRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersRequest) SetID(id string) {
+	s.ID = id
+	s.require(salesTaxExemptionsCancelPartnersRequestFieldID)
+}
+
+// SetCancelledOn sets the CancelledOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersRequest) SetCancelledOn(cancelledOn time.Time) {
+	s.CancelledOn = cancelledOn
+	s.require(salesTaxExemptionsCancelPartnersRequestFieldCancelledOn)
+}
+
+func (s *SalesTaxExemptionsCancelPartnersRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SalesTaxExemptionsCancelPartnersRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SalesTaxExemptionsCancelPartnersRequest(body)
+	return nil
+}
+
+func (s *SalesTaxExemptionsCancelPartnersRequest) MarshalJSON() ([]byte, error) {
+	type embed SalesTaxExemptionsCancelPartnersRequest
+	var marshaler = struct {
+		embed
+		CancelledOn *internal.Date `json:"cancelledOn"`
+	}{
+		embed:       embed(*s),
+		CancelledOn: internal.NewDate(s.CancelledOn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	salesTaxExemptionsCreatePartnersRequestFieldPartnerID               = big.NewInt(1 << 0)
+	salesTaxExemptionsCreatePartnersRequestFieldState                   = big.NewInt(1 << 1)
+	salesTaxExemptionsCreatePartnersRequestFieldReasons                 = big.NewInt(1 << 2)
+	salesTaxExemptionsCreatePartnersRequestFieldOtherReason             = big.NewInt(1 << 3)
+	salesTaxExemptionsCreatePartnersRequestFieldReasonDetail            = big.NewInt(1 << 4)
+	salesTaxExemptionsCreatePartnersRequestFieldBusinessType            = big.NewInt(1 << 5)
+	salesTaxExemptionsCreatePartnersRequestFieldOtherBusinessType       = big.NewInt(1 << 6)
+	salesTaxExemptionsCreatePartnersRequestFieldIDNumber                = big.NewInt(1 << 7)
+	salesTaxExemptionsCreatePartnersRequestFieldIDIssuedBy              = big.NewInt(1 << 8)
+	salesTaxExemptionsCreatePartnersRequestFieldSinglePurchaseReference = big.NewInt(1 << 9)
+	salesTaxExemptionsCreatePartnersRequestFieldSignedBy                = big.NewInt(1 << 10)
+	salesTaxExemptionsCreatePartnersRequestFieldSignerTitle             = big.NewInt(1 << 11)
+	salesTaxExemptionsCreatePartnersRequestFieldSignedOn                = big.NewInt(1 << 12)
+	salesTaxExemptionsCreatePartnersRequestFieldReceivedOn              = big.NewInt(1 << 13)
+)
+
+type SalesTaxExemptionsCreatePartnersRequest struct {
+	PartnerID               string                                               `json:"partnerId" url:"-"`
+	State                   SalesTaxExemptionsCreatePartnersRequestState         `json:"state" url:"-"`
+	Reasons                 []SalesTaxExemptionsCreatePartnersRequestReasonsItem `json:"reasons" url:"-"`
+	OtherReason             *string                                              `json:"otherReason,omitempty" url:"-"`
+	ReasonDetail            *string                                              `json:"reasonDetail,omitempty" url:"-"`
+	BusinessType            SalesTaxExemptionsCreatePartnersRequestBusinessType  `json:"businessType" url:"-"`
+	OtherBusinessType       *string                                              `json:"otherBusinessType,omitempty" url:"-"`
+	IDNumber                string                                               `json:"idNumber" url:"-"`
+	IDIssuedBy              string                                               `json:"idIssuedBy" url:"-"`
+	SinglePurchaseReference *string                                              `json:"singlePurchaseReference,omitempty" url:"-"`
+	SignedBy                *string                                              `json:"signedBy,omitempty" url:"-"`
+	SignerTitle             *string                                              `json:"signerTitle,omitempty" url:"-"`
+	SignedOn                *time.Time                                           `json:"signedOn,omitempty" url:"-" format:"date"`
+	ReceivedOn              time.Time                                            `json:"receivedOn" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SalesTaxExemptionsCreatePartnersRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetPartnerID(partnerID string) {
+	s.PartnerID = partnerID
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldPartnerID)
+}
+
+// SetState sets the State field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetState(state SalesTaxExemptionsCreatePartnersRequestState) {
+	s.State = state
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldState)
+}
+
+// SetReasons sets the Reasons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetReasons(reasons []SalesTaxExemptionsCreatePartnersRequestReasonsItem) {
+	s.Reasons = reasons
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldReasons)
+}
+
+// SetOtherReason sets the OtherReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetOtherReason(otherReason *string) {
+	s.OtherReason = otherReason
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldOtherReason)
+}
+
+// SetReasonDetail sets the ReasonDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetReasonDetail(reasonDetail *string) {
+	s.ReasonDetail = reasonDetail
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldReasonDetail)
+}
+
+// SetBusinessType sets the BusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetBusinessType(businessType SalesTaxExemptionsCreatePartnersRequestBusinessType) {
+	s.BusinessType = businessType
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldBusinessType)
+}
+
+// SetOtherBusinessType sets the OtherBusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetOtherBusinessType(otherBusinessType *string) {
+	s.OtherBusinessType = otherBusinessType
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldOtherBusinessType)
+}
+
+// SetIDNumber sets the IDNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetIDNumber(idNumber string) {
+	s.IDNumber = idNumber
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldIDNumber)
+}
+
+// SetIDIssuedBy sets the IDIssuedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetIDIssuedBy(idIssuedBy string) {
+	s.IDIssuedBy = idIssuedBy
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldIDIssuedBy)
+}
+
+// SetSinglePurchaseReference sets the SinglePurchaseReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetSinglePurchaseReference(singlePurchaseReference *string) {
+	s.SinglePurchaseReference = singlePurchaseReference
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldSinglePurchaseReference)
+}
+
+// SetSignedBy sets the SignedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetSignedBy(signedBy *string) {
+	s.SignedBy = signedBy
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldSignedBy)
+}
+
+// SetSignerTitle sets the SignerTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetSignerTitle(signerTitle *string) {
+	s.SignerTitle = signerTitle
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldSignerTitle)
+}
+
+// SetSignedOn sets the SignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetSignedOn(signedOn *time.Time) {
+	s.SignedOn = signedOn
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldSignedOn)
+}
+
+// SetReceivedOn sets the ReceivedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersRequest) SetReceivedOn(receivedOn time.Time) {
+	s.ReceivedOn = receivedOn
+	s.require(salesTaxExemptionsCreatePartnersRequestFieldReceivedOn)
+}
+
+func (s *SalesTaxExemptionsCreatePartnersRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SalesTaxExemptionsCreatePartnersRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SalesTaxExemptionsCreatePartnersRequest(body)
+	return nil
+}
+
+func (s *SalesTaxExemptionsCreatePartnersRequest) MarshalJSON() ([]byte, error) {
+	type embed SalesTaxExemptionsCreatePartnersRequest
+	var marshaler = struct {
+		embed
+		SignedOn   *internal.Date `json:"signedOn,omitempty"`
+		ReceivedOn *internal.Date `json:"receivedOn"`
+	}{
+		embed:      embed(*s),
+		SignedOn:   internal.NewOptionalDate(s.SignedOn),
+		ReceivedOn: internal.NewDate(s.ReceivedOn),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	salesTaxExemptionsListPartnersRequestFieldPartnerID = big.NewInt(1 << 0)
+)
+
+type SalesTaxExemptionsListPartnersRequest struct {
+	PartnerID *string `json:"partnerId,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SalesTaxExemptionsListPartnersRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersRequest) SetPartnerID(partnerID *string) {
+	s.PartnerID = partnerID
+	s.require(salesTaxExemptionsListPartnersRequestFieldPartnerID)
+}
+
+func (s *SalesTaxExemptionsListPartnersRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SalesTaxExemptionsListPartnersRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SalesTaxExemptionsListPartnersRequest(body)
+	return nil
+}
+
+func (s *SalesTaxExemptionsListPartnersRequest) MarshalJSON() ([]byte, error) {
+	type embed SalesTaxExemptionsListPartnersRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 
@@ -8868,8 +9158,9 @@ var (
 	createPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 37)
 	createPartnersResponseFieldIsActive              = big.NewInt(1 << 38)
 	createPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 39)
-	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 40)
-	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 41)
+	createPartnersResponseFieldIdentifiers           = big.NewInt(1 << 40)
+	createPartnersResponseFieldCreatedAt             = big.NewInt(1 << 41)
+	createPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 42)
 )
 
 type CreatePartnersResponse struct {
@@ -8913,6 +9204,7 @@ type CreatePartnersResponse struct {
 	IsGroupMember         bool                                         `json:"isGroupMember" url:"isGroupMember"`
 	IsActive              bool                                         `json:"isActive" url:"isActive"`
 	LegalCountryClass     *CreatePartnersResponseLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	Identifiers           map[string]string                            `json:"identifiers" url:"identifiers"`
 	CreatedAt             time.Time                                    `json:"createdAt" url:"createdAt"`
 	UpdatedAt             time.Time                                    `json:"updatedAt" url:"updatedAt"`
 
@@ -9201,6 +9493,13 @@ func (c *CreatePartnersResponse) GetLegalCountryClass() *CreatePartnersResponseL
 		return nil
 	}
 	return c.LegalCountryClass
+}
+
+func (c *CreatePartnersResponse) GetIdentifiers() map[string]string {
+	if c == nil {
+		return nil
+	}
+	return c.Identifiers
 }
 
 func (c *CreatePartnersResponse) GetCreatedAt() time.Time {
@@ -9509,6 +9808,13 @@ func (c *CreatePartnersResponse) SetIsActive(isActive bool) {
 func (c *CreatePartnersResponse) SetLegalCountryClass(legalCountryClass *CreatePartnersResponseLegalCountryClass) {
 	c.LegalCountryClass = legalCountryClass
 	c.require(createPartnersResponseFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreatePartnersResponse) SetIdentifiers(identifiers map[string]string) {
+	c.Identifiers = identifiers
+	c.require(createPartnersResponseFieldIdentifiers)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -13608,8 +13914,9 @@ var (
 	findOrCreatePartnersResponsePartnerFieldIsGroupMember         = big.NewInt(1 << 37)
 	findOrCreatePartnersResponsePartnerFieldIsActive              = big.NewInt(1 << 38)
 	findOrCreatePartnersResponsePartnerFieldLegalCountryClass     = big.NewInt(1 << 39)
-	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 40)
-	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 41)
+	findOrCreatePartnersResponsePartnerFieldIdentifiers           = big.NewInt(1 << 40)
+	findOrCreatePartnersResponsePartnerFieldCreatedAt             = big.NewInt(1 << 41)
+	findOrCreatePartnersResponsePartnerFieldUpdatedAt             = big.NewInt(1 << 42)
 )
 
 type FindOrCreatePartnersResponsePartner struct {
@@ -13653,6 +13960,7 @@ type FindOrCreatePartnersResponsePartner struct {
 	IsGroupMember         bool                                                      `json:"isGroupMember" url:"isGroupMember"`
 	IsActive              bool                                                      `json:"isActive" url:"isActive"`
 	LegalCountryClass     *FindOrCreatePartnersResponsePartnerLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	Identifiers           map[string]string                                         `json:"identifiers" url:"identifiers"`
 	CreatedAt             time.Time                                                 `json:"createdAt" url:"createdAt"`
 	UpdatedAt             time.Time                                                 `json:"updatedAt" url:"updatedAt"`
 
@@ -13941,6 +14249,13 @@ func (f *FindOrCreatePartnersResponsePartner) GetLegalCountryClass() *FindOrCrea
 		return nil
 	}
 	return f.LegalCountryClass
+}
+
+func (f *FindOrCreatePartnersResponsePartner) GetIdentifiers() map[string]string {
+	if f == nil {
+		return nil
+	}
+	return f.Identifiers
 }
 
 func (f *FindOrCreatePartnersResponsePartner) GetCreatedAt() time.Time {
@@ -14249,6 +14564,13 @@ func (f *FindOrCreatePartnersResponsePartner) SetIsActive(isActive bool) {
 func (f *FindOrCreatePartnersResponsePartner) SetLegalCountryClass(legalCountryClass *FindOrCreatePartnersResponsePartnerLegalCountryClass) {
 	f.LegalCountryClass = legalCountryClass
 	f.require(findOrCreatePartnersResponsePartnerFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (f *FindOrCreatePartnersResponsePartner) SetIdentifiers(identifiers map[string]string) {
+	f.Identifiers = identifiers
+	f.require(findOrCreatePartnersResponsePartnerFieldIdentifiers)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -14789,8 +15111,9 @@ var (
 	getPartnersResponseFieldIsGroupMember         = big.NewInt(1 << 37)
 	getPartnersResponseFieldIsActive              = big.NewInt(1 << 38)
 	getPartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 39)
-	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 40)
-	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 41)
+	getPartnersResponseFieldIdentifiers           = big.NewInt(1 << 40)
+	getPartnersResponseFieldCreatedAt             = big.NewInt(1 << 41)
+	getPartnersResponseFieldUpdatedAt             = big.NewInt(1 << 42)
 )
 
 type GetPartnersResponse struct {
@@ -14834,6 +15157,7 @@ type GetPartnersResponse struct {
 	IsGroupMember         bool                                      `json:"isGroupMember" url:"isGroupMember"`
 	IsActive              bool                                      `json:"isActive" url:"isActive"`
 	LegalCountryClass     *GetPartnersResponseLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	Identifiers           map[string]string                         `json:"identifiers" url:"identifiers"`
 	CreatedAt             time.Time                                 `json:"createdAt" url:"createdAt"`
 	UpdatedAt             time.Time                                 `json:"updatedAt" url:"updatedAt"`
 
@@ -15122,6 +15446,13 @@ func (g *GetPartnersResponse) GetLegalCountryClass() *GetPartnersResponseLegalCo
 		return nil
 	}
 	return g.LegalCountryClass
+}
+
+func (g *GetPartnersResponse) GetIdentifiers() map[string]string {
+	if g == nil {
+		return nil
+	}
+	return g.Identifiers
 }
 
 func (g *GetPartnersResponse) GetCreatedAt() time.Time {
@@ -15430,6 +15761,13 @@ func (g *GetPartnersResponse) SetIsActive(isActive bool) {
 func (g *GetPartnersResponse) SetLegalCountryClass(legalCountryClass *GetPartnersResponseLegalCountryClass) {
 	g.LegalCountryClass = legalCountryClass
 	g.require(getPartnersResponseFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetPartnersResponse) SetIdentifiers(identifiers map[string]string) {
+	g.Identifiers = identifiers
+	g.require(getPartnersResponseFieldIdentifiers)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -19185,8 +19523,9 @@ var (
 	listPartnersResponseRowsItemFieldIsGroupMember         = big.NewInt(1 << 37)
 	listPartnersResponseRowsItemFieldIsActive              = big.NewInt(1 << 38)
 	listPartnersResponseRowsItemFieldLegalCountryClass     = big.NewInt(1 << 39)
-	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 40)
-	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 41)
+	listPartnersResponseRowsItemFieldIdentifiers           = big.NewInt(1 << 40)
+	listPartnersResponseRowsItemFieldCreatedAt             = big.NewInt(1 << 41)
+	listPartnersResponseRowsItemFieldUpdatedAt             = big.NewInt(1 << 42)
 )
 
 type ListPartnersResponseRowsItem struct {
@@ -19230,6 +19569,7 @@ type ListPartnersResponseRowsItem struct {
 	IsGroupMember         bool                                               `json:"isGroupMember" url:"isGroupMember"`
 	IsActive              bool                                               `json:"isActive" url:"isActive"`
 	LegalCountryClass     *ListPartnersResponseRowsItemLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	Identifiers           map[string]string                                  `json:"identifiers" url:"identifiers"`
 	CreatedAt             time.Time                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt             time.Time                                          `json:"updatedAt" url:"updatedAt"`
 
@@ -19518,6 +19858,13 @@ func (l *ListPartnersResponseRowsItem) GetLegalCountryClass() *ListPartnersRespo
 		return nil
 	}
 	return l.LegalCountryClass
+}
+
+func (l *ListPartnersResponseRowsItem) GetIdentifiers() map[string]string {
+	if l == nil {
+		return nil
+	}
+	return l.Identifiers
 }
 
 func (l *ListPartnersResponseRowsItem) GetCreatedAt() time.Time {
@@ -19826,6 +20173,13 @@ func (l *ListPartnersResponseRowsItem) SetIsActive(isActive bool) {
 func (l *ListPartnersResponseRowsItem) SetLegalCountryClass(legalCountryClass *ListPartnersResponseRowsItemLegalCountryClass) {
 	l.LegalCountryClass = legalCountryClass
 	l.require(listPartnersResponseRowsItemFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListPartnersResponseRowsItem) SetIdentifiers(identifiers map[string]string) {
+	l.Identifiers = identifiers
+	l.require(listPartnersResponseRowsItemFieldIdentifiers)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -20555,6 +20909,1281 @@ func (m *MergePartnersResponseMovedItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", m)
+}
+
+var (
+	salesTaxExemptionsCancelPartnersResponseFieldID                      = big.NewInt(1 << 0)
+	salesTaxExemptionsCancelPartnersResponseFieldPartnerID               = big.NewInt(1 << 1)
+	salesTaxExemptionsCancelPartnersResponseFieldState                   = big.NewInt(1 << 2)
+	salesTaxExemptionsCancelPartnersResponseFieldReasons                 = big.NewInt(1 << 3)
+	salesTaxExemptionsCancelPartnersResponseFieldOtherReason             = big.NewInt(1 << 4)
+	salesTaxExemptionsCancelPartnersResponseFieldReasonDetail            = big.NewInt(1 << 5)
+	salesTaxExemptionsCancelPartnersResponseFieldBusinessType            = big.NewInt(1 << 6)
+	salesTaxExemptionsCancelPartnersResponseFieldOtherBusinessType       = big.NewInt(1 << 7)
+	salesTaxExemptionsCancelPartnersResponseFieldIDNumber                = big.NewInt(1 << 8)
+	salesTaxExemptionsCancelPartnersResponseFieldIDIssuedBy              = big.NewInt(1 << 9)
+	salesTaxExemptionsCancelPartnersResponseFieldSinglePurchaseReference = big.NewInt(1 << 10)
+	salesTaxExemptionsCancelPartnersResponseFieldSignedBy                = big.NewInt(1 << 11)
+	salesTaxExemptionsCancelPartnersResponseFieldSignerTitle             = big.NewInt(1 << 12)
+	salesTaxExemptionsCancelPartnersResponseFieldSignedOn                = big.NewInt(1 << 13)
+	salesTaxExemptionsCancelPartnersResponseFieldReceivedOn              = big.NewInt(1 << 14)
+	salesTaxExemptionsCancelPartnersResponseFieldCancelledOn             = big.NewInt(1 << 15)
+)
+
+type SalesTaxExemptionsCancelPartnersResponse struct {
+	ID                      string   `json:"id" url:"id"`
+	PartnerID               string   `json:"partnerId" url:"partnerId"`
+	State                   string   `json:"state" url:"state"`
+	Reasons                 []string `json:"reasons" url:"reasons"`
+	OtherReason             *string  `json:"otherReason,omitempty" url:"otherReason,omitempty"`
+	ReasonDetail            *string  `json:"reasonDetail,omitempty" url:"reasonDetail,omitempty"`
+	BusinessType            string   `json:"businessType" url:"businessType"`
+	OtherBusinessType       *string  `json:"otherBusinessType,omitempty" url:"otherBusinessType,omitempty"`
+	IDNumber                string   `json:"idNumber" url:"idNumber"`
+	IDIssuedBy              string   `json:"idIssuedBy" url:"idIssuedBy"`
+	SinglePurchaseReference *string  `json:"singlePurchaseReference,omitempty" url:"singlePurchaseReference,omitempty"`
+	SignedBy                *string  `json:"signedBy,omitempty" url:"signedBy,omitempty"`
+	SignerTitle             *string  `json:"signerTitle,omitempty" url:"signerTitle,omitempty"`
+	SignedOn                *string  `json:"signedOn,omitempty" url:"signedOn,omitempty"`
+	ReceivedOn              string   `json:"receivedOn" url:"receivedOn"`
+	CancelledOn             *string  `json:"cancelledOn,omitempty" url:"cancelledOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetPartnerID() string {
+	if s == nil {
+		return ""
+	}
+	return s.PartnerID
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetState() string {
+	if s == nil {
+		return ""
+	}
+	return s.State
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetReasons() []string {
+	if s == nil {
+		return nil
+	}
+	return s.Reasons
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetOtherReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.OtherReason
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetReasonDetail() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonDetail
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetBusinessType() string {
+	if s == nil {
+		return ""
+	}
+	return s.BusinessType
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetOtherBusinessType() *string {
+	if s == nil {
+		return nil
+	}
+	return s.OtherBusinessType
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetIDNumber() string {
+	if s == nil {
+		return ""
+	}
+	return s.IDNumber
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetIDIssuedBy() string {
+	if s == nil {
+		return ""
+	}
+	return s.IDIssuedBy
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetSinglePurchaseReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SinglePurchaseReference
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetSignedBy() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignedBy
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetSignerTitle() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignerTitle
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetSignedOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignedOn
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetReceivedOn() string {
+	if s == nil {
+		return ""
+	}
+	return s.ReceivedOn
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetCancelledOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CancelledOn
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetID(id string) {
+	s.ID = id
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetPartnerID(partnerID string) {
+	s.PartnerID = partnerID
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldPartnerID)
+}
+
+// SetState sets the State field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetState(state string) {
+	s.State = state
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldState)
+}
+
+// SetReasons sets the Reasons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetReasons(reasons []string) {
+	s.Reasons = reasons
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldReasons)
+}
+
+// SetOtherReason sets the OtherReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetOtherReason(otherReason *string) {
+	s.OtherReason = otherReason
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldOtherReason)
+}
+
+// SetReasonDetail sets the ReasonDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetReasonDetail(reasonDetail *string) {
+	s.ReasonDetail = reasonDetail
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldReasonDetail)
+}
+
+// SetBusinessType sets the BusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetBusinessType(businessType string) {
+	s.BusinessType = businessType
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldBusinessType)
+}
+
+// SetOtherBusinessType sets the OtherBusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetOtherBusinessType(otherBusinessType *string) {
+	s.OtherBusinessType = otherBusinessType
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldOtherBusinessType)
+}
+
+// SetIDNumber sets the IDNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetIDNumber(idNumber string) {
+	s.IDNumber = idNumber
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldIDNumber)
+}
+
+// SetIDIssuedBy sets the IDIssuedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetIDIssuedBy(idIssuedBy string) {
+	s.IDIssuedBy = idIssuedBy
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldIDIssuedBy)
+}
+
+// SetSinglePurchaseReference sets the SinglePurchaseReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetSinglePurchaseReference(singlePurchaseReference *string) {
+	s.SinglePurchaseReference = singlePurchaseReference
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldSinglePurchaseReference)
+}
+
+// SetSignedBy sets the SignedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetSignedBy(signedBy *string) {
+	s.SignedBy = signedBy
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldSignedBy)
+}
+
+// SetSignerTitle sets the SignerTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetSignerTitle(signerTitle *string) {
+	s.SignerTitle = signerTitle
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldSignerTitle)
+}
+
+// SetSignedOn sets the SignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetSignedOn(signedOn *string) {
+	s.SignedOn = signedOn
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldSignedOn)
+}
+
+// SetReceivedOn sets the ReceivedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetReceivedOn(receivedOn string) {
+	s.ReceivedOn = receivedOn
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldReceivedOn)
+}
+
+// SetCancelledOn sets the CancelledOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCancelPartnersResponse) SetCancelledOn(cancelledOn *string) {
+	s.CancelledOn = cancelledOn
+	s.require(salesTaxExemptionsCancelPartnersResponseFieldCancelledOn)
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SalesTaxExemptionsCancelPartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SalesTaxExemptionsCancelPartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed SalesTaxExemptionsCancelPartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SalesTaxExemptionsCancelPartnersResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+type SalesTaxExemptionsCreatePartnersRequestBusinessType string
+
+const (
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeTen       SalesTaxExemptionsCreatePartnersRequestBusinessType = "10"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeEleven    SalesTaxExemptionsCreatePartnersRequestBusinessType = "11"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeTwelve    SalesTaxExemptionsCreatePartnersRequestBusinessType = "12"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeThirteen  SalesTaxExemptionsCreatePartnersRequestBusinessType = "13"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeFourteen  SalesTaxExemptionsCreatePartnersRequestBusinessType = "14"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeFifteen   SalesTaxExemptionsCreatePartnersRequestBusinessType = "15"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeSixteen   SalesTaxExemptionsCreatePartnersRequestBusinessType = "16"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeSeventeen SalesTaxExemptionsCreatePartnersRequestBusinessType = "17"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeEighteen  SalesTaxExemptionsCreatePartnersRequestBusinessType = "18"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeNineteen  SalesTaxExemptionsCreatePartnersRequestBusinessType = "19"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeTwenty    SalesTaxExemptionsCreatePartnersRequestBusinessType = "20"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeOne       SalesTaxExemptionsCreatePartnersRequestBusinessType = "01"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeTwo       SalesTaxExemptionsCreatePartnersRequestBusinessType = "02"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeThree     SalesTaxExemptionsCreatePartnersRequestBusinessType = "03"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeFour      SalesTaxExemptionsCreatePartnersRequestBusinessType = "04"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeFive      SalesTaxExemptionsCreatePartnersRequestBusinessType = "05"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeSix       SalesTaxExemptionsCreatePartnersRequestBusinessType = "06"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeSeven     SalesTaxExemptionsCreatePartnersRequestBusinessType = "07"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeEight     SalesTaxExemptionsCreatePartnersRequestBusinessType = "08"
+	SalesTaxExemptionsCreatePartnersRequestBusinessTypeNine      SalesTaxExemptionsCreatePartnersRequestBusinessType = "09"
+)
+
+func NewSalesTaxExemptionsCreatePartnersRequestBusinessTypeFromString(s string) (SalesTaxExemptionsCreatePartnersRequestBusinessType, error) {
+	switch s {
+	case "10":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeTen, nil
+	case "11":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeEleven, nil
+	case "12":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeTwelve, nil
+	case "13":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeThirteen, nil
+	case "14":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeFourteen, nil
+	case "15":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeFifteen, nil
+	case "16":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeSixteen, nil
+	case "17":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeSeventeen, nil
+	case "18":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeEighteen, nil
+	case "19":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeNineteen, nil
+	case "20":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeTwenty, nil
+	case "01":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeOne, nil
+	case "02":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeTwo, nil
+	case "03":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeThree, nil
+	case "04":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeFour, nil
+	case "05":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeFive, nil
+	case "06":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeSix, nil
+	case "07":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeSeven, nil
+	case "08":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeEight, nil
+	case "09":
+		return SalesTaxExemptionsCreatePartnersRequestBusinessTypeNine, nil
+	}
+	var t SalesTaxExemptionsCreatePartnersRequestBusinessType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SalesTaxExemptionsCreatePartnersRequestBusinessType) Ptr() *SalesTaxExemptionsCreatePartnersRequestBusinessType {
+	return &s
+}
+
+type SalesTaxExemptionsCreatePartnersRequestReasonsItem string
+
+const (
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemA SalesTaxExemptionsCreatePartnersRequestReasonsItem = "A"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemB SalesTaxExemptionsCreatePartnersRequestReasonsItem = "B"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemC SalesTaxExemptionsCreatePartnersRequestReasonsItem = "C"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemD SalesTaxExemptionsCreatePartnersRequestReasonsItem = "D"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemE SalesTaxExemptionsCreatePartnersRequestReasonsItem = "E"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemF SalesTaxExemptionsCreatePartnersRequestReasonsItem = "F"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemG SalesTaxExemptionsCreatePartnersRequestReasonsItem = "G"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemH SalesTaxExemptionsCreatePartnersRequestReasonsItem = "H"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemI SalesTaxExemptionsCreatePartnersRequestReasonsItem = "I"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemJ SalesTaxExemptionsCreatePartnersRequestReasonsItem = "J"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemK SalesTaxExemptionsCreatePartnersRequestReasonsItem = "K"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemL SalesTaxExemptionsCreatePartnersRequestReasonsItem = "L"
+	SalesTaxExemptionsCreatePartnersRequestReasonsItemM SalesTaxExemptionsCreatePartnersRequestReasonsItem = "M"
+)
+
+func NewSalesTaxExemptionsCreatePartnersRequestReasonsItemFromString(s string) (SalesTaxExemptionsCreatePartnersRequestReasonsItem, error) {
+	switch s {
+	case "A":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemA, nil
+	case "B":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemB, nil
+	case "C":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemC, nil
+	case "D":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemD, nil
+	case "E":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemE, nil
+	case "F":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemF, nil
+	case "G":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemG, nil
+	case "H":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemH, nil
+	case "I":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemI, nil
+	case "J":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemJ, nil
+	case "K":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemK, nil
+	case "L":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemL, nil
+	case "M":
+		return SalesTaxExemptionsCreatePartnersRequestReasonsItemM, nil
+	}
+	var t SalesTaxExemptionsCreatePartnersRequestReasonsItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SalesTaxExemptionsCreatePartnersRequestReasonsItem) Ptr() *SalesTaxExemptionsCreatePartnersRequestReasonsItem {
+	return &s
+}
+
+type SalesTaxExemptionsCreatePartnersRequestState string
+
+const (
+	SalesTaxExemptionsCreatePartnersRequestStateUsAr SalesTaxExemptionsCreatePartnersRequestState = "US-AR"
+	SalesTaxExemptionsCreatePartnersRequestStateUsGa SalesTaxExemptionsCreatePartnersRequestState = "US-GA"
+	SalesTaxExemptionsCreatePartnersRequestStateUsIa SalesTaxExemptionsCreatePartnersRequestState = "US-IA"
+	SalesTaxExemptionsCreatePartnersRequestStateUsIn SalesTaxExemptionsCreatePartnersRequestState = "US-IN"
+	SalesTaxExemptionsCreatePartnersRequestStateUsKs SalesTaxExemptionsCreatePartnersRequestState = "US-KS"
+	SalesTaxExemptionsCreatePartnersRequestStateUsKy SalesTaxExemptionsCreatePartnersRequestState = "US-KY"
+	SalesTaxExemptionsCreatePartnersRequestStateUsMi SalesTaxExemptionsCreatePartnersRequestState = "US-MI"
+	SalesTaxExemptionsCreatePartnersRequestStateUsMn SalesTaxExemptionsCreatePartnersRequestState = "US-MN"
+	SalesTaxExemptionsCreatePartnersRequestStateUsNc SalesTaxExemptionsCreatePartnersRequestState = "US-NC"
+	SalesTaxExemptionsCreatePartnersRequestStateUsNd SalesTaxExemptionsCreatePartnersRequestState = "US-ND"
+	SalesTaxExemptionsCreatePartnersRequestStateUsNe SalesTaxExemptionsCreatePartnersRequestState = "US-NE"
+	SalesTaxExemptionsCreatePartnersRequestStateUsNj SalesTaxExemptionsCreatePartnersRequestState = "US-NJ"
+	SalesTaxExemptionsCreatePartnersRequestStateUsNv SalesTaxExemptionsCreatePartnersRequestState = "US-NV"
+	SalesTaxExemptionsCreatePartnersRequestStateUsOh SalesTaxExemptionsCreatePartnersRequestState = "US-OH"
+	SalesTaxExemptionsCreatePartnersRequestStateUsOk SalesTaxExemptionsCreatePartnersRequestState = "US-OK"
+	SalesTaxExemptionsCreatePartnersRequestStateUsRi SalesTaxExemptionsCreatePartnersRequestState = "US-RI"
+	SalesTaxExemptionsCreatePartnersRequestStateUsSd SalesTaxExemptionsCreatePartnersRequestState = "US-SD"
+	SalesTaxExemptionsCreatePartnersRequestStateUsTn SalesTaxExemptionsCreatePartnersRequestState = "US-TN"
+	SalesTaxExemptionsCreatePartnersRequestStateUsUt SalesTaxExemptionsCreatePartnersRequestState = "US-UT"
+	SalesTaxExemptionsCreatePartnersRequestStateUsVt SalesTaxExemptionsCreatePartnersRequestState = "US-VT"
+	SalesTaxExemptionsCreatePartnersRequestStateUsWa SalesTaxExemptionsCreatePartnersRequestState = "US-WA"
+	SalesTaxExemptionsCreatePartnersRequestStateUsWi SalesTaxExemptionsCreatePartnersRequestState = "US-WI"
+	SalesTaxExemptionsCreatePartnersRequestStateUsWv SalesTaxExemptionsCreatePartnersRequestState = "US-WV"
+	SalesTaxExemptionsCreatePartnersRequestStateUsWy SalesTaxExemptionsCreatePartnersRequestState = "US-WY"
+)
+
+func NewSalesTaxExemptionsCreatePartnersRequestStateFromString(s string) (SalesTaxExemptionsCreatePartnersRequestState, error) {
+	switch s {
+	case "US-AR":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsAr, nil
+	case "US-GA":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsGa, nil
+	case "US-IA":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsIa, nil
+	case "US-IN":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsIn, nil
+	case "US-KS":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsKs, nil
+	case "US-KY":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsKy, nil
+	case "US-MI":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsMi, nil
+	case "US-MN":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsMn, nil
+	case "US-NC":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsNc, nil
+	case "US-ND":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsNd, nil
+	case "US-NE":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsNe, nil
+	case "US-NJ":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsNj, nil
+	case "US-NV":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsNv, nil
+	case "US-OH":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsOh, nil
+	case "US-OK":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsOk, nil
+	case "US-RI":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsRi, nil
+	case "US-SD":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsSd, nil
+	case "US-TN":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsTn, nil
+	case "US-UT":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsUt, nil
+	case "US-VT":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsVt, nil
+	case "US-WA":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsWa, nil
+	case "US-WI":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsWi, nil
+	case "US-WV":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsWv, nil
+	case "US-WY":
+		return SalesTaxExemptionsCreatePartnersRequestStateUsWy, nil
+	}
+	var t SalesTaxExemptionsCreatePartnersRequestState
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SalesTaxExemptionsCreatePartnersRequestState) Ptr() *SalesTaxExemptionsCreatePartnersRequestState {
+	return &s
+}
+
+var (
+	salesTaxExemptionsCreatePartnersResponseFieldID                      = big.NewInt(1 << 0)
+	salesTaxExemptionsCreatePartnersResponseFieldPartnerID               = big.NewInt(1 << 1)
+	salesTaxExemptionsCreatePartnersResponseFieldState                   = big.NewInt(1 << 2)
+	salesTaxExemptionsCreatePartnersResponseFieldReasons                 = big.NewInt(1 << 3)
+	salesTaxExemptionsCreatePartnersResponseFieldOtherReason             = big.NewInt(1 << 4)
+	salesTaxExemptionsCreatePartnersResponseFieldReasonDetail            = big.NewInt(1 << 5)
+	salesTaxExemptionsCreatePartnersResponseFieldBusinessType            = big.NewInt(1 << 6)
+	salesTaxExemptionsCreatePartnersResponseFieldOtherBusinessType       = big.NewInt(1 << 7)
+	salesTaxExemptionsCreatePartnersResponseFieldIDNumber                = big.NewInt(1 << 8)
+	salesTaxExemptionsCreatePartnersResponseFieldIDIssuedBy              = big.NewInt(1 << 9)
+	salesTaxExemptionsCreatePartnersResponseFieldSinglePurchaseReference = big.NewInt(1 << 10)
+	salesTaxExemptionsCreatePartnersResponseFieldSignedBy                = big.NewInt(1 << 11)
+	salesTaxExemptionsCreatePartnersResponseFieldSignerTitle             = big.NewInt(1 << 12)
+	salesTaxExemptionsCreatePartnersResponseFieldSignedOn                = big.NewInt(1 << 13)
+	salesTaxExemptionsCreatePartnersResponseFieldReceivedOn              = big.NewInt(1 << 14)
+	salesTaxExemptionsCreatePartnersResponseFieldCancelledOn             = big.NewInt(1 << 15)
+)
+
+type SalesTaxExemptionsCreatePartnersResponse struct {
+	ID                      string   `json:"id" url:"id"`
+	PartnerID               string   `json:"partnerId" url:"partnerId"`
+	State                   string   `json:"state" url:"state"`
+	Reasons                 []string `json:"reasons" url:"reasons"`
+	OtherReason             *string  `json:"otherReason,omitempty" url:"otherReason,omitempty"`
+	ReasonDetail            *string  `json:"reasonDetail,omitempty" url:"reasonDetail,omitempty"`
+	BusinessType            string   `json:"businessType" url:"businessType"`
+	OtherBusinessType       *string  `json:"otherBusinessType,omitempty" url:"otherBusinessType,omitempty"`
+	IDNumber                string   `json:"idNumber" url:"idNumber"`
+	IDIssuedBy              string   `json:"idIssuedBy" url:"idIssuedBy"`
+	SinglePurchaseReference *string  `json:"singlePurchaseReference,omitempty" url:"singlePurchaseReference,omitempty"`
+	SignedBy                *string  `json:"signedBy,omitempty" url:"signedBy,omitempty"`
+	SignerTitle             *string  `json:"signerTitle,omitempty" url:"signerTitle,omitempty"`
+	SignedOn                *string  `json:"signedOn,omitempty" url:"signedOn,omitempty"`
+	ReceivedOn              string   `json:"receivedOn" url:"receivedOn"`
+	CancelledOn             *string  `json:"cancelledOn,omitempty" url:"cancelledOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetPartnerID() string {
+	if s == nil {
+		return ""
+	}
+	return s.PartnerID
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetState() string {
+	if s == nil {
+		return ""
+	}
+	return s.State
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetReasons() []string {
+	if s == nil {
+		return nil
+	}
+	return s.Reasons
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetOtherReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.OtherReason
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetReasonDetail() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonDetail
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetBusinessType() string {
+	if s == nil {
+		return ""
+	}
+	return s.BusinessType
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetOtherBusinessType() *string {
+	if s == nil {
+		return nil
+	}
+	return s.OtherBusinessType
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetIDNumber() string {
+	if s == nil {
+		return ""
+	}
+	return s.IDNumber
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetIDIssuedBy() string {
+	if s == nil {
+		return ""
+	}
+	return s.IDIssuedBy
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetSinglePurchaseReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SinglePurchaseReference
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetSignedBy() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignedBy
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetSignerTitle() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignerTitle
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetSignedOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignedOn
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetReceivedOn() string {
+	if s == nil {
+		return ""
+	}
+	return s.ReceivedOn
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetCancelledOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CancelledOn
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetID(id string) {
+	s.ID = id
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetPartnerID(partnerID string) {
+	s.PartnerID = partnerID
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldPartnerID)
+}
+
+// SetState sets the State field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetState(state string) {
+	s.State = state
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldState)
+}
+
+// SetReasons sets the Reasons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetReasons(reasons []string) {
+	s.Reasons = reasons
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldReasons)
+}
+
+// SetOtherReason sets the OtherReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetOtherReason(otherReason *string) {
+	s.OtherReason = otherReason
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldOtherReason)
+}
+
+// SetReasonDetail sets the ReasonDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetReasonDetail(reasonDetail *string) {
+	s.ReasonDetail = reasonDetail
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldReasonDetail)
+}
+
+// SetBusinessType sets the BusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetBusinessType(businessType string) {
+	s.BusinessType = businessType
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldBusinessType)
+}
+
+// SetOtherBusinessType sets the OtherBusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetOtherBusinessType(otherBusinessType *string) {
+	s.OtherBusinessType = otherBusinessType
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldOtherBusinessType)
+}
+
+// SetIDNumber sets the IDNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetIDNumber(idNumber string) {
+	s.IDNumber = idNumber
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldIDNumber)
+}
+
+// SetIDIssuedBy sets the IDIssuedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetIDIssuedBy(idIssuedBy string) {
+	s.IDIssuedBy = idIssuedBy
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldIDIssuedBy)
+}
+
+// SetSinglePurchaseReference sets the SinglePurchaseReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetSinglePurchaseReference(singlePurchaseReference *string) {
+	s.SinglePurchaseReference = singlePurchaseReference
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldSinglePurchaseReference)
+}
+
+// SetSignedBy sets the SignedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetSignedBy(signedBy *string) {
+	s.SignedBy = signedBy
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldSignedBy)
+}
+
+// SetSignerTitle sets the SignerTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetSignerTitle(signerTitle *string) {
+	s.SignerTitle = signerTitle
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldSignerTitle)
+}
+
+// SetSignedOn sets the SignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetSignedOn(signedOn *string) {
+	s.SignedOn = signedOn
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldSignedOn)
+}
+
+// SetReceivedOn sets the ReceivedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetReceivedOn(receivedOn string) {
+	s.ReceivedOn = receivedOn
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldReceivedOn)
+}
+
+// SetCancelledOn sets the CancelledOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsCreatePartnersResponse) SetCancelledOn(cancelledOn *string) {
+	s.CancelledOn = cancelledOn
+	s.require(salesTaxExemptionsCreatePartnersResponseFieldCancelledOn)
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SalesTaxExemptionsCreatePartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SalesTaxExemptionsCreatePartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed SalesTaxExemptionsCreatePartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SalesTaxExemptionsCreatePartnersResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	salesTaxExemptionsListPartnersResponseFieldItems = big.NewInt(1 << 0)
+)
+
+type SalesTaxExemptionsListPartnersResponse struct {
+	Items []*SalesTaxExemptionsListPartnersResponseItemsItem `json:"items" url:"items"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SalesTaxExemptionsListPartnersResponse) GetItems() []*SalesTaxExemptionsListPartnersResponseItemsItem {
+	if s == nil {
+		return nil
+	}
+	return s.Items
+}
+
+func (s *SalesTaxExemptionsListPartnersResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SalesTaxExemptionsListPartnersResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetItems sets the Items field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponse) SetItems(items []*SalesTaxExemptionsListPartnersResponseItemsItem) {
+	s.Items = items
+	s.require(salesTaxExemptionsListPartnersResponseFieldItems)
+}
+
+func (s *SalesTaxExemptionsListPartnersResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SalesTaxExemptionsListPartnersResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SalesTaxExemptionsListPartnersResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SalesTaxExemptionsListPartnersResponse) MarshalJSON() ([]byte, error) {
+	type embed SalesTaxExemptionsListPartnersResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SalesTaxExemptionsListPartnersResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
+	salesTaxExemptionsListPartnersResponseItemsItemFieldID                      = big.NewInt(1 << 0)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldPartnerID               = big.NewInt(1 << 1)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldState                   = big.NewInt(1 << 2)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldReasons                 = big.NewInt(1 << 3)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldOtherReason             = big.NewInt(1 << 4)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldReasonDetail            = big.NewInt(1 << 5)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldBusinessType            = big.NewInt(1 << 6)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldOtherBusinessType       = big.NewInt(1 << 7)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldIDNumber                = big.NewInt(1 << 8)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldIDIssuedBy              = big.NewInt(1 << 9)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldSinglePurchaseReference = big.NewInt(1 << 10)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldSignedBy                = big.NewInt(1 << 11)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldSignerTitle             = big.NewInt(1 << 12)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldSignedOn                = big.NewInt(1 << 13)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldReceivedOn              = big.NewInt(1 << 14)
+	salesTaxExemptionsListPartnersResponseItemsItemFieldCancelledOn             = big.NewInt(1 << 15)
+)
+
+type SalesTaxExemptionsListPartnersResponseItemsItem struct {
+	ID                      string   `json:"id" url:"id"`
+	PartnerID               string   `json:"partnerId" url:"partnerId"`
+	State                   string   `json:"state" url:"state"`
+	Reasons                 []string `json:"reasons" url:"reasons"`
+	OtherReason             *string  `json:"otherReason,omitempty" url:"otherReason,omitempty"`
+	ReasonDetail            *string  `json:"reasonDetail,omitempty" url:"reasonDetail,omitempty"`
+	BusinessType            string   `json:"businessType" url:"businessType"`
+	OtherBusinessType       *string  `json:"otherBusinessType,omitempty" url:"otherBusinessType,omitempty"`
+	IDNumber                string   `json:"idNumber" url:"idNumber"`
+	IDIssuedBy              string   `json:"idIssuedBy" url:"idIssuedBy"`
+	SinglePurchaseReference *string  `json:"singlePurchaseReference,omitempty" url:"singlePurchaseReference,omitempty"`
+	SignedBy                *string  `json:"signedBy,omitempty" url:"signedBy,omitempty"`
+	SignerTitle             *string  `json:"signerTitle,omitempty" url:"signerTitle,omitempty"`
+	SignedOn                *string  `json:"signedOn,omitempty" url:"signedOn,omitempty"`
+	ReceivedOn              string   `json:"receivedOn" url:"receivedOn"`
+	CancelledOn             *string  `json:"cancelledOn,omitempty" url:"cancelledOn,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetID() string {
+	if s == nil {
+		return ""
+	}
+	return s.ID
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetPartnerID() string {
+	if s == nil {
+		return ""
+	}
+	return s.PartnerID
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetState() string {
+	if s == nil {
+		return ""
+	}
+	return s.State
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetReasons() []string {
+	if s == nil {
+		return nil
+	}
+	return s.Reasons
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetOtherReason() *string {
+	if s == nil {
+		return nil
+	}
+	return s.OtherReason
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetReasonDetail() *string {
+	if s == nil {
+		return nil
+	}
+	return s.ReasonDetail
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetBusinessType() string {
+	if s == nil {
+		return ""
+	}
+	return s.BusinessType
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetOtherBusinessType() *string {
+	if s == nil {
+		return nil
+	}
+	return s.OtherBusinessType
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetIDNumber() string {
+	if s == nil {
+		return ""
+	}
+	return s.IDNumber
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetIDIssuedBy() string {
+	if s == nil {
+		return ""
+	}
+	return s.IDIssuedBy
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetSinglePurchaseReference() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SinglePurchaseReference
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetSignedBy() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignedBy
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetSignerTitle() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignerTitle
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetSignedOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.SignedOn
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetReceivedOn() string {
+	if s == nil {
+		return ""
+	}
+	return s.ReceivedOn
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetCancelledOn() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CancelledOn
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetID(id string) {
+	s.ID = id
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetPartnerID(partnerID string) {
+	s.PartnerID = partnerID
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldPartnerID)
+}
+
+// SetState sets the State field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetState(state string) {
+	s.State = state
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldState)
+}
+
+// SetReasons sets the Reasons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetReasons(reasons []string) {
+	s.Reasons = reasons
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldReasons)
+}
+
+// SetOtherReason sets the OtherReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetOtherReason(otherReason *string) {
+	s.OtherReason = otherReason
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldOtherReason)
+}
+
+// SetReasonDetail sets the ReasonDetail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetReasonDetail(reasonDetail *string) {
+	s.ReasonDetail = reasonDetail
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldReasonDetail)
+}
+
+// SetBusinessType sets the BusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetBusinessType(businessType string) {
+	s.BusinessType = businessType
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldBusinessType)
+}
+
+// SetOtherBusinessType sets the OtherBusinessType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetOtherBusinessType(otherBusinessType *string) {
+	s.OtherBusinessType = otherBusinessType
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldOtherBusinessType)
+}
+
+// SetIDNumber sets the IDNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetIDNumber(idNumber string) {
+	s.IDNumber = idNumber
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldIDNumber)
+}
+
+// SetIDIssuedBy sets the IDIssuedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetIDIssuedBy(idIssuedBy string) {
+	s.IDIssuedBy = idIssuedBy
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldIDIssuedBy)
+}
+
+// SetSinglePurchaseReference sets the SinglePurchaseReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetSinglePurchaseReference(singlePurchaseReference *string) {
+	s.SinglePurchaseReference = singlePurchaseReference
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldSinglePurchaseReference)
+}
+
+// SetSignedBy sets the SignedBy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetSignedBy(signedBy *string) {
+	s.SignedBy = signedBy
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldSignedBy)
+}
+
+// SetSignerTitle sets the SignerTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetSignerTitle(signerTitle *string) {
+	s.SignerTitle = signerTitle
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldSignerTitle)
+}
+
+// SetSignedOn sets the SignedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetSignedOn(signedOn *string) {
+	s.SignedOn = signedOn
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldSignedOn)
+}
+
+// SetReceivedOn sets the ReceivedOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetReceivedOn(receivedOn string) {
+	s.ReceivedOn = receivedOn
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldReceivedOn)
+}
+
+// SetCancelledOn sets the CancelledOn field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) SetCancelledOn(cancelledOn *string) {
+	s.CancelledOn = cancelledOn
+	s.require(salesTaxExemptionsListPartnersResponseItemsItemFieldCancelledOn)
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler SalesTaxExemptionsListPartnersResponseItemsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SalesTaxExemptionsListPartnersResponseItemsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) MarshalJSON() ([]byte, error) {
+	type embed SalesTaxExemptionsListPartnersResponseItemsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SalesTaxExemptionsListPartnersResponseItemsItem) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
 }
 
 var (
@@ -22031,8 +23660,9 @@ var (
 	updatePartnersResponseFieldIsGroupMember         = big.NewInt(1 << 37)
 	updatePartnersResponseFieldIsActive              = big.NewInt(1 << 38)
 	updatePartnersResponseFieldLegalCountryClass     = big.NewInt(1 << 39)
-	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 40)
-	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 41)
+	updatePartnersResponseFieldIdentifiers           = big.NewInt(1 << 40)
+	updatePartnersResponseFieldCreatedAt             = big.NewInt(1 << 41)
+	updatePartnersResponseFieldUpdatedAt             = big.NewInt(1 << 42)
 )
 
 type UpdatePartnersResponse struct {
@@ -22076,6 +23706,7 @@ type UpdatePartnersResponse struct {
 	IsGroupMember         bool                                         `json:"isGroupMember" url:"isGroupMember"`
 	IsActive              bool                                         `json:"isActive" url:"isActive"`
 	LegalCountryClass     *UpdatePartnersResponseLegalCountryClass     `json:"legalCountryClass,omitempty" url:"legalCountryClass,omitempty"`
+	Identifiers           map[string]string                            `json:"identifiers" url:"identifiers"`
 	CreatedAt             time.Time                                    `json:"createdAt" url:"createdAt"`
 	UpdatedAt             time.Time                                    `json:"updatedAt" url:"updatedAt"`
 
@@ -22364,6 +23995,13 @@ func (u *UpdatePartnersResponse) GetLegalCountryClass() *UpdatePartnersResponseL
 		return nil
 	}
 	return u.LegalCountryClass
+}
+
+func (u *UpdatePartnersResponse) GetIdentifiers() map[string]string {
+	if u == nil {
+		return nil
+	}
+	return u.Identifiers
 }
 
 func (u *UpdatePartnersResponse) GetCreatedAt() time.Time {
@@ -22672,6 +24310,13 @@ func (u *UpdatePartnersResponse) SetIsActive(isActive bool) {
 func (u *UpdatePartnersResponse) SetLegalCountryClass(legalCountryClass *UpdatePartnersResponseLegalCountryClass) {
 	u.LegalCountryClass = legalCountryClass
 	u.require(updatePartnersResponseFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersResponse) SetIdentifiers(identifiers map[string]string) {
+	u.Identifiers = identifiers
+	u.require(updatePartnersResponseFieldIdentifiers)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -24998,6 +26643,7 @@ var (
 	updatePartnersRequestFieldIsGroupMember         = big.NewInt(1 << 35)
 	updatePartnersRequestFieldIsActive              = big.NewInt(1 << 36)
 	updatePartnersRequestFieldLegalCountryClass     = big.NewInt(1 << 37)
+	updatePartnersRequestFieldIdentifiers           = big.NewInt(1 << 38)
 )
 
 type UpdatePartnersRequest struct {
@@ -25042,6 +26688,8 @@ type UpdatePartnersRequest struct {
 	IsGroupMember         *bool                                       `json:"isGroupMember,omitempty" url:"-"`
 	IsActive              *bool                                       `json:"isActive,omitempty" url:"-"`
 	LegalCountryClass     *UpdatePartnersRequestLegalCountryClass     `json:"legalCountryClass,omitempty" url:"-"`
+	// Tax data of the partner by key, checked against the company's country: `tin` (US, Taxpayer identification number (TIN) from Form W-9, 9 digits); `tinType` (US, Type of the taxpayer identification number, SSN, EIN, ITIN or ATIN); `taxClassification` (US, Federal tax classification (Form W-9, line 3a), individual, c-corporation, s-corporation, partnership, trust-estate, llc-c, llc-s, llc-p, other); `nonemployeeCompensation` (US, Paid for services as nonemployee compensation (Form 1099-NEC, box 1), yes or no)
+	Identifiers map[string]*string `json:"identifiers,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -25318,6 +26966,13 @@ func (u *UpdatePartnersRequest) SetIsActive(isActive *bool) {
 func (u *UpdatePartnersRequest) SetLegalCountryClass(legalCountryClass *UpdatePartnersRequestLegalCountryClass) {
 	u.LegalCountryClass = legalCountryClass
 	u.require(updatePartnersRequestFieldLegalCountryClass)
+}
+
+// SetIdentifiers sets the Identifiers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdatePartnersRequest) SetIdentifiers(identifiers map[string]*string) {
+	u.Identifiers = identifiers
+	u.require(updatePartnersRequestFieldIdentifiers)
 }
 
 func (u *UpdatePartnersRequest) UnmarshalJSON(data []byte) error {

@@ -1505,7 +1505,9 @@ var (
 	invoicesCreateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 28)
 	invoicesCreateSalesRequestFieldDiscountPercent              = big.NewInt(1 << 29)
 	invoicesCreateSalesRequestFieldSalesTaxPercent              = big.NewInt(1 << 30)
-	invoicesCreateSalesRequestFieldLines                        = big.NewInt(1 << 31)
+	invoicesCreateSalesRequestFieldSalesTaxJurisdiction         = big.NewInt(1 << 31)
+	invoicesCreateSalesRequestFieldDeliveryAddress              = big.NewInt(1 << 32)
+	invoicesCreateSalesRequestFieldLines                        = big.NewInt(1 << 33)
 )
 
 type InvoicesCreateSalesRequest struct {
@@ -1544,9 +1546,13 @@ type InvoicesCreateSalesRequest struct {
 	ReceivedByName       *string `json:"receivedByName,omitempty" url:"-"`
 	ReceivedByTitle      *string `json:"receivedByTitle,omitempty" url:"-"`
 	DiscountPercent      *string `json:"discountPercent,omitempty" url:"-"`
-	// Sales tax as a percent of the net total, added to the invoice total. It is not posted to the ledger and is left out of VAT and national tax reports. Invoices only.
-	SalesTaxPercent *string                                `json:"salesTaxPercent,omitempty" url:"-"`
-	Lines           []*InvoicesCreateSalesRequestLinesItem `json:"lines" url:"-"`
+	// Sales tax as a percent of the net total, added to the document total and posted to the sales tax payable account when the document is issued. US companies only (422 otherwise); invoices and credit notes only.
+	SalesTaxPercent *string `json:"salesTaxPercent,omitempty" url:"-"`
+	// The US state the sales tax is collected for, as an ISO 3166-2 code such as `US-CA`; unset means the state of `deliveryAddress` (422 when it has none), else the credited invoice's state for a credit note, else the state of the customer's address (422 without one). When the customer has a certificate of exemption for that state (`partners/sales-tax-exemptions/create`) that covers the sale, no sales tax is charged and the document keeps the certificate's id in `salesTaxExemptionId`.
+	SalesTaxJurisdiction *string `json:"salesTaxJurisdiction,omitempty" url:"-"`
+	// Where the goods or services are delivered, when not at the customer's address; it decides the state of the sales tax when `salesTaxJurisdiction` is not given.
+	DeliveryAddress *InvoicesCreateSalesRequestDeliveryAddress `json:"deliveryAddress,omitempty" url:"-"`
+	Lines           []*InvoicesCreateSalesRequestLinesItem     `json:"lines" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1774,6 +1780,20 @@ func (i *InvoicesCreateSalesRequest) SetDiscountPercent(discountPercent *string)
 func (i *InvoicesCreateSalesRequest) SetSalesTaxPercent(salesTaxPercent *string) {
 	i.SalesTaxPercent = salesTaxPercent
 	i.require(invoicesCreateSalesRequestFieldSalesTaxPercent)
+}
+
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequest) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesCreateSalesRequestFieldSalesTaxJurisdiction)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequest) SetDeliveryAddress(deliveryAddress *InvoicesCreateSalesRequestDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesCreateSalesRequestFieldDeliveryAddress)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -2753,38 +2773,43 @@ var (
 	invoicesUpdateSalesRequestFieldReceivedByName               = big.NewInt(1 << 24)
 	invoicesUpdateSalesRequestFieldReceivedByTitle              = big.NewInt(1 << 25)
 	invoicesUpdateSalesRequestFieldSalesTaxPercent              = big.NewInt(1 << 26)
-	invoicesUpdateSalesRequestFieldLines                        = big.NewInt(1 << 27)
+	invoicesUpdateSalesRequestFieldSalesTaxJurisdiction         = big.NewInt(1 << 27)
+	invoicesUpdateSalesRequestFieldDeliveryAddress              = big.NewInt(1 << 28)
+	invoicesUpdateSalesRequestFieldLines                        = big.NewInt(1 << 29)
 )
 
 type InvoicesUpdateSalesRequest struct {
-	ID                           string                                 `json:"id" url:"-"`
-	PartnerID                    *string                                `json:"partnerId,omitempty" url:"-"`
-	AgreementID                  *string                                `json:"agreementId,omitempty" url:"-"`
-	Currency                     *string                                `json:"currency,omitempty" url:"-"`
-	IssueDate                    *time.Time                             `json:"issueDate,omitempty" url:"-" format:"date"`
-	DueDate                      *time.Time                             `json:"dueDate,omitempty" url:"-" format:"date"`
-	VatScheme                    *InvoicesUpdateSalesRequestVatScheme   `json:"vatScheme,omitempty" url:"-"`
-	IntrastatTransportMode       *string                                `json:"intrastatTransportMode,omitempty" url:"-"`
-	IntrastatDeliveryTerms       *string                                `json:"intrastatDeliveryTerms,omitempty" url:"-"`
-	IntrastatRegion              *string                                `json:"intrastatRegion,omitempty" url:"-"`
-	IntrastatNatureOfTransaction *string                                `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
-	VatCountryCode               *string                                `json:"vatCountryCode,omitempty" url:"-"`
-	DeemedSupplier               *bool                                  `json:"deemedSupplier,omitempty" url:"-"`
-	Notes                        *string                                `json:"notes,omitempty" url:"-"`
-	Locale                       *InvoicesUpdateSalesRequestLocale      `json:"locale,omitempty" url:"-"`
-	PayLinkEnabled               *bool                                  `json:"payLinkEnabled,omitempty" url:"-"`
-	DebtRemindersEnabled         *bool                                  `json:"debtRemindersEnabled,omitempty" url:"-"`
-	OperationTypeID              *string                                `json:"operationTypeId,omitempty" url:"-"`
-	DocumentSeriesID             *string                                `json:"documentSeriesId,omitempty" url:"-"`
-	SeriesLabel                  *string                                `json:"seriesLabel,omitempty" url:"-"`
-	DiscountPercent              *string                                `json:"discountPercent,omitempty" url:"-"`
-	OrderNumber                  *string                                `json:"orderNumber,omitempty" url:"-"`
-	IssuedByName                 *string                                `json:"issuedByName,omitempty" url:"-"`
-	IssuedByTitle                *string                                `json:"issuedByTitle,omitempty" url:"-"`
-	ReceivedByName               *string                                `json:"receivedByName,omitempty" url:"-"`
-	ReceivedByTitle              *string                                `json:"receivedByTitle,omitempty" url:"-"`
-	SalesTaxPercent              *string                                `json:"salesTaxPercent,omitempty" url:"-"`
-	Lines                        []*InvoicesUpdateSalesRequestLinesItem `json:"lines,omitempty" url:"-"`
+	ID                           string                               `json:"id" url:"-"`
+	PartnerID                    *string                              `json:"partnerId,omitempty" url:"-"`
+	AgreementID                  *string                              `json:"agreementId,omitempty" url:"-"`
+	Currency                     *string                              `json:"currency,omitempty" url:"-"`
+	IssueDate                    *time.Time                           `json:"issueDate,omitempty" url:"-" format:"date"`
+	DueDate                      *time.Time                           `json:"dueDate,omitempty" url:"-" format:"date"`
+	VatScheme                    *InvoicesUpdateSalesRequestVatScheme `json:"vatScheme,omitempty" url:"-"`
+	IntrastatTransportMode       *string                              `json:"intrastatTransportMode,omitempty" url:"-"`
+	IntrastatDeliveryTerms       *string                              `json:"intrastatDeliveryTerms,omitempty" url:"-"`
+	IntrastatRegion              *string                              `json:"intrastatRegion,omitempty" url:"-"`
+	IntrastatNatureOfTransaction *string                              `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
+	VatCountryCode               *string                              `json:"vatCountryCode,omitempty" url:"-"`
+	DeemedSupplier               *bool                                `json:"deemedSupplier,omitempty" url:"-"`
+	Notes                        *string                              `json:"notes,omitempty" url:"-"`
+	Locale                       *InvoicesUpdateSalesRequestLocale    `json:"locale,omitempty" url:"-"`
+	PayLinkEnabled               *bool                                `json:"payLinkEnabled,omitempty" url:"-"`
+	DebtRemindersEnabled         *bool                                `json:"debtRemindersEnabled,omitempty" url:"-"`
+	OperationTypeID              *string                              `json:"operationTypeId,omitempty" url:"-"`
+	DocumentSeriesID             *string                              `json:"documentSeriesId,omitempty" url:"-"`
+	SeriesLabel                  *string                              `json:"seriesLabel,omitempty" url:"-"`
+	DiscountPercent              *string                              `json:"discountPercent,omitempty" url:"-"`
+	OrderNumber                  *string                              `json:"orderNumber,omitempty" url:"-"`
+	IssuedByName                 *string                              `json:"issuedByName,omitempty" url:"-"`
+	IssuedByTitle                *string                              `json:"issuedByTitle,omitempty" url:"-"`
+	ReceivedByName               *string                              `json:"receivedByName,omitempty" url:"-"`
+	ReceivedByTitle              *string                              `json:"receivedByTitle,omitempty" url:"-"`
+	SalesTaxPercent              *string                              `json:"salesTaxPercent,omitempty" url:"-"`
+	// The US state the sales tax is collected for, as an ISO 3166-2 code such as `US-CA`
+	SalesTaxJurisdiction *string                                    `json:"salesTaxJurisdiction,omitempty" url:"-"`
+	DeliveryAddress      *InvoicesUpdateSalesRequestDeliveryAddress `json:"deliveryAddress,omitempty" url:"-"`
+	Lines                []*InvoicesUpdateSalesRequestLinesItem     `json:"lines,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2984,6 +3009,20 @@ func (i *InvoicesUpdateSalesRequest) SetReceivedByTitle(receivedByTitle *string)
 func (i *InvoicesUpdateSalesRequest) SetSalesTaxPercent(salesTaxPercent *string) {
 	i.SalesTaxPercent = salesTaxPercent
 	i.require(invoicesUpdateSalesRequestFieldSalesTaxPercent)
+}
+
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequest) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesUpdateSalesRequestFieldSalesTaxJurisdiction)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequest) SetDeliveryAddress(deliveryAddress *InvoicesUpdateSalesRequestDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesUpdateSalesRequestFieldDeliveryAddress)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -13246,129 +13285,135 @@ var (
 	invoicesApplyAdvanceSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesApplyAdvanceSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesApplyAdvanceSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesApplyAdvanceSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesApplyAdvanceSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesApplyAdvanceSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesApplyAdvanceSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesApplyAdvanceSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesApplyAdvanceSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesApplyAdvanceSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesApplyAdvanceSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesApplyAdvanceSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesApplyAdvanceSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesApplyAdvanceSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesApplyAdvanceSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesApplyAdvanceSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesApplyAdvanceSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesApplyAdvanceSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesApplyAdvanceSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesApplyAdvanceSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesApplyAdvanceSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesApplyAdvanceSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesApplyAdvanceSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesApplyAdvanceSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesApplyAdvanceSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesApplyAdvanceSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesApplyAdvanceSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesApplyAdvanceSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesApplyAdvanceSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesApplyAdvanceSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesApplyAdvanceSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesApplyAdvanceSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesApplyAdvanceSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesApplyAdvanceSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesApplyAdvanceSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesApplyAdvanceSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesApplyAdvanceSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesApplyAdvanceSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesApplyAdvanceSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesApplyAdvanceSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesApplyAdvanceSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesApplyAdvanceSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesApplyAdvanceSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesApplyAdvanceSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesApplyAdvanceSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesApplyAdvanceSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesApplyAdvanceSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesApplyAdvanceSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesApplyAdvanceSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesApplyAdvanceSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesApplyAdvanceSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesApplyAdvanceSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesApplyAdvanceSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesApplyAdvanceSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesApplyAdvanceSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesApplyAdvanceSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesApplyAdvanceSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesApplyAdvanceSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesApplyAdvanceSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesApplyAdvanceSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesApplyAdvanceSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesApplyAdvanceSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesApplyAdvanceSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesApplyAdvanceSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesApplyAdvanceSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesApplyAdvanceSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesApplyAdvanceSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesApplyAdvanceSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesApplyAdvanceSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesApplyAdvanceSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesApplyAdvanceSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesApplyAdvanceSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesApplyAdvanceSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesApplyAdvanceSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesApplyAdvanceSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesApplyAdvanceSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesApplyAdvanceSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesApplyAdvanceSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesApplyAdvanceSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesApplyAdvanceSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
 )
 
 type InvoicesApplyAdvanceSalesResponse struct {
-	ID                           string                                         `json:"id" url:"id"`
-	PartnerID                    string                                         `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesApplyAdvanceSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesApplyAdvanceSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesApplyAdvanceSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                        `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                         `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                                     `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                                     `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                         `json:"currency" url:"currency"`
-	FxRate                       *string                                        `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                         `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                         `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                         `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                        `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                         `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                         `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                                     `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                        `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                        `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                        `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                                     `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesApplyAdvanceSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                        `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                        `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                        `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                        `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                         `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                        `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                        `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                                     `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                           `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                           `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                        `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                        `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                        `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                        `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                        `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                        `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                                     `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                                     `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                        `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                        `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                        `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                                     `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                                     `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                            `json:"id" url:"id"`
+	PartnerID                    string                                            `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesApplyAdvanceSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesApplyAdvanceSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesApplyAdvanceSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                           `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                            `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                           `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                        `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                        `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                            `json:"currency" url:"currency"`
+	FxRate                       *string                                           `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                            `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                            `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                            `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                           `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                            `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                           `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                           `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesApplyAdvanceSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                            `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                           `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                        `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                           `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                           `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                           `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                           `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                           `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                        `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                           `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesApplyAdvanceSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                           `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                           `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                           `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                           `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                           `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                              `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                           `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                           `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                           `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                           `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                            `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                           `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                           `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                           `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                           `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                           `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                           `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                           `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                           `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                           `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                              `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                              `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                           `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                           `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                           `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                           `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                           `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                           `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                        `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                        `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                           `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                           `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                           `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                        `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                        `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                         `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                         `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                                       `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesApplyAdvanceSalesResponseLinesItem `json:"lines" url:"lines"`
@@ -13498,6 +13543,27 @@ func (i *InvoicesApplyAdvanceSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesApplyAdvanceSalesResponse) GetDeliveryAddress() *InvoicesApplyAdvanceSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesApplyAdvanceSalesResponse) GetPaidAmount() string {
@@ -14004,6 +14070,27 @@ func (i *InvoicesApplyAdvanceSalesResponse) SetSalesTaxTotal(salesTaxTotal strin
 	i.require(invoicesApplyAdvanceSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesApplyAdvanceSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesApplyAdvanceSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesApplyAdvanceSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesApplyAdvanceSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesApplyAdvanceSalesResponse) SetPaidAmount(paidAmount string) {
@@ -14451,6 +14538,155 @@ func (i *InvoicesApplyAdvanceSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesApplyAdvanceSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesApplyAdvanceSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesApplyAdvanceSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesApplyAdvanceSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesApplyAdvanceSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesApplyAdvanceSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesApplyAdvanceSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesApplyAdvanceSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesApplyAdvanceSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesApplyAdvanceSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesApplyAdvanceSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesApplyAdvanceSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesApplyAdvanceSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesApplyAdvanceSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesApplyAdvanceSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesApplyAdvanceSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -16561,6 +16797,156 @@ func (i *InvoicesCardPaymentsGetSalesResponse) String() string {
 	return fmt.Sprintf("%#v", i)
 }
 
+// Where the goods or services are delivered, when not at the customer's address; it decides the state of the sales tax when `salesTaxJurisdiction` is not given.
+var (
+	invoicesCreateSalesRequestDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesCreateSalesRequestDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesCreateSalesRequestDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesCreateSalesRequestDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesCreateSalesRequestDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesCreateSalesRequestDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequestDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesCreateSalesRequestDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequestDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesCreateSalesRequestDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequestDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesCreateSalesRequestDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequestDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesCreateSalesRequestDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesRequestDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesCreateSalesRequestDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesCreateSalesRequestDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesCreateSalesRequestDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesCreateSalesRequestDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesCreateSalesRequestDeliveryAddress) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
 var (
 	invoicesCreateSalesRequestLinesItemFieldItemID                 = big.NewInt(1 << 0)
 	invoicesCreateSalesRequestLinesItemFieldDescription            = big.NewInt(1 << 1)
@@ -17436,130 +17822,136 @@ var (
 	invoicesCreateSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesCreateSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesCreateSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesCreateSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesCreateSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesCreateSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesCreateSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesCreateSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesCreateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesCreateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesCreateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesCreateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesCreateSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesCreateSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesCreateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesCreateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesCreateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesCreateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesCreateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesCreateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesCreateSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesCreateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesCreateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesCreateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesCreateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesCreateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesCreateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesCreateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesCreateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesCreateSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesCreateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesCreateSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesCreateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesCreateSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesCreateSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesCreateSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesCreateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesCreateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesCreateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesCreateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesCreateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesCreateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesCreateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesCreateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesCreateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesCreateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesCreateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesCreateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesCreateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesCreateSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesCreateSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesCreateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
-	invoicesCreateSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesCreateSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesCreateSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesCreateSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesCreateSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesCreateSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesCreateSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesCreateSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesCreateSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesCreateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesCreateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesCreateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesCreateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesCreateSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesCreateSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesCreateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesCreateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesCreateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesCreateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesCreateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesCreateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesCreateSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesCreateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesCreateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesCreateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesCreateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesCreateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesCreateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesCreateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesCreateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesCreateSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesCreateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesCreateSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesCreateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesCreateSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesCreateSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesCreateSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesCreateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesCreateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesCreateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesCreateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesCreateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesCreateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesCreateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesCreateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesCreateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesCreateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesCreateSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesCreateSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesCreateSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesCreateSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesCreateSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesCreateSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesCreateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesCreateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesCreateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesCreateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
+	invoicesCreateSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 73)
 )
 
 type InvoicesCreateSalesResponse struct {
-	ID                           string                                   `json:"id" url:"id"`
-	PartnerID                    string                                   `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesCreateSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesCreateSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesCreateSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                  `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                   `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                  `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                               `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                               `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                   `json:"currency" url:"currency"`
-	FxRate                       *string                                  `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                   `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                   `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                   `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                  `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                   `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                   `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                               `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                  `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                  `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                  `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                  `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                               `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                  `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesCreateSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                  `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                  `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                  `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                  `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                  `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                     `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                  `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                  `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                  `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                  `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                   `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                  `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                  `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                  `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                  `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                  `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                  `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                  `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                               `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                  `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                  `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                     `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                     `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                  `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                  `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                  `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                  `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                  `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                  `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                               `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                               `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                  `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                  `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                  `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                               `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                               `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                      `json:"id" url:"id"`
+	PartnerID                    string                                      `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesCreateSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesCreateSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesCreateSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                     `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                      `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                  `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                  `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                      `json:"currency" url:"currency"`
+	FxRate                       *string                                     `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                      `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                      `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                      `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                     `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                      `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                     `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                     `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesCreateSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                      `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                  `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                     `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                     `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                     `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                     `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                     `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                  `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                     `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesCreateSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                     `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                     `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                     `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                     `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                     `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                        `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                     `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                     `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                     `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                      `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                     `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                     `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                     `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                     `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                     `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                     `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                     `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                  `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                     `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                     `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                        `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                        `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                     `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                     `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                     `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                     `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                     `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                     `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                  `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                  `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                     `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                     `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                     `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                  `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                  `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                   `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                                    `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesCreateSalesResponseLinesItem    `json:"lines" url:"lines"`
@@ -17690,6 +18082,27 @@ func (i *InvoicesCreateSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesCreateSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesCreateSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesCreateSalesResponse) GetDeliveryAddress() *InvoicesCreateSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesCreateSalesResponse) GetPaidAmount() string {
@@ -18203,6 +18616,27 @@ func (i *InvoicesCreateSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
 	i.require(invoicesCreateSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesCreateSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesCreateSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesCreateSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesCreateSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreateSalesResponse) SetPaidAmount(paidAmount string) {
@@ -18657,6 +19091,155 @@ func (i *InvoicesCreateSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesCreateSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesCreateSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesCreateSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesCreateSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesCreateSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesCreateSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesCreateSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesCreateSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesCreateSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesCreateSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesCreateSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreateSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesCreateSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesCreateSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesCreateSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesCreateSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesCreateSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -21319,129 +21902,135 @@ var (
 	invoicesGetSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesGetSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesGetSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesGetSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesGetSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesGetSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesGetSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesGetSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesGetSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesGetSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesGetSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesGetSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesGetSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesGetSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesGetSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesGetSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesGetSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesGetSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesGetSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesGetSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesGetSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesGetSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesGetSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesGetSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesGetSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesGetSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesGetSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesGetSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesGetSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesGetSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesGetSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesGetSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesGetSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesGetSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesGetSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesGetSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesGetSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesGetSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesGetSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesGetSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesGetSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesGetSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesGetSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesGetSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesGetSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesGetSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesGetSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesGetSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesGetSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesGetSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesGetSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesGetSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesGetSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesGetSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesGetSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesGetSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesGetSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesGetSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesGetSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesGetSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesGetSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesGetSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesGetSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesGetSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesGetSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesGetSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesGetSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesGetSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesGetSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesGetSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesGetSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesGetSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesGetSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesGetSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesGetSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesGetSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesGetSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesGetSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesGetSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesGetSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesGetSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesGetSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesGetSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesGetSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesGetSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesGetSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesGetSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesGetSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesGetSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesGetSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesGetSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesGetSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesGetSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesGetSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesGetSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesGetSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesGetSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesGetSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesGetSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesGetSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesGetSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesGetSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesGetSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesGetSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesGetSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesGetSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesGetSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesGetSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesGetSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
 )
 
 type InvoicesGetSalesResponse struct {
-	ID                           string                                `json:"id" url:"id"`
-	PartnerID                    string                                `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesGetSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesGetSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesGetSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                               `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                               `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                            `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                            `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                `json:"currency" url:"currency"`
-	FxRate                       *string                               `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                               `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                               `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                            `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                               `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                               `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                               `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                               `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                               `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                            `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                               `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesGetSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                               `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                               `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                               `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                               `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                               `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                  `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                               `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                               `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                               `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                               `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                               `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                               `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                               `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                               `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                               `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                               `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                               `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                               `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                            `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                               `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                               `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                  `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                  `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                               `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                               `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                               `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                               `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                               `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                               `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                            `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                            `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                               `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                               `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                               `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                            `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                            `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                             `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                             `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                   `json:"id" url:"id"`
+	PartnerID                    string                                   `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesGetSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesGetSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesGetSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                  `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                   `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                  `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                               `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                               `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                   `json:"currency" url:"currency"`
+	FxRate                       *string                                  `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                   `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                   `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                   `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                  `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                   `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                  `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                  `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesGetSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                   `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                               `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                  `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                  `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                  `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                  `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                               `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                  `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesGetSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                  `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                  `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                  `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                  `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                  `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                     `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                  `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                  `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                  `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                  `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                   `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                  `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                  `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                  `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                  `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                  `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                  `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                  `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                               `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                  `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                  `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                     `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                     `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                  `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                  `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                  `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                  `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                  `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                  `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                               `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                               `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                  `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                  `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                  `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                               `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                               `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                              `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesGetSalesResponseLinesItem `json:"lines" url:"lines"`
@@ -21571,6 +22160,27 @@ func (i *InvoicesGetSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesGetSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesGetSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesGetSalesResponse) GetDeliveryAddress() *InvoicesGetSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesGetSalesResponse) GetPaidAmount() string {
@@ -22077,6 +22687,27 @@ func (i *InvoicesGetSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
 	i.require(invoicesGetSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesGetSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesGetSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesGetSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesGetSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetSalesResponse) SetPaidAmount(paidAmount string) {
@@ -22524,6 +23155,155 @@ func (i *InvoicesGetSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesGetSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesGetSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesGetSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesGetSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesGetSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesGetSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesGetSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesGetSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesGetSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesGetSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesGetSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesGetSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesGetSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesGetSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesGetSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesGetSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -24336,130 +25116,136 @@ var (
 	invoicesIssueSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesIssueSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesIssueSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesIssueSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesIssueSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesIssueSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesIssueSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesIssueSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesIssueSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesIssueSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesIssueSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesIssueSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesIssueSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesIssueSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesIssueSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesIssueSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesIssueSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesIssueSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesIssueSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesIssueSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesIssueSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesIssueSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesIssueSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesIssueSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesIssueSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesIssueSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesIssueSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesIssueSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesIssueSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesIssueSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesIssueSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesIssueSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesIssueSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesIssueSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesIssueSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesIssueSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesIssueSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesIssueSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesIssueSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesIssueSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesIssueSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesIssueSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesIssueSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesIssueSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesIssueSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesIssueSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesIssueSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesIssueSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesIssueSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesIssueSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesIssueSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesIssueSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
-	invoicesIssueSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesIssueSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesIssueSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesIssueSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesIssueSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesIssueSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesIssueSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesIssueSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesIssueSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesIssueSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesIssueSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesIssueSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesIssueSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesIssueSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesIssueSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesIssueSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesIssueSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesIssueSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesIssueSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesIssueSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesIssueSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesIssueSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesIssueSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesIssueSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesIssueSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesIssueSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesIssueSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesIssueSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesIssueSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesIssueSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesIssueSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesIssueSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesIssueSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesIssueSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesIssueSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesIssueSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesIssueSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesIssueSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesIssueSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesIssueSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesIssueSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesIssueSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesIssueSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesIssueSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesIssueSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesIssueSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesIssueSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesIssueSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesIssueSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesIssueSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesIssueSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesIssueSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesIssueSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesIssueSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesIssueSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesIssueSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesIssueSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
+	invoicesIssueSalesResponseFieldWarnings                     = big.NewInt(0).Lsh(big.NewInt(1), 73)
 )
 
 type InvoicesIssueSalesResponse struct {
-	ID                           string                                  `json:"id" url:"id"`
-	PartnerID                    string                                  `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesIssueSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesIssueSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesIssueSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                 `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                  `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                 `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                              `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                              `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                  `json:"currency" url:"currency"`
-	FxRate                       *string                                 `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                  `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                  `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                  `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                 `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                  `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                  `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                 `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                              `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                 `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                 `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                 `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                 `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                 `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                              `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                 `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesIssueSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                 `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                 `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                 `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                 `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                 `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                    `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                 `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                 `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                 `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                 `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                 `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                  `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                 `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                 `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                 `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                 `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                 `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                 `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                 `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                              `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                 `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                 `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                    `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                    `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                 `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                 `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                 `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                 `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                 `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                 `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                              `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                              `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                 `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                 `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                 `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                              `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                              `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                               `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                               `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                     `json:"id" url:"id"`
+	PartnerID                    string                                     `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesIssueSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesIssueSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesIssueSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                    `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                     `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                    `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                 `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                 `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                     `json:"currency" url:"currency"`
+	FxRate                       *string                                    `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                     `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                     `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                     `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                    `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                     `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                    `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                    `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesIssueSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                     `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                    `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                 `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                    `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                    `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                    `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                    `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                    `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                 `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                    `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesIssueSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                    `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                    `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                    `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                    `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                    `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                       `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                    `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                    `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                    `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                    `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                    `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                     `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                    `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                    `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                    `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                    `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                    `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                    `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                    `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                 `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                    `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                    `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                       `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                       `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                    `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                    `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                    `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                    `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                    `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                    `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                 `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                 `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                    `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                    `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                    `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                 `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                 `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                  `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                  `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                                   `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesIssueSalesResponseLinesItem    `json:"lines" url:"lines"`
@@ -24590,6 +25376,27 @@ func (i *InvoicesIssueSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesIssueSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesIssueSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesIssueSalesResponse) GetDeliveryAddress() *InvoicesIssueSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesIssueSalesResponse) GetPaidAmount() string {
@@ -25103,6 +25910,27 @@ func (i *InvoicesIssueSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
 	i.require(invoicesIssueSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesIssueSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesIssueSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesIssueSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesIssueSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesIssueSalesResponse) SetPaidAmount(paidAmount string) {
@@ -25557,6 +26385,155 @@ func (i *InvoicesIssueSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesIssueSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesIssueSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesIssueSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesIssueSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesIssueSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesIssueSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesIssueSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesIssueSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesIssueSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesIssueSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesIssueSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesIssueSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesIssueSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesIssueSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesIssueSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesIssueSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesIssueSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -28088,129 +29065,135 @@ var (
 	invoicesListSalesResponseRowsItemFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesListSalesResponseRowsItemFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesListSalesResponseRowsItemFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesListSalesResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesListSalesResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesListSalesResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesListSalesResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesListSalesResponseRowsItemFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesListSalesResponseRowsItemFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesListSalesResponseRowsItemFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesListSalesResponseRowsItemFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesListSalesResponseRowsItemFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesListSalesResponseRowsItemFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesListSalesResponseRowsItemFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesListSalesResponseRowsItemFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesListSalesResponseRowsItemFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesListSalesResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesListSalesResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesListSalesResponseRowsItemFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesListSalesResponseRowsItemFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesListSalesResponseRowsItemFieldNotes                        = big.NewInt(1 << 34)
-	invoicesListSalesResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesListSalesResponseRowsItemFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesListSalesResponseRowsItemFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesListSalesResponseRowsItemFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesListSalesResponseRowsItemFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesListSalesResponseRowsItemFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesListSalesResponseRowsItemFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesListSalesResponseRowsItemFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesListSalesResponseRowsItemFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesListSalesResponseRowsItemFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesListSalesResponseRowsItemFieldLocale                       = big.NewInt(1 << 45)
-	invoicesListSalesResponseRowsItemFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesListSalesResponseRowsItemFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesListSalesResponseRowsItemFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesListSalesResponseRowsItemFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesListSalesResponseRowsItemFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesListSalesResponseRowsItemFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesListSalesResponseRowsItemFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesListSalesResponseRowsItemFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesListSalesResponseRowsItemFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesListSalesResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesListSalesResponseRowsItemFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesListSalesResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesListSalesResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesListSalesResponseRowsItemFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesListSalesResponseRowsItemFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesListSalesResponseRowsItemFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesListSalesResponseRowsItemFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesListSalesResponseRowsItemFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesListSalesResponseRowsItemFieldAdvanceUnappliedAmount       = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesListSalesResponseRowsItemFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesListSalesResponseRowsItemFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesListSalesResponseRowsItemFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesListSalesResponseRowsItemFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesListSalesResponseRowsItemFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesListSalesResponseRowsItemFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesListSalesResponseRowsItemFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesListSalesResponseRowsItemFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesListSalesResponseRowsItemFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesListSalesResponseRowsItemFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesListSalesResponseRowsItemFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesListSalesResponseRowsItemFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesListSalesResponseRowsItemFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesListSalesResponseRowsItemFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesListSalesResponseRowsItemFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesListSalesResponseRowsItemFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesListSalesResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesListSalesResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesListSalesResponseRowsItemFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesListSalesResponseRowsItemFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesListSalesResponseRowsItemFieldNotes                        = big.NewInt(1 << 37)
+	invoicesListSalesResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesListSalesResponseRowsItemFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesListSalesResponseRowsItemFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesListSalesResponseRowsItemFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesListSalesResponseRowsItemFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesListSalesResponseRowsItemFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesListSalesResponseRowsItemFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesListSalesResponseRowsItemFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesListSalesResponseRowsItemFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesListSalesResponseRowsItemFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesListSalesResponseRowsItemFieldLocale                       = big.NewInt(1 << 48)
+	invoicesListSalesResponseRowsItemFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesListSalesResponseRowsItemFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesListSalesResponseRowsItemFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesListSalesResponseRowsItemFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesListSalesResponseRowsItemFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesListSalesResponseRowsItemFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesListSalesResponseRowsItemFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesListSalesResponseRowsItemFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesListSalesResponseRowsItemFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesListSalesResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesListSalesResponseRowsItemFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesListSalesResponseRowsItemFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesListSalesResponseRowsItemFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesListSalesResponseRowsItemFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesListSalesResponseRowsItemFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesListSalesResponseRowsItemFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesListSalesResponseRowsItemFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesListSalesResponseRowsItemFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesListSalesResponseRowsItemFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesListSalesResponseRowsItemFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesListSalesResponseRowsItemFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesListSalesResponseRowsItemFieldPartnerName                  = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesListSalesResponseRowsItemFieldAdvanceUnappliedAmount       = big.NewInt(0).Lsh(big.NewInt(1), 71)
 )
 
 type InvoicesListSalesResponseRowsItem struct {
-	ID                           string                                         `json:"id" url:"id"`
-	PartnerID                    string                                         `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesListSalesResponseRowsItemType          `json:"type" url:"type"`
-	Status                       InvoicesListSalesResponseRowsItemStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesListSalesResponseRowsItemPaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                        `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                         `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                        `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                                     `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                                     `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                         `json:"currency" url:"currency"`
-	FxRate                       *string                                        `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                         `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                         `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                         `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                        `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                         `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                         `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                        `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                                     `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                        `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                        `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                        `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                        `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                        `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                                     `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesListSalesResponseRowsItemVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                        `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                        `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                        `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                        `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                        `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                           `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                        `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                        `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                        `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                        `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                         `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                        `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                        `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                        `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                        `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                        `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                        `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                        `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                                     `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                        `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                        `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                           `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                           `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                        `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                        `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                        `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                        `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                        `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                        `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                                     `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                                     `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                        `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                        `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                        `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                                     `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                                     `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
-	PartnerName                  *string                                        `json:"partnerName,omitempty" url:"partnerName,omitempty"`
+	ID                           string                                            `json:"id" url:"id"`
+	PartnerID                    string                                            `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesListSalesResponseRowsItemType             `json:"type" url:"type"`
+	Status                       InvoicesListSalesResponseRowsItemStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesListSalesResponseRowsItemPaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                           `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                            `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                           `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                        `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                        `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                            `json:"currency" url:"currency"`
+	FxRate                       *string                                           `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                            `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                            `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                            `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                           `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                            `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                           `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                           `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesListSalesResponseRowsItemDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                            `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                           `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                        `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                           `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                           `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                           `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                           `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                           `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                        `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                           `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesListSalesResponseRowsItemVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                           `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                           `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                           `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                           `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                           `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                              `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                           `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                           `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                           `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                           `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                           `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                            `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                           `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                           `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                           `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                           `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                           `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                           `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                           `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                        `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                           `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                           `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                              `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                              `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                           `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                           `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                           `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                           `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                           `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                           `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                        `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                        `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                           `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                           `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                           `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                        `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                        `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                         `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                         `json:"updatedAt" url:"updatedAt"`
+	PartnerName                  *string                                           `json:"partnerName,omitempty" url:"partnerName,omitempty"`
 	// Gross amount of an advance invoice not yet applied or credited; null on other documents
 	AdvanceUnappliedAmount *string `json:"advanceUnappliedAmount,omitempty" url:"advanceUnappliedAmount,omitempty"`
 
@@ -28338,6 +29321,27 @@ func (i *InvoicesListSalesResponseRowsItem) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesListSalesResponseRowsItem) GetDeliveryAddress() *InvoicesListSalesResponseRowsItemDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesListSalesResponseRowsItem) GetPaidAmount() string {
@@ -28837,6 +29841,27 @@ func (i *InvoicesListSalesResponseRowsItem) SetSalesTaxTotal(salesTaxTotal strin
 	i.require(invoicesListSalesResponseRowsItemFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesListSalesResponseRowsItemFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesListSalesResponseRowsItemFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItem) SetDeliveryAddress(deliveryAddress *InvoicesListSalesResponseRowsItemDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesListSalesResponseRowsItemFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesListSalesResponseRowsItem) SetPaidAmount(paidAmount string) {
@@ -29291,6 +30316,155 @@ func (i *InvoicesListSalesResponseRowsItem) String() string {
 	return fmt.Sprintf("%#v", i)
 }
 
+var (
+	invoicesListSalesResponseRowsItemDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesListSalesResponseRowsItemDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesListSalesResponseRowsItemDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesListSalesResponseRowsItemDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesListSalesResponseRowsItemDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesListSalesResponseRowsItemDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesListSalesResponseRowsItemDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesListSalesResponseRowsItemDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesListSalesResponseRowsItemDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesListSalesResponseRowsItemDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesListSalesResponseRowsItemDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesListSalesResponseRowsItemDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesListSalesResponseRowsItemDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesListSalesResponseRowsItemDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesListSalesResponseRowsItemDeliveryAddress) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
 type InvoicesListSalesResponseRowsItemPaymentStatus string
 
 const (
@@ -29433,129 +30607,135 @@ var (
 	invoicesLockSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesLockSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesLockSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesLockSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesLockSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesLockSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesLockSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesLockSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesLockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesLockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesLockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesLockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesLockSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesLockSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesLockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesLockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesLockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesLockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesLockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesLockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesLockSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesLockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesLockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesLockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesLockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesLockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesLockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesLockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesLockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesLockSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesLockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesLockSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesLockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesLockSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesLockSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesLockSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesLockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesLockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesLockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesLockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesLockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesLockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesLockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesLockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesLockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesLockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesLockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesLockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesLockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesLockSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesLockSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesLockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesLockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesLockSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesLockSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesLockSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesLockSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesLockSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesLockSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesLockSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesLockSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesLockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesLockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesLockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesLockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesLockSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesLockSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesLockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesLockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesLockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesLockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesLockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesLockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesLockSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesLockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesLockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesLockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesLockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesLockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesLockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesLockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesLockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesLockSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesLockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesLockSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesLockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesLockSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesLockSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesLockSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesLockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesLockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesLockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesLockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesLockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesLockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesLockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesLockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesLockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesLockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesLockSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesLockSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesLockSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesLockSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesLockSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesLockSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesLockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesLockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesLockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesLockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
 )
 
 type InvoicesLockSalesResponse struct {
-	ID                           string                                 `json:"id" url:"id"`
-	PartnerID                    string                                 `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesLockSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesLockSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesLockSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                 `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                             `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                             `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                 `json:"currency" url:"currency"`
-	FxRate                       *string                                `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                 `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                 `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                 `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                 `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                 `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                             `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                             `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesLockSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                   `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                 `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                             `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                   `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                   `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                             `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                             `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                             `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                             `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                              `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                              `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                    `json:"id" url:"id"`
+	PartnerID                    string                                    `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesLockSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesLockSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesLockSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                   `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                    `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                   `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                    `json:"currency" url:"currency"`
+	FxRate                       *string                                   `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                    `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                    `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                    `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                   `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                    `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                   `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                   `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesLockSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                    `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                   `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                   `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                   `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                   `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                   `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesLockSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                   `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                   `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                   `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                   `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                   `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                      `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                   `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                   `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                   `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                    `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                   `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                   `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                   `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                   `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                   `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                   `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                   `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                   `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                   `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                      `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                      `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                   `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                   `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                   `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                   `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                   `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                   `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                   `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                   `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                   `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                 `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                 `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                               `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesLockSalesResponseLinesItem `json:"lines" url:"lines"`
@@ -29685,6 +30865,27 @@ func (i *InvoicesLockSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesLockSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesLockSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesLockSalesResponse) GetDeliveryAddress() *InvoicesLockSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesLockSalesResponse) GetPaidAmount() string {
@@ -30191,6 +31392,27 @@ func (i *InvoicesLockSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
 	i.require(invoicesLockSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesLockSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesLockSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesLockSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesLockSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesLockSalesResponse) SetPaidAmount(paidAmount string) {
@@ -30638,6 +31860,155 @@ func (i *InvoicesLockSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesLockSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesLockSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesLockSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesLockSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesLockSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesLockSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesLockSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesLockSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesLockSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesLockSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesLockSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesLockSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesLockSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesLockSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesLockSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesLockSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesLockSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -33479,129 +34850,135 @@ var (
 	invoicesReverseSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesReverseSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesReverseSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesReverseSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesReverseSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesReverseSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesReverseSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesReverseSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesReverseSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesReverseSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesReverseSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesReverseSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesReverseSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesReverseSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesReverseSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesReverseSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesReverseSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesReverseSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesReverseSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesReverseSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesReverseSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesReverseSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesReverseSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesReverseSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesReverseSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesReverseSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesReverseSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesReverseSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesReverseSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesReverseSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesReverseSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesReverseSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesReverseSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesReverseSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesReverseSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesReverseSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesReverseSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesReverseSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesReverseSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesReverseSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesReverseSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesReverseSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesReverseSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesReverseSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesReverseSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesReverseSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesReverseSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesReverseSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesReverseSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesReverseSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesReverseSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesReverseSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesReverseSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesReverseSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesReverseSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesReverseSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesReverseSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesReverseSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesReverseSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesReverseSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesReverseSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesReverseSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesReverseSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesReverseSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesReverseSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesReverseSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesReverseSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesReverseSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesReverseSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesReverseSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesReverseSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesReverseSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesReverseSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesReverseSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesReverseSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesReverseSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesReverseSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesReverseSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesReverseSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesReverseSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesReverseSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesReverseSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesReverseSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesReverseSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesReverseSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesReverseSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesReverseSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesReverseSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesReverseSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesReverseSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesReverseSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesReverseSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesReverseSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesReverseSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesReverseSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesReverseSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesReverseSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesReverseSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesReverseSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesReverseSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesReverseSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesReverseSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesReverseSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesReverseSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesReverseSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesReverseSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesReverseSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesReverseSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesReverseSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesReverseSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesReverseSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesReverseSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
 )
 
 type InvoicesReverseSalesResponse struct {
-	ID                           string                                    `json:"id" url:"id"`
-	PartnerID                    string                                    `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesReverseSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesReverseSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesReverseSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                   `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                    `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                   `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                                `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                                `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                    `json:"currency" url:"currency"`
-	FxRate                       *string                                   `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                    `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                    `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                    `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                   `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                    `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                    `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                   `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                                `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                   `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                   `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                   `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                   `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                   `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                                `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                   `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesReverseSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                   `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                   `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                   `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                   `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                   `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                      `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                   `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                   `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                   `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                   `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                    `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                   `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                   `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                   `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                   `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                   `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                   `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                   `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                                `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                   `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                   `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                      `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                      `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                   `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                   `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                   `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                   `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                   `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                   `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                                `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                                `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                   `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                   `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                   `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                                `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                                `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                                 `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                 `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                       `json:"id" url:"id"`
+	PartnerID                    string                                       `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesReverseSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesReverseSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesReverseSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                      `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                       `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                      `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                   `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                   `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                       `json:"currency" url:"currency"`
+	FxRate                       *string                                      `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                       `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                       `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                       `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                      `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                       `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                      `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                      `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesReverseSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                       `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                      `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                   `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                      `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                      `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                      `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                      `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                      `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                   `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                      `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesReverseSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                      `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                      `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                      `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                      `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                      `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                         `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                      `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                      `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                      `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                      `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                      `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                       `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                      `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                      `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                      `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                      `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                      `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                      `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                      `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                   `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                      `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                      `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                         `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                         `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                      `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                      `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                      `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                      `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                      `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                      `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                   `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                   `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                      `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                      `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                      `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                   `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                   `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                    `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                    `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                                  `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesReverseSalesResponseLinesItem `json:"lines" url:"lines"`
@@ -33731,6 +35108,27 @@ func (i *InvoicesReverseSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesReverseSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesReverseSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesReverseSalesResponse) GetDeliveryAddress() *InvoicesReverseSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesReverseSalesResponse) GetPaidAmount() string {
@@ -34237,6 +35635,27 @@ func (i *InvoicesReverseSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
 	i.require(invoicesReverseSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesReverseSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesReverseSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesReverseSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesReverseSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesReverseSalesResponse) SetPaidAmount(paidAmount string) {
@@ -34684,6 +36103,155 @@ func (i *InvoicesReverseSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesReverseSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesReverseSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesReverseSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesReverseSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesReverseSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesReverseSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesReverseSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesReverseSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesReverseSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesReverseSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesReverseSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReverseSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesReverseSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesReverseSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesReverseSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesReverseSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesReverseSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -36711,129 +38279,135 @@ var (
 	invoicesUnlockSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesUnlockSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesUnlockSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesUnlockSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesUnlockSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesUnlockSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesUnlockSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesUnlockSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesUnlockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesUnlockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesUnlockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesUnlockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesUnlockSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesUnlockSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesUnlockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesUnlockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesUnlockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesUnlockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesUnlockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesUnlockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesUnlockSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesUnlockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesUnlockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesUnlockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesUnlockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesUnlockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesUnlockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesUnlockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesUnlockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesUnlockSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesUnlockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesUnlockSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesUnlockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesUnlockSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesUnlockSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesUnlockSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesUnlockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesUnlockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesUnlockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesUnlockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesUnlockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesUnlockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesUnlockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesUnlockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesUnlockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesUnlockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesUnlockSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesUnlockSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesUnlockSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesUnlockSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesUnlockSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesUnlockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesUnlockSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesUnlockSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesUnlockSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesUnlockSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesUnlockSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesUnlockSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesUnlockSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesUnlockSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesUnlockSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesUnlockSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesUnlockSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesUnlockSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesUnlockSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesUnlockSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesUnlockSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesUnlockSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesUnlockSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesUnlockSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesUnlockSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesUnlockSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesUnlockSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesUnlockSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesUnlockSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesUnlockSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesUnlockSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesUnlockSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesUnlockSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesUnlockSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesUnlockSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesUnlockSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesUnlockSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesUnlockSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesUnlockSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesUnlockSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesUnlockSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesUnlockSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesUnlockSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesUnlockSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesUnlockSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesUnlockSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesUnlockSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesUnlockSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesUnlockSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesUnlockSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesUnlockSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesUnlockSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesUnlockSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesUnlockSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesUnlockSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesUnlockSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesUnlockSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesUnlockSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesUnlockSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesUnlockSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesUnlockSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesUnlockSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
 )
 
 type InvoicesUnlockSalesResponse struct {
-	ID                           string                                   `json:"id" url:"id"`
-	PartnerID                    string                                   `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesUnlockSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesUnlockSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesUnlockSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                  `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                   `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                  `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                               `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                               `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                   `json:"currency" url:"currency"`
-	FxRate                       *string                                  `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                   `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                   `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                   `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                  `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                   `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                   `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                               `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                  `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                  `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                  `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                  `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                               `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                  `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesUnlockSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                  `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                  `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                  `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                  `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                  `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                     `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                  `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                  `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                  `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                  `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                   `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                  `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                  `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                  `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                  `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                  `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                  `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                  `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                               `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                  `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                  `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                     `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                     `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                  `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                  `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                  `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                  `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                  `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                  `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                               `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                               `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                  `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                  `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                  `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                               `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                               `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                      `json:"id" url:"id"`
+	PartnerID                    string                                      `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesUnlockSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesUnlockSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesUnlockSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                     `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                      `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                  `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                  `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                      `json:"currency" url:"currency"`
+	FxRate                       *string                                     `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                      `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                      `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                      `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                     `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                      `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                     `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                     `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesUnlockSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                      `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                  `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                     `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                     `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                     `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                     `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                     `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                  `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                     `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesUnlockSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                     `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                     `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                     `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                     `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                     `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                        `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                     `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                     `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                     `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                      `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                     `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                     `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                     `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                     `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                     `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                     `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                     `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                  `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                     `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                     `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                        `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                        `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                     `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                     `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                     `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                     `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                     `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                     `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                  `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                  `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                     `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                     `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                     `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                  `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                  `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                   `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                                 `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesUnlockSalesResponseLinesItem `json:"lines" url:"lines"`
@@ -36963,6 +38537,27 @@ func (i *InvoicesUnlockSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesUnlockSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesUnlockSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesUnlockSalesResponse) GetDeliveryAddress() *InvoicesUnlockSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesUnlockSalesResponse) GetPaidAmount() string {
@@ -37469,6 +39064,27 @@ func (i *InvoicesUnlockSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
 	i.require(invoicesUnlockSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesUnlockSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesUnlockSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesUnlockSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesUnlockSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUnlockSalesResponse) SetPaidAmount(paidAmount string) {
@@ -37916,6 +39532,155 @@ func (i *InvoicesUnlockSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesUnlockSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesUnlockSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesUnlockSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesUnlockSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesUnlockSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesUnlockSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesUnlockSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesUnlockSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesUnlockSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesUnlockSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesUnlockSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesUnlockSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesUnlockSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesUnlockSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesUnlockSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesUnlockSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}
@@ -39711,6 +41476,155 @@ func (i InvoicesUnlockSalesResponseVatScheme) Ptr() *InvoicesUnlockSalesResponse
 }
 
 var (
+	invoicesUpdateSalesRequestDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesUpdateSalesRequestDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesUpdateSalesRequestDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesUpdateSalesRequestDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesUpdateSalesRequestDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesUpdateSalesRequestDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesUpdateSalesRequestDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesUpdateSalesRequestDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesUpdateSalesRequestDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesUpdateSalesRequestDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesUpdateSalesRequestDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesUpdateSalesRequestDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesUpdateSalesRequestDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesUpdateSalesRequestDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesUpdateSalesRequestDeliveryAddress) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
 	invoicesUpdateSalesRequestLinesItemFieldItemID                 = big.NewInt(1 << 0)
 	invoicesUpdateSalesRequestLinesItemFieldDescription            = big.NewInt(1 << 1)
 	invoicesUpdateSalesRequestLinesItemFieldUnit                   = big.NewInt(1 << 2)
@@ -40556,129 +42470,135 @@ var (
 	invoicesUpdateSalesResponseFieldGrossTotal                   = big.NewInt(1 << 14)
 	invoicesUpdateSalesResponseFieldSalesTaxPercent              = big.NewInt(1 << 15)
 	invoicesUpdateSalesResponseFieldSalesTaxTotal                = big.NewInt(1 << 16)
-	invoicesUpdateSalesResponseFieldPaidAmount                   = big.NewInt(1 << 17)
-	invoicesUpdateSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 18)
-	invoicesUpdateSalesResponseFieldReversedAt                   = big.NewInt(1 << 19)
-	invoicesUpdateSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 20)
-	invoicesUpdateSalesResponseFieldReversalReason               = big.NewInt(1 << 21)
-	invoicesUpdateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 22)
-	invoicesUpdateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 23)
-	invoicesUpdateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 24)
-	invoicesUpdateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 25)
-	invoicesUpdateSalesResponseFieldAgreementID                  = big.NewInt(1 << 26)
-	invoicesUpdateSalesResponseFieldVatScheme                    = big.NewInt(1 << 27)
-	invoicesUpdateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 28)
-	invoicesUpdateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 29)
-	invoicesUpdateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 30)
-	invoicesUpdateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 31)
-	invoicesUpdateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 32)
-	invoicesUpdateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 33)
-	invoicesUpdateSalesResponseFieldNotes                        = big.NewInt(1 << 34)
-	invoicesUpdateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 35)
-	invoicesUpdateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 36)
-	invoicesUpdateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 37)
-	invoicesUpdateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 38)
-	invoicesUpdateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 39)
-	invoicesUpdateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 40)
-	invoicesUpdateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 41)
-	invoicesUpdateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 42)
-	invoicesUpdateSalesResponseFieldReceivedByName               = big.NewInt(1 << 43)
-	invoicesUpdateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 44)
-	invoicesUpdateSalesResponseFieldLocale                       = big.NewInt(1 << 45)
-	invoicesUpdateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 46)
-	invoicesUpdateSalesResponseFieldLockedAt                     = big.NewInt(1 << 47)
-	invoicesUpdateSalesResponseFieldLockedBy                     = big.NewInt(1 << 48)
-	invoicesUpdateSalesResponseFieldPayToken                     = big.NewInt(1 << 49)
-	invoicesUpdateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 50)
-	invoicesUpdateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 51)
-	invoicesUpdateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 52)
-	invoicesUpdateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 53)
-	invoicesUpdateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 54)
-	invoicesUpdateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 55)
-	invoicesUpdateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 56)
-	invoicesUpdateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 57)
-	invoicesUpdateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 58)
-	invoicesUpdateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 59)
-	invoicesUpdateSalesResponseFieldPeppolMessageID              = big.NewInt(1 << 60)
-	invoicesUpdateSalesResponseFieldPeppolStatus                 = big.NewInt(1 << 61)
-	invoicesUpdateSalesResponseFieldPeppolDetail                 = big.NewInt(1 << 62)
-	invoicesUpdateSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 63)
-	invoicesUpdateSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 64)
-	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 65)
-	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 66)
-	invoicesUpdateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 67)
-	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 68)
-	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesUpdateSalesResponseFieldSalesTaxJurisdiction         = big.NewInt(1 << 17)
+	invoicesUpdateSalesResponseFieldSalesTaxExemptionID          = big.NewInt(1 << 18)
+	invoicesUpdateSalesResponseFieldDeliveryAddress              = big.NewInt(1 << 19)
+	invoicesUpdateSalesResponseFieldPaidAmount                   = big.NewInt(1 << 20)
+	invoicesUpdateSalesResponseFieldJournalTransactionID         = big.NewInt(1 << 21)
+	invoicesUpdateSalesResponseFieldReversedAt                   = big.NewInt(1 << 22)
+	invoicesUpdateSalesResponseFieldReversalJournalTransactionID = big.NewInt(1 << 23)
+	invoicesUpdateSalesResponseFieldReversalReason               = big.NewInt(1 << 24)
+	invoicesUpdateSalesResponseFieldAppliedToInvoiceID           = big.NewInt(1 << 25)
+	invoicesUpdateSalesResponseFieldCreditedInvoiceID            = big.NewInt(1 << 26)
+	invoicesUpdateSalesResponseFieldCreditedInvoiceReference     = big.NewInt(1 << 27)
+	invoicesUpdateSalesResponseFieldCreditedInvoiceDate          = big.NewInt(1 << 28)
+	invoicesUpdateSalesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesUpdateSalesResponseFieldVatScheme                    = big.NewInt(1 << 30)
+	invoicesUpdateSalesResponseFieldIntrastatTransportMode       = big.NewInt(1 << 31)
+	invoicesUpdateSalesResponseFieldIntrastatDeliveryTerms       = big.NewInt(1 << 32)
+	invoicesUpdateSalesResponseFieldIntrastatRegion              = big.NewInt(1 << 33)
+	invoicesUpdateSalesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 34)
+	invoicesUpdateSalesResponseFieldVatCountryCode               = big.NewInt(1 << 35)
+	invoicesUpdateSalesResponseFieldDeemedSupplier               = big.NewInt(1 << 36)
+	invoicesUpdateSalesResponseFieldNotes                        = big.NewInt(1 << 37)
+	invoicesUpdateSalesResponseFieldDocumentRef                  = big.NewInt(1 << 38)
+	invoicesUpdateSalesResponseFieldOperationTypeID              = big.NewInt(1 << 39)
+	invoicesUpdateSalesResponseFieldDocumentSeriesID             = big.NewInt(1 << 40)
+	invoicesUpdateSalesResponseFieldSeriesLabel                  = big.NewInt(1 << 41)
+	invoicesUpdateSalesResponseFieldDiscountPercent              = big.NewInt(1 << 42)
+	invoicesUpdateSalesResponseFieldOrderNumber                  = big.NewInt(1 << 43)
+	invoicesUpdateSalesResponseFieldIssuedByName                 = big.NewInt(1 << 44)
+	invoicesUpdateSalesResponseFieldIssuedByTitle                = big.NewInt(1 << 45)
+	invoicesUpdateSalesResponseFieldReceivedByName               = big.NewInt(1 << 46)
+	invoicesUpdateSalesResponseFieldReceivedByTitle              = big.NewInt(1 << 47)
+	invoicesUpdateSalesResponseFieldLocale                       = big.NewInt(1 << 48)
+	invoicesUpdateSalesResponseFieldRecurringInvoiceID           = big.NewInt(1 << 49)
+	invoicesUpdateSalesResponseFieldLockedAt                     = big.NewInt(1 << 50)
+	invoicesUpdateSalesResponseFieldLockedBy                     = big.NewInt(1 << 51)
+	invoicesUpdateSalesResponseFieldPayToken                     = big.NewInt(1 << 52)
+	invoicesUpdateSalesResponseFieldPayLinkEnabled               = big.NewInt(1 << 53)
+	invoicesUpdateSalesResponseFieldDebtRemindersEnabled         = big.NewInt(1 << 54)
+	invoicesUpdateSalesResponseFieldEinvoiceSystem               = big.NewInt(1 << 55)
+	invoicesUpdateSalesResponseFieldEinvoiceTransport            = big.NewInt(1 << 56)
+	invoicesUpdateSalesResponseFieldEinvoiceMessageID            = big.NewInt(1 << 57)
+	invoicesUpdateSalesResponseFieldEinvoiceNumber               = big.NewInt(1 << 58)
+	invoicesUpdateSalesResponseFieldEinvoiceStatus               = big.NewInt(1 << 59)
+	invoicesUpdateSalesResponseFieldEinvoiceDetail               = big.NewInt(1 << 60)
+	invoicesUpdateSalesResponseFieldEinvoiceSentAt               = big.NewInt(1 << 61)
+	invoicesUpdateSalesResponseFieldEinvoiceCheckedAt            = big.NewInt(1 << 62)
+	invoicesUpdateSalesResponseFieldPeppolMessageID              = big.NewInt(0).Lsh(big.NewInt(1), 63)
+	invoicesUpdateSalesResponseFieldPeppolStatus                 = big.NewInt(0).Lsh(big.NewInt(1), 64)
+	invoicesUpdateSalesResponseFieldPeppolDetail                 = big.NewInt(0).Lsh(big.NewInt(1), 65)
+	invoicesUpdateSalesResponseFieldPeppolSentAt                 = big.NewInt(0).Lsh(big.NewInt(1), 66)
+	invoicesUpdateSalesResponseFieldPeppolCheckedAt              = big.NewInt(0).Lsh(big.NewInt(1), 67)
+	invoicesUpdateSalesResponseFieldCreatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 68)
+	invoicesUpdateSalesResponseFieldUpdatedAt                    = big.NewInt(0).Lsh(big.NewInt(1), 69)
+	invoicesUpdateSalesResponseFieldAdvanceAppliedAmount         = big.NewInt(0).Lsh(big.NewInt(1), 70)
+	invoicesUpdateSalesResponseFieldLines                        = big.NewInt(0).Lsh(big.NewInt(1), 71)
+	invoicesUpdateSalesResponseFieldVatEvidence                  = big.NewInt(0).Lsh(big.NewInt(1), 72)
 )
 
 type InvoicesUpdateSalesResponse struct {
-	ID                           string                                   `json:"id" url:"id"`
-	PartnerID                    string                                   `json:"partnerId" url:"partnerId"`
-	Type                         InvoicesUpdateSalesResponseType          `json:"type" url:"type"`
-	Status                       InvoicesUpdateSalesResponseStatus        `json:"status" url:"status"`
-	PaymentStatus                InvoicesUpdateSalesResponsePaymentStatus `json:"paymentStatus" url:"paymentStatus"`
-	Series                       *string                                  `json:"series,omitempty" url:"series,omitempty"`
-	Number                       *int64                                   `json:"number,omitempty" url:"number,omitempty"`
-	FullNumber                   *string                                  `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
-	IssueDate                    *time.Time                               `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
-	DueDate                      *time.Time                               `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
-	Currency                     string                                   `json:"currency" url:"currency"`
-	FxRate                       *string                                  `json:"fxRate,omitempty" url:"fxRate,omitempty"`
-	NetTotal                     string                                   `json:"netTotal" url:"netTotal"`
-	VatTotal                     string                                   `json:"vatTotal" url:"vatTotal"`
-	GrossTotal                   string                                   `json:"grossTotal" url:"grossTotal"`
-	SalesTaxPercent              *string                                  `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
-	SalesTaxTotal                string                                   `json:"salesTaxTotal" url:"salesTaxTotal"`
-	PaidAmount                   string                                   `json:"paidAmount" url:"paidAmount"`
-	JournalTransactionID         *string                                  `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
-	ReversedAt                   *time.Time                               `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
-	ReversalJournalTransactionID *string                                  `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
-	ReversalReason               *string                                  `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
-	AppliedToInvoiceID           *string                                  `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
-	CreditedInvoiceID            *string                                  `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
-	CreditedInvoiceReference     *string                                  `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
-	CreditedInvoiceDate          *time.Time                               `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
-	AgreementID                  *string                                  `json:"agreementId,omitempty" url:"agreementId,omitempty"`
-	VatScheme                    *InvoicesUpdateSalesResponseVatScheme    `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
-	IntrastatTransportMode       *string                                  `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
-	IntrastatDeliveryTerms       *string                                  `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
-	IntrastatRegion              *string                                  `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
-	IntrastatNatureOfTransaction *string                                  `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
-	VatCountryCode               *string                                  `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
-	DeemedSupplier               bool                                     `json:"deemedSupplier" url:"deemedSupplier"`
-	Notes                        *string                                  `json:"notes,omitempty" url:"notes,omitempty"`
-	DocumentRef                  *string                                  `json:"documentRef,omitempty" url:"documentRef,omitempty"`
-	OperationTypeID              *string                                  `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
-	DocumentSeriesID             *string                                  `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
-	SeriesLabel                  *string                                  `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
-	DiscountPercent              string                                   `json:"discountPercent" url:"discountPercent"`
-	OrderNumber                  *string                                  `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
-	IssuedByName                 *string                                  `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
-	IssuedByTitle                *string                                  `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
-	ReceivedByName               *string                                  `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
-	ReceivedByTitle              *string                                  `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
-	Locale                       *string                                  `json:"locale,omitempty" url:"locale,omitempty"`
-	RecurringInvoiceID           *string                                  `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
-	LockedAt                     *time.Time                               `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
-	LockedBy                     *string                                  `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
-	PayToken                     *string                                  `json:"payToken,omitempty" url:"payToken,omitempty"`
-	PayLinkEnabled               bool                                     `json:"payLinkEnabled" url:"payLinkEnabled"`
-	DebtRemindersEnabled         bool                                     `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
-	EinvoiceSystem               *string                                  `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
-	EinvoiceTransport            *string                                  `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
-	EinvoiceMessageID            *string                                  `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
-	EinvoiceNumber               *string                                  `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
-	EinvoiceStatus               *string                                  `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
-	EinvoiceDetail               *string                                  `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
-	EinvoiceSentAt               *time.Time                               `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
-	EinvoiceCheckedAt            *time.Time                               `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
-	PeppolMessageID              *string                                  `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
-	PeppolStatus                 *string                                  `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
-	PeppolDetail                 *string                                  `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
-	PeppolSentAt                 *time.Time                               `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
-	PeppolCheckedAt              *time.Time                               `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
-	CreatedAt                    time.Time                                `json:"createdAt" url:"createdAt"`
-	UpdatedAt                    time.Time                                `json:"updatedAt" url:"updatedAt"`
+	ID                           string                                      `json:"id" url:"id"`
+	PartnerID                    string                                      `json:"partnerId" url:"partnerId"`
+	Type                         InvoicesUpdateSalesResponseType             `json:"type" url:"type"`
+	Status                       InvoicesUpdateSalesResponseStatus           `json:"status" url:"status"`
+	PaymentStatus                InvoicesUpdateSalesResponsePaymentStatus    `json:"paymentStatus" url:"paymentStatus"`
+	Series                       *string                                     `json:"series,omitempty" url:"series,omitempty"`
+	Number                       *int64                                      `json:"number,omitempty" url:"number,omitempty"`
+	FullNumber                   *string                                     `json:"fullNumber,omitempty" url:"fullNumber,omitempty"`
+	IssueDate                    *time.Time                                  `json:"issueDate,omitempty" url:"issueDate,omitempty" format:"date"`
+	DueDate                      *time.Time                                  `json:"dueDate,omitempty" url:"dueDate,omitempty" format:"date"`
+	Currency                     string                                      `json:"currency" url:"currency"`
+	FxRate                       *string                                     `json:"fxRate,omitempty" url:"fxRate,omitempty"`
+	NetTotal                     string                                      `json:"netTotal" url:"netTotal"`
+	VatTotal                     string                                      `json:"vatTotal" url:"vatTotal"`
+	GrossTotal                   string                                      `json:"grossTotal" url:"grossTotal"`
+	SalesTaxPercent              *string                                     `json:"salesTaxPercent,omitempty" url:"salesTaxPercent,omitempty"`
+	SalesTaxTotal                string                                      `json:"salesTaxTotal" url:"salesTaxTotal"`
+	SalesTaxJurisdiction         *string                                     `json:"salesTaxJurisdiction,omitempty" url:"salesTaxJurisdiction,omitempty"`
+	SalesTaxExemptionID          *string                                     `json:"salesTaxExemptionId,omitempty" url:"salesTaxExemptionId,omitempty"`
+	DeliveryAddress              *InvoicesUpdateSalesResponseDeliveryAddress `json:"deliveryAddress,omitempty" url:"deliveryAddress,omitempty"`
+	PaidAmount                   string                                      `json:"paidAmount" url:"paidAmount"`
+	JournalTransactionID         *string                                     `json:"journalTransactionId,omitempty" url:"journalTransactionId,omitempty"`
+	ReversedAt                   *time.Time                                  `json:"reversedAt,omitempty" url:"reversedAt,omitempty"`
+	ReversalJournalTransactionID *string                                     `json:"reversalJournalTransactionId,omitempty" url:"reversalJournalTransactionId,omitempty"`
+	ReversalReason               *string                                     `json:"reversalReason,omitempty" url:"reversalReason,omitempty"`
+	AppliedToInvoiceID           *string                                     `json:"appliedToInvoiceId,omitempty" url:"appliedToInvoiceId,omitempty"`
+	CreditedInvoiceID            *string                                     `json:"creditedInvoiceId,omitempty" url:"creditedInvoiceId,omitempty"`
+	CreditedInvoiceReference     *string                                     `json:"creditedInvoiceReference,omitempty" url:"creditedInvoiceReference,omitempty"`
+	CreditedInvoiceDate          *time.Time                                  `json:"creditedInvoiceDate,omitempty" url:"creditedInvoiceDate,omitempty" format:"date"`
+	AgreementID                  *string                                     `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	VatScheme                    *InvoicesUpdateSalesResponseVatScheme       `json:"vatScheme,omitempty" url:"vatScheme,omitempty"`
+	IntrastatTransportMode       *string                                     `json:"intrastatTransportMode,omitempty" url:"intrastatTransportMode,omitempty"`
+	IntrastatDeliveryTerms       *string                                     `json:"intrastatDeliveryTerms,omitempty" url:"intrastatDeliveryTerms,omitempty"`
+	IntrastatRegion              *string                                     `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
+	IntrastatNatureOfTransaction *string                                     `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
+	VatCountryCode               *string                                     `json:"vatCountryCode,omitempty" url:"vatCountryCode,omitempty"`
+	DeemedSupplier               bool                                        `json:"deemedSupplier" url:"deemedSupplier"`
+	Notes                        *string                                     `json:"notes,omitempty" url:"notes,omitempty"`
+	DocumentRef                  *string                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	OperationTypeID              *string                                     `json:"operationTypeId,omitempty" url:"operationTypeId,omitempty"`
+	DocumentSeriesID             *string                                     `json:"documentSeriesId,omitempty" url:"documentSeriesId,omitempty"`
+	SeriesLabel                  *string                                     `json:"seriesLabel,omitempty" url:"seriesLabel,omitempty"`
+	DiscountPercent              string                                      `json:"discountPercent" url:"discountPercent"`
+	OrderNumber                  *string                                     `json:"orderNumber,omitempty" url:"orderNumber,omitempty"`
+	IssuedByName                 *string                                     `json:"issuedByName,omitempty" url:"issuedByName,omitempty"`
+	IssuedByTitle                *string                                     `json:"issuedByTitle,omitempty" url:"issuedByTitle,omitempty"`
+	ReceivedByName               *string                                     `json:"receivedByName,omitempty" url:"receivedByName,omitempty"`
+	ReceivedByTitle              *string                                     `json:"receivedByTitle,omitempty" url:"receivedByTitle,omitempty"`
+	Locale                       *string                                     `json:"locale,omitempty" url:"locale,omitempty"`
+	RecurringInvoiceID           *string                                     `json:"recurringInvoiceId,omitempty" url:"recurringInvoiceId,omitempty"`
+	LockedAt                     *time.Time                                  `json:"lockedAt,omitempty" url:"lockedAt,omitempty"`
+	LockedBy                     *string                                     `json:"lockedBy,omitempty" url:"lockedBy,omitempty"`
+	PayToken                     *string                                     `json:"payToken,omitempty" url:"payToken,omitempty"`
+	PayLinkEnabled               bool                                        `json:"payLinkEnabled" url:"payLinkEnabled"`
+	DebtRemindersEnabled         bool                                        `json:"debtRemindersEnabled" url:"debtRemindersEnabled"`
+	EinvoiceSystem               *string                                     `json:"einvoiceSystem,omitempty" url:"einvoiceSystem,omitempty"`
+	EinvoiceTransport            *string                                     `json:"einvoiceTransport,omitempty" url:"einvoiceTransport,omitempty"`
+	EinvoiceMessageID            *string                                     `json:"einvoiceMessageId,omitempty" url:"einvoiceMessageId,omitempty"`
+	EinvoiceNumber               *string                                     `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	EinvoiceStatus               *string                                     `json:"einvoiceStatus,omitempty" url:"einvoiceStatus,omitempty"`
+	EinvoiceDetail               *string                                     `json:"einvoiceDetail,omitempty" url:"einvoiceDetail,omitempty"`
+	EinvoiceSentAt               *time.Time                                  `json:"einvoiceSentAt,omitempty" url:"einvoiceSentAt,omitempty"`
+	EinvoiceCheckedAt            *time.Time                                  `json:"einvoiceCheckedAt,omitempty" url:"einvoiceCheckedAt,omitempty"`
+	PeppolMessageID              *string                                     `json:"peppolMessageId,omitempty" url:"peppolMessageId,omitempty"`
+	PeppolStatus                 *string                                     `json:"peppolStatus,omitempty" url:"peppolStatus,omitempty"`
+	PeppolDetail                 *string                                     `json:"peppolDetail,omitempty" url:"peppolDetail,omitempty"`
+	PeppolSentAt                 *time.Time                                  `json:"peppolSentAt,omitempty" url:"peppolSentAt,omitempty"`
+	PeppolCheckedAt              *time.Time                                  `json:"peppolCheckedAt,omitempty" url:"peppolCheckedAt,omitempty"`
+	CreatedAt                    time.Time                                   `json:"createdAt" url:"createdAt"`
+	UpdatedAt                    time.Time                                   `json:"updatedAt" url:"updatedAt"`
 	// Gross amount of an advance invoice applied to final invoices so far; null on other documents
 	AdvanceAppliedAmount *string                                 `json:"advanceAppliedAmount,omitempty" url:"advanceAppliedAmount,omitempty"`
 	Lines                []*InvoicesUpdateSalesResponseLinesItem `json:"lines" url:"lines"`
@@ -40808,6 +42728,27 @@ func (i *InvoicesUpdateSalesResponse) GetSalesTaxTotal() string {
 		return ""
 	}
 	return i.SalesTaxTotal
+}
+
+func (i *InvoicesUpdateSalesResponse) GetSalesTaxJurisdiction() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxJurisdiction
+}
+
+func (i *InvoicesUpdateSalesResponse) GetSalesTaxExemptionID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.SalesTaxExemptionID
+}
+
+func (i *InvoicesUpdateSalesResponse) GetDeliveryAddress() *InvoicesUpdateSalesResponseDeliveryAddress {
+	if i == nil {
+		return nil
+	}
+	return i.DeliveryAddress
 }
 
 func (i *InvoicesUpdateSalesResponse) GetPaidAmount() string {
@@ -41314,6 +43255,27 @@ func (i *InvoicesUpdateSalesResponse) SetSalesTaxTotal(salesTaxTotal string) {
 	i.require(invoicesUpdateSalesResponseFieldSalesTaxTotal)
 }
 
+// SetSalesTaxJurisdiction sets the SalesTaxJurisdiction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetSalesTaxJurisdiction(salesTaxJurisdiction *string) {
+	i.SalesTaxJurisdiction = salesTaxJurisdiction
+	i.require(invoicesUpdateSalesResponseFieldSalesTaxJurisdiction)
+}
+
+// SetSalesTaxExemptionID sets the SalesTaxExemptionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetSalesTaxExemptionID(salesTaxExemptionID *string) {
+	i.SalesTaxExemptionID = salesTaxExemptionID
+	i.require(invoicesUpdateSalesResponseFieldSalesTaxExemptionID)
+}
+
+// SetDeliveryAddress sets the DeliveryAddress field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponse) SetDeliveryAddress(deliveryAddress *InvoicesUpdateSalesResponseDeliveryAddress) {
+	i.DeliveryAddress = deliveryAddress
+	i.require(invoicesUpdateSalesResponseFieldDeliveryAddress)
+}
+
 // SetPaidAmount sets the PaidAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdateSalesResponse) SetPaidAmount(paidAmount string) {
@@ -41761,6 +43723,155 @@ func (i *InvoicesUpdateSalesResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InvoicesUpdateSalesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesUpdateSalesResponseDeliveryAddressFieldStreet      = big.NewInt(1 << 0)
+	invoicesUpdateSalesResponseDeliveryAddressFieldCity        = big.NewInt(1 << 1)
+	invoicesUpdateSalesResponseDeliveryAddressFieldPostalCode  = big.NewInt(1 << 2)
+	invoicesUpdateSalesResponseDeliveryAddressFieldCountryCode = big.NewInt(1 << 3)
+	invoicesUpdateSalesResponseDeliveryAddressFieldSubdivision = big.NewInt(1 << 4)
+)
+
+type InvoicesUpdateSalesResponseDeliveryAddress struct {
+	Street      *string `json:"street,omitempty" url:"street,omitempty"`
+	City        *string `json:"city,omitempty" url:"city,omitempty"`
+	PostalCode  *string `json:"postalCode,omitempty" url:"postalCode,omitempty"`
+	CountryCode *string `json:"countryCode,omitempty" url:"countryCode,omitempty"`
+	// ISO 3166-2 code of the state, province or UK nation, such as US-CA or GB-SCT
+	Subdivision *string `json:"subdivision,omitempty" url:"subdivision,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) GetStreet() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Street
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) GetCity() *string {
+	if i == nil {
+		return nil
+	}
+	return i.City
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) GetPostalCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PostalCode
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) GetCountryCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CountryCode
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) GetSubdivision() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Subdivision
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetStreet sets the Street field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) SetStreet(street *string) {
+	i.Street = street
+	i.require(invoicesUpdateSalesResponseDeliveryAddressFieldStreet)
+}
+
+// SetCity sets the City field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) SetCity(city *string) {
+	i.City = city
+	i.require(invoicesUpdateSalesResponseDeliveryAddressFieldCity)
+}
+
+// SetPostalCode sets the PostalCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) SetPostalCode(postalCode *string) {
+	i.PostalCode = postalCode
+	i.require(invoicesUpdateSalesResponseDeliveryAddressFieldPostalCode)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) SetCountryCode(countryCode *string) {
+	i.CountryCode = countryCode
+	i.require(invoicesUpdateSalesResponseDeliveryAddressFieldCountryCode)
+}
+
+// SetSubdivision sets the Subdivision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) SetSubdivision(subdivision *string) {
+	i.Subdivision = subdivision
+	i.require(invoicesUpdateSalesResponseDeliveryAddressFieldSubdivision)
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesUpdateSalesResponseDeliveryAddress
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesUpdateSalesResponseDeliveryAddress(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) MarshalJSON() ([]byte, error) {
+	type embed InvoicesUpdateSalesResponseDeliveryAddress
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesUpdateSalesResponseDeliveryAddress) String() string {
 	if i == nil {
 		return "<nil>"
 	}

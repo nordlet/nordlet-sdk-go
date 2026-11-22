@@ -580,6 +580,95 @@ func TestPartnersCompaniesHouseGetWithWireMock(
 	VerifyRequestCount(t, "TestPartnersCompaniesHouseGetWithWireMock", "POST", "/v1/partners/companies-house/get", nil, 1)
 }
 
+func TestPartnersSalesTaxExemptionsCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SalesTaxExemptionsCreatePartnersRequest{
+		PartnerID: "partnerId",
+		State:     nordlet.SalesTaxExemptionsCreatePartnersRequestStateUsAr,
+		Reasons: []nordlet.SalesTaxExemptionsCreatePartnersRequestReasonsItem{
+			nordlet.SalesTaxExemptionsCreatePartnersRequestReasonsItemA,
+		},
+		BusinessType: nordlet.SalesTaxExemptionsCreatePartnersRequestBusinessTypeTen,
+		IDNumber:     "idNumber",
+		IDIssuedBy:   "idIssuedBy",
+		ReceivedOn: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Partners.SalesTaxExemptionsCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersSalesTaxExemptionsCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersSalesTaxExemptionsCreateWithWireMock", "POST", "/v1/partners/sales-tax-exemptions/create", nil, 1)
+}
+
+func TestPartnersSalesTaxExemptionsListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SalesTaxExemptionsListPartnersRequest{}
+	_, invocationErr := client.Partners.SalesTaxExemptionsList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersSalesTaxExemptionsListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersSalesTaxExemptionsListWithWireMock", "POST", "/v1/partners/sales-tax-exemptions/list", nil, 1)
+}
+
+func TestPartnersSalesTaxExemptionsCancelWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SalesTaxExemptionsCancelPartnersRequest{
+		ID: "id",
+		CancelledOn: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Partners.SalesTaxExemptionsCancel(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPartnersSalesTaxExemptionsCancelWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPartnersSalesTaxExemptionsCancelWithWireMock", "POST", "/v1/partners/sales-tax-exemptions/cancel", nil, 1)
+}
+
 func TestPartnersVatReviewsListWithWireMock(
 	t *testing.T,
 ) {
