@@ -119,6 +119,23 @@ func (c *Client) AssetsCreate(
 	return response.Body, nil
 }
 
+// Register a fixed asset from a line of a registered purchase invoice that was booked to the asset account of the group (422 otherwise, and for a credit note, a draft or reversed invoice and a deferred line). The acquisition date is the invoice's registration date, else its document date. The acquisition cost is what the line booked, in the company currency (its net amount plus the VAT not deducted), less what earlier assets from the same line took; `acquisitionCost` takes a part of it instead, for a line that holds several assets (422 above what is left, 409 when nothing is left). The name defaults to the line description. The asset keeps `purchaseInvoiceLineId`. Otherwise as `assets/assets/create`.
+func (c *Client) AssetsCreateFromPurchase(
+	ctx context.Context,
+	request *nordlet.AssetsCreateFromPurchaseAssetsRequest,
+	opts ...option.RequestOption,
+) (*nordlet.AssetsCreateFromPurchaseAssetsResponse, error) {
+	response, err := c.WithRawResponse.AssetsCreateFromPurchase(
+		ctx,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
 // Change an asset that has no posted depreciation yet: group, code, name, dates, cost, salvage value, useful life, notes or documents. Refused with 409 once depreciation is posted or the asset is disposed, and with 422 when the salvage value would reach the acquisition cost; a duplicate code is 409.
 func (c *Client) AssetsUpdate(
 	ctx context.Context,

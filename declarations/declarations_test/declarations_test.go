@@ -495,6 +495,34 @@ func TestDeclarationsEuOssComputeWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsEuOssComputeWithWireMock", "POST", "/v1/declarations/eu/oss/compute", nil, 1)
 }
 
+func TestDeclarationsEuOssNonUnionComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EuOssNonUnionComputeDeclarationsRequest{
+		Year:                        int64(1000000),
+		Quarter:                     int64(1000000),
+		MemberStateOfIdentification: nordlet.EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationAt,
+	}
+	_, invocationErr := client.Declarations.EuOssNonUnionCompute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEuOssNonUnionComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEuOssNonUnionComputeWithWireMock", "POST", "/v1/declarations/eu/oss-non-union/compute", nil, 1)
+}
+
 func TestDeclarationsEuIossComputeWithWireMock(
 	t *testing.T,
 ) {
@@ -1244,6 +1272,59 @@ func TestDeclarationsVatProrataGetWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsVatProrataGetWithWireMock", "POST", "/v1/declarations/vat-prorata/get", nil, 1)
 }
 
+func TestDeclarationsVatProrataAdjustmentGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.VatProrataAdjustmentGetDeclarationsRequest{
+		FiscalYear: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.VatProrataAdjustmentGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsVatProrataAdjustmentGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsVatProrataAdjustmentGetWithWireMock", "POST", "/v1/declarations/vat-prorata/adjustment/get", nil, 1)
+}
+
+func TestDeclarationsVatProrataAdjustmentPostWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.VatProrataAdjustmentPostDeclarationsRequest{
+		FiscalYear:  int64(1000000),
+		AccountCode: "accountCode",
+	}
+	_, invocationErr := client.Declarations.VatProrataAdjustmentPost(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsVatProrataAdjustmentPostWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsVatProrataAdjustmentPostWithWireMock", "POST", "/v1/declarations/vat-prorata/adjustment/post", nil, 1)
+}
+
 func TestDeclarationsVatProrataListWithWireMock(
 	t *testing.T,
 ) {
@@ -1788,6 +1869,87 @@ func TestDeclarationsDkSelskabsskatGenerateWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsDkSelskabsskatGenerateWithWireMock", "POST", "/v1/declarations/dk/selskabsskat/generate", nil, 1)
 }
 
+func TestDeclarationsEeTsdAnnexesGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EeTsdAnnexesGetDeclarationsRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.EeTsdAnnexesGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEeTsdAnnexesGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEeTsdAnnexesGetWithWireMock", "POST", "/v1/declarations/ee/tsd-annexes/get", nil, 1)
+}
+
+func TestDeclarationsEeTsdAnnexesSetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EeTsdAnnexesSetDeclarationsRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.EeTsdAnnexesSet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEeTsdAnnexesSetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEeTsdAnnexesSetWithWireMock", "POST", "/v1/declarations/ee/tsd-annexes/set", nil, 1)
+}
+
+func TestDeclarationsEeEmploymentRegisterGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.EeEmploymentRegisterGenerateDeclarationsRequest{
+		ContractID: "contractId",
+		Event:      nordlet.EeEmploymentRegisterGenerateDeclarationsRequestEventStart,
+	}
+	_, invocationErr := client.Declarations.EeEmploymentRegisterGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsEeEmploymentRegisterGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsEeEmploymentRegisterGenerateWithWireMock", "POST", "/v1/declarations/ee/employment-register/generate", nil, 1)
+}
+
 func TestDeclarationsEeEmploymentRegisterSendWithWireMock(
 	t *testing.T,
 ) {
@@ -1891,6 +2053,32 @@ func TestDeclarationsIeB1GenerateWithWireMock(
 	VerifyRequestCount(t, "TestDeclarationsIeB1GenerateWithWireMock", "POST", "/v1/declarations/ie/b1/generate", nil, 1)
 }
 
+func TestDeclarationsIeRtdGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.IeRtdGenerateDeclarationsRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.IeRtdGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsIeRtdGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsIeRtdGenerateWithWireMock", "POST", "/v1/declarations/ie/rtd/generate", nil, 1)
+}
+
 func TestDeclarationsItSdiPurchaseSendWithWireMock(
 	t *testing.T,
 ) {
@@ -1941,6 +2129,202 @@ func TestDeclarationsItSdiPurchasePreviewWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestDeclarationsItSdiPurchasePreviewWithWireMock", "POST", "/v1/declarations/it/sdi/purchase-preview", nil, 1)
+}
+
+func TestDeclarationsItTfrAccrualComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItTfrAccrualComputeDeclarationsRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.ItTfrAccrualCompute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsItTfrAccrualComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsItTfrAccrualComputeWithWireMock", "POST", "/v1/declarations/it/tfr/accrual/compute", nil, 1)
+}
+
+func TestDeclarationsItTfrAccrualPostWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItTfrAccrualPostDeclarationsRequest{
+		Year:               int64(1000000),
+		Month:              int64(1000000),
+		ExpenseAccountCode: "expenseAccountCode",
+	}
+	_, invocationErr := client.Declarations.ItTfrAccrualPost(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsItTfrAccrualPostWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsItTfrAccrualPostWithWireMock", "POST", "/v1/declarations/it/tfr/accrual/post", nil, 1)
+}
+
+func TestDeclarationsItTfrRevaluationComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItTfrRevaluationComputeDeclarationsRequest{
+		Year:                int64(1000000),
+		FoiPreviousDecember: "121.0000",
+		FoiDecember:         "121.0000",
+		Funds: []*nordlet.ItTfrRevaluationComputeDeclarationsRequestFundsItem{
+			&nordlet.ItTfrRevaluationComputeDeclarationsRequestFundsItem{
+				EmployeeID: "employeeId",
+				Amount:     "121.00",
+			},
+		},
+	}
+	_, invocationErr := client.Declarations.ItTfrRevaluationCompute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsItTfrRevaluationComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsItTfrRevaluationComputeWithWireMock", "POST", "/v1/declarations/it/tfr/revaluation/compute", nil, 1)
+}
+
+func TestDeclarationsItTfrRevaluationPostWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItTfrRevaluationPostDeclarationsRequest{
+		Year:                int64(1000000),
+		FoiPreviousDecember: "121.0000",
+		FoiDecember:         "121.0000",
+		Funds: []*nordlet.ItTfrRevaluationPostDeclarationsRequestFundsItem{
+			&nordlet.ItTfrRevaluationPostDeclarationsRequestFundsItem{
+				EmployeeID: "employeeId",
+				Amount:     "121.00",
+			},
+		},
+		ExpenseAccountCode: "expenseAccountCode",
+		FundAccountCode:    "fundAccountCode",
+		TaxAccountCode:     "taxAccountCode",
+	}
+	_, invocationErr := client.Declarations.ItTfrRevaluationPost(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsItTfrRevaluationPostWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsItTfrRevaluationPostWithWireMock", "POST", "/v1/declarations/it/tfr/revaluation/post", nil, 1)
+}
+
+func TestDeclarationsItInailAutoliquidazioneComputeWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItInailAutoliquidazioneComputeDeclarationsRequest{
+		Year: int64(1000000),
+		Positions: []*nordlet.ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem{
+			&nordlet.ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem{
+				Pat:              "pat",
+				PatControlCode:   "patControlCode",
+				Voce:             "voce",
+				TassoRegolazione: "121.00000",
+				TassoRata:        "121.00000",
+			},
+		},
+	}
+	_, invocationErr := client.Declarations.ItInailAutoliquidazioneCompute(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsItInailAutoliquidazioneComputeWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsItInailAutoliquidazioneComputeWithWireMock", "POST", "/v1/declarations/it/inail/autoliquidazione/compute", nil, 1)
+}
+
+func TestDeclarationsItInailAutoliquidazioneF24WithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.ItInailAutoliquidazioneF24DeclarationsRequest{
+		Year: int64(1000000),
+		Positions: []*nordlet.ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem{
+			&nordlet.ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem{
+				Pat:              "pat",
+				PatControlCode:   "patControlCode",
+				Voce:             "voce",
+				TassoRegolazione: "121.00000",
+				TassoRata:        "121.00000",
+			},
+		},
+	}
+	_, invocationErr := client.Declarations.ItInailAutoliquidazioneF24(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsItInailAutoliquidazioneF24WithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsItInailAutoliquidazioneF24WithWireMock", "POST", "/v1/declarations/it/inail/autoliquidazione/f24", nil, 1)
 }
 
 func TestDeclarationsLtSaftSendWithWireMock(
@@ -2030,6 +2414,59 @@ func TestDeclarationsLtPln204FfdataWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestDeclarationsLtPln204FfdataWithWireMock", "POST", "/v1/declarations/lt/pln204/ffdata", nil, 1)
+}
+
+func TestDeclarationsLvEmployeeNoticeGenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.LvEmployeeNoticeGenerateDeclarationsRequest{
+		ContractID: "contractId",
+		Event:      nordlet.LvEmployeeNoticeGenerateDeclarationsRequestEventStart,
+	}
+	_, invocationErr := client.Declarations.LvEmployeeNoticeGenerate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsLvEmployeeNoticeGenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsLvEmployeeNoticeGenerateWithWireMock", "POST", "/v1/declarations/lv/employee-notice/generate", nil, 1)
+}
+
+func TestDeclarationsMtFs7GenerateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.MtFs7GenerateDeclarationsRequest{
+		Year: int64(1000000),
+	}
+	_, invocationErr := client.Declarations.MtFs7Generate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestDeclarationsMtFs7GenerateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestDeclarationsMtFs7GenerateWithWireMock", "POST", "/v1/declarations/mt/fs7/generate", nil, 1)
 }
 
 func TestDeclarationsMtCompanyTaxGenerateWithWireMock(

@@ -2425,6 +2425,138 @@ func (p *PaymentsExportBankRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	postingRulesCreateBankRequestFieldCounterpartyContains = big.NewInt(1 << 0)
+	postingRulesCreateBankRequestFieldDescriptionContains  = big.NewInt(1 << 1)
+	postingRulesCreateBankRequestFieldAccountCode          = big.NewInt(1 << 2)
+	postingRulesCreateBankRequestFieldPartnerID            = big.NewInt(1 << 3)
+)
+
+type PostingRulesCreateBankRequest struct {
+	CounterpartyContains *string `json:"counterpartyContains,omitempty" url:"-"`
+	DescriptionContains  *string `json:"descriptionContains,omitempty" url:"-"`
+	AccountCode          string  `json:"accountCode" url:"-"`
+	PartnerID            *string `json:"partnerId,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostingRulesCreateBankRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetCounterpartyContains sets the CounterpartyContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankRequest) SetCounterpartyContains(counterpartyContains *string) {
+	p.CounterpartyContains = counterpartyContains
+	p.require(postingRulesCreateBankRequestFieldCounterpartyContains)
+}
+
+// SetDescriptionContains sets the DescriptionContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankRequest) SetDescriptionContains(descriptionContains *string) {
+	p.DescriptionContains = descriptionContains
+	p.require(postingRulesCreateBankRequestFieldDescriptionContains)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankRequest) SetAccountCode(accountCode string) {
+	p.AccountCode = accountCode
+	p.require(postingRulesCreateBankRequestFieldAccountCode)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankRequest) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postingRulesCreateBankRequestFieldPartnerID)
+}
+
+func (p *PostingRulesCreateBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostingRulesCreateBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostingRulesCreateBankRequest(body)
+	return nil
+}
+
+func (p *PostingRulesCreateBankRequest) MarshalJSON() ([]byte, error) {
+	type embed PostingRulesCreateBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	postingRulesDeleteBankRequestFieldID = big.NewInt(1 << 0)
+)
+
+type PostingRulesDeleteBankRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostingRulesDeleteBankRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesDeleteBankRequest) SetID(id string) {
+	p.ID = id
+	p.require(postingRulesDeleteBankRequestFieldID)
+}
+
+func (p *PostingRulesDeleteBankRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostingRulesDeleteBankRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*p = PostingRulesDeleteBankRequest(body)
+	return nil
+}
+
+func (p *PostingRulesDeleteBankRequest) MarshalJSON() ([]byte, error) {
+	type embed PostingRulesDeleteBankRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type PostingRulesListBankRequest struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (p *PostingRulesListBankRequest) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+var (
 	reconciliationGetBankRequestFieldBankAccountID    = big.NewInt(1 << 0)
 	reconciliationGetBankRequestFieldDate             = big.NewInt(1 << 1)
 	reconciliationGetBankRequestFieldStatementBalance = big.NewInt(1 << 2)
@@ -3685,17 +3817,19 @@ var (
 	transactionsPostBankRequestFieldProjectID         = big.NewInt(1 << 5)
 	transactionsPostBankRequestFieldDescription       = big.NewInt(1 << 6)
 	transactionsPostBankRequestFieldVatClassifierCode = big.NewInt(1 << 7)
+	transactionsPostBankRequestFieldSaveRule          = big.NewInt(1 << 8)
 )
 
 type TransactionsPostBankRequest struct {
-	TransactionID     string  `json:"transactionId" url:"-"`
-	AccountCode       string  `json:"accountCode" url:"-"`
-	TaxPaymentID      *string `json:"taxPaymentId,omitempty" url:"-"`
-	PartnerID         *string `json:"partnerId,omitempty" url:"-"`
-	CostCenterID      *string `json:"costCenterId,omitempty" url:"-"`
-	ProjectID         *string `json:"projectId,omitempty" url:"-"`
-	Description       *string `json:"description,omitempty" url:"-"`
-	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"-"`
+	TransactionID     string                               `json:"transactionId" url:"-"`
+	AccountCode       string                               `json:"accountCode" url:"-"`
+	TaxPaymentID      *string                              `json:"taxPaymentId,omitempty" url:"-"`
+	PartnerID         *string                              `json:"partnerId,omitempty" url:"-"`
+	CostCenterID      *string                              `json:"costCenterId,omitempty" url:"-"`
+	ProjectID         *string                              `json:"projectId,omitempty" url:"-"`
+	Description       *string                              `json:"description,omitempty" url:"-"`
+	VatClassifierCode *string                              `json:"vatClassifierCode,omitempty" url:"-"`
+	SaveRule          *TransactionsPostBankRequestSaveRule `json:"saveRule,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -3762,6 +3896,13 @@ func (t *TransactionsPostBankRequest) SetDescription(description *string) {
 func (t *TransactionsPostBankRequest) SetVatClassifierCode(vatClassifierCode *string) {
 	t.VatClassifierCode = vatClassifierCode
 	t.require(transactionsPostBankRequestFieldVatClassifierCode)
+}
+
+// SetSaveRule sets the SaveRule field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequest) SetSaveRule(saveRule *TransactionsPostBankRequestSaveRule) {
+	t.SaveRule = saveRule
+	t.require(transactionsPostBankRequestFieldSaveRule)
 }
 
 func (t *TransactionsPostBankRequest) UnmarshalJSON(data []byte) error {
@@ -4046,6 +4187,8 @@ var (
 	accountsCreateBankRequestPaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
 	accountsCreateBankRequestPaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
 	accountsCreateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+	accountsCreateBankRequestPaymentFileSettingsFieldBic                      = big.NewInt(1 << 8)
+	accountsCreateBankRequestPaymentFileSettingsFieldInitiatingPartyBankID    = big.NewInt(1 << 9)
 )
 
 type AccountsCreateBankRequestPaymentFileSettings struct {
@@ -4065,6 +4208,10 @@ type AccountsCreateBankRequestPaymentFileSettings struct {
 	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
 	// Nacha: the Company Discretionary Data the bank asks for
 	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+	// pain.001: the BIC of the bank that holds this account, written as the debtor agent; required for a SEK supplier file from a Swedish account
+	Bic *string `json:"bic,omitempty" url:"bic,omitempty"`
+	// pain.001: the identifier the bank gave the company for file payments (at Swedbank the agreement ID), written as InitgPty/Id/OrgId/Othr with scheme BANK
+	InitiatingPartyBankID *string `json:"initiatingPartyBankId,omitempty" url:"initiatingPartyBankId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4127,6 +4274,20 @@ func (a *AccountsCreateBankRequestPaymentFileSettings) GetCompanyDiscretionaryDa
 		return nil
 	}
 	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetBic() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Bic
+}
+
+func (a *AccountsCreateBankRequestPaymentFileSettings) GetInitiatingPartyBankID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InitiatingPartyBankID
 }
 
 func (a *AccountsCreateBankRequestPaymentFileSettings) GetExtraProperties() map[string]interface{} {
@@ -4197,6 +4358,20 @@ func (a *AccountsCreateBankRequestPaymentFileSettings) SetCompanyName(companyNam
 func (a *AccountsCreateBankRequestPaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
 	a.CompanyDiscretionaryData = companyDiscretionaryData
 	a.require(accountsCreateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+// SetBic sets the Bic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetBic(bic *string) {
+	a.Bic = bic
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldBic)
+}
+
+// SetInitiatingPartyBankID sets the InitiatingPartyBankID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankRequestPaymentFileSettings) SetInitiatingPartyBankID(initiatingPartyBankID *string) {
+	a.InitiatingPartyBankID = initiatingPartyBankID
+	a.require(accountsCreateBankRequestPaymentFileSettingsFieldInitiatingPartyBankID)
 }
 
 func (a *AccountsCreateBankRequestPaymentFileSettings) UnmarshalJSON(data []byte) error {
@@ -4527,6 +4702,8 @@ var (
 	accountsCreateBankResponsePaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
 	accountsCreateBankResponsePaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
 	accountsCreateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+	accountsCreateBankResponsePaymentFileSettingsFieldBic                      = big.NewInt(1 << 8)
+	accountsCreateBankResponsePaymentFileSettingsFieldInitiatingPartyBankID    = big.NewInt(1 << 9)
 )
 
 type AccountsCreateBankResponsePaymentFileSettings struct {
@@ -4546,6 +4723,10 @@ type AccountsCreateBankResponsePaymentFileSettings struct {
 	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
 	// Nacha: the Company Discretionary Data the bank asks for
 	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+	// pain.001: the BIC of the bank that holds this account, written as the debtor agent; required for a SEK supplier file from a Swedish account
+	Bic *string `json:"bic,omitempty" url:"bic,omitempty"`
+	// pain.001: the identifier the bank gave the company for file payments (at Swedbank the agreement ID), written as InitgPty/Id/OrgId/Othr with scheme BANK
+	InitiatingPartyBankID *string `json:"initiatingPartyBankId,omitempty" url:"initiatingPartyBankId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -4608,6 +4789,20 @@ func (a *AccountsCreateBankResponsePaymentFileSettings) GetCompanyDiscretionaryD
 		return nil
 	}
 	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetBic() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Bic
+}
+
+func (a *AccountsCreateBankResponsePaymentFileSettings) GetInitiatingPartyBankID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InitiatingPartyBankID
 }
 
 func (a *AccountsCreateBankResponsePaymentFileSettings) GetExtraProperties() map[string]interface{} {
@@ -4678,6 +4873,20 @@ func (a *AccountsCreateBankResponsePaymentFileSettings) SetCompanyName(companyNa
 func (a *AccountsCreateBankResponsePaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
 	a.CompanyDiscretionaryData = companyDiscretionaryData
 	a.require(accountsCreateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+// SetBic sets the Bic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetBic(bic *string) {
+	a.Bic = bic
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldBic)
+}
+
+// SetInitiatingPartyBankID sets the InitiatingPartyBankID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsCreateBankResponsePaymentFileSettings) SetInitiatingPartyBankID(initiatingPartyBankID *string) {
+	a.InitiatingPartyBankID = initiatingPartyBankID
+	a.require(accountsCreateBankResponsePaymentFileSettingsFieldInitiatingPartyBankID)
 }
 
 func (a *AccountsCreateBankResponsePaymentFileSettings) UnmarshalJSON(data []byte) error {
@@ -5611,6 +5820,8 @@ var (
 	accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
 	accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
 	accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldBic                      = big.NewInt(1 << 8)
+	accountsListBankResponseRowsItemPaymentFileSettingsFieldInitiatingPartyBankID    = big.NewInt(1 << 9)
 )
 
 type AccountsListBankResponseRowsItemPaymentFileSettings struct {
@@ -5630,6 +5841,10 @@ type AccountsListBankResponseRowsItemPaymentFileSettings struct {
 	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
 	// Nacha: the Company Discretionary Data the bank asks for
 	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+	// pain.001: the BIC of the bank that holds this account, written as the debtor agent; required for a SEK supplier file from a Swedish account
+	Bic *string `json:"bic,omitempty" url:"bic,omitempty"`
+	// pain.001: the identifier the bank gave the company for file payments (at Swedbank the agreement ID), written as InitgPty/Id/OrgId/Othr with scheme BANK
+	InitiatingPartyBankID *string `json:"initiatingPartyBankId,omitempty" url:"initiatingPartyBankId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5692,6 +5907,20 @@ func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetCompanyDiscreti
 		return nil
 	}
 	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetBic() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Bic
+}
+
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetInitiatingPartyBankID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InitiatingPartyBankID
 }
 
 func (a *AccountsListBankResponseRowsItemPaymentFileSettings) GetExtraProperties() map[string]interface{} {
@@ -5762,6 +5991,20 @@ func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetCompanyName(com
 func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
 	a.CompanyDiscretionaryData = companyDiscretionaryData
 	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+// SetBic sets the Bic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetBic(bic *string) {
+	a.Bic = bic
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldBic)
+}
+
+// SetInitiatingPartyBankID sets the InitiatingPartyBankID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsListBankResponseRowsItemPaymentFileSettings) SetInitiatingPartyBankID(initiatingPartyBankID *string) {
+	a.InitiatingPartyBankID = initiatingPartyBankID
+	a.require(accountsListBankResponseRowsItemPaymentFileSettingsFieldInitiatingPartyBankID)
 }
 
 func (a *AccountsListBankResponseRowsItemPaymentFileSettings) UnmarshalJSON(data []byte) error {
@@ -5841,6 +6084,8 @@ var (
 	accountsUpdateBankRequestPaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
 	accountsUpdateBankRequestPaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
 	accountsUpdateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+	accountsUpdateBankRequestPaymentFileSettingsFieldBic                      = big.NewInt(1 << 8)
+	accountsUpdateBankRequestPaymentFileSettingsFieldInitiatingPartyBankID    = big.NewInt(1 << 9)
 )
 
 type AccountsUpdateBankRequestPaymentFileSettings struct {
@@ -5860,6 +6105,10 @@ type AccountsUpdateBankRequestPaymentFileSettings struct {
 	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
 	// Nacha: the Company Discretionary Data the bank asks for
 	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+	// pain.001: the BIC of the bank that holds this account, written as the debtor agent; required for a SEK supplier file from a Swedish account
+	Bic *string `json:"bic,omitempty" url:"bic,omitempty"`
+	// pain.001: the identifier the bank gave the company for file payments (at Swedbank the agreement ID), written as InitgPty/Id/OrgId/Othr with scheme BANK
+	InitiatingPartyBankID *string `json:"initiatingPartyBankId,omitempty" url:"initiatingPartyBankId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -5922,6 +6171,20 @@ func (a *AccountsUpdateBankRequestPaymentFileSettings) GetCompanyDiscretionaryDa
 		return nil
 	}
 	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetBic() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Bic
+}
+
+func (a *AccountsUpdateBankRequestPaymentFileSettings) GetInitiatingPartyBankID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InitiatingPartyBankID
 }
 
 func (a *AccountsUpdateBankRequestPaymentFileSettings) GetExtraProperties() map[string]interface{} {
@@ -5992,6 +6255,20 @@ func (a *AccountsUpdateBankRequestPaymentFileSettings) SetCompanyName(companyNam
 func (a *AccountsUpdateBankRequestPaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
 	a.CompanyDiscretionaryData = companyDiscretionaryData
 	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+// SetBic sets the Bic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetBic(bic *string) {
+	a.Bic = bic
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldBic)
+}
+
+// SetInitiatingPartyBankID sets the InitiatingPartyBankID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankRequestPaymentFileSettings) SetInitiatingPartyBankID(initiatingPartyBankID *string) {
+	a.InitiatingPartyBankID = initiatingPartyBankID
+	a.require(accountsUpdateBankRequestPaymentFileSettingsFieldInitiatingPartyBankID)
 }
 
 func (a *AccountsUpdateBankRequestPaymentFileSettings) UnmarshalJSON(data []byte) error {
@@ -6322,6 +6599,8 @@ var (
 	accountsUpdateBankResponsePaymentFileSettingsFieldCompanyIdentification    = big.NewInt(1 << 5)
 	accountsUpdateBankResponsePaymentFileSettingsFieldCompanyName              = big.NewInt(1 << 6)
 	accountsUpdateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData = big.NewInt(1 << 7)
+	accountsUpdateBankResponsePaymentFileSettingsFieldBic                      = big.NewInt(1 << 8)
+	accountsUpdateBankResponsePaymentFileSettingsFieldInitiatingPartyBankID    = big.NewInt(1 << 9)
 )
 
 type AccountsUpdateBankResponsePaymentFileSettings struct {
@@ -6341,6 +6620,10 @@ type AccountsUpdateBankResponsePaymentFileSettings struct {
 	CompanyName *string `json:"companyName,omitempty" url:"companyName,omitempty"`
 	// Nacha: the Company Discretionary Data the bank asks for
 	CompanyDiscretionaryData *string `json:"companyDiscretionaryData,omitempty" url:"companyDiscretionaryData,omitempty"`
+	// pain.001: the BIC of the bank that holds this account, written as the debtor agent; required for a SEK supplier file from a Swedish account
+	Bic *string `json:"bic,omitempty" url:"bic,omitempty"`
+	// pain.001: the identifier the bank gave the company for file payments (at Swedbank the agreement ID), written as InitgPty/Id/OrgId/Othr with scheme BANK
+	InitiatingPartyBankID *string `json:"initiatingPartyBankId,omitempty" url:"initiatingPartyBankId,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -6403,6 +6686,20 @@ func (a *AccountsUpdateBankResponsePaymentFileSettings) GetCompanyDiscretionaryD
 		return nil
 	}
 	return a.CompanyDiscretionaryData
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetBic() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Bic
+}
+
+func (a *AccountsUpdateBankResponsePaymentFileSettings) GetInitiatingPartyBankID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InitiatingPartyBankID
 }
 
 func (a *AccountsUpdateBankResponsePaymentFileSettings) GetExtraProperties() map[string]interface{} {
@@ -6473,6 +6770,20 @@ func (a *AccountsUpdateBankResponsePaymentFileSettings) SetCompanyName(companyNa
 func (a *AccountsUpdateBankResponsePaymentFileSettings) SetCompanyDiscretionaryData(companyDiscretionaryData *string) {
 	a.CompanyDiscretionaryData = companyDiscretionaryData
 	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldCompanyDiscretionaryData)
+}
+
+// SetBic sets the Bic field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetBic(bic *string) {
+	a.Bic = bic
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldBic)
+}
+
+// SetInitiatingPartyBankID sets the InitiatingPartyBankID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AccountsUpdateBankResponsePaymentFileSettings) SetInitiatingPartyBankID(initiatingPartyBankID *string) {
+	a.InitiatingPartyBankID = initiatingPartyBankID
+	a.require(accountsUpdateBankResponsePaymentFileSettingsFieldInitiatingPartyBankID)
 }
 
 func (a *AccountsUpdateBankResponsePaymentFileSettings) UnmarshalJSON(data []byte) error {
@@ -19885,6 +20196,518 @@ func (p PaymentsExportBankResponseFormat) Ptr() *PaymentsExportBankResponseForma
 }
 
 var (
+	postingRulesCreateBankResponseFieldID                   = big.NewInt(1 << 0)
+	postingRulesCreateBankResponseFieldCounterpartyContains = big.NewInt(1 << 1)
+	postingRulesCreateBankResponseFieldDescriptionContains  = big.NewInt(1 << 2)
+	postingRulesCreateBankResponseFieldAccountCode          = big.NewInt(1 << 3)
+	postingRulesCreateBankResponseFieldPartnerID            = big.NewInt(1 << 4)
+	postingRulesCreateBankResponseFieldCreatedAt            = big.NewInt(1 << 5)
+)
+
+type PostingRulesCreateBankResponse struct {
+	ID                   string    `json:"id" url:"id"`
+	CounterpartyContains *string   `json:"counterpartyContains,omitempty" url:"counterpartyContains,omitempty"`
+	DescriptionContains  *string   `json:"descriptionContains,omitempty" url:"descriptionContains,omitempty"`
+	AccountCode          string    `json:"accountCode" url:"accountCode"`
+	PartnerID            *string   `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostingRulesCreateBankResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostingRulesCreateBankResponse) GetCounterpartyContains() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CounterpartyContains
+}
+
+func (p *PostingRulesCreateBankResponse) GetDescriptionContains() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DescriptionContains
+}
+
+func (p *PostingRulesCreateBankResponse) GetAccountCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.AccountCode
+}
+
+func (p *PostingRulesCreateBankResponse) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerID
+}
+
+func (p *PostingRulesCreateBankResponse) GetCreatedAt() time.Time {
+	if p == nil {
+		return time.Time{}
+	}
+	return p.CreatedAt
+}
+
+func (p *PostingRulesCreateBankResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostingRulesCreateBankResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankResponse) SetID(id string) {
+	p.ID = id
+	p.require(postingRulesCreateBankResponseFieldID)
+}
+
+// SetCounterpartyContains sets the CounterpartyContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankResponse) SetCounterpartyContains(counterpartyContains *string) {
+	p.CounterpartyContains = counterpartyContains
+	p.require(postingRulesCreateBankResponseFieldCounterpartyContains)
+}
+
+// SetDescriptionContains sets the DescriptionContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankResponse) SetDescriptionContains(descriptionContains *string) {
+	p.DescriptionContains = descriptionContains
+	p.require(postingRulesCreateBankResponseFieldDescriptionContains)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankResponse) SetAccountCode(accountCode string) {
+	p.AccountCode = accountCode
+	p.require(postingRulesCreateBankResponseFieldAccountCode)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankResponse) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postingRulesCreateBankResponseFieldPartnerID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesCreateBankResponse) SetCreatedAt(createdAt time.Time) {
+	p.CreatedAt = createdAt
+	p.require(postingRulesCreateBankResponseFieldCreatedAt)
+}
+
+func (p *PostingRulesCreateBankResponse) UnmarshalJSON(data []byte) error {
+	type embed PostingRulesCreateBankResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*p),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*p = PostingRulesCreateBankResponse(unmarshaler.embed)
+	p.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostingRulesCreateBankResponse) MarshalJSON() ([]byte, error) {
+	type embed PostingRulesCreateBankResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*p),
+		CreatedAt: internal.NewDateTime(p.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostingRulesCreateBankResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postingRulesDeleteBankResponseFieldID = big.NewInt(1 << 0)
+)
+
+type PostingRulesDeleteBankResponse struct {
+	ID string `json:"id" url:"id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostingRulesDeleteBankResponse) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostingRulesDeleteBankResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostingRulesDeleteBankResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesDeleteBankResponse) SetID(id string) {
+	p.ID = id
+	p.require(postingRulesDeleteBankResponseFieldID)
+}
+
+func (p *PostingRulesDeleteBankResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostingRulesDeleteBankResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostingRulesDeleteBankResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostingRulesDeleteBankResponse) MarshalJSON() ([]byte, error) {
+	type embed PostingRulesDeleteBankResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostingRulesDeleteBankResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postingRulesListBankResponseFieldRows = big.NewInt(1 << 0)
+)
+
+type PostingRulesListBankResponse struct {
+	Rows []*PostingRulesListBankResponseRowsItem `json:"rows" url:"rows"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostingRulesListBankResponse) GetRows() []*PostingRulesListBankResponseRowsItem {
+	if p == nil {
+		return nil
+	}
+	return p.Rows
+}
+
+func (p *PostingRulesListBankResponse) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostingRulesListBankResponse) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesListBankResponse) SetRows(rows []*PostingRulesListBankResponseRowsItem) {
+	p.Rows = rows
+	p.require(postingRulesListBankResponseFieldRows)
+}
+
+func (p *PostingRulesListBankResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler PostingRulesListBankResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = PostingRulesListBankResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostingRulesListBankResponse) MarshalJSON() ([]byte, error) {
+	type embed PostingRulesListBankResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostingRulesListBankResponse) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
+	postingRulesListBankResponseRowsItemFieldID                   = big.NewInt(1 << 0)
+	postingRulesListBankResponseRowsItemFieldCounterpartyContains = big.NewInt(1 << 1)
+	postingRulesListBankResponseRowsItemFieldDescriptionContains  = big.NewInt(1 << 2)
+	postingRulesListBankResponseRowsItemFieldAccountCode          = big.NewInt(1 << 3)
+	postingRulesListBankResponseRowsItemFieldPartnerID            = big.NewInt(1 << 4)
+	postingRulesListBankResponseRowsItemFieldCreatedAt            = big.NewInt(1 << 5)
+)
+
+type PostingRulesListBankResponseRowsItem struct {
+	ID                   string    `json:"id" url:"id"`
+	CounterpartyContains *string   `json:"counterpartyContains,omitempty" url:"counterpartyContains,omitempty"`
+	DescriptionContains  *string   `json:"descriptionContains,omitempty" url:"descriptionContains,omitempty"`
+	AccountCode          string    `json:"accountCode" url:"accountCode"`
+	PartnerID            *string   `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	CreatedAt            time.Time `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *PostingRulesListBankResponseRowsItem) GetID() string {
+	if p == nil {
+		return ""
+	}
+	return p.ID
+}
+
+func (p *PostingRulesListBankResponseRowsItem) GetCounterpartyContains() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CounterpartyContains
+}
+
+func (p *PostingRulesListBankResponseRowsItem) GetDescriptionContains() *string {
+	if p == nil {
+		return nil
+	}
+	return p.DescriptionContains
+}
+
+func (p *PostingRulesListBankResponseRowsItem) GetAccountCode() string {
+	if p == nil {
+		return ""
+	}
+	return p.AccountCode
+}
+
+func (p *PostingRulesListBankResponseRowsItem) GetPartnerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.PartnerID
+}
+
+func (p *PostingRulesListBankResponseRowsItem) GetCreatedAt() time.Time {
+	if p == nil {
+		return time.Time{}
+	}
+	return p.CreatedAt
+}
+
+func (p *PostingRulesListBankResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *PostingRulesListBankResponseRowsItem) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesListBankResponseRowsItem) SetID(id string) {
+	p.ID = id
+	p.require(postingRulesListBankResponseRowsItemFieldID)
+}
+
+// SetCounterpartyContains sets the CounterpartyContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesListBankResponseRowsItem) SetCounterpartyContains(counterpartyContains *string) {
+	p.CounterpartyContains = counterpartyContains
+	p.require(postingRulesListBankResponseRowsItemFieldCounterpartyContains)
+}
+
+// SetDescriptionContains sets the DescriptionContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesListBankResponseRowsItem) SetDescriptionContains(descriptionContains *string) {
+	p.DescriptionContains = descriptionContains
+	p.require(postingRulesListBankResponseRowsItemFieldDescriptionContains)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesListBankResponseRowsItem) SetAccountCode(accountCode string) {
+	p.AccountCode = accountCode
+	p.require(postingRulesListBankResponseRowsItemFieldAccountCode)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesListBankResponseRowsItem) SetPartnerID(partnerID *string) {
+	p.PartnerID = partnerID
+	p.require(postingRulesListBankResponseRowsItemFieldPartnerID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *PostingRulesListBankResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	p.CreatedAt = createdAt
+	p.require(postingRulesListBankResponseRowsItemFieldCreatedAt)
+}
+
+func (p *PostingRulesListBankResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed PostingRulesListBankResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*p),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*p = PostingRulesListBankResponseRowsItem(unmarshaler.embed)
+	p.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *PostingRulesListBankResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed PostingRulesListBankResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*p),
+		CreatedAt: internal.NewDateTime(p.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *PostingRulesListBankResponseRowsItem) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+var (
 	reconciliationGetBankResponseFieldBankAccountID          = big.NewInt(1 << 0)
 	reconciliationGetBankResponseFieldAccountCode            = big.NewInt(1 << 1)
 	reconciliationGetBankResponseFieldCurrency               = big.NewInt(1 << 2)
@@ -31794,6 +32617,106 @@ func (t TransactionsMatchManyBankResponseStatus) Ptr() *TransactionsMatchManyBan
 }
 
 var (
+	transactionsPostBankRequestSaveRuleFieldCounterpartyContains = big.NewInt(1 << 0)
+	transactionsPostBankRequestSaveRuleFieldDescriptionContains  = big.NewInt(1 << 1)
+)
+
+type TransactionsPostBankRequestSaveRule struct {
+	CounterpartyContains *string `json:"counterpartyContains,omitempty" url:"counterpartyContains,omitempty"`
+	DescriptionContains  *string `json:"descriptionContains,omitempty" url:"descriptionContains,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsPostBankRequestSaveRule) GetCounterpartyContains() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CounterpartyContains
+}
+
+func (t *TransactionsPostBankRequestSaveRule) GetDescriptionContains() *string {
+	if t == nil {
+		return nil
+	}
+	return t.DescriptionContains
+}
+
+func (t *TransactionsPostBankRequestSaveRule) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsPostBankRequestSaveRule) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetCounterpartyContains sets the CounterpartyContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequestSaveRule) SetCounterpartyContains(counterpartyContains *string) {
+	t.CounterpartyContains = counterpartyContains
+	t.require(transactionsPostBankRequestSaveRuleFieldCounterpartyContains)
+}
+
+// SetDescriptionContains sets the DescriptionContains field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsPostBankRequestSaveRule) SetDescriptionContains(descriptionContains *string) {
+	t.DescriptionContains = descriptionContains
+	t.require(transactionsPostBankRequestSaveRuleFieldDescriptionContains)
+}
+
+func (t *TransactionsPostBankRequestSaveRule) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsPostBankRequestSaveRule
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TransactionsPostBankRequestSaveRule(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsPostBankRequestSaveRule) MarshalJSON() ([]byte, error) {
+	type embed TransactionsPostBankRequestSaveRule
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsPostBankRequestSaveRule) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
 	transactionsPostBankResponseFieldID                   = big.NewInt(1 << 0)
 	transactionsPostBankResponseFieldBankAccountID        = big.NewInt(1 << 1)
 	transactionsPostBankResponseFieldDate                 = big.NewInt(1 << 2)
@@ -32573,11 +33496,15 @@ func (t TransactionsRecordBankResponseStatus) Ptr() *TransactionsRecordBankRespo
 }
 
 var (
-	transactionsSuggestMatchesBankResponseFieldSuggestions = big.NewInt(1 << 0)
+	transactionsSuggestMatchesBankResponseFieldSuggestions  = big.NewInt(1 << 0)
+	transactionsSuggestMatchesBankResponseFieldAllocations  = big.NewInt(1 << 1)
+	transactionsSuggestMatchesBankResponseFieldPostingRules = big.NewInt(1 << 2)
 )
 
 type TransactionsSuggestMatchesBankResponse struct {
-	Suggestions []*TransactionsSuggestMatchesBankResponseSuggestionsItem `json:"suggestions" url:"suggestions"`
+	Suggestions  []*TransactionsSuggestMatchesBankResponseSuggestionsItem  `json:"suggestions" url:"suggestions"`
+	Allocations  []*TransactionsSuggestMatchesBankResponseAllocationsItem  `json:"allocations,omitempty" url:"allocations,omitempty"`
+	PostingRules []*TransactionsSuggestMatchesBankResponsePostingRulesItem `json:"postingRules" url:"postingRules"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -32591,6 +33518,20 @@ func (t *TransactionsSuggestMatchesBankResponse) GetSuggestions() []*Transaction
 		return nil
 	}
 	return t.Suggestions
+}
+
+func (t *TransactionsSuggestMatchesBankResponse) GetAllocations() []*TransactionsSuggestMatchesBankResponseAllocationsItem {
+	if t == nil {
+		return nil
+	}
+	return t.Allocations
+}
+
+func (t *TransactionsSuggestMatchesBankResponse) GetPostingRules() []*TransactionsSuggestMatchesBankResponsePostingRulesItem {
+	if t == nil {
+		return nil
+	}
+	return t.PostingRules
 }
 
 func (t *TransactionsSuggestMatchesBankResponse) GetExtraProperties() map[string]interface{} {
@@ -32612,6 +33553,20 @@ func (t *TransactionsSuggestMatchesBankResponse) require(field *big.Int) {
 func (t *TransactionsSuggestMatchesBankResponse) SetSuggestions(suggestions []*TransactionsSuggestMatchesBankResponseSuggestionsItem) {
 	t.Suggestions = suggestions
 	t.require(transactionsSuggestMatchesBankResponseFieldSuggestions)
+}
+
+// SetAllocations sets the Allocations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponse) SetAllocations(allocations []*TransactionsSuggestMatchesBankResponseAllocationsItem) {
+	t.Allocations = allocations
+	t.require(transactionsSuggestMatchesBankResponseFieldAllocations)
+}
+
+// SetPostingRules sets the PostingRules field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponse) SetPostingRules(postingRules []*TransactionsSuggestMatchesBankResponsePostingRulesItem) {
+	t.PostingRules = postingRules
+	t.require(transactionsSuggestMatchesBankResponseFieldPostingRules)
 }
 
 func (t *TransactionsSuggestMatchesBankResponse) UnmarshalJSON(data []byte) error {
@@ -32642,6 +33597,276 @@ func (t *TransactionsSuggestMatchesBankResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionsSuggestMatchesBankResponse) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+var (
+	transactionsSuggestMatchesBankResponseAllocationsItemFieldDocumentType = big.NewInt(1 << 0)
+	transactionsSuggestMatchesBankResponseAllocationsItemFieldDocumentID   = big.NewInt(1 << 1)
+	transactionsSuggestMatchesBankResponseAllocationsItemFieldNumber       = big.NewInt(1 << 2)
+	transactionsSuggestMatchesBankResponseAllocationsItemFieldAmount       = big.NewInt(1 << 3)
+)
+
+type TransactionsSuggestMatchesBankResponseAllocationsItem struct {
+	DocumentType TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType `json:"documentType" url:"documentType"`
+	DocumentID   string                                                            `json:"documentId" url:"documentId"`
+	Number       string                                                            `json:"number" url:"number"`
+	Amount       string                                                            `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) GetDocumentType() TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType {
+	if t == nil {
+		return ""
+	}
+	return t.DocumentType
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) GetDocumentID() string {
+	if t == nil {
+		return ""
+	}
+	return t.DocumentID
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) GetNumber() string {
+	if t == nil {
+		return ""
+	}
+	return t.Number
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) GetAmount() string {
+	if t == nil {
+		return ""
+	}
+	return t.Amount
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) SetDocumentType(documentType TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType) {
+	t.DocumentType = documentType
+	t.require(transactionsSuggestMatchesBankResponseAllocationsItemFieldDocumentType)
+}
+
+// SetDocumentID sets the DocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) SetDocumentID(documentID string) {
+	t.DocumentID = documentID
+	t.require(transactionsSuggestMatchesBankResponseAllocationsItemFieldDocumentID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) SetNumber(number string) {
+	t.Number = number
+	t.require(transactionsSuggestMatchesBankResponseAllocationsItemFieldNumber)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) SetAmount(amount string) {
+	t.Amount = amount
+	t.require(transactionsSuggestMatchesBankResponseAllocationsItemFieldAmount)
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsSuggestMatchesBankResponseAllocationsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TransactionsSuggestMatchesBankResponseAllocationsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) MarshalJSON() ([]byte, error) {
+	type embed TransactionsSuggestMatchesBankResponseAllocationsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsSuggestMatchesBankResponseAllocationsItem) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType string
+
+const (
+	TransactionsSuggestMatchesBankResponseAllocationsItemDocumentTypeSaleInvoice     TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType = "sale_invoice"
+	TransactionsSuggestMatchesBankResponseAllocationsItemDocumentTypePurchaseInvoice TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType = "purchase_invoice"
+)
+
+func NewTransactionsSuggestMatchesBankResponseAllocationsItemDocumentTypeFromString(s string) (TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType, error) {
+	switch s {
+	case "sale_invoice":
+		return TransactionsSuggestMatchesBankResponseAllocationsItemDocumentTypeSaleInvoice, nil
+	case "purchase_invoice":
+		return TransactionsSuggestMatchesBankResponseAllocationsItemDocumentTypePurchaseInvoice, nil
+	}
+	var t TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (t TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType) Ptr() *TransactionsSuggestMatchesBankResponseAllocationsItemDocumentType {
+	return &t
+}
+
+var (
+	transactionsSuggestMatchesBankResponsePostingRulesItemFieldRuleID      = big.NewInt(1 << 0)
+	transactionsSuggestMatchesBankResponsePostingRulesItemFieldAccountCode = big.NewInt(1 << 1)
+	transactionsSuggestMatchesBankResponsePostingRulesItemFieldPartnerID   = big.NewInt(1 << 2)
+)
+
+type TransactionsSuggestMatchesBankResponsePostingRulesItem struct {
+	RuleID      string  `json:"ruleId" url:"ruleId"`
+	AccountCode string  `json:"accountCode" url:"accountCode"`
+	PartnerID   *string `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) GetRuleID() string {
+	if t == nil {
+		return ""
+	}
+	return t.RuleID
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) GetAccountCode() string {
+	if t == nil {
+		return ""
+	}
+	return t.AccountCode
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) GetPartnerID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PartnerID
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetRuleID sets the RuleID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) SetRuleID(ruleID string) {
+	t.RuleID = ruleID
+	t.require(transactionsSuggestMatchesBankResponsePostingRulesItemFieldRuleID)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) SetAccountCode(accountCode string) {
+	t.AccountCode = accountCode
+	t.require(transactionsSuggestMatchesBankResponsePostingRulesItemFieldAccountCode)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) SetPartnerID(partnerID *string) {
+	t.PartnerID = partnerID
+	t.require(transactionsSuggestMatchesBankResponsePostingRulesItemFieldPartnerID)
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler TransactionsSuggestMatchesBankResponsePostingRulesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = TransactionsSuggestMatchesBankResponsePostingRulesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) MarshalJSON() ([]byte, error) {
+	type embed TransactionsSuggestMatchesBankResponsePostingRulesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *TransactionsSuggestMatchesBankResponsePostingRulesItem) String() string {
 	if t == nil {
 		return "<nil>"
 	}

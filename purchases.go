@@ -157,11 +157,14 @@ var (
 	invoicesCreatePurchasesRequestFieldIntrastatRegion              = big.NewInt(1 << 12)
 	invoicesCreatePurchasesRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 13)
 	invoicesCreatePurchasesRequestFieldEinvoiceNumber               = big.NewInt(1 << 14)
-	invoicesCreatePurchasesRequestFieldDocumentRef                  = big.NewInt(1 << 15)
-	invoicesCreatePurchasesRequestFieldLines                        = big.NewInt(1 << 16)
-	invoicesCreatePurchasesRequestFieldNetTotal                     = big.NewInt(1 << 17)
-	invoicesCreatePurchasesRequestFieldVatTotal                     = big.NewInt(1 << 18)
-	invoicesCreatePurchasesRequestFieldGrossTotal                   = big.NewInt(1 << 19)
+	invoicesCreatePurchasesRequestFieldPaymentReference             = big.NewInt(1 << 15)
+	invoicesCreatePurchasesRequestFieldDocumentRef                  = big.NewInt(1 << 16)
+	invoicesCreatePurchasesRequestFieldAgreementID                  = big.NewInt(1 << 17)
+	invoicesCreatePurchasesRequestFieldAgreementPeriodStart         = big.NewInt(1 << 18)
+	invoicesCreatePurchasesRequestFieldLines                        = big.NewInt(1 << 19)
+	invoicesCreatePurchasesRequestFieldNetTotal                     = big.NewInt(1 << 20)
+	invoicesCreatePurchasesRequestFieldVatTotal                     = big.NewInt(1 << 21)
+	invoicesCreatePurchasesRequestFieldGrossTotal                   = big.NewInt(1 << 22)
 )
 
 type InvoicesCreatePurchasesRequest struct {
@@ -180,7 +183,10 @@ type InvoicesCreatePurchasesRequest struct {
 	IntrastatRegion              *string                                    `json:"intrastatRegion,omitempty" url:"-"`
 	IntrastatNatureOfTransaction *string                                    `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
 	EinvoiceNumber               *string                                    `json:"einvoiceNumber,omitempty" url:"-"`
+	PaymentReference             *string                                    `json:"paymentReference,omitempty" url:"-"`
 	DocumentRef                  *string                                    `json:"documentRef,omitempty" url:"-"`
+	AgreementID                  *string                                    `json:"agreementId,omitempty" url:"-"`
+	AgreementPeriodStart         *time.Time                                 `json:"agreementPeriodStart,omitempty" url:"-" format:"date"`
 	Lines                        []*InvoicesCreatePurchasesRequestLinesItem `json:"lines" url:"-"`
 	NetTotal                     *string                                    `json:"netTotal,omitempty" url:"-"`
 	VatTotal                     *string                                    `json:"vatTotal,omitempty" url:"-"`
@@ -302,11 +308,32 @@ func (i *InvoicesCreatePurchasesRequest) SetEinvoiceNumber(einvoiceNumber *strin
 	i.require(invoicesCreatePurchasesRequestFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequest) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesCreatePurchasesRequestFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreatePurchasesRequest) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesCreatePurchasesRequestFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequest) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesCreatePurchasesRequestFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequest) SetAgreementPeriodStart(agreementPeriodStart *time.Time) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesCreatePurchasesRequestFieldAgreementPeriodStart)
 }
 
 // SetLines sets the Lines field and marks it as non-optional;
@@ -351,12 +378,14 @@ func (i *InvoicesCreatePurchasesRequest) MarshalJSON() ([]byte, error) {
 	type embed InvoicesCreatePurchasesRequest
 	var marshaler = struct {
 		embed
-		DocumentDate *internal.Date `json:"documentDate"`
-		DueDate      *internal.Date `json:"dueDate,omitempty"`
+		DocumentDate         *internal.Date `json:"documentDate"`
+		DueDate              *internal.Date `json:"dueDate,omitempty"`
+		AgreementPeriodStart *internal.Date `json:"agreementPeriodStart,omitempty"`
 	}{
-		embed:        embed(*i),
-		DocumentDate: internal.NewDate(i.DocumentDate),
-		DueDate:      internal.NewOptionalDate(i.DueDate),
+		embed:                embed(*i),
+		DocumentDate:         internal.NewDate(i.DocumentDate),
+		DueDate:              internal.NewOptionalDate(i.DueDate),
+		AgreementPeriodStart: internal.NewOptionalDate(i.AgreementPeriodStart),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -593,6 +622,72 @@ func (i *InvoicesMatchPurchasesRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	invoicesProposeLinesPurchasesRequestFieldPartnerID    = big.NewInt(1 << 0)
+	invoicesProposeLinesPurchasesRequestFieldDocumentDate = big.NewInt(1 << 1)
+	invoicesProposeLinesPurchasesRequestFieldLines        = big.NewInt(1 << 2)
+)
+
+type InvoicesProposeLinesPurchasesRequest struct {
+	PartnerID    string                                           `json:"partnerId" url:"-"`
+	DocumentDate *time.Time                                       `json:"documentDate,omitempty" url:"-" format:"date"`
+	Lines        []*InvoicesProposeLinesPurchasesRequestLinesItem `json:"lines" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *InvoicesProposeLinesPurchasesRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesRequest) SetPartnerID(partnerID string) {
+	i.PartnerID = partnerID
+	i.require(invoicesProposeLinesPurchasesRequestFieldPartnerID)
+}
+
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesRequest) SetDocumentDate(documentDate *time.Time) {
+	i.DocumentDate = documentDate
+	i.require(invoicesProposeLinesPurchasesRequestFieldDocumentDate)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesRequest) SetLines(lines []*InvoicesProposeLinesPurchasesRequestLinesItem) {
+	i.Lines = lines
+	i.require(invoicesProposeLinesPurchasesRequestFieldLines)
+}
+
+func (i *InvoicesProposeLinesPurchasesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesProposeLinesPurchasesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = InvoicesProposeLinesPurchasesRequest(body)
+	return nil
+}
+
+func (i *InvoicesProposeLinesPurchasesRequest) MarshalJSON() ([]byte, error) {
+	type embed InvoicesProposeLinesPurchasesRequest
+	var marshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate,omitempty"`
+	}{
+		embed:        embed(*i),
+		DocumentDate: internal.NewOptionalDate(i.DocumentDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	invoicesRegisterPurchasesRequestFieldID               = big.NewInt(1 << 0)
 	invoicesRegisterPurchasesRequestFieldRegistrationDate = big.NewInt(1 << 1)
 	invoicesRegisterPurchasesRequestFieldWarehouseID      = big.NewInt(1 << 2)
@@ -748,10 +843,13 @@ var (
 	invoicesUpdatePurchasesRequestFieldIntrastatRegion              = big.NewInt(1 << 11)
 	invoicesUpdatePurchasesRequestFieldIntrastatNatureOfTransaction = big.NewInt(1 << 12)
 	invoicesUpdatePurchasesRequestFieldEinvoiceNumber               = big.NewInt(1 << 13)
-	invoicesUpdatePurchasesRequestFieldLines                        = big.NewInt(1 << 14)
-	invoicesUpdatePurchasesRequestFieldNetTotal                     = big.NewInt(1 << 15)
-	invoicesUpdatePurchasesRequestFieldVatTotal                     = big.NewInt(1 << 16)
-	invoicesUpdatePurchasesRequestFieldGrossTotal                   = big.NewInt(1 << 17)
+	invoicesUpdatePurchasesRequestFieldPaymentReference             = big.NewInt(1 << 14)
+	invoicesUpdatePurchasesRequestFieldAgreementID                  = big.NewInt(1 << 15)
+	invoicesUpdatePurchasesRequestFieldAgreementPeriodStart         = big.NewInt(1 << 16)
+	invoicesUpdatePurchasesRequestFieldLines                        = big.NewInt(1 << 17)
+	invoicesUpdatePurchasesRequestFieldNetTotal                     = big.NewInt(1 << 18)
+	invoicesUpdatePurchasesRequestFieldVatTotal                     = big.NewInt(1 << 19)
+	invoicesUpdatePurchasesRequestFieldGrossTotal                   = big.NewInt(1 << 20)
 )
 
 type InvoicesUpdatePurchasesRequest struct {
@@ -769,6 +867,9 @@ type InvoicesUpdatePurchasesRequest struct {
 	IntrastatRegion              *string                                    `json:"intrastatRegion,omitempty" url:"-"`
 	IntrastatNatureOfTransaction *string                                    `json:"intrastatNatureOfTransaction,omitempty" url:"-"`
 	EinvoiceNumber               *string                                    `json:"einvoiceNumber,omitempty" url:"-"`
+	PaymentReference             *string                                    `json:"paymentReference,omitempty" url:"-"`
+	AgreementID                  *string                                    `json:"agreementId,omitempty" url:"-"`
+	AgreementPeriodStart         *time.Time                                 `json:"agreementPeriodStart,omitempty" url:"-" format:"date"`
 	Lines                        []*InvoicesUpdatePurchasesRequestLinesItem `json:"lines,omitempty" url:"-"`
 	NetTotal                     *string                                    `json:"netTotal,omitempty" url:"-"`
 	VatTotal                     *string                                    `json:"vatTotal,omitempty" url:"-"`
@@ -883,6 +984,27 @@ func (i *InvoicesUpdatePurchasesRequest) SetEinvoiceNumber(einvoiceNumber *strin
 	i.require(invoicesUpdatePurchasesRequestFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequest) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesUpdatePurchasesRequestFieldPaymentReference)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequest) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesUpdatePurchasesRequestFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequest) SetAgreementPeriodStart(agreementPeriodStart *time.Time) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesUpdatePurchasesRequestFieldAgreementPeriodStart)
+}
+
 // SetLines sets the Lines field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdatePurchasesRequest) SetLines(lines []*InvoicesUpdatePurchasesRequestLinesItem) {
@@ -925,12 +1047,14 @@ func (i *InvoicesUpdatePurchasesRequest) MarshalJSON() ([]byte, error) {
 	type embed InvoicesUpdatePurchasesRequest
 	var marshaler = struct {
 		embed
-		DocumentDate *internal.Date `json:"documentDate,omitempty"`
-		DueDate      *internal.Date `json:"dueDate,omitempty"`
+		DocumentDate         *internal.Date `json:"documentDate,omitempty"`
+		DueDate              *internal.Date `json:"dueDate,omitempty"`
+		AgreementPeriodStart *internal.Date `json:"agreementPeriodStart,omitempty"`
 	}{
-		embed:        embed(*i),
-		DocumentDate: internal.NewOptionalDate(i.DocumentDate),
-		DueDate:      internal.NewOptionalDate(i.DueDate),
+		embed:                embed(*i),
+		DocumentDate:         internal.NewOptionalDate(i.DocumentDate),
+		DueDate:              internal.NewOptionalDate(i.DueDate),
+		AgreementPeriodStart: internal.NewOptionalDate(i.AgreementPeriodStart),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
 	return json.Marshal(explicitMarshaler)
@@ -2830,6 +2954,8 @@ var (
 	invoicesCreatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 	invoicesCreatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
 	invoicesCreatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
+	invoicesCreatePurchasesRequestLinesItemFieldDeductiblePercent = big.NewInt(1 << 15)
+	invoicesCreatePurchasesRequestLinesItemFieldChassisNumbers    = big.NewInt(1 << 16)
 )
 
 type InvoicesCreatePurchasesRequestLinesItem struct {
@@ -2848,6 +2974,10 @@ type InvoicesCreatePurchasesRequestLinesItem struct {
 	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string                                          `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time                                       `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	// The share of the purchase used for the company's taxable supplies, in whole percent rounded up: required on a VAT type that deducts the line's own share (CZ-D21-P, CZ-D12-P, the poměrný koeficient of § 75 odst. 3 ZDPH) and refused on any other
+	DeductiblePercent *int64 `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
+	// The chassis numbers of the passenger cars bought on the line. A Hungarian company lists them on sheet 2665A-09 of the VAT return of the period when the line is an intra-Community acquisition or an import (Áfa tv. 4/A. számú melléklet II.)
+	ChassisNumbers []string `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -2959,6 +3089,20 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return i.ExpiryDate
+}
+
+func (i *InvoicesCreatePurchasesRequestLinesItem) GetDeductiblePercent() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.DeductiblePercent
+}
+
+func (i *InvoicesCreatePurchasesRequestLinesItem) GetChassisNumbers() []string {
+	if i == nil {
+		return nil
+	}
+	return i.ChassisNumbers
 }
 
 func (i *InvoicesCreatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -3078,6 +3222,20 @@ func (i *InvoicesCreatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string
 func (i *InvoicesCreatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	i.ExpiryDate = expiryDate
 	i.require(invoicesCreatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequestLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	i.DeductiblePercent = deductiblePercent
+	i.require(invoicesCreatePurchasesRequestLinesItemFieldDeductiblePercent)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesRequestLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	i.ChassisNumbers = chassisNumbers
+	i.require(invoicesCreatePurchasesRequestLinesItemFieldChassisNumbers)
 }
 
 func (i *InvoicesCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -3250,11 +3408,14 @@ var (
 	invoicesCreatePurchasesResponseFieldIntrastatRegion              = big.NewInt(1 << 24)
 	invoicesCreatePurchasesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	invoicesCreatePurchasesResponseFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	invoicesCreatePurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 27)
-	invoicesCreatePurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 28)
-	invoicesCreatePurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 29)
-	invoicesCreatePurchasesResponseFieldLines                        = big.NewInt(1 << 30)
-	invoicesCreatePurchasesResponseFieldWarnings                     = big.NewInt(1 << 31)
+	invoicesCreatePurchasesResponseFieldPaymentReference             = big.NewInt(1 << 27)
+	invoicesCreatePurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	invoicesCreatePurchasesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesCreatePurchasesResponseFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	invoicesCreatePurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 31)
+	invoicesCreatePurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 32)
+	invoicesCreatePurchasesResponseFieldLines                        = big.NewInt(1 << 33)
+	invoicesCreatePurchasesResponseFieldWarnings                     = big.NewInt(1 << 34)
 )
 
 type InvoicesCreatePurchasesResponse struct {
@@ -3285,7 +3446,10 @@ type InvoicesCreatePurchasesResponse struct {
 	IntrastatRegion              *string                                        `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                        `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                        `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                        `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                        `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                        `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                        `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                      `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                      `json:"updatedAt" url:"updatedAt"`
 	Lines                        []*InvoicesCreatePurchasesResponseLinesItem    `json:"lines" url:"lines"`
@@ -3487,11 +3651,32 @@ func (i *InvoicesCreatePurchasesResponse) GetEinvoiceNumber() *string {
 	return i.EinvoiceNumber
 }
 
+func (i *InvoicesCreatePurchasesResponse) GetPaymentReference() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentReference
+}
+
 func (i *InvoicesCreatePurchasesResponse) GetDocumentRef() *string {
 	if i == nil {
 		return nil
 	}
 	return i.DocumentRef
+}
+
+func (i *InvoicesCreatePurchasesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoicesCreatePurchasesResponse) GetAgreementPeriodStart() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementPeriodStart
 }
 
 func (i *InvoicesCreatePurchasesResponse) GetCreatedAt() time.Time {
@@ -3725,11 +3910,32 @@ func (i *InvoicesCreatePurchasesResponse) SetEinvoiceNumber(einvoiceNumber *stri
 	i.require(invoicesCreatePurchasesResponseFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponse) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesCreatePurchasesResponseFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreatePurchasesResponse) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesCreatePurchasesResponseFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesCreatePurchasesResponseFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponse) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesCreatePurchasesResponseFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3842,17 +4048,19 @@ var (
 	invoicesCreatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
 	invoicesCreatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
 	invoicesCreatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	invoicesCreatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	invoicesCreatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	invoicesCreatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	invoicesCreatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
-	invoicesCreatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
-	invoicesCreatePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
-	invoicesCreatePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
-	invoicesCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
-	invoicesCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
-	invoicesCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
-	invoicesCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
+	invoicesCreatePurchasesResponseLinesItemFieldDeductiblePercent = big.NewInt(1 << 11)
+	invoicesCreatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 12)
+	invoicesCreatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 13)
+	invoicesCreatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 14)
+	invoicesCreatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 15)
+	invoicesCreatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 16)
+	invoicesCreatePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 17)
+	invoicesCreatePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 18)
+	invoicesCreatePurchasesResponseLinesItemFieldChassisNumbers    = big.NewInt(1 << 19)
+	invoicesCreatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 20)
+	invoicesCreatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 21)
+	invoicesCreatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 22)
+	invoicesCreatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 23)
 )
 
 type InvoicesCreatePurchasesResponseLinesItem struct {
@@ -3867,6 +4075,7 @@ type InvoicesCreatePurchasesResponseLinesItem struct {
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	DeductiblePercent *int64     `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
 	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
@@ -3874,6 +4083,7 @@ type InvoicesCreatePurchasesResponseLinesItem struct {
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	ChassisNumbers    []string   `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -3963,6 +4173,13 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) GetVatClassifierCode() *strin
 	return i.VatClassifierCode
 }
 
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetDeductiblePercent() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.DeductiblePercent
+}
+
 func (i *InvoicesCreatePurchasesResponseLinesItem) GetCostCenterID() *string {
 	if i == nil {
 		return nil
@@ -4010,6 +4227,13 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return i.ExpiryDate
+}
+
+func (i *InvoicesCreatePurchasesResponseLinesItem) GetChassisNumbers() []string {
+	if i == nil {
+		return nil
+	}
+	return i.ChassisNumbers
 }
 
 func (i *InvoicesCreatePurchasesResponseLinesItem) GetLineNet() string {
@@ -4131,6 +4355,13 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) SetVatClassifierCode(vatClass
 	i.require(invoicesCreatePurchasesResponseLinesItemFieldVatClassifierCode)
 }
 
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	i.DeductiblePercent = deductiblePercent
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldDeductiblePercent)
+}
+
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesCreatePurchasesResponseLinesItem) SetCostCenterID(costCenterID *string) {
@@ -4178,6 +4409,13 @@ func (i *InvoicesCreatePurchasesResponseLinesItem) SetLotNumber(lotNumber *strin
 func (i *InvoicesCreatePurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	i.ExpiryDate = expiryDate
 	i.require(invoicesCreatePurchasesResponseLinesItemFieldExpiryDate)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesCreatePurchasesResponseLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	i.ChassisNumbers = chassisNumbers
+	i.require(invoicesCreatePurchasesResponseLinesItemFieldChassisNumbers)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
@@ -4566,10 +4804,13 @@ var (
 	invoicesGetPurchasesResponseFieldIntrastatRegion              = big.NewInt(1 << 24)
 	invoicesGetPurchasesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	invoicesGetPurchasesResponseFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	invoicesGetPurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 27)
-	invoicesGetPurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 28)
-	invoicesGetPurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 29)
-	invoicesGetPurchasesResponseFieldLines                        = big.NewInt(1 << 30)
+	invoicesGetPurchasesResponseFieldPaymentReference             = big.NewInt(1 << 27)
+	invoicesGetPurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	invoicesGetPurchasesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesGetPurchasesResponseFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	invoicesGetPurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 31)
+	invoicesGetPurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 32)
+	invoicesGetPurchasesResponseFieldLines                        = big.NewInt(1 << 33)
 )
 
 type InvoicesGetPurchasesResponse struct {
@@ -4600,7 +4841,10 @@ type InvoicesGetPurchasesResponse struct {
 	IntrastatRegion              *string                                   `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                   `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                   `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                   `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                   `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                   `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                   `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                 `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                 `json:"updatedAt" url:"updatedAt"`
 	Lines                        []*InvoicesGetPurchasesResponseLinesItem  `json:"lines" url:"lines"`
@@ -4801,11 +5045,32 @@ func (i *InvoicesGetPurchasesResponse) GetEinvoiceNumber() *string {
 	return i.EinvoiceNumber
 }
 
+func (i *InvoicesGetPurchasesResponse) GetPaymentReference() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentReference
+}
+
 func (i *InvoicesGetPurchasesResponse) GetDocumentRef() *string {
 	if i == nil {
 		return nil
 	}
 	return i.DocumentRef
+}
+
+func (i *InvoicesGetPurchasesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoicesGetPurchasesResponse) GetAgreementPeriodStart() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementPeriodStart
 }
 
 func (i *InvoicesGetPurchasesResponse) GetCreatedAt() time.Time {
@@ -5032,11 +5297,32 @@ func (i *InvoicesGetPurchasesResponse) SetEinvoiceNumber(einvoiceNumber *string)
 	i.require(invoicesGetPurchasesResponseFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponse) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesGetPurchasesResponseFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetPurchasesResponse) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesGetPurchasesResponseFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesGetPurchasesResponseFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponse) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesGetPurchasesResponseFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -5142,17 +5428,19 @@ var (
 	invoicesGetPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
 	invoicesGetPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
 	invoicesGetPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	invoicesGetPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	invoicesGetPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	invoicesGetPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	invoicesGetPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
-	invoicesGetPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
-	invoicesGetPurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
-	invoicesGetPurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
-	invoicesGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
-	invoicesGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
-	invoicesGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
-	invoicesGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
+	invoicesGetPurchasesResponseLinesItemFieldDeductiblePercent = big.NewInt(1 << 11)
+	invoicesGetPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 12)
+	invoicesGetPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 13)
+	invoicesGetPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 14)
+	invoicesGetPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 15)
+	invoicesGetPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 16)
+	invoicesGetPurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 17)
+	invoicesGetPurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 18)
+	invoicesGetPurchasesResponseLinesItemFieldChassisNumbers    = big.NewInt(1 << 19)
+	invoicesGetPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 20)
+	invoicesGetPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 21)
+	invoicesGetPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 22)
+	invoicesGetPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 23)
 )
 
 type InvoicesGetPurchasesResponseLinesItem struct {
@@ -5167,6 +5455,7 @@ type InvoicesGetPurchasesResponseLinesItem struct {
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	DeductiblePercent *int64     `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
 	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
@@ -5174,6 +5463,7 @@ type InvoicesGetPurchasesResponseLinesItem struct {
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	ChassisNumbers    []string   `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -5263,6 +5553,13 @@ func (i *InvoicesGetPurchasesResponseLinesItem) GetVatClassifierCode() *string {
 	return i.VatClassifierCode
 }
 
+func (i *InvoicesGetPurchasesResponseLinesItem) GetDeductiblePercent() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.DeductiblePercent
+}
+
 func (i *InvoicesGetPurchasesResponseLinesItem) GetCostCenterID() *string {
 	if i == nil {
 		return nil
@@ -5310,6 +5607,13 @@ func (i *InvoicesGetPurchasesResponseLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return i.ExpiryDate
+}
+
+func (i *InvoicesGetPurchasesResponseLinesItem) GetChassisNumbers() []string {
+	if i == nil {
+		return nil
+	}
+	return i.ChassisNumbers
 }
 
 func (i *InvoicesGetPurchasesResponseLinesItem) GetLineNet() string {
@@ -5431,6 +5735,13 @@ func (i *InvoicesGetPurchasesResponseLinesItem) SetVatClassifierCode(vatClassifi
 	i.require(invoicesGetPurchasesResponseLinesItemFieldVatClassifierCode)
 }
 
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	i.DeductiblePercent = deductiblePercent
+	i.require(invoicesGetPurchasesResponseLinesItemFieldDeductiblePercent)
+}
+
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesGetPurchasesResponseLinesItem) SetCostCenterID(costCenterID *string) {
@@ -5478,6 +5789,13 @@ func (i *InvoicesGetPurchasesResponseLinesItem) SetLotNumber(lotNumber *string) 
 func (i *InvoicesGetPurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	i.ExpiryDate = expiryDate
 	i.require(invoicesGetPurchasesResponseLinesItemFieldExpiryDate)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesGetPurchasesResponseLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	i.ChassisNumbers = chassisNumbers
+	i.require(invoicesGetPurchasesResponseLinesItemFieldChassisNumbers)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
@@ -6269,10 +6587,13 @@ var (
 	invoicesListPurchasesResponseRowsItemFieldIntrastatRegion              = big.NewInt(1 << 24)
 	invoicesListPurchasesResponseRowsItemFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	invoicesListPurchasesResponseRowsItemFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	invoicesListPurchasesResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 27)
-	invoicesListPurchasesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 28)
-	invoicesListPurchasesResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 29)
-	invoicesListPurchasesResponseRowsItemFieldPartnerName                  = big.NewInt(1 << 30)
+	invoicesListPurchasesResponseRowsItemFieldPaymentReference             = big.NewInt(1 << 27)
+	invoicesListPurchasesResponseRowsItemFieldDocumentRef                  = big.NewInt(1 << 28)
+	invoicesListPurchasesResponseRowsItemFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesListPurchasesResponseRowsItemFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	invoicesListPurchasesResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 31)
+	invoicesListPurchasesResponseRowsItemFieldUpdatedAt                    = big.NewInt(1 << 32)
+	invoicesListPurchasesResponseRowsItemFieldPartnerName                  = big.NewInt(1 << 33)
 )
 
 type InvoicesListPurchasesResponseRowsItem struct {
@@ -6303,7 +6624,10 @@ type InvoicesListPurchasesResponseRowsItem struct {
 	IntrastatRegion              *string                                            `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                            `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                            `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                            `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                            `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                            `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                            `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                          `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                          `json:"updatedAt" url:"updatedAt"`
 	PartnerName                  *string                                            `json:"partnerName,omitempty" url:"partnerName,omitempty"`
@@ -6504,11 +6828,32 @@ func (i *InvoicesListPurchasesResponseRowsItem) GetEinvoiceNumber() *string {
 	return i.EinvoiceNumber
 }
 
+func (i *InvoicesListPurchasesResponseRowsItem) GetPaymentReference() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentReference
+}
+
 func (i *InvoicesListPurchasesResponseRowsItem) GetDocumentRef() *string {
 	if i == nil {
 		return nil
 	}
 	return i.DocumentRef
+}
+
+func (i *InvoicesListPurchasesResponseRowsItem) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoicesListPurchasesResponseRowsItem) GetAgreementPeriodStart() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementPeriodStart
 }
 
 func (i *InvoicesListPurchasesResponseRowsItem) GetCreatedAt() time.Time {
@@ -6735,11 +7080,32 @@ func (i *InvoicesListPurchasesResponseRowsItem) SetEinvoiceNumber(einvoiceNumber
 	i.require(invoicesListPurchasesResponseRowsItemFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListPurchasesResponseRowsItem) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesListPurchasesResponseRowsItemFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesListPurchasesResponseRowsItem) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesListPurchasesResponseRowsItemFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListPurchasesResponseRowsItem) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesListPurchasesResponseRowsItemFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesListPurchasesResponseRowsItem) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesListPurchasesResponseRowsItemFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7306,6 +7672,354 @@ func (i InvoicesMatchPurchasesResponseStatus) Ptr() *InvoicesMatchPurchasesRespo
 }
 
 var (
+	invoicesProposeLinesPurchasesRequestLinesItemFieldItemID         = big.NewInt(1 << 0)
+	invoicesProposeLinesPurchasesRequestLinesItemFieldVatRatePercent = big.NewInt(1 << 1)
+	invoicesProposeLinesPurchasesRequestLinesItemFieldVatAmount      = big.NewInt(1 << 2)
+)
+
+type InvoicesProposeLinesPurchasesRequestLinesItem struct {
+	ItemID         *string `json:"itemId,omitempty" url:"itemId,omitempty"`
+	VatRatePercent *string `json:"vatRatePercent,omitempty" url:"vatRatePercent,omitempty"`
+	VatAmount      *string `json:"vatAmount,omitempty" url:"vatAmount,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) GetItemID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.ItemID
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) GetVatRatePercent() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatRatePercent
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) GetVatAmount() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatAmount
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetItemID sets the ItemID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) SetItemID(itemID *string) {
+	i.ItemID = itemID
+	i.require(invoicesProposeLinesPurchasesRequestLinesItemFieldItemID)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) SetVatRatePercent(vatRatePercent *string) {
+	i.VatRatePercent = vatRatePercent
+	i.require(invoicesProposeLinesPurchasesRequestLinesItemFieldVatRatePercent)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) SetVatAmount(vatAmount *string) {
+	i.VatAmount = vatAmount
+	i.require(invoicesProposeLinesPurchasesRequestLinesItemFieldVatAmount)
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesProposeLinesPurchasesRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesProposeLinesPurchasesRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesProposeLinesPurchasesRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesProposeLinesPurchasesRequestLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesProposeLinesPurchasesResponseFieldLines = big.NewInt(1 << 0)
+)
+
+type InvoicesProposeLinesPurchasesResponse struct {
+	Lines []*InvoicesProposeLinesPurchasesResponseLinesItem `json:"lines" url:"lines"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesProposeLinesPurchasesResponse) GetLines() []*InvoicesProposeLinesPurchasesResponseLinesItem {
+	if i == nil {
+		return nil
+	}
+	return i.Lines
+}
+
+func (i *InvoicesProposeLinesPurchasesResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesProposeLinesPurchasesResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesResponse) SetLines(lines []*InvoicesProposeLinesPurchasesResponseLinesItem) {
+	i.Lines = lines
+	i.require(invoicesProposeLinesPurchasesResponseFieldLines)
+}
+
+func (i *InvoicesProposeLinesPurchasesResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesProposeLinesPurchasesResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesProposeLinesPurchasesResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesProposeLinesPurchasesResponse) MarshalJSON() ([]byte, error) {
+	type embed InvoicesProposeLinesPurchasesResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesProposeLinesPurchasesResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	invoicesProposeLinesPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 0)
+	invoicesProposeLinesPurchasesResponseLinesItemFieldAccountReason     = big.NewInt(1 << 1)
+	invoicesProposeLinesPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 2)
+	invoicesProposeLinesPurchasesResponseLinesItemFieldVatReason         = big.NewInt(1 << 3)
+	invoicesProposeLinesPurchasesResponseLinesItemFieldVatCandidates     = big.NewInt(1 << 4)
+)
+
+type InvoicesProposeLinesPurchasesResponseLinesItem struct {
+	AccountCode       *string  `json:"accountCode,omitempty" url:"accountCode,omitempty"`
+	AccountReason     *string  `json:"accountReason,omitempty" url:"accountReason,omitempty"`
+	VatClassifierCode *string  `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	VatReason         *string  `json:"vatReason,omitempty" url:"vatReason,omitempty"`
+	VatCandidates     []string `json:"vatCandidates" url:"vatCandidates"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) GetAccountCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AccountCode
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) GetAccountReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AccountReason
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) GetVatClassifierCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatClassifierCode
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) GetVatReason() *string {
+	if i == nil {
+		return nil
+	}
+	return i.VatReason
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) GetVatCandidates() []string {
+	if i == nil {
+		return nil
+	}
+	return i.VatCandidates
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) SetAccountCode(accountCode *string) {
+	i.AccountCode = accountCode
+	i.require(invoicesProposeLinesPurchasesResponseLinesItemFieldAccountCode)
+}
+
+// SetAccountReason sets the AccountReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) SetAccountReason(accountReason *string) {
+	i.AccountReason = accountReason
+	i.require(invoicesProposeLinesPurchasesResponseLinesItemFieldAccountReason)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	i.VatClassifierCode = vatClassifierCode
+	i.require(invoicesProposeLinesPurchasesResponseLinesItemFieldVatClassifierCode)
+}
+
+// SetVatReason sets the VatReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) SetVatReason(vatReason *string) {
+	i.VatReason = vatReason
+	i.require(invoicesProposeLinesPurchasesResponseLinesItemFieldVatReason)
+}
+
+// SetVatCandidates sets the VatCandidates field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) SetVatCandidates(vatCandidates []string) {
+	i.VatCandidates = vatCandidates
+	i.require(invoicesProposeLinesPurchasesResponseLinesItemFieldVatCandidates)
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler InvoicesProposeLinesPurchasesResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = InvoicesProposeLinesPurchasesResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed InvoicesProposeLinesPurchasesResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *InvoicesProposeLinesPurchasesResponseLinesItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
 	invoicesRegisterPurchasesResponseFieldID                           = big.NewInt(1 << 0)
 	invoicesRegisterPurchasesResponseFieldPartnerID                    = big.NewInt(1 << 1)
 	invoicesRegisterPurchasesResponseFieldType                         = big.NewInt(1 << 2)
@@ -7333,11 +8047,14 @@ var (
 	invoicesRegisterPurchasesResponseFieldIntrastatRegion              = big.NewInt(1 << 24)
 	invoicesRegisterPurchasesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	invoicesRegisterPurchasesResponseFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	invoicesRegisterPurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 27)
-	invoicesRegisterPurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 28)
-	invoicesRegisterPurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 29)
-	invoicesRegisterPurchasesResponseFieldLines                        = big.NewInt(1 << 30)
-	invoicesRegisterPurchasesResponseFieldWarnings                     = big.NewInt(1 << 31)
+	invoicesRegisterPurchasesResponseFieldPaymentReference             = big.NewInt(1 << 27)
+	invoicesRegisterPurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	invoicesRegisterPurchasesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesRegisterPurchasesResponseFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	invoicesRegisterPurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 31)
+	invoicesRegisterPurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 32)
+	invoicesRegisterPurchasesResponseFieldLines                        = big.NewInt(1 << 33)
+	invoicesRegisterPurchasesResponseFieldWarnings                     = big.NewInt(1 << 34)
 )
 
 type InvoicesRegisterPurchasesResponse struct {
@@ -7368,7 +8085,10 @@ type InvoicesRegisterPurchasesResponse struct {
 	IntrastatRegion              *string                                          `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                          `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                          `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                          `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                          `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                          `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                          `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                        `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                        `json:"updatedAt" url:"updatedAt"`
 	Lines                        []*InvoicesRegisterPurchasesResponseLinesItem    `json:"lines" url:"lines"`
@@ -7570,11 +8290,32 @@ func (i *InvoicesRegisterPurchasesResponse) GetEinvoiceNumber() *string {
 	return i.EinvoiceNumber
 }
 
+func (i *InvoicesRegisterPurchasesResponse) GetPaymentReference() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentReference
+}
+
 func (i *InvoicesRegisterPurchasesResponse) GetDocumentRef() *string {
 	if i == nil {
 		return nil
 	}
 	return i.DocumentRef
+}
+
+func (i *InvoicesRegisterPurchasesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoicesRegisterPurchasesResponse) GetAgreementPeriodStart() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementPeriodStart
 }
 
 func (i *InvoicesRegisterPurchasesResponse) GetCreatedAt() time.Time {
@@ -7808,11 +8549,32 @@ func (i *InvoicesRegisterPurchasesResponse) SetEinvoiceNumber(einvoiceNumber *st
 	i.require(invoicesRegisterPurchasesResponseFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponse) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesRegisterPurchasesResponseFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesRegisterPurchasesResponse) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesRegisterPurchasesResponseFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesRegisterPurchasesResponseFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponse) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesRegisterPurchasesResponseFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7925,17 +8687,19 @@ var (
 	invoicesRegisterPurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
 	invoicesRegisterPurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
 	invoicesRegisterPurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	invoicesRegisterPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	invoicesRegisterPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	invoicesRegisterPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	invoicesRegisterPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
-	invoicesRegisterPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
-	invoicesRegisterPurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
-	invoicesRegisterPurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
-	invoicesRegisterPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
-	invoicesRegisterPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
+	invoicesRegisterPurchasesResponseLinesItemFieldDeductiblePercent = big.NewInt(1 << 11)
+	invoicesRegisterPurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 12)
+	invoicesRegisterPurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 13)
+	invoicesRegisterPurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 14)
+	invoicesRegisterPurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 15)
+	invoicesRegisterPurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 16)
+	invoicesRegisterPurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 17)
+	invoicesRegisterPurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 18)
+	invoicesRegisterPurchasesResponseLinesItemFieldChassisNumbers    = big.NewInt(1 << 19)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 20)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 21)
+	invoicesRegisterPurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 22)
+	invoicesRegisterPurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 23)
 )
 
 type InvoicesRegisterPurchasesResponseLinesItem struct {
@@ -7950,6 +8714,7 @@ type InvoicesRegisterPurchasesResponseLinesItem struct {
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	DeductiblePercent *int64     `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
 	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
@@ -7957,6 +8722,7 @@ type InvoicesRegisterPurchasesResponseLinesItem struct {
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	ChassisNumbers    []string   `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -8046,6 +8812,13 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) GetVatClassifierCode() *str
 	return i.VatClassifierCode
 }
 
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetDeductiblePercent() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.DeductiblePercent
+}
+
 func (i *InvoicesRegisterPurchasesResponseLinesItem) GetCostCenterID() *string {
 	if i == nil {
 		return nil
@@ -8093,6 +8866,13 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) GetExpiryDate() *time.Time 
 		return nil
 	}
 	return i.ExpiryDate
+}
+
+func (i *InvoicesRegisterPurchasesResponseLinesItem) GetChassisNumbers() []string {
+	if i == nil {
+		return nil
+	}
+	return i.ChassisNumbers
 }
 
 func (i *InvoicesRegisterPurchasesResponseLinesItem) GetLineNet() string {
@@ -8214,6 +8994,13 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) SetVatClassifierCode(vatCla
 	i.require(invoicesRegisterPurchasesResponseLinesItemFieldVatClassifierCode)
 }
 
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	i.DeductiblePercent = deductiblePercent
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldDeductiblePercent)
+}
+
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesRegisterPurchasesResponseLinesItem) SetCostCenterID(costCenterID *string) {
@@ -8261,6 +9048,13 @@ func (i *InvoicesRegisterPurchasesResponseLinesItem) SetLotNumber(lotNumber *str
 func (i *InvoicesRegisterPurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	i.ExpiryDate = expiryDate
 	i.require(invoicesRegisterPurchasesResponseLinesItemFieldExpiryDate)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesRegisterPurchasesResponseLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	i.ChassisNumbers = chassisNumbers
+	i.require(invoicesRegisterPurchasesResponseLinesItemFieldChassisNumbers)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
@@ -8565,10 +9359,13 @@ var (
 	invoicesReversePurchasesResponseFieldIntrastatRegion              = big.NewInt(1 << 24)
 	invoicesReversePurchasesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	invoicesReversePurchasesResponseFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	invoicesReversePurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 27)
-	invoicesReversePurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 28)
-	invoicesReversePurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 29)
-	invoicesReversePurchasesResponseFieldLines                        = big.NewInt(1 << 30)
+	invoicesReversePurchasesResponseFieldPaymentReference             = big.NewInt(1 << 27)
+	invoicesReversePurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	invoicesReversePurchasesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesReversePurchasesResponseFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	invoicesReversePurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 31)
+	invoicesReversePurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 32)
+	invoicesReversePurchasesResponseFieldLines                        = big.NewInt(1 << 33)
 )
 
 type InvoicesReversePurchasesResponse struct {
@@ -8599,7 +9396,10 @@ type InvoicesReversePurchasesResponse struct {
 	IntrastatRegion              *string                                       `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                       `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                       `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                       `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                       `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                       `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                       `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                     `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                     `json:"updatedAt" url:"updatedAt"`
 	Lines                        []*InvoicesReversePurchasesResponseLinesItem  `json:"lines" url:"lines"`
@@ -8800,11 +9600,32 @@ func (i *InvoicesReversePurchasesResponse) GetEinvoiceNumber() *string {
 	return i.EinvoiceNumber
 }
 
+func (i *InvoicesReversePurchasesResponse) GetPaymentReference() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentReference
+}
+
 func (i *InvoicesReversePurchasesResponse) GetDocumentRef() *string {
 	if i == nil {
 		return nil
 	}
 	return i.DocumentRef
+}
+
+func (i *InvoicesReversePurchasesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoicesReversePurchasesResponse) GetAgreementPeriodStart() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementPeriodStart
 }
 
 func (i *InvoicesReversePurchasesResponse) GetCreatedAt() time.Time {
@@ -9031,11 +9852,32 @@ func (i *InvoicesReversePurchasesResponse) SetEinvoiceNumber(einvoiceNumber *str
 	i.require(invoicesReversePurchasesResponseFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReversePurchasesResponse) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesReversePurchasesResponseFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesReversePurchasesResponse) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesReversePurchasesResponseFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReversePurchasesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesReversePurchasesResponseFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReversePurchasesResponse) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesReversePurchasesResponseFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -9141,17 +9983,19 @@ var (
 	invoicesReversePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
 	invoicesReversePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
 	invoicesReversePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	invoicesReversePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	invoicesReversePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	invoicesReversePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	invoicesReversePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
-	invoicesReversePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
-	invoicesReversePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
-	invoicesReversePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
-	invoicesReversePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
-	invoicesReversePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
-	invoicesReversePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
-	invoicesReversePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
+	invoicesReversePurchasesResponseLinesItemFieldDeductiblePercent = big.NewInt(1 << 11)
+	invoicesReversePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 12)
+	invoicesReversePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 13)
+	invoicesReversePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 14)
+	invoicesReversePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 15)
+	invoicesReversePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 16)
+	invoicesReversePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 17)
+	invoicesReversePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 18)
+	invoicesReversePurchasesResponseLinesItemFieldChassisNumbers    = big.NewInt(1 << 19)
+	invoicesReversePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 20)
+	invoicesReversePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 21)
+	invoicesReversePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 22)
+	invoicesReversePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 23)
 )
 
 type InvoicesReversePurchasesResponseLinesItem struct {
@@ -9166,6 +10010,7 @@ type InvoicesReversePurchasesResponseLinesItem struct {
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	DeductiblePercent *int64     `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
 	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
@@ -9173,6 +10018,7 @@ type InvoicesReversePurchasesResponseLinesItem struct {
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	ChassisNumbers    []string   `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -9262,6 +10108,13 @@ func (i *InvoicesReversePurchasesResponseLinesItem) GetVatClassifierCode() *stri
 	return i.VatClassifierCode
 }
 
+func (i *InvoicesReversePurchasesResponseLinesItem) GetDeductiblePercent() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.DeductiblePercent
+}
+
 func (i *InvoicesReversePurchasesResponseLinesItem) GetCostCenterID() *string {
 	if i == nil {
 		return nil
@@ -9309,6 +10162,13 @@ func (i *InvoicesReversePurchasesResponseLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return i.ExpiryDate
+}
+
+func (i *InvoicesReversePurchasesResponseLinesItem) GetChassisNumbers() []string {
+	if i == nil {
+		return nil
+	}
+	return i.ChassisNumbers
 }
 
 func (i *InvoicesReversePurchasesResponseLinesItem) GetLineNet() string {
@@ -9430,6 +10290,13 @@ func (i *InvoicesReversePurchasesResponseLinesItem) SetVatClassifierCode(vatClas
 	i.require(invoicesReversePurchasesResponseLinesItemFieldVatClassifierCode)
 }
 
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReversePurchasesResponseLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	i.DeductiblePercent = deductiblePercent
+	i.require(invoicesReversePurchasesResponseLinesItemFieldDeductiblePercent)
+}
+
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesReversePurchasesResponseLinesItem) SetCostCenterID(costCenterID *string) {
@@ -9477,6 +10344,13 @@ func (i *InvoicesReversePurchasesResponseLinesItem) SetLotNumber(lotNumber *stri
 func (i *InvoicesReversePurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	i.ExpiryDate = expiryDate
 	i.require(invoicesReversePurchasesResponseLinesItemFieldExpiryDate)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesReversePurchasesResponseLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	i.ChassisNumbers = chassisNumbers
+	i.require(invoicesReversePurchasesResponseLinesItemFieldChassisNumbers)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
@@ -9653,6 +10527,8 @@ var (
 	invoicesUpdatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 	invoicesUpdatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
 	invoicesUpdatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
+	invoicesUpdatePurchasesRequestLinesItemFieldDeductiblePercent = big.NewInt(1 << 15)
+	invoicesUpdatePurchasesRequestLinesItemFieldChassisNumbers    = big.NewInt(1 << 16)
 )
 
 type InvoicesUpdatePurchasesRequestLinesItem struct {
@@ -9671,6 +10547,10 @@ type InvoicesUpdatePurchasesRequestLinesItem struct {
 	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string                                          `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time                                       `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	// The share of the purchase used for the company's taxable supplies, in whole percent rounded up: required on a VAT type that deducts the line's own share (CZ-D21-P, CZ-D12-P, the poměrný koeficient of § 75 odst. 3 ZDPH) and refused on any other
+	DeductiblePercent *int64 `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
+	// The chassis numbers of the passenger cars bought on the line. A Hungarian company lists them on sheet 2665A-09 of the VAT return of the period when the line is an intra-Community acquisition or an import (Áfa tv. 4/A. számú melléklet II.)
+	ChassisNumbers []string `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -9782,6 +10662,20 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return i.ExpiryDate
+}
+
+func (i *InvoicesUpdatePurchasesRequestLinesItem) GetDeductiblePercent() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.DeductiblePercent
+}
+
+func (i *InvoicesUpdatePurchasesRequestLinesItem) GetChassisNumbers() []string {
+	if i == nil {
+		return nil
+	}
+	return i.ChassisNumbers
 }
 
 func (i *InvoicesUpdatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -9901,6 +10795,20 @@ func (i *InvoicesUpdatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string
 func (i *InvoicesUpdatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	i.ExpiryDate = expiryDate
 	i.require(invoicesUpdatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequestLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	i.DeductiblePercent = deductiblePercent
+	i.require(invoicesUpdatePurchasesRequestLinesItemFieldDeductiblePercent)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesRequestLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	i.ChassisNumbers = chassisNumbers
+	i.require(invoicesUpdatePurchasesRequestLinesItemFieldChassisNumbers)
 }
 
 func (i *InvoicesUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -10051,10 +10959,13 @@ var (
 	invoicesUpdatePurchasesResponseFieldIntrastatRegion              = big.NewInt(1 << 24)
 	invoicesUpdatePurchasesResponseFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	invoicesUpdatePurchasesResponseFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	invoicesUpdatePurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 27)
-	invoicesUpdatePurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 28)
-	invoicesUpdatePurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 29)
-	invoicesUpdatePurchasesResponseFieldLines                        = big.NewInt(1 << 30)
+	invoicesUpdatePurchasesResponseFieldPaymentReference             = big.NewInt(1 << 27)
+	invoicesUpdatePurchasesResponseFieldDocumentRef                  = big.NewInt(1 << 28)
+	invoicesUpdatePurchasesResponseFieldAgreementID                  = big.NewInt(1 << 29)
+	invoicesUpdatePurchasesResponseFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	invoicesUpdatePurchasesResponseFieldCreatedAt                    = big.NewInt(1 << 31)
+	invoicesUpdatePurchasesResponseFieldUpdatedAt                    = big.NewInt(1 << 32)
+	invoicesUpdatePurchasesResponseFieldLines                        = big.NewInt(1 << 33)
 )
 
 type InvoicesUpdatePurchasesResponse struct {
@@ -10085,7 +10996,10 @@ type InvoicesUpdatePurchasesResponse struct {
 	IntrastatRegion              *string                                      `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                      `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                      `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                      `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                      `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                      `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                      `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                    `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                    `json:"updatedAt" url:"updatedAt"`
 	Lines                        []*InvoicesUpdatePurchasesResponseLinesItem  `json:"lines" url:"lines"`
@@ -10286,11 +11200,32 @@ func (i *InvoicesUpdatePurchasesResponse) GetEinvoiceNumber() *string {
 	return i.EinvoiceNumber
 }
 
+func (i *InvoicesUpdatePurchasesResponse) GetPaymentReference() *string {
+	if i == nil {
+		return nil
+	}
+	return i.PaymentReference
+}
+
 func (i *InvoicesUpdatePurchasesResponse) GetDocumentRef() *string {
 	if i == nil {
 		return nil
 	}
 	return i.DocumentRef
+}
+
+func (i *InvoicesUpdatePurchasesResponse) GetAgreementID() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementID
+}
+
+func (i *InvoicesUpdatePurchasesResponse) GetAgreementPeriodStart() *string {
+	if i == nil {
+		return nil
+	}
+	return i.AgreementPeriodStart
 }
 
 func (i *InvoicesUpdatePurchasesResponse) GetCreatedAt() time.Time {
@@ -10517,11 +11452,32 @@ func (i *InvoicesUpdatePurchasesResponse) SetEinvoiceNumber(einvoiceNumber *stri
 	i.require(invoicesUpdatePurchasesResponseFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponse) SetPaymentReference(paymentReference *string) {
+	i.PaymentReference = paymentReference
+	i.require(invoicesUpdatePurchasesResponseFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdatePurchasesResponse) SetDocumentRef(documentRef *string) {
 	i.DocumentRef = documentRef
 	i.require(invoicesUpdatePurchasesResponseFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponse) SetAgreementID(agreementID *string) {
+	i.AgreementID = agreementID
+	i.require(invoicesUpdatePurchasesResponseFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponse) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	i.AgreementPeriodStart = agreementPeriodStart
+	i.require(invoicesUpdatePurchasesResponseFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -10627,17 +11583,19 @@ var (
 	invoicesUpdatePurchasesResponseLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
 	invoicesUpdatePurchasesResponseLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
 	invoicesUpdatePurchasesResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	invoicesUpdatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	invoicesUpdatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	invoicesUpdatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	invoicesUpdatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
-	invoicesUpdatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
-	invoicesUpdatePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 16)
-	invoicesUpdatePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 18)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 19)
-	invoicesUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 20)
-	invoicesUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 21)
+	invoicesUpdatePurchasesResponseLinesItemFieldDeductiblePercent = big.NewInt(1 << 11)
+	invoicesUpdatePurchasesResponseLinesItemFieldCostCenterID      = big.NewInt(1 << 12)
+	invoicesUpdatePurchasesResponseLinesItemFieldProjectID         = big.NewInt(1 << 13)
+	invoicesUpdatePurchasesResponseLinesItemFieldAccountCode       = big.NewInt(1 << 14)
+	invoicesUpdatePurchasesResponseLinesItemFieldDeferralStartDate = big.NewInt(1 << 15)
+	invoicesUpdatePurchasesResponseLinesItemFieldDeferralEndDate   = big.NewInt(1 << 16)
+	invoicesUpdatePurchasesResponseLinesItemFieldLotNumber         = big.NewInt(1 << 17)
+	invoicesUpdatePurchasesResponseLinesItemFieldExpiryDate        = big.NewInt(1 << 18)
+	invoicesUpdatePurchasesResponseLinesItemFieldChassisNumbers    = big.NewInt(1 << 19)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineNet           = big.NewInt(1 << 20)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineVat           = big.NewInt(1 << 21)
+	invoicesUpdatePurchasesResponseLinesItemFieldLineGross         = big.NewInt(1 << 22)
+	invoicesUpdatePurchasesResponseLinesItemFieldSortOrder         = big.NewInt(1 << 23)
 )
 
 type InvoicesUpdatePurchasesResponseLinesItem struct {
@@ -10652,6 +11610,7 @@ type InvoicesUpdatePurchasesResponseLinesItem struct {
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	DeductiblePercent *int64     `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
 	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
@@ -10659,6 +11618,7 @@ type InvoicesUpdatePurchasesResponseLinesItem struct {
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	ChassisNumbers    []string   `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -10748,6 +11708,13 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) GetVatClassifierCode() *strin
 	return i.VatClassifierCode
 }
 
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetDeductiblePercent() *int64 {
+	if i == nil {
+		return nil
+	}
+	return i.DeductiblePercent
+}
+
 func (i *InvoicesUpdatePurchasesResponseLinesItem) GetCostCenterID() *string {
 	if i == nil {
 		return nil
@@ -10795,6 +11762,13 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return i.ExpiryDate
+}
+
+func (i *InvoicesUpdatePurchasesResponseLinesItem) GetChassisNumbers() []string {
+	if i == nil {
+		return nil
+	}
+	return i.ChassisNumbers
 }
 
 func (i *InvoicesUpdatePurchasesResponseLinesItem) GetLineNet() string {
@@ -10916,6 +11890,13 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) SetVatClassifierCode(vatClass
 	i.require(invoicesUpdatePurchasesResponseLinesItemFieldVatClassifierCode)
 }
 
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	i.DeductiblePercent = deductiblePercent
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldDeductiblePercent)
+}
+
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (i *InvoicesUpdatePurchasesResponseLinesItem) SetCostCenterID(costCenterID *string) {
@@ -10963,6 +11944,13 @@ func (i *InvoicesUpdatePurchasesResponseLinesItem) SetLotNumber(lotNumber *strin
 func (i *InvoicesUpdatePurchasesResponseLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	i.ExpiryDate = expiryDate
 	i.require(invoicesUpdatePurchasesResponseLinesItemFieldExpiryDate)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *InvoicesUpdatePurchasesResponseLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	i.ChassisNumbers = chassisNumbers
+	i.require(invoicesUpdatePurchasesResponseLinesItemFieldChassisNumbers)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
@@ -13554,6 +14542,8 @@ var (
 	ordersCreatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 	ordersCreatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
 	ordersCreatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
+	ordersCreatePurchasesRequestLinesItemFieldDeductiblePercent = big.NewInt(1 << 15)
+	ordersCreatePurchasesRequestLinesItemFieldChassisNumbers    = big.NewInt(1 << 16)
 )
 
 type OrdersCreatePurchasesRequestLinesItem struct {
@@ -13572,6 +14562,10 @@ type OrdersCreatePurchasesRequestLinesItem struct {
 	DeferralEndDate   *time.Time                                     `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string                                        `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time                                     `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	// The share of the purchase used for the company's taxable supplies, in whole percent rounded up: required on a VAT type that deducts the line's own share (CZ-D21-P, CZ-D12-P, the poměrný koeficient of § 75 odst. 3 ZDPH) and refused on any other
+	DeductiblePercent *int64 `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
+	// The chassis numbers of the passenger cars bought on the line. A Hungarian company lists them on sheet 2665A-09 of the VAT return of the period when the line is an intra-Community acquisition or an import (Áfa tv. 4/A. számú melléklet II.)
+	ChassisNumbers []string `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -13683,6 +14677,20 @@ func (o *OrdersCreatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return o.ExpiryDate
+}
+
+func (o *OrdersCreatePurchasesRequestLinesItem) GetDeductiblePercent() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DeductiblePercent
+}
+
+func (o *OrdersCreatePurchasesRequestLinesItem) GetChassisNumbers() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ChassisNumbers
 }
 
 func (o *OrdersCreatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -13802,6 +14810,20 @@ func (o *OrdersCreatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string) 
 func (o *OrdersCreatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	o.ExpiryDate = expiryDate
 	o.require(ordersCreatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesRequestLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	o.DeductiblePercent = deductiblePercent
+	o.require(ordersCreatePurchasesRequestLinesItemFieldDeductiblePercent)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersCreatePurchasesRequestLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	o.ChassisNumbers = chassisNumbers
+	o.require(ordersCreatePurchasesRequestLinesItemFieldChassisNumbers)
 }
 
 func (o *OrdersCreatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -18264,6 +19286,8 @@ var (
 	ordersUpdatePurchasesRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 	ordersUpdatePurchasesRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
 	ordersUpdatePurchasesRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
+	ordersUpdatePurchasesRequestLinesItemFieldDeductiblePercent = big.NewInt(1 << 15)
+	ordersUpdatePurchasesRequestLinesItemFieldChassisNumbers    = big.NewInt(1 << 16)
 )
 
 type OrdersUpdatePurchasesRequestLinesItem struct {
@@ -18282,6 +19306,10 @@ type OrdersUpdatePurchasesRequestLinesItem struct {
 	DeferralEndDate   *time.Time                                     `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string                                        `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time                                     `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	// The share of the purchase used for the company's taxable supplies, in whole percent rounded up: required on a VAT type that deducts the line's own share (CZ-D21-P, CZ-D12-P, the poměrný koeficient of § 75 odst. 3 ZDPH) and refused on any other
+	DeductiblePercent *int64 `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
+	// The chassis numbers of the passenger cars bought on the line. A Hungarian company lists them on sheet 2665A-09 of the VAT return of the period when the line is an intra-Community acquisition or an import (Áfa tv. 4/A. számú melléklet II.)
+	ChassisNumbers []string `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -18393,6 +19421,20 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return o.ExpiryDate
+}
+
+func (o *OrdersUpdatePurchasesRequestLinesItem) GetDeductiblePercent() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DeductiblePercent
+}
+
+func (o *OrdersUpdatePurchasesRequestLinesItem) GetChassisNumbers() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ChassisNumbers
 }
 
 func (o *OrdersUpdatePurchasesRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -18512,6 +19554,20 @@ func (o *OrdersUpdatePurchasesRequestLinesItem) SetLotNumber(lotNumber *string) 
 func (o *OrdersUpdatePurchasesRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	o.ExpiryDate = expiryDate
 	o.require(ordersUpdatePurchasesRequestLinesItemFieldExpiryDate)
+}
+
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesRequestLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	o.DeductiblePercent = deductiblePercent
+	o.require(ordersUpdatePurchasesRequestLinesItemFieldDeductiblePercent)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (o *OrdersUpdatePurchasesRequestLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	o.ChassisNumbers = chassisNumbers
+	o.require(ordersUpdatePurchasesRequestLinesItemFieldChassisNumbers)
 }
 
 func (o *OrdersUpdatePurchasesRequestLinesItem) UnmarshalJSON(data []byte) error {

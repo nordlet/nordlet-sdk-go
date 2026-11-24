@@ -608,6 +608,13 @@ func TestEnumQueueListReviewResponseItemsItemKind(t *testing.T) {
 		assert.Equal(t, QueueListReviewResponseItemsItemKind("filing_settings_missing"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_file_unattached", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewQueueListReviewResponseItemsItemKindFromString("file_unattached")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, QueueListReviewResponseItemsItemKind("file_unattached"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewQueueListReviewResponseItemsItemKindFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)

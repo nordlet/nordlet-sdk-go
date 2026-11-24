@@ -218,57 +218,61 @@ var (
 	itemsCreateCatalogRequestFieldSalePriceExclVat        = big.NewInt(1 << 8)
 	itemsCreateCatalogRequestFieldPurchasePriceExclVat    = big.NewInt(1 << 9)
 	itemsCreateCatalogRequestFieldCnCode                  = big.NewInt(1 << 10)
-	itemsCreateCatalogRequestFieldOriginCountry           = big.NewInt(1 << 11)
-	itemsCreateCatalogRequestFieldNetMassKg               = big.NewInt(1 << 12)
-	itemsCreateCatalogRequestFieldSupplementaryUnit       = big.NewInt(1 << 13)
-	itemsCreateCatalogRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 14)
-	itemsCreateCatalogRequestFieldDescription             = big.NewInt(1 << 15)
-	itemsCreateCatalogRequestFieldGroupID                 = big.NewInt(1 << 16)
-	itemsCreateCatalogRequestFieldAttributes              = big.NewInt(1 << 17)
-	itemsCreateCatalogRequestFieldDocumentRef             = big.NewInt(1 << 18)
-	itemsCreateCatalogRequestFieldTranslations            = big.NewInt(1 << 19)
-	itemsCreateCatalogRequestFieldComponents              = big.NewInt(1 << 20)
-	itemsCreateCatalogRequestFieldKindID                  = big.NewInt(1 << 21)
-	itemsCreateCatalogRequestFieldSaleAccountCode         = big.NewInt(1 << 22)
-	itemsCreateCatalogRequestFieldPurchaseAccountCode     = big.NewInt(1 << 23)
-	itemsCreateCatalogRequestFieldExpenseAccountCode      = big.NewInt(1 << 24)
-	itemsCreateCatalogRequestFieldManufacturer            = big.NewInt(1 << 25)
-	itemsCreateCatalogRequestFieldGrossMassKg             = big.NewInt(1 << 26)
-	itemsCreateCatalogRequestFieldMinQuantity             = big.NewInt(1 << 27)
-	itemsCreateCatalogRequestFieldCostPrice               = big.NewInt(1 << 28)
-	itemsCreateCatalogRequestFieldIsFreePrice             = big.NewInt(1 << 29)
-	itemsCreateCatalogRequestFieldExternalID              = big.NewInt(1 << 30)
-	itemsCreateCatalogRequestFieldIsReturnable            = big.NewInt(1 << 31)
-	itemsCreateCatalogRequestFieldCommentRequired         = big.NewInt(1 << 32)
-	itemsCreateCatalogRequestFieldPriceFrom               = big.NewInt(1 << 33)
-	itemsCreateCatalogRequestFieldPriceTo                 = big.NewInt(1 << 34)
-	itemsCreateCatalogRequestFieldMinPrice                = big.NewInt(1 << 35)
-	itemsCreateCatalogRequestFieldDiscountPercent         = big.NewInt(1 << 36)
-	itemsCreateCatalogRequestFieldMaxDiscountPercent      = big.NewInt(1 << 37)
-	itemsCreateCatalogRequestFieldLoyaltyPoints           = big.NewInt(1 << 38)
-	itemsCreateCatalogRequestFieldDepartment              = big.NewInt(1 << 39)
-	itemsCreateCatalogRequestFieldAgeRestriction          = big.NewInt(1 << 40)
-	itemsCreateCatalogRequestFieldPackageQuantity         = big.NewInt(1 << 41)
-	itemsCreateCatalogRequestFieldTaraCode                = big.NewInt(1 << 42)
-	itemsCreateCatalogRequestFieldCertificateNumber       = big.NewInt(1 << 43)
-	itemsCreateCatalogRequestFieldCertificateDate         = big.NewInt(1 << 44)
-	itemsCreateCatalogRequestFieldValidFrom               = big.NewInt(1 << 45)
-	itemsCreateCatalogRequestFieldValidTo                 = big.NewInt(1 << 46)
-	itemsCreateCatalogRequestFieldPosFlags                = big.NewInt(1 << 47)
+	itemsCreateCatalogRequestFieldCpaCode                 = big.NewInt(1 << 11)
+	itemsCreateCatalogRequestFieldOriginCountry           = big.NewInt(1 << 12)
+	itemsCreateCatalogRequestFieldNetMassKg               = big.NewInt(1 << 13)
+	itemsCreateCatalogRequestFieldSupplementaryUnit       = big.NewInt(1 << 14)
+	itemsCreateCatalogRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
+	itemsCreateCatalogRequestFieldDescription             = big.NewInt(1 << 16)
+	itemsCreateCatalogRequestFieldGroupID                 = big.NewInt(1 << 17)
+	itemsCreateCatalogRequestFieldAttributes              = big.NewInt(1 << 18)
+	itemsCreateCatalogRequestFieldDocumentRef             = big.NewInt(1 << 19)
+	itemsCreateCatalogRequestFieldTranslations            = big.NewInt(1 << 20)
+	itemsCreateCatalogRequestFieldComponents              = big.NewInt(1 << 21)
+	itemsCreateCatalogRequestFieldKindID                  = big.NewInt(1 << 22)
+	itemsCreateCatalogRequestFieldSaleAccountCode         = big.NewInt(1 << 23)
+	itemsCreateCatalogRequestFieldPurchaseAccountCode     = big.NewInt(1 << 24)
+	itemsCreateCatalogRequestFieldExpenseAccountCode      = big.NewInt(1 << 25)
+	itemsCreateCatalogRequestFieldManufacturer            = big.NewInt(1 << 26)
+	itemsCreateCatalogRequestFieldGrossMassKg             = big.NewInt(1 << 27)
+	itemsCreateCatalogRequestFieldMinQuantity             = big.NewInt(1 << 28)
+	itemsCreateCatalogRequestFieldCostPrice               = big.NewInt(1 << 29)
+	itemsCreateCatalogRequestFieldIsFreePrice             = big.NewInt(1 << 30)
+	itemsCreateCatalogRequestFieldExternalID              = big.NewInt(1 << 31)
+	itemsCreateCatalogRequestFieldIsReturnable            = big.NewInt(1 << 32)
+	itemsCreateCatalogRequestFieldCommentRequired         = big.NewInt(1 << 33)
+	itemsCreateCatalogRequestFieldPriceFrom               = big.NewInt(1 << 34)
+	itemsCreateCatalogRequestFieldPriceTo                 = big.NewInt(1 << 35)
+	itemsCreateCatalogRequestFieldMinPrice                = big.NewInt(1 << 36)
+	itemsCreateCatalogRequestFieldDiscountPercent         = big.NewInt(1 << 37)
+	itemsCreateCatalogRequestFieldMaxDiscountPercent      = big.NewInt(1 << 38)
+	itemsCreateCatalogRequestFieldLoyaltyPoints           = big.NewInt(1 << 39)
+	itemsCreateCatalogRequestFieldDepartment              = big.NewInt(1 << 40)
+	itemsCreateCatalogRequestFieldAgeRestriction          = big.NewInt(1 << 41)
+	itemsCreateCatalogRequestFieldPackageQuantity         = big.NewInt(1 << 42)
+	itemsCreateCatalogRequestFieldTaraCode                = big.NewInt(1 << 43)
+	itemsCreateCatalogRequestFieldCertificateNumber       = big.NewInt(1 << 44)
+	itemsCreateCatalogRequestFieldCertificateDate         = big.NewInt(1 << 45)
+	itemsCreateCatalogRequestFieldValidFrom               = big.NewInt(1 << 46)
+	itemsCreateCatalogRequestFieldValidTo                 = big.NewInt(1 << 47)
+	itemsCreateCatalogRequestFieldPosFlags                = big.NewInt(1 << 48)
 )
 
 type ItemsCreateCatalogRequest struct {
-	Type                    *ItemsCreateCatalogRequestType                         `json:"type,omitempty" url:"-"`
-	Tracking                *ItemsCreateCatalogRequestTracking                     `json:"tracking,omitempty" url:"-"`
-	Name                    string                                                 `json:"name" url:"-"`
-	Code                    *string                                                `json:"code,omitempty" url:"-"`
-	Barcode                 *string                                                `json:"barcode,omitempty" url:"-"`
-	Unit                    *string                                                `json:"unit,omitempty" url:"-"`
-	VatClassifierCode       *string                                                `json:"vatClassifierCode,omitempty" url:"-"`
-	VatRatePercent          *string                                                `json:"vatRatePercent,omitempty" url:"-"`
-	SalePriceExclVat        *string                                                `json:"salePriceExclVat,omitempty" url:"-"`
-	PurchasePriceExclVat    *string                                                `json:"purchasePriceExclVat,omitempty" url:"-"`
-	CnCode                  *string                                                `json:"cnCode,omitempty" url:"-"`
+	Type     *ItemsCreateCatalogRequestType     `json:"type,omitempty" url:"-"`
+	Tracking *ItemsCreateCatalogRequestTracking `json:"tracking,omitempty" url:"-"`
+	Name     string                             `json:"name" url:"-"`
+	Code     *string                            `json:"code,omitempty" url:"-"`
+	Barcode  *string                            `json:"barcode,omitempty" url:"-"`
+	// Unit of measure; without it `vnt` for a Lithuanian company and `pcs` for any other
+	Unit                 *string `json:"unit,omitempty" url:"-"`
+	VatClassifierCode    *string `json:"vatClassifierCode,omitempty" url:"-"`
+	VatRatePercent       *string `json:"vatRatePercent,omitempty" url:"-"`
+	SalePriceExclVat     *string `json:"salePriceExclVat,omitempty" url:"-"`
+	PurchasePriceExclVat *string `json:"purchasePriceExclVat,omitempty" url:"-"`
+	CnCode               *string `json:"cnCode,omitempty" url:"-"`
+	// CPA code of a service, six digits without dots (62.01.11 is 620111); the Italian Intrastat list of services needs it
+	CpaCode                 *string                                                `json:"cpaCode,omitempty" url:"-"`
 	OriginCountry           *string                                                `json:"originCountry,omitempty" url:"-"`
 	NetMassKg               *string                                                `json:"netMassKg,omitempty" url:"-"`
 	SupplementaryUnit       *string                                                `json:"supplementaryUnit,omitempty" url:"-"`
@@ -393,6 +397,13 @@ func (i *ItemsCreateCatalogRequest) SetPurchasePriceExclVat(purchasePriceExclVat
 func (i *ItemsCreateCatalogRequest) SetCnCode(cnCode *string) {
 	i.CnCode = cnCode
 	i.require(itemsCreateCatalogRequestFieldCnCode)
+}
+
+// SetCpaCode sets the CpaCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogRequest) SetCpaCode(cpaCode *string) {
+	i.CpaCode = cpaCode
+	i.require(itemsCreateCatalogRequestFieldCpaCode)
 }
 
 // SetOriginCountry sets the OriginCountry field and marks it as non-optional;
@@ -1608,58 +1619,62 @@ var (
 	itemsUpdateCatalogRequestFieldSalePriceExclVat        = big.NewInt(1 << 9)
 	itemsUpdateCatalogRequestFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
 	itemsUpdateCatalogRequestFieldCnCode                  = big.NewInt(1 << 11)
-	itemsUpdateCatalogRequestFieldOriginCountry           = big.NewInt(1 << 12)
-	itemsUpdateCatalogRequestFieldNetMassKg               = big.NewInt(1 << 13)
-	itemsUpdateCatalogRequestFieldSupplementaryUnit       = big.NewInt(1 << 14)
-	itemsUpdateCatalogRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
-	itemsUpdateCatalogRequestFieldDescription             = big.NewInt(1 << 16)
-	itemsUpdateCatalogRequestFieldGroupID                 = big.NewInt(1 << 17)
-	itemsUpdateCatalogRequestFieldAttributes              = big.NewInt(1 << 18)
-	itemsUpdateCatalogRequestFieldDocumentRef             = big.NewInt(1 << 19)
-	itemsUpdateCatalogRequestFieldTranslations            = big.NewInt(1 << 20)
-	itemsUpdateCatalogRequestFieldComponents              = big.NewInt(1 << 21)
-	itemsUpdateCatalogRequestFieldKindID                  = big.NewInt(1 << 22)
-	itemsUpdateCatalogRequestFieldSaleAccountCode         = big.NewInt(1 << 23)
-	itemsUpdateCatalogRequestFieldPurchaseAccountCode     = big.NewInt(1 << 24)
-	itemsUpdateCatalogRequestFieldExpenseAccountCode      = big.NewInt(1 << 25)
-	itemsUpdateCatalogRequestFieldManufacturer            = big.NewInt(1 << 26)
-	itemsUpdateCatalogRequestFieldGrossMassKg             = big.NewInt(1 << 27)
-	itemsUpdateCatalogRequestFieldMinQuantity             = big.NewInt(1 << 28)
-	itemsUpdateCatalogRequestFieldCostPrice               = big.NewInt(1 << 29)
-	itemsUpdateCatalogRequestFieldIsFreePrice             = big.NewInt(1 << 30)
-	itemsUpdateCatalogRequestFieldExternalID              = big.NewInt(1 << 31)
-	itemsUpdateCatalogRequestFieldIsReturnable            = big.NewInt(1 << 32)
-	itemsUpdateCatalogRequestFieldCommentRequired         = big.NewInt(1 << 33)
-	itemsUpdateCatalogRequestFieldPriceFrom               = big.NewInt(1 << 34)
-	itemsUpdateCatalogRequestFieldPriceTo                 = big.NewInt(1 << 35)
-	itemsUpdateCatalogRequestFieldMinPrice                = big.NewInt(1 << 36)
-	itemsUpdateCatalogRequestFieldDiscountPercent         = big.NewInt(1 << 37)
-	itemsUpdateCatalogRequestFieldMaxDiscountPercent      = big.NewInt(1 << 38)
-	itemsUpdateCatalogRequestFieldLoyaltyPoints           = big.NewInt(1 << 39)
-	itemsUpdateCatalogRequestFieldDepartment              = big.NewInt(1 << 40)
-	itemsUpdateCatalogRequestFieldAgeRestriction          = big.NewInt(1 << 41)
-	itemsUpdateCatalogRequestFieldPackageQuantity         = big.NewInt(1 << 42)
-	itemsUpdateCatalogRequestFieldTaraCode                = big.NewInt(1 << 43)
-	itemsUpdateCatalogRequestFieldCertificateNumber       = big.NewInt(1 << 44)
-	itemsUpdateCatalogRequestFieldCertificateDate         = big.NewInt(1 << 45)
-	itemsUpdateCatalogRequestFieldValidFrom               = big.NewInt(1 << 46)
-	itemsUpdateCatalogRequestFieldValidTo                 = big.NewInt(1 << 47)
-	itemsUpdateCatalogRequestFieldPosFlags                = big.NewInt(1 << 48)
+	itemsUpdateCatalogRequestFieldCpaCode                 = big.NewInt(1 << 12)
+	itemsUpdateCatalogRequestFieldOriginCountry           = big.NewInt(1 << 13)
+	itemsUpdateCatalogRequestFieldNetMassKg               = big.NewInt(1 << 14)
+	itemsUpdateCatalogRequestFieldSupplementaryUnit       = big.NewInt(1 << 15)
+	itemsUpdateCatalogRequestFieldSupplementaryQtyPerUnit = big.NewInt(1 << 16)
+	itemsUpdateCatalogRequestFieldDescription             = big.NewInt(1 << 17)
+	itemsUpdateCatalogRequestFieldGroupID                 = big.NewInt(1 << 18)
+	itemsUpdateCatalogRequestFieldAttributes              = big.NewInt(1 << 19)
+	itemsUpdateCatalogRequestFieldDocumentRef             = big.NewInt(1 << 20)
+	itemsUpdateCatalogRequestFieldTranslations            = big.NewInt(1 << 21)
+	itemsUpdateCatalogRequestFieldComponents              = big.NewInt(1 << 22)
+	itemsUpdateCatalogRequestFieldKindID                  = big.NewInt(1 << 23)
+	itemsUpdateCatalogRequestFieldSaleAccountCode         = big.NewInt(1 << 24)
+	itemsUpdateCatalogRequestFieldPurchaseAccountCode     = big.NewInt(1 << 25)
+	itemsUpdateCatalogRequestFieldExpenseAccountCode      = big.NewInt(1 << 26)
+	itemsUpdateCatalogRequestFieldManufacturer            = big.NewInt(1 << 27)
+	itemsUpdateCatalogRequestFieldGrossMassKg             = big.NewInt(1 << 28)
+	itemsUpdateCatalogRequestFieldMinQuantity             = big.NewInt(1 << 29)
+	itemsUpdateCatalogRequestFieldCostPrice               = big.NewInt(1 << 30)
+	itemsUpdateCatalogRequestFieldIsFreePrice             = big.NewInt(1 << 31)
+	itemsUpdateCatalogRequestFieldExternalID              = big.NewInt(1 << 32)
+	itemsUpdateCatalogRequestFieldIsReturnable            = big.NewInt(1 << 33)
+	itemsUpdateCatalogRequestFieldCommentRequired         = big.NewInt(1 << 34)
+	itemsUpdateCatalogRequestFieldPriceFrom               = big.NewInt(1 << 35)
+	itemsUpdateCatalogRequestFieldPriceTo                 = big.NewInt(1 << 36)
+	itemsUpdateCatalogRequestFieldMinPrice                = big.NewInt(1 << 37)
+	itemsUpdateCatalogRequestFieldDiscountPercent         = big.NewInt(1 << 38)
+	itemsUpdateCatalogRequestFieldMaxDiscountPercent      = big.NewInt(1 << 39)
+	itemsUpdateCatalogRequestFieldLoyaltyPoints           = big.NewInt(1 << 40)
+	itemsUpdateCatalogRequestFieldDepartment              = big.NewInt(1 << 41)
+	itemsUpdateCatalogRequestFieldAgeRestriction          = big.NewInt(1 << 42)
+	itemsUpdateCatalogRequestFieldPackageQuantity         = big.NewInt(1 << 43)
+	itemsUpdateCatalogRequestFieldTaraCode                = big.NewInt(1 << 44)
+	itemsUpdateCatalogRequestFieldCertificateNumber       = big.NewInt(1 << 45)
+	itemsUpdateCatalogRequestFieldCertificateDate         = big.NewInt(1 << 46)
+	itemsUpdateCatalogRequestFieldValidFrom               = big.NewInt(1 << 47)
+	itemsUpdateCatalogRequestFieldValidTo                 = big.NewInt(1 << 48)
+	itemsUpdateCatalogRequestFieldPosFlags                = big.NewInt(1 << 49)
 )
 
 type ItemsUpdateCatalogRequest struct {
-	ID                      string                                                 `json:"id" url:"-"`
-	Type                    *ItemsUpdateCatalogRequestType                         `json:"type,omitempty" url:"-"`
-	Tracking                *ItemsUpdateCatalogRequestTracking                     `json:"tracking,omitempty" url:"-"`
-	Name                    *string                                                `json:"name,omitempty" url:"-"`
-	Code                    *string                                                `json:"code,omitempty" url:"-"`
-	Barcode                 *string                                                `json:"barcode,omitempty" url:"-"`
-	Unit                    *string                                                `json:"unit,omitempty" url:"-"`
-	VatClassifierCode       *string                                                `json:"vatClassifierCode,omitempty" url:"-"`
-	VatRatePercent          *string                                                `json:"vatRatePercent,omitempty" url:"-"`
-	SalePriceExclVat        *string                                                `json:"salePriceExclVat,omitempty" url:"-"`
-	PurchasePriceExclVat    *string                                                `json:"purchasePriceExclVat,omitempty" url:"-"`
-	CnCode                  *string                                                `json:"cnCode,omitempty" url:"-"`
+	ID       string                             `json:"id" url:"-"`
+	Type     *ItemsUpdateCatalogRequestType     `json:"type,omitempty" url:"-"`
+	Tracking *ItemsUpdateCatalogRequestTracking `json:"tracking,omitempty" url:"-"`
+	Name     *string                            `json:"name,omitempty" url:"-"`
+	Code     *string                            `json:"code,omitempty" url:"-"`
+	Barcode  *string                            `json:"barcode,omitempty" url:"-"`
+	// Unit of measure; without it `vnt` for a Lithuanian company and `pcs` for any other
+	Unit                 *string `json:"unit,omitempty" url:"-"`
+	VatClassifierCode    *string `json:"vatClassifierCode,omitempty" url:"-"`
+	VatRatePercent       *string `json:"vatRatePercent,omitempty" url:"-"`
+	SalePriceExclVat     *string `json:"salePriceExclVat,omitempty" url:"-"`
+	PurchasePriceExclVat *string `json:"purchasePriceExclVat,omitempty" url:"-"`
+	CnCode               *string `json:"cnCode,omitempty" url:"-"`
+	// CPA code of a service, six digits without dots (62.01.11 is 620111); the Italian Intrastat list of services needs it
+	CpaCode                 *string                                                `json:"cpaCode,omitempty" url:"-"`
 	OriginCountry           *string                                                `json:"originCountry,omitempty" url:"-"`
 	NetMassKg               *string                                                `json:"netMassKg,omitempty" url:"-"`
 	SupplementaryUnit       *string                                                `json:"supplementaryUnit,omitempty" url:"-"`
@@ -1791,6 +1806,13 @@ func (i *ItemsUpdateCatalogRequest) SetPurchasePriceExclVat(purchasePriceExclVat
 func (i *ItemsUpdateCatalogRequest) SetCnCode(cnCode *string) {
 	i.CnCode = cnCode
 	i.require(itemsUpdateCatalogRequestFieldCnCode)
+}
+
+// SetCpaCode sets the CpaCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogRequest) SetCpaCode(cpaCode *string) {
+	i.CpaCode = cpaCode
+	i.require(itemsUpdateCatalogRequestFieldCpaCode)
 }
 
 // SetOriginCountry sets the OriginCountry field and marks it as non-optional;
@@ -3306,46 +3328,47 @@ var (
 	itemsCreateCatalogResponseFieldSalePriceExclVat        = big.NewInt(1 << 9)
 	itemsCreateCatalogResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
 	itemsCreateCatalogResponseFieldCnCode                  = big.NewInt(1 << 11)
-	itemsCreateCatalogResponseFieldOriginCountry           = big.NewInt(1 << 12)
-	itemsCreateCatalogResponseFieldNetMassKg               = big.NewInt(1 << 13)
-	itemsCreateCatalogResponseFieldSupplementaryUnit       = big.NewInt(1 << 14)
-	itemsCreateCatalogResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
-	itemsCreateCatalogResponseFieldDescription             = big.NewInt(1 << 16)
-	itemsCreateCatalogResponseFieldGroupID                 = big.NewInt(1 << 17)
-	itemsCreateCatalogResponseFieldAttributes              = big.NewInt(1 << 18)
-	itemsCreateCatalogResponseFieldDocumentRef             = big.NewInt(1 << 19)
-	itemsCreateCatalogResponseFieldTranslations            = big.NewInt(1 << 20)
-	itemsCreateCatalogResponseFieldComponents              = big.NewInt(1 << 21)
-	itemsCreateCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 22)
-	itemsCreateCatalogResponseFieldKindID                  = big.NewInt(1 << 23)
-	itemsCreateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 24)
-	itemsCreateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 25)
-	itemsCreateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 26)
-	itemsCreateCatalogResponseFieldManufacturer            = big.NewInt(1 << 27)
-	itemsCreateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 28)
-	itemsCreateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 29)
-	itemsCreateCatalogResponseFieldCostPrice               = big.NewInt(1 << 30)
-	itemsCreateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 31)
-	itemsCreateCatalogResponseFieldExternalID              = big.NewInt(1 << 32)
-	itemsCreateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 33)
-	itemsCreateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 34)
-	itemsCreateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 35)
-	itemsCreateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 36)
-	itemsCreateCatalogResponseFieldMinPrice                = big.NewInt(1 << 37)
-	itemsCreateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 38)
-	itemsCreateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 39)
-	itemsCreateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 40)
-	itemsCreateCatalogResponseFieldDepartment              = big.NewInt(1 << 41)
-	itemsCreateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 42)
-	itemsCreateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 43)
-	itemsCreateCatalogResponseFieldTaraCode                = big.NewInt(1 << 44)
-	itemsCreateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 45)
-	itemsCreateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 46)
-	itemsCreateCatalogResponseFieldValidFrom               = big.NewInt(1 << 47)
-	itemsCreateCatalogResponseFieldValidTo                 = big.NewInt(1 << 48)
-	itemsCreateCatalogResponseFieldPosFlags                = big.NewInt(1 << 49)
-	itemsCreateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 50)
-	itemsCreateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 51)
+	itemsCreateCatalogResponseFieldCpaCode                 = big.NewInt(1 << 12)
+	itemsCreateCatalogResponseFieldOriginCountry           = big.NewInt(1 << 13)
+	itemsCreateCatalogResponseFieldNetMassKg               = big.NewInt(1 << 14)
+	itemsCreateCatalogResponseFieldSupplementaryUnit       = big.NewInt(1 << 15)
+	itemsCreateCatalogResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 16)
+	itemsCreateCatalogResponseFieldDescription             = big.NewInt(1 << 17)
+	itemsCreateCatalogResponseFieldGroupID                 = big.NewInt(1 << 18)
+	itemsCreateCatalogResponseFieldAttributes              = big.NewInt(1 << 19)
+	itemsCreateCatalogResponseFieldDocumentRef             = big.NewInt(1 << 20)
+	itemsCreateCatalogResponseFieldTranslations            = big.NewInt(1 << 21)
+	itemsCreateCatalogResponseFieldComponents              = big.NewInt(1 << 22)
+	itemsCreateCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 23)
+	itemsCreateCatalogResponseFieldKindID                  = big.NewInt(1 << 24)
+	itemsCreateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 25)
+	itemsCreateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 26)
+	itemsCreateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 27)
+	itemsCreateCatalogResponseFieldManufacturer            = big.NewInt(1 << 28)
+	itemsCreateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 29)
+	itemsCreateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 30)
+	itemsCreateCatalogResponseFieldCostPrice               = big.NewInt(1 << 31)
+	itemsCreateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 32)
+	itemsCreateCatalogResponseFieldExternalID              = big.NewInt(1 << 33)
+	itemsCreateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 34)
+	itemsCreateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 35)
+	itemsCreateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 36)
+	itemsCreateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 37)
+	itemsCreateCatalogResponseFieldMinPrice                = big.NewInt(1 << 38)
+	itemsCreateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 39)
+	itemsCreateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 40)
+	itemsCreateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 41)
+	itemsCreateCatalogResponseFieldDepartment              = big.NewInt(1 << 42)
+	itemsCreateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 43)
+	itemsCreateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 44)
+	itemsCreateCatalogResponseFieldTaraCode                = big.NewInt(1 << 45)
+	itemsCreateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 46)
+	itemsCreateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 47)
+	itemsCreateCatalogResponseFieldValidFrom               = big.NewInt(1 << 48)
+	itemsCreateCatalogResponseFieldValidTo                 = big.NewInt(1 << 49)
+	itemsCreateCatalogResponseFieldPosFlags                = big.NewInt(1 << 50)
+	itemsCreateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 51)
+	itemsCreateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 52)
 )
 
 type ItemsCreateCatalogResponse struct {
@@ -3361,6 +3384,7 @@ type ItemsCreateCatalogResponse struct {
 	SalePriceExclVat        *string                                                 `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
 	PurchasePriceExclVat    *string                                                 `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
 	CnCode                  *string                                                 `json:"cnCode,omitempty" url:"cnCode,omitempty"`
+	CpaCode                 *string                                                 `json:"cpaCode,omitempty" url:"cpaCode,omitempty"`
 	OriginCountry           *string                                                 `json:"originCountry,omitempty" url:"originCountry,omitempty"`
 	NetMassKg               *string                                                 `json:"netMassKg,omitempty" url:"netMassKg,omitempty"`
 	SupplementaryUnit       *string                                                 `json:"supplementaryUnit,omitempty" url:"supplementaryUnit,omitempty"`
@@ -3491,6 +3515,13 @@ func (i *ItemsCreateCatalogResponse) GetCnCode() *string {
 		return nil
 	}
 	return i.CnCode
+}
+
+func (i *ItemsCreateCatalogResponse) GetCpaCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CpaCode
 }
 
 func (i *ItemsCreateCatalogResponse) GetOriginCountry() *string {
@@ -3869,6 +3900,13 @@ func (i *ItemsCreateCatalogResponse) SetPurchasePriceExclVat(purchasePriceExclVa
 func (i *ItemsCreateCatalogResponse) SetCnCode(cnCode *string) {
 	i.CnCode = cnCode
 	i.require(itemsCreateCatalogResponseFieldCnCode)
+}
+
+// SetCpaCode sets the CpaCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsCreateCatalogResponse) SetCpaCode(cpaCode *string) {
+	i.CpaCode = cpaCode
+	i.require(itemsCreateCatalogResponseFieldCpaCode)
 }
 
 // SetOriginCountry sets the OriginCountry field and marks it as non-optional;
@@ -5040,46 +5078,47 @@ var (
 	itemsGetCatalogResponseFieldSalePriceExclVat        = big.NewInt(1 << 9)
 	itemsGetCatalogResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
 	itemsGetCatalogResponseFieldCnCode                  = big.NewInt(1 << 11)
-	itemsGetCatalogResponseFieldOriginCountry           = big.NewInt(1 << 12)
-	itemsGetCatalogResponseFieldNetMassKg               = big.NewInt(1 << 13)
-	itemsGetCatalogResponseFieldSupplementaryUnit       = big.NewInt(1 << 14)
-	itemsGetCatalogResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
-	itemsGetCatalogResponseFieldDescription             = big.NewInt(1 << 16)
-	itemsGetCatalogResponseFieldGroupID                 = big.NewInt(1 << 17)
-	itemsGetCatalogResponseFieldAttributes              = big.NewInt(1 << 18)
-	itemsGetCatalogResponseFieldDocumentRef             = big.NewInt(1 << 19)
-	itemsGetCatalogResponseFieldTranslations            = big.NewInt(1 << 20)
-	itemsGetCatalogResponseFieldComponents              = big.NewInt(1 << 21)
-	itemsGetCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 22)
-	itemsGetCatalogResponseFieldKindID                  = big.NewInt(1 << 23)
-	itemsGetCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 24)
-	itemsGetCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 25)
-	itemsGetCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 26)
-	itemsGetCatalogResponseFieldManufacturer            = big.NewInt(1 << 27)
-	itemsGetCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 28)
-	itemsGetCatalogResponseFieldMinQuantity             = big.NewInt(1 << 29)
-	itemsGetCatalogResponseFieldCostPrice               = big.NewInt(1 << 30)
-	itemsGetCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 31)
-	itemsGetCatalogResponseFieldExternalID              = big.NewInt(1 << 32)
-	itemsGetCatalogResponseFieldIsReturnable            = big.NewInt(1 << 33)
-	itemsGetCatalogResponseFieldCommentRequired         = big.NewInt(1 << 34)
-	itemsGetCatalogResponseFieldPriceFrom               = big.NewInt(1 << 35)
-	itemsGetCatalogResponseFieldPriceTo                 = big.NewInt(1 << 36)
-	itemsGetCatalogResponseFieldMinPrice                = big.NewInt(1 << 37)
-	itemsGetCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 38)
-	itemsGetCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 39)
-	itemsGetCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 40)
-	itemsGetCatalogResponseFieldDepartment              = big.NewInt(1 << 41)
-	itemsGetCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 42)
-	itemsGetCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 43)
-	itemsGetCatalogResponseFieldTaraCode                = big.NewInt(1 << 44)
-	itemsGetCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 45)
-	itemsGetCatalogResponseFieldCertificateDate         = big.NewInt(1 << 46)
-	itemsGetCatalogResponseFieldValidFrom               = big.NewInt(1 << 47)
-	itemsGetCatalogResponseFieldValidTo                 = big.NewInt(1 << 48)
-	itemsGetCatalogResponseFieldPosFlags                = big.NewInt(1 << 49)
-	itemsGetCatalogResponseFieldCreatedAt               = big.NewInt(1 << 50)
-	itemsGetCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 51)
+	itemsGetCatalogResponseFieldCpaCode                 = big.NewInt(1 << 12)
+	itemsGetCatalogResponseFieldOriginCountry           = big.NewInt(1 << 13)
+	itemsGetCatalogResponseFieldNetMassKg               = big.NewInt(1 << 14)
+	itemsGetCatalogResponseFieldSupplementaryUnit       = big.NewInt(1 << 15)
+	itemsGetCatalogResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 16)
+	itemsGetCatalogResponseFieldDescription             = big.NewInt(1 << 17)
+	itemsGetCatalogResponseFieldGroupID                 = big.NewInt(1 << 18)
+	itemsGetCatalogResponseFieldAttributes              = big.NewInt(1 << 19)
+	itemsGetCatalogResponseFieldDocumentRef             = big.NewInt(1 << 20)
+	itemsGetCatalogResponseFieldTranslations            = big.NewInt(1 << 21)
+	itemsGetCatalogResponseFieldComponents              = big.NewInt(1 << 22)
+	itemsGetCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 23)
+	itemsGetCatalogResponseFieldKindID                  = big.NewInt(1 << 24)
+	itemsGetCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 25)
+	itemsGetCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 26)
+	itemsGetCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 27)
+	itemsGetCatalogResponseFieldManufacturer            = big.NewInt(1 << 28)
+	itemsGetCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 29)
+	itemsGetCatalogResponseFieldMinQuantity             = big.NewInt(1 << 30)
+	itemsGetCatalogResponseFieldCostPrice               = big.NewInt(1 << 31)
+	itemsGetCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 32)
+	itemsGetCatalogResponseFieldExternalID              = big.NewInt(1 << 33)
+	itemsGetCatalogResponseFieldIsReturnable            = big.NewInt(1 << 34)
+	itemsGetCatalogResponseFieldCommentRequired         = big.NewInt(1 << 35)
+	itemsGetCatalogResponseFieldPriceFrom               = big.NewInt(1 << 36)
+	itemsGetCatalogResponseFieldPriceTo                 = big.NewInt(1 << 37)
+	itemsGetCatalogResponseFieldMinPrice                = big.NewInt(1 << 38)
+	itemsGetCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 39)
+	itemsGetCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 40)
+	itemsGetCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 41)
+	itemsGetCatalogResponseFieldDepartment              = big.NewInt(1 << 42)
+	itemsGetCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 43)
+	itemsGetCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 44)
+	itemsGetCatalogResponseFieldTaraCode                = big.NewInt(1 << 45)
+	itemsGetCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 46)
+	itemsGetCatalogResponseFieldCertificateDate         = big.NewInt(1 << 47)
+	itemsGetCatalogResponseFieldValidFrom               = big.NewInt(1 << 48)
+	itemsGetCatalogResponseFieldValidTo                 = big.NewInt(1 << 49)
+	itemsGetCatalogResponseFieldPosFlags                = big.NewInt(1 << 50)
+	itemsGetCatalogResponseFieldCreatedAt               = big.NewInt(1 << 51)
+	itemsGetCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 52)
 )
 
 type ItemsGetCatalogResponse struct {
@@ -5095,6 +5134,7 @@ type ItemsGetCatalogResponse struct {
 	SalePriceExclVat        *string                                              `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
 	PurchasePriceExclVat    *string                                              `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
 	CnCode                  *string                                              `json:"cnCode,omitempty" url:"cnCode,omitempty"`
+	CpaCode                 *string                                              `json:"cpaCode,omitempty" url:"cpaCode,omitempty"`
 	OriginCountry           *string                                              `json:"originCountry,omitempty" url:"originCountry,omitempty"`
 	NetMassKg               *string                                              `json:"netMassKg,omitempty" url:"netMassKg,omitempty"`
 	SupplementaryUnit       *string                                              `json:"supplementaryUnit,omitempty" url:"supplementaryUnit,omitempty"`
@@ -5225,6 +5265,13 @@ func (i *ItemsGetCatalogResponse) GetCnCode() *string {
 		return nil
 	}
 	return i.CnCode
+}
+
+func (i *ItemsGetCatalogResponse) GetCpaCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CpaCode
 }
 
 func (i *ItemsGetCatalogResponse) GetOriginCountry() *string {
@@ -5603,6 +5650,13 @@ func (i *ItemsGetCatalogResponse) SetPurchasePriceExclVat(purchasePriceExclVat *
 func (i *ItemsGetCatalogResponse) SetCnCode(cnCode *string) {
 	i.CnCode = cnCode
 	i.require(itemsGetCatalogResponseFieldCnCode)
+}
+
+// SetCpaCode sets the CpaCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsGetCatalogResponse) SetCpaCode(cpaCode *string) {
+	i.CpaCode = cpaCode
+	i.require(itemsGetCatalogResponseFieldCpaCode)
 }
 
 // SetOriginCountry sets the OriginCountry field and marks it as non-optional;
@@ -7861,46 +7915,47 @@ var (
 	itemsListCatalogResponseRowsItemFieldSalePriceExclVat        = big.NewInt(1 << 9)
 	itemsListCatalogResponseRowsItemFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
 	itemsListCatalogResponseRowsItemFieldCnCode                  = big.NewInt(1 << 11)
-	itemsListCatalogResponseRowsItemFieldOriginCountry           = big.NewInt(1 << 12)
-	itemsListCatalogResponseRowsItemFieldNetMassKg               = big.NewInt(1 << 13)
-	itemsListCatalogResponseRowsItemFieldSupplementaryUnit       = big.NewInt(1 << 14)
-	itemsListCatalogResponseRowsItemFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
-	itemsListCatalogResponseRowsItemFieldDescription             = big.NewInt(1 << 16)
-	itemsListCatalogResponseRowsItemFieldGroupID                 = big.NewInt(1 << 17)
-	itemsListCatalogResponseRowsItemFieldAttributes              = big.NewInt(1 << 18)
-	itemsListCatalogResponseRowsItemFieldDocumentRef             = big.NewInt(1 << 19)
-	itemsListCatalogResponseRowsItemFieldTranslations            = big.NewInt(1 << 20)
-	itemsListCatalogResponseRowsItemFieldComponents              = big.NewInt(1 << 21)
-	itemsListCatalogResponseRowsItemFieldAlternativeUnits        = big.NewInt(1 << 22)
-	itemsListCatalogResponseRowsItemFieldKindID                  = big.NewInt(1 << 23)
-	itemsListCatalogResponseRowsItemFieldSaleAccountCode         = big.NewInt(1 << 24)
-	itemsListCatalogResponseRowsItemFieldPurchaseAccountCode     = big.NewInt(1 << 25)
-	itemsListCatalogResponseRowsItemFieldExpenseAccountCode      = big.NewInt(1 << 26)
-	itemsListCatalogResponseRowsItemFieldManufacturer            = big.NewInt(1 << 27)
-	itemsListCatalogResponseRowsItemFieldGrossMassKg             = big.NewInt(1 << 28)
-	itemsListCatalogResponseRowsItemFieldMinQuantity             = big.NewInt(1 << 29)
-	itemsListCatalogResponseRowsItemFieldCostPrice               = big.NewInt(1 << 30)
-	itemsListCatalogResponseRowsItemFieldIsFreePrice             = big.NewInt(1 << 31)
-	itemsListCatalogResponseRowsItemFieldExternalID              = big.NewInt(1 << 32)
-	itemsListCatalogResponseRowsItemFieldIsReturnable            = big.NewInt(1 << 33)
-	itemsListCatalogResponseRowsItemFieldCommentRequired         = big.NewInt(1 << 34)
-	itemsListCatalogResponseRowsItemFieldPriceFrom               = big.NewInt(1 << 35)
-	itemsListCatalogResponseRowsItemFieldPriceTo                 = big.NewInt(1 << 36)
-	itemsListCatalogResponseRowsItemFieldMinPrice                = big.NewInt(1 << 37)
-	itemsListCatalogResponseRowsItemFieldDiscountPercent         = big.NewInt(1 << 38)
-	itemsListCatalogResponseRowsItemFieldMaxDiscountPercent      = big.NewInt(1 << 39)
-	itemsListCatalogResponseRowsItemFieldLoyaltyPoints           = big.NewInt(1 << 40)
-	itemsListCatalogResponseRowsItemFieldDepartment              = big.NewInt(1 << 41)
-	itemsListCatalogResponseRowsItemFieldAgeRestriction          = big.NewInt(1 << 42)
-	itemsListCatalogResponseRowsItemFieldPackageQuantity         = big.NewInt(1 << 43)
-	itemsListCatalogResponseRowsItemFieldTaraCode                = big.NewInt(1 << 44)
-	itemsListCatalogResponseRowsItemFieldCertificateNumber       = big.NewInt(1 << 45)
-	itemsListCatalogResponseRowsItemFieldCertificateDate         = big.NewInt(1 << 46)
-	itemsListCatalogResponseRowsItemFieldValidFrom               = big.NewInt(1 << 47)
-	itemsListCatalogResponseRowsItemFieldValidTo                 = big.NewInt(1 << 48)
-	itemsListCatalogResponseRowsItemFieldPosFlags                = big.NewInt(1 << 49)
-	itemsListCatalogResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 50)
-	itemsListCatalogResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 51)
+	itemsListCatalogResponseRowsItemFieldCpaCode                 = big.NewInt(1 << 12)
+	itemsListCatalogResponseRowsItemFieldOriginCountry           = big.NewInt(1 << 13)
+	itemsListCatalogResponseRowsItemFieldNetMassKg               = big.NewInt(1 << 14)
+	itemsListCatalogResponseRowsItemFieldSupplementaryUnit       = big.NewInt(1 << 15)
+	itemsListCatalogResponseRowsItemFieldSupplementaryQtyPerUnit = big.NewInt(1 << 16)
+	itemsListCatalogResponseRowsItemFieldDescription             = big.NewInt(1 << 17)
+	itemsListCatalogResponseRowsItemFieldGroupID                 = big.NewInt(1 << 18)
+	itemsListCatalogResponseRowsItemFieldAttributes              = big.NewInt(1 << 19)
+	itemsListCatalogResponseRowsItemFieldDocumentRef             = big.NewInt(1 << 20)
+	itemsListCatalogResponseRowsItemFieldTranslations            = big.NewInt(1 << 21)
+	itemsListCatalogResponseRowsItemFieldComponents              = big.NewInt(1 << 22)
+	itemsListCatalogResponseRowsItemFieldAlternativeUnits        = big.NewInt(1 << 23)
+	itemsListCatalogResponseRowsItemFieldKindID                  = big.NewInt(1 << 24)
+	itemsListCatalogResponseRowsItemFieldSaleAccountCode         = big.NewInt(1 << 25)
+	itemsListCatalogResponseRowsItemFieldPurchaseAccountCode     = big.NewInt(1 << 26)
+	itemsListCatalogResponseRowsItemFieldExpenseAccountCode      = big.NewInt(1 << 27)
+	itemsListCatalogResponseRowsItemFieldManufacturer            = big.NewInt(1 << 28)
+	itemsListCatalogResponseRowsItemFieldGrossMassKg             = big.NewInt(1 << 29)
+	itemsListCatalogResponseRowsItemFieldMinQuantity             = big.NewInt(1 << 30)
+	itemsListCatalogResponseRowsItemFieldCostPrice               = big.NewInt(1 << 31)
+	itemsListCatalogResponseRowsItemFieldIsFreePrice             = big.NewInt(1 << 32)
+	itemsListCatalogResponseRowsItemFieldExternalID              = big.NewInt(1 << 33)
+	itemsListCatalogResponseRowsItemFieldIsReturnable            = big.NewInt(1 << 34)
+	itemsListCatalogResponseRowsItemFieldCommentRequired         = big.NewInt(1 << 35)
+	itemsListCatalogResponseRowsItemFieldPriceFrom               = big.NewInt(1 << 36)
+	itemsListCatalogResponseRowsItemFieldPriceTo                 = big.NewInt(1 << 37)
+	itemsListCatalogResponseRowsItemFieldMinPrice                = big.NewInt(1 << 38)
+	itemsListCatalogResponseRowsItemFieldDiscountPercent         = big.NewInt(1 << 39)
+	itemsListCatalogResponseRowsItemFieldMaxDiscountPercent      = big.NewInt(1 << 40)
+	itemsListCatalogResponseRowsItemFieldLoyaltyPoints           = big.NewInt(1 << 41)
+	itemsListCatalogResponseRowsItemFieldDepartment              = big.NewInt(1 << 42)
+	itemsListCatalogResponseRowsItemFieldAgeRestriction          = big.NewInt(1 << 43)
+	itemsListCatalogResponseRowsItemFieldPackageQuantity         = big.NewInt(1 << 44)
+	itemsListCatalogResponseRowsItemFieldTaraCode                = big.NewInt(1 << 45)
+	itemsListCatalogResponseRowsItemFieldCertificateNumber       = big.NewInt(1 << 46)
+	itemsListCatalogResponseRowsItemFieldCertificateDate         = big.NewInt(1 << 47)
+	itemsListCatalogResponseRowsItemFieldValidFrom               = big.NewInt(1 << 48)
+	itemsListCatalogResponseRowsItemFieldValidTo                 = big.NewInt(1 << 49)
+	itemsListCatalogResponseRowsItemFieldPosFlags                = big.NewInt(1 << 50)
+	itemsListCatalogResponseRowsItemFieldCreatedAt               = big.NewInt(1 << 51)
+	itemsListCatalogResponseRowsItemFieldUpdatedAt               = big.NewInt(1 << 52)
 )
 
 type ItemsListCatalogResponseRowsItem struct {
@@ -7916,6 +7971,7 @@ type ItemsListCatalogResponseRowsItem struct {
 	SalePriceExclVat        *string                                                       `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
 	PurchasePriceExclVat    *string                                                       `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
 	CnCode                  *string                                                       `json:"cnCode,omitempty" url:"cnCode,omitempty"`
+	CpaCode                 *string                                                       `json:"cpaCode,omitempty" url:"cpaCode,omitempty"`
 	OriginCountry           *string                                                       `json:"originCountry,omitempty" url:"originCountry,omitempty"`
 	NetMassKg               *string                                                       `json:"netMassKg,omitempty" url:"netMassKg,omitempty"`
 	SupplementaryUnit       *string                                                       `json:"supplementaryUnit,omitempty" url:"supplementaryUnit,omitempty"`
@@ -8046,6 +8102,13 @@ func (i *ItemsListCatalogResponseRowsItem) GetCnCode() *string {
 		return nil
 	}
 	return i.CnCode
+}
+
+func (i *ItemsListCatalogResponseRowsItem) GetCpaCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CpaCode
 }
 
 func (i *ItemsListCatalogResponseRowsItem) GetOriginCountry() *string {
@@ -8424,6 +8487,13 @@ func (i *ItemsListCatalogResponseRowsItem) SetPurchasePriceExclVat(purchasePrice
 func (i *ItemsListCatalogResponseRowsItem) SetCnCode(cnCode *string) {
 	i.CnCode = cnCode
 	i.require(itemsListCatalogResponseRowsItemFieldCnCode)
+}
+
+// SetCpaCode sets the CpaCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsListCatalogResponseRowsItem) SetCpaCode(cpaCode *string) {
+	i.CpaCode = cpaCode
+	i.require(itemsListCatalogResponseRowsItemFieldCpaCode)
 }
 
 // SetOriginCountry sets the OriginCountry field and marks it as non-optional;
@@ -10905,46 +10975,47 @@ var (
 	itemsUpdateCatalogResponseFieldSalePriceExclVat        = big.NewInt(1 << 9)
 	itemsUpdateCatalogResponseFieldPurchasePriceExclVat    = big.NewInt(1 << 10)
 	itemsUpdateCatalogResponseFieldCnCode                  = big.NewInt(1 << 11)
-	itemsUpdateCatalogResponseFieldOriginCountry           = big.NewInt(1 << 12)
-	itemsUpdateCatalogResponseFieldNetMassKg               = big.NewInt(1 << 13)
-	itemsUpdateCatalogResponseFieldSupplementaryUnit       = big.NewInt(1 << 14)
-	itemsUpdateCatalogResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 15)
-	itemsUpdateCatalogResponseFieldDescription             = big.NewInt(1 << 16)
-	itemsUpdateCatalogResponseFieldGroupID                 = big.NewInt(1 << 17)
-	itemsUpdateCatalogResponseFieldAttributes              = big.NewInt(1 << 18)
-	itemsUpdateCatalogResponseFieldDocumentRef             = big.NewInt(1 << 19)
-	itemsUpdateCatalogResponseFieldTranslations            = big.NewInt(1 << 20)
-	itemsUpdateCatalogResponseFieldComponents              = big.NewInt(1 << 21)
-	itemsUpdateCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 22)
-	itemsUpdateCatalogResponseFieldKindID                  = big.NewInt(1 << 23)
-	itemsUpdateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 24)
-	itemsUpdateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 25)
-	itemsUpdateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 26)
-	itemsUpdateCatalogResponseFieldManufacturer            = big.NewInt(1 << 27)
-	itemsUpdateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 28)
-	itemsUpdateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 29)
-	itemsUpdateCatalogResponseFieldCostPrice               = big.NewInt(1 << 30)
-	itemsUpdateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 31)
-	itemsUpdateCatalogResponseFieldExternalID              = big.NewInt(1 << 32)
-	itemsUpdateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 33)
-	itemsUpdateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 34)
-	itemsUpdateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 35)
-	itemsUpdateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 36)
-	itemsUpdateCatalogResponseFieldMinPrice                = big.NewInt(1 << 37)
-	itemsUpdateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 38)
-	itemsUpdateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 39)
-	itemsUpdateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 40)
-	itemsUpdateCatalogResponseFieldDepartment              = big.NewInt(1 << 41)
-	itemsUpdateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 42)
-	itemsUpdateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 43)
-	itemsUpdateCatalogResponseFieldTaraCode                = big.NewInt(1 << 44)
-	itemsUpdateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 45)
-	itemsUpdateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 46)
-	itemsUpdateCatalogResponseFieldValidFrom               = big.NewInt(1 << 47)
-	itemsUpdateCatalogResponseFieldValidTo                 = big.NewInt(1 << 48)
-	itemsUpdateCatalogResponseFieldPosFlags                = big.NewInt(1 << 49)
-	itemsUpdateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 50)
-	itemsUpdateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 51)
+	itemsUpdateCatalogResponseFieldCpaCode                 = big.NewInt(1 << 12)
+	itemsUpdateCatalogResponseFieldOriginCountry           = big.NewInt(1 << 13)
+	itemsUpdateCatalogResponseFieldNetMassKg               = big.NewInt(1 << 14)
+	itemsUpdateCatalogResponseFieldSupplementaryUnit       = big.NewInt(1 << 15)
+	itemsUpdateCatalogResponseFieldSupplementaryQtyPerUnit = big.NewInt(1 << 16)
+	itemsUpdateCatalogResponseFieldDescription             = big.NewInt(1 << 17)
+	itemsUpdateCatalogResponseFieldGroupID                 = big.NewInt(1 << 18)
+	itemsUpdateCatalogResponseFieldAttributes              = big.NewInt(1 << 19)
+	itemsUpdateCatalogResponseFieldDocumentRef             = big.NewInt(1 << 20)
+	itemsUpdateCatalogResponseFieldTranslations            = big.NewInt(1 << 21)
+	itemsUpdateCatalogResponseFieldComponents              = big.NewInt(1 << 22)
+	itemsUpdateCatalogResponseFieldAlternativeUnits        = big.NewInt(1 << 23)
+	itemsUpdateCatalogResponseFieldKindID                  = big.NewInt(1 << 24)
+	itemsUpdateCatalogResponseFieldSaleAccountCode         = big.NewInt(1 << 25)
+	itemsUpdateCatalogResponseFieldPurchaseAccountCode     = big.NewInt(1 << 26)
+	itemsUpdateCatalogResponseFieldExpenseAccountCode      = big.NewInt(1 << 27)
+	itemsUpdateCatalogResponseFieldManufacturer            = big.NewInt(1 << 28)
+	itemsUpdateCatalogResponseFieldGrossMassKg             = big.NewInt(1 << 29)
+	itemsUpdateCatalogResponseFieldMinQuantity             = big.NewInt(1 << 30)
+	itemsUpdateCatalogResponseFieldCostPrice               = big.NewInt(1 << 31)
+	itemsUpdateCatalogResponseFieldIsFreePrice             = big.NewInt(1 << 32)
+	itemsUpdateCatalogResponseFieldExternalID              = big.NewInt(1 << 33)
+	itemsUpdateCatalogResponseFieldIsReturnable            = big.NewInt(1 << 34)
+	itemsUpdateCatalogResponseFieldCommentRequired         = big.NewInt(1 << 35)
+	itemsUpdateCatalogResponseFieldPriceFrom               = big.NewInt(1 << 36)
+	itemsUpdateCatalogResponseFieldPriceTo                 = big.NewInt(1 << 37)
+	itemsUpdateCatalogResponseFieldMinPrice                = big.NewInt(1 << 38)
+	itemsUpdateCatalogResponseFieldDiscountPercent         = big.NewInt(1 << 39)
+	itemsUpdateCatalogResponseFieldMaxDiscountPercent      = big.NewInt(1 << 40)
+	itemsUpdateCatalogResponseFieldLoyaltyPoints           = big.NewInt(1 << 41)
+	itemsUpdateCatalogResponseFieldDepartment              = big.NewInt(1 << 42)
+	itemsUpdateCatalogResponseFieldAgeRestriction          = big.NewInt(1 << 43)
+	itemsUpdateCatalogResponseFieldPackageQuantity         = big.NewInt(1 << 44)
+	itemsUpdateCatalogResponseFieldTaraCode                = big.NewInt(1 << 45)
+	itemsUpdateCatalogResponseFieldCertificateNumber       = big.NewInt(1 << 46)
+	itemsUpdateCatalogResponseFieldCertificateDate         = big.NewInt(1 << 47)
+	itemsUpdateCatalogResponseFieldValidFrom               = big.NewInt(1 << 48)
+	itemsUpdateCatalogResponseFieldValidTo                 = big.NewInt(1 << 49)
+	itemsUpdateCatalogResponseFieldPosFlags                = big.NewInt(1 << 50)
+	itemsUpdateCatalogResponseFieldCreatedAt               = big.NewInt(1 << 51)
+	itemsUpdateCatalogResponseFieldUpdatedAt               = big.NewInt(1 << 52)
 )
 
 type ItemsUpdateCatalogResponse struct {
@@ -10960,6 +11031,7 @@ type ItemsUpdateCatalogResponse struct {
 	SalePriceExclVat        *string                                                 `json:"salePriceExclVat,omitempty" url:"salePriceExclVat,omitempty"`
 	PurchasePriceExclVat    *string                                                 `json:"purchasePriceExclVat,omitempty" url:"purchasePriceExclVat,omitempty"`
 	CnCode                  *string                                                 `json:"cnCode,omitempty" url:"cnCode,omitempty"`
+	CpaCode                 *string                                                 `json:"cpaCode,omitempty" url:"cpaCode,omitempty"`
 	OriginCountry           *string                                                 `json:"originCountry,omitempty" url:"originCountry,omitempty"`
 	NetMassKg               *string                                                 `json:"netMassKg,omitempty" url:"netMassKg,omitempty"`
 	SupplementaryUnit       *string                                                 `json:"supplementaryUnit,omitempty" url:"supplementaryUnit,omitempty"`
@@ -11090,6 +11162,13 @@ func (i *ItemsUpdateCatalogResponse) GetCnCode() *string {
 		return nil
 	}
 	return i.CnCode
+}
+
+func (i *ItemsUpdateCatalogResponse) GetCpaCode() *string {
+	if i == nil {
+		return nil
+	}
+	return i.CpaCode
 }
 
 func (i *ItemsUpdateCatalogResponse) GetOriginCountry() *string {
@@ -11468,6 +11547,13 @@ func (i *ItemsUpdateCatalogResponse) SetPurchasePriceExclVat(purchasePriceExclVa
 func (i *ItemsUpdateCatalogResponse) SetCnCode(cnCode *string) {
 	i.CnCode = cnCode
 	i.require(itemsUpdateCatalogResponseFieldCnCode)
+}
+
+// SetCpaCode sets the CpaCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItemsUpdateCatalogResponse) SetCpaCode(cpaCode *string) {
+	i.CpaCode = cpaCode
+	i.require(itemsUpdateCatalogResponseFieldCpaCode)
 }
 
 // SetOriginCountry sets the OriginCountry field and marks it as non-optional;

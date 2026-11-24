@@ -85,7 +85,7 @@ func (c *Client) PositionsList(
 	return response.Body, nil
 }
 
-// Creates an employee record. `payrollOptions` holds the country-specific settings the payroll engine reads for the person (see `hr/employees/fields`); `applyAllowance` defaults to true and `pensionAccumulation` to false. An `iban` whose check digits fail (ISO 13616), a `birthDate` in the future or before 1900, and a `personalCode` that is not a valid OIB (Croatia) or DNI/NIE (Spain) are refused with 422.
+// Creates an employee record. `payrollOptions` holds the country-specific settings the payroll engine reads for the person (see `hr/employees/fields`); `applyAllowance` defaults to true and `pensionAccumulation` to false, except in a Croatian company, where an employee with a `birthDate` who is under 40 on the `hireDate` (today without one) is in pension pillar II by default (Zakon o obveznim mirovinskim fondovima čl. 90 st. 1). An `iban` whose check digits fail (ISO 13616), a `birthDate` in the future or before 1900, and a `personalCode` that is not a valid OIB (Croatia) or DNI/NIE (Spain) are refused with 422.
 func (c *Client) EmployeesCreate(
 	ctx context.Context,
 	request *nordlet.EmployeesCreateHrRequest,
@@ -544,7 +544,7 @@ func (c *Client) EmployeesAttachmentsList(
 	return response.Body, nil
 }
 
-// Builds the timesheet of the month for every employee with a contract in it, or for one employee with `employeeId`, replacing any existing timesheet: the Monday to Friday days within the contract get the contract's daily hours (its weekly hours over five), and for a Lithuanian company the public holidays are `holiday` days with 0 hours. Answers 422 when no contract covers the month.
+// Builds the timesheet of the month for every employee with a contract in it, or for one employee with `employeeId`, replacing any existing timesheet: the Monday to Friday days within the contract get the contract's daily hours (its weekly hours over five), and the public holidays of the company's country (of its region, from the address `subdivision`, where they differ) are `holiday` days with 0 hours. Answers 422 when no contract covers the month.
 func (c *Client) TimesheetsGenerate(
 	ctx context.Context,
 	request *nordlet.TimesheetsGenerateHrRequest,

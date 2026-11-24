@@ -237,6 +237,7 @@ const (
 	ErrorResponseErrorCodeIdempotencyInProgress ErrorResponseErrorCode = "idempotency_in_progress"
 	ErrorResponseErrorCodeRateLimited           ErrorResponseErrorCode = "rate_limited"
 	ErrorResponseErrorCodePaymentRequired       ErrorResponseErrorCode = "payment_required"
+	ErrorResponseErrorCodeConfirmationRequired  ErrorResponseErrorCode = "confirmation_required"
 	ErrorResponseErrorCodeInternal              ErrorResponseErrorCode = "internal"
 )
 
@@ -260,6 +261,8 @@ func NewErrorResponseErrorCodeFromString(s string) (ErrorResponseErrorCode, erro
 		return ErrorResponseErrorCodeRateLimited, nil
 	case "payment_required":
 		return ErrorResponseErrorCodePaymentRequired, nil
+	case "confirmation_required":
+		return ErrorResponseErrorCodeConfirmationRequired, nil
 	case "internal":
 		return ErrorResponseErrorCodeInternal, nil
 	}

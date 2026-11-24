@@ -1264,6 +1264,65 @@ func (p *PosSalesReportsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	saftNoReportsRequestFieldFromDate = big.NewInt(1 << 0)
+	saftNoReportsRequestFieldToDate   = big.NewInt(1 << 1)
+)
+
+type SaftNoReportsRequest struct {
+	FromDate time.Time `json:"fromDate" url:"-" format:"date"`
+	ToDate   time.Time `json:"toDate" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SaftNoReportsRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsRequest) SetFromDate(fromDate time.Time) {
+	s.FromDate = fromDate
+	s.require(saftNoReportsRequestFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsRequest) SetToDate(toDate time.Time) {
+	s.ToDate = toDate
+	s.require(saftNoReportsRequestFieldToDate)
+}
+
+func (s *SaftNoReportsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SaftNoReportsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SaftNoReportsRequest(body)
+	return nil
+}
+
+func (s *SaftNoReportsRequest) MarshalJSON() ([]byte, error) {
+	type embed SaftNoReportsRequest
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*s),
+		FromDate: internal.NewDate(s.FromDate),
+		ToDate:   internal.NewDate(s.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	sieReportsRequestFieldFromDate            = big.NewInt(1 << 0)
 	sieReportsRequestFieldToDate              = big.NewInt(1 << 1)
 	sieReportsRequestFieldIncludeTransactions = big.NewInt(1 << 2)
@@ -11330,15 +11389,18 @@ func (p *PeriodChecklistReportsResponseItemsItem) String() string {
 type PeriodChecklistReportsResponseItemsItemCode string
 
 const (
-	PeriodChecklistReportsResponseItemsItemCodeDraftSaleDocuments            PeriodChecklistReportsResponseItemsItemCode = "draft_sale_documents"
-	PeriodChecklistReportsResponseItemsItemCodeDraftPurchaseDocuments        PeriodChecklistReportsResponseItemsItemCode = "draft_purchase_documents"
-	PeriodChecklistReportsResponseItemsItemCodeUnbookedBankLines             PeriodChecklistReportsResponseItemsItemCode = "unbooked_bank_lines"
-	PeriodChecklistReportsResponseItemsItemCodeDepreciationNotPosted         PeriodChecklistReportsResponseItemsItemCode = "depreciation_not_posted"
-	PeriodChecklistReportsResponseItemsItemCodeDeferralsNotPosted            PeriodChecklistReportsResponseItemsItemCode = "deferrals_not_posted"
-	PeriodChecklistReportsResponseItemsItemCodeRecurringInvoicesNotGenerated PeriodChecklistReportsResponseItemsItemCode = "recurring_invoices_not_generated"
-	PeriodChecklistReportsResponseItemsItemCodePayrollRunsNotApproved        PeriodChecklistReportsResponseItemsItemCode = "payroll_runs_not_approved"
-	PeriodChecklistReportsResponseItemsItemCodeOpenFxReceivables             PeriodChecklistReportsResponseItemsItemCode = "open_fx_receivables"
-	PeriodChecklistReportsResponseItemsItemCodeOpenFxPayables                PeriodChecklistReportsResponseItemsItemCode = "open_fx_payables"
+	PeriodChecklistReportsResponseItemsItemCodeDraftSaleDocuments             PeriodChecklistReportsResponseItemsItemCode = "draft_sale_documents"
+	PeriodChecklistReportsResponseItemsItemCodeDraftPurchaseDocuments         PeriodChecklistReportsResponseItemsItemCode = "draft_purchase_documents"
+	PeriodChecklistReportsResponseItemsItemCodeUnbookedBankLines              PeriodChecklistReportsResponseItemsItemCode = "unbooked_bank_lines"
+	PeriodChecklistReportsResponseItemsItemCodeDepreciationNotPosted          PeriodChecklistReportsResponseItemsItemCode = "depreciation_not_posted"
+	PeriodChecklistReportsResponseItemsItemCodeDeferralsNotPosted             PeriodChecklistReportsResponseItemsItemCode = "deferrals_not_posted"
+	PeriodChecklistReportsResponseItemsItemCodeRecurringInvoicesNotGenerated  PeriodChecklistReportsResponseItemsItemCode = "recurring_invoices_not_generated"
+	PeriodChecklistReportsResponseItemsItemCodePayrollRunsNotApproved         PeriodChecklistReportsResponseItemsItemCode = "payroll_runs_not_approved"
+	PeriodChecklistReportsResponseItemsItemCodeOpenFxReceivables              PeriodChecklistReportsResponseItemsItemCode = "open_fx_receivables"
+	PeriodChecklistReportsResponseItemsItemCodeOpenFxPayables                 PeriodChecklistReportsResponseItemsItemCode = "open_fx_payables"
+	PeriodChecklistReportsResponseItemsItemCodeBankLedgerDiffersFromStatement PeriodChecklistReportsResponseItemsItemCode = "bank_ledger_differs_from_statement"
+	PeriodChecklistReportsResponseItemsItemCodeVatOutsideReturns              PeriodChecklistReportsResponseItemsItemCode = "vat_outside_returns"
+	PeriodChecklistReportsResponseItemsItemCodeFilingSettingsMissing          PeriodChecklistReportsResponseItemsItemCode = "filing_settings_missing"
 )
 
 func NewPeriodChecklistReportsResponseItemsItemCodeFromString(s string) (PeriodChecklistReportsResponseItemsItemCode, error) {
@@ -11361,6 +11423,12 @@ func NewPeriodChecklistReportsResponseItemsItemCodeFromString(s string) (PeriodC
 		return PeriodChecklistReportsResponseItemsItemCodeOpenFxReceivables, nil
 	case "open_fx_payables":
 		return PeriodChecklistReportsResponseItemsItemCodeOpenFxPayables, nil
+	case "bank_ledger_differs_from_statement":
+		return PeriodChecklistReportsResponseItemsItemCodeBankLedgerDiffersFromStatement, nil
+	case "vat_outside_returns":
+		return PeriodChecklistReportsResponseItemsItemCodeVatOutsideReturns, nil
+	case "filing_settings_missing":
+		return PeriodChecklistReportsResponseItemsItemCodeFilingSettingsMissing, nil
 	}
 	var t PeriodChecklistReportsResponseItemsItemCode
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -12031,6 +12099,170 @@ func (p *PosSalesReportsResponseTotals) String() string {
 }
 
 var (
+	saftNoReportsResponseFieldFileName    = big.NewInt(1 << 0)
+	saftNoReportsResponseFieldContentType = big.NewInt(1 << 1)
+	saftNoReportsResponseFieldData        = big.NewInt(1 << 2)
+	saftNoReportsResponseFieldVersion     = big.NewInt(1 << 3)
+	saftNoReportsResponseFieldSource      = big.NewInt(1 << 4)
+	saftNoReportsResponseFieldWarnings    = big.NewInt(1 << 5)
+)
+
+type SaftNoReportsResponse struct {
+	FileName    string   `json:"fileName" url:"fileName"`
+	ContentType string   `json:"contentType" url:"contentType"`
+	Data        string   `json:"data" url:"data"`
+	Version     string   `json:"version" url:"version"`
+	Source      string   `json:"source" url:"source"`
+	Warnings    []string `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (s *SaftNoReportsResponse) GetFileName() string {
+	if s == nil {
+		return ""
+	}
+	return s.FileName
+}
+
+func (s *SaftNoReportsResponse) GetContentType() string {
+	if s == nil {
+		return ""
+	}
+	return s.ContentType
+}
+
+func (s *SaftNoReportsResponse) GetData() string {
+	if s == nil {
+		return ""
+	}
+	return s.Data
+}
+
+func (s *SaftNoReportsResponse) GetVersion() string {
+	if s == nil {
+		return ""
+	}
+	return s.Version
+}
+
+func (s *SaftNoReportsResponse) GetSource() string {
+	if s == nil {
+		return ""
+	}
+	return s.Source
+}
+
+func (s *SaftNoReportsResponse) GetWarnings() []string {
+	if s == nil {
+		return nil
+	}
+	return s.Warnings
+}
+
+func (s *SaftNoReportsResponse) GetExtraProperties() map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	return s.extraProperties
+}
+
+func (s *SaftNoReportsResponse) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsResponse) SetFileName(fileName string) {
+	s.FileName = fileName
+	s.require(saftNoReportsResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsResponse) SetContentType(contentType string) {
+	s.ContentType = contentType
+	s.require(saftNoReportsResponseFieldContentType)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsResponse) SetData(data string) {
+	s.Data = data
+	s.require(saftNoReportsResponseFieldData)
+}
+
+// SetVersion sets the Version field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsResponse) SetVersion(version string) {
+	s.Version = version
+	s.require(saftNoReportsResponseFieldVersion)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsResponse) SetSource(source string) {
+	s.Source = source
+	s.require(saftNoReportsResponseFieldSource)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SaftNoReportsResponse) SetWarnings(warnings []string) {
+	s.Warnings = warnings
+	s.require(saftNoReportsResponseFieldWarnings)
+}
+
+func (s *SaftNoReportsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler SaftNoReportsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*s = SaftNoReportsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *s)
+	if err != nil {
+		return err
+	}
+	s.extraProperties = extraProperties
+	s.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (s *SaftNoReportsResponse) MarshalJSON() ([]byte, error) {
+	type embed SaftNoReportsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (s *SaftNoReportsResponse) String() string {
+	if s == nil {
+		return "<nil>"
+	}
+	if len(s.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(s.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(s); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", s)
+}
+
+var (
 	sieReportsResponseFieldFileName    = big.NewInt(1 << 0)
 	sieReportsResponseFieldContentType = big.NewInt(1 << 1)
 	sieReportsResponseFieldData        = big.NewInt(1 << 2)
@@ -12230,13 +12462,15 @@ var (
 	sizeCategoryReportsResponseFieldYear       = big.NewInt(1 << 0)
 	sizeCategoryReportsResponseFieldCriteria   = big.NewInt(1 << 1)
 	sizeCategoryReportsResponseFieldCategory   = big.NewInt(1 << 2)
-	sizeCategoryReportsResponseFieldThresholds = big.NewInt(1 << 3)
+	sizeCategoryReportsResponseFieldCurrency   = big.NewInt(1 << 3)
+	sizeCategoryReportsResponseFieldThresholds = big.NewInt(1 << 4)
 )
 
 type SizeCategoryReportsResponse struct {
 	Year       int64                                                  `json:"year" url:"year"`
 	Criteria   *SizeCategoryReportsResponseCriteria                   `json:"criteria" url:"criteria"`
 	Category   SizeCategoryReportsResponseCategory                    `json:"category" url:"category"`
+	Currency   string                                                 `json:"currency" url:"currency"`
 	Thresholds map[string]*SizeCategoryReportsResponseThresholdsValue `json:"thresholds" url:"thresholds"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -12265,6 +12499,13 @@ func (s *SizeCategoryReportsResponse) GetCategory() SizeCategoryReportsResponseC
 		return ""
 	}
 	return s.Category
+}
+
+func (s *SizeCategoryReportsResponse) GetCurrency() string {
+	if s == nil {
+		return ""
+	}
+	return s.Currency
 }
 
 func (s *SizeCategoryReportsResponse) GetThresholds() map[string]*SizeCategoryReportsResponseThresholdsValue {
@@ -12307,6 +12548,13 @@ func (s *SizeCategoryReportsResponse) SetCriteria(criteria *SizeCategoryReportsR
 func (s *SizeCategoryReportsResponse) SetCategory(category SizeCategoryReportsResponseCategory) {
 	s.Category = category
 	s.require(sizeCategoryReportsResponseFieldCategory)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SizeCategoryReportsResponse) SetCurrency(currency string) {
+	s.Currency = currency
+	s.require(sizeCategoryReportsResponseFieldCurrency)
 }
 
 // SetThresholds sets the Thresholds field and marks it as non-optional;
@@ -14349,6 +14597,673 @@ func (t *TrialBalanceReportsResponseTotals) String() string {
 	return fmt.Sprintf("%#v", t)
 }
 
+var (
+	vatAccountsReportsResponseFieldFromDate  = big.NewInt(1 << 0)
+	vatAccountsReportsResponseFieldToDate    = big.NewInt(1 << 1)
+	vatAccountsReportsResponseFieldAccounts  = big.NewInt(1 << 2)
+	vatAccountsReportsResponseFieldDocuments = big.NewInt(1 << 3)
+	vatAccountsReportsResponseFieldWarnings  = big.NewInt(1 << 4)
+)
+
+type VatAccountsReportsResponse struct {
+	FromDate  time.Time                                 `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate    time.Time                                 `json:"toDate" url:"toDate" format:"date"`
+	Accounts  []*VatAccountsReportsResponseAccountsItem `json:"accounts" url:"accounts"`
+	Documents *VatAccountsReportsResponseDocuments      `json:"documents" url:"documents"`
+	Warnings  []string                                  `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatAccountsReportsResponse) GetFromDate() time.Time {
+	if v == nil {
+		return time.Time{}
+	}
+	return v.FromDate
+}
+
+func (v *VatAccountsReportsResponse) GetToDate() time.Time {
+	if v == nil {
+		return time.Time{}
+	}
+	return v.ToDate
+}
+
+func (v *VatAccountsReportsResponse) GetAccounts() []*VatAccountsReportsResponseAccountsItem {
+	if v == nil {
+		return nil
+	}
+	return v.Accounts
+}
+
+func (v *VatAccountsReportsResponse) GetDocuments() *VatAccountsReportsResponseDocuments {
+	if v == nil {
+		return nil
+	}
+	return v.Documents
+}
+
+func (v *VatAccountsReportsResponse) GetWarnings() []string {
+	if v == nil {
+		return nil
+	}
+	return v.Warnings
+}
+
+func (v *VatAccountsReportsResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatAccountsReportsResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponse) SetFromDate(fromDate time.Time) {
+	v.FromDate = fromDate
+	v.require(vatAccountsReportsResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponse) SetToDate(toDate time.Time) {
+	v.ToDate = toDate
+	v.require(vatAccountsReportsResponseFieldToDate)
+}
+
+// SetAccounts sets the Accounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponse) SetAccounts(accounts []*VatAccountsReportsResponseAccountsItem) {
+	v.Accounts = accounts
+	v.require(vatAccountsReportsResponseFieldAccounts)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponse) SetDocuments(documents *VatAccountsReportsResponseDocuments) {
+	v.Documents = documents
+	v.require(vatAccountsReportsResponseFieldDocuments)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponse) SetWarnings(warnings []string) {
+	v.Warnings = warnings
+	v.require(vatAccountsReportsResponseFieldWarnings)
+}
+
+func (v *VatAccountsReportsResponse) UnmarshalJSON(data []byte) error {
+	type embed VatAccountsReportsResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*v = VatAccountsReportsResponse(unmarshaler.embed)
+	v.FromDate = unmarshaler.FromDate.Time()
+	v.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatAccountsReportsResponse) MarshalJSON() ([]byte, error) {
+	type embed VatAccountsReportsResponse
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*v),
+		FromDate: internal.NewDate(v.FromDate),
+		ToDate:   internal.NewDate(v.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatAccountsReportsResponse) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatAccountsReportsResponseAccountsItemFieldAccountCode    = big.NewInt(1 << 0)
+	vatAccountsReportsResponseAccountsItemFieldRules          = big.NewInt(1 << 1)
+	vatAccountsReportsResponseAccountsItemFieldSide           = big.NewInt(1 << 2)
+	vatAccountsReportsResponseAccountsItemFieldPosted         = big.NewInt(1 << 3)
+	vatAccountsReportsResponseAccountsItemFieldExpected       = big.NewInt(1 << 4)
+	vatAccountsReportsResponseAccountsItemFieldDifference     = big.NewInt(1 << 5)
+	vatAccountsReportsResponseAccountsItemFieldSettlements    = big.NewInt(1 << 6)
+	vatAccountsReportsResponseAccountsItemFieldByDocumentType = big.NewInt(1 << 7)
+)
+
+type VatAccountsReportsResponseAccountsItem struct {
+	AccountCode    string                                                      `json:"accountCode" url:"accountCode"`
+	Rules          []VatAccountsReportsResponseAccountsItemRulesItem           `json:"rules" url:"rules"`
+	Side           VatAccountsReportsResponseAccountsItemSide                  `json:"side" url:"side"`
+	Posted         string                                                      `json:"posted" url:"posted"`
+	Expected       string                                                      `json:"expected" url:"expected"`
+	Difference     string                                                      `json:"difference" url:"difference"`
+	Settlements    string                                                      `json:"settlements" url:"settlements"`
+	ByDocumentType []*VatAccountsReportsResponseAccountsItemByDocumentTypeItem `json:"byDocumentType" url:"byDocumentType"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetAccountCode() string {
+	if v == nil {
+		return ""
+	}
+	return v.AccountCode
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetRules() []VatAccountsReportsResponseAccountsItemRulesItem {
+	if v == nil {
+		return nil
+	}
+	return v.Rules
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetSide() VatAccountsReportsResponseAccountsItemSide {
+	if v == nil {
+		return ""
+	}
+	return v.Side
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetPosted() string {
+	if v == nil {
+		return ""
+	}
+	return v.Posted
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetExpected() string {
+	if v == nil {
+		return ""
+	}
+	return v.Expected
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetDifference() string {
+	if v == nil {
+		return ""
+	}
+	return v.Difference
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetSettlements() string {
+	if v == nil {
+		return ""
+	}
+	return v.Settlements
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetByDocumentType() []*VatAccountsReportsResponseAccountsItemByDocumentTypeItem {
+	if v == nil {
+		return nil
+	}
+	return v.ByDocumentType
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetAccountCode(accountCode string) {
+	v.AccountCode = accountCode
+	v.require(vatAccountsReportsResponseAccountsItemFieldAccountCode)
+}
+
+// SetRules sets the Rules field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetRules(rules []VatAccountsReportsResponseAccountsItemRulesItem) {
+	v.Rules = rules
+	v.require(vatAccountsReportsResponseAccountsItemFieldRules)
+}
+
+// SetSide sets the Side field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetSide(side VatAccountsReportsResponseAccountsItemSide) {
+	v.Side = side
+	v.require(vatAccountsReportsResponseAccountsItemFieldSide)
+}
+
+// SetPosted sets the Posted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetPosted(posted string) {
+	v.Posted = posted
+	v.require(vatAccountsReportsResponseAccountsItemFieldPosted)
+}
+
+// SetExpected sets the Expected field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetExpected(expected string) {
+	v.Expected = expected
+	v.require(vatAccountsReportsResponseAccountsItemFieldExpected)
+}
+
+// SetDifference sets the Difference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetDifference(difference string) {
+	v.Difference = difference
+	v.require(vatAccountsReportsResponseAccountsItemFieldDifference)
+}
+
+// SetSettlements sets the Settlements field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetSettlements(settlements string) {
+	v.Settlements = settlements
+	v.require(vatAccountsReportsResponseAccountsItemFieldSettlements)
+}
+
+// SetByDocumentType sets the ByDocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItem) SetByDocumentType(byDocumentType []*VatAccountsReportsResponseAccountsItemByDocumentTypeItem) {
+	v.ByDocumentType = byDocumentType
+	v.require(vatAccountsReportsResponseAccountsItemFieldByDocumentType)
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatAccountsReportsResponseAccountsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatAccountsReportsResponseAccountsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) MarshalJSON() ([]byte, error) {
+	type embed VatAccountsReportsResponseAccountsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatAccountsReportsResponseAccountsItem) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldDocumentType = big.NewInt(1 << 0)
+	vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldDebit        = big.NewInt(1 << 1)
+	vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldCredit       = big.NewInt(1 << 2)
+	vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldTransactions = big.NewInt(1 << 3)
+)
+
+type VatAccountsReportsResponseAccountsItemByDocumentTypeItem struct {
+	DocumentType string `json:"documentType" url:"documentType"`
+	Debit        string `json:"debit" url:"debit"`
+	Credit       string `json:"credit" url:"credit"`
+	Transactions int64  `json:"transactions" url:"transactions"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) GetDocumentType() string {
+	if v == nil {
+		return ""
+	}
+	return v.DocumentType
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) GetDebit() string {
+	if v == nil {
+		return ""
+	}
+	return v.Debit
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) GetCredit() string {
+	if v == nil {
+		return ""
+	}
+	return v.Credit
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) GetTransactions() int64 {
+	if v == nil {
+		return 0
+	}
+	return v.Transactions
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) SetDocumentType(documentType string) {
+	v.DocumentType = documentType
+	v.require(vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldDocumentType)
+}
+
+// SetDebit sets the Debit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) SetDebit(debit string) {
+	v.Debit = debit
+	v.require(vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldDebit)
+}
+
+// SetCredit sets the Credit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) SetCredit(credit string) {
+	v.Credit = credit
+	v.require(vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldCredit)
+}
+
+// SetTransactions sets the Transactions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) SetTransactions(transactions int64) {
+	v.Transactions = transactions
+	v.require(vatAccountsReportsResponseAccountsItemByDocumentTypeItemFieldTransactions)
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatAccountsReportsResponseAccountsItemByDocumentTypeItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatAccountsReportsResponseAccountsItemByDocumentTypeItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) MarshalJSON() ([]byte, error) {
+	type embed VatAccountsReportsResponseAccountsItemByDocumentTypeItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatAccountsReportsResponseAccountsItemByDocumentTypeItem) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+type VatAccountsReportsResponseAccountsItemRulesItem string
+
+const (
+	VatAccountsReportsResponseAccountsItemRulesItemSalesVatPayable        VatAccountsReportsResponseAccountsItemRulesItem = "sales.vatPayable"
+	VatAccountsReportsResponseAccountsItemRulesItemSalesOssVatPayable     VatAccountsReportsResponseAccountsItemRulesItem = "sales.ossVatPayable"
+	VatAccountsReportsResponseAccountsItemRulesItemPurchasesVatReceivable VatAccountsReportsResponseAccountsItemRulesItem = "purchases.vatReceivable"
+)
+
+func NewVatAccountsReportsResponseAccountsItemRulesItemFromString(s string) (VatAccountsReportsResponseAccountsItemRulesItem, error) {
+	switch s {
+	case "sales.vatPayable":
+		return VatAccountsReportsResponseAccountsItemRulesItemSalesVatPayable, nil
+	case "sales.ossVatPayable":
+		return VatAccountsReportsResponseAccountsItemRulesItemSalesOssVatPayable, nil
+	case "purchases.vatReceivable":
+		return VatAccountsReportsResponseAccountsItemRulesItemPurchasesVatReceivable, nil
+	}
+	var t VatAccountsReportsResponseAccountsItemRulesItem
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VatAccountsReportsResponseAccountsItemRulesItem) Ptr() *VatAccountsReportsResponseAccountsItemRulesItem {
+	return &v
+}
+
+type VatAccountsReportsResponseAccountsItemSide string
+
+const (
+	VatAccountsReportsResponseAccountsItemSidePayable    VatAccountsReportsResponseAccountsItemSide = "payable"
+	VatAccountsReportsResponseAccountsItemSideReceivable VatAccountsReportsResponseAccountsItemSide = "receivable"
+)
+
+func NewVatAccountsReportsResponseAccountsItemSideFromString(s string) (VatAccountsReportsResponseAccountsItemSide, error) {
+	switch s {
+	case "payable":
+		return VatAccountsReportsResponseAccountsItemSidePayable, nil
+	case "receivable":
+		return VatAccountsReportsResponseAccountsItemSideReceivable, nil
+	}
+	var t VatAccountsReportsResponseAccountsItemSide
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (v VatAccountsReportsResponseAccountsItemSide) Ptr() *VatAccountsReportsResponseAccountsItemSide {
+	return &v
+}
+
+var (
+	vatAccountsReportsResponseDocumentsFieldOutputVat       = big.NewInt(1 << 0)
+	vatAccountsReportsResponseDocumentsFieldOssVat          = big.NewInt(1 << 1)
+	vatAccountsReportsResponseDocumentsFieldSelfAssessedVat = big.NewInt(1 << 2)
+	vatAccountsReportsResponseDocumentsFieldDeductibleVat   = big.NewInt(1 << 3)
+)
+
+type VatAccountsReportsResponseDocuments struct {
+	OutputVat       string `json:"outputVat" url:"outputVat"`
+	OssVat          string `json:"ossVat" url:"ossVat"`
+	SelfAssessedVat string `json:"selfAssessedVat" url:"selfAssessedVat"`
+	DeductibleVat   string `json:"deductibleVat" url:"deductibleVat"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatAccountsReportsResponseDocuments) GetOutputVat() string {
+	if v == nil {
+		return ""
+	}
+	return v.OutputVat
+}
+
+func (v *VatAccountsReportsResponseDocuments) GetOssVat() string {
+	if v == nil {
+		return ""
+	}
+	return v.OssVat
+}
+
+func (v *VatAccountsReportsResponseDocuments) GetSelfAssessedVat() string {
+	if v == nil {
+		return ""
+	}
+	return v.SelfAssessedVat
+}
+
+func (v *VatAccountsReportsResponseDocuments) GetDeductibleVat() string {
+	if v == nil {
+		return ""
+	}
+	return v.DeductibleVat
+}
+
+func (v *VatAccountsReportsResponseDocuments) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatAccountsReportsResponseDocuments) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetOutputVat sets the OutputVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseDocuments) SetOutputVat(outputVat string) {
+	v.OutputVat = outputVat
+	v.require(vatAccountsReportsResponseDocumentsFieldOutputVat)
+}
+
+// SetOssVat sets the OssVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseDocuments) SetOssVat(ossVat string) {
+	v.OssVat = ossVat
+	v.require(vatAccountsReportsResponseDocumentsFieldOssVat)
+}
+
+// SetSelfAssessedVat sets the SelfAssessedVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseDocuments) SetSelfAssessedVat(selfAssessedVat string) {
+	v.SelfAssessedVat = selfAssessedVat
+	v.require(vatAccountsReportsResponseDocumentsFieldSelfAssessedVat)
+}
+
+// SetDeductibleVat sets the DeductibleVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsResponseDocuments) SetDeductibleVat(deductibleVat string) {
+	v.DeductibleVat = deductibleVat
+	v.require(vatAccountsReportsResponseDocumentsFieldDeductibleVat)
+}
+
+func (v *VatAccountsReportsResponseDocuments) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatAccountsReportsResponseDocuments
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatAccountsReportsResponseDocuments(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatAccountsReportsResponseDocuments) MarshalJSON() ([]byte, error) {
+	type embed VatAccountsReportsResponseDocuments
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatAccountsReportsResponseDocuments) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
 type VatDetailReportsRequestSide string
 
 const (
@@ -15643,6 +16558,70 @@ func (w *WriteOffActsReportsResponseRowsItem) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", w)
+}
+
+var (
+	vatAccountsReportsRequestFieldYear   = big.NewInt(1 << 0)
+	vatAccountsReportsRequestFieldMonth  = big.NewInt(1 << 1)
+	vatAccountsReportsRequestFieldMonths = big.NewInt(1 << 2)
+)
+
+type VatAccountsReportsRequest struct {
+	Year   int64  `json:"year" url:"-"`
+	Month  int64  `json:"month" url:"-"`
+	Months *int64 `json:"months,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VatAccountsReportsRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsRequest) SetYear(year int64) {
+	v.Year = year
+	v.require(vatAccountsReportsRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsRequest) SetMonth(month int64) {
+	v.Month = month
+	v.require(vatAccountsReportsRequestFieldMonth)
+}
+
+// SetMonths sets the Months field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatAccountsReportsRequest) SetMonths(months *int64) {
+	v.Months = months
+	v.require(vatAccountsReportsRequestFieldMonths)
+}
+
+func (v *VatAccountsReportsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatAccountsReportsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VatAccountsReportsRequest(body)
+	return nil
+}
+
+func (v *VatAccountsReportsRequest) MarshalJSON() ([]byte, error) {
+	type embed VatAccountsReportsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
 }
 
 var (

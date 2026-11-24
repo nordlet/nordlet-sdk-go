@@ -9073,15 +9073,15 @@ func (c CreatePartnersRequestInvoiceLocale) Ptr() *CreatePartnersRequestInvoiceL
 type CreatePartnersRequestLegalCountryClass string
 
 const (
-	CreatePartnersRequestLegalCountryClassLt    CreatePartnersRequestLegalCountryClass = "lt"
-	CreatePartnersRequestLegalCountryClassEu    CreatePartnersRequestLegalCountryClass = "eu"
-	CreatePartnersRequestLegalCountryClassNonEu CreatePartnersRequestLegalCountryClass = "non_eu"
+	CreatePartnersRequestLegalCountryClassDomestic CreatePartnersRequestLegalCountryClass = "domestic"
+	CreatePartnersRequestLegalCountryClassEu       CreatePartnersRequestLegalCountryClass = "eu"
+	CreatePartnersRequestLegalCountryClassNonEu    CreatePartnersRequestLegalCountryClass = "non_eu"
 )
 
 func NewCreatePartnersRequestLegalCountryClassFromString(s string) (CreatePartnersRequestLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return CreatePartnersRequestLegalCountryClassLt, nil
+	case "domestic":
+		return CreatePartnersRequestLegalCountryClassDomestic, nil
 	case "eu":
 		return CreatePartnersRequestLegalCountryClassEu, nil
 	case "non_eu":
@@ -10270,15 +10270,15 @@ func (c *CreatePartnersResponseCorrespondenceAddress) String() string {
 type CreatePartnersResponseLegalCountryClass string
 
 const (
-	CreatePartnersResponseLegalCountryClassLt    CreatePartnersResponseLegalCountryClass = "lt"
-	CreatePartnersResponseLegalCountryClassEu    CreatePartnersResponseLegalCountryClass = "eu"
-	CreatePartnersResponseLegalCountryClassNonEu CreatePartnersResponseLegalCountryClass = "non_eu"
+	CreatePartnersResponseLegalCountryClassDomestic CreatePartnersResponseLegalCountryClass = "domestic"
+	CreatePartnersResponseLegalCountryClassEu       CreatePartnersResponseLegalCountryClass = "eu"
+	CreatePartnersResponseLegalCountryClassNonEu    CreatePartnersResponseLegalCountryClass = "non_eu"
 )
 
 func NewCreatePartnersResponseLegalCountryClassFromString(s string) (CreatePartnersResponseLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return CreatePartnersResponseLegalCountryClassLt, nil
+	case "domestic":
+		return CreatePartnersResponseLegalCountryClassDomestic, nil
 	case "eu":
 		return CreatePartnersResponseLegalCountryClassEu, nil
 	case "non_eu":
@@ -13729,15 +13729,15 @@ func (f FindOrCreatePartnersRequestInvoiceLocale) Ptr() *FindOrCreatePartnersReq
 type FindOrCreatePartnersRequestLegalCountryClass string
 
 const (
-	FindOrCreatePartnersRequestLegalCountryClassLt    FindOrCreatePartnersRequestLegalCountryClass = "lt"
-	FindOrCreatePartnersRequestLegalCountryClassEu    FindOrCreatePartnersRequestLegalCountryClass = "eu"
-	FindOrCreatePartnersRequestLegalCountryClassNonEu FindOrCreatePartnersRequestLegalCountryClass = "non_eu"
+	FindOrCreatePartnersRequestLegalCountryClassDomestic FindOrCreatePartnersRequestLegalCountryClass = "domestic"
+	FindOrCreatePartnersRequestLegalCountryClassEu       FindOrCreatePartnersRequestLegalCountryClass = "eu"
+	FindOrCreatePartnersRequestLegalCountryClassNonEu    FindOrCreatePartnersRequestLegalCountryClass = "non_eu"
 )
 
 func NewFindOrCreatePartnersRequestLegalCountryClassFromString(s string) (FindOrCreatePartnersRequestLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return FindOrCreatePartnersRequestLegalCountryClassLt, nil
+	case "domestic":
+		return FindOrCreatePartnersRequestLegalCountryClassDomestic, nil
 	case "eu":
 		return FindOrCreatePartnersRequestLegalCountryClassEu, nil
 	case "non_eu":
@@ -15026,15 +15026,15 @@ func (f *FindOrCreatePartnersResponsePartnerCorrespondenceAddress) String() stri
 type FindOrCreatePartnersResponsePartnerLegalCountryClass string
 
 const (
-	FindOrCreatePartnersResponsePartnerLegalCountryClassLt    FindOrCreatePartnersResponsePartnerLegalCountryClass = "lt"
-	FindOrCreatePartnersResponsePartnerLegalCountryClassEu    FindOrCreatePartnersResponsePartnerLegalCountryClass = "eu"
-	FindOrCreatePartnersResponsePartnerLegalCountryClassNonEu FindOrCreatePartnersResponsePartnerLegalCountryClass = "non_eu"
+	FindOrCreatePartnersResponsePartnerLegalCountryClassDomestic FindOrCreatePartnersResponsePartnerLegalCountryClass = "domestic"
+	FindOrCreatePartnersResponsePartnerLegalCountryClassEu       FindOrCreatePartnersResponsePartnerLegalCountryClass = "eu"
+	FindOrCreatePartnersResponsePartnerLegalCountryClassNonEu    FindOrCreatePartnersResponsePartnerLegalCountryClass = "non_eu"
 )
 
 func NewFindOrCreatePartnersResponsePartnerLegalCountryClassFromString(s string) (FindOrCreatePartnersResponsePartnerLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return FindOrCreatePartnersResponsePartnerLegalCountryClassLt, nil
+	case "domestic":
+		return FindOrCreatePartnersResponsePartnerLegalCountryClassDomestic, nil
 	case "eu":
 		return FindOrCreatePartnersResponsePartnerLegalCountryClassEu, nil
 	case "non_eu":
@@ -16223,15 +16223,15 @@ func (g *GetPartnersResponseCorrespondenceAddress) String() string {
 type GetPartnersResponseLegalCountryClass string
 
 const (
-	GetPartnersResponseLegalCountryClassLt    GetPartnersResponseLegalCountryClass = "lt"
-	GetPartnersResponseLegalCountryClassEu    GetPartnersResponseLegalCountryClass = "eu"
-	GetPartnersResponseLegalCountryClassNonEu GetPartnersResponseLegalCountryClass = "non_eu"
+	GetPartnersResponseLegalCountryClassDomestic GetPartnersResponseLegalCountryClass = "domestic"
+	GetPartnersResponseLegalCountryClassEu       GetPartnersResponseLegalCountryClass = "eu"
+	GetPartnersResponseLegalCountryClassNonEu    GetPartnersResponseLegalCountryClass = "non_eu"
 )
 
 func NewGetPartnersResponseLegalCountryClassFromString(s string) (GetPartnersResponseLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return GetPartnersResponseLegalCountryClassLt, nil
+	case "domestic":
+		return GetPartnersResponseLegalCountryClassDomestic, nil
 	case "eu":
 		return GetPartnersResponseLegalCountryClassEu, nil
 	case "non_eu":
@@ -20635,15 +20635,15 @@ func (l *ListPartnersResponseRowsItemCorrespondenceAddress) String() string {
 type ListPartnersResponseRowsItemLegalCountryClass string
 
 const (
-	ListPartnersResponseRowsItemLegalCountryClassLt    ListPartnersResponseRowsItemLegalCountryClass = "lt"
-	ListPartnersResponseRowsItemLegalCountryClassEu    ListPartnersResponseRowsItemLegalCountryClass = "eu"
-	ListPartnersResponseRowsItemLegalCountryClassNonEu ListPartnersResponseRowsItemLegalCountryClass = "non_eu"
+	ListPartnersResponseRowsItemLegalCountryClassDomestic ListPartnersResponseRowsItemLegalCountryClass = "domestic"
+	ListPartnersResponseRowsItemLegalCountryClassEu       ListPartnersResponseRowsItemLegalCountryClass = "eu"
+	ListPartnersResponseRowsItemLegalCountryClassNonEu    ListPartnersResponseRowsItemLegalCountryClass = "non_eu"
 )
 
 func NewListPartnersResponseRowsItemLegalCountryClassFromString(s string) (ListPartnersResponseRowsItemLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return ListPartnersResponseRowsItemLegalCountryClassLt, nil
+	case "domestic":
+		return ListPartnersResponseRowsItemLegalCountryClassDomestic, nil
 	case "eu":
 		return ListPartnersResponseRowsItemLegalCountryClassEu, nil
 	case "non_eu":
@@ -23575,15 +23575,15 @@ func (u UpdatePartnersRequestInvoiceLocale) Ptr() *UpdatePartnersRequestInvoiceL
 type UpdatePartnersRequestLegalCountryClass string
 
 const (
-	UpdatePartnersRequestLegalCountryClassLt    UpdatePartnersRequestLegalCountryClass = "lt"
-	UpdatePartnersRequestLegalCountryClassEu    UpdatePartnersRequestLegalCountryClass = "eu"
-	UpdatePartnersRequestLegalCountryClassNonEu UpdatePartnersRequestLegalCountryClass = "non_eu"
+	UpdatePartnersRequestLegalCountryClassDomestic UpdatePartnersRequestLegalCountryClass = "domestic"
+	UpdatePartnersRequestLegalCountryClassEu       UpdatePartnersRequestLegalCountryClass = "eu"
+	UpdatePartnersRequestLegalCountryClassNonEu    UpdatePartnersRequestLegalCountryClass = "non_eu"
 )
 
 func NewUpdatePartnersRequestLegalCountryClassFromString(s string) (UpdatePartnersRequestLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return UpdatePartnersRequestLegalCountryClassLt, nil
+	case "domestic":
+		return UpdatePartnersRequestLegalCountryClassDomestic, nil
 	case "eu":
 		return UpdatePartnersRequestLegalCountryClassEu, nil
 	case "non_eu":
@@ -24772,15 +24772,15 @@ func (u *UpdatePartnersResponseCorrespondenceAddress) String() string {
 type UpdatePartnersResponseLegalCountryClass string
 
 const (
-	UpdatePartnersResponseLegalCountryClassLt    UpdatePartnersResponseLegalCountryClass = "lt"
-	UpdatePartnersResponseLegalCountryClassEu    UpdatePartnersResponseLegalCountryClass = "eu"
-	UpdatePartnersResponseLegalCountryClassNonEu UpdatePartnersResponseLegalCountryClass = "non_eu"
+	UpdatePartnersResponseLegalCountryClassDomestic UpdatePartnersResponseLegalCountryClass = "domestic"
+	UpdatePartnersResponseLegalCountryClassEu       UpdatePartnersResponseLegalCountryClass = "eu"
+	UpdatePartnersResponseLegalCountryClassNonEu    UpdatePartnersResponseLegalCountryClass = "non_eu"
 )
 
 func NewUpdatePartnersResponseLegalCountryClassFromString(s string) (UpdatePartnersResponseLegalCountryClass, error) {
 	switch s {
-	case "lt":
-		return UpdatePartnersResponseLegalCountryClassLt, nil
+	case "domestic":
+		return UpdatePartnersResponseLegalCountryClassDomestic, nil
 	case "eu":
 		return UpdatePartnersResponseLegalCountryClassEu, nil
 	case "non_eu":

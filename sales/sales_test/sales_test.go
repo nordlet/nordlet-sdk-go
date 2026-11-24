@@ -314,6 +314,32 @@ func TestSalesInvoicesEinvoiceXMLWithWireMock(
 	VerifyRequestCount(t, "TestSalesInvoicesEinvoiceXMLWithWireMock", "POST", "/v1/sales/invoices/einvoice-xml", nil, 1)
 }
 
+func TestSalesInvoicesZugferdPdfWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesZugferdPdfSalesRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Sales.InvoicesZugferdPdf(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestSalesInvoicesZugferdPdfWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestSalesInvoicesZugferdPdfWithWireMock", "POST", "/v1/sales/invoices/zugferd-pdf", nil, 1)
+}
+
 func TestSalesInvoicesEinvoiceSendWithWireMock(
 	t *testing.T,
 ) {

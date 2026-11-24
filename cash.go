@@ -925,19 +925,23 @@ func (b *BalanceCashResponse) String() string {
 }
 
 var (
-	expenseReportsCreateCashRequestLinesItemFieldDescription    = big.NewInt(1 << 0)
-	expenseReportsCreateCashRequestLinesItemFieldDocumentNumber = big.NewInt(1 << 1)
-	expenseReportsCreateCashRequestLinesItemFieldAccountCode    = big.NewInt(1 << 2)
-	expenseReportsCreateCashRequestLinesItemFieldNetAmount      = big.NewInt(1 << 3)
-	expenseReportsCreateCashRequestLinesItemFieldVatAmount      = big.NewInt(1 << 4)
+	expenseReportsCreateCashRequestLinesItemFieldDescription       = big.NewInt(1 << 0)
+	expenseReportsCreateCashRequestLinesItemFieldDocumentNumber    = big.NewInt(1 << 1)
+	expenseReportsCreateCashRequestLinesItemFieldAccountCode       = big.NewInt(1 << 2)
+	expenseReportsCreateCashRequestLinesItemFieldPartnerID         = big.NewInt(1 << 3)
+	expenseReportsCreateCashRequestLinesItemFieldVatClassifierCode = big.NewInt(1 << 4)
+	expenseReportsCreateCashRequestLinesItemFieldNetAmount         = big.NewInt(1 << 5)
+	expenseReportsCreateCashRequestLinesItemFieldVatAmount         = big.NewInt(1 << 6)
 )
 
 type ExpenseReportsCreateCashRequestLinesItem struct {
-	Description    string  `json:"description" url:"description"`
-	DocumentNumber *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	AccountCode    string  `json:"accountCode" url:"accountCode"`
-	NetAmount      string  `json:"netAmount" url:"netAmount"`
-	VatAmount      *string `json:"vatAmount,omitempty" url:"vatAmount,omitempty"`
+	Description       string  `json:"description" url:"description"`
+	DocumentNumber    *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	AccountCode       string  `json:"accountCode" url:"accountCode"`
+	PartnerID         *string `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	NetAmount         string  `json:"netAmount" url:"netAmount"`
+	VatAmount         *string `json:"vatAmount,omitempty" url:"vatAmount,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -965,6 +969,20 @@ func (e *ExpenseReportsCreateCashRequestLinesItem) GetAccountCode() string {
 		return ""
 	}
 	return e.AccountCode
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetPartnerID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PartnerID
+}
+
+func (e *ExpenseReportsCreateCashRequestLinesItem) GetVatClassifierCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.VatClassifierCode
 }
 
 func (e *ExpenseReportsCreateCashRequestLinesItem) GetNetAmount() string {
@@ -1014,6 +1032,20 @@ func (e *ExpenseReportsCreateCashRequestLinesItem) SetDocumentNumber(documentNum
 func (e *ExpenseReportsCreateCashRequestLinesItem) SetAccountCode(accountCode string) {
 	e.AccountCode = accountCode
 	e.require(expenseReportsCreateCashRequestLinesItemFieldAccountCode)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequestLinesItem) SetPartnerID(partnerID *string) {
+	e.PartnerID = partnerID
+	e.require(expenseReportsCreateCashRequestLinesItemFieldPartnerID)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashRequestLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	e.VatClassifierCode = vatClassifierCode
+	e.require(expenseReportsCreateCashRequestLinesItemFieldVatClassifierCode)
 }
 
 // SetNetAmount sets the NetAmount field and marks it as non-optional;
@@ -1329,21 +1361,27 @@ func (e *ExpenseReportsCreateCashResponse) String() string {
 }
 
 var (
-	expenseReportsCreateCashResponseLinesItemFieldID             = big.NewInt(1 << 0)
-	expenseReportsCreateCashResponseLinesItemFieldDescription    = big.NewInt(1 << 1)
-	expenseReportsCreateCashResponseLinesItemFieldDocumentNumber = big.NewInt(1 << 2)
-	expenseReportsCreateCashResponseLinesItemFieldAccountCode    = big.NewInt(1 << 3)
-	expenseReportsCreateCashResponseLinesItemFieldNetAmount      = big.NewInt(1 << 4)
-	expenseReportsCreateCashResponseLinesItemFieldVatAmount      = big.NewInt(1 << 5)
+	expenseReportsCreateCashResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	expenseReportsCreateCashResponseLinesItemFieldDescription       = big.NewInt(1 << 1)
+	expenseReportsCreateCashResponseLinesItemFieldDocumentNumber    = big.NewInt(1 << 2)
+	expenseReportsCreateCashResponseLinesItemFieldAccountCode       = big.NewInt(1 << 3)
+	expenseReportsCreateCashResponseLinesItemFieldPartnerID         = big.NewInt(1 << 4)
+	expenseReportsCreateCashResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	expenseReportsCreateCashResponseLinesItemFieldNetAmount         = big.NewInt(1 << 6)
+	expenseReportsCreateCashResponseLinesItemFieldVatAmount         = big.NewInt(1 << 7)
+	expenseReportsCreateCashResponseLinesItemFieldDeductibleVat     = big.NewInt(1 << 8)
 )
 
 type ExpenseReportsCreateCashResponseLinesItem struct {
-	ID             string  `json:"id" url:"id"`
-	Description    string  `json:"description" url:"description"`
-	DocumentNumber *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	AccountCode    string  `json:"accountCode" url:"accountCode"`
-	NetAmount      string  `json:"netAmount" url:"netAmount"`
-	VatAmount      string  `json:"vatAmount" url:"vatAmount"`
+	ID                string  `json:"id" url:"id"`
+	Description       string  `json:"description" url:"description"`
+	DocumentNumber    *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	AccountCode       string  `json:"accountCode" url:"accountCode"`
+	PartnerID         *string `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	NetAmount         string  `json:"netAmount" url:"netAmount"`
+	VatAmount         string  `json:"vatAmount" url:"vatAmount"`
+	DeductibleVat     *string `json:"deductibleVat,omitempty" url:"deductibleVat,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1380,6 +1418,20 @@ func (e *ExpenseReportsCreateCashResponseLinesItem) GetAccountCode() string {
 	return e.AccountCode
 }
 
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetPartnerID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PartnerID
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetVatClassifierCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.VatClassifierCode
+}
+
 func (e *ExpenseReportsCreateCashResponseLinesItem) GetNetAmount() string {
 	if e == nil {
 		return ""
@@ -1392,6 +1444,13 @@ func (e *ExpenseReportsCreateCashResponseLinesItem) GetVatAmount() string {
 		return ""
 	}
 	return e.VatAmount
+}
+
+func (e *ExpenseReportsCreateCashResponseLinesItem) GetDeductibleVat() *string {
+	if e == nil {
+		return nil
+	}
+	return e.DeductibleVat
 }
 
 func (e *ExpenseReportsCreateCashResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1436,6 +1495,20 @@ func (e *ExpenseReportsCreateCashResponseLinesItem) SetAccountCode(accountCode s
 	e.require(expenseReportsCreateCashResponseLinesItemFieldAccountCode)
 }
 
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetPartnerID(partnerID *string) {
+	e.PartnerID = partnerID
+	e.require(expenseReportsCreateCashResponseLinesItemFieldPartnerID)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	e.VatClassifierCode = vatClassifierCode
+	e.require(expenseReportsCreateCashResponseLinesItemFieldVatClassifierCode)
+}
+
 // SetNetAmount sets the NetAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (e *ExpenseReportsCreateCashResponseLinesItem) SetNetAmount(netAmount string) {
@@ -1448,6 +1521,13 @@ func (e *ExpenseReportsCreateCashResponseLinesItem) SetNetAmount(netAmount strin
 func (e *ExpenseReportsCreateCashResponseLinesItem) SetVatAmount(vatAmount string) {
 	e.VatAmount = vatAmount
 	e.require(expenseReportsCreateCashResponseLinesItemFieldVatAmount)
+}
+
+// SetDeductibleVat sets the DeductibleVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsCreateCashResponseLinesItem) SetDeductibleVat(deductibleVat *string) {
+	e.DeductibleVat = deductibleVat
+	e.require(expenseReportsCreateCashResponseLinesItemFieldDeductibleVat)
 }
 
 func (e *ExpenseReportsCreateCashResponseLinesItem) UnmarshalJSON(data []byte) error {
@@ -1749,21 +1829,27 @@ func (e *ExpenseReportsGetCashResponse) String() string {
 }
 
 var (
-	expenseReportsGetCashResponseLinesItemFieldID             = big.NewInt(1 << 0)
-	expenseReportsGetCashResponseLinesItemFieldDescription    = big.NewInt(1 << 1)
-	expenseReportsGetCashResponseLinesItemFieldDocumentNumber = big.NewInt(1 << 2)
-	expenseReportsGetCashResponseLinesItemFieldAccountCode    = big.NewInt(1 << 3)
-	expenseReportsGetCashResponseLinesItemFieldNetAmount      = big.NewInt(1 << 4)
-	expenseReportsGetCashResponseLinesItemFieldVatAmount      = big.NewInt(1 << 5)
+	expenseReportsGetCashResponseLinesItemFieldID                = big.NewInt(1 << 0)
+	expenseReportsGetCashResponseLinesItemFieldDescription       = big.NewInt(1 << 1)
+	expenseReportsGetCashResponseLinesItemFieldDocumentNumber    = big.NewInt(1 << 2)
+	expenseReportsGetCashResponseLinesItemFieldAccountCode       = big.NewInt(1 << 3)
+	expenseReportsGetCashResponseLinesItemFieldPartnerID         = big.NewInt(1 << 4)
+	expenseReportsGetCashResponseLinesItemFieldVatClassifierCode = big.NewInt(1 << 5)
+	expenseReportsGetCashResponseLinesItemFieldNetAmount         = big.NewInt(1 << 6)
+	expenseReportsGetCashResponseLinesItemFieldVatAmount         = big.NewInt(1 << 7)
+	expenseReportsGetCashResponseLinesItemFieldDeductibleVat     = big.NewInt(1 << 8)
 )
 
 type ExpenseReportsGetCashResponseLinesItem struct {
-	ID             string  `json:"id" url:"id"`
-	Description    string  `json:"description" url:"description"`
-	DocumentNumber *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
-	AccountCode    string  `json:"accountCode" url:"accountCode"`
-	NetAmount      string  `json:"netAmount" url:"netAmount"`
-	VatAmount      string  `json:"vatAmount" url:"vatAmount"`
+	ID                string  `json:"id" url:"id"`
+	Description       string  `json:"description" url:"description"`
+	DocumentNumber    *string `json:"documentNumber,omitempty" url:"documentNumber,omitempty"`
+	AccountCode       string  `json:"accountCode" url:"accountCode"`
+	PartnerID         *string `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	VatClassifierCode *string `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	NetAmount         string  `json:"netAmount" url:"netAmount"`
+	VatAmount         string  `json:"vatAmount" url:"vatAmount"`
+	DeductibleVat     *string `json:"deductibleVat,omitempty" url:"deductibleVat,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1800,6 +1886,20 @@ func (e *ExpenseReportsGetCashResponseLinesItem) GetAccountCode() string {
 	return e.AccountCode
 }
 
+func (e *ExpenseReportsGetCashResponseLinesItem) GetPartnerID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PartnerID
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetVatClassifierCode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.VatClassifierCode
+}
+
 func (e *ExpenseReportsGetCashResponseLinesItem) GetNetAmount() string {
 	if e == nil {
 		return ""
@@ -1812,6 +1912,13 @@ func (e *ExpenseReportsGetCashResponseLinesItem) GetVatAmount() string {
 		return ""
 	}
 	return e.VatAmount
+}
+
+func (e *ExpenseReportsGetCashResponseLinesItem) GetDeductibleVat() *string {
+	if e == nil {
+		return nil
+	}
+	return e.DeductibleVat
 }
 
 func (e *ExpenseReportsGetCashResponseLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1856,6 +1963,20 @@ func (e *ExpenseReportsGetCashResponseLinesItem) SetAccountCode(accountCode stri
 	e.require(expenseReportsGetCashResponseLinesItemFieldAccountCode)
 }
 
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetPartnerID(partnerID *string) {
+	e.PartnerID = partnerID
+	e.require(expenseReportsGetCashResponseLinesItemFieldPartnerID)
+}
+
+// SetVatClassifierCode sets the VatClassifierCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetVatClassifierCode(vatClassifierCode *string) {
+	e.VatClassifierCode = vatClassifierCode
+	e.require(expenseReportsGetCashResponseLinesItemFieldVatClassifierCode)
+}
+
 // SetNetAmount sets the NetAmount field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (e *ExpenseReportsGetCashResponseLinesItem) SetNetAmount(netAmount string) {
@@ -1868,6 +1989,13 @@ func (e *ExpenseReportsGetCashResponseLinesItem) SetNetAmount(netAmount string) 
 func (e *ExpenseReportsGetCashResponseLinesItem) SetVatAmount(vatAmount string) {
 	e.VatAmount = vatAmount
 	e.require(expenseReportsGetCashResponseLinesItemFieldVatAmount)
+}
+
+// SetDeductibleVat sets the DeductibleVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *ExpenseReportsGetCashResponseLinesItem) SetDeductibleVat(deductibleVat *string) {
+	e.DeductibleVat = deductibleVat
+	e.require(expenseReportsGetCashResponseLinesItemFieldDeductibleVat)
 }
 
 func (e *ExpenseReportsGetCashResponseLinesItem) UnmarshalJSON(data []byte) error {

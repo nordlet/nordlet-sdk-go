@@ -429,6 +429,14 @@ func TestSettersItemsCreateCatalogRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCpaCode", func(t *testing.T) {
+		obj := &ItemsCreateCatalogRequest{}
+		var fernTestValueCpaCode *string
+		obj.SetCpaCode(fernTestValueCpaCode)
+		assert.Equal(t, fernTestValueCpaCode, obj.CpaCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOriginCountry", func(t *testing.T) {
 		obj := &ItemsCreateCatalogRequest{}
 		var fernTestValueOriginCountry *string
@@ -1046,6 +1054,37 @@ func TestSettersMarkExplicitItemsCreateCatalogRequest(t *testing.T) {
 
 		// Act
 		obj.SetCnCode(fernTestValueCnCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCpaCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsCreateCatalogRequest{}
+		var fernTestValueCpaCode *string
+
+		// Act
+		obj.SetCpaCode(fernTestValueCpaCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4037,6 +4076,14 @@ func TestSettersItemsUpdateCatalogRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCpaCode", func(t *testing.T) {
+		obj := &ItemsUpdateCatalogRequest{}
+		var fernTestValueCpaCode *string
+		obj.SetCpaCode(fernTestValueCpaCode)
+		assert.Equal(t, fernTestValueCpaCode, obj.CpaCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOriginCountry", func(t *testing.T) {
 		obj := &ItemsUpdateCatalogRequest{}
 		var fernTestValueOriginCountry *string
@@ -4685,6 +4732,37 @@ func TestSettersMarkExplicitItemsUpdateCatalogRequest(t *testing.T) {
 
 		// Act
 		obj.SetCnCode(fernTestValueCnCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCpaCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsUpdateCatalogRequest{}
+		var fernTestValueCpaCode *string
+
+		// Act
+		obj.SetCpaCode(fernTestValueCpaCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -7945,6 +8023,14 @@ func TestSettersItemsCreateCatalogResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCpaCode", func(t *testing.T) {
+		obj := &ItemsCreateCatalogResponse{}
+		var fernTestValueCpaCode *string
+		obj.SetCpaCode(fernTestValueCpaCode)
+		assert.Equal(t, fernTestValueCpaCode, obj.CpaCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOriginCountry", func(t *testing.T) {
 		obj := &ItemsCreateCatalogResponse{}
 		var fernTestValueOriginCountry *string
@@ -8612,6 +8698,39 @@ func TestGettersItemsCreateCatalogResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCnCode() // Should return zero value
+	})
+
+	t.Run("GetCpaCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsCreateCatalogResponse{}
+		var expected *string
+		obj.CpaCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCpaCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCpaCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsCreateCatalogResponse{}
+		obj.CpaCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCpaCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCpaCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ItemsCreateCatalogResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCpaCode() // Should return zero value
 	})
 
 	t.Run("GetOriginCountry", func(t *testing.T) {
@@ -10236,6 +10355,37 @@ func TestSettersMarkExplicitItemsCreateCatalogResponse(t *testing.T) {
 
 		// Act
 		obj.SetCnCode(fernTestValueCnCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCpaCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsCreateCatalogResponse{}
+		var fernTestValueCpaCode *string
+
+		// Act
+		obj.SetCpaCode(fernTestValueCpaCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -13066,6 +13216,14 @@ func TestSettersItemsGetCatalogResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCpaCode", func(t *testing.T) {
+		obj := &ItemsGetCatalogResponse{}
+		var fernTestValueCpaCode *string
+		obj.SetCpaCode(fernTestValueCpaCode)
+		assert.Equal(t, fernTestValueCpaCode, obj.CpaCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOriginCountry", func(t *testing.T) {
 		obj := &ItemsGetCatalogResponse{}
 		var fernTestValueOriginCountry *string
@@ -13733,6 +13891,39 @@ func TestGettersItemsGetCatalogResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCnCode() // Should return zero value
+	})
+
+	t.Run("GetCpaCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsGetCatalogResponse{}
+		var expected *string
+		obj.CpaCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCpaCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCpaCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsGetCatalogResponse{}
+		obj.CpaCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCpaCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCpaCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ItemsGetCatalogResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCpaCode() // Should return zero value
 	})
 
 	t.Run("GetOriginCountry", func(t *testing.T) {
@@ -15357,6 +15548,37 @@ func TestSettersMarkExplicitItemsGetCatalogResponse(t *testing.T) {
 
 		// Act
 		obj.SetCnCode(fernTestValueCnCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCpaCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsGetCatalogResponse{}
+		var fernTestValueCpaCode *string
+
+		// Act
+		obj.SetCpaCode(fernTestValueCpaCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -19852,6 +20074,14 @@ func TestSettersItemsListCatalogResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCpaCode", func(t *testing.T) {
+		obj := &ItemsListCatalogResponseRowsItem{}
+		var fernTestValueCpaCode *string
+		obj.SetCpaCode(fernTestValueCpaCode)
+		assert.Equal(t, fernTestValueCpaCode, obj.CpaCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOriginCountry", func(t *testing.T) {
 		obj := &ItemsListCatalogResponseRowsItem{}
 		var fernTestValueOriginCountry *string
@@ -20519,6 +20749,39 @@ func TestGettersItemsListCatalogResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCnCode() // Should return zero value
+	})
+
+	t.Run("GetCpaCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsListCatalogResponseRowsItem{}
+		var expected *string
+		obj.CpaCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCpaCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCpaCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsListCatalogResponseRowsItem{}
+		obj.CpaCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCpaCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCpaCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ItemsListCatalogResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCpaCode() // Should return zero value
 	})
 
 	t.Run("GetOriginCountry", func(t *testing.T) {
@@ -22143,6 +22406,37 @@ func TestSettersMarkExplicitItemsListCatalogResponseRowsItem(t *testing.T) {
 
 		// Act
 		obj.SetCnCode(fernTestValueCnCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCpaCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsListCatalogResponseRowsItem{}
+		var fernTestValueCpaCode *string
+
+		// Act
+		obj.SetCpaCode(fernTestValueCpaCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -27749,6 +28043,14 @@ func TestSettersItemsUpdateCatalogResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetCpaCode", func(t *testing.T) {
+		obj := &ItemsUpdateCatalogResponse{}
+		var fernTestValueCpaCode *string
+		obj.SetCpaCode(fernTestValueCpaCode)
+		assert.Equal(t, fernTestValueCpaCode, obj.CpaCode)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetOriginCountry", func(t *testing.T) {
 		obj := &ItemsUpdateCatalogResponse{}
 		var fernTestValueOriginCountry *string
@@ -28416,6 +28718,39 @@ func TestGettersItemsUpdateCatalogResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetCnCode() // Should return zero value
+	})
+
+	t.Run("GetCpaCode", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsUpdateCatalogResponse{}
+		var expected *string
+		obj.CpaCode = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCpaCode(), "getter should return the property value")
+	})
+
+	t.Run("GetCpaCode_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsUpdateCatalogResponse{}
+		obj.CpaCode = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetCpaCode(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetCpaCode_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ItemsUpdateCatalogResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCpaCode() // Should return zero value
 	})
 
 	t.Run("GetOriginCountry", func(t *testing.T) {
@@ -30040,6 +30375,37 @@ func TestSettersMarkExplicitItemsUpdateCatalogResponse(t *testing.T) {
 
 		// Act
 		obj.SetCnCode(fernTestValueCnCode)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCpaCode_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ItemsUpdateCatalogResponse{}
+		var fernTestValueCpaCode *string
+
+		// Act
+		obj.SetCpaCode(fernTestValueCpaCode)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

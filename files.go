@@ -1549,6 +1549,146 @@ func (u *UploadFilesResponse) String() string {
 }
 
 var (
+	uploadLinksCreateFilesResponseFieldURL        = big.NewInt(1 << 0)
+	uploadLinksCreateFilesResponseFieldFileID     = big.NewInt(1 << 1)
+	uploadLinksCreateFilesResponseFieldStorageKey = big.NewInt(1 << 2)
+	uploadLinksCreateFilesResponseFieldExpiresAt  = big.NewInt(1 << 3)
+)
+
+type UploadLinksCreateFilesResponse struct {
+	URL        string    `json:"url" url:"url"`
+	FileID     string    `json:"fileId" url:"fileId"`
+	StorageKey string    `json:"storageKey" url:"storageKey"`
+	ExpiresAt  time.Time `json:"expiresAt" url:"expiresAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UploadLinksCreateFilesResponse) GetURL() string {
+	if u == nil {
+		return ""
+	}
+	return u.URL
+}
+
+func (u *UploadLinksCreateFilesResponse) GetFileID() string {
+	if u == nil {
+		return ""
+	}
+	return u.FileID
+}
+
+func (u *UploadLinksCreateFilesResponse) GetStorageKey() string {
+	if u == nil {
+		return ""
+	}
+	return u.StorageKey
+}
+
+func (u *UploadLinksCreateFilesResponse) GetExpiresAt() time.Time {
+	if u == nil {
+		return time.Time{}
+	}
+	return u.ExpiresAt
+}
+
+func (u *UploadLinksCreateFilesResponse) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UploadLinksCreateFilesResponse) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetURL sets the URL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesResponse) SetURL(url string) {
+	u.URL = url
+	u.require(uploadLinksCreateFilesResponseFieldURL)
+}
+
+// SetFileID sets the FileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesResponse) SetFileID(fileID string) {
+	u.FileID = fileID
+	u.require(uploadLinksCreateFilesResponseFieldFileID)
+}
+
+// SetStorageKey sets the StorageKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesResponse) SetStorageKey(storageKey string) {
+	u.StorageKey = storageKey
+	u.require(uploadLinksCreateFilesResponseFieldStorageKey)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesResponse) SetExpiresAt(expiresAt time.Time) {
+	u.ExpiresAt = expiresAt
+	u.require(uploadLinksCreateFilesResponseFieldExpiresAt)
+}
+
+func (u *UploadLinksCreateFilesResponse) UnmarshalJSON(data []byte) error {
+	type embed UploadLinksCreateFilesResponse
+	var unmarshaler = struct {
+		embed
+		ExpiresAt *internal.DateTime `json:"expiresAt"`
+	}{
+		embed: embed(*u),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*u = UploadLinksCreateFilesResponse(unmarshaler.embed)
+	u.ExpiresAt = unmarshaler.ExpiresAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UploadLinksCreateFilesResponse) MarshalJSON() ([]byte, error) {
+	type embed UploadLinksCreateFilesResponse
+	var marshaler = struct {
+		embed
+		ExpiresAt *internal.DateTime `json:"expiresAt"`
+	}{
+		embed:     embed(*u),
+		ExpiresAt: internal.NewDateTime(u.ExpiresAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UploadLinksCreateFilesResponse) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
+}
+
+var (
 	uploadFilesRequestFieldEntity   = big.NewInt(1 << 0)
 	uploadFilesRequestFieldEntityID = big.NewInt(1 << 1)
 	uploadFilesRequestFieldFileName = big.NewInt(1 << 2)
@@ -1623,6 +1763,88 @@ func (u *UploadFilesRequest) UnmarshalJSON(data []byte) error {
 
 func (u *UploadFilesRequest) MarshalJSON() ([]byte, error) {
 	type embed UploadFilesRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	uploadLinksCreateFilesRequestFieldEntity           = big.NewInt(1 << 0)
+	uploadLinksCreateFilesRequestFieldEntityID         = big.NewInt(1 << 1)
+	uploadLinksCreateFilesRequestFieldFileName         = big.NewInt(1 << 2)
+	uploadLinksCreateFilesRequestFieldMimeType         = big.NewInt(1 << 3)
+	uploadLinksCreateFilesRequestFieldExpiresInMinutes = big.NewInt(1 << 4)
+)
+
+type UploadLinksCreateFilesRequest struct {
+	Entity           string  `json:"entity" url:"-"`
+	EntityID         *string `json:"entityId,omitempty" url:"-"`
+	FileName         string  `json:"fileName" url:"-"`
+	MimeType         *string `json:"mimeType,omitempty" url:"-"`
+	ExpiresInMinutes *int64  `json:"expiresInMinutes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (u *UploadLinksCreateFilesRequest) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetEntity sets the Entity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesRequest) SetEntity(entity string) {
+	u.Entity = entity
+	u.require(uploadLinksCreateFilesRequestFieldEntity)
+}
+
+// SetEntityID sets the EntityID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesRequest) SetEntityID(entityID *string) {
+	u.EntityID = entityID
+	u.require(uploadLinksCreateFilesRequestFieldEntityID)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesRequest) SetFileName(fileName string) {
+	u.FileName = fileName
+	u.require(uploadLinksCreateFilesRequestFieldFileName)
+}
+
+// SetMimeType sets the MimeType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesRequest) SetMimeType(mimeType *string) {
+	u.MimeType = mimeType
+	u.require(uploadLinksCreateFilesRequestFieldMimeType)
+}
+
+// SetExpiresInMinutes sets the ExpiresInMinutes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UploadLinksCreateFilesRequest) SetExpiresInMinutes(expiresInMinutes *int64) {
+	u.ExpiresInMinutes = expiresInMinutes
+	u.require(uploadLinksCreateFilesRequestFieldExpiresInMinutes)
+}
+
+func (u *UploadLinksCreateFilesRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler UploadLinksCreateFilesRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*u = UploadLinksCreateFilesRequest(body)
+	return nil
+}
+
+func (u *UploadLinksCreateFilesRequest) MarshalJSON() ([]byte, error) {
+	type embed UploadLinksCreateFilesRequest
 	var marshaler = struct {
 		embed
 	}{

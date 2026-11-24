@@ -700,6 +700,120 @@ func TestLedgerJournalTransactionsCreateWithWireMock(
 	VerifyRequestCount(t, "TestLedgerJournalTransactionsCreateWithWireMock", "POST", "/v1/ledger/journal/transactions/create", nil, 1)
 }
 
+func TestLedgerJournalTemplatesCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.JournalTemplatesCreateLedgerRequest{
+		Name: "name",
+		Lines: []*nordlet.JournalTemplatesCreateLedgerRequestLinesItem{
+			&nordlet.JournalTemplatesCreateLedgerRequestLinesItem{
+				AccountCode: "accountCode",
+				Side:        nordlet.JournalTemplatesCreateLedgerRequestLinesItemSideDebit,
+			},
+		},
+	}
+	_, invocationErr := client.Ledger.JournalTemplatesCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTemplatesCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerJournalTemplatesCreateWithWireMock", "POST", "/v1/ledger/journal/templates/create", nil, 1)
+}
+
+func TestLedgerJournalTemplatesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.JournalTemplatesListLedgerRequest{}
+	_, invocationErr := client.Ledger.JournalTemplatesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTemplatesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerJournalTemplatesListWithWireMock", "POST", "/v1/ledger/journal/templates/list", nil, 1)
+}
+
+func TestLedgerJournalTemplatesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.JournalTemplatesDeleteLedgerRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Ledger.JournalTemplatesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTemplatesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerJournalTemplatesDeleteWithWireMock", "POST", "/v1/ledger/journal/templates/delete", nil, 1)
+}
+
+func TestLedgerJournalTemplatesPostWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.JournalTemplatesPostLedgerRequest{
+		ID: "id",
+		Date: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		Amounts: []string{
+			"121.0000",
+		},
+	}
+	_, invocationErr := client.Ledger.JournalTemplatesPost(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestLedgerJournalTemplatesPostWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestLedgerJournalTemplatesPostWithWireMock", "POST", "/v1/ledger/journal/templates/post", nil, 1)
+}
+
 func TestLedgerJournalTransactionsReverseWithWireMock(
 	t *testing.T,
 ) {

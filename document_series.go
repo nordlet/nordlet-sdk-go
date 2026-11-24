@@ -22,8 +22,9 @@ var (
 	createDocumentSeriesRequestFieldAllocatedTo     = big.NewInt(1 << 8)
 	createDocumentSeriesRequestFieldWarehouseID     = big.NewInt(1 << 9)
 	createDocumentSeriesRequestFieldPrintSeries     = big.NewInt(1 << 10)
-	createDocumentSeriesRequestFieldIsDefault       = big.NewInt(1 << 11)
-	createDocumentSeriesRequestFieldIsActive        = big.NewInt(1 << 12)
+	createDocumentSeriesRequestFieldSuffix          = big.NewInt(1 << 11)
+	createDocumentSeriesRequestFieldIsDefault       = big.NewInt(1 << 12)
+	createDocumentSeriesRequestFieldIsActive        = big.NewInt(1 << 13)
 )
 
 type CreateDocumentSeriesRequest struct {
@@ -38,6 +39,7 @@ type CreateDocumentSeriesRequest struct {
 	AllocatedTo     *int64                                   `json:"allocatedTo,omitempty" url:"-"`
 	WarehouseID     *string                                  `json:"warehouseId,omitempty" url:"-"`
 	PrintSeries     *bool                                    `json:"printSeries,omitempty" url:"-"`
+	Suffix          *string                                  `json:"suffix,omitempty" url:"-"`
 	IsDefault       *bool                                    `json:"isDefault,omitempty" url:"-"`
 	IsActive        *bool                                    `json:"isActive,omitempty" url:"-"`
 
@@ -127,6 +129,13 @@ func (c *CreateDocumentSeriesRequest) SetWarehouseID(warehouseID *string) {
 func (c *CreateDocumentSeriesRequest) SetPrintSeries(printSeries *bool) {
 	c.PrintSeries = printSeries
 	c.require(createDocumentSeriesRequestFieldPrintSeries)
+}
+
+// SetSuffix sets the Suffix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateDocumentSeriesRequest) SetSuffix(suffix *string) {
+	c.Suffix = suffix
+	c.require(createDocumentSeriesRequestFieldSuffix)
 }
 
 // SetIsDefault sets the IsDefault field and marks it as non-optional;
@@ -380,10 +389,11 @@ var (
 	createDocumentSeriesResponseFieldAllocatedTo     = big.NewInt(1 << 9)
 	createDocumentSeriesResponseFieldWarehouseID     = big.NewInt(1 << 10)
 	createDocumentSeriesResponseFieldPrintSeries     = big.NewInt(1 << 11)
-	createDocumentSeriesResponseFieldIsDefault       = big.NewInt(1 << 12)
-	createDocumentSeriesResponseFieldIsActive        = big.NewInt(1 << 13)
-	createDocumentSeriesResponseFieldCreatedAt       = big.NewInt(1 << 14)
-	createDocumentSeriesResponseFieldUpdatedAt       = big.NewInt(1 << 15)
+	createDocumentSeriesResponseFieldSuffix          = big.NewInt(1 << 12)
+	createDocumentSeriesResponseFieldIsDefault       = big.NewInt(1 << 13)
+	createDocumentSeriesResponseFieldIsActive        = big.NewInt(1 << 14)
+	createDocumentSeriesResponseFieldCreatedAt       = big.NewInt(1 << 15)
+	createDocumentSeriesResponseFieldUpdatedAt       = big.NewInt(1 << 16)
 )
 
 type CreateDocumentSeriesResponse struct {
@@ -399,6 +409,7 @@ type CreateDocumentSeriesResponse struct {
 	AllocatedTo     *int64    `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool      `json:"printSeries" url:"printSeries"`
+	Suffix          string    `json:"suffix" url:"suffix"`
 	IsDefault       bool      `json:"isDefault" url:"isDefault"`
 	IsActive        bool      `json:"isActive" url:"isActive"`
 	CreatedAt       time.Time `json:"createdAt" url:"createdAt"`
@@ -493,6 +504,13 @@ func (c *CreateDocumentSeriesResponse) GetPrintSeries() bool {
 		return false
 	}
 	return c.PrintSeries
+}
+
+func (c *CreateDocumentSeriesResponse) GetSuffix() string {
+	if c == nil {
+		return ""
+	}
+	return c.Suffix
 }
 
 func (c *CreateDocumentSeriesResponse) GetIsDefault() bool {
@@ -619,6 +637,13 @@ func (c *CreateDocumentSeriesResponse) SetWarehouseID(warehouseID *string) {
 func (c *CreateDocumentSeriesResponse) SetPrintSeries(printSeries bool) {
 	c.PrintSeries = printSeries
 	c.require(createDocumentSeriesResponseFieldPrintSeries)
+}
+
+// SetSuffix sets the Suffix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateDocumentSeriesResponse) SetSuffix(suffix string) {
+	c.Suffix = suffix
+	c.require(createDocumentSeriesResponseFieldSuffix)
 }
 
 // SetIsDefault sets the IsDefault field and marks it as non-optional;
@@ -800,10 +825,11 @@ var (
 	getDocumentSeriesResponseFieldAllocatedTo     = big.NewInt(1 << 9)
 	getDocumentSeriesResponseFieldWarehouseID     = big.NewInt(1 << 10)
 	getDocumentSeriesResponseFieldPrintSeries     = big.NewInt(1 << 11)
-	getDocumentSeriesResponseFieldIsDefault       = big.NewInt(1 << 12)
-	getDocumentSeriesResponseFieldIsActive        = big.NewInt(1 << 13)
-	getDocumentSeriesResponseFieldCreatedAt       = big.NewInt(1 << 14)
-	getDocumentSeriesResponseFieldUpdatedAt       = big.NewInt(1 << 15)
+	getDocumentSeriesResponseFieldSuffix          = big.NewInt(1 << 12)
+	getDocumentSeriesResponseFieldIsDefault       = big.NewInt(1 << 13)
+	getDocumentSeriesResponseFieldIsActive        = big.NewInt(1 << 14)
+	getDocumentSeriesResponseFieldCreatedAt       = big.NewInt(1 << 15)
+	getDocumentSeriesResponseFieldUpdatedAt       = big.NewInt(1 << 16)
 )
 
 type GetDocumentSeriesResponse struct {
@@ -819,6 +845,7 @@ type GetDocumentSeriesResponse struct {
 	AllocatedTo     *int64    `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool      `json:"printSeries" url:"printSeries"`
+	Suffix          string    `json:"suffix" url:"suffix"`
 	IsDefault       bool      `json:"isDefault" url:"isDefault"`
 	IsActive        bool      `json:"isActive" url:"isActive"`
 	CreatedAt       time.Time `json:"createdAt" url:"createdAt"`
@@ -913,6 +940,13 @@ func (g *GetDocumentSeriesResponse) GetPrintSeries() bool {
 		return false
 	}
 	return g.PrintSeries
+}
+
+func (g *GetDocumentSeriesResponse) GetSuffix() string {
+	if g == nil {
+		return ""
+	}
+	return g.Suffix
 }
 
 func (g *GetDocumentSeriesResponse) GetIsDefault() bool {
@@ -1039,6 +1073,13 @@ func (g *GetDocumentSeriesResponse) SetWarehouseID(warehouseID *string) {
 func (g *GetDocumentSeriesResponse) SetPrintSeries(printSeries bool) {
 	g.PrintSeries = printSeries
 	g.require(getDocumentSeriesResponseFieldPrintSeries)
+}
+
+// SetSuffix sets the Suffix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (g *GetDocumentSeriesResponse) SetSuffix(suffix string) {
+	g.Suffix = suffix
+	g.require(getDocumentSeriesResponseFieldSuffix)
 }
 
 // SetIsDefault sets the IsDefault field and marks it as non-optional;
@@ -1739,10 +1780,11 @@ var (
 	listDocumentSeriesResponseRowsItemFieldAllocatedTo     = big.NewInt(1 << 9)
 	listDocumentSeriesResponseRowsItemFieldWarehouseID     = big.NewInt(1 << 10)
 	listDocumentSeriesResponseRowsItemFieldPrintSeries     = big.NewInt(1 << 11)
-	listDocumentSeriesResponseRowsItemFieldIsDefault       = big.NewInt(1 << 12)
-	listDocumentSeriesResponseRowsItemFieldIsActive        = big.NewInt(1 << 13)
-	listDocumentSeriesResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 14)
-	listDocumentSeriesResponseRowsItemFieldUpdatedAt       = big.NewInt(1 << 15)
+	listDocumentSeriesResponseRowsItemFieldSuffix          = big.NewInt(1 << 12)
+	listDocumentSeriesResponseRowsItemFieldIsDefault       = big.NewInt(1 << 13)
+	listDocumentSeriesResponseRowsItemFieldIsActive        = big.NewInt(1 << 14)
+	listDocumentSeriesResponseRowsItemFieldCreatedAt       = big.NewInt(1 << 15)
+	listDocumentSeriesResponseRowsItemFieldUpdatedAt       = big.NewInt(1 << 16)
 )
 
 type ListDocumentSeriesResponseRowsItem struct {
@@ -1758,6 +1800,7 @@ type ListDocumentSeriesResponseRowsItem struct {
 	AllocatedTo     *int64    `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool      `json:"printSeries" url:"printSeries"`
+	Suffix          string    `json:"suffix" url:"suffix"`
 	IsDefault       bool      `json:"isDefault" url:"isDefault"`
 	IsActive        bool      `json:"isActive" url:"isActive"`
 	CreatedAt       time.Time `json:"createdAt" url:"createdAt"`
@@ -1852,6 +1895,13 @@ func (l *ListDocumentSeriesResponseRowsItem) GetPrintSeries() bool {
 		return false
 	}
 	return l.PrintSeries
+}
+
+func (l *ListDocumentSeriesResponseRowsItem) GetSuffix() string {
+	if l == nil {
+		return ""
+	}
+	return l.Suffix
 }
 
 func (l *ListDocumentSeriesResponseRowsItem) GetIsDefault() bool {
@@ -1980,6 +2030,13 @@ func (l *ListDocumentSeriesResponseRowsItem) SetPrintSeries(printSeries bool) {
 	l.require(listDocumentSeriesResponseRowsItemFieldPrintSeries)
 }
 
+// SetSuffix sets the Suffix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListDocumentSeriesResponseRowsItem) SetSuffix(suffix string) {
+	l.Suffix = suffix
+	l.require(listDocumentSeriesResponseRowsItemFieldSuffix)
+}
+
 // SetIsDefault sets the IsDefault field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (l *ListDocumentSeriesResponseRowsItem) SetIsDefault(isDefault bool) {
@@ -2103,10 +2160,11 @@ var (
 	updateDocumentSeriesResponseFieldAllocatedTo     = big.NewInt(1 << 9)
 	updateDocumentSeriesResponseFieldWarehouseID     = big.NewInt(1 << 10)
 	updateDocumentSeriesResponseFieldPrintSeries     = big.NewInt(1 << 11)
-	updateDocumentSeriesResponseFieldIsDefault       = big.NewInt(1 << 12)
-	updateDocumentSeriesResponseFieldIsActive        = big.NewInt(1 << 13)
-	updateDocumentSeriesResponseFieldCreatedAt       = big.NewInt(1 << 14)
-	updateDocumentSeriesResponseFieldUpdatedAt       = big.NewInt(1 << 15)
+	updateDocumentSeriesResponseFieldSuffix          = big.NewInt(1 << 12)
+	updateDocumentSeriesResponseFieldIsDefault       = big.NewInt(1 << 13)
+	updateDocumentSeriesResponseFieldIsActive        = big.NewInt(1 << 14)
+	updateDocumentSeriesResponseFieldCreatedAt       = big.NewInt(1 << 15)
+	updateDocumentSeriesResponseFieldUpdatedAt       = big.NewInt(1 << 16)
 )
 
 type UpdateDocumentSeriesResponse struct {
@@ -2122,6 +2180,7 @@ type UpdateDocumentSeriesResponse struct {
 	AllocatedTo     *int64    `json:"allocatedTo,omitempty" url:"allocatedTo,omitempty"`
 	WarehouseID     *string   `json:"warehouseId,omitempty" url:"warehouseId,omitempty"`
 	PrintSeries     bool      `json:"printSeries" url:"printSeries"`
+	Suffix          string    `json:"suffix" url:"suffix"`
 	IsDefault       bool      `json:"isDefault" url:"isDefault"`
 	IsActive        bool      `json:"isActive" url:"isActive"`
 	CreatedAt       time.Time `json:"createdAt" url:"createdAt"`
@@ -2216,6 +2275,13 @@ func (u *UpdateDocumentSeriesResponse) GetPrintSeries() bool {
 		return false
 	}
 	return u.PrintSeries
+}
+
+func (u *UpdateDocumentSeriesResponse) GetSuffix() string {
+	if u == nil {
+		return ""
+	}
+	return u.Suffix
 }
 
 func (u *UpdateDocumentSeriesResponse) GetIsDefault() bool {
@@ -2344,6 +2410,13 @@ func (u *UpdateDocumentSeriesResponse) SetPrintSeries(printSeries bool) {
 	u.require(updateDocumentSeriesResponseFieldPrintSeries)
 }
 
+// SetSuffix sets the Suffix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateDocumentSeriesResponse) SetSuffix(suffix string) {
+	u.Suffix = suffix
+	u.require(updateDocumentSeriesResponseFieldSuffix)
+}
+
 // SetIsDefault sets the IsDefault field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (u *UpdateDocumentSeriesResponse) SetIsDefault(isDefault bool) {
@@ -2439,8 +2512,9 @@ var (
 	updateDocumentSeriesRequestFieldAllocatedTo     = big.NewInt(1 << 9)
 	updateDocumentSeriesRequestFieldWarehouseID     = big.NewInt(1 << 10)
 	updateDocumentSeriesRequestFieldPrintSeries     = big.NewInt(1 << 11)
-	updateDocumentSeriesRequestFieldIsDefault       = big.NewInt(1 << 12)
-	updateDocumentSeriesRequestFieldIsActive        = big.NewInt(1 << 13)
+	updateDocumentSeriesRequestFieldSuffix          = big.NewInt(1 << 12)
+	updateDocumentSeriesRequestFieldIsDefault       = big.NewInt(1 << 13)
+	updateDocumentSeriesRequestFieldIsActive        = big.NewInt(1 << 14)
 )
 
 type UpdateDocumentSeriesRequest struct {
@@ -2456,6 +2530,7 @@ type UpdateDocumentSeriesRequest struct {
 	AllocatedTo     *int64                                   `json:"allocatedTo,omitempty" url:"-"`
 	WarehouseID     *string                                  `json:"warehouseId,omitempty" url:"-"`
 	PrintSeries     *bool                                    `json:"printSeries,omitempty" url:"-"`
+	Suffix          *string                                  `json:"suffix,omitempty" url:"-"`
 	IsDefault       *bool                                    `json:"isDefault,omitempty" url:"-"`
 	IsActive        *bool                                    `json:"isActive,omitempty" url:"-"`
 
@@ -2552,6 +2627,13 @@ func (u *UpdateDocumentSeriesRequest) SetWarehouseID(warehouseID *string) {
 func (u *UpdateDocumentSeriesRequest) SetPrintSeries(printSeries *bool) {
 	u.PrintSeries = printSeries
 	u.require(updateDocumentSeriesRequestFieldPrintSeries)
+}
+
+// SetSuffix sets the Suffix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateDocumentSeriesRequest) SetSuffix(suffix *string) {
+	u.Suffix = suffix
+	u.require(updateDocumentSeriesRequestFieldSuffix)
 }
 
 // SetIsDefault sets the IsDefault field and marks it as non-optional;

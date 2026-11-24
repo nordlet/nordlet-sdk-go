@@ -5599,7 +5599,7 @@ type CompaniesContextAccountResponseProfile struct {
 	BankCode               *string                                        `json:"bankCode,omitempty" url:"bankCode,omitempty"`
 	BankBranchCode         *string                                        `json:"bankBranchCode,omitempty" url:"bankBranchCode,omitempty"`
 	BankAccountNumber      *string                                        `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
-	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
+	// Prefix of the numbers of invoices issued without a document series (SF when none was set; empty in Bulgaria, where invoices and notes share one ten-digit number range)
 	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
 	// Number the next invoice issued without a document series gets, before any country-specific format
 	NextInvoiceNumber         string                                                    `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
@@ -7797,7 +7797,7 @@ type CompaniesProfileAccountResponse struct {
 	BankCode               *string                                 `json:"bankCode,omitempty" url:"bankCode,omitempty"`
 	BankBranchCode         *string                                 `json:"bankBranchCode,omitempty" url:"bankBranchCode,omitempty"`
 	BankAccountNumber      *string                                 `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
-	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
+	// Prefix of the numbers of invoices issued without a document series (SF when none was set; empty in Bulgaria, where invoices and notes share one ten-digit number range)
 	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
 	// Number the next invoice issued without a document series gets, before any country-specific format
 	NextInvoiceNumber         string                                             `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`
@@ -9428,7 +9428,7 @@ type CompaniesUpdateAccountResponse struct {
 	BankCode               *string                                `json:"bankCode,omitempty" url:"bankCode,omitempty"`
 	BankBranchCode         *string                                `json:"bankBranchCode,omitempty" url:"bankBranchCode,omitempty"`
 	BankAccountNumber      *string                                `json:"bankAccountNumber,omitempty" url:"bankAccountNumber,omitempty"`
-	// Prefix of the numbers of invoices issued without a document series (SF when none was set)
+	// Prefix of the numbers of invoices issued without a document series (SF when none was set; empty in Bulgaria, where invoices and notes share one ten-digit number range)
 	InvoicePrefix string `json:"invoicePrefix" url:"invoicePrefix"`
 	// Number the next invoice issued without a document series gets, before any country-specific format
 	NextInvoiceNumber         string                                            `json:"nextInvoiceNumber" url:"nextInvoiceNumber"`

@@ -912,6 +912,274 @@ func (f *FxRevaluationRunLedgerRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	journalTemplatesCreateLedgerRequestFieldName        = big.NewInt(1 << 0)
+	journalTemplatesCreateLedgerRequestFieldDescription = big.NewInt(1 << 1)
+	journalTemplatesCreateLedgerRequestFieldLines       = big.NewInt(1 << 2)
+)
+
+type JournalTemplatesCreateLedgerRequest struct {
+	Name        string                                          `json:"name" url:"-"`
+	Description *string                                         `json:"description,omitempty" url:"-"`
+	Lines       []*JournalTemplatesCreateLedgerRequestLinesItem `json:"lines" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (j *JournalTemplatesCreateLedgerRequest) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequest) SetName(name string) {
+	j.Name = name
+	j.require(journalTemplatesCreateLedgerRequestFieldName)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequest) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesCreateLedgerRequestFieldDescription)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequest) SetLines(lines []*JournalTemplatesCreateLedgerRequestLinesItem) {
+	j.Lines = lines
+	j.require(journalTemplatesCreateLedgerRequestFieldLines)
+}
+
+func (j *JournalTemplatesCreateLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesCreateLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*j = JournalTemplatesCreateLedgerRequest(body)
+	return nil
+}
+
+func (j *JournalTemplatesCreateLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesCreateLedgerRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	journalTemplatesDeleteLedgerRequestFieldID = big.NewInt(1 << 0)
+)
+
+type JournalTemplatesDeleteLedgerRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (j *JournalTemplatesDeleteLedgerRequest) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesDeleteLedgerRequest) SetID(id string) {
+	j.ID = id
+	j.require(journalTemplatesDeleteLedgerRequestFieldID)
+}
+
+func (j *JournalTemplatesDeleteLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesDeleteLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*j = JournalTemplatesDeleteLedgerRequest(body)
+	return nil
+}
+
+func (j *JournalTemplatesDeleteLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesDeleteLedgerRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	journalTemplatesListLedgerRequestFieldPage     = big.NewInt(1 << 0)
+	journalTemplatesListLedgerRequestFieldPageSize = big.NewInt(1 << 1)
+	journalTemplatesListLedgerRequestFieldSort     = big.NewInt(1 << 2)
+	journalTemplatesListLedgerRequestFieldFilter   = big.NewInt(1 << 3)
+	journalTemplatesListLedgerRequestFieldTotals   = big.NewInt(1 << 4)
+)
+
+type JournalTemplatesListLedgerRequest struct {
+	Page     *int64                                         `json:"page,omitempty" url:"-"`
+	PageSize *int64                                         `json:"pageSize,omitempty" url:"-"`
+	Sort     []*JournalTemplatesListLedgerRequestSortItem   `json:"sort,omitempty" url:"-"`
+	Filter   []*JournalTemplatesListLedgerRequestFilterItem `json:"filter,omitempty" url:"-"`
+	// Numeric fields to sum over every row matching the filter (not only the current page)
+	Totals []string `json:"totals,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (j *JournalTemplatesListLedgerRequest) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequest) SetPage(page *int64) {
+	j.Page = page
+	j.require(journalTemplatesListLedgerRequestFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequest) SetPageSize(pageSize *int64) {
+	j.PageSize = pageSize
+	j.require(journalTemplatesListLedgerRequestFieldPageSize)
+}
+
+// SetSort sets the Sort field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequest) SetSort(sort []*JournalTemplatesListLedgerRequestSortItem) {
+	j.Sort = sort
+	j.require(journalTemplatesListLedgerRequestFieldSort)
+}
+
+// SetFilter sets the Filter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequest) SetFilter(filter []*JournalTemplatesListLedgerRequestFilterItem) {
+	j.Filter = filter
+	j.require(journalTemplatesListLedgerRequestFieldFilter)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequest) SetTotals(totals []string) {
+	j.Totals = totals
+	j.require(journalTemplatesListLedgerRequestFieldTotals)
+}
+
+func (j *JournalTemplatesListLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesListLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*j = JournalTemplatesListLedgerRequest(body)
+	return nil
+}
+
+func (j *JournalTemplatesListLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesListLedgerRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	journalTemplatesPostLedgerRequestFieldID          = big.NewInt(1 << 0)
+	journalTemplatesPostLedgerRequestFieldDate        = big.NewInt(1 << 1)
+	journalTemplatesPostLedgerRequestFieldDescription = big.NewInt(1 << 2)
+	journalTemplatesPostLedgerRequestFieldAmounts     = big.NewInt(1 << 3)
+)
+
+type JournalTemplatesPostLedgerRequest struct {
+	ID          string    `json:"id" url:"-"`
+	Date        time.Time `json:"date" url:"-" format:"date"`
+	Description *string   `json:"description,omitempty" url:"-"`
+	Amounts     []string  `json:"amounts" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (j *JournalTemplatesPostLedgerRequest) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerRequest) SetID(id string) {
+	j.ID = id
+	j.require(journalTemplatesPostLedgerRequestFieldID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerRequest) SetDate(date time.Time) {
+	j.Date = date
+	j.require(journalTemplatesPostLedgerRequestFieldDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerRequest) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesPostLedgerRequestFieldDescription)
+}
+
+// SetAmounts sets the Amounts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerRequest) SetAmounts(amounts []string) {
+	j.Amounts = amounts
+	j.require(journalTemplatesPostLedgerRequestFieldAmounts)
+}
+
+func (j *JournalTemplatesPostLedgerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesPostLedgerRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*j = JournalTemplatesPostLedgerRequest(body)
+	return nil
+}
+
+func (j *JournalTemplatesPostLedgerRequest) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesPostLedgerRequest
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*j),
+		Date:  internal.NewDate(j.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	journalTransactionsCreateLedgerRequestFieldDate        = big.NewInt(1 << 0)
 	journalTransactionsCreateLedgerRequestFieldDescription = big.NewInt(1 << 1)
 	journalTransactionsCreateLedgerRequestFieldCurrency    = big.NewInt(1 << 2)
@@ -6640,6 +6908,1813 @@ func (f FxRevaluationRunLedgerResponseLinesItemKind) Ptr() *FxRevaluationRunLedg
 }
 
 var (
+	journalTemplatesCreateLedgerRequestLinesItemFieldAccountCode  = big.NewInt(1 << 0)
+	journalTemplatesCreateLedgerRequestLinesItemFieldSide         = big.NewInt(1 << 1)
+	journalTemplatesCreateLedgerRequestLinesItemFieldDescription  = big.NewInt(1 << 2)
+	journalTemplatesCreateLedgerRequestLinesItemFieldCostCenterID = big.NewInt(1 << 3)
+	journalTemplatesCreateLedgerRequestLinesItemFieldProjectID    = big.NewInt(1 << 4)
+	journalTemplatesCreateLedgerRequestLinesItemFieldPartnerID    = big.NewInt(1 << 5)
+)
+
+type JournalTemplatesCreateLedgerRequestLinesItem struct {
+	AccountCode  string                                           `json:"accountCode" url:"accountCode"`
+	Side         JournalTemplatesCreateLedgerRequestLinesItemSide `json:"side" url:"side"`
+	Description  *string                                          `json:"description,omitempty" url:"description,omitempty"`
+	CostCenterID *string                                          `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID    *string                                          `json:"projectId,omitempty" url:"projectId,omitempty"`
+	PartnerID    *string                                          `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) GetAccountCode() string {
+	if j == nil {
+		return ""
+	}
+	return j.AccountCode
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) GetSide() JournalTemplatesCreateLedgerRequestLinesItemSide {
+	if j == nil {
+		return ""
+	}
+	return j.Side
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) GetDescription() *string {
+	if j == nil {
+		return nil
+	}
+	return j.Description
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) GetCostCenterID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.CostCenterID
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) GetProjectID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.ProjectID
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) GetPartnerID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerID
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) SetAccountCode(accountCode string) {
+	j.AccountCode = accountCode
+	j.require(journalTemplatesCreateLedgerRequestLinesItemFieldAccountCode)
+}
+
+// SetSide sets the Side field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) SetSide(side JournalTemplatesCreateLedgerRequestLinesItemSide) {
+	j.Side = side
+	j.require(journalTemplatesCreateLedgerRequestLinesItemFieldSide)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesCreateLedgerRequestLinesItemFieldDescription)
+}
+
+// SetCostCenterID sets the CostCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) SetCostCenterID(costCenterID *string) {
+	j.CostCenterID = costCenterID
+	j.require(journalTemplatesCreateLedgerRequestLinesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) SetProjectID(projectID *string) {
+	j.ProjectID = projectID
+	j.require(journalTemplatesCreateLedgerRequestLinesItemFieldProjectID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) SetPartnerID(partnerID *string) {
+	j.PartnerID = partnerID
+	j.require(journalTemplatesCreateLedgerRequestLinesItemFieldPartnerID)
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesCreateLedgerRequestLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*j = JournalTemplatesCreateLedgerRequestLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesCreateLedgerRequestLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesCreateLedgerRequestLinesItem) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+type JournalTemplatesCreateLedgerRequestLinesItemSide string
+
+const (
+	JournalTemplatesCreateLedgerRequestLinesItemSideDebit  JournalTemplatesCreateLedgerRequestLinesItemSide = "debit"
+	JournalTemplatesCreateLedgerRequestLinesItemSideCredit JournalTemplatesCreateLedgerRequestLinesItemSide = "credit"
+)
+
+func NewJournalTemplatesCreateLedgerRequestLinesItemSideFromString(s string) (JournalTemplatesCreateLedgerRequestLinesItemSide, error) {
+	switch s {
+	case "debit":
+		return JournalTemplatesCreateLedgerRequestLinesItemSideDebit, nil
+	case "credit":
+		return JournalTemplatesCreateLedgerRequestLinesItemSideCredit, nil
+	}
+	var t JournalTemplatesCreateLedgerRequestLinesItemSide
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (j JournalTemplatesCreateLedgerRequestLinesItemSide) Ptr() *JournalTemplatesCreateLedgerRequestLinesItemSide {
+	return &j
+}
+
+var (
+	journalTemplatesCreateLedgerResponseFieldID          = big.NewInt(1 << 0)
+	journalTemplatesCreateLedgerResponseFieldName        = big.NewInt(1 << 1)
+	journalTemplatesCreateLedgerResponseFieldDescription = big.NewInt(1 << 2)
+	journalTemplatesCreateLedgerResponseFieldLines       = big.NewInt(1 << 3)
+	journalTemplatesCreateLedgerResponseFieldCreatedAt   = big.NewInt(1 << 4)
+)
+
+type JournalTemplatesCreateLedgerResponse struct {
+	ID          string                                           `json:"id" url:"id"`
+	Name        string                                           `json:"name" url:"name"`
+	Description *string                                          `json:"description,omitempty" url:"description,omitempty"`
+	Lines       []*JournalTemplatesCreateLedgerResponseLinesItem `json:"lines" url:"lines"`
+	CreatedAt   time.Time                                        `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) GetID() string {
+	if j == nil {
+		return ""
+	}
+	return j.ID
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) GetName() string {
+	if j == nil {
+		return ""
+	}
+	return j.Name
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) GetDescription() *string {
+	if j == nil {
+		return nil
+	}
+	return j.Description
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) GetLines() []*JournalTemplatesCreateLedgerResponseLinesItem {
+	if j == nil {
+		return nil
+	}
+	return j.Lines
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) GetCreatedAt() time.Time {
+	if j == nil {
+		return time.Time{}
+	}
+	return j.CreatedAt
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponse) SetID(id string) {
+	j.ID = id
+	j.require(journalTemplatesCreateLedgerResponseFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponse) SetName(name string) {
+	j.Name = name
+	j.require(journalTemplatesCreateLedgerResponseFieldName)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponse) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesCreateLedgerResponseFieldDescription)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponse) SetLines(lines []*JournalTemplatesCreateLedgerResponseLinesItem) {
+	j.Lines = lines
+	j.require(journalTemplatesCreateLedgerResponseFieldLines)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponse) SetCreatedAt(createdAt time.Time) {
+	j.CreatedAt = createdAt
+	j.require(journalTemplatesCreateLedgerResponseFieldCreatedAt)
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) UnmarshalJSON(data []byte) error {
+	type embed JournalTemplatesCreateLedgerResponse
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*j),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*j = JournalTemplatesCreateLedgerResponse(unmarshaler.embed)
+	j.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesCreateLedgerResponse
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*j),
+		CreatedAt: internal.NewDateTime(j.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesCreateLedgerResponse) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+var (
+	journalTemplatesCreateLedgerResponseLinesItemFieldAccountCode  = big.NewInt(1 << 0)
+	journalTemplatesCreateLedgerResponseLinesItemFieldSide         = big.NewInt(1 << 1)
+	journalTemplatesCreateLedgerResponseLinesItemFieldDescription  = big.NewInt(1 << 2)
+	journalTemplatesCreateLedgerResponseLinesItemFieldCostCenterID = big.NewInt(1 << 3)
+	journalTemplatesCreateLedgerResponseLinesItemFieldProjectID    = big.NewInt(1 << 4)
+	journalTemplatesCreateLedgerResponseLinesItemFieldPartnerID    = big.NewInt(1 << 5)
+)
+
+type JournalTemplatesCreateLedgerResponseLinesItem struct {
+	AccountCode  string                                            `json:"accountCode" url:"accountCode"`
+	Side         JournalTemplatesCreateLedgerResponseLinesItemSide `json:"side" url:"side"`
+	Description  *string                                           `json:"description,omitempty" url:"description,omitempty"`
+	CostCenterID *string                                           `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID    *string                                           `json:"projectId,omitempty" url:"projectId,omitempty"`
+	PartnerID    *string                                           `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) GetAccountCode() string {
+	if j == nil {
+		return ""
+	}
+	return j.AccountCode
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) GetSide() JournalTemplatesCreateLedgerResponseLinesItemSide {
+	if j == nil {
+		return ""
+	}
+	return j.Side
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) GetDescription() *string {
+	if j == nil {
+		return nil
+	}
+	return j.Description
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) GetCostCenterID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.CostCenterID
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) GetProjectID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.ProjectID
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) GetPartnerID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerID
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) SetAccountCode(accountCode string) {
+	j.AccountCode = accountCode
+	j.require(journalTemplatesCreateLedgerResponseLinesItemFieldAccountCode)
+}
+
+// SetSide sets the Side field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) SetSide(side JournalTemplatesCreateLedgerResponseLinesItemSide) {
+	j.Side = side
+	j.require(journalTemplatesCreateLedgerResponseLinesItemFieldSide)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesCreateLedgerResponseLinesItemFieldDescription)
+}
+
+// SetCostCenterID sets the CostCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) SetCostCenterID(costCenterID *string) {
+	j.CostCenterID = costCenterID
+	j.require(journalTemplatesCreateLedgerResponseLinesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) SetProjectID(projectID *string) {
+	j.ProjectID = projectID
+	j.require(journalTemplatesCreateLedgerResponseLinesItemFieldProjectID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) SetPartnerID(partnerID *string) {
+	j.PartnerID = partnerID
+	j.require(journalTemplatesCreateLedgerResponseLinesItemFieldPartnerID)
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesCreateLedgerResponseLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*j = JournalTemplatesCreateLedgerResponseLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesCreateLedgerResponseLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesCreateLedgerResponseLinesItem) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+type JournalTemplatesCreateLedgerResponseLinesItemSide string
+
+const (
+	JournalTemplatesCreateLedgerResponseLinesItemSideDebit  JournalTemplatesCreateLedgerResponseLinesItemSide = "debit"
+	JournalTemplatesCreateLedgerResponseLinesItemSideCredit JournalTemplatesCreateLedgerResponseLinesItemSide = "credit"
+)
+
+func NewJournalTemplatesCreateLedgerResponseLinesItemSideFromString(s string) (JournalTemplatesCreateLedgerResponseLinesItemSide, error) {
+	switch s {
+	case "debit":
+		return JournalTemplatesCreateLedgerResponseLinesItemSideDebit, nil
+	case "credit":
+		return JournalTemplatesCreateLedgerResponseLinesItemSideCredit, nil
+	}
+	var t JournalTemplatesCreateLedgerResponseLinesItemSide
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (j JournalTemplatesCreateLedgerResponseLinesItemSide) Ptr() *JournalTemplatesCreateLedgerResponseLinesItemSide {
+	return &j
+}
+
+var (
+	journalTemplatesDeleteLedgerResponseFieldDeleted = big.NewInt(1 << 0)
+)
+
+type JournalTemplatesDeleteLedgerResponse struct {
+	Deleted bool `json:"deleted" url:"deleted"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesDeleteLedgerResponse) GetDeleted() bool {
+	if j == nil {
+		return false
+	}
+	return j.Deleted
+}
+
+func (j *JournalTemplatesDeleteLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesDeleteLedgerResponse) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetDeleted sets the Deleted field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesDeleteLedgerResponse) SetDeleted(deleted bool) {
+	j.Deleted = deleted
+	j.require(journalTemplatesDeleteLedgerResponseFieldDeleted)
+}
+
+func (j *JournalTemplatesDeleteLedgerResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesDeleteLedgerResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*j = JournalTemplatesDeleteLedgerResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesDeleteLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesDeleteLedgerResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesDeleteLedgerResponse) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+var (
+	journalTemplatesListLedgerRequestFilterItemFieldField = big.NewInt(1 << 0)
+	journalTemplatesListLedgerRequestFilterItemFieldOp    = big.NewInt(1 << 1)
+	journalTemplatesListLedgerRequestFilterItemFieldValue = big.NewInt(1 << 2)
+)
+
+type JournalTemplatesListLedgerRequestFilterItem struct {
+	Field string                                            `json:"field" url:"field"`
+	Op    JournalTemplatesListLedgerRequestFilterItemOp     `json:"op" url:"op"`
+	Value *JournalTemplatesListLedgerRequestFilterItemValue `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) GetField() string {
+	if j == nil {
+		return ""
+	}
+	return j.Field
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) GetOp() JournalTemplatesListLedgerRequestFilterItemOp {
+	if j == nil {
+		return ""
+	}
+	return j.Op
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) GetValue() *JournalTemplatesListLedgerRequestFilterItemValue {
+	if j == nil {
+		return nil
+	}
+	return j.Value
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequestFilterItem) SetField(field string) {
+	j.Field = field
+	j.require(journalTemplatesListLedgerRequestFilterItemFieldField)
+}
+
+// SetOp sets the Op field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequestFilterItem) SetOp(op JournalTemplatesListLedgerRequestFilterItemOp) {
+	j.Op = op
+	j.require(journalTemplatesListLedgerRequestFilterItemFieldOp)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequestFilterItem) SetValue(value *JournalTemplatesListLedgerRequestFilterItemValue) {
+	j.Value = value
+	j.require(journalTemplatesListLedgerRequestFilterItemFieldValue)
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesListLedgerRequestFilterItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*j = JournalTemplatesListLedgerRequestFilterItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesListLedgerRequestFilterItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItem) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+type JournalTemplatesListLedgerRequestFilterItemOp string
+
+const (
+	JournalTemplatesListLedgerRequestFilterItemOpEq       JournalTemplatesListLedgerRequestFilterItemOp = "eq"
+	JournalTemplatesListLedgerRequestFilterItemOpNe       JournalTemplatesListLedgerRequestFilterItemOp = "ne"
+	JournalTemplatesListLedgerRequestFilterItemOpContains JournalTemplatesListLedgerRequestFilterItemOp = "contains"
+	JournalTemplatesListLedgerRequestFilterItemOpGte      JournalTemplatesListLedgerRequestFilterItemOp = "gte"
+	JournalTemplatesListLedgerRequestFilterItemOpLte      JournalTemplatesListLedgerRequestFilterItemOp = "lte"
+	JournalTemplatesListLedgerRequestFilterItemOpIn       JournalTemplatesListLedgerRequestFilterItemOp = "in"
+)
+
+func NewJournalTemplatesListLedgerRequestFilterItemOpFromString(s string) (JournalTemplatesListLedgerRequestFilterItemOp, error) {
+	switch s {
+	case "eq":
+		return JournalTemplatesListLedgerRequestFilterItemOpEq, nil
+	case "ne":
+		return JournalTemplatesListLedgerRequestFilterItemOpNe, nil
+	case "contains":
+		return JournalTemplatesListLedgerRequestFilterItemOpContains, nil
+	case "gte":
+		return JournalTemplatesListLedgerRequestFilterItemOpGte, nil
+	case "lte":
+		return JournalTemplatesListLedgerRequestFilterItemOpLte, nil
+	case "in":
+		return JournalTemplatesListLedgerRequestFilterItemOpIn, nil
+	}
+	var t JournalTemplatesListLedgerRequestFilterItemOp
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (j JournalTemplatesListLedgerRequestFilterItemOp) Ptr() *JournalTemplatesListLedgerRequestFilterItemOp {
+	return &j
+}
+
+type JournalTemplatesListLedgerRequestFilterItemValue struct {
+	String                                                        string
+	Double                                                        float64
+	Boolean                                                       bool
+	JournalTemplatesListLedgerRequestFilterItemValueThreeItemList []*JournalTemplatesListLedgerRequestFilterItemValueThreeItem
+
+	typ string
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValue) GetString() string {
+	if j == nil {
+		return ""
+	}
+	return j.String
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValue) GetDouble() float64 {
+	if j == nil {
+		return 0
+	}
+	return j.Double
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValue) GetBoolean() bool {
+	if j == nil {
+		return false
+	}
+	return j.Boolean
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValue) GetJournalTemplatesListLedgerRequestFilterItemValueThreeItemList() []*JournalTemplatesListLedgerRequestFilterItemValueThreeItem {
+	if j == nil {
+		return nil
+	}
+	return j.JournalTemplatesListLedgerRequestFilterItemValueThreeItemList
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValue) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		j.typ = "String"
+		j.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		j.typ = "Double"
+		j.Double = valueDouble
+		return nil
+	}
+	var valueBoolean bool
+	if err := json.Unmarshal(data, &valueBoolean); err == nil {
+		j.typ = "Boolean"
+		j.Boolean = valueBoolean
+		return nil
+	}
+	var valueJournalTemplatesListLedgerRequestFilterItemValueThreeItemList []*JournalTemplatesListLedgerRequestFilterItemValueThreeItem
+	if err := json.Unmarshal(data, &valueJournalTemplatesListLedgerRequestFilterItemValueThreeItemList); err == nil {
+		j.typ = "JournalTemplatesListLedgerRequestFilterItemValueThreeItemList"
+		j.JournalTemplatesListLedgerRequestFilterItemValueThreeItemList = valueJournalTemplatesListLedgerRequestFilterItemValueThreeItemList
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, j)
+}
+
+func (j JournalTemplatesListLedgerRequestFilterItemValue) MarshalJSON() ([]byte, error) {
+	if j.typ == "String" || j.String != "" {
+		return json.Marshal(j.String)
+	}
+	if j.typ == "Double" || j.Double != 0 {
+		return json.Marshal(j.Double)
+	}
+	if j.typ == "Boolean" || j.Boolean != false {
+		return json.Marshal(j.Boolean)
+	}
+	if j.typ == "JournalTemplatesListLedgerRequestFilterItemValueThreeItemList" || j.JournalTemplatesListLedgerRequestFilterItemValueThreeItemList != nil {
+		return json.Marshal(j.JournalTemplatesListLedgerRequestFilterItemValueThreeItemList)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", j)
+}
+
+type JournalTemplatesListLedgerRequestFilterItemValueVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+	VisitBoolean(bool) error
+	VisitJournalTemplatesListLedgerRequestFilterItemValueThreeItemList([]*JournalTemplatesListLedgerRequestFilterItemValueThreeItem) error
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValue) Accept(visitor JournalTemplatesListLedgerRequestFilterItemValueVisitor) error {
+	if j.typ == "String" || j.String != "" {
+		return visitor.VisitString(j.String)
+	}
+	if j.typ == "Double" || j.Double != 0 {
+		return visitor.VisitDouble(j.Double)
+	}
+	if j.typ == "Boolean" || j.Boolean != false {
+		return visitor.VisitBoolean(j.Boolean)
+	}
+	if j.typ == "JournalTemplatesListLedgerRequestFilterItemValueThreeItemList" || j.JournalTemplatesListLedgerRequestFilterItemValueThreeItemList != nil {
+		return visitor.VisitJournalTemplatesListLedgerRequestFilterItemValueThreeItemList(j.JournalTemplatesListLedgerRequestFilterItemValueThreeItemList)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", j)
+}
+
+type JournalTemplatesListLedgerRequestFilterItemValueThreeItem struct {
+	String string
+	Double float64
+
+	typ string
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValueThreeItem) GetString() string {
+	if j == nil {
+		return ""
+	}
+	return j.String
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValueThreeItem) GetDouble() float64 {
+	if j == nil {
+		return 0
+	}
+	return j.Double
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValueThreeItem) UnmarshalJSON(data []byte) error {
+	var valueString string
+	if err := json.Unmarshal(data, &valueString); err == nil {
+		j.typ = "String"
+		j.String = valueString
+		return nil
+	}
+	var valueDouble float64
+	if err := json.Unmarshal(data, &valueDouble); err == nil {
+		j.typ = "Double"
+		j.Double = valueDouble
+		return nil
+	}
+	return fmt.Errorf("%s cannot be deserialized as a %T", data, j)
+}
+
+func (j JournalTemplatesListLedgerRequestFilterItemValueThreeItem) MarshalJSON() ([]byte, error) {
+	if j.typ == "String" || j.String != "" {
+		return json.Marshal(j.String)
+	}
+	if j.typ == "Double" || j.Double != 0 {
+		return json.Marshal(j.Double)
+	}
+	return nil, fmt.Errorf("type %T does not include a non-empty union type", j)
+}
+
+type JournalTemplatesListLedgerRequestFilterItemValueThreeItemVisitor interface {
+	VisitString(string) error
+	VisitDouble(float64) error
+}
+
+func (j *JournalTemplatesListLedgerRequestFilterItemValueThreeItem) Accept(visitor JournalTemplatesListLedgerRequestFilterItemValueThreeItemVisitor) error {
+	if j.typ == "String" || j.String != "" {
+		return visitor.VisitString(j.String)
+	}
+	if j.typ == "Double" || j.Double != 0 {
+		return visitor.VisitDouble(j.Double)
+	}
+	return fmt.Errorf("type %T does not include a non-empty union type", j)
+}
+
+var (
+	journalTemplatesListLedgerRequestSortItemFieldField = big.NewInt(1 << 0)
+	journalTemplatesListLedgerRequestSortItemFieldDir   = big.NewInt(1 << 1)
+)
+
+type JournalTemplatesListLedgerRequestSortItem struct {
+	Field string                                        `json:"field" url:"field"`
+	Dir   *JournalTemplatesListLedgerRequestSortItemDir `json:"dir,omitempty" url:"dir,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesListLedgerRequestSortItem) GetField() string {
+	if j == nil {
+		return ""
+	}
+	return j.Field
+}
+
+func (j *JournalTemplatesListLedgerRequestSortItem) GetDir() *JournalTemplatesListLedgerRequestSortItemDir {
+	if j == nil {
+		return nil
+	}
+	return j.Dir
+}
+
+func (j *JournalTemplatesListLedgerRequestSortItem) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesListLedgerRequestSortItem) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetField sets the Field field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequestSortItem) SetField(field string) {
+	j.Field = field
+	j.require(journalTemplatesListLedgerRequestSortItemFieldField)
+}
+
+// SetDir sets the Dir field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerRequestSortItem) SetDir(dir *JournalTemplatesListLedgerRequestSortItemDir) {
+	j.Dir = dir
+	j.require(journalTemplatesListLedgerRequestSortItemFieldDir)
+}
+
+func (j *JournalTemplatesListLedgerRequestSortItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesListLedgerRequestSortItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*j = JournalTemplatesListLedgerRequestSortItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesListLedgerRequestSortItem) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesListLedgerRequestSortItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesListLedgerRequestSortItem) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+type JournalTemplatesListLedgerRequestSortItemDir string
+
+const (
+	JournalTemplatesListLedgerRequestSortItemDirAsc  JournalTemplatesListLedgerRequestSortItemDir = "asc"
+	JournalTemplatesListLedgerRequestSortItemDirDesc JournalTemplatesListLedgerRequestSortItemDir = "desc"
+)
+
+func NewJournalTemplatesListLedgerRequestSortItemDirFromString(s string) (JournalTemplatesListLedgerRequestSortItemDir, error) {
+	switch s {
+	case "asc":
+		return JournalTemplatesListLedgerRequestSortItemDirAsc, nil
+	case "desc":
+		return JournalTemplatesListLedgerRequestSortItemDirDesc, nil
+	}
+	var t JournalTemplatesListLedgerRequestSortItemDir
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (j JournalTemplatesListLedgerRequestSortItemDir) Ptr() *JournalTemplatesListLedgerRequestSortItemDir {
+	return &j
+}
+
+var (
+	journalTemplatesListLedgerResponseFieldRows             = big.NewInt(1 << 0)
+	journalTemplatesListLedgerResponseFieldPage             = big.NewInt(1 << 1)
+	journalTemplatesListLedgerResponseFieldPageSize         = big.NewInt(1 << 2)
+	journalTemplatesListLedgerResponseFieldTotal            = big.NewInt(1 << 3)
+	journalTemplatesListLedgerResponseFieldTotals           = big.NewInt(1 << 4)
+	journalTemplatesListLedgerResponseFieldTotalsByCurrency = big.NewInt(1 << 5)
+)
+
+type JournalTemplatesListLedgerResponse struct {
+	Rows     []*JournalTemplatesListLedgerResponseRowsItem `json:"rows" url:"rows"`
+	Page     int64                                         `json:"page" url:"page"`
+	PageSize int64                                         `json:"pageSize" url:"pageSize"`
+	Total    int64                                         `json:"total" url:"total"`
+	Totals   map[string]string                             `json:"totals,omitempty" url:"totals,omitempty"`
+	// The requested totals split by currency code, present when the listed records carry a currency
+	TotalsByCurrency map[string]map[string]string `json:"totalsByCurrency,omitempty" url:"totalsByCurrency,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesListLedgerResponse) GetRows() []*JournalTemplatesListLedgerResponseRowsItem {
+	if j == nil {
+		return nil
+	}
+	return j.Rows
+}
+
+func (j *JournalTemplatesListLedgerResponse) GetPage() int64 {
+	if j == nil {
+		return 0
+	}
+	return j.Page
+}
+
+func (j *JournalTemplatesListLedgerResponse) GetPageSize() int64 {
+	if j == nil {
+		return 0
+	}
+	return j.PageSize
+}
+
+func (j *JournalTemplatesListLedgerResponse) GetTotal() int64 {
+	if j == nil {
+		return 0
+	}
+	return j.Total
+}
+
+func (j *JournalTemplatesListLedgerResponse) GetTotals() map[string]string {
+	if j == nil {
+		return nil
+	}
+	return j.Totals
+}
+
+func (j *JournalTemplatesListLedgerResponse) GetTotalsByCurrency() map[string]map[string]string {
+	if j == nil {
+		return nil
+	}
+	return j.TotalsByCurrency
+}
+
+func (j *JournalTemplatesListLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesListLedgerResponse) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponse) SetRows(rows []*JournalTemplatesListLedgerResponseRowsItem) {
+	j.Rows = rows
+	j.require(journalTemplatesListLedgerResponseFieldRows)
+}
+
+// SetPage sets the Page field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponse) SetPage(page int64) {
+	j.Page = page
+	j.require(journalTemplatesListLedgerResponseFieldPage)
+}
+
+// SetPageSize sets the PageSize field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponse) SetPageSize(pageSize int64) {
+	j.PageSize = pageSize
+	j.require(journalTemplatesListLedgerResponseFieldPageSize)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponse) SetTotal(total int64) {
+	j.Total = total
+	j.require(journalTemplatesListLedgerResponseFieldTotal)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponse) SetTotals(totals map[string]string) {
+	j.Totals = totals
+	j.require(journalTemplatesListLedgerResponseFieldTotals)
+}
+
+// SetTotalsByCurrency sets the TotalsByCurrency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponse) SetTotalsByCurrency(totalsByCurrency map[string]map[string]string) {
+	j.TotalsByCurrency = totalsByCurrency
+	j.require(journalTemplatesListLedgerResponseFieldTotalsByCurrency)
+}
+
+func (j *JournalTemplatesListLedgerResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesListLedgerResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*j = JournalTemplatesListLedgerResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesListLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesListLedgerResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesListLedgerResponse) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+var (
+	journalTemplatesListLedgerResponseRowsItemFieldID          = big.NewInt(1 << 0)
+	journalTemplatesListLedgerResponseRowsItemFieldName        = big.NewInt(1 << 1)
+	journalTemplatesListLedgerResponseRowsItemFieldDescription = big.NewInt(1 << 2)
+	journalTemplatesListLedgerResponseRowsItemFieldLines       = big.NewInt(1 << 3)
+	journalTemplatesListLedgerResponseRowsItemFieldCreatedAt   = big.NewInt(1 << 4)
+)
+
+type JournalTemplatesListLedgerResponseRowsItem struct {
+	ID          string                                                 `json:"id" url:"id"`
+	Name        string                                                 `json:"name" url:"name"`
+	Description *string                                                `json:"description,omitempty" url:"description,omitempty"`
+	Lines       []*JournalTemplatesListLedgerResponseRowsItemLinesItem `json:"lines" url:"lines"`
+	CreatedAt   time.Time                                              `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) GetID() string {
+	if j == nil {
+		return ""
+	}
+	return j.ID
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) GetName() string {
+	if j == nil {
+		return ""
+	}
+	return j.Name
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) GetDescription() *string {
+	if j == nil {
+		return nil
+	}
+	return j.Description
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) GetLines() []*JournalTemplatesListLedgerResponseRowsItemLinesItem {
+	if j == nil {
+		return nil
+	}
+	return j.Lines
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) GetCreatedAt() time.Time {
+	if j == nil {
+		return time.Time{}
+	}
+	return j.CreatedAt
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItem) SetID(id string) {
+	j.ID = id
+	j.require(journalTemplatesListLedgerResponseRowsItemFieldID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItem) SetName(name string) {
+	j.Name = name
+	j.require(journalTemplatesListLedgerResponseRowsItemFieldName)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItem) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesListLedgerResponseRowsItemFieldDescription)
+}
+
+// SetLines sets the Lines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItem) SetLines(lines []*JournalTemplatesListLedgerResponseRowsItemLinesItem) {
+	j.Lines = lines
+	j.require(journalTemplatesListLedgerResponseRowsItemFieldLines)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItem) SetCreatedAt(createdAt time.Time) {
+	j.CreatedAt = createdAt
+	j.require(journalTemplatesListLedgerResponseRowsItemFieldCreatedAt)
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed JournalTemplatesListLedgerResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*j),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*j = JournalTemplatesListLedgerResponseRowsItem(unmarshaler.embed)
+	j.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesListLedgerResponseRowsItem
+	var marshaler = struct {
+		embed
+		CreatedAt *internal.DateTime `json:"createdAt"`
+	}{
+		embed:     embed(*j),
+		CreatedAt: internal.NewDateTime(j.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItem) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+var (
+	journalTemplatesListLedgerResponseRowsItemLinesItemFieldAccountCode  = big.NewInt(1 << 0)
+	journalTemplatesListLedgerResponseRowsItemLinesItemFieldSide         = big.NewInt(1 << 1)
+	journalTemplatesListLedgerResponseRowsItemLinesItemFieldDescription  = big.NewInt(1 << 2)
+	journalTemplatesListLedgerResponseRowsItemLinesItemFieldCostCenterID = big.NewInt(1 << 3)
+	journalTemplatesListLedgerResponseRowsItemLinesItemFieldProjectID    = big.NewInt(1 << 4)
+	journalTemplatesListLedgerResponseRowsItemLinesItemFieldPartnerID    = big.NewInt(1 << 5)
+)
+
+type JournalTemplatesListLedgerResponseRowsItemLinesItem struct {
+	AccountCode  string                                                  `json:"accountCode" url:"accountCode"`
+	Side         JournalTemplatesListLedgerResponseRowsItemLinesItemSide `json:"side" url:"side"`
+	Description  *string                                                 `json:"description,omitempty" url:"description,omitempty"`
+	CostCenterID *string                                                 `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
+	ProjectID    *string                                                 `json:"projectId,omitempty" url:"projectId,omitempty"`
+	PartnerID    *string                                                 `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) GetAccountCode() string {
+	if j == nil {
+		return ""
+	}
+	return j.AccountCode
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) GetSide() JournalTemplatesListLedgerResponseRowsItemLinesItemSide {
+	if j == nil {
+		return ""
+	}
+	return j.Side
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) GetDescription() *string {
+	if j == nil {
+		return nil
+	}
+	return j.Description
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) GetCostCenterID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.CostCenterID
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) GetProjectID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.ProjectID
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) GetPartnerID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerID
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) SetAccountCode(accountCode string) {
+	j.AccountCode = accountCode
+	j.require(journalTemplatesListLedgerResponseRowsItemLinesItemFieldAccountCode)
+}
+
+// SetSide sets the Side field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) SetSide(side JournalTemplatesListLedgerResponseRowsItemLinesItemSide) {
+	j.Side = side
+	j.require(journalTemplatesListLedgerResponseRowsItemLinesItemFieldSide)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesListLedgerResponseRowsItemLinesItemFieldDescription)
+}
+
+// SetCostCenterID sets the CostCenterID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) SetCostCenterID(costCenterID *string) {
+	j.CostCenterID = costCenterID
+	j.require(journalTemplatesListLedgerResponseRowsItemLinesItemFieldCostCenterID)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) SetProjectID(projectID *string) {
+	j.ProjectID = projectID
+	j.require(journalTemplatesListLedgerResponseRowsItemLinesItemFieldProjectID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) SetPartnerID(partnerID *string) {
+	j.PartnerID = partnerID
+	j.require(journalTemplatesListLedgerResponseRowsItemLinesItemFieldPartnerID)
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler JournalTemplatesListLedgerResponseRowsItemLinesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*j = JournalTemplatesListLedgerResponseRowsItemLinesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesListLedgerResponseRowsItemLinesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*j),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesListLedgerResponseRowsItemLinesItem) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+type JournalTemplatesListLedgerResponseRowsItemLinesItemSide string
+
+const (
+	JournalTemplatesListLedgerResponseRowsItemLinesItemSideDebit  JournalTemplatesListLedgerResponseRowsItemLinesItemSide = "debit"
+	JournalTemplatesListLedgerResponseRowsItemLinesItemSideCredit JournalTemplatesListLedgerResponseRowsItemLinesItemSide = "credit"
+)
+
+func NewJournalTemplatesListLedgerResponseRowsItemLinesItemSideFromString(s string) (JournalTemplatesListLedgerResponseRowsItemLinesItemSide, error) {
+	switch s {
+	case "debit":
+		return JournalTemplatesListLedgerResponseRowsItemLinesItemSideDebit, nil
+	case "credit":
+		return JournalTemplatesListLedgerResponseRowsItemLinesItemSideCredit, nil
+	}
+	var t JournalTemplatesListLedgerResponseRowsItemLinesItemSide
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (j JournalTemplatesListLedgerResponseRowsItemLinesItemSide) Ptr() *JournalTemplatesListLedgerResponseRowsItemLinesItemSide {
+	return &j
+}
+
+var (
+	journalTemplatesPostLedgerResponseFieldID           = big.NewInt(1 << 0)
+	journalTemplatesPostLedgerResponseFieldDate         = big.NewInt(1 << 1)
+	journalTemplatesPostLedgerResponseFieldDescription  = big.NewInt(1 << 2)
+	journalTemplatesPostLedgerResponseFieldDocumentType = big.NewInt(1 << 3)
+	journalTemplatesPostLedgerResponseFieldDocumentID   = big.NewInt(1 << 4)
+	journalTemplatesPostLedgerResponseFieldPartnerID    = big.NewInt(1 << 5)
+	journalTemplatesPostLedgerResponseFieldStatus       = big.NewInt(1 << 6)
+	journalTemplatesPostLedgerResponseFieldCreatedAt    = big.NewInt(1 << 7)
+	journalTemplatesPostLedgerResponseFieldPostedAt     = big.NewInt(1 << 8)
+)
+
+type JournalTemplatesPostLedgerResponse struct {
+	ID           string                                   `json:"id" url:"id"`
+	Date         time.Time                                `json:"date" url:"date" format:"date"`
+	Description  *string                                  `json:"description,omitempty" url:"description,omitempty"`
+	DocumentType *string                                  `json:"documentType,omitempty" url:"documentType,omitempty"`
+	DocumentID   *string                                  `json:"documentId,omitempty" url:"documentId,omitempty"`
+	PartnerID    *string                                  `json:"partnerId,omitempty" url:"partnerId,omitempty"`
+	Status       JournalTemplatesPostLedgerResponseStatus `json:"status" url:"status"`
+	CreatedAt    time.Time                                `json:"createdAt" url:"createdAt"`
+	PostedAt     *time.Time                               `json:"postedAt,omitempty" url:"postedAt,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetID() string {
+	if j == nil {
+		return ""
+	}
+	return j.ID
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetDate() time.Time {
+	if j == nil {
+		return time.Time{}
+	}
+	return j.Date
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetDescription() *string {
+	if j == nil {
+		return nil
+	}
+	return j.Description
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetDocumentType() *string {
+	if j == nil {
+		return nil
+	}
+	return j.DocumentType
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetDocumentID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.DocumentID
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetPartnerID() *string {
+	if j == nil {
+		return nil
+	}
+	return j.PartnerID
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetStatus() JournalTemplatesPostLedgerResponseStatus {
+	if j == nil {
+		return ""
+	}
+	return j.Status
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetCreatedAt() time.Time {
+	if j == nil {
+		return time.Time{}
+	}
+	return j.CreatedAt
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetPostedAt() *time.Time {
+	if j == nil {
+		return nil
+	}
+	return j.PostedAt
+}
+
+func (j *JournalTemplatesPostLedgerResponse) GetExtraProperties() map[string]interface{} {
+	if j == nil {
+		return nil
+	}
+	return j.extraProperties
+}
+
+func (j *JournalTemplatesPostLedgerResponse) require(field *big.Int) {
+	if j.explicitFields == nil {
+		j.explicitFields = big.NewInt(0)
+	}
+	j.explicitFields.Or(j.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetID(id string) {
+	j.ID = id
+	j.require(journalTemplatesPostLedgerResponseFieldID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetDate(date time.Time) {
+	j.Date = date
+	j.require(journalTemplatesPostLedgerResponseFieldDate)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetDescription(description *string) {
+	j.Description = description
+	j.require(journalTemplatesPostLedgerResponseFieldDescription)
+}
+
+// SetDocumentType sets the DocumentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetDocumentType(documentType *string) {
+	j.DocumentType = documentType
+	j.require(journalTemplatesPostLedgerResponseFieldDocumentType)
+}
+
+// SetDocumentID sets the DocumentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetDocumentID(documentID *string) {
+	j.DocumentID = documentID
+	j.require(journalTemplatesPostLedgerResponseFieldDocumentID)
+}
+
+// SetPartnerID sets the PartnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetPartnerID(partnerID *string) {
+	j.PartnerID = partnerID
+	j.require(journalTemplatesPostLedgerResponseFieldPartnerID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetStatus(status JournalTemplatesPostLedgerResponseStatus) {
+	j.Status = status
+	j.require(journalTemplatesPostLedgerResponseFieldStatus)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetCreatedAt(createdAt time.Time) {
+	j.CreatedAt = createdAt
+	j.require(journalTemplatesPostLedgerResponseFieldCreatedAt)
+}
+
+// SetPostedAt sets the PostedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (j *JournalTemplatesPostLedgerResponse) SetPostedAt(postedAt *time.Time) {
+	j.PostedAt = postedAt
+	j.require(journalTemplatesPostLedgerResponseFieldPostedAt)
+}
+
+func (j *JournalTemplatesPostLedgerResponse) UnmarshalJSON(data []byte) error {
+	type embed JournalTemplatesPostLedgerResponse
+	var unmarshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		PostedAt  *internal.DateTime `json:"postedAt,omitempty"`
+	}{
+		embed: embed(*j),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*j = JournalTemplatesPostLedgerResponse(unmarshaler.embed)
+	j.Date = unmarshaler.Date.Time()
+	j.CreatedAt = unmarshaler.CreatedAt.Time()
+	j.PostedAt = unmarshaler.PostedAt.TimePtr()
+	extraProperties, err := internal.ExtractExtraProperties(data, *j)
+	if err != nil {
+		return err
+	}
+	j.extraProperties = extraProperties
+	j.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (j *JournalTemplatesPostLedgerResponse) MarshalJSON() ([]byte, error) {
+	type embed JournalTemplatesPostLedgerResponse
+	var marshaler = struct {
+		embed
+		Date      *internal.Date     `json:"date"`
+		CreatedAt *internal.DateTime `json:"createdAt"`
+		PostedAt  *internal.DateTime `json:"postedAt,omitempty"`
+	}{
+		embed:     embed(*j),
+		Date:      internal.NewDate(j.Date),
+		CreatedAt: internal.NewDateTime(j.CreatedAt),
+		PostedAt:  internal.NewOptionalDateTime(j.PostedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, j.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (j *JournalTemplatesPostLedgerResponse) String() string {
+	if j == nil {
+		return "<nil>"
+	}
+	if len(j.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(j.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(j); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", j)
+}
+
+type JournalTemplatesPostLedgerResponseStatus string
+
+const (
+	JournalTemplatesPostLedgerResponseStatusDraft  JournalTemplatesPostLedgerResponseStatus = "draft"
+	JournalTemplatesPostLedgerResponseStatusPosted JournalTemplatesPostLedgerResponseStatus = "posted"
+)
+
+func NewJournalTemplatesPostLedgerResponseStatusFromString(s string) (JournalTemplatesPostLedgerResponseStatus, error) {
+	switch s {
+	case "draft":
+		return JournalTemplatesPostLedgerResponseStatusDraft, nil
+	case "posted":
+		return JournalTemplatesPostLedgerResponseStatusPosted, nil
+	}
+	var t JournalTemplatesPostLedgerResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (j JournalTemplatesPostLedgerResponseStatus) Ptr() *JournalTemplatesPostLedgerResponseStatus {
+	return &j
+}
+
+var (
 	journalTransactionsCreateLedgerRequestEntriesItemFieldAccountCode  = big.NewInt(1 << 0)
 	journalTransactionsCreateLedgerRequestEntriesItemFieldCostCenterID = big.NewInt(1 << 1)
 	journalTransactionsCreateLedgerRequestEntriesItemFieldProjectID    = big.NewInt(1 << 2)
@@ -12201,15 +14276,18 @@ func (p *PeriodsLockLedgerResponseWarningsItem) String() string {
 type PeriodsLockLedgerResponseWarningsItemCode string
 
 const (
-	PeriodsLockLedgerResponseWarningsItemCodeDraftSaleDocuments            PeriodsLockLedgerResponseWarningsItemCode = "draft_sale_documents"
-	PeriodsLockLedgerResponseWarningsItemCodeDraftPurchaseDocuments        PeriodsLockLedgerResponseWarningsItemCode = "draft_purchase_documents"
-	PeriodsLockLedgerResponseWarningsItemCodeUnbookedBankLines             PeriodsLockLedgerResponseWarningsItemCode = "unbooked_bank_lines"
-	PeriodsLockLedgerResponseWarningsItemCodeDepreciationNotPosted         PeriodsLockLedgerResponseWarningsItemCode = "depreciation_not_posted"
-	PeriodsLockLedgerResponseWarningsItemCodeDeferralsNotPosted            PeriodsLockLedgerResponseWarningsItemCode = "deferrals_not_posted"
-	PeriodsLockLedgerResponseWarningsItemCodeRecurringInvoicesNotGenerated PeriodsLockLedgerResponseWarningsItemCode = "recurring_invoices_not_generated"
-	PeriodsLockLedgerResponseWarningsItemCodePayrollRunsNotApproved        PeriodsLockLedgerResponseWarningsItemCode = "payroll_runs_not_approved"
-	PeriodsLockLedgerResponseWarningsItemCodeOpenFxReceivables             PeriodsLockLedgerResponseWarningsItemCode = "open_fx_receivables"
-	PeriodsLockLedgerResponseWarningsItemCodeOpenFxPayables                PeriodsLockLedgerResponseWarningsItemCode = "open_fx_payables"
+	PeriodsLockLedgerResponseWarningsItemCodeDraftSaleDocuments             PeriodsLockLedgerResponseWarningsItemCode = "draft_sale_documents"
+	PeriodsLockLedgerResponseWarningsItemCodeDraftPurchaseDocuments         PeriodsLockLedgerResponseWarningsItemCode = "draft_purchase_documents"
+	PeriodsLockLedgerResponseWarningsItemCodeUnbookedBankLines              PeriodsLockLedgerResponseWarningsItemCode = "unbooked_bank_lines"
+	PeriodsLockLedgerResponseWarningsItemCodeDepreciationNotPosted          PeriodsLockLedgerResponseWarningsItemCode = "depreciation_not_posted"
+	PeriodsLockLedgerResponseWarningsItemCodeDeferralsNotPosted             PeriodsLockLedgerResponseWarningsItemCode = "deferrals_not_posted"
+	PeriodsLockLedgerResponseWarningsItemCodeRecurringInvoicesNotGenerated  PeriodsLockLedgerResponseWarningsItemCode = "recurring_invoices_not_generated"
+	PeriodsLockLedgerResponseWarningsItemCodePayrollRunsNotApproved         PeriodsLockLedgerResponseWarningsItemCode = "payroll_runs_not_approved"
+	PeriodsLockLedgerResponseWarningsItemCodeOpenFxReceivables              PeriodsLockLedgerResponseWarningsItemCode = "open_fx_receivables"
+	PeriodsLockLedgerResponseWarningsItemCodeOpenFxPayables                 PeriodsLockLedgerResponseWarningsItemCode = "open_fx_payables"
+	PeriodsLockLedgerResponseWarningsItemCodeBankLedgerDiffersFromStatement PeriodsLockLedgerResponseWarningsItemCode = "bank_ledger_differs_from_statement"
+	PeriodsLockLedgerResponseWarningsItemCodeVatOutsideReturns              PeriodsLockLedgerResponseWarningsItemCode = "vat_outside_returns"
+	PeriodsLockLedgerResponseWarningsItemCodeFilingSettingsMissing          PeriodsLockLedgerResponseWarningsItemCode = "filing_settings_missing"
 )
 
 func NewPeriodsLockLedgerResponseWarningsItemCodeFromString(s string) (PeriodsLockLedgerResponseWarningsItemCode, error) {
@@ -12232,6 +14310,12 @@ func NewPeriodsLockLedgerResponseWarningsItemCodeFromString(s string) (PeriodsLo
 		return PeriodsLockLedgerResponseWarningsItemCodeOpenFxReceivables, nil
 	case "open_fx_payables":
 		return PeriodsLockLedgerResponseWarningsItemCodeOpenFxPayables, nil
+	case "bank_ledger_differs_from_statement":
+		return PeriodsLockLedgerResponseWarningsItemCodeBankLedgerDiffersFromStatement, nil
+	case "vat_outside_returns":
+		return PeriodsLockLedgerResponseWarningsItemCodeVatOutsideReturns, nil
+	case "filing_settings_missing":
+		return PeriodsLockLedgerResponseWarningsItemCodeFilingSettingsMissing, nil
 	}
 	var t PeriodsLockLedgerResponseWarningsItemCode
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -12734,6 +14818,7 @@ const (
 	PostingRulesUpdateLedgerRequestRulesItemKeySalesRevenueProducts         PostingRulesUpdateLedgerRequestRulesItemKey = "sales.revenueProducts"
 	PostingRulesUpdateLedgerRequestRulesItemKeySalesRevenueServices         PostingRulesUpdateLedgerRequestRulesItemKey = "sales.revenueServices"
 	PostingRulesUpdateLedgerRequestRulesItemKeySalesVatPayable              PostingRulesUpdateLedgerRequestRulesItemKey = "sales.vatPayable"
+	PostingRulesUpdateLedgerRequestRulesItemKeySalesOssVatPayable           PostingRulesUpdateLedgerRequestRulesItemKey = "sales.ossVatPayable"
 	PostingRulesUpdateLedgerRequestRulesItemKeySalesAdvancesReceived        PostingRulesUpdateLedgerRequestRulesItemKey = "sales.advancesReceived"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesPayables            PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.payables"
 	PostingRulesUpdateLedgerRequestRulesItemKeyPurchasesAdvancesPaid        PostingRulesUpdateLedgerRequestRulesItemKey = "purchases.advancesPaid"
@@ -12790,6 +14875,8 @@ func NewPostingRulesUpdateLedgerRequestRulesItemKeyFromString(s string) (Posting
 		return PostingRulesUpdateLedgerRequestRulesItemKeySalesRevenueServices, nil
 	case "sales.vatPayable":
 		return PostingRulesUpdateLedgerRequestRulesItemKeySalesVatPayable, nil
+	case "sales.ossVatPayable":
+		return PostingRulesUpdateLedgerRequestRulesItemKeySalesOssVatPayable, nil
 	case "sales.advancesReceived":
 		return PostingRulesUpdateLedgerRequestRulesItemKeySalesAdvancesReceived, nil
 	case "purchases.payables":

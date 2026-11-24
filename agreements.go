@@ -300,6 +300,63 @@ func (a *AgreementsDeleteAgreementsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	agreementsExpectedInvoicesAgreementsRequestFieldID = big.NewInt(1 << 0)
+	agreementsExpectedInvoicesAgreementsRequestFieldTo = big.NewInt(1 << 1)
+)
+
+type AgreementsExpectedInvoicesAgreementsRequest struct {
+	ID string     `json:"id" url:"-"`
+	To *time.Time `json:"to,omitempty" url:"-" format:"date"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsRequest) SetID(id string) {
+	a.ID = id
+	a.require(agreementsExpectedInvoicesAgreementsRequestFieldID)
+}
+
+// SetTo sets the To field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsRequest) SetTo(to *time.Time) {
+	a.To = to
+	a.require(agreementsExpectedInvoicesAgreementsRequestFieldTo)
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsExpectedInvoicesAgreementsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = AgreementsExpectedInvoicesAgreementsRequest(body)
+	return nil
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsExpectedInvoicesAgreementsRequest
+	var marshaler = struct {
+		embed
+		To *internal.Date `json:"to,omitempty"`
+	}{
+		embed: embed(*a),
+		To:    internal.NewOptionalDate(a.To),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	agreementsGenerateInvoiceAgreementsRequestFieldID       = big.NewInt(1 << 0)
 	agreementsGenerateInvoiceAgreementsRequestFieldAsOfDate = big.NewInt(1 << 1)
 )
@@ -476,6 +533,107 @@ func (a *AgreementsListAgreementsRequest) UnmarshalJSON(data []byte) error {
 
 func (a *AgreementsListAgreementsRequest) MarshalJSON() ([]byte, error) {
 	type embed AgreementsListAgreementsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	agreementsPaymentScheduleGetAgreementsRequestFieldID = big.NewInt(1 << 0)
+)
+
+type AgreementsPaymentScheduleGetAgreementsRequest struct {
+	ID string `json:"id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsRequest) SetID(id string) {
+	a.ID = id
+	a.require(agreementsPaymentScheduleGetAgreementsRequestFieldID)
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsPaymentScheduleGetAgreementsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleGetAgreementsRequest(body)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleGetAgreementsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	agreementsPaymentScheduleSetAgreementsRequestFieldID   = big.NewInt(1 << 0)
+	agreementsPaymentScheduleSetAgreementsRequestFieldRows = big.NewInt(1 << 1)
+)
+
+type AgreementsPaymentScheduleSetAgreementsRequest struct {
+	ID   string                                                   `json:"id" url:"-"`
+	Rows []*AgreementsPaymentScheduleSetAgreementsRequestRowsItem `json:"rows" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsRequest) SetID(id string) {
+	a.ID = id
+	a.require(agreementsPaymentScheduleSetAgreementsRequestFieldID)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsRequest) SetRows(rows []*AgreementsPaymentScheduleSetAgreementsRequestRowsItem) {
+	a.Rows = rows
+	a.require(agreementsPaymentScheduleSetAgreementsRequestFieldRows)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsPaymentScheduleSetAgreementsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleSetAgreementsRequest(body)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequest) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleSetAgreementsRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -2267,6 +2425,521 @@ func (a *AgreementsDeleteAgreementsResponse) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsExpectedInvoicesAgreementsResponseFieldAgreementID = big.NewInt(1 << 0)
+	agreementsExpectedInvoicesAgreementsResponseFieldNumber      = big.NewInt(1 << 1)
+	agreementsExpectedInvoicesAgreementsResponseFieldCurrency    = big.NewInt(1 << 2)
+	agreementsExpectedInvoicesAgreementsResponseFieldPeriods     = big.NewInt(1 << 3)
+)
+
+type AgreementsExpectedInvoicesAgreementsResponse struct {
+	AgreementID string                                                     `json:"agreementId" url:"agreementId"`
+	Number      string                                                     `json:"number" url:"number"`
+	Currency    string                                                     `json:"currency" url:"currency"`
+	Periods     []*AgreementsExpectedInvoicesAgreementsResponsePeriodsItem `json:"periods" url:"periods"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) GetAgreementID() string {
+	if a == nil {
+		return ""
+	}
+	return a.AgreementID
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) GetNumber() string {
+	if a == nil {
+		return ""
+	}
+	return a.Number
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) GetCurrency() string {
+	if a == nil {
+		return ""
+	}
+	return a.Currency
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) GetPeriods() []*AgreementsExpectedInvoicesAgreementsResponsePeriodsItem {
+	if a == nil {
+		return nil
+	}
+	return a.Periods
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponse) SetAgreementID(agreementID string) {
+	a.AgreementID = agreementID
+	a.require(agreementsExpectedInvoicesAgreementsResponseFieldAgreementID)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponse) SetNumber(number string) {
+	a.Number = number
+	a.require(agreementsExpectedInvoicesAgreementsResponseFieldNumber)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponse) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsExpectedInvoicesAgreementsResponseFieldCurrency)
+}
+
+// SetPeriods sets the Periods field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponse) SetPeriods(periods []*AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) {
+	a.Periods = periods
+	a.require(agreementsExpectedInvoicesAgreementsResponseFieldPeriods)
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsExpectedInvoicesAgreementsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgreementsExpectedInvoicesAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsExpectedInvoicesAgreementsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldPeriodStart      = big.NewInt(1 << 0)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldPeriodEnd        = big.NewInt(1 << 1)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldExpectedNet      = big.NewInt(1 << 2)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldMissing          = big.NewInt(1 << 3)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldPurchaseInvoices = big.NewInt(1 << 4)
+)
+
+type AgreementsExpectedInvoicesAgreementsResponsePeriodsItem struct {
+	PeriodStart      string                                                                         `json:"periodStart" url:"periodStart"`
+	PeriodEnd        string                                                                         `json:"periodEnd" url:"periodEnd"`
+	ExpectedNet      *string                                                                        `json:"expectedNet,omitempty" url:"expectedNet,omitempty"`
+	Missing          bool                                                                           `json:"missing" url:"missing"`
+	PurchaseInvoices []*AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem `json:"purchaseInvoices" url:"purchaseInvoices"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) GetPeriodStart() string {
+	if a == nil {
+		return ""
+	}
+	return a.PeriodStart
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) GetPeriodEnd() string {
+	if a == nil {
+		return ""
+	}
+	return a.PeriodEnd
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) GetExpectedNet() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ExpectedNet
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) GetMissing() bool {
+	if a == nil {
+		return false
+	}
+	return a.Missing
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) GetPurchaseInvoices() []*AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoices
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) SetPeriodStart(periodStart string) {
+	a.PeriodStart = periodStart
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) SetPeriodEnd(periodEnd string) {
+	a.PeriodEnd = periodEnd
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldPeriodEnd)
+}
+
+// SetExpectedNet sets the ExpectedNet field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) SetExpectedNet(expectedNet *string) {
+	a.ExpectedNet = expectedNet
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldExpectedNet)
+}
+
+// SetMissing sets the Missing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) SetMissing(missing bool) {
+	a.Missing = missing
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldMissing)
+}
+
+// SetPurchaseInvoices sets the PurchaseInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) SetPurchaseInvoices(purchaseInvoices []*AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) {
+	a.PurchaseInvoices = purchaseInvoices
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemFieldPurchaseInvoices)
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsExpectedInvoicesAgreementsResponsePeriodsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgreementsExpectedInvoicesAgreementsResponsePeriodsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsExpectedInvoicesAgreementsResponsePeriodsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldID             = big.NewInt(1 << 0)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldDocumentNumber = big.NewInt(1 << 1)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldDocumentDate   = big.NewInt(1 << 2)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldStatus         = big.NewInt(1 << 3)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldType           = big.NewInt(1 << 4)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldNetTotal       = big.NewInt(1 << 5)
+	agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldCurrency       = big.NewInt(1 << 6)
+)
+
+type AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem struct {
+	ID             string                                                                            `json:"id" url:"id"`
+	DocumentNumber string                                                                            `json:"documentNumber" url:"documentNumber"`
+	DocumentDate   time.Time                                                                         `json:"documentDate" url:"documentDate" format:"date"`
+	Status         AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus `json:"status" url:"status"`
+	Type           AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType   `json:"type" url:"type"`
+	NetTotal       string                                                                            `json:"netTotal" url:"netTotal"`
+	Currency       string                                                                            `json:"currency" url:"currency"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetDocumentNumber() string {
+	if a == nil {
+		return ""
+	}
+	return a.DocumentNumber
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetDocumentDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DocumentDate
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetStatus() AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus {
+	if a == nil {
+		return ""
+	}
+	return a.Status
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetType() AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType {
+	if a == nil {
+		return ""
+	}
+	return a.Type
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetNetTotal() string {
+	if a == nil {
+		return ""
+	}
+	return a.NetTotal
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetCurrency() string {
+	if a == nil {
+		return ""
+	}
+	return a.Currency
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) SetID(id string) {
+	a.ID = id
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldID)
+}
+
+// SetDocumentNumber sets the DocumentNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) SetDocumentNumber(documentNumber string) {
+	a.DocumentNumber = documentNumber
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldDocumentNumber)
+}
+
+// SetDocumentDate sets the DocumentDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) SetDocumentDate(documentDate time.Time) {
+	a.DocumentDate = documentDate
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldDocumentDate)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) SetStatus(status AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus) {
+	a.Status = status
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldStatus)
+}
+
+// SetType sets the Type field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) SetType(type_ AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType) {
+	a.Type = type_
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldType)
+}
+
+// SetNetTotal sets the NetTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) SetNetTotal(netTotal string) {
+	a.NetTotal = netTotal
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldNetTotal)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemFieldCurrency)
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) UnmarshalJSON(data []byte) error {
+	type embed AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem
+	var unmarshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem(unmarshaler.embed)
+	a.DocumentDate = unmarshaler.DocumentDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem
+	var marshaler = struct {
+		embed
+		DocumentDate *internal.Date `json:"documentDate"`
+	}{
+		embed:        embed(*a),
+		DocumentDate: internal.NewDate(a.DocumentDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus string
+
+const (
+	AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatusDraft      AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus = "draft"
+	AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatusRegistered AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus = "registered"
+	AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatusReversed   AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus = "reversed"
+)
+
+func NewAgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatusFromString(s string) (AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus, error) {
+	switch s {
+	case "draft":
+		return AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatusDraft, nil
+	case "registered":
+		return AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatusRegistered, nil
+	case "reversed":
+		return AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatusReversed, nil
+	}
+	var t AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus) Ptr() *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemStatus {
+	return &a
+}
+
+type AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType string
+
+const (
+	AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemTypeInvoice    AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType = "invoice"
+	AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemTypeCreditNote AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType = "credit_note"
+)
+
+func NewAgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemTypeFromString(s string) (AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType, error) {
+	switch s {
+	case "invoice":
+		return AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemTypeInvoice, nil
+	case "credit_note":
+		return AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemTypeCreditNote, nil
+	}
+	var t AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType) Ptr() *AgreementsExpectedInvoicesAgreementsResponsePeriodsItemPurchaseInvoicesItemType {
+	return &a
 }
 
 var (
@@ -4146,6 +4819,970 @@ func NewAgreementsListAgreementsResponseRowsItemStatusFromString(s string) (Agre
 
 func (a AgreementsListAgreementsResponseRowsItemStatus) Ptr() *AgreementsListAgreementsResponseRowsItemStatus {
 	return &a
+}
+
+var (
+	agreementsPaymentScheduleGetAgreementsResponseFieldAgreementID = big.NewInt(1 << 0)
+	agreementsPaymentScheduleGetAgreementsResponseFieldCurrency    = big.NewInt(1 << 1)
+	agreementsPaymentScheduleGetAgreementsResponseFieldValue       = big.NewInt(1 << 2)
+	agreementsPaymentScheduleGetAgreementsResponseFieldRows        = big.NewInt(1 << 3)
+	agreementsPaymentScheduleGetAgreementsResponseFieldTotals      = big.NewInt(1 << 4)
+)
+
+type AgreementsPaymentScheduleGetAgreementsResponse struct {
+	AgreementID string                                                    `json:"agreementId" url:"agreementId"`
+	Currency    string                                                    `json:"currency" url:"currency"`
+	Value       *string                                                   `json:"value,omitempty" url:"value,omitempty"`
+	Rows        []*AgreementsPaymentScheduleGetAgreementsResponseRowsItem `json:"rows" url:"rows"`
+	Totals      *AgreementsPaymentScheduleGetAgreementsResponseTotals     `json:"totals" url:"totals"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) GetAgreementID() string {
+	if a == nil {
+		return ""
+	}
+	return a.AgreementID
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) GetCurrency() string {
+	if a == nil {
+		return ""
+	}
+	return a.Currency
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) GetValue() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Value
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) GetRows() []*AgreementsPaymentScheduleGetAgreementsResponseRowsItem {
+	if a == nil {
+		return nil
+	}
+	return a.Rows
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) GetTotals() *AgreementsPaymentScheduleGetAgreementsResponseTotals {
+	if a == nil {
+		return nil
+	}
+	return a.Totals
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) SetAgreementID(agreementID string) {
+	a.AgreementID = agreementID
+	a.require(agreementsPaymentScheduleGetAgreementsResponseFieldAgreementID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsPaymentScheduleGetAgreementsResponseFieldCurrency)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsPaymentScheduleGetAgreementsResponseFieldValue)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) SetRows(rows []*AgreementsPaymentScheduleGetAgreementsResponseRowsItem) {
+	a.Rows = rows
+	a.require(agreementsPaymentScheduleGetAgreementsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) SetTotals(totals *AgreementsPaymentScheduleGetAgreementsResponseTotals) {
+	a.Totals = totals
+	a.require(agreementsPaymentScheduleGetAgreementsResponseFieldTotals)
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsPaymentScheduleGetAgreementsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleGetAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleGetAgreementsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldDueDate              = big.NewInt(1 << 0)
+	agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldPrincipal            = big.NewInt(1 << 1)
+	agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldInterest             = big.NewInt(1 << 2)
+	agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldTotal                = big.NewInt(1 << 3)
+	agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldPrincipalOutstanding = big.NewInt(1 << 4)
+)
+
+type AgreementsPaymentScheduleGetAgreementsResponseRowsItem struct {
+	DueDate              time.Time `json:"dueDate" url:"dueDate" format:"date"`
+	Principal            string    `json:"principal" url:"principal"`
+	Interest             string    `json:"interest" url:"interest"`
+	Total                string    `json:"total" url:"total"`
+	PrincipalOutstanding *string   `json:"principalOutstanding,omitempty" url:"principalOutstanding,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) GetDueDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DueDate
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) GetPrincipal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Principal
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) GetInterest() string {
+	if a == nil {
+		return ""
+	}
+	return a.Interest
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) GetTotal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Total
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) GetPrincipalOutstanding() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PrincipalOutstanding
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) SetDueDate(dueDate time.Time) {
+	a.DueDate = dueDate
+	a.require(agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldDueDate)
+}
+
+// SetPrincipal sets the Principal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) SetPrincipal(principal string) {
+	a.Principal = principal
+	a.require(agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldPrincipal)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) SetInterest(interest string) {
+	a.Interest = interest
+	a.require(agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldInterest)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) SetTotal(total string) {
+	a.Total = total
+	a.require(agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldTotal)
+}
+
+// SetPrincipalOutstanding sets the PrincipalOutstanding field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) SetPrincipalOutstanding(principalOutstanding *string) {
+	a.PrincipalOutstanding = principalOutstanding
+	a.require(agreementsPaymentScheduleGetAgreementsResponseRowsItemFieldPrincipalOutstanding)
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed AgreementsPaymentScheduleGetAgreementsResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleGetAgreementsResponseRowsItem(unmarshaler.embed)
+	a.DueDate = unmarshaler.DueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleGetAgreementsResponseRowsItem
+	var marshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed:   embed(*a),
+		DueDate: internal.NewDate(a.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseRowsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsPaymentScheduleGetAgreementsResponseTotalsFieldPrincipal = big.NewInt(1 << 0)
+	agreementsPaymentScheduleGetAgreementsResponseTotalsFieldInterest  = big.NewInt(1 << 1)
+	agreementsPaymentScheduleGetAgreementsResponseTotalsFieldTotal     = big.NewInt(1 << 2)
+)
+
+type AgreementsPaymentScheduleGetAgreementsResponseTotals struct {
+	Principal string `json:"principal" url:"principal"`
+	Interest  string `json:"interest" url:"interest"`
+	Total     string `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) GetPrincipal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Principal
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) GetInterest() string {
+	if a == nil {
+		return ""
+	}
+	return a.Interest
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) GetTotal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Total
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetPrincipal sets the Principal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) SetPrincipal(principal string) {
+	a.Principal = principal
+	a.require(agreementsPaymentScheduleGetAgreementsResponseTotalsFieldPrincipal)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) SetInterest(interest string) {
+	a.Interest = interest
+	a.require(agreementsPaymentScheduleGetAgreementsResponseTotalsFieldInterest)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) SetTotal(total string) {
+	a.Total = total
+	a.require(agreementsPaymentScheduleGetAgreementsResponseTotalsFieldTotal)
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsPaymentScheduleGetAgreementsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleGetAgreementsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleGetAgreementsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsPaymentScheduleGetAgreementsResponseTotals) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsPaymentScheduleSetAgreementsRequestRowsItemFieldDueDate   = big.NewInt(1 << 0)
+	agreementsPaymentScheduleSetAgreementsRequestRowsItemFieldPrincipal = big.NewInt(1 << 1)
+	agreementsPaymentScheduleSetAgreementsRequestRowsItemFieldInterest  = big.NewInt(1 << 2)
+)
+
+type AgreementsPaymentScheduleSetAgreementsRequestRowsItem struct {
+	DueDate   time.Time `json:"dueDate" url:"dueDate" format:"date"`
+	Principal string    `json:"principal" url:"principal"`
+	Interest  string    `json:"interest" url:"interest"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) GetDueDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DueDate
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) GetPrincipal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Principal
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) GetInterest() string {
+	if a == nil {
+		return ""
+	}
+	return a.Interest
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) SetDueDate(dueDate time.Time) {
+	a.DueDate = dueDate
+	a.require(agreementsPaymentScheduleSetAgreementsRequestRowsItemFieldDueDate)
+}
+
+// SetPrincipal sets the Principal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) SetPrincipal(principal string) {
+	a.Principal = principal
+	a.require(agreementsPaymentScheduleSetAgreementsRequestRowsItemFieldPrincipal)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) SetInterest(interest string) {
+	a.Interest = interest
+	a.require(agreementsPaymentScheduleSetAgreementsRequestRowsItemFieldInterest)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) UnmarshalJSON(data []byte) error {
+	type embed AgreementsPaymentScheduleSetAgreementsRequestRowsItem
+	var unmarshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleSetAgreementsRequestRowsItem(unmarshaler.embed)
+	a.DueDate = unmarshaler.DueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleSetAgreementsRequestRowsItem
+	var marshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed:   embed(*a),
+		DueDate: internal.NewDate(a.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsRequestRowsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsPaymentScheduleSetAgreementsResponseFieldAgreementID = big.NewInt(1 << 0)
+	agreementsPaymentScheduleSetAgreementsResponseFieldCurrency    = big.NewInt(1 << 1)
+	agreementsPaymentScheduleSetAgreementsResponseFieldValue       = big.NewInt(1 << 2)
+	agreementsPaymentScheduleSetAgreementsResponseFieldRows        = big.NewInt(1 << 3)
+	agreementsPaymentScheduleSetAgreementsResponseFieldTotals      = big.NewInt(1 << 4)
+)
+
+type AgreementsPaymentScheduleSetAgreementsResponse struct {
+	AgreementID string                                                    `json:"agreementId" url:"agreementId"`
+	Currency    string                                                    `json:"currency" url:"currency"`
+	Value       *string                                                   `json:"value,omitempty" url:"value,omitempty"`
+	Rows        []*AgreementsPaymentScheduleSetAgreementsResponseRowsItem `json:"rows" url:"rows"`
+	Totals      *AgreementsPaymentScheduleSetAgreementsResponseTotals     `json:"totals" url:"totals"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) GetAgreementID() string {
+	if a == nil {
+		return ""
+	}
+	return a.AgreementID
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) GetCurrency() string {
+	if a == nil {
+		return ""
+	}
+	return a.Currency
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) GetValue() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Value
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) GetRows() []*AgreementsPaymentScheduleSetAgreementsResponseRowsItem {
+	if a == nil {
+		return nil
+	}
+	return a.Rows
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) GetTotals() *AgreementsPaymentScheduleSetAgreementsResponseTotals {
+	if a == nil {
+		return nil
+	}
+	return a.Totals
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) SetAgreementID(agreementID string) {
+	a.AgreementID = agreementID
+	a.require(agreementsPaymentScheduleSetAgreementsResponseFieldAgreementID)
+}
+
+// SetCurrency sets the Currency field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) SetCurrency(currency string) {
+	a.Currency = currency
+	a.require(agreementsPaymentScheduleSetAgreementsResponseFieldCurrency)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) SetValue(value *string) {
+	a.Value = value
+	a.require(agreementsPaymentScheduleSetAgreementsResponseFieldValue)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) SetRows(rows []*AgreementsPaymentScheduleSetAgreementsResponseRowsItem) {
+	a.Rows = rows
+	a.require(agreementsPaymentScheduleSetAgreementsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) SetTotals(totals *AgreementsPaymentScheduleSetAgreementsResponseTotals) {
+	a.Totals = totals
+	a.require(agreementsPaymentScheduleSetAgreementsResponseFieldTotals)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsPaymentScheduleSetAgreementsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleSetAgreementsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleSetAgreementsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldDueDate              = big.NewInt(1 << 0)
+	agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldPrincipal            = big.NewInt(1 << 1)
+	agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldInterest             = big.NewInt(1 << 2)
+	agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldTotal                = big.NewInt(1 << 3)
+	agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldPrincipalOutstanding = big.NewInt(1 << 4)
+)
+
+type AgreementsPaymentScheduleSetAgreementsResponseRowsItem struct {
+	DueDate              time.Time `json:"dueDate" url:"dueDate" format:"date"`
+	Principal            string    `json:"principal" url:"principal"`
+	Interest             string    `json:"interest" url:"interest"`
+	Total                string    `json:"total" url:"total"`
+	PrincipalOutstanding *string   `json:"principalOutstanding,omitempty" url:"principalOutstanding,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) GetDueDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DueDate
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) GetPrincipal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Principal
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) GetInterest() string {
+	if a == nil {
+		return ""
+	}
+	return a.Interest
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) GetTotal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Total
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) GetPrincipalOutstanding() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PrincipalOutstanding
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) SetDueDate(dueDate time.Time) {
+	a.DueDate = dueDate
+	a.require(agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldDueDate)
+}
+
+// SetPrincipal sets the Principal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) SetPrincipal(principal string) {
+	a.Principal = principal
+	a.require(agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldPrincipal)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) SetInterest(interest string) {
+	a.Interest = interest
+	a.require(agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldInterest)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) SetTotal(total string) {
+	a.Total = total
+	a.require(agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldTotal)
+}
+
+// SetPrincipalOutstanding sets the PrincipalOutstanding field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) SetPrincipalOutstanding(principalOutstanding *string) {
+	a.PrincipalOutstanding = principalOutstanding
+	a.require(agreementsPaymentScheduleSetAgreementsResponseRowsItemFieldPrincipalOutstanding)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type embed AgreementsPaymentScheduleSetAgreementsResponseRowsItem
+	var unmarshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleSetAgreementsResponseRowsItem(unmarshaler.embed)
+	a.DueDate = unmarshaler.DueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleSetAgreementsResponseRowsItem
+	var marshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed:   embed(*a),
+		DueDate: internal.NewDate(a.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseRowsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agreementsPaymentScheduleSetAgreementsResponseTotalsFieldPrincipal = big.NewInt(1 << 0)
+	agreementsPaymentScheduleSetAgreementsResponseTotalsFieldInterest  = big.NewInt(1 << 1)
+	agreementsPaymentScheduleSetAgreementsResponseTotalsFieldTotal     = big.NewInt(1 << 2)
+)
+
+type AgreementsPaymentScheduleSetAgreementsResponseTotals struct {
+	Principal string `json:"principal" url:"principal"`
+	Interest  string `json:"interest" url:"interest"`
+	Total     string `json:"total" url:"total"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) GetPrincipal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Principal
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) GetInterest() string {
+	if a == nil {
+		return ""
+	}
+	return a.Interest
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) GetTotal() string {
+	if a == nil {
+		return ""
+	}
+	return a.Total
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetPrincipal sets the Principal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) SetPrincipal(principal string) {
+	a.Principal = principal
+	a.require(agreementsPaymentScheduleSetAgreementsResponseTotalsFieldPrincipal)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) SetInterest(interest string) {
+	a.Interest = interest
+	a.require(agreementsPaymentScheduleSetAgreementsResponseTotalsFieldInterest)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) SetTotal(total string) {
+	a.Total = total
+	a.require(agreementsPaymentScheduleSetAgreementsResponseTotalsFieldTotal)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgreementsPaymentScheduleSetAgreementsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgreementsPaymentScheduleSetAgreementsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed AgreementsPaymentScheduleSetAgreementsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgreementsPaymentScheduleSetAgreementsResponseTotals) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
 }
 
 type AgreementsUpdateAgreementsRequestBillingPeriod string

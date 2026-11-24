@@ -70407,11 +70407,11 @@ func TestEnumCreatePartnersRequestInvoiceLocale(t *testing.T) {
 }
 
 func TestEnumCreatePartnersRequestLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewCreatePartnersRequestLegalCountryClassFromString("lt")
+		val, err := NewCreatePartnersRequestLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CreatePartnersRequestLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreatePartnersRequestLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -70434,7 +70434,7 @@ func TestEnumCreatePartnersRequestLegalCountryClass(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewCreatePartnersRequestLegalCountryClassFromString("lt")
+		val, err := NewCreatePartnersRequestLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -70472,11 +70472,11 @@ func TestEnumCreatePartnersRequestType(t *testing.T) {
 }
 
 func TestEnumCreatePartnersResponseLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewCreatePartnersResponseLegalCountryClassFromString("lt")
+		val, err := NewCreatePartnersResponseLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, CreatePartnersResponseLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, CreatePartnersResponseLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -70499,7 +70499,7 @@ func TestEnumCreatePartnersResponseLegalCountryClass(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewCreatePartnersResponseLegalCountryClassFromString("lt")
+		val, err := NewCreatePartnersResponseLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -71783,11 +71783,11 @@ func TestEnumFindOrCreatePartnersRequestInvoiceLocale(t *testing.T) {
 }
 
 func TestEnumFindOrCreatePartnersRequestLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewFindOrCreatePartnersRequestLegalCountryClassFromString("lt")
+		val, err := NewFindOrCreatePartnersRequestLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, FindOrCreatePartnersRequestLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, FindOrCreatePartnersRequestLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -71810,7 +71810,7 @@ func TestEnumFindOrCreatePartnersRequestLegalCountryClass(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewFindOrCreatePartnersRequestLegalCountryClassFromString("lt")
+		val, err := NewFindOrCreatePartnersRequestLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -71848,11 +71848,11 @@ func TestEnumFindOrCreatePartnersRequestType(t *testing.T) {
 }
 
 func TestEnumFindOrCreatePartnersResponsePartnerLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewFindOrCreatePartnersResponsePartnerLegalCountryClassFromString("lt")
+		val, err := NewFindOrCreatePartnersResponsePartnerLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, FindOrCreatePartnersResponsePartnerLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, FindOrCreatePartnersResponsePartnerLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -71875,7 +71875,7 @@ func TestEnumFindOrCreatePartnersResponsePartnerLegalCountryClass(t *testing.T) 
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewFindOrCreatePartnersResponsePartnerLegalCountryClassFromString("lt")
+		val, err := NewFindOrCreatePartnersResponsePartnerLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -71913,11 +71913,11 @@ func TestEnumFindOrCreatePartnersResponsePartnerType(t *testing.T) {
 }
 
 func TestEnumGetPartnersResponseLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewGetPartnersResponseLegalCountryClassFromString("lt")
+		val, err := NewGetPartnersResponseLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, GetPartnersResponseLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, GetPartnersResponseLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -71940,7 +71940,7 @@ func TestEnumGetPartnersResponseLegalCountryClass(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewGetPartnersResponseLegalCountryClassFromString("lt")
+		val, err := NewGetPartnersResponseLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -72330,11 +72330,11 @@ func TestEnumListPartnersRequestSortItemDir(t *testing.T) {
 }
 
 func TestEnumListPartnersResponseRowsItemLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewListPartnersResponseRowsItemLegalCountryClassFromString("lt")
+		val, err := NewListPartnersResponseRowsItemLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, ListPartnersResponseRowsItemLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, ListPartnersResponseRowsItemLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -72357,7 +72357,7 @@ func TestEnumListPartnersResponseRowsItemLegalCountryClass(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewListPartnersResponseRowsItemLegalCountryClassFromString("lt")
+		val, err := NewListPartnersResponseRowsItemLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -73695,11 +73695,11 @@ func TestEnumUpdatePartnersRequestInvoiceLocale(t *testing.T) {
 }
 
 func TestEnumUpdatePartnersRequestLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewUpdatePartnersRequestLegalCountryClassFromString("lt")
+		val, err := NewUpdatePartnersRequestLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, UpdatePartnersRequestLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdatePartnersRequestLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -73722,7 +73722,7 @@ func TestEnumUpdatePartnersRequestLegalCountryClass(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewUpdatePartnersRequestLegalCountryClassFromString("lt")
+		val, err := NewUpdatePartnersRequestLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -73760,11 +73760,11 @@ func TestEnumUpdatePartnersRequestType(t *testing.T) {
 }
 
 func TestEnumUpdatePartnersResponseLegalCountryClass(t *testing.T) {
-	t.Run("NewFromString_lt", func(t *testing.T) {
+	t.Run("NewFromString_domestic", func(t *testing.T) {
 		t.Parallel()
-		val, err := NewUpdatePartnersResponseLegalCountryClassFromString("lt")
+		val, err := NewUpdatePartnersResponseLegalCountryClassFromString("domestic")
 		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, UpdatePartnersResponseLegalCountryClass("lt"), val, "enum value should match expected wire value")
+		assert.Equal(t, UpdatePartnersResponseLegalCountryClass("domestic"), val, "enum value should match expected wire value")
 	})
 
 	t.Run("NewFromString_eu", func(t *testing.T) {
@@ -73787,7 +73787,7 @@ func TestEnumUpdatePartnersResponseLegalCountryClass(t *testing.T) {
 	})
 
 	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewUpdatePartnersResponseLegalCountryClassFromString("lt")
+		val, err := NewUpdatePartnersResponseLegalCountryClassFromString("domestic")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

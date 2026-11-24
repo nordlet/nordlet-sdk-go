@@ -1575,6 +1575,61 @@ func (d *DkSelskabsskatGenerateDeclarationsRequest) MarshalJSON() ([]byte, error
 }
 
 var (
+	eeEmploymentRegisterGenerateDeclarationsRequestFieldContractID = big.NewInt(1 << 0)
+	eeEmploymentRegisterGenerateDeclarationsRequestFieldEvent      = big.NewInt(1 << 1)
+)
+
+type EeEmploymentRegisterGenerateDeclarationsRequest struct {
+	ContractID string                                               `json:"contractId" url:"-"`
+	Event      EeEmploymentRegisterGenerateDeclarationsRequestEvent `json:"event" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetContractID sets the ContractID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeEmploymentRegisterGenerateDeclarationsRequest) SetContractID(contractID string) {
+	e.ContractID = contractID
+	e.require(eeEmploymentRegisterGenerateDeclarationsRequestFieldContractID)
+}
+
+// SetEvent sets the Event field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeEmploymentRegisterGenerateDeclarationsRequest) SetEvent(event EeEmploymentRegisterGenerateDeclarationsRequestEvent) {
+	e.Event = event
+	e.require(eeEmploymentRegisterGenerateDeclarationsRequestFieldEvent)
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeEmploymentRegisterGenerateDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EeEmploymentRegisterGenerateDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EeEmploymentRegisterGenerateDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	eeEmploymentRegisterSendDeclarationsRequestFieldContractID = big.NewInt(1 << 0)
 	eeEmploymentRegisterSendDeclarationsRequestFieldEvent      = big.NewInt(1 << 1)
 )
@@ -1620,6 +1675,143 @@ func (e *EeEmploymentRegisterSendDeclarationsRequest) UnmarshalJSON(data []byte)
 
 func (e *EeEmploymentRegisterSendDeclarationsRequest) MarshalJSON() ([]byte, error) {
 	type embed EeEmploymentRegisterSendDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsRequestFieldYear  = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsRequestFieldMonth = big.NewInt(1 << 1)
+)
+
+type EeTsdAnnexesGetDeclarationsRequest struct {
+	Year  int64 `json:"year" url:"-"`
+	Month int64 `json:"month" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EeTsdAnnexesGetDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsRequest) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesGetDeclarationsRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsRequest) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesGetDeclarationsRequestFieldMonth)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsRequestFieldYear   = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsRequestFieldMonth  = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsRequestFieldAnnex4 = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsRequestFieldAnnex5 = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsRequestFieldAnnex6 = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesSetDeclarationsRequest struct {
+	Year   int64                                     `json:"year" url:"-"`
+	Month  int64                                     `json:"month" url:"-"`
+	Annex4 *EeTsdAnnexesSetDeclarationsRequestAnnex4 `json:"annex4,omitempty" url:"-"`
+	Annex5 *EeTsdAnnexesSetDeclarationsRequestAnnex5 `json:"annex5,omitempty" url:"-"`
+	Annex6 *EeTsdAnnexesSetDeclarationsRequestAnnex6 `json:"annex6,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequest) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesSetDeclarationsRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequest) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesSetDeclarationsRequestFieldMonth)
+}
+
+// SetAnnex4 sets the Annex4 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequest) SetAnnex4(annex4 *EeTsdAnnexesSetDeclarationsRequestAnnex4) {
+	e.Annex4 = annex4
+	e.require(eeTsdAnnexesSetDeclarationsRequestFieldAnnex4)
+}
+
+// SetAnnex5 sets the Annex5 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequest) SetAnnex5(annex5 *EeTsdAnnexesSetDeclarationsRequestAnnex5) {
+	e.Annex5 = annex5
+	e.require(eeTsdAnnexesSetDeclarationsRequestFieldAnnex5)
+}
+
+// SetAnnex6 sets the Annex6 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequest) SetAnnex6(annex6 *EeTsdAnnexesSetDeclarationsRequestAnnex6) {
+	e.Annex6 = annex6
+	e.require(eeTsdAnnexesSetDeclarationsRequestFieldAnnex6)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -1942,6 +2134,70 @@ func (e *EuOssComputeDeclarationsRequest) UnmarshalJSON(data []byte) error {
 
 func (e *EuOssComputeDeclarationsRequest) MarshalJSON() ([]byte, error) {
 	type embed EuOssComputeDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	euOssNonUnionComputeDeclarationsRequestFieldYear                        = big.NewInt(1 << 0)
+	euOssNonUnionComputeDeclarationsRequestFieldQuarter                     = big.NewInt(1 << 1)
+	euOssNonUnionComputeDeclarationsRequestFieldMemberStateOfIdentification = big.NewInt(1 << 2)
+)
+
+type EuOssNonUnionComputeDeclarationsRequest struct {
+	Year                        int64                                                              `json:"year" url:"-"`
+	Quarter                     int64                                                              `json:"quarter" url:"-"`
+	MemberStateOfIdentification EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification `json:"memberStateOfIdentification" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EuOssNonUnionComputeDeclarationsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsRequest) SetYear(year int64) {
+	e.Year = year
+	e.require(euOssNonUnionComputeDeclarationsRequestFieldYear)
+}
+
+// SetQuarter sets the Quarter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsRequest) SetQuarter(quarter int64) {
+	e.Quarter = quarter
+	e.require(euOssNonUnionComputeDeclarationsRequestFieldQuarter)
+}
+
+// SetMemberStateOfIdentification sets the MemberStateOfIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsRequest) SetMemberStateOfIdentification(memberStateOfIdentification EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification) {
+	e.MemberStateOfIdentification = memberStateOfIdentification
+	e.require(euOssNonUnionComputeDeclarationsRequestFieldMemberStateOfIdentification)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuOssNonUnionComputeDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*e = EuOssNonUnionComputeDeclarationsRequest(body)
+	return nil
+}
+
+func (e *EuOssNonUnionComputeDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed EuOssNonUnionComputeDeclarationsRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -3143,6 +3399,261 @@ func (i *IeCt1GenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	ieRtdGenerateDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type IeRtdGenerateDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *IeRtdGenerateDeclarationsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsRequest) SetYear(year int64) {
+	i.Year = year
+	i.require(ieRtdGenerateDeclarationsRequestFieldYear)
+}
+
+func (i *IeRtdGenerateDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler IeRtdGenerateDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = IeRtdGenerateDeclarationsRequest(body)
+	return nil
+}
+
+func (i *IeRtdGenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed IeRtdGenerateDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsRequestFieldYear                   = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsRequestFieldPositions              = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsRequestFieldRataAnticipata         = big.NewInt(1 << 2)
+	itInailAutoliquidazioneComputeDeclarationsRequestFieldRateazione             = big.NewInt(1 << 3)
+	itInailAutoliquidazioneComputeDeclarationsRequestFieldCodiceDitta            = big.NewInt(1 << 4)
+	itInailAutoliquidazioneComputeDeclarationsRequestFieldCodiceDittaControlCode = big.NewInt(1 << 5)
+	itInailAutoliquidazioneComputeDeclarationsRequestFieldSedeInail              = big.NewInt(1 << 6)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsRequest struct {
+	Year                   int64                                                             `json:"year" url:"-"`
+	Positions              []*ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem `json:"positions" url:"-"`
+	RataAnticipata         *string                                                           `json:"rataAnticipata,omitempty" url:"-"`
+	Rateazione             *bool                                                             `json:"rateazione,omitempty" url:"-"`
+	CodiceDitta            *string                                                           `json:"codiceDitta,omitempty" url:"-"`
+	CodiceDittaControlCode *string                                                           `json:"codiceDittaControlCode,omitempty" url:"-"`
+	SedeInail              *string                                                           `json:"sedeInail,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) SetYear(year int64) {
+	i.Year = year
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestFieldYear)
+}
+
+// SetPositions sets the Positions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) SetPositions(positions []*ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) {
+	i.Positions = positions
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestFieldPositions)
+}
+
+// SetRataAnticipata sets the RataAnticipata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) SetRataAnticipata(rataAnticipata *string) {
+	i.RataAnticipata = rataAnticipata
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestFieldRataAnticipata)
+}
+
+// SetRateazione sets the Rateazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) SetRateazione(rateazione *bool) {
+	i.Rateazione = rateazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestFieldRateazione)
+}
+
+// SetCodiceDitta sets the CodiceDitta field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) SetCodiceDitta(codiceDitta *string) {
+	i.CodiceDitta = codiceDitta
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestFieldCodiceDitta)
+}
+
+// SetCodiceDittaControlCode sets the CodiceDittaControlCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) SetCodiceDittaControlCode(codiceDittaControlCode *string) {
+	i.CodiceDittaControlCode = codiceDittaControlCode
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestFieldCodiceDittaControlCode)
+}
+
+// SetSedeInail sets the SedeInail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) SetSedeInail(sedeInail *string) {
+	i.SedeInail = sedeInail
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestFieldSedeInail)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneComputeDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsRequest(body)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itInailAutoliquidazioneF24DeclarationsRequestFieldYear                   = big.NewInt(1 << 0)
+	itInailAutoliquidazioneF24DeclarationsRequestFieldPositions              = big.NewInt(1 << 1)
+	itInailAutoliquidazioneF24DeclarationsRequestFieldRataAnticipata         = big.NewInt(1 << 2)
+	itInailAutoliquidazioneF24DeclarationsRequestFieldRateazione             = big.NewInt(1 << 3)
+	itInailAutoliquidazioneF24DeclarationsRequestFieldCodiceDitta            = big.NewInt(1 << 4)
+	itInailAutoliquidazioneF24DeclarationsRequestFieldCodiceDittaControlCode = big.NewInt(1 << 5)
+	itInailAutoliquidazioneF24DeclarationsRequestFieldSedeInail              = big.NewInt(1 << 6)
+	itInailAutoliquidazioneF24DeclarationsRequestFieldInstalment             = big.NewInt(1 << 7)
+)
+
+type ItInailAutoliquidazioneF24DeclarationsRequest struct {
+	Year                   int64                                                         `json:"year" url:"-"`
+	Positions              []*ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem `json:"positions" url:"-"`
+	RataAnticipata         *string                                                       `json:"rataAnticipata,omitempty" url:"-"`
+	Rateazione             *bool                                                         `json:"rateazione,omitempty" url:"-"`
+	CodiceDitta            *string                                                       `json:"codiceDitta,omitempty" url:"-"`
+	CodiceDittaControlCode *string                                                       `json:"codiceDittaControlCode,omitempty" url:"-"`
+	SedeInail              *string                                                       `json:"sedeInail,omitempty" url:"-"`
+	Instalment             *int64                                                        `json:"instalment,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetYear(year int64) {
+	i.Year = year
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldYear)
+}
+
+// SetPositions sets the Positions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetPositions(positions []*ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) {
+	i.Positions = positions
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldPositions)
+}
+
+// SetRataAnticipata sets the RataAnticipata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetRataAnticipata(rataAnticipata *string) {
+	i.RataAnticipata = rataAnticipata
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldRataAnticipata)
+}
+
+// SetRateazione sets the Rateazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetRateazione(rateazione *bool) {
+	i.Rateazione = rateazione
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldRateazione)
+}
+
+// SetCodiceDitta sets the CodiceDitta field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetCodiceDitta(codiceDitta *string) {
+	i.CodiceDitta = codiceDitta
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldCodiceDitta)
+}
+
+// SetCodiceDittaControlCode sets the CodiceDittaControlCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetCodiceDittaControlCode(codiceDittaControlCode *string) {
+	i.CodiceDittaControlCode = codiceDittaControlCode
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldCodiceDittaControlCode)
+}
+
+// SetSedeInail sets the SedeInail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetSedeInail(sedeInail *string) {
+	i.SedeInail = sedeInail
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldSedeInail)
+}
+
+// SetInstalment sets the Instalment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) SetInstalment(instalment *int64) {
+	i.Instalment = instalment
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestFieldInstalment)
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneF24DeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneF24DeclarationsRequest(body)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneF24DeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	itSdiPurchasePreviewDeclarationsRequestFieldPurchaseInvoiceID = big.NewInt(1 << 0)
 	itSdiPurchasePreviewDeclarationsRequestFieldVatRatePercent    = big.NewInt(1 << 1)
 	itSdiPurchasePreviewDeclarationsRequestFieldTipoDocumento     = big.NewInt(1 << 2)
@@ -3261,6 +3772,334 @@ func (i *ItSdiPurchaseSendDeclarationsRequest) UnmarshalJSON(data []byte) error 
 
 func (i *ItSdiPurchaseSendDeclarationsRequest) MarshalJSON() ([]byte, error) {
 	type embed ItSdiPurchaseSendDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itTfrAccrualComputeDeclarationsRequestFieldYear                = big.NewInt(1 << 0)
+	itTfrAccrualComputeDeclarationsRequestFieldMonth               = big.NewInt(1 << 1)
+	itTfrAccrualComputeDeclarationsRequestFieldIncludePaymentTypes = big.NewInt(1 << 2)
+)
+
+type ItTfrAccrualComputeDeclarationsRequest struct {
+	Year                int64    `json:"year" url:"-"`
+	Month               int64    `json:"month" url:"-"`
+	IncludePaymentTypes []string `json:"includePaymentTypes,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItTfrAccrualComputeDeclarationsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsRequest) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrAccrualComputeDeclarationsRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsRequest) SetMonth(month int64) {
+	i.Month = month
+	i.require(itTfrAccrualComputeDeclarationsRequestFieldMonth)
+}
+
+// SetIncludePaymentTypes sets the IncludePaymentTypes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsRequest) SetIncludePaymentTypes(includePaymentTypes []string) {
+	i.IncludePaymentTypes = includePaymentTypes
+	i.require(itTfrAccrualComputeDeclarationsRequestFieldIncludePaymentTypes)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualComputeDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualComputeDeclarationsRequest(body)
+	return nil
+}
+
+func (i *ItTfrAccrualComputeDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualComputeDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itTfrAccrualPostDeclarationsRequestFieldYear                = big.NewInt(1 << 0)
+	itTfrAccrualPostDeclarationsRequestFieldMonth               = big.NewInt(1 << 1)
+	itTfrAccrualPostDeclarationsRequestFieldIncludePaymentTypes = big.NewInt(1 << 2)
+	itTfrAccrualPostDeclarationsRequestFieldExpenseAccountCode  = big.NewInt(1 << 3)
+	itTfrAccrualPostDeclarationsRequestFieldFundAccountCode     = big.NewInt(1 << 4)
+	itTfrAccrualPostDeclarationsRequestFieldPayableAccountCode  = big.NewInt(1 << 5)
+)
+
+type ItTfrAccrualPostDeclarationsRequest struct {
+	Year                int64    `json:"year" url:"-"`
+	Month               int64    `json:"month" url:"-"`
+	IncludePaymentTypes []string `json:"includePaymentTypes,omitempty" url:"-"`
+	ExpenseAccountCode  string   `json:"expenseAccountCode" url:"-"`
+	FundAccountCode     *string  `json:"fundAccountCode,omitempty" url:"-"`
+	PayableAccountCode  *string  `json:"payableAccountCode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItTfrAccrualPostDeclarationsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsRequest) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrAccrualPostDeclarationsRequestFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsRequest) SetMonth(month int64) {
+	i.Month = month
+	i.require(itTfrAccrualPostDeclarationsRequestFieldMonth)
+}
+
+// SetIncludePaymentTypes sets the IncludePaymentTypes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsRequest) SetIncludePaymentTypes(includePaymentTypes []string) {
+	i.IncludePaymentTypes = includePaymentTypes
+	i.require(itTfrAccrualPostDeclarationsRequestFieldIncludePaymentTypes)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsRequest) SetExpenseAccountCode(expenseAccountCode string) {
+	i.ExpenseAccountCode = expenseAccountCode
+	i.require(itTfrAccrualPostDeclarationsRequestFieldExpenseAccountCode)
+}
+
+// SetFundAccountCode sets the FundAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsRequest) SetFundAccountCode(fundAccountCode *string) {
+	i.FundAccountCode = fundAccountCode
+	i.require(itTfrAccrualPostDeclarationsRequestFieldFundAccountCode)
+}
+
+// SetPayableAccountCode sets the PayableAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsRequest) SetPayableAccountCode(payableAccountCode *string) {
+	i.PayableAccountCode = payableAccountCode
+	i.require(itTfrAccrualPostDeclarationsRequestFieldPayableAccountCode)
+}
+
+func (i *ItTfrAccrualPostDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualPostDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualPostDeclarationsRequest(body)
+	return nil
+}
+
+func (i *ItTfrAccrualPostDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualPostDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itTfrRevaluationComputeDeclarationsRequestFieldYear                = big.NewInt(1 << 0)
+	itTfrRevaluationComputeDeclarationsRequestFieldFoiPreviousDecember = big.NewInt(1 << 1)
+	itTfrRevaluationComputeDeclarationsRequestFieldFoiDecember         = big.NewInt(1 << 2)
+	itTfrRevaluationComputeDeclarationsRequestFieldFunds               = big.NewInt(1 << 3)
+)
+
+type ItTfrRevaluationComputeDeclarationsRequest struct {
+	Year                int64                                                  `json:"year" url:"-"`
+	FoiPreviousDecember string                                                 `json:"foiPreviousDecember" url:"-"`
+	FoiDecember         string                                                 `json:"foiDecember" url:"-"`
+	Funds               []*ItTfrRevaluationComputeDeclarationsRequestFundsItem `json:"funds" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsRequest) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrRevaluationComputeDeclarationsRequestFieldYear)
+}
+
+// SetFoiPreviousDecember sets the FoiPreviousDecember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsRequest) SetFoiPreviousDecember(foiPreviousDecember string) {
+	i.FoiPreviousDecember = foiPreviousDecember
+	i.require(itTfrRevaluationComputeDeclarationsRequestFieldFoiPreviousDecember)
+}
+
+// SetFoiDecember sets the FoiDecember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsRequest) SetFoiDecember(foiDecember string) {
+	i.FoiDecember = foiDecember
+	i.require(itTfrRevaluationComputeDeclarationsRequestFieldFoiDecember)
+}
+
+// SetFunds sets the Funds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsRequest) SetFunds(funds []*ItTfrRevaluationComputeDeclarationsRequestFundsItem) {
+	i.Funds = funds
+	i.require(itTfrRevaluationComputeDeclarationsRequestFieldFunds)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationComputeDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationComputeDeclarationsRequest(body)
+	return nil
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationComputeDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	itTfrRevaluationPostDeclarationsRequestFieldYear                = big.NewInt(1 << 0)
+	itTfrRevaluationPostDeclarationsRequestFieldFoiPreviousDecember = big.NewInt(1 << 1)
+	itTfrRevaluationPostDeclarationsRequestFieldFoiDecember         = big.NewInt(1 << 2)
+	itTfrRevaluationPostDeclarationsRequestFieldFunds               = big.NewInt(1 << 3)
+	itTfrRevaluationPostDeclarationsRequestFieldExpenseAccountCode  = big.NewInt(1 << 4)
+	itTfrRevaluationPostDeclarationsRequestFieldFundAccountCode     = big.NewInt(1 << 5)
+	itTfrRevaluationPostDeclarationsRequestFieldTaxAccountCode      = big.NewInt(1 << 6)
+)
+
+type ItTfrRevaluationPostDeclarationsRequest struct {
+	Year                int64                                               `json:"year" url:"-"`
+	FoiPreviousDecember string                                              `json:"foiPreviousDecember" url:"-"`
+	FoiDecember         string                                              `json:"foiDecember" url:"-"`
+	Funds               []*ItTfrRevaluationPostDeclarationsRequestFundsItem `json:"funds" url:"-"`
+	ExpenseAccountCode  string                                              `json:"expenseAccountCode" url:"-"`
+	FundAccountCode     string                                              `json:"fundAccountCode" url:"-"`
+	TaxAccountCode      string                                              `json:"taxAccountCode" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequest) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequest) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrRevaluationPostDeclarationsRequestFieldYear)
+}
+
+// SetFoiPreviousDecember sets the FoiPreviousDecember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequest) SetFoiPreviousDecember(foiPreviousDecember string) {
+	i.FoiPreviousDecember = foiPreviousDecember
+	i.require(itTfrRevaluationPostDeclarationsRequestFieldFoiPreviousDecember)
+}
+
+// SetFoiDecember sets the FoiDecember field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequest) SetFoiDecember(foiDecember string) {
+	i.FoiDecember = foiDecember
+	i.require(itTfrRevaluationPostDeclarationsRequestFieldFoiDecember)
+}
+
+// SetFunds sets the Funds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequest) SetFunds(funds []*ItTfrRevaluationPostDeclarationsRequestFundsItem) {
+	i.Funds = funds
+	i.require(itTfrRevaluationPostDeclarationsRequestFieldFunds)
+}
+
+// SetExpenseAccountCode sets the ExpenseAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequest) SetExpenseAccountCode(expenseAccountCode string) {
+	i.ExpenseAccountCode = expenseAccountCode
+	i.require(itTfrRevaluationPostDeclarationsRequestFieldExpenseAccountCode)
+}
+
+// SetFundAccountCode sets the FundAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequest) SetFundAccountCode(fundAccountCode string) {
+	i.FundAccountCode = fundAccountCode
+	i.require(itTfrRevaluationPostDeclarationsRequestFieldFundAccountCode)
+}
+
+// SetTaxAccountCode sets the TaxAccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequest) SetTaxAccountCode(taxAccountCode string) {
+	i.TaxAccountCode = taxAccountCode
+	i.require(itTfrRevaluationPostDeclarationsRequestFieldTaxAccountCode)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationPostDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationPostDeclarationsRequest(body)
+	return nil
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationPostDeclarationsRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -4503,6 +5342,70 @@ func (l *LtSdGenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	lvEmployeeNoticeGenerateDeclarationsRequestFieldContractID = big.NewInt(1 << 0)
+	lvEmployeeNoticeGenerateDeclarationsRequestFieldEvent      = big.NewInt(1 << 1)
+	lvEmployeeNoticeGenerateDeclarationsRequestFieldEndCode    = big.NewInt(1 << 2)
+)
+
+type LvEmployeeNoticeGenerateDeclarationsRequest struct {
+	ContractID string                                              `json:"contractId" url:"-"`
+	Event      LvEmployeeNoticeGenerateDeclarationsRequestEvent    `json:"event" url:"-"`
+	EndCode    *LvEmployeeNoticeGenerateDeclarationsRequestEndCode `json:"endCode,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetContractID sets the ContractID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LvEmployeeNoticeGenerateDeclarationsRequest) SetContractID(contractID string) {
+	l.ContractID = contractID
+	l.require(lvEmployeeNoticeGenerateDeclarationsRequestFieldContractID)
+}
+
+// SetEvent sets the Event field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LvEmployeeNoticeGenerateDeclarationsRequest) SetEvent(event LvEmployeeNoticeGenerateDeclarationsRequestEvent) {
+	l.Event = event
+	l.require(lvEmployeeNoticeGenerateDeclarationsRequestFieldEvent)
+}
+
+// SetEndCode sets the EndCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LvEmployeeNoticeGenerateDeclarationsRequest) SetEndCode(endCode *LvEmployeeNoticeGenerateDeclarationsRequestEndCode) {
+	l.EndCode = endCode
+	l.require(lvEmployeeNoticeGenerateDeclarationsRequestFieldEndCode)
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler LvEmployeeNoticeGenerateDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*l = LvEmployeeNoticeGenerateDeclarationsRequest(body)
+	return nil
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed LvEmployeeNoticeGenerateDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*l),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	mtAnnualReturnGenerateDeclarationsRequestFieldYear = big.NewInt(1 << 0)
 )
 
@@ -4585,6 +5488,52 @@ func (m *MtCompanyTaxGenerateDeclarationsRequest) UnmarshalJSON(data []byte) err
 
 func (m *MtCompanyTaxGenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
 	type embed MtCompanyTaxGenerateDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	mtFs7GenerateDeclarationsRequestFieldYear = big.NewInt(1 << 0)
+)
+
+type MtFs7GenerateDeclarationsRequest struct {
+	Year int64 `json:"year" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (m *MtFs7GenerateDeclarationsRequest) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsRequest) SetYear(year int64) {
+	m.Year = year
+	m.require(mtFs7GenerateDeclarationsRequestFieldYear)
+}
+
+func (m *MtFs7GenerateDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler MtFs7GenerateDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*m = MtFs7GenerateDeclarationsRequest(body)
+	return nil
+}
+
+func (m *MtFs7GenerateDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed MtFs7GenerateDeclarationsRequest
 	var marshaler = struct {
 		embed
 	}{
@@ -21824,6 +22773,168 @@ func (d *DkSelskabsskatGenerateDeclarationsResponseFieldsItem) String() string {
 	return fmt.Sprintf("%#v", d)
 }
 
+type EeEmploymentRegisterGenerateDeclarationsRequestEvent string
+
+const (
+	EeEmploymentRegisterGenerateDeclarationsRequestEventStart EeEmploymentRegisterGenerateDeclarationsRequestEvent = "start"
+	EeEmploymentRegisterGenerateDeclarationsRequestEventEnd   EeEmploymentRegisterGenerateDeclarationsRequestEvent = "end"
+)
+
+func NewEeEmploymentRegisterGenerateDeclarationsRequestEventFromString(s string) (EeEmploymentRegisterGenerateDeclarationsRequestEvent, error) {
+	switch s {
+	case "start":
+		return EeEmploymentRegisterGenerateDeclarationsRequestEventStart, nil
+	case "end":
+		return EeEmploymentRegisterGenerateDeclarationsRequestEventEnd, nil
+	}
+	var t EeEmploymentRegisterGenerateDeclarationsRequestEvent
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeEmploymentRegisterGenerateDeclarationsRequestEvent) Ptr() *EeEmploymentRegisterGenerateDeclarationsRequestEvent {
+	return &e
+}
+
+var (
+	eeEmploymentRegisterGenerateDeclarationsResponseFieldFileName  = big.NewInt(1 << 0)
+	eeEmploymentRegisterGenerateDeclarationsResponseFieldEntryDate = big.NewInt(1 << 1)
+	eeEmploymentRegisterGenerateDeclarationsResponseFieldXML       = big.NewInt(1 << 2)
+	eeEmploymentRegisterGenerateDeclarationsResponseFieldWarnings  = big.NewInt(1 << 3)
+)
+
+type EeEmploymentRegisterGenerateDeclarationsResponse struct {
+	FileName  string    `json:"fileName" url:"fileName"`
+	EntryDate time.Time `json:"entryDate" url:"entryDate" format:"date"`
+	XML       string    `json:"xml" url:"xml"`
+	Warnings  []string  `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) GetFileName() string {
+	if e == nil {
+		return ""
+	}
+	return e.FileName
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) GetEntryDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.EntryDate
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) GetXML() string {
+	if e == nil {
+		return ""
+	}
+	return e.XML
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) GetWarnings() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Warnings
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) SetFileName(fileName string) {
+	e.FileName = fileName
+	e.require(eeEmploymentRegisterGenerateDeclarationsResponseFieldFileName)
+}
+
+// SetEntryDate sets the EntryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) SetEntryDate(entryDate time.Time) {
+	e.EntryDate = entryDate
+	e.require(eeEmploymentRegisterGenerateDeclarationsResponseFieldEntryDate)
+}
+
+// SetXML sets the XML field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) SetXML(xml string) {
+	e.XML = xml
+	e.require(eeEmploymentRegisterGenerateDeclarationsResponseFieldXML)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) SetWarnings(warnings []string) {
+	e.Warnings = warnings
+	e.require(eeEmploymentRegisterGenerateDeclarationsResponseFieldWarnings)
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed EeEmploymentRegisterGenerateDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		EntryDate *internal.Date `json:"entryDate"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EeEmploymentRegisterGenerateDeclarationsResponse(unmarshaler.embed)
+	e.EntryDate = unmarshaler.EntryDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EeEmploymentRegisterGenerateDeclarationsResponse
+	var marshaler = struct {
+		embed
+		EntryDate *internal.Date `json:"entryDate"`
+	}{
+		embed:     embed(*e),
+		EntryDate: internal.NewDate(e.EntryDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeEmploymentRegisterGenerateDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
 type EeEmploymentRegisterSendDeclarationsRequestEvent string
 
 const (
@@ -22056,6 +23167,6224 @@ func NewEeEmploymentRegisterSendDeclarationsResponseStateFromString(s string) (E
 }
 
 func (e EeEmploymentRegisterSendDeclarationsResponseState) Ptr() *EeEmploymentRegisterSendDeclarationsResponseState {
+	return &e
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseFieldYear    = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseFieldMonth   = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseFieldInput   = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseFieldAnnexes = big.NewInt(1 << 3)
+)
+
+type EeTsdAnnexesGetDeclarationsResponse struct {
+	Year    int64                                       `json:"year" url:"year"`
+	Month   int64                                       `json:"month" url:"month"`
+	Input   *EeTsdAnnexesGetDeclarationsResponseInput   `json:"input" url:"input"`
+	Annexes *EeTsdAnnexesGetDeclarationsResponseAnnexes `json:"annexes,omitempty" url:"annexes,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) GetMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Month
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) GetInput() *EeTsdAnnexesGetDeclarationsResponseInput {
+	if e == nil {
+		return nil
+	}
+	return e.Input
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) GetAnnexes() *EeTsdAnnexesGetDeclarationsResponseAnnexes {
+	if e == nil {
+		return nil
+	}
+	return e.Annexes
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponse) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesGetDeclarationsResponseFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponse) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesGetDeclarationsResponseFieldMonth)
+}
+
+// SetInput sets the Input field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponse) SetInput(input *EeTsdAnnexesGetDeclarationsResponseInput) {
+	e.Input = input
+	e.require(eeTsdAnnexesGetDeclarationsResponseFieldInput)
+}
+
+// SetAnnexes sets the Annexes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponse) SetAnnexes(annexes *EeTsdAnnexesGetDeclarationsResponseAnnexes) {
+	e.Annexes = annexes
+	e.require(eeTsdAnnexesGetDeclarationsResponseFieldAnnexes)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseAnnexesFieldAnnex4    = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesFieldAnnex5    = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesFieldAnnex6    = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesFieldIncomeTax = big.NewInt(1 << 3)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesFieldSocialTax = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseAnnexes struct {
+	Annex4 []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item `json:"annex4,omitempty" url:"annex4,omitempty"`
+	Annex5 []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item `json:"annex5,omitempty" url:"annex5,omitempty"`
+	Annex6 *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6       `json:"annex6,omitempty" url:"annex6,omitempty"`
+	// Added to code 114; negative when annex 5 or 6 gives back more than the annexes add
+	IncomeTax string `json:"incomeTax" url:"incomeTax"`
+	// Code 4180, added to code 115
+	SocialTax string `json:"socialTax" url:"socialTax"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) GetAnnex4() []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item {
+	if e == nil {
+		return nil
+	}
+	return e.Annex4
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) GetAnnex5() []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item {
+	if e == nil {
+		return nil
+	}
+	return e.Annex5
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) GetAnnex6() *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex6
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) GetIncomeTax() string {
+	if e == nil {
+		return ""
+	}
+	return e.IncomeTax
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) GetSocialTax() string {
+	if e == nil {
+		return ""
+	}
+	return e.SocialTax
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetAnnex4 sets the Annex4 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) SetAnnex4(annex4 []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) {
+	e.Annex4 = annex4
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesFieldAnnex4)
+}
+
+// SetAnnex5 sets the Annex5 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) SetAnnex5(annex5 []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) {
+	e.Annex5 = annex5
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesFieldAnnex5)
+}
+
+// SetAnnex6 sets the Annex6 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) SetAnnex6(annex6 *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) {
+	e.Annex6 = annex6
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesFieldAnnex6)
+}
+
+// SetIncomeTax sets the IncomeTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) SetIncomeTax(incomeTax string) {
+	e.IncomeTax = incomeTax
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesFieldIncomeTax)
+}
+
+// SetSocialTax sets the SocialTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) SetSocialTax(socialTax string) {
+	e.SocialTax = socialTax
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesFieldSocialTax)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseAnnexes
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseAnnexes(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseAnnexes
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexes) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4ItemFieldElement = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4ItemFieldAmount  = big.NewInt(1 << 1)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item struct {
+	// The element of tsd_schema, named by its code
+	Element string `json:"element" url:"element"`
+	Amount  string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) GetElement() string {
+	if e == nil {
+		return ""
+	}
+	return e.Element
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetElement sets the Element field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) SetElement(element string) {
+	e.Element = element
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4ItemFieldElement)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4ItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex4Item) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5ItemFieldElement = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5ItemFieldAmount  = big.NewInt(1 << 1)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item struct {
+	// The element of tsd_schema, named by its code
+	Element string `json:"element" url:"element"`
+	Amount  string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) GetElement() string {
+	if e == nil {
+		return ""
+	}
+	return e.Element
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetElement sets the Element field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) SetElement(element string) {
+	e.Element = element
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5ItemFieldElement)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5ItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex5Item) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldFields         = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldReductions     = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldRelatedParties = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6 struct {
+	Fields         []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem         `json:"fields" url:"fields"`
+	Reductions     []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem     `json:"reductions" url:"reductions"`
+	RelatedParties []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem `json:"relatedParties" url:"relatedParties"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) GetFields() []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Fields
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) GetReductions() []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Reductions
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) GetRelatedParties() []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem {
+	if e == nil {
+		return nil
+	}
+	return e.RelatedParties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) SetFields(fields []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) {
+	e.Fields = fields
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldFields)
+}
+
+// SetReductions sets the Reductions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) SetReductions(reductions []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) {
+	e.Reductions = reductions
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldReductions)
+}
+
+// SetRelatedParties sets the RelatedParties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) SetRelatedParties(relatedParties []*EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) {
+	e.RelatedParties = relatedParties
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldRelatedParties)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItemFieldElement = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItemFieldAmount  = big.NewInt(1 << 1)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem struct {
+	// The element of tsd_schema, named by its code
+	Element string `json:"element" url:"element"`
+	Amount  string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) GetElement() string {
+	if e == nil {
+		return ""
+	}
+	return e.Element
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetElement sets the Element field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) SetElement(element string) {
+	e.Element = element
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItemFieldElement)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6FieldsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldMonth  = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldYear   = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem struct {
+	Month  int64  `json:"month" url:"month"`
+	Year   int64  `json:"year" url:"year"`
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Month
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldMonth)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6ReductionsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldRegistryCode = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldName         = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldCountry      = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldAmount       = big.NewInt(1 << 3)
+	eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldTypeCode     = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem struct {
+	RegistryCode string `json:"registryCode" url:"registryCode"`
+	Name         string `json:"name" url:"name"`
+	Country      string `json:"country" url:"country"`
+	Amount       string `json:"amount" url:"amount"`
+	TypeCode     string `json:"typeCode" url:"typeCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetRegistryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.RegistryCode
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetCountry() string {
+	if e == nil {
+		return ""
+	}
+	return e.Country
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetTypeCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.TypeCode
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRegistryCode sets the RegistryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetRegistryCode(registryCode string) {
+	e.RegistryCode = registryCode
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldRegistryCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetName(name string) {
+	e.Name = name
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldName)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetCountry(country string) {
+	e.Country = country
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldCountry)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldAmount)
+}
+
+// SetTypeCode sets the TypeCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetTypeCode(typeCode string) {
+	e.TypeCode = typeCode
+	e.require(eeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldTypeCode)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseInputFieldAnnex4 = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseInputFieldAnnex5 = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseInputFieldAnnex6 = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseInput struct {
+	Annex4 *EeTsdAnnexesGetDeclarationsResponseInputAnnex4 `json:"annex4,omitempty" url:"annex4,omitempty"`
+	Annex5 *EeTsdAnnexesGetDeclarationsResponseInputAnnex5 `json:"annex5,omitempty" url:"annex5,omitempty"`
+	Annex6 *EeTsdAnnexesGetDeclarationsResponseInputAnnex6 `json:"annex6,omitempty" url:"annex6,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) GetAnnex4() *EeTsdAnnexesGetDeclarationsResponseInputAnnex4 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex4
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) GetAnnex5() *EeTsdAnnexesGetDeclarationsResponseInputAnnex5 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex5
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) GetAnnex6() *EeTsdAnnexesGetDeclarationsResponseInputAnnex6 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex6
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetAnnex4 sets the Annex4 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) SetAnnex4(annex4 *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) {
+	e.Annex4 = annex4
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputFieldAnnex4)
+}
+
+// SetAnnex5 sets the Annex5 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) SetAnnex5(annex5 *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) {
+	e.Annex5 = annex5
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputFieldAnnex5)
+}
+
+// SetAnnex6 sets the Annex6 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) SetAnnex6(annex6 *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) {
+	e.Annex6 = annex6
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputFieldAnnex6)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInput) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldHousing                   = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldInsurancePremiums         = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldCarCompensationAboveLimit = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldEmployerVehicle           = big.NewInt(1 << 3)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldOtherProperty             = big.NewInt(1 << 4)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldLoanMarketInterest        = big.NewInt(1 << 5)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldLoanContractInterest      = big.NewInt(1 << 6)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldTransferMarketPrice       = big.NewInt(1 << 7)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldTransferAppliedPrice      = big.NewInt(1 << 8)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldStockOption               = big.NewInt(1 << 9)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldPurchaseAppliedPrice      = big.NewInt(1 << 10)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldPurchaseMarketPrice       = big.NewInt(1 << 11)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldWaivedClaims              = big.NewInt(1 << 12)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldEducation                 = big.NewInt(1 << 13)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldHealthPromotion           = big.NewInt(1 << 14)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldOther                     = big.NewInt(1 << 15)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldNotTaxedWithIncomeTax     = big.NewInt(1 << 16)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldNotTaxedWithSocialTax     = big.NewInt(1 << 17)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex4 struct {
+	// 4000: full or partial cover of the employee’s housing costs
+	Housing *string `json:"housing,omitempty" url:"housing,omitempty"`
+	// 4010: insurance premiums not required by law, the employee being the beneficiary
+	InsurancePremiums *string `json:"insurancePremiums,omitempty" url:"insurancePremiums,omitempty"`
+	// 4030: compensation for a personal car used for work above the limit
+	CarCompensationAboveLimit *string `json:"carCompensationAboveLimit,omitempty" url:"carCompensationAboveLimit,omitempty"`
+	// 4040: an employer vehicle used for non-work purposes (TuMS § 48 lg 8)
+	EmployerVehicle *string `json:"employerVehicle,omitempty" url:"employerVehicle,omitempty"`
+	// 4050: other employer property used for non-work purposes
+	OtherProperty *string `json:"otherProperty,omitempty" url:"otherProperty,omitempty"`
+	// 4061: interest at market terms on a loan given below market interest
+	LoanMarketInterest *string `json:"loanMarketInterest,omitempty" url:"loanMarketInterest,omitempty"`
+	// 4062: interest at the rate of the loan contract
+	LoanContractInterest *string `json:"loanContractInterest,omitempty" url:"loanContractInterest,omitempty"`
+	// 4071: market price of a thing, security, right or service given free or cheap
+	TransferMarketPrice *string `json:"transferMarketPrice,omitempty" url:"transferMarketPrice,omitempty"`
+	// 4072: price applied to it
+	TransferAppliedPrice *string                                                    `json:"transferAppliedPrice,omitempty" url:"transferAppliedPrice,omitempty"`
+	StockOption          *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption `json:"stockOption,omitempty" url:"stockOption,omitempty"`
+	// 4091: price paid for a thing, security, right or service bought above market
+	PurchaseAppliedPrice *string `json:"purchaseAppliedPrice,omitempty" url:"purchaseAppliedPrice,omitempty"`
+	// 4092: its market price
+	PurchaseMarketPrice *string `json:"purchaseMarketPrice,omitempty" url:"purchaseMarketPrice,omitempty"`
+	// 4100: waiver of a monetary claim
+	WaivedClaims *string `json:"waivedClaims,omitempty" url:"waivedClaims,omitempty"`
+	// 4110: education costs not directly related to the job
+	Education *string `json:"education,omitempty" url:"education,omitempty"`
+	// 4120: health promotion above the yearly exempt amount
+	HealthPromotion *string `json:"healthPromotion,omitempty" url:"healthPromotion,omitempty"`
+	// 4130: other fringe benefits
+	Other *string `json:"other,omitempty" url:"other,omitempty"`
+	// 4150: of the total, not taxed with Estonian income tax
+	NotTaxedWithIncomeTax *string `json:"notTaxedWithIncomeTax,omitempty" url:"notTaxedWithIncomeTax,omitempty"`
+	// 4160: of the total, not taxed with Estonian social tax
+	NotTaxedWithSocialTax *string `json:"notTaxedWithSocialTax,omitempty" url:"notTaxedWithSocialTax,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetHousing() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Housing
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetInsurancePremiums() *string {
+	if e == nil {
+		return nil
+	}
+	return e.InsurancePremiums
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetCarCompensationAboveLimit() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CarCompensationAboveLimit
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetEmployerVehicle() *string {
+	if e == nil {
+		return nil
+	}
+	return e.EmployerVehicle
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetOtherProperty() *string {
+	if e == nil {
+		return nil
+	}
+	return e.OtherProperty
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetLoanMarketInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LoanMarketInterest
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetLoanContractInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LoanContractInterest
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetTransferMarketPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TransferMarketPrice
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetTransferAppliedPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TransferAppliedPrice
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetStockOption() *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption {
+	if e == nil {
+		return nil
+	}
+	return e.StockOption
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetPurchaseAppliedPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PurchaseAppliedPrice
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetPurchaseMarketPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PurchaseMarketPrice
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetWaivedClaims() *string {
+	if e == nil {
+		return nil
+	}
+	return e.WaivedClaims
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetEducation() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Education
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetHealthPromotion() *string {
+	if e == nil {
+		return nil
+	}
+	return e.HealthPromotion
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetOther() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Other
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetNotTaxedWithIncomeTax() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NotTaxedWithIncomeTax
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetNotTaxedWithSocialTax() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NotTaxedWithSocialTax
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetHousing sets the Housing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetHousing(housing *string) {
+	e.Housing = housing
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldHousing)
+}
+
+// SetInsurancePremiums sets the InsurancePremiums field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetInsurancePremiums(insurancePremiums *string) {
+	e.InsurancePremiums = insurancePremiums
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldInsurancePremiums)
+}
+
+// SetCarCompensationAboveLimit sets the CarCompensationAboveLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetCarCompensationAboveLimit(carCompensationAboveLimit *string) {
+	e.CarCompensationAboveLimit = carCompensationAboveLimit
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldCarCompensationAboveLimit)
+}
+
+// SetEmployerVehicle sets the EmployerVehicle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetEmployerVehicle(employerVehicle *string) {
+	e.EmployerVehicle = employerVehicle
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldEmployerVehicle)
+}
+
+// SetOtherProperty sets the OtherProperty field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetOtherProperty(otherProperty *string) {
+	e.OtherProperty = otherProperty
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldOtherProperty)
+}
+
+// SetLoanMarketInterest sets the LoanMarketInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetLoanMarketInterest(loanMarketInterest *string) {
+	e.LoanMarketInterest = loanMarketInterest
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldLoanMarketInterest)
+}
+
+// SetLoanContractInterest sets the LoanContractInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetLoanContractInterest(loanContractInterest *string) {
+	e.LoanContractInterest = loanContractInterest
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldLoanContractInterest)
+}
+
+// SetTransferMarketPrice sets the TransferMarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetTransferMarketPrice(transferMarketPrice *string) {
+	e.TransferMarketPrice = transferMarketPrice
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldTransferMarketPrice)
+}
+
+// SetTransferAppliedPrice sets the TransferAppliedPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetTransferAppliedPrice(transferAppliedPrice *string) {
+	e.TransferAppliedPrice = transferAppliedPrice
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldTransferAppliedPrice)
+}
+
+// SetStockOption sets the StockOption field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetStockOption(stockOption *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) {
+	e.StockOption = stockOption
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldStockOption)
+}
+
+// SetPurchaseAppliedPrice sets the PurchaseAppliedPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetPurchaseAppliedPrice(purchaseAppliedPrice *string) {
+	e.PurchaseAppliedPrice = purchaseAppliedPrice
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldPurchaseAppliedPrice)
+}
+
+// SetPurchaseMarketPrice sets the PurchaseMarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetPurchaseMarketPrice(purchaseMarketPrice *string) {
+	e.PurchaseMarketPrice = purchaseMarketPrice
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldPurchaseMarketPrice)
+}
+
+// SetWaivedClaims sets the WaivedClaims field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetWaivedClaims(waivedClaims *string) {
+	e.WaivedClaims = waivedClaims
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldWaivedClaims)
+}
+
+// SetEducation sets the Education field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetEducation(education *string) {
+	e.Education = education
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldEducation)
+}
+
+// SetHealthPromotion sets the HealthPromotion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetHealthPromotion(healthPromotion *string) {
+	e.HealthPromotion = healthPromotion
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldHealthPromotion)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetOther(other *string) {
+	e.Other = other
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldOther)
+}
+
+// SetNotTaxedWithIncomeTax sets the NotTaxedWithIncomeTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetNotTaxedWithIncomeTax(notTaxedWithIncomeTax *string) {
+	e.NotTaxedWithIncomeTax = notTaxedWithIncomeTax
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldNotTaxedWithIncomeTax)
+}
+
+// SetNotTaxedWithSocialTax sets the NotTaxedWithSocialTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) SetNotTaxedWithSocialTax(notTaxedWithSocialTax *string) {
+	e.NotTaxedWithSocialTax = notTaxedWithSocialTax
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4FieldNotTaxedWithSocialTax)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseInputAnnex4
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseInputAnnex4(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseInputAnnex4
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldEvent         = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldMarketPrice   = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldExercisePrice = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldPremium       = big.NewInt(1 << 3)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption struct {
+	// `sale`: the option was sold (4081 – 4083); `exercise`: the shares were acquired (4081 – 4082 – 4083)
+	Event EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent `json:"event" url:"event"`
+	// 4081: market price
+	MarketPrice string `json:"marketPrice" url:"marketPrice"`
+	// 4082: exercise price, for `exercise` only
+	ExercisePrice *string `json:"exercisePrice,omitempty" url:"exercisePrice,omitempty"`
+	// 4083: option premium
+	Premium string `json:"premium" url:"premium"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) GetEvent() EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent {
+	if e == nil {
+		return ""
+	}
+	return e.Event
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) GetMarketPrice() string {
+	if e == nil {
+		return ""
+	}
+	return e.MarketPrice
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) GetExercisePrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ExercisePrice
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) GetPremium() string {
+	if e == nil {
+		return ""
+	}
+	return e.Premium
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetEvent sets the Event field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) SetEvent(event EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent) {
+	e.Event = event
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldEvent)
+}
+
+// SetMarketPrice sets the MarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) SetMarketPrice(marketPrice string) {
+	e.MarketPrice = marketPrice
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldMarketPrice)
+}
+
+// SetExercisePrice sets the ExercisePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) SetExercisePrice(exercisePrice *string) {
+	e.ExercisePrice = exercisePrice
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldExercisePrice)
+}
+
+// SetPremium sets the Premium field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) SetPremium(premium string) {
+	e.Premium = premium
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionFieldPremium)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOption) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// `sale`: the option was sold (4081 – 4083); `exercise`: the shares were acquired (4081 – 4082 – 4083)
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent string
+
+const (
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEventSale     EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent = "sale"
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEventExercise EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent = "exercise"
+)
+
+func NewEeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEventFromString(s string) (EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent, error) {
+	switch s {
+	case "sale":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEventSale, nil
+	case "exercise":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEventExercise, nil
+	}
+	var t EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent) Ptr() *EeTsdAnnexesGetDeclarationsResponseInputAnnex4StockOptionEvent {
+	return &e
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldGifts                    = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldGiftsToListedPersons     = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldLimit                    = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldLastYearProfit           = big.NewInt(1 << 3)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldEntertainment            = big.NewInt(1 << 4)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldListedPersonTaxableGifts = big.NewInt(1 << 5)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex5 struct {
+	// 5000: gifts and donations of the month, except those of 5010
+	Gifts *string `json:"gifts,omitempty" url:"gifts,omitempty"`
+	// 5010: gifts and donations of the month to persons on the TuMS § 11 lg 1 list or § 11 lg 10 associations (0 when none)
+	GiftsToListedPersons *string `json:"giftsToListedPersons,omitempty" url:"giftsToListedPersons,omitempty"`
+	// TuMS § 49 lg 2 limit used this month for 5020: `socialTax` 3 % of the personalised social-taxed payments of the year (5030), `profit` 10 % of the last financial year’s profit (5040, 5050); the choice of December is final
+	Limit *EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit `json:"limit,omitempty" url:"limit,omitempty"`
+	// 5040: profit of the last financial year ended by 1 January, own profit only (0 for a loss); needed with `profit`
+	LastYearProfit *string `json:"lastYearProfit,omitempty" url:"lastYearProfit,omitempty"`
+	// 5100: costs of the month for food, transport, accommodation or entertainment of guests or partners (0 to use the cumulative recalculation without spending)
+	Entertainment *string `json:"entertainment,omitempty" url:"entertainment,omitempty"`
+	// 5180: part II, taxable gifts and donations of a person on the TuMS § 11 lg 1 list; excludes the part I fields
+	ListedPersonTaxableGifts *string `json:"listedPersonTaxableGifts,omitempty" url:"listedPersonTaxableGifts,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) GetGifts() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Gifts
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) GetGiftsToListedPersons() *string {
+	if e == nil {
+		return nil
+	}
+	return e.GiftsToListedPersons
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) GetLimit() *EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit {
+	if e == nil {
+		return nil
+	}
+	return e.Limit
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) GetLastYearProfit() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LastYearProfit
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) GetEntertainment() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Entertainment
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) GetListedPersonTaxableGifts() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ListedPersonTaxableGifts
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetGifts sets the Gifts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) SetGifts(gifts *string) {
+	e.Gifts = gifts
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldGifts)
+}
+
+// SetGiftsToListedPersons sets the GiftsToListedPersons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) SetGiftsToListedPersons(giftsToListedPersons *string) {
+	e.GiftsToListedPersons = giftsToListedPersons
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldGiftsToListedPersons)
+}
+
+// SetLimit sets the Limit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) SetLimit(limit *EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit) {
+	e.Limit = limit
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldLimit)
+}
+
+// SetLastYearProfit sets the LastYearProfit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) SetLastYearProfit(lastYearProfit *string) {
+	e.LastYearProfit = lastYearProfit
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldLastYearProfit)
+}
+
+// SetEntertainment sets the Entertainment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) SetEntertainment(entertainment *string) {
+	e.Entertainment = entertainment
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldEntertainment)
+}
+
+// SetListedPersonTaxableGifts sets the ListedPersonTaxableGifts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) SetListedPersonTaxableGifts(listedPersonTaxableGifts *string) {
+	e.ListedPersonTaxableGifts = listedPersonTaxableGifts
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex5FieldListedPersonTaxableGifts)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseInputAnnex5
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseInputAnnex5(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseInputAnnex5
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex5) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// TuMS § 49 lg 2 limit used this month for 5020: `socialTax` 3 % of the personalised social-taxed payments of the year (5030), `profit` 10 % of the last financial year’s profit (5040, 5050); the choice of December is final
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit string
+
+const (
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex5LimitSocialTax EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit = "socialTax"
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex5LimitProfit    EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit = "profit"
+)
+
+func NewEeTsdAnnexesGetDeclarationsResponseInputAnnex5LimitFromString(s string) (EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit, error) {
+	switch s {
+	case "socialTax":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex5LimitSocialTax, nil
+	case "profit":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex5LimitProfit, nil
+	}
+	var t EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit) Ptr() *EeTsdAnnexesGetDeclarationsResponseInputAnnex5Limit {
+	return &e
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldRelatedParties          = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldFines                   = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldTaxInterest             = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldConfiscatedProperty     = big.NewInt(1 << 3)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldEnvironmentalCharges    = big.NewInt(1 << 4)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldBribes                  = big.NewInt(1 << 5)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldMembershipFees          = big.NewInt(1 << 6)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldUndocumentedPayments    = big.NewInt(1 << 7)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldNonBusinessExpenses     = big.NewInt(1 << 8)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxSecurities        = big.NewInt(1 << 9)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxHoldings          = big.NewInt(1 << 10)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxPenalties         = big.NewInt(1 << 11)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxLoans             = big.NewInt(1 << 12)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldCreditInstitutionLosses = big.NewInt(1 << 13)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldReductions              = big.NewInt(1 << 14)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex6 struct {
+	// Part II rows; their sum is 6000
+	RelatedParties []*EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem `json:"relatedParties,omitempty" url:"relatedParties,omitempty"`
+	// 6010: fines and penalty payments imposed by law
+	Fines *string `json:"fines,omitempty" url:"fines,omitempty"`
+	// 6020: interest paid under the Taxation Act
+	TaxInterest *string `json:"taxInterest,omitempty" url:"taxInterest,omitempty"`
+	// 6030: value of confiscated property
+	ConfiscatedProperty *string `json:"confiscatedProperty,omitempty" url:"confiscatedProperty,omitempty"`
+	// 6040: environmental charges at the elevated rate and damage compensation
+	EnvironmentalCharges *string `json:"environmentalCharges,omitempty" url:"environmentalCharges,omitempty"`
+	// 6050: bribes
+	Bribes *string `json:"bribes,omitempty" url:"bribes,omitempty"`
+	// 6060: entrance and membership fees of non-profits not related to the business
+	MembershipFees *string `json:"membershipFees,omitempty" url:"membershipFees,omitempty"`
+	// 6070: payments without a source document meeting the requirements
+	UndocumentedPayments *string `json:"undocumentedPayments,omitempty" url:"undocumentedPayments,omitempty"`
+	// 6080: non-business obligations, assets and services, excess borrowing costs and the other amounts of the code
+	NonBusinessExpenses *string `json:"nonBusinessExpenses,omitempty" url:"nonBusinessExpenses,omitempty"`
+	// 6090: securities of a legal person in a low tax rate territory
+	LowTaxSecurities *string `json:"lowTaxSecurities,omitempty" url:"lowTaxSecurities,omitempty"`
+	// 6100: holdings in a legal person in a low tax rate territory
+	LowTaxHoldings *string `json:"lowTaxHoldings,omitempty" url:"lowTaxHoldings,omitempty"`
+	// 6110: penalties and damages paid to such a legal person
+	LowTaxPenalties *string `json:"lowTaxPenalties,omitempty" url:"lowTaxPenalties,omitempty"`
+	// 6120: loans, prepayments and claims against such a legal person
+	LowTaxLoans *string `json:"lowTaxLoans,omitempty" url:"lowTaxLoans,omitempty"`
+	// 6130: credit institutions only
+	CreditInstitutionLosses *string `json:"creditInstitutionLosses,omitempty" url:"creditInstitutionLosses,omitempty"`
+	// 6140: reductions of an amount taxed on an earlier annex 6 (TuMS § 54 lg 6)
+	Reductions []*EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem `json:"reductions,omitempty" url:"reductions,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetRelatedParties() []*EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem {
+	if e == nil {
+		return nil
+	}
+	return e.RelatedParties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetFines() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Fines
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetTaxInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TaxInterest
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetConfiscatedProperty() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ConfiscatedProperty
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetEnvironmentalCharges() *string {
+	if e == nil {
+		return nil
+	}
+	return e.EnvironmentalCharges
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetBribes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Bribes
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetMembershipFees() *string {
+	if e == nil {
+		return nil
+	}
+	return e.MembershipFees
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetUndocumentedPayments() *string {
+	if e == nil {
+		return nil
+	}
+	return e.UndocumentedPayments
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetNonBusinessExpenses() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NonBusinessExpenses
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetLowTaxSecurities() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxSecurities
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetLowTaxHoldings() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxHoldings
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetLowTaxPenalties() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxPenalties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetLowTaxLoans() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxLoans
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetCreditInstitutionLosses() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CreditInstitutionLosses
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetReductions() []*EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Reductions
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRelatedParties sets the RelatedParties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetRelatedParties(relatedParties []*EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) {
+	e.RelatedParties = relatedParties
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldRelatedParties)
+}
+
+// SetFines sets the Fines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetFines(fines *string) {
+	e.Fines = fines
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldFines)
+}
+
+// SetTaxInterest sets the TaxInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetTaxInterest(taxInterest *string) {
+	e.TaxInterest = taxInterest
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldTaxInterest)
+}
+
+// SetConfiscatedProperty sets the ConfiscatedProperty field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetConfiscatedProperty(confiscatedProperty *string) {
+	e.ConfiscatedProperty = confiscatedProperty
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldConfiscatedProperty)
+}
+
+// SetEnvironmentalCharges sets the EnvironmentalCharges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetEnvironmentalCharges(environmentalCharges *string) {
+	e.EnvironmentalCharges = environmentalCharges
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldEnvironmentalCharges)
+}
+
+// SetBribes sets the Bribes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetBribes(bribes *string) {
+	e.Bribes = bribes
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldBribes)
+}
+
+// SetMembershipFees sets the MembershipFees field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetMembershipFees(membershipFees *string) {
+	e.MembershipFees = membershipFees
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldMembershipFees)
+}
+
+// SetUndocumentedPayments sets the UndocumentedPayments field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetUndocumentedPayments(undocumentedPayments *string) {
+	e.UndocumentedPayments = undocumentedPayments
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldUndocumentedPayments)
+}
+
+// SetNonBusinessExpenses sets the NonBusinessExpenses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetNonBusinessExpenses(nonBusinessExpenses *string) {
+	e.NonBusinessExpenses = nonBusinessExpenses
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldNonBusinessExpenses)
+}
+
+// SetLowTaxSecurities sets the LowTaxSecurities field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetLowTaxSecurities(lowTaxSecurities *string) {
+	e.LowTaxSecurities = lowTaxSecurities
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxSecurities)
+}
+
+// SetLowTaxHoldings sets the LowTaxHoldings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetLowTaxHoldings(lowTaxHoldings *string) {
+	e.LowTaxHoldings = lowTaxHoldings
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxHoldings)
+}
+
+// SetLowTaxPenalties sets the LowTaxPenalties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetLowTaxPenalties(lowTaxPenalties *string) {
+	e.LowTaxPenalties = lowTaxPenalties
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxPenalties)
+}
+
+// SetLowTaxLoans sets the LowTaxLoans field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetLowTaxLoans(lowTaxLoans *string) {
+	e.LowTaxLoans = lowTaxLoans
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldLowTaxLoans)
+}
+
+// SetCreditInstitutionLosses sets the CreditInstitutionLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetCreditInstitutionLosses(creditInstitutionLosses *string) {
+	e.CreditInstitutionLosses = creditInstitutionLosses
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldCreditInstitutionLosses)
+}
+
+// SetReductions sets the Reductions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) SetReductions(reductions []*EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) {
+	e.Reductions = reductions
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6FieldReductions)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseInputAnnex6
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseInputAnnex6(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseInputAnnex6
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItemFieldMonth  = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItemFieldYear   = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem struct {
+	// 6141
+	Month int64 `json:"month" url:"month"`
+	// 6142
+	Year int64 `json:"year" url:"year"`
+	// 6143: the amount taxed in that period whose basis fell away
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) GetMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Month
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItemFieldMonth)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItemFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6ReductionsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldRegistryCode = big.NewInt(1 << 0)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldName         = big.NewInt(1 << 1)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldCountry      = big.NewInt(1 << 2)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldAmount       = big.NewInt(1 << 3)
+	eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldTypeCode     = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem struct {
+	// 6200: registry code of the related person
+	RegistryCode string `json:"registryCode" url:"registryCode"`
+	// 6210
+	Name string `json:"name" url:"name"`
+	// 6220: ISO 3166-1 alpha-2 country
+	Country string `json:"country" url:"country"`
+	// 6230: taxable amount
+	Amount string `json:"amount" url:"amount"`
+	// 6240: 621 transfer price, 6211 transfer price with a party under TuMS § 52¹, 622 income not received or cost not incurred, 623 hybrid mismatch (TuMS §§ 54⁷, 54⁸), 624 market value on a transfer to a tonnage unit
+	TypeCode EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode `json:"typeCode" url:"typeCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetRegistryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.RegistryCode
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetCountry() string {
+	if e == nil {
+		return ""
+	}
+	return e.Country
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetTypeCode() EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode {
+	if e == nil {
+		return ""
+	}
+	return e.TypeCode
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRegistryCode sets the RegistryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetRegistryCode(registryCode string) {
+	e.RegistryCode = registryCode
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldRegistryCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetName(name string) {
+	e.Name = name
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldName)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetCountry(country string) {
+	e.Country = country
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldCountry)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldAmount)
+}
+
+// SetTypeCode sets the TypeCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetTypeCode(typeCode EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode) {
+	e.TypeCode = typeCode
+	e.require(eeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldTypeCode)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// 6240: 621 transfer price, 6211 transfer price with a party under TuMS § 52¹, 622 income not received or cost not incurred, 623 hybrid mismatch (TuMS §§ 54⁷, 54⁸), 624 market value on a transfer to a tonnage unit
+type EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode string
+
+const (
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyOne         EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "621"
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyTwo         EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "622"
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyThree       EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "623"
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyFour        EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "624"
+	EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixThousandTwoHundredEleven EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "6211"
+)
+
+func NewEeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeFromString(s string) (EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode, error) {
+	switch s {
+	case "621":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyOne, nil
+	case "622":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyTwo, nil
+	case "623":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyThree, nil
+	case "624":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyFour, nil
+	case "6211":
+		return EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixThousandTwoHundredEleven, nil
+	}
+	var t EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode) Ptr() *EeTsdAnnexesGetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode {
+	return &e
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldHousing                   = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldInsurancePremiums         = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldCarCompensationAboveLimit = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldEmployerVehicle           = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldOtherProperty             = big.NewInt(1 << 4)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldLoanMarketInterest        = big.NewInt(1 << 5)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldLoanContractInterest      = big.NewInt(1 << 6)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldTransferMarketPrice       = big.NewInt(1 << 7)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldTransferAppliedPrice      = big.NewInt(1 << 8)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldStockOption               = big.NewInt(1 << 9)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldPurchaseAppliedPrice      = big.NewInt(1 << 10)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldPurchaseMarketPrice       = big.NewInt(1 << 11)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldWaivedClaims              = big.NewInt(1 << 12)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldEducation                 = big.NewInt(1 << 13)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldHealthPromotion           = big.NewInt(1 << 14)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldOther                     = big.NewInt(1 << 15)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldNotTaxedWithIncomeTax     = big.NewInt(1 << 16)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4FieldNotTaxedWithSocialTax     = big.NewInt(1 << 17)
+)
+
+type EeTsdAnnexesSetDeclarationsRequestAnnex4 struct {
+	// 4000: full or partial cover of the employee’s housing costs
+	Housing *string `json:"housing,omitempty" url:"housing,omitempty"`
+	// 4010: insurance premiums not required by law, the employee being the beneficiary
+	InsurancePremiums *string `json:"insurancePremiums,omitempty" url:"insurancePremiums,omitempty"`
+	// 4030: compensation for a personal car used for work above the limit
+	CarCompensationAboveLimit *string `json:"carCompensationAboveLimit,omitempty" url:"carCompensationAboveLimit,omitempty"`
+	// 4040: an employer vehicle used for non-work purposes (TuMS § 48 lg 8)
+	EmployerVehicle *string `json:"employerVehicle,omitempty" url:"employerVehicle,omitempty"`
+	// 4050: other employer property used for non-work purposes
+	OtherProperty *string `json:"otherProperty,omitempty" url:"otherProperty,omitempty"`
+	// 4061: interest at market terms on a loan given below market interest
+	LoanMarketInterest *string `json:"loanMarketInterest,omitempty" url:"loanMarketInterest,omitempty"`
+	// 4062: interest at the rate of the loan contract
+	LoanContractInterest *string `json:"loanContractInterest,omitempty" url:"loanContractInterest,omitempty"`
+	// 4071: market price of a thing, security, right or service given free or cheap
+	TransferMarketPrice *string `json:"transferMarketPrice,omitempty" url:"transferMarketPrice,omitempty"`
+	// 4072: price applied to it
+	TransferAppliedPrice *string                                              `json:"transferAppliedPrice,omitempty" url:"transferAppliedPrice,omitempty"`
+	StockOption          *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption `json:"stockOption,omitempty" url:"stockOption,omitempty"`
+	// 4091: price paid for a thing, security, right or service bought above market
+	PurchaseAppliedPrice *string `json:"purchaseAppliedPrice,omitempty" url:"purchaseAppliedPrice,omitempty"`
+	// 4092: its market price
+	PurchaseMarketPrice *string `json:"purchaseMarketPrice,omitempty" url:"purchaseMarketPrice,omitempty"`
+	// 4100: waiver of a monetary claim
+	WaivedClaims *string `json:"waivedClaims,omitempty" url:"waivedClaims,omitempty"`
+	// 4110: education costs not directly related to the job
+	Education *string `json:"education,omitempty" url:"education,omitempty"`
+	// 4120: health promotion above the yearly exempt amount
+	HealthPromotion *string `json:"healthPromotion,omitempty" url:"healthPromotion,omitempty"`
+	// 4130: other fringe benefits
+	Other *string `json:"other,omitempty" url:"other,omitempty"`
+	// 4150: of the total, not taxed with Estonian income tax
+	NotTaxedWithIncomeTax *string `json:"notTaxedWithIncomeTax,omitempty" url:"notTaxedWithIncomeTax,omitempty"`
+	// 4160: of the total, not taxed with Estonian social tax
+	NotTaxedWithSocialTax *string `json:"notTaxedWithSocialTax,omitempty" url:"notTaxedWithSocialTax,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetHousing() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Housing
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetInsurancePremiums() *string {
+	if e == nil {
+		return nil
+	}
+	return e.InsurancePremiums
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetCarCompensationAboveLimit() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CarCompensationAboveLimit
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetEmployerVehicle() *string {
+	if e == nil {
+		return nil
+	}
+	return e.EmployerVehicle
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetOtherProperty() *string {
+	if e == nil {
+		return nil
+	}
+	return e.OtherProperty
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetLoanMarketInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LoanMarketInterest
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetLoanContractInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LoanContractInterest
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetTransferMarketPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TransferMarketPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetTransferAppliedPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TransferAppliedPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetStockOption() *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption {
+	if e == nil {
+		return nil
+	}
+	return e.StockOption
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetPurchaseAppliedPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PurchaseAppliedPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetPurchaseMarketPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PurchaseMarketPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetWaivedClaims() *string {
+	if e == nil {
+		return nil
+	}
+	return e.WaivedClaims
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetEducation() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Education
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetHealthPromotion() *string {
+	if e == nil {
+		return nil
+	}
+	return e.HealthPromotion
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetOther() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Other
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetNotTaxedWithIncomeTax() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NotTaxedWithIncomeTax
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetNotTaxedWithSocialTax() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NotTaxedWithSocialTax
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetHousing sets the Housing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetHousing(housing *string) {
+	e.Housing = housing
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldHousing)
+}
+
+// SetInsurancePremiums sets the InsurancePremiums field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetInsurancePremiums(insurancePremiums *string) {
+	e.InsurancePremiums = insurancePremiums
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldInsurancePremiums)
+}
+
+// SetCarCompensationAboveLimit sets the CarCompensationAboveLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetCarCompensationAboveLimit(carCompensationAboveLimit *string) {
+	e.CarCompensationAboveLimit = carCompensationAboveLimit
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldCarCompensationAboveLimit)
+}
+
+// SetEmployerVehicle sets the EmployerVehicle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetEmployerVehicle(employerVehicle *string) {
+	e.EmployerVehicle = employerVehicle
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldEmployerVehicle)
+}
+
+// SetOtherProperty sets the OtherProperty field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetOtherProperty(otherProperty *string) {
+	e.OtherProperty = otherProperty
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldOtherProperty)
+}
+
+// SetLoanMarketInterest sets the LoanMarketInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetLoanMarketInterest(loanMarketInterest *string) {
+	e.LoanMarketInterest = loanMarketInterest
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldLoanMarketInterest)
+}
+
+// SetLoanContractInterest sets the LoanContractInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetLoanContractInterest(loanContractInterest *string) {
+	e.LoanContractInterest = loanContractInterest
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldLoanContractInterest)
+}
+
+// SetTransferMarketPrice sets the TransferMarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetTransferMarketPrice(transferMarketPrice *string) {
+	e.TransferMarketPrice = transferMarketPrice
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldTransferMarketPrice)
+}
+
+// SetTransferAppliedPrice sets the TransferAppliedPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetTransferAppliedPrice(transferAppliedPrice *string) {
+	e.TransferAppliedPrice = transferAppliedPrice
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldTransferAppliedPrice)
+}
+
+// SetStockOption sets the StockOption field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetStockOption(stockOption *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) {
+	e.StockOption = stockOption
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldStockOption)
+}
+
+// SetPurchaseAppliedPrice sets the PurchaseAppliedPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetPurchaseAppliedPrice(purchaseAppliedPrice *string) {
+	e.PurchaseAppliedPrice = purchaseAppliedPrice
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldPurchaseAppliedPrice)
+}
+
+// SetPurchaseMarketPrice sets the PurchaseMarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetPurchaseMarketPrice(purchaseMarketPrice *string) {
+	e.PurchaseMarketPrice = purchaseMarketPrice
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldPurchaseMarketPrice)
+}
+
+// SetWaivedClaims sets the WaivedClaims field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetWaivedClaims(waivedClaims *string) {
+	e.WaivedClaims = waivedClaims
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldWaivedClaims)
+}
+
+// SetEducation sets the Education field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetEducation(education *string) {
+	e.Education = education
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldEducation)
+}
+
+// SetHealthPromotion sets the HealthPromotion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetHealthPromotion(healthPromotion *string) {
+	e.HealthPromotion = healthPromotion
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldHealthPromotion)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetOther(other *string) {
+	e.Other = other
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldOther)
+}
+
+// SetNotTaxedWithIncomeTax sets the NotTaxedWithIncomeTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetNotTaxedWithIncomeTax(notTaxedWithIncomeTax *string) {
+	e.NotTaxedWithIncomeTax = notTaxedWithIncomeTax
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldNotTaxedWithIncomeTax)
+}
+
+// SetNotTaxedWithSocialTax sets the NotTaxedWithSocialTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) SetNotTaxedWithSocialTax(notTaxedWithSocialTax *string) {
+	e.NotTaxedWithSocialTax = notTaxedWithSocialTax
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4FieldNotTaxedWithSocialTax)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsRequestAnnex4
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsRequestAnnex4(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsRequestAnnex4
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldEvent         = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldMarketPrice   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldExercisePrice = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldPremium       = big.NewInt(1 << 3)
+)
+
+type EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption struct {
+	// `sale`: the option was sold (4081 – 4083); `exercise`: the shares were acquired (4081 – 4082 – 4083)
+	Event EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent `json:"event" url:"event"`
+	// 4081: market price
+	MarketPrice string `json:"marketPrice" url:"marketPrice"`
+	// 4082: exercise price, for `exercise` only
+	ExercisePrice *string `json:"exercisePrice,omitempty" url:"exercisePrice,omitempty"`
+	// 4083: option premium
+	Premium string `json:"premium" url:"premium"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) GetEvent() EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent {
+	if e == nil {
+		return ""
+	}
+	return e.Event
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) GetMarketPrice() string {
+	if e == nil {
+		return ""
+	}
+	return e.MarketPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) GetExercisePrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ExercisePrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) GetPremium() string {
+	if e == nil {
+		return ""
+	}
+	return e.Premium
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetEvent sets the Event field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) SetEvent(event EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent) {
+	e.Event = event
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldEvent)
+}
+
+// SetMarketPrice sets the MarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) SetMarketPrice(marketPrice string) {
+	e.MarketPrice = marketPrice
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldMarketPrice)
+}
+
+// SetExercisePrice sets the ExercisePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) SetExercisePrice(exercisePrice *string) {
+	e.ExercisePrice = exercisePrice
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldExercisePrice)
+}
+
+// SetPremium sets the Premium field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) SetPremium(premium string) {
+	e.Premium = premium
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionFieldPremium)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOption) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// `sale`: the option was sold (4081 – 4083); `exercise`: the shares were acquired (4081 – 4082 – 4083)
+type EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent string
+
+const (
+	EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEventSale     EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent = "sale"
+	EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEventExercise EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent = "exercise"
+)
+
+func NewEeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEventFromString(s string) (EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent, error) {
+	switch s {
+	case "sale":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEventSale, nil
+	case "exercise":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEventExercise, nil
+	}
+	var t EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent) Ptr() *EeTsdAnnexesSetDeclarationsRequestAnnex4StockOptionEvent {
+	return &e
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsRequestAnnex5FieldGifts                    = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsRequestAnnex5FieldGiftsToListedPersons     = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsRequestAnnex5FieldLimit                    = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsRequestAnnex5FieldLastYearProfit           = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsRequestAnnex5FieldEntertainment            = big.NewInt(1 << 4)
+	eeTsdAnnexesSetDeclarationsRequestAnnex5FieldListedPersonTaxableGifts = big.NewInt(1 << 5)
+)
+
+type EeTsdAnnexesSetDeclarationsRequestAnnex5 struct {
+	// 5000: gifts and donations of the month, except those of 5010
+	Gifts *string `json:"gifts,omitempty" url:"gifts,omitempty"`
+	// 5010: gifts and donations of the month to persons on the TuMS § 11 lg 1 list or § 11 lg 10 associations (0 when none)
+	GiftsToListedPersons *string `json:"giftsToListedPersons,omitempty" url:"giftsToListedPersons,omitempty"`
+	// TuMS § 49 lg 2 limit used this month for 5020: `socialTax` 3 % of the personalised social-taxed payments of the year (5030), `profit` 10 % of the last financial year’s profit (5040, 5050); the choice of December is final
+	Limit *EeTsdAnnexesSetDeclarationsRequestAnnex5Limit `json:"limit,omitempty" url:"limit,omitempty"`
+	// 5040: profit of the last financial year ended by 1 January, own profit only (0 for a loss); needed with `profit`
+	LastYearProfit *string `json:"lastYearProfit,omitempty" url:"lastYearProfit,omitempty"`
+	// 5100: costs of the month for food, transport, accommodation or entertainment of guests or partners (0 to use the cumulative recalculation without spending)
+	Entertainment *string `json:"entertainment,omitempty" url:"entertainment,omitempty"`
+	// 5180: part II, taxable gifts and donations of a person on the TuMS § 11 lg 1 list; excludes the part I fields
+	ListedPersonTaxableGifts *string `json:"listedPersonTaxableGifts,omitempty" url:"listedPersonTaxableGifts,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) GetGifts() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Gifts
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) GetGiftsToListedPersons() *string {
+	if e == nil {
+		return nil
+	}
+	return e.GiftsToListedPersons
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) GetLimit() *EeTsdAnnexesSetDeclarationsRequestAnnex5Limit {
+	if e == nil {
+		return nil
+	}
+	return e.Limit
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) GetLastYearProfit() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LastYearProfit
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) GetEntertainment() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Entertainment
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) GetListedPersonTaxableGifts() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ListedPersonTaxableGifts
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetGifts sets the Gifts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) SetGifts(gifts *string) {
+	e.Gifts = gifts
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex5FieldGifts)
+}
+
+// SetGiftsToListedPersons sets the GiftsToListedPersons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) SetGiftsToListedPersons(giftsToListedPersons *string) {
+	e.GiftsToListedPersons = giftsToListedPersons
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex5FieldGiftsToListedPersons)
+}
+
+// SetLimit sets the Limit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) SetLimit(limit *EeTsdAnnexesSetDeclarationsRequestAnnex5Limit) {
+	e.Limit = limit
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex5FieldLimit)
+}
+
+// SetLastYearProfit sets the LastYearProfit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) SetLastYearProfit(lastYearProfit *string) {
+	e.LastYearProfit = lastYearProfit
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex5FieldLastYearProfit)
+}
+
+// SetEntertainment sets the Entertainment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) SetEntertainment(entertainment *string) {
+	e.Entertainment = entertainment
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex5FieldEntertainment)
+}
+
+// SetListedPersonTaxableGifts sets the ListedPersonTaxableGifts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) SetListedPersonTaxableGifts(listedPersonTaxableGifts *string) {
+	e.ListedPersonTaxableGifts = listedPersonTaxableGifts
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex5FieldListedPersonTaxableGifts)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsRequestAnnex5
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsRequestAnnex5(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsRequestAnnex5
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex5) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// TuMS § 49 lg 2 limit used this month for 5020: `socialTax` 3 % of the personalised social-taxed payments of the year (5030), `profit` 10 % of the last financial year’s profit (5040, 5050); the choice of December is final
+type EeTsdAnnexesSetDeclarationsRequestAnnex5Limit string
+
+const (
+	EeTsdAnnexesSetDeclarationsRequestAnnex5LimitSocialTax EeTsdAnnexesSetDeclarationsRequestAnnex5Limit = "socialTax"
+	EeTsdAnnexesSetDeclarationsRequestAnnex5LimitProfit    EeTsdAnnexesSetDeclarationsRequestAnnex5Limit = "profit"
+)
+
+func NewEeTsdAnnexesSetDeclarationsRequestAnnex5LimitFromString(s string) (EeTsdAnnexesSetDeclarationsRequestAnnex5Limit, error) {
+	switch s {
+	case "socialTax":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex5LimitSocialTax, nil
+	case "profit":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex5LimitProfit, nil
+	}
+	var t EeTsdAnnexesSetDeclarationsRequestAnnex5Limit
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesSetDeclarationsRequestAnnex5Limit) Ptr() *EeTsdAnnexesSetDeclarationsRequestAnnex5Limit {
+	return &e
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldRelatedParties          = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldFines                   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldTaxInterest             = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldConfiscatedProperty     = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldEnvironmentalCharges    = big.NewInt(1 << 4)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldBribes                  = big.NewInt(1 << 5)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldMembershipFees          = big.NewInt(1 << 6)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldUndocumentedPayments    = big.NewInt(1 << 7)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldNonBusinessExpenses     = big.NewInt(1 << 8)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxSecurities        = big.NewInt(1 << 9)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxHoldings          = big.NewInt(1 << 10)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxPenalties         = big.NewInt(1 << 11)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxLoans             = big.NewInt(1 << 12)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldCreditInstitutionLosses = big.NewInt(1 << 13)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6FieldReductions              = big.NewInt(1 << 14)
+)
+
+type EeTsdAnnexesSetDeclarationsRequestAnnex6 struct {
+	// Part II rows; their sum is 6000
+	RelatedParties []*EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem `json:"relatedParties,omitempty" url:"relatedParties,omitempty"`
+	// 6010: fines and penalty payments imposed by law
+	Fines *string `json:"fines,omitempty" url:"fines,omitempty"`
+	// 6020: interest paid under the Taxation Act
+	TaxInterest *string `json:"taxInterest,omitempty" url:"taxInterest,omitempty"`
+	// 6030: value of confiscated property
+	ConfiscatedProperty *string `json:"confiscatedProperty,omitempty" url:"confiscatedProperty,omitempty"`
+	// 6040: environmental charges at the elevated rate and damage compensation
+	EnvironmentalCharges *string `json:"environmentalCharges,omitempty" url:"environmentalCharges,omitempty"`
+	// 6050: bribes
+	Bribes *string `json:"bribes,omitempty" url:"bribes,omitempty"`
+	// 6060: entrance and membership fees of non-profits not related to the business
+	MembershipFees *string `json:"membershipFees,omitempty" url:"membershipFees,omitempty"`
+	// 6070: payments without a source document meeting the requirements
+	UndocumentedPayments *string `json:"undocumentedPayments,omitempty" url:"undocumentedPayments,omitempty"`
+	// 6080: non-business obligations, assets and services, excess borrowing costs and the other amounts of the code
+	NonBusinessExpenses *string `json:"nonBusinessExpenses,omitempty" url:"nonBusinessExpenses,omitempty"`
+	// 6090: securities of a legal person in a low tax rate territory
+	LowTaxSecurities *string `json:"lowTaxSecurities,omitempty" url:"lowTaxSecurities,omitempty"`
+	// 6100: holdings in a legal person in a low tax rate territory
+	LowTaxHoldings *string `json:"lowTaxHoldings,omitempty" url:"lowTaxHoldings,omitempty"`
+	// 6110: penalties and damages paid to such a legal person
+	LowTaxPenalties *string `json:"lowTaxPenalties,omitempty" url:"lowTaxPenalties,omitempty"`
+	// 6120: loans, prepayments and claims against such a legal person
+	LowTaxLoans *string `json:"lowTaxLoans,omitempty" url:"lowTaxLoans,omitempty"`
+	// 6130: credit institutions only
+	CreditInstitutionLosses *string `json:"creditInstitutionLosses,omitempty" url:"creditInstitutionLosses,omitempty"`
+	// 6140: reductions of an amount taxed on an earlier annex 6 (TuMS § 54 lg 6)
+	Reductions []*EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem `json:"reductions,omitempty" url:"reductions,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetRelatedParties() []*EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem {
+	if e == nil {
+		return nil
+	}
+	return e.RelatedParties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetFines() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Fines
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetTaxInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TaxInterest
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetConfiscatedProperty() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ConfiscatedProperty
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetEnvironmentalCharges() *string {
+	if e == nil {
+		return nil
+	}
+	return e.EnvironmentalCharges
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetBribes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Bribes
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetMembershipFees() *string {
+	if e == nil {
+		return nil
+	}
+	return e.MembershipFees
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetUndocumentedPayments() *string {
+	if e == nil {
+		return nil
+	}
+	return e.UndocumentedPayments
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetNonBusinessExpenses() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NonBusinessExpenses
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetLowTaxSecurities() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxSecurities
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetLowTaxHoldings() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxHoldings
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetLowTaxPenalties() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxPenalties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetLowTaxLoans() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxLoans
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetCreditInstitutionLosses() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CreditInstitutionLosses
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetReductions() []*EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Reductions
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRelatedParties sets the RelatedParties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetRelatedParties(relatedParties []*EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) {
+	e.RelatedParties = relatedParties
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldRelatedParties)
+}
+
+// SetFines sets the Fines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetFines(fines *string) {
+	e.Fines = fines
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldFines)
+}
+
+// SetTaxInterest sets the TaxInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetTaxInterest(taxInterest *string) {
+	e.TaxInterest = taxInterest
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldTaxInterest)
+}
+
+// SetConfiscatedProperty sets the ConfiscatedProperty field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetConfiscatedProperty(confiscatedProperty *string) {
+	e.ConfiscatedProperty = confiscatedProperty
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldConfiscatedProperty)
+}
+
+// SetEnvironmentalCharges sets the EnvironmentalCharges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetEnvironmentalCharges(environmentalCharges *string) {
+	e.EnvironmentalCharges = environmentalCharges
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldEnvironmentalCharges)
+}
+
+// SetBribes sets the Bribes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetBribes(bribes *string) {
+	e.Bribes = bribes
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldBribes)
+}
+
+// SetMembershipFees sets the MembershipFees field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetMembershipFees(membershipFees *string) {
+	e.MembershipFees = membershipFees
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldMembershipFees)
+}
+
+// SetUndocumentedPayments sets the UndocumentedPayments field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetUndocumentedPayments(undocumentedPayments *string) {
+	e.UndocumentedPayments = undocumentedPayments
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldUndocumentedPayments)
+}
+
+// SetNonBusinessExpenses sets the NonBusinessExpenses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetNonBusinessExpenses(nonBusinessExpenses *string) {
+	e.NonBusinessExpenses = nonBusinessExpenses
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldNonBusinessExpenses)
+}
+
+// SetLowTaxSecurities sets the LowTaxSecurities field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetLowTaxSecurities(lowTaxSecurities *string) {
+	e.LowTaxSecurities = lowTaxSecurities
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxSecurities)
+}
+
+// SetLowTaxHoldings sets the LowTaxHoldings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetLowTaxHoldings(lowTaxHoldings *string) {
+	e.LowTaxHoldings = lowTaxHoldings
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxHoldings)
+}
+
+// SetLowTaxPenalties sets the LowTaxPenalties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetLowTaxPenalties(lowTaxPenalties *string) {
+	e.LowTaxPenalties = lowTaxPenalties
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxPenalties)
+}
+
+// SetLowTaxLoans sets the LowTaxLoans field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetLowTaxLoans(lowTaxLoans *string) {
+	e.LowTaxLoans = lowTaxLoans
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldLowTaxLoans)
+}
+
+// SetCreditInstitutionLosses sets the CreditInstitutionLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetCreditInstitutionLosses(creditInstitutionLosses *string) {
+	e.CreditInstitutionLosses = creditInstitutionLosses
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldCreditInstitutionLosses)
+}
+
+// SetReductions sets the Reductions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) SetReductions(reductions []*EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) {
+	e.Reductions = reductions
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6FieldReductions)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsRequestAnnex6
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsRequestAnnex6(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsRequestAnnex6
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItemFieldMonth  = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItemFieldYear   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem struct {
+	// 6141
+	Month int64 `json:"month" url:"month"`
+	// 6142
+	Year int64 `json:"year" url:"year"`
+	// 6143: the amount taxed in that period whose basis fell away
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) GetMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Month
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItemFieldMonth)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItemFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6ReductionsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldRegistryCode = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldName         = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldCountry      = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldAmount       = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldTypeCode     = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem struct {
+	// 6200: registry code of the related person
+	RegistryCode string `json:"registryCode" url:"registryCode"`
+	// 6210
+	Name string `json:"name" url:"name"`
+	// 6220: ISO 3166-1 alpha-2 country
+	Country string `json:"country" url:"country"`
+	// 6230: taxable amount
+	Amount string `json:"amount" url:"amount"`
+	// 6240: 621 transfer price, 6211 transfer price with a party under TuMS § 52¹, 622 income not received or cost not incurred, 623 hybrid mismatch (TuMS §§ 54⁷, 54⁸), 624 market value on a transfer to a tonnage unit
+	TypeCode EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode `json:"typeCode" url:"typeCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) GetRegistryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.RegistryCode
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) GetCountry() string {
+	if e == nil {
+		return ""
+	}
+	return e.Country
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) GetTypeCode() EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode {
+	if e == nil {
+		return ""
+	}
+	return e.TypeCode
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRegistryCode sets the RegistryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) SetRegistryCode(registryCode string) {
+	e.RegistryCode = registryCode
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldRegistryCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) SetName(name string) {
+	e.Name = name
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldName)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) SetCountry(country string) {
+	e.Country = country
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldCountry)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldAmount)
+}
+
+// SetTypeCode sets the TypeCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) SetTypeCode(typeCode EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode) {
+	e.TypeCode = typeCode
+	e.require(eeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemFieldTypeCode)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// 6240: 621 transfer price, 6211 transfer price with a party under TuMS § 52¹, 622 income not received or cost not incurred, 623 hybrid mismatch (TuMS §§ 54⁷, 54⁸), 624 market value on a transfer to a tonnage unit
+type EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode string
+
+const (
+	EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyOne         EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode = "621"
+	EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyTwo         EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode = "622"
+	EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyThree       EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode = "623"
+	EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyFour        EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode = "624"
+	EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixThousandTwoHundredEleven EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode = "6211"
+)
+
+func NewEeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeFromString(s string) (EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode, error) {
+	switch s {
+	case "621":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyOne, nil
+	case "622":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyTwo, nil
+	case "623":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyThree, nil
+	case "624":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyFour, nil
+	case "6211":
+		return EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCodeSixThousandTwoHundredEleven, nil
+	}
+	var t EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode) Ptr() *EeTsdAnnexesSetDeclarationsRequestAnnex6RelatedPartiesItemTypeCode {
+	return &e
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseFieldYear    = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseFieldMonth   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseFieldInput   = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseFieldAnnexes = big.NewInt(1 << 3)
+)
+
+type EeTsdAnnexesSetDeclarationsResponse struct {
+	Year    int64                                       `json:"year" url:"year"`
+	Month   int64                                       `json:"month" url:"month"`
+	Input   *EeTsdAnnexesSetDeclarationsResponseInput   `json:"input" url:"input"`
+	Annexes *EeTsdAnnexesSetDeclarationsResponseAnnexes `json:"annexes,omitempty" url:"annexes,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) GetMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Month
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) GetInput() *EeTsdAnnexesSetDeclarationsResponseInput {
+	if e == nil {
+		return nil
+	}
+	return e.Input
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) GetAnnexes() *EeTsdAnnexesSetDeclarationsResponseAnnexes {
+	if e == nil {
+		return nil
+	}
+	return e.Annexes
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponse) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesSetDeclarationsResponseFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponse) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesSetDeclarationsResponseFieldMonth)
+}
+
+// SetInput sets the Input field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponse) SetInput(input *EeTsdAnnexesSetDeclarationsResponseInput) {
+	e.Input = input
+	e.require(eeTsdAnnexesSetDeclarationsResponseFieldInput)
+}
+
+// SetAnnexes sets the Annexes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponse) SetAnnexes(annexes *EeTsdAnnexesSetDeclarationsResponseAnnexes) {
+	e.Annexes = annexes
+	e.require(eeTsdAnnexesSetDeclarationsResponseFieldAnnexes)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseAnnexesFieldAnnex4    = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesFieldAnnex5    = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesFieldAnnex6    = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesFieldIncomeTax = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesFieldSocialTax = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseAnnexes struct {
+	Annex4 []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item `json:"annex4,omitempty" url:"annex4,omitempty"`
+	Annex5 []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item `json:"annex5,omitempty" url:"annex5,omitempty"`
+	Annex6 *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6       `json:"annex6,omitempty" url:"annex6,omitempty"`
+	// Added to code 114; negative when annex 5 or 6 gives back more than the annexes add
+	IncomeTax string `json:"incomeTax" url:"incomeTax"`
+	// Code 4180, added to code 115
+	SocialTax string `json:"socialTax" url:"socialTax"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) GetAnnex4() []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item {
+	if e == nil {
+		return nil
+	}
+	return e.Annex4
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) GetAnnex5() []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item {
+	if e == nil {
+		return nil
+	}
+	return e.Annex5
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) GetAnnex6() *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex6
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) GetIncomeTax() string {
+	if e == nil {
+		return ""
+	}
+	return e.IncomeTax
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) GetSocialTax() string {
+	if e == nil {
+		return ""
+	}
+	return e.SocialTax
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetAnnex4 sets the Annex4 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) SetAnnex4(annex4 []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) {
+	e.Annex4 = annex4
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesFieldAnnex4)
+}
+
+// SetAnnex5 sets the Annex5 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) SetAnnex5(annex5 []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) {
+	e.Annex5 = annex5
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesFieldAnnex5)
+}
+
+// SetAnnex6 sets the Annex6 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) SetAnnex6(annex6 *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) {
+	e.Annex6 = annex6
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesFieldAnnex6)
+}
+
+// SetIncomeTax sets the IncomeTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) SetIncomeTax(incomeTax string) {
+	e.IncomeTax = incomeTax
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesFieldIncomeTax)
+}
+
+// SetSocialTax sets the SocialTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) SetSocialTax(socialTax string) {
+	e.SocialTax = socialTax
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesFieldSocialTax)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseAnnexes
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseAnnexes(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseAnnexes
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexes) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4ItemFieldElement = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4ItemFieldAmount  = big.NewInt(1 << 1)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item struct {
+	// The element of tsd_schema, named by its code
+	Element string `json:"element" url:"element"`
+	Amount  string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) GetElement() string {
+	if e == nil {
+		return ""
+	}
+	return e.Element
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetElement sets the Element field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) SetElement(element string) {
+	e.Element = element
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4ItemFieldElement)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4ItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex4Item) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5ItemFieldElement = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5ItemFieldAmount  = big.NewInt(1 << 1)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item struct {
+	// The element of tsd_schema, named by its code
+	Element string `json:"element" url:"element"`
+	Amount  string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) GetElement() string {
+	if e == nil {
+		return ""
+	}
+	return e.Element
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetElement sets the Element field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) SetElement(element string) {
+	e.Element = element
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5ItemFieldElement)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5ItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex5Item) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldFields         = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldReductions     = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldRelatedParties = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6 struct {
+	Fields         []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem         `json:"fields" url:"fields"`
+	Reductions     []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem     `json:"reductions" url:"reductions"`
+	RelatedParties []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem `json:"relatedParties" url:"relatedParties"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) GetFields() []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Fields
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) GetReductions() []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Reductions
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) GetRelatedParties() []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem {
+	if e == nil {
+		return nil
+	}
+	return e.RelatedParties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetFields sets the Fields field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) SetFields(fields []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) {
+	e.Fields = fields
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldFields)
+}
+
+// SetReductions sets the Reductions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) SetReductions(reductions []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) {
+	e.Reductions = reductions
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldReductions)
+}
+
+// SetRelatedParties sets the RelatedParties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) SetRelatedParties(relatedParties []*EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) {
+	e.RelatedParties = relatedParties
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldRelatedParties)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItemFieldElement = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItemFieldAmount  = big.NewInt(1 << 1)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem struct {
+	// The element of tsd_schema, named by its code
+	Element string `json:"element" url:"element"`
+	Amount  string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) GetElement() string {
+	if e == nil {
+		return ""
+	}
+	return e.Element
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetElement sets the Element field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) SetElement(element string) {
+	e.Element = element
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItemFieldElement)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6FieldsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldMonth  = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldYear   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem struct {
+	Month  int64  `json:"month" url:"month"`
+	Year   int64  `json:"year" url:"year"`
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Month
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldMonth)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6ReductionsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldRegistryCode = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldName         = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldCountry      = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldAmount       = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldTypeCode     = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem struct {
+	RegistryCode string `json:"registryCode" url:"registryCode"`
+	Name         string `json:"name" url:"name"`
+	Country      string `json:"country" url:"country"`
+	Amount       string `json:"amount" url:"amount"`
+	TypeCode     string `json:"typeCode" url:"typeCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetRegistryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.RegistryCode
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetCountry() string {
+	if e == nil {
+		return ""
+	}
+	return e.Country
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetTypeCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.TypeCode
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRegistryCode sets the RegistryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetRegistryCode(registryCode string) {
+	e.RegistryCode = registryCode
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldRegistryCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetName(name string) {
+	e.Name = name
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldName)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetCountry(country string) {
+	e.Country = country
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldCountry)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldAmount)
+}
+
+// SetTypeCode sets the TypeCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) SetTypeCode(typeCode string) {
+	e.TypeCode = typeCode
+	e.require(eeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItemFieldTypeCode)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseAnnexesAnnex6RelatedPartiesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseInputFieldAnnex4 = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseInputFieldAnnex5 = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseInputFieldAnnex6 = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseInput struct {
+	Annex4 *EeTsdAnnexesSetDeclarationsResponseInputAnnex4 `json:"annex4,omitempty" url:"annex4,omitempty"`
+	Annex5 *EeTsdAnnexesSetDeclarationsResponseInputAnnex5 `json:"annex5,omitempty" url:"annex5,omitempty"`
+	Annex6 *EeTsdAnnexesSetDeclarationsResponseInputAnnex6 `json:"annex6,omitempty" url:"annex6,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) GetAnnex4() *EeTsdAnnexesSetDeclarationsResponseInputAnnex4 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex4
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) GetAnnex5() *EeTsdAnnexesSetDeclarationsResponseInputAnnex5 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex5
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) GetAnnex6() *EeTsdAnnexesSetDeclarationsResponseInputAnnex6 {
+	if e == nil {
+		return nil
+	}
+	return e.Annex6
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetAnnex4 sets the Annex4 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) SetAnnex4(annex4 *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) {
+	e.Annex4 = annex4
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputFieldAnnex4)
+}
+
+// SetAnnex5 sets the Annex5 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) SetAnnex5(annex5 *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) {
+	e.Annex5 = annex5
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputFieldAnnex5)
+}
+
+// SetAnnex6 sets the Annex6 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) SetAnnex6(annex6 *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) {
+	e.Annex6 = annex6
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputFieldAnnex6)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInput) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldHousing                   = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldInsurancePremiums         = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldCarCompensationAboveLimit = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldEmployerVehicle           = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldOtherProperty             = big.NewInt(1 << 4)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldLoanMarketInterest        = big.NewInt(1 << 5)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldLoanContractInterest      = big.NewInt(1 << 6)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldTransferMarketPrice       = big.NewInt(1 << 7)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldTransferAppliedPrice      = big.NewInt(1 << 8)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldStockOption               = big.NewInt(1 << 9)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldPurchaseAppliedPrice      = big.NewInt(1 << 10)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldPurchaseMarketPrice       = big.NewInt(1 << 11)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldWaivedClaims              = big.NewInt(1 << 12)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldEducation                 = big.NewInt(1 << 13)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldHealthPromotion           = big.NewInt(1 << 14)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldOther                     = big.NewInt(1 << 15)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldNotTaxedWithIncomeTax     = big.NewInt(1 << 16)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldNotTaxedWithSocialTax     = big.NewInt(1 << 17)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex4 struct {
+	// 4000: full or partial cover of the employee’s housing costs
+	Housing *string `json:"housing,omitempty" url:"housing,omitempty"`
+	// 4010: insurance premiums not required by law, the employee being the beneficiary
+	InsurancePremiums *string `json:"insurancePremiums,omitempty" url:"insurancePremiums,omitempty"`
+	// 4030: compensation for a personal car used for work above the limit
+	CarCompensationAboveLimit *string `json:"carCompensationAboveLimit,omitempty" url:"carCompensationAboveLimit,omitempty"`
+	// 4040: an employer vehicle used for non-work purposes (TuMS § 48 lg 8)
+	EmployerVehicle *string `json:"employerVehicle,omitempty" url:"employerVehicle,omitempty"`
+	// 4050: other employer property used for non-work purposes
+	OtherProperty *string `json:"otherProperty,omitempty" url:"otherProperty,omitempty"`
+	// 4061: interest at market terms on a loan given below market interest
+	LoanMarketInterest *string `json:"loanMarketInterest,omitempty" url:"loanMarketInterest,omitempty"`
+	// 4062: interest at the rate of the loan contract
+	LoanContractInterest *string `json:"loanContractInterest,omitempty" url:"loanContractInterest,omitempty"`
+	// 4071: market price of a thing, security, right or service given free or cheap
+	TransferMarketPrice *string `json:"transferMarketPrice,omitempty" url:"transferMarketPrice,omitempty"`
+	// 4072: price applied to it
+	TransferAppliedPrice *string                                                    `json:"transferAppliedPrice,omitempty" url:"transferAppliedPrice,omitempty"`
+	StockOption          *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption `json:"stockOption,omitempty" url:"stockOption,omitempty"`
+	// 4091: price paid for a thing, security, right or service bought above market
+	PurchaseAppliedPrice *string `json:"purchaseAppliedPrice,omitempty" url:"purchaseAppliedPrice,omitempty"`
+	// 4092: its market price
+	PurchaseMarketPrice *string `json:"purchaseMarketPrice,omitempty" url:"purchaseMarketPrice,omitempty"`
+	// 4100: waiver of a monetary claim
+	WaivedClaims *string `json:"waivedClaims,omitempty" url:"waivedClaims,omitempty"`
+	// 4110: education costs not directly related to the job
+	Education *string `json:"education,omitempty" url:"education,omitempty"`
+	// 4120: health promotion above the yearly exempt amount
+	HealthPromotion *string `json:"healthPromotion,omitempty" url:"healthPromotion,omitempty"`
+	// 4130: other fringe benefits
+	Other *string `json:"other,omitempty" url:"other,omitempty"`
+	// 4150: of the total, not taxed with Estonian income tax
+	NotTaxedWithIncomeTax *string `json:"notTaxedWithIncomeTax,omitempty" url:"notTaxedWithIncomeTax,omitempty"`
+	// 4160: of the total, not taxed with Estonian social tax
+	NotTaxedWithSocialTax *string `json:"notTaxedWithSocialTax,omitempty" url:"notTaxedWithSocialTax,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetHousing() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Housing
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetInsurancePremiums() *string {
+	if e == nil {
+		return nil
+	}
+	return e.InsurancePremiums
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetCarCompensationAboveLimit() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CarCompensationAboveLimit
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetEmployerVehicle() *string {
+	if e == nil {
+		return nil
+	}
+	return e.EmployerVehicle
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetOtherProperty() *string {
+	if e == nil {
+		return nil
+	}
+	return e.OtherProperty
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetLoanMarketInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LoanMarketInterest
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetLoanContractInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LoanContractInterest
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetTransferMarketPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TransferMarketPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetTransferAppliedPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TransferAppliedPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetStockOption() *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption {
+	if e == nil {
+		return nil
+	}
+	return e.StockOption
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetPurchaseAppliedPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PurchaseAppliedPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetPurchaseMarketPrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.PurchaseMarketPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetWaivedClaims() *string {
+	if e == nil {
+		return nil
+	}
+	return e.WaivedClaims
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetEducation() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Education
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetHealthPromotion() *string {
+	if e == nil {
+		return nil
+	}
+	return e.HealthPromotion
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetOther() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Other
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetNotTaxedWithIncomeTax() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NotTaxedWithIncomeTax
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetNotTaxedWithSocialTax() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NotTaxedWithSocialTax
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetHousing sets the Housing field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetHousing(housing *string) {
+	e.Housing = housing
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldHousing)
+}
+
+// SetInsurancePremiums sets the InsurancePremiums field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetInsurancePremiums(insurancePremiums *string) {
+	e.InsurancePremiums = insurancePremiums
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldInsurancePremiums)
+}
+
+// SetCarCompensationAboveLimit sets the CarCompensationAboveLimit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetCarCompensationAboveLimit(carCompensationAboveLimit *string) {
+	e.CarCompensationAboveLimit = carCompensationAboveLimit
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldCarCompensationAboveLimit)
+}
+
+// SetEmployerVehicle sets the EmployerVehicle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetEmployerVehicle(employerVehicle *string) {
+	e.EmployerVehicle = employerVehicle
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldEmployerVehicle)
+}
+
+// SetOtherProperty sets the OtherProperty field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetOtherProperty(otherProperty *string) {
+	e.OtherProperty = otherProperty
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldOtherProperty)
+}
+
+// SetLoanMarketInterest sets the LoanMarketInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetLoanMarketInterest(loanMarketInterest *string) {
+	e.LoanMarketInterest = loanMarketInterest
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldLoanMarketInterest)
+}
+
+// SetLoanContractInterest sets the LoanContractInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetLoanContractInterest(loanContractInterest *string) {
+	e.LoanContractInterest = loanContractInterest
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldLoanContractInterest)
+}
+
+// SetTransferMarketPrice sets the TransferMarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetTransferMarketPrice(transferMarketPrice *string) {
+	e.TransferMarketPrice = transferMarketPrice
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldTransferMarketPrice)
+}
+
+// SetTransferAppliedPrice sets the TransferAppliedPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetTransferAppliedPrice(transferAppliedPrice *string) {
+	e.TransferAppliedPrice = transferAppliedPrice
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldTransferAppliedPrice)
+}
+
+// SetStockOption sets the StockOption field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetStockOption(stockOption *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) {
+	e.StockOption = stockOption
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldStockOption)
+}
+
+// SetPurchaseAppliedPrice sets the PurchaseAppliedPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetPurchaseAppliedPrice(purchaseAppliedPrice *string) {
+	e.PurchaseAppliedPrice = purchaseAppliedPrice
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldPurchaseAppliedPrice)
+}
+
+// SetPurchaseMarketPrice sets the PurchaseMarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetPurchaseMarketPrice(purchaseMarketPrice *string) {
+	e.PurchaseMarketPrice = purchaseMarketPrice
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldPurchaseMarketPrice)
+}
+
+// SetWaivedClaims sets the WaivedClaims field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetWaivedClaims(waivedClaims *string) {
+	e.WaivedClaims = waivedClaims
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldWaivedClaims)
+}
+
+// SetEducation sets the Education field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetEducation(education *string) {
+	e.Education = education
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldEducation)
+}
+
+// SetHealthPromotion sets the HealthPromotion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetHealthPromotion(healthPromotion *string) {
+	e.HealthPromotion = healthPromotion
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldHealthPromotion)
+}
+
+// SetOther sets the Other field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetOther(other *string) {
+	e.Other = other
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldOther)
+}
+
+// SetNotTaxedWithIncomeTax sets the NotTaxedWithIncomeTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetNotTaxedWithIncomeTax(notTaxedWithIncomeTax *string) {
+	e.NotTaxedWithIncomeTax = notTaxedWithIncomeTax
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldNotTaxedWithIncomeTax)
+}
+
+// SetNotTaxedWithSocialTax sets the NotTaxedWithSocialTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) SetNotTaxedWithSocialTax(notTaxedWithSocialTax *string) {
+	e.NotTaxedWithSocialTax = notTaxedWithSocialTax
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4FieldNotTaxedWithSocialTax)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseInputAnnex4
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseInputAnnex4(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseInputAnnex4
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldEvent         = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldMarketPrice   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldExercisePrice = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldPremium       = big.NewInt(1 << 3)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption struct {
+	// `sale`: the option was sold (4081 – 4083); `exercise`: the shares were acquired (4081 – 4082 – 4083)
+	Event EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent `json:"event" url:"event"`
+	// 4081: market price
+	MarketPrice string `json:"marketPrice" url:"marketPrice"`
+	// 4082: exercise price, for `exercise` only
+	ExercisePrice *string `json:"exercisePrice,omitempty" url:"exercisePrice,omitempty"`
+	// 4083: option premium
+	Premium string `json:"premium" url:"premium"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) GetEvent() EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent {
+	if e == nil {
+		return ""
+	}
+	return e.Event
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) GetMarketPrice() string {
+	if e == nil {
+		return ""
+	}
+	return e.MarketPrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) GetExercisePrice() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ExercisePrice
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) GetPremium() string {
+	if e == nil {
+		return ""
+	}
+	return e.Premium
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetEvent sets the Event field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) SetEvent(event EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent) {
+	e.Event = event
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldEvent)
+}
+
+// SetMarketPrice sets the MarketPrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) SetMarketPrice(marketPrice string) {
+	e.MarketPrice = marketPrice
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldMarketPrice)
+}
+
+// SetExercisePrice sets the ExercisePrice field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) SetExercisePrice(exercisePrice *string) {
+	e.ExercisePrice = exercisePrice
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldExercisePrice)
+}
+
+// SetPremium sets the Premium field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) SetPremium(premium string) {
+	e.Premium = premium
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionFieldPremium)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOption) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// `sale`: the option was sold (4081 – 4083); `exercise`: the shares were acquired (4081 – 4082 – 4083)
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent string
+
+const (
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEventSale     EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent = "sale"
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEventExercise EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent = "exercise"
+)
+
+func NewEeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEventFromString(s string) (EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent, error) {
+	switch s {
+	case "sale":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEventSale, nil
+	case "exercise":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEventExercise, nil
+	}
+	var t EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent) Ptr() *EeTsdAnnexesSetDeclarationsResponseInputAnnex4StockOptionEvent {
+	return &e
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldGifts                    = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldGiftsToListedPersons     = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldLimit                    = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldLastYearProfit           = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldEntertainment            = big.NewInt(1 << 4)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldListedPersonTaxableGifts = big.NewInt(1 << 5)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex5 struct {
+	// 5000: gifts and donations of the month, except those of 5010
+	Gifts *string `json:"gifts,omitempty" url:"gifts,omitempty"`
+	// 5010: gifts and donations of the month to persons on the TuMS § 11 lg 1 list or § 11 lg 10 associations (0 when none)
+	GiftsToListedPersons *string `json:"giftsToListedPersons,omitempty" url:"giftsToListedPersons,omitempty"`
+	// TuMS § 49 lg 2 limit used this month for 5020: `socialTax` 3 % of the personalised social-taxed payments of the year (5030), `profit` 10 % of the last financial year’s profit (5040, 5050); the choice of December is final
+	Limit *EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit `json:"limit,omitempty" url:"limit,omitempty"`
+	// 5040: profit of the last financial year ended by 1 January, own profit only (0 for a loss); needed with `profit`
+	LastYearProfit *string `json:"lastYearProfit,omitempty" url:"lastYearProfit,omitempty"`
+	// 5100: costs of the month for food, transport, accommodation or entertainment of guests or partners (0 to use the cumulative recalculation without spending)
+	Entertainment *string `json:"entertainment,omitempty" url:"entertainment,omitempty"`
+	// 5180: part II, taxable gifts and donations of a person on the TuMS § 11 lg 1 list; excludes the part I fields
+	ListedPersonTaxableGifts *string `json:"listedPersonTaxableGifts,omitempty" url:"listedPersonTaxableGifts,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) GetGifts() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Gifts
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) GetGiftsToListedPersons() *string {
+	if e == nil {
+		return nil
+	}
+	return e.GiftsToListedPersons
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) GetLimit() *EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit {
+	if e == nil {
+		return nil
+	}
+	return e.Limit
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) GetLastYearProfit() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LastYearProfit
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) GetEntertainment() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Entertainment
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) GetListedPersonTaxableGifts() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ListedPersonTaxableGifts
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetGifts sets the Gifts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) SetGifts(gifts *string) {
+	e.Gifts = gifts
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldGifts)
+}
+
+// SetGiftsToListedPersons sets the GiftsToListedPersons field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) SetGiftsToListedPersons(giftsToListedPersons *string) {
+	e.GiftsToListedPersons = giftsToListedPersons
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldGiftsToListedPersons)
+}
+
+// SetLimit sets the Limit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) SetLimit(limit *EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit) {
+	e.Limit = limit
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldLimit)
+}
+
+// SetLastYearProfit sets the LastYearProfit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) SetLastYearProfit(lastYearProfit *string) {
+	e.LastYearProfit = lastYearProfit
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldLastYearProfit)
+}
+
+// SetEntertainment sets the Entertainment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) SetEntertainment(entertainment *string) {
+	e.Entertainment = entertainment
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldEntertainment)
+}
+
+// SetListedPersonTaxableGifts sets the ListedPersonTaxableGifts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) SetListedPersonTaxableGifts(listedPersonTaxableGifts *string) {
+	e.ListedPersonTaxableGifts = listedPersonTaxableGifts
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex5FieldListedPersonTaxableGifts)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseInputAnnex5
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseInputAnnex5(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseInputAnnex5
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex5) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// TuMS § 49 lg 2 limit used this month for 5020: `socialTax` 3 % of the personalised social-taxed payments of the year (5030), `profit` 10 % of the last financial year’s profit (5040, 5050); the choice of December is final
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit string
+
+const (
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex5LimitSocialTax EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit = "socialTax"
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex5LimitProfit    EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit = "profit"
+)
+
+func NewEeTsdAnnexesSetDeclarationsResponseInputAnnex5LimitFromString(s string) (EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit, error) {
+	switch s {
+	case "socialTax":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex5LimitSocialTax, nil
+	case "profit":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex5LimitProfit, nil
+	}
+	var t EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit) Ptr() *EeTsdAnnexesSetDeclarationsResponseInputAnnex5Limit {
+	return &e
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldRelatedParties          = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldFines                   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldTaxInterest             = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldConfiscatedProperty     = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldEnvironmentalCharges    = big.NewInt(1 << 4)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldBribes                  = big.NewInt(1 << 5)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldMembershipFees          = big.NewInt(1 << 6)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldUndocumentedPayments    = big.NewInt(1 << 7)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldNonBusinessExpenses     = big.NewInt(1 << 8)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxSecurities        = big.NewInt(1 << 9)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxHoldings          = big.NewInt(1 << 10)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxPenalties         = big.NewInt(1 << 11)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxLoans             = big.NewInt(1 << 12)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldCreditInstitutionLosses = big.NewInt(1 << 13)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldReductions              = big.NewInt(1 << 14)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex6 struct {
+	// Part II rows; their sum is 6000
+	RelatedParties []*EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem `json:"relatedParties,omitempty" url:"relatedParties,omitempty"`
+	// 6010: fines and penalty payments imposed by law
+	Fines *string `json:"fines,omitempty" url:"fines,omitempty"`
+	// 6020: interest paid under the Taxation Act
+	TaxInterest *string `json:"taxInterest,omitempty" url:"taxInterest,omitempty"`
+	// 6030: value of confiscated property
+	ConfiscatedProperty *string `json:"confiscatedProperty,omitempty" url:"confiscatedProperty,omitempty"`
+	// 6040: environmental charges at the elevated rate and damage compensation
+	EnvironmentalCharges *string `json:"environmentalCharges,omitempty" url:"environmentalCharges,omitempty"`
+	// 6050: bribes
+	Bribes *string `json:"bribes,omitempty" url:"bribes,omitempty"`
+	// 6060: entrance and membership fees of non-profits not related to the business
+	MembershipFees *string `json:"membershipFees,omitempty" url:"membershipFees,omitempty"`
+	// 6070: payments without a source document meeting the requirements
+	UndocumentedPayments *string `json:"undocumentedPayments,omitempty" url:"undocumentedPayments,omitempty"`
+	// 6080: non-business obligations, assets and services, excess borrowing costs and the other amounts of the code
+	NonBusinessExpenses *string `json:"nonBusinessExpenses,omitempty" url:"nonBusinessExpenses,omitempty"`
+	// 6090: securities of a legal person in a low tax rate territory
+	LowTaxSecurities *string `json:"lowTaxSecurities,omitempty" url:"lowTaxSecurities,omitempty"`
+	// 6100: holdings in a legal person in a low tax rate territory
+	LowTaxHoldings *string `json:"lowTaxHoldings,omitempty" url:"lowTaxHoldings,omitempty"`
+	// 6110: penalties and damages paid to such a legal person
+	LowTaxPenalties *string `json:"lowTaxPenalties,omitempty" url:"lowTaxPenalties,omitempty"`
+	// 6120: loans, prepayments and claims against such a legal person
+	LowTaxLoans *string `json:"lowTaxLoans,omitempty" url:"lowTaxLoans,omitempty"`
+	// 6130: credit institutions only
+	CreditInstitutionLosses *string `json:"creditInstitutionLosses,omitempty" url:"creditInstitutionLosses,omitempty"`
+	// 6140: reductions of an amount taxed on an earlier annex 6 (TuMS § 54 lg 6)
+	Reductions []*EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem `json:"reductions,omitempty" url:"reductions,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetRelatedParties() []*EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem {
+	if e == nil {
+		return nil
+	}
+	return e.RelatedParties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetFines() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Fines
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetTaxInterest() *string {
+	if e == nil {
+		return nil
+	}
+	return e.TaxInterest
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetConfiscatedProperty() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ConfiscatedProperty
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetEnvironmentalCharges() *string {
+	if e == nil {
+		return nil
+	}
+	return e.EnvironmentalCharges
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetBribes() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Bribes
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetMembershipFees() *string {
+	if e == nil {
+		return nil
+	}
+	return e.MembershipFees
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetUndocumentedPayments() *string {
+	if e == nil {
+		return nil
+	}
+	return e.UndocumentedPayments
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetNonBusinessExpenses() *string {
+	if e == nil {
+		return nil
+	}
+	return e.NonBusinessExpenses
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetLowTaxSecurities() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxSecurities
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetLowTaxHoldings() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxHoldings
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetLowTaxPenalties() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxPenalties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetLowTaxLoans() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LowTaxLoans
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetCreditInstitutionLosses() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CreditInstitutionLosses
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetReductions() []*EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Reductions
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRelatedParties sets the RelatedParties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetRelatedParties(relatedParties []*EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) {
+	e.RelatedParties = relatedParties
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldRelatedParties)
+}
+
+// SetFines sets the Fines field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetFines(fines *string) {
+	e.Fines = fines
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldFines)
+}
+
+// SetTaxInterest sets the TaxInterest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetTaxInterest(taxInterest *string) {
+	e.TaxInterest = taxInterest
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldTaxInterest)
+}
+
+// SetConfiscatedProperty sets the ConfiscatedProperty field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetConfiscatedProperty(confiscatedProperty *string) {
+	e.ConfiscatedProperty = confiscatedProperty
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldConfiscatedProperty)
+}
+
+// SetEnvironmentalCharges sets the EnvironmentalCharges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetEnvironmentalCharges(environmentalCharges *string) {
+	e.EnvironmentalCharges = environmentalCharges
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldEnvironmentalCharges)
+}
+
+// SetBribes sets the Bribes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetBribes(bribes *string) {
+	e.Bribes = bribes
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldBribes)
+}
+
+// SetMembershipFees sets the MembershipFees field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetMembershipFees(membershipFees *string) {
+	e.MembershipFees = membershipFees
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldMembershipFees)
+}
+
+// SetUndocumentedPayments sets the UndocumentedPayments field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetUndocumentedPayments(undocumentedPayments *string) {
+	e.UndocumentedPayments = undocumentedPayments
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldUndocumentedPayments)
+}
+
+// SetNonBusinessExpenses sets the NonBusinessExpenses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetNonBusinessExpenses(nonBusinessExpenses *string) {
+	e.NonBusinessExpenses = nonBusinessExpenses
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldNonBusinessExpenses)
+}
+
+// SetLowTaxSecurities sets the LowTaxSecurities field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetLowTaxSecurities(lowTaxSecurities *string) {
+	e.LowTaxSecurities = lowTaxSecurities
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxSecurities)
+}
+
+// SetLowTaxHoldings sets the LowTaxHoldings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetLowTaxHoldings(lowTaxHoldings *string) {
+	e.LowTaxHoldings = lowTaxHoldings
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxHoldings)
+}
+
+// SetLowTaxPenalties sets the LowTaxPenalties field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetLowTaxPenalties(lowTaxPenalties *string) {
+	e.LowTaxPenalties = lowTaxPenalties
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxPenalties)
+}
+
+// SetLowTaxLoans sets the LowTaxLoans field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetLowTaxLoans(lowTaxLoans *string) {
+	e.LowTaxLoans = lowTaxLoans
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldLowTaxLoans)
+}
+
+// SetCreditInstitutionLosses sets the CreditInstitutionLosses field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetCreditInstitutionLosses(creditInstitutionLosses *string) {
+	e.CreditInstitutionLosses = creditInstitutionLosses
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldCreditInstitutionLosses)
+}
+
+// SetReductions sets the Reductions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) SetReductions(reductions []*EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) {
+	e.Reductions = reductions
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6FieldReductions)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseInputAnnex6
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseInputAnnex6(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseInputAnnex6
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItemFieldMonth  = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItemFieldYear   = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItemFieldAmount = big.NewInt(1 << 2)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem struct {
+	// 6141
+	Month int64 `json:"month" url:"month"`
+	// 6142
+	Year int64 `json:"year" url:"year"`
+	// 6143: the amount taxed in that period whose basis fell away
+	Amount string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) GetMonth() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Month
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) GetYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Year
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) SetMonth(month int64) {
+	e.Month = month
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItemFieldMonth)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) SetYear(year int64) {
+	e.Year = year
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItemFieldYear)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItemFieldAmount)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6ReductionsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldRegistryCode = big.NewInt(1 << 0)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldName         = big.NewInt(1 << 1)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldCountry      = big.NewInt(1 << 2)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldAmount       = big.NewInt(1 << 3)
+	eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldTypeCode     = big.NewInt(1 << 4)
+)
+
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem struct {
+	// 6200: registry code of the related person
+	RegistryCode string `json:"registryCode" url:"registryCode"`
+	// 6210
+	Name string `json:"name" url:"name"`
+	// 6220: ISO 3166-1 alpha-2 country
+	Country string `json:"country" url:"country"`
+	// 6230: taxable amount
+	Amount string `json:"amount" url:"amount"`
+	// 6240: 621 transfer price, 6211 transfer price with a party under TuMS § 52¹, 622 income not received or cost not incurred, 623 hybrid mismatch (TuMS §§ 54⁷, 54⁸), 624 market value on a transfer to a tonnage unit
+	TypeCode EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode `json:"typeCode" url:"typeCode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetRegistryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.RegistryCode
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetName() string {
+	if e == nil {
+		return ""
+	}
+	return e.Name
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetCountry() string {
+	if e == nil {
+		return ""
+	}
+	return e.Country
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.Amount
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetTypeCode() EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode {
+	if e == nil {
+		return ""
+	}
+	return e.TypeCode
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetRegistryCode sets the RegistryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetRegistryCode(registryCode string) {
+	e.RegistryCode = registryCode
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldRegistryCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetName(name string) {
+	e.Name = name
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldName)
+}
+
+// SetCountry sets the Country field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetCountry(country string) {
+	e.Country = country
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldCountry)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetAmount(amount string) {
+	e.Amount = amount
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldAmount)
+}
+
+// SetTypeCode sets the TypeCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) SetTypeCode(typeCode EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode) {
+	e.TypeCode = typeCode
+	e.require(eeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemFieldTypeCode)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) MarshalJSON() ([]byte, error) {
+	type embed EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+// 6240: 621 transfer price, 6211 transfer price with a party under TuMS § 52¹, 622 income not received or cost not incurred, 623 hybrid mismatch (TuMS §§ 54⁷, 54⁸), 624 market value on a transfer to a tonnage unit
+type EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode string
+
+const (
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyOne         EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "621"
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyTwo         EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "622"
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyThree       EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "623"
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyFour        EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "624"
+	EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixThousandTwoHundredEleven EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode = "6211"
+)
+
+func NewEeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeFromString(s string) (EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode, error) {
+	switch s {
+	case "621":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyOne, nil
+	case "622":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyTwo, nil
+	case "623":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyThree, nil
+	case "624":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixHundredTwentyFour, nil
+	case "6211":
+		return EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCodeSixThousandTwoHundredEleven, nil
+	}
+	var t EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode) Ptr() *EeTsdAnnexesSetDeclarationsResponseInputAnnex6RelatedPartiesItemTypeCode {
 	return &e
 }
 
@@ -25581,6 +32910,909 @@ func (e *EuOssComputeDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EuOssComputeDeclarationsResponseTotals) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification string
+
+const (
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationAt EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "AT"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationBe EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "BE"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationBg EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "BG"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationCy EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "CY"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationCz EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "CZ"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationDe EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "DE"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationDk EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "DK"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationEe EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "EE"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationEs EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "ES"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationFi EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "FI"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationFr EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "FR"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationGr EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "GR"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationHr EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "HR"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationHu EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "HU"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationIe EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "IE"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationIt EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "IT"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationLt EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "LT"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationLu EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "LU"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationLv EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "LV"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationMt EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "MT"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationNl EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "NL"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationPl EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "PL"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationPt EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "PT"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationRo EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "RO"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationSe EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "SE"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationSi EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "SI"
+	EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationSk EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification = "SK"
+)
+
+func NewEuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationFromString(s string) (EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification, error) {
+	switch s {
+	case "AT":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationAt, nil
+	case "BE":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationBe, nil
+	case "BG":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationBg, nil
+	case "CY":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationCy, nil
+	case "CZ":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationCz, nil
+	case "DE":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationDe, nil
+	case "DK":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationDk, nil
+	case "EE":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationEe, nil
+	case "ES":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationEs, nil
+	case "FI":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationFi, nil
+	case "FR":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationFr, nil
+	case "GR":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationGr, nil
+	case "HR":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationHr, nil
+	case "HU":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationHu, nil
+	case "IE":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationIe, nil
+	case "IT":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationIt, nil
+	case "LT":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationLt, nil
+	case "LU":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationLu, nil
+	case "LV":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationLv, nil
+	case "MT":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationMt, nil
+	case "NL":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationNl, nil
+	case "PL":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationPl, nil
+	case "PT":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationPt, nil
+	case "RO":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationRo, nil
+	case "SE":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationSe, nil
+	case "SI":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationSi, nil
+	case "SK":
+		return EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentificationSk, nil
+	}
+	var t EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification) Ptr() *EuOssNonUnionComputeDeclarationsRequestMemberStateOfIdentification {
+	return &e
+}
+
+var (
+	euOssNonUnionComputeDeclarationsResponseFieldPeriodYear                  = big.NewInt(1 << 0)
+	euOssNonUnionComputeDeclarationsResponseFieldFromDate                    = big.NewInt(1 << 1)
+	euOssNonUnionComputeDeclarationsResponseFieldToDate                      = big.NewInt(1 << 2)
+	euOssNonUnionComputeDeclarationsResponseFieldMemberStateOfIdentification = big.NewInt(1 << 3)
+	euOssNonUnionComputeDeclarationsResponseFieldRows                        = big.NewInt(1 << 4)
+	euOssNonUnionComputeDeclarationsResponseFieldTotals                      = big.NewInt(1 << 5)
+	euOssNonUnionComputeDeclarationsResponseFieldCorrections                 = big.NewInt(1 << 6)
+	euOssNonUnionComputeDeclarationsResponseFieldCorrectionsTotal            = big.NewInt(1 << 7)
+	euOssNonUnionComputeDeclarationsResponseFieldWarnings                    = big.NewInt(1 << 8)
+	euOssNonUnionComputeDeclarationsResponseFieldPeriodQuarter               = big.NewInt(1 << 9)
+)
+
+type EuOssNonUnionComputeDeclarationsResponse struct {
+	PeriodYear                  int64                                                      `json:"periodYear" url:"periodYear"`
+	FromDate                    time.Time                                                  `json:"fromDate" url:"fromDate" format:"date"`
+	ToDate                      time.Time                                                  `json:"toDate" url:"toDate" format:"date"`
+	MemberStateOfIdentification string                                                     `json:"memberStateOfIdentification" url:"memberStateOfIdentification"`
+	Rows                        []*EuOssNonUnionComputeDeclarationsResponseRowsItem        `json:"rows" url:"rows"`
+	Totals                      *EuOssNonUnionComputeDeclarationsResponseTotals            `json:"totals" url:"totals"`
+	Corrections                 []*EuOssNonUnionComputeDeclarationsResponseCorrectionsItem `json:"corrections" url:"corrections"`
+	CorrectionsTotal            *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal  `json:"correctionsTotal" url:"correctionsTotal"`
+	Warnings                    []string                                                   `json:"warnings" url:"warnings"`
+	PeriodQuarter               int64                                                      `json:"periodQuarter" url:"periodQuarter"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetPeriodYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PeriodYear
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetFromDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.FromDate
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetToDate() time.Time {
+	if e == nil {
+		return time.Time{}
+	}
+	return e.ToDate
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetMemberStateOfIdentification() string {
+	if e == nil {
+		return ""
+	}
+	return e.MemberStateOfIdentification
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetRows() []*EuOssNonUnionComputeDeclarationsResponseRowsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Rows
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetTotals() *EuOssNonUnionComputeDeclarationsResponseTotals {
+	if e == nil {
+		return nil
+	}
+	return e.Totals
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetCorrections() []*EuOssNonUnionComputeDeclarationsResponseCorrectionsItem {
+	if e == nil {
+		return nil
+	}
+	return e.Corrections
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetCorrectionsTotal() *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal {
+	if e == nil {
+		return nil
+	}
+	return e.CorrectionsTotal
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetWarnings() []string {
+	if e == nil {
+		return nil
+	}
+	return e.Warnings
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetPeriodQuarter() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PeriodQuarter
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetPeriodYear(periodYear int64) {
+	e.PeriodYear = periodYear
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldPeriodYear)
+}
+
+// SetFromDate sets the FromDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetFromDate(fromDate time.Time) {
+	e.FromDate = fromDate
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldFromDate)
+}
+
+// SetToDate sets the ToDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetToDate(toDate time.Time) {
+	e.ToDate = toDate
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldToDate)
+}
+
+// SetMemberStateOfIdentification sets the MemberStateOfIdentification field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetMemberStateOfIdentification(memberStateOfIdentification string) {
+	e.MemberStateOfIdentification = memberStateOfIdentification
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldMemberStateOfIdentification)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetRows(rows []*EuOssNonUnionComputeDeclarationsResponseRowsItem) {
+	e.Rows = rows
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetTotals(totals *EuOssNonUnionComputeDeclarationsResponseTotals) {
+	e.Totals = totals
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldTotals)
+}
+
+// SetCorrections sets the Corrections field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetCorrections(corrections []*EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) {
+	e.Corrections = corrections
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldCorrections)
+}
+
+// SetCorrectionsTotal sets the CorrectionsTotal field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetCorrectionsTotal(correctionsTotal *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) {
+	e.CorrectionsTotal = correctionsTotal
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldCorrectionsTotal)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetWarnings(warnings []string) {
+	e.Warnings = warnings
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldWarnings)
+}
+
+// SetPeriodQuarter sets the PeriodQuarter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponse) SetPeriodQuarter(periodQuarter int64) {
+	e.PeriodQuarter = periodQuarter
+	e.require(euOssNonUnionComputeDeclarationsResponseFieldPeriodQuarter)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed EuOssNonUnionComputeDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed: embed(*e),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*e = EuOssNonUnionComputeDeclarationsResponse(unmarshaler.embed)
+	e.FromDate = unmarshaler.FromDate.Time()
+	e.ToDate = unmarshaler.ToDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed EuOssNonUnionComputeDeclarationsResponse
+	var marshaler = struct {
+		embed
+		FromDate *internal.Date `json:"fromDate"`
+		ToDate   *internal.Date `json:"toDate"`
+	}{
+		embed:    embed(*e),
+		FromDate: internal.NewDate(e.FromDate),
+		ToDate:   internal.NewDate(e.ToDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponse) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldCountryCode   = big.NewInt(1 << 0)
+	euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldPeriodYear    = big.NewInt(1 << 1)
+	euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldPeriodQuarter = big.NewInt(1 << 2)
+	euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldPeriodMonth   = big.NewInt(1 << 3)
+	euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldTaxableAmount = big.NewInt(1 << 4)
+	euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldVatAmount     = big.NewInt(1 << 5)
+	euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldDocuments     = big.NewInt(1 << 6)
+)
+
+type EuOssNonUnionComputeDeclarationsResponseCorrectionsItem struct {
+	CountryCode   string `json:"countryCode" url:"countryCode"`
+	PeriodYear    int64  `json:"periodYear" url:"periodYear"`
+	PeriodQuarter *int64 `json:"periodQuarter,omitempty" url:"periodQuarter,omitempty"`
+	PeriodMonth   *int64 `json:"periodMonth,omitempty" url:"periodMonth,omitempty"`
+	TaxableAmount string `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount     string `json:"vatAmount" url:"vatAmount"`
+	Documents     int64  `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetCountryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.CountryCode
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetPeriodYear() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.PeriodYear
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetPeriodQuarter() *int64 {
+	if e == nil {
+		return nil
+	}
+	return e.PeriodQuarter
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetPeriodMonth() *int64 {
+	if e == nil {
+		return nil
+	}
+	return e.PeriodMonth
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetTaxableAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.TaxableAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetVatAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetDocuments() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Documents
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) SetCountryCode(countryCode string) {
+	e.CountryCode = countryCode
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldCountryCode)
+}
+
+// SetPeriodYear sets the PeriodYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) SetPeriodYear(periodYear int64) {
+	e.PeriodYear = periodYear
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldPeriodYear)
+}
+
+// SetPeriodQuarter sets the PeriodQuarter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) SetPeriodQuarter(periodQuarter *int64) {
+	e.PeriodQuarter = periodQuarter
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldPeriodQuarter)
+}
+
+// SetPeriodMonth sets the PeriodMonth field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) SetPeriodMonth(periodMonth *int64) {
+	e.PeriodMonth = periodMonth
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldPeriodMonth)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) SetTaxableAmount(taxableAmount string) {
+	e.TaxableAmount = taxableAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) SetVatAmount(vatAmount string) {
+	e.VatAmount = vatAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldVatAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) SetDocuments(documents int64) {
+	e.Documents = documents
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsItemFieldDocuments)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuOssNonUnionComputeDeclarationsResponseCorrectionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuOssNonUnionComputeDeclarationsResponseCorrectionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) MarshalJSON() ([]byte, error) {
+	type embed EuOssNonUnionComputeDeclarationsResponseCorrectionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euOssNonUnionComputeDeclarationsResponseCorrectionsTotalFieldTaxableAmount = big.NewInt(1 << 0)
+	euOssNonUnionComputeDeclarationsResponseCorrectionsTotalFieldVatAmount     = big.NewInt(1 << 1)
+)
+
+type EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal struct {
+	TaxableAmount string `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount     string `json:"vatAmount" url:"vatAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) GetTaxableAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.TaxableAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) GetVatAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) SetTaxableAmount(taxableAmount string) {
+	e.TaxableAmount = taxableAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsTotalFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) SetVatAmount(vatAmount string) {
+	e.VatAmount = vatAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseCorrectionsTotalFieldVatAmount)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) MarshalJSON() ([]byte, error) {
+	type embed EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseCorrectionsTotal) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	euOssNonUnionComputeDeclarationsResponseRowsItemFieldCountryCode    = big.NewInt(1 << 0)
+	euOssNonUnionComputeDeclarationsResponseRowsItemFieldRateType       = big.NewInt(1 << 1)
+	euOssNonUnionComputeDeclarationsResponseRowsItemFieldVatRatePercent = big.NewInt(1 << 2)
+	euOssNonUnionComputeDeclarationsResponseRowsItemFieldTaxableAmount  = big.NewInt(1 << 3)
+	euOssNonUnionComputeDeclarationsResponseRowsItemFieldVatAmount      = big.NewInt(1 << 4)
+	euOssNonUnionComputeDeclarationsResponseRowsItemFieldDocuments      = big.NewInt(1 << 5)
+)
+
+type EuOssNonUnionComputeDeclarationsResponseRowsItem struct {
+	CountryCode    string                                                   `json:"countryCode" url:"countryCode"`
+	RateType       EuOssNonUnionComputeDeclarationsResponseRowsItemRateType `json:"rateType" url:"rateType"`
+	VatRatePercent string                                                   `json:"vatRatePercent" url:"vatRatePercent"`
+	TaxableAmount  string                                                   `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount      string                                                   `json:"vatAmount" url:"vatAmount"`
+	Documents      int64                                                    `json:"documents" url:"documents"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) GetCountryCode() string {
+	if e == nil {
+		return ""
+	}
+	return e.CountryCode
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) GetRateType() EuOssNonUnionComputeDeclarationsResponseRowsItemRateType {
+	if e == nil {
+		return ""
+	}
+	return e.RateType
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) GetVatRatePercent() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatRatePercent
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) GetTaxableAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.TaxableAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) GetVatAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) GetDocuments() int64 {
+	if e == nil {
+		return 0
+	}
+	return e.Documents
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetCountryCode sets the CountryCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) SetCountryCode(countryCode string) {
+	e.CountryCode = countryCode
+	e.require(euOssNonUnionComputeDeclarationsResponseRowsItemFieldCountryCode)
+}
+
+// SetRateType sets the RateType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) SetRateType(rateType EuOssNonUnionComputeDeclarationsResponseRowsItemRateType) {
+	e.RateType = rateType
+	e.require(euOssNonUnionComputeDeclarationsResponseRowsItemFieldRateType)
+}
+
+// SetVatRatePercent sets the VatRatePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) SetVatRatePercent(vatRatePercent string) {
+	e.VatRatePercent = vatRatePercent
+	e.require(euOssNonUnionComputeDeclarationsResponseRowsItemFieldVatRatePercent)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) SetTaxableAmount(taxableAmount string) {
+	e.TaxableAmount = taxableAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseRowsItemFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) SetVatAmount(vatAmount string) {
+	e.VatAmount = vatAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseRowsItemFieldVatAmount)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) SetDocuments(documents int64) {
+	e.Documents = documents
+	e.require(euOssNonUnionComputeDeclarationsResponseRowsItemFieldDocuments)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuOssNonUnionComputeDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuOssNonUnionComputeDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed EuOssNonUnionComputeDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseRowsItem) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+type EuOssNonUnionComputeDeclarationsResponseRowsItemRateType string
+
+const (
+	EuOssNonUnionComputeDeclarationsResponseRowsItemRateTypeStandard EuOssNonUnionComputeDeclarationsResponseRowsItemRateType = "STANDARD"
+	EuOssNonUnionComputeDeclarationsResponseRowsItemRateTypeReduced  EuOssNonUnionComputeDeclarationsResponseRowsItemRateType = "REDUCED"
+)
+
+func NewEuOssNonUnionComputeDeclarationsResponseRowsItemRateTypeFromString(s string) (EuOssNonUnionComputeDeclarationsResponseRowsItemRateType, error) {
+	switch s {
+	case "STANDARD":
+		return EuOssNonUnionComputeDeclarationsResponseRowsItemRateTypeStandard, nil
+	case "REDUCED":
+		return EuOssNonUnionComputeDeclarationsResponseRowsItemRateTypeReduced, nil
+	}
+	var t EuOssNonUnionComputeDeclarationsResponseRowsItemRateType
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (e EuOssNonUnionComputeDeclarationsResponseRowsItemRateType) Ptr() *EuOssNonUnionComputeDeclarationsResponseRowsItemRateType {
+	return &e
+}
+
+var (
+	euOssNonUnionComputeDeclarationsResponseTotalsFieldTaxableAmount = big.NewInt(1 << 0)
+	euOssNonUnionComputeDeclarationsResponseTotalsFieldVatAmount     = big.NewInt(1 << 1)
+)
+
+type EuOssNonUnionComputeDeclarationsResponseTotals struct {
+	TaxableAmount string `json:"taxableAmount" url:"taxableAmount"`
+	VatAmount     string `json:"vatAmount" url:"vatAmount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) GetTaxableAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.TaxableAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) GetVatAmount() string {
+	if e == nil {
+		return ""
+	}
+	return e.VatAmount
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetTaxableAmount sets the TaxableAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) SetTaxableAmount(taxableAmount string) {
+	e.TaxableAmount = taxableAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseTotalsFieldTaxableAmount)
+}
+
+// SetVatAmount sets the VatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) SetVatAmount(vatAmount string) {
+	e.VatAmount = vatAmount
+	e.require(euOssNonUnionComputeDeclarationsResponseTotalsFieldVatAmount)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler EuOssNonUnionComputeDeclarationsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EuOssNonUnionComputeDeclarationsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed EuOssNonUnionComputeDeclarationsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EuOssNonUnionComputeDeclarationsResponseTotals) String() string {
 	if e == nil {
 		return "<nil>"
 	}
@@ -48125,6 +56357,2322 @@ func (i *IeCt1GenerateDeclarationsResponseFieldsItem) String() string {
 	return fmt.Sprintf("%#v", i)
 }
 
+var (
+	ieRtdGenerateDeclarationsResponseFieldYear         = big.NewInt(1 << 0)
+	ieRtdGenerateDeclarationsResponseFieldPeriodStart  = big.NewInt(1 << 1)
+	ieRtdGenerateDeclarationsResponseFieldPeriodEnd    = big.NewInt(1 << 2)
+	ieRtdGenerateDeclarationsResponseFieldTaxRegNumber = big.NewInt(1 << 3)
+	ieRtdGenerateDeclarationsResponseFieldRows         = big.NewInt(1 << 4)
+	ieRtdGenerateDeclarationsResponseFieldTotals       = big.NewInt(1 << 5)
+	ieRtdGenerateDeclarationsResponseFieldCounts       = big.NewInt(1 << 6)
+	ieRtdGenerateDeclarationsResponseFieldFileName     = big.NewInt(1 << 7)
+	ieRtdGenerateDeclarationsResponseFieldXML          = big.NewInt(1 << 8)
+	ieRtdGenerateDeclarationsResponseFieldWarnings     = big.NewInt(1 << 9)
+	ieRtdGenerateDeclarationsResponseFieldNotes        = big.NewInt(1 << 10)
+	ieRtdGenerateDeclarationsResponseFieldSource       = big.NewInt(1 << 11)
+)
+
+type IeRtdGenerateDeclarationsResponse struct {
+	Year         int64                                        `json:"year" url:"year"`
+	PeriodStart  string                                       `json:"periodStart" url:"periodStart"`
+	PeriodEnd    string                                       `json:"periodEnd" url:"periodEnd"`
+	TaxRegNumber string                                       `json:"taxRegNumber" url:"taxRegNumber"`
+	Rows         []*IeRtdGenerateDeclarationsResponseRowsItem `json:"rows" url:"rows"`
+	Totals       *IeRtdGenerateDeclarationsResponseTotals     `json:"totals" url:"totals"`
+	Counts       *IeRtdGenerateDeclarationsResponseCounts     `json:"counts" url:"counts"`
+	FileName     string                                       `json:"fileName" url:"fileName"`
+	XML          string                                       `json:"xml" url:"xml"`
+	Warnings     []string                                     `json:"warnings" url:"warnings"`
+	Notes        []string                                     `json:"notes" url:"notes"`
+	Source       string                                       `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetYear() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Year
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetPeriodStart() string {
+	if i == nil {
+		return ""
+	}
+	return i.PeriodStart
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetPeriodEnd() string {
+	if i == nil {
+		return ""
+	}
+	return i.PeriodEnd
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetTaxRegNumber() string {
+	if i == nil {
+		return ""
+	}
+	return i.TaxRegNumber
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetRows() []*IeRtdGenerateDeclarationsResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetTotals() *IeRtdGenerateDeclarationsResponseTotals {
+	if i == nil {
+		return nil
+	}
+	return i.Totals
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetCounts() *IeRtdGenerateDeclarationsResponseCounts {
+	if i == nil {
+		return nil
+	}
+	return i.Counts
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetFileName() string {
+	if i == nil {
+		return ""
+	}
+	return i.FileName
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetXML() string {
+	if i == nil {
+		return ""
+	}
+	return i.XML
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetWarnings() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetNotes() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Notes
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetSource() string {
+	if i == nil {
+		return ""
+	}
+	return i.Source
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetYear(year int64) {
+	i.Year = year
+	i.require(ieRtdGenerateDeclarationsResponseFieldYear)
+}
+
+// SetPeriodStart sets the PeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetPeriodStart(periodStart string) {
+	i.PeriodStart = periodStart
+	i.require(ieRtdGenerateDeclarationsResponseFieldPeriodStart)
+}
+
+// SetPeriodEnd sets the PeriodEnd field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetPeriodEnd(periodEnd string) {
+	i.PeriodEnd = periodEnd
+	i.require(ieRtdGenerateDeclarationsResponseFieldPeriodEnd)
+}
+
+// SetTaxRegNumber sets the TaxRegNumber field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetTaxRegNumber(taxRegNumber string) {
+	i.TaxRegNumber = taxRegNumber
+	i.require(ieRtdGenerateDeclarationsResponseFieldTaxRegNumber)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetRows(rows []*IeRtdGenerateDeclarationsResponseRowsItem) {
+	i.Rows = rows
+	i.require(ieRtdGenerateDeclarationsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetTotals(totals *IeRtdGenerateDeclarationsResponseTotals) {
+	i.Totals = totals
+	i.require(ieRtdGenerateDeclarationsResponseFieldTotals)
+}
+
+// SetCounts sets the Counts field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetCounts(counts *IeRtdGenerateDeclarationsResponseCounts) {
+	i.Counts = counts
+	i.require(ieRtdGenerateDeclarationsResponseFieldCounts)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetFileName(fileName string) {
+	i.FileName = fileName
+	i.require(ieRtdGenerateDeclarationsResponseFieldFileName)
+}
+
+// SetXML sets the XML field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetXML(xml string) {
+	i.XML = xml
+	i.require(ieRtdGenerateDeclarationsResponseFieldXML)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetWarnings(warnings []string) {
+	i.Warnings = warnings
+	i.require(ieRtdGenerateDeclarationsResponseFieldWarnings)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetNotes(notes []string) {
+	i.Notes = notes
+	i.require(ieRtdGenerateDeclarationsResponseFieldNotes)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponse) SetSource(source string) {
+	i.Source = source
+	i.require(ieRtdGenerateDeclarationsResponseFieldSource)
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler IeRtdGenerateDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = IeRtdGenerateDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed IeRtdGenerateDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *IeRtdGenerateDeclarationsResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	ieRtdGenerateDeclarationsResponseCountsFieldSalesInvoices    = big.NewInt(1 << 0)
+	ieRtdGenerateDeclarationsResponseCountsFieldPurchaseInvoices = big.NewInt(1 << 1)
+)
+
+type IeRtdGenerateDeclarationsResponseCounts struct {
+	SalesInvoices    int64 `json:"salesInvoices" url:"salesInvoices"`
+	PurchaseInvoices int64 `json:"purchaseInvoices" url:"purchaseInvoices"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *IeRtdGenerateDeclarationsResponseCounts) GetSalesInvoices() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.SalesInvoices
+}
+
+func (i *IeRtdGenerateDeclarationsResponseCounts) GetPurchaseInvoices() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.PurchaseInvoices
+}
+
+func (i *IeRtdGenerateDeclarationsResponseCounts) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *IeRtdGenerateDeclarationsResponseCounts) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetSalesInvoices sets the SalesInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseCounts) SetSalesInvoices(salesInvoices int64) {
+	i.SalesInvoices = salesInvoices
+	i.require(ieRtdGenerateDeclarationsResponseCountsFieldSalesInvoices)
+}
+
+// SetPurchaseInvoices sets the PurchaseInvoices field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseCounts) SetPurchaseInvoices(purchaseInvoices int64) {
+	i.PurchaseInvoices = purchaseInvoices
+	i.require(ieRtdGenerateDeclarationsResponseCountsFieldPurchaseInvoices)
+}
+
+func (i *IeRtdGenerateDeclarationsResponseCounts) UnmarshalJSON(data []byte) error {
+	type unmarshaler IeRtdGenerateDeclarationsResponseCounts
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = IeRtdGenerateDeclarationsResponseCounts(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *IeRtdGenerateDeclarationsResponseCounts) MarshalJSON() ([]byte, error) {
+	type embed IeRtdGenerateDeclarationsResponseCounts
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *IeRtdGenerateDeclarationsResponseCounts) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	ieRtdGenerateDeclarationsResponseRowsItemFieldRate               = big.NewInt(1 << 0)
+	ieRtdGenerateDeclarationsResponseRowsItemFieldLabel              = big.NewInt(1 << 1)
+	ieRtdGenerateDeclarationsResponseRowsItemFieldSupplies           = big.NewInt(1 << 2)
+	ieRtdGenerateDeclarationsResponseRowsItemFieldAcquisitions       = big.NewInt(1 << 3)
+	ieRtdGenerateDeclarationsResponseRowsItemFieldPurchasesResale    = big.NewInt(1 << 4)
+	ieRtdGenerateDeclarationsResponseRowsItemFieldPurchasesNonResale = big.NewInt(1 << 5)
+)
+
+type IeRtdGenerateDeclarationsResponseRowsItem struct {
+	Rate               string `json:"rate" url:"rate"`
+	Label              string `json:"label" url:"label"`
+	Supplies           string `json:"supplies" url:"supplies"`
+	Acquisitions       string `json:"acquisitions" url:"acquisitions"`
+	PurchasesResale    string `json:"purchasesResale" url:"purchasesResale"`
+	PurchasesNonResale string `json:"purchasesNonResale" url:"purchasesNonResale"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) GetRate() string {
+	if i == nil {
+		return ""
+	}
+	return i.Rate
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) GetLabel() string {
+	if i == nil {
+		return ""
+	}
+	return i.Label
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) GetSupplies() string {
+	if i == nil {
+		return ""
+	}
+	return i.Supplies
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) GetAcquisitions() string {
+	if i == nil {
+		return ""
+	}
+	return i.Acquisitions
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) GetPurchasesResale() string {
+	if i == nil {
+		return ""
+	}
+	return i.PurchasesResale
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) GetPurchasesNonResale() string {
+	if i == nil {
+		return ""
+	}
+	return i.PurchasesNonResale
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) SetRate(rate string) {
+	i.Rate = rate
+	i.require(ieRtdGenerateDeclarationsResponseRowsItemFieldRate)
+}
+
+// SetLabel sets the Label field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) SetLabel(label string) {
+	i.Label = label
+	i.require(ieRtdGenerateDeclarationsResponseRowsItemFieldLabel)
+}
+
+// SetSupplies sets the Supplies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) SetSupplies(supplies string) {
+	i.Supplies = supplies
+	i.require(ieRtdGenerateDeclarationsResponseRowsItemFieldSupplies)
+}
+
+// SetAcquisitions sets the Acquisitions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) SetAcquisitions(acquisitions string) {
+	i.Acquisitions = acquisitions
+	i.require(ieRtdGenerateDeclarationsResponseRowsItemFieldAcquisitions)
+}
+
+// SetPurchasesResale sets the PurchasesResale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) SetPurchasesResale(purchasesResale string) {
+	i.PurchasesResale = purchasesResale
+	i.require(ieRtdGenerateDeclarationsResponseRowsItemFieldPurchasesResale)
+}
+
+// SetPurchasesNonResale sets the PurchasesNonResale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) SetPurchasesNonResale(purchasesNonResale string) {
+	i.PurchasesNonResale = purchasesNonResale
+	i.require(ieRtdGenerateDeclarationsResponseRowsItemFieldPurchasesNonResale)
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler IeRtdGenerateDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = IeRtdGenerateDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed IeRtdGenerateDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *IeRtdGenerateDeclarationsResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	ieRtdGenerateDeclarationsResponseTotalsFieldSupplies           = big.NewInt(1 << 0)
+	ieRtdGenerateDeclarationsResponseTotalsFieldAcquisitions       = big.NewInt(1 << 1)
+	ieRtdGenerateDeclarationsResponseTotalsFieldPurchasesResale    = big.NewInt(1 << 2)
+	ieRtdGenerateDeclarationsResponseTotalsFieldPurchasesNonResale = big.NewInt(1 << 3)
+)
+
+type IeRtdGenerateDeclarationsResponseTotals struct {
+	Supplies           string `json:"supplies" url:"supplies"`
+	Acquisitions       string `json:"acquisitions" url:"acquisitions"`
+	PurchasesResale    string `json:"purchasesResale" url:"purchasesResale"`
+	PurchasesNonResale string `json:"purchasesNonResale" url:"purchasesNonResale"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) GetSupplies() string {
+	if i == nil {
+		return ""
+	}
+	return i.Supplies
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) GetAcquisitions() string {
+	if i == nil {
+		return ""
+	}
+	return i.Acquisitions
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) GetPurchasesResale() string {
+	if i == nil {
+		return ""
+	}
+	return i.PurchasesResale
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) GetPurchasesNonResale() string {
+	if i == nil {
+		return ""
+	}
+	return i.PurchasesNonResale
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetSupplies sets the Supplies field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseTotals) SetSupplies(supplies string) {
+	i.Supplies = supplies
+	i.require(ieRtdGenerateDeclarationsResponseTotalsFieldSupplies)
+}
+
+// SetAcquisitions sets the Acquisitions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseTotals) SetAcquisitions(acquisitions string) {
+	i.Acquisitions = acquisitions
+	i.require(ieRtdGenerateDeclarationsResponseTotalsFieldAcquisitions)
+}
+
+// SetPurchasesResale sets the PurchasesResale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseTotals) SetPurchasesResale(purchasesResale string) {
+	i.PurchasesResale = purchasesResale
+	i.require(ieRtdGenerateDeclarationsResponseTotalsFieldPurchasesResale)
+}
+
+// SetPurchasesNonResale sets the PurchasesNonResale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *IeRtdGenerateDeclarationsResponseTotals) SetPurchasesNonResale(purchasesNonResale string) {
+	i.PurchasesNonResale = purchasesNonResale
+	i.require(ieRtdGenerateDeclarationsResponseTotalsFieldPurchasesNonResale)
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler IeRtdGenerateDeclarationsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = IeRtdGenerateDeclarationsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed IeRtdGenerateDeclarationsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *IeRtdGenerateDeclarationsResponseTotals) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldPat                  = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldPatControlCode       = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldVoce                 = big.NewInt(1 << 2)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldTassoRegolazione     = big.NewInt(1 << 3)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldTassoRata            = big.NewInt(1 << 4)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldRiduzioneRegolazione = big.NewInt(1 << 5)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldRiduzioneRata        = big.NewInt(1 << 6)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldQuoteEsenti          = big.NewInt(1 << 7)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldRetribuzioniRata     = big.NewInt(1 << 8)
+	itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldEmployeeIDs          = big.NewInt(1 << 9)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem struct {
+	Pat                  string   `json:"pat" url:"pat"`
+	PatControlCode       string   `json:"patControlCode" url:"patControlCode"`
+	Voce                 string   `json:"voce" url:"voce"`
+	TassoRegolazione     string   `json:"tassoRegolazione" url:"tassoRegolazione"`
+	TassoRata            string   `json:"tassoRata" url:"tassoRata"`
+	RiduzioneRegolazione *string  `json:"riduzioneRegolazione,omitempty" url:"riduzioneRegolazione,omitempty"`
+	RiduzioneRata        *string  `json:"riduzioneRata,omitempty" url:"riduzioneRata,omitempty"`
+	QuoteEsenti          *string  `json:"quoteEsenti,omitempty" url:"quoteEsenti,omitempty"`
+	RetribuzioniRata     *string  `json:"retribuzioniRata,omitempty" url:"retribuzioniRata,omitempty"`
+	EmployeeIDs          []string `json:"employeeIds,omitempty" url:"employeeIds,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetPat() string {
+	if i == nil {
+		return ""
+	}
+	return i.Pat
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetPatControlCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.PatControlCode
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetVoce() string {
+	if i == nil {
+		return ""
+	}
+	return i.Voce
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetTassoRegolazione() string {
+	if i == nil {
+		return ""
+	}
+	return i.TassoRegolazione
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetTassoRata() string {
+	if i == nil {
+		return ""
+	}
+	return i.TassoRata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetRiduzioneRegolazione() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RiduzioneRegolazione
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetRiduzioneRata() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RiduzioneRata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetQuoteEsenti() *string {
+	if i == nil {
+		return nil
+	}
+	return i.QuoteEsenti
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetRetribuzioniRata() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RetribuzioniRata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetEmployeeIDs() []string {
+	if i == nil {
+		return nil
+	}
+	return i.EmployeeIDs
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetPat sets the Pat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetPat(pat string) {
+	i.Pat = pat
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldPat)
+}
+
+// SetPatControlCode sets the PatControlCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetPatControlCode(patControlCode string) {
+	i.PatControlCode = patControlCode
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldPatControlCode)
+}
+
+// SetVoce sets the Voce field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetVoce(voce string) {
+	i.Voce = voce
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldVoce)
+}
+
+// SetTassoRegolazione sets the TassoRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetTassoRegolazione(tassoRegolazione string) {
+	i.TassoRegolazione = tassoRegolazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldTassoRegolazione)
+}
+
+// SetTassoRata sets the TassoRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetTassoRata(tassoRata string) {
+	i.TassoRata = tassoRata
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldTassoRata)
+}
+
+// SetRiduzioneRegolazione sets the RiduzioneRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetRiduzioneRegolazione(riduzioneRegolazione *string) {
+	i.RiduzioneRegolazione = riduzioneRegolazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldRiduzioneRegolazione)
+}
+
+// SetRiduzioneRata sets the RiduzioneRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetRiduzioneRata(riduzioneRata *string) {
+	i.RiduzioneRata = riduzioneRata
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldRiduzioneRata)
+}
+
+// SetQuoteEsenti sets the QuoteEsenti field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetQuoteEsenti(quoteEsenti *string) {
+	i.QuoteEsenti = quoteEsenti
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldQuoteEsenti)
+}
+
+// SetRetribuzioniRata sets the RetribuzioniRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetRetribuzioniRata(retribuzioniRata *string) {
+	i.RetribuzioniRata = retribuzioniRata
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldRetribuzioniRata)
+}
+
+// SetEmployeeIDs sets the EmployeeIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) SetEmployeeIDs(employeeIDs []string) {
+	i.EmployeeIDs = employeeIDs
+	i.require(itInailAutoliquidazioneComputeDeclarationsRequestPositionsItemFieldEmployeeIDs)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsRequestPositionsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldYear        = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldPositions   = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldRegolazione = big.NewInt(1 << 2)
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldRata        = big.NewInt(1 << 3)
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldTotal       = big.NewInt(1 << 4)
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldInstalments = big.NewInt(1 << 5)
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldF24         = big.NewInt(1 << 6)
+	itInailAutoliquidazioneComputeDeclarationsResponseFieldWarnings    = big.NewInt(1 << 7)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsResponse struct {
+	Year        int64                                                                `json:"year" url:"year"`
+	Positions   []*ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem   `json:"positions" url:"positions"`
+	Regolazione *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione       `json:"regolazione" url:"regolazione"`
+	Rata        *ItInailAutoliquidazioneComputeDeclarationsResponseRata              `json:"rata" url:"rata"`
+	Total       string                                                               `json:"total" url:"total"`
+	Instalments []*ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem `json:"instalments" url:"instalments"`
+	F24         []*ItInailAutoliquidazioneComputeDeclarationsResponseF24Item         `json:"f24" url:"f24"`
+	Warnings    []string                                                             `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetYear() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Year
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetPositions() []*ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Positions
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetRegolazione() *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione {
+	if i == nil {
+		return nil
+	}
+	return i.Regolazione
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetRata() *ItInailAutoliquidazioneComputeDeclarationsResponseRata {
+	if i == nil {
+		return nil
+	}
+	return i.Rata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.Total
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetInstalments() []*ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Instalments
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetF24() []*ItInailAutoliquidazioneComputeDeclarationsResponseF24Item {
+	if i == nil {
+		return nil
+	}
+	return i.F24
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetWarnings() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetYear(year int64) {
+	i.Year = year
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldYear)
+}
+
+// SetPositions sets the Positions field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetPositions(positions []*ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) {
+	i.Positions = positions
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldPositions)
+}
+
+// SetRegolazione sets the Regolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetRegolazione(regolazione *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) {
+	i.Regolazione = regolazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldRegolazione)
+}
+
+// SetRata sets the Rata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetRata(rata *ItInailAutoliquidazioneComputeDeclarationsResponseRata) {
+	i.Rata = rata
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldRata)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetTotal(total string) {
+	i.Total = total
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldTotal)
+}
+
+// SetInstalments sets the Instalments field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetInstalments(instalments []*ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) {
+	i.Instalments = instalments
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldInstalments)
+}
+
+// SetF24 sets the F24 field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetF24(f24 []*ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) {
+	i.F24 = f24
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldF24)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) SetWarnings(warnings []string) {
+	i.Warnings = warnings
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseFieldWarnings)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneComputeDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCodiceSede        = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCodiceDitta       = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCc                = big.NewInt(1 << 2)
+	itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldNumeroRiferimento = big.NewInt(1 << 3)
+	itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCausale           = big.NewInt(1 << 4)
+	itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldImporto           = big.NewInt(1 << 5)
+	itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCredito           = big.NewInt(1 << 6)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsResponseF24Item struct {
+	CodiceSede        string `json:"codiceSede" url:"codiceSede"`
+	CodiceDitta       string `json:"codiceDitta" url:"codiceDitta"`
+	Cc                string `json:"cc" url:"cc"`
+	NumeroRiferimento string `json:"numeroRiferimento" url:"numeroRiferimento"`
+	Causale           string `json:"causale" url:"causale"`
+	Importo           string `json:"importo" url:"importo"`
+	Credito           *bool  `json:"credito,omitempty" url:"credito,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetCodiceSede() string {
+	if i == nil {
+		return ""
+	}
+	return i.CodiceSede
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetCodiceDitta() string {
+	if i == nil {
+		return ""
+	}
+	return i.CodiceDitta
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetCc() string {
+	if i == nil {
+		return ""
+	}
+	return i.Cc
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetNumeroRiferimento() string {
+	if i == nil {
+		return ""
+	}
+	return i.NumeroRiferimento
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetCausale() string {
+	if i == nil {
+		return ""
+	}
+	return i.Causale
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetImporto() string {
+	if i == nil {
+		return ""
+	}
+	return i.Importo
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetCredito() *bool {
+	if i == nil {
+		return nil
+	}
+	return i.Credito
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetCodiceSede sets the CodiceSede field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) SetCodiceSede(codiceSede string) {
+	i.CodiceSede = codiceSede
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCodiceSede)
+}
+
+// SetCodiceDitta sets the CodiceDitta field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) SetCodiceDitta(codiceDitta string) {
+	i.CodiceDitta = codiceDitta
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCodiceDitta)
+}
+
+// SetCc sets the Cc field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) SetCc(cc string) {
+	i.Cc = cc
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCc)
+}
+
+// SetNumeroRiferimento sets the NumeroRiferimento field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) SetNumeroRiferimento(numeroRiferimento string) {
+	i.NumeroRiferimento = numeroRiferimento
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldNumeroRiferimento)
+}
+
+// SetCausale sets the Causale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) SetCausale(causale string) {
+	i.Causale = causale
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCausale)
+}
+
+// SetImporto sets the Importo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) SetImporto(importo string) {
+	i.Importo = importo
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldImporto)
+}
+
+// SetCredito sets the Credito field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) SetCredito(credito *bool) {
+	i.Credito = credito
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseF24ItemFieldCredito)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneComputeDeclarationsResponseF24Item
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsResponseF24Item(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsResponseF24Item
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseF24Item) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldNumber   = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldDueDate  = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldAmount   = big.NewInt(1 << 2)
+	itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldInterest = big.NewInt(1 << 3)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem struct {
+	Number   int64     `json:"number" url:"number"`
+	DueDate  time.Time `json:"dueDate" url:"dueDate" format:"date"`
+	Amount   string    `json:"amount" url:"amount"`
+	Interest *string   `json:"interest,omitempty" url:"interest,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) GetNumber() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Number
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) GetDueDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.DueDate
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) GetAmount() string {
+	if i == nil {
+		return ""
+	}
+	return i.Amount
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) GetInterest() *string {
+	if i == nil {
+		return nil
+	}
+	return i.Interest
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetNumber sets the Number field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) SetNumber(number int64) {
+	i.Number = number
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldNumber)
+}
+
+// SetDueDate sets the DueDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) SetDueDate(dueDate time.Time) {
+	i.DueDate = dueDate
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldDueDate)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) SetAmount(amount string) {
+	i.Amount = amount
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldAmount)
+}
+
+// SetInterest sets the Interest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) SetInterest(interest *string) {
+	i.Interest = interest
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItemFieldInterest)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) UnmarshalJSON(data []byte) error {
+	type embed ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem
+	var unmarshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem(unmarshaler.embed)
+	i.DueDate = unmarshaler.DueDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem
+	var marshaler = struct {
+		embed
+		DueDate *internal.Date `json:"dueDate"`
+	}{
+		embed:   embed(*i),
+		DueDate: internal.NewDate(i.DueDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseInstalmentsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPat                   = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPatControlCode        = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldVoce                  = big.NewInt(1 << 2)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldEmployees             = big.NewInt(1 << 3)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldRetribuzioni          = big.NewInt(1 << 4)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldQuoteEsenti           = big.NewInt(1 << 5)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldImponibileRegolazione = big.NewInt(1 << 6)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPremioRegolazione     = big.NewInt(1 << 7)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldRiduzioneRegolazione  = big.NewInt(1 << 8)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldTotaleRegolazione     = big.NewInt(1 << 9)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldImponibileRata        = big.NewInt(1 << 10)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPremioRata            = big.NewInt(1 << 11)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldRiduzioneRata         = big.NewInt(1 << 12)
+	itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldTotaleRata            = big.NewInt(1 << 13)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem struct {
+	Pat                   string `json:"pat" url:"pat"`
+	PatControlCode        string `json:"patControlCode" url:"patControlCode"`
+	Voce                  string `json:"voce" url:"voce"`
+	Employees             int64  `json:"employees" url:"employees"`
+	Retribuzioni          string `json:"retribuzioni" url:"retribuzioni"`
+	QuoteEsenti           string `json:"quoteEsenti" url:"quoteEsenti"`
+	ImponibileRegolazione string `json:"imponibileRegolazione" url:"imponibileRegolazione"`
+	PremioRegolazione     string `json:"premioRegolazione" url:"premioRegolazione"`
+	RiduzioneRegolazione  string `json:"riduzioneRegolazione" url:"riduzioneRegolazione"`
+	TotaleRegolazione     string `json:"totaleRegolazione" url:"totaleRegolazione"`
+	ImponibileRata        string `json:"imponibileRata" url:"imponibileRata"`
+	PremioRata            string `json:"premioRata" url:"premioRata"`
+	RiduzioneRata         string `json:"riduzioneRata" url:"riduzioneRata"`
+	TotaleRata            string `json:"totaleRata" url:"totaleRata"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetPat() string {
+	if i == nil {
+		return ""
+	}
+	return i.Pat
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetPatControlCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.PatControlCode
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetVoce() string {
+	if i == nil {
+		return ""
+	}
+	return i.Voce
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetEmployees() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Employees
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetRetribuzioni() string {
+	if i == nil {
+		return ""
+	}
+	return i.Retribuzioni
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetQuoteEsenti() string {
+	if i == nil {
+		return ""
+	}
+	return i.QuoteEsenti
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetImponibileRegolazione() string {
+	if i == nil {
+		return ""
+	}
+	return i.ImponibileRegolazione
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetPremioRegolazione() string {
+	if i == nil {
+		return ""
+	}
+	return i.PremioRegolazione
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetRiduzioneRegolazione() string {
+	if i == nil {
+		return ""
+	}
+	return i.RiduzioneRegolazione
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetTotaleRegolazione() string {
+	if i == nil {
+		return ""
+	}
+	return i.TotaleRegolazione
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetImponibileRata() string {
+	if i == nil {
+		return ""
+	}
+	return i.ImponibileRata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetPremioRata() string {
+	if i == nil {
+		return ""
+	}
+	return i.PremioRata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetRiduzioneRata() string {
+	if i == nil {
+		return ""
+	}
+	return i.RiduzioneRata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetTotaleRata() string {
+	if i == nil {
+		return ""
+	}
+	return i.TotaleRata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetPat sets the Pat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetPat(pat string) {
+	i.Pat = pat
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPat)
+}
+
+// SetPatControlCode sets the PatControlCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetPatControlCode(patControlCode string) {
+	i.PatControlCode = patControlCode
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPatControlCode)
+}
+
+// SetVoce sets the Voce field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetVoce(voce string) {
+	i.Voce = voce
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldVoce)
+}
+
+// SetEmployees sets the Employees field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetEmployees(employees int64) {
+	i.Employees = employees
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldEmployees)
+}
+
+// SetRetribuzioni sets the Retribuzioni field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetRetribuzioni(retribuzioni string) {
+	i.Retribuzioni = retribuzioni
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldRetribuzioni)
+}
+
+// SetQuoteEsenti sets the QuoteEsenti field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetQuoteEsenti(quoteEsenti string) {
+	i.QuoteEsenti = quoteEsenti
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldQuoteEsenti)
+}
+
+// SetImponibileRegolazione sets the ImponibileRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetImponibileRegolazione(imponibileRegolazione string) {
+	i.ImponibileRegolazione = imponibileRegolazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldImponibileRegolazione)
+}
+
+// SetPremioRegolazione sets the PremioRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetPremioRegolazione(premioRegolazione string) {
+	i.PremioRegolazione = premioRegolazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPremioRegolazione)
+}
+
+// SetRiduzioneRegolazione sets the RiduzioneRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetRiduzioneRegolazione(riduzioneRegolazione string) {
+	i.RiduzioneRegolazione = riduzioneRegolazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldRiduzioneRegolazione)
+}
+
+// SetTotaleRegolazione sets the TotaleRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetTotaleRegolazione(totaleRegolazione string) {
+	i.TotaleRegolazione = totaleRegolazione
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldTotaleRegolazione)
+}
+
+// SetImponibileRata sets the ImponibileRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetImponibileRata(imponibileRata string) {
+	i.ImponibileRata = imponibileRata
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldImponibileRata)
+}
+
+// SetPremioRata sets the PremioRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetPremioRata(premioRata string) {
+	i.PremioRata = premioRata
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldPremioRata)
+}
+
+// SetRiduzioneRata sets the RiduzioneRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetRiduzioneRata(riduzioneRata string) {
+	i.RiduzioneRata = riduzioneRata
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldRiduzioneRata)
+}
+
+// SetTotaleRata sets the TotaleRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) SetTotaleRata(totaleRata string) {
+	i.TotaleRata = totaleRata
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponsePositionsItemFieldTotaleRata)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponsePositionsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsResponseRataFieldTotale      = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsResponseRataFieldAddizionale = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsResponseRataFieldImporto     = big.NewInt(1 << 2)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsResponseRata struct {
+	Totale      string `json:"totale" url:"totale"`
+	Addizionale string `json:"addizionale" url:"addizionale"`
+	Importo     string `json:"importo" url:"importo"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) GetTotale() string {
+	if i == nil {
+		return ""
+	}
+	return i.Totale
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) GetAddizionale() string {
+	if i == nil {
+		return ""
+	}
+	return i.Addizionale
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) GetImporto() string {
+	if i == nil {
+		return ""
+	}
+	return i.Importo
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetTotale sets the Totale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) SetTotale(totale string) {
+	i.Totale = totale
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseRataFieldTotale)
+}
+
+// SetAddizionale sets the Addizionale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) SetAddizionale(addizionale string) {
+	i.Addizionale = addizionale
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseRataFieldAddizionale)
+}
+
+// SetImporto sets the Importo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) SetImporto(importo string) {
+	i.Importo = importo
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseRataFieldImporto)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneComputeDeclarationsResponseRata
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsResponseRata(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsResponseRata
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRata) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldTotale         = big.NewInt(1 << 0)
+	itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldAddizionale    = big.NewInt(1 << 1)
+	itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldRataAnticipata = big.NewInt(1 << 2)
+	itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldImporto        = big.NewInt(1 << 3)
+)
+
+type ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione struct {
+	Totale         string `json:"totale" url:"totale"`
+	Addizionale    string `json:"addizionale" url:"addizionale"`
+	RataAnticipata string `json:"rataAnticipata" url:"rataAnticipata"`
+	Importo        string `json:"importo" url:"importo"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) GetTotale() string {
+	if i == nil {
+		return ""
+	}
+	return i.Totale
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) GetAddizionale() string {
+	if i == nil {
+		return ""
+	}
+	return i.Addizionale
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) GetRataAnticipata() string {
+	if i == nil {
+		return ""
+	}
+	return i.RataAnticipata
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) GetImporto() string {
+	if i == nil {
+		return ""
+	}
+	return i.Importo
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetTotale sets the Totale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) SetTotale(totale string) {
+	i.Totale = totale
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldTotale)
+}
+
+// SetAddizionale sets the Addizionale field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) SetAddizionale(addizionale string) {
+	i.Addizionale = addizionale
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldAddizionale)
+}
+
+// SetRataAnticipata sets the RataAnticipata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) SetRataAnticipata(rataAnticipata string) {
+	i.RataAnticipata = rataAnticipata
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldRataAnticipata)
+}
+
+// SetImporto sets the Importo field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) SetImporto(importo string) {
+	i.Importo = importo
+	i.require(itInailAutoliquidazioneComputeDeclarationsResponseRegolazioneFieldImporto)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneComputeDeclarationsResponseRegolazione) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldPat                  = big.NewInt(1 << 0)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldPatControlCode       = big.NewInt(1 << 1)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldVoce                 = big.NewInt(1 << 2)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldTassoRegolazione     = big.NewInt(1 << 3)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldTassoRata            = big.NewInt(1 << 4)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldRiduzioneRegolazione = big.NewInt(1 << 5)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldRiduzioneRata        = big.NewInt(1 << 6)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldQuoteEsenti          = big.NewInt(1 << 7)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldRetribuzioniRata     = big.NewInt(1 << 8)
+	itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldEmployeeIDs          = big.NewInt(1 << 9)
+)
+
+type ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem struct {
+	Pat                  string   `json:"pat" url:"pat"`
+	PatControlCode       string   `json:"patControlCode" url:"patControlCode"`
+	Voce                 string   `json:"voce" url:"voce"`
+	TassoRegolazione     string   `json:"tassoRegolazione" url:"tassoRegolazione"`
+	TassoRata            string   `json:"tassoRata" url:"tassoRata"`
+	RiduzioneRegolazione *string  `json:"riduzioneRegolazione,omitempty" url:"riduzioneRegolazione,omitempty"`
+	RiduzioneRata        *string  `json:"riduzioneRata,omitempty" url:"riduzioneRata,omitempty"`
+	QuoteEsenti          *string  `json:"quoteEsenti,omitempty" url:"quoteEsenti,omitempty"`
+	RetribuzioniRata     *string  `json:"retribuzioniRata,omitempty" url:"retribuzioniRata,omitempty"`
+	EmployeeIDs          []string `json:"employeeIds,omitempty" url:"employeeIds,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetPat() string {
+	if i == nil {
+		return ""
+	}
+	return i.Pat
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetPatControlCode() string {
+	if i == nil {
+		return ""
+	}
+	return i.PatControlCode
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetVoce() string {
+	if i == nil {
+		return ""
+	}
+	return i.Voce
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetTassoRegolazione() string {
+	if i == nil {
+		return ""
+	}
+	return i.TassoRegolazione
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetTassoRata() string {
+	if i == nil {
+		return ""
+	}
+	return i.TassoRata
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetRiduzioneRegolazione() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RiduzioneRegolazione
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetRiduzioneRata() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RiduzioneRata
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetQuoteEsenti() *string {
+	if i == nil {
+		return nil
+	}
+	return i.QuoteEsenti
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetRetribuzioniRata() *string {
+	if i == nil {
+		return nil
+	}
+	return i.RetribuzioniRata
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetEmployeeIDs() []string {
+	if i == nil {
+		return nil
+	}
+	return i.EmployeeIDs
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetPat sets the Pat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetPat(pat string) {
+	i.Pat = pat
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldPat)
+}
+
+// SetPatControlCode sets the PatControlCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetPatControlCode(patControlCode string) {
+	i.PatControlCode = patControlCode
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldPatControlCode)
+}
+
+// SetVoce sets the Voce field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetVoce(voce string) {
+	i.Voce = voce
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldVoce)
+}
+
+// SetTassoRegolazione sets the TassoRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetTassoRegolazione(tassoRegolazione string) {
+	i.TassoRegolazione = tassoRegolazione
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldTassoRegolazione)
+}
+
+// SetTassoRata sets the TassoRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetTassoRata(tassoRata string) {
+	i.TassoRata = tassoRata
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldTassoRata)
+}
+
+// SetRiduzioneRegolazione sets the RiduzioneRegolazione field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetRiduzioneRegolazione(riduzioneRegolazione *string) {
+	i.RiduzioneRegolazione = riduzioneRegolazione
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldRiduzioneRegolazione)
+}
+
+// SetRiduzioneRata sets the RiduzioneRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetRiduzioneRata(riduzioneRata *string) {
+	i.RiduzioneRata = riduzioneRata
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldRiduzioneRata)
+}
+
+// SetQuoteEsenti sets the QuoteEsenti field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetQuoteEsenti(quoteEsenti *string) {
+	i.QuoteEsenti = quoteEsenti
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldQuoteEsenti)
+}
+
+// SetRetribuzioniRata sets the RetribuzioniRata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetRetribuzioniRata(retribuzioniRata *string) {
+	i.RetribuzioniRata = retribuzioniRata
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldRetribuzioniRata)
+}
+
+// SetEmployeeIDs sets the EmployeeIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) SetEmployeeIDs(employeeIDs []string) {
+	i.EmployeeIDs = employeeIDs
+	i.require(itInailAutoliquidazioneF24DeclarationsRequestPositionsItemFieldEmployeeIDs)
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsRequestPositionsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itInailAutoliquidazioneF24DeclarationsResponseFieldFileName    = big.NewInt(1 << 0)
+	itInailAutoliquidazioneF24DeclarationsResponseFieldContentType = big.NewInt(1 << 1)
+	itInailAutoliquidazioneF24DeclarationsResponseFieldData        = big.NewInt(1 << 2)
+	itInailAutoliquidazioneF24DeclarationsResponseFieldTotal       = big.NewInt(1 << 3)
+	itInailAutoliquidazioneF24DeclarationsResponseFieldWarnings    = big.NewInt(1 << 4)
+)
+
+type ItInailAutoliquidazioneF24DeclarationsResponse struct {
+	FileName    string   `json:"fileName" url:"fileName"`
+	ContentType string   `json:"contentType" url:"contentType"`
+	Data        string   `json:"data" url:"data"`
+	Total       string   `json:"total" url:"total"`
+	Warnings    []string `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) GetFileName() string {
+	if i == nil {
+		return ""
+	}
+	return i.FileName
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) GetContentType() string {
+	if i == nil {
+		return ""
+	}
+	return i.ContentType
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) GetData() string {
+	if i == nil {
+		return ""
+	}
+	return i.Data
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) GetTotal() string {
+	if i == nil {
+		return ""
+	}
+	return i.Total
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) GetWarnings() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) SetFileName(fileName string) {
+	i.FileName = fileName
+	i.require(itInailAutoliquidazioneF24DeclarationsResponseFieldFileName)
+}
+
+// SetContentType sets the ContentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) SetContentType(contentType string) {
+	i.ContentType = contentType
+	i.require(itInailAutoliquidazioneF24DeclarationsResponseFieldContentType)
+}
+
+// SetData sets the Data field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) SetData(data string) {
+	i.Data = data
+	i.require(itInailAutoliquidazioneF24DeclarationsResponseFieldData)
+}
+
+// SetTotal sets the Total field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) SetTotal(total string) {
+	i.Total = total
+	i.require(itInailAutoliquidazioneF24DeclarationsResponseFieldTotal)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) SetWarnings(warnings []string) {
+	i.Warnings = warnings
+	i.require(itInailAutoliquidazioneF24DeclarationsResponseFieldWarnings)
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItInailAutoliquidazioneF24DeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItInailAutoliquidazioneF24DeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed ItInailAutoliquidazioneF24DeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItInailAutoliquidazioneF24DeclarationsResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
 type ItSdiPurchasePreviewDeclarationsRequestTipoDocumento string
 
 const (
@@ -48722,6 +59270,2392 @@ func NewItSdiPurchaseSendDeclarationsResponseTransportFromString(s string) (ItSd
 
 func (i ItSdiPurchaseSendDeclarationsResponseTransport) Ptr() *ItSdiPurchaseSendDeclarationsResponseTransport {
 	return &i
+}
+
+var (
+	itTfrAccrualComputeDeclarationsResponseFieldYear     = big.NewInt(1 << 0)
+	itTfrAccrualComputeDeclarationsResponseFieldMonth    = big.NewInt(1 << 1)
+	itTfrAccrualComputeDeclarationsResponseFieldDate     = big.NewInt(1 << 2)
+	itTfrAccrualComputeDeclarationsResponseFieldRows     = big.NewInt(1 << 3)
+	itTfrAccrualComputeDeclarationsResponseFieldTotals   = big.NewInt(1 << 4)
+	itTfrAccrualComputeDeclarationsResponseFieldWarnings = big.NewInt(1 << 5)
+)
+
+type ItTfrAccrualComputeDeclarationsResponse struct {
+	Year     int64                                              `json:"year" url:"year"`
+	Month    int64                                              `json:"month" url:"month"`
+	Date     time.Time                                          `json:"date" url:"date" format:"date"`
+	Rows     []*ItTfrAccrualComputeDeclarationsResponseRowsItem `json:"rows" url:"rows"`
+	Totals   *ItTfrAccrualComputeDeclarationsResponseTotals     `json:"totals" url:"totals"`
+	Warnings []string                                           `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) GetYear() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Year
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) GetMonth() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Month
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) GetDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.Date
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) GetRows() []*ItTfrAccrualComputeDeclarationsResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) GetTotals() *ItTfrAccrualComputeDeclarationsResponseTotals {
+	if i == nil {
+		return nil
+	}
+	return i.Totals
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) GetWarnings() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponse) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrAccrualComputeDeclarationsResponseFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponse) SetMonth(month int64) {
+	i.Month = month
+	i.require(itTfrAccrualComputeDeclarationsResponseFieldMonth)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponse) SetDate(date time.Time) {
+	i.Date = date
+	i.require(itTfrAccrualComputeDeclarationsResponseFieldDate)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponse) SetRows(rows []*ItTfrAccrualComputeDeclarationsResponseRowsItem) {
+	i.Rows = rows
+	i.require(itTfrAccrualComputeDeclarationsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponse) SetTotals(totals *ItTfrAccrualComputeDeclarationsResponseTotals) {
+	i.Totals = totals
+	i.require(itTfrAccrualComputeDeclarationsResponseFieldTotals)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponse) SetWarnings(warnings []string) {
+	i.Warnings = warnings
+	i.require(itTfrAccrualComputeDeclarationsResponseFieldWarnings)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed ItTfrAccrualComputeDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualComputeDeclarationsResponse(unmarshaler.embed)
+	i.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualComputeDeclarationsResponse
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+		Date:  internal.NewDate(i.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldEmployeeID       = big.NewInt(1 << 0)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldName             = big.NewInt(1 << 1)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldDestination      = big.NewInt(1 << 2)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldBase             = big.NewInt(1 << 3)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldQuota            = big.NewInt(1 << 4)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldContributionBase = big.NewInt(1 << 5)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldContribution     = big.NewInt(1 << 6)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldAccrual          = big.NewInt(1 << 7)
+	itTfrAccrualComputeDeclarationsResponseRowsItemFieldLeftOut          = big.NewInt(1 << 8)
+)
+
+type ItTfrAccrualComputeDeclarationsResponseRowsItem struct {
+	EmployeeID       string                                                        `json:"employeeId" url:"employeeId"`
+	Name             string                                                        `json:"name" url:"name"`
+	Destination      ItTfrAccrualComputeDeclarationsResponseRowsItemDestination    `json:"destination" url:"destination"`
+	Base             string                                                        `json:"base" url:"base"`
+	Quota            string                                                        `json:"quota" url:"quota"`
+	ContributionBase string                                                        `json:"contributionBase" url:"contributionBase"`
+	Contribution     string                                                        `json:"contribution" url:"contribution"`
+	Accrual          string                                                        `json:"accrual" url:"accrual"`
+	LeftOut          []*ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem `json:"leftOut" url:"leftOut"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetEmployeeID() string {
+	if i == nil {
+		return ""
+	}
+	return i.EmployeeID
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetDestination() ItTfrAccrualComputeDeclarationsResponseRowsItemDestination {
+	if i == nil {
+		return ""
+	}
+	return i.Destination
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetBase() string {
+	if i == nil {
+		return ""
+	}
+	return i.Base
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetQuota() string {
+	if i == nil {
+		return ""
+	}
+	return i.Quota
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetContributionBase() string {
+	if i == nil {
+		return ""
+	}
+	return i.ContributionBase
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetContribution() string {
+	if i == nil {
+		return ""
+	}
+	return i.Contribution
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetAccrual() string {
+	if i == nil {
+		return ""
+	}
+	return i.Accrual
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetLeftOut() []*ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem {
+	if i == nil {
+		return nil
+	}
+	return i.LeftOut
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldEmployeeID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetName(name string) {
+	i.Name = name
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldName)
+}
+
+// SetDestination sets the Destination field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetDestination(destination ItTfrAccrualComputeDeclarationsResponseRowsItemDestination) {
+	i.Destination = destination
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldDestination)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetBase(base string) {
+	i.Base = base
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldBase)
+}
+
+// SetQuota sets the Quota field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetQuota(quota string) {
+	i.Quota = quota
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldQuota)
+}
+
+// SetContributionBase sets the ContributionBase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetContributionBase(contributionBase string) {
+	i.ContributionBase = contributionBase
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldContributionBase)
+}
+
+// SetContribution sets the Contribution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetContribution(contribution string) {
+	i.Contribution = contribution
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldContribution)
+}
+
+// SetAccrual sets the Accrual field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetAccrual(accrual string) {
+	i.Accrual = accrual
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldAccrual)
+}
+
+// SetLeftOut sets the LeftOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) SetLeftOut(leftOut []*ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) {
+	i.LeftOut = leftOut
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemFieldLeftOut)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualComputeDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualComputeDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualComputeDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type ItTfrAccrualComputeDeclarationsResponseRowsItemDestination string
+
+const (
+	ItTfrAccrualComputeDeclarationsResponseRowsItemDestinationAzienda                 ItTfrAccrualComputeDeclarationsResponseRowsItemDestination = "azienda"
+	ItTfrAccrualComputeDeclarationsResponseRowsItemDestinationFondoTesoreria          ItTfrAccrualComputeDeclarationsResponseRowsItemDestination = "fondo-tesoreria"
+	ItTfrAccrualComputeDeclarationsResponseRowsItemDestinationPrevidenzaComplementare ItTfrAccrualComputeDeclarationsResponseRowsItemDestination = "previdenza-complementare"
+)
+
+func NewItTfrAccrualComputeDeclarationsResponseRowsItemDestinationFromString(s string) (ItTfrAccrualComputeDeclarationsResponseRowsItemDestination, error) {
+	switch s {
+	case "azienda":
+		return ItTfrAccrualComputeDeclarationsResponseRowsItemDestinationAzienda, nil
+	case "fondo-tesoreria":
+		return ItTfrAccrualComputeDeclarationsResponseRowsItemDestinationFondoTesoreria, nil
+	case "previdenza-complementare":
+		return ItTfrAccrualComputeDeclarationsResponseRowsItemDestinationPrevidenzaComplementare, nil
+	}
+	var t ItTfrAccrualComputeDeclarationsResponseRowsItemDestination
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i ItTfrAccrualComputeDeclarationsResponseRowsItemDestination) Ptr() *ItTfrAccrualComputeDeclarationsResponseRowsItemDestination {
+	return &i
+}
+
+var (
+	itTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItemFieldPaymentType = big.NewInt(1 << 0)
+	itTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItemFieldAmount      = big.NewInt(1 << 1)
+)
+
+type ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem struct {
+	PaymentType string `json:"paymentType" url:"paymentType"`
+	Amount      string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) GetPaymentType() string {
+	if i == nil {
+		return ""
+	}
+	return i.PaymentType
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) GetAmount() string {
+	if i == nil {
+		return ""
+	}
+	return i.Amount
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) SetPaymentType(paymentType string) {
+	i.PaymentType = paymentType
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItemFieldPaymentType)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) SetAmount(amount string) {
+	i.Amount = amount
+	i.require(itTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItemFieldAmount)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseRowsItemLeftOutItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrAccrualComputeDeclarationsResponseTotalsFieldKept    = big.NewInt(1 << 0)
+	itTfrAccrualComputeDeclarationsResponseTotalsFieldPaidOut = big.NewInt(1 << 1)
+	itTfrAccrualComputeDeclarationsResponseTotalsFieldAccrual = big.NewInt(1 << 2)
+)
+
+type ItTfrAccrualComputeDeclarationsResponseTotals struct {
+	Kept    string `json:"kept" url:"kept"`
+	PaidOut string `json:"paidOut" url:"paidOut"`
+	Accrual string `json:"accrual" url:"accrual"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) GetKept() string {
+	if i == nil {
+		return ""
+	}
+	return i.Kept
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) GetPaidOut() string {
+	if i == nil {
+		return ""
+	}
+	return i.PaidOut
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) GetAccrual() string {
+	if i == nil {
+		return ""
+	}
+	return i.Accrual
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetKept sets the Kept field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) SetKept(kept string) {
+	i.Kept = kept
+	i.require(itTfrAccrualComputeDeclarationsResponseTotalsFieldKept)
+}
+
+// SetPaidOut sets the PaidOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) SetPaidOut(paidOut string) {
+	i.PaidOut = paidOut
+	i.require(itTfrAccrualComputeDeclarationsResponseTotalsFieldPaidOut)
+}
+
+// SetAccrual sets the Accrual field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) SetAccrual(accrual string) {
+	i.Accrual = accrual
+	i.require(itTfrAccrualComputeDeclarationsResponseTotalsFieldAccrual)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualComputeDeclarationsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualComputeDeclarationsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualComputeDeclarationsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualComputeDeclarationsResponseTotals) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrAccrualPostDeclarationsResponseFieldID       = big.NewInt(1 << 0)
+	itTfrAccrualPostDeclarationsResponseFieldYear     = big.NewInt(1 << 1)
+	itTfrAccrualPostDeclarationsResponseFieldMonth    = big.NewInt(1 << 2)
+	itTfrAccrualPostDeclarationsResponseFieldDate     = big.NewInt(1 << 3)
+	itTfrAccrualPostDeclarationsResponseFieldRows     = big.NewInt(1 << 4)
+	itTfrAccrualPostDeclarationsResponseFieldTotals   = big.NewInt(1 << 5)
+	itTfrAccrualPostDeclarationsResponseFieldWarnings = big.NewInt(1 << 6)
+)
+
+type ItTfrAccrualPostDeclarationsResponse struct {
+	ID       string                                          `json:"id" url:"id"`
+	Year     int64                                           `json:"year" url:"year"`
+	Month    int64                                           `json:"month" url:"month"`
+	Date     time.Time                                       `json:"date" url:"date" format:"date"`
+	Rows     []*ItTfrAccrualPostDeclarationsResponseRowsItem `json:"rows" url:"rows"`
+	Totals   *ItTfrAccrualPostDeclarationsResponseTotals     `json:"totals" url:"totals"`
+	Warnings []string                                        `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetYear() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Year
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetMonth() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Month
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.Date
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetRows() []*ItTfrAccrualPostDeclarationsResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetTotals() *ItTfrAccrualPostDeclarationsResponseTotals {
+	if i == nil {
+		return nil
+	}
+	return i.Totals
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetWarnings() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponse) SetID(id string) {
+	i.ID = id
+	i.require(itTfrAccrualPostDeclarationsResponseFieldID)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponse) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrAccrualPostDeclarationsResponseFieldYear)
+}
+
+// SetMonth sets the Month field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponse) SetMonth(month int64) {
+	i.Month = month
+	i.require(itTfrAccrualPostDeclarationsResponseFieldMonth)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponse) SetDate(date time.Time) {
+	i.Date = date
+	i.require(itTfrAccrualPostDeclarationsResponseFieldDate)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponse) SetRows(rows []*ItTfrAccrualPostDeclarationsResponseRowsItem) {
+	i.Rows = rows
+	i.require(itTfrAccrualPostDeclarationsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponse) SetTotals(totals *ItTfrAccrualPostDeclarationsResponseTotals) {
+	i.Totals = totals
+	i.require(itTfrAccrualPostDeclarationsResponseFieldTotals)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponse) SetWarnings(warnings []string) {
+	i.Warnings = warnings
+	i.require(itTfrAccrualPostDeclarationsResponseFieldWarnings)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed ItTfrAccrualPostDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualPostDeclarationsResponse(unmarshaler.embed)
+	i.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualPostDeclarationsResponse
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+		Date:  internal.NewDate(i.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldEmployeeID       = big.NewInt(1 << 0)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldName             = big.NewInt(1 << 1)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldDestination      = big.NewInt(1 << 2)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldBase             = big.NewInt(1 << 3)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldQuota            = big.NewInt(1 << 4)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldContributionBase = big.NewInt(1 << 5)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldContribution     = big.NewInt(1 << 6)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldAccrual          = big.NewInt(1 << 7)
+	itTfrAccrualPostDeclarationsResponseRowsItemFieldLeftOut          = big.NewInt(1 << 8)
+)
+
+type ItTfrAccrualPostDeclarationsResponseRowsItem struct {
+	EmployeeID       string                                                     `json:"employeeId" url:"employeeId"`
+	Name             string                                                     `json:"name" url:"name"`
+	Destination      ItTfrAccrualPostDeclarationsResponseRowsItemDestination    `json:"destination" url:"destination"`
+	Base             string                                                     `json:"base" url:"base"`
+	Quota            string                                                     `json:"quota" url:"quota"`
+	ContributionBase string                                                     `json:"contributionBase" url:"contributionBase"`
+	Contribution     string                                                     `json:"contribution" url:"contribution"`
+	Accrual          string                                                     `json:"accrual" url:"accrual"`
+	LeftOut          []*ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem `json:"leftOut" url:"leftOut"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetEmployeeID() string {
+	if i == nil {
+		return ""
+	}
+	return i.EmployeeID
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetDestination() ItTfrAccrualPostDeclarationsResponseRowsItemDestination {
+	if i == nil {
+		return ""
+	}
+	return i.Destination
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetBase() string {
+	if i == nil {
+		return ""
+	}
+	return i.Base
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetQuota() string {
+	if i == nil {
+		return ""
+	}
+	return i.Quota
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetContributionBase() string {
+	if i == nil {
+		return ""
+	}
+	return i.ContributionBase
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetContribution() string {
+	if i == nil {
+		return ""
+	}
+	return i.Contribution
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetAccrual() string {
+	if i == nil {
+		return ""
+	}
+	return i.Accrual
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetLeftOut() []*ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem {
+	if i == nil {
+		return nil
+	}
+	return i.LeftOut
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldEmployeeID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetName(name string) {
+	i.Name = name
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldName)
+}
+
+// SetDestination sets the Destination field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetDestination(destination ItTfrAccrualPostDeclarationsResponseRowsItemDestination) {
+	i.Destination = destination
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldDestination)
+}
+
+// SetBase sets the Base field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetBase(base string) {
+	i.Base = base
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldBase)
+}
+
+// SetQuota sets the Quota field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetQuota(quota string) {
+	i.Quota = quota
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldQuota)
+}
+
+// SetContributionBase sets the ContributionBase field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetContributionBase(contributionBase string) {
+	i.ContributionBase = contributionBase
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldContributionBase)
+}
+
+// SetContribution sets the Contribution field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetContribution(contribution string) {
+	i.Contribution = contribution
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldContribution)
+}
+
+// SetAccrual sets the Accrual field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetAccrual(accrual string) {
+	i.Accrual = accrual
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldAccrual)
+}
+
+// SetLeftOut sets the LeftOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) SetLeftOut(leftOut []*ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) {
+	i.LeftOut = leftOut
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemFieldLeftOut)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualPostDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualPostDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualPostDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+type ItTfrAccrualPostDeclarationsResponseRowsItemDestination string
+
+const (
+	ItTfrAccrualPostDeclarationsResponseRowsItemDestinationAzienda                 ItTfrAccrualPostDeclarationsResponseRowsItemDestination = "azienda"
+	ItTfrAccrualPostDeclarationsResponseRowsItemDestinationFondoTesoreria          ItTfrAccrualPostDeclarationsResponseRowsItemDestination = "fondo-tesoreria"
+	ItTfrAccrualPostDeclarationsResponseRowsItemDestinationPrevidenzaComplementare ItTfrAccrualPostDeclarationsResponseRowsItemDestination = "previdenza-complementare"
+)
+
+func NewItTfrAccrualPostDeclarationsResponseRowsItemDestinationFromString(s string) (ItTfrAccrualPostDeclarationsResponseRowsItemDestination, error) {
+	switch s {
+	case "azienda":
+		return ItTfrAccrualPostDeclarationsResponseRowsItemDestinationAzienda, nil
+	case "fondo-tesoreria":
+		return ItTfrAccrualPostDeclarationsResponseRowsItemDestinationFondoTesoreria, nil
+	case "previdenza-complementare":
+		return ItTfrAccrualPostDeclarationsResponseRowsItemDestinationPrevidenzaComplementare, nil
+	}
+	var t ItTfrAccrualPostDeclarationsResponseRowsItemDestination
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i ItTfrAccrualPostDeclarationsResponseRowsItemDestination) Ptr() *ItTfrAccrualPostDeclarationsResponseRowsItemDestination {
+	return &i
+}
+
+var (
+	itTfrAccrualPostDeclarationsResponseRowsItemLeftOutItemFieldPaymentType = big.NewInt(1 << 0)
+	itTfrAccrualPostDeclarationsResponseRowsItemLeftOutItemFieldAmount      = big.NewInt(1 << 1)
+)
+
+type ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem struct {
+	PaymentType string `json:"paymentType" url:"paymentType"`
+	Amount      string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) GetPaymentType() string {
+	if i == nil {
+		return ""
+	}
+	return i.PaymentType
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) GetAmount() string {
+	if i == nil {
+		return ""
+	}
+	return i.Amount
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetPaymentType sets the PaymentType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) SetPaymentType(paymentType string) {
+	i.PaymentType = paymentType
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemLeftOutItemFieldPaymentType)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) SetAmount(amount string) {
+	i.Amount = amount
+	i.require(itTfrAccrualPostDeclarationsResponseRowsItemLeftOutItemFieldAmount)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseRowsItemLeftOutItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrAccrualPostDeclarationsResponseTotalsFieldKept    = big.NewInt(1 << 0)
+	itTfrAccrualPostDeclarationsResponseTotalsFieldPaidOut = big.NewInt(1 << 1)
+	itTfrAccrualPostDeclarationsResponseTotalsFieldAccrual = big.NewInt(1 << 2)
+)
+
+type ItTfrAccrualPostDeclarationsResponseTotals struct {
+	Kept    string `json:"kept" url:"kept"`
+	PaidOut string `json:"paidOut" url:"paidOut"`
+	Accrual string `json:"accrual" url:"accrual"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) GetKept() string {
+	if i == nil {
+		return ""
+	}
+	return i.Kept
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) GetPaidOut() string {
+	if i == nil {
+		return ""
+	}
+	return i.PaidOut
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) GetAccrual() string {
+	if i == nil {
+		return ""
+	}
+	return i.Accrual
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetKept sets the Kept field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) SetKept(kept string) {
+	i.Kept = kept
+	i.require(itTfrAccrualPostDeclarationsResponseTotalsFieldKept)
+}
+
+// SetPaidOut sets the PaidOut field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) SetPaidOut(paidOut string) {
+	i.PaidOut = paidOut
+	i.require(itTfrAccrualPostDeclarationsResponseTotalsFieldPaidOut)
+}
+
+// SetAccrual sets the Accrual field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) SetAccrual(accrual string) {
+	i.Accrual = accrual
+	i.require(itTfrAccrualPostDeclarationsResponseTotalsFieldAccrual)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrAccrualPostDeclarationsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrAccrualPostDeclarationsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed ItTfrAccrualPostDeclarationsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrAccrualPostDeclarationsResponseTotals) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationComputeDeclarationsRequestFundsItemFieldEmployeeID = big.NewInt(1 << 0)
+	itTfrRevaluationComputeDeclarationsRequestFundsItemFieldAmount     = big.NewInt(1 << 1)
+)
+
+type ItTfrRevaluationComputeDeclarationsRequestFundsItem struct {
+	EmployeeID string `json:"employeeId" url:"employeeId"`
+	Amount     string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) GetEmployeeID() string {
+	if i == nil {
+		return ""
+	}
+	return i.EmployeeID
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) GetAmount() string {
+	if i == nil {
+		return ""
+	}
+	return i.Amount
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(itTfrRevaluationComputeDeclarationsRequestFundsItemFieldEmployeeID)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) SetAmount(amount string) {
+	i.Amount = amount
+	i.require(itTfrRevaluationComputeDeclarationsRequestFundsItemFieldAmount)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationComputeDeclarationsRequestFundsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationComputeDeclarationsRequestFundsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationComputeDeclarationsRequestFundsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsRequestFundsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationComputeDeclarationsResponseFieldYear     = big.NewInt(1 << 0)
+	itTfrRevaluationComputeDeclarationsResponseFieldDate     = big.NewInt(1 << 1)
+	itTfrRevaluationComputeDeclarationsResponseFieldRate     = big.NewInt(1 << 2)
+	itTfrRevaluationComputeDeclarationsResponseFieldRows     = big.NewInt(1 << 3)
+	itTfrRevaluationComputeDeclarationsResponseFieldTotals   = big.NewInt(1 << 4)
+	itTfrRevaluationComputeDeclarationsResponseFieldWarnings = big.NewInt(1 << 5)
+)
+
+type ItTfrRevaluationComputeDeclarationsResponse struct {
+	Year     int64                                                  `json:"year" url:"year"`
+	Date     time.Time                                              `json:"date" url:"date" format:"date"`
+	Rate     string                                                 `json:"rate" url:"rate"`
+	Rows     []*ItTfrRevaluationComputeDeclarationsResponseRowsItem `json:"rows" url:"rows"`
+	Totals   *ItTfrRevaluationComputeDeclarationsResponseTotals     `json:"totals" url:"totals"`
+	Warnings []string                                               `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) GetYear() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Year
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) GetDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.Date
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) GetRate() string {
+	if i == nil {
+		return ""
+	}
+	return i.Rate
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) GetRows() []*ItTfrRevaluationComputeDeclarationsResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) GetTotals() *ItTfrRevaluationComputeDeclarationsResponseTotals {
+	if i == nil {
+		return nil
+	}
+	return i.Totals
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) GetWarnings() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponse) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrRevaluationComputeDeclarationsResponseFieldYear)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponse) SetDate(date time.Time) {
+	i.Date = date
+	i.require(itTfrRevaluationComputeDeclarationsResponseFieldDate)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponse) SetRate(rate string) {
+	i.Rate = rate
+	i.require(itTfrRevaluationComputeDeclarationsResponseFieldRate)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponse) SetRows(rows []*ItTfrRevaluationComputeDeclarationsResponseRowsItem) {
+	i.Rows = rows
+	i.require(itTfrRevaluationComputeDeclarationsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponse) SetTotals(totals *ItTfrRevaluationComputeDeclarationsResponseTotals) {
+	i.Totals = totals
+	i.require(itTfrRevaluationComputeDeclarationsResponseFieldTotals)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponse) SetWarnings(warnings []string) {
+	i.Warnings = warnings
+	i.require(itTfrRevaluationComputeDeclarationsResponseFieldWarnings)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed ItTfrRevaluationComputeDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationComputeDeclarationsResponse(unmarshaler.embed)
+	i.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationComputeDeclarationsResponse
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+		Date:  internal.NewDate(i.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationComputeDeclarationsResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 0)
+	itTfrRevaluationComputeDeclarationsResponseRowsItemFieldName          = big.NewInt(1 << 1)
+	itTfrRevaluationComputeDeclarationsResponseRowsItemFieldFund          = big.NewInt(1 << 2)
+	itTfrRevaluationComputeDeclarationsResponseRowsItemFieldRevaluation   = big.NewInt(1 << 3)
+	itTfrRevaluationComputeDeclarationsResponseRowsItemFieldSubstituteTax = big.NewInt(1 << 4)
+	itTfrRevaluationComputeDeclarationsResponseRowsItemFieldFundAfter     = big.NewInt(1 << 5)
+)
+
+type ItTfrRevaluationComputeDeclarationsResponseRowsItem struct {
+	EmployeeID    string `json:"employeeId" url:"employeeId"`
+	Name          string `json:"name" url:"name"`
+	Fund          string `json:"fund" url:"fund"`
+	Revaluation   string `json:"revaluation" url:"revaluation"`
+	SubstituteTax string `json:"substituteTax" url:"substituteTax"`
+	FundAfter     string `json:"fundAfter" url:"fundAfter"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) GetEmployeeID() string {
+	if i == nil {
+		return ""
+	}
+	return i.EmployeeID
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) GetFund() string {
+	if i == nil {
+		return ""
+	}
+	return i.Fund
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) GetRevaluation() string {
+	if i == nil {
+		return ""
+	}
+	return i.Revaluation
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) GetSubstituteTax() string {
+	if i == nil {
+		return ""
+	}
+	return i.SubstituteTax
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) GetFundAfter() string {
+	if i == nil {
+		return ""
+	}
+	return i.FundAfter
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(itTfrRevaluationComputeDeclarationsResponseRowsItemFieldEmployeeID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) SetName(name string) {
+	i.Name = name
+	i.require(itTfrRevaluationComputeDeclarationsResponseRowsItemFieldName)
+}
+
+// SetFund sets the Fund field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) SetFund(fund string) {
+	i.Fund = fund
+	i.require(itTfrRevaluationComputeDeclarationsResponseRowsItemFieldFund)
+}
+
+// SetRevaluation sets the Revaluation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) SetRevaluation(revaluation string) {
+	i.Revaluation = revaluation
+	i.require(itTfrRevaluationComputeDeclarationsResponseRowsItemFieldRevaluation)
+}
+
+// SetSubstituteTax sets the SubstituteTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) SetSubstituteTax(substituteTax string) {
+	i.SubstituteTax = substituteTax
+	i.require(itTfrRevaluationComputeDeclarationsResponseRowsItemFieldSubstituteTax)
+}
+
+// SetFundAfter sets the FundAfter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) SetFundAfter(fundAfter string) {
+	i.FundAfter = fundAfter
+	i.require(itTfrRevaluationComputeDeclarationsResponseRowsItemFieldFundAfter)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationComputeDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationComputeDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationComputeDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationComputeDeclarationsResponseTotalsFieldRevaluation     = big.NewInt(1 << 0)
+	itTfrRevaluationComputeDeclarationsResponseTotalsFieldSubstituteTax   = big.NewInt(1 << 1)
+	itTfrRevaluationComputeDeclarationsResponseTotalsFieldAccontoNextYear = big.NewInt(1 << 2)
+)
+
+type ItTfrRevaluationComputeDeclarationsResponseTotals struct {
+	Revaluation     string `json:"revaluation" url:"revaluation"`
+	SubstituteTax   string `json:"substituteTax" url:"substituteTax"`
+	AccontoNextYear string `json:"accontoNextYear" url:"accontoNextYear"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) GetRevaluation() string {
+	if i == nil {
+		return ""
+	}
+	return i.Revaluation
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) GetSubstituteTax() string {
+	if i == nil {
+		return ""
+	}
+	return i.SubstituteTax
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) GetAccontoNextYear() string {
+	if i == nil {
+		return ""
+	}
+	return i.AccontoNextYear
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetRevaluation sets the Revaluation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) SetRevaluation(revaluation string) {
+	i.Revaluation = revaluation
+	i.require(itTfrRevaluationComputeDeclarationsResponseTotalsFieldRevaluation)
+}
+
+// SetSubstituteTax sets the SubstituteTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) SetSubstituteTax(substituteTax string) {
+	i.SubstituteTax = substituteTax
+	i.require(itTfrRevaluationComputeDeclarationsResponseTotalsFieldSubstituteTax)
+}
+
+// SetAccontoNextYear sets the AccontoNextYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) SetAccontoNextYear(accontoNextYear string) {
+	i.AccontoNextYear = accontoNextYear
+	i.require(itTfrRevaluationComputeDeclarationsResponseTotalsFieldAccontoNextYear)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationComputeDeclarationsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationComputeDeclarationsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationComputeDeclarationsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationComputeDeclarationsResponseTotals) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationPostDeclarationsRequestFundsItemFieldEmployeeID = big.NewInt(1 << 0)
+	itTfrRevaluationPostDeclarationsRequestFundsItemFieldAmount     = big.NewInt(1 << 1)
+)
+
+type ItTfrRevaluationPostDeclarationsRequestFundsItem struct {
+	EmployeeID string `json:"employeeId" url:"employeeId"`
+	Amount     string `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) GetEmployeeID() string {
+	if i == nil {
+		return ""
+	}
+	return i.EmployeeID
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) GetAmount() string {
+	if i == nil {
+		return ""
+	}
+	return i.Amount
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(itTfrRevaluationPostDeclarationsRequestFundsItemFieldEmployeeID)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) SetAmount(amount string) {
+	i.Amount = amount
+	i.require(itTfrRevaluationPostDeclarationsRequestFundsItemFieldAmount)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationPostDeclarationsRequestFundsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationPostDeclarationsRequestFundsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationPostDeclarationsRequestFundsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsRequestFundsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationPostDeclarationsResponseFieldID       = big.NewInt(1 << 0)
+	itTfrRevaluationPostDeclarationsResponseFieldYear     = big.NewInt(1 << 1)
+	itTfrRevaluationPostDeclarationsResponseFieldDate     = big.NewInt(1 << 2)
+	itTfrRevaluationPostDeclarationsResponseFieldRate     = big.NewInt(1 << 3)
+	itTfrRevaluationPostDeclarationsResponseFieldRows     = big.NewInt(1 << 4)
+	itTfrRevaluationPostDeclarationsResponseFieldTotals   = big.NewInt(1 << 5)
+	itTfrRevaluationPostDeclarationsResponseFieldWarnings = big.NewInt(1 << 6)
+)
+
+type ItTfrRevaluationPostDeclarationsResponse struct {
+	ID       string                                              `json:"id" url:"id"`
+	Year     int64                                               `json:"year" url:"year"`
+	Date     time.Time                                           `json:"date" url:"date" format:"date"`
+	Rate     string                                              `json:"rate" url:"rate"`
+	Rows     []*ItTfrRevaluationPostDeclarationsResponseRowsItem `json:"rows" url:"rows"`
+	Totals   *ItTfrRevaluationPostDeclarationsResponseTotals     `json:"totals" url:"totals"`
+	Warnings []string                                            `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetID() string {
+	if i == nil {
+		return ""
+	}
+	return i.ID
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetYear() int64 {
+	if i == nil {
+		return 0
+	}
+	return i.Year
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetDate() time.Time {
+	if i == nil {
+		return time.Time{}
+	}
+	return i.Date
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetRate() string {
+	if i == nil {
+		return ""
+	}
+	return i.Rate
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetRows() []*ItTfrRevaluationPostDeclarationsResponseRowsItem {
+	if i == nil {
+		return nil
+	}
+	return i.Rows
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetTotals() *ItTfrRevaluationPostDeclarationsResponseTotals {
+	if i == nil {
+		return nil
+	}
+	return i.Totals
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetWarnings() []string {
+	if i == nil {
+		return nil
+	}
+	return i.Warnings
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponse) SetID(id string) {
+	i.ID = id
+	i.require(itTfrRevaluationPostDeclarationsResponseFieldID)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponse) SetYear(year int64) {
+	i.Year = year
+	i.require(itTfrRevaluationPostDeclarationsResponseFieldYear)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponse) SetDate(date time.Time) {
+	i.Date = date
+	i.require(itTfrRevaluationPostDeclarationsResponseFieldDate)
+}
+
+// SetRate sets the Rate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponse) SetRate(rate string) {
+	i.Rate = rate
+	i.require(itTfrRevaluationPostDeclarationsResponseFieldRate)
+}
+
+// SetRows sets the Rows field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponse) SetRows(rows []*ItTfrRevaluationPostDeclarationsResponseRowsItem) {
+	i.Rows = rows
+	i.require(itTfrRevaluationPostDeclarationsResponseFieldRows)
+}
+
+// SetTotals sets the Totals field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponse) SetTotals(totals *ItTfrRevaluationPostDeclarationsResponseTotals) {
+	i.Totals = totals
+	i.require(itTfrRevaluationPostDeclarationsResponseFieldTotals)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponse) SetWarnings(warnings []string) {
+	i.Warnings = warnings
+	i.require(itTfrRevaluationPostDeclarationsResponseFieldWarnings)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed ItTfrRevaluationPostDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationPostDeclarationsResponse(unmarshaler.embed)
+	i.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationPostDeclarationsResponse
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*i),
+		Date:  internal.NewDate(i.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponse) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationPostDeclarationsResponseRowsItemFieldEmployeeID    = big.NewInt(1 << 0)
+	itTfrRevaluationPostDeclarationsResponseRowsItemFieldName          = big.NewInt(1 << 1)
+	itTfrRevaluationPostDeclarationsResponseRowsItemFieldFund          = big.NewInt(1 << 2)
+	itTfrRevaluationPostDeclarationsResponseRowsItemFieldRevaluation   = big.NewInt(1 << 3)
+	itTfrRevaluationPostDeclarationsResponseRowsItemFieldSubstituteTax = big.NewInt(1 << 4)
+	itTfrRevaluationPostDeclarationsResponseRowsItemFieldFundAfter     = big.NewInt(1 << 5)
+)
+
+type ItTfrRevaluationPostDeclarationsResponseRowsItem struct {
+	EmployeeID    string `json:"employeeId" url:"employeeId"`
+	Name          string `json:"name" url:"name"`
+	Fund          string `json:"fund" url:"fund"`
+	Revaluation   string `json:"revaluation" url:"revaluation"`
+	SubstituteTax string `json:"substituteTax" url:"substituteTax"`
+	FundAfter     string `json:"fundAfter" url:"fundAfter"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) GetEmployeeID() string {
+	if i == nil {
+		return ""
+	}
+	return i.EmployeeID
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) GetName() string {
+	if i == nil {
+		return ""
+	}
+	return i.Name
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) GetFund() string {
+	if i == nil {
+		return ""
+	}
+	return i.Fund
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) GetRevaluation() string {
+	if i == nil {
+		return ""
+	}
+	return i.Revaluation
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) GetSubstituteTax() string {
+	if i == nil {
+		return ""
+	}
+	return i.SubstituteTax
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) GetFundAfter() string {
+	if i == nil {
+		return ""
+	}
+	return i.FundAfter
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetEmployeeID sets the EmployeeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) SetEmployeeID(employeeID string) {
+	i.EmployeeID = employeeID
+	i.require(itTfrRevaluationPostDeclarationsResponseRowsItemFieldEmployeeID)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) SetName(name string) {
+	i.Name = name
+	i.require(itTfrRevaluationPostDeclarationsResponseRowsItemFieldName)
+}
+
+// SetFund sets the Fund field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) SetFund(fund string) {
+	i.Fund = fund
+	i.require(itTfrRevaluationPostDeclarationsResponseRowsItemFieldFund)
+}
+
+// SetRevaluation sets the Revaluation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) SetRevaluation(revaluation string) {
+	i.Revaluation = revaluation
+	i.require(itTfrRevaluationPostDeclarationsResponseRowsItemFieldRevaluation)
+}
+
+// SetSubstituteTax sets the SubstituteTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) SetSubstituteTax(substituteTax string) {
+	i.SubstituteTax = substituteTax
+	i.require(itTfrRevaluationPostDeclarationsResponseRowsItemFieldSubstituteTax)
+}
+
+// SetFundAfter sets the FundAfter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) SetFundAfter(fundAfter string) {
+	i.FundAfter = fundAfter
+	i.require(itTfrRevaluationPostDeclarationsResponseRowsItemFieldFundAfter)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationPostDeclarationsResponseRowsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationPostDeclarationsResponseRowsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationPostDeclarationsResponseRowsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseRowsItem) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
+}
+
+var (
+	itTfrRevaluationPostDeclarationsResponseTotalsFieldRevaluation     = big.NewInt(1 << 0)
+	itTfrRevaluationPostDeclarationsResponseTotalsFieldSubstituteTax   = big.NewInt(1 << 1)
+	itTfrRevaluationPostDeclarationsResponseTotalsFieldAccontoNextYear = big.NewInt(1 << 2)
+)
+
+type ItTfrRevaluationPostDeclarationsResponseTotals struct {
+	Revaluation     string `json:"revaluation" url:"revaluation"`
+	SubstituteTax   string `json:"substituteTax" url:"substituteTax"`
+	AccontoNextYear string `json:"accontoNextYear" url:"accontoNextYear"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) GetRevaluation() string {
+	if i == nil {
+		return ""
+	}
+	return i.Revaluation
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) GetSubstituteTax() string {
+	if i == nil {
+		return ""
+	}
+	return i.SubstituteTax
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) GetAccontoNextYear() string {
+	if i == nil {
+		return ""
+	}
+	return i.AccontoNextYear
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) GetExtraProperties() map[string]interface{} {
+	if i == nil {
+		return nil
+	}
+	return i.extraProperties
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetRevaluation sets the Revaluation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) SetRevaluation(revaluation string) {
+	i.Revaluation = revaluation
+	i.require(itTfrRevaluationPostDeclarationsResponseTotalsFieldRevaluation)
+}
+
+// SetSubstituteTax sets the SubstituteTax field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) SetSubstituteTax(substituteTax string) {
+	i.SubstituteTax = substituteTax
+	i.require(itTfrRevaluationPostDeclarationsResponseTotalsFieldSubstituteTax)
+}
+
+// SetAccontoNextYear sets the AccontoNextYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) SetAccontoNextYear(accontoNextYear string) {
+	i.AccontoNextYear = accontoNextYear
+	i.require(itTfrRevaluationPostDeclarationsResponseTotalsFieldAccontoNextYear)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) UnmarshalJSON(data []byte) error {
+	type unmarshaler ItTfrRevaluationPostDeclarationsResponseTotals
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*i = ItTfrRevaluationPostDeclarationsResponseTotals(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *i)
+	if err != nil {
+		return err
+	}
+	i.extraProperties = extraProperties
+	i.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) MarshalJSON() ([]byte, error) {
+	type embed ItTfrRevaluationPostDeclarationsResponseTotals
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (i *ItTfrRevaluationPostDeclarationsResponseTotals) String() string {
+	if i == nil {
+		return "<nil>"
+	}
+	if len(i.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(i.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(i); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", i)
 }
 
 var (
@@ -58108,6 +71042,202 @@ func (l LtSdGenerateDeclarationsResponseType) Ptr() *LtSdGenerateDeclarationsRes
 	return &l
 }
 
+type LvEmployeeNoticeGenerateDeclarationsRequestEndCode string
+
+const (
+	LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyOne   LvEmployeeNoticeGenerateDeclarationsRequestEndCode = "21"
+	LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyTwo   LvEmployeeNoticeGenerateDeclarationsRequestEndCode = "22"
+	LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyThree LvEmployeeNoticeGenerateDeclarationsRequestEndCode = "23"
+	LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyFour  LvEmployeeNoticeGenerateDeclarationsRequestEndCode = "24"
+	LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyFive  LvEmployeeNoticeGenerateDeclarationsRequestEndCode = "25"
+	LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentySix   LvEmployeeNoticeGenerateDeclarationsRequestEndCode = "26"
+)
+
+func NewLvEmployeeNoticeGenerateDeclarationsRequestEndCodeFromString(s string) (LvEmployeeNoticeGenerateDeclarationsRequestEndCode, error) {
+	switch s {
+	case "21":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyOne, nil
+	case "22":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyTwo, nil
+	case "23":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyThree, nil
+	case "24":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyFour, nil
+	case "25":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentyFive, nil
+	case "26":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEndCodeTwentySix, nil
+	}
+	var t LvEmployeeNoticeGenerateDeclarationsRequestEndCode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (l LvEmployeeNoticeGenerateDeclarationsRequestEndCode) Ptr() *LvEmployeeNoticeGenerateDeclarationsRequestEndCode {
+	return &l
+}
+
+type LvEmployeeNoticeGenerateDeclarationsRequestEvent string
+
+const (
+	LvEmployeeNoticeGenerateDeclarationsRequestEventStart LvEmployeeNoticeGenerateDeclarationsRequestEvent = "start"
+	LvEmployeeNoticeGenerateDeclarationsRequestEventEnd   LvEmployeeNoticeGenerateDeclarationsRequestEvent = "end"
+)
+
+func NewLvEmployeeNoticeGenerateDeclarationsRequestEventFromString(s string) (LvEmployeeNoticeGenerateDeclarationsRequestEvent, error) {
+	switch s {
+	case "start":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEventStart, nil
+	case "end":
+		return LvEmployeeNoticeGenerateDeclarationsRequestEventEnd, nil
+	}
+	var t LvEmployeeNoticeGenerateDeclarationsRequestEvent
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (l LvEmployeeNoticeGenerateDeclarationsRequestEvent) Ptr() *LvEmployeeNoticeGenerateDeclarationsRequestEvent {
+	return &l
+}
+
+var (
+	lvEmployeeNoticeGenerateDeclarationsResponseFieldFileName  = big.NewInt(1 << 0)
+	lvEmployeeNoticeGenerateDeclarationsResponseFieldEntryDate = big.NewInt(1 << 1)
+	lvEmployeeNoticeGenerateDeclarationsResponseFieldXML       = big.NewInt(1 << 2)
+	lvEmployeeNoticeGenerateDeclarationsResponseFieldWarnings  = big.NewInt(1 << 3)
+)
+
+type LvEmployeeNoticeGenerateDeclarationsResponse struct {
+	FileName  string    `json:"fileName" url:"fileName"`
+	EntryDate time.Time `json:"entryDate" url:"entryDate" format:"date"`
+	XML       string    `json:"xml" url:"xml"`
+	Warnings  []string  `json:"warnings" url:"warnings"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) GetFileName() string {
+	if l == nil {
+		return ""
+	}
+	return l.FileName
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) GetEntryDate() time.Time {
+	if l == nil {
+		return time.Time{}
+	}
+	return l.EntryDate
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) GetXML() string {
+	if l == nil {
+		return ""
+	}
+	return l.XML
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) GetWarnings() []string {
+	if l == nil {
+		return nil
+	}
+	return l.Warnings
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if l == nil {
+		return nil
+	}
+	return l.extraProperties
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) SetFileName(fileName string) {
+	l.FileName = fileName
+	l.require(lvEmployeeNoticeGenerateDeclarationsResponseFieldFileName)
+}
+
+// SetEntryDate sets the EntryDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) SetEntryDate(entryDate time.Time) {
+	l.EntryDate = entryDate
+	l.require(lvEmployeeNoticeGenerateDeclarationsResponseFieldEntryDate)
+}
+
+// SetXML sets the XML field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) SetXML(xml string) {
+	l.XML = xml
+	l.require(lvEmployeeNoticeGenerateDeclarationsResponseFieldXML)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) SetWarnings(warnings []string) {
+	l.Warnings = warnings
+	l.require(lvEmployeeNoticeGenerateDeclarationsResponseFieldWarnings)
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed LvEmployeeNoticeGenerateDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		EntryDate *internal.Date `json:"entryDate"`
+	}{
+		embed: embed(*l),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*l = LvEmployeeNoticeGenerateDeclarationsResponse(unmarshaler.embed)
+	l.EntryDate = unmarshaler.EntryDate.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *l)
+	if err != nil {
+		return err
+	}
+	l.extraProperties = extraProperties
+	l.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed LvEmployeeNoticeGenerateDeclarationsResponse
+	var marshaler = struct {
+		embed
+		EntryDate *internal.Date `json:"entryDate"`
+	}{
+		embed:     embed(*l),
+		EntryDate: internal.NewDate(l.EntryDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, l.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (l *LvEmployeeNoticeGenerateDeclarationsResponse) String() string {
+	if l == nil {
+		return "<nil>"
+	}
+	if len(l.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(l.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(l); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", l)
+}
+
 var (
 	mtAnnualReturnGenerateDeclarationsResponseFieldYear        = big.NewInt(1 << 0)
 	mtAnnualReturnGenerateDeclarationsResponseFieldMadeUpTo    = big.NewInt(1 << 1)
@@ -59274,6 +72404,303 @@ func (m *MtCompanyTaxGenerateDeclarationsResponseTaxAccountsItem) MarshalJSON() 
 }
 
 func (m *MtCompanyTaxGenerateDeclarationsResponseTaxAccountsItem) String() string {
+	if m == nil {
+		return "<nil>"
+	}
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(m); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", m)
+}
+
+var (
+	mtFs7GenerateDeclarationsResponseFieldYear        = big.NewInt(1 << 0)
+	mtFs7GenerateDeclarationsResponseFieldBoxes       = big.NewInt(1 << 1)
+	mtFs7GenerateDeclarationsResponseFieldLeftToPayer = big.NewInt(1 << 2)
+	mtFs7GenerateDeclarationsResponseFieldFileName    = big.NewInt(1 << 3)
+	mtFs7GenerateDeclarationsResponseFieldPdf         = big.NewInt(1 << 4)
+	mtFs7GenerateDeclarationsResponseFieldWarnings    = big.NewInt(1 << 5)
+	mtFs7GenerateDeclarationsResponseFieldSource      = big.NewInt(1 << 6)
+)
+
+type MtFs7GenerateDeclarationsResponse struct {
+	Year        int64                                         `json:"year" url:"year"`
+	Boxes       []*MtFs7GenerateDeclarationsResponseBoxesItem `json:"boxes" url:"boxes"`
+	LeftToPayer []string                                      `json:"leftToPayer" url:"leftToPayer"`
+	FileName    string                                        `json:"fileName" url:"fileName"`
+	// The working copy, base64
+	Pdf      string   `json:"pdf" url:"pdf"`
+	Warnings []string `json:"warnings" url:"warnings"`
+	Source   string   `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetYear() int64 {
+	if m == nil {
+		return 0
+	}
+	return m.Year
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetBoxes() []*MtFs7GenerateDeclarationsResponseBoxesItem {
+	if m == nil {
+		return nil
+	}
+	return m.Boxes
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetLeftToPayer() []string {
+	if m == nil {
+		return nil
+	}
+	return m.LeftToPayer
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetFileName() string {
+	if m == nil {
+		return ""
+	}
+	return m.FileName
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetPdf() string {
+	if m == nil {
+		return ""
+	}
+	return m.Pdf
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetWarnings() []string {
+	if m == nil {
+		return nil
+	}
+	return m.Warnings
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetSource() string {
+	if m == nil {
+		return ""
+	}
+	return m.Source
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if m == nil {
+		return nil
+	}
+	return m.extraProperties
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponse) SetYear(year int64) {
+	m.Year = year
+	m.require(mtFs7GenerateDeclarationsResponseFieldYear)
+}
+
+// SetBoxes sets the Boxes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponse) SetBoxes(boxes []*MtFs7GenerateDeclarationsResponseBoxesItem) {
+	m.Boxes = boxes
+	m.require(mtFs7GenerateDeclarationsResponseFieldBoxes)
+}
+
+// SetLeftToPayer sets the LeftToPayer field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponse) SetLeftToPayer(leftToPayer []string) {
+	m.LeftToPayer = leftToPayer
+	m.require(mtFs7GenerateDeclarationsResponseFieldLeftToPayer)
+}
+
+// SetFileName sets the FileName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponse) SetFileName(fileName string) {
+	m.FileName = fileName
+	m.require(mtFs7GenerateDeclarationsResponseFieldFileName)
+}
+
+// SetPdf sets the Pdf field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponse) SetPdf(pdf string) {
+	m.Pdf = pdf
+	m.require(mtFs7GenerateDeclarationsResponseFieldPdf)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponse) SetWarnings(warnings []string) {
+	m.Warnings = warnings
+	m.require(mtFs7GenerateDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponse) SetSource(source string) {
+	m.Source = source
+	m.require(mtFs7GenerateDeclarationsResponseFieldSource)
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler MtFs7GenerateDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*m = MtFs7GenerateDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
+	if err != nil {
+		return err
+	}
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed MtFs7GenerateDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (m *MtFs7GenerateDeclarationsResponse) String() string {
+	if m == nil {
+		return "<nil>"
+	}
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(m); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", m)
+}
+
+var (
+	mtFs7GenerateDeclarationsResponseBoxesItemFieldBox         = big.NewInt(1 << 0)
+	mtFs7GenerateDeclarationsResponseBoxesItemFieldDescription = big.NewInt(1 << 1)
+	mtFs7GenerateDeclarationsResponseBoxesItemFieldValue       = big.NewInt(1 << 2)
+)
+
+type MtFs7GenerateDeclarationsResponseBoxesItem struct {
+	Box         string `json:"box" url:"box"`
+	Description string `json:"description" url:"description"`
+	Value       string `json:"value" url:"value"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) GetBox() string {
+	if m == nil {
+		return ""
+	}
+	return m.Box
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) GetDescription() string {
+	if m == nil {
+		return ""
+	}
+	return m.Description
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) GetValue() string {
+	if m == nil {
+		return ""
+	}
+	return m.Value
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) GetExtraProperties() map[string]interface{} {
+	if m == nil {
+		return nil
+	}
+	return m.extraProperties
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetBox sets the Box field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) SetBox(box string) {
+	m.Box = box
+	m.require(mtFs7GenerateDeclarationsResponseBoxesItemFieldBox)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) SetDescription(description string) {
+	m.Description = description
+	m.require(mtFs7GenerateDeclarationsResponseBoxesItemFieldDescription)
+}
+
+// SetValue sets the Value field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) SetValue(value string) {
+	m.Value = value
+	m.require(mtFs7GenerateDeclarationsResponseBoxesItemFieldValue)
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler MtFs7GenerateDeclarationsResponseBoxesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*m = MtFs7GenerateDeclarationsResponseBoxesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
+	if err != nil {
+		return err
+	}
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) MarshalJSON() ([]byte, error) {
+	type embed MtFs7GenerateDeclarationsResponseBoxesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (m *MtFs7GenerateDeclarationsResponseBoxesItem) String() string {
 	if m == nil {
 		return "<nil>"
 	}
@@ -81146,6 +94573,438 @@ func (u *UsWorkweeksListDeclarationsResponseEmployeesItemWeeksItemDaysItem) Stri
 }
 
 var (
+	vatProrataAdjustmentGetDeclarationsResponseFieldFiscalYear               = big.NewInt(1 << 0)
+	vatProrataAdjustmentGetDeclarationsResponseFieldProvisionalPercent       = big.NewInt(1 << 1)
+	vatProrataAdjustmentGetDeclarationsResponseFieldComputedPercent          = big.NewInt(1 << 2)
+	vatProrataAdjustmentGetDeclarationsResponseFieldDefinitivePercent        = big.NewInt(1 << 3)
+	vatProrataAdjustmentGetDeclarationsResponseFieldTurnoverWithDeduction    = big.NewInt(1 << 4)
+	vatProrataAdjustmentGetDeclarationsResponseFieldTurnoverWithoutDeduction = big.NewInt(1 << 5)
+	vatProrataAdjustmentGetDeclarationsResponseFieldCapitalGoodsSales        = big.NewInt(1 << 6)
+	vatProrataAdjustmentGetDeclarationsResponseFieldProRataVat               = big.NewInt(1 << 7)
+	vatProrataAdjustmentGetDeclarationsResponseFieldDeductedVat              = big.NewInt(1 << 8)
+	vatProrataAdjustmentGetDeclarationsResponseFieldDefinitiveDeductibleVat  = big.NewInt(1 << 9)
+	vatProrataAdjustmentGetDeclarationsResponseFieldAdjustment               = big.NewInt(1 << 10)
+	vatProrataAdjustmentGetDeclarationsResponseFieldWarnings                 = big.NewInt(1 << 11)
+	vatProrataAdjustmentGetDeclarationsResponseFieldSource                   = big.NewInt(1 << 12)
+)
+
+type VatProrataAdjustmentGetDeclarationsResponse struct {
+	FiscalYear               int64    `json:"fiscalYear" url:"fiscalYear"`
+	ProvisionalPercent       *string  `json:"provisionalPercent,omitempty" url:"provisionalPercent,omitempty"`
+	ComputedPercent          *string  `json:"computedPercent,omitempty" url:"computedPercent,omitempty"`
+	DefinitivePercent        *string  `json:"definitivePercent,omitempty" url:"definitivePercent,omitempty"`
+	TurnoverWithDeduction    string   `json:"turnoverWithDeduction" url:"turnoverWithDeduction"`
+	TurnoverWithoutDeduction string   `json:"turnoverWithoutDeduction" url:"turnoverWithoutDeduction"`
+	CapitalGoodsSales        string   `json:"capitalGoodsSales" url:"capitalGoodsSales"`
+	ProRataVat               string   `json:"proRataVat" url:"proRataVat"`
+	DeductedVat              string   `json:"deductedVat" url:"deductedVat"`
+	DefinitiveDeductibleVat  *string  `json:"definitiveDeductibleVat,omitempty" url:"definitiveDeductibleVat,omitempty"`
+	Adjustment               *string  `json:"adjustment,omitempty" url:"adjustment,omitempty"`
+	Warnings                 []string `json:"warnings" url:"warnings"`
+	Source                   string   `json:"source" url:"source"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetFiscalYear() int64 {
+	if v == nil {
+		return 0
+	}
+	return v.FiscalYear
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetProvisionalPercent() *string {
+	if v == nil {
+		return nil
+	}
+	return v.ProvisionalPercent
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetComputedPercent() *string {
+	if v == nil {
+		return nil
+	}
+	return v.ComputedPercent
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetDefinitivePercent() *string {
+	if v == nil {
+		return nil
+	}
+	return v.DefinitivePercent
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetTurnoverWithDeduction() string {
+	if v == nil {
+		return ""
+	}
+	return v.TurnoverWithDeduction
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetTurnoverWithoutDeduction() string {
+	if v == nil {
+		return ""
+	}
+	return v.TurnoverWithoutDeduction
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetCapitalGoodsSales() string {
+	if v == nil {
+		return ""
+	}
+	return v.CapitalGoodsSales
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetProRataVat() string {
+	if v == nil {
+		return ""
+	}
+	return v.ProRataVat
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetDeductedVat() string {
+	if v == nil {
+		return ""
+	}
+	return v.DeductedVat
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetDefinitiveDeductibleVat() *string {
+	if v == nil {
+		return nil
+	}
+	return v.DefinitiveDeductibleVat
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetAdjustment() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Adjustment
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetWarnings() []string {
+	if v == nil {
+		return nil
+	}
+	return v.Warnings
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetSource() string {
+	if v == nil {
+		return ""
+	}
+	return v.Source
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldFiscalYear)
+}
+
+// SetProvisionalPercent sets the ProvisionalPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetProvisionalPercent(provisionalPercent *string) {
+	v.ProvisionalPercent = provisionalPercent
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldProvisionalPercent)
+}
+
+// SetComputedPercent sets the ComputedPercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetComputedPercent(computedPercent *string) {
+	v.ComputedPercent = computedPercent
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldComputedPercent)
+}
+
+// SetDefinitivePercent sets the DefinitivePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetDefinitivePercent(definitivePercent *string) {
+	v.DefinitivePercent = definitivePercent
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldDefinitivePercent)
+}
+
+// SetTurnoverWithDeduction sets the TurnoverWithDeduction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetTurnoverWithDeduction(turnoverWithDeduction string) {
+	v.TurnoverWithDeduction = turnoverWithDeduction
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldTurnoverWithDeduction)
+}
+
+// SetTurnoverWithoutDeduction sets the TurnoverWithoutDeduction field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetTurnoverWithoutDeduction(turnoverWithoutDeduction string) {
+	v.TurnoverWithoutDeduction = turnoverWithoutDeduction
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldTurnoverWithoutDeduction)
+}
+
+// SetCapitalGoodsSales sets the CapitalGoodsSales field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetCapitalGoodsSales(capitalGoodsSales string) {
+	v.CapitalGoodsSales = capitalGoodsSales
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldCapitalGoodsSales)
+}
+
+// SetProRataVat sets the ProRataVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetProRataVat(proRataVat string) {
+	v.ProRataVat = proRataVat
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldProRataVat)
+}
+
+// SetDeductedVat sets the DeductedVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetDeductedVat(deductedVat string) {
+	v.DeductedVat = deductedVat
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldDeductedVat)
+}
+
+// SetDefinitiveDeductibleVat sets the DefinitiveDeductibleVat field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetDefinitiveDeductibleVat(definitiveDeductibleVat *string) {
+	v.DefinitiveDeductibleVat = definitiveDeductibleVat
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldDefinitiveDeductibleVat)
+}
+
+// SetAdjustment sets the Adjustment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetAdjustment(adjustment *string) {
+	v.Adjustment = adjustment
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldAdjustment)
+}
+
+// SetWarnings sets the Warnings field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetWarnings(warnings []string) {
+	v.Warnings = warnings
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldWarnings)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsResponse) SetSource(source string) {
+	v.Source = source
+	v.require(vatProrataAdjustmentGetDeclarationsResponseFieldSource)
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataAdjustmentGetDeclarationsResponse
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*v = VatProrataAdjustmentGetDeclarationsResponse(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed VatProrataAdjustmentGetDeclarationsResponse
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsResponse) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
+	vatProrataAdjustmentPostDeclarationsResponseFieldID                = big.NewInt(1 << 0)
+	vatProrataAdjustmentPostDeclarationsResponseFieldDate              = big.NewInt(1 << 1)
+	vatProrataAdjustmentPostDeclarationsResponseFieldFiscalYear        = big.NewInt(1 << 2)
+	vatProrataAdjustmentPostDeclarationsResponseFieldDefinitivePercent = big.NewInt(1 << 3)
+	vatProrataAdjustmentPostDeclarationsResponseFieldAmount            = big.NewInt(1 << 4)
+)
+
+type VatProrataAdjustmentPostDeclarationsResponse struct {
+	ID                string    `json:"id" url:"id"`
+	Date              time.Time `json:"date" url:"date" format:"date"`
+	FiscalYear        int64     `json:"fiscalYear" url:"fiscalYear"`
+	DefinitivePercent string    `json:"definitivePercent" url:"definitivePercent"`
+	Amount            string    `json:"amount" url:"amount"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) GetID() string {
+	if v == nil {
+		return ""
+	}
+	return v.ID
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) GetDate() time.Time {
+	if v == nil {
+		return time.Time{}
+	}
+	return v.Date
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) GetFiscalYear() int64 {
+	if v == nil {
+		return 0
+	}
+	return v.FiscalYear
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) GetDefinitivePercent() string {
+	if v == nil {
+		return ""
+	}
+	return v.DefinitivePercent
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) GetAmount() string {
+	if v == nil {
+		return ""
+	}
+	return v.Amount
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) GetExtraProperties() map[string]interface{} {
+	if v == nil {
+		return nil
+	}
+	return v.extraProperties
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsResponse) SetID(id string) {
+	v.ID = id
+	v.require(vatProrataAdjustmentPostDeclarationsResponseFieldID)
+}
+
+// SetDate sets the Date field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsResponse) SetDate(date time.Time) {
+	v.Date = date
+	v.require(vatProrataAdjustmentPostDeclarationsResponseFieldDate)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsResponse) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataAdjustmentPostDeclarationsResponseFieldFiscalYear)
+}
+
+// SetDefinitivePercent sets the DefinitivePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsResponse) SetDefinitivePercent(definitivePercent string) {
+	v.DefinitivePercent = definitivePercent
+	v.require(vatProrataAdjustmentPostDeclarationsResponseFieldDefinitivePercent)
+}
+
+// SetAmount sets the Amount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsResponse) SetAmount(amount string) {
+	v.Amount = amount
+	v.require(vatProrataAdjustmentPostDeclarationsResponseFieldAmount)
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) UnmarshalJSON(data []byte) error {
+	type embed VatProrataAdjustmentPostDeclarationsResponse
+	var unmarshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*v),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*v = VatProrataAdjustmentPostDeclarationsResponse(unmarshaler.embed)
+	v.Date = unmarshaler.Date.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *v)
+	if err != nil {
+		return err
+	}
+	v.extraProperties = extraProperties
+	v.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) MarshalJSON() ([]byte, error) {
+	type embed VatProrataAdjustmentPostDeclarationsResponse
+	var marshaler = struct {
+		embed
+		Date *internal.Date `json:"date"`
+	}{
+		embed: embed(*v),
+		Date:  internal.NewDate(v.Date),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsResponse) String() string {
+	if v == nil {
+		return "<nil>"
+	}
+	if len(v.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(v.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(v); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", v)
+}
+
+var (
 	vatProrataGetDeclarationsResponseFieldFiscalYear = big.NewInt(1 << 0)
 	vatProrataGetDeclarationsResponseFieldPercent    = big.NewInt(1 << 1)
 )
@@ -82348,6 +96207,125 @@ func (u *UsWorkweeksListDeclarationsRequest) MarshalJSON() ([]byte, error) {
 		To:    internal.NewDate(u.To),
 	}
 	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	vatProrataAdjustmentGetDeclarationsRequestFieldFiscalYear        = big.NewInt(1 << 0)
+	vatProrataAdjustmentGetDeclarationsRequestFieldDefinitivePercent = big.NewInt(1 << 1)
+)
+
+type VatProrataAdjustmentGetDeclarationsRequest struct {
+	FiscalYear        int64   `json:"fiscalYear" url:"-"`
+	DefinitivePercent *string `json:"definitivePercent,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsRequest) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataAdjustmentGetDeclarationsRequestFieldFiscalYear)
+}
+
+// SetDefinitivePercent sets the DefinitivePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentGetDeclarationsRequest) SetDefinitivePercent(definitivePercent *string) {
+	v.DefinitivePercent = definitivePercent
+	v.require(vatProrataAdjustmentGetDeclarationsRequestFieldDefinitivePercent)
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataAdjustmentGetDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VatProrataAdjustmentGetDeclarationsRequest(body)
+	return nil
+}
+
+func (v *VatProrataAdjustmentGetDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed VatProrataAdjustmentGetDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	vatProrataAdjustmentPostDeclarationsRequestFieldFiscalYear        = big.NewInt(1 << 0)
+	vatProrataAdjustmentPostDeclarationsRequestFieldAccountCode       = big.NewInt(1 << 1)
+	vatProrataAdjustmentPostDeclarationsRequestFieldDefinitivePercent = big.NewInt(1 << 2)
+)
+
+type VatProrataAdjustmentPostDeclarationsRequest struct {
+	FiscalYear        int64   `json:"fiscalYear" url:"-"`
+	AccountCode       string  `json:"accountCode" url:"-"`
+	DefinitivePercent *string `json:"definitivePercent,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsRequest) require(field *big.Int) {
+	if v.explicitFields == nil {
+		v.explicitFields = big.NewInt(0)
+	}
+	v.explicitFields.Or(v.explicitFields, field)
+}
+
+// SetFiscalYear sets the FiscalYear field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsRequest) SetFiscalYear(fiscalYear int64) {
+	v.FiscalYear = fiscalYear
+	v.require(vatProrataAdjustmentPostDeclarationsRequestFieldFiscalYear)
+}
+
+// SetAccountCode sets the AccountCode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsRequest) SetAccountCode(accountCode string) {
+	v.AccountCode = accountCode
+	v.require(vatProrataAdjustmentPostDeclarationsRequestFieldAccountCode)
+}
+
+// SetDefinitivePercent sets the DefinitivePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (v *VatProrataAdjustmentPostDeclarationsRequest) SetDefinitivePercent(definitivePercent *string) {
+	v.DefinitivePercent = definitivePercent
+	v.require(vatProrataAdjustmentPostDeclarationsRequestFieldDefinitivePercent)
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler VatProrataAdjustmentPostDeclarationsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*v = VatProrataAdjustmentPostDeclarationsRequest(body)
+	return nil
+}
+
+func (v *VatProrataAdjustmentPostDeclarationsRequest) MarshalJSON() ([]byte, error) {
+	type embed VatProrataAdjustmentPostDeclarationsRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*v),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, v.explicitFields)
 	return json.Marshal(explicitMarshaler)
 }
 

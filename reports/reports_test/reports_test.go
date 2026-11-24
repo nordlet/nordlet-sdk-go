@@ -566,6 +566,64 @@ func TestReportsFecWithWireMock(
 	VerifyRequestCount(t, "TestReportsFecWithWireMock", "POST", "/v1/reports/fec", nil, 1)
 }
 
+func TestReportsSaftNoWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.SaftNoReportsRequest{
+		FromDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+		ToDate: nordlet.MustParseDate(
+			"2026-07-01",
+		),
+	}
+	_, invocationErr := client.Reports.SaftNo(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReportsSaftNoWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReportsSaftNoWithWireMock", "POST", "/v1/reports/saft-no", nil, 1)
+}
+
+func TestReportsVatAccountsWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.VatAccountsReportsRequest{
+		Year:  int64(1000000),
+		Month: int64(1000000),
+	}
+	_, invocationErr := client.Reports.VatAccounts(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestReportsVatAccountsWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestReportsVatAccountsWithWireMock", "POST", "/v1/reports/vat-accounts", nil, 1)
+}
+
 func TestReportsPeriodChecklistWithWireMock(
 	t *testing.T,
 ) {

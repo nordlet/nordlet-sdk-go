@@ -335,6 +335,93 @@ func TestAgreementsAgreementsGenerateInvoiceWithWireMock(
 	VerifyRequestCount(t, "TestAgreementsAgreementsGenerateInvoiceWithWireMock", "POST", "/v1/agreements/agreements/generate-invoice", nil, 1)
 }
 
+func TestAgreementsAgreementsExpectedInvoicesWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.AgreementsExpectedInvoicesAgreementsRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Agreements.AgreementsExpectedInvoices(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsExpectedInvoicesWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAgreementsAgreementsExpectedInvoicesWithWireMock", "POST", "/v1/agreements/agreements/expected-invoices", nil, 1)
+}
+
+func TestAgreementsAgreementsPaymentScheduleSetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.AgreementsPaymentScheduleSetAgreementsRequest{
+		ID: "id",
+		Rows: []*nordlet.AgreementsPaymentScheduleSetAgreementsRequestRowsItem{
+			&nordlet.AgreementsPaymentScheduleSetAgreementsRequestRowsItem{
+				DueDate: nordlet.MustParseDate(
+					"2026-07-01",
+				),
+				Principal: "121.0000",
+				Interest:  "121.0000",
+			},
+		},
+	}
+	_, invocationErr := client.Agreements.AgreementsPaymentScheduleSet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsPaymentScheduleSetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAgreementsAgreementsPaymentScheduleSetWithWireMock", "POST", "/v1/agreements/agreements/payment-schedule/set", nil, 1)
+}
+
+func TestAgreementsAgreementsPaymentScheduleGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.AgreementsPaymentScheduleGetAgreementsRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Agreements.AgreementsPaymentScheduleGet(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestAgreementsAgreementsPaymentScheduleGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestAgreementsAgreementsPaymentScheduleGetWithWireMock", "POST", "/v1/agreements/agreements/payment-schedule/get", nil, 1)
+}
+
 func TestAgreementsAgreementsBillingRunWithWireMock(
 	t *testing.T,
 ) {

@@ -188,6 +188,35 @@ func TestPurchasesInvoicesDeleteWithWireMock(
 	VerifyRequestCount(t, "TestPurchasesInvoicesDeleteWithWireMock", "POST", "/v1/purchases/invoices/delete", nil, 1)
 }
 
+func TestPurchasesInvoicesProposeLinesWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.InvoicesProposeLinesPurchasesRequest{
+		PartnerID: "partnerId",
+		Lines: []*nordlet.InvoicesProposeLinesPurchasesRequestLinesItem{
+			&nordlet.InvoicesProposeLinesPurchasesRequestLinesItem{},
+		},
+	}
+	_, invocationErr := client.Purchases.InvoicesProposeLines(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestPurchasesInvoicesProposeLinesWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestPurchasesInvoicesProposeLinesWithWireMock", "POST", "/v1/purchases/invoices/propose-lines", nil, 1)
+}
+
 func TestPurchasesInvoicesRegisterWithWireMock(
 	t *testing.T,
 ) {

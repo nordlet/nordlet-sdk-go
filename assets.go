@@ -142,6 +142,135 @@ func (a *AssetsCreateAssetsRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
+	assetsCreateFromPurchaseAssetsRequestFieldPurchaseInvoiceLineID = big.NewInt(1 << 0)
+	assetsCreateFromPurchaseAssetsRequestFieldGroupID               = big.NewInt(1 << 1)
+	assetsCreateFromPurchaseAssetsRequestFieldCode                  = big.NewInt(1 << 2)
+	assetsCreateFromPurchaseAssetsRequestFieldName                  = big.NewInt(1 << 3)
+	assetsCreateFromPurchaseAssetsRequestFieldDepreciationStartDate = big.NewInt(1 << 4)
+	assetsCreateFromPurchaseAssetsRequestFieldAcquisitionCost       = big.NewInt(1 << 5)
+	assetsCreateFromPurchaseAssetsRequestFieldSalvageValue          = big.NewInt(1 << 6)
+	assetsCreateFromPurchaseAssetsRequestFieldUsefulLifeMonths      = big.NewInt(1 << 7)
+	assetsCreateFromPurchaseAssetsRequestFieldNotes                 = big.NewInt(1 << 8)
+	assetsCreateFromPurchaseAssetsRequestFieldDocuments             = big.NewInt(1 << 9)
+)
+
+type AssetsCreateFromPurchaseAssetsRequest struct {
+	PurchaseInvoiceLineID string                                                `json:"purchaseInvoiceLineId" url:"-"`
+	GroupID               string                                                `json:"groupId" url:"-"`
+	Code                  string                                                `json:"code" url:"-"`
+	Name                  *string                                               `json:"name,omitempty" url:"-"`
+	DepreciationStartDate *time.Time                                            `json:"depreciationStartDate,omitempty" url:"-" format:"date"`
+	AcquisitionCost       *string                                               `json:"acquisitionCost,omitempty" url:"-"`
+	SalvageValue          *string                                               `json:"salvageValue,omitempty" url:"-"`
+	UsefulLifeMonths      *int64                                                `json:"usefulLifeMonths,omitempty" url:"-"`
+	Notes                 *string                                               `json:"notes,omitempty" url:"-"`
+	Documents             []*AssetsCreateFromPurchaseAssetsRequestDocumentsItem `json:"documents,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetPurchaseInvoiceLineID(purchaseInvoiceLineID string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldPurchaseInvoiceLineID)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetCode(code string) {
+	a.Code = code
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetName(name *string) {
+	a.Name = name
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldName)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetDepreciationStartDate(depreciationStartDate *time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetAcquisitionCost(acquisitionCost *string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetSalvageValue(salvageValue *string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetUsefulLifeMonths(usefulLifeMonths *int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldUsefulLifeMonths)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequest) SetDocuments(documents []*AssetsCreateFromPurchaseAssetsRequestDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsCreateFromPurchaseAssetsRequestFieldDocuments)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateFromPurchaseAssetsRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = AssetsCreateFromPurchaseAssetsRequest(body)
+	return nil
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequest) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateFromPurchaseAssetsRequest
+	var marshaler = struct {
+		embed
+		DepreciationStartDate *internal.Date `json:"depreciationStartDate,omitempty"`
+	}{
+		embed:                 embed(*a),
+		DepreciationStartDate: internal.NewOptionalDate(a.DepreciationStartDate),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
 	assetsDisposeAssetsRequestFieldID            = big.NewInt(1 << 0)
 	assetsDisposeAssetsRequestFieldDate          = big.NewInt(1 << 1)
 	assetsDisposeAssetsRequestFieldReason        = big.NewInt(1 << 2)
@@ -1153,7 +1282,8 @@ var (
 	assetsCreateAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsCreateAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
 	assetsCreateAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
-	assetsCreateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
+	assetsCreateAssetsResponseFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsCreateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 28)
 )
 
 type AssetsCreateAssetsResponse struct {
@@ -1184,6 +1314,7 @@ type AssetsCreateAssetsResponse struct {
 	DisposalProceeds             *string                                             `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                             `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
 	DisposalSaleInvoiceID        *string                                             `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                             `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
 	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -1380,6 +1511,13 @@ func (a *AssetsCreateAssetsResponse) GetDisposalSaleInvoiceID() *string {
 		return nil
 	}
 	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsCreateAssetsResponse) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
 }
 
 func (a *AssetsCreateAssetsResponse) GetCreatedAt() time.Time {
@@ -1590,6 +1728,13 @@ func (a *AssetsCreateAssetsResponse) SetDisposalJournalTransactionID(disposalJou
 func (a *AssetsCreateAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
 	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
 	a.require(assetsCreateAssetsResponseFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateAssetsResponse) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsCreateAssetsResponseFieldPurchaseInvoiceLineID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -1956,6 +2101,953 @@ func (a AssetsCreateAssetsResponseStatus) Ptr() *AssetsCreateAssetsResponseStatu
 	return &a
 }
 
+var (
+	assetsCreateFromPurchaseAssetsRequestDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsCreateFromPurchaseAssetsRequestDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type AssetsCreateFromPurchaseAssetsRequestDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) GetRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.Ref
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsCreateFromPurchaseAssetsRequestDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsCreateFromPurchaseAssetsRequestDocumentsItemFieldRef)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateFromPurchaseAssetsRequestDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsCreateFromPurchaseAssetsRequestDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateFromPurchaseAssetsRequestDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsRequestDocumentsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	assetsCreateFromPurchaseAssetsResponseFieldID                           = big.NewInt(1 << 0)
+	assetsCreateFromPurchaseAssetsResponseFieldGroupID                      = big.NewInt(1 << 1)
+	assetsCreateFromPurchaseAssetsResponseFieldCode                         = big.NewInt(1 << 2)
+	assetsCreateFromPurchaseAssetsResponseFieldName                         = big.NewInt(1 << 3)
+	assetsCreateFromPurchaseAssetsResponseFieldAcquisitionDate              = big.NewInt(1 << 4)
+	assetsCreateFromPurchaseAssetsResponseFieldDepreciationStartDate        = big.NewInt(1 << 5)
+	assetsCreateFromPurchaseAssetsResponseFieldAcquisitionCost              = big.NewInt(1 << 6)
+	assetsCreateFromPurchaseAssetsResponseFieldSalvageValue                 = big.NewInt(1 << 7)
+	assetsCreateFromPurchaseAssetsResponseFieldUsefulLifeMonths             = big.NewInt(1 << 8)
+	assetsCreateFromPurchaseAssetsResponseFieldTotalCost                    = big.NewInt(1 << 9)
+	assetsCreateFromPurchaseAssetsResponseFieldAccumulatedDepreciation      = big.NewInt(1 << 10)
+	assetsCreateFromPurchaseAssetsResponseFieldNetBookValue                 = big.NewInt(1 << 11)
+	assetsCreateFromPurchaseAssetsResponseFieldDepreciatedMonths            = big.NewInt(1 << 12)
+	assetsCreateFromPurchaseAssetsResponseFieldTotalLifeMonths              = big.NewInt(1 << 13)
+	assetsCreateFromPurchaseAssetsResponseFieldStatus                       = big.NewInt(1 << 14)
+	assetsCreateFromPurchaseAssetsResponseFieldNotes                        = big.NewInt(1 << 15)
+	assetsCreateFromPurchaseAssetsResponseFieldDocuments                    = big.NewInt(1 << 16)
+	assetsCreateFromPurchaseAssetsResponseFieldInputVatAmount               = big.NewInt(1 << 17)
+	assetsCreateFromPurchaseAssetsResponseFieldInputVatFirstUseDate         = big.NewInt(1 << 18)
+	assetsCreateFromPurchaseAssetsResponseFieldInputVatDeductiblePercent    = big.NewInt(1 << 19)
+	assetsCreateFromPurchaseAssetsResponseFieldInputVatRealEstate           = big.NewInt(1 << 20)
+	assetsCreateFromPurchaseAssetsResponseFieldInputVatUseChanges           = big.NewInt(1 << 21)
+	assetsCreateFromPurchaseAssetsResponseFieldDisposalDate                 = big.NewInt(1 << 22)
+	assetsCreateFromPurchaseAssetsResponseFieldDisposalReason               = big.NewInt(1 << 23)
+	assetsCreateFromPurchaseAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
+	assetsCreateFromPurchaseAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
+	assetsCreateFromPurchaseAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
+	assetsCreateFromPurchaseAssetsResponseFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsCreateFromPurchaseAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 28)
+)
+
+type AssetsCreateFromPurchaseAssetsResponse struct {
+	ID                           string                                                          `json:"id" url:"id"`
+	GroupID                      string                                                          `json:"groupId" url:"groupId"`
+	Code                         string                                                          `json:"code" url:"code"`
+	Name                         string                                                          `json:"name" url:"name"`
+	AcquisitionDate              time.Time                                                       `json:"acquisitionDate" url:"acquisitionDate" format:"date"`
+	DepreciationStartDate        time.Time                                                       `json:"depreciationStartDate" url:"depreciationStartDate" format:"date"`
+	AcquisitionCost              string                                                          `json:"acquisitionCost" url:"acquisitionCost"`
+	SalvageValue                 string                                                          `json:"salvageValue" url:"salvageValue"`
+	UsefulLifeMonths             int64                                                           `json:"usefulLifeMonths" url:"usefulLifeMonths"`
+	TotalCost                    string                                                          `json:"totalCost" url:"totalCost"`
+	AccumulatedDepreciation      string                                                          `json:"accumulatedDepreciation" url:"accumulatedDepreciation"`
+	NetBookValue                 string                                                          `json:"netBookValue" url:"netBookValue"`
+	DepreciatedMonths            int64                                                           `json:"depreciatedMonths" url:"depreciatedMonths"`
+	TotalLifeMonths              int64                                                           `json:"totalLifeMonths" url:"totalLifeMonths"`
+	Status                       AssetsCreateFromPurchaseAssetsResponseStatus                    `json:"status" url:"status"`
+	Notes                        *string                                                         `json:"notes,omitempty" url:"notes,omitempty"`
+	Documents                    []*AssetsCreateFromPurchaseAssetsResponseDocumentsItem          `json:"documents,omitempty" url:"documents,omitempty"`
+	InputVatAmount               *string                                                         `json:"inputVatAmount,omitempty" url:"inputVatAmount,omitempty"`
+	InputVatFirstUseDate         *time.Time                                                      `json:"inputVatFirstUseDate,omitempty" url:"inputVatFirstUseDate,omitempty" format:"date"`
+	InputVatDeductiblePercent    *string                                                         `json:"inputVatDeductiblePercent,omitempty" url:"inputVatDeductiblePercent,omitempty"`
+	InputVatRealEstate           bool                                                            `json:"inputVatRealEstate" url:"inputVatRealEstate"`
+	InputVatUseChanges           []*AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem `json:"inputVatUseChanges" url:"inputVatUseChanges"`
+	DisposalDate                 *time.Time                                                      `json:"disposalDate,omitempty" url:"disposalDate,omitempty" format:"date"`
+	DisposalReason               *AssetsCreateFromPurchaseAssetsResponseDisposalReason           `json:"disposalReason,omitempty" url:"disposalReason,omitempty"`
+	DisposalProceeds             *string                                                         `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
+	DisposalJournalTransactionID *string                                                         `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
+	DisposalSaleInvoiceID        *string                                                         `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                                         `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
+	CreatedAt                    time.Time                                                       `json:"createdAt" url:"createdAt"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetGroupID() string {
+	if a == nil {
+		return ""
+	}
+	return a.GroupID
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetCode() string {
+	if a == nil {
+		return ""
+	}
+	return a.Code
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetAcquisitionDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.AcquisitionDate
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDepreciationStartDate() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.DepreciationStartDate
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetAcquisitionCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.AcquisitionCost
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetSalvageValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.SalvageValue
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetUsefulLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.UsefulLifeMonths
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetTotalCost() string {
+	if a == nil {
+		return ""
+	}
+	return a.TotalCost
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetAccumulatedDepreciation() string {
+	if a == nil {
+		return ""
+	}
+	return a.AccumulatedDepreciation
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetNetBookValue() string {
+	if a == nil {
+		return ""
+	}
+	return a.NetBookValue
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDepreciatedMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.DepreciatedMonths
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetTotalLifeMonths() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.TotalLifeMonths
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetStatus() AssetsCreateFromPurchaseAssetsResponseStatus {
+	if a == nil {
+		return ""
+	}
+	return a.Status
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetNotes() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Notes
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDocuments() []*AssetsCreateFromPurchaseAssetsResponseDocumentsItem {
+	if a == nil {
+		return nil
+	}
+	return a.Documents
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetInputVatAmount() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatAmount
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetInputVatFirstUseDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatFirstUseDate
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetInputVatDeductiblePercent() *string {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatDeductiblePercent
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetInputVatRealEstate() bool {
+	if a == nil {
+		return false
+	}
+	return a.InputVatRealEstate
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetInputVatUseChanges() []*AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem {
+	if a == nil {
+		return nil
+	}
+	return a.InputVatUseChanges
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDisposalDate() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalDate
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDisposalReason() *AssetsCreateFromPurchaseAssetsResponseDisposalReason {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalReason
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDisposalProceeds() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalProceeds
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDisposalJournalTransactionID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalJournalTransactionID
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetDisposalSaleInvoiceID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetCreatedAt() time.Time {
+	if a == nil {
+		return time.Time{}
+	}
+	return a.CreatedAt
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetID(id string) {
+	a.ID = id
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldID)
+}
+
+// SetGroupID sets the GroupID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetGroupID(groupID string) {
+	a.GroupID = groupID
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldGroupID)
+}
+
+// SetCode sets the Code field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetCode(code string) {
+	a.Code = code
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldCode)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetName(name string) {
+	a.Name = name
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldName)
+}
+
+// SetAcquisitionDate sets the AcquisitionDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetAcquisitionDate(acquisitionDate time.Time) {
+	a.AcquisitionDate = acquisitionDate
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldAcquisitionDate)
+}
+
+// SetDepreciationStartDate sets the DepreciationStartDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDepreciationStartDate(depreciationStartDate time.Time) {
+	a.DepreciationStartDate = depreciationStartDate
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDepreciationStartDate)
+}
+
+// SetAcquisitionCost sets the AcquisitionCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetAcquisitionCost(acquisitionCost string) {
+	a.AcquisitionCost = acquisitionCost
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldAcquisitionCost)
+}
+
+// SetSalvageValue sets the SalvageValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetSalvageValue(salvageValue string) {
+	a.SalvageValue = salvageValue
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldSalvageValue)
+}
+
+// SetUsefulLifeMonths sets the UsefulLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetUsefulLifeMonths(usefulLifeMonths int64) {
+	a.UsefulLifeMonths = usefulLifeMonths
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldUsefulLifeMonths)
+}
+
+// SetTotalCost sets the TotalCost field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetTotalCost(totalCost string) {
+	a.TotalCost = totalCost
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldTotalCost)
+}
+
+// SetAccumulatedDepreciation sets the AccumulatedDepreciation field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetAccumulatedDepreciation(accumulatedDepreciation string) {
+	a.AccumulatedDepreciation = accumulatedDepreciation
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldAccumulatedDepreciation)
+}
+
+// SetNetBookValue sets the NetBookValue field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetNetBookValue(netBookValue string) {
+	a.NetBookValue = netBookValue
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldNetBookValue)
+}
+
+// SetDepreciatedMonths sets the DepreciatedMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDepreciatedMonths(depreciatedMonths int64) {
+	a.DepreciatedMonths = depreciatedMonths
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDepreciatedMonths)
+}
+
+// SetTotalLifeMonths sets the TotalLifeMonths field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetTotalLifeMonths(totalLifeMonths int64) {
+	a.TotalLifeMonths = totalLifeMonths
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldTotalLifeMonths)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetStatus(status AssetsCreateFromPurchaseAssetsResponseStatus) {
+	a.Status = status
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldStatus)
+}
+
+// SetNotes sets the Notes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetNotes(notes *string) {
+	a.Notes = notes
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldNotes)
+}
+
+// SetDocuments sets the Documents field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDocuments(documents []*AssetsCreateFromPurchaseAssetsResponseDocumentsItem) {
+	a.Documents = documents
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDocuments)
+}
+
+// SetInputVatAmount sets the InputVatAmount field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetInputVatAmount(inputVatAmount *string) {
+	a.InputVatAmount = inputVatAmount
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldInputVatAmount)
+}
+
+// SetInputVatFirstUseDate sets the InputVatFirstUseDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetInputVatFirstUseDate(inputVatFirstUseDate *time.Time) {
+	a.InputVatFirstUseDate = inputVatFirstUseDate
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldInputVatFirstUseDate)
+}
+
+// SetInputVatDeductiblePercent sets the InputVatDeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetInputVatDeductiblePercent(inputVatDeductiblePercent *string) {
+	a.InputVatDeductiblePercent = inputVatDeductiblePercent
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldInputVatDeductiblePercent)
+}
+
+// SetInputVatRealEstate sets the InputVatRealEstate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetInputVatRealEstate(inputVatRealEstate bool) {
+	a.InputVatRealEstate = inputVatRealEstate
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldInputVatRealEstate)
+}
+
+// SetInputVatUseChanges sets the InputVatUseChanges field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetInputVatUseChanges(inputVatUseChanges []*AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) {
+	a.InputVatUseChanges = inputVatUseChanges
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldInputVatUseChanges)
+}
+
+// SetDisposalDate sets the DisposalDate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDisposalDate(disposalDate *time.Time) {
+	a.DisposalDate = disposalDate
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDisposalDate)
+}
+
+// SetDisposalReason sets the DisposalReason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDisposalReason(disposalReason *AssetsCreateFromPurchaseAssetsResponseDisposalReason) {
+	a.DisposalReason = disposalReason
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDisposalReason)
+}
+
+// SetDisposalProceeds sets the DisposalProceeds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDisposalProceeds(disposalProceeds *string) {
+	a.DisposalProceeds = disposalProceeds
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDisposalProceeds)
+}
+
+// SetDisposalJournalTransactionID sets the DisposalJournalTransactionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDisposalJournalTransactionID(disposalJournalTransactionID *string) {
+	a.DisposalJournalTransactionID = disposalJournalTransactionID
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDisposalJournalTransactionID)
+}
+
+// SetDisposalSaleInvoiceID sets the DisposalSaleInvoiceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
+	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldPurchaseInvoiceLineID)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponse) SetCreatedAt(createdAt time.Time) {
+	a.CreatedAt = createdAt
+	a.require(assetsCreateFromPurchaseAssetsResponseFieldCreatedAt)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) UnmarshalJSON(data []byte) error {
+	type embed AssetsCreateFromPurchaseAssetsResponse
+	var unmarshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed: embed(*a),
+	}
+	if err := json.Unmarshal(data, &unmarshaler); err != nil {
+		return err
+	}
+	*a = AssetsCreateFromPurchaseAssetsResponse(unmarshaler.embed)
+	a.AcquisitionDate = unmarshaler.AcquisitionDate.Time()
+	a.DepreciationStartDate = unmarshaler.DepreciationStartDate.Time()
+	a.InputVatFirstUseDate = unmarshaler.InputVatFirstUseDate.TimePtr()
+	a.DisposalDate = unmarshaler.DisposalDate.TimePtr()
+	a.CreatedAt = unmarshaler.CreatedAt.Time()
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateFromPurchaseAssetsResponse
+	var marshaler = struct {
+		embed
+		AcquisitionDate       *internal.Date     `json:"acquisitionDate"`
+		DepreciationStartDate *internal.Date     `json:"depreciationStartDate"`
+		InputVatFirstUseDate  *internal.Date     `json:"inputVatFirstUseDate,omitempty"`
+		DisposalDate          *internal.Date     `json:"disposalDate,omitempty"`
+		CreatedAt             *internal.DateTime `json:"createdAt"`
+	}{
+		embed:                 embed(*a),
+		AcquisitionDate:       internal.NewDate(a.AcquisitionDate),
+		DepreciationStartDate: internal.NewDate(a.DepreciationStartDate),
+		InputVatFirstUseDate:  internal.NewOptionalDate(a.InputVatFirstUseDate),
+		DisposalDate:          internal.NewOptionalDate(a.DisposalDate),
+		CreatedAt:             internal.NewDateTime(a.CreatedAt),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponse) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsCreateFromPurchaseAssetsResponseDisposalReason string
+
+const (
+	AssetsCreateFromPurchaseAssetsResponseDisposalReasonSold       AssetsCreateFromPurchaseAssetsResponseDisposalReason = "sold"
+	AssetsCreateFromPurchaseAssetsResponseDisposalReasonScrapped   AssetsCreateFromPurchaseAssetsResponseDisposalReason = "scrapped"
+	AssetsCreateFromPurchaseAssetsResponseDisposalReasonWrittenOff AssetsCreateFromPurchaseAssetsResponseDisposalReason = "written_off"
+)
+
+func NewAssetsCreateFromPurchaseAssetsResponseDisposalReasonFromString(s string) (AssetsCreateFromPurchaseAssetsResponseDisposalReason, error) {
+	switch s {
+	case "sold":
+		return AssetsCreateFromPurchaseAssetsResponseDisposalReasonSold, nil
+	case "scrapped":
+		return AssetsCreateFromPurchaseAssetsResponseDisposalReasonScrapped, nil
+	case "written_off":
+		return AssetsCreateFromPurchaseAssetsResponseDisposalReasonWrittenOff, nil
+	}
+	var t AssetsCreateFromPurchaseAssetsResponseDisposalReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsCreateFromPurchaseAssetsResponseDisposalReason) Ptr() *AssetsCreateFromPurchaseAssetsResponseDisposalReason {
+	return &a
+}
+
+var (
+	assetsCreateFromPurchaseAssetsResponseDocumentsItemFieldName = big.NewInt(1 << 0)
+	assetsCreateFromPurchaseAssetsResponseDocumentsItemFieldRef  = big.NewInt(1 << 1)
+)
+
+type AssetsCreateFromPurchaseAssetsResponseDocumentsItem struct {
+	Name string `json:"name" url:"name"`
+	Ref  string `json:"ref" url:"ref"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) GetName() string {
+	if a == nil {
+		return ""
+	}
+	return a.Name
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) GetRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.Ref
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) SetName(name string) {
+	a.Name = name
+	a.require(assetsCreateFromPurchaseAssetsResponseDocumentsItemFieldName)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) SetRef(ref string) {
+	a.Ref = ref
+	a.require(assetsCreateFromPurchaseAssetsResponseDocumentsItemFieldRef)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateFromPurchaseAssetsResponseDocumentsItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsCreateFromPurchaseAssetsResponseDocumentsItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateFromPurchaseAssetsResponseDocumentsItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseDocumentsItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	assetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemFieldYear    = big.NewInt(1 << 0)
+	assetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemFieldPercent = big.NewInt(1 << 1)
+	assetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemFieldReason  = big.NewInt(1 << 2)
+)
+
+type AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem struct {
+	Year    int64                                                              `json:"year" url:"year"`
+	Percent string                                                             `json:"percent" url:"percent"`
+	Reason  AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason `json:"reason" url:"reason"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) GetYear() int64 {
+	if a == nil {
+		return 0
+	}
+	return a.Year
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) GetPercent() string {
+	if a == nil {
+		return ""
+	}
+	return a.Percent
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) GetReason() AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason {
+	if a == nil {
+		return ""
+	}
+	return a.Reason
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetYear sets the Year field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) SetYear(year int64) {
+	a.Year = year
+	a.require(assetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemFieldYear)
+}
+
+// SetPercent sets the Percent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) SetPercent(percent string) {
+	a.Percent = percent
+	a.require(assetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemFieldPercent)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) SetReason(reason AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason) {
+	a.Reason = reason
+	a.require(assetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemFieldReason)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) UnmarshalJSON(data []byte) error {
+	type unmarshaler AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) MarshalJSON() ([]byte, error) {
+	type embed AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItem) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason string
+
+const (
+	AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReasonUseChange  AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason = "use_change"
+	AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReasonSale       AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason = "sale"
+	AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReasonWithdrawal AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason = "withdrawal"
+)
+
+func NewAssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReasonFromString(s string) (AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason, error) {
+	switch s {
+	case "use_change":
+		return AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReasonUseChange, nil
+	case "sale":
+		return AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReasonSale, nil
+	case "withdrawal":
+		return AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReasonWithdrawal, nil
+	}
+	var t AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason) Ptr() *AssetsCreateFromPurchaseAssetsResponseInputVatUseChangesItemReason {
+	return &a
+}
+
+type AssetsCreateFromPurchaseAssetsResponseStatus string
+
+const (
+	AssetsCreateFromPurchaseAssetsResponseStatusActive           AssetsCreateFromPurchaseAssetsResponseStatus = "active"
+	AssetsCreateFromPurchaseAssetsResponseStatusFullyDepreciated AssetsCreateFromPurchaseAssetsResponseStatus = "fully_depreciated"
+	AssetsCreateFromPurchaseAssetsResponseStatusDisposed         AssetsCreateFromPurchaseAssetsResponseStatus = "disposed"
+)
+
+func NewAssetsCreateFromPurchaseAssetsResponseStatusFromString(s string) (AssetsCreateFromPurchaseAssetsResponseStatus, error) {
+	switch s {
+	case "active":
+		return AssetsCreateFromPurchaseAssetsResponseStatusActive, nil
+	case "fully_depreciated":
+		return AssetsCreateFromPurchaseAssetsResponseStatusFullyDepreciated, nil
+	case "disposed":
+		return AssetsCreateFromPurchaseAssetsResponseStatusDisposed, nil
+	}
+	var t AssetsCreateFromPurchaseAssetsResponseStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AssetsCreateFromPurchaseAssetsResponseStatus) Ptr() *AssetsCreateFromPurchaseAssetsResponseStatus {
+	return &a
+}
+
 type AssetsDisposeAssetsRequestReason string
 
 const (
@@ -2009,7 +3101,8 @@ var (
 	assetsDisposeAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsDisposeAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
 	assetsDisposeAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
-	assetsDisposeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
+	assetsDisposeAssetsResponseFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsDisposeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 28)
 )
 
 type AssetsDisposeAssetsResponse struct {
@@ -2040,6 +3133,7 @@ type AssetsDisposeAssetsResponse struct {
 	DisposalProceeds             *string                                              `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                              `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
 	DisposalSaleInvoiceID        *string                                              `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                              `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
 	CreatedAt                    time.Time                                            `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -2236,6 +3330,13 @@ func (a *AssetsDisposeAssetsResponse) GetDisposalSaleInvoiceID() *string {
 		return nil
 	}
 	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsDisposeAssetsResponse) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
 }
 
 func (a *AssetsDisposeAssetsResponse) GetCreatedAt() time.Time {
@@ -2446,6 +3547,13 @@ func (a *AssetsDisposeAssetsResponse) SetDisposalJournalTransactionID(disposalJo
 func (a *AssetsDisposeAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
 	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
 	a.require(assetsDisposeAssetsResponseFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsDisposeAssetsResponse) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsDisposeAssetsResponseFieldPurchaseInvoiceLineID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -2840,7 +3948,8 @@ var (
 	assetsGetAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsGetAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
 	assetsGetAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
-	assetsGetAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
+	assetsGetAssetsResponseFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsGetAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 28)
 )
 
 type AssetsGetAssetsResponse struct {
@@ -2871,6 +3980,7 @@ type AssetsGetAssetsResponse struct {
 	DisposalProceeds             *string                                          `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                          `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
 	DisposalSaleInvoiceID        *string                                          `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                          `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
 	CreatedAt                    time.Time                                        `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -3067,6 +4177,13 @@ func (a *AssetsGetAssetsResponse) GetDisposalSaleInvoiceID() *string {
 		return nil
 	}
 	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsGetAssetsResponse) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
 }
 
 func (a *AssetsGetAssetsResponse) GetCreatedAt() time.Time {
@@ -3277,6 +4394,13 @@ func (a *AssetsGetAssetsResponse) SetDisposalJournalTransactionID(disposalJourna
 func (a *AssetsGetAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
 	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
 	a.require(assetsGetAssetsResponseFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsGetAssetsResponse) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsGetAssetsResponseFieldPurchaseInvoiceLineID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3812,7 +4936,8 @@ var (
 	assetsInputVatAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsInputVatAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
 	assetsInputVatAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
-	assetsInputVatAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
+	assetsInputVatAssetsResponseFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsInputVatAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 28)
 )
 
 type AssetsInputVatAssetsResponse struct {
@@ -3843,6 +4968,7 @@ type AssetsInputVatAssetsResponse struct {
 	DisposalProceeds             *string                                               `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                               `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
 	DisposalSaleInvoiceID        *string                                               `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                               `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
 	CreatedAt                    time.Time                                             `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -4039,6 +5165,13 @@ func (a *AssetsInputVatAssetsResponse) GetDisposalSaleInvoiceID() *string {
 		return nil
 	}
 	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsInputVatAssetsResponse) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
 }
 
 func (a *AssetsInputVatAssetsResponse) GetCreatedAt() time.Time {
@@ -4249,6 +5382,13 @@ func (a *AssetsInputVatAssetsResponse) SetDisposalJournalTransactionID(disposalJ
 func (a *AssetsInputVatAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
 	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
 	a.require(assetsInputVatAssetsResponseFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsInputVatAssetsResponse) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsInputVatAssetsResponseFieldPurchaseInvoiceLineID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -5246,7 +6386,8 @@ var (
 	assetsListAssetsResponseRowsItemFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsListAssetsResponseRowsItemFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
 	assetsListAssetsResponseRowsItemFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
-	assetsListAssetsResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 27)
+	assetsListAssetsResponseRowsItemFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsListAssetsResponseRowsItemFieldCreatedAt                    = big.NewInt(1 << 28)
 )
 
 type AssetsListAssetsResponseRowsItem struct {
@@ -5277,6 +6418,7 @@ type AssetsListAssetsResponseRowsItem struct {
 	DisposalProceeds             *string                                                   `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                                   `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
 	DisposalSaleInvoiceID        *string                                                   `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                                   `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
 	CreatedAt                    time.Time                                                 `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -5473,6 +6615,13 @@ func (a *AssetsListAssetsResponseRowsItem) GetDisposalSaleInvoiceID() *string {
 		return nil
 	}
 	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsListAssetsResponseRowsItem) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
 }
 
 func (a *AssetsListAssetsResponseRowsItem) GetCreatedAt() time.Time {
@@ -5683,6 +6832,13 @@ func (a *AssetsListAssetsResponseRowsItem) SetDisposalJournalTransactionID(dispo
 func (a *AssetsListAssetsResponseRowsItem) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
 	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
 	a.require(assetsListAssetsResponseRowsItemFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsListAssetsResponseRowsItem) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsListAssetsResponseRowsItemFieldPurchaseInvoiceLineID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -6077,7 +7233,8 @@ var (
 	assetsModernizeAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsModernizeAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
 	assetsModernizeAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
-	assetsModernizeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
+	assetsModernizeAssetsResponseFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsModernizeAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 28)
 )
 
 type AssetsModernizeAssetsResponse struct {
@@ -6108,6 +7265,7 @@ type AssetsModernizeAssetsResponse struct {
 	DisposalProceeds             *string                                                `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                                `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
 	DisposalSaleInvoiceID        *string                                                `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                                `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
 	CreatedAt                    time.Time                                              `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -6304,6 +7462,13 @@ func (a *AssetsModernizeAssetsResponse) GetDisposalSaleInvoiceID() *string {
 		return nil
 	}
 	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsModernizeAssetsResponse) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
 }
 
 func (a *AssetsModernizeAssetsResponse) GetCreatedAt() time.Time {
@@ -6514,6 +7679,13 @@ func (a *AssetsModernizeAssetsResponse) SetDisposalJournalTransactionID(disposal
 func (a *AssetsModernizeAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
 	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
 	a.require(assetsModernizeAssetsResponseFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsModernizeAssetsResponse) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsModernizeAssetsResponseFieldPurchaseInvoiceLineID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -7008,7 +8180,8 @@ var (
 	assetsUpdateAssetsResponseFieldDisposalProceeds             = big.NewInt(1 << 24)
 	assetsUpdateAssetsResponseFieldDisposalJournalTransactionID = big.NewInt(1 << 25)
 	assetsUpdateAssetsResponseFieldDisposalSaleInvoiceID        = big.NewInt(1 << 26)
-	assetsUpdateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 27)
+	assetsUpdateAssetsResponseFieldPurchaseInvoiceLineID        = big.NewInt(1 << 27)
+	assetsUpdateAssetsResponseFieldCreatedAt                    = big.NewInt(1 << 28)
 )
 
 type AssetsUpdateAssetsResponse struct {
@@ -7039,6 +8212,7 @@ type AssetsUpdateAssetsResponse struct {
 	DisposalProceeds             *string                                             `json:"disposalProceeds,omitempty" url:"disposalProceeds,omitempty"`
 	DisposalJournalTransactionID *string                                             `json:"disposalJournalTransactionId,omitempty" url:"disposalJournalTransactionId,omitempty"`
 	DisposalSaleInvoiceID        *string                                             `json:"disposalSaleInvoiceId,omitempty" url:"disposalSaleInvoiceId,omitempty"`
+	PurchaseInvoiceLineID        *string                                             `json:"purchaseInvoiceLineId,omitempty" url:"purchaseInvoiceLineId,omitempty"`
 	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -7235,6 +8409,13 @@ func (a *AssetsUpdateAssetsResponse) GetDisposalSaleInvoiceID() *string {
 		return nil
 	}
 	return a.DisposalSaleInvoiceID
+}
+
+func (a *AssetsUpdateAssetsResponse) GetPurchaseInvoiceLineID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.PurchaseInvoiceLineID
 }
 
 func (a *AssetsUpdateAssetsResponse) GetCreatedAt() time.Time {
@@ -7445,6 +8626,13 @@ func (a *AssetsUpdateAssetsResponse) SetDisposalJournalTransactionID(disposalJou
 func (a *AssetsUpdateAssetsResponse) SetDisposalSaleInvoiceID(disposalSaleInvoiceID *string) {
 	a.DisposalSaleInvoiceID = disposalSaleInvoiceID
 	a.require(assetsUpdateAssetsResponseFieldDisposalSaleInvoiceID)
+}
+
+// SetPurchaseInvoiceLineID sets the PurchaseInvoiceLineID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AssetsUpdateAssetsResponse) SetPurchaseInvoiceLineID(purchaseInvoiceLineID *string) {
+	a.PurchaseInvoiceLineID = purchaseInvoiceLineID
+	a.require(assetsUpdateAssetsResponseFieldPurchaseInvoiceLineID)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;

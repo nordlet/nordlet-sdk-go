@@ -132,7 +132,7 @@ var (
 
 type QueueListReviewResponseItemsItem struct {
 	Kind QueueListReviewResponseItemsItemKind `json:"kind" url:"kind"`
-	// The id of the draft, bank transaction or partner, or the key of the filing
+	// The id of the draft, bank transaction, partner or file, or the key of the filing
 	ID      string `json:"id" url:"id"`
 	Message string `json:"message" url:"message"`
 	Fix     string `json:"fix" url:"fix"`
@@ -279,6 +279,7 @@ const (
 	QueueListReviewResponseItemsItemKindBankTransactionUnbooked QueueListReviewResponseItemsItemKind = "bank_transaction_unbooked"
 	QueueListReviewResponseItemsItemKindPartnerVatInvalid       QueueListReviewResponseItemsItemKind = "partner_vat_invalid"
 	QueueListReviewResponseItemsItemKindFilingSettingsMissing   QueueListReviewResponseItemsItemKind = "filing_settings_missing"
+	QueueListReviewResponseItemsItemKindFileUnattached          QueueListReviewResponseItemsItemKind = "file_unattached"
 )
 
 func NewQueueListReviewResponseItemsItemKindFromString(s string) (QueueListReviewResponseItemsItemKind, error) {
@@ -291,6 +292,8 @@ func NewQueueListReviewResponseItemsItemKindFromString(s string) (QueueListRevie
 		return QueueListReviewResponseItemsItemKindPartnerVatInvalid, nil
 	case "filing_settings_missing":
 		return QueueListReviewResponseItemsItemKindFilingSettingsMissing, nil
+	case "file_unattached":
+		return QueueListReviewResponseItemsItemKindFileUnattached, nil
 	}
 	var t QueueListReviewResponseItemsItemKind
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

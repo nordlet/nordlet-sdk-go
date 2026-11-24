@@ -99,6 +99,14 @@ func TestSettersCreateDocumentSeriesRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSuffix", func(t *testing.T) {
+		obj := &CreateDocumentSeriesRequest{}
+		var fernTestValueSuffix *string
+		obj.SetSuffix(fernTestValueSuffix)
+		assert.Equal(t, fernTestValueSuffix, obj.Suffix)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsDefault", func(t *testing.T) {
 		obj := &CreateDocumentSeriesRequest{}
 		var fernTestValueIsDefault *bool
@@ -436,6 +444,37 @@ func TestSettersMarkExplicitCreateDocumentSeriesRequest(t *testing.T) {
 
 		// Act
 		obj.SetPrintSeries(fernTestValuePrintSeries)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSuffix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateDocumentSeriesRequest{}
+		var fernTestValueSuffix *string
+
+		// Act
+		obj.SetSuffix(fernTestValueSuffix)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -911,6 +950,14 @@ func TestSettersCreateDocumentSeriesResponse(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSuffix", func(t *testing.T) {
+		obj := &CreateDocumentSeriesResponse{}
+		var fernTestValueSuffix string
+		obj.SetSuffix(fernTestValueSuffix)
+		assert.Equal(t, fernTestValueSuffix, obj.Suffix)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsDefault", func(t *testing.T) {
 		obj := &CreateDocumentSeriesResponse{}
 		var fernTestValueIsDefault bool
@@ -1280,6 +1327,29 @@ func TestGettersCreateDocumentSeriesResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPrintSeries() // Should return zero value
+	})
+
+	t.Run("GetSuffix", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateDocumentSeriesResponse{}
+		var expected string
+		obj.Suffix = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSuffix(), "getter should return the property value")
+	})
+
+	t.Run("GetSuffix_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateDocumentSeriesResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSuffix() // Should return zero value
 	})
 
 	t.Run("GetIsDefault", func(t *testing.T) {
@@ -1749,6 +1819,37 @@ func TestSettersMarkExplicitCreateDocumentSeriesResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSuffix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateDocumentSeriesResponse{}
+		var fernTestValueSuffix string
+
+		// Act
+		obj.SetSuffix(fernTestValueSuffix)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetIsDefault_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -2040,6 +2141,14 @@ func TestSettersGetDocumentSeriesResponse(t *testing.T) {
 		var fernTestValuePrintSeries bool
 		obj.SetPrintSeries(fernTestValuePrintSeries)
 		assert.Equal(t, fernTestValuePrintSeries, obj.PrintSeries)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSuffix", func(t *testing.T) {
+		obj := &GetDocumentSeriesResponse{}
+		var fernTestValueSuffix string
+		obj.SetSuffix(fernTestValueSuffix)
+		assert.Equal(t, fernTestValueSuffix, obj.Suffix)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -2412,6 +2521,29 @@ func TestGettersGetDocumentSeriesResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPrintSeries() // Should return zero value
+	})
+
+	t.Run("GetSuffix", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetDocumentSeriesResponse{}
+		var expected string
+		obj.Suffix = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSuffix(), "getter should return the property value")
+	})
+
+	t.Run("GetSuffix_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *GetDocumentSeriesResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSuffix() // Should return zero value
 	})
 
 	t.Run("GetIsDefault", func(t *testing.T) {
@@ -2858,6 +2990,37 @@ func TestSettersMarkExplicitGetDocumentSeriesResponse(t *testing.T) {
 
 		// Act
 		obj.SetPrintSeries(fernTestValuePrintSeries)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSuffix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &GetDocumentSeriesResponse{}
+		var fernTestValueSuffix string
+
+		// Act
+		obj.SetSuffix(fernTestValueSuffix)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -4017,6 +4180,14 @@ func TestSettersListDocumentSeriesResponseRowsItem(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetSuffix", func(t *testing.T) {
+		obj := &ListDocumentSeriesResponseRowsItem{}
+		var fernTestValueSuffix string
+		obj.SetSuffix(fernTestValueSuffix)
+		assert.Equal(t, fernTestValueSuffix, obj.Suffix)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetIsDefault", func(t *testing.T) {
 		obj := &ListDocumentSeriesResponseRowsItem{}
 		var fernTestValueIsDefault bool
@@ -4386,6 +4557,29 @@ func TestGettersListDocumentSeriesResponseRowsItem(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPrintSeries() // Should return zero value
+	})
+
+	t.Run("GetSuffix", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListDocumentSeriesResponseRowsItem{}
+		var expected string
+		obj.Suffix = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSuffix(), "getter should return the property value")
+	})
+
+	t.Run("GetSuffix_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *ListDocumentSeriesResponseRowsItem
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSuffix() // Should return zero value
 	})
 
 	t.Run("GetIsDefault", func(t *testing.T) {
@@ -4855,6 +5049,37 @@ func TestSettersMarkExplicitListDocumentSeriesResponseRowsItem(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSuffix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListDocumentSeriesResponseRowsItem{}
+		var fernTestValueSuffix string
+
+		// Act
+		obj.SetSuffix(fernTestValueSuffix)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetIsDefault_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -5075,6 +5300,14 @@ func TestSettersUpdateDocumentSeriesResponse(t *testing.T) {
 		var fernTestValuePrintSeries bool
 		obj.SetPrintSeries(fernTestValuePrintSeries)
 		assert.Equal(t, fernTestValuePrintSeries, obj.PrintSeries)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSuffix", func(t *testing.T) {
+		obj := &UpdateDocumentSeriesResponse{}
+		var fernTestValueSuffix string
+		obj.SetSuffix(fernTestValueSuffix)
+		assert.Equal(t, fernTestValueSuffix, obj.Suffix)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -5447,6 +5680,29 @@ func TestGettersUpdateDocumentSeriesResponse(t *testing.T) {
 			}
 		}()
 		_ = obj.GetPrintSeries() // Should return zero value
+	})
+
+	t.Run("GetSuffix", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateDocumentSeriesResponse{}
+		var expected string
+		obj.Suffix = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSuffix(), "getter should return the property value")
+	})
+
+	t.Run("GetSuffix_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *UpdateDocumentSeriesResponse
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSuffix() // Should return zero value
 	})
 
 	t.Run("GetIsDefault", func(t *testing.T) {
@@ -5916,6 +6172,37 @@ func TestSettersMarkExplicitUpdateDocumentSeriesResponse(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
+	t.Run("SetSuffix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateDocumentSeriesResponse{}
+		var fernTestValueSuffix string
+
+		// Act
+		obj.SetSuffix(fernTestValueSuffix)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
 	t.Run("SetIsDefault_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -6136,6 +6423,14 @@ func TestSettersUpdateDocumentSeriesRequest(t *testing.T) {
 		var fernTestValuePrintSeries *bool
 		obj.SetPrintSeries(fernTestValuePrintSeries)
 		assert.Equal(t, fernTestValuePrintSeries, obj.PrintSeries)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSuffix", func(t *testing.T) {
+		obj := &UpdateDocumentSeriesRequest{}
+		var fernTestValueSuffix *string
+		obj.SetSuffix(fernTestValueSuffix)
+		assert.Equal(t, fernTestValueSuffix, obj.Suffix)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -6507,6 +6802,37 @@ func TestSettersMarkExplicitUpdateDocumentSeriesRequest(t *testing.T) {
 
 		// Act
 		obj.SetPrintSeries(fernTestValuePrintSeries)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSuffix_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &UpdateDocumentSeriesRequest{}
+		var fernTestValueSuffix *string
+
+		// Act
+		obj.SetSuffix(fernTestValueSuffix)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)

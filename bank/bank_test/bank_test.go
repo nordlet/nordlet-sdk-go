@@ -751,6 +751,82 @@ func TestBankMatchRulesListWithWireMock(
 	VerifyRequestCount(t, "TestBankMatchRulesListWithWireMock", "POST", "/v1/bank/match-rules/list", nil, 1)
 }
 
+func TestBankPostingRulesCreateWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostingRulesCreateBankRequest{
+		AccountCode: "accountCode",
+	}
+	_, invocationErr := client.Bank.PostingRulesCreate(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostingRulesCreateWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostingRulesCreateWithWireMock", "POST", "/v1/bank/posting-rules/create", nil, 1)
+}
+
+func TestBankPostingRulesListWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostingRulesListBankRequest{}
+	_, invocationErr := client.Bank.PostingRulesList(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostingRulesListWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostingRulesListWithWireMock", "POST", "/v1/bank/posting-rules/list", nil, 1)
+}
+
+func TestBankPostingRulesDeleteWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.NewClient(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithToken("test-token"),
+	)
+	request := &nordlet.PostingRulesDeleteBankRequest{
+		ID: "id",
+	}
+	_, invocationErr := client.Bank.PostingRulesDelete(
+		context.TODO(),
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestBankPostingRulesDeleteWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestBankPostingRulesDeleteWithWireMock", "POST", "/v1/bank/posting-rules/delete", nil, 1)
+}
+
 func TestBankMandatesCreateWithWireMock(
 	t *testing.T,
 ) {

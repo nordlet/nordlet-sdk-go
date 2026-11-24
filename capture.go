@@ -396,6 +396,8 @@ var (
 	documentsConfirmCaptureRequestLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 	documentsConfirmCaptureRequestLinesItemFieldLotNumber         = big.NewInt(1 << 13)
 	documentsConfirmCaptureRequestLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
+	documentsConfirmCaptureRequestLinesItemFieldDeductiblePercent = big.NewInt(1 << 15)
+	documentsConfirmCaptureRequestLinesItemFieldChassisNumbers    = big.NewInt(1 << 16)
 )
 
 type DocumentsConfirmCaptureRequestLinesItem struct {
@@ -414,6 +416,10 @@ type DocumentsConfirmCaptureRequestLinesItem struct {
 	DeferralEndDate   *time.Time                                       `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string                                          `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time                                       `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	// The share of the purchase used for the company's taxable supplies, in whole percent rounded up: required on a VAT type that deducts the line's own share (CZ-D21-P, CZ-D12-P, the poměrný koeficient of § 75 odst. 3 ZDPH) and refused on any other
+	DeductiblePercent *int64 `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
+	// The chassis numbers of the passenger cars bought on the line. A Hungarian company lists them on sheet 2665A-09 of the VAT return of the period when the line is an intra-Community acquisition or an import (Áfa tv. 4/A. számú melléklet II.)
+	ChassisNumbers []string `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -525,6 +531,20 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) GetExpiryDate() *time.Time {
 		return nil
 	}
 	return d.ExpiryDate
+}
+
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetDeductiblePercent() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.DeductiblePercent
+}
+
+func (d *DocumentsConfirmCaptureRequestLinesItem) GetChassisNumbers() []string {
+	if d == nil {
+		return nil
+	}
+	return d.ChassisNumbers
 }
 
 func (d *DocumentsConfirmCaptureRequestLinesItem) GetExtraProperties() map[string]interface{} {
@@ -644,6 +664,20 @@ func (d *DocumentsConfirmCaptureRequestLinesItem) SetLotNumber(lotNumber *string
 func (d *DocumentsConfirmCaptureRequestLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	d.ExpiryDate = expiryDate
 	d.require(documentsConfirmCaptureRequestLinesItemFieldExpiryDate)
+}
+
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	d.DeductiblePercent = deductiblePercent
+	d.require(documentsConfirmCaptureRequestLinesItemFieldDeductiblePercent)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	d.ChassisNumbers = chassisNumbers
+	d.require(documentsConfirmCaptureRequestLinesItemFieldChassisNumbers)
 }
 
 func (d *DocumentsConfirmCaptureRequestLinesItem) UnmarshalJSON(data []byte) error {
@@ -914,6 +948,8 @@ var (
 	documentsConfirmCaptureRequestOppositeLinesItemFieldDeferralEndDate   = big.NewInt(1 << 12)
 	documentsConfirmCaptureRequestOppositeLinesItemFieldLotNumber         = big.NewInt(1 << 13)
 	documentsConfirmCaptureRequestOppositeLinesItemFieldExpiryDate        = big.NewInt(1 << 14)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldDeductiblePercent = big.NewInt(1 << 15)
+	documentsConfirmCaptureRequestOppositeLinesItemFieldChassisNumbers    = big.NewInt(1 << 16)
 )
 
 type DocumentsConfirmCaptureRequestOppositeLinesItem struct {
@@ -932,6 +968,10 @@ type DocumentsConfirmCaptureRequestOppositeLinesItem struct {
 	DeferralEndDate   *time.Time                                               `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string                                                  `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time                                               `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	// The share of the purchase used for the company's taxable supplies, in whole percent rounded up: required on a VAT type that deducts the line's own share (CZ-D21-P, CZ-D12-P, the poměrný koeficient of § 75 odst. 3 ZDPH) and refused on any other
+	DeductiblePercent *int64 `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
+	// The chassis numbers of the passenger cars bought on the line. A Hungarian company lists them on sheet 2665A-09 of the VAT return of the period when the line is an intra-Community acquisition or an import (Áfa tv. 4/A. számú melléklet II.)
+	ChassisNumbers []string `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -1043,6 +1083,20 @@ func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetExpiryDate() *time.
 		return nil
 	}
 	return d.ExpiryDate
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetDeductiblePercent() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.DeductiblePercent
+}
+
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetChassisNumbers() []string {
+	if d == nil {
+		return nil
+	}
+	return d.ChassisNumbers
 }
 
 func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) GetExtraProperties() map[string]interface{} {
@@ -1162,6 +1216,20 @@ func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetLotNumber(lotNumber
 func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	d.ExpiryDate = expiryDate
 	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldExpiryDate)
+}
+
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	d.DeductiblePercent = deductiblePercent
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldDeductiblePercent)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	d.ChassisNumbers = chassisNumbers
+	d.require(documentsConfirmCaptureRequestOppositeLinesItemFieldChassisNumbers)
 }
 
 func (d *DocumentsConfirmCaptureRequestOppositeLinesItem) UnmarshalJSON(data []byte) error {
@@ -2648,10 +2716,13 @@ var (
 	documentsConfirmCaptureResponseInvoiceFieldIntrastatRegion              = big.NewInt(1 << 24)
 	documentsConfirmCaptureResponseInvoiceFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	documentsConfirmCaptureResponseInvoiceFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	documentsConfirmCaptureResponseInvoiceFieldDocumentRef                  = big.NewInt(1 << 27)
-	documentsConfirmCaptureResponseInvoiceFieldCreatedAt                    = big.NewInt(1 << 28)
-	documentsConfirmCaptureResponseInvoiceFieldUpdatedAt                    = big.NewInt(1 << 29)
-	documentsConfirmCaptureResponseInvoiceFieldLines                        = big.NewInt(1 << 30)
+	documentsConfirmCaptureResponseInvoiceFieldPaymentReference             = big.NewInt(1 << 27)
+	documentsConfirmCaptureResponseInvoiceFieldDocumentRef                  = big.NewInt(1 << 28)
+	documentsConfirmCaptureResponseInvoiceFieldAgreementID                  = big.NewInt(1 << 29)
+	documentsConfirmCaptureResponseInvoiceFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	documentsConfirmCaptureResponseInvoiceFieldCreatedAt                    = big.NewInt(1 << 31)
+	documentsConfirmCaptureResponseInvoiceFieldUpdatedAt                    = big.NewInt(1 << 32)
+	documentsConfirmCaptureResponseInvoiceFieldLines                        = big.NewInt(1 << 33)
 )
 
 type DocumentsConfirmCaptureResponseInvoice struct {
@@ -2682,7 +2753,10 @@ type DocumentsConfirmCaptureResponseInvoice struct {
 	IntrastatRegion              *string                                             `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                             `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                             `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                             `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                             `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                             `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                             `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                           `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                           `json:"updatedAt" url:"updatedAt"`
 	Lines                        []*DocumentsConfirmCaptureResponseInvoiceLinesItem  `json:"lines" url:"lines"`
@@ -2883,11 +2957,32 @@ func (d *DocumentsConfirmCaptureResponseInvoice) GetEinvoiceNumber() *string {
 	return d.EinvoiceNumber
 }
 
+func (d *DocumentsConfirmCaptureResponseInvoice) GetPaymentReference() *string {
+	if d == nil {
+		return nil
+	}
+	return d.PaymentReference
+}
+
 func (d *DocumentsConfirmCaptureResponseInvoice) GetDocumentRef() *string {
 	if d == nil {
 		return nil
 	}
 	return d.DocumentRef
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoice) GetAgreementID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.AgreementID
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoice) GetAgreementPeriodStart() *string {
+	if d == nil {
+		return nil
+	}
+	return d.AgreementPeriodStart
 }
 
 func (d *DocumentsConfirmCaptureResponseInvoice) GetCreatedAt() time.Time {
@@ -3114,11 +3209,32 @@ func (d *DocumentsConfirmCaptureResponseInvoice) SetEinvoiceNumber(einvoiceNumbe
 	d.require(documentsConfirmCaptureResponseInvoiceFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoice) SetPaymentReference(paymentReference *string) {
+	d.PaymentReference = paymentReference
+	d.require(documentsConfirmCaptureResponseInvoiceFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseInvoice) SetDocumentRef(documentRef *string) {
 	d.DocumentRef = documentRef
 	d.require(documentsConfirmCaptureResponseInvoiceFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoice) SetAgreementID(agreementID *string) {
+	d.AgreementID = agreementID
+	d.require(documentsConfirmCaptureResponseInvoiceFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoice) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	d.AgreementPeriodStart = agreementPeriodStart
+	d.require(documentsConfirmCaptureResponseInvoiceFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -3224,17 +3340,19 @@ var (
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
 	documentsConfirmCaptureResponseInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLotNumber         = big.NewInt(1 << 16)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 18)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 19)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 20)
-	documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 21)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeductiblePercent = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLotNumber         = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldExpiryDate        = big.NewInt(1 << 18)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldChassisNumbers    = big.NewInt(1 << 19)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 20)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 21)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 22)
+	documentsConfirmCaptureResponseInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 23)
 )
 
 type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
@@ -3249,6 +3367,7 @@ type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	DeductiblePercent *int64     `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
 	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
@@ -3256,6 +3375,7 @@ type DocumentsConfirmCaptureResponseInvoiceLinesItem struct {
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	ChassisNumbers    []string   `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -3345,6 +3465,13 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetVatClassifierCode()
 	return d.VatClassifierCode
 }
 
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetDeductiblePercent() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.DeductiblePercent
+}
+
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetCostCenterID() *string {
 	if d == nil {
 		return nil
@@ -3392,6 +3519,13 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetExpiryDate() *time.
 		return nil
 	}
 	return d.ExpiryDate
+}
+
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetChassisNumbers() []string {
+	if d == nil {
+		return nil
+	}
+	return d.ChassisNumbers
 }
 
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) GetLineNet() string {
@@ -3513,6 +3647,13 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetVatClassifierCode(v
 	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldVatClassifierCode)
 }
 
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	d.DeductiblePercent = deductiblePercent
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldDeductiblePercent)
+}
+
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetCostCenterID(costCenterID *string) {
@@ -3560,6 +3701,13 @@ func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetLotNumber(lotNumber
 func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	d.ExpiryDate = expiryDate
 	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldExpiryDate)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseInvoiceLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	d.ChassisNumbers = chassisNumbers
+	d.require(documentsConfirmCaptureResponseInvoiceLinesItemFieldChassisNumbers)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
@@ -3748,10 +3896,13 @@ var (
 	documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatRegion              = big.NewInt(1 << 24)
 	documentsConfirmCaptureResponseOppositeInvoiceFieldIntrastatNatureOfTransaction = big.NewInt(1 << 25)
 	documentsConfirmCaptureResponseOppositeInvoiceFieldEinvoiceNumber               = big.NewInt(1 << 26)
-	documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentRef                  = big.NewInt(1 << 27)
-	documentsConfirmCaptureResponseOppositeInvoiceFieldCreatedAt                    = big.NewInt(1 << 28)
-	documentsConfirmCaptureResponseOppositeInvoiceFieldUpdatedAt                    = big.NewInt(1 << 29)
-	documentsConfirmCaptureResponseOppositeInvoiceFieldLines                        = big.NewInt(1 << 30)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldPaymentReference             = big.NewInt(1 << 27)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentRef                  = big.NewInt(1 << 28)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldAgreementID                  = big.NewInt(1 << 29)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldAgreementPeriodStart         = big.NewInt(1 << 30)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldCreatedAt                    = big.NewInt(1 << 31)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldUpdatedAt                    = big.NewInt(1 << 32)
+	documentsConfirmCaptureResponseOppositeInvoiceFieldLines                        = big.NewInt(1 << 33)
 )
 
 type DocumentsConfirmCaptureResponseOppositeInvoice struct {
@@ -3782,7 +3933,10 @@ type DocumentsConfirmCaptureResponseOppositeInvoice struct {
 	IntrastatRegion              *string                                                     `json:"intrastatRegion,omitempty" url:"intrastatRegion,omitempty"`
 	IntrastatNatureOfTransaction *string                                                     `json:"intrastatNatureOfTransaction,omitempty" url:"intrastatNatureOfTransaction,omitempty"`
 	EinvoiceNumber               *string                                                     `json:"einvoiceNumber,omitempty" url:"einvoiceNumber,omitempty"`
+	PaymentReference             *string                                                     `json:"paymentReference,omitempty" url:"paymentReference,omitempty"`
 	DocumentRef                  *string                                                     `json:"documentRef,omitempty" url:"documentRef,omitempty"`
+	AgreementID                  *string                                                     `json:"agreementId,omitempty" url:"agreementId,omitempty"`
+	AgreementPeriodStart         *string                                                     `json:"agreementPeriodStart,omitempty" url:"agreementPeriodStart,omitempty"`
 	CreatedAt                    time.Time                                                   `json:"createdAt" url:"createdAt"`
 	UpdatedAt                    time.Time                                                   `json:"updatedAt" url:"updatedAt"`
 	Lines                        []*DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem  `json:"lines" url:"lines"`
@@ -3983,11 +4137,32 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetEinvoiceNumber() *st
 	return d.EinvoiceNumber
 }
 
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetPaymentReference() *string {
+	if d == nil {
+		return nil
+	}
+	return d.PaymentReference
+}
+
 func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetDocumentRef() *string {
 	if d == nil {
 		return nil
 	}
 	return d.DocumentRef
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetAgreementID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.AgreementID
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetAgreementPeriodStart() *string {
+	if d == nil {
+		return nil
+	}
+	return d.AgreementPeriodStart
 }
 
 func (d *DocumentsConfirmCaptureResponseOppositeInvoice) GetCreatedAt() time.Time {
@@ -4214,11 +4389,32 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetEinvoiceNumber(einvo
 	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldEinvoiceNumber)
 }
 
+// SetPaymentReference sets the PaymentReference field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetPaymentReference(paymentReference *string) {
+	d.PaymentReference = paymentReference
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldPaymentReference)
+}
+
 // SetDocumentRef sets the DocumentRef field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetDocumentRef(documentRef *string) {
 	d.DocumentRef = documentRef
 	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldDocumentRef)
+}
+
+// SetAgreementID sets the AgreementID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetAgreementID(agreementID *string) {
+	d.AgreementID = agreementID
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldAgreementID)
+}
+
+// SetAgreementPeriodStart sets the AgreementPeriodStart field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoice) SetAgreementPeriodStart(agreementPeriodStart *string) {
+	d.AgreementPeriodStart = agreementPeriodStart
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceFieldAgreementPeriodStart)
 }
 
 // SetCreatedAt sets the CreatedAt field and marks it as non-optional;
@@ -4324,17 +4520,19 @@ var (
 	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldUnitPriceInclVat  = big.NewInt(1 << 8)
 	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatRatePercent    = big.NewInt(1 << 9)
 	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatClassifierCode = big.NewInt(1 << 10)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 11)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 12)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 13)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 14)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 15)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLotNumber         = big.NewInt(1 << 16)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldExpiryDate        = big.NewInt(1 << 17)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 18)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 19)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 20)
-	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 21)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeductiblePercent = big.NewInt(1 << 11)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldCostCenterID      = big.NewInt(1 << 12)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldProjectID         = big.NewInt(1 << 13)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldAccountCode       = big.NewInt(1 << 14)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralStartDate = big.NewInt(1 << 15)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeferralEndDate   = big.NewInt(1 << 16)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLotNumber         = big.NewInt(1 << 17)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldExpiryDate        = big.NewInt(1 << 18)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldChassisNumbers    = big.NewInt(1 << 19)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineNet           = big.NewInt(1 << 20)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineVat           = big.NewInt(1 << 21)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldLineGross         = big.NewInt(1 << 22)
+	documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldSortOrder         = big.NewInt(1 << 23)
 )
 
 type DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem struct {
@@ -4349,6 +4547,7 @@ type DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem struct {
 	UnitPriceInclVat  *string    `json:"unitPriceInclVat,omitempty" url:"unitPriceInclVat,omitempty"`
 	VatRatePercent    string     `json:"vatRatePercent" url:"vatRatePercent"`
 	VatClassifierCode *string    `json:"vatClassifierCode,omitempty" url:"vatClassifierCode,omitempty"`
+	DeductiblePercent *int64     `json:"deductiblePercent,omitempty" url:"deductiblePercent,omitempty"`
 	CostCenterID      *string    `json:"costCenterId,omitempty" url:"costCenterId,omitempty"`
 	ProjectID         *string    `json:"projectId,omitempty" url:"projectId,omitempty"`
 	AccountCode       *string    `json:"accountCode,omitempty" url:"accountCode,omitempty"`
@@ -4356,6 +4555,7 @@ type DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem struct {
 	DeferralEndDate   *time.Time `json:"deferralEndDate,omitempty" url:"deferralEndDate,omitempty" format:"date"`
 	LotNumber         *string    `json:"lotNumber,omitempty" url:"lotNumber,omitempty"`
 	ExpiryDate        *time.Time `json:"expiryDate,omitempty" url:"expiryDate,omitempty" format:"date"`
+	ChassisNumbers    []string   `json:"chassisNumbers,omitempty" url:"chassisNumbers,omitempty"`
 	LineNet           string     `json:"lineNet" url:"lineNet"`
 	LineVat           string     `json:"lineVat" url:"lineVat"`
 	LineGross         string     `json:"lineGross" url:"lineGross"`
@@ -4445,6 +4645,13 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetVatClassifi
 	return d.VatClassifierCode
 }
 
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetDeductiblePercent() *int64 {
+	if d == nil {
+		return nil
+	}
+	return d.DeductiblePercent
+}
+
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetCostCenterID() *string {
 	if d == nil {
 		return nil
@@ -4492,6 +4699,13 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetExpiryDate(
 		return nil
 	}
 	return d.ExpiryDate
+}
+
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetChassisNumbers() []string {
+	if d == nil {
+		return nil
+	}
+	return d.ChassisNumbers
 }
 
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) GetLineNet() string {
@@ -4613,6 +4827,13 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetVatClassifi
 	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldVatClassifierCode)
 }
 
+// SetDeductiblePercent sets the DeductiblePercent field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetDeductiblePercent(deductiblePercent *int64) {
+	d.DeductiblePercent = deductiblePercent
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldDeductiblePercent)
+}
+
 // SetCostCenterID sets the CostCenterID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetCostCenterID(costCenterID *string) {
@@ -4660,6 +4881,13 @@ func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetLotNumber(l
 func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetExpiryDate(expiryDate *time.Time) {
 	d.ExpiryDate = expiryDate
 	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldExpiryDate)
+}
+
+// SetChassisNumbers sets the ChassisNumbers field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (d *DocumentsConfirmCaptureResponseOppositeInvoiceLinesItem) SetChassisNumbers(chassisNumbers []string) {
+	d.ChassisNumbers = chassisNumbers
+	d.require(documentsConfirmCaptureResponseOppositeInvoiceLinesItemFieldChassisNumbers)
 }
 
 // SetLineNet sets the LineNet field and marks it as non-optional;
